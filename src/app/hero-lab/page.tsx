@@ -305,6 +305,132 @@ const VARIANTS: HeroVariantProps[] = [
     visualNote: "Three stacked numbered cards as the visual; named-geography proof strip below",
     style: "cream",
   },
+
+  // ============================================
+  // ROUND 3 — PAIN-FIRST (customer problem leads, operator answers)
+  // ============================================
+
+  {
+    id: 18,
+    archetype: "No-show pain",
+    lever: "Quantified loss",
+    headline: (
+      <>
+        Losing <span className="gradient-text">$8K a month</span> to no-shows,
+        <br />
+        unreturned DMs, and leads rotting in your inbox?
+      </>
+    ),
+    sub: "I build the automation that catches them — WhatsApp reminders, CRM auto-fill, voice agents that follow up while you sleep. One operator, AI cofounder, 14-day ship.",
+    primaryCta: { label: "Get the leak audit", href: "/contact" },
+    secondaryCta: { label: "See client wins", href: "/case-studies" },
+    visualNote: "Red downward $-amount counter + green automation graph cross-fading",
+    style: "default",
+  },
+  {
+    id: 19,
+    archetype: "Time-bleed pain",
+    lever: "Loss aversion + time",
+    headline: (
+      <>
+        Still spending <span className="gradient-text">three hours a day</span>
+        <br />
+        on email triage, follow-ups, and DM replies?
+      </>
+    ),
+    sub: "Stéphanie did too. Now her n8n + GPT-4o agent drafts every reply in 20 minutes. She goes home at 6pm. I build the same for service businesses across nine countries.",
+    primaryCta: { label: "Get my workflow audited", href: "/contact" },
+    secondaryCta: { label: "See how Takycorp solved it", href: "/case-studies" },
+    visualNote: "Clock face left (3h) → calendar w/ family dinner right (6pm)",
+    style: "split",
+  },
+  {
+    id: 20,
+    archetype: "Solo-ceiling pain",
+    lever: "Scale ceiling + identity",
+    headline: (
+      <>
+        You hit <span className="gradient-text">the solo ceiling</span> at $10K MRR.
+        <br />
+        Hiring won&apos;t fix it. Automation will.
+      </>
+    ),
+    sub: "I build the systems that replace the next two hires — n8n, CRM, voice agents, WhatsApp. One operator. AI cofounder. Real receipts in Seattle, Paris, Lahore.",
+    primaryCta: { label: "Show me the leak", href: "/contact" },
+    secondaryCta: { label: "Stack I build with", href: "/services" },
+    visualNote: "Org chart w/ two empty hire boxes replaced by n8n logo + Claude glyph",
+    style: "default",
+  },
+  {
+    id: 21,
+    archetype: "Tool chaos pain",
+    lever: "Frustration + simplicity",
+    headline: (
+      <>
+        Your CRM, calendar, WhatsApp, Stripe, and inbox
+        <br />
+        <span className="gradient-text">still don&apos;t talk to each other?</span>
+      </>
+    ),
+    sub: "That&apos;s the leak. I wire them into one workflow in 14 days — n8n + the tools you already pay for. Solo operator + AI cofounder. Shipped to clinics, logistics, dealerships.",
+    primaryCta: { label: "Wire my stack", href: "/contact" },
+    secondaryCta: { label: "What I&apos;ve built", href: SITE.social.github },
+    visualNote: "Disconnected tool logos left → connected node graph right",
+    style: "split",
+  },
+  {
+    id: 22,
+    archetype: "Drowning founder pain",
+    lever: "Empathy + identity",
+    headline: (
+      <>
+        You didn&apos;t start the business
+        <br />
+        <span className="gradient-text">to spend your week answering DMs.</span>
+      </>
+    ),
+    sub: "I build the automations that take the admin off your plate — so the part of the business you love (the actual work) gets your hours back. Shipped to nine countries. Direct line, always.",
+    primaryCta: { label: "Take it off my plate", href: "/contact" },
+    secondaryCta: { label: "Case studies", href: "/case-studies" },
+    visualNote: "Cracked screen w/ 47 unread notifications → calm dashboard w/ 1 daily summary",
+    style: "default",
+  },
+  {
+    id: 23,
+    archetype: "Slow-lead-response pain",
+    lever: "Competitive loss",
+    headline: (
+      <>
+        The lead picked your competitor
+        <br />
+        because <span className="gradient-text">they replied in 6 minutes.</span>
+        <br />
+        You replied in 6 hours.
+      </>
+    ),
+    sub: "I build the WhatsApp + voice + CRM stack that responds in 30 seconds — whether you&apos;re in Bali or asleep. One operator. AI cofounder. Real client wins across nine countries.",
+    primaryCta: { label: "Stop losing leads", href: "/contact" },
+    secondaryCta: { label: "See the stack", href: "/services" },
+    visualNote: "Stopwatch w/ 6m vs 6h split; subtle WhatsApp + Cal.com + voice-agent badges",
+    style: "default",
+  },
+  {
+    id: 24,
+    archetype: "SaaS bloat pain",
+    lever: "Cost + identity",
+    headline: (
+      <>
+        Paying for <span className="gradient-text">14 SaaS tools</span>
+        <br />
+        and your team still uses 4?
+      </>
+    ),
+    sub: "I audit the stack, kill the bloat, automate the gaps. n8n + the tools that actually earned their seat. Solo operator + AI cofounder. Shipped to clinics, logistics, dealerships.",
+    primaryCta: { label: "Audit my stack", href: "/contact" },
+    secondaryCta: { label: "Recent builds", href: SITE.social.github },
+    visualNote: "Grid of 14 logos w/ 10 greyed out; n8n + 4 colored",
+    style: "cream",
+  },
 ];
 
 export default function HeroLab() {
@@ -315,12 +441,14 @@ export default function HeroLab() {
           Internal · Hero Lab
         </p>
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
-          17 hero variants. Pick one.
+          24 hero variants. Pick one.
         </h1>
         <p className="text-fg-muted max-w-2xl">
           Round 1 (V01–V12): researched against Linear, Vercel, Basecamp, Claude, Cursor.
           <br />
-          Round 2 (<span className="text-skynet-primary-light font-semibold">V13–V17</span>): hybrids of Waseem-picked DNA — V01 anti-agency × V02 AI-cofounder × V11 named-geography proof.
+          Round 2 (V13–V17): hybrids of V01 anti-agency × V02 AI-cofounder × V11 named-geo proof.
+          <br />
+          Round 3 (<span className="text-skynet-primary-light font-semibold">V18–V24</span>): <span className="text-fg font-semibold">PAIN-FIRST</span> — lead with customer leak, operator answers. (No-shows, time-bleed, solo ceiling, tool chaos, drowning founder, slow lead response, SaaS bloat.)
           <br />
           Reply with variant number to ship as the homepage hero.
         </p>
