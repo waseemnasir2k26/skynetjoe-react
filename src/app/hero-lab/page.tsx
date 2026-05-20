@@ -210,6 +210,101 @@ const VARIANTS: HeroVariantProps[] = [
     visualNote: "Pure terminal hero, blinking cursor, monospace only",
     style: "terminal",
   },
+
+  // ============================================
+  // ROUND 2 — HYBRIDS of V1 + V2 + V11 DNA
+  // (anti-agency × AI-cofounder × named-geo proof)
+  // ============================================
+
+  {
+    id: 13,
+    archetype: "Anti-agency × named-geo",
+    lever: "Wedge + anchored proof",
+    headline: (
+      <>
+        Not an agency.
+        <br />
+        The operator who built <span className="gradient-text">a dental flagship in NY,</span>
+        <br />
+        a voice agent in Paris, a recovery site in Seattle.
+      </>
+    ),
+    sub: "One operator. Claude as engineering cofounder. The person you message is the person writing the code.",
+    primaryCta: { label: "Start a project", href: "/contact" },
+    secondaryCta: { label: "See the work on GitHub", href: SITE.social.github },
+    visualNote: "Three city-flag tiles below headline, each linking to its case study",
+    style: "default",
+  },
+  {
+    id: 14,
+    archetype: "AI-cofounder × named-geo",
+    lever: "Honest AI + anchored proof",
+    headline: (
+      <>
+        Two cofounders.
+        <br />
+        <span className="gradient-text">One human in Bali. One AI in your laptop.</span>
+      </>
+    ),
+    sub: "Together we shipped dental flagships in SoHo, French voice agents in Paris, recovery sites in Seattle. Brief on Monday, live by next Friday.",
+    primaryCta: { label: "Brief me", href: "/contact" },
+    secondaryCta: { label: "Open the GitHub", href: SITE.social.github },
+    visualNote: "Split: Bali workspace photo left, terminal w/ Claude `/` glyph right",
+    style: "split",
+  },
+  {
+    id: 15,
+    archetype: "Honest-AI wedge",
+    lever: "Contrarian transparency",
+    headline: (
+      <>
+        I&apos;m honest about working with Claude.
+        <br />
+        <span className="gradient-text">Every other agency hides it.</span>
+      </>
+    ),
+    sub: "Solo operator + 1M-context AI engineer = ten times the throughput, none of the agency overhead. Shipped across nine countries.",
+    primaryCta: { label: "Send a brief", href: "/contact" },
+    secondaryCta: { label: "See the work", href: SITE.social.github },
+    visualNote: "Bold serif headline on cream, subtle Claude `/` watermark bottom-right",
+    style: "bold",
+  },
+  {
+    id: 16,
+    archetype: "Direct-line manifesto",
+    lever: "Anti-agency + transparency",
+    headline: (
+      <>
+        The person taking your brief
+        <br />
+        is the person <span className="gradient-text">writing the code.</span>
+      </>
+    ),
+    sub: "No account managers. No discovery deck. Claude is my engineering cofounder. Bali is my office. You get the work — direct.",
+    primaryCta: { label: "Start a project", href: "/contact" },
+    secondaryCta: { label: "What I&apos;ve built", href: SITE.social.github },
+    visualNote: "Minimal centered text, single arrow CTA below, no decorative elements",
+    style: "minimal",
+  },
+  {
+    id: 17,
+    archetype: "Specificity stack",
+    lever: "Quantified proof + anti-agency",
+    headline: (
+      <>
+        One operator.
+        <br />
+        One AI cofounder.
+        <br />
+        <span className="gradient-text">Nine countries shipped.</span>
+      </>
+    ),
+    sub: "Built sites and automations for clinics in Seattle, logistics in Paris, dealerships in Lahore, recovery in PNW. Median ship: 14 days. Direct line, always.",
+    primaryCta: { label: "Work with me", href: "/contact" },
+    secondaryCta: { label: "Case studies", href: "/case-studies" },
+    visualNote: "Three stacked numbered cards as the visual; named-geography proof strip below",
+    style: "cream",
+  },
 ];
 
 export default function HeroLab() {
@@ -220,12 +315,13 @@ export default function HeroLab() {
           Internal · Hero Lab
         </p>
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
-          12 hero variants. Pick one.
+          17 hero variants. Pick one.
         </h1>
         <p className="text-fg-muted max-w-2xl">
-          Researched against Linear, Vercel, Basecamp, Claude, Cursor (May 2026).
-          Each variant tagged with archetype + psychology lever. Top 3 picks per research:{" "}
-          <span className="text-skynet-primary-light font-semibold">V01, V02, V09</span>.
+          Round 1 (V01–V12): researched against Linear, Vercel, Basecamp, Claude, Cursor.
+          <br />
+          Round 2 (<span className="text-skynet-primary-light font-semibold">V13–V17</span>): hybrids of Waseem-picked DNA — V01 anti-agency × V02 AI-cofounder × V11 named-geography proof.
+          <br />
           Reply with variant number to ship as the homepage hero.
         </p>
       </div>
