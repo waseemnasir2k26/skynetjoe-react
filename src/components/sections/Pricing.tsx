@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
-import { SITE } from "@/lib/site";
 
 const TIERS = [
   {
@@ -98,7 +97,7 @@ export default function Pricing() {
                 ))}
               </ul>
               <Link
-                href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}?text=Hi, interested in ${t.name}`}
+                href={`/contact?tier=${encodeURIComponent(t.name)}`}
                 className={t.featured ? "btn-primary w-full justify-center" : "btn-ghost w-full justify-center"}
               >
                 {t.cta}

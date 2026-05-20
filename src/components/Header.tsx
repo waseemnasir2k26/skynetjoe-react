@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { SITE, NAV_PRIMARY, SERVICE_CATEGORIES } from "@/lib/site";
+import { NAV_PRIMARY, SERVICE_CATEGORIES } from "@/lib/site";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,7 +28,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2 group">
           <span className="text-2xl font-extrabold tracking-tight">
             <span className="gradient-primary-text">Skynet</span>
-            <span className="text-white">Joe</span>
+            <span className="text-fg">Labs</span>
           </span>
         </Link>
 
@@ -77,8 +78,9 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <Link href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}`} className="btn-primary text-sm">
-            Book a Call
+          <ThemeToggle />
+          <Link href="/contact" className="btn-primary text-sm">
+            Start a project
           </Link>
         </div>
 
@@ -104,12 +106,16 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}`}
-              className="btn-primary mt-4 justify-center"
-            >
-              Book a Call
-            </Link>
+            <div className="mt-4 flex items-center gap-2">
+              <ThemeToggle />
+              <Link
+                href="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="btn-primary flex-1 justify-center"
+              >
+                Start a project
+              </Link>
+            </div>
           </nav>
         </div>
       )}

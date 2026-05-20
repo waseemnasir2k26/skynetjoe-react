@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { SITE } from "@/lib/site";
 
 export default function CTA() {
   return (
@@ -17,18 +16,18 @@ export default function CTA() {
               <br />
               <span className="gradient-text">Start trading systems for revenue.</span>
             </h2>
-            <p className="text-lg text-gray-300 mb-8">
+            <p className="text-lg text-fg-muted mb-8">
               Free 20-min audit. We&apos;ll Loom you the leak in your funnel and the 1 automation that closes it.
               No deck. No pitch. Pure signal.
             </p>
             <Link
-              href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}`}
+              href="/contact"
               className="btn-primary text-base px-8 py-4"
             >
-              Book your free audit
+              Start a project
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <p className="text-xs text-gray-500 mt-4">
+            <p className="text-xs text-fg-faint mt-4">
               Replies within 6 hours · Bali timezone (GMT+8) · 9 countries served
             </p>
           </div>

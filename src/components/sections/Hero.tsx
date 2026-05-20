@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { SITE } from "@/lib/site";
 
+// V1 hero — being iterated. See /hero-lab for variants.
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-32 mesh-bg">
@@ -33,34 +35,34 @@ export default function Hero() {
             while you sleep in Bali.
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-fg-muted max-w-2xl mb-10 leading-relaxed">
             {SITE.brand} ships n8n workflows, AEO-optimized websites, and WhatsApp/CRM systems
-            for service businesses ready to stop trading hours for dollars.
-            Built by <span className="text-white font-medium">{SITE.founder}</span>, run from Bali, served to 9 countries.
+            for service businesses ready to stop trading hours for systems.
+            Built by <span className="text-fg font-medium">{SITE.founder}</span>, run from Bali, served to 9 countries.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href={`https://wa.me/${SITE.whatsapp.replace(/\D/g, "")}`} className="btn-primary">
-              Book a free 20-min audit
+            <Link href="/contact" className="btn-primary">
+              Start a project
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/case-studies" className="btn-ghost">
-              See client wins
+            <Link href={SITE.social.github} target="_blank" rel="noopener" className="btn-ghost">
+              See work on GitHub
             </Link>
           </div>
 
-          <div className="mt-12 flex flex-wrap gap-6 text-sm text-gray-400">
+          <div className="mt-12 flex flex-wrap gap-6 text-sm text-fg-faint">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
               <span>Available for May 2026</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-600">·</span>
-              <span>$1,500 — $9,500 + retainer</span>
+              <span className="opacity-60">·</span>
+              <span>5–14 day ship window</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-600">·</span>
-              <span>5–14 day ship</span>
+              <span className="opacity-60">·</span>
+              <span>9 countries served</span>
             </div>
           </div>
         </motion.div>

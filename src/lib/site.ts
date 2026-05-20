@@ -5,7 +5,7 @@
 
 export const SITE = {
   name: "SkynetLabs",
-  brand: "SkynetJoe",
+  brand: "SkynetLabs",
   domain: "skynetjoe.com",
   url: "https://skynetjoe.com",
   founder: "Waseem Nasir",
@@ -76,10 +76,10 @@ export const SERVICE_CATEGORIES = [
 ] as const;
 
 export const STATS = [
-  { value: "$2M+", label: "Client revenue automated" },
   { value: "180+", label: "Workflows shipped" },
+  { value: "40+", label: "Websites delivered" },
   { value: "9", label: "Countries served" },
-  { value: "5x", label: "Avg lead-flow lift" },
+  { value: "5–14d", label: "Ship window" },
 ] as const;
 
 export const BRANDS_TRUSTED = [

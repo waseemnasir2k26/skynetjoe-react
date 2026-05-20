@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="text-2xl font-extrabold tracking-tight inline-block mb-4">
               <span className="gradient-primary-text">Skynet</span>
-              <span className="text-white">Joe</span>
+              <span className="text-fg">Labs</span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
               {SITE.description}

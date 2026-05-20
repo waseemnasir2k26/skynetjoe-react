@@ -58,8 +58,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${lexend.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-skynet-dark text-gray-100 font-sans">
+    <html lang="en" className={`${lexend.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var t = localStorage.getItem('theme');
+                if (t === 'light') document.documentElement.classList.add('light');
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col font-sans">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

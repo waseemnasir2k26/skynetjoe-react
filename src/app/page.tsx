@@ -4,7 +4,6 @@ import Stats from "@/components/sections/Stats";
 import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
 import Testimonials from "@/components/sections/Testimonials";
-import Pricing from "@/components/sections/Pricing";
 import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
 import JsonLd from "@/components/JsonLd";
@@ -65,7 +64,6 @@ export default function Home() {
       <Services />
       <Process />
       <Testimonials />
-      <Pricing />
       <FAQ />
       <CTA />
     </>
