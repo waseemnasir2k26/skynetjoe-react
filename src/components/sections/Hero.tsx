@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { FounderDuoMonogram } from "@/components/icons/ClaudeCodeIcon";
 
 // V3 OCEAN hero — picked from /gradient-lab#picked-03
 // Dark ocean gradient bg + 3 orbs (deep blue, cyan, teal) + cyan→mint text gradient
@@ -87,7 +88,7 @@ export default function Hero() {
                 color: "#eaf6ff",
               }}
             >
-              WN <span style={{ color: "#5eead4", margin: "0 4px" }}>+</span> CC
+              <FounderDuoMonogram size={28} />
             </span>
             <span style={{ color: "rgba(234,246,255,0.55)" }}>
               Built with Claude Code as second seat

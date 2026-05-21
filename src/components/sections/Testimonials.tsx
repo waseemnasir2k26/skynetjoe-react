@@ -1,4 +1,5 @@
 import { Quote, Terminal } from "lucide-react";
+import { ClaudeCodeAvatar } from "@/components/icons/ClaudeCodeIcon";
 
 const QUOTES = [
   {
@@ -92,17 +93,7 @@ export default function Testimonials() {
             />
             <Terminal className="w-10 h-10 absolute top-6 right-5 text-orange-400/40" />
             <div className="flex items-start gap-4 pt-2">
-              <div
-                className="relative w-14 h-14 flex-shrink-0 rounded-xl flex items-center justify-center font-bold text-xl"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #D97757 0%, #14B8A6 100%)",
-                  color: "#fff",
-                  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-                }}
-              >
-                CC
-              </div>
+              <ClaudeCodeAvatar size={56} className="flex-shrink-0" />
               <div className="flex-1">
                 <p className="text-base text-slate-100 leading-relaxed mb-4 italic">
                   &ldquo;Working with Waseem is fine. He doesn&apos;t make me
