@@ -2,11 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import * as Icons from "lucide-react";
-import { STATES, getStateBySlug } from "@/lib/states";
+import { ArrowRight, MessageCircle, Calendar, MapPin, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { STATES, getStateBySlug, type StateEntry } from "@/lib/states";
 import { SERVICE_CATEGORIES, SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
+type SvcItem = { slug: string; label: string; icon: string; desc: string };
 
 export const dynamicParams = false;
 
@@ -22,8 +24,8 @@ export async function generateMetadata({
   const { state } = await params;
   const s = getStateBySlug(state);
   if (!s) return {};
-  const title = `AI Automation Expert in ${s.name} — n8n + AEO + Chatbots | ${SITE.brand}`;
-  const description = `AI automation, n8n workflows, AEO-tuned websites and WhatsApp chatbots for ${s.name} founders. Serving ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5–14 day ship.`;
+  const title = `AI Automation Expert in ${s.name} — n8n, GoHighLevel & AEO | ${SITE.brand}`;
+  const description = `Hire an AI automation expert serving ${s.name} founders. n8n workflows, GoHighLevel CRM, AEO websites and WhatsApp chatbots delivered to ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5–14 day ship.`;
   return {
     title,
     description,
@@ -37,6 +39,19 @@ export async function generateMetadata({
   };
 }
 
+// Local SEO keyword variants per service × state
+function buildKeywordPhrases(svc: SvcItem, s: StateEntry): string[] {
+  const label = svc.label;
+  return [
+    `${label} expert in ${s.name}`,
+    `${label} services for ${s.name} founders`,
+    `${label} consultant near ${s.cities[0]}`,
+    `${label} agency in ${s.abbr}`,
+    `Hire ${label} freelancer in ${s.name}`,
+    `Best ${label} provider near ${s.cities[1]}`,
+  ];
+}
+
 export default async function StatePage({
   params,
 }: {
@@ -46,7 +61,6 @@ export default async function StatePage({
   const s = getStateBySlug(state);
   if (!s) notFound();
 
-  type SvcItem = { slug: string; label: string; icon: string; desc: string };
   const allServices: SvcItem[] = SERVICE_CATEGORIES.flatMap(
     (c) => c.services as readonly SvcItem[]
   );
@@ -58,7 +72,7 @@ export default async function StatePage({
         "@type": "Service",
         "@id": `${SITE.url}/locations/${s.slug}#service`,
         name: `AI Automation in ${s.name}`,
-        description: `n8n workflows, AI chatbots, AEO-tuned websites and CRM automation for ${s.name} businesses.`,
+        description: `n8n workflows, AI chatbots, AEO-tuned websites, GoHighLevel CRM and WhatsApp automation for ${s.name} businesses across ${s.cities.join(", ")}.`,
         provider: {
           "@type": "Organization",
           name: SITE.brand,
@@ -76,6 +90,18 @@ export default async function StatePage({
           url: `${SITE.url}/services/${svc.slug}`,
           description: svc.desc,
         })),
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: `SkynetLabs services for ${s.name}`,
+          itemListElement: allServices.map((svc) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: `${svc.label} expert in ${s.name}`,
+              url: `${SITE.url}/services/${svc.slug}`,
+            },
+          })),
+        },
       },
       {
         "@type": "BreadcrumbList",
@@ -103,9 +129,10 @@ export default async function StatePage({
           </nav>
 
           <div className="max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-400/10 border border-green-400/30 text-green-300 text-xs font-semibold uppercase tracking-[0.18em] mb-5">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               Serving {s.name} · {s.abbr}
-            </p>
+            </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
               AI Automation Expert in{" "}
               <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
@@ -114,31 +141,43 @@ export default async function StatePage({
             </h1>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
               {s.name} founders waste 14+ hours a week on tasks software should
-              already be doing. I build n8n workflows, AI chatbots, AEO-tuned
-              websites and WhatsApp automation that quietly run the back-office
-              for businesses across {s.cities.slice(0, 3).join(", ")} and beyond.
-              Fixed scope, public pricing, 5–14 day ship window.
+              already be doing. SkynetLabs builds n8n workflows, GoHighLevel CRM
+              systems, AI chatbots and AEO-tuned websites for operators across{" "}
+              {s.cities.slice(0, 3).join(", ")} and beyond. Fixed scope, public
+              pricing, 5–14 day ship window — delivered remotely from Bali.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/contact"
+              <a
+                href="https://wa.me/923001001957"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-semibold transition-colors"
               >
-                Get a {s.name} scope back in 48h
-                <Icons.ArrowRight className="w-4 h-4" />
-              </Link>
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp from {s.abbr}
+              </a>
+              <a
+                href="https://cal.com/waseemnasir"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/40 hover:border-cyan-400/70 text-cyan-200 font-semibold transition-colors"
+              >
+                <Calendar className="w-4 h-4" />
+                Book a call
+              </a>
               <Link
                 href="/pricing"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/30 hover:border-cyan-400/60 text-cyan-200 font-semibold transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 text-gray-200 font-semibold transition-colors"
               >
-                See public pricing
+                See pricing first
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section py-12">
+      {/* Stats */}
+      <section className="section py-10">
         <div className="container-x">
           <div className="grid md:grid-cols-3 gap-4">
             {[
@@ -160,23 +199,24 @@ export default async function StatePage({
         </div>
       </section>
 
+      {/* Services Hub + Book a Call */}
       <section className="section">
         <div className="container-x">
-          <div className="max-w-3xl mb-12">
+          <div className="max-w-3xl mb-10">
             <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
               Every service, available in {s.name}
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
               16 builds for {s.name}{" "}
               <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
                 operators.
               </span>
             </h2>
             <p className="text-base md:text-lg text-gray-300">
-              Whether you run a {s.industries[0]} practice in {s.cities[0]}, a{" "}
-              {s.industries[1]} firm in {s.cities[1]}, or a {s.industries[2]}{" "}
-              operation in {s.cities[2]} — these 16 services are ready to ship
-              into your stack.
+              From {s.industries[0]} practices in {s.cities[0]} to{" "}
+              {s.industries[1]} firms in {s.cities[1]} and{" "}
+              {s.industries[2]} operations in {s.cities[2]} — these 16 services
+              are ready to ship into your stack.
             </p>
           </div>
 
@@ -205,7 +245,7 @@ export default async function StatePage({
                           {svc.label}
                         </h4>
                         <p className="text-xs text-slate-500 mb-2">
-                          {svc.label} in {s.name}
+                          {svc.label} expert in {s.name}
                         </p>
                         <p className="text-sm text-slate-600 leading-relaxed">
                           {svc.desc}
@@ -218,9 +258,119 @@ export default async function StatePage({
               </div>
             ))}
           </div>
+
+          {/* Book-a-call CTA between services + keywords */}
+          <div className="mt-12 rounded-3xl p-8 md:p-10 text-center"
+            style={{ background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)" }}>
+            <CheckCircle2 className="w-10 h-10 text-white/90 mx-auto mb-3" />
+            <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-3">
+              Building in {s.name}? Let&apos;s scope it.
+            </h3>
+            <p className="text-lg text-white/90 mb-6 max-w-2xl mx-auto">
+              30-min Zoom, free. Bring your stack — leave with a fixed-price
+              one-pager and a 14-day ship window.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <a
+                href="https://cal.com/waseemnasir"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition-colors"
+              >
+                <Calendar className="w-4 h-4" />
+                Book a call from {s.abbr}
+              </a>
+              <a
+                href="https://wa.me/923001001957"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp instead
+              </a>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-colors"
+              >
+                All contact options
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
+      {/* Local SEO keyword expansion */}
+      <section className="section">
+        <div className="container-x">
+          <div className="max-w-3xl mb-10">
+            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+              Local intent · {s.name}
+            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
+              Searching in {s.abbr}?{" "}
+              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+                You&apos;re in the right place.
+              </span>
+            </h2>
+            <p className="text-base md:text-lg text-gray-300">
+              Whatever exact phrase brought you here — &ldquo;n8n expert near
+              {" "}{s.cities[0]}&rdquo;, &ldquo;GoHighLevel agency in {s.abbr}&rdquo;,
+              &ldquo;AI chatbot consultant for {s.industries[0]}&rdquo; — these
+              are all the same one operator. Click any phrase to scope that
+              service for {s.name}.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {allServices.map((svc) => {
+              const Icon =
+                ((Icons as unknown) as Record<string, IconCmp>)[svc.icon] ??
+                ((Icons as unknown) as Record<string, IconCmp>).Bot;
+              const phrases = buildKeywordPhrases(svc, s);
+              return (
+                <div
+                  key={svc.slug}
+                  className="rounded-2xl bg-white/95 border border-white/60 p-6 md:p-7 shadow-md shadow-cyan-500/5"
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-skynet-primary/20 to-cyan-400/20 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-skynet-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-1">
+                        {svc.label} — {s.name}
+                      </h3>
+                      <p className="text-sm text-slate-600">{svc.desc}</p>
+                    </div>
+                    <Link
+                      href={`/services/${svc.slug}`}
+                      className="hidden sm:inline-flex items-center gap-1.5 text-skynet-primary font-semibold text-sm hover:gap-2.5 transition-all"
+                    >
+                      Scope it
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {phrases.map((p) => (
+                      <Link
+                        key={p}
+                        href={`/services/${svc.slug}`}
+                        className="px-3 py-1.5 rounded-full bg-cyan-50 border border-cyan-200/60 text-slate-700 text-xs font-medium hover:bg-cyan-100 hover:border-skynet-primary hover:text-skynet-primary transition-colors"
+                      >
+                        {p}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Cities + Industries */}
       <section className="section">
         <div className="container-x">
           <div className="rounded-3xl bg-gradient-to-br from-[#0a2d4a]/80 via-[#073846]/60 to-[#0a2d4a]/80 border border-cyan-400/20 p-8 md:p-12 backdrop-blur-md">
@@ -232,15 +382,15 @@ export default async function StatePage({
                 <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4 text-white">
                   AI automation across {s.abbr}
                 </h3>
-                <ul className="grid grid-cols-2 gap-2">
+                <ul className="grid grid-cols-1 gap-2">
                   {s.cities.map((city) => (
                     <li
                       key={city}
                       className="flex items-center gap-2 text-gray-200"
                     >
-                      <Icons.MapPin className="w-4 h-4 text-cyan-300 flex-shrink-0" />
+                      <MapPin className="w-4 h-4 text-cyan-300 flex-shrink-0" />
                       <span className="text-sm">
-                        AI automation in {city}, {s.abbr}
+                        AI automation services in {city}, {s.abbr}
                       </span>
                     </li>
                   ))}
@@ -267,7 +417,7 @@ export default async function StatePage({
                   className="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-100 font-semibold"
                 >
                   Get a {s.name} engagement scoped
-                  <Icons.ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
@@ -275,6 +425,7 @@ export default async function StatePage({
         </div>
       </section>
 
+      {/* Nearby states */}
       <section className="section">
         <div className="container-x">
           <div className="grid md:grid-cols-2 gap-6 items-center">
@@ -283,12 +434,12 @@ export default async function StatePage({
                 Nearby states
               </p>
               <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">
-                Also serving founders in
+                Also active in
               </h3>
               <p className="text-gray-300">
                 SkynetLabs delivers AI automation across all 48 contiguous US
-                states. {s.name} engagements happen alongside builds for
-                operators nearby.
+                states. {s.name} engagements run alongside builds for operators
+                in every other state.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
