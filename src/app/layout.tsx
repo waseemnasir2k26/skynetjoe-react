@@ -8,6 +8,7 @@ import Analytics, { GtmNoscript } from "@/components/Analytics";
 import AISignals from "@/components/aeo/AISignals";
 import LiveChat from "@/components/LiveChat";
 import DiscoveryPopup from "@/components/DiscoveryPopup";
+import IncomingCallPopup from "@/components/IncomingCallPopup";
 import "./globals.css";
 
 const lexend = Lexend({
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Suspense fallback={null}>
           <DiscoveryPopup />
         </Suspense>
+        <IncomingCallPopup />
       </body>
     </html>
   );
