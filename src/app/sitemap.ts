@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
 import { STATES } from "@/lib/states";
 import { POSTS } from "@/lib/posts";
+import { NEWS } from "@/lib/news";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -21,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/n8n-vs-zapier",
     "/author/waseem-nasir",
     "/blog",
+    "/news",
     "/portfolio",
     "/privacy-policy",
     "/terms-of-service",
@@ -55,6 +57,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const newsRoutes = NEWS.map((n) => ({
+    url: `${base}/news/${n.slug}`,
+    lastModified: new Date(n.updatedAt || n.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
   const PROTOTYPE_STATE_MATRIX = ["california"];
   const serviceStateRoutes = SERVICE_CATEGORIES.flatMap((cat) =>
     cat.services.flatMap((svc) =>
@@ -74,6 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...serviceRoutes,
     ...stateRoutes,
     ...blogRoutes,
+    ...newsRoutes,
     ...serviceStateRoutes,
   ];
 }
