@@ -1,0 +1,230 @@
+<article class="wn-about">
+<style>
+.wn-about{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-purple);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-about *{box-sizing:border-box}
+.wn-about .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-about .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-about .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-about .wn-hero>*{position:relative;z-index:1}
+.wn-about .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-about h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em;color:var(--wn-fg)}
+.wn-about h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-about .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1rem}
+.wn-about .wn-sub{font-size:.95rem;color:var(--wn-fg-faint);max-width:62ch;margin:0}
+.wn-about h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-about h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-about p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-about strong{color:var(--wn-fg);font-weight:600}
+.wn-about .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-about .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-about .wn-grid{display:grid;gap:1rem}
+.wn-about .wn-grid-2{grid-template-columns:1fr}
+.wn-about .wn-grid-3{grid-template-columns:1fr}
+.wn-about .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-about .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-about .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-about .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-about .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-about .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-about .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-about .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-about .wn-stat{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;text-align:center}
+.wn-about .wn-stat .wn-num{font-size:1.8rem;font-weight:800;background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;display:block;margin-bottom:.25rem}
+.wn-about .wn-stat .wn-lbl{font-size:.85rem;color:var(--wn-fg-muted);letter-spacing:.04em}
+.wn-about .wn-principles{display:grid;gap:.85rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-about .wn-principles{grid-template-columns:repeat(2,1fr)}}
+.wn-about .wn-principle{padding:1.1rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-left:3px solid var(--wn-accent-a);border-radius:0 10px 10px 0}
+.wn-about .wn-principle h3{margin:0 0 .35rem;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a)}
+.wn-about .wn-principle p{margin:0;color:var(--wn-fg);font-size:.98rem;font-weight:500}
+.wn-about .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-about .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-about .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-about .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-about .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-about .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-about .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-about .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-about{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">About · SkynetLabs</span>
+    <h1>Most agencies sell hours. <span class="wn-grad">We ship outcomes you can measure on a Tuesday.</span></h1>
+    <p class="wn-lede">SkynetLabs is a one-founder automation studio. We build the systems that other agencies promise but never finish — workflows you can read, sites that load, and AI integrations that survive a Monday morning.</p>
+    <p class="wn-sub">Run by 1 founder in Bali + AI as the 2nd seat.</p>
+    <div class="wn-cta-row" style="margin-top:1.5rem">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start a brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See the work</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Origin</p>
+    <h2>Why this agency exists</h2>
+    <p>The first three agencies we worked with billed us a retainer and shipped a slide deck. The fourth one rebuilt the same WordPress site we already had and called it a "digital transformation". By the fifth, we stopped hiring agencies and started building the work in-house — n8n, Next.js, GPT-4o, GoHighLevel, a JotForm or two. The clients we eventually started serving had the same complaint. So we kept building.</p>
+    <p>The wrong thing about most automation agencies is that they sell <strong>time</strong>. Twenty hours a month. A standing Tuesday call. A Notion board nobody updates. The right thing to sell is a <strong>system you can hand to a part-time ops lead</strong> — version-controlled, documented, reversible. That's a different product. It takes less time to build and more thought to design.</p>
+    <p>So that's what we built differently. Fixed scopes. Public pricing. JSON-exported workflows you own and can self-host. A 5–14 day ship window. One founder accountable for the deliverable — not a project manager who passes a Loom to a contractor in another timezone.</p>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Beliefs</p>
+    <h2>Six principles we won't trade away</h2>
+    <div class="wn-principles">
+      <div class="wn-principle">
+        <h3>01 · Retainers</h3>
+        <p>Retainers without measurable adoption are theft. If nobody on your team uses the system after week two, we built the wrong system.</p>
+      </div>
+      <div class="wn-principle">
+        <h3>02 · Onboarding</h3>
+        <p>If a workflow needs a 90-day onboarding, it's the wrong workflow. Real automation onboards in an afternoon.</p>
+      </div>
+      <div class="wn-principle">
+        <h3>03 · AI as teammate</h3>
+        <p>AI is a teammate, not a tool. Claude reviews every diff, drafts every doc, and gets credit on the about page.</p>
+      </div>
+      <div class="wn-principle">
+        <h3>04 · Public pricing</h3>
+        <p>Hidden pricing is a tell. If the answer to "how much" is a 30-minute call, you're paying for the call as much as the build.</p>
+      </div>
+      <div class="wn-principle">
+        <h3>05 · Source ownership</h3>
+        <p>You own every workflow JSON, every Git repo, every credential vault. We hold no keys you can't take back in an hour.</p>
+      </div>
+      <div class="wn-principle">
+        <h3>06 · Honest scope</h3>
+        <p>We turn down two briefs a month. If the scope is wrong, the project will be wrong, and a refund won't fix the calendar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Operating model</p>
+    <h2>How we're built</h2>
+    <div class="wn-grid wn-grid-3">
+      <div class="wn-card">
+        <h3>One founder, accountable</h3>
+        <p>Waseem Nasir owns every deliverable end-to-end. No account manager. No "let me check with the team". The person on the kickoff call is the person writing the code.</p>
+      </div>
+      <div class="wn-card">
+        <h3>Claude as cofounder</h3>
+        <p>Claude Opus 4.7 reviews architecture, audits diffs, drafts client docs, and rubber-ducks every decision. Not equity. Not a buzzword. The actual second seat.</p>
+      </div>
+      <div class="wn-card">
+        <h3>One video editor partner</h3>
+        <p>For reel-heavy content engines we co-build with one trusted editor. That's the entire org chart. No "growth hires". Margin over volume.</p>
+      </div>
+    </div>
+    <div class="wn-vuln" style="max-width:62rem;margin:2rem auto 0">We've tried scaling with three contractors. The quality dropped, the rework grew, and the only person making more money was the third contractor. Solo + AI ships faster and ships cleaner. We'll grow when the work outgrows the model, not before.</div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Receipts</p>
+    <h2>What "shipped" looks like in numbers</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-stat"><span class="wn-num">180</span><span class="wn-lbl">Workflows shipped</span></div>
+      <div class="wn-stat"><span class="wn-num">40</span><span class="wn-lbl">Websites delivered</span></div>
+      <div class="wn-stat"><span class="wn-num">9</span><span class="wn-lbl">Countries served</span></div>
+      <div class="wn-stat"><span class="wn-num">5–14d</span><span class="wn-lbl">Ship window</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Location</p>
+    <h2>Where we are, when we're online</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <h3>Bali HQ · GMT+8</h3>
+        <p>Operations run from Canggu and Ubud. The morning standup is a sunrise on a scooter. The studio is a co-working desk and a backup mobile hotspot.</p>
+      </div>
+      <div class="wn-card">
+        <h3>Reply within 8 hours</h3>
+        <p>Working hours: 7am–4pm Bali time, Monday through Friday. Async-first, but a Zoom slot opens within 24h of a real brief. We don't run a 24/7 support desk and we won't pretend to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Start here</p>
+    <h2>Three ways to work with us</h2>
+    <div class="wn-grid wn-grid-3">
+      <div class="wn-card">
+        <h3>1 · Send a brief</h3>
+        <p>Three sentences is enough. What's leaking, what you've tried, what "shipped" looks like. We'll reply with scope + price or tell you we're the wrong fit.</p>
+        <p style="margin-top:1rem"><a href="/contact" class="wn-btn wn-btn-ghost">Open the form →</a></p>
+      </div>
+      <div class="wn-card">
+        <h3>2 · Read the case studies</h3>
+        <p>Nine anonymized builds across automation, websites, AI content and CRM rebuilds. Honest outcomes. No vanity metrics.</p>
+        <p style="margin-top:1rem"><a href="/case-studies" class="wn-btn wn-btn-ghost">See the work →</a></p>
+      </div>
+      <div class="wn-card">
+        <h3>3 · Follow the work</h3>
+        <p>Most of what we build gets posted on LinkedIn or shipped to GitHub the same week. Cheaper than a sales call, more honest than a brochure.</p>
+        <p style="margin-top:1rem"><a href="https://www.linkedin.com/in/waseemnasir" class="wn-btn wn-btn-ghost" rel="noopener">LinkedIn →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>The brief takes 3 sentences. We reply within 8 hours.</h2>
+    <p style="max-width:54ch;margin:0 auto;color:var(--wn-fg-muted)">If we're the wrong fit, we'll say so on the first reply. No discovery call required.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start a brief</a>
+      <a href="/pricing" class="wn-btn wn-btn-ghost">See pricing</a>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://skynetjoe.com/#organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com",
+      "logo": "https://skynetjoe.com/logo.png",
+      "description": "One-founder automation studio building n8n workflows, AEO websites, and AI integrations for service businesses.",
+      "founder": {
+        "@type": "Person",
+        "name": "Waseem Nasir",
+        "url": "https://www.waseemnasir.com",
+        "jobTitle": "Founder"
+      },
+      "foundingDate": "2022-01-01",
+      "areaServed": ["US", "GB", "AU", "AE", "SA", "ID", "PK", "FR", "IT"],
+      "knowsAbout": ["n8n automation", "AEO content engineering", "GoHighLevel CRM", "Meta messaging automation", "Next.js development", "AI integration"],
+      "sameAs": [
+        "https://www.linkedin.com/in/waseemnasir",
+        "https://x.com/waseemnasir",
+        "https://github.com/waseemnasir2k26",
+        "https://www.fiverr.com/skynetjoellc"
+      ]
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://skynetjoe.com/about#page",
+      "url": "https://skynetjoe.com/about",
+      "name": "About SkynetLabs",
+      "description": "How and why SkynetLabs operates as a one-founder automation studio with AI as the second seat.",
+      "isPartOf": { "@id": "https://skynetjoe.com/#organization" },
+      "mainEntity": { "@id": "https://skynetjoe.com/#organization" }
+    }
+  ]
+}
+</script>
+</article>

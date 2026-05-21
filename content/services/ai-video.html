@@ -1,0 +1,187 @@
+<article class="wn-service wn-service-ai-video">
+<style>
+.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service *{box-sizing:border-box}
+.wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-service .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-service .wn-hero>*{position:relative;z-index:1}
+.wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-service p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-service strong{color:var(--wn-fg);font-weight:600}
+.wn-service .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-service .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-service .wn-grid{display:grid;gap:1rem}
+.wn-service .wn-grid-2{grid-template-columns:1fr}
+.wn-service .wn-grid-3{grid-template-columns:1fr}
+.wn-service .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-service .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-service .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-service .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-service .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
+.wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
+.wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
+.wn-service .wn-proof{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-proof{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-proof-item{padding:1.25rem;border-left:3px solid var(--wn-accent-a);background:var(--wn-surface)}
+.wn-service .wn-proof-item .wn-metric{font-size:1.4rem;font-weight:800;color:var(--wn-accent-a);display:block;margin-bottom:.25rem}
+.wn-service .wn-price-tiers{display:grid;gap:.85rem}
+@media(min-width:768px){.wn-service .wn-price-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-price{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px}
+.wn-service .wn-price .wn-tier{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-fg-faint);margin-bottom:.4rem}
+.wn-service .wn-price .wn-amt{font-size:1.5rem;font-weight:800;color:var(--wn-fg);margin-bottom:.3rem}
+.wn-service .wn-price .wn-cadence{font-size:.85rem;color:var(--wn-fg-muted)}
+.wn-service details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-service details summary::-webkit-details-marker{display:none}
+.wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-service details[open] summary::after{content:"–"}
+.wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+.wn-service-ai-video{--wn-accent-a:#FF6B6B;--wn-accent-b:#00D4FF}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">AI Content · Video</span>
+    <h1>You filmed 12 minutes of B-roll in Bali. <span class="wn-grad">Three weeks later it's still on the SD card.</span></h1>
+    <p class="wn-lede">Footage piles up because editing one reel takes you four hours and you have actual client work waiting. Meanwhile a competitor with worse footage posts daily and books the discovery calls. We build a pipeline that turns raw clips into a week of reels in under two hours — silence-cut, caption, B-roll, end card, voice EQ, done.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">What we build</p>
+    <h2>A nine-stage reel pipeline you can run yourself</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <h3>Silence-cut and clip-pick</h3>
+        <p>Auto-strip the pauses, Whisper transcribes the speech, Gemini scores hooks for stoppability. You get three banger clips per 10 minutes of raw footage.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M7 12h.01"/><path d="M11 12h.01"/></svg>
+        <h3>9:16 reframe with push-in</h3>
+        <p>MediaPipe detects faces, keeps you centred, ffmpeg adds a 4 percent push-in over the duration. No more weird crops where your forehead leaves the frame.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <h3>Pop-karaoke captions</h3>
+        <p>Word-by-word reveal, brand colour highlight on impact words, drop shadow, 4px stroke. ASS subtitle format so you can re-style across the whole batch in seconds.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <h3>B-roll cards from AI prompts</h3>
+        <p>Gemini reads the transcript, picks topic-relevant B-roll moments, Pollinations Flux generates the still, ffmpeg overlays with a 0.25-0.8s fade.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <h3>Voice EQ + BGM duck + SFX</h3>
+        <p>Six-stage EQ chain, music ducks 8dB under speech, impact, pop, and ding sound effects punch the cuts. Loudness normalised to broadcast spec.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0  0 1 22 16.92z"/></svg>
+        <h3>End card with handle and hook</h3>
+        <p>Thumbnail title for 0.2-3.5s, end card with your @handle, episode counter, and a CTA to follow. Generated from one config file you control.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln wn-wrap" style="max-width:62rem">The reason most "AI video tools" produce something that screams "made by a SaaS app" is they skip every human-feel step: word-level caption timing, real B-roll selection, EQ on the voice, music that ducks instead of competing. We rebuilt the saddamh1-style reel forensically — every step a real editor would do, automated.</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Process</p>
+    <h2>Footage in Monday, batch out Friday</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Watch your last 10 reels, listen to your voice, pull your brand colours. Build a config file with caption colours, BGM library, end-card layout.</p><span class="wn-step-day">Day 1–2</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Lock the look on a single test clip. You approve caption font, colour highlight, music level, end-card geometry before we scale.</p><span class="wn-step-day">Day 3</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Pipeline runs in your environment (local or VPS). First batch processed with us on a screen-share to catch edge cases.</p><span class="wn-step-day">Day 4–7</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>Loom walkthroughs, one-command runner, troubleshooting runbook, 14-day fix window.</p><span class="wn-step-day">Day 8–10</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Stack we use</p>
+    <h2>What runs the pipeline</h2>
+    <div class="wn-stack">
+      <span>ffmpeg + ASS subtitles</span><span>OpenAI Whisper</span><span>Gemini Flash</span><span>MediaPipe face detect</span><span>Pollinations Flux</span><span>pyannote diarization</span><span>Mixkit BGM &amp; SFX</span><span>Python orchestration</span>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Proof</p>
+    <h2>What this pipeline has shipped</h2>
+    <div class="wn-proof">
+      <div class="wn-proof-item"><span class="wn-metric">4h → 90min</span>Founder's weekly reel batch time. Three clips, captions, B-roll, end card.</div>
+      <div class="wn-proof-item"><span class="wn-metric">10 / 9 / 9</span>Hook scores on first run with the visa/digital-nomad reel. Published manually, locked as canonical reference.</div>
+      <div class="wn-proof-item"><span class="wn-metric">5 modes</span>One skill drives interview-clipper, saddamh1, TTS-voiceover, kinetic-stoic, and motion-graphics modes.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Investment</p>
+    <h2>Pipeline build, then keep it running</h2>
+    <div class="wn-price-tiers">
+      <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$500</div><div class="wn-cadence">Single-mode pipeline, your brand config, three test reels with hand-tuning.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$1,000–$2,500</div><div class="wn-cadence">Multi-mode (talking-head + interview + voiceover), full brand config, batch runner, runbook.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $397/mo</div><div class="wn-cadence">Weekly batch ship from your raw footage, monthly config refresh, on-call when ffmpeg complains.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Questions</p>
+    <h2>Common questions</h2>
+    <details><summary>Can you make me a faceless AI avatar?</summary><div class="wn-faq-body">We can, but we usually argue against it for founder-led brands. Avatar reels under-perform face-to-camera by a factor of two to four on engagement, and viewers can tell. For e-commerce or news-style channels where there is no founder, faceless is fine and we'll set up HeyGen or Synthesia.</div></details>
+    <details><summary>Do I need a fancy camera?</summary><div class="wn-faq-body">No. The reference reel that opened this pipeline was shot on a DJI Pocket 3 in handheld mode at noon, full sun, with no microphone. Captions and EQ do most of the heavy lifting. An iPhone 14 or later is enough.</div></details>
+    <details><summary>Can I run it without a GPU?</summary><div class="wn-faq-body">Yes, on a CPU it's slower but works. Whisper has a CPU-friendly model. Pollinations runs in the cloud. ffmpeg uses CPU by default. A modern laptop runs the full nine-stage pipeline on a 60-second clip in roughly five minutes.</div></details>
+    <details><summary>What about copyright on music?</summary><div class="wn-faq-body">We default to the Mixkit free tier and clearly-licensed Epidemic Sound tracks if you have a subscription. We never use TikTok-trending audio in the auto-pipeline because it ages fast and creates copyright strikes on cross-posted YouTube uploads.</div></details>
+    <details><summary>Can my team edit clips after the pipeline runs?</summary><div class="wn-faq-body">Yes. The pipeline writes a Premiere-compatible XML and a CapCut JSON. Editors can re-time captions, swap B-roll, and re-export. That said, most clients post the pipeline output as-is once we've locked the look.</div></details>
+  </div>
+</section>
+
+<div class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>Stop letting your SD card hold your channel hostage.</h2>
+    <p class="wn-lede" style="margin:0 auto">Send one 60-second clip. We'll send back a reel built with this pipeline so you can judge the look.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"AI Video Creation","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Nine-stage reel pipeline: silence-cut, Whisper transcription, 9:16 reframe, pop-karaoke captions, B-roll cards, voice EQ, BGM duck, and end card.","serviceType":"AI video production"},{"@type":"Offer","name":"AI Video engagement","priceCurrency":"USD","price":"500","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"500","maxPrice":"2500"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}}]}
+</script>
+</article>

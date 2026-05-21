@@ -1,0 +1,273 @@
+<article class="wn-services-index">
+<style>
+.wn-services-index{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-services-index *{box-sizing:border-box}
+.wn-services-index .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-services-index .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-services-index .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-services-index .wn-hero>*{position:relative;z-index:1}
+.wn-services-index .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-services-index h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em;color:var(--wn-fg)}
+.wn-services-index h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-services-index .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-services-index h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 .65rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-services-index h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-services-index p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-services-index strong{color:var(--wn-fg);font-weight:600}
+.wn-services-index .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-services-index .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-services-index .wn-cat-intro{max-width:62ch;color:var(--wn-fg-muted);margin:0 0 1.5rem}
+.wn-services-index .wn-grid{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-services-index .wn-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-services-index .wn-grid{grid-template-columns:repeat(4,1fr)}}
+.wn-services-index .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease;display:flex;flex-direction:column}
+.wn-services-index .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border));transform:translateY(-2px)}
+.wn-services-index .wn-card .wn-icon{width:34px;height:34px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--wn-accent-a) 12%,transparent);color:var(--wn-accent-a);margin-bottom:.85rem}
+.wn-services-index .wn-card .wn-icon svg{width:18px;height:18px}
+.wn-services-index .wn-card p{font-size:.92rem;margin:0 0 .85rem;color:var(--wn-fg-muted)}
+.wn-services-index .wn-card .wn-read{margin-top:auto;font-size:.85rem;font-weight:600;color:var(--wn-accent-a);text-decoration:none}
+.wn-services-index .wn-card .wn-read:hover{color:var(--wn-accent-b)}
+.wn-services-index .wn-card-link{text-decoration:none;color:inherit;display:block}
+.wn-services-index .wn-bottom-strip{text-align:center;padding:3rem 1.5rem;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-b) 6%,transparent));border-top:1px solid var(--wn-border)}
+.wn-services-index .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-services-index .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-services-index .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-services-index .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-services-index .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-services-index .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-services-index .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem auto;border-radius:0 8px 8px 0;max-width:62rem}
+html.light .wn-services-index{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">Services · SkynetLabs</span>
+    <h1>16 services. 1 founder. <span class="wn-grad">0 generic agency tactics.</span></h1>
+    <p class="wn-lede">Pick the leak. We'll ship the stack. Every service below is a real build we've shipped at least three times — not a brochure menu we generated to look full.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Send a 3-sentence brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">01 · Automation</p>
+    <h2>Workflows that don't need a babysitter</h2>
+    <p class="wn-cat-intro">The paste-job your VA does at 11pm — gone. n8n, GoHighLevel, Zapier and Make wired so leads, refunds, and reports move themselves. Source-controlled. You own every JSON.</p>
+    <div class="wn-grid">
+      <a class="wn-card-link" href="/services/n8n-automation">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/></svg></span>
+          <h3>n8n Automation</h3>
+          <p>Workflow automation that runs while you sleep.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/gohighlevel">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+          <h3>GoHighLevel CRM</h3>
+          <p>Full CRM + sales pipeline setup, end-to-end.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/zapier-make">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+          <h3>Zapier &amp; Make</h3>
+          <p>Multi-tool connectivity layer when n8n is overkill.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/social-automation">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
+          <h3>Social Automation</h3>
+          <p>Auto-post + DM responder stack across Meta + LinkedIn.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">02 · AI Content</p>
+    <h2>Voice-locked content at volume</h2>
+    <p class="wn-cat-intro">Reels, shorts, talking heads, faceless YouTube. We don't generate slop — we build the pipeline that captures your voice once, then ships in the voice every week without you in the loop.</p>
+    <div class="wn-grid">
+      <a class="wn-card-link" href="/services/ai-video">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+          <h3>AI Video Creation</h3>
+          <p>Reels, shorts, talking-head at scale.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/youtube-automation">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></span>
+          <h3>YouTube Automation</h3>
+          <p>Faceless channel pipeline with thumbnails + SEO baked in.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/tiktok-automation">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+          <h3>TikTok Automation</h3>
+          <p>Daily content engine, hook-tested, voice-locked.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/facebook-automation">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <h3>Facebook Automation</h3>
+          <p>Page + DM + group reach without burning out admins.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">03 · Development</p>
+    <h2>Sites, shops, and chatbots you can ship in two weeks</h2>
+    <p class="wn-cat-intro">Next.js builds, AEO-tuned WordPress blogs, Shopify automation, and chatbots wired into the real CRM. Fast, indexable, and built so a junior dev can maintain them.</p>
+    <div class="wn-grid">
+      <a class="wn-card-link" href="/services/wordpress-seo">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></svg></span>
+          <h3>WordPress SEO Blog</h3>
+          <p>AEO-tuned content engine that wins the answer box.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/ecommerce-automation">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
+          <h3>E-commerce Automation</h3>
+          <p>Shopify + Stripe + n8n stack that handles ops on autopilot.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/vibe-coded-sites">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <h3>Vibe-Coded Websites</h3>
+          <p>Custom Next.js builds. Seven-day ship. No theme bloat.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/ai-chatbots">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          <h3>AI Chatbots</h3>
+          <p>Meta messaging + web + voice agents wired to your CRM.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">04 · Consulting</p>
+    <h2>Strategy, training, and design we can put in writing</h2>
+    <p class="wn-cat-intro">Operator-grade blueprints, voice-locked content systems, and identity work that survives a brand audit. The output is a doc your team can read on a Tuesday, not a deck nobody opens twice.</p>
+    <div class="wn-grid">
+      <a class="wn-card-link" href="/services/ai-business-systems">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></span>
+          <h3>AI Business Systems</h3>
+          <p>Operator-grade ops blueprint — the doc you wished you had at launch.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/strategy-training">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+          <h3>Strategy &amp; Training</h3>
+          <p>Team upskilling + playbooks so the system survives you.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/branding-design">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 1 0 0 20 4 4 0 0 0 4-4 2 2 0 0 1 2-2h2a4 4 0 0 0 4-4 10 10 0 0 0-12-10z"/></svg></span>
+          <h3>Branding &amp; Design</h3>
+          <p>Identity + design system that ships, not just looks.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+      <a class="wn-card-link" href="/services/ai-content-creation">
+        <div class="wn-card">
+          <span class="wn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg></span>
+          <h3>AI Content Creation</h3>
+          <p>Voice-locked content at volume — your tone, not GPT-default.</p>
+          <span class="wn-read">Read more →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln">Not sure which fits? Send a 3-sentence brief at <a href="/contact" style="color:inherit;text-decoration:underline">/contact</a> and we'll route you to the right service — or tell you we're the wrong fit. Either way you get a real answer, not a 30-minute discovery call.</div>
+
+<section class="wn-bottom-strip">
+  <div class="wn-wrap">
+    <h2 style="margin-bottom:.75rem">180 workflows · 40 websites · 9 countries · 5–14d ship</h2>
+    <p style="color:var(--wn-fg-muted);max-width:54ch;margin:0 auto">Every service ships against a fixed scope, a fixed price, and a Loom walkthrough. No hourly meter. No surprise milestone.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start a brief</a>
+      <a href="/pricing" class="wn-btn wn-btn-ghost">See pricing</a>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://skynetjoe.com/services#page",
+  "url": "https://skynetjoe.com/services",
+  "name": "SkynetLabs Services — 16 builds across automation, AI content, development, consulting",
+  "description": "Sixteen production-grade services from SkynetLabs across automation, AI content, development and consulting. Fixed scopes, public pricing, 5–14 day ship window.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "SkynetLabs",
+    "url": "https://skynetjoe.com"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "SkynetLabs service catalog",
+    "numberOfItems": 16,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "n8n Automation", "url": "https://skynetjoe.com/services/n8n-automation" },
+      { "@type": "ListItem", "position": 2, "name": "GoHighLevel CRM", "url": "https://skynetjoe.com/services/gohighlevel" },
+      { "@type": "ListItem", "position": 3, "name": "Zapier & Make", "url": "https://skynetjoe.com/services/zapier-make" },
+      { "@type": "ListItem", "position": 4, "name": "Social Automation", "url": "https://skynetjoe.com/services/social-automation" },
+      { "@type": "ListItem", "position": 5, "name": "AI Video Creation", "url": "https://skynetjoe.com/services/ai-video" },
+      { "@type": "ListItem", "position": 6, "name": "YouTube Automation", "url": "https://skynetjoe.com/services/youtube-automation" },
+      { "@type": "ListItem", "position": 7, "name": "TikTok Automation", "url": "https://skynetjoe.com/services/tiktok-automation" },
+      { "@type": "ListItem", "position": 8, "name": "Facebook Automation", "url": "https://skynetjoe.com/services/facebook-automation" },
+      { "@type": "ListItem", "position": 9, "name": "WordPress SEO Blog", "url": "https://skynetjoe.com/services/wordpress-seo" },
+      { "@type": "ListItem", "position": 10, "name": "E-commerce Automation", "url": "https://skynetjoe.com/services/ecommerce-automation" },
+      { "@type": "ListItem", "position": 11, "name": "Vibe-Coded Websites", "url": "https://skynetjoe.com/services/vibe-coded-sites" },
+      { "@type": "ListItem", "position": 12, "name": "AI Chatbots", "url": "https://skynetjoe.com/services/ai-chatbots" },
+      { "@type": "ListItem", "position": 13, "name": "AI Business Systems", "url": "https://skynetjoe.com/services/ai-business-systems" },
+      { "@type": "ListItem", "position": 14, "name": "Strategy & Training", "url": "https://skynetjoe.com/services/strategy-training" },
+      { "@type": "ListItem", "position": 15, "name": "Branding & Design", "url": "https://skynetjoe.com/services/branding-design" },
+      { "@type": "ListItem", "position": 16, "name": "AI Content Creation", "url": "https://skynetjoe.com/services/ai-content-creation" }
+    ]
+  }
+}
+</script>
+</article>

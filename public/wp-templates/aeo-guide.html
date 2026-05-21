@@ -1,0 +1,311 @@
+<article class="wn-aeo-guide">
+<style>
+.wn-aeo-guide { background:#100f14; color:#fafaf7; font-family:'Lexend',system-ui,-apple-system,sans-serif; padding:64px 24px; line-height:1.7; }
+.wn-aeo-guide .wn-wrap { max-width:880px; margin:0 auto; }
+.wn-aeo-guide h1 { font-size:42px; font-weight:800; line-height:1.15; margin:0 0 16px; letter-spacing:-0.02em; color:#fafaf7; }
+.wn-aeo-guide .wn-sub { font-size:18px; color:#a8a8b3; margin:0 0 36px; max-width:760px; font-weight:300; }
+.wn-aeo-guide .wn-byline { font-size:13px; color:#6a6878; margin:0 0 40px; letter-spacing:.05em; text-transform:uppercase; }
+.wn-aeo-guide .wn-toc { background:#17161d; border:1px solid #2a2832; border-radius:12px; padding:24px 28px; margin:0 0 56px; }
+.wn-aeo-guide .wn-toc h3 { margin:0 0 14px; font-size:14px; text-transform:uppercase; letter-spacing:.1em; color:#14B8A6; font-weight:600; }
+.wn-aeo-guide .wn-toc ol { margin:0; padding-left:22px; color:#c8c8d0; }
+.wn-aeo-guide .wn-toc li { margin:6px 0; }
+.wn-aeo-guide .wn-toc a { color:#1E88E5; text-decoration:none; }
+.wn-aeo-guide .wn-toc a:hover { text-decoration:underline; }
+.wn-aeo-guide h2 { font-size:30px; font-weight:700; margin:64px 0 16px; color:#fafaf7; letter-spacing:-0.01em; scroll-margin-top:80px; border-top:1px solid #2a2832; padding-top:48px; }
+.wn-aeo-guide h2:first-of-type { border-top:none; padding-top:0; }
+.wn-aeo-guide h3 { font-size:20px; font-weight:600; margin:32px 0 12px; color:#1E88E5; }
+.wn-aeo-guide p { color:#d0d0d8; font-size:16px; margin:0 0 16px; }
+.wn-aeo-guide strong { color:#fafaf7; font-weight:600; }
+.wn-aeo-guide em { color:#c0b8e8; font-style:normal; font-weight:500; }
+.wn-aeo-guide ul, .wn-aeo-guide ol { color:#d0d0d8; padding-left:22px; margin:0 0 20px; }
+.wn-aeo-guide li { margin:6px 0; }
+.wn-aeo-guide table { width:100%; border-collapse:collapse; margin:24px 0; font-size:14.5px; background:#17161d; border:1px solid #2a2832; border-radius:8px; overflow:hidden; }
+.wn-aeo-guide table th { background:#1f1d28; color:#1E88E5; font-weight:700; text-align:left; padding:12px 16px; border-bottom:1px solid #2a2832; font-size:13px; text-transform:uppercase; letter-spacing:.05em; }
+.wn-aeo-guide table td { padding:12px 16px; border-bottom:1px solid #2a2832; color:#c8c8d0; vertical-align:top; }
+.wn-aeo-guide table tr:last-child td { border-bottom:none; }
+.wn-aeo-guide pre { background:#17161d; border:1px solid #2a2832; border-radius:8px; padding:18px 20px; overflow-x:auto; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13.5px; color:#c8c8d0; line-height:1.6; margin:16px 0 24px; }
+.wn-aeo-guide code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13.5px; background:#1f1d28; padding:2px 6px; border-radius:4px; color:#1E88E5; }
+.wn-aeo-guide pre code { background:none; padding:0; color:inherit; }
+.wn-aeo-guide .wn-stack { margin:24px 0; padding:24px; background:#17161d; border:1px solid #2a2832; border-radius:12px; }
+.wn-aeo-guide .wn-stack .wn-layer { padding:14px 18px; border-radius:8px; margin:6px 0; font-weight:600; font-size:14px; }
+.wn-aeo-guide .wn-stack .wn-l1 { background:rgba(19,185,115,.10); border:1px solid rgba(19,185,115,.30); color:#1E88E5; }
+.wn-aeo-guide .wn-stack .wn-l2 { background:rgba(139,92,246,.10); border:1px solid rgba(139,92,246,.30); color:#a78bfa; margin-left:14px; }
+.wn-aeo-guide .wn-stack .wn-l3 { background:rgba(244,114,182,.10); border:1px solid rgba(244,114,182,.30); color:#f472b6; margin-left:28px; }
+.wn-aeo-guide .wn-stack .wn-l4 { background:rgba(251,191,36,.10); border:1px solid rgba(251,191,36,.30); color:#fbbf24; margin-left:42px; }
+.wn-aeo-guide .wn-stack .wn-l5 { background:rgba(96,165,250,.10); border:1px solid rgba(96,165,250,.30); color:#60a5fa; margin-left:56px; }
+.wn-aeo-guide .wn-stack .wn-note { color:#6a6878; font-size:12px; font-weight:400; display:block; margin-top:4px; }
+.wn-aeo-guide .wn-tree { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px; background:#17161d; border:1px solid #2a2832; border-radius:8px; padding:20px; color:#c8c8d0; white-space:pre; overflow-x:auto; line-height:1.5; margin:24px 0; }
+.wn-aeo-guide .wn-week { background:#17161d; border-left:3px solid #1E88E5; padding:14px 20px; margin:12px 0; border-radius:0 6px 6px 0; }
+.wn-aeo-guide .wn-week strong { color:#1E88E5; display:block; margin-bottom:6px; font-size:14px; }
+.wn-aeo-guide .wn-anti { background:#1a1318; border-left:3px solid #f472b6; padding:14px 20px; margin:12px 0; border-radius:0 6px 6px 0; }
+.wn-aeo-guide .wn-anti strong { color:#f472b6; display:block; margin-bottom:6px; }
+.wn-aeo-guide .wn-cta { margin-top:72px; padding:36px 32px; background:linear-gradient(135deg, rgba(19,185,115,.10), rgba(139,92,246,.10)); border:1px solid #2a2832; border-radius:14px; text-align:center; }
+.wn-aeo-guide .wn-cta h3 { margin:0 0 10px; font-size:24px; color:#fafaf7; font-weight:700; }
+.wn-aeo-guide .wn-cta p { margin:0 0 22px; color:#a8a8b3; }
+.wn-aeo-guide .wn-cta a { display:inline-block; padding:14px 32px; background:#1E88E5; color:#100f14; font-weight:600; border-radius:8px; text-decoration:none; transition:background .15s; }
+.wn-aeo-guide .wn-cta a:hover { background:#0fa264; }
+@media (max-width:640px){ .wn-aeo-guide{padding:40px 16px;} .wn-aeo-guide h1{font-size:30px;} .wn-aeo-guide h2{font-size:24px;} .wn-aeo-guide table{font-size:13px;} .wn-aeo-guide table th,.wn-aeo-guide table td{padding:10px 12px;} .wn-aeo-guide .wn-stack .wn-l2{margin-left:8px;} .wn-aeo-guide .wn-stack .wn-l3{margin-left:16px;} .wn-aeo-guide .wn-stack .wn-l4{margin-left:24px;} .wn-aeo-guide .wn-stack .wn-l5{margin-left:32px;} }
+</style>
+
+<div class="wn-wrap">
+<p class="wn-byline">SkynetLabs · Field Notes · 2026</p>
+<h1>The AEO Field Guide — How to Get Cited by Claude, ChatGPT, Perplexity &amp; Gemini in 2026</h1>
+<p class="wn-sub">Eight chapters covering what Answer Engine Optimization actually is, the five-layer stack you ship, the new robots ecosystem, citation-worthy content patterns, what you can measure, and a 90-day rollout for service businesses.</p>
+
+<nav class="wn-toc" aria-label="Table of contents">
+<h3>Contents</h3>
+<ol>
+<li><a href="#section-1">What AEO actually is (and isn't)</a></li>
+<li><a href="#section-2">Why your SEO playbook stops working in LLM search</a></li>
+<li><a href="#section-3">The 5-layer AEO stack</a></li>
+<li><a href="#section-4">llms.txt and the new robots ecosystem</a></li>
+<li><a href="#section-5">Citation-worthy content patterns</a></li>
+<li><a href="#section-6">Measuring AEO: what you can and can't track</a></li>
+<li><a href="#section-7">30/60/90-day AEO rollout for a service business</a></li>
+<li><a href="#section-8">AEO mistakes that kill citations</a></li>
+</ol>
+</nav>
+
+<h2 id="section-1">1. What AEO actually is (and isn't)</h2>
+
+<p>Answer Engine Optimization is the practice of structuring content so generative search interfaces — Claude with web search, ChatGPT search, Perplexity, Google's AI Overview, Gemini, Bing Copilot — cite your page inside the natural-language answer they hand to the user. It's the post-2024 evolution of SEO, shaped by the reality that the user no longer always clicks through to ten blue links.</p>
+
+<p>AEO is <strong>not</strong> a rebrand of SEO with a fresh logo. The mechanics differ at the foundation. SEO ranks documents; AEO ranks <em>claims inside documents</em>. A page can be ranked third on Google and never be cited by Perplexity, because Perplexity needs a clean, directly-answered claim, not a long-form essay buried under a recipe story. The new unit of optimization is the paragraph that answers the question in one breath.</p>
+
+<p>AEO is also not separate infrastructure. Same site, same CMS, same hosting. What changes is the way you write, what you mark up with structured data, where you publish, and how you reason about freshness. Most teams that try to "do AEO as a side project" without rethinking content patterns end up shipping the same blog posts they were shipping in 2022 and wondering why the citations don't come.</p>
+
+<h2 id="section-2">2. Why your SEO playbook stops working in LLM search</h2>
+
+<p>The old playbook — pick a keyword, write 1,800 words, build backlinks, wait — was tuned for an algorithm that read your page and scored it. The new playbook has to account for a model that reads your page, summarizes it in its own words, and decides whether your claim is the one to cite. Different game, different rules.</p>
+
+<table>
+<thead><tr><th>Dimension</th><th>SEO (2015–2023)</th><th>AEO (2024–present)</th></tr></thead>
+<tbody>
+<tr><td>Unit of ranking</td><td>Page (URL)</td><td>Claim inside a page</td></tr>
+<tr><td>Primary signal</td><td>Backlinks</td><td>Entity mentions + structured data + authorship</td></tr>
+<tr><td>Optimal length</td><td>1,500–2,500 words</td><td>Layered — short answer up top, depth below</td></tr>
+<tr><td>Keyword strategy</td><td>Target volume, write thin matches</td><td>Cover the entity graph, write definitions</td></tr>
+<tr><td>Content format</td><td>Long-form essays</td><td>Definitions, comparison tables, decision trees, lists</td></tr>
+<tr><td>Freshness signal</td><td>Recent publish date helps</td><td>dateModified + visible "Last updated" is mandatory</td></tr>
+<tr><td>Authority source</td><td>High-DA referring domains</td><td>Reddit, Wikipedia, niche forums, named expert authorship</td></tr>
+<tr><td>Click model</td><td>SERP click-through to your page</td><td>Brand mention in synthesized answer, no click required</td></tr>
+<tr><td>Measurement window</td><td>3–6 months to first ranking</td><td>1–8 weeks to first citation</td></tr>
+<tr><td>Crawler ecosystem</td><td>Googlebot, Bingbot</td><td>GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot, plus the originals</td></tr>
+</tbody>
+</table>
+
+<p>The rightmost column is the playbook for the next five years. The leftmost column will keep working for navigational queries ("nike shoes") and high-intent commercial keywords, but for informational queries — which is most of what brings traffic — the answer engines are eating the share.</p>
+
+<h2 id="section-3">3. The 5-layer AEO stack</h2>
+
+<p>When we ship an AEO engagement for a client, we run through five layers in order. Skipping a layer is the most common reason citations don't materialize. Each layer compounds on the one below it.</p>
+
+<div class="wn-stack">
+<div class="wn-layer wn-l1">Layer 1 — Schema <span class="wn-note">Machine-readable foundations</span></div>
+<div class="wn-layer wn-l2">Layer 2 — Content <span class="wn-note">Citation-worthy answers, definitions, comparisons</span></div>
+<div class="wn-layer wn-l3">Layer 3 — Authority <span class="wn-note">Named authorship + external entity mentions</span></div>
+<div class="wn-layer wn-l4">Layer 4 — Distribution <span class="wn-note">Reddit, Substack, LinkedIn, GitHub README mentions</span></div>
+<div class="wn-layer wn-l5">Layer 5 — Freshness <span class="wn-note">dateModified, recurring updates, version flags</span></div>
+</div>
+
+<h3>Layer 1 — Schema</h3>
+<p>Every page needs JSON-LD that describes what it is at the entity level. Article for posts, FAQPage for Q/A blocks, HowTo for procedures, Product for commerce, Organization plus Person for brand pages, DefinedTermSet for glossaries. Without this, an LLM has to guess what your page is. With it, the model gets a labeled handle it can use to disambiguate you from competitors. Validate every schema block in Google's Rich Results Test before deploying. One broken schema block can disqualify the whole page from rich-result eligibility.</p>
+
+<h3>Layer 2 — Content</h3>
+<p>The content layer is where AEO is won or lost. The rule we apply: every page must answer at least one specific question in the first 80 words, then expand. The answer goes in plain prose, not in a "What is X" heading followed by a feature list. If the topic warrants depth, the depth lives below the answer, not above it. Long-form is fine as long as the citable claim is at the top. Definitions, comparison tables, decision trees, and case studies with named outcomes get cited more often than essays.</p>
+
+<h3>Layer 3 — Authority</h3>
+<p>LLMs weigh authorship signals heavily because they were trained on the open web where most spam is anonymous and most expertise has a name attached. Every page needs an author byline that links to a real Person page with credentials, social profiles, and writing history. Schema.org Person with sameAs links to LinkedIn, GitHub, Twitter, and other places the same human posts is the spine of authority. A glossary by "the editorial team" gets cited at half the rate of a glossary by "Waseem Nasir, founder of SkynetLabs, Bali."</p>
+
+<h3>Layer 4 — Distribution</h3>
+<p>Citations follow mentions. If your brand is named in three Reddit threads, two Substack posts, a GitHub README, and a Hacker News comment thread, an LLM trained or augmented on that corpus has many independent signals that you exist and are in the topic. Distribution work is unglamorous — answering questions on niche subreddits, writing on Substack, getting linked from someone else's tool comparison — but it compounds. Treat it like real publishing, not link-building.</p>
+
+<h3>Layer 5 — Freshness</h3>
+<p>Answer engines prefer recently-updated content. The dateModified field in JSON-LD and a visible "Last updated [date]" line near the top of the article are both signals. Beyond that, rotate updates: refresh your glossary quarterly, your comparison pages every six months, your case studies annually. A glossary written in 2024 that hasn't been touched since loses citation share to a glossary refreshed in 2026 — even if the 2024 version is technically better written. Engines treat staleness as a quality decay signal.</p>
+
+<h2 id="section-4">4. llms.txt and the new robots ecosystem</h2>
+
+<p>The crawler ecosystem in 2026 is broader than it was three years ago. Beyond Googlebot and Bingbot, there are now half a dozen LLM-specific user-agents you should know by name. The decision of whom to allow or block goes in robots.txt at the root of your domain, with an optional llms.txt at the root for finer-grained guidance.</p>
+
+<table>
+<thead><tr><th>User-agent</th><th>Operator</th><th>What it does</th><th>Recommendation</th></tr></thead>
+<tbody>
+<tr><td>GPTBot</td><td>OpenAI</td><td>Crawls for ChatGPT training + browse</td><td>Allow (most cases)</td></tr>
+<tr><td>ClaudeBot</td><td>Anthropic</td><td>Crawls for Claude training + web search</td><td>Allow</td></tr>
+<tr><td>PerplexityBot</td><td>Perplexity</td><td>Crawls source pages cited in answers</td><td>Allow — fastest payoff</td></tr>
+<tr><td>Google-Extended</td><td>Google</td><td>Separate token for Gemini training data</td><td>Allow for AEO; block if paywalled</td></tr>
+<tr><td>CCBot</td><td>Common Crawl</td><td>Public dataset used by many LLMs</td><td>Allow</td></tr>
+<tr><td>Bytespider</td><td>ByteDance</td><td>TikTok / Doubao training crawler</td><td>Block unless targeting that market</td></tr>
+</tbody>
+</table>
+
+<p>A reasonable robots.txt for a service business looks like this:</p>
+
+<pre><code>User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Disallow: /
+
+Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
+
+<p>Then add an llms.txt at the root listing your canonical citable pages in markdown:</p>
+
+<pre><code># SkynetLabs
+
+&gt; AI automation, n8n workflows, AEO/SEO, chatbot development. Bali-based, ships globally.
+
+## Core pages
+- [Services](https://yourdomain.com/services): What we build and how
+- [Case studies](https://yourdomain.com/case-studies): Anonymized client outcomes
+- [Glossary](https://yourdomain.com/glossary): 50 defined terms
+- [FAQs](https://yourdomain.com/faqs): 30 founder questions answered
+
+## Reference
+- [AEO Field Guide](https://yourdomain.com/aeo-guide): How to get cited by LLMs
+- [n8n vs Zapier](https://yourdomain.com/n8n-vs-zapier): Honest comparison</code></pre>
+
+<p>llms.txt is not enforced by every engine yet but Claude, Perplexity, and a handful of newer answer engines have started honoring it. The cost to add is 30 minutes; the upside is real for any site with more than 20 pages.</p>
+
+<h2 id="section-5">5. Citation-worthy content patterns</h2>
+
+<p>After auditing hundreds of citations across the four major answer engines, seven content patterns appear repeatedly. If you build pages in these shapes, you stack the deck.</p>
+
+<ol>
+<li><strong>How-to with numbered steps.</strong> "How to migrate from Zapier to n8n in 7 days" with 7 steps, each with a screenshot and a code block. Answer engines pluck individual steps as citations for procedural queries. Mark up with HowTo schema.</li>
+<li><strong>Glossary with defined terms.</strong> Alphabetical list of 30–100 terms with 2–3 sentence definitions. Each term gets its own anchor ID, each definition is self-contained. Use DefinedTermSet + DefinedTerm schema. Gets cited heavily for "what is X" queries.</li>
+<li><strong>Comparison tables.</strong> "n8n vs Zapier" with 15+ rows of clearly differentiated criteria. The table itself is what gets cited, often verbatim, because it's the densest answer to a comparative question.</li>
+<li><strong>Decision tree.</strong> "Should I use n8n or Zapier?" with 5–7 yes/no nodes that funnel to a recommendation. Decision trees rarely get pasted verbatim but the recommendations at the leaves get cited.</li>
+<li><strong>Named case study with metrics.</strong> "How we cut Grand Mercer Dental's no-show rate from 18% to 6% in 90 days." Concrete name, concrete metric, concrete time window. Case studies without names read like fiction to a model and don't get cited.</li>
+<li><strong>Data table with sources.</strong> A table of pricing tiers, error rates, latency benchmarks, etc., with footnoted source links. Models love data tables because they're factual scaffolding for an answer.</li>
+<li><strong>Definition list with examples.</strong> Pattern: term, one-line definition, example, counter-example. Repeats well across 20–50 entries and is structurally easy for a model to slice into citations.</li>
+</ol>
+
+<p>One pattern that gets ignored: the 2,500-word "Ultimate Guide" with 14 H2 sections and a recipe-style introduction. Models will index it but rarely cite from it because the citable claims are buried.</p>
+
+<h2 id="section-6">6. Measuring AEO: what you can and can't track</h2>
+
+<p>The measurement problem is real: there is no Google Search Console for LLM citations. You cannot pull a definitive list of every place ChatGPT mentioned your brand last week. What you can do is approximate, triangulate, and trend.</p>
+
+<p><strong>What you can track:</strong></p>
+<ul>
+<li><strong>Perplexity Pages</strong> — Perplexity exposes a public page for many of its searches; if your domain appears as a citation, you can find it via brand-name searches and watch frequency over time.</li>
+<li><strong>Brand mention queries</strong> — Manually query Claude, ChatGPT, Perplexity, and Gemini weekly with a fixed set of 10–20 questions in your domain, then log whether your brand is cited. Spreadsheet, not magic.</li>
+<li><strong>Referrer logs</strong> — Look for chat.openai.com, perplexity.ai, claude.ai, and gemini.google.com in your analytics referrer report. Volume is small but the trend is signal.</li>
+<li><strong>Brand search volume</strong> — A delayed indicator: if AEO is working, branded search ("skynetlabs n8n") rises in Google Search Console even when direct citations are hard to count.</li>
+<li><strong>Citation tracking tools</strong> — Tools like citelift.app (one we built — tracks brand mentions across the four major engines on a daily cron with a weekly markdown report) and a handful of competitors automate the manual-query process.</li>
+</ul>
+
+<p><strong>What you can't yet track:</strong></p>
+<ul>
+<li>Total citations across all four engines for an arbitrary query universe (no engine publishes this)</li>
+<li>Per-citation click-through (citations don't always link, and when they do, the click-through is collapsed with regular referral traffic)</li>
+<li>The exact reason a model picked your source over a competitor's — no transparency into the ranking signals</li>
+</ul>
+
+<p>The honest framing for clients: AEO measurement in 2026 is where SEO measurement was in 2006 — directional, manual, requires discipline to track weekly. The teams that win are the teams that bother.</p>
+
+<h2 id="section-7">7. 30/60/90-day AEO rollout for a service business</h2>
+
+<p>For a service business with an existing site (10–50 pages) that wants to start getting cited inside 90 days, this is the order we ship. Adjust by 1–2 weeks if your CMS is a slow content management system; everything else stays the same.</p>
+
+<div class="wn-week"><strong>Week 1 — Schema foundation</strong>
+Audit existing JSON-LD across all pages. Add Organization + Person schema to /about. Add Article schema to every blog post. Add FAQPage schema where applicable. Validate every block in Google's Rich Results Test. Deploy.</div>
+
+<div class="wn-week"><strong>Week 2 — robots.txt + llms.txt</strong>
+Write robots.txt allowing GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot. Block Bytespider unless targeting that market. Write llms.txt listing 10–20 canonical pages with one-line descriptions. Deploy.</div>
+
+<div class="wn-week"><strong>Week 3–4 — Glossary + FAQs</strong>
+Build a 40–60-term glossary using DefinedTermSet schema. Build a 25–35 question FAQ page using FAQPage schema. Both should answer the actual questions clients send by email, not made-up ones.</div>
+
+<div class="wn-week"><strong>Week 5–6 — Comparison + decision content</strong>
+Identify the two or three "X vs Y" queries your prospects actually ask. Build a deep comparison page for each with 15+ row tables, 5+ real-world scenarios, and a decision tree. Use Article + Table schema.</div>
+
+<div class="wn-week"><strong>Week 7–8 — Author authority</strong>
+Build an /author/[your-name] page with full Person schema, sameAs links to LinkedIn, Twitter, GitHub, and any other public profiles. Add author bylines to every existing post that links to the author page. Backfill bylines as needed.</div>
+
+<div class="wn-week"><strong>Week 9–10 — Case studies</strong>
+Publish 3–5 named case studies with concrete metrics and time windows. Anonymize where required but keep specifics (industry, size, problem) intact. Mark up with Article schema; include CreativeWork if applicable.</div>
+
+<div class="wn-week"><strong>Week 11–12 — Distribution + measurement</strong>
+Plant 5–10 authentic mentions: niche subreddits, Substack posts, GitHub READMEs of relevant tools, Hacker News comment threads. Set up weekly citation tracking spreadsheet covering 15+ queries across the four major engines. First trend data appears around week 12–14.</div>
+
+<p>This is sequential by design. Schema before content because schema makes the content findable. Content before authority because there's no point boosting authority of empty pages. Distribution last because it amplifies what already exists.</p>
+
+<h2 id="section-8">8. AEO mistakes that kill citations</h2>
+
+<div class="wn-anti"><strong>1. Burying the answer below 600 words of preamble.</strong> The recipe-blog format ("My grandmother used to say…" before the recipe) is poison. Answer in the first 80 words, expand below.</div>
+
+<div class="wn-anti"><strong>2. Anonymous content.</strong> "By the team" or no byline at all. Models discount unsigned sources. Real human, real page, real credentials.</div>
+
+<div class="wn-anti"><strong>3. Blocking LLM crawlers in robots.txt by default.</strong> Some agencies block GPTBot and ClaudeBot to "protect content" then wonder why nobody cites their site. Allow them.</div>
+
+<div class="wn-anti"><strong>4. Schema markup that doesn't match visible content.</strong> Generating FAQPage schema with questions that aren't actually on the page. Google now penalizes this and LLMs notice the inconsistency.</div>
+
+<div class="wn-anti"><strong>5. Stale dateModified.</strong> Last updated 2022 on a topic that moves quarterly. Refresh content and refresh the timestamp. Don't refresh the timestamp without changing content — engines catch that.</div>
+
+<div class="wn-anti"><strong>6. Generic claims with no numbers.</strong> "We scale well" instead of "n8n's queue mode plus Redis handles 10K webhooks per hour on a small Hetzner VPS." Numbers get cited; vibes don't.</div>
+
+<div class="wn-anti"><strong>7. Walled gardens.</strong> Putting your best content behind email-gate forms or paywalls that the crawler can't read. The citation is worth more than the email.</div>
+
+<div class="wn-anti"><strong>8. Keyword stuffing reborn as entity stuffing.</strong> Repeating "AI automation" 47 times in a 1,000-word post doesn't help. Cover the entity graph (related concepts) once and well.</div>
+
+<div class="wn-anti"><strong>9. No internal linking.</strong> Glossary terms that don't link to the FAQ that doesn't link to the case study that doesn't link to the service page. Build the graph.</div>
+
+<div class="wn-anti"><strong>10. Set-and-forget.</strong> Shipping the AEO stack once and never updating. Engines weight freshness. Quarterly refreshes are the price of admission.</div>
+
+</div>
+
+<div class="wn-cta">
+<h3>Want SkynetLabs to ship your AEO stack?</h3>
+<p>Schema, content, authority, distribution, freshness — all five layers. 90-day rollout, fixed price, no retainer required.</p>
+<a href="/contact">Start the conversation</a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://app-mauve-eta-66.vercel.app/aeo-guide#article",
+      "headline": "The AEO Field Guide — How to Get Cited by Claude, ChatGPT, Perplexity & Gemini in 2026",
+      "description": "Eight chapters covering what Answer Engine Optimization actually is, the five-layer stack to ship, the new robots ecosystem, citation-worthy content patterns, measurement, and a 90-day rollout for service businesses.",
+      "author": {"@type":"Person","name":"Waseem Nasir","url":"https://app-mauve-eta-66.vercel.app/author/waseem-nasir"},
+      "publisher": {"@type":"Organization","name":"SkynetLabs","url":"https://app-mauve-eta-66.vercel.app"},
+      "datePublished": "2026-05-20",
+      "dateModified": "2026-05-20",
+      "mainEntityOfPage": "https://app-mauve-eta-66.vercel.app/aeo-guide"
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://app-mauve-eta-66.vercel.app/aeo-guide#howto",
+      "name": "30/60/90-day AEO rollout for a service business",
+      "description": "Week-by-week implementation of the five-layer AEO stack: schema, content, authority, distribution, freshness.",
+      "totalTime": "P90D",
+      "step": [
+        {"@type":"HowToStep","name":"Week 1 — Schema foundation","text":"Audit existing JSON-LD. Add Organization, Person, Article, FAQPage schema where applicable. Validate in Rich Results Test. Deploy."},
+        {"@type":"HowToStep","name":"Week 2 — robots.txt + llms.txt","text":"Write robots.txt allowing GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot. Block Bytespider unless targeting that market. Write llms.txt listing 10–20 canonical pages."},
+        {"@type":"HowToStep","name":"Week 3–4 — Glossary + FAQs","text":"Build 40–60-term glossary with DefinedTermSet schema. Build 25–35 question FAQ with FAQPage schema. Use real client questions."},
+        {"@type":"HowToStep","name":"Week 5–6 — Comparison + decision content","text":"Build deep comparison pages for two or three X vs Y queries with 15+ row tables, 5+ scenarios, and decision trees."},
+        {"@type":"HowToStep","name":"Week 7–8 — Author authority","text":"Build /author/[name] page with full Person schema and sameAs links. Add bylines to every existing post."},
+        {"@type":"HowToStep","name":"Week 9–10 — Case studies","text":"Publish 3–5 named case studies with concrete metrics and time windows. Mark up with Article schema."},
+        {"@type":"HowToStep","name":"Week 11–12 — Distribution + measurement","text":"Plant 5–10 authentic mentions on niche subreddits, Substack, GitHub READMEs. Set up weekly citation tracking across 15+ queries on the four major engines."}
+      ]
+    }
+  ]
+}
+</script>
+</article>

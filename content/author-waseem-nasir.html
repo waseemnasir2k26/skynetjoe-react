@@ -1,0 +1,526 @@
+<article class="wn-author">
+  <style>
+    .wn-author {
+      --a-bg: #100f14;
+      --a-bg-alt: #1a1920;
+      --a-surface: #1f1f23;
+      --a-surface-2: #29282d;
+      --a-fg: #f7f7f7;
+      --a-fg-muted: #c6c7c6;
+      --a-fg-faint: #98989d;
+      --a-border: rgba(255, 255, 255, 0.08);
+      --a-border-strong: rgba(255, 255, 255, 0.16);
+      --a-green: #1E88E5;
+      --a-green-dark: #1565C0;
+      --a-green-light: #42A5F5;
+      --a-purple: #14B8A6;
+      --a-purple-light: #5EEAD4;
+      --a-cyan: #00D4FF;
+      --a-radius: 14px;
+      --a-radius-sm: 10px;
+      background: var(--a-bg);
+      color: var(--a-fg);
+      font-family: var(--font-lexend, "Lexend", system-ui, -apple-system, "Segoe UI", sans-serif);
+      display: block;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+    .wn-author *, .wn-author *::before, .wn-author *::after { box-sizing: border-box; }
+    .wn-author a { color: var(--a-green-light); text-decoration: none; transition: color .15s ease; }
+    .wn-author a:hover { color: var(--a-green); }
+
+    .wn-author .wn-a-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+
+    /* Hero */
+    .wn-author .wn-a-hero {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      padding-bottom: 3rem;
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid var(--a-border);
+    }
+    .wn-author .wn-a-portrait-wrap {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--a-border-strong);
+      background: linear-gradient(135deg, var(--a-green) 0%, var(--a-purple) 100%);
+      flex-shrink: 0;
+    }
+    .wn-author .wn-a-portrait-wrap::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--a-green) 0%, var(--a-purple) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .wn-author .wn-a-portrait-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .wn-author .wn-a-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--a-border-strong);
+      border-radius: 999px;
+      background: rgba(19, 185, 115, 0.08);
+      color: var(--a-green-light);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .wn-author .wn-a-eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--a-green);
+      box-shadow: 0 0 8px var(--a-green);
+    }
+    .wn-author .wn-a-h1 {
+      font-size: clamp(1.9rem, 4vw, 2.85rem);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.6rem;
+      color: var(--a-fg);
+    }
+    .wn-author .wn-a-h1 small {
+      display: block;
+      font-size: 0.55em;
+      font-weight: 500;
+      color: var(--a-fg-faint);
+      letter-spacing: 0.01em;
+      margin-top: 0.4rem;
+    }
+    .wn-author .wn-a-sub {
+      font-size: 1.15rem;
+      color: var(--a-fg-muted);
+      margin: 0 0 1.25rem;
+      max-width: 50ch;
+    }
+    .wn-author .wn-a-sub em {
+      font-style: normal;
+      color: var(--a-green-light);
+      font-weight: 500;
+    }
+
+    /* Section h2 */
+    .wn-author .wn-a-h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 1.5rem;
+      color: var(--a-fg);
+      position: relative;
+      padding-left: 1rem;
+    }
+    .wn-author .wn-a-h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.4em;
+      bottom: 0.4em;
+      width: 3px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, var(--a-green) 0%, var(--a-purple) 100%);
+    }
+
+    /* Story */
+    .wn-author .wn-a-section { margin-bottom: 3.5rem; }
+    .wn-author .wn-a-story p {
+      color: var(--a-fg-muted);
+      font-size: 1.05rem;
+      margin: 0 0 1.2rem;
+    }
+    .wn-author .wn-a-story p:last-child { margin-bottom: 0; }
+    .wn-author .wn-a-story strong {
+      color: var(--a-fg);
+      font-weight: 600;
+    }
+    .wn-author .wn-a-story em {
+      color: var(--a-green-light);
+      font-style: normal;
+      font-weight: 500;
+    }
+    .wn-author .wn-a-route {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem 0.6rem;
+      padding: 0.85rem 1.1rem;
+      background: var(--a-surface);
+      border: 1px solid var(--a-border);
+      border-radius: var(--a-radius-sm);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9rem;
+      color: var(--a-fg-muted);
+      margin: 0 0 1.5rem;
+    }
+    .wn-author .wn-a-route span {
+      color: var(--a-fg);
+      font-weight: 600;
+    }
+    .wn-author .wn-a-route .wn-a-route-now {
+      color: var(--a-green-light);
+      position: relative;
+    }
+    .wn-author .wn-a-route .wn-a-arrow {
+      color: var(--a-fg-faint);
+      font-weight: 400;
+    }
+
+    /* How I work bullets */
+    .wn-author .wn-a-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .wn-author .wn-a-bullet {
+      padding: 1.4rem;
+      background: var(--a-surface);
+      border: 1px solid var(--a-border);
+      border-radius: var(--a-radius);
+      position: relative;
+    }
+    .wn-author .wn-a-bullet-h {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--a-fg);
+      margin: 0 0 0.45rem;
+    }
+    .wn-author .wn-a-bullet-h::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      background: linear-gradient(135deg, var(--a-green) 0%, var(--a-green-dark) 100%);
+      flex-shrink: 0;
+    }
+    .wn-author .wn-a-bullet-p {
+      color: var(--a-fg-muted);
+      font-size: 0.94rem;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* Credibility row */
+    .wn-author .wn-a-creds {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--a-surface);
+      border: 1px solid var(--a-border);
+      border-radius: var(--a-radius);
+    }
+    .wn-author .wn-a-cred {
+      text-align: center;
+      padding: 0.5rem 0.4rem;
+      border-right: 1px solid var(--a-border);
+    }
+    .wn-author .wn-a-cred:last-child { border-right: 0; }
+    .wn-author .wn-a-cred-v {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--a-green) 0%, var(--a-cyan) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: block;
+      line-height: 1.1;
+    }
+    .wn-author .wn-a-cred-l {
+      font-size: 0.78rem;
+      color: var(--a-fg-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.35rem;
+    }
+
+    /* Social row */
+    .wn-author .wn-a-social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+    .wn-author .wn-a-social a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      background: var(--a-surface);
+      border: 1px solid var(--a-border);
+      border-radius: var(--a-radius-sm);
+      color: var(--a-fg);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .wn-author .wn-a-social a:hover {
+      border-color: var(--a-green);
+      transform: translateY(-1px);
+      color: var(--a-green-light);
+    }
+    .wn-author .wn-a-social svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* CTA */
+    .wn-author .wn-a-cta {
+      margin-top: 3.5rem;
+      padding: 2.5rem;
+      background: linear-gradient(135deg, rgba(19, 185, 115, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+      border: 1px solid var(--a-border-strong);
+      border-radius: var(--a-radius);
+      text-align: center;
+    }
+    .wn-author .wn-a-cta-h {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin: 0 0 0.6rem;
+      color: var(--a-fg);
+    }
+    .wn-author .wn-a-cta-p {
+      color: var(--a-fg-muted);
+      margin: 0 0 1.5rem;
+      font-size: 1rem;
+    }
+    .wn-author .wn-a-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--a-green) 0%, var(--a-green-dark) 100%);
+      color: #fff !important;
+      font-weight: 700;
+      padding: 0.9rem 1.6rem;
+      border-radius: var(--a-radius-sm);
+      box-shadow: 0 4px 18px rgba(19, 185, 115, 0.25);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .wn-author .wn-a-cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(19, 185, 115, 0.35);
+      color: #fff !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .wn-author .wn-a-wrap { padding: 3.5rem 1.25rem; }
+      .wn-author .wn-a-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1.5rem;
+      }
+      .wn-author .wn-a-portrait-wrap {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto;
+      }
+      .wn-author .wn-a-sub { margin-left: auto; margin-right: auto; }
+      .wn-author .wn-a-bullets { grid-template-columns: 1fr; }
+      .wn-author .wn-a-creds {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+      }
+      .wn-author .wn-a-cred {
+        border-right: 0;
+        border-bottom: 1px solid var(--a-border);
+        padding-bottom: 0.9rem;
+      }
+      .wn-author .wn-a-cred:nth-last-child(-n+2) { border-bottom: 0; padding-bottom: 0.5rem; }
+    }
+    @media (max-width: 480px) {
+      .wn-author .wn-a-wrap { padding: 2.75rem 1rem; }
+      .wn-author .wn-a-creds { grid-template-columns: 1fr; }
+      .wn-author .wn-a-cred { border-right: 0; border-bottom: 1px solid var(--a-border); }
+      .wn-author .wn-a-cred:last-child { border-bottom: 0; }
+      .wn-author .wn-a-cta { padding: 1.75rem; }
+    }
+  </style>
+
+  <div class="wn-a-wrap">
+    <header class="wn-a-hero">
+      <div class="wn-a-portrait-wrap">
+        <img src="/waseem-portrait.jpg" alt="Waseem Nasir, founder of SkynetLabs" loading="eager" width="220" height="220" />
+      </div>
+      <div>
+        <span class="wn-a-eyebrow">Founder &middot; Currently in Bali</span>
+        <h1 class="wn-a-h1">
+          Waseem Nasir
+          <small>Founder, SkynetLabs</small>
+        </h1>
+        <p class="wn-a-sub">I build automation that <em>doesn't need me to babysit it</em>. Most agencies sell hours. I sell the system that makes the hours disappear.</p>
+      </div>
+    </header>
+
+    <section class="wn-a-section">
+      <h2 class="wn-a-h2">The route here wasn't a straight line</h2>
+      <div class="wn-a-route">
+        <span>Lahore</span>
+        <span class="wn-a-arrow">&rarr;</span>
+        <span>Singapore</span>
+        <span class="wn-a-arrow">&rarr;</span>
+        <span>Bangkok</span>
+        <span class="wn-a-arrow">&rarr;</span>
+        <span>Kuala Lumpur</span>
+        <span class="wn-a-arrow">&rarr;</span>
+        <span class="wn-a-route-now">Bali (now)</span>
+      </div>
+      <div class="wn-a-story">
+        <p>I left <strong>Lahore</strong> because the ceiling was clear. Not the people &mdash; the city had brilliant developers and warmer hospitality than anywhere I've lived since. The ceiling was the math: local clients, local currency, local-paying budgets. You can outwork the math for a while. You can't outwork it forever.</p>
+        <p>The next <strong>40-something websites</strong> taught me what nobody on YouTube teaches: <em>most client work fails at the brief, not the build.</em> I'd ship pixel-perfect Webflow sites for clients who couldn't say what they wanted in one sentence. The technical work was fine. The strategic work was the gap. So I stopped taking briefs I couldn't pressure-test in 15 minutes.</p>
+        <p>Then <strong>n8n + Claude</strong> hit me sideways. Not as tools &mdash; as a force multiplier. The same brain that used to ship one site a fortnight could now ship a site, an automation, a chatbot, and a content engine in the same window. I started writing about Claude as a <em>cofounder-in-the-machine</em>: no equity, no Bali wifi complaints, no ego on rewrites.</p>
+        <p>What I'm building now is the version of <strong>SkynetLabs</strong> that 25-year-old-me would have hired in a heartbeat: a one-person agency with AI in the second seat, fixed-price scopes, no retainer hostage situations, and the option to walk on day one if the fit's wrong. Bali is HQ. The clients are everywhere else.</p>
+      </div>
+    </section>
+
+    <section class="wn-a-section">
+      <h2 class="wn-a-h2">How I actually work</h2>
+      <ul class="wn-a-bullets">
+        <li class="wn-a-bullet">
+          <h3 class="wn-a-bullet-h">Patience-first intake</h3>
+          <p class="wn-a-bullet-p">I'd rather lose a week to scoping than ship in the wrong direction. If your brief is fuzzy, I'll send you a one-page pressure-test before I send you a quote.</p>
+        </li>
+        <li class="wn-a-bullet">
+          <h3 class="wn-a-bullet-h">No-surprises pricing</h3>
+          <p class="wn-a-bullet-p">Fixed price per milestone. Written down before I touch the keyboard. If scope grows, the conversation is "here's the new line item" &mdash; not a quiet inflation of the invoice.</p>
+        </li>
+        <li class="wn-a-bullet">
+          <h3 class="wn-a-bullet-h">Real ship dates</h3>
+          <p class="wn-a-bullet-p">Most builds land in 5&ndash;14 days. If something is going to slip, you hear it from me 48 hours before the date, not 48 hours after.</p>
+        </li>
+        <li class="wn-a-bullet">
+          <h3 class="wn-a-bullet-h">Walk-away triggers</h3>
+          <p class="wn-a-bullet-p">Disrespect, ghosting, scope-creep without payment, or "make it pop"-grade feedback. I'll refund and unsubscribe. Life is too short for the wrong room.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="wn-a-section">
+      <h2 class="wn-a-h2">Receipts</h2>
+      <div class="wn-a-creds">
+        <div class="wn-a-cred">
+          <span class="wn-a-cred-v">180+</span>
+          <div class="wn-a-cred-l">Workflows shipped</div>
+        </div>
+        <div class="wn-a-cred">
+          <span class="wn-a-cred-v">40+</span>
+          <div class="wn-a-cred-l">Websites delivered</div>
+        </div>
+        <div class="wn-a-cred">
+          <span class="wn-a-cred-v">9</span>
+          <div class="wn-a-cred-l">Countries served</div>
+        </div>
+        <div class="wn-a-cred">
+          <span class="wn-a-cred-v">5&ndash;14d</span>
+          <div class="wn-a-cred-l">Ship window</div>
+        </div>
+        <div class="wn-a-cred">
+          <span class="wn-a-cred-v">Bali</span>
+          <div class="wn-a-cred-l">HQ</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wn-a-section">
+      <h2 class="wn-a-h2">Find me elsewhere</h2>
+      <div class="wn-a-social">
+        <a href="https://www.linkedin.com/in/waseemnasir" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.55 0h4.37v1.91h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.48 3.04 5.48 7v7.45h-4.56v-6.61c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V22H7.77V8z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://x.com/waseemnasir" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X / Twitter
+        </a>
+        <a href="https://github.com/waseemnasir2k26" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.58.1.79-.25.79-.56v-2c-3.22.7-3.9-1.36-3.9-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.7.08-.7 1.18.08 1.8 1.21 1.8 1.21 1.04 1.79 2.74 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.57-.29-5.27-1.28-5.27-5.72 0-1.27.45-2.3 1.2-3.12-.12-.3-.52-1.48.11-3.08 0 0 .98-.31 3.2 1.2a11.1 11.1 0 0 1 5.83 0c2.22-1.51 3.2-1.2 3.2-1.2.63 1.6.23 2.78.11 3.08.75.82 1.2 1.85 1.2 3.12 0 4.46-2.7 5.43-5.28 5.71.42.36.8 1.07.8 2.17v3.22c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.fiverr.com/skynetjoellc" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.004 15.588a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-1.5 1H17.49v-2.082c0-.738.566-.918 1.082-.918h.926v-3.012h-1.93c-2.328 0-3.094 1.738-3.094 3.246v2.766h-2.95v-2.082c0-.738.567-.918 1.083-.918h.598V10.59h-1.598c-2.328 0-3.094 1.738-3.094 3.246v2.752H6.5v3.012h2.012V22.5h2.998v-2.9h2.95V22.5h2.998v-2.9h2.046V22.5h3.012V16.59z"/></svg>
+          Fiverr
+        </a>
+      </div>
+    </section>
+
+    <section class="wn-a-cta">
+      <h2 class="wn-a-cta-h">Got a build that won't ship itself?</h2>
+      <p class="wn-a-cta-p">Send the brief. I'll send the scope. 8-hour reply window on weekdays.</p>
+      <a class="wn-a-cta-btn" href="/contact">Hire me to build it &rarr;</a>
+    </section>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://skynetjoe.com/author/waseem-nasir#person",
+        "name": "Waseem Nasir",
+        "givenName": "Waseem",
+        "familyName": "Nasir",
+        "url": "https://skynetjoe.com/author/waseem-nasir",
+        "image": "https://skynetjoe.com/waseem-portrait.jpg",
+        "jobTitle": "Founder, SkynetLabs",
+        "description": "Founder of SkynetLabs. Builds n8n automation, AI chatbots and conversion-tuned websites for service businesses. Currently based in Bali.",
+        "worksFor": {
+          "@type": "Organization",
+          "@id": "https://skynetjoe.com/#organization",
+          "name": "SkynetLabs",
+          "url": "https://skynetjoe.com"
+        },
+        "homeLocation": {
+          "@type": "Place",
+          "name": "Bali, Indonesia"
+        },
+        "knowsAbout": ["n8n automation", "AI chatbots", "WordPress development", "AEO/SEO", "Conversational APIs", "Next.js"],
+        "sameAs": [
+          "https://www.linkedin.com/in/waseemnasir",
+          "https://x.com/waseemnasir",
+          "https://github.com/waseemnasir2k26",
+          "https://www.fiverr.com/skynetjoellc"
+        ]
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://skynetjoe.com/author/waseem-nasir#profile",
+        "url": "https://skynetjoe.com/author/waseem-nasir",
+        "name": "Waseem Nasir — Founder, SkynetLabs",
+        "mainEntity": { "@id": "https://skynetjoe.com/author/waseem-nasir#person" },
+        "about": { "@id": "https://skynetjoe.com/author/waseem-nasir#person" }
+      }
+    ]
+  }
+  </script>
+</article>

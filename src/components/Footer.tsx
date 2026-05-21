@@ -21,7 +21,7 @@ export default function Footer() {
               <span className="gradient-primary-text">Skynet</span>
               <span className="text-fg">Labs</span>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-fg-muted leading-relaxed max-w-sm">
               {SITE.description}
             </p>
             <div className="flex items-center gap-3 mt-6">
@@ -42,11 +42,11 @@ export default function Footer() {
 
           {FOOTER_COLUMNS.map((col) => (
             <div key={col.title}>
-              <h4 className="text-sm font-semibold text-white mb-4">{col.title}</h4>
+              <h4 className="text-sm font-semibold text-fg mb-4">{col.title}</h4>
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-gray-400 hover:text-skynet-primary-light transition-colors">
+                    <Link href={link.href} className="text-sm text-fg-muted hover:text-skynet-primary-light transition-colors">
                       {link.label}
                     </Link>
                   </li>
@@ -57,14 +57,14 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-fg-faint">
             © {new Date().getFullYear()} {SITE.brand}. Built in Bali by{" "}
-            <a href={SITE.founderUrl} className="text-gray-300 hover:text-skynet-primary-light">
+            <a href={SITE.founderUrl} className="text-fg-muted hover:text-skynet-primary-light">
               {SITE.founder}
             </a>
             .
           </p>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-fg-faint">
             <a href={`mailto:${SITE.email}`} className="hover:text-skynet-primary-light">
               {SITE.email}
             </a>

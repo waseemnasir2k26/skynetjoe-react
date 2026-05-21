@@ -42,7 +42,7 @@ export default function Header() {
             >
               <Link
                 href={item.href}
-                className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-fg-muted hover:text-fg transition-colors"
               >
                 {item.label}
                 {item.hasMega && <ChevronDown className="w-3.5 h-3.5 opacity-60" />}
@@ -61,7 +61,7 @@ export default function Header() {
                             <li key={svc.slug}>
                               <Link
                                 href={`/services/${svc.slug}`}
-                                className="block text-sm text-gray-300 hover:text-skynet-primary-light transition-colors"
+                                className="block text-sm text-fg-muted hover:text-skynet-primary-light transition-colors"
                               >
                                 {svc.label}
                               </Link>
@@ -86,7 +86,7 @@ export default function Header() {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden p-2 text-gray-200"
+          className="lg:hidden p-2 text-fg"
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -101,7 +101,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="py-3 text-base font-medium text-gray-200 hover:text-skynet-primary-light border-b border-white/5"
+                className="py-3 text-base font-medium text-fg hover:text-skynet-primary-light border-b border-white/5"
               >
                 {item.label}
               </Link>

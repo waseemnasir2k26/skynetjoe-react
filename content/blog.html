@@ -1,0 +1,187 @@
+<article class="wn-blog">
+<style>
+.wn-blog{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-border-strong:rgba(255,255,255,.16);--wn-green:#1E88E5;--wn-green-light:#42A5F5;--wn-purple:#14B8A6;--wn-purple-light:#5EEAD4;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-amber:#FFB547;color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,"Lexend",system-ui,-apple-system,"Segoe UI",sans-serif);line-height:1.65;display:block;-webkit-font-smoothing:antialiased}
+.wn-blog *,.wn-blog *::before,.wn-blog *::after{box-sizing:border-box}
+.wn-blog a{color:var(--wn-green-light);text-decoration:none;transition:color .15s ease}
+.wn-blog a:hover{color:var(--wn-green)}
+.wn-blog .wn-wrap{max-width:1180px;margin:0 auto;padding:5rem 1.5rem}
+.wn-blog .wn-hero{padding-bottom:2.5rem;margin-bottom:2.5rem;border-bottom:1px solid var(--wn-border)}
+.wn-blog .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .85rem;border:1px solid var(--wn-border-strong);border-radius:999px;background:rgba(19,185,115,.08);color:var(--wn-green-light);font-size:.78rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-bottom:1.1rem}
+.wn-blog .wn-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--wn-green);box-shadow:0 0 8px var(--wn-green)}
+.wn-blog h1{font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:0 0 1rem;max-width:24ch}
+.wn-blog h1 em{font-style:normal;background:linear-gradient(90deg,var(--wn-green) 0%,var(--wn-cyan) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-blog .wn-lede{font-size:1.08rem;color:var(--wn-fg-muted);max-width:62ch;margin:0}
+.wn-blog .wn-section{padding:3rem 0;border-top:1px solid var(--wn-border)}
+.wn-blog .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-green-light);margin:0 0 1.5rem}
+.wn-blog .wn-featured{display:grid;grid-template-columns:1fr;gap:1.2rem}
+.wn-blog .wn-feat{display:flex;flex-direction:column;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:18px;overflow:hidden;color:var(--wn-fg);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.wn-blog .wn-feat:hover{transform:translateY(-4px);border-color:var(--wn-border-strong);box-shadow:0 14px 36px rgba(0,0,0,.4);color:var(--wn-fg)}
+.wn-blog .wn-feat-thumb{aspect-ratio:16/9;width:100%;position:relative;display:flex;align-items:flex-end;padding:1.4rem;overflow:hidden}
+.wn-blog .wn-feat-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.6) 100%);pointer-events:none}
+.wn-blog .wn-feat-thumb .wn-glyph{position:relative;z-index:2;font-size:2.6rem;font-weight:800;color:rgba(255,255,255,.22);letter-spacing:-.04em;mix-blend-mode:overlay}
+.wn-blog .wn-feat-thumb .wn-pin{position:absolute;top:1rem;left:1rem;z-index:2;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .7rem;border-radius:6px;background:rgba(0,0,0,.45);color:#fff;backdrop-filter:blur(6px)}
+.wn-blog .g-aeo{background:linear-gradient(135deg,#1E88E5 0%,#00D4FF 100%)}
+.wn-blog .g-n8n{background:linear-gradient(135deg,#14B8A6 0%,#0F766E 50%,#1E88E5 100%)}
+.wn-blog .g-faq{background:linear-gradient(135deg,#FF6B6B 0%,#14B8A6 100%)}
+.wn-blog .wn-feat-body{padding:1.6rem 1.65rem 1.75rem;display:flex;flex-direction:column;gap:.65rem}
+.wn-blog .wn-feat-meta{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--wn-fg-faint);font-weight:600}
+.wn-blog .wn-feat-h{font-size:1.2rem;font-weight:700;margin:0;line-height:1.3;color:var(--wn-fg)}
+.wn-blog .wn-feat-p{font-size:.95rem;color:var(--wn-fg-muted);margin:0}
+.wn-blog .wn-feat-link{font-size:.88rem;font-weight:600;color:var(--wn-green-light);display:inline-flex;align-items:center;gap:.35rem;margin-top:.3rem}
+.wn-blog .wn-feat-link::after{content:"→";transition:transform .2s ease}
+.wn-blog .wn-feat:hover .wn-feat-link::after{transform:translateX(3px)}
+.wn-blog .wn-upcoming{display:grid;grid-template-columns:1fr;gap:1rem}
+.wn-blog .wn-up{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.6rem;opacity:.92}
+.wn-blog .wn-up-badge{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;border:1px solid rgba(255,181,71,.35);border-radius:999px;background:rgba(255,181,71,.08);color:var(--wn-amber);align-self:flex-start}
+.wn-blog .wn-up-h{font-size:1.02rem;font-weight:700;margin:0;line-height:1.35;color:var(--wn-fg)}
+.wn-blog .wn-up-p{font-size:.9rem;color:var(--wn-fg-muted);margin:0;line-height:1.5}
+.wn-blog .wn-newsletter{margin-top:3.5rem;padding:2.5rem 1.75rem;border:1px solid var(--wn-border);border-radius:18px;background:linear-gradient(135deg,rgba(19,185,115,.08) 0%,rgba(139,92,246,.06) 100%)}
+.wn-blog .wn-newsletter h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 .65rem;letter-spacing:-.01em}
+.wn-blog .wn-newsletter p{color:var(--wn-fg-muted);margin:0 0 1.4rem;font-size:.98rem;max-width:54ch}
+.wn-blog .wn-form{display:flex;flex-direction:column;gap:.65rem;max-width:480px}
+.wn-blog .wn-form input[type=email]{flex:1;padding:.85rem 1.05rem;background:var(--wn-surface);border:1px solid var(--wn-border-strong);border-radius:10px;font-size:.95rem;color:var(--wn-fg);font-family:inherit}
+.wn-blog .wn-form input[type=email]:focus{outline:none;border-color:var(--wn-green)}
+.wn-blog .wn-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;cursor:pointer;border:0;font-family:inherit;transition:all .2s ease}
+.wn-blog .wn-btn-primary{background:linear-gradient(135deg,var(--wn-green),var(--wn-cyan));color:#0a0a0a;box-shadow:0 4px 20px rgba(19,185,115,.3)}
+.wn-blog .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(19,185,115,.4)}
+@media(min-width:768px){.wn-blog .wn-featured{grid-template-columns:repeat(3,1fr)}.wn-blog .wn-upcoming{grid-template-columns:repeat(2,1fr)}.wn-blog .wn-form{flex-direction:row}}
+@media(min-width:1024px){.wn-blog .wn-upcoming{grid-template-columns:repeat(3,1fr)}}
+html.light .wn-blog{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08);--wn-border-strong:rgba(16,15,20,.16)}
+html.light .wn-blog .wn-feat:hover{box-shadow:0 14px 36px rgba(16,15,20,.12)}
+</style>
+
+<div class="wn-wrap">
+  <header class="wn-hero">
+    <span class="wn-eyebrow">SkynetLabs Journal</span>
+    <h1>Long-form writing on AI automation, AEO, and <em>what actually ships</em></h1>
+    <p class="wn-lede">No daily posting cadence. No SEO listicles. One long-form essay at a time, drawn from real engagements with real budgets and real failure modes.</p>
+  </header>
+
+  <section class="wn-section" style="border-top:none;padding-top:0">
+    <p class="wn-section-title">Featured — published long-form</p>
+    <div class="wn-featured">
+      <a href="/aeo-guide" class="wn-feat">
+        <div class="wn-feat-thumb g-aeo">
+          <span class="wn-pin">Guide</span>
+          <span class="wn-glyph">AEO</span>
+        </div>
+        <div class="wn-feat-body">
+          <span class="wn-feat-meta">Reading time · 22 min</span>
+          <h2 class="wn-feat-h">The AEO Field Guide — How to Get Cited by Claude, ChatGPT, Perplexity &amp; Gemini in 2026</h2>
+          <p class="wn-feat-p">The complete answer-engine optimization playbook. What each LLM crawls, how citations are picked, the schema layout that wins, and the ten most common reasons your page never gets quoted.</p>
+          <span class="wn-feat-link">Read the guide</span>
+        </div>
+      </a>
+
+      <a href="/n8n-vs-zapier" class="wn-feat">
+        <div class="wn-feat-thumb g-n8n">
+          <span class="wn-pin">Comparison</span>
+          <span class="wn-glyph">n8n</span>
+        </div>
+        <div class="wn-feat-body">
+          <span class="wn-feat-meta">Reading time · 14 min</span>
+          <h2 class="wn-feat-h">n8n vs Zapier in 2026 — Honest Engineer's Take</h2>
+          <p class="wn-feat-p">Where Zapier still wins, where n8n eats it alive, where Make sits in the middle, and the three exact decision triggers that should flip your stack. Pricing, hosting, and gotchas included.</p>
+          <span class="wn-feat-link">Read the comparison</span>
+        </div>
+      </a>
+
+      <a href="/faqs" class="wn-feat">
+        <div class="wn-feat-thumb g-faq">
+          <span class="wn-pin">FAQ</span>
+          <span class="wn-glyph">Q&amp;A</span>
+        </div>
+        <div class="wn-feat-body">
+          <span class="wn-feat-meta">Reading time · 18 min</span>
+          <h2 class="wn-feat-h">AI Automation FAQs — 30 Questions Answered</h2>
+          <p class="wn-feat-p">Real founder questions about n8n, Zapier, AEO, chatbots, messaging integrations, and working with SkynetLabs. Concrete answers, including the ones where the honest reply is "don't hire us."</p>
+          <span class="wn-feat-link">Read the FAQs</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="wn-section">
+    <p class="wn-section-title">Coming soon — drafted, scheduled</p>
+    <div class="wn-upcoming">
+      <article class="wn-up">
+        <span class="wn-up-badge">Coming soon</span>
+        <h3 class="wn-up-h">Why most agency retainers don't survive the AI shift</h3>
+        <p class="wn-up-p">The retainer model assumes a body in a seat. When the body is a Claude Code skill on a laptop in Bali, the entire pricing logic of the agency world stops making sense.</p>
+      </article>
+      <article class="wn-up">
+        <span class="wn-up-badge">Coming soon</span>
+        <h3 class="wn-up-h">How we ship a working n8n flow in 9 days</h3>
+        <p class="wn-up-p">Day-by-day walk through a real engagement. Discovery, wireframe, build, three rev cycles, handoff, and the documentation we leave behind so the client can edit nodes without us.</p>
+      </article>
+      <article class="wn-up">
+        <span class="wn-up-badge">Coming soon</span>
+        <h3 class="wn-up-h">The voice-lint that hard-fails on 60+ AI tells</h3>
+        <p class="wn-up-p">Sixty-plus banned phrases, the regex that catches them, and the eight client-style anchors that get injected so the copy still sounds like the founder wrote it.</p>
+      </article>
+      <article class="wn-up">
+        <span class="wn-up-badge">Coming soon</span>
+        <h3 class="wn-up-h">WordPress → Next.js → Vercel: when to migrate and when not to</h3>
+        <p class="wn-up-p">SEO risk, recovery windows, the three scenarios where a Vercel subdomain beats a root cutover, and the one scenario where you should leave WordPress alone forever.</p>
+      </article>
+      <article class="wn-up">
+        <span class="wn-up-badge">Coming soon</span>
+        <h3 class="wn-up-h">Bali as an HQ: why we don't see a single client in person</h3>
+        <p class="wn-up-p">Zero in-person meetings. Zero airport runs. Zero office. A working setup for a one-founder agency that ships across nine countries while staying on one warung lunch a day.</p>
+      </article>
+      <article class="wn-up">
+        <span class="wn-up-badge">Coming soon</span>
+        <h3 class="wn-up-h">From freelancer to founder: the four unlocks that 10x'd our pricing</h3>
+        <p class="wn-up-p">Niche, proof, packaging, presence. The four shifts that took us from racing-to-the-bottom Fiverr gigs to fixed-price flagship builds with deposit upfront.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wn-newsletter">
+    <h2>One essay per week, in your inbox</h2>
+    <p>AEO, automation, the SkynetLabs ship log. No tracker pixels, no upsell sequences, no daily nag. Unsubscribe in one click.</p>
+    <form class="wn-form" action="https://formspree.io/f/REPLACE_NEWSLETTER_ID" method="POST">
+      <input type="email" name="email" placeholder="you@company.com" required aria-label="Email address" />
+      <button type="submit" class="wn-btn wn-btn-primary">Subscribe</button>
+    </form>
+  </section>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "SkynetLabs Journal",
+  "url": "https://skynetjoe.com/blog",
+  "description": "Long-form writing on AI automation, AEO, and what actually ships, by Waseem Nasir of SkynetLabs.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "SkynetLabs",
+    "url": "https://skynetjoe.com"
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "The AEO Field Guide — How to Get Cited by Claude, ChatGPT, Perplexity & Gemini in 2026",
+      "url": "https://skynetjoe.com/aeo-guide",
+      "author": {"@type": "Person", "name": "Waseem Nasir"},
+      "publisher": {"@type": "Organization", "name": "SkynetLabs"}
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "n8n vs Zapier in 2026 — Honest Engineer's Take",
+      "url": "https://skynetjoe.com/n8n-vs-zapier",
+      "author": {"@type": "Person", "name": "Waseem Nasir"},
+      "publisher": {"@type": "Organization", "name": "SkynetLabs"}
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "AI Automation FAQs — 30 Questions Answered",
+      "url": "https://skynetjoe.com/faqs",
+      "author": {"@type": "Person", "name": "Waseem Nasir"},
+      "publisher": {"@type": "Organization", "name": "SkynetLabs"}
+    }
+  ]
+}
+</script>
+</article>

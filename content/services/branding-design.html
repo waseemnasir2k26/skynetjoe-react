@@ -1,0 +1,187 @@
+<article class="wn-service wn-service-branding-design">
+<style>
+.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service *{box-sizing:border-box}
+.wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-service .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-service .wn-hero>*{position:relative;z-index:1}
+.wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-service p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-service strong{color:var(--wn-fg);font-weight:600}
+.wn-service .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-service .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-service .wn-grid{display:grid;gap:1rem}
+.wn-service .wn-grid-2{grid-template-columns:1fr}
+.wn-service .wn-grid-3{grid-template-columns:1fr}
+.wn-service .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-service .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-service .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-service .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-service .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
+.wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
+.wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
+.wn-service .wn-proof{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-proof{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-proof-item{padding:1.25rem;border-left:3px solid var(--wn-accent-a);background:var(--wn-surface)}
+.wn-service .wn-proof-item .wn-metric{font-size:1.4rem;font-weight:800;color:var(--wn-accent-a);display:block;margin-bottom:.25rem}
+.wn-service .wn-price-tiers{display:grid;gap:.85rem}
+@media(min-width:768px){.wn-service .wn-price-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-price{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px}
+.wn-service .wn-price .wn-tier{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-fg-faint);margin-bottom:.4rem}
+.wn-service .wn-price .wn-amt{font-size:1.5rem;font-weight:800;color:var(--wn-fg);margin-bottom:.3rem}
+.wn-service .wn-price .wn-cadence{font-size:.85rem;color:var(--wn-fg-muted)}
+.wn-service details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-service details summary::-webkit-details-marker{display:none}
+.wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-service details[open] summary::after{content:"–"}
+.wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+.wn-service-branding-design{--wn-accent-a:#FF6B6B;--wn-accent-b:#14B8A6}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">Consulting · Brand &amp; Identity</span>
+    <h1>Your logo cost $300 on Fiverr in 2021. <span class="wn-grad">It still looks like 14 other clinics in town.</span></h1>
+    <p class="wn-lede">A logo is the smallest, least interesting part of a brand. The buyer who's choosing between you and your competitor is choosing on tone of voice, photography, the way the form looks on their phone, and whether the colour palette feels expensive or cheap. We rebuild the parts that actually move the buyer — voice, palette, photo direction, design system — and ship a Figma library your team can run on.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">What we deliver</p>
+    <h2>A brand system, not just an identity PDF</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        <h3>Positioning and tone of voice</h3>
+        <p>Who you serve, who you don't, what you sound like when you write to them. Verbatim phrase library, voice-don't list, three reference posts your team can mimic.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <h3>Visual identity</h3>
+        <p>Logo (yes, still), but more importantly: colour palette with semantic tokens, typography pairing with sizing scale, motion specs for hover and reveal states, iconography style.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
+        <h3>Photography direction</h3>
+        <p>Mood board, shot list, lighting style, post-process LUT. So when you brief a photographer or shoot it yourself, every image lands consistent without being "stock".</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+        <h3>Figma design system</h3>
+        <p>Tokens (colours, type, spacing) as variables. Component library for buttons, cards, forms, hero blocks. Templates for social, email, presentation, one-pager.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <h3>Brand book (operational)</h3>
+        <p>20 pages, not 80. Logo usage, palette, type, voice rules, do/don't examples from your own past work. Designed for a freelance designer or new hire to use in 30 minutes.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <h3>Application audit</h3>
+        <p>Where the new brand goes first — website hero, business cards, email signatures, invoice template, social profiles, vehicle wraps if relevant. Prioritised by visibility.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln wn-wrap" style="max-width:62rem">There's a special tier of branding agency that charges $80k for a 200-page identity PDF, then disappears. The client's marketing manager opens it once and goes back to the old logo because there are no usable Figma components inside. We deliver the opposite: small book, big component library, everything your team can use on Monday morning.</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Process</p>
+    <h2>Audit, position, build</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Interviews with founders, top 3 reps, top 5 clients. Competitor teardown. Pull every brand artifact you currently use. Identify three tensions.</p><span class="wn-step-day">Week 1</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Positioning statement, voice profile, mood-board options, three identity directions. You pick one before we build the full system.</p><span class="wn-step-day">Week 2</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Build the Figma library, write the brand book, design 6-8 application examples (homepage, social card, email signature, one-pager).</p><span class="wn-step-day">Week 3–4</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>Two training sessions with whoever applies the brand. Live application of the new system to your top three surfaces. 30-day quality review.</p><span class="wn-step-day">Week 5–6</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Tools we work in</p>
+    <h2>What we deliver in</h2>
+    <div class="wn-stack">
+      <span>Figma (variables + components)</span><span>Adobe Illustrator (logo final)</span><span>Notion brand book</span><span>Google Fonts / Adobe Fonts</span><span>Capture One (photo references)</span><span>Lightroom LUT</span>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Proof</p>
+    <h2>Real builds</h2>
+    <div class="wn-proof">
+      <div class="wn-proof-item"><span class="wn-metric">14 → 1 system</span>Recovery clinic Kitts brought us 14 visual inconsistencies across web, print, and social. We shipped one Figma library + 5-app rollout.</div>
+      <div class="wn-proof-item"><span class="wn-metric">Atelier No. 1</span>Dental flagship identity: full visual + voice system, applied across 14-section site, 12-page wax-up lead magnet, cold-pitch email pack.</div>
+      <div class="wn-proof-item"><span class="wn-metric">3 directions</span>Default delivery includes 3 identity directions before you pick. No "one and done" reveal that the client hates.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Investment</p>
+    <h2>Brand right, then scale it</h2>
+    <div class="wn-price-tiers">
+      <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$1,000</div><div class="wn-cadence">Voice and positioning audit, 8-page document, three sample applications.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical engagement</div><div class="wn-amt">$2,500–$5,000</div><div class="wn-cadence">Full identity rebuild, Figma library, 20-page brand book, 6-8 application examples, training sessions.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $997/mo</div><div class="wn-cadence">Monthly design retainer: new templates, application reviews, quarterly brand health check.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Questions</p>
+    <h2>Common questions</h2>
+    <details><summary>Do we need a full rebrand or a refresh?</summary><div class="wn-faq-body">Refresh is right when the existing brand has equity worth keeping (a recognisable logo, a known colour) and the problem is operational drift — inconsistent application, weak templates, no Figma library. Full rebrand is right when the positioning has shifted, the audience has changed, or the visual feels actively wrong. We tell you honestly which one your situation needs.</div></details>
+    <details><summary>Will you change our logo?</summary><div class="wn-faq-body">Only if it earns its keep. About 30% of engagements end with the same logo, refined typography, new palette, and a Figma system that makes the old logo look better in context. Rebranding the logo when the rest of the system is broken is putting fresh paint on a leaking roof.</div></details>
+    <details><summary>Can you build the website too?</summary><div class="wn-faq-body">Yes — that's our most common flow. We hand the Figma library off, then our vibe-coded sites team ships a Next.js build on top of it. Same studio, same accountable lead, no Figma-to-dev translation loss. That's a separate engagement priced separately.</div></details>
+    <details><summary>How do you brief photography?</summary><div class="wn-faq-body">Shot list, mood board, lighting style, post-process LUT (a Lightroom preset we share with the photographer). We prefer one editorial-style shoot over twenty stock images. For founder-led brands, an iPhone in your home office with our shot list often beats hiring a photographer who doesn't know your story.</div></details>
+    <details><summary>What if our existing brand book has 80 pages we like?</summary><div class="wn-faq-body">Honestly, that's usually a sign the book was made to impress, not to operate. We can audit what's worth keeping (typography rules, semantic colour, motion specs) and build a 20-page operating version on top. The 80-page version goes in the archive.</div></details>
+  </div>
+</section>
+
+<div class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>Stop looking like 14 other clinics on the same street.</h2>
+    <p class="wn-lede" style="margin:0 auto">Brand audit, positioning draft, three identity directions — shipped inside two weeks.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Branding & Design","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Positioning, voice, visual identity, Figma design system, photography direction, and 20-page operational brand book.","serviceType":"Brand and design system"},{"@type":"Offer","name":"Branding & Design engagement","priceCurrency":"USD","price":"1000","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"1000","maxPrice":"5000"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}}]}
+</script>
+</article>

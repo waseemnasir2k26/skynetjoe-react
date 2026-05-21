@@ -1,0 +1,304 @@
+<article class="wn-glossary">
+<style>
+.wn-glossary { background:#100f14; color:#fafaf7; font-family:'Lexend',system-ui,-apple-system,sans-serif; padding:64px 24px; line-height:1.65; }
+.wn-glossary .wn-wrap { max-width:920px; margin:0 auto; }
+.wn-glossary h1 { font-size:42px; font-weight:800; line-height:1.15; margin:0 0 16px; letter-spacing:-0.02em; color:#fafaf7; }
+.wn-glossary .wn-sub { font-size:17px; color:#a8a8b3; margin:0 0 32px; max-width:720px; }
+.wn-glossary .wn-jump { display:flex; flex-wrap:wrap; gap:6px; padding:18px; background:#17161d; border:1px solid #2a2832; border-radius:12px; margin:0 0 48px; }
+.wn-glossary .wn-jump a { display:inline-block; padding:6px 11px; background:#1f1d28; color:#1E88E5; border-radius:6px; text-decoration:none; font-size:13px; font-weight:600; min-width:30px; text-align:center; transition:background .15s; }
+.wn-glossary .wn-jump a:hover { background:#1E88E5; color:#100f14; }
+.wn-glossary .wn-jump a.wn-empty { color:#4a4856; pointer-events:none; }
+.wn-glossary h2 { font-size:28px; font-weight:700; margin:48px 0 16px; color:#14B8A6; letter-spacing:-0.01em; }
+.wn-glossary dl { margin:0; }
+.wn-glossary dt { font-size:18px; font-weight:700; color:#1E88E5; margin:28px 0 6px; scroll-margin-top:80px; }
+.wn-glossary dd { margin:0 0 0; color:#c8c8d0; font-size:15.5px; line-height:1.7; }
+.wn-glossary .wn-back { display:inline-block; margin-top:8px; font-size:12px; color:#6a6878; text-decoration:none; }
+.wn-glossary .wn-back:hover { color:#1E88E5; }
+@media (max-width:640px){ .wn-glossary{padding:40px 16px;} .wn-glossary h1{font-size:32px;} .wn-glossary h2{font-size:22px;} .wn-glossary .wn-jump a{padding:5px 9px;font-size:12px;} }
+</style>
+
+<div class="wn-wrap">
+<h1>AI Automation &amp; AEO Glossary — 50+ Terms Defined</h1>
+<p class="wn-sub">A working reference for the vocabulary that comes up when you ship LLM features, automation workflows, and content that gets cited by answer engines. Written for builders who'd rather read three sentences than three paragraphs. Updated 2026.</p>
+
+<nav class="wn-jump" aria-label="Jump to letter">
+<a href="#letter-a">A</a><a href="#letter-b">B</a><a href="#letter-c">C</a><a href="#letter-d">D</a><a href="#letter-e">E</a><a href="#letter-f">F</a><a href="#letter-g">G</a><a href="#letter-h">H</a><a href="#letter-i">I</a><a href="#letter-j">J</a><a href="#letter-k">K</a><a href="#letter-l">L</a><a href="#letter-m">M</a><a href="#letter-n">N</a><a href="#letter-o">O</a><a href="#letter-p">P</a><a href="#letter-q">Q</a><a href="#letter-r">R</a><a href="#letter-s">S</a><a href="#letter-t">T</a><a href="#letter-u">U</a><a href="#letter-v">V</a><a href="#letter-w">W</a><a class="wn-empty">X</a><a class="wn-empty">Y</a><a class="wn-empty">Z</a>
+</nav>
+
+<dl>
+
+<h2 id="letter-a">A</h2>
+
+<dt id="term-action">Action</dt>
+<dd>The end step of a workflow that produces a side effect — sending an email, writing to a database, calling an API. In n8n and Zapier, every flow is a chain of trigger plus one or more actions; the action is where the work actually lands.</dd>
+
+<dt id="term-aeo">AEO (Answer Engine Optimization)</dt>
+<dd>The practice of structuring content so LLM-driven answer engines (Claude, ChatGPT, Perplexity, Gemini) cite you in generated responses. AEO rewards direct definitions, structured data, comparison tables, and clear authorship over keyword density.</dd>
+
+<dt id="term-agent">Agent</dt>
+<dd>An LLM-powered system that uses tools (function calls, web browsing, code execution) in a loop to accomplish a goal that requires more than one inference step. An agent decides what to do next based on prior tool outputs; a chatbot just generates text replies.</dd>
+
+<dt id="term-answer-engine">Answer Engine</dt>
+<dd>A search interface that returns synthesized natural-language answers instead of (or alongside) a list of links. Perplexity, ChatGPT search, and Google's AI Overview are answer engines; classic Google is a search engine.</dd>
+
+<dt id="term-api">API</dt>
+<dd>An Application Programming Interface — a defined contract for two systems to exchange data. In automation, every integration is fundamentally an API call: read from this one, transform, write to that one.</dd>
+
+<h2 id="letter-b">B</h2>
+
+<dt id="term-branching">Branching</dt>
+<dd>A workflow node that splits execution down two or more paths based on a condition. Healthy automations branch early and merge late; flows that try to handle every case in one straight line become un-debuggable within months.</dd>
+
+<h2 id="letter-c">C</h2>
+
+<dt id="term-ccbot">CCBot</dt>
+<dd>The user-agent string used by Common Crawl, the nonprofit web archive whose dataset trains a meaningful fraction of every major LLM. Blocking CCBot removes you from future model training data — usually the wrong call for service businesses.</dd>
+
+<dt id="term-chatbot">Chatbot</dt>
+<dd>A conversational interface that exchanges text (or voice) messages with a user. Modern chatbots wrap an LLM with system prompts, tool use, and memory; older rule-based bots match keywords to canned replies.</dd>
+
+<dt id="term-citation">Citation</dt>
+<dd>A link or named reference inside an LLM-generated answer that attributes a claim to a source. Citations are the AEO equivalent of organic rankings: they drive clicks, brand exposure, and downstream trust.</dd>
+
+<dt id="term-claudebot">ClaudeBot</dt>
+<dd>The user-agent string Anthropic uses when crawling the web for Claude's training and search features. ClaudeBot respects robots.txt and llms.txt; allowing it is generally beneficial for AEO unless your content is paywalled.</dd>
+
+<dt id="term-cms">CMS</dt>
+<dd>A Content Management System — WordPress, Sanity, Contentful, Webflow, Strapi. The CMS is where editors author content; everything downstream (your site, your search index, your AEO surface) renders from what's stored there.</dd>
+
+<dt id="term-condition">Condition</dt>
+<dd>A boolean check inside a workflow that decides whether to branch, skip, or continue. Good automations log condition outcomes so you can audit why a record took the path it did three months later.</dd>
+
+<dt id="term-cron">Cron</dt>
+<dd>A scheduled-trigger syntax (originating from Unix) that runs a job at fixed intervals: every five minutes, every Monday at 9am, the first of the month at midnight. In n8n it's the Schedule Trigger; in serverless platforms it's a cron job.</dd>
+
+<dt id="term-crm">CRM</dt>
+<dd>A Customer Relationship Management system — HubSpot, Salesforce, Pipedrive, GoHighLevel. The CRM holds the authoritative customer record; automations either feed it (new lead capture) or read from it (personalized outreach).</dd>
+
+<h2 id="letter-d">D</h2>
+
+<dt id="term-defined-term">DefinedTerm</dt>
+<dd>A schema.org type used to mark up vocabulary entries in a glossary so search engines and LLMs can parse them as structured definitions. Pairing DefinedTerm with DefinedTermSet (this page) is one of the cleanest AEO patterns.</dd>
+
+<h2 id="letter-e">E</h2>
+
+<dt id="term-eeat">EEAT</dt>
+<dd>Google's quality framework: Experience, Expertise, Authoritativeness, Trustworthiness. Originally an SEO ranking signal, EEAT has bled into LLM ranking heuristics — authored content by named humans with verifiable credentials outranks anonymous content.</dd>
+
+<dt id="term-embeddings">Embeddings</dt>
+<dd>Numerical vectors (usually 768 or 1536 dimensions) that represent the meaning of a piece of text in a way that lets you compute similarity by distance. Embeddings power semantic search, retrieval for RAG, and de-duplication of generated content.</dd>
+
+<dt id="term-etl">ETL</dt>
+<dd>Extract, Transform, Load — the classical data-pipeline pattern. Pull data from a source, reshape it, push it to a destination. Most n8n workflows are small ETL jobs even when they're called "automations."</dd>
+
+<h2 id="letter-f">F</h2>
+
+<dt id="term-fine-tuning">Fine-tuning</dt>
+<dd>Updating an LLM's weights on a domain-specific dataset so it learns a style, format, or knowledge area you can't reliably get from prompting. Useful for narrow tasks with thousands of examples; almost always the wrong first move when prompting plus RAG would suffice.</dd>
+
+<dt id="term-function-calling">Function Calling</dt>
+<dd>The pattern where an LLM emits a structured JSON object describing a tool to invoke (and arguments) instead of free text. Function calling is how chatbots cross from "generates text" to "does things in the real world."</dd>
+
+<h2 id="letter-g">G</h2>
+
+<dt id="term-geo">GEO (Generative Engine Optimization)</dt>
+<dd>A near-synonym for AEO used by some agencies to sound new. The tactics overlap heavily; the framing emphasizes optimizing for generative answers rather than answer engines specifically. Use whichever term your client uses.</dd>
+
+<dt id="term-ghl">GHL (GoHighLevel)</dt>
+<dd>A bundled CRM, marketing automation, and white-label SaaS platform popular with agencies. Has built-in workflow automation, SMS/email/voice, and a snapshot system for cloning client setups — strong for agencies, less flexible than n8n for engineering-heavy work.</dd>
+
+<dt id="term-google-extended">Google-Extended</dt>
+<dd>A separate user-agent token Google introduced so site owners can allow Googlebot (for Search) while blocking Google's AI training crawler. Setting User-agent: Google-Extended Disallow: / removes you from Bard/Gemini training while preserving Search visibility.</dd>
+
+<dt id="term-gptbot">GPTBot</dt>
+<dd>OpenAI's user-agent for crawling sites to train and improve GPT models. Respected by robots.txt directives. Most service businesses should allow GPTBot — being in training data is upstream of being cited.</dd>
+
+<h2 id="letter-h">H</h2>
+
+<dt id="term-howto">HowTo (schema)</dt>
+<dd>A schema.org type for step-by-step instructions, with structured properties for tools, supplies, and timing. HowTo markup is one of the strongest signals LLMs use to pick a source for procedural answers.</dd>
+
+<h2 id="letter-i">I</h2>
+
+<dt id="term-idempotency">Idempotency</dt>
+<dd>The property that running the same operation twice produces the same result as running it once. Webhooks must be idempotent or retries will double-charge customers, send duplicate emails, and create duplicate database rows. Always pass an idempotency key.</dd>
+
+<h2 id="letter-j">J</h2>
+
+<dt id="term-jsonld">JSON-LD</dt>
+<dd>JSON for Linked Data — the structured-data format Google, Bing, and LLMs prefer for parsing schema.org markup. Goes in a script tag with type application/ld+json. Easier to maintain than microdata or RDFa because it's separate from your visible HTML.</dd>
+
+<h2 id="letter-k">K</h2>
+
+<dt id="term-knowledge-graph">Knowledge Graph</dt>
+<dd>A structured database of entities (people, places, organizations, concepts) and the relationships between them. Google has one; LLMs build implicit ones from training data. Getting your entities into the right relationships is core AEO work.</dd>
+
+<h2 id="letter-l">L</h2>
+
+<dt id="term-llm">LLM</dt>
+<dd>Large Language Model — a neural network trained on a large text corpus to predict the next token given prior tokens. Modern LLMs (GPT-4, Claude, Gemini) add instruction tuning, RLHF, and tool use on top of that base capability.</dd>
+
+<dt id="term-llms-txt">llms.txt</dt>
+<dd>A draft standard (proposed by Jeremy Howard) for a markdown index file at /llms.txt that tells LLMs which of your pages are canonical, citable, and structured for ingestion. Adoption is partial; cost to add is 30 minutes and the upside is compounding.</dd>
+
+<h2 id="letter-m">M</h2>
+
+<dt id="term-mcp">MCP (Model Context Protocol)</dt>
+<dd>An open protocol introduced by Anthropic for connecting LLM clients to external tools, data sources, and services. MCP standardizes the function-calling contract across providers so a single tool server works with Claude, ChatGPT, and other compatible clients.</dd>
+
+<dt id="term-microdata">Microdata</dt>
+<dd>An older inline format for structured data, embedded directly in HTML attributes (itemscope, itemtype, itemprop). Still parsed by Google but harder to maintain than JSON-LD; new sites should pick JSON-LD.</dd>
+
+<h2 id="letter-n">N</h2>
+
+<dt id="term-n8n">n8n</dt>
+<dd>An open-source workflow automation platform with self-hosting, branching, code nodes, and a node library covering 400+ services. Pronounced "nodemation." Built around a fair-code license that allows self-hosting for free but restricts commercial resale.</dd>
+
+<h2 id="letter-o">O</h2>
+
+<dt id="term-oauth">OAuth</dt>
+<dd>An authorization protocol (currently OAuth 2.0) that lets a user grant a third-party app limited access to their account without sharing their password. Most modern API integrations use OAuth; the token-refresh dance is where many automation bugs live.</dd>
+
+<dt id="term-openapi">OpenAPI</dt>
+<dd>A specification format (formerly Swagger) for describing REST APIs in a machine-readable YAML or JSON document. Tools generate clients, docs, and validators from OpenAPI; LLMs can call an API directly given its OpenAPI spec.</dd>
+
+<dt id="term-observability">Observability</dt>
+<dd>The discipline of instrumenting a system so you can answer "why did it do that" from logs, metrics, and traces — without redeploying. For automations, observability means structured logs at every node and an alert when error rate exceeds a threshold.</dd>
+
+<h2 id="letter-p">P</h2>
+
+<dt id="term-perplexitybot">PerplexityBot</dt>
+<dd>The user-agent Perplexity uses for crawling source pages it cites in answers. Perplexity tends to update its index fastest of the major answer engines — sometimes within 7 days of publishing — so allowing PerplexityBot has the quickest AEO payoff.</dd>
+
+<dt id="term-prompt-engineering">Prompt Engineering</dt>
+<dd>The practice of writing inputs to an LLM that reliably produce useful outputs. Includes role assignment, few-shot examples, output schemas, chain-of-thought scaffolding, and negative instructions. A discipline, not a hack — the difference between a flaky bot and a reliable one is mostly prompt quality.</dd>
+
+<h2 id="letter-q">Q</h2>
+
+<dt id="term-queue">Queue</dt>
+<dd>A data structure that holds pending work items so they can be processed asynchronously and in order. In n8n, queue mode uses Redis to decouple workflow scheduling from execution; in any production automation, a queue is what prevents one slow job from blocking everything.</dd>
+
+<h2 id="letter-r">R</h2>
+
+<dt id="term-rag">RAG (Retrieval-Augmented Generation)</dt>
+<dd>The pattern of fetching relevant documents from a knowledge base and passing them to an LLM as context before generation. Solves the "model doesn't know my data" problem without fine-tuning. Most production chatbots are RAG systems wearing different UI.</dd>
+
+<dt id="term-rate-limiting">Rate Limiting</dt>
+<dd>A cap on how many requests an API will accept per time window. Production automations must respect rate limits with exponential backoff, queue draining, and idempotent retries — otherwise you'll get IP-banned at the worst possible moment.</dd>
+
+<dt id="term-robots-txt">robots.txt</dt>
+<dd>A plain-text file at /robots.txt that tells crawlers which paths and user-agents are allowed or disallowed. Honored by ethical crawlers (Googlebot, GPTBot, ClaudeBot, PerplexityBot); ignored by scrapers. The first file every LLM crawler reads.</dd>
+
+<h2 id="letter-s">S</h2>
+
+<dt id="term-schema-markup">Schema Markup</dt>
+<dd>Structured data following the schema.org vocabulary — Product, Article, FAQPage, Organization, Person — embedded as JSON-LD or microdata. Schema markup tells search engines and LLMs what your page is about at the entity level.</dd>
+
+<dt id="term-sitemap">Sitemap</dt>
+<dd>An XML file at /sitemap.xml listing every URL on your site you want crawled, with lastmod timestamps. Sitemaps don't directly boost rankings but they make sure crawlers know what exists, especially deep pages with few internal links.</dd>
+
+<dt id="term-structured-data">Structured Data</dt>
+<dd>Any machine-readable annotation of page content following a known vocabulary (schema.org being the dominant one). Structured data is the difference between "this page is about something" and "this page is about a Product called X with price Y and rating Z."</dd>
+
+<dt id="term-system-prompt">System Prompt</dt>
+<dd>The persistent instruction set prepended to every conversation with an LLM, defining role, constraints, tone, and tool-use rules. Live in version control like code, not in a Notion doc — they drift fast.</dd>
+
+<h2 id="letter-t">T</h2>
+
+<dt id="term-tool-use">Tool Use</dt>
+<dd>The capability for an LLM to invoke external functions (search, calculator, database query, custom API) during a conversation. Tool use plus a reasoning loop is what turns a chatbot into an agent that can complete real-world tasks.</dd>
+
+<dt id="term-trigger">Trigger</dt>
+<dd>The starting event of a workflow — a webhook firing, a scheduled cron tick, a new row in a sheet, an inbound email. Every n8n or Zapier flow starts with exactly one trigger; everything downstream is reaction.</dd>
+
+<h2 id="letter-u">U</h2>
+
+<dt id="term-user-agent">User-agent</dt>
+<dd>The identifier string a crawler sends in HTTP request headers (GPTBot, ClaudeBot, PerplexityBot, Googlebot). robots.txt rules match against user-agent. Knowing the right strings is the foundation of controlling who reads your content.</dd>
+
+<h2 id="letter-v">V</h2>
+
+<dt id="term-vector-db">Vector Database</dt>
+<dd>A database optimized for storing and querying embeddings by similarity — Qdrant, Pinecone, Weaviate, Postgres with pgvector. The retrieval half of RAG runs here. For most projects under 1M documents, pgvector on your existing Postgres is the right answer.</dd>
+
+<h2 id="letter-w">W</h2>
+
+<dt id="term-webhook">Webhook</dt>
+<dd>An HTTP POST sent from one system to another when an event happens — new order, completed payment, form submission. Webhooks are how systems push data without you polling them; they require idempotency, signature verification, and timeouts to be production-safe.</dd>
+
+<dt id="term-webhook-signature">Webhook Signature</dt>
+<dd>A cryptographic hash (usually HMAC-SHA256 of the body using a shared secret) sent in a header so the receiver can verify the webhook came from the expected sender. Skipping signature verification is how attackers inject fake events into your CRM.</dd>
+
+<dt id="term-workflow">Workflow</dt>
+<dd>A defined sequence of trigger plus actions plus conditions that automates a process. In n8n, Zapier, Make, and GoHighLevel, workflow is the unit of automation. A clean workflow does one thing well; a messy workflow does seven things and breaks weekly.</dd>
+
+</dl>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "@id": "https://app-mauve-eta-66.vercel.app/glossary#termset",
+  "name": "AI Automation & AEO Glossary",
+  "description": "50 definitions covering AEO, SEO, n8n, automation, LLMs, RAG, agents, schema markup, and the vocabulary that comes up when shipping LLM features and content for answer engines.",
+  "inDefinedTermSet": "https://app-mauve-eta-66.vercel.app/glossary",
+  "hasDefinedTerm": [
+    {"@type":"DefinedTerm","name":"Action","description":"The end step of a workflow that produces a side effect — sending an email, writing to a database, calling an API."},
+    {"@type":"DefinedTerm","name":"AEO","description":"Answer Engine Optimization — structuring content so LLM-driven engines cite you in generated responses."},
+    {"@type":"DefinedTerm","name":"Agent","description":"An LLM-powered system that uses tools in a loop to accomplish multi-step goals."},
+    {"@type":"DefinedTerm","name":"Answer Engine","description":"A search interface returning synthesized natural-language answers instead of a list of links."},
+    {"@type":"DefinedTerm","name":"API","description":"Application Programming Interface — a defined contract for two systems to exchange data."},
+    {"@type":"DefinedTerm","name":"Branching","description":"A workflow node that splits execution down two or more paths based on a condition."},
+    {"@type":"DefinedTerm","name":"CCBot","description":"The user-agent string used by Common Crawl, the nonprofit web archive whose dataset trains a meaningful fraction of every major LLM."},
+    {"@type":"DefinedTerm","name":"Chatbot","description":"A conversational interface that exchanges text or voice messages with a user."},
+    {"@type":"DefinedTerm","name":"Citation","description":"A link or named reference inside an LLM-generated answer that attributes a claim to a source."},
+    {"@type":"DefinedTerm","name":"ClaudeBot","description":"The user-agent string Anthropic uses when crawling the web for Claude's training and search features."},
+    {"@type":"DefinedTerm","name":"CMS","description":"Content Management System — where editors author content."},
+    {"@type":"DefinedTerm","name":"Condition","description":"A boolean check inside a workflow that decides whether to branch, skip, or continue."},
+    {"@type":"DefinedTerm","name":"Cron","description":"A scheduled-trigger syntax originating from Unix that runs a job at fixed intervals."},
+    {"@type":"DefinedTerm","name":"CRM","description":"Customer Relationship Management system holding the authoritative customer record."},
+    {"@type":"DefinedTerm","name":"DefinedTerm","description":"A schema.org type used to mark up vocabulary entries in a glossary."},
+    {"@type":"DefinedTerm","name":"EEAT","description":"Google's quality framework: Experience, Expertise, Authoritativeness, Trustworthiness."},
+    {"@type":"DefinedTerm","name":"Embeddings","description":"Numerical vectors representing text meaning so similarity is computed by distance."},
+    {"@type":"DefinedTerm","name":"ETL","description":"Extract, Transform, Load — the classical data-pipeline pattern."},
+    {"@type":"DefinedTerm","name":"Fine-tuning","description":"Updating an LLM's weights on a domain-specific dataset to learn a style, format, or knowledge area."},
+    {"@type":"DefinedTerm","name":"Function Calling","description":"The pattern where an LLM emits structured JSON describing a tool to invoke instead of free text."},
+    {"@type":"DefinedTerm","name":"GEO","description":"Generative Engine Optimization — a near-synonym for AEO."},
+    {"@type":"DefinedTerm","name":"GHL","description":"GoHighLevel — a bundled CRM, marketing automation, and white-label SaaS platform popular with agencies."},
+    {"@type":"DefinedTerm","name":"Google-Extended","description":"A separate user-agent token Google introduced so site owners can allow Googlebot while blocking Google's AI training crawler."},
+    {"@type":"DefinedTerm","name":"GPTBot","description":"OpenAI's user-agent for crawling sites to train and improve GPT models."},
+    {"@type":"DefinedTerm","name":"HowTo","description":"A schema.org type for step-by-step instructions with structured properties for tools, supplies, and timing."},
+    {"@type":"DefinedTerm","name":"Idempotency","description":"The property that running the same operation twice produces the same result as running it once."},
+    {"@type":"DefinedTerm","name":"JSON-LD","description":"JSON for Linked Data — the structured-data format Google, Bing, and LLMs prefer for parsing schema.org markup."},
+    {"@type":"DefinedTerm","name":"Knowledge Graph","description":"A structured database of entities and the relationships between them."},
+    {"@type":"DefinedTerm","name":"LLM","description":"Large Language Model — a neural network trained on a large text corpus to predict the next token."},
+    {"@type":"DefinedTerm","name":"llms.txt","description":"A draft standard for a markdown index file at /llms.txt telling LLMs which pages are canonical and citable."},
+    {"@type":"DefinedTerm","name":"MCP","description":"Model Context Protocol — an open protocol for connecting LLM clients to external tools and data sources."},
+    {"@type":"DefinedTerm","name":"Microdata","description":"An older inline format for structured data embedded directly in HTML attributes."},
+    {"@type":"DefinedTerm","name":"n8n","description":"An open-source workflow automation platform with self-hosting, branching, code nodes, and a node library covering 400+ services."},
+    {"@type":"DefinedTerm","name":"OAuth","description":"An authorization protocol letting a user grant a third-party app limited access without sharing their password."},
+    {"@type":"DefinedTerm","name":"OpenAPI","description":"A specification format for describing REST APIs in a machine-readable YAML or JSON document."},
+    {"@type":"DefinedTerm","name":"Observability","description":"Instrumenting a system so you can answer why it did that from logs, metrics, and traces without redeploying."},
+    {"@type":"DefinedTerm","name":"PerplexityBot","description":"The user-agent Perplexity uses for crawling source pages it cites in answers."},
+    {"@type":"DefinedTerm","name":"Prompt Engineering","description":"Writing inputs to an LLM that reliably produce useful outputs."},
+    {"@type":"DefinedTerm","name":"Queue","description":"A data structure that holds pending work items so they can be processed asynchronously and in order."},
+    {"@type":"DefinedTerm","name":"RAG","description":"Retrieval-Augmented Generation — fetching relevant documents from a knowledge base and passing them to an LLM as context."},
+    {"@type":"DefinedTerm","name":"Rate Limiting","description":"A cap on how many requests an API will accept per time window."},
+    {"@type":"DefinedTerm","name":"robots.txt","description":"A plain-text file at /robots.txt that tells crawlers which paths and user-agents are allowed or disallowed."},
+    {"@type":"DefinedTerm","name":"Schema Markup","description":"Structured data following the schema.org vocabulary embedded as JSON-LD or microdata."},
+    {"@type":"DefinedTerm","name":"Sitemap","description":"An XML file at /sitemap.xml listing every URL you want crawled, with lastmod timestamps."},
+    {"@type":"DefinedTerm","name":"Structured Data","description":"Machine-readable annotation of page content following a known vocabulary."},
+    {"@type":"DefinedTerm","name":"System Prompt","description":"The persistent instruction set prepended to every LLM conversation defining role, constraints, tone, and tool-use rules."},
+    {"@type":"DefinedTerm","name":"Tool Use","description":"The capability for an LLM to invoke external functions during a conversation."},
+    {"@type":"DefinedTerm","name":"Trigger","description":"The starting event of a workflow — a webhook, scheduled cron tick, new sheet row, or inbound email."},
+    {"@type":"DefinedTerm","name":"User-agent","description":"The identifier string a crawler sends in HTTP request headers."},
+    {"@type":"DefinedTerm","name":"Vector Database","description":"A database optimized for storing and querying embeddings by similarity."},
+    {"@type":"DefinedTerm","name":"Webhook","description":"An HTTP POST sent from one system to another when an event happens."},
+    {"@type":"DefinedTerm","name":"Webhook Signature","description":"A cryptographic hash sent in a header so the receiver can verify the webhook came from the expected sender."},
+    {"@type":"DefinedTerm","name":"Workflow","description":"A defined sequence of trigger, actions, and conditions that automates a process."}
+  ]
+}
+</script>
+</article>

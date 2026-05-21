@@ -13,7 +13,8 @@ export const SITE = {
   tagline: "AI Automation Agency for Founders Who Refuse to Be Average",
   description:
     "SkynetLabs builds n8n + AI automation, AEO-optimized websites, and WhatsApp/CRM systems for service businesses. Run by Waseem Nasir from Bali.",
-  email: "waseembali2k26@gmail.com",
+  email: "info@skynetjoe.com",
+  emailFounder: "waseem@skynetjoe.com",
   whatsapp: "+923001001957",
   social: {
     linkedin: "https://www.linkedin.com/in/waseemnasir",

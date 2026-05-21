@@ -18,6 +18,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/faqs",
     "/n8n-vs-zapier",
     "/author/waseem-nasir",
+    "/blog",
+    "/portfolio",
+    "/privacy-policy",
+    "/terms-of-service",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,

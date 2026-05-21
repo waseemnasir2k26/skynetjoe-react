@@ -1,0 +1,52 @@
+import fs from "fs";
+import path from "path";
+import type { Metadata } from "next";
+import { SITE } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+
+const html = fs.readFileSync(
+  path.join(process.cwd(), "content", "privacy-policy.html"),
+  "utf8"
+);
+
+export const metadata: Metadata = {
+  title: "Privacy Policy — SkynetLabs",
+  description:
+    "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement. Last updated 2026-05-20.",
+  alternates: { canonical: "/privacy-policy" },
+  openGraph: {
+    title: "SkynetLabs Privacy Policy",
+    description:
+      "How we handle your data. Minimum collection, no tracking cookies, deletion on request.",
+    url: "/privacy-policy",
+    type: "article",
+  },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Privacy Policy — SkynetLabs",
+  description:
+    "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement.",
+  url: `${SITE.url}/privacy-policy`,
+  inLanguage: "en",
+  dateModified: "2026-05-20",
+  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
+  publisher: {
+    "@type": "Organization",
+    name: SITE.brand,
+    url: SITE.url,
+    logo: { "@type": "ImageObject", url: `${SITE.url}/apple-icon.png` },
+  },
+  mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/privacy-policy` },
+};
+
+export default function PrivacyPolicyPage() {
+  return (
+    <>
+      <JsonLd data={schema} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </>
+  );
+}

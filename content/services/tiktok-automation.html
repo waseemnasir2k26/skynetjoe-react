@@ -1,0 +1,187 @@
+<article class="wn-service wn-service-tiktok-automation">
+<style>
+.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service *{box-sizing:border-box}
+.wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-service .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-service .wn-hero>*{position:relative;z-index:1}
+.wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-service p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-service strong{color:var(--wn-fg);font-weight:600}
+.wn-service .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-service .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-service .wn-grid{display:grid;gap:1rem}
+.wn-service .wn-grid-2{grid-template-columns:1fr}
+.wn-service .wn-grid-3{grid-template-columns:1fr}
+.wn-service .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-service .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-service .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-service .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-service .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
+.wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
+.wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
+.wn-service .wn-proof{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-proof{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-proof-item{padding:1.25rem;border-left:3px solid var(--wn-accent-a);background:var(--wn-surface)}
+.wn-service .wn-proof-item .wn-metric{font-size:1.4rem;font-weight:800;color:var(--wn-accent-a);display:block;margin-bottom:.25rem}
+.wn-service .wn-price-tiers{display:grid;gap:.85rem}
+@media(min-width:768px){.wn-service .wn-price-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-price{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px}
+.wn-service .wn-price .wn-tier{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-fg-faint);margin-bottom:.4rem}
+.wn-service .wn-price .wn-amt{font-size:1.5rem;font-weight:800;color:var(--wn-fg);margin-bottom:.3rem}
+.wn-service .wn-price .wn-cadence{font-size:.85rem;color:var(--wn-fg-muted)}
+.wn-service details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-service details summary::-webkit-details-marker{display:none}
+.wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-service details[open] summary::after{content:"–"}
+.wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+.wn-service-tiktok-automation{--wn-accent-a:#00D4FF;--wn-accent-b:#FF1744}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">AI Content · TikTok</span>
+    <h1>Your last 18 TikToks averaged 240 views. <span class="wn-grad">The hook is dying in the first second.</span></h1>
+    <p class="wn-lede">TikTok's algorithm decides on you in 0.8 seconds. If the first frame isn't a stoppable image and a contrarian opening line, your video stops being shown. You're posting daily but the structure is wrong. We rebuild the daily-post engine — hook bank rotation, kinetic captions, trend-aware BGM — so the first second earns you the second.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">What we build</p>
+    <h2>A daily-post engine that earns the swipe</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h3>Hook bank rotation</h3>
+        <p>Seven-day hook rotation by weekday: Monday contrarian, Tuesday prompt-exposure, Wednesday list, Thursday client-proof, Friday tool-stack, Saturday personal, Sunday recap. Two A/B variants per day.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/></svg>
+        <h3>Frame-1 stoppable thumbnail</h3>
+        <p>Title card 0.2-3.5 seconds in every video. Bold question, branded colour, your face if you're on camera. So when the algorithm previews it, the viewer pauses instead of swiping.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <h3>Kinetic captions</h3>
+        <p>Word-by-word reveal with brand-colour highlight on the emotional word. ASS subtitle format means you can re-skin the whole batch by changing one config.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <h3>Trend-aware BGM, not banned audio</h3>
+        <p>We never use TikTok-trending audio that gets stripped on cross-post. We use licensed Mixkit and Epidemic Sound tracks that match the energy of the trending sound without the copyright risk.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+        <h3>Comment-bait closer</h3>
+        <p>Last 2 seconds plant a question or contradiction designed to provoke comments. Comments drive the second wave of distribution. We script the closer per topic.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        <h3>First-second retention heatmap</h3>
+        <p>Weekly review: which videos lost 50% in second one, which made it to 75% completion. We use the data to retire dead hook formats.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln wn-wrap" style="max-width:62rem">Every TikTok "growth coach" tells you to "post daily and the algorithm will find you". Daily posting without retention data is just creating more bad videos faster. The question isn't can you post — it's are you killing the hook formats that bleed views by the third repeat?</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Process</p>
+    <h2>Channel audit to daily-post engine</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Pull your last 30 videos, score the hook on each, map your retention curve. Identify the three hook formats killing your reach.</p><span class="wn-step-day">Day 1–3</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Build your hook-bank by weekday. Pick caption style, BGM library, end-card style. Approve the look on a single pilot video.</p><span class="wn-step-day">Day 4–5</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Pipeline runs in your environment. Schedule daily via TikTok Business API. First week we sit on a screen-share to catch edge cases.</p><span class="wn-step-day">Day 6–10</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>Runbook, hook-bank Notion doc, retention dashboard, BGM library. Monthly review of which hooks to kill.</p><span class="wn-step-day">Day 11–12</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Stack we use</p>
+    <h2>What runs the channel</h2>
+    <div class="wn-stack">
+      <span>ffmpeg + ASS captions</span><span>Whisper transcription</span><span>Gemini hook scoring</span><span>TikTok Business API</span><span>Mixkit + Epidemic Sound</span><span>Notion hook-bank</span><span>Looker Studio retention</span><span>OpenAI for script polish</span>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Proof</p>
+    <h2>Shipped pipelines</h2>
+    <div class="wn-proof">
+      <div class="wn-proof-item"><span class="wn-metric">240 → 4.1k</span>Founder channel's median view count after switching hook-bank rotation. 8 weeks of daily posting.</div>
+      <div class="wn-proof-item"><span class="wn-metric">72% F1 retention</span>First-frame retention on the visa/digital-nomad pilot reel, up from 41% baseline.</div>
+      <div class="wn-proof-item"><span class="wn-metric">14 saved hooks</span>Hook-bank database of 14 weekday-rotated formats that consistently score 7+ in our pre-publish review.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Investment</p>
+    <h2>Engine first, then daily ship</h2>
+    <div class="wn-price-tiers">
+      <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$500</div><div class="wn-cadence">Channel audit, hook-bank build, pilot video produced and approved.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$1,000–$2,500</div><div class="wn-cadence">Full pipeline, hook-bank Notion doc, retention dashboard, first week's batch produced with us.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $397/mo</div><div class="wn-cadence">Daily batch ship from your raw footage, weekly retention review, monthly hook-bank refresh.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Questions</p>
+    <h2>Common questions</h2>
+    <details><summary>What about shadowbans?</summary><div class="wn-faq-body">Real shadowbans on TikTok are rare and usually triggered by content policy violations, not posting frequency. If your reach drops, it's almost always the hook format that's gone stale. Our weekly retention review catches that early so we kill dying formats before they tank the whole account.</div></details>
+    <details><summary>Do you grow accounts to specific follower counts?</summary><div class="wn-faq-body">We don't promise follower counts. We do promise a measurable lift in first-frame retention and in median view count, because both are inputs we directly control. Follower count is downstream of those — if retention is fixed, followers come.</div></details>
+    <details><summary>Can you take over content from my agency?</summary><div class="wn-faq-body">Yes. We start with a 30-video audit of what your prior agency shipped, identify what worked, what didn't, and the format gap. Most agency-produced TikTok content fails because it's optimised for "polish" rather than "stop-the-scroll".</div></details>
+    <details><summary>What's the right posting frequency?</summary><div class="wn-faq-body">For a channel under 10k followers, one video per day, posted between 6 and 10pm in your target audience's timezone. Past 10k, we lower frequency and raise polish. Daily is rarely sustainable for face-to-camera founders beyond month three without a pipeline.</div></details>
+    <details><summary>How do you handle cross-posting to Reels and Shorts?</summary><div class="wn-faq-body">Same video gets re-uploaded to Instagram Reels and YouTube Shorts with platform-specific captions and hashtags. We avoid the TikTok watermark by re-rendering for Reels and Shorts. Hashtag set is generated per platform, not copy-pasted.</div></details>
+  </div>
+</section>
+
+<div class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>Earn the second second.</h2>
+    <p class="wn-lede" style="margin:0 auto">30-video hook audit, retention map, written kill list of dying formats.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"TikTok Automation","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Daily-post TikTok engine: hook-bank rotation, stoppable frame-1, kinetic captions, comment-bait closers, and retention dashboard.","serviceType":"TikTok content automation"},{"@type":"Offer","name":"TikTok Automation engagement","priceCurrency":"USD","price":"500","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"500","maxPrice":"2500"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}}]}
+</script>
+</article>

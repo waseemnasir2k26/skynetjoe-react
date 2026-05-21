@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/sync-wp-templates.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/sync-wp-templates.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync-wp": "node scripts/sync-wp-templates.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

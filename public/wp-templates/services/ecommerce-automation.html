@@ -1,0 +1,187 @@
+<article class="wn-service wn-service-ecommerce-automation">
+<style>
+.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service *{box-sizing:border-box}
+.wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-service .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-service .wn-hero>*{position:relative;z-index:1}
+.wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-service p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-service strong{color:var(--wn-fg);font-weight:600}
+.wn-service .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-service .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-service .wn-grid{display:grid;gap:1rem}
+.wn-service .wn-grid-2{grid-template-columns:1fr}
+.wn-service .wn-grid-3{grid-template-columns:1fr}
+.wn-service .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-service .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-service .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-service .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-service .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
+.wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
+.wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
+.wn-service .wn-proof{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-proof{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-proof-item{padding:1.25rem;border-left:3px solid var(--wn-accent-a);background:var(--wn-surface)}
+.wn-service .wn-proof-item .wn-metric{font-size:1.4rem;font-weight:800;color:var(--wn-accent-a);display:block;margin-bottom:.25rem}
+.wn-service .wn-price-tiers{display:grid;gap:.85rem}
+@media(min-width:768px){.wn-service .wn-price-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-price{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px}
+.wn-service .wn-price .wn-tier{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-fg-faint);margin-bottom:.4rem}
+.wn-service .wn-price .wn-amt{font-size:1.5rem;font-weight:800;color:var(--wn-fg);margin-bottom:.3rem}
+.wn-service .wn-price .wn-cadence{font-size:.85rem;color:var(--wn-fg-muted)}
+.wn-service details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-service details summary::-webkit-details-marker{display:none}
+.wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-service details[open] summary::after{content:"–"}
+.wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+.wn-service-ecommerce-automation{--wn-accent-a:#FF6B6B;--wn-accent-b:#1E88E5}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">Development · E-commerce</span>
+    <h1>You ship 60 orders a day. <span class="wn-grad">Your fulfilment runs on three tabs and a sticky note.</span></h1>
+    <p class="wn-lede">Shopify orders, Stripe payouts, an inventory sheet, a shipping label tool, a Klaviyo flow that doesn't fire on the right tag — and a customer support inbox that's three days behind. The store is making money despite the stack, not because of it. We wire Shopify, Stripe, n8n, and Klaviyo into a system where one order trigger handles everything downstream.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">What we build</p>
+    <h2>One trigger, downstream automated</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <h3>Order-to-fulfilment pipeline</h3>
+        <p>Shopify order webhook → n8n routes by SKU → inventory check → ShipStation label → tracking number into Klaviyo confirmation flow. End-to-end under 90 seconds, no human touches in the middle.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <h3>Abandoned-cart flow that converts</h3>
+        <p>Klaviyo + Postscript SMS, two-hour first nudge, 24-hour discount offer, 72-hour "let us know what went wrong" survey. Source-tagged so attribution joins back to ad spend.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+        <h3>Returns and refunds workflow</h3>
+        <p>One-click return portal, return label automation, refund processing in Stripe, inventory restocking in Shopify, customer notification at every step. Replaces three tabs and a sticky note.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        <h3>Operations dashboard</h3>
+        <p>Today's revenue, today's orders, top SKU, stuck shipments, refund rate, top-3 product reviews. Looker Studio fed by n8n daily exports. Email digest at 7am.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <h3>Low-stock and reorder triggers</h3>
+        <p>SKU drops below threshold → Slack alert to the founder, draft reorder PO emailed to supplier, COGS sheet updated. No more "we sold out yesterday" surprises.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+        <h3>Support escalation routing</h3>
+        <p>Gorgias or Zendesk inbound → AI classifier (shipping question vs refund vs complaint) → auto-reply with tracking, escalation to human for nuance, satisfaction survey post-close.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln wn-wrap" style="max-width:62rem">Shopify apps are a tax — every "add this app" is another $30 a month and another point of breakage. We replace the 5 apps you're stacking with two n8n workflows you own. Slower to set up the first time. Cheaper and tougher every month after.</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Process</p>
+    <h2>Stack audit to one-trigger ops</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Audit your Shopify apps, Klaviyo flows, ShipStation rules, support inbox. Map every manual paste-job. Written report with kill / keep / rebuild.</p><span class="wn-step-day">Day 1–4</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Workflow diagrams, app kill list, schema for tags and custom fields, dashboard mockup. You approve before we touch the store.</p><span class="wn-step-day">Day 5–7</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Build n8n flows in staging, parallel-run against real orders for 5 days, cut over only after zero errors. Migrate Klaviyo flows last.</p><span class="wn-step-day">Day 8–14</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>One-page runbook per workflow, Loom walkthroughs, dashboard handed to ops, 14-day fix window.</p><span class="wn-step-day">Day 15</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Stack we use</p>
+    <h2>What gets wired</h2>
+    <div class="wn-stack">
+      <span>Shopify (Plus + standard)</span><span>Stripe + Shop Pay</span><span>n8n</span><span>Klaviyo</span><span>Postscript SMS</span><span>ShipStation / Easyship</span><span>Gorgias / Zendesk</span><span>Looker Studio</span><span>OpenAI for support classifier</span>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Proof</p>
+    <h2>Stores we've wired</h2>
+    <div class="wn-proof">
+      <div class="wn-proof-item"><span class="wn-metric">5 apps killed</span>Skincare brand replaced abandoned-cart app, returns app, shipping app, inventory app, and a custom-script app with two n8n flows.</div>
+      <div class="wn-proof-item"><span class="wn-metric">90s order-to-label</span>Fashion store cut order-to-shipping-label time from 12 minutes (manual) to under 90 seconds (automated).</div>
+      <div class="wn-proof-item"><span class="wn-metric">3-day → 4hr support</span>Apparel brand support response SLA after AI-triaged inbox + auto-reply for shipping queries.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Investment</p>
+    <h2>Wire the store, then run it lean</h2>
+    <div class="wn-price-tiers">
+      <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$1,500</div><div class="wn-cadence">Order-to-fulfilment flow + abandoned cart + one dashboard.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$3,000–$7,500</div><div class="wn-cadence">Full store ops rebuild, 6–10 workflows, returns portal, support triage, Looker dashboard.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $697/mo</div><div class="wn-cadence">Monthly workflow tweaks, new flows for promos and launches, BFCM/holiday prep, on-call when an order errors.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Questions</p>
+    <h2>Common questions</h2>
+    <details><summary>Can you work with WooCommerce or BigCommerce, not just Shopify?</summary><div class="wn-faq-body">Yes. The pattern is the same: webhook out of the platform, n8n handles routing, Stripe handles money, Klaviyo or a fork handles email. WooCommerce works well for content-heavy stores; BigCommerce for B2B with complex pricing tiers. We default to Shopify because most clients are already on it.</div></details>
+    <details><summary>What about subscriptions and recurring billing?</summary><div class="wn-faq-body">We wire Recharge or Bold for Shopify, or Stripe Billing directly for headless stores. Both feed into the same n8n hub for tag management, churn-prediction flows, and dunning emails when cards fail.</div></details>
+    <details><summary>Will you slow my store down with all this automation?</summary><div class="wn-faq-body">Opposite. Most of what we replace is Shopify apps loading scripts on the storefront. By moving abandoned-cart and inventory logic to background n8n workflows, the storefront actually gets faster. Average LCP improvement: 30–50% on stores we've migrated.</div></details>
+    <details><summary>Can we handle Black Friday on this stack?</summary><div class="wn-faq-body">Yes — and that's when it pays off the most. We rehearse BFCM in November with a load-test against 20x normal volume, queue-buffer the inventory check, and set fallback paths so a Shopify webhook delay doesn't break fulfilment. Built for spike days.</div></details>
+    <details><summary>What's the smallest store worth doing this for?</summary><div class="wn-faq-body">If you ship under 10 orders a day, you're better off with a clean Shopify + Klaviyo setup and a part-time VA. We earn our keep above 30 orders a day or when the founder is doing fulfilment themselves and wants to stop. Past that volume, the time saved easily covers the build cost.</div></details>
+  </div>
+</section>
+
+<div class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>Stop running fulfilment on three tabs and a sticky note.</h2>
+    <p class="wn-lede" style="margin:0 auto">Stack audit, kill list, workflow diagram — shipped within five working days.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"E-commerce Automation","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Shopify + Stripe + n8n + Klaviyo stack: order-to-fulfilment, abandoned cart, returns portal, support triage, and operations dashboard.","serviceType":"E-commerce operations automation"},{"@type":"Offer","name":"E-commerce Automation engagement","priceCurrency":"USD","price":"1500","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"1500","maxPrice":"7500"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}}]}
+</script>
+</article>

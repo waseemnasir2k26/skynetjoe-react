@@ -1,0 +1,187 @@
+<article class="wn-service wn-service-ai-content-creation">
+<style>
+.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service *{box-sizing:border-box}
+.wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-service .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-service .wn-hero>*{position:relative;z-index:1}
+.wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-service p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-service strong{color:var(--wn-fg);font-weight:600}
+.wn-service .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-service .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-service .wn-grid{display:grid;gap:1rem}
+.wn-service .wn-grid-2{grid-template-columns:1fr}
+.wn-service .wn-grid-3{grid-template-columns:1fr}
+.wn-service .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-service .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-service .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-service .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-service .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
+.wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
+.wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
+.wn-service .wn-proof{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-proof{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-proof-item{padding:1.25rem;border-left:3px solid var(--wn-accent-a);background:var(--wn-surface)}
+.wn-service .wn-proof-item .wn-metric{font-size:1.4rem;font-weight:800;color:var(--wn-accent-a);display:block;margin-bottom:.25rem}
+.wn-service .wn-price-tiers{display:grid;gap:.85rem}
+@media(min-width:768px){.wn-service .wn-price-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-price{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px}
+.wn-service .wn-price .wn-tier{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-fg-faint);margin-bottom:.4rem}
+.wn-service .wn-price .wn-amt{font-size:1.5rem;font-weight:800;color:var(--wn-fg);margin-bottom:.3rem}
+.wn-service .wn-price .wn-cadence{font-size:.85rem;color:var(--wn-fg-muted)}
+.wn-service details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-service details summary::-webkit-details-marker{display:none}
+.wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-service details[open] summary::after{content:"–"}
+.wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+.wn-service-ai-content-creation{--wn-accent-a:#14B8A6;--wn-accent-b:#FF6B6B}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">Consulting · Voice-Locked Content</span>
+    <h1>Your last 30 posts read like 30 different people wrote them. <span class="wn-grad">Because they did.</span></h1>
+    <p class="wn-lede">You hired a freelancer, then a VA, then a "ghostwriter from Twitter". Each one drafts in a voice that isn't yours. Your feed reads like a stranger ran your brand for a quarter. We lock your voice into a documented system, then build the content engine that produces 60+ posts per month without it ever sounding generic.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">What we deliver</p>
+    <h2>A voice your team and your AI can both ship in</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        <h3>Voice profile document</h3>
+        <p>A 12-page voice profile capturing your hook style, sentence rhythm, vocabulary do/don't lists, vulnerability beats, and exact banned phrases. Built from 30 of your best past posts.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8"/><path d="M8 16h5"/><path d="M8 8h8"/></svg>
+        <h3>Hook bank + arc templates</h3>
+        <p>50+ hook openers organised by day-of-week rotation. Eight content arcs (contrarian, case-study, tool-stack, vulnerability, behind-the-build). One template per arc with fill-in prompts.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        <h3>Voice-lint engine</h3>
+        <p>An automated linter that flags AI tells, banned phrases, and voice drift before anything ships. Runs locally or as a CI check. Hard-fails on 60+ patterns.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <h3>Content engine in your tools</h3>
+        <p>n8n or Make pipeline that turns one source (interview, voice memo, blog draft) into a week of cross-channel posts. LinkedIn, X, Instagram, newsletter, all voice-linted before they go out.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M21 3v5h-5"/><path d="M21 21v-5h-5"/></svg>
+        <h3>Rotation calendar</h3>
+        <p>30-day editorial calendar locked to your hook bank rotation, your client-win library, and your geo anchors. No "what should I post today" panic. Slots are pre-named.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c0 .69.28 1.31.73 1.76"/></svg>
+        <h3>Quarterly voice refresh</h3>
+        <p>Voice drifts as you grow. Every quarter we re-sample your best 20 posts and update the profile, the hook bank, and the lint rules. Your voice ages with you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln wn-wrap" style="max-width:62rem">Most "ghostwriting" engagements fail the same way: a smart writer studies your archive for a week, drafts in their version of your voice, ships posts that get half your engagement, then quits when you keep rewriting them. The fix isn't a better writer — it's a voice profile so explicit that the writer (or the model) has nowhere to drift to.</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Process</p>
+    <h2>Sample, lock, ship</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Send us 30 of your best past posts and 5 you regret. Interview call to capture your worldview, banned phrases, and the lines you wish someone had said about you.</p><span class="wn-step-day">Day 1–3</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Build the voice profile, hook bank, arc templates, and lint rule set. Sample 3 fresh posts in the locked voice for your sign-off.</p><span class="wn-step-day">Day 4–10</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Stand up the n8n content engine, wire the voice linter, load the 30-day calendar, train your VA or junior writer on the system.</p><span class="wn-step-day">Day 11–18</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>Two weeks of co-editing the live calendar, then you (or your team) run it. We stay on for monthly drift checks and quarterly refresh.</p><span class="wn-step-day">Day 19–30</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Stack we use</p>
+    <h2>Tools the content engine ships on</h2>
+    <div class="wn-stack">
+      <span>Claude (voice profile + drafting)</span><span>GPT-4 (variant testing)</span><span>n8n (pipeline)</span><span>Notion (editorial calendar)</span><span>Python voice linter (60+ rules)</span><span>Whisper (interview → text)</span><span>Buffer / GHL (scheduling)</span><span>Airtable (post archive + performance)</span>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Proof</p>
+    <h2>Voices we've locked</h2>
+    <div class="wn-proof">
+      <div class="wn-proof-item"><span class="wn-metric">4 → 28</span>Posts per month for a Bali wellness operator after the voice profile and rotation calendar replaced ad-hoc drafting.</div>
+      <div class="wn-proof-item"><span class="wn-metric">60+ AI tells caught</span>Average post used to ship with 6–9 generic phrases. Linter now hard-fails before publish.</div>
+      <div class="wn-proof-item"><span class="wn-metric">3 channels, one voice</span>LinkedIn, Instagram, newsletter all run off one source interview per week. Voice holds across all three.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Investment</p>
+    <h2>One voice, locked forever</h2>
+    <div class="wn-price-tiers">
+      <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$1,000</div><div class="wn-cadence">Voice profile only. 12-page doc, hook bank, 5 sample posts in locked voice. No pipeline.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical engagement</div><div class="wn-amt">$2,500–$5,000</div><div class="wn-cadence">Full system: voice profile, hook bank, n8n pipeline, linter, 30-day calendar, team training, 2 weeks co-editing.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $997/mo</div><div class="wn-cadence">Monthly drift check, weekly office hours, quarterly voice refresh, new hook bank rotation per quarter.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Questions</p>
+    <h2>Common questions</h2>
+    <details><summary>Will my content stop sounding like ChatGPT?</summary><div class="wn-faq-body">Yes — that's the explicit goal. The voice linter hard-fails on 60+ AI tells (leverage, robust, seamless, harness, delve, "in today's", "in the realm of", em-dash overuse, rule-of-three, vague attributions). A draft can't ship if it triggers any of them. Add to the banned list as new tells emerge.</div></details>
+    <details><summary>Can my VA or junior writer use this system?</summary><div class="wn-faq-body">That's the whole point. The voice profile is explicit enough that a competent junior can draft in your voice on day one. The linter catches drift before you ever see the draft. Most of our clients run the engine with a $500/mo VA after the system is locked.</div></details>
+    <details><summary>What if my voice changes over the year?</summary><div class="wn-faq-body">Voice drifts naturally as you grow. The retainer includes a quarterly refresh: we re-sample your 20 best recent posts, update the profile, retire stale hooks, add new banned phrases. Your voice ages with you instead of getting frozen in time.</div></details>
+    <details><summary>Do you write the posts, or just build the system?</summary><div class="wn-faq-body">We build the system. Drafting we hand off — either to your VA, your in-house writer, or a content retainer (separate engagement). Our job is to make sure whoever drafts ships in your voice, not theirs.</div></details>
+    <details><summary>What if I don't have 30 past posts to sample from?</summary><div class="wn-faq-body">Common with founders just starting to post. We do a 90-minute voice interview, transcribe it, and sample your spoken voice instead. Most founders' written voice ends up 80% identical to their spoken voice once we strip the conference-talk filler.</div></details>
+  </div>
+</section>
+
+<div class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>Lock your voice before you scale the volume.</h2>
+    <p class="wn-lede" style="margin:0 auto">30-minute discovery call, then a 30-day build that ends with your content engine running on autopilot in your voice.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"AI Content Creation","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Voice-locked content systems: 12-page voice profile, hook bank, arc templates, n8n content engine, automated voice linter, 30-day editorial calendar, quarterly voice refresh.","serviceType":"Brand voice and content strategy"},{"@type":"Offer","name":"AI Content Creation engagement","priceCurrency":"USD","price":"1000","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"1000","maxPrice":"5000"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}}]}
+</script>
+</article>

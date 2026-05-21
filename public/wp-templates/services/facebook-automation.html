@@ -1,0 +1,187 @@
+<article class="wn-service wn-service-facebook-automation">
+<style>
+.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service *{box-sizing:border-box}
+.wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-service .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-service .wn-hero>*{position:relative;z-index:1}
+.wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-service p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-service strong{color:var(--wn-fg);font-weight:600}
+.wn-service .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-service .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-service .wn-grid{display:grid;gap:1rem}
+.wn-service .wn-grid-2{grid-template-columns:1fr}
+.wn-service .wn-grid-3{grid-template-columns:1fr}
+.wn-service .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-service .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-service .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-service .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-service .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
+.wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
+.wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
+.wn-service .wn-proof{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-proof{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-proof-item{padding:1.25rem;border-left:3px solid var(--wn-accent-a);background:var(--wn-surface)}
+.wn-service .wn-proof-item .wn-metric{font-size:1.4rem;font-weight:800;color:var(--wn-accent-a);display:block;margin-bottom:.25rem}
+.wn-service .wn-price-tiers{display:grid;gap:.85rem}
+@media(min-width:768px){.wn-service .wn-price-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-price{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px}
+.wn-service .wn-price .wn-tier{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-fg-faint);margin-bottom:.4rem}
+.wn-service .wn-price .wn-amt{font-size:1.5rem;font-weight:800;color:var(--wn-fg);margin-bottom:.3rem}
+.wn-service .wn-price .wn-cadence{font-size:.85rem;color:var(--wn-fg-muted)}
+.wn-service details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-service details summary::-webkit-details-marker{display:none}
+.wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-service details[open] summary::after{content:"–"}
+.wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+.wn-service-facebook-automation{--wn-accent-a:#3B82F6;--wn-accent-b:#14B8A6}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">AI Content · Facebook</span>
+    <h1>Your Facebook page reach is 23. <span class="wn-grad">Your group has 4,000 silent members.</span></h1>
+    <p class="wn-lede">Facebook still has buyers, but the page is a graveyard and the group hasn't seen a comment since March. Reach is gated, the algorithm rewards conversations not broadcasts, and your DMs are buried under cold pitches. We rebuild the page + group + DM system so the people who already opted in actually see your work.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">What we build</p>
+    <h2>Page, group, and DMs working as one</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/></svg>
+        <h3>Page post mix that doesn't die at 23 reach</h3>
+        <p>A 9-card weekly post mix: 4 educational, 2 motivational, 3 sell-later, plus a locked Sunday closer. Each tuned for Facebook's text-heavy preference, not Instagram leftovers.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="4"/></svg>
+        <h3>Group revival sequence</h3>
+        <p>Membership question audit, three-question pre-approval flow, weekly thread cadence (poll, story, debate). Hand-curated for the first 30 days then handed to a moderator.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        <h3>ManyChat DM funnel</h3>
+        <p>Keyword triggers (price, info, demo) → menu → calendar link, with human escalation when the buyer keeps typing. Compliant with Meta's 24-hour window rule.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <h3>Comment-prompt closer on every post</h3>
+        <p>Facebook's algorithm boosts posts with comments more than likes. Every post ends with a question, an opinion ask, or a contradiction. Comment volume drives reach.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        <h3>Engagement attribution</h3>
+        <p>UTM tracking on every group→funnel link, page→DM→booking attribution, weekly Looker Studio digest of which post style produced which booking.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <h3>Meta-policy safe stack</h3>
+        <p>All automation runs through Meta's official Graph API and ManyChat. No browser-emulation tools, no session hijack. Auditable, banable-only-on-content-not-on-method.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln wn-wrap" style="max-width:62rem">Facebook is the channel everyone calls dead but where buyers over 35 still spend two hours a day. The platform punishes broadcast and rewards conversation. Most pages die because they post like a billboard. We rebuild them to post like a host who wants the room to talk back.</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Process</p>
+    <h2>Audit, revive, automate</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Page + group audit. Reach per post, member engagement, DM response times, top three posts by saved-shared ratio.</p><span class="wn-step-day">Day 1–3</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Post mix calendar, group revival plan, DM funnel script, comment-prompt library. Locked on a single test week.</p><span class="wn-step-day">Day 4–6</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Wire ManyChat, schedule first month of posts, kick off the group revival sequence, run a parallel week with you on the screen-share.</p><span class="wn-step-day">Day 7–11</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>Runbook per channel, post-mix Notion doc, ManyChat builder access, weekly attribution review booked.</p><span class="wn-step-day">Day 12–14</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Stack we use</p>
+    <h2>What runs the page</h2>
+    <div class="wn-stack">
+      <span>Meta Graph API</span><span>ManyChat</span><span>Buffer / Publer scheduling</span><span>Facebook Groups native tools</span><span>Looker Studio</span><span>Notion content calendar</span><span>OpenAI for post drafts</span><span>WhatsApp Cloud API handoff</span>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Proof</p>
+    <h2>Real pages we revived</h2>
+    <div class="wn-proof">
+      <div class="wn-proof-item"><span class="wn-metric">23 → 1.4k</span>Page weekly reach for a regional wellness brand after switching to comment-prompt closers and 9-card mix.</div>
+      <div class="wn-proof-item"><span class="wn-metric">4 min reply</span>DM-to-first-reply via ManyChat for a coaching practice. Down from 6 hours.</div>
+      <div class="wn-proof-item"><span class="wn-metric">4k silent → 600 active</span>Group revival: pre-approval questions, weekly thread cadence, three-month rebuild.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Investment</p>
+    <h2>One channel, three surfaces</h2>
+    <div class="wn-price-tiers">
+      <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$500</div><div class="wn-cadence">Page audit, post-mix calendar, single ManyChat DM funnel.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$1,000–$2,500</div><div class="wn-cadence">Page + group + DM funnel rebuild, first month of posts, attribution dashboard.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $397/mo</div><div class="wn-cadence">Monthly content scheduling, group moderation rules, DM funnel updates, attribution review.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Questions</p>
+    <h2>Common questions</h2>
+    <details><summary>Isn't Facebook dead for organic reach?</summary><div class="wn-faq-body">Dead for broadcasts, alive for groups and Reels. Page reach for static-image posts collapsed in 2020. But Facebook Groups, Facebook Reels, and DM-driven funnels still convert. We avoid the page-broadcast trap and use the surfaces that still work.</div></details>
+    <details><summary>Should we run paid ads alongside this?</summary><div class="wn-faq-body">Eventually yes, but not while the organic side is broken. Spending on ads while the comment-to-DM funnel is dead burns money. We get organic working first, then layer ads on the same funnel because the cost-per-lead drops.</div></details>
+    <details><summary>What about Facebook Reels — separate or part of this?</summary><div class="wn-faq-body">Part of this. The same reels going to TikTok and Instagram cross-post to Facebook Reels. Facebook Reels reach for a sub-10k page can be five to ten times the page-post reach right now. We bake the cross-post into the schedule.</div></details>
+    <details><summary>Can you take over our existing group?</summary><div class="wn-faq-body">We don't moderate as ourselves. We set up the revival sequence, document the rules, train your moderator, and stay on retainer for monthly tune-ups. Group culture has to come from inside the community, not an outside agency.</div></details>
+    <details><summary>How does this play with our WhatsApp strategy?</summary><div class="wn-faq-body">Facebook DM is the cold layer. ManyChat handles the first reply and qualifying. When the buyer is warm, we lateral to WhatsApp Business via a Cloud API template. WhatsApp is the booked-call layer. Both share the same CRM tag set.</div></details>
+  </div>
+</section>
+
+<div class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>Stop posting into the void at 23 reach.</h2>
+    <p class="wn-lede" style="margin:0 auto">Page + group + DM audit, three-post pilot, sent within five working days.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Facebook Automation","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Page + group + DM funnel rebuild: 9-card weekly post mix, group revival sequence, ManyChat keyword funnels, and attribution dashboard.","serviceType":"Facebook content and automation"},{"@type":"Offer","name":"Facebook Automation engagement","priceCurrency":"USD","price":"500","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"500","maxPrice":"2500"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}}]}
+</script>
+</article>

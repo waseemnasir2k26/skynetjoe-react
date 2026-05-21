@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SkynetLabs &middot; WordPress Paste Kit</title>
+<meta name="description" content="How to migrate Next.js-rendered HTML pages into a WordPress site without losing styling, schema, or layout." />
+<meta name="robots" content="noindex,nofollow" />
+<style>
+  :root {
+    --bg: #0b0f17;
+    --bg-2: #0f1422;
+    --panel: #131a2b;
+    --panel-2: #161e33;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.16);
+    --ink: #e8ecf5;
+    --ink-dim: #aab2c5;
+    --ink-mute: #7d8599;
+    --green: #13b973;
+    --green-2: #21d98a;
+    --purple: #8a6dff;
+    --purple-2: #b39bff;
+    --warn: #f5b34c;
+    --code-bg: #0a0f1c;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    background:
+      radial-gradient(1200px 600px at 100% -10%, rgba(138,109,255,0.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(19,185,115,0.08), transparent 60%),
+      var(--bg);
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 96px; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green-2);
+    background: rgba(19,185,115,0.10);
+    border: 1px solid rgba(19,185,115,0.30);
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: clamp(28px, 4.5vw, 44px);
+    line-height: 1.12;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+  h1 .accent {
+    background: linear-gradient(120deg, var(--green-2), var(--purple-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  h2 {
+    font-size: 22px;
+    margin: 56px 0 14px;
+    letter-spacing: -0.01em;
+    border-left: 3px solid var(--green);
+    padding-left: 12px;
+  }
+  h3 { font-size: 17px; margin: 28px 0 10px; color: var(--purple-2); }
+  p, li { color: var(--ink-dim); }
+  p strong, li strong { color: var(--ink); }
+  a { color: var(--green-2); }
+  a:hover { color: var(--green); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 48px 0; }
+  .lede { font-size: 17px; color: var(--ink); max-width: 70ch; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 22px;
+    margin: 16px 0;
+  }
+  .panel.warn { border-color: rgba(245,179,76,0.35); background: rgba(245,179,76,0.06); }
+  .panel.warn strong { color: var(--warn); }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #d2d8e8;
+  }
+  code { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace; font-size: 0.92em; color: var(--green-2); }
+  pre code { color: inherit; }
+  details {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0;
+    margin: 10px 0;
+    overflow: hidden;
+    transition: border-color .2s ease;
+  }
+  details[open] { border-color: var(--border-strong); }
+  details > summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 18px;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::after {
+    content: "view paste kit ▾";
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-2);
+    background: rgba(19,185,115,0.10);
+    border: 1px solid rgba(19,185,115,0.25);
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  details[open] > summary::after { content: "close ▴"; }
+  details .body { padding: 4px 18px 18px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th { color: var(--ink); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--purple-2); }
+  td code { font-size: 12px; }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(138,109,255,0.15);
+    color: var(--purple-2);
+    border: 1px solid rgba(138,109,255,0.30);
+  }
+  .badge.green { background: rgba(19,185,115,0.12); color: var(--green-2); border-color: rgba(19,185,115,0.30); }
+  ol li { margin-bottom: 8px; }
+  .meta { color: var(--ink-mute); font-size: 13px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 720px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+  .footer-note { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--ink-mute); }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <span class="eyebrow">SkynetLabs · WordPress Paste Kit</span>
+  <h1>Move a Next.js page into <span class="accent">WordPress</span> without breaking it.</h1>
+  <p class="lede">
+    Every route on <a href="https://app-mauve-eta-66.vercel.app">app-mauve-eta-66.vercel.app</a> is also exported
+    as a standalone, self-styled HTML file at <code>/wp-templates/&lt;slug&gt;.html</code>.
+    Open one, right-click → <strong>View Source</strong>, copy the full markup, and paste it
+    into WordPress using one of the three methods below. The CSS is scoped to a <code>.wn-&lt;slug&gt;</code>
+    wrapper so your theme's styles can't bleed in.
+  </p>
+
+  <div class="panel">
+    <strong>Last sync:</strong> <span class="meta">Files in <code>/wp-templates/</code> are regenerated automatically every <code>npm run dev</code> and <code>npm run build</code> via the <code>scripts/sync-wp-templates.mjs</code> hook. Run <code>npm run sync-wp</code> to force a sync.</span>
+  </div>
+
+  <h2>1. Three ways to paste into WordPress</h2>
+
+  <h3>Method A — Page Editor + Custom HTML block <span class="badge green">easiest</span></h3>
+  <ol>
+    <li>WP admin → <strong>Pages → Add New</strong>.</li>
+    <li>Title the page (suggested titles below).</li>
+    <li>Add a <strong>Custom HTML</strong> block (Gutenberg) or switch the Classic editor to the <strong>Text</strong> tab.</li>
+    <li>Paste the entire <code>&lt;style&gt;...&lt;/style&gt;</code> + body markup from the <code>/wp-templates/&lt;slug&gt;.html</code> file. Skip the outer <code>&lt;html&gt;</code>/<code>&lt;head&gt;</code>/<code>&lt;body&gt;</code> tags — WordPress provides those.</li>
+    <li>Publish. Verify on the front-end. If your theme injects a sidebar, switch the page template to a full-width or "Empty" template.</li>
+  </ol>
+
+  <h3>Method B — Save as a page template <span class="badge">recommended for permanence</span></h3>
+  <ol>
+    <li>SSH/SFTP into the WP install and open the active theme directory (e.g. <code>wp-content/themes/skynetjoe/</code>).</li>
+    <li>Create a file named <code>page-&lt;slug&gt;.php</code> (e.g. <code>page-contact.php</code>).</li>
+    <li>Paste this wrapper, then paste the HTML body where indicated:</li>
+  </ol>
+<pre><code>&lt;?php
+/* Template Name: SkynetLabs &lt;Slug&gt; */
+get_header(); ?&gt;
+&lt;main class="skynetlabs-page"&gt;
+  &lt;!-- PASTE content/&lt;slug&gt;.html HERE (style block + body markup, no html/head/body tags) --&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+  <ol start="4">
+    <li>WP admin → <strong>Pages → Add New</strong> → in the Page Attributes sidebar, pick <em>SkynetLabs &lt;Slug&gt;</em> as the template.</li>
+    <li>Publish.</li>
+  </ol>
+
+  <h3>Method C — Functions.php custom block / shortcode <span class="badge">advanced</span></h3>
+  <p>Drop this into <code>functions.php</code> for a reusable <code>[skynetlabs slug="contact"]</code> shortcode that pulls
+     the template from the file system on every request — easier to update later:</p>
+<pre><code>&lt;?php
+add_shortcode('skynetlabs', function($atts) {
+    $atts = shortcode_atts(['slug' =&gt; ''], $atts);
+    $slug = sanitize_file_name($atts['slug']);
+    if (!$slug) return '';
+    $path = get_stylesheet_directory() . '/skynetlabs-templates/' . $slug . '.html';
+    if (!file_exists($path)) return '&lt;!-- skynetlabs: missing ' . esc_html($slug) . ' --&gt;';
+    return file_get_contents($path); // already-scoped CSS, schema, layout
+});</code></pre>
+  <p class="meta">Then drop the HTML files into <code>wp-content/themes/&lt;theme&gt;/skynetlabs-templates/&lt;slug&gt;.html</code> and reference them anywhere with <code>[skynetlabs slug="contact"]</code>.</p>
+
+  <hr />
+
+  <h2>2. Available templates</h2>
+  <p>Click any row to expand the paste kit for that page (file path · suggested URL · suggested WP title · paste-block snippet).</p>
+
+  <table>
+    <thead>
+      <tr><th>Page</th><th>Source</th><th>Suggested WP URL</th><th>Suggested WP title</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Contact</td><td><code>content/contact.html</code></td><td><code>/contact/</code></td><td>Contact &middot; SkynetLabs</td></tr>
+      <tr><td>Author — Waseem Nasir</td><td><code>content/author-waseem-nasir.html</code></td><td><code>/author/waseem-nasir/</code></td><td>About Waseem Nasir &middot; Founder, SkynetLabs</td></tr>
+      <tr><td>Case Studies</td><td><code>content/case-studies.html</code></td><td><code>/case-studies/</code></td><td>Case Studies &middot; SkynetLabs</td></tr>
+      <tr><td>Glossary</td><td><code>content/glossary.html</code></td><td><code>/glossary/</code></td><td>AEO &amp; Automation Glossary</td></tr>
+      <tr><td>FAQs</td><td><code>content/faqs.html</code></td><td><code>/faqs/</code></td><td>Frequently Asked Questions</td></tr>
+      <tr><td>AEO Guide</td><td><code>content/aeo-guide.html</code></td><td><code>/aeo-guide/</code></td><td>The AEO Guide for Founders</td></tr>
+      <tr><td>n8n vs Zapier</td><td><code>content/n8n-vs-zapier.html</code></td><td><code>/n8n-vs-zapier/</code></td><td>n8n vs Zapier &middot; Side-by-side comparison</td></tr>
+      <tr><td colspan="4" style="color:var(--purple-2); font-weight:600; padding-top:18px;">Services — Automation</td></tr>
+      <tr><td>n8n Automation</td><td><code>content/services/n8n-automation.html</code></td><td><code>/services/n8n-automation/</code></td><td>n8n Automation &middot; SkynetLabs</td></tr>
+      <tr><td>GoHighLevel CRM</td><td><code>content/services/gohighlevel.html</code></td><td><code>/services/gohighlevel/</code></td><td>GoHighLevel CRM &middot; SkynetLabs</td></tr>
+      <tr><td>Zapier &amp; Make</td><td><code>content/services/zapier-make.html</code></td><td><code>/services/zapier-make/</code></td><td>Zapier &amp; Make &middot; SkynetLabs</td></tr>
+      <tr><td>Social Automation</td><td><code>content/services/social-automation.html</code></td><td><code>/services/social-automation/</code></td><td>Social Automation &middot; SkynetLabs</td></tr>
+      <tr><td colspan="4" style="color:var(--purple-2); font-weight:600; padding-top:18px;">Services — AI Content</td></tr>
+      <tr><td>AI Video Creation</td><td><code>content/services/ai-video.html</code></td><td><code>/services/ai-video/</code></td><td>AI Video Creation &middot; SkynetLabs</td></tr>
+      <tr><td>YouTube Automation</td><td><code>content/services/youtube-automation.html</code></td><td><code>/services/youtube-automation/</code></td><td>YouTube Automation &middot; SkynetLabs</td></tr>
+      <tr><td>TikTok Automation</td><td><code>content/services/tiktok-automation.html</code></td><td><code>/services/tiktok-automation/</code></td><td>TikTok Automation &middot; SkynetLabs</td></tr>
+      <tr><td>Facebook Automation</td><td><code>content/services/facebook-automation.html</code></td><td><code>/services/facebook-automation/</code></td><td>Facebook Automation &middot; SkynetLabs</td></tr>
+      <tr><td colspan="4" style="color:var(--purple-2); font-weight:600; padding-top:18px;">Services — Development</td></tr>
+      <tr><td>WordPress SEO Blog</td><td><code>content/services/wordpress-seo.html</code></td><td><code>/services/wordpress-seo/</code></td><td>WordPress SEO Blog &middot; SkynetLabs</td></tr>
+      <tr><td>E-commerce Automation</td><td><code>content/services/ecommerce-automation.html</code></td><td><code>/services/ecommerce-automation/</code></td><td>E-commerce Automation &middot; SkynetLabs</td></tr>
+      <tr><td>Vibe-Coded Websites</td><td><code>content/services/vibe-coded-sites.html</code></td><td><code>/services/vibe-coded-sites/</code></td><td>Vibe-Coded Websites &middot; SkynetLabs</td></tr>
+      <tr><td>AI Chatbots</td><td><code>content/services/ai-chatbots.html</code></td><td><code>/services/ai-chatbots/</code></td><td>AI Chatbots &middot; SkynetLabs</td></tr>
+      <tr><td colspan="4" style="color:var(--purple-2); font-weight:600; padding-top:18px;">Services — Consulting</td></tr>
+      <tr><td>AI Business Systems</td><td><code>content/services/ai-business-systems.html</code></td><td><code>/services/ai-business-systems/</code></td><td>AI Business Systems &middot; SkynetLabs</td></tr>
+      <tr><td>Strategy &amp; Training</td><td><code>content/services/strategy-training.html</code></td><td><code>/services/strategy-training/</code></td><td>Strategy &amp; Training &middot; SkynetLabs</td></tr>
+      <tr><td>Branding &amp; Design</td><td><code>content/services/branding-design.html</code></td><td><code>/services/branding-design/</code></td><td>Branding &amp; Design &middot; SkynetLabs</td></tr>
+      <tr><td>AI Content Creation</td><td><code>content/services/ai-content-creation.html</code></td><td><code>/services/ai-content-creation/</code></td><td>AI Content Creation &middot; SkynetLabs</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Per-template paste kits</h3>
+  <p class="meta">Each <code>&lt;details&gt;</code> below is a one-click paste recipe for that page. Click to expand the page-template wrapper pre-filled with the right slug.</p>
+
+  <details>
+    <summary>Contact &nbsp;·&nbsp; <code>/contact/</code></summary>
+    <div class="body">
+<pre><code>&lt;?php
+/* Template Name: SkynetLabs Contact */
+get_header(); ?&gt;
+&lt;main class="skynetlabs-page"&gt;
+  &lt;!-- PASTE content/contact.html HERE --&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+    Source: <code>/wp-templates/contact.html</code> · Live preview: <a href="https://app-mauve-eta-66.vercel.app/contact" target="_blank" rel="noopener">/contact</a>
+    </div>
+  </details>
+
+  <details>
+    <summary>Author — Waseem Nasir &nbsp;·&nbsp; <code>/author/waseem-nasir/</code></summary>
+    <div class="body">
+<pre><code>&lt;?php
+/* Template Name: SkynetLabs Author Waseem */
+get_header(); ?&gt;
+&lt;main class="skynetlabs-page"&gt;
+  &lt;!-- PASTE content/author-waseem-nasir.html HERE --&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+    Source: <code>/wp-templates/author-waseem-nasir.html</code> · Live preview: <a href="https://app-mauve-eta-66.vercel.app/author/waseem-nasir" target="_blank" rel="noopener">/author/waseem-nasir</a>
+    </div>
+  </details>
+
+  <details>
+    <summary>Case Studies &nbsp;·&nbsp; <code>/case-studies/</code></summary>
+    <div class="body">
+<pre><code>&lt;?php
+/* Template Name: SkynetLabs Case Studies */
+get_header(); ?&gt;
+&lt;main class="skynetlabs-page"&gt;
+  &lt;!-- PASTE content/case-studies.html HERE --&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+    Source: <code>/wp-templates/case-studies.html</code>
+    </div>
+  </details>
+
+  <details>
+    <summary>Glossary &nbsp;·&nbsp; <code>/glossary/</code></summary>
+    <div class="body">
+<pre><code>&lt;?php
+/* Template Name: SkynetLabs Glossary */
+get_header(); ?&gt;
+&lt;main class="skynetlabs-page"&gt;
+  &lt;!-- PASTE content/glossary.html HERE --&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+    Source: <code>/wp-templates/glossary.html</code>
+    </div>
+  </details>
+
+  <details>
+    <summary>FAQs &nbsp;·&nbsp; <code>/faqs/</code></summary>
+    <div class="body">
+<pre><code>&lt;?php
+/* Template Name: SkynetLabs FAQs */
+get_header(); ?&gt;
+&lt;main class="skynetlabs-page"&gt;
+  &lt;!-- PASTE content/faqs.html HERE --&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+    Source: <code>/wp-templates/faqs.html</code>
+    </div>
+  </details>
+
+  <details>
+    <summary>AEO Guide &nbsp;·&nbsp; <code>/aeo-guide/</code></summary>
+    <div class="body">
+<pre><code>&lt;?php
+/* Template Name: SkynetLabs AEO Guide */
+get_header(); ?&gt;
+&lt;main class="skynetlabs-page"&gt;
+  &lt;!-- PASTE content/aeo-guide.html HERE --&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+    Source: <code>/wp-templates/aeo-guide.html</code>
+    </div>
+  </details>
+
+  <details>
+    <summary>n8n vs Zapier &nbsp;·&nbsp; <code>/n8n-vs-zapier/</code></summary>
+    <div class="body">
+<pre><code>&lt;?php
+/* Template Name: SkynetLabs n8n vs Zapier */
+get_header(); ?&gt;
+&lt;main class="skynetlabs-page"&gt;
+  &lt;!-- PASTE content/n8n-vs-zapier.html HERE --&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+    Source: <code>/wp-templates/n8n-vs-zapier.html</code>
+    </div>
+  </details>
+
+  <details>
+    <summary>Any service page &nbsp;·&nbsp; <code>/services/&lt;slug&gt;/</code></summary>
+    <div class="body">
+<pre><code>&lt;?php
+/* Template Name: SkynetLabs Service */
+get_header(); ?&gt;
+&lt;main class="skynetlabs-page"&gt;
+  &lt;!-- PASTE content/services/&lt;slug&gt;.html HERE (one of: n8n-automation, gohighlevel, zapier-make,
+       social-automation, ai-video, youtube-automation, tiktok-automation, facebook-automation,
+       wordpress-seo, ecommerce-automation, vibe-coded-sites, ai-chatbots, ai-business-systems,
+       strategy-training, branding-design, ai-content-creation) --&gt;
+&lt;/main&gt;
+&lt;?php get_footer(); ?&gt;</code></pre>
+    Source: <code>/wp-templates/services/&lt;slug&gt;.html</code> · 16 slugs total. One template file works for all if you use the shortcode method.
+    </div>
+  </details>
+
+  <hr />
+
+  <h2>3. Style isolation — why CSS won't bleed</h2>
+  <div class="panel">
+    <p>Every template wraps its content in a unique <code>.wn-&lt;slug&gt;</code> class (e.g. <code>.wn-contact</code>, <code>.wn-aeo-guide</code>).
+       All selectors in the embedded <code>&lt;style&gt;</code> block are scoped to that prefix:</p>
+<pre><code>.wn-contact h1 { ... }
+.wn-contact .hero { ... }
+.wn-contact .btn-primary { ... }</code></pre>
+    <p>This means the active WordPress theme's <code>h1</code>, <code>.btn</code>, or container styles cannot
+       cascade into the pasted markup, and vice-versa. <strong>Do not rename the wrapper class</strong> when pasting —
+       if you do, every rule in the &lt;style&gt; block stops matching.</p>
+  </div>
+
+  <h2>4. Images — two options</h2>
+  <div class="panel">
+    <p>Templates reference images either as <code>/img/...</code> (Next.js public assets) or as full Unsplash/CDN URLs.
+       Pick one of these on paste:</p>
+    <ol>
+      <li><strong>Option A — Upload to WP Media (recommended for long-term).</strong> Upload each <code>/img/foo.jpg</code> to <em>Media Library</em>, then find/replace <code>src="/img/foo.jpg"</code> → <code>src="https://skynetjoe.com/wp-content/uploads/2026/05/foo.jpg"</code> in the pasted HTML.</li>
+      <li><strong>Option B — Hotlink the Vercel deploy (zero work).</strong> Find/replace <code>src="/</code> → <code>src="https://app-mauve-eta-66.vercel.app/</code> in the pasted HTML. Images keep loading from the React build. Trade-off: if you ever sunset the Vercel project, the images break — keep the project live or migrate before deleting.</li>
+    </ol>
+  </div>
+
+  <h2>5. JSON-LD schema — already inline</h2>
+  <div class="panel">
+    <p>Every template ships its own <code>&lt;script type="application/ld+json"&gt;...&lt;/script&gt;</code> block
+       (Article, FAQPage, BreadcrumbList, Organization, Person, etc.). The WordPress <strong>Custom HTML</strong> block
+       and <strong>Text mode</strong> editor both preserve <code>&lt;script&gt;</code> tags as-is — <em>no schema plugin needed</em>.</p>
+    <div class="panel warn" style="margin-top:14px;">
+      <strong>Plugin conflict warning:</strong> if Yoast / Rank Math / All-in-One SEO is installed and outputting
+      Article/WebPage schema for the same URL, you'll have <em>duplicate</em> schema blocks. Either (a) disable
+      schema output for these specific page slugs in your SEO plugin, or (b) strip the inline JSON-LD before pasting.
+      Don't ship both — Google's Rich Results test will flag the conflict.
+    </div>
+  </div>
+
+  <h2>6. Pre-flight checklist</h2>
+  <div class="panel">
+    <ol>
+      <li>Page template picked (Method A, B, or C).</li>
+      <li>Page slug matches the suggested WP URL exactly (so internal links from other templates resolve).</li>
+      <li>Image strategy chosen (uploaded to Media or hotlinked to Vercel).</li>
+      <li>SEO plugin schema disabled on the URL if pasting inline JSON-LD.</li>
+      <li>Page template set to <em>Full Width</em> / <em>No Sidebar</em> (the templates supply their own container).</li>
+      <li>Tested on mobile — wrap classes don't break the WP theme's responsive grid.</li>
+      <li>Rich Results test pass: <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">search.google.com/test/rich-results</a>.</li>
+    </ol>
+  </div>
+
+  <p class="footer-note">
+    Generated by <code>scripts/sync-wp-templates.mjs</code> · part of the SkynetLabs portability project ·
+    repo <a href="https://github.com/waseemnasir2k26/skynetjoe-react" target="_blank" rel="noopener">github.com/waseemnasir2k26/skynetjoe-react</a> ·
+    questions → <a href="mailto:waseembali2k26@gmail.com">waseembali2k26@gmail.com</a>.
+  </p>
+
+</main>
+</body>
+</html>

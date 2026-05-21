@@ -1,0 +1,255 @@
+<article class="wn-pricing">
+<style>
+.wn-pricing{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-purple);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-pricing *{box-sizing:border-box}
+.wn-pricing .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-pricing .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-pricing .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-pricing .wn-hero>*{position:relative;z-index:1}
+.wn-pricing .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-pricing h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em;color:var(--wn-fg)}
+.wn-pricing h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-pricing .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-pricing h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-pricing h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-pricing p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-pricing strong{color:var(--wn-fg);font-weight:600}
+.wn-pricing .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-pricing .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-pricing .wn-tiers{display:grid;gap:1rem;grid-template-columns:1fr;align-items:stretch}
+@media(min-width:1024px){.wn-pricing .wn-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-pricing .wn-tier{position:relative;padding:1.75rem 1.5rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:16px;display:flex;flex-direction:column}
+.wn-pricing .wn-tier-featured{background:linear-gradient(180deg,color-mix(in srgb,var(--wn-accent-a) 10%,var(--wn-surface)),var(--wn-surface));border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,var(--wn-border));box-shadow:0 8px 40px color-mix(in srgb,var(--wn-accent-a) 18%,transparent)}
+@media(min-width:1024px){.wn-pricing .wn-tier-featured{transform:scale(1.04)}}
+.wn-pricing .wn-tier-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:.3rem .75rem;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px}
+.wn-pricing .wn-tier-name{font-size:1.15rem;font-weight:700;color:var(--wn-fg);margin:0 0 .35rem}
+.wn-pricing .wn-tier-fit{font-size:.9rem;color:var(--wn-fg-muted);margin:0 0 1.1rem}
+.wn-pricing .wn-tier-price{display:flex;align-items:baseline;gap:.4rem;margin-bottom:1.25rem}
+.wn-pricing .wn-tier-amt{font-size:2.1rem;font-weight:800;color:var(--wn-fg);letter-spacing:-.02em}
+.wn-pricing .wn-tier-cad{font-size:.85rem;color:var(--wn-fg-faint)}
+.wn-pricing .wn-tier-list{list-style:none;padding:0;margin:0 0 1rem;display:flex;flex-direction:column;gap:.55rem}
+.wn-pricing .wn-tier-list li{font-size:.92rem;color:var(--wn-fg-muted);padding-left:1.5rem;position:relative}
+.wn-pricing .wn-tier-list li::before{content:"";position:absolute;left:0;top:.4rem;width:14px;height:14px;border-radius:50%;background:color-mix(in srgb,var(--wn-accent-a) 18%,transparent);border:1px solid color-mix(in srgb,var(--wn-accent-a) 50%,transparent)}
+.wn-pricing .wn-tier-list li::after{content:"";position:absolute;left:3px;top:.65rem;width:8px;height:4px;border-left:2px solid var(--wn-accent-a);border-bottom:2px solid var(--wn-accent-a);transform:rotate(-45deg)}
+.wn-pricing .wn-tier-not{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-fg-faint);margin:.75rem 0 .35rem}
+.wn-pricing .wn-tier-not-list{list-style:none;padding:0;margin:0 0 1.1rem;display:flex;flex-direction:column;gap:.4rem}
+.wn-pricing .wn-tier-not-list li{font-size:.88rem;color:var(--wn-fg-faint);padding-left:1.25rem;position:relative}
+.wn-pricing .wn-tier-not-list li::before{content:"×";position:absolute;left:.25rem;top:-.1rem;color:var(--wn-coral);font-weight:700}
+.wn-pricing .wn-tier-ship{font-size:.82rem;color:var(--wn-accent-b);margin:.25rem 0 1.1rem;padding:.4rem .65rem;background:color-mix(in srgb,var(--wn-accent-b) 10%,transparent);border-radius:8px;display:inline-block}
+.wn-pricing .wn-tier-cta{margin-top:auto}
+.wn-pricing .wn-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.25rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease;width:100%}
+.wn-pricing .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-pricing .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-pricing .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-pricing .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-pricing .wn-micro-grid{display:grid;gap:.85rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-pricing .wn-micro-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-pricing .wn-micro-grid{grid-template-columns:repeat(3,1fr)}}
+.wn-pricing .wn-micro{padding:1.1rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:.85rem}
+.wn-pricing .wn-micro-name{font-size:.95rem;font-weight:600;color:var(--wn-fg)}
+.wn-pricing .wn-micro-price{font-size:.95rem;font-weight:700;color:var(--wn-accent-a);white-space:nowrap}
+.wn-pricing details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-pricing details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-pricing details summary::-webkit-details-marker{display:none}
+.wn-pricing details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-pricing details[open] summary::after{content:"–"}
+.wn-pricing details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-pricing .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-pricing .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-pricing .wn-cta-row .wn-btn{width:auto}
+.wn-pricing .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem auto;border-radius:0 8px 8px 0;max-width:62rem}
+html.light .wn-pricing{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">Pricing · SkynetLabs</span>
+    <h1>Pricing for people who hate <span class="wn-grad">"request a quote".</span></h1>
+    <p class="wn-lede">Public. Honest. No "enterprise tier hidden behind a sales call". You see the price before we see your calendar.</p>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Three ways to start</p>
+    <h2>Pick the smallest one that does the job</h2>
+    <div class="wn-tiers">
+
+      <div class="wn-tier">
+        <h3 class="wn-tier-name">Starter Build</h3>
+        <p class="wn-tier-fit">For one specific automation or one specific page.</p>
+        <div class="wn-tier-price"><span class="wn-tier-amt">$1,497</span><span class="wn-tier-cad">one-time</span></div>
+        <ul class="wn-tier-list">
+          <li>One n8n / Zapier / GHL workflow OR one landing page</li>
+          <li>Up to three integrations wired and tested</li>
+          <li>Loom walkthrough + one-page SOP doc</li>
+          <li>JSON export committed to your private Git</li>
+          <li>14 days of post-ship fixes included</li>
+        </ul>
+        <p class="wn-tier-not">Not included</p>
+        <ul class="wn-tier-not-list">
+          <li>Multi-channel content engines</li>
+          <li>Ongoing monthly maintenance</li>
+        </ul>
+        <span class="wn-tier-ship">Ship: 5–7 days</span>
+        <div class="wn-tier-cta"><a href="/contact?tier=starter" class="wn-btn wn-btn-ghost">Start a brief →</a></div>
+      </div>
+
+      <div class="wn-tier wn-tier-featured">
+        <span class="wn-tier-badge">Most chosen</span>
+        <h3 class="wn-tier-name">Flagship Build</h3>
+        <p class="wn-tier-fit">A full system: site + automation + chatbot + content engine.</p>
+        <div class="wn-tier-price"><span class="wn-tier-amt">$9,500</span><span class="wn-tier-cad">one-time</span></div>
+        <ul class="wn-tier-list">
+          <li>Custom Next.js site on Vercel — AEO-tuned from the URL up</li>
+          <li>Five-workflow automation stack (n8n + GHL + Meta + email)</li>
+          <li>Voice-locked AI chatbot wired to the CRM</li>
+          <li>Content engine: weekly post pack, on-brand, hands-off</li>
+          <li>30 days of post-ship fixes + Loom training pack</li>
+        </ul>
+        <p class="wn-tier-not">Not included</p>
+        <ul class="wn-tier-not-list">
+          <li>Paid ad management</li>
+          <li>Custom mobile app development</li>
+        </ul>
+        <span class="wn-tier-ship">Ship: 10–14 days</span>
+        <div class="wn-tier-cta"><a href="/contact?tier=flagship" class="wn-btn wn-btn-primary">Start a brief →</a></div>
+      </div>
+
+      <div class="wn-tier">
+        <h3 class="wn-tier-name">Retainer</h3>
+        <p class="wn-tier-fit">Ongoing build + maintain + adapt — for teams already shipping.</p>
+        <div class="wn-tier-price"><span class="wn-tier-amt">$1,997</span><span class="wn-tier-cad">/ month, from</span></div>
+        <ul class="wn-tier-list">
+          <li>20 hrs / month of build + iterate time</li>
+          <li>Unlimited async messages, 8h reply window</li>
+          <li>Monthly 60-min strategy call + adoption review</li>
+          <li>Workflow audit + uptime monitoring included</li>
+          <li>Pause anytime · 3-month minimum engagement</li>
+        </ul>
+        <p class="wn-tier-not">Not included</p>
+        <ul class="wn-tier-not-list">
+          <li>Net-new flagship rebuilds (priced separately)</li>
+          <li>Founder-on-call weekends</li>
+        </ul>
+        <span class="wn-tier-ship">Onboard: 3 days</span>
+        <div class="wn-tier-cta"><a href="/contact?tier=retainer" class="wn-btn wn-btn-ghost">Start a brief →</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln">Most agencies hide the price because the price doesn't match the work. We've been on the other side of three of those proposals. Every one of them ended in a renegotiation. We'd rather quote you out of a deal than nickel you through one.</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Smaller engagements</p>
+    <h2>Need just one thing? Pick a micro</h2>
+    <p style="max-width:62ch">Six fixed-scope wedges. Each one is a single deliverable, one to two weeks, no retainer commitment. Use them to test the working relationship before you scale.</p>
+    <div class="wn-micro-grid">
+      <div class="wn-micro"><span class="wn-micro-name">Audit (site + stack + AEO)</span><span class="wn-micro-price">$497</span></div>
+      <div class="wn-micro"><span class="wn-micro-name">Voice profile (locked tone)</span><span class="wn-micro-price">$997</span></div>
+      <div class="wn-micro"><span class="wn-micro-name">n8n smoke-test build</span><span class="wn-micro-price">$750</span></div>
+      <div class="wn-micro"><span class="wn-micro-name">AEO content sprint (10 posts)</span><span class="wn-micro-price">$1,200</span></div>
+      <div class="wn-micro"><span class="wn-micro-name">GoHighLevel setup</span><span class="wn-micro-price">$1,500</span></div>
+      <div class="wn-micro"><span class="wn-micro-name">Content engine v1</span><span class="wn-micro-price">$2,500</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">FAQ</p>
+    <h2>Pricing questions we get often</h2>
+
+    <details>
+      <summary>Why isn't there an enterprise tier?</summary>
+      <div class="wn-faq-body">Because every "enterprise tier" we've ever been quoted was a generic Flagship with a different number on it. If your scope genuinely needs more than the Flagship can hold, we'll quote the delta on top — line by line, in writing, before the kickoff. No mystery tier.</div>
+    </details>
+
+    <details>
+      <summary>Can I split the Flagship into two payments?</summary>
+      <div class="wn-faq-body">Yes. The default is 50% at kickoff and 50% at ship. For larger Flagship scopes (multi-site or multi-brand), we can offer three payments tied to milestones. We don't run subscriptions on a one-time fee.</div>
+    </details>
+
+    <details>
+      <summary>What happens if you go over the ship window?</summary>
+      <div class="wn-faq-body">If the delay is on us, the retainer month is free or we credit the equivalent hours on a one-time build. If the delay is on your side (asset hand-off, account access, brand approval), we'll pause the clock with a written log — no surprise extension fees. The ship window in your contract is the one we hit.</div>
+    </details>
+
+    <details>
+      <summary>Do you offer revenue-share or equity in place of cash?</summary>
+      <div class="wn-faq-body">No. We've taken three rev-share deals and zero of them ended cleanly. Our pricing is structured to be cash-affordable at the size of business that benefits — under that line, the work doesn't pay back fast enough either way.</div>
+    </details>
+
+    <details>
+      <summary>Can I see the contract before I send a brief?</summary>
+      <div class="wn-faq-body">Yes. Drop a one-line request via /contact and we'll send the standard MSA + SOW template before you commit. It's two pages. Everyone reads it.</div>
+    </details>
+
+    <details>
+      <summary>What payment methods do you accept?</summary>
+      <div class="wn-faq-body">Wise, Payoneer, PayPal, Stripe invoice, direct USD wire, or bank transfer in IDR / GBP / EUR / SAR / AED. Crypto on request. We invoice from a registered entity — no PayPal "friends and family" hacks.</div>
+    </details>
+  </div>
+</section>
+
+<section class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>180 workflows · 40 websites · 9 countries · 5–14d ship</h2>
+    <p style="max-width:54ch;margin:0 auto;color:var(--wn-fg-muted)">No quote form. No 30-minute discovery dance. Send a 3-sentence brief and we'll come back with scope + price within 8 hours.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start a brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  "@id": "https://skynetjoe.com/pricing#catalog",
+  "name": "SkynetLabs Pricing",
+  "url": "https://skynetjoe.com/pricing",
+  "provider": {
+    "@type": "Organization",
+    "name": "SkynetLabs",
+    "url": "https://skynetjoe.com"
+  },
+  "itemListElement": [
+    {
+      "@type": "Offer",
+      "name": "Starter Build",
+      "description": "One workflow or one landing page, shipped end-to-end with Loom walkthrough and 14-day fixes.",
+      "price": "1497",
+      "priceCurrency": "USD",
+      "category": "One-time build",
+      "availability": "https://schema.org/InStock",
+      "url": "https://skynetjoe.com/contact?tier=starter"
+    },
+    {
+      "@type": "Offer",
+      "name": "Flagship Build",
+      "description": "Full system: Next.js site, 5-workflow automation stack, AI chatbot, voice-locked content engine.",
+      "price": "9500",
+      "priceCurrency": "USD",
+      "category": "One-time build",
+      "availability": "https://schema.org/InStock",
+      "url": "https://skynetjoe.com/contact?tier=flagship"
+    },
+    {
+      "@type": "Offer",
+      "name": "Retainer",
+      "description": "Ongoing build + maintain + adapt. 20 hrs/month, async + monthly strategy call, 3-month minimum.",
+      "price": "1997",
+      "priceCurrency": "USD",
+      "category": "Monthly retainer",
+      "availability": "https://schema.org/InStock",
+      "url": "https://skynetjoe.com/contact?tier=retainer"
+    }
+  ]
+}
+</script>
+</article>

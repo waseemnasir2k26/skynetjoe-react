@@ -1,0 +1,187 @@
+<article class="wn-service wn-service-strategy-training">
+<style>
+.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service *{box-sizing:border-box}
+.wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-service .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-service .wn-hero>*{position:relative;z-index:1}
+.wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-service p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-service strong{color:var(--wn-fg);font-weight:600}
+.wn-service .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-service .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-service .wn-grid{display:grid;gap:1rem}
+.wn-service .wn-grid-2{grid-template-columns:1fr}
+.wn-service .wn-grid-3{grid-template-columns:1fr}
+.wn-service .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-service .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-service .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-service .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-service .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
+.wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
+.wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
+.wn-service .wn-proof{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-proof{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-proof-item{padding:1.25rem;border-left:3px solid var(--wn-accent-a);background:var(--wn-surface)}
+.wn-service .wn-proof-item .wn-metric{font-size:1.4rem;font-weight:800;color:var(--wn-accent-a);display:block;margin-bottom:.25rem}
+.wn-service .wn-price-tiers{display:grid;gap:.85rem}
+@media(min-width:768px){.wn-service .wn-price-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-price{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px}
+.wn-service .wn-price .wn-tier{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-fg-faint);margin-bottom:.4rem}
+.wn-service .wn-price .wn-amt{font-size:1.5rem;font-weight:800;color:var(--wn-fg);margin-bottom:.3rem}
+.wn-service .wn-price .wn-cadence{font-size:.85rem;color:var(--wn-fg-muted)}
+.wn-service details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-service details summary::-webkit-details-marker{display:none}
+.wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-service details[open] summary::after{content:"–"}
+.wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+.wn-service-strategy-training{--wn-accent-a:#1E88E5;--wn-accent-b:#FF6B6B}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">Consulting · Team Training</span>
+    <h1>Your team watched 12 hours of AI courses. <span class="wn-grad">Nobody has shipped a single workflow.</span></h1>
+    <p class="wn-lede">Generic AI training puts your team to sleep because it teaches the tool, not the job. Your ops manager doesn't need to learn ChatGPT — she needs to learn how to draft 30 sales emails per morning. We build role-specific AI playbooks, deliver hands-on workshops, and stay on for 30 days of accountability so the team actually adopts what we taught.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">What we deliver</p>
+    <h2>Training that survives Monday morning</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <h3>Role-specific playbooks</h3>
+        <p>One playbook per role (sales, ops, marketing, founder). Real prompts, real workflows, real screenshots from your tools. Not "10 ChatGPT prompts for productivity".</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="4"/></svg>
+        <h3>Hands-on workshops</h3>
+        <p>2-hour sessions in groups of 6 max. Bring your real inbox, your real spreadsheet, your real CRM. We work alongside until everyone has shipped one workflow they'll use tomorrow.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <h3>30-day adoption checks</h3>
+        <p>Weekly check-ins for 30 days post-training. Anyone stuck gets a 20-minute pair session. Adoption is measured per role, not per "course completion".</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <h3>Prompt library + voice profile</h3>
+        <p>Curated prompt library in your Notion. Voice profiles for company comms (sales tone, support tone, marketing tone). Every team member can pull and remix.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1v6m0 6v6"/><path d="m3 12 6 0m6 0 6 0"/></svg>
+        <h3>AI policy and data handling</h3>
+        <p>Written policy on what data can and can't go into ChatGPT or Claude. Data residency, redaction rules, free vs paid tier guidance, GDPR / HIPAA notes where they apply.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        <h3>Adoption metrics dashboard</h3>
+        <p>Per-role: workflows shipped, hours saved per week, tasks using AI assist. Honest, observable. Not vanity dashboards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln wn-wrap" style="max-width:62rem">Most AI training fails the same way: a generic vendor flies in, runs a four-hour deck, leaves. Three weeks later the team is back to copy-pasting from ChatGPT and nothing structural changed. The fix isn't more content — it's smaller groups, real work in the session, and someone holding the line for 30 days.</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Process</p>
+    <h2>Audit, train, hold</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Interview team leads, shadow 3 roles for half a day each, identify the 5 tasks per role where AI fits and the 5 where it doesn't.</p><span class="wn-step-day">Week 1</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Build the playbooks, draft the prompt library, set up the Notion workspace, write the AI policy doc.</p><span class="wn-step-day">Week 2</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Run the workshops live (in-person or Zoom). 2-hour blocks per role, 6 people max. Every workshop ends with a workflow shipped.</p><span class="wn-step-day">Week 3</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>30-day check-ins, weekly office hours, adoption metrics, monthly playbook refresh.</p><span class="wn-step-day">Week 4–8</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Tools we teach on</p>
+    <h2>What the team will use after we leave</h2>
+    <div class="wn-stack">
+      <span>ChatGPT (Plus + Team)</span><span>Claude</span><span>Notion AI</span><span>Perplexity</span><span>Gemini for Workspace</span><span>GitHub Copilot (for dev teams)</span><span>Custom GPTs / Claude Projects</span><span>n8n for the few tasks worth automating</span>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Proof</p>
+    <h2>Trained teams</h2>
+    <div class="wn-proof">
+      <div class="wn-proof-item"><span class="wn-metric">12 → 38</span>Workflows shipped per quarter for a mid-market services team after role-specific training.</div>
+      <div class="wn-proof-item"><span class="wn-metric">5.5 hrs/wk saved</span>Average per ops team member, self-reported after 30 days, on a wellness brand engagement.</div>
+      <div class="wn-proof-item"><span class="wn-metric">9 / 10 retain</span>Adoption holds past day 30 in 9 of last 10 engagements (vs ~3 of 10 for generic vendor training).</div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Investment</p>
+    <h2>Train the team, not the LMS</h2>
+    <div class="wn-price-tiers">
+      <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$1,000</div><div class="wn-cadence">Single role, 2-hour workshop, role-specific playbook, 7-day adoption check.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical engagement</div><div class="wn-amt">$2,500–$5,000</div><div class="wn-cadence">3–4 roles, full playbook set, prompt library, AI policy doc, 30-day adoption program.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $997/mo</div><div class="wn-cadence">Monthly refresh workshop, new playbook per quarter, office hours, adoption metrics review.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Questions</p>
+    <h2>Common questions</h2>
+    <details><summary>Can we train just the leadership team first?</summary><div class="wn-faq-body">Yes — this is often the right move. We run a "founder + 3 leaders" mini-engagement so the top of the company learns to ship AI workflows themselves before they ask the team to. The leadership cohort tends to adopt fastest because they have direct skin in the savings.</div></details>
+    <details><summary>What if our team is already using AI tools "informally"?</summary><div class="wn-faq-body">Common starting point. Step one is usually surfacing the shadow AI usage — who's already pasting customer data into the free ChatGPT, what tools have unaudited approval. Then we formalise: paid tiers with data-retention controls, a written policy, sanctioned workflows. Most teams sleep better after this step.</div></details>
+    <details><summary>Do you do industry-specific training (legal, medical, finance)?</summary><div class="wn-faq-body">Yes, with a different rigor bar. Medical = HIPAA-mode training, no PHI in any free tier, only AWS Bedrock or Azure OpenAI with BAAs. Legal = work-product privilege concerns. Finance = SOX considerations. The playbooks change but the workshop format holds.</div></details>
+    <details><summary>How do you handle remote vs in-person?</summary><div class="wn-faq-body">Both work. In-person sessions adopt about 20% faster because of the social pressure of pair-work in a room. Remote requires tighter facilitation — smaller groups (4 max), more breakout time, mandatory cameras-on. We've delivered both formats successfully.</div></details>
+    <details><summary>What if someone refuses to engage with AI?</summary><div class="wn-faq-body">It happens. We don't force adoption. We make the case once with the data (hours saved, work quality), then let leadership decide whether that role needs to evolve. The 30-day metrics make the conversation factual rather than ideological.</div></details>
+  </div>
+</section>
+
+<div class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>Stop paying for AI tools your team doesn't use.</h2>
+    <p class="wn-lede" style="margin:0 auto">30-minute discovery, then a 4-week training engagement that ends with measurable adoption.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Strategy & Training","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Role-specific AI playbooks, hands-on workshops, 30-day adoption program, prompt library, and written AI policy.","serviceType":"AI training and enablement"},{"@type":"Offer","name":"Strategy & Training engagement","priceCurrency":"USD","price":"1000","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"1000","maxPrice":"5000"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}}]}
+</script>
+</article>

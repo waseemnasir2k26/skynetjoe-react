@@ -1,0 +1,187 @@
+<article class="wn-service wn-service-zapier-make">
+<style>
+.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service *{box-sizing:border-box}
+.wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-service .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-service .wn-hero>*{position:relative;z-index:1}
+.wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-service p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-service strong{color:var(--wn-fg);font-weight:600}
+.wn-service .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-service .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-service .wn-grid{display:grid;gap:1rem}
+.wn-service .wn-grid-2{grid-template-columns:1fr}
+.wn-service .wn-grid-3{grid-template-columns:1fr}
+.wn-service .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-service .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-service .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-service .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-service .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
+.wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
+.wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
+.wn-service .wn-proof{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-proof{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-proof-item{padding:1.25rem;border-left:3px solid var(--wn-accent-a);background:var(--wn-surface)}
+.wn-service .wn-proof-item .wn-metric{font-size:1.4rem;font-weight:800;color:var(--wn-accent-a);display:block;margin-bottom:.25rem}
+.wn-service .wn-price-tiers{display:grid;gap:.85rem}
+@media(min-width:768px){.wn-service .wn-price-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-price{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px}
+.wn-service .wn-price .wn-tier{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-fg-faint);margin-bottom:.4rem}
+.wn-service .wn-price .wn-amt{font-size:1.5rem;font-weight:800;color:var(--wn-fg);margin-bottom:.3rem}
+.wn-service .wn-price .wn-cadence{font-size:.85rem;color:var(--wn-fg-muted)}
+.wn-service details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-service details summary::-webkit-details-marker{display:none}
+.wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-service details[open] summary::after{content:"–"}
+.wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+.wn-service-zapier-make{--wn-accent-a:#FF6B6B;--wn-accent-b:#14B8A6}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">Connectivity · Zapier &amp; Make</span>
+    <h1>You have 47 Zaps. <span class="wn-grad">Six of them are doing all the work.</span></h1>
+    <p class="wn-lede">Your Zapier bill is $99 a month and climbing. Half the Zaps run on duplicate triggers, three are paused since last September, and the one that matters — the form-to-Stripe-to-Mailchimp chain — silently swallowed a refund yesterday. We audit, prune, and rebuild the connectivity layer so you stop paying per-task for noise.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">What we build</p>
+    <h2>Connectivity you can read on one page</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m10 13-1 1-3-3 1-1m4 4 6 6m-7-7 1-1 3 3-1 1"/></svg>
+        <h3>Zap audit and prune</h3>
+        <p>We log every active Zap, its task volume, error rate, and what it actually feeds. You get a one-page kill list and a written reason for each cut.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h3>Scheduler scenarios in Make</h3>
+        <p>Bulk operations Zapier hates — Make handles cleanly. Daily Shopify exports, recurring HubSpot dedupe, monthly Stripe-to-Sheets reports.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4"/><path d="m16.24 7.76 2.83-2.83"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
+        <h3>AI steps that pay for themselves</h3>
+        <p>OpenAI or Claude inside a Zap or scenario: classify support tickets, summarise long form submissions, translate inbound DMs before they hit your team.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6"/><path d="M12 9v6"/><circle cx="12" cy="12" r="10"/></svg>
+        <h3>Error-aware paths</h3>
+        <p>Retry policies, fallback routes, dead-letter Slack alerts. When a Zap dies at 2am, your phone knows before your customer does.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+        <h3>Webhook gateways</h3>
+        <p>One named webhook per source. Versioned payload schema, request logging, replay endpoint. Migrate triggers between Zapier and Make without breaking downstream.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <h3>Documentation that humans read</h3>
+        <p>One page per scenario: trigger, steps, owner, what breaks if it fails. Not a Notion dump — a runbook your VA can act on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln wn-wrap" style="max-width:62rem">Zapier is great until you have 30 Zaps and nobody owns them. Make is great until you wire a scenario nobody else on the team can debug. The hard part isn't building — it's deciding which tool owns which job, then writing it down so the next person doesn't have to guess.</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Process</p>
+    <h2>Audit, decide, rebuild</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Read-only access to your Zapier and Make accounts. We pull task history, errors, and step counts into a single audit sheet.</p><span class="wn-step-day">Day 1–2</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Kill list, keep list, rebuild list. We assign each scenario to the tool it should live in and propose a webhook gateway pattern.</p><span class="wn-step-day">Day 3</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Rebuild critical scenarios in parallel with the old ones running. Cut over only after 48 hours of clean execution.</p><span class="wn-step-day">Day 4–8</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>One-page runbook per live scenario, Slack alerting wired, monthly health check booked.</p><span class="wn-step-day">Day 9–10</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Stack we use</p>
+    <h2>What we wire and test</h2>
+    <div class="wn-stack">
+      <span>Zapier (Pro + Team)</span><span>Make (Core + Pro)</span><span>OpenAI GPT-4o</span><span>Anthropic Claude</span><span>Slack alerts</span><span>Webhook.site</span><span>Postman</span><span>HubSpot &amp; Pipedrive</span><span>Stripe &amp; Shopify</span><span>Google Sheets</span>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Proof</p>
+    <h2>Pruned and shipped</h2>
+    <div class="wn-proof">
+      <div class="wn-proof-item"><span class="wn-metric">47 Zaps → 11</span>SaaS client. Same outputs, lower task ceiling, dropped one tier.</div>
+      <div class="wn-proof-item"><span class="wn-metric">12 scenarios</span>Logistics client moved bulk operations from Zapier to Make. Task burn dropped, scheduling problem solved.</div>
+      <div class="wn-proof-item"><span class="wn-metric">0 silent fails</span>Slack dead-letter pattern on 9 critical paths. Errors surface inside 60 seconds of a webhook miss.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Investment</p>
+    <h2>Pay for the audit, then the rebuild</h2>
+    <div class="wn-price-tiers">
+      <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$750</div><div class="wn-cadence">Audit of up to 30 Zaps or Make scenarios with written kill/keep/rebuild list.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$1,500–$3,000</div><div class="wn-cadence">Full rebuild across both tools, 6–12 scenarios, error alerting, runbooks.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $497/mo</div><div class="wn-cadence">Monthly health check, new scenarios, on-call when something breaks.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Questions</p>
+    <h2>Common questions</h2>
+    <details><summary>Why not just move everything to n8n and skip Zapier?</summary><div class="wn-faq-body">Sometimes that is the right answer — and we'll say so. But n8n needs hosting, a deploy story, and a person who can read a JSON error. Zapier is right when the team is small, the connectors are exotic, and you'd rather pay a SaaS fee than a DevOps fee. Make sits in the middle. We pick by team and by load, not by ideology.</div></details>
+    <details><summary>Will the audit alone reduce our task burn?</summary><div class="wn-faq-body">Usually yes. About 30 to 50 percent of Zaps in a long-running account are firing on triggers nobody uses anymore. Killing those drops the task count without touching the work that matters. We've seen a Pro account drop to Starter inside 30 days.</div></details>
+    <details><summary>What's the difference between Make scenarios and Zapier Zaps in practice?</summary><div class="wn-faq-body">Zapier is per-task billing and one-trigger-one-action thinking. Make charges per operation and assumes you'll branch, iterate, and bulk-process. Bulk jobs (300 rows nightly) cost a fortune in Zapier and are pennies in Make. Real-time single-event jobs are cleaner in Zapier.</div></details>
+    <details><summary>Can you support webhooks from custom apps?</summary><div class="wn-faq-body">Yes. We've connected custom Laravel apps, Rails monoliths, and Bubble back-ends to both platforms via webhook gateways. The pattern is the same: named endpoint, versioned payload, replay capability, request logging in a Google Sheet for audit.</div></details>
+    <details><summary>How long until you're out and we're self-sufficient?</summary><div class="wn-faq-body">Most teams take 30 to 45 days to feel confident editing scenarios themselves. We hand off Loom walkthroughs per scenario and a one-page runbook. After that, the retainer is optional — we keep maybe a third of clients on it after handoff because they prefer outsourcing the monthly review.</div></details>
+  </div>
+</section>
+
+<div class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>Cut the noise. Keep the six that earn.</h2>
+    <p class="wn-lede" style="margin:0 auto">Audit ships in under a week. Kill list in your hand by Friday.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Zapier & Make Connectivity","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Audit, prune, and rebuild Zapier and Make scenarios with AI steps, error alerting, and runbook documentation.","serviceType":"Integration platform implementation"},{"@type":"Offer","name":"Zapier & Make engagement","priceCurrency":"USD","price":"750","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"750","maxPrice":"3000"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}}]}
+</script>
+</article>

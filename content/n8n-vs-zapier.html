@@ -1,0 +1,206 @@
+<article class="wn-n8n-vs-zapier">
+<style>
+.wn-n8n-vs-zapier { background:#100f14; color:#fafaf7; font-family:'Lexend',system-ui,-apple-system,sans-serif; padding:64px 24px; line-height:1.7; }
+.wn-n8n-vs-zapier .wn-wrap { max-width:920px; margin:0 auto; }
+.wn-n8n-vs-zapier h1 { font-size:40px; font-weight:800; line-height:1.15; margin:0 0 16px; letter-spacing:-0.02em; color:#fafaf7; }
+.wn-n8n-vs-zapier .wn-byline { font-size:13px; color:#6a6878; margin:0 0 24px; letter-spacing:.05em; text-transform:uppercase; }
+.wn-n8n-vs-zapier .wn-sub { font-size:18px; color:#a8a8b3; margin:0 0 36px; max-width:760px; font-weight:300; }
+.wn-n8n-vs-zapier .wn-tldr { background:linear-gradient(135deg, rgba(19,185,115,.08), rgba(139,92,246,.08)); border:1px solid #2a2832; border-radius:12px; padding:24px 28px; margin:0 0 56px; }
+.wn-n8n-vs-zapier .wn-tldr h3 { margin:0 0 12px; font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:#1E88E5; font-weight:700; }
+.wn-n8n-vs-zapier .wn-tldr p { margin:0 0 18px; color:#d0d0d8; font-size:15.5px; }
+.wn-n8n-vs-zapier .wn-verdict { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px; }
+.wn-n8n-vs-zapier .wn-verdict div { padding:14px 18px; border-radius:8px; font-size:14px; }
+.wn-n8n-vs-zapier .wn-pick-n8n { background:rgba(19,185,115,.10); border:1px solid rgba(19,185,115,.30); }
+.wn-n8n-vs-zapier .wn-pick-zap { background:rgba(139,92,246,.10); border:1px solid rgba(139,92,246,.30); }
+.wn-n8n-vs-zapier .wn-pick-n8n strong { color:#1E88E5; display:block; margin-bottom:6px; }
+.wn-n8n-vs-zapier .wn-pick-zap strong { color:#a78bfa; display:block; margin-bottom:6px; }
+.wn-n8n-vs-zapier h2 { font-size:28px; font-weight:700; margin:64px 0 16px; color:#fafaf7; letter-spacing:-0.01em; scroll-margin-top:80px; border-top:1px solid #2a2832; padding-top:48px; }
+.wn-n8n-vs-zapier h3 { font-size:19px; font-weight:600; margin:32px 0 12px; color:#1E88E5; }
+.wn-n8n-vs-zapier p { color:#d0d0d8; font-size:16px; margin:0 0 16px; }
+.wn-n8n-vs-zapier strong { color:#fafaf7; font-weight:600; }
+.wn-n8n-vs-zapier ul { color:#d0d0d8; padding-left:22px; margin:0 0 20px; }
+.wn-n8n-vs-zapier li { margin:6px 0; }
+.wn-n8n-vs-zapier table { width:100%; border-collapse:collapse; margin:24px 0; font-size:14px; background:#17161d; border:1px solid #2a2832; border-radius:8px; overflow:hidden; }
+.wn-n8n-vs-zapier table th { background:#1f1d28; color:#1E88E5; font-weight:700; text-align:left; padding:12px 14px; border-bottom:1px solid #2a2832; font-size:12.5px; text-transform:uppercase; letter-spacing:.05em; }
+.wn-n8n-vs-zapier table th.wn-zap { color:#a78bfa; }
+.wn-n8n-vs-zapier table td { padding:12px 14px; border-bottom:1px solid #2a2832; color:#c8c8d0; vertical-align:top; }
+.wn-n8n-vs-zapier table td:first-child { font-weight:600; color:#fafaf7; width:24%; }
+.wn-n8n-vs-zapier table tr:last-child td { border-bottom:none; }
+.wn-n8n-vs-zapier .wn-scenario { background:#17161d; border:1px solid #2a2832; border-left:3px solid #1E88E5; padding:22px 26px; margin:20px 0; border-radius:0 10px 10px 0; }
+.wn-n8n-vs-zapier .wn-scenario h4 { margin:0 0 10px; font-size:16px; color:#1E88E5; font-weight:700; }
+.wn-n8n-vs-zapier .wn-scenario p { font-size:15px; color:#d0d0d8; margin:0 0 12px; }
+.wn-n8n-vs-zapier .wn-scenario p:last-child { margin:0; }
+.wn-n8n-vs-zapier .wn-scenario .wn-verdict-line { color:#fafaf7; font-weight:600; padding:10px 14px; background:#1f1d28; border-radius:6px; display:inline-block; margin-top:8px; font-size:14px; }
+.wn-n8n-vs-zapier .wn-tree { background:#17161d; border:1px solid #2a2832; border-radius:10px; padding:28px; margin:28px 0; }
+.wn-n8n-vs-zapier .wn-node { background:#1f1d28; border:1px solid #2a2832; padding:12px 18px; border-radius:8px; margin:8px 0; font-size:14.5px; color:#fafaf7; }
+.wn-n8n-vs-zapier .wn-node strong { color:#1E88E5; }
+.wn-n8n-vs-zapier .wn-arrow { color:#6a6878; padding-left:24px; font-family:ui-monospace,monospace; font-size:13px; margin:2px 0; }
+.wn-n8n-vs-zapier .wn-leaf-n8n { background:rgba(19,185,115,.10); border:1px solid rgba(19,185,115,.30); padding:10px 16px; border-radius:8px; margin:8px 0 8px 32px; color:#1E88E5; font-weight:600; font-size:14px; }
+.wn-n8n-vs-zapier .wn-leaf-zap { background:rgba(139,92,246,.10); border:1px solid rgba(139,92,246,.30); padding:10px 16px; border-radius:8px; margin:8px 0 8px 32px; color:#a78bfa; font-weight:600; font-size:14px; }
+.wn-n8n-vs-zapier .wn-leaf-alt { background:rgba(251,191,36,.10); border:1px solid rgba(251,191,36,.30); padding:10px 16px; border-radius:8px; margin:8px 0 8px 32px; color:#fbbf24; font-weight:600; font-size:14px; }
+.wn-n8n-vs-zapier .wn-cta { margin-top:72px; padding:36px 32px; background:linear-gradient(135deg, rgba(19,185,115,.10), rgba(139,92,246,.10)); border:1px solid #2a2832; border-radius:14px; text-align:center; }
+.wn-n8n-vs-zapier .wn-cta h3 { margin:0 0 10px; font-size:24px; color:#fafaf7; font-weight:700; }
+.wn-n8n-vs-zapier .wn-cta p { margin:0 0 22px; color:#a8a8b3; }
+.wn-n8n-vs-zapier .wn-cta a { display:inline-block; padding:14px 32px; background:#1E88E5; color:#100f14; font-weight:600; border-radius:8px; text-decoration:none; }
+.wn-n8n-vs-zapier .wn-cta a:hover { background:#0fa264; }
+@media (max-width:640px){ .wn-n8n-vs-zapier{padding:40px 16px;} .wn-n8n-vs-zapier h1{font-size:28px;} .wn-n8n-vs-zapier h2{font-size:22px;} .wn-n8n-vs-zapier .wn-verdict{grid-template-columns:1fr;} .wn-n8n-vs-zapier table{font-size:13px;} .wn-n8n-vs-zapier table th,.wn-n8n-vs-zapier table td{padding:9px 10px;} }
+</style>
+
+<div class="wn-wrap">
+<p class="wn-byline">SkynetLabs · Engineer's Field Notes · 2026</p>
+<h1>n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)</h1>
+<p class="wn-sub">Side-by-side comparison from someone who has shipped 180+ workflows across both platforms. No affiliate links. No "it depends." Concrete recommendations.</p>
+
+<div class="wn-tldr">
+<h3>TL;DR</h3>
+<p>n8n and Zapier solve different shapes of the same problem. Zapier is a managed SaaS optimized for non-engineers shipping a small number of straight-line automations against well-known SaaS APIs. n8n is open-source infrastructure optimized for engineers (or engineer-adjacent operators) shipping many automations including branching, looping, custom code, and self-hosted compliance. They are not competitors in the head-to-head sense — they're competitors at the edges of each other's strong zones.</p>
+<div class="wn-verdict">
+<div class="wn-pick-n8n"><strong>Pick n8n if</strong>You have 5+ flows, need branching/loops/code, run more than 5K tasks/month, need self-hosting for HIPAA or data residency, or want to ship automation as a service to your own clients.</div>
+<div class="wn-pick-zap"><strong>Pick Zapier if</strong>You have 1–3 flows, zero engineering capacity, your stack is mainstream SaaS (Gmail, Slack, Sheets, Stripe), task volume is under 2K/month, and you'd rather pay than maintain.</div>
+</div>
+</div>
+
+<h2 id="comparison">Side-by-side comparison</h2>
+
+<table>
+<thead><tr><th>Criterion</th><th>n8n</th><th class="wn-zap">Zapier</th></tr></thead>
+<tbody>
+<tr><td>Pricing model</td><td>Free self-hosted, fair-code license. Cloud: per-execution tiers from a low monthly base.</td><td>Per-task pricing. Compounds quickly past ~10K tasks/month.</td></tr>
+<tr><td>Self-hosting</td><td>First-class. Docker Compose on a small Hetzner VPS works fine.</td><td>Not supported. SaaS only.</td></tr>
+<tr><td>Code nodes</td><td>Native JavaScript + Python (beta) code nodes. Full npm package access on self-hosted.</td><td>Code by Zapier (JavaScript / Python) with execution limits and no external packages.</td></tr>
+<tr><td>Branching</td><td>IF, Switch, and Merge nodes. Visual branching with full join semantics.</td><td>Paths feature (Professional+). Limited compared to n8n's branching.</td></tr>
+<tr><td>Error handling</td><td>Workflow error trigger + per-node continue-on-fail + custom error workflows.</td><td>Built-in retries and an error inbox. Less programmable than n8n.</td></tr>
+<tr><td>Sub-workflows</td><td>Yes — call one workflow from another. Critical for DRY automation libraries.</td><td>Multi-step Zaps only — no native sub-workflow primitive.</td></tr>
+<tr><td>Queue mode</td><td>Yes — Redis-backed worker pool. Handles 10K+ webhooks/hour on a small VPS.</td><td>Abstracted away. You don't see it; you also can't tune it.</td></tr>
+<tr><td>Webhook latency</td><td>Sub-second on self-hosted. ~1–3s on cloud.</td><td>2–15 seconds typical. Higher tiers reduce queue time.</td></tr>
+<tr><td>AI / LLM nodes</td><td>OpenAI, Anthropic, Gemini, plus generic HTTP and LangChain nodes for any custom model.</td><td>Decent OpenAI / Claude integration. Less flexible for custom LLM stacks.</td></tr>
+<tr><td>Marketplace size</td><td>~400 integrations + write-your-own HTTP node for anything missing.</td><td>~6,000 apps. The widest integration library in the category.</td></tr>
+<tr><td>Learning curve</td><td>2–4 weeks to fluency if you have basic API literacy.</td><td>2–4 days to fluency. The lowest-barrier automation tool on the market.</td></tr>
+<tr><td>Compliance (HIPAA / SOC2)</td><td>Self-host gives you full control. Cloud plans add compliance tiers.</td><td>Enterprise plans include HIPAA + SOC2 (Zapier holds both).</td></tr>
+<tr><td>Vendor lock-in</td><td>Low. Workflows export as JSON; you can move providers in a day.</td><td>High. Zaps don't export to other platforms in any useful format.</td></tr>
+<tr><td>Speed of building a 5-step flow</td><td>30–60 minutes once you know the platform.</td><td>15–30 minutes — fastest in the category for simple flows.</td></tr>
+<tr><td>Speed of building a 25-step flow with branching</td><td>4–8 hours including testing. Manageable.</td><td>12+ hours and painful — Paths multiply, debugging gets messy.</td></tr>
+</tbody>
+</table>
+
+<h2 id="scenarios">Five real-world scenarios</h2>
+
+<div class="wn-scenario">
+<h4>Scenario 1: "I have one marketing flow and zero engineering"</h4>
+<p>You're a solo founder or small marketing team. You want new HubSpot leads to land in a Google Sheet, trigger an internal Slack notification, and send a welcome email via your ESP. That's it. You don't want to think about hosting, you don't want to write code, you don't want to fix queue mode in six months when traffic doubles.</p>
+<p>Zapier wins this cleanly. The UI is the friendliest in the category. The connector for HubSpot, Google Sheets, Slack, and your ESP is one click each. You'll build the flow in 25 minutes and forget it exists. The premium for not thinking about infrastructure is worth it at this scale. If you're processing under 750 tasks per month, the cost is trivial.</p>
+<span class="wn-verdict-line">Verdict — Zapier Starter plan. Don't overthink it.</span>
+</div>
+
+<div class="wn-scenario">
+<h4>Scenario 2: "I have 12 internal ops flows and 1 dev"</h4>
+<p>You're a 20-person company. Ops, sales, support, and finance all want their own automations. Lead routing, invoice processing, support ticket enrichment, CRM hygiene, weekly reports. Task volume is around 30K/month across the lot. You have a developer who can help maintain but who has bigger product work to ship.</p>
+<p>n8n wins this. Self-host on a small Hetzner VPS with Docker Compose, Postgres for state, Caddy for HTTPS, and let the developer set up workflow versioning in Git. At 30K tasks/month Zapier would cost roughly 10x what running your own VPS does. The sub-workflow primitive lets you build shared "send Slack alert" or "look up account in CRM" subroutines once and reuse them across 12 flows. By month six, the time saved on DRY refactors pays back the setup investment.</p>
+<span class="wn-verdict-line">Verdict — n8n self-hosted. Hetzner + Docker + Postgres + Caddy.</span>
+</div>
+
+<div class="wn-scenario">
+<h4>Scenario 3: "I need HIPAA compliance"</h4>
+<p>You're in healthcare, mental health, or any vertical where PHI flows through your automation. Patient names, appointment data, insurance numbers — anything that would land you in legal trouble if it leaked through an unaudited third party.</p>
+<p>Both can do this but the path differs. Zapier Enterprise has HIPAA available with a signed BAA — fast to set up, expensive monthly, no infrastructure questions. n8n self-hosted on your own AWS VPC or HIPAA-compliant hosting (Aptible, OpsCompass) gives you full control of where PHI lives and how it's logged. The right choice depends on whether you're already on AWS — if yes, n8n self-hosted is cheaper and tighter. If you're a small clinic with no cloud team, Zapier Enterprise removes a whole category of risk.</p>
+<span class="wn-verdict-line">Verdict — Zapier Enterprise if no cloud team. n8n self-hosted on HIPAA-compliant infra if you have one.</span>
+</div>
+
+<div class="wn-scenario">
+<h4>Scenario 4: "I run an agency selling automation as a service"</h4>
+<p>You're an agency. You sell automation builds to clients ranging from solopreneurs to mid-market. You want a stack where you can ship fast, white-label nothing, and not have your margin eaten by per-task fees flowing through your reseller account.</p>
+<p>n8n wins this convincingly. Self-host one n8n instance per client on a cheap Hetzner VPS, or run multi-tenant with isolated databases. Workflows export as JSON which means you can build a library of templated flows ("Stripe-to-Notion lead capture," "Calendly-to-CRM intake") and clone them across clients in minutes. Zapier's per-task billing makes reseller economics painful — every time a client's flows scale, your margin shrinks. GoHighLevel is another agency-friendly alternative if your clients want marketing-focused features.</p>
+<span class="wn-verdict-line">Verdict — n8n self-hosted, one instance per client. GHL as alternative if marketing-focused.</span>
+</div>
+
+<div class="wn-scenario">
+<h4>Scenario 5: "I'm migrating off Zapier — should I"</h4>
+<p>You've been on Zapier for two years. You have 8–15 Zaps and your monthly bill has crept north of what feels reasonable. You're wondering if the migration tax is worth it.</p>
+<p>Honest answer: only if you have at least 5 Zaps, more than 5K tasks/month, and a developer or technically-comfortable operator who can own the n8n instance. Below those thresholds, the migration tax (40–80 hours of rebuilding, testing, and re-credentialing) eats your savings for a year. Above those thresholds, the payback period is typically 3–4 months. Never bulk-migrate — one flow at a time, run both for 48 hours in parallel with a comparison spreadsheet, then disable Zapier. A typical 12-Zap migration takes us about 3 weeks at SkynetLabs.</p>
+<span class="wn-verdict-line">Verdict — migrate if 5+ flows AND 5K+ tasks/month AND someone owns it. Otherwise stay.</span>
+</div>
+
+<h2 id="decision-tree">Decision tree</h2>
+
+<div class="wn-tree">
+<div class="wn-node"><strong>Q1.</strong> Do you have more than 5 active workflows (or plan to within 6 months)?</div>
+<div class="wn-arrow">└── No →</div>
+<div class="wn-leaf-zap">→ Zapier (don't overthink small)</div>
+<div class="wn-arrow">└── Yes ↓</div>
+
+<div class="wn-node"><strong>Q2.</strong> Do you (or anyone on your team) need branching, loops, or custom code in a workflow?</div>
+<div class="wn-arrow">└── No →</div>
+<div class="wn-leaf-zap">→ Zapier Professional</div>
+<div class="wn-arrow">└── Yes ↓</div>
+
+<div class="wn-node"><strong>Q3.</strong> Is your monthly task volume above ~5K?</div>
+<div class="wn-arrow">└── No →</div>
+<div class="wn-leaf-zap">→ Zapier Professional + Paths feature</div>
+<div class="wn-arrow">└── Yes ↓</div>
+
+<div class="wn-node"><strong>Q4.</strong> Do you have someone (in-house or contractor) who can own infrastructure?</div>
+<div class="wn-arrow">└── No →</div>
+<div class="wn-leaf-alt">→ n8n Cloud (skip self-hosting, accept cost)</div>
+<div class="wn-arrow">└── Yes ↓</div>
+
+<div class="wn-node"><strong>Q5.</strong> Do you need HIPAA, SOC2, or data-residency compliance?</div>
+<div class="wn-arrow">└── No →</div>
+<div class="wn-leaf-n8n">→ n8n self-hosted on Hetzner/DigitalOcean</div>
+<div class="wn-arrow">└── Yes ↓</div>
+
+<div class="wn-node"><strong>Q6.</strong> Are you already running on AWS, Azure, or GCP with a security team?</div>
+<div class="wn-arrow">└── No →</div>
+<div class="wn-leaf-alt">→ Zapier Enterprise with signed BAA</div>
+<div class="wn-arrow">└── Yes →</div>
+<div class="wn-leaf-n8n">→ n8n self-hosted on your VPC with audited PHI handling</div>
+</div>
+
+<h2 id="when-neither">When NOT to use either</h2>
+
+<p>Automation evangelism has a habit of forgetting that some problems aren't workflow problems. Three cases where n8n and Zapier are both the wrong answer:</p>
+
+<h3>1. You need a real durable event-driven system</h3>
+<p>If you're orchestrating long-running transactions, multi-step sagas, or anything that needs strict exactly-once semantics at scale (financial reconciliation, multi-system order fulfillment with rollback), n8n's queue mode and Zapier's retry logic are both insufficient. You want AWS Step Functions, Temporal, or Inngest. These are workflow engines built for production-grade orchestration with proper retry policies, idempotency keys, and state durability guarantees.</p>
+
+<h3>2. The logic is trivial and you have engineers</h3>
+<p>If the "automation" is fetch from API A, transform, write to API B, on a cron — that's 40 lines of Python plus a cron job on the smallest VPS your hosting provider offers. Wrapping it in n8n or Zapier adds operational overhead (yet another tool to maintain, yet another dashboard to check) for negative engineering value. A Python script with a logging library and a Slack-notify-on-failure handler is the right tool. Don't reach for a workflow platform when you don't need branching, UI, or non-engineer accessibility.</p>
+
+<h3>3. You're really doing marketing automation, not workflow automation</h3>
+<p>If 80% of what you call "automation" is actually drip campaigns, lead nurturing, SMS sequences, and pipeline triggers tied to a CRM — Make (formerly Integromat) is more visual-friendly, GoHighLevel bundles CRM + automation + SMS + email + booking, and HubSpot Operations Hub integrates more tightly with HubSpot CRM. n8n and Zapier can technically do all of these but you'll fight the tool. Pick the platform built for the use case.</p>
+
+<div class="wn-cta">
+<h3>We ship both stacks.</h3>
+<p>We'll tell you straight which fits your business — even if the honest answer is "neither, you need Make or a Python script."</p>
+<a href="/contact">Get a straight recommendation</a>
+</div>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://app-mauve-eta-66.vercel.app/n8n-vs-zapier#article",
+      "headline": "n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)",
+      "description": "Side-by-side comparison of n8n and Zapier covering pricing, self-hosting, branching, error handling, AI integrations, compliance, and five real-world scenarios with explicit recommendations.",
+      "author": {"@type":"Person","name":"Waseem Nasir","url":"https://app-mauve-eta-66.vercel.app/author/waseem-nasir"},
+      "publisher": {"@type":"Organization","name":"SkynetLabs","url":"https://app-mauve-eta-66.vercel.app"},
+      "datePublished": "2026-05-20",
+      "dateModified": "2026-05-20",
+      "mainEntityOfPage": "https://app-mauve-eta-66.vercel.app/n8n-vs-zapier",
+      "about": [
+        {"@type":"SoftwareApplication","name":"n8n","applicationCategory":"BusinessApplication","operatingSystem":"Cross-platform"},
+        {"@type":"SoftwareApplication","name":"Zapier","applicationCategory":"BusinessApplication","operatingSystem":"Web"}
+      ]
+    },
+    {
+      "@type": "Table",
+      "@id": "https://app-mauve-eta-66.vercel.app/n8n-vs-zapier#comparison-table",
+      "about": "Feature comparison between n8n and Zapier across 15 criteria including pricing, self-hosting, branching, error handling, AI integrations, and compliance."
+    }
+  ]
+}
+</script>
+</article>

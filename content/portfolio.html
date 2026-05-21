@@ -1,0 +1,266 @@
+<article class="wn-portfolio">
+<style>
+.wn-portfolio{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-border-strong:rgba(255,255,255,.16);--wn-green:#1E88E5;--wn-green-light:#42A5F5;--wn-purple:#14B8A6;--wn-purple-light:#5EEAD4;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-amber:#FFB547;color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,"Lexend",system-ui,-apple-system,"Segoe UI",sans-serif);line-height:1.6;display:block;-webkit-font-smoothing:antialiased}
+.wn-portfolio *,.wn-portfolio *::before,.wn-portfolio *::after{box-sizing:border-box}
+.wn-portfolio a{color:var(--wn-green-light);text-decoration:none;transition:color .15s ease}
+.wn-portfolio a:hover{color:var(--wn-green)}
+.wn-portfolio .wn-wrap{max-width:1200px;margin:0 auto;padding:5rem 1.5rem}
+.wn-portfolio .wn-hero{padding-bottom:2.25rem;margin-bottom:2.25rem;border-bottom:1px solid var(--wn-border)}
+.wn-portfolio .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .85rem;border:1px solid var(--wn-border-strong);border-radius:999px;background:rgba(19,185,115,.08);color:var(--wn-green-light);font-size:.78rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-bottom:1.1rem}
+.wn-portfolio .wn-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--wn-green);box-shadow:0 0 8px var(--wn-green)}
+.wn-portfolio h1{font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.1;font-weight:800;letter-spacing:-.02em;margin:0 0 1rem;max-width:24ch}
+.wn-portfolio h1 em{font-style:normal;background:linear-gradient(90deg,var(--wn-green) 0%,var(--wn-cyan) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-portfolio .wn-lede{font-size:1.08rem;color:var(--wn-fg-muted);max-width:60ch;margin:0}
+.wn-portfolio .wn-proof-strip{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:1.5rem;font-size:.85rem;color:var(--wn-fg-faint)}
+.wn-portfolio .wn-proof-strip span{padding:.3rem .7rem;border:1px solid var(--wn-border);border-radius:6px;background:var(--wn-surface)}
+.wn-portfolio .wn-filters{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2.5rem}
+.wn-portfolio .wn-filter{padding:.55rem 1.1rem;border:1px solid var(--wn-border-strong);border-radius:999px;font-size:.88rem;font-weight:500;color:var(--wn-fg-muted);background:transparent}
+.wn-portfolio .wn-filter.is-active{background:linear-gradient(135deg,var(--wn-green) 0%,#1565C0 100%);border-color:transparent;color:#fff}
+.wn-portfolio .wn-grid{display:grid;grid-template-columns:1fr;gap:1.1rem;margin-bottom:3.5rem}
+.wn-portfolio .wn-tile{position:relative;border:1px solid var(--wn-border);border-radius:16px;overflow:hidden;display:block;color:var(--wn-fg);background:var(--wn-surface);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;min-height:220px}
+.wn-portfolio .wn-tile:hover{transform:translateY(-4px);border-color:var(--wn-border-strong);box-shadow:0 14px 36px rgba(0,0,0,.4)}
+.wn-portfolio .wn-thumb{position:relative;aspect-ratio:16/9;width:100%;display:flex;align-items:flex-end;padding:1.25rem;overflow:hidden}
+.wn-portfolio .wn-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%);pointer-events:none}
+.wn-portfolio .wn-thumb .wn-chip{position:relative;z-index:2;display:inline-block;padding:.3rem .7rem;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;background:rgba(0,0,0,.45);color:#fff;backdrop-filter:blur(6px);align-self:flex-start;position:absolute;top:.9rem;left:.95rem}
+.wn-portfolio .wn-thumb .wn-num{position:absolute;top:.9rem;right:.95rem;z-index:2;font-size:.72rem;font-weight:700;color:rgba(255,255,255,.9);background:rgba(0,0,0,.32);backdrop-filter:blur(6px);padding:.22rem .55rem;border-radius:6px;letter-spacing:.04em}
+.wn-portfolio .wn-thumb .wn-glyph{position:relative;z-index:2;font-size:2.4rem;font-weight:800;color:rgba(255,255,255,.18);letter-spacing:-.04em;mix-blend-mode:overlay}
+.wn-portfolio .wn-tile-body{padding:1.25rem 1.4rem 1.5rem}
+.wn-portfolio .wn-tile-h{font-size:1.05rem;font-weight:700;margin:0 0 .5rem;line-height:1.3;color:var(--wn-fg)}
+.wn-portfolio .wn-tile-p{font-size:.92rem;color:var(--wn-fg-muted);margin:0 0 .9rem;line-height:1.5}
+.wn-portfolio .wn-tile-link{font-size:.85rem;font-weight:600;color:var(--wn-green-light);display:inline-flex;align-items:center;gap:.35rem}
+.wn-portfolio .wn-tile-link::after{content:"→";transition:transform .2s ease}
+.wn-portfolio .wn-tile:hover .wn-tile-link::after{transform:translateX(3px)}
+.wn-portfolio .g1{background:linear-gradient(135deg,#1E88E5 0%,#1565C0 100%)}
+.wn-portfolio .g2{background:linear-gradient(135deg,#14B8A6 0%,#0F766E 55%,#1E88E5 100%)}
+.wn-portfolio .g3{background:linear-gradient(135deg,#00D4FF 0%,#1E88E5 100%)}
+.wn-portfolio .g4{background:linear-gradient(135deg,#FF6B6B 0%,#14B8A6 100%)}
+.wn-portfolio .g5{background:linear-gradient(135deg,#100f14 0%,#1E88E5 90%)}
+.wn-portfolio .g6{background:linear-gradient(135deg,#14B8A6 0%,#00D4FF 100%)}
+.wn-portfolio .g7{background:linear-gradient(135deg,#FFB547 0%,#FF6B6B 60%,#14B8A6 100%)}
+.wn-portfolio .g8{background:linear-gradient(135deg,#1565C0 0%,#00D4FF 100%)}
+.wn-portfolio .g9{background:linear-gradient(135deg,#29282d 0%,#14B8A6 70%,#1E88E5 100%)}
+.wn-portfolio .g10{background:linear-gradient(135deg,#FF6B6B 0%,#FFB547 100%)}
+.wn-portfolio .g11{background:linear-gradient(135deg,#1E88E5 0%,#14B8A6 100%)}
+.wn-portfolio .g12{background:linear-gradient(135deg,#00D4FF 0%,#14B8A6 50%,#FF6B6B 100%)}
+.wn-portfolio .wn-cta{margin-top:3rem;padding:2.5rem 1.75rem;border:1px solid var(--wn-border);border-radius:18px;background:linear-gradient(135deg,rgba(19,185,115,.08) 0%,rgba(139,92,246,.06) 100%);text-align:center}
+.wn-portfolio .wn-cta h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 .65rem;letter-spacing:-.01em}
+.wn-portfolio .wn-cta p{color:var(--wn-fg-muted);margin:0 0 1.4rem;font-size:1rem;max-width:48ch;margin-left:auto;margin-right:auto}
+.wn-portfolio .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.6rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-portfolio .wn-btn-primary{background:linear-gradient(135deg,var(--wn-green),var(--wn-cyan));color:#0a0a0a;box-shadow:0 4px 20px rgba(19,185,115,.3)}
+.wn-portfolio .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(19,185,115,.4);color:#0a0a0a}
+@media(min-width:768px){.wn-portfolio .wn-grid{grid-template-columns:repeat(2,1fr)}.wn-portfolio .wn-tile.span-2{grid-column:span 2}}
+@media(min-width:1024px){.wn-portfolio .wn-grid{grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(120px,auto)}.wn-portfolio .wn-tile.span-2{grid-column:span 2}.wn-portfolio .wn-tile.tall .wn-thumb{aspect-ratio:1/1}}
+html.light .wn-portfolio{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08);--wn-border-strong:rgba(16,15,20,.16)}
+html.light .wn-portfolio .wn-tile:hover{box-shadow:0 14px 36px rgba(16,15,20,.12)}
+</style>
+
+<div class="wn-wrap">
+  <header class="wn-hero">
+    <span class="wn-eyebrow">Portfolio</span>
+    <h1>What we've shipped — <em>visually</em></h1>
+    <p class="wn-lede">Twelve builds, anonymized where contracts require it. Click any tile to read the full case study with stack, outcomes, and what we'd change next time.</p>
+    <div class="wn-proof-strip">
+      <span>180 workflows</span>
+      <span>40 websites</span>
+      <span>9 countries</span>
+      <span>5–14d ship</span>
+    </div>
+  </header>
+
+  <nav class="wn-filters" aria-label="Filter portfolio">
+    <span class="wn-filter is-active">All</span>
+    <span class="wn-filter">Sites</span>
+    <span class="wn-filter">Automation</span>
+    <span class="wn-filter">Branding</span>
+    <span class="wn-filter">Content</span>
+  </nav>
+
+  <div class="wn-grid">
+    <a href="/case-studies" class="wn-tile span-2">
+      <div class="wn-thumb g1">
+        <span class="wn-chip">Automation</span>
+        <span class="wn-num">01 / 12</span>
+        <span class="wn-glyph">EU</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">EU logistics email autoreply (mining + freight, French)</h3>
+        <p class="wn-tile-p">n8n + GPT-4o Gmail draft generator. Five-condition gate enforces sender / amount / keyword / recipient rules. Replaced 3 hrs/day manual triage on the maintenance inbox.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g2">
+        <span class="wn-chip">Sites</span>
+        <span class="wn-num">02 / 12</span>
+        <span class="wn-glyph">SOHO</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">Manhattan dental atelier — bespoke flagship</h3>
+        <p class="wn-tile-p">Next 16 + Tailwind v4 + Framer Motion. Editorial press strip, 6-card process, transparent investment tiers, JotForm Healthcare intake. Built to look like it cost ten times what it did.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g3">
+        <span class="wn-chip">Sites</span>
+        <span class="wn-num">03 / 12</span>
+        <span class="wn-glyph">KSA</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">KSA premium shoe retailer storefront</h3>
+        <p class="wn-tile-p">Headless Shopify front-end, Arabic + English RTL toggle, Mada checkout. Lifted mobile conversion by reordering hero + collection grid above the fold.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g4">
+        <span class="wn-chip">Sites</span>
+        <span class="wn-num">04 / 12</span>
+        <span class="wn-glyph">BALI</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">Bali wellness funnel — 3-step retreat intake</h3>
+        <p class="wn-tile-p">Single-page funnel + Cal.com embed + booked-call confirmation pack. Replaced a 7-page Squarespace site that converted at 0.4%. New funnel hit 3.1% on the same ad spend.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g5">
+        <span class="wn-chip">Sites</span>
+        <span class="wn-num">05 / 12</span>
+        <span class="wn-glyph">AUTO</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">Premium auto dealer — model-page rebuild</h3>
+        <p class="wn-tile-p">15 model pages, JSON-LD Vehicle schema, finance calculator, test-drive booker. Cited inside Perplexity for "best X dealer near Y" inside 4 weeks of ship.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile span-2">
+      <div class="wn-thumb g6">
+        <span class="wn-chip">Sites + Branding</span>
+        <span class="wn-num">06 / 12</span>
+        <span class="wn-glyph">RI</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">Northeast US recovery network — brand + Google Form site</h3>
+        <p class="wn-tile-p">Navy + teal palette, repurposed founder's trident mark, mobile hamburger menu, embedded Google Form intake. Shipped in 3 rev cycles after a corrective pivot from an earlier dark variant.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g7">
+        <span class="wn-chip">Sites + Automation</span>
+        <span class="wn-num">07 / 12</span>
+        <span class="wn-glyph">FR</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">French translation welcome flow — 3-screen speculative demo</h3>
+        <p class="wn-tile-p">Sign-in → form → mock confirmation w/ generated order ID. Static HTML + Tailwind + vanilla JS on Vercel. Pitched as 24-hour ship with the live demo as proof of capability.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g8">
+        <span class="wn-chip">Content</span>
+        <span class="wn-num">08 / 12</span>
+        <span class="wn-glyph">AEO</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">AEO content engine — voice-linted daily pack</h3>
+        <p class="wn-tile-p">Five-channel pipeline that drafts LinkedIn, Facebook, Instagram, YouTube, and TikTok output, then hard-fails on 60+ AI tells before render. Runs on a single Claude Code skill.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g9">
+        <span class="wn-chip">Automation</span>
+        <span class="wn-num">09 / 12</span>
+        <span class="wn-glyph">CRSL</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">n8n carousel pipeline — 200 PNG batch generator</h3>
+        <p class="wn-tile-p">Topic JSON → html2canvas renderer → ffmpeg sequence → GHL CSV scheduler. Two hundred slides cleared in one pass, fully re-runnable from the same source file.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g10">
+        <span class="wn-chip">Automation</span>
+        <span class="wn-num">10 / 12</span>
+        <span class="wn-glyph">GHL</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">GoHighLevel insurance retainer — monthly automation</h3>
+        <p class="wn-tile-p">Inbound lead → 14-touch nurture → SMS + email + voicemail drop. Calendar booking + tagged follow-up. Replaced two manual VAs and saved the team the night-and-weekend shift.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g11">
+        <span class="wn-chip">Content</span>
+        <span class="wn-num">11 / 12</span>
+        <span class="wn-glyph">SAAS</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">SaaS launch — multi-channel content drip</h3>
+        <p class="wn-tile-p">Twelve-week pre-launch + launch week pack across LinkedIn, X, IG, FB and YouTube Shorts. ManyChat keyword funnel attached to the launch carousels for opt-in.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+
+    <a href="/case-studies" class="wn-tile">
+      <div class="wn-thumb g12">
+        <span class="wn-chip">Automation</span>
+        <span class="wn-num">12 / 12</span>
+        <span class="wn-glyph">EDIT</span>
+      </div>
+      <div class="wn-tile-body">
+        <h3 class="wn-tile-h">Internal video editor v3 — reel pipeline</h3>
+        <p class="wn-tile-p">Silence-cut → Whisper → Gemini hooks → ffmpeg cut → MediaPipe reframe → ASS karaoke captions → BGM duck → end card. One reel ships from raw input to publish in under 30 minutes.</p>
+        <span class="wn-tile-link">View case study</span>
+      </div>
+    </a>
+  </div>
+
+  <section class="wn-cta">
+    <h2>Want yours next?</h2>
+    <p>Brief in. Fixed scope back inside 48 hours. Ship windows from 5 days for a focused build to 14 days for a flagship site.</p>
+    <a href="/contact" class="wn-btn wn-btn-primary">Send a brief</a>
+  </section>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "SkynetLabs Portfolio — 12 shipped builds",
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "numberOfItems": 12,
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"item":{"@type":"CreativeWork","name":"EU logistics email autoreply","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Automation","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":2,"item":{"@type":"CreativeWork","name":"Manhattan dental atelier","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Website","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":3,"item":{"@type":"CreativeWork","name":"KSA premium shoe retailer","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Website","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":4,"item":{"@type":"CreativeWork","name":"Bali wellness funnel","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Website","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":5,"item":{"@type":"CreativeWork","name":"Premium auto dealer rebuild","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Website","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":6,"item":{"@type":"CreativeWork","name":"Northeast US recovery network","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Website + Branding","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":7,"item":{"@type":"CreativeWork","name":"French translation welcome flow","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Website + Automation","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":8,"item":{"@type":"CreativeWork","name":"AEO content engine","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Content","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":9,"item":{"@type":"CreativeWork","name":"n8n carousel pipeline","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Automation","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":10,"item":{"@type":"CreativeWork","name":"GoHighLevel insurance retainer","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Automation","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":11,"item":{"@type":"CreativeWork","name":"SaaS launch multi-channel content","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Content","url":"https://skynetjoe.com/case-studies"}},
+    {"@type":"ListItem","position":12,"item":{"@type":"CreativeWork","name":"Internal video editor v3","creator":{"@type":"Organization","name":"SkynetLabs"},"genre":"Automation","url":"https://skynetjoe.com/case-studies"}}
+  ]
+}
+</script>
+</article>

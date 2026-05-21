@@ -5,56 +5,64 @@
    ============================================ */
 
 :root {
-  /* Static brand colors (do not flip on theme) */
-  --skynet-primary: #13b973;
-  --skynet-primary-glow: rgba(19, 185, 115, 0.3);
-  --skynet-primary-dark: #0f9e61;
-  --skynet-primary-light: #1ed17f;
+  /* Static brand colors (do not flip on theme) — OCEAN palette */
+  --skynet-primary: #1E88E5;
+  --skynet-primary-glow: rgba(30, 136, 229, 0.30);
+  --skynet-primary-dark: #1565C0;
+  --skynet-primary-light: #42A5F5;
 
-  --skynet-secondary: #8B5CF6;
-  --skynet-secondary-glow: rgba(139, 92, 246, 0.3);
-  --skynet-secondary-dark: #7C3AED;
-  --skynet-secondary-light: #A78BFA;
+  --skynet-secondary: #14B8A6;
+  --skynet-secondary-glow: rgba(20, 184, 166, 0.30);
+  --skynet-secondary-dark: #0F766E;
+  --skynet-secondary-light: #5EEAD4;
 
-  --ai-neon-green: #00FF88;
+  --ai-neon-green: #5EEAD4;   /* legacy var name kept — retinted to mint-teal */
   --ai-neon-cyan: #00D4FF;
-  --ai-neon-purple: #BF00FF;
+  --ai-neon-purple: #14B8A6;  /* legacy var name kept — retinted to teal */
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #13b973 0%, #0f9e61 100%);
-  --gradient-primary-hover: linear-gradient(135deg, #1ed17f 0%, #13b973 100%);
-  --gradient-neural: linear-gradient(90deg, #00FF88 0%, #00D4FF 50%, #8B5CF6 100%);
-  --gradient-neon: linear-gradient(135deg, #00FF88 0%, #00D4FF 100%);
+  /* Gradients — Ocean */
+  --gradient-primary: linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%);
+  --gradient-neural: linear-gradient(90deg, #1E88E5 0%, #00D4FF 50%, #14B8A6 100%);
+  --gradient-neon: linear-gradient(135deg, #00D4FF 0%, #14B8A6 100%);
 
-  /* DARK theme (default) */
-  --bg: #100f14;
-  --bg-alt: #030208;
-  --surface: #1f1f23;
-  --surface-alt: #29282d;
-  --fg: #f7f7f7;
-  --fg-muted: #c6c7c6;
-  --fg-faint: #98989d;
-  --border: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(26, 29, 46, 0.7);
+  /* DARK OCEAN theme — DEFAULT (matches Hero v03) */
+  --bg: #061827;
+  --bg-alt: #03101a;
+  --surface: #0a2d4a;
+  --surface-alt: #0d3556;
+  --skynet-darker: #03101a;
+  --skynet-surface: #0a2d4a;
+  --fg: #eaf6ff;
+  --fg-muted: #b8d4e8;
+  --fg-faint: #7ea3bf;
+  --border: rgba(126, 228, 255, 0.10);
+  --border-strong: rgba(126, 228, 255, 0.20);
+  --glass-bg: rgba(6, 24, 39, 0.78);
   --gradient-mesh:
-    radial-gradient(at 20% 30%, rgba(19, 185, 115, 0.08) 0px, transparent 50%),
-    radial-gradient(at 80% 70%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+    radial-gradient(at 18% 22%, rgba(30, 136, 229, 0.32) 0px, transparent 55%),
+    radial-gradient(at 82% 28%, rgba(0, 212, 255, 0.22) 0px, transparent 55%),
+    radial-gradient(at 50% 95%, rgba(20, 184, 166, 0.24) 0px, transparent 55%);
 }
 
 html.light {
-  /* LIGHT theme — cream/white w/ same green-purple accents */
-  --bg: #fafaf7;
-  --bg-alt: #f3f3ee;
+  /* LIGHT alt theme — cream + warm white (opt-in via toggle) */
+  --bg: #fbfaf6;
+  --bg-alt: #f3f1ea;
   --surface: #ffffff;
-  --surface-alt: #f7f7f4;
-  --fg: #100f14;
-  --fg-muted: #4a4a52;
-  --fg-faint: #6e6e73;
-  --border: rgba(16, 15, 20, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.75);
+  --surface-alt: #f7f5ef;
+  --skynet-darker: #f3f1ea;
+  --skynet-surface: #ffffff;
+  --fg: #0f1419;
+  --fg-muted: #3d4654;
+  --fg-faint: #6b7280;
+  --border: rgba(15, 20, 25, 0.08);
+  --border-strong: rgba(15, 20, 25, 0.14);
+  --glass-bg: rgba(255, 255, 255, 0.78);
   --gradient-mesh:
-    radial-gradient(at 20% 30%, rgba(19, 185, 115, 0.12) 0px, transparent 50%),
-    radial-gradient(at 80% 70%, rgba(139, 92, 246, 0.08) 0px, transparent 50%);
+    radial-gradient(at 18% 22%, rgba(30, 136, 229, 0.18) 0px, transparent 55%),
+    radial-gradient(at 82% 28%, rgba(0, 212, 255, 0.14) 0px, transparent 55%),
+    radial-gradient(at 50% 95%, rgba(20, 184, 166, 0.12) 0px, transparent 55%);
 }
 
 @theme inline {
@@ -73,6 +81,8 @@ html.light {
   --color-skynet-secondary: var(--skynet-secondary);
   --color-skynet-secondary-dark: var(--skynet-secondary-dark);
   --color-skynet-secondary-light: var(--skynet-secondary-light);
+  --color-skynet-darker: var(--skynet-darker);
+  --color-skynet-surface: var(--skynet-surface);
   --color-neon-green: var(--ai-neon-green);
   --color-neon-cyan: var(--ai-neon-cyan);
   --color-neon-purple: var(--ai-neon-purple);
@@ -83,11 +93,79 @@ html.light {
 }
 
 html, body {
-  background: var(--bg);
   color: var(--fg);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: 'cv11', 'ss01';
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: color 0.2s ease;
+  min-height: 100%;
+}
+
+/* OCEAN BODY — gradient + 3 fixed floating orbs across every page */
+body {
+  background:
+    linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%);
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+}
+html.light body {
+  background:
+    radial-gradient(at 18% 22%, rgba(30, 136, 229, 0.18) 0px, transparent 55%),
+    radial-gradient(at 82% 28%, rgba(0, 212, 255, 0.14) 0px, transparent 55%),
+    radial-gradient(at 50% 95%, rgba(20, 184, 166, 0.12) 0px, transparent 55%),
+    linear-gradient(135deg, #fbfaf6 0%, #f3f1ea 100%);
+  background-attachment: fixed;
+}
+
+/* 3 floating orbs — visible across all pages */
+body::before,
+body::after,
+main::before {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: float-orb 14s ease-in-out infinite;
+}
+body::before {
+  top: -120px;
+  left: -150px;
+  width: 540px;
+  height: 540px;
+  background: #1E88E5;
+  opacity: 0.40;
+}
+body::after {
+  top: 100px;
+  right: -180px;
+  width: 580px;
+  height: 580px;
+  background: #00D4FF;
+  opacity: 0.30;
+  animation-delay: -7s;
+}
+main::before {
+  bottom: -160px;
+  left: 30%;
+  width: 480px;
+  height: 480px;
+  background: #14B8A6;
+  opacity: 0.35;
+  animation-delay: -3s;
+}
+html.light body::before { opacity: 0.22; }
+html.light body::after { opacity: 0.18; }
+html.light main::before { opacity: 0.22; }
+
+/* Lift content above orbs */
+main {
+  position: relative;
+  z-index: 1;
+}
+header {
+  z-index: 50 !important;
 }
 
 /* ============================================
@@ -183,12 +261,152 @@ html.light .orb { opacity: 0.35; }
   margin: 0 auto;
 }
 
-/* Surface card swap on light theme */
+/* ============================================
+   Theme-aware overrides for hardcoded Tailwind utilities
+   Header/Footer/sections use literal text-gray-300, border-white/5 etc.
+   These rules flip them based on current theme so the toggle actually works.
+   ============================================ */
+
+/* LIGHT theme override (opt-in): rewrite hardcoded utilities to light palette */
+html.light .text-gray-100,
+html.light .text-gray-200,
+html.light .text-gray-300,
+html.light .text-gray-400,
+html.light .text-gray-500 {
+  color: var(--fg-muted) !important;
+}
+html.light .hover\:text-white:hover,
+html.light .text-white {
+  color: var(--fg) !important;
+}
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/20 {
+  border-color: var(--border) !important;
+}
+html.light .bg-white\/5,
+html.light .bg-white\/10 {
+  background-color: rgba(15, 20, 25, 0.04) !important;
+}
+
+/* Ocean accent text in dark mode for service-categories label etc. */
+.text-skynet-primary,
+.text-skynet-primary-light {
+  color: var(--skynet-primary-light) !important;
+}
+html.light .text-skynet-primary,
+html.light .text-skynet-primary-light {
+  color: var(--skynet-primary-dark) !important;
+}
+
+/* Homepage section bgs — translucent so body ocean gradient + orbs shine through
+   (Replaces solid utility classes that broke the global ocean look) */
+.bg-skynet-darker,
+.bg-skynet-darker\/40,
+.bg-skynet-darker\/50 {
+  background-color: transparent !important;
+  background-image:
+    radial-gradient(at 50% 0%, rgba(0, 212, 255, 0.06) 0, transparent 60%) !important;
+}
+.bg-skynet-surface\/60,
+.bg-skynet-surface\/40 {
+  background-color: rgba(10, 45, 74, 0.45) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-color: rgba(126, 228, 255, 0.14) !important;
+}
+/* Light theme equivalents */
+html.light .bg-skynet-darker,
 html.light .bg-skynet-darker\/40,
 html.light .bg-skynet-darker\/50 {
-  background-color: var(--bg-alt) !important;
+  background-color: transparent !important;
+  background-image:
+    radial-gradient(at 50% 0%, rgba(30, 136, 229, 0.06) 0, transparent 60%) !important;
 }
-html.light .bg-skynet-surface\/60 {
-  background-color: var(--surface) !important;
-  box-shadow: 0 1px 3px rgba(16, 15, 20, 0.04);
+html.light .bg-skynet-surface\/60,
+html.light .bg-skynet-surface\/40 {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+  border-color: rgba(15, 20, 25, 0.10) !important;
+  box-shadow: 0 1px 3px rgba(15, 20, 25, 0.04);
+}
+
+/* Kill solid Footer bg — let body ocean breathe through */
+footer.bg-skynet-darker {
+  background-color: rgba(3, 16, 26, 0.40) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(126, 228, 255, 0.12) !important;
+}
+html.light footer.bg-skynet-darker {
+  background-color: rgba(243, 241, 234, 0.65) !important;
+  border-top: 1px solid rgba(15, 20, 25, 0.10) !important;
+}
+
+/* Glass effect adapts to theme */
+.glass {
+  background: var(--glass-bg);
+  border-color: var(--border);
+}
+
+/* Hero / CTA orbs softer on light */
+html.light .orb {
+  opacity: 0.45;
+  filter: blur(80px);
+}
+
+/* ============================================
+   WP-PORTABLE CONTENT SCOPES — theme bridge
+   32 routes use `<article class="wn-<slug>">` w/ scoped CSS vars defined
+   inline (dark base + html.light override). Doc default is now LIGHT, so
+   we override the inline dark base on light theme + provide a cooler dark
+   palette when .dark is active.
+   ============================================ */
+article[class*="wn-"] {
+  /* DARK OCEAN defaults — transparent bg so body gradient + orbs shine through */
+  --wn-fg: #eaf6ff;
+  --wn-fg-muted: #b8d4e8;
+  --wn-fg-faint: #7ea3bf;
+  --wn-bg: transparent;
+  --wn-surface: rgba(10, 45, 74, 0.45);
+  --wn-surface-alt: rgba(13, 53, 86, 0.55);
+  --wn-border: rgba(126, 228, 255, 0.14);
+  background: transparent !important;
+}
+html.light article[class*="wn-"] {
+  /* LIGHT cream overrides (opt-in via toggle) */
+  --wn-fg: #0f1419;
+  --wn-fg-muted: #3d4654;
+  --wn-fg-faint: #6b7280;
+  --wn-bg: transparent;
+  --wn-surface: rgba(255, 255, 255, 0.85);
+  --wn-surface-alt: rgba(247, 245, 239, 0.85);
+  --wn-border: rgba(15, 20, 25, 0.10);
+}
+
+/* Glass-card effect on every wn- card — picks up the ocean glow */
+article[class*="wn-"] .wn-card,
+article[class*="wn-"] .wn-proof-item,
+article[class*="wn-"] .wn-price,
+article[class*="wn-"] details {
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Stronger ocean glow on every page's hero section */
+article[class*="wn-"] .wn-hero::before {
+  background:
+    radial-gradient(at 15% 28%, rgba(30, 136, 229, 0.42) 0, transparent 50%),
+    radial-gradient(at 85% 72%, rgba(0, 212, 255, 0.28) 0, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(20, 184, 166, 0.22) 0, transparent 55%) !important;
+}
+html.light article[class*="wn-"] .wn-hero::before {
+  opacity: 0.55;
+}
+
+/* Section dividers — softer, glow-tinted */
+article[class*="wn-"] .wn-section {
+  border-top-color: rgba(126, 228, 255, 0.10) !important;
+}
+html.light article[class*="wn-"] .wn-section {
+  border-top-color: rgba(15, 20, 25, 0.08) !important;
 }

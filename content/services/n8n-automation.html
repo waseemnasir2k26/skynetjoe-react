@@ -1,0 +1,188 @@
+<article class="wn-service wn-service-n8n-automation">
+<style>
+.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service *{box-sizing:border-box}
+.wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
+.wn-service .wn-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(at 20% 30%,color-mix(in srgb,var(--wn-accent-a) 18%,transparent) 0,transparent 50%),radial-gradient(at 80% 70%,color-mix(in srgb,var(--wn-accent-b) 14%,transparent) 0,transparent 50%);pointer-events:none;z-index:0}
+.wn-service .wn-hero>*{position:relative;z-index:1}
+.wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
+.wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
+.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
+.wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
+.wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
+.wn-service p{margin:0 0 1rem;color:var(--wn-fg-muted)}
+.wn-service strong{color:var(--wn-fg);font-weight:600}
+.wn-service .wn-section{padding:3rem 1.5rem;border-top:1px solid var(--wn-border)}
+.wn-service .wn-section-title{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-accent-a);margin:0 0 .75rem}
+.wn-service .wn-grid{display:grid;gap:1rem}
+.wn-service .wn-grid-2{grid-template-columns:1fr}
+.wn-service .wn-grid-3{grid-template-columns:1fr}
+.wn-service .wn-grid-4{grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-grid-2{grid-template-columns:repeat(2,1fr)}.wn-service .wn-grid-3{grid-template-columns:repeat(3,1fr)}.wn-service .wn-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.wn-service .wn-grid-4{grid-template-columns:repeat(4,1fr)}}
+.wn-service .wn-card{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px;padding:1.4rem 1.25rem;transition:border-color .2s ease,transform .2s ease}
+.wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
+.wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
+.wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
+.wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
+.wn-service .wn-proof{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:768px){.wn-service .wn-proof{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-proof-item{padding:1.25rem;border-left:3px solid var(--wn-accent-a);background:var(--wn-surface)}
+.wn-service .wn-proof-item .wn-metric{font-size:1.4rem;font-weight:800;color:var(--wn-accent-a);display:block;margin-bottom:.25rem}
+.wn-service .wn-price-tiers{display:grid;gap:.85rem}
+@media(min-width:768px){.wn-service .wn-price-tiers{grid-template-columns:repeat(3,1fr)}}
+.wn-service .wn-price{padding:1.5rem 1.25rem;background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:14px}
+.wn-service .wn-price .wn-tier{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wn-fg-faint);margin-bottom:.4rem}
+.wn-service .wn-price .wn-amt{font-size:1.5rem;font-weight:800;color:var(--wn-fg);margin-bottom:.3rem}
+.wn-service .wn-price .wn-cadence{font-size:.85rem;color:var(--wn-fg-muted)}
+.wn-service details{background:var(--wn-surface);border:1px solid var(--wn-border);border-radius:12px;padding:0;margin-bottom:.65rem;overflow:hidden}
+.wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.wn-service details summary::-webkit-details-marker{display:none}
+.wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
+.wn-service details[open] summary::after{content:"–"}
+.wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
+.wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
+.wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
+.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
+.wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
+.wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
+/* Per-service accent override */
+.wn-service-n8n-automation{--wn-accent-a:#1E88E5;--wn-accent-b:#00D4FF}
+</style>
+
+<header class="wn-hero">
+  <div class="wn-wrap">
+    <span class="wn-eyebrow">Automation · n8n</span>
+    <h1>Your team copy-pastes leads at 11pm. <span class="wn-grad">It's costing you the deal.</span></h1>
+    <p class="wn-lede">You hired two VAs to move leads from form to Sheet to CRM to Slack. They still miss one in four. Every missed lead is a call-back you'll never make, and the prospect already booked your competitor. We build the n8n workflow that catches every row before it falls.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</header>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">What we build</p>
+    <h2>Workflows that don't need a babysitter</h2>
+    <div class="wn-grid wn-grid-2">
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/></svg>
+        <h3>Lead-to-CRM router</h3>
+        <p>One pipe from Meta, Google, WhatsApp, JotForm, and Calendly straight into HubSpot, GoHighLevel, or Pipedrive — with dedupe, source tagging, and SLA timers.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3>Approval and triage flows</h3>
+        <p>Slack or Telegram buttons that let your ops lead approve a refund, send a contract, or reroute a complaint in one tap. No more dashboards.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+        <h3>Daily ops reports</h3>
+        <p>Yesterday's bookings, today's missed calls, this week's pipeline. Delivered to your inbox at 7am Bali time — or whatever timezone owns your morning.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4"/><path d="m16.24 7.76 2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
+        <h3>AI-enriched data layer</h3>
+        <p>GPT-4o or Claude classifies each lead, summarises the inquiry, drafts a reply, and scores fit before a human touches it.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <h3>Error handling that pages you</h3>
+        <p>Every node wrapped with retry, fallback, and a Telegram alert if a webhook silently fails. No more discovering broken flows three weeks later.</p>
+      </div>
+      <div class="wn-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <h3>Source-controlled exports</h3>
+        <p>Every workflow exported as JSON and committed to your private Git repo. You own it, you can self-host it, you can fork it whenever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wn-vuln wn-wrap" style="max-width:62rem">We've shipped 180+ workflows since 2022 and the same lie always lands first: "we can do this in Zapier next week." Six months later there are 14 Zaps, two interns who half-understand them, and nobody fixes the broken ones because nobody knows which is which. n8n + version control kills that drift.</div>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Process</p>
+    <h2>Four steps, no surprises</h2>
+    <div class="wn-grid wn-grid-4">
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>60-minute audit. We map your current paste-jobs, your tool stack, and the three flows that bleed the most hours.</p><span class="wn-step-day">Day 1–2</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>You get a flow diagram, the input/output for each node, error paths, and the sandbox creds checklist. You sign before we build.</p><span class="wn-step-day">Day 3–4</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>We build inside your n8n instance (self-host or cloud), test against real data, and run a parallel week with your old process.</p><span class="wn-step-day">Day 5–10</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>Loom walkthroughs, Git-versioned JSON, and a 14-day fix window. We don't disappear after the invoice.</p><span class="wn-step-day">Day 11–14</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Stack we use</p>
+    <h2>Tools that have earned their keep</h2>
+    <div class="wn-stack">
+      <span>n8n (self-host + cloud)</span><span>OpenAI GPT-4o</span><span>Anthropic Claude</span><span>Google Sheets API</span><span>Gmail API</span><span>HubSpot API</span><span>Twilio</span><span>Slack &amp; Telegram</span><span>Supabase</span><span>Webhook.site</span>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Proof</p>
+    <h2>Real shipped work</h2>
+    <div class="wn-proof">
+      <div class="wn-proof-item"><span class="wn-metric">4h → 6min</span>Lead-routing for a French logistics client. Eight conditional gates, GPT-4o draft, Gmail auto-reply.</div>
+      <div class="wn-proof-item"><span class="wn-metric">0 missed leads</span>Dental flagship form-to-CRM with WhatsApp confirm. Ran 90 days straight, zero drops.</div>
+      <div class="wn-proof-item"><span class="wn-metric">17 nodes audited</span>Patched a TakyCorp Gmail auto-draft. Found one blocker, four risks, returned v1.1 in 48 hours.</div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Investment</p>
+    <h2>Range, not flat rate — because your flow isn't the same as theirs</h2>
+    <div class="wn-price-tiers">
+      <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$750</div><div class="wn-cadence">Single workflow, one trigger, three actions, one integration.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$1,500–$3,000</div><div class="wn-cadence">3–6 connected workflows, AI layer, error handling, Git export.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $497/mo</div><div class="wn-cadence">Ongoing fixes, new flows, monthly audit, priority Telegram channel.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">Questions</p>
+    <h2>What founders ask before signing</h2>
+    <details><summary>Do you work in our n8n instance or yours?</summary><div class="wn-faq-body">Always yours. We never lock work inside an account we control. If you self-host on Hetzner or Hostinger VPS, we work there. If you're on n8n.cloud, we work there. You own the credentials, the workflows, and the export the day we deliver.</div></details>
+    <details><summary>What if Zapier is already half-working — do we have to migrate?</summary><div class="wn-faq-body">Not on day one. We usually leave existing Zaps alone, build the new logic in n8n, and migrate one Zap at a time once each n8n flow has run clean for two weeks. Migration usually pays for itself on Zap tier savings inside 90 days.</div></details>
+    <details><summary>How do you handle credentials and API keys?</summary><div class="wn-faq-body">We use a shared 1Password vault you control, or your own KMS. Keys live in n8n's encrypted credential store, never in a Sheet. We rotate after handoff and document which scopes each key actually needs.</div></details>
+    <details><summary>Can we add AI to an existing workflow instead of rebuilding?</summary><div class="wn-faq-body">Yes — that's actually our most common engagement. We bolt a GPT-4o or Claude classifier onto your existing form-to-CRM pipe, you get smarter routing in three days, and we don't touch the parts that already work.</div></details>
+    <details><summary>What's the smallest project worth doing with you?</summary><div class="wn-faq-body">$750 single workflow. If your job is one trigger and two actions, you don't need an agency — use Zapier's free tier. If you need conditional logic, retries, an AI layer, or you're paying $79/month for a Zapier tier you've outgrown, that's where we earn the fee back.</div></details>
+  </div>
+</section>
+
+<div class="wn-cta-block">
+  <div class="wn-wrap">
+    <h2>Pick the leak. We'll map the fix in 60 minutes.</h2>
+    <p class="wn-lede" style="margin:0 auto">Short brief, async friendly, no slide-deck theatre.</p>
+    <div class="wn-cta-row">
+      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"n8n Automation","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Self-hosted and cloud n8n workflow automation: lead routing, approval flows, AI-enriched triage, error handling, and Git-versioned exports.","serviceType":"Workflow automation"},{"@type":"Offer","name":"n8n Automation engagement","priceCurrency":"USD","price":"750","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"750","maxPrice":"3000"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}}]}
+</script>
+</article>

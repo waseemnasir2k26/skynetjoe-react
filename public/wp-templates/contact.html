@@ -1,0 +1,434 @@
+<article class="wn-contact">
+  <style>
+    .wn-contact {
+      --c-bg: #100f14;
+      --c-bg-alt: #1a1920;
+      --c-surface: #1f1f23;
+      --c-surface-2: #29282d;
+      --c-fg: #f7f7f7;
+      --c-fg-muted: #c6c7c6;
+      --c-fg-faint: #98989d;
+      --c-border: rgba(255, 255, 255, 0.08);
+      --c-border-strong: rgba(255, 255, 255, 0.16);
+      --c-green: #1E88E5;
+      --c-green-dark: #1565C0;
+      --c-green-light: #42A5F5;
+      --c-purple: #14B8A6;
+      --c-cyan: #00D4FF;
+      --c-radius: 14px;
+      --c-radius-sm: 10px;
+      background: var(--c-bg);
+      color: var(--c-fg);
+      font-family: var(--font-lexend, "Lexend", system-ui, -apple-system, "Segoe UI", sans-serif);
+      display: block;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+    .wn-contact *, .wn-contact *::before, .wn-contact *::after { box-sizing: border-box; }
+    .wn-contact a { color: var(--c-green-light); text-decoration: none; transition: color .15s ease; }
+    .wn-contact a:hover { color: var(--c-green); }
+
+    .wn-contact .wn-c-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+
+    /* Hero */
+    .wn-contact .wn-c-hero {
+      position: relative;
+      padding: 1rem 0 3rem;
+      border-bottom: 1px solid var(--c-border);
+      margin-bottom: 3.5rem;
+    }
+    .wn-contact .wn-c-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--c-border-strong);
+      border-radius: 999px;
+      background: rgba(19, 185, 115, 0.08);
+      color: var(--c-green-light);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .wn-contact .wn-c-eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c-green);
+      box-shadow: 0 0 8px var(--c-green);
+    }
+    .wn-contact .wn-c-h1 {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.1rem;
+      color: var(--c-fg);
+      max-width: 24ch;
+    }
+    .wn-contact .wn-c-h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--c-green) 0%, var(--c-cyan) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .wn-contact .wn-c-sub {
+      font-size: 1.1rem;
+      color: var(--c-fg-muted);
+      max-width: 56ch;
+      margin: 0;
+    }
+
+    /* Contact methods */
+    .wn-contact .wn-c-methods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .wn-contact .wn-c-method {
+      padding: 1.5rem;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--c-radius);
+      transition: border-color .2s ease, transform .2s ease;
+      display: block;
+      color: var(--c-fg);
+    }
+    .wn-contact .wn-c-method:hover {
+      border-color: var(--c-green);
+      transform: translateY(-2px);
+    }
+    .wn-contact .wn-c-method-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(19, 185, 115, 0.12);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-green-light);
+      margin-bottom: 0.85rem;
+    }
+    .wn-contact .wn-c-method-label {
+      font-size: 0.78rem;
+      color: var(--c-fg-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 0.3rem;
+    }
+    .wn-contact .wn-c-method-value {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--c-fg);
+      margin: 0;
+      word-break: break-word;
+    }
+
+    /* Form */
+    .wn-contact .wn-c-form-card {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--c-radius);
+      padding: 2.25rem;
+      margin-bottom: 3rem;
+    }
+    .wn-contact .wn-c-form-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 0.4rem;
+      color: var(--c-fg);
+    }
+    .wn-contact .wn-c-form-blurb {
+      color: var(--c-fg-muted);
+      font-size: 0.95rem;
+      margin: 0 0 1.75rem;
+    }
+    .wn-contact .wn-c-form {
+      display: grid;
+      gap: 1.1rem;
+    }
+    .wn-contact .wn-c-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+    }
+    .wn-contact .wn-c-field { display: grid; gap: 0.4rem; }
+    .wn-contact .wn-c-field label {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--c-fg-muted);
+      letter-spacing: 0.01em;
+    }
+    .wn-contact .wn-c-field input,
+    .wn-contact .wn-c-field select,
+    .wn-contact .wn-c-field textarea {
+      background: var(--c-bg-alt);
+      border: 1px solid var(--c-border-strong);
+      border-radius: var(--c-radius-sm);
+      padding: 0.78rem 0.95rem;
+      color: var(--c-fg);
+      font: inherit;
+      font-size: 0.97rem;
+      width: 100%;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    .wn-contact .wn-c-field textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+    .wn-contact .wn-c-field input:focus,
+    .wn-contact .wn-c-field select:focus,
+    .wn-contact .wn-c-field textarea:focus {
+      outline: none;
+      border-color: var(--c-green);
+      box-shadow: 0 0 0 3px rgba(19, 185, 115, 0.18);
+    }
+    .wn-contact .wn-c-field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c6c7c6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.95rem center;
+      padding-right: 2.5rem;
+    }
+    .wn-contact .wn-c-submit {
+      justify-self: start;
+      background: linear-gradient(135deg, var(--c-green) 0%, var(--c-green-dark) 100%);
+      color: #fff;
+      font-weight: 700;
+      padding: 0.95rem 1.6rem;
+      border-radius: var(--c-radius-sm);
+      border: 0;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 4px 18px rgba(19, 185, 115, 0.25);
+    }
+    .wn-contact .wn-c-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(19, 185, 115, 0.35);
+    }
+    .wn-contact .wn-c-form-note {
+      color: var(--c-fg-faint);
+      font-size: 0.82rem;
+      margin: 0.4rem 0 0;
+    }
+
+    /* After-send timeline */
+    .wn-contact .wn-c-after {
+      margin-bottom: 3rem;
+    }
+    .wn-contact .wn-c-after-h {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      color: var(--c-fg);
+    }
+    .wn-contact .wn-c-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      position: relative;
+    }
+    .wn-contact .wn-c-step {
+      padding: 1.5rem;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--c-radius);
+      position: relative;
+    }
+    .wn-contact .wn-c-step-num {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--c-green) 0%, var(--c-green-dark) 100%);
+      color: #fff;
+      font-weight: 700;
+      text-align: center;
+      line-height: 32px;
+      font-size: 0.9rem;
+      margin-bottom: 0.85rem;
+    }
+    .wn-contact .wn-c-step-h {
+      font-size: 1.02rem;
+      font-weight: 600;
+      margin: 0 0 0.35rem;
+      color: var(--c-fg);
+    }
+    .wn-contact .wn-c-step-p {
+      color: var(--c-fg-muted);
+      font-size: 0.92rem;
+      margin: 0;
+    }
+
+    /* Trust strip */
+    .wn-contact .wn-c-trust {
+      border-top: 1px solid var(--c-border);
+      padding-top: 2rem;
+      text-align: center;
+      color: var(--c-fg-muted);
+      font-size: 0.95rem;
+    }
+    .wn-contact .wn-c-trust strong {
+      color: var(--c-green-light);
+      font-weight: 600;
+    }
+    .wn-contact .wn-c-trust-divider {
+      display: inline-block;
+      margin: 0 0.6rem;
+      color: var(--c-fg-faint);
+      opacity: 0.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .wn-contact .wn-c-h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
+    }
+    @media (max-width: 768px) {
+      .wn-contact .wn-c-wrap { padding: 3.5rem 1.25rem; }
+      .wn-contact .wn-c-methods,
+      .wn-contact .wn-c-steps { grid-template-columns: 1fr; }
+      .wn-contact .wn-c-row-2 { grid-template-columns: 1fr; }
+      .wn-contact .wn-c-form-card { padding: 1.75rem; }
+    }
+    @media (max-width: 480px) {
+      .wn-contact .wn-c-wrap { padding: 2.75rem 1rem; }
+      .wn-contact .wn-c-form-card { padding: 1.4rem; }
+      .wn-contact .wn-c-trust-divider { display: block; height: 0.5rem; }
+    }
+  </style>
+
+  <div class="wn-c-wrap">
+    <header class="wn-c-hero">
+      <span class="wn-c-eyebrow">Direct line</span>
+      <h1 class="wn-c-h1">No "discovery call" funnel. <em>You write what you need.</em> I reply same business day &mdash; or refund the form.</h1>
+      <p class="wn-c-sub">Bali timezone (GMT+8). Replies land within 8 hours on weekdays. Weekends are for the beach &mdash; expect a Monday answer.</p>
+    </header>
+
+    <section class="wn-c-methods" aria-label="Contact methods">
+      <a class="wn-c-method" href="mailto:info@skynetjoe.com">
+        <span class="wn-c-method-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+        </span>
+        <p class="wn-c-method-label">Email</p>
+        <p class="wn-c-method-value">info@skynetjoe.com</p>
+      </a>
+      <a class="wn-c-method" href="https://cal.com/waseem-nasir/intro" target="_blank" rel="noopener">
+        <span class="wn-c-method-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+        </span>
+        <p class="wn-c-method-label">Book a 30-min call</p>
+        <p class="wn-c-method-value">cal.com/waseem-nasir</p>
+      </a>
+      <a class="wn-c-method" href="https://github.com/waseemnasir2k26" target="_blank" rel="noopener">
+        <span class="wn-c-method-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.58.1.79-.25.79-.56v-2c-3.22.7-3.9-1.36-3.9-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.7.08-.7 1.18.08 1.8 1.21 1.8 1.21 1.04 1.79 2.74 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.57-.29-5.27-1.28-5.27-5.72 0-1.27.45-2.3 1.2-3.12-.12-.3-.52-1.48.11-3.08 0 0 .98-.31 3.2 1.2a11.1 11.1 0 0 1 5.83 0c2.22-1.51 3.2-1.2 3.2-1.2.63 1.6.23 2.78.11 3.08.75.82 1.2 1.85 1.2 3.12 0 4.46-2.7 5.43-5.28 5.71.42.36.8 1.07.8 2.17v3.22c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        </span>
+        <p class="wn-c-method-label">Code &amp; receipts</p>
+        <p class="wn-c-method-value">github.com/waseemnasir2k26</p>
+      </a>
+    </section>
+
+    <section class="wn-c-form-card" aria-label="Project brief form">
+      <h2 class="wn-c-form-title">Tell me what you're trying to build</h2>
+      <p class="wn-c-form-blurb">Skip the warm-up. Drop budget + timeline + the one thing keeping you up. I'll come back with a fixed-price scope or a clean "this isn't my lane &mdash; here's who you should talk to."</p>
+
+      <form class="wn-c-form" action="https://formspree.io/f/REPLACE_FORM_ID" method="POST">
+        <div class="wn-c-row-2">
+          <div class="wn-c-field">
+            <label for="wn-c-name">Your name</label>
+            <input type="text" id="wn-c-name" name="name" required autocomplete="name" />
+          </div>
+          <div class="wn-c-field">
+            <label for="wn-c-email">Email</label>
+            <input type="email" id="wn-c-email" name="email" required autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="wn-c-row-2">
+          <div class="wn-c-field">
+            <label for="wn-c-type">Project type</label>
+            <select id="wn-c-type" name="project_type" required>
+              <option value="">Pick one&hellip;</option>
+              <option value="n8n">n8n / workflow automation</option>
+              <option value="website">Website build</option>
+              <option value="chatbot">AI chatbot</option>
+              <option value="ai-consulting">AI consulting / audit</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="wn-c-field">
+            <label for="wn-c-budget">Budget range (USD)</label>
+            <select id="wn-c-budget" name="budget" required>
+              <option value="">Pick one&hellip;</option>
+              <option value="lt-500">&lt; $500 (small fix or proof-of-concept)</option>
+              <option value="500-2k">$500 &ndash; $2K (one-off build)</option>
+              <option value="2k-5k">$2K &ndash; $5K (multi-week scope)</option>
+              <option value="5k-plus">$5K+ (flagship build)</option>
+              <option value="retainer">Retainer (ongoing monthly)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="wn-c-field">
+          <label for="wn-c-timeline">Timeline</label>
+          <select id="wn-c-timeline" name="timeline" required>
+            <option value="">Pick one&hellip;</option>
+            <option value="this-week">Bleeding &mdash; this week</option>
+            <option value="2-weeks">Within 2 weeks</option>
+            <option value="month">Within a month</option>
+            <option value="quarter">This quarter</option>
+            <option value="exploring">Just exploring</option>
+          </select>
+        </div>
+
+        <div class="wn-c-field">
+          <label for="wn-c-brief">One-paragraph brief</label>
+          <textarea id="wn-c-brief" name="brief" placeholder="What's broken / what you're trying to ship / what 'done' looks like. Plain English." required></textarea>
+        </div>
+
+        <button type="submit" class="wn-c-submit">Send brief &rarr;</button>
+        <p class="wn-c-form-note">No newsletter signup. No autoresponder sequence. Just a real reply from a real human in Bali.</p>
+      </form>
+    </section>
+
+    <section class="wn-c-after" aria-label="What happens next">
+      <h2 class="wn-c-after-h">What happens after you hit send</h2>
+      <div class="wn-c-steps">
+        <div class="wn-c-step">
+          <span class="wn-c-step-num">1</span>
+          <h3 class="wn-c-step-h">Reply within 8h</h3>
+          <p class="wn-c-step-p">Weekdays. Real human, not an autoresponder. If I can't take it, I say so on day one.</p>
+        </div>
+        <div class="wn-c-step">
+          <span class="wn-c-step-num">2</span>
+          <h3 class="wn-c-step-h">30-min scoping call</h3>
+          <p class="wn-c-step-p">Cal.com link, no slide deck. We talk through the build and the edges where it could break.</p>
+        </div>
+        <div class="wn-c-step">
+          <span class="wn-c-step-num">3</span>
+          <h3 class="wn-c-step-h">Fixed-price scope in 48h</h3>
+          <p class="wn-c-step-p">One PDF. Deliverables, ship date, payment milestones. You sign or you walk &mdash; no follow-up funnel.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="wn-c-trust">
+      <strong>9 countries served</strong>
+      <span class="wn-c-trust-divider">&middot;</span>
+      <strong>40+ websites delivered</strong>
+      <span class="wn-c-trust-divider">&middot;</span>
+      <strong>Reply guarantee: 8h or refund the form</strong>
+    </footer>
+  </div>
+</article>
