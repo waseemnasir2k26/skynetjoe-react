@@ -31,6 +31,7 @@ export const NAV_PRIMARY: NavItem[] = [
   { label: "Locations", href: "/locations" },
   { label: "Work", href: "/portfolio" },
   { label: "Case Studies", href: "/case-studies" },
+  { label: "News", href: "/news" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
