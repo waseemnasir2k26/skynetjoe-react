@@ -36,7 +36,7 @@ const VARIANTS: HeroVariantProps[] = [
         <span className="gradient-text">That&apos;s the whole team.</span>
       </>
     ),
-    sub: "Solo founder plus a 1M-context AI engineer. n8n, Next.js, WhatsApp, AEO — shipped across nine countries.",
+    sub: "Solo founder plus a 1M-context AI engineer. n8n, Next.js, live chat, AEO — shipped across nine countries.",
     primaryCta: { label: "Brief me", href: "/contact" },
     secondaryCta: { label: "Open the GitHub", href: SITE.social.github },
     visualNote: "Split portrait + Claude `/` glyph, gold hairline divider",
@@ -87,7 +87,7 @@ const VARIANTS: HeroVariantProps[] = [
         Shipped to <span className="gradient-text">nine countries.</span>
       </>
     ),
-    sub: "Async by default, lean by design. Next.js, n8n, WhatsApp, voice agents — delivered by the person who built them.",
+    sub: "Async by default, lean by design. Next.js, n8n, live chat, voice agents — delivered by the person who built them.",
     primaryCta: { label: "Work with me", href: "/contact" },
     secondaryCta: { label: "Case studies", href: "/case-studies" },
     visualNote: "Wide photo of Bali workspace, code overlay top-right",
@@ -104,7 +104,7 @@ const VARIANTS: HeroVariantProps[] = [
         <span className="gradient-text">that hate logging into things.</span>
       </>
     ),
-    sub: "Dental, mining-logistics, recovery clinics, dealerships. n8n + WhatsApp + CRM glue, built by one operator.",
+    sub: "Dental, mining-logistics, recovery clinics, dealerships. n8n + live chat + CRM glue, built by one operator.",
     primaryCta: { label: "Book a fit call", href: "/contact" },
     secondaryCta: { label: "See vertical work", href: "/case-studies" },
     visualNote: "Four named vertical tiles, one per case study",
@@ -136,7 +136,7 @@ const VARIANTS: HeroVariantProps[] = [
         What if your CRM <span className="gradient-text">filled itself in?</span>
       </>
     ),
-    sub: "That's the kind of automation I build. n8n, WhatsApp, voice — connected to the tools you already pay for.",
+    sub: "That's the kind of automation I build. n8n, live chat, voice — connected to the tools you already pay for.",
     primaryCta: { label: "Show me how", href: "/contact" },
     secondaryCta: { label: "Recent builds", href: "/case-studies" },
     visualNote: "Animated form auto-filling field by field",
@@ -321,7 +321,7 @@ const VARIANTS: HeroVariantProps[] = [
         unreturned DMs, and leads rotting in your inbox?
       </>
     ),
-    sub: "I build the automation that catches them — WhatsApp reminders, CRM auto-fill, voice agents that follow up while you sleep. One operator, AI cofounder, 14-day ship.",
+    sub: "I build the automation that catches them — live chat reminders, CRM auto-fill, voice agents that follow up while you sleep. One operator, AI cofounder, 14-day ship.",
     primaryCta: { label: "Get the leak audit", href: "/contact" },
     secondaryCta: { label: "See client wins", href: "/case-studies" },
     visualNote: "Red downward $-amount counter + green automation graph cross-fading",
@@ -355,7 +355,7 @@ const VARIANTS: HeroVariantProps[] = [
         Hiring won&apos;t fix it. Automation will.
       </>
     ),
-    sub: "I build the systems that replace the next two hires — n8n, CRM, voice agents, WhatsApp. One operator. AI cofounder. Real receipts in Seattle, Paris, Lahore.",
+    sub: "I build the systems that replace the next two hires — n8n, CRM, voice agents, live chat. One operator. AI cofounder. Real receipts in Seattle, Paris, Lahore.",
     primaryCta: { label: "Show me the leak", href: "/contact" },
     secondaryCta: { label: "Stack I build with", href: "/services" },
     visualNote: "Org chart w/ two empty hire boxes replaced by n8n logo + Claude glyph",
@@ -367,7 +367,7 @@ const VARIANTS: HeroVariantProps[] = [
     lever: "Frustration + simplicity",
     headline: (
       <>
-        Your CRM, calendar, WhatsApp, Stripe, and inbox
+        Your CRM, calendar, live chat, Stripe, and inbox
         <br />
         <span className="gradient-text">still don&apos;t talk to each other?</span>
       </>
@@ -408,10 +408,10 @@ const VARIANTS: HeroVariantProps[] = [
         You replied in 6 hours.
       </>
     ),
-    sub: "I build the WhatsApp + voice + CRM stack that responds in 30 seconds — whether you&apos;re in Bali or asleep. One operator. AI cofounder. Real client wins across nine countries.",
+    sub: "I build the live chat + voice + CRM stack that responds in 30 seconds — whether you&apos;re in Bali or asleep. One operator. AI cofounder. Real client wins across nine countries.",
     primaryCta: { label: "Stop losing leads", href: "/contact" },
     secondaryCta: { label: "See the stack", href: "/services" },
-    visualNote: "Stopwatch w/ 6m vs 6h split; subtle WhatsApp + Cal.com + voice-agent badges",
+    visualNote: "Stopwatch w/ 6m vs 6h split; subtle live chat + Cal.com + voice-agent badges",
     style: "default",
   },
   {

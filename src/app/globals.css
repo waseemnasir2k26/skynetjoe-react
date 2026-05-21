@@ -410,3 +410,122 @@ article[class*="wn-"] .wn-section {
 html.light article[class*="wn-"] .wn-section {
   border-top-color: rgba(15, 20, 25, 0.08) !important;
 }
+
+/* ============================================
+   THEME BRIDGE v2 — flip hardcoded dark utilities in light mode
+   Many components were written for dark-default and use literal
+   text-gray-200/300/400, bg-white/5/10, border-white/5/10/15/20.
+   In dark mode these are correct. In light mode they break contrast.
+   These overrides ensure the toggle visibly flips ALL pages.
+   ============================================ */
+
+/* Body-level text utilities used in dark hero copy */
+html.light .text-gray-100,
+html.light .text-gray-200,
+html.light .text-gray-300,
+html.light .text-gray-400,
+html.light .text-gray-500,
+html.light .text-gray-600 {
+  color: var(--fg-muted) !important;
+}
+html.light .text-white,
+html.light .text-white\/90,
+html.light .text-white\/80 {
+  color: var(--fg) !important;
+}
+
+/* Cyan-tinted hero overlay text — readable on cream */
+html.light .text-cyan-100,
+html.light .text-cyan-200,
+html.light .text-cyan-300 {
+  color: var(--skynet-primary-dark) !important;
+}
+
+/* Borders + bg overlays for cards built for dark theme */
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/15,
+html.light .border-white\/20,
+html.light .border-white\/40,
+html.light .border-white\/60 {
+  border-color: var(--border-strong) !important;
+}
+html.light .bg-white\/5,
+html.light .bg-white\/10,
+html.light .bg-white\/15 {
+  background-color: rgba(15, 20, 25, 0.04) !important;
+}
+
+/* Inline-style dark hero gradients — flip via class hook
+   Add class="theme-hero-ocean" wherever hero uses inline ocean gradient.
+   These mimic the existing inline gradient but flip on light theme. */
+.theme-hero-ocean {
+  background:
+    linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%);
+}
+html.light .theme-hero-ocean {
+  background:
+    radial-gradient(at 18% 22%, rgba(30, 136, 229, 0.18) 0px, transparent 55%),
+    radial-gradient(at 82% 28%, rgba(0, 212, 255, 0.14) 0px, transparent 55%),
+    linear-gradient(135deg, #fbfaf6 0%, #f3f1ea 100%) !important;
+  color: var(--fg) !important;
+}
+html.light .theme-hero-ocean h1,
+html.light .theme-hero-ocean h2,
+html.light .theme-hero-ocean h3,
+html.light .theme-hero-ocean p {
+  color: var(--fg) !important;
+}
+
+/* Hero v3 inline-styled section flips too (matches Hero.tsx inline bg) */
+html.light section[style*="linear-gradient(135deg, #061827"],
+html.light section[style*="linear-gradient(135deg,#061827"] {
+  background:
+    radial-gradient(at 18% 22%, rgba(30, 136, 229, 0.18) 0px, transparent 55%),
+    radial-gradient(at 82% 28%, rgba(0, 212, 255, 0.14) 0px, transparent 55%),
+    linear-gradient(135deg, #fbfaf6 0%, #f3f1ea 100%) !important;
+  color: var(--fg) !important;
+}
+
+/* Dark inline gradient panels (rounded-3xl bg-gradient-to-br from-[#0a2d4a]) */
+html.light .from-\[\#0a2d4a\]\/80,
+html.light .via-\[\#073846\]\/60,
+html.light .to-\[\#0a2d4a\]\/80 {
+  --tw-gradient-from: rgba(255, 255, 255, 0.85) !important;
+  --tw-gradient-via: rgba(247, 245, 239, 0.78) !important;
+  --tw-gradient-to: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* White-card surfaces (bg-white/95 etc) — slight tint differentiation in light */
+html.light .bg-white,
+html.light .bg-white\/95 {
+  background-color: var(--surface) !important;
+}
+
+/* Text on dark blocks — keep ocean tone on light mode */
+html.light .text-slate-200,
+html.light .text-slate-300,
+html.light .text-slate-400 {
+  color: var(--fg-faint) !important;
+}
+
+/* Hero headline gradients (light mode keeps the cyan→mint look — readable) */
+/* No override needed; cyan→mint stays legible on cream */
+
+/* Orbs softer in light */
+html.light section .orb {
+  opacity: 0.30 !important;
+}
+
+/* Stat number cyan-300 on dark → primary-dark on light */
+html.light .text-cyan-400,
+html.light .text-cyan-500,
+html.light .text-cyan-600 {
+  color: var(--skynet-primary-dark) !important;
+}
+
+/* Header glass needs theme-aware border */
+html.light header.glass {
+  background: var(--glass-bg) !important;
+  border-bottom: 1px solid var(--border) !important;
+}

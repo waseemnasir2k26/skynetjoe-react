@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Lexend } from "next/font/google";
 import { SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Analytics, { GtmNoscript } from "@/components/Analytics";
 import AISignals from "@/components/aeo/AISignals";
+import LiveChat from "@/components/LiveChat";
+import DiscoveryPopup from "@/components/DiscoveryPopup";
 import "./globals.css";
 
 const lexend = Lexend({
@@ -80,6 +83,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <LiveChat />
+        <Suspense fallback={null}>
+          <DiscoveryPopup />
+        </Suspense>
       </body>
     </html>
   );

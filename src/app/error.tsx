@@ -60,15 +60,13 @@ export default function ErrorBoundary({
               <Home className="w-4 h-4" />
               Go home
             </Link>
-            <a
-              href="https://wa.me/923001001957"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/discovery-call"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-white border border-white/20 hover:border-white/40"
             >
               <MessageCircle className="w-4 h-4" />
               Tell us about it
-            </a>
+            </Link>
           </div>
         </div>
       </div>

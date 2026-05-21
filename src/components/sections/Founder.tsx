@@ -91,8 +91,7 @@ export default function Founder() {
               SkynetLabs isn&apos;t an agency. It&apos;s one person + Claude as
               second seat, shipping automation and sites from a Canggu co-working
               space and a Liberty Market desk in Lahore. No account managers, no
-              sales pods, no hand-offs. You message me on WhatsApp, I read your
-              brief, I build.
+              sales pods, no hand-offs. You send a brief, I read it, I build.
             </p>
             <p className="text-base md:text-lg text-fg-muted leading-relaxed mb-6">
               I started this after 10+ years in WordPress, then n8n, then AI. The

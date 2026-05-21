@@ -184,13 +184,11 @@ export default async function ServiceStatePage({
                 Apply for a discovery call
               </Link>
               <a
-                href="https://wa.me/923001001957"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#livechat-open"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-medium text-white border border-white/20 hover:border-white/40"
               >
                 <MessageCircle className="w-4 h-4" />
-                WhatsApp from {st.abbr}
+                Live chat
               </a>
             </div>
           </div>

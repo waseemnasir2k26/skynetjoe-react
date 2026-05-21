@@ -8,7 +8,6 @@ const person = {
   jobTitle: "Founder, SkynetLabs",
   image: `${SITE.url}/portraits/waseem-rooftop.jpg`,
   email: SITE.emailFounder,
-  telephone: SITE.whatsapp,
   worksFor: { "@id": `${SITE.url}/#organization` },
   sameAs: [
     SITE.social.linkedin,
@@ -34,7 +33,6 @@ const organization = {
   description: SITE.description,
   founder: { "@id": `${SITE.url}/#person` },
   email: SITE.email,
-  telephone: SITE.whatsapp,
   sameAs: [
     SITE.social.linkedin,
     SITE.social.twitter,
