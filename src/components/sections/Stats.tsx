@@ -31,6 +31,36 @@ export default function Stats() {
             );
           })}
         </div>
+
+        {/* The team-size stat — the co-founder hook */}
+        <div className="mt-5 flex justify-center">
+          <div
+            className="inline-flex items-center gap-3 px-5 py-3 rounded-full text-sm"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(217, 119, 87, 0.10) 0%, rgba(20, 184, 166, 0.10) 100%)",
+              border: "1px solid rgba(217, 119, 87, 0.30)",
+              color: "rgba(255,255,255,0.92)",
+            }}
+          >
+            <span
+              className="text-base font-extrabold tracking-tight"
+              style={{
+                background:
+                  "linear-gradient(120deg, #fdba8c 0%, #5eead4 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              1 human + 1 Claude Code
+            </span>
+            <span className="text-xs uppercase tracking-[0.16em] text-gray-400">
+              = 2-person agency. Most have 12.
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );

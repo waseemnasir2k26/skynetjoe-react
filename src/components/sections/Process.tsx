@@ -1,4 +1,5 @@
-import { Search, Wrench, Rocket, TrendingUp, ArrowRight, Calendar } from "lucide-react";
+import Image from "next/image";
+import { Search, Wrench, Rocket, TrendingUp, ArrowRight, Calendar, Terminal } from "lucide-react";
 
 const STEPS = [
   {
@@ -125,7 +126,42 @@ export default function Process() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-[#0a2d4a]/60 via-[#073846]/40 to-[#0a2d4a]/60 border border-cyan-400/20 backdrop-blur-sm">
+        {/* How we actually split the work — the co-founder pact */}
+        <div className="mt-14 grid md:grid-cols-[180px_1fr] gap-6 items-center p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/10">
+          <div className="relative w-full md:w-[180px] aspect-square rounded-xl overflow-hidden border border-white/10 mx-auto">
+            <Image
+              src="/portraits/waseem-cafe-working-side.jpg"
+              alt="Waseem at a cafe laptop — the human half of the 2-person team"
+              fill
+              loading="lazy"
+              sizes="(min-width: 768px) 180px, 50vw"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <div className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.16em] text-orange-300 mb-2">
+              <Terminal className="w-3.5 h-3.5" />
+              How the 2-person team splits the work
+            </div>
+            <h3 className="text-xl md:text-2xl font-bold mb-3 text-white">
+              You brief Waseem. Claude drafts. Waseem ships.
+            </h3>
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-3">
+              You send a brief in 3 sentences. I read it, scope it, and pair
+              with Claude Code in a terminal next to my coffee. Claude drafts
+              architecture, writes the first 70% of the code, audits diffs, and
+              writes the docs. I make the calls, talk to you, ship the
+              deliverable, and take the blame if it breaks. You get a
+              production deploy in 14 days. No account manager in the loop.
+            </p>
+            <p className="text-xs text-gray-500 italic">
+              Most agencies have 12 humans. We have 1 human + 1 Anthropic API
+              key. The math works.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-[#0a2d4a]/60 via-[#073846]/40 to-[#0a2d4a]/60 border border-cyan-400/20 backdrop-blur-sm">
           <div className="flex-1">
             <p className="text-sm font-semibold text-cyan-200 mb-1">
               Total clock: 14 days from first Loom to production deploy.
