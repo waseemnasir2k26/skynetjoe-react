@@ -2,6 +2,7 @@ import Hero from "@/components/sections/Hero";
 import Stats from "@/components/sections/Stats";
 import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
+import Founder from "@/components/sections/Founder";
 import LinkedInBadge from "@/components/sections/LinkedInBadge";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
@@ -62,6 +63,7 @@ export default function Home() {
       <Stats />
       <Services />
       <Process />
+      <Founder />
       <LinkedInBadge />
       <Testimonials />
       <FAQ />

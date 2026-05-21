@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import DiscoveryCallForm from "./DiscoveryCallForm";
+import Image from "next/image";
+import DiscoveryCallForm, { DiscoveryProofSidebar } from "./DiscoveryCallForm";
 import { CheckCircle2, Clock, Filter, Users, ShieldCheck, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -131,6 +132,16 @@ export default function DiscoveryCallPage() {
               </span>
             </div>
 
+            <div className="flex items-center gap-3 mb-5">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-cyan-400/40">
+                <Image src="/portraits/waseem-bluepolo.jpg" alt="Waseem Nasir" fill sizes="48px" className="object-cover" />
+              </div>
+              <div>
+                <p className="text-cyan-200 text-sm font-semibold">Waseem reviews briefs personally</p>
+                <p className="text-gray-400 text-xs">Bali · GMT+8 · solo-led since 2014</p>
+              </div>
+            </div>
+
             <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.04] tracking-tight mb-6 text-white">
               Don&apos;t book a call.{" "}
               <span
@@ -184,7 +195,8 @@ export default function DiscoveryCallPage() {
             </div>
 
             <aside className="space-y-4">
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+              <DiscoveryProofSidebar />
+              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 mt-6">
                 Why we filter
               </p>
               {whyFilter.map((w) => {

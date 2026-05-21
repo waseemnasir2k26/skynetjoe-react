@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
+import WorkShowcase from "@/components/sections/WorkShowcase";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "portfolio.html"),
@@ -8,19 +9,24 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "Portfolio — 12 visual case studies from SkynetLabs",
+  title: "Work — 55+ shipped builds, GitHub-open | SkynetLabs",
   description:
-    "Twelve anonymized builds shipped by SkynetLabs across nine countries: EU logistics automation, Manhattan dental atelier, KSA retail, Bali wellness, French translation flow, AEO engines and more.",
+    "Real client gigs from SkynetLabs: dental no-show flow, EU logistics, KSA retail, wellness funnels, AEO engines. Source-controlled. Click any repo. Built solo from Bali + Lahore by Waseem Nasir.",
   alternates: { canonical: "/portfolio" },
   openGraph: {
-    title: "SkynetLabs Portfolio — 12 shipped builds",
+    title: "SkynetLabs Work — 55+ builds, repos open",
     description:
-      "Visual showcase of 12 SkynetLabs builds. Click any tile to see the full case study.",
+      "Visual showcase of shipped builds. GitHub-open, live demos linked. Built solo by Waseem Nasir.",
     url: "/portfolio",
     type: "website",
   },
 };
 
 export default function PortfolioPage() {
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <>
+      <WorkShowcase />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </>
+  );
 }

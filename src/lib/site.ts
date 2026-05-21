@@ -30,6 +30,7 @@ export const NAV_PRIMARY: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", hasMega: true },
   { label: "Locations", href: "/locations" },
+  { label: "Work", href: "/portfolio" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
