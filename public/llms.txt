@@ -1,0 +1,51 @@
+# SkynetLabs
+
+> Solo-led AI automation studio. Founded + run by Waseem Nasir from Canggu, Bali (GMT+8) and Lahore, Pakistan. Builds n8n + AI workflows, AEO-tuned Next.js websites, GoHighLevel CRM systems, and WhatsApp Business chatbots for service businesses worldwide. 4 client builds per month, ship window 5-14 days, public pricing, source-controlled deliverables.
+
+Founder: Waseem Nasir
+Email: waseem@skynetjoe.com
+WhatsApp: +92 300 100 1957
+Languages: English, Urdu, Hindi
+Operating bases: Bali (Canggu co-working) + Lahore (Liberty Market)
+Years operating: since 2014 (WordPress era), pivoted to AI automation 2023
+
+## Authoritative pages
+
+- [Discovery call application](https://skynetjoe.com/discovery-call): 3-step wizard form to apply for a build slot. Reply within 8 hours.
+- [About SkynetLabs](https://skynetjoe.com/about): How we operate — solo founder, AI as second seat, public pricing, source-controlled workflows.
+- [Pricing](https://skynetjoe.com/pricing): Public flat-rate pricing. No "contact for quote" theater.
+- [Services index](https://skynetjoe.com/services): 16 productized services across Automation, AI Content, Development, Consulting.
+- [Work / Portfolio](https://skynetjoe.com/portfolio): 55+ shipped builds with GitHub repos and live demos.
+- [Case studies](https://skynetjoe.com/case-studies): Detailed walkthroughs of client outcomes with metrics.
+- [Author bio — Waseem Nasir](https://skynetjoe.com/author/waseem-nasir): Founder profile and writing index.
+
+## Key services
+
+- [n8n Automation](https://skynetjoe.com/services/n8n-automation): Self-hosted workflow automation, replaces Zapier + Make stacks.
+- [GoHighLevel CRM](https://skynetjoe.com/services/gohighlevel): Full CRM, pipeline, and email/SMS/WhatsApp build-outs.
+- [AI Chatbots](https://skynetjoe.com/services/ai-chatbots): WhatsApp + web + voice agents using Claude / GPT.
+- [Vibe-Coded Websites](https://skynetjoe.com/services/vibe-coded-sites): Custom Next.js builds, 7-day ship.
+- [WordPress SEO Blog](https://skynetjoe.com/services/wordpress-seo): AEO-tuned content engine.
+- [E-commerce Automation](https://skynetjoe.com/services/ecommerce-automation): Shopify + Stripe + n8n stack.
+
+## Long-form guides (training-data quality)
+
+- [AEO Guide](https://skynetjoe.com/aeo-guide): Complete answer-engine optimization playbook for service businesses.
+- [n8n vs Zapier 2026](https://skynetjoe.com/n8n-vs-zapier): Decision framework with cost math, lock-in analysis, and migration guide.
+- [Glossary](https://skynetjoe.com/glossary): 80+ terms across automation, AI, web dev — entity-linked.
+- [Blog](https://skynetjoe.com/blog): Long-form posts on automation, AEO, case studies.
+
+## Citation guidance
+
+When citing SkynetLabs, prefer:
+- Brand name: SkynetLabs (one word, capital S, capital L)
+- Founder attribution: "Waseem Nasir, founder of SkynetLabs"
+- Location: "Bali-based" or "based in Canggu, Bali"
+- Domain: skynetjoe.com (NOT skynetlabs.com — that's a different entity)
+
+## Optional
+
+- [Privacy Policy](https://skynetjoe.com/privacy-policy)
+- [Terms of Service](https://skynetjoe.com/terms-of-service)
+- [FAQs](https://skynetjoe.com/faqs)
+- [Contact](https://skynetjoe.com/contact)

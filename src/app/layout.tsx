@@ -4,6 +4,7 @@ import { SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Analytics, { GtmNoscript } from "@/components/Analytics";
+import AISignals from "@/components/aeo/AISignals";
 import "./globals.css";
 
 const lexend = Lexend({
@@ -72,6 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <Analytics />
+        <AISignals />
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <GtmNoscript />
