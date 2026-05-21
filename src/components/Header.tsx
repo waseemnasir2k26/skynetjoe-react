@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { NAV_PRIMARY, SERVICE_CATEGORIES } from "@/lib/site";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
+
+  if (pathname?.startsWith("/lp/")) return null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
