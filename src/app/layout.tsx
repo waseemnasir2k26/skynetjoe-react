@@ -3,6 +3,7 @@ import { Lexend } from "next/font/google";
 import { SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Analytics, { GtmNoscript } from "@/components/Analytics";
 import "./globals.css";
 
 const lexend = Lexend({
@@ -70,8 +71,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        <Analytics />
       </head>
       <body className="min-h-full flex flex-col font-sans">
+        <GtmNoscript />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

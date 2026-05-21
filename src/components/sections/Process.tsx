@@ -136,13 +136,11 @@ export default function Process() {
             </p>
           </div>
           <a
-            href="https://cal.com/waseemnasir"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/discovery-call"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-semibold text-sm transition-colors whitespace-nowrap"
           >
             <Calendar className="w-4 h-4" />
-            Book your free audit
+            Apply for a discovery call
           </a>
         </div>
       </div>

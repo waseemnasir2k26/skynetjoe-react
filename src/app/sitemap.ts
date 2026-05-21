@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
 import { STATES } from "@/lib/states";
+import { POSTS } from "@/lib/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -14,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/pricing",
     "/about",
     "/contact",
+    "/discovery-call",
     "/aeo-guide",
     "/glossary",
     "/faqs",
@@ -47,5 +49,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...stateRoutes];
+  const blogRoutes = POSTS.map((p) => ({
+    url: `${base}/blog/${p.slug}`,
+    lastModified: new Date(p.updatedAt || p.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  const PROTOTYPE_STATE_MATRIX = ["california"];
+  const serviceStateRoutes = SERVICE_CATEGORIES.flatMap((cat) =>
+    cat.services.flatMap((svc) =>
+      STATES.filter((s) => PROTOTYPE_STATE_MATRIX.includes(s.slug)).map(
+        (s) => ({
+          url: `${base}/services/${svc.slug}/in/${s.slug}`,
+          lastModified: now,
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+        })
+      )
+    )
+  );
+
+  return [
+    ...staticRoutes,
+    ...serviceRoutes,
+    ...stateRoutes,
+    ...blogRoutes,
+    ...serviceStateRoutes,
+  ];
 }

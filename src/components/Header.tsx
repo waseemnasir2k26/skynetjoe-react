@@ -79,8 +79,8 @@ export default function Header() {
 
         <div className="hidden lg:flex items-center gap-3">
           <ThemeToggle />
-          <Link href="/contact" className="btn-primary text-sm">
-            Start a project
+          <Link href="/discovery-call" className="btn-primary text-sm">
+            Apply for a call
           </Link>
         </div>
 
@@ -109,11 +109,11 @@ export default function Header() {
             <div className="mt-4 flex items-center gap-2">
               <ThemeToggle />
               <Link
-                href="/contact"
+                href="/discovery-call"
                 onClick={() => setMobileOpen(false)}
                 className="btn-primary flex-1 justify-center"
               >
-                Start a project
+                Apply for a call
               </Link>
             </div>
           </nav>

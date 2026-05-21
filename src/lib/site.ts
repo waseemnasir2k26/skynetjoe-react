@@ -131,6 +131,7 @@ export const FOOTER_COLUMNS = [
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms of Service", href: "/terms-of-service" },
       { label: "Contact", href: "/contact" },
+      { label: "Apply for a call", href: "/discovery-call" },
     ],
   },
 ] as const;

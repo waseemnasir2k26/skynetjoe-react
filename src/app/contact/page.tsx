@@ -31,7 +31,7 @@ const GithubIcon = ({ className }: { className?: string }) => (
 export const metadata: Metadata = {
   title: "Contact — 8-hour reply guarantee from Bali | SkynetLabs",
   description:
-    "Skip the discovery-call dance. Send a brief, get a fixed-price scope back in 48 hours. WhatsApp, email, LinkedIn, or Cal.com — pick your channel. Reply within 8h on weekdays.",
+    "Skip the discovery-call dance. Send a brief, get a fixed-price scope back in 48 hours. WhatsApp, email, LinkedIn, or formal application — pick your channel. Reply within 8h on weekdays.",
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Talk to Waseem — SkynetLabs",
@@ -48,7 +48,7 @@ const schema = {
   name: "Contact SkynetLabs",
   url: `${SITE.url}/contact`,
   description:
-    "Multi-channel contact for SkynetLabs. WhatsApp, email, LinkedIn, Cal.com. 8-hour reply on weekdays.",
+    "Multi-channel contact for SkynetLabs. WhatsApp, email, LinkedIn, discovery-call application. 8-hour reply on weekdays.",
   inLanguage: "en",
   mainEntity: {
     "@type": "Organization",
@@ -104,13 +104,13 @@ const channels = [
     badge: "Daily active",
   },
   {
-    name: "Cal.com",
-    desc: "30-min Zoom. Free. No funnel. Bring questions.",
-    cta: "Book a slot",
-    href: "https://cal.com/waseemnasir",
+    name: "Apply for a call",
+    desc: "Send a brief. If we're a fit, you get a Cal.com link in your inbox within 8 hours.",
+    cta: "Open application form",
+    href: "/discovery-call",
     icon: Calendar,
     color: "from-violet-400 to-purple-500",
-    badge: "Free",
+    badge: "Filtered",
   },
 ];
 
@@ -264,10 +264,8 @@ export default function ContactPage() {
                   <Mail className="w-4 h-4" />
                   Email me
                 </a>
-                <a
-                  href="https://cal.com/waseemnasir"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/discovery-call"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-medium text-white transition-colors"
                   style={{
                     background: "rgba(255, 255, 255, 0.06)",
@@ -275,8 +273,8 @@ export default function ContactPage() {
                   }}
                 >
                   <Calendar className="w-4 h-4" />
-                  Or book a slot
-                </a>
+                  Or apply for a call
+                </Link>
               </div>
             </div>
 

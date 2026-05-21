@@ -156,15 +156,13 @@ export default async function StatePage({
                 <MessageCircle className="w-4 h-4" />
                 WhatsApp from {s.abbr}
               </a>
-              <a
-                href="https://cal.com/waseemnasir"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/discovery-call"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/40 hover:border-cyan-400/70 text-cyan-200 font-semibold transition-colors"
               >
                 <Calendar className="w-4 h-4" />
-                Book a call
-              </a>
+                Apply for a call
+              </Link>
               <Link
                 href="/pricing"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 text-gray-200 font-semibold transition-colors"
@@ -267,19 +265,17 @@ export default async function StatePage({
               Building in {s.name}? Let&apos;s scope it.
             </h3>
             <p className="text-lg text-white/90 mb-6 max-w-2xl mx-auto">
-              30-min Zoom, free. Bring your stack — leave with a fixed-price
-              one-pager and a 14-day ship window.
+              Send a brief. If we&apos;re a fit for {s.name}, you&apos;ll get a
+              Cal.com link back within 8 hours. Fixed-price scope in 48h.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <a
-                href="https://cal.com/waseemnasir"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/discovery-call"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition-colors"
               >
                 <Calendar className="w-4 h-4" />
-                Book a call from {s.abbr}
-              </a>
+                Apply from {s.abbr}
+              </Link>
               <a
                 href="https://wa.me/923001001957"
                 target="_blank"

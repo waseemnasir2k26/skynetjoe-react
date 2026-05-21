@@ -1,0 +1,142 @@
+<style>
+  .wn-ghl-no-show-automation-case-study { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-ghl-no-show-automation-case-study h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-ghl-no-show-automation-case-study h3 { color: #7ee4ff; font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+  .wn-ghl-no-show-automation-case-study p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-ghl-no-show-automation-case-study ul, .wn-ghl-no-show-automation-case-study ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-ghl-no-show-automation-case-study li { margin-bottom: 0.6rem; }
+  .wn-ghl-no-show-automation-case-study strong { color: #fff; }
+  .wn-ghl-no-show-automation-case-study a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-ghl-no-show-automation-case-study .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem; }
+  .wn-ghl-no-show-automation-case-study .stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(0,212,255,0.2); padding: 1.25rem; border-radius: 14px; }
+  .wn-ghl-no-show-automation-case-study .stat-value { font-size: 1.8rem; font-weight: 800; background: linear-gradient(120deg, #7ee4ff, #5eead4); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.1; margin-bottom: 0.25rem; }
+  .wn-ghl-no-show-automation-case-study .stat-label { font-size: 0.8rem; color: #9ca3af; }
+  .wn-ghl-no-show-automation-case-study .timeline { background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(20,184,166,0.06)); border: 1px solid rgba(0,212,255,0.2); border-radius: 14px; padding: 1.5rem; margin: 2rem 0; }
+  .wn-ghl-no-show-automation-case-study .timeline-item { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .wn-ghl-no-show-automation-case-study .timeline-item:last-child { border-bottom: 0; }
+  .wn-ghl-no-show-automation-case-study .timeline-day { color: #7ee4ff; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.75rem; }
+  .wn-ghl-no-show-automation-case-study .verdict { background: linear-gradient(135deg, #1E88E5, #14B8A6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-ghl-no-show-automation-case-study code { background: rgba(0,212,255,0.12); color: #7ee4ff; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.9em; }
+</style>
+
+<p>Names changed, numbers real. We worked with a five-chair dental practice in the US Midwest from March to April 2026. They came to us through a LinkedIn DM with one sentence: <em>"We're hemorrhaging money on no-shows and our front-desk staff is drowning in reminder calls."</em></p>
+
+<p>Fourteen days later, their no-show rate had dropped from 32% to 7%. Front-desk hours spent on reminder calls dropped from ~18/week to under 3. Net recovered revenue: $11,400/month based on their average procedure value.</p>
+
+<h2>The starting state</h2>
+
+<div class="stats">
+  <div class="stat"><div class="stat-value">32%</div><div class="stat-label">No-show rate</div></div>
+  <div class="stat"><div class="stat-value">$11.4K</div><div class="stat-label">Monthly revenue lost</div></div>
+  <div class="stat"><div class="stat-value">18 hrs</div><div class="stat-label">Weekly reminder calls</div></div>
+  <div class="stat"><div class="stat-value">0</div><div class="stat-label">Recovery flow</div></div>
+</div>
+
+<p>The practice ran a hodgepodge of tools: a legacy practice management system (PMS) for scheduling, a separate SMS service that fired once 24 hours before, and a Gmail inbox where appointment confirmations went to die. Patients confirmed via phone — when they remembered.</p>
+
+<p>The owner had tried GoHighLevel six months prior but couldn't get the calendar to sync with the PMS, gave up, and was paying $97/month for an unused account when we got the brief.</p>
+
+<h2>What we actually built</h2>
+
+<p>The architecture was deliberately boring. No AI agents, no fancy ML scoring. Just disciplined messaging at the right moments through the right channels.</p>
+
+<h3>1. Calendar bridge: PMS → GoHighLevel</h3>
+<p>The PMS exposed an iCal feed (most do). We pointed an n8n workflow at the feed every 15 minutes, diffed against the previous fetch, and pushed new/changed/canceled appointments into GHL via its API. Took two days of testing to handle edge cases (appointment moved to a different provider, double-booked slot, last-minute reschedules).</p>
+
+<h3>2. Multi-channel reminder cascade</h3>
+<p>The reminder sequence we landed on after A/B testing:</p>
+<ul>
+  <li><strong>T-7 days:</strong> WhatsApp message with appointment details + add-to-calendar link. Personal, conversational tone.</li>
+  <li><strong>T-72 hours:</strong> Email confirmation with one-click confirm/reschedule buttons.</li>
+  <li><strong>T-24 hours:</strong> WhatsApp + SMS in parallel. "Hi [Name], confirming your 2pm appointment tomorrow with Dr. Patel. Reply YES to confirm or RESCHED if you need to change."</li>
+  <li><strong>T-3 hours:</strong> SMS only. Quick reminder with location pin and parking instructions.</li>
+  <li><strong>T-30 minutes:</strong> SMS only. "On your way? Reply HERE when you arrive."</li>
+</ul>
+
+<p>Critical decision: <strong>WhatsApp was the primary channel</strong>, SMS the fallback. WhatsApp Business templates were pre-approved through GHL's WhatsApp integration. The read rate on WhatsApp messages was 94% vs 81% for SMS — patients actually saw them.</p>
+
+<h3>3. The recovery flow</h3>
+
+<p>This was the biggest revenue lever. Before our build, a canceled or no-show slot was just lost. Front desk would maybe call a waitlist patient if they had time. Usually they didn't.</p>
+
+<p>The recovery flow we built:</p>
+
+<ol>
+  <li>Cancellation triggers n8n webhook from GHL.</li>
+  <li>n8n queries the GHL waitlist tag for patients matching the canceled service type (cleaning, filling, whitening, etc.).</li>
+  <li>WhatsApp goes to the top 3 waitlist candidates simultaneously: "Hi [Name], a slot opened at [time] today/tomorrow with [provider]. Want it? Reply YES."</li>
+  <li>First YES wins. Slot moves into PMS via the same iCal bridge running in reverse.</li>
+  <li>Other waitlist candidates get a polite "slot taken, you're next in line" message.</li>
+</ol>
+
+<p>Average time from cancellation to filled slot: <strong>11 minutes</strong>. Filled slots that would have been lost: 18 per month.</p>
+
+<h3>4. Soft escalation for chronic no-shows</h3>
+
+<p>Patients with 3+ no-shows in 12 months were flagged in GHL. Future appointments required a $50 deposit, communicated via WhatsApp at booking. This was the only "harsh" rule — and it cut chronic no-shows by 80% (most of those patients just stopped booking, which the owner was fine with).</p>
+
+<h2>The numbers, two weeks after launch</h2>
+
+<div class="stats">
+  <div class="stat"><div class="stat-value">7%</div><div class="stat-label">No-show rate</div></div>
+  <div class="stat"><div class="stat-value">$11.4K</div><div class="stat-label">Monthly recovered</div></div>
+  <div class="stat"><div class="stat-value">2.6 hrs</div><div class="stat-label">Weekly call time</div></div>
+  <div class="stat"><div class="stat-value">11 min</div><div class="stat-label">Avg cancel-to-fill</div></div>
+</div>
+
+<p>The 7% residual no-show rate is essentially unsolvable — those are emergencies, family crises, true forgetfulness. Pushing below 7% would require punitive deposits and would chase good patients away.</p>
+
+<h2>The build timeline</h2>
+
+<div class="timeline">
+  <div class="timeline-item"><span class="timeline-day">Day 1</span>Brief reviewed, scope written, deposit invoiced.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 2–3</span>GHL audit, PMS API access, WhatsApp Business approval kicked off.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 4–6</span>iCal bridge built, tested with sandboxed appointments.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 7–9</span>Reminder cascade built, message templates A/B tested with 30 test patients.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 10–11</span>Recovery flow built and stress-tested.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 12</span>Front-desk training (45 min Loom + 15 min live Q&A).</div>
+  <div class="timeline-item"><span class="timeline-day">Day 13</span>Soft launch — new appointments only, old ones stay manual.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 14</span>Full cutover.</div>
+</div>
+
+<h2>What this cost the practice</h2>
+
+<ul>
+  <li><strong>Build fee:</strong> $3,400 (one-time)</li>
+  <li><strong>Monthly stack:</strong> $147 (GHL $97 + n8n Cloud $24 + WhatsApp Business $20 + SMS credits ~$6)</li>
+  <li><strong>Payback period:</strong> 9 days from launch.</li>
+</ul>
+
+<p>The owner's exact text three weeks in: <em>"This thing pays for itself daily. Why didn't I do this two years ago."</em></p>
+
+<h2>Why this isn't impressive (and why that matters)</h2>
+
+<p>There's nothing technically impressive in this build. No machine learning. No exotic AI. No proprietary algorithm. Just:</p>
+
+<ul>
+  <li>A boring iCal sync between two systems.</li>
+  <li>Five well-timed messages across three channels.</li>
+  <li>A cancellation listener that hits a waitlist.</li>
+  <li>A deposit rule for chronic offenders.</li>
+</ul>
+
+<p>The "innovation" was deciding what <em>not</em> to build. We didn't build a custom UI for the front desk (they use GHL's existing pipeline view). We didn't build patient sentiment scoring (it's a dental clinic, not a SaaS). We didn't build an AI receptionist (their actual human one was already good at her job once we freed up her time).</p>
+
+<div class="verdict">
+  The leverage isn't in the tooling. It's in saying no to the 80% of the wishlist that wouldn't move the needle, and yes to the 20% that does.
+</div>
+
+<h2>What we'd do differently</h2>
+
+<p>Two things, in hindsight:</p>
+
+<ol>
+  <li><strong>Started with WhatsApp template approval sooner.</strong> Meta's approval process took 3 days. We could have submitted templates on day 1 instead of day 4. Would have shaved the timeline to 11 days instead of 14.</li>
+  <li><strong>Built a simple owner dashboard.</strong> We delivered raw GHL reports. The owner wanted a single-screen "yesterday/this week/this month" snapshot. We built it later as a $400 add-on. Should have included it in scope.</li>
+</ol>
+
+<p>The rest, we'd build the same way. Boring, opinionated, shipped in 14 days.</p>
+
+<div style="background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(20,184,166,0.08)); border-left: 3px solid #00D4FF; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2.5rem 0;">
+  <strong style="color: #7ee4ff;">Running a service business with a no-show problem?</strong> Send a brief. We'll send back a scoped fix in 48 hours. <a href="/discovery-call">Apply for a discovery call</a>.
+</div>

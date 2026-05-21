@@ -106,15 +106,13 @@ export default function LocationsIndexPage() {
                 <MessageCircle className="w-4 h-4" />
                 WhatsApp now
               </a>
-              <a
-                href="https://cal.com/waseemnasir"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/discovery-call"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/40 hover:border-cyan-400/70 text-cyan-200 font-semibold transition-colors"
               >
                 <Calendar className="w-4 h-4" />
-                Book a call
-              </a>
+                Apply for a call
+              </Link>
             </div>
           </div>
         </div>
@@ -182,19 +180,18 @@ export default function LocationsIndexPage() {
               Not sure which service fits your state?
             </h3>
             <p className="text-lg text-white/90 mb-6 max-w-2xl mx-auto">
-              Book a free 30-min call. Bring your stack — leave with a fixed
-              scope. No funnel, no upsell.
+              Send a brief through our short application. If we&apos;re a fit,
+              you&apos;ll have a Cal.com link in your inbox within 8 hours. No
+              funnel, no upsell.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <a
-                href="https://cal.com/waseemnasir"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/discovery-call"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition-colors"
               >
                 <Calendar className="w-4 h-4" />
-                Book a call
-              </a>
+                Apply for a call
+              </Link>
               <a
                 href="https://wa.me/923001001957"
                 target="_blank"
