@@ -156,7 +156,7 @@ export async function POST(req: Request) {
   if (!ghlOk && !emailOk) {
     console.error("[discovery] both GHL + email failed", { ghlRes, emailRes });
     return NextResponse.json(
-      { error: "Couldn't deliver brief. Try WhatsApp." },
+      { error: "Couldn't deliver brief. Email waseem@skynetjoe.com directly." },
       { status: 502 },
     );
   }

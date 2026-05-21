@@ -11,7 +11,7 @@ type IconCmp = React.ComponentType<{ className?: string }>;
 export const metadata: Metadata = {
   title: "AI Automation Services Across All 48 US States | SkynetLabs",
   description:
-    "SkynetLabs delivers AI automation, n8n workflows, GoHighLevel CRM, AEO websites and WhatsApp chatbots to founders in all 48 contiguous US states. Pick your state — fixed scope, public pricing, 5–14 day ship.",
+    "SkynetLabs delivers AI automation, n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents to founders in all 48 contiguous US states. Pick your state — fixed scope, public pricing, 5–14 day ship.",
   alternates: { canonical: "/locations" },
   openGraph: {
     title: "SkynetLabs — Active in all 48 US states",
@@ -76,7 +76,7 @@ export default function LocationsIndexPage() {
             </h1>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
               SkynetLabs ships n8n workflows, GoHighLevel CRM systems, AEO-tuned
-              websites and WhatsApp chatbots to founders in every contiguous US
+              websites and live-chat agents to founders in every contiguous US
               state — from{" "}
               <Link href="/locations/california" className="text-cyan-300 hover:text-cyan-100 underline decoration-cyan-400/40 underline-offset-4">
                 California
@@ -97,22 +97,20 @@ export default function LocationsIndexPage() {
               weekday reply guarantee.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
-                href="https://wa.me/923001001957"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-semibold transition-colors"
-              >
-                <MessageCircle className="w-4 h-4" />
-                WhatsApp now
-              </a>
               <Link
                 href="/discovery-call"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/40 hover:border-cyan-400/70 text-cyan-200 font-semibold transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-semibold transition-colors"
               >
                 <Calendar className="w-4 h-4" />
                 Apply for a call
               </Link>
+              <a
+                href="#livechat-open"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/40 hover:border-cyan-400/70 text-cyan-200 font-semibold transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Live chat
+              </a>
             </div>
           </div>
         </div>
@@ -193,13 +191,11 @@ export default function LocationsIndexPage() {
                 Apply for a call
               </Link>
               <a
-                href="https://wa.me/923001001957"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#livechat-open"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
-                WhatsApp instead
+                Live chat instead
               </a>
               <Link
                 href="/contact"

@@ -26,7 +26,7 @@ const TIERS = [
       "Custom Next.js site (Vercel)",
       "5-workflow automation stack",
       "AEO-tuned SEO base",
-      "WhatsApp / CRM integration",
+      "Live chat / CRM integration",
       "14-day delivery",
       "30-day support",
       "$497/mo retainer optional",
@@ -41,7 +41,7 @@ const TIERS = [
     desc: "Ongoing automation operator. Stack new wins monthly.",
     features: [
       "20 hrs/month dedicated",
-      "Unlimited Slack / WhatsApp",
+      "Unlimited Slack / email access",
       "Monthly strategy call",
       "Pause anytime",
       "Min 3-month engagement",

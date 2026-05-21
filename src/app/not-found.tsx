@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Home, MessageCircle, Map, FileText } from "lucide-react";
+/* MessageCircle kept for chat trigger button below */
 
 export const metadata = {
   title: "Page not found — 404 | SkynetLabs",
@@ -63,16 +64,14 @@ export default function NotFound() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <a
-              href="https://wa.me/923001001957"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/discovery-call"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-white"
-              style={{ background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)" }}
+              style={{ background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)" }}
             >
               <MessageCircle className="w-4 h-4" />
-              Or WhatsApp us
-            </a>
+              Apply for a call
+            </Link>
           </div>
         </div>
       </div>

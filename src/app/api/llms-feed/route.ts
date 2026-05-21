@@ -27,7 +27,7 @@ export async function GET() {
       founder_url: SITE.founderUrl,
       contact: {
         email: SITE.emailFounder,
-        whatsapp: SITE.whatsapp,
+        live_chat: "Embedded site widget + /discovery-call brief form",
       },
       location: {
         primary: "Canggu, Bali, Indonesia (GMT+8)",

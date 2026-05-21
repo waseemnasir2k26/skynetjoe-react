@@ -286,12 +286,10 @@ export default function DiscoveryCallPage() {
                 </a>
                 , or just{" "}
                 <a
-                  href="https://wa.me/923001001957"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:waseem@skynetjoe.com"
                   className="underline decoration-2 underline-offset-4 hover:text-cyan-100"
                 >
-                  WhatsApp Waseem
+                  email Waseem
                 </a>{" "}
                 a quick question. No funnel.
               </p>

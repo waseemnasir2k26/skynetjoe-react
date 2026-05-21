@@ -39,7 +39,7 @@ export async function GET() {
 
 Founder: ${SITE.founder}
 Domain: ${SITE.domain}
-Contact: ${SITE.emailFounder} | WhatsApp ${SITE.whatsapp}
+Contact: ${SITE.emailFounder} | Apply for a call: ${SITE.url}/discovery-call
 Base: Canggu, Bali (GMT+8) + Lahore, Pakistan
 Operating since: 2014 (WordPress) | AI automation since 2023
 

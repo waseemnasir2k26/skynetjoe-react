@@ -42,7 +42,7 @@ const STACK_OPTIONS = [
   "Shopify",
   "Webflow",
   "Next.js / React",
-  "WhatsApp Business",
+  "Live chat / chatbot",
   "OpenAI / Claude API",
   "Airtable / Notion",
   "Nothing yet",
@@ -184,7 +184,7 @@ export default function DiscoveryCallForm() {
       }
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Submission failed. Try WhatsApp instead.");
+      setErrorMsg(err instanceof Error ? err.message : "Submission failed. Email waseem@skynetjoe.com instead.");
     }
   }
 
@@ -234,15 +234,14 @@ export default function DiscoveryCallForm() {
             </ol>
           </div>
           <p className="text-sm text-gray-400 mt-6">
-            Urgent? WhatsApp:{" "}
+            Urgent? Email{" "}
             <a
-              href="https://wa.me/923001001957"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:waseem@skynetjoe.com"
               className="text-cyan-300 underline font-semibold"
             >
-              +92 300 100 1957
-            </a>
+              waseem@skynetjoe.com
+            </a>{" "}
+            — typical reply window 8 hours.
           </p>
         </motion.div>
       </>
@@ -362,7 +361,7 @@ export default function DiscoveryCallForm() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label="WhatsApp" hint="Include country code.">
+              <Field label="Phone" hint="Optional. Include country code.">
                 <input
                   type="tel"
                   value={form.whatsapp}
@@ -541,7 +540,7 @@ export default function DiscoveryCallForm() {
                 rows={5}
                 value={form.pain}
                 onChange={(e) => update("pain", e.target.value)}
-                placeholder="Example: We get 40 leads/week from Facebook but 30% no-show on consult calls. CRM is GHL but reminders aren't firing. Want WhatsApp + SMS reminder flow + auto-rebook for cancellations."
+                placeholder="Example: We get 40 leads/week from Facebook but 30% no-show on consult calls. CRM is GHL but reminders aren't firing. Want SMS + email reminder flow + auto-rebook for cancellations."
                 className={inputClass + " resize-none"}
               />
               <div className="flex justify-between text-[11px] text-gray-500 mt-1.5">
@@ -587,7 +586,7 @@ export default function DiscoveryCallForm() {
                 className="mt-0.5 w-4 h-4 rounded border-white/30 bg-white/5 accent-cyan-400"
               />
               <span className="text-sm text-gray-300 leading-relaxed">
-                OK to reply via WhatsApp + email. We don&apos;t share your data,
+                OK to reply via email. We don&apos;t share your data,
                 sell it, or add you to a drip. One-touch unsubscribe always.
               </span>
             </label>
@@ -607,12 +606,10 @@ export default function DiscoveryCallForm() {
                   <p className="text-rose-100/60 mt-2">
                     Fallback:{" "}
                     <a
-                      href="https://wa.me/923001001957"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="mailto:waseem@skynetjoe.com"
                       className="underline"
                     >
-                      WhatsApp Waseem
+                      email Waseem
                     </a>{" "}
                     directly.
                   </p>

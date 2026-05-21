@@ -6,7 +6,7 @@ import { Plus, Minus } from "lucide-react";
 const FAQS = [
   {
     q: "How fast can you ship?",
-    a: "Starter automations: 5 days. Flagship site rebuilds: 14 days. AI agent stacks (voice / WhatsApp / CRM): 7–10 days. Audit booked Monday → first deliverable shipped by end of next week. No 6-week discovery phase.",
+    a: "Starter automations: 5 days. Flagship site rebuilds: 14 days. AI agent stacks (voice / live chat / CRM): 7–10 days. Audit booked Monday → first deliverable shipped by end of next week. No 6-week discovery phase.",
   },
   {
     q: "Are you a solo operator or an agency?",
