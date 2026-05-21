@@ -8,11 +8,11 @@ export const metadata: Metadata = {
 };
 
 const VARIANTS = [
-  { slug: "freight-v1-editorial", name: "V1 — Editorial Dark + Gold", desc: "NYT-magazine, dark+gold, Fraunces serif, asymmetric grid", color: "#d4af37", bg: "#0a0a0a" },
-  { slug: "freight-v2-swiss", name: "V2 — Swiss Grid", desc: "Linear/Stripe-tier, light, Inter Tight + JetBrains Mono, safety-orange slash", color: "#ff4a1c", bg: "#fafaf7" },
-  { slug: "freight-v3-letter", name: "V3 — Founder Letter", desc: "Long-scroll personal letter, Lora + Caveat handwriting, warm navy + gold", color: "#c9985a", bg: "#f7f3ec" },
-  { slug: "freight-v4-calculator", name: "V4 — ROI Calculator", desc: "Terminal-style, JetBrains Mono, charcoal + neon green + Bloomberg amber, live sliders", color: "#00ff9c", bg: "#0d1117" },
-  { slug: "freight-v5-cinematic", name: "V5 — Cinematic Video", desc: "Full-bleed ken-burns hero, DM Serif Display, cinema-red + cream, video-first", color: "#d62828", bg: "#050505" },
+  { slug: "freight-v1-editorial", name: "V1 — Editorial Dark + Gold (funnel)", desc: "Dark+gold restructure: hero w/ live dispatch preview, 6 named clients, 2 photo testimonials, single CTA, scarcity ribbon, 4-question FAQ", color: "#d4af37", bg: "#0a0a0a" },
+  { slug: "freight-v2-swiss", name: "V2 — Swiss / Stripe-tier", desc: "Linear/Stripe-anatomy: tight headline, dark product mockup under hero, 4-feature grid, dark comparison table vs agencies/dev/AI, single primary CTA", color: "#ff4a1c", bg: "#fafaf7" },
+  { slug: "freight-v3-letter", name: "V3 — Founder Letter (untouched)", desc: "Long-scroll personal letter, Lora + Caveat handwriting, warm navy + gold (user's favourite — kept as-is)", color: "#c9985a", bg: "#f7f3ec" },
+  { slug: "freight-v4-calculator", name: "V4 — ROI Calculator (funnel)", desc: "Terminal-green calc hero, trust strip, 2 testimonials w/ payback proof, public pricing table w/ inline CTAs, scarcity ribbon", color: "#00ff9c", bg: "#0d1117" },
+  { slug: "freight-v5-cinematic", name: "V5 — Cinematic Video (funnel)", desc: "Cinema-red ken-burns hero, trust strip under hero, 90-sec video, 3 clip cards, 3-card offer grid, 2 italic-serif testimonials, pricing", color: "#d62828", bg: "#050505" },
 ];
 
 export default function FreightLpIndex() {
