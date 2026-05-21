@@ -37,9 +37,9 @@ export const NEWS: NewsArticle[] = [
     slug: "8-hour-reply-rule",
     title: "The 8-hour reply rule",
     eyebrow: "Operations · Volume II · 2026",
-    deck: "How SkynetLabs handles four builds a month from a cafe in Bali without missing replies, dropping builds, or burning out. The unsexy WhatsApp-and-Notion stack that actually runs the shop.",
+    deck: "How SkynetLabs handles four builds a month from a cafe in Bali without missing replies, dropping builds, or burning out. The unsexy Signal-and-Notion stack that actually runs the shop.",
     description:
-      "The exact operating rhythm — WhatsApp queue, Notion build board, eight-hour weekday reply window — that lets one operator ship 4 client builds/month from Canggu without slipping.",
+      "The exact operating rhythm — Signal queue, Notion build board, eight-hour weekday reply window — that lets one operator ship 4 client builds/month from Canggu without slipping.",
     heroImage: "/news/8-hour-reply.jpg",
     heroCaption: "Crate Cafe · Canggu · 7am scooter slot",
     publishedAt: "2026-05-07",
@@ -51,7 +51,7 @@ export const NEWS: NewsArticle[] = [
     slug: "dental-no-show-n8n-flow",
     title: "I built a dental no-show flow that cut cancellations 70%",
     eyebrow: "Build log · Volume II · 2026",
-    deck: "A real Karachi dental flagship was losing PKR 480,000/month to no-shows. The n8n + GoHighLevel + WhatsApp graph I shipped in 11 days — every node, every fallback, every number.",
+    deck: "A real Karachi dental flagship was losing PKR 480,000/month to no-shows. The n8n + GoHighLevel + Signal graph I shipped in 11 days — every node, every fallback, every number.",
     description:
       "Full breakdown of the dental no-show n8n flow that took a Karachi practice from 32% to under 10% cancellation rate. Architecture, message timing, fallback logic, and the cost math.",
     heroImage: "/news/dental-no-show.jpg",

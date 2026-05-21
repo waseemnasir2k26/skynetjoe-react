@@ -134,11 +134,11 @@ export default function Page() {
 
         <h3>Six: One communication channel</h3>
         <p>
-          WhatsApp Business (free), a Slack workspace (free for under 90
+          Signal (free), a Slack workspace (free for under 90
           days of history), or Microsoft Teams (often bundled with
           QuickBooks accounts). One. Not three. If your drivers are
           texting to one number and your office is on Teams and your
-          dispatcher is on WhatsApp, that&apos;s an organizational problem,
+          dispatcher is on Signal, that&apos;s an organizational problem,
           not a tooling problem.
         </p>
 
@@ -155,7 +155,7 @@ export default function Page() {
         <p>
           Pick one. Delete the others. The right one for small fleets
           is usually GoHighLevel (because it&apos;s priced for SMB and
-          handles SMS+WhatsApp natively) or a stripped-down Pipedrive.
+          handles SMS+Signal natively) or a stripped-down Pipedrive.
           HubSpot is too expensive for under 100 contacts in your
           pipeline.
         </p>
@@ -254,9 +254,9 @@ export default function Page() {
           broker calls from costing you a driver.
         </p>
         <p>
-          <strong>A WhatsApp inbox for owner-operator communication.</strong>
-          Most small fleets use SMS or email. Your drivers are on WhatsApp.
-          A WhatsApp Business inbox (free) plus a $97/month GoHighLevel
+          <strong>A Signal inbox for owner-operator communication.</strong>
+          Most small fleets use SMS or email. Your drivers are on Signal.
+          A Signal inbox (free) plus a $97/month GoHighLevel
           seat to route the messages saves about 4 hours/week of
           back-and-forth.
         </p>

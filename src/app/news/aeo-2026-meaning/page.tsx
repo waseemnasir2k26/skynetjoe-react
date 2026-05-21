@@ -139,7 +139,7 @@ export default function Page() {
         </p>
         <p>
           A good answer block: <em>&quot;SkynetLabs builds n8n + GoHighLevel
-          + WhatsApp automation systems for service businesses. Public
+          + Signal automation systems for service businesses. Public
           pricing starts at $1,497, ships in 14 days, founder-led by
           Waseem Nasir from Canggu, Bali.&quot;</em> Three concrete claims,
           one named entity, geo-tag, founder name. Easy to cite.

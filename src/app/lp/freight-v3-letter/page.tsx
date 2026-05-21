@@ -134,9 +134,9 @@ export default function V3Letter() {
             <p>Right question. Let me answer it the way I&apos;d want it answered.</p>
 
             <h2>The reason solo works in your favor</h2>
-            <p>No account managers. No sales pod. No creative director. When you message me on WhatsApp, you reach <mark>the person who will write the code, design the dashboard, and ship the AI agent</mark>. Not a project coordinator. Not a junior. Me.</p>
+            <p>No account managers. No sales pod. No creative director. When you message me on Signal, you reach <mark>the person who will write the code, design the dashboard, and ship the AI agent</mark>. Not a project coordinator. Not a junior. Me.</p>
             <div className="margin-note">this is the part most agencies skip</div>
-            <p>When you tell me &quot;the broker keeps calling at 2am and I miss every load,&quot; I don&apos;t relay that to three other people. I open Vapi, write the qualifying flow, test it on a burner number tonight, you see a working demo on WhatsApp in 48 hours. Cycle time from your pain to a working prototype is faster than any 12-person agency can run a standup.</p>
+            <p>When you tell me &quot;the broker keeps calling at 2am and I miss every load,&quot; I don&apos;t relay that to three other people. I open Vapi, write the qualifying flow, test it on a burner number tonight, you see a working demo on Signal in 48 hours. Cycle time from your pain to a working prototype is faster than any 12-person agency can run a standup.</p>
             <blockquote>&quot;I get more done in eight hours than my last agency got done in eight weeks. And I know it&apos;s actually him, because he sends me Loom walkthroughs at 3am his time.&quot;<cite>— Vow Sanctuary, Asheville NC (real client)</cite></blockquote>
 
             <h2>Why I named the page &quot;one operator, one stack, one roof&quot;</h2>
@@ -173,7 +173,7 @@ export default function V3Letter() {
             <div className="proof-grid">
               <article className="proof-card"><div className="proof-card-meta">Wellness · Asheville NC</div><div className="proof-card-name">Vow Sanctuary</div><p className="proof-card-body">Next.js flagship · Lighthouse 98 · 3-day ship · $7K MRR pipeline within 30 days.</p></article>
               <article className="proof-card"><div className="proof-card-meta">Functional medicine · USA</div><div className="proof-card-name">GutReno</div><p className="proof-card-body">WordPress + GHL funnel · 12% landing→consult · $4K/mo lead value.</p></article>
-              <article className="proof-card"><div className="proof-card-meta">DTC supplements · multi-region</div><div className="proof-card-name">Wellness DNA</div><p className="proof-card-body">Shopify + n8n + WhatsApp post-purchase · 28% LTV lift in 90 days.</p></article>
+              <article className="proof-card"><div className="proof-card-meta">DTC supplements · multi-region</div><div className="proof-card-name">Wellness DNA</div><p className="proof-card-body">Shopify + n8n + Signal post-purchase · 28% LTV lift in 90 days.</p></article>
               <article className="proof-card"><div className="proof-card-meta">Home services · USA</div><div className="proof-card-name">Pretty Potty</div><p className="proof-card-body">Lead-gen + GHL + SMS reminders · 4× booked-consult rate.</p></article>
               <article className="proof-card"><div className="proof-card-meta">Construction · USA</div><div className="proof-card-name">TimeLapse Renovation</div><p className="proof-card-body">Progress tracker + client portal · replaces 3 paid SaaS subs.</p></article>
               <article className="proof-card"><div className="proof-card-meta">Internal · open-source</div><div className="proof-card-name">SkynetJoe theme</div><p className="proof-card-body">The premium WordPress theme this whole stack evolved from. Public on GitHub.</p></article>
@@ -187,7 +187,7 @@ export default function V3Letter() {
             <h2><em>Four tiers.</em> No &quot;custom quote&quot; theater.</h2>
             <p className="pricing-note">Half on signature, half on launch. Walk anytime with what&apos;s built. Audit comes first — pricing only matters if we&apos;re a fit.</p>
             <ul className="tiers-list">
-              <li><div className="tier-row-name">Starter <small>14d · site + CRM + WA</small></div><div className="tier-row-price">$1,497 <small>flat</small></div><div className="tier-row-desc">Five-page premium site, GHL CRM, WhatsApp Business inbox, Meta Pixel + CAPI, 2 revision rounds.</div></li>
+              <li><div className="tier-row-name">Starter <small>14d · site + CRM + WA</small></div><div className="tier-row-price">$1,497 <small>flat</small></div><div className="tier-row-desc">Five-page premium site, GHL CRM, Signal inbox, Meta Pixel + CAPI, 2 revision rounds.</div></li>
               <li><div className="tier-row-name">Pro <small>21d · + dispatch + factoring</small></div><div className="tier-row-price">$3,997 <small>+ $497/mo</small></div><div className="tier-row-desc">Everything in Starter, plus custom dispatch dashboard, factoring integration, SMS automation, monthly opt call.</div></li>
               <li><div className="tier-row-name">Premium <small>30d · + ad ops + lead gen</small></div><div className="tier-row-price">$7,997 <small>+ $997/mo</small></div><div className="tier-row-desc">Everything in Pro, plus Meta + LinkedIn ad ops, cold + warm lead-gen flows, monthly content batch, weekly review.</div></li>
               <li><div className="tier-row-name">Flagship <small>45d · AI Dispatcher Agent™</small></div><div className="tier-row-price">$9,500 <small>+ $1,997/mo</small></div><div className="tier-row-desc">Everything in Premium, plus Vapi / Retell AI voice agent, inbound load qualification, 24/7 phone coverage.</div></li>
@@ -200,7 +200,7 @@ export default function V3Letter() {
           <p>Eight-hour reply on weekday Bali time. Yes, no, or referral. No commitment. No funnel. Either way you walk with the audit findings.</p>
           <div className="closer-cta-row">
             <a href="https://cal.com/skynetjoe/audit" className="btn btn-gold">Book the audit →</a>
-            <a href="https://wa.me/923001001957?text=COMMAND" className="btn btn-paper">WhatsApp &quot;Command&quot;</a>
+            <a href="/discovery-call" className="btn btn-paper">Apply for a call</a>
           </div>
         </section>
 
@@ -209,7 +209,7 @@ export default function V3Letter() {
             <div className="grid">
               <div><h5>SkynetLabs</h5><p>One operator. One stack. One roof.<br />Waseem Nasir · Canggu, Bali (GMT+8) + Lahore, Pakistan.</p></div>
               <div><h5>Pages</h5><a href="/services">Services</a><a href="/portfolio">Work</a><a href="/pricing">Pricing</a></div>
-              <div><h5>Reach</h5><a href="https://cal.com/skynetjoe/audit">Book audit</a><a href="https://wa.me/923001001957?text=COMMAND">WhatsApp</a><a href="mailto:waseem@skynetjoe.com">Email</a></div>
+              <div><h5>Reach</h5><a href="https://cal.com/skynetjoe/audit">Book audit</a><a href="/discovery-call">Signal</a><a href="mailto:waseem@skynetjoe.com">Email</a></div>
               <div><h5>Elsewhere</h5><a href="https://www.linkedin.com/in/waseemnasir2k26">LinkedIn</a><a href="https://github.com/waseemnasir2k26">GitHub</a><a href="https://youtube.com/@skynetlabs">YouTube</a></div>
             </div>
             <p className="disclaimer">SkynetLabs provides software, design, and marketing services. Not a freight broker or motor carrier. No FMCSA authority. Software demos are inbound-only and require user consent (TCPA-compliant). Reference 49 CFR 371 governs broker authority and is not implicated by services described herein. Public pricing reflects standard scope as of 2026-06-01 and may vary by custom requirements. © 2026 SkynetLabs · Waseem Nasir.</p>
@@ -217,7 +217,7 @@ export default function V3Letter() {
         </footer>
       </main>
 
-      <a href="https://wa.me/923001001957?text=COMMAND" className="wa-sticky">
+      <a href="/discovery-call" className="wa-sticky">
         <svg viewBox="0 0 24 24"><path d={WA_ICON} /></svg>WA
       </a>
     </div>

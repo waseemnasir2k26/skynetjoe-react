@@ -100,10 +100,10 @@ export default function NewsIndex() {
                 Book the audit →
               </a>
               <a
-                href="https://wa.me/923001001957?text=NEWS"
+                href="/discovery-call"
                 className="btn btn-paper"
               >
-                WhatsApp &quot;News&quot;
+                Apply for a call
               </a>
             </div>
           </section>

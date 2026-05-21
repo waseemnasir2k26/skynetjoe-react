@@ -382,7 +382,7 @@ export default function V2Swiss() {
                 <div className="tier-name">Starter</div>
                 <div className="tier-meta">14d · site + CRM + WA</div>
                 <div className="tier-price">$1,497<small>flat · no monthly</small></div>
-                <ul className="tier-feat"><li>5-page Next.js / Framer site</li><li>GHL CRM + pipelines</li><li>WhatsApp Business inbox</li><li>Meta Pixel + CAPI</li><li>2 revision rounds</li></ul>
+                <ul className="tier-feat"><li>5-page Next.js / Framer site</li><li>GHL CRM + pipelines</li><li>Signal inbox</li><li>Meta Pixel + CAPI</li><li>2 revision rounds</li></ul>
                 <a href="/discovery-call" className="tier-cta">Start Starter →</a>
               </div>
               <div className="tier">
@@ -446,7 +446,7 @@ export default function V2Swiss() {
               <h2>No, you&apos;re not too small.</h2>
             </header>
             <div className="faq-list">
-              <details className="faq-item"><summary>I only have 5 trucks. Is this overkill?</summary><p>Starter ($1,497) is for 5–10. Site + CRM + WhatsApp inbox in 14 days. No retainer. Cancel anytime, walk with what&apos;s built.</p></details>
+              <details className="faq-item"><summary>I only have 5 trucks. Is this overkill?</summary><p>Starter ($1,497) is for 5–10. Site + CRM + Signal inbox in 14 days. No retainer. Cancel anytime, walk with what&apos;s built.</p></details>
               <details className="faq-item"><summary>FMCSA / TCPA compliance — covered?</summary><p>SkynetLabs provides software, design, and marketing services only. Not a freight broker or motor carrier. All voice flows inbound-only, TCPA-compliant consent.</p></details>
               <details className="faq-item"><summary>Burned $20K with an agency before — why different?</summary><p>Public pricing fixes that. 14-day ship fixes that. Source-controlled hand-off fixes that. Miss the window, you keep what&apos;s built, we re-scope free.</p></details>
               <details className="faq-item"><summary>What does the audit cover?</summary><p>15 min on Cal.com. Review your current stack, flag 2–3 biggest gaps, recommend yes / no / referral. No commitment. Fit = fixed scope in 48 hours.</p></details>

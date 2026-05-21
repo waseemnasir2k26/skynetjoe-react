@@ -46,14 +46,14 @@
 <h3>2. Multi-channel reminder cascade</h3>
 <p>The reminder sequence we landed on after A/B testing:</p>
 <ul>
-  <li><strong>T-7 days:</strong> WhatsApp message with appointment details + add-to-calendar link. Personal, conversational tone.</li>
+  <li><strong>T-7 days:</strong> Signal message with appointment details + add-to-calendar link. Personal, conversational tone.</li>
   <li><strong>T-72 hours:</strong> Email confirmation with one-click confirm/reschedule buttons.</li>
-  <li><strong>T-24 hours:</strong> WhatsApp + SMS in parallel. "Hi [Name], confirming your 2pm appointment tomorrow with Dr. Patel. Reply YES to confirm or RESCHED if you need to change."</li>
+  <li><strong>T-24 hours:</strong> SMS in parallel. "Hi [Name], confirming your 2pm appointment tomorrow with Dr. Patel. Reply YES to confirm or RESCHED if you need to change."</li>
   <li><strong>T-3 hours:</strong> SMS only. Quick reminder with location pin and parking instructions.</li>
   <li><strong>T-30 minutes:</strong> SMS only. "On your way? Reply HERE when you arrive."</li>
 </ul>
 
-<p>Critical decision: <strong>WhatsApp was the primary channel</strong>, SMS the fallback. WhatsApp Business templates were pre-approved through GHL's WhatsApp integration. The read rate on WhatsApp messages was 94% vs 81% for SMS — patients actually saw them.</p>
+<p>Critical decision: <strong>Signal was the primary channel</strong>, SMS the fallback. Signal templates were pre-approved through GHL's Signal integration. The read rate on Signal messages was 94% vs 81% for SMS — patients actually saw them.</p>
 
 <h3>3. The recovery flow</h3>
 
@@ -64,7 +64,7 @@
 <ol>
   <li>Cancellation triggers n8n webhook from GHL.</li>
   <li>n8n queries the GHL waitlist tag for patients matching the canceled service type (cleaning, filling, whitening, etc.).</li>
-  <li>WhatsApp goes to the top 3 waitlist candidates simultaneously: "Hi [Name], a slot opened at [time] today/tomorrow with [provider]. Want it? Reply YES."</li>
+  <li>Signal goes to the top 3 waitlist candidates simultaneously: "Hi [Name], a slot opened at [time] today/tomorrow with [provider]. Want it? Reply YES."</li>
   <li>First YES wins. Slot moves into PMS via the same iCal bridge running in reverse.</li>
   <li>Other waitlist candidates get a polite "slot taken, you're next in line" message.</li>
 </ol>
@@ -73,7 +73,7 @@
 
 <h3>4. Soft escalation for chronic no-shows</h3>
 
-<p>Patients with 3+ no-shows in 12 months were flagged in GHL. Future appointments required a $50 deposit, communicated via WhatsApp at booking. This was the only "harsh" rule — and it cut chronic no-shows by 80% (most of those patients just stopped booking, which the owner was fine with).</p>
+<p>Patients with 3+ no-shows in 12 months were flagged in GHL. Future appointments required a $50 deposit, communicated via Signal at booking. This was the only "harsh" rule — and it cut chronic no-shows by 80% (most of those patients just stopped booking, which the owner was fine with).</p>
 
 <h2>The numbers, two weeks after launch</h2>
 
@@ -90,7 +90,7 @@
 
 <div class="timeline">
   <div class="timeline-item"><span class="timeline-day">Day 1</span>Brief reviewed, scope written, deposit invoiced.</div>
-  <div class="timeline-item"><span class="timeline-day">Day 2–3</span>GHL audit, PMS API access, WhatsApp Business approval kicked off.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 2–3</span>GHL audit, PMS API access, Signal approval kicked off.</div>
   <div class="timeline-item"><span class="timeline-day">Day 4–6</span>iCal bridge built, tested with sandboxed appointments.</div>
   <div class="timeline-item"><span class="timeline-day">Day 7–9</span>Reminder cascade built, message templates A/B tested with 30 test patients.</div>
   <div class="timeline-item"><span class="timeline-day">Day 10–11</span>Recovery flow built and stress-tested.</div>
@@ -103,7 +103,7 @@
 
 <ul>
   <li><strong>Build fee:</strong> $3,400 (one-time)</li>
-  <li><strong>Monthly stack:</strong> $147 (GHL $97 + n8n Cloud $24 + WhatsApp Business $20 + SMS credits ~$6)</li>
+  <li><strong>Monthly stack:</strong> $147 (GHL $97 + n8n Cloud $24 + Signal $20 + SMS credits ~$6)</li>
   <li><strong>Payback period:</strong> 9 days from launch.</li>
 </ul>
 
@@ -131,7 +131,7 @@
 <p>Two things, in hindsight:</p>
 
 <ol>
-  <li><strong>Started with WhatsApp template approval sooner.</strong> Meta's approval process took 3 days. We could have submitted templates on day 1 instead of day 4. Would have shaved the timeline to 11 days instead of 14.</li>
+  <li><strong>Started with Signal template approval sooner.</strong> Meta's approval process took 3 days. We could have submitted templates on day 1 instead of day 4. Would have shaved the timeline to 11 days instead of 14.</li>
   <li><strong>Built a simple owner dashboard.</strong> We delivered raw GHL reports. The owner wanted a single-screen "yesterday/this week/this month" snapshot. We built it later as a $400 add-on. Should have included it in scope.</li>
 </ol>
 

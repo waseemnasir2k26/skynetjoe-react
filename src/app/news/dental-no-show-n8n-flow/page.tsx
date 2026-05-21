@@ -77,7 +77,7 @@ export default function Page() {
           I sketched the flow on a paper napkin that night. Eleven days
           later it was in production. Six months later the cancellation
           rate sat at <mark>under 10%, sometimes dipping to 7%</mark> on
-          weeks the WhatsApp engagement was high. Here&apos;s the entire
+          weeks the Signal engagement was high. Here&apos;s the entire
           graph, every node, every decision, every fallback.
         </p>
 
@@ -85,7 +85,7 @@ export default function Page() {
         <p>
           GoHighLevel holds the appointment calendar and patient records.
           n8n watches for appointment creation, schedules four touch points
-          across the booking window, sends each one through WhatsApp Cloud
+          across the booking window, sends each one through Signal Cloud
           API, listens for the patient&apos;s reply, branches based on the
           response, and writes the outcome back to GHL. The front desk gets
           one daily Slack digest at 8am: who confirmed, who cancelled, who
@@ -123,7 +123,7 @@ export default function Page() {
         <p>
           The 6pm timing on T-24 was a hard-won choice. We tested 10am, 2pm,
           and 6pm. 6pm crushed the others because that&apos;s when people
-          are home, settled, and actually checking WhatsApp.
+          are home, settled, and actually checking Signal.
         </p>
         <div className="margin-note">10am replies looked like spam to them</div>
 
@@ -152,9 +152,9 @@ export default function Page() {
           where they left off.
         </p>
 
-        <h3>WhatsApp Cloud API send</h3>
+        <h3>Signal Cloud API send</h3>
         <p>
-          Each touch point lands in a WhatsApp template message. WhatsApp
+          Each touch point lands in a Signal template message. Signal
           requires templates be pre-approved for messages sent outside the
           24-hour customer-initiated window — which dental appointments
           mostly are. We submitted four templates:
@@ -173,7 +173,7 @@ export default function Page() {
 
         <h3>Reply listener</h3>
         <p>
-          WhatsApp Cloud sends incoming messages to a different webhook. We
+          Signal Cloud sends incoming messages to a different webhook. We
           parse the patient reply against a regex bank:
         </p>
         <pre><code>{`YES|HAA|HAANJI|OK|CONFIRM    -> confirmed
@@ -276,7 +276,7 @@ Call list (T-24 no reply):
           The flow ports cleanly to any single-location practice with
           appointment-based revenue: dental, chiropractic, dermatology,
           aesthetics, physiotherapy. The base template is now $2,997 for
-          a 10-day ship including WhatsApp Business setup, GHL pipeline
+          a 10-day ship including Signal setup, GHL pipeline
           mapping, four template approvals, the n8n graph, and a
           handoff Loom for your front desk.
         </p>

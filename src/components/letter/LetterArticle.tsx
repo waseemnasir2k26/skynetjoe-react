@@ -95,9 +95,6 @@ export const LETTER_CSS = `
 .lp-v3 .wa-sticky svg { width:16px; height:16px; fill:currentColor; }
 `;
 
-const WA_ICON =
-  "M17.5 14c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 2 .6 3.9 1.7 5.5L2 22l4.6-1.2c1.5.8 3.3 1.3 5.4 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z";
-
 export type RelatedItem = {
   slug: string;
   title: string;
@@ -142,17 +139,6 @@ export function LetterShell({ children }: { children: ReactNode }) {
       </header>
 
       {children}
-
-      <a
-        href="https://wa.me/923001001957?text=NEWS"
-        className="wa-sticky"
-        aria-label="WhatsApp SkynetLabs"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d={WA_ICON} />
-        </svg>
-        WA
-      </a>
     </div>
   );
 }
@@ -236,10 +222,10 @@ export default function LetterArticle({
               Book the audit →
             </a>
             <a
-              href="https://wa.me/923001001957?text=NEWS"
+              href="/discovery-call"
               className="btn btn-paper"
             >
-              WhatsApp &quot;News&quot;
+              Apply for a call →
             </a>
           </div>
         </section>

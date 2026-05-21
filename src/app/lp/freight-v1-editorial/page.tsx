@@ -252,7 +252,7 @@ export default function V1Editorial() {
                 <div className="ps-card-lbl">Your current stack</div>
                 <h3>Six tabs, $847/mo, zero throughput.</h3>
                 <ul>
-                  <li><strong>DAT + Truckstop + QuickBooks + ELD + sheet + WhatsApp</strong> — six logins, none talk to each other.</li>
+                  <li><strong>DAT + Truckstop + QuickBooks + ELD + sheet + Signal</strong> — six logins, none talk to each other.</li>
                   <li><strong>Phone never stops.</strong> Miss the 2am rate confirmation, broker reassigns by 6am.</li>
                   <li><strong>$847/mo</strong> in tool spend, per SkynetLabs 2026 intake average.</li>
                   <li><strong>Agencies want 6-month retainers.</strong> Dev shops want time + materials. Nobody quotes a price.</li>
@@ -279,7 +279,7 @@ export default function V1Editorial() {
             <h2 className="section-h">Quietly, <em>they keep buying.</em></h2>
             <div className="testimonials">
               <article className="quote">
-                <p className="quote-body">Eight days. Site live, GHL wired, WhatsApp inbox routing every load. We were paying three agencies and a freelancer for less than this one operator ships.</p>
+                <p className="quote-body">Eight days. Site live, GHL wired, Signal inbox routing every load. We were paying three agencies and a freelancer for less than this one operator ships.</p>
                 <div className="quote-attrib">
                   <div className="quote-avatar">JR</div>
                   <div className="quote-meta">
@@ -318,7 +318,7 @@ export default function V1Editorial() {
                 <ul>
                   <li>5-page premium Next.js site</li>
                   <li>GHL CRM + pipelines wired</li>
-                  <li>WhatsApp Business inbox</li>
+                  <li>Signal inbox</li>
                   <li>Meta Pixel + CAPI</li>
                   <li>2 revision rounds</li>
                 </ul>
@@ -391,7 +391,7 @@ export default function V1Editorial() {
             <span className="kicker">Operators ask first</span>
             <h2 className="section-h">No, you&apos;re <em>not too small.</em></h2>
             <div className="faq-list">
-              <details className="faq-item"><summary>I only have 5 trucks. Is this overkill?</summary><p>Starter ($1,497) is built for 5–10 trucks. Site + CRM + WhatsApp inbox in 14 days. No monthly fee. Cancel anytime, walk with the full build.</p></details>
+              <details className="faq-item"><summary>I only have 5 trucks. Is this overkill?</summary><p>Starter ($1,497) is built for 5–10 trucks. Site + CRM + Signal inbox in 14 days. No monthly fee. Cancel anytime, walk with the full build.</p></details>
               <details className="faq-item"><summary>FMCSA / TCPA compliance — covered?</summary><p>SkynetLabs provides software, design, and marketing services only. Not a freight broker or motor carrier. No FMCSA authority required. AI voice flows are inbound-only and require user consent (TCPA-compliant).</p></details>
               <details className="faq-item"><summary>I burned $20K on an agency last year. Why is this different?</summary><p>Public pricing fixes that. 14-day ship window fixes that. Source-controlled hand-off in your GitHub fixes that. Miss the window, you keep what&apos;s built and we re-scope free.</p></details>
               <details className="faq-item"><summary>What happens on the 15-minute audit?</summary><p>Cal.com call. I review your current stack, flag 2–3 biggest gaps, recommend yes / no / referral. No commitment. Fit = fixed scope quoted in 48 hours.</p></details>

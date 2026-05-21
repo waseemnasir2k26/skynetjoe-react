@@ -177,7 +177,7 @@ export default function Page() {
           </li>
           <li>
             <strong>Phone (Telkomsel SIM):</strong> 150,000 IDR/month
-            (~$10). Local data, calls home over WhatsApp.
+            (~$10). Local data, calls home over Signal.
           </li>
           <li>
             <strong>Going out (dinners, beach clubs occasionally):</strong>

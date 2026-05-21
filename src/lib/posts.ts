@@ -26,7 +26,7 @@ export const POSTS: Post[] = [
     slug: "ghl-no-show-automation-case-study",
     title: "Case Study: How We Cut a Dental Practice's No-Show Rate from 32% to 7%",
     description:
-      "Real client. Real numbers. The GoHighLevel + WhatsApp + n8n stack that recovered $11,400/month in lost revenue inside 14 days.",
+      "Real client. Real numbers. The GoHighLevel + Signal + n8n stack that recovered $11,400/month in lost revenue inside 14 days.",
     publishedAt: "2026-05-15",
     readingTime: 7,
     category: "case-study",

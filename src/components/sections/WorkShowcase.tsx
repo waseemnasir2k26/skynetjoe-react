@@ -21,7 +21,7 @@ const GIGS: Gig[] = [
   {
     title: "Dental no-show automation",
     client: "Manhattan dental atelier",
-    stack: ["GHL", "WhatsApp", "n8n", "Twilio"],
+    stack: ["GHL", "Signal", "n8n", "Twilio"],
     outcome: "30% no-show → 8% in 6 weeks. +$24K/mo recovered.",
     githubUrl: "https://github.com/waseemnasir2k26/dental-noshow-flow",
     thumb: "ghl",
@@ -35,9 +35,9 @@ const GIGS: Gig[] = [
     thumb: "n8n",
   },
   {
-    title: "KSA retail WhatsApp catalog",
+    title: "KSA retail Signal catalog",
     client: "Riyadh fashion boutique",
-    stack: ["WhatsApp Business API", "n8n", "Shopify"],
+    stack: ["Signal API", "n8n", "Shopify"],
     outcome: "47% reply→sale conversion. 800 SKUs synced live.",
     thumb: "shopify",
   },

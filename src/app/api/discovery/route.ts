@@ -84,7 +84,7 @@ async function sendEmailFallback(payload: Payload, lead: "HOT" | "WARM" | "COLD"
       <table style="width:100%;border-collapse:collapse;">
         ${row("Name", payload.name)}
         ${row("Email", payload.email)}
-        ${row("WhatsApp", payload.whatsapp)}
+        ${row("Signal", payload.whatsapp)}
         ${row("Role", payload.role)}
         ${row("Company", payload.company)}
         ${row("Website", payload.website)}

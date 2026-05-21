@@ -1,10 +1,10 @@
 # SkynetLabs
 
-> Solo-led AI automation studio. Founded + run by Waseem Nasir from Canggu, Bali (GMT+8) and Lahore, Pakistan. Builds n8n + AI workflows, AEO-tuned Next.js websites, GoHighLevel CRM systems, and WhatsApp Business chatbots for service businesses worldwide. 4 client builds per month, ship window 5-14 days, public pricing, source-controlled deliverables.
+> Solo-led AI automation studio. Founded + run by Waseem Nasir from Canggu, Bali (GMT+8) and Lahore, Pakistan. Builds n8n + AI workflows, AEO-tuned Next.js websites, GoHighLevel CRM systems, and Signal chatbots for service businesses worldwide. 4 client builds per month, ship window 5-14 days, public pricing, source-controlled deliverables.
 
 Founder: Waseem Nasir
 Email: waseem@skynetjoe.com
-WhatsApp: +92 300 100 1957
+
 Languages: English, Urdu, Hindi
 Operating bases: Bali (Canggu co-working) + Lahore (Liberty Market)
 Years operating: since 2014 (WordPress era), pivoted to AI automation 2023
@@ -22,8 +22,8 @@ Years operating: since 2014 (WordPress era), pivoted to AI automation 2023
 ## Key services
 
 - [n8n Automation](https://skynetjoe.com/services/n8n-automation): Self-hosted workflow automation, replaces Zapier + Make stacks.
-- [GoHighLevel CRM](https://skynetjoe.com/services/gohighlevel): Full CRM, pipeline, and email/SMS/WhatsApp build-outs.
-- [AI Chatbots](https://skynetjoe.com/services/ai-chatbots): WhatsApp + web + voice agents using Claude / GPT.
+- [GoHighLevel CRM](https://skynetjoe.com/services/gohighlevel): Full CRM, pipeline, and email/SMS/Signal build-outs.
+- [AI Chatbots](https://skynetjoe.com/services/ai-chatbots): Signal + web + voice agents using Claude / GPT.
 - [Vibe-Coded Websites](https://skynetjoe.com/services/vibe-coded-sites): Custom Next.js builds, 7-day ship.
 - [WordPress SEO Blog](https://skynetjoe.com/services/wordpress-seo): AEO-tuned content engine.
 - [E-commerce Automation](https://skynetjoe.com/services/ecommerce-automation): Shopify + Stripe + n8n stack.

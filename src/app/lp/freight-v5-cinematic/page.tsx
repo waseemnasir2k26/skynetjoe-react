@@ -282,7 +282,7 @@ export default function V5Cinematic() {
             <div className="testimonials">
               <article className="t-card">
                 <div className="stars">★★★★★</div>
-                <p className="body">Watched the teardown Wednesday. Booked the audit Thursday. By the next Friday — <em>site live, GHL wired, WhatsApp inbox routing every load.</em> Eight days, source in our GitHub.</p>
+                <p className="body">Watched the teardown Wednesday. Booked the audit Thursday. By the next Friday — <em>site live, GHL wired, Signal inbox routing every load.</em> Eight days, source in our GitHub.</p>
                 <div className="author">
                   <div className="avatar">JR</div>
                   <div className="meta"><strong>James R. — Operations</strong><span>Wellness DNA · Charlotte NC</span></div>
@@ -312,7 +312,7 @@ export default function V5Cinematic() {
                 <div className="tier-name">Starter</div>
                 <div className="tier-meta">14d · site + CRM + WA</div>
                 <div className="tier-price">$1,497<small>flat · no monthly</small></div>
-                <ul className="tier-feat"><li>5-page premium site</li><li>GHL CRM + pipelines</li><li>WhatsApp Business inbox</li><li>Meta Pixel + CAPI</li><li>2 revision rounds</li></ul>
+                <ul className="tier-feat"><li>5-page premium site</li><li>GHL CRM + pipelines</li><li>Signal inbox</li><li>Meta Pixel + CAPI</li><li>2 revision rounds</li></ul>
                 <a href="/discovery-call" className="tier-cta">Start Starter →</a>
               </div>
               <div className="tier">
@@ -349,7 +349,7 @@ export default function V5Cinematic() {
             <div className="section-kicker">Questions Operators Ask First</div>
             <h2 className="section-h">No, you&apos;re <em>not too small.</em></h2>
             <div className="faq-list">
-              <details className="faq"><summary>I only have 5 trucks. Overkill?</summary><p>Starter ($1,497) is for 5–10. Site + CRM + WhatsApp in 14 days. Cancel anytime, walk with the build.</p></details>
+              <details className="faq"><summary>I only have 5 trucks. Overkill?</summary><p>Starter ($1,497) is for 5–10. Site + CRM + Signal in 14 days. Cancel anytime, walk with the build.</p></details>
               <details className="faq"><summary>FMCSA / TCPA compliance — covered?</summary><p>SkynetLabs provides software, design, marketing services. Not a freight broker or motor carrier. All voice flows inbound-only, TCPA-compliant.</p></details>
               <details className="faq"><summary>Burned $20K on agencies before — why different?</summary><p>Public pricing fixes that. 14-day ship fixes that. Source-controlled hand-off fixes that. Miss the window, you keep what&apos;s built, we re-scope free.</p></details>
               <details className="faq"><summary>What does the audit cover?</summary><p>15 min on Cal.com. Review your stack, flag 2–3 biggest gaps, recommend yes / no / referral. No commitment.</p></details>

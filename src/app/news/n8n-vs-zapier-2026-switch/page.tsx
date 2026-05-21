@@ -84,7 +84,7 @@ export default function Page() {
         </p>
         <ul>
           <li>1 × Zapier Pro seat for the client: $79/month</li>
-          <li>2 × Premium app surcharges (WhatsApp Cloud, Twilio): $19/month</li>
+          <li>2 × Premium app surcharges (Signal Cloud, Twilio): $19/month</li>
           <li>Task overage on busy months (5,000 tasks tier): $30–60/month</li>
           <li>My internal Team seat to manage their account: $103/seat amortized</li>
         </ul>
@@ -127,7 +127,7 @@ export default function Page() {
           The biggest surprise was that 80% of my Zaps were genuinely
           straightforward HTTP calls with a transform step in the middle. The
           remaining 20% — Stripe webhooks with signature verification, Calendly
-          OAuth refresh, WhatsApp Cloud API media handling — took as long as the
+          OAuth refresh, Signal Cloud API media handling — took as long as the
           other 80% combined.
           <cite>— Field notes, day 2</cite>
         </blockquote>
@@ -157,7 +157,7 @@ export default function Page() {
           isn&apos;t. Run it for a wellness client at $9.99/mo. Done.
         </p>
         <p>
-          Everything else — every single client onboarding flow, every WhatsApp
+          Everything else — every single client onboarding flow, every Signal
           notifier, every Google Calendar to GHL sync, every form-to-CRM, every
           Slack alerter, every Airtable mirror — runs on n8n now.
         </p>

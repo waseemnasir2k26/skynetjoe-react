@@ -61,7 +61,7 @@ export default function Page() {
           back within eight hours, weekday Bali time. That&apos;s the deal.
           That&apos;s the entire customer-success program. There&apos;s no
           dashboard, no monthly check-in call, no &quot;account executive&quot;
-          who pretends to know your account. Just a WhatsApp thread and an eight-hour
+          who pretends to know your account. Just a Signal thread and an eight-hour
           reply window.
         </p>
         <p>
@@ -70,7 +70,7 @@ export default function Page() {
           Bali&apos;s timezone works. GMT+8 means I wake up at 6am as US East
           Coast is going to sleep. By the time New York opens at 9am EST
           (8pm Bali), I&apos;ve already had a full work day, ridden the scooter
-          home, eaten, and am on the second coffee block. Any WhatsApp from a
+          home, eaten, and am on the second coffee block. Any Signal from a
           US client that lands in their morning gets a reply before I sleep.
           That&apos;s structurally 8 hours. Sometimes 3.
         </p>
@@ -82,7 +82,7 @@ export default function Page() {
         </p>
         <p>
           Not a technical complaint. Not a deliverable complaint. Not a price
-          complaint. They had to chase. They&apos;d send a WhatsApp on Tuesday
+          complaint. They had to chase. They&apos;d send a Signal on Tuesday
           asking about a checkout bug, get a reply Friday saying &quot;great
           question, let me check with the dev team,&quot; and another week
           would pass before anyone touched it. By the time it was fixed, the
@@ -105,7 +105,7 @@ export default function Page() {
         </p>
         <ul>
           <li>
-            <strong>WhatsApp Business (one number)</strong> — every active client
+            <strong>Signal (one number)</strong> — every active client
             in one app. Pinned threads at the top. Star-emoji on threads that
             need a reply today.
           </li>
@@ -126,7 +126,7 @@ export default function Page() {
         </ul>
         <p>
           That&apos;s the entire ops stack. Total cost: $35/month for Notion
-          Plus and a Loom seat. WhatsApp and Cal.com are free.
+          Plus and a Loom seat. Signal and Cal.com are free.
         </p>
 
         <h2>The weekly rhythm</h2>
@@ -134,10 +134,10 @@ export default function Page() {
           Mondays in Bali are slow. US clients are still in their weekend, EU
           clients are in their Monday morning. I use Monday for deep build
           work — the hard stuff that needs a 4-hour uninterrupted block. No
-          calls, no meetings, no WhatsApp checks until 4pm.
+          calls, no meetings, no Signal checks until 4pm.
         </p>
         <p>
-          Tuesdays through Thursdays are reactive. I check WhatsApp at 7am
+          Tuesdays through Thursdays are reactive. I check Signal at 7am
           (over the first coffee at Crate or Penny Lane), 12pm (lunch break),
           and 4pm (end of the work block). Three checks. That&apos;s the
           whole loop. Anything urgent inside that window gets handled in
@@ -164,7 +164,7 @@ export default function Page() {
           Monday is Client A. Tuesday is Client B. Wednesday is back to A if
           they unblocked me overnight, otherwise C. Each day has a single
           dominant build. The other three are in maintenance mode — answer
-          WhatsApp, ship the small ticket, push to staging, don&apos;t start
+          Signal, ship the small ticket, push to staging, don&apos;t start
           anything new.
         </p>
         <p>

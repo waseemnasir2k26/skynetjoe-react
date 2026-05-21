@@ -88,7 +88,7 @@ export default function Page() {
         </p>
         <p>
           When a brand-new wellness brand with $800 in their account
-          messages me on WhatsApp, they see &quot;Starter $1,497&quot; on
+          messages me on Signal, they see &quot;Starter $1,497&quot; on
           the pricing page and self-deselect. They don&apos;t book a
           call. They don&apos;t waste 45 minutes of mine. They don&apos;t
           email back three times asking if I have a smaller package.
