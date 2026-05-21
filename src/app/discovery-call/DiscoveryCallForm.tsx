@@ -810,6 +810,54 @@ export function DiscoveryProofSidebar() {
           map your stack, then reply yes / no / referral. No funnel.&quot;
         </p>
       </div>
+
+      {/* The 2-person team card — co-founder hook */}
+      <div
+        className="rounded-2xl p-5 overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(217, 119, 87, 0.10) 0%, rgba(20, 184, 166, 0.08) 100%)",
+          border: "1px solid rgba(217, 119, 87, 0.30)",
+        }}
+      >
+        <div className="flex items-center gap-3 mb-3">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-orange-400/40 flex-shrink-0">
+            <Image
+              src="/portraits/waseem-veranda-thinking.jpg"
+              alt="Waseem"
+              fill
+              sizes="48px"
+              className="object-cover"
+            />
+          </div>
+          <div
+            className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm border-2"
+            style={{
+              background:
+                "linear-gradient(135deg, #D97757 0%, #14B8A6 100%)",
+              color: "#fff",
+              fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+              borderColor: "rgba(217, 119, 87, 0.40)",
+            }}
+          >
+            CC
+          </div>
+          <div>
+            <p className="text-white font-semibold text-sm">
+              <span className="text-cyan-300">WN</span>{" "}
+              <span className="text-orange-300">+</span>{" "}
+              <span className="text-orange-300">CC</span>
+            </p>
+            <p className="text-xs text-gray-400 font-mono">
+              2-person team. Yes that&apos;s it.
+            </p>
+          </div>
+        </div>
+        <p className="text-sm text-gray-300 leading-relaxed italic">
+          You brief me. Claude drafts. I ship. Most agencies have 12 humans —
+          we have 1 human + 1 Anthropic API key. The math works.
+        </p>
+      </div>
     </div>
   );
 }

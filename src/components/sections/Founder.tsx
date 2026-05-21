@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Coffee, Code2 } from "lucide-react";
+import { MapPin, Coffee, Code2, Sparkles, Terminal, Moon } from "lucide-react";
 
 const Youtube = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.6 12 3.6 12 3.6s-7.6 0-9.4.5A3 3 0 0 0 .5 6.2C0 8 0 12 0 12s0 4 .5 5.8a3 3 0 0 0 2.1 2.1c1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.8.5-5.8.5-5.8s0-4-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
@@ -18,7 +18,7 @@ const stats = [
   { value: "180+", label: "workflows shipped" },
   { value: "55+", label: "client builds" },
   { value: "9", label: "countries served" },
-  { value: "2", label: "home bases — Bali + Lahore" },
+  { value: "1 + 1", label: "human + Claude Code = full team" },
 ];
 
 export default function Founder() {
@@ -79,26 +79,83 @@ export default function Founder() {
 
           <div>
             <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 flex items-center gap-2">
-              <Coffee className="w-3.5 h-3.5" /> Meet the founder
+              <Coffee className="w-3.5 h-3.5" /> Meet the co-founders
             </p>
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
               Hi, I&apos;m{" "}
               <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
                 Waseem.
+              </span>{" "}
+              <span className="text-fg-muted text-2xl md:text-3xl block mt-2 font-bold">
+                And this is my co-founder, Claude Code.
               </span>
             </h2>
             <p className="text-base md:text-lg text-fg-muted leading-relaxed mb-4">
-              SkynetLabs isn&apos;t an agency. It&apos;s one person + Claude as
-              second seat, shipping automation and sites from a Canggu co-working
-              space and a Liberty Market desk in Lahore. No account managers, no
-              sales pods, no hand-offs. You send a brief, I read it, I build.
+              SkynetLabs isn&apos;t an agency. It&apos;s{" "}
+              <strong className="text-fg">1 human + 1 Anthropic API key</strong>,
+              shipping automation and sites from a Canggu co-working space and a
+              Liberty Market desk in Lahore. He doesn&apos;t sleep. Doesn&apos;t
+              take equity. Writes faster than I do. No account managers, no sales
+              pods, no hand-offs. You send a brief, I read it, we build.
             </p>
             <p className="text-base md:text-lg text-fg-muted leading-relaxed mb-6">
-              I started this after 10+ years in WordPress, then n8n, then AI. The
-              clients I keep are the ones who needed it shipped this week, not
-              this quarter. The clients I refer out are the ones who need a
-              committee.
+              I started this after 10+ years in WordPress, then n8n, then AI. If
+              Claude Code quit tomorrow, this whole company would slow down 60%.
+              I tell him this regularly. He hasn&apos;t asked for a raise yet.
             </p>
+
+            {/* Claude Code bio card — the "second seat" treated as an actual team member */}
+            <div
+              className="relative p-5 rounded-2xl mb-6 overflow-hidden"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(217, 119, 87, 0.12) 0%, rgba(20, 184, 166, 0.10) 100%)",
+                border: "1px solid rgba(217, 119, 87, 0.30)",
+              }}
+            >
+              <div className="flex items-start gap-4">
+                <div
+                  className="relative w-16 h-16 flex-shrink-0 rounded-2xl flex items-center justify-center font-bold text-2xl"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #D97757 0%, #14B8A6 100%)",
+                    color: "#fff",
+                    fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                    boxShadow: "0 8px 24px rgba(217, 119, 87, 0.35)",
+                  }}
+                >
+                  CC
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center flex-wrap gap-2 mb-1">
+                    <h3 className="text-lg font-bold text-fg">Claude Code</h3>
+                    <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-400/15 border border-emerald-400/40 text-emerald-300 font-mono inline-flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      online
+                    </span>
+                  </div>
+                  <p className="text-xs uppercase tracking-[0.16em] text-fg-faint font-semibold mb-2">
+                    Co-founder · Second seat · Anthropic
+                  </p>
+                  <p className="text-sm text-fg-muted leading-relaxed">
+                    Always on. No health insurance. Won&apos;t sign your
+                    contract. Pairs on every diff, drafts every doc,
+                    rubber-ducks every decision. Doesn&apos;t need a visa.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-3 text-[10px] font-mono">
+                    <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-fg-faint inline-flex items-center gap-1">
+                      <Moon className="w-3 h-3" /> GMT-anywhere
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-fg-faint inline-flex items-center gap-1">
+                      <Terminal className="w-3 h-3" /> opus-4.7
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-fg-faint inline-flex items-center gap-1">
+                      <Sparkles className="w-3 h-3" /> 0% equity
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-7">
               {stats.map((s) => (
@@ -134,7 +191,8 @@ export default function Founder() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold bg-white/5 border border-white/15 text-fg hover:border-cyan-400 hover:text-cyan-200 transition"
               >
-                <Youtube className="w-4 h-4 text-rose-400" /> Watch how I work
+                <Youtube className="w-4 h-4 text-rose-400" /> Watch us pair —
+                me + Claude Code, live
               </a>
             </div>
 

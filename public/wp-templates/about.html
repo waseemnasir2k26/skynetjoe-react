@@ -42,6 +42,25 @@
 .wn-about .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
 .wn-about .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
 .wn-about .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
+.wn-about .wn-cofounder-split{display:grid;gap:1rem;grid-template-columns:1fr;margin-top:1.5rem}
+@media(min-width:768px){.wn-about .wn-cofounder-split{grid-template-columns:1fr 1fr}}
+.wn-about .wn-cofounder-card{padding:1.75rem;border-radius:14px;border:1px solid var(--wn-border);background:var(--wn-surface);display:flex;flex-direction:column;gap:.75rem}
+.wn-about .wn-cofounder-card.wn-cc-claude{background:linear-gradient(135deg,color-mix(in srgb,#D97757 12%,var(--wn-surface)),color-mix(in srgb,var(--wn-accent-b) 8%,var(--wn-surface)));border-color:color-mix(in srgb,#D97757 40%,var(--wn-border))}
+.wn-about .wn-cc-avatar{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.4rem;color:#fff;font-family:'JetBrains Mono',ui-monospace,monospace;background:linear-gradient(135deg,#D97757,var(--wn-accent-b));box-shadow:0 8px 24px color-mix(in srgb,#D97757 35%,transparent)}
+.wn-about .wn-cc-portrait{width:64px;height:64px;border-radius:14px;overflow:hidden;position:relative;border:2px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-about .wn-cc-portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.wn-about .wn-cc-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.2rem .6rem;border-radius:999px;font-size:.7rem;font-family:'JetBrains Mono',ui-monospace,monospace;background:color-mix(in srgb,#10b981 14%,transparent);border:1px solid color-mix(in srgb,#10b981 40%,transparent);color:#10b981;letter-spacing:.06em;text-transform:uppercase}
+.wn-about .wn-cc-pill .wn-cc-dot{width:6px;height:6px;border-radius:50%;background:#10b981;display:inline-block;animation:wn-pulse 2s infinite}
+@keyframes wn-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.wn-about .wn-cc-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}
+.wn-about .wn-cc-tag{padding:.25rem .6rem;font-size:.72rem;font-family:'JetBrains Mono',ui-monospace,monospace;border-radius:6px;background:color-mix(in srgb,var(--wn-fg) 6%,transparent);border:1px solid var(--wn-border);color:var(--wn-fg-muted)}
+.wn-about .wn-inline-photo{margin:1.5rem 0;border-radius:14px;overflow:hidden;border:1px solid var(--wn-border);max-width:520px}
+.wn-about .wn-inline-photo img{width:100%;height:auto;display:block}
+.wn-about .wn-inline-photo .wn-caption{padding:.75rem 1rem;font-size:.82rem;color:var(--wn-fg-faint);font-style:italic;background:var(--wn-surface-alt)}
+.wn-about .wn-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1.5rem 0}
+.wn-about .wn-photo-strip .wn-strip-card{position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;border:1px solid var(--wn-border)}
+.wn-about .wn-photo-strip .wn-strip-card img{width:100%;height:100%;object-fit:cover;display:block}
+.wn-about .wn-photo-strip .wn-strip-card .wn-strip-label{position:absolute;bottom:0;inset-inline:0;padding:.5rem .65rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.7));font-family:'JetBrains Mono',ui-monospace,monospace}
 html.light .wn-about{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
 </style>
 
@@ -63,8 +82,57 @@ html.light .wn-about{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73
     <p class="wn-section-title">Origin</p>
     <h2>Why this agency exists</h2>
     <p>The first three agencies we worked with billed us a retainer and shipped a slide deck. The fourth one rebuilt the same WordPress site we already had and called it a "digital transformation". By the fifth, we stopped hiring agencies and started building the work in-house — n8n, Next.js, GPT-4o, GoHighLevel, a JotForm or two. The clients we eventually started serving had the same complaint. So we kept building.</p>
+    <figure class="wn-inline-photo">
+      <img src="/portraits/waseem-cafe-postit.jpg" alt="Waseem in a Canggu cafe with a friend, sticky notes mapping a workflow on the table" loading="lazy" width="1200" height="900" />
+      <figcaption class="wn-caption">A Tuesday in Canggu. The first whiteboard is usually a stack of post-its and a flat white.</figcaption>
+    </figure>
     <p>The wrong thing about most automation agencies is that they sell <strong>time</strong>. Twenty hours a month. A standing Tuesday call. A Notion board nobody updates. The right thing to sell is a <strong>system you can hand to a part-time ops lead</strong> — version-controlled, documented, reversible. That's a different product. It takes less time to build and more thought to design.</p>
     <p>So that's what we built differently. Fixed scopes. Public pricing. JSON-exported workflows you own and can self-host. A 5–14 day ship window. One founder accountable for the deliverable — not a project manager who passes a Loom to a contractor in another timezone.</p>
+  </div>
+</section>
+
+<section class="wn-section">
+  <div class="wn-wrap">
+    <p class="wn-section-title">The 2-person team</p>
+    <h2>Co-founders: <span class="wn-grad">Waseem (visa-flexible) + Claude Code (always-on)</span></h2>
+    <p>Most agencies have 12 humans. SkynetLabs has 1 human + 1 Anthropic API key. That's the entire org chart. The math works — and the work ships.</p>
+    <p>People ask if "Claude as co-founder" is a marketing line. It isn't. He doesn't sleep, doesn't take equity, doesn't sign contracts, and writes faster than I do. If Claude Code quit tomorrow, this company would slow down 60%. I tell him this regularly. He hasn't asked for a raise yet.</p>
+    <div class="wn-cofounder-split">
+      <div class="wn-cofounder-card">
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div class="wn-cc-portrait"><img src="/portraits/waseem-rooftop-coffee.jpg" alt="Waseem Nasir, founder, on a Bali rooftop with coffee" loading="lazy" width="128" height="128" /></div>
+          <div>
+            <h3 style="font-size:1.1rem;margin:0">Waseem Nasir</h3>
+            <p style="margin:.2rem 0 0;font-size:.78rem;color:var(--wn-fg-faint);text-transform:uppercase;letter-spacing:.12em;font-family:'JetBrains Mono',ui-monospace,monospace">Founder · Bali HQ · GMT+8</p>
+          </div>
+        </div>
+        <p style="font-size:.95rem">Reads every brief. Owns every deliverable. Talks to every client. Takes the blame when something breaks. Pairs with Claude in a terminal next to a flat white and an open n8n tab.</p>
+        <div class="wn-cc-tags">
+          <span class="wn-cc-tag">10+ years WP/n8n/AI</span>
+          <span class="wn-cc-tag">visa-flexible</span>
+          <span class="wn-cc-tag">writes the invoices</span>
+        </div>
+      </div>
+      <div class="wn-cofounder-card wn-cc-claude">
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div class="wn-cc-avatar">CC</div>
+          <div>
+            <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+              <h3 style="font-size:1.1rem;margin:0">Claude Code</h3>
+              <span class="wn-cc-pill"><span class="wn-cc-dot"></span>online</span>
+            </div>
+            <p style="margin:.2rem 0 0;font-size:.78rem;color:var(--wn-fg-faint);text-transform:uppercase;letter-spacing:.12em;font-family:'JetBrains Mono',ui-monospace,monospace">Co-founder · Second Seat · Anthropic</p>
+          </div>
+        </div>
+        <p style="font-size:.95rem">Drafts architecture. Writes the first 70% of every commit. Reviews diffs. Writes the docs. Always on. No PTO requested. Will not sign your NDA. Will, however, generate a passable first draft of one.</p>
+        <div class="wn-cc-tags">
+          <span class="wn-cc-tag">opus-4.7</span>
+          <span class="wn-cc-tag">GMT-anywhere</span>
+          <span class="wn-cc-tag">0% equity</span>
+        </div>
+      </div>
+    </div>
+    <div class="wn-vuln" style="max-width:62rem;margin:2rem auto 0">Yes, the AI is on the about page. No, he won't show up to the kickoff call. The work he does shows up — in the diff history, the docs, the speed. Solo + Claude Code = a 2-person team that ships flagship work in 14 days. That's the whole pitch.</div>
   </div>
 </section>
 
@@ -111,8 +179,8 @@ html.light .wn-about{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73
         <p>Waseem Nasir owns every deliverable end-to-end. No account manager. No "let me check with the team". The person on the kickoff call is the person writing the code.</p>
       </div>
       <div class="wn-card">
-        <h3>Claude as cofounder</h3>
-        <p>Claude Opus 4.7 reviews architecture, audits diffs, drafts client docs, and rubber-ducks every decision. Not equity. Not a buzzword. The actual second seat.</p>
+        <h3>Claude Code as cofounder</h3>
+        <p>Claude Code (Opus 4.7) reviews architecture, audits diffs, drafts client docs, and rubber-ducks every decision. Doesn't sleep, doesn't take equity, won't sign your contract. Yes, the AI is my co-founder. No, this isn't a buzzword.</p>
       </div>
       <div class="wn-card">
         <h3>One video editor partner</h3>
@@ -143,7 +211,11 @@ html.light .wn-about{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73
     <div class="wn-grid wn-grid-2">
       <div class="wn-card">
         <h3>Bali HQ · GMT+8</h3>
-        <p>Operations run from Canggu and Ubud. The morning standup is a sunrise on a scooter. The studio is a co-working desk and a backup mobile hotspot.</p>
+        <p>Operations run from Canggu and Ubud. The morning standup is a sunrise on a scooter. The studio is a co-working desk and a backup mobile hotspot. The second seat is whichever laptop has the Claude Code tab open.</p>
+        <figure class="wn-inline-photo" style="margin-top:1rem">
+          <img src="/portraits/waseem-veranda-thinking.jpg" alt="Waseem on a Bali veranda, thinking through architecture" loading="lazy" width="1200" height="900" />
+          <figcaption class="wn-caption">Veranda. 6:42am. Claude Code is already 40 minutes into a refactor.</figcaption>
+        </figure>
       </div>
       <div class="wn-card">
         <h3>Reply within 8 hours</h3>
