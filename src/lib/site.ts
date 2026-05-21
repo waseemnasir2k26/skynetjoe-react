@@ -17,8 +17,8 @@ export const SITE = {
   emailFounder: "waseem@skynetjoe.com",
   whatsapp: "+923001001957",
   social: {
-    linkedin: "https://www.linkedin.com/in/waseemnasir",
-    twitter: "https://x.com/waseemnasir",
+    linkedin: "https://www.linkedin.com/in/waseemnasir2k26",
+    twitter: "https://x.com/Skynetjoe1",
     github: "https://github.com/waseemnasir2k26",
     youtube: "https://youtube.com/@skynetlabs",
     fiverr: "https://www.fiverr.com/skynetjoellc",
@@ -29,8 +29,8 @@ export type NavItem = { label: string; href: string; hasMega?: boolean };
 export const NAV_PRIMARY: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", hasMega: true },
+  { label: "Locations", href: "/locations" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Tools", href: "/tools" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

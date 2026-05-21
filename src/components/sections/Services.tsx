@@ -35,14 +35,14 @@ export default function Services() {
                     <Link
                       key={svc.slug}
                       href={`/services/${svc.slug}`}
-                      className="group relative p-6 rounded-2xl bg-skynet-surface/60 border border-white/5 hover:border-skynet-primary/40 transition-all duration-300 hover:-translate-y-1"
+                      className="group relative p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-white/60 shadow-lg shadow-cyan-500/5 hover:shadow-xl hover:shadow-cyan-500/20 hover:border-skynet-primary/60 hover:bg-white transition-all duration-300 hover:-translate-y-1.5"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-skynet-primary/10 flex items-center justify-center mb-4 group-hover:bg-skynet-primary/20 transition-colors">
-                        <Icon className="w-5 h-5 text-skynet-primary-light" />
+                      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-skynet-primary/20 to-cyan-400/20 flex items-center justify-center mb-4 group-hover:from-skynet-primary/30 group-hover:to-cyan-400/30 transition-colors">
+                        <Icon className="w-5 h-5 text-skynet-primary" />
                       </div>
-                      <h4 className="text-base font-semibold text-white mb-2">{svc.label}</h4>
-                      <p className="text-sm text-gray-400 leading-relaxed">{svc.desc}</p>
-                      <Icons.ArrowUpRight className="absolute top-5 right-5 w-4 h-4 text-gray-600 group-hover:text-skynet-primary-light transition-colors" />
+                      <h4 className="text-base font-semibold text-slate-900 mb-2">{svc.label}</h4>
+                      <p className="text-sm text-slate-600 leading-relaxed">{svc.desc}</p>
+                      <Icons.ArrowUpRight className="absolute top-5 right-5 w-4 h-4 text-slate-400 group-hover:text-skynet-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                     </Link>
                   );
                 })}

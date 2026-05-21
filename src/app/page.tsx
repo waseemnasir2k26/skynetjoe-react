@@ -1,8 +1,8 @@
 import Hero from "@/components/sections/Hero";
-import Brands from "@/components/sections/Brands";
 import Stats from "@/components/sections/Stats";
 import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
+import LinkedInBadge from "@/components/sections/LinkedInBadge";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
@@ -59,10 +59,10 @@ export default function Home() {
     <>
       <JsonLd data={orgSchema} />
       <Hero />
-      <Brands />
       <Stats />
       <Services />
       <Process />
+      <LinkedInBadge />
       <Testimonials />
       <FAQ />
       <CTA />

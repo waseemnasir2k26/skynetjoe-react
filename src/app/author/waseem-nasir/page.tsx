@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Waseem Nasir — Founder, SkynetLabs",
     description:
       "I build automation that doesn't need me to babysit it. 180+ workflows, 40+ websites, 9 countries.",
-    creator: "@waseemnasir",
+    creator: "@Skynetjoe1",
     images: ["/waseem-portrait.jpg"],
   },
 };

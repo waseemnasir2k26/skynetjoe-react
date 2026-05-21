@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
+import { STATES } from "@/lib/states";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/portfolio",
     "/privacy-policy",
     "/terms-of-service",
+    "/locations",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,
@@ -38,5 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticRoutes, ...serviceRoutes];
+  const stateRoutes = STATES.map((s) => ({
+    url: `${base}/locations/${s.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...stateRoutes];
 }

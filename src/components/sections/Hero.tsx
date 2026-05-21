@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
@@ -54,12 +55,11 @@ export default function Hero() {
         }}
       />
 
-      <div className="container-x px-6 relative z-10">
+      <div className="container-x px-6 relative z-10 grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl"
         >
           <div
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
@@ -165,6 +165,45 @@ export default function Hero() {
               >
                 Ship window
               </span>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="relative hidden md:block"
+        >
+          <div
+            className="relative aspect-[4/5] w-full max-w-md ml-auto rounded-3xl overflow-hidden"
+            style={{
+              border: "1px solid rgba(0, 212, 255, 0.30)",
+              boxShadow: "0 30px 80px -10px rgba(0, 212, 255, 0.35)",
+            }}
+          >
+            <Image
+              src="/portraits/waseem-cafe-arch.jpg"
+              alt="Waseem Nasir, founder of SkynetLabs, building automation from a Bali cafe"
+              fill
+              priority
+              sizes="(min-width: 1024px) 440px, (min-width: 768px) 380px, 0"
+              className="object-cover"
+            />
+            <div
+              className="absolute inset-x-0 bottom-0 p-5 pt-12"
+              style={{
+                background:
+                  "linear-gradient(180deg, transparent 0%, rgba(6,24,39,0.92) 100%)",
+              }}
+            >
+              <div className="text-xs uppercase tracking-[0.18em] text-cyan-300 mb-1">
+                Built solo · 🌴 Bali
+              </div>
+              <div className="text-white font-semibold">Waseem Nasir</div>
+              <div className="text-sm text-gray-300">
+                Founder · automation operator
+              </div>
             </div>
           </div>
         </motion.div>
