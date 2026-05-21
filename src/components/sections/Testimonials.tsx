@@ -23,30 +23,56 @@ const QUOTES = [
   },
 ];
 
+const ACCENTS = [
+  { ribbon: "from-cyan-400 to-sky-500", quote: "text-cyan-500/60", border: "border-cyan-300/60" },
+  { ribbon: "from-rose-400 to-amber-400", quote: "text-rose-500/60", border: "border-rose-300/60" },
+  { ribbon: "from-teal-400 to-emerald-500", quote: "text-teal-500/60", border: "border-teal-300/60" },
+  { ribbon: "from-violet-400 to-fuchsia-500", quote: "text-violet-500/60", border: "border-violet-300/60" },
+];
+
 export default function Testimonials() {
   return (
     <section className="section" id="testimonials">
       <div className="container-x">
         <div className="max-w-3xl mb-12">
-          <p className="text-xs uppercase tracking-[0.2em] text-skynet-primary-light font-semibold mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold uppercase tracking-[0.18em] mb-5">
             Real receipts
-          </p>
+          </div>
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-            What founders <span className="gradient-text">actually say</span> after we ship.
+            What founders{" "}
+            <span className="bg-gradient-to-r from-amber-300 via-rose-300 to-cyan-300 bg-clip-text text-transparent">
+              actually say
+            </span>{" "}
+            after we ship.
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {QUOTES.map((q, i) => (
-            <div key={i} className="p-7 rounded-2xl bg-skynet-surface/60 border border-white/5 relative">
-              <Quote className="w-8 h-8 text-skynet-primary/30 absolute top-5 right-5" />
-              <p className="text-base text-gray-200 leading-relaxed mb-5">&ldquo;{q.text}&rdquo;</p>
-              <div>
-                <div className="text-sm font-semibold text-white">{q.name}</div>
-                <div className="text-xs text-gray-500">{q.role}</div>
+          {QUOTES.map((q, i) => {
+            const a = ACCENTS[i % ACCENTS.length];
+            return (
+              <div
+                key={i}
+                className={`relative p-7 rounded-2xl bg-white/95 border ${a.border} shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden`}
+              >
+                <div
+                  className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${a.ribbon}`}
+                />
+                <Quote
+                  className={`w-10 h-10 ${a.quote} absolute top-6 right-5`}
+                />
+                <p className="text-base text-slate-800 leading-relaxed mb-5 pt-2">
+                  &ldquo;{q.text}&rdquo;
+                </p>
+                <div>
+                  <div className="text-sm font-bold text-slate-900">
+                    {q.name}
+                  </div>
+                  <div className="text-xs text-slate-500">{q.role}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

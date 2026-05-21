@@ -34,36 +34,57 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="section bg-skynet-darker/40">
+    <section className="section">
       <div className="container-x max-w-3xl">
         <div className="mb-12">
-          <p className="text-xs uppercase tracking-[0.2em] text-skynet-primary-light font-semibold mb-3">
-            Questions
-          </p>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-fuchsia-400/10 border border-fuchsia-400/30 text-fuchsia-300 text-xs font-semibold uppercase tracking-[0.18em] mb-5">
+            Frequently Asked
+          </div>
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-            Things founders ask <span className="gradient-text">before booking.</span>
+            Things founders ask{" "}
+            <span className="bg-gradient-to-r from-fuchsia-300 via-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              before booking.
+            </span>
           </h2>
         </div>
 
         <div className="space-y-3">
-          {FAQS.map((f, i) => (
-            <div key={i} className="rounded-xl bg-skynet-surface/60 border border-white/5 overflow-hidden">
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-white/[0.02] transition-colors"
+          {FAQS.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div
+                key={i}
+                className={`rounded-2xl overflow-hidden transition-all duration-300 ${
+                  isOpen
+                    ? "bg-white/95 border border-cyan-300/60 shadow-xl shadow-cyan-500/15"
+                    : "bg-white/5 border border-white/10 hover:bg-white/10 hover:border-cyan-400/30"
+                }`}
               >
-                <span className="text-base font-semibold text-white">{f.q}</span>
-                {open === i ? (
-                  <Minus className="w-4 h-4 text-skynet-primary-light flex-shrink-0" />
-                ) : (
-                  <Plus className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 p-5 text-left transition-colors"
+                >
+                  <span
+                    className={`text-base font-semibold ${
+                      isOpen ? "text-slate-900" : "text-white"
+                    }`}
+                  >
+                    {f.q}
+                  </span>
+                  {isOpen ? (
+                    <Minus className="w-5 h-5 text-cyan-600 flex-shrink-0" />
+                  ) : (
+                    <Plus className="w-5 h-5 text-cyan-300 flex-shrink-0" />
+                  )}
+                </button>
+                {isOpen && (
+                  <div className="px-5 pb-5 text-sm text-slate-700 leading-relaxed">
+                    {f.a}
+                  </div>
                 )}
-              </button>
-              {open === i && (
-                <div className="px-5 pb-5 text-sm text-gray-300 leading-relaxed">{f.a}</div>
-              )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
