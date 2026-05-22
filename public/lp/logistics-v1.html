@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Logistics Automation — Built for US Freight Operators | SkynetLabs</title>
+<meta name="description" content="Conversion-engineered websites + AI dispatch automation for US carriers, brokers & 5-50 truck fleets. Replace 4 paid tools with one stack. Live in 14 days." />
+<meta name="theme-color" content="#0F766E" />
+<meta name="color-scheme" content="light" />
+<link rel="canonical" href="https://app-mauve-eta-66.vercel.app/lp/logistics-v1.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Logistics Automation — Built for US Freight Operators | SkynetLabs" />
+<meta property="og:description" content="AI dispatcher agent, carrier portal, broker pipeline — wired in 14 days. For 5-50 truck fleets." />
+<meta property="og:image" content="https://app-mauve-eta-66.vercel.app/og/logistics.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Service","@id":"#service","name":"Logistics Automation & Web Systems","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://app-mauve-eta-66.vercel.app"},"areaServed":{"@type":"Country","name":"United States"},"serviceType":"AI Dispatch + Freight Broker Web Systems","description":"Conversion-engineered logistics sites, AI dispatcher voice agents, carrier portals, GoHighLevel CRM pipelines for US carriers and freight brokers.","offers":{"@type":"Offer","price":"1500","priceCurrency":"USD"}},
+    {"@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Do you only work with US logistics operators?","acceptedAnswer":{"@type":"Answer","text":"We specialize in US carriers, freight brokers and 5-50 truck fleets. We also serve Canadian operators."}},
+      {"@type":"Question","name":"Can you integrate with my TMS?","acceptedAnswer":{"@type":"Answer","text":"Yes. We integrate with Samsara, Motive, McLeod, AscendTMS, Truckstop and any TMS with a REST API or webhook surface."}},
+      {"@type":"Question","name":"How fast can the AI dispatcher go live?","acceptedAnswer":{"@type":"Answer","text":"Live in 14 days from kickoff. Voice agent trained on your lanes, equipment types, and rate cards. ElevenLabs natural voice + OpenAI logic."}},
+      {"@type":"Question","name":"What does it replace?","acceptedAnswer":{"@type":"Answer","text":"Replaces the typical 4-tool stack — separate CRM, calendar, email blaster, WhatsApp manager — with one connected system you own."}}
+    ]}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --teal:#0F766E;       /* deeper than Yasir's #288671 for higher contrast */
+  --teal-2:#14B8A6;
+  --mint:#5EEAD4;
+  --mint-tint:#ECFDF5;
+  --ink:#0B1F1C;
+  --ink-2:#0F2E2A;
+  --ink-3:#1F4540;
+  --gold:#F59E0B;
+  --gold-2:#FBBF24;
+  --coral:#F97316;
+  --line:#D6E7E1;
+  --bg:#FAFFFE;
+  --card:#FFFFFF;
+  --shadow-sm:0 1px 2px rgba(15,118,110,.06), 0 4px 12px rgba(15,118,110,.04);
+  --shadow:0 6px 28px rgba(15,118,110,.10), 0 2px 8px rgba(15,118,110,.06);
+  --shadow-lg:0 20px 60px rgba(15,118,110,.18), 0 8px 24px rgba(15,118,110,.10);
+  --r:16px;
+  --r-lg:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:17px;line-height:1.62;color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-family:'Bricolage Grotesque','Inter',sans-serif;font-weight:700;line-height:1.08;letter-spacing:-.02em;color:var(--ink)}
+h1{font-size:clamp(38px,6vw,68px);font-weight:800;letter-spacing:-.035em}
+h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.025em}
+h3{font-size:clamp(22px,2.4vw,28px);}
+.eyebrow-italic{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;color:var(--teal);font-size:18px}
+p{color:var(--ink-3);font-size:17px}
+a{color:var(--teal);text-decoration:none}
+img{max-width:100%;display:block}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+@media (max-width:768px){.section{padding:64px 0}}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(250,255,254,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1200px;margin:0 auto}
+.logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;color:var(--ink);letter-spacing:-.02em}
+.logo span{color:var(--teal)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-weight:600;font-size:14.5px;transition:transform .2s,box-shadow .2s}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+
+/* HERO */
+.hero{position:relative;padding:88px 0 60px;overflow:hidden;background:linear-gradient(180deg,#F0FBF9 0%,#FAFFFE 100%)}
+.hero::before{content:"";position:absolute;top:-200px;right:-200px;width:560px;height:560px;background:radial-gradient(circle,rgba(20,184,166,.25),transparent 60%);border-radius:50%}
+.hero::after{content:"";position:absolute;bottom:-220px;left:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,.13),transparent 60%);border-radius:50%}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;position:relative;z-index:1}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:#fff;border:1px solid var(--line);border-radius:999px;font-size:13.5px;font-weight:600;color:var(--teal);box-shadow:var(--shadow-sm);margin-bottom:24px}
+.hero-tag .dot{width:8px;height:8px;border-radius:50%;background:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,.25);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+.hero h1 .accent{background:linear-gradient(90deg,var(--teal),var(--teal-2) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 .italic{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;letter-spacing:0;color:var(--teal)}
+
+.hero-sub{margin-top:20px;font-size:19px;line-height:1.55;color:var(--ink-3);max-width:560px}
+.hero-ctas{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:14px;font-weight:600;font-size:15.5px;transition:all .25s;border:none;cursor:pointer;font-family:inherit}
+.btn-primary{background:var(--ink);color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);background:var(--teal)}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+.btn-arr{width:18px;height:18px}
+
+.hero-trust{margin-top:36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-3)}
+.hero-trust .star{color:var(--gold);font-size:15px}
+.hero-trust strong{color:var(--ink);font-weight:700}
+
+/* HERO VISUAL */
+.hero-visual{position:relative;perspective:1200px}
+.dispatch-card{background:#fff;border-radius:var(--r-lg);box-shadow:var(--shadow-lg);padding:0;overflow:hidden;border:1px solid var(--line);transform:rotateY(-2deg) rotateX(2deg)}
+.dispatch-head{padding:18px 22px;background:linear-gradient(135deg,var(--ink) 0%,var(--teal) 100%);color:#fff;display:flex;justify-content:space-between;align-items:center}
+.dispatch-head h4{color:#fff;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.dispatch-head .live{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;background:rgba(94,234,212,.18);color:#5EEAD4;padding:4px 10px;border-radius:999px}
+.dispatch-head .live::before{content:"";width:6px;height:6px;border-radius:50%;background:#5EEAD4;box-shadow:0 0 0 3px rgba(94,234,212,.3);animation:pulse 1.5s infinite}
+.dispatch-body{padding:22px}
+.lane-row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px dashed var(--line)}
+.lane-row:last-child{border-bottom:none}
+.lane-icon{width:42px;height:42px;border-radius:11px;background:var(--mint-tint);display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:700;font-size:14px}
+.lane-meta .from-to{font-size:14px;font-weight:600;color:var(--ink)}
+.lane-meta .equip{font-size:12px;color:var(--ink-3);margin-top:2px}
+.lane-rate{text-align:right}
+.lane-rate .price{font-weight:700;color:var(--teal);font-size:15px}
+.lane-rate .status{font-size:11px;color:var(--ink-3);margin-top:2px}
+.lane-status-booked{color:#10B981 !important;font-weight:600}
+.lane-status-callback{color:var(--gold) !important;font-weight:600}
+
+/* STATS STRIP */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;padding:28px 0}
+.strip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+@media (max-width:768px){.strip-grid{grid-template-columns:repeat(2,1fr);gap:20px}}
+.stat .num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:36px;letter-spacing:-.02em;background:linear-gradient(135deg,var(--teal),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lbl{font-size:12.5px;color:var(--ink-3);font-weight:500;margin-top:4px;text-transform:uppercase;letter-spacing:.05em}
+
+/* PAIN */
+.pain{background:#FFFAF0;border-top:1px solid var(--line)}
+.pain-head{text-align:center;max-width:760px;margin:0 auto 56px}
+.pain-head .eyebrow-italic{display:block;margin-bottom:14px}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media (max-width:900px){.pain-grid{grid-template-columns:1fr}}
+.pain-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.pain-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--coral),var(--gold))}
+.pain-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.pain-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#FEF3C7,#FED7AA);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px}
+.pain-card h3{font-size:20px;margin-bottom:10px}
+.pain-card p{font-size:15.5px;line-height:1.55}
+.pain-card .cost{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line);font-size:13px;color:var(--coral);font-weight:600}
+
+/* PRODUCT — AI Dispatcher */
+.product{background:linear-gradient(180deg,#0F2E2A 0%,#0B1F1C 100%);color:#fff;position:relative;overflow:hidden}
+.product::before{content:"";position:absolute;top:10%;right:-15%;width:500px;height:500px;background:radial-gradient(circle,rgba(20,184,166,.18),transparent 65%);border-radius:50%}
+.product::after{content:"";position:absolute;bottom:-20%;left:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(94,234,212,.12),transparent 65%);border-radius:50%}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
+@media (max-width:900px){.product-grid{grid-template-columns:1fr}}
+.product .eyebrow-italic{color:var(--mint)}
+.product h2{color:#fff}
+.product h2 .accent{background:linear-gradient(90deg,var(--mint),var(--gold-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.product p{color:rgba(255,255,255,.78);font-size:18px;line-height:1.6}
+.feature-list{list-style:none;margin-top:32px}
+.feature-list li{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:15.5px;color:rgba(255,255,255,.88)}
+.feature-list li:last-child{border-bottom:none}
+.feature-list .check{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--mint);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:2px}
+
+.voice-mock{background:linear-gradient(135deg,#1F4540,#0F2E2A);border:1px solid rgba(94,234,212,.2);border-radius:var(--r-lg);padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.voice-mock-head{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.voice-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--mint),var(--teal));display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--ink);font-weight:800}
+.voice-mock-head .name{color:#fff;font-weight:600;font-size:15px}
+.voice-mock-head .sub{color:rgba(255,255,255,.55);font-size:12px;margin-top:2px}
+.transcript{display:flex;flex-direction:column;gap:14px}
+.bubble{padding:12px 16px;border-radius:14px;font-size:14px;max-width:85%;line-height:1.5}
+.bubble.them{background:rgba(255,255,255,.08);color:rgba(255,255,255,.88);border-bottom-left-radius:4px}
+.bubble.me{background:var(--mint);color:var(--ink);align-self:flex-end;border-bottom-right-radius:4px;font-weight:500}
+.bubble-meta{font-size:11px;color:rgba(255,255,255,.4);margin-top:4px;padding:0 4px}
+.voice-bar{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.55)}
+.voice-bar strong{color:var(--mint);font-weight:600}
+
+/* STACK */
+.stack{background:#fff}
+.stack-head{text-align:center;max-width:720px;margin:0 auto 56px}
+.stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:900px){.stack-grid{grid-template-columns:1fr}}
+.module{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:32px;transition:all .25s;position:relative;overflow:hidden}
+.module:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--teal)}
+.module::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--ribbon,linear-gradient(90deg,var(--teal),var(--teal-2)))}
+.module[data-c="ops"]{--ribbon:linear-gradient(90deg,#0F766E,#14B8A6)}
+.module[data-c="growth"]{--ribbon:linear-gradient(90deg,#F59E0B,#F97316)}
+.module[data-c="web"]{--ribbon:linear-gradient(90deg,#1F4540,#5EEAD4)}
+.module-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px}
+.module[data-c="ops"] .module-icon{background:linear-gradient(135deg,#CCFBF1,#A7F3D0)}
+.module[data-c="growth"] .module-icon{background:linear-gradient(135deg,#FEF3C7,#FED7AA)}
+.module[data-c="web"] .module-icon{background:linear-gradient(135deg,#E0F2FE,#CCFBF1)}
+.module h3{font-size:21px;margin-bottom:8px}
+.module .tag{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.module ul{list-style:none;margin-top:20px}
+.module ul li{padding:9px 0;font-size:14.5px;color:var(--ink-3);display:flex;align-items:flex-start;gap:10px;border-bottom:1px dashed var(--line)}
+.module ul li:last-child{border-bottom:none}
+.module ul li::before{content:"›";color:var(--teal);font-weight:700;font-size:18px;line-height:1;flex-shrink:0;margin-top:1px}
+
+/* TIERS */
+.tiers{background:linear-gradient(180deg,var(--mint-tint) 0%,#fff 100%)}
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+@media (max-width:900px){.tiers-grid{grid-template-columns:1fr}}
+.tier{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:36px 32px;position:relative;display:flex;flex-direction:column}
+.tier.featured{border:2px solid var(--teal);box-shadow:var(--shadow-lg);transform:scale(1.02)}
+.tier.featured::before{content:"MOST CHOSEN";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;padding:5px 14px;border-radius:999px}
+.tier h3{font-size:22px;margin-bottom:6px}
+.tier .for{font-size:13.5px;color:var(--ink-3);min-height:42px;line-height:1.45;margin-bottom:18px}
+.tier .price{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:42px;color:var(--ink);letter-spacing:-.025em;margin-bottom:4px}
+.tier .price .starts{font-size:13px;font-weight:500;color:var(--ink-3);display:block;margin-bottom:4px}
+.tier .price .unit{font-size:14px;color:var(--ink-3);font-weight:500}
+.tier ul{list-style:none;margin:24px 0 28px;flex:1}
+.tier ul li{padding:9px 0;font-size:14.5px;color:var(--ink-3);display:flex;align-items:flex-start;gap:10px;border-bottom:1px dashed var(--line)}
+.tier ul li:last-child{border-bottom:none}
+.tier ul li::before{content:"✓";color:var(--teal);font-weight:700;flex-shrink:0}
+.tier .btn{width:100%;justify-content:center}
+
+/* CASE STUDIES */
+.cases{background:#fff}
+.cases-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;gap:24px;flex-wrap:wrap}
+.cases-head .right{font-size:14px;color:var(--ink-3)}
+.cases-head .right a{color:var(--teal);font-weight:600}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:900px){.case-grid{grid-template-columns:1fr}}
+.case{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:all .25s;position:relative}
+.case:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.case-img{height:180px;background:linear-gradient(135deg,var(--ink-2),var(--teal));position:relative;overflow:hidden}
+.case-img::after{content:attr(data-label);position:absolute;bottom:14px;left:18px;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em}
+.case[data-c="freight"] .case-img{background:linear-gradient(135deg,#0F2E2A,#0F766E)}
+.case[data-c="carrier"] .case-img{background:linear-gradient(135deg,#1F4540,#F59E0B)}
+.case[data-c="broker"] .case-img{background:linear-gradient(135deg,#0F766E,#5EEAD4)}
+.case-body{padding:24px}
+.case-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);background:var(--mint-tint);padding:4px 10px;border-radius:6px;margin-bottom:12px}
+.case h3{font-size:19px;margin-bottom:8px}
+.case p{font-size:14.5px;color:var(--ink-3)}
+.case-metric{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center}
+.case-metric .num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;color:var(--teal)}
+.case-metric .lbl{font-size:12px;color:var(--ink-3)}
+
+/* TESTIMONIAL */
+.quote{background:linear-gradient(135deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;position:relative;overflow:hidden}
+.quote::before{content:"\201C";position:absolute;top:20px;left:80px;font-family:'Playfair Display',serif;font-size:280px;color:rgba(94,234,212,.08);line-height:1}
+.quote-body{position:relative;z-index:1;max-width:880px;margin:0 auto;text-align:center}
+.quote blockquote{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(22px,2.6vw,30px);line-height:1.45;color:#fff}
+.quote-attr{margin-top:32px;display:flex;align-items:center;justify-content:center;gap:14px}
+.quote-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--mint),var(--gold-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--ink);font-size:18px}
+.quote-attr .name{color:#fff;font-weight:600}
+.quote-attr .role{color:rgba(255,255,255,.6);font-size:13px;margin-top:2px}
+
+/* PROCESS */
+.process{background:#FAFFFE}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px;position:relative}
+@media (max-width:900px){.process-grid{grid-template-columns:1fr}}
+.process-grid::before{content:"";position:absolute;top:36px;left:8%;right:8%;height:2px;background:repeating-linear-gradient(90deg,var(--teal) 0 6px,transparent 6px 12px);z-index:0}
+@media (max-width:900px){.process-grid::before{display:none}}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;position:relative;z-index:1;transition:all .25s}
+.step:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.step-num{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--teal),var(--teal-2));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin-bottom:18px;box-shadow:0 8px 20px rgba(15,118,110,.3)}
+.step .day{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);background:var(--mint-tint);padding:3px 10px;border-radius:6px;margin-bottom:10px}
+.step h3{font-size:18px;margin-bottom:8px}
+.step p{font-size:14.5px;color:var(--ink-3)}
+
+/* FAQ */
+.faq{background:#fff}
+.faq-grid{max-width:820px;margin:48px auto 0}
+.faq-item{border-bottom:1px solid var(--line);padding:24px 0}
+.faq-item summary{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-size:24px;color:var(--teal);font-weight:600;transition:transform .25s;flex-shrink:0}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item p{margin-top:14px;color:var(--ink-3);font-size:15.5px;line-height:1.6}
+
+/* FINAL CTA */
+.final{background:linear-gradient(135deg,var(--ink) 0%,var(--ink-2) 50%,var(--teal) 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;top:-30%;left:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(94,234,212,.18),transparent 65%);border-radius:50%}
+.final::after{content:"";position:absolute;bottom:-30%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(245,158,11,.14),transparent 65%);border-radius:50%}
+.final .container{position:relative;z-index:1}
+.final h2{color:#fff;max-width:780px;margin:0 auto}
+.final h2 .italic{font-family:'Playfair Display',serif;font-style:italic;color:var(--mint);font-weight:500}
+.final p{color:rgba(255,255,255,.78);font-size:19px;max-width:580px;margin:20px auto 36px}
+.final .btn-primary{background:var(--mint);color:var(--ink);font-size:17px;padding:18px 32px;box-shadow:0 20px 50px rgba(94,234,212,.3)}
+.final .btn-primary:hover{background:#fff;color:var(--ink);transform:translateY(-3px)}
+.final .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.final .btn-ghost:hover{border-color:var(--mint);color:var(--mint)}
+.final-trust{margin-top:36px;display:flex;justify-content:center;align-items:center;gap:32px;flex-wrap:wrap;color:rgba(255,255,255,.65);font-size:13.5px}
+.final-trust strong{color:var(--mint)}
+
+/* FOOTER */
+footer{background:#0B1F1C;color:rgba(255,255,255,.65);padding:48px 0 32px;font-size:14px}
+.footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap}
+.footer-brand{max-width:340px}
+.footer-brand .logo{color:#fff;margin-bottom:12px;display:inline-block}
+.footer-brand p{color:rgba(255,255,255,.6);font-size:14px;line-height:1.55}
+.footer-links{display:flex;gap:48px;flex-wrap:wrap}
+.footer-col h4{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:14px}
+.footer-col a{display:block;color:rgba(255,255,255,.6);margin-bottom:8px;font-size:14px;transition:color .2s}
+.footer-col a:hover{color:var(--mint)}
+.footer-bottom{margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);text-align:center;color:rgba(255,255,255,.45);font-size:13px}
+
+/* META PIXEL placeholder */
+.pixel-placeholder{display:none}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">Skynet<span>Labs</span></a>
+    <a href="#book" class="nav-cta">Book Free Audit <svg class="btn-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="hero-tag"><span class="dot"></span> Built for US Logistics Operators · 2026</span>
+      <h1>
+        Your dispatchers miss calls. Your <span class="italic">site loses</span> loads. We <span class="accent">wire both</span>.
+      </h1>
+      <p class="hero-sub">
+        Conversion-engineered freight sites + AI dispatcher voice agent + GoHighLevel pipeline for US carriers, brokers and 5-50 truck fleets. Replace 4 paid tools with one connected stack. Live in 14 days.
+      </p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn btn-primary">Book Free 30-min Audit <svg class="btn-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="#cases" class="btn btn-ghost">See logistics builds</a>
+      </div>
+      <div class="hero-trust">
+        <span class="star">★★★★★</span>
+        <span><strong>180+ workflows</strong> shipped · <strong>9 countries</strong> · 8 US freight builds</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="dispatch-card">
+        <div class="dispatch-head">
+          <h4>Dispatch Pipeline · Today</h4>
+          <span class="live">Live</span>
+        </div>
+        <div class="dispatch-body">
+          <div class="lane-row">
+            <div class="lane-icon">DV</div>
+            <div class="lane-meta">
+              <div class="from-to">Dallas TX → Phoenix AZ</div>
+              <div class="equip">Dry Van · 48ft · Same-day pickup</div>
+            </div>
+            <div class="lane-rate">
+              <div class="price">$2,840</div>
+              <div class="status lane-status-booked">Booked</div>
+            </div>
+          </div>
+          <div class="lane-row">
+            <div class="lane-icon">RF</div>
+            <div class="lane-meta">
+              <div class="from-to">Atlanta GA → Miami FL</div>
+              <div class="equip">Reefer · Temp 38°F · Wed</div>
+            </div>
+            <div class="lane-rate">
+              <div class="price">$1,920</div>
+              <div class="status lane-status-callback">Callback</div>
+            </div>
+          </div>
+          <div class="lane-row">
+            <div class="lane-icon">FB</div>
+            <div class="lane-meta">
+              <div class="from-to">Houston TX → New Orleans LA</div>
+              <div class="equip">Flatbed · Tarped · Thu AM</div>
+            </div>
+            <div class="lane-rate">
+              <div class="price">$1,450</div>
+              <div class="status lane-status-booked">Booked</div>
+            </div>
+          </div>
+          <div class="lane-row">
+            <div class="lane-icon">OT</div>
+            <div class="lane-meta">
+              <div class="from-to">Chicago IL → Denver CO</div>
+              <div class="equip">OTR · 53ft Reefer · Fri</div>
+            </div>
+            <div class="lane-rate">
+              <div class="price">$3,210</div>
+              <div class="status lane-status-callback">Callback</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section class="strip">
+  <div class="container strip-grid">
+    <div class="stat"><div class="num">14d</div><div class="lbl">Audit → Live</div></div>
+    <div class="stat"><div class="num">24/7</div><div class="lbl">AI Dispatcher Voice</div></div>
+    <div class="stat"><div class="num">4 → 1</div><div class="lbl">Tools Replaced</div></div>
+    <div class="stat"><div class="num">$0</div><div class="lbl">Deposit Refundable</div></div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="section pain">
+  <div class="container">
+    <div class="pain-head">
+      <span class="eyebrow-italic">Where the load slips</span>
+      <h2>Three leaks every freight broker pays for, every week.</h2>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">📞</div>
+        <h3>Missed carrier calls</h3>
+        <p>Carriers call after hours, weekends, mid-load. Voicemail kills the rate. Competitor with 24/7 answer wins the lane.</p>
+        <div class="cost">Avg loss: $8K-22K/mo on missed coverage</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🐌</div>
+        <h3>Quote-to-booked is days</h3>
+        <p>Shipper requests a quote. You email a PDF Monday. They booked with another broker Tuesday. Manual quoting is the bottleneck.</p>
+        <div class="cost">Avg loss: 35-50% of inbound RFQs</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🧰</div>
+        <h3>4 disconnected tools</h3>
+        <p>CRM ≠ load board ≠ email ≠ phone. Driver text doesn't hit dispatch. Lead from website never enters CRM. Hours die in copy-paste.</p>
+        <div class="cost">Avg cost: 14+ hrs/wk of admin tax</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT: AI DISPATCHER -->
+<section class="section product">
+  <div class="container product-grid">
+    <div>
+      <span class="eyebrow-italic">Flagship product</span>
+      <h2 style="margin-top:12px">AI Dispatcher Agent <span class="accent">™</span></h2>
+      <p style="margin-top:20px">A natural-voice AI agent that answers your dispatch line 24/7. Trained on your lanes, equipment, rate cards and broker contacts. Books loads, qualifies carriers, hands off to a human only when it matters.</p>
+      <ul class="feature-list">
+        <li><span class="check">✓</span> Answers carrier + shipper calls in <strong style="color:#fff">natural voice</strong> (ElevenLabs)</li>
+        <li><span class="check">✓</span> Pulls live rate from your matrix, posts to load board if no match</li>
+        <li><span class="check">✓</span> Texts MC# + load confirmation, logs everything to GoHighLevel</li>
+        <li><span class="check">✓</span> Hands to human dispatcher on <strong style="color:#fff">edge cases</strong> (oversize, hot loads, exceptions)</li>
+        <li><span class="check">✓</span> Integrates with Samsara, Motive, McLeod, AscendTMS via REST</li>
+      </ul>
+    </div>
+    <div class="voice-mock">
+      <div class="voice-mock-head">
+        <div class="voice-avatar">🎧</div>
+        <div>
+          <div class="name">SkynetLabs AI Dispatcher</div>
+          <div class="sub">Inbound call · Wed 11:42 PM CT</div>
+        </div>
+      </div>
+      <div class="transcript">
+        <div class="bubble them">Hey, this is Mike with Redline Carriers. Y'all still need that Phoenix run?</div>
+        <div class="bubble-meta">Mike · 11:42:08 PM</div>
+        <div class="bubble me">Hey Mike — yes, Dallas to Phoenix dry van, pickup tomorrow 6 AM. Pays $2,840 all-in. Got a 48-footer?</div>
+        <div class="bubble-meta">Dispatcher · 11:42:11 PM</div>
+        <div class="bubble them">Yep, 53. Driver's at the Petro. Can do $2,950?</div>
+        <div class="bubble me">I can do $2,900 even. Booking and texting your dispatcher the rate con now. Sound good?</div>
+        <div class="bubble-meta">Dispatcher · 11:42:21 PM</div>
+      </div>
+      <div class="voice-bar"><span>Load booked at <strong>11:42 PM</strong></span><span>Human reviewed <strong>Thu 7:03 AM</strong></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="section stack">
+  <div class="container">
+    <div class="stack-head">
+      <span class="eyebrow-italic">The connected stack</span>
+      <h2>Three modules. One operating system.</h2>
+      <p style="margin-top:16px">Start with one. Add the rest as you grow. Owned by you forever — no monthly per-seat tax.</p>
+    </div>
+    <div class="stack-grid">
+      <div class="module" data-c="ops">
+        <div class="module-icon">⚙️</div>
+        <span class="tag">Module 01 · Ops</span>
+        <h3>DispatchOS™</h3>
+        <p>AI voice + load matching + carrier vetting + CRM pipeline.</p>
+        <ul>
+          <li>AI Dispatcher Agent (24/7 voice)</li>
+          <li>Carrier portal w/ MC# + insurance vetting</li>
+          <li>GoHighLevel pipeline: New → Quoted → Booked → POD</li>
+          <li>Samsara / Motive / TMS sync via n8n</li>
+          <li>Driver app w/ rate con + check-call automation</li>
+        </ul>
+      </div>
+      <div class="module" data-c="web">
+        <div class="module-icon">🌐</div>
+        <span class="tag">Module 02 · Web</span>
+        <h3>Freight Website</h3>
+        <p>Conversion-engineered site for carrier or broker that books loads, not just looks pretty.</p>
+        <ul>
+          <li>Instant quote form → CRM in &lt;90 sec</li>
+          <li>Shipper portal: quote, track, document download</li>
+          <li>Lane + equipment finder w/ live rate ranges</li>
+          <li>SEO + AEO tuned for US freight queries</li>
+          <li>Mobile-first, Lighthouse 90+ perf</li>
+        </ul>
+      </div>
+      <div class="module" data-c="growth">
+        <div class="module-icon">📈</div>
+        <span class="tag">Module 03 · Growth</span>
+        <h3>Lead & Nurture Engine</h3>
+        <p>Inbound systems that fill your pipeline without cold-calling.</p>
+        <ul>
+          <li>Email + SMS sequences for stale shippers</li>
+          <li>Reactivation playbook for last-90-day carriers</li>
+          <li>Meta + Google Ads launch (creative + landing)</li>
+          <li>Monthly content engine: 8 posts auto-published</li>
+          <li>ROI dashboard — channel attribution</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="section tiers">
+  <div class="container">
+    <div class="pain-head">
+      <span class="eyebrow-italic">Public pricing. No quote games.</span>
+      <h2>Pick a tier. Book a call. Full scope in 24 hours.</h2>
+    </div>
+    <div class="tiers-grid">
+      <div class="tier">
+        <h3>Quick Launch</h3>
+        <p class="for">For owner-operators + small fleets needing a real site + quote intake.</p>
+        <div class="price"><span class="starts">Starts at</span>$1,500<span class="unit"> one-time</span></div>
+        <ul>
+          <li>Conversion-engineered 6-page site</li>
+          <li>Instant quote → email pipeline</li>
+          <li>SEO base + Google Business setup</li>
+          <li>Live in 7 days</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost">Start with Web</a>
+      </div>
+      <div class="tier featured">
+        <h3>DispatchOS Stack</h3>
+        <p class="for">For 5-50 truck fleets + brokers replacing 4 tools with one ops layer.</p>
+        <div class="price"><span class="starts">Starts at</span>$5,500<span class="unit"> + $2K/mo</span></div>
+        <ul>
+          <li>Everything in Quick Launch</li>
+          <li>AI Dispatcher Agent (24/7 voice)</li>
+          <li>GoHighLevel CRM + carrier portal</li>
+          <li>n8n automation backbone</li>
+          <li>TMS integration (Samsara/Motive/McLeod)</li>
+          <li>Live in 14 days</li>
+        </ul>
+        <a href="#book" class="btn btn-primary">Book the call</a>
+      </div>
+      <div class="tier">
+        <h3>Full Growth Engine</h3>
+        <p class="for">For brokers ready to scale inbound w/o hiring 3 SDRs.</p>
+        <div class="price"><span class="starts">Starts at</span>$9,500<span class="unit"> + $3K/mo</span></div>
+        <ul>
+          <li>Everything in DispatchOS</li>
+          <li>Meta + Google Ads launch + creative</li>
+          <li>Email + SMS nurture sequences</li>
+          <li>Monthly content engine (8 posts/mo)</li>
+          <li>ROI dashboard + monthly strategy call</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost">Start with Growth</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="section cases" id="cases">
+  <div class="container">
+    <div class="cases-head">
+      <div>
+        <span class="eyebrow-italic">Real freight builds</span>
+        <h2 style="margin-top:12px">Live US logistics clients.</h2>
+      </div>
+      <div class="right">8 freight + carrier builds shipped · <a href="/case-studies">All case studies →</a></div>
+    </div>
+    <div class="case-grid">
+      <div class="case" data-c="freight">
+        <div class="case-img" data-label="Freight Brokerage"></div>
+        <div class="case-body">
+          <span class="case-tag">Broker</span>
+          <h3>Bold dark-theme brokerage + admin dashboard</h3>
+          <p>Full corporate site + driver recruiting funnel + quote portal. Replaced 3 SaaS tools.</p>
+          <div class="case-metric"><div><div class="num">+62%</div><div class="lbl">RFQ → booked</div></div><div><div class="num">14d</div><div class="lbl">to live</div></div></div>
+        </div>
+      </div>
+      <div class="case" data-c="carrier">
+        <div class="case-img" data-label="Carrier Site + Portal"></div>
+        <div class="case-body">
+          <span class="case-tag">Carrier</span>
+          <h3>Modern carrier site w/ quote system</h3>
+          <p>Mobile-first carrier site for OTR ops. Live quote + load board API. SEO tuned for Midwest lanes.</p>
+          <div class="case-metric"><div><div class="num">3.2x</div><div class="lbl">inbound leads/mo</div></div><div><div class="num">7d</div><div class="lbl">to live</div></div></div>
+        </div>
+      </div>
+      <div class="case" data-c="broker">
+        <div class="case-img" data-label="AI Dispatch"></div>
+        <div class="case-body">
+          <span class="case-tag">Hauler</span>
+          <h3>Local hauling co. w/ online booking + AI dispatch</h3>
+          <p>Material hauling biz w/ shipper booking + AI agent for off-hours intake. Calendar + dispatch synced.</p>
+          <div class="case-metric"><div><div class="num">24/7</div><div class="lbl">coverage</div></div><div><div class="num">−40%</div><div class="lbl">missed calls</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="section quote">
+  <div class="container quote-body">
+    <blockquote>"Skynet built our entire CRM + dispatch flow + lead site in days. We're booking loads at 2 AM while we sleep. Best investment of the year."</blockquote>
+    <div class="quote-attr">
+      <div class="quote-avatar">DM</div>
+      <div style="text-align:left">
+        <div class="name">Dominique M.</div>
+        <div class="role">Freight Broker · Indiana</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process">
+  <div class="container">
+    <div class="pain-head">
+      <span class="eyebrow-italic">How we work</span>
+      <h2>Audit to live in 14 days.</h2>
+    </div>
+    <div class="process-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <span class="day">Mon</span>
+        <h3>Free Loom audit</h3>
+        <p>You send URL + bottleneck. I record a 10-min walk-through w/ specific fixes in 24h. No call required.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <span class="day">Tue–Wed</span>
+        <h3>Scope + signed brief</h3>
+        <p>15-min call. Fixed scope, fixed timeline, deposit. No quote tennis. Either yes or no.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <span class="day">Thu → next Fri</span>
+        <h3>Build + integrate</h3>
+        <p>Site shipped, AI dispatcher trained, CRM wired, TMS connected. Daily Loom updates.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <span class="day">Day 14+</span>
+        <h3>Live + handover</h3>
+        <p>You own the stack. Walkthrough video. 30-day post-ship fixes free. Optional retainer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq">
+  <div class="container">
+    <div class="pain-head">
+      <span class="eyebrow-italic">Everything you need to know</span>
+      <h2>Frequently asked.</h2>
+    </div>
+    <div class="faq-grid">
+      <details class="faq-item">
+        <summary>Do you only work with US logistics operators?</summary>
+        <p>We specialize in US carriers, freight brokers, and 5-50 truck fleets — that's where our AI dispatcher and TMS integrations are tuned. We also serve Canadian operators. Outside North America, we'll refer.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can the AI dispatcher integrate with my TMS?</summary>
+        <p>Yes. Out of the box: Samsara, Motive, McLeod, AscendTMS, Truckstop. Anything with a REST API or webhook — we wire it via n8n. If your TMS is paper-based, we move you to GoHighLevel + a lightweight portal first.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How fast can the AI dispatcher go live?</summary>
+        <p>Live in 14 days from signed brief. Days 1-3: voice training on your lanes + rates. Days 4-9: portal + CRM + TMS wiring. Days 10-14: pilot calls, tuning, soft launch. Day 14: live.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if my drivers are not tech-savvy?</summary>
+        <p>The driver app is text-message based by default — no install. Rate con arrives by SMS. Check-calls arrive by SMS. POD upload by SMS reply with photo. The complexity sits server-side, not in the cab.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What does it replace?</summary>
+        <p>Typically the 4-tool stack: separate CRM + load board + email blaster + WhatsApp/SMS manager. We collapse to one connected pipeline you own. Saves $400-1200/mo in SaaS + 14+ hrs/wk in admin.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do I own the system after launch?</summary>
+        <p>Yes. Repo, GHL sub-account, n8n workflows, voice training data — all transferred to you. Cancel retainer anytime; the system keeps running. We hate vendor lock-in because we've been on the other side of it.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section final" id="book">
+  <div class="container">
+    <span class="eyebrow-italic" style="color:#5EEAD4">No discovery games. No quote tennis.</span>
+    <h2 style="margin-top:16px">Drop your URL. I'll record a <span class="italic">10-min Loom</span> on your dispatch leaks in 24h.</h2>
+    <p>Free. No call. No pitch deck. If it's useful — book the audit. If not — keep the Loom and ship the fixes yourself.</p>
+    <div class="hero-ctas" style="justify-content:center">
+      <a href="https://cal.com/waseemnasir/freight-audit" class="btn btn-primary">Send my URL for free Loom <svg class="btn-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="/pricing" class="btn btn-ghost">See public pricing</a>
+    </div>
+    <div class="final-trust">
+      <span>★★★★★ <strong>180+ workflows</strong> shipped</span>
+      <span>·</span>
+      <span><strong>9 countries</strong> served</span>
+      <span>·</span>
+      <span>Solo founder · <strong>Built in Bali</strong></span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo">Skynet<span style="color:#5EEAD4">Labs</span></a>
+        <p>AI automation + conversion-engineered web systems for founders who refuse to be average. Built by Waseem Nasir from Bali.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Logistics</h4>
+          <a href="/services/dispatch-automation">AI Dispatcher</a>
+          <a href="/services/freight-website">Freight Website</a>
+          <a href="/services/carrier-portal">Carrier Portal</a>
+          <a href="/case-studies">Case Studies</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about">About</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/contact">Contact</a>
+          <a href="/blog">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy-policy">Privacy</a>
+          <a href="/terms-of-service">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 SkynetLabs. Conversion-engineered in Bali for the world.</div>
+  </div>
+</footer>
+
+<!-- META PIXEL placeholder -->
+<!-- <script>!function(f,b,e,v,n,t,s){...}('init', 'YOUR_PIXEL_ID');fbq('track', 'PageView');</script> -->
+<!-- GA4 placeholder -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script> -->
+
+</body>
+</html>

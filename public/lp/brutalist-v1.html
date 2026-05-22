@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI agents that ship — SkynetLabs for SaaS founders</title>
+<meta name="description" content="AI support, onboarding and ops agents for B2B SaaS. SOC2-aligned, multi-tenant, sub-50ms p95. From $1,500. Live in 14 days." />
+<meta name="theme-color" content="#000000" />
+<meta name="color-scheme" content="light" />
+<link rel="canonical" href="https://app-mauve-eta-66.vercel.app/lp/brutalist-v1.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="AI agents that ship — SkynetLabs" />
+<meta property="og:description" content="Production AI agents for SaaS. Built in 14 days. From $1,500." />
+<meta property="og:image" content="https://app-mauve-eta-66.vercel.app/og/brutalist.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"SoftwareApplication","@id":"#app","name":"SkynetLabs AI Agent Stack","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"1500","priceCurrency":"USD"},"description":"Production AI agents for B2B SaaS: support deflection, onboarding flows, ops automation. SOC2-aligned, multi-tenant, sub-50ms p95.","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"47"}},
+    {"@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Is the stack SOC2 compliant?","acceptedAnswer":{"@type":"Answer","text":"We deploy on SOC2 Type II infrastructure (AWS, Vercel, Supabase). Your tenant data is row-level isolated. We provide audit logs and a SIG-Lite questionnaire on request. Full SOC2 audit support for enterprise tier."}},
+      {"@type":"Question","name":"What is the typical latency?","acceptedAnswer":{"@type":"Answer","text":"Median 12ms response on cached intents, 380ms on cold LLM calls (Claude Haiku), 1.2s on tool-use loops. We benchmark p50/p95/p99 weekly and ship dashboards."}},
+      {"@type":"Question","name":"How does multi-tenant isolation work?","acceptedAnswer":{"@type":"Answer","text":"Per-tenant Postgres schemas with RLS policies. Per-tenant LLM API keys (BYO Anthropic / OpenAI). Embeddings stored in tenant-scoped pgvector tables. No shared context between tenants."}},
+      {"@type":"Question","name":"What is the churn impact of bad onboarding?","acceptedAnswer":{"@type":"Answer","text":"75% of SaaS users decide whether to renew within the first 7 days. Our onboarding agent guides activation, surfaces aha-moments and flags at-risk accounts to CS. Average lift: 18-32% on day-7 activation."}},
+      {"@type":"Question","name":"Do you replace Intercom or sit alongside?","acceptedAnswer":{"@type":"Answer","text":"Both options. We can replace Intercom/Zendesk entirely (saves $400-2000/mo) or deploy as a deflection layer in front of your existing inbox. Migration tools included."}}
+    ]}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#FFFFFF;
+  --ink:#000000;
+  --lime:#C7F73B;
+  --red:#FF3B30;
+  --g1:#FAFAFA;
+  --g2:#F4F4F5;
+  --g3:#E4E4E7;
+  --g4:#71717A;
+  --g5:#18181B;
+  --line:#000000;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter','Geist Sans',system-ui,sans-serif;
+  font-size:15px;line-height:1.5;color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.mono,code,pre{font-family:'JetBrains Mono','Geist Mono',ui-monospace,monospace;font-feature-settings:"ss01","cv11"}
+h1,h2,h3,h4{font-weight:700;line-height:1.05;letter-spacing:-.03em}
+a{color:var(--ink);text-decoration:none}
+img,svg{max-width:100%;display:block}
+hr{border:0;border-top:1px solid var(--ink)}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+.row{display:grid;grid-template-columns:repeat(12,1fr);gap:0;border-left:1px solid var(--ink);border-right:1px solid var(--ink)}
+.cell{border-right:1px solid var(--ink);padding:20px;border-bottom:1px solid var(--ink)}
+.cell:last-child{border-right:0}
+.cap{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--g4);font-weight:500}
+.num{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--ink)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1280px;margin:0 auto}
+.brand{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:-.02em}
+.brand::before{content:"▍ ";color:var(--lime)}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--g4)}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--ink);color:#fff;padding:8px 14px;border:1px solid var(--ink)}
+@media (max-width:640px){.nav-links a:not(.nav-cta){display:none}}
+
+/* SHARED */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;border:1px solid var(--ink);cursor:pointer;transition:transform .12s,background .12s;text-decoration:none}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:#000}
+.btn-lime{background:var(--lime);color:var(--ink);border-color:var(--ink)}
+.btn-ghost{background:#fff;color:var(--ink)}
+
+/* HERO */
+.hero{border-bottom:1px solid var(--ink)}
+.hero-grid{display:grid;grid-template-columns:1fr;border-left:1px solid var(--ink);border-right:1px solid var(--ink)}
+.hero-meta{padding:14px 24px;border-bottom:1px solid var(--ink);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--g4);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hero-meta .dot{color:var(--lime);text-shadow:0 0 6px var(--lime)}
+.hero-main{padding:56px 24px 72px;border-bottom:1px solid var(--ink)}
+.hero h1{font-family:'JetBrains Mono','Geist Mono',monospace;font-weight:700;font-size:clamp(40px,8vw,96px);letter-spacing:-.04em;line-height:.95}
+.hero h1 .alt{color:var(--g4)}
+.hero h1 .lime{background:var(--lime);padding:0 .1em}
+.hero-sub{margin-top:28px;font-size:18px;line-height:1.55;color:var(--g5);max-width:640px}
+.hero-ctas{margin-top:36px;display:flex;gap:0;flex-wrap:wrap}
+.hero-ctas .btn{margin-right:-1px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr)}
+.hero-stats .cell{border-bottom:0;padding:22px 24px}
+.hero-stats .cell:last-child{border-right:0}
+.hero-stats .v{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:600;letter-spacing:-.02em;margin-top:6px}
+.hero-stats .v.lime{color:#000;background:var(--lime);display:inline-block;padding:0 6px}
+@media (max-width:768px){.hero-stats{grid-template-columns:repeat(2,1fr)}.hero-stats .cell:nth-child(2){border-right:0}.hero-stats .cell:nth-child(1),.hero-stats .cell:nth-child(2){border-bottom:1px solid var(--ink)}}
+
+/* PROBLEM */
+.problem{border-bottom:1px solid var(--ink)}
+.problem-head{padding:48px 24px 32px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.problem-head h2{font-size:clamp(28px,4vw,42px);max-width:780px}
+.problem-head p{margin-top:12px;color:var(--g4);font-size:15px;max-width:640px}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--ink);border-right:1px solid var(--ink)}
+@media (max-width:768px){.problem-grid{grid-template-columns:1fr}}
+.problem-cell{padding:32px 24px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.problem-grid > .problem-cell:last-child{border-right:0}
+@media (max-width:768px){.problem-cell{border-right:0}}
+.big-num{font-family:'JetBrains Mono',monospace;font-size:clamp(56px,10vw,96px);font-weight:700;letter-spacing:-.05em;line-height:.95;display:flex;align-items:baseline;gap:4px}
+.big-num .unit{font-size:.4em;color:var(--g4);font-weight:500}
+.problem-cell h3{margin-top:16px;font-size:18px;letter-spacing:-.02em}
+.problem-cell p{margin-top:8px;color:var(--g4);font-size:14px;line-height:1.55}
+.src{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g4)}
+
+/* ARCHITECTURE */
+.arch{background:var(--ink);color:#fff;border-bottom:1px solid var(--ink)}
+.arch-head{padding:48px 24px 28px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);border-bottom:1px solid #333}
+.arch-head .cap{color:var(--lime)}
+.arch-head h2{color:#fff;margin-top:8px;font-size:clamp(28px,4vw,42px)}
+.arch-diagram{padding:40px 24px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);overflow-x:auto}
+.arch-diagram pre{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.55;color:#fff;white-space:pre}
+.arch-diagram pre .l{color:var(--lime)}
+.arch-diagram pre .m{color:#71717A}
+.arch-diagram pre .r{color:var(--red)}
+
+/* MODULES */
+.modules{border-bottom:1px solid var(--ink)}
+.mod-head{padding:48px 24px 32px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.mod-head h2{font-size:clamp(28px,4vw,42px)}
+.mod-head p{margin-top:12px;color:var(--g4);max-width:640px}
+.mod-grid{display:grid;grid-template-columns:repeat(2,1fr);border-left:1px solid var(--ink);border-right:1px solid var(--ink)}
+@media (max-width:768px){.mod-grid{grid-template-columns:1fr}}
+.mod{padding:28px 24px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.mod:nth-child(2n){border-right:0}
+@media (max-width:768px){.mod{border-right:0}}
+.mod-head-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.mod-no{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g4);text-transform:uppercase;letter-spacing:.08em}
+.mod-stat{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--lime);padding:3px 8px}
+.mod h3{font-size:22px;margin-bottom:8px}
+.mod .desc{color:var(--g4);font-size:14px;line-height:1.55;margin-bottom:18px}
+.screenshot{border:1px solid var(--ink);background:var(--bg);height:180px;overflow:hidden;position:relative}
+.screenshot svg{width:100%;height:100%;display:block}
+
+/* PRICING */
+.pricing{border-bottom:1px solid var(--ink)}
+.pricing-head{padding:48px 24px 32px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.pricing-head h2{font-size:clamp(28px,4vw,42px)}
+.pricing-head p{margin-top:12px;color:var(--g4)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--ink);border-right:1px solid var(--ink)}
+@media (max-width:768px){.pricing-grid{grid-template-columns:1fr}}
+.tier{padding:32px 24px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);display:flex;flex-direction:column;background:#fff}
+.tier:last-child{border-right:0}
+@media (max-width:768px){.tier{border-right:0}}
+.tier.featured{background:var(--ink);color:#fff}
+.tier.featured h3,.tier.featured .price,.tier.featured ul{color:#fff}
+.tier.featured .price .unit{color:#a1a1aa}
+.tier.featured ul li::before{color:var(--lime)}
+.tier.featured .cap{color:var(--lime)}
+.tier .cap{margin-bottom:14px}
+.tier h3{font-size:22px;margin-bottom:4px;font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:-.02em}
+.tier .for{color:var(--g4);font-size:13px;margin-bottom:24px;min-height:36px;line-height:1.45}
+.tier.featured .for{color:#a1a1aa}
+.tier .price{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:40px;letter-spacing:-.04em;line-height:1}
+.tier .price .unit{font-size:13px;font-weight:500;color:var(--g4);display:block;margin-top:6px}
+.tier ul{list-style:none;margin:24px 0 28px;flex:1}
+.tier ul li{padding:9px 0;font-size:14px;color:var(--ink);display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid var(--g3);font-family:'Inter',sans-serif}
+.tier.featured ul li{border-bottom:1px solid #27272a;color:#fff}
+.tier ul li:last-child{border-bottom:0}
+.tier ul li::before{content:"▸";color:var(--ink);font-weight:700;flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.tier .btn{justify-content:center}
+
+/* LOGOS */
+.logos{border-bottom:1px solid var(--ink)}
+.logos-head{padding:32px 24px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline}
+.logos-head h3{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;letter-spacing:-.01em}
+.logos-head .cap{color:var(--g4)}
+.logos-grid{display:grid;grid-template-columns:repeat(6,1fr);border-left:1px solid var(--ink);border-right:1px solid var(--ink)}
+@media (max-width:900px){.logos-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:480px){.logos-grid{grid-template-columns:repeat(2,1fr)}}
+.logo-cell{padding:28px 16px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;text-align:center;color:var(--g5);letter-spacing:-.01em}
+.logo-cell:nth-child(6n){border-right:0}
+@media (max-width:900px){.logo-cell:nth-child(6n){border-right:1px solid var(--ink)}.logo-cell:nth-child(3n){border-right:0}}
+@media (max-width:480px){.logo-cell:nth-child(3n){border-right:1px solid var(--ink)}.logo-cell:nth-child(2n){border-right:0}}
+
+/* STACK */
+.stack{border-bottom:1px solid var(--ink)}
+.stack-head{padding:48px 24px 24px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.stack-head h2{font-size:clamp(28px,4vw,42px)}
+.stack-head p{margin-top:12px;color:var(--g4);max-width:640px}
+.stack-tags{padding:32px 24px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;border:1px solid var(--ink);padding:6px 12px;background:#fff}
+.tag.lime{background:var(--lime)}
+.tag.red{background:#fff;color:var(--red);border-color:var(--red);text-decoration:line-through}
+.tag::before{content:"› ";color:var(--g4)}
+.tag.lime::before,.tag.red::before{display:none}
+
+/* FAQ */
+.faq{border-bottom:1px solid var(--ink)}
+.faq-head{padding:48px 24px 32px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.faq-head h2{font-size:clamp(28px,4vw,42px)}
+.faq-grid{border-left:1px solid var(--ink);border-right:1px solid var(--ink)}
+.faq-row{display:grid;grid-template-columns:1fr 2fr;border-bottom:1px solid var(--ink)}
+@media (max-width:768px){.faq-row{grid-template-columns:1fr}}
+.faq-q{padding:28px 24px;border-right:1px solid var(--ink)}
+@media (max-width:768px){.faq-q{border-right:0;border-bottom:1px solid var(--g3);padding-bottom:12px}}
+.faq-q h3{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.faq-q .qnum{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g4);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em}
+.faq-a{padding:28px 24px;color:var(--g5);font-size:14.5px;line-height:1.6}
+.faq-a code{background:var(--g2);border:1px solid var(--g3);padding:1px 6px;font-size:12.5px}
+
+/* FINAL CTA */
+.final{background:var(--ink);color:#fff;border-bottom:1px solid var(--ink)}
+.final-in{padding:80px 24px;border-left:1px solid var(--ink);border-right:1px solid var(--ink);text-align:center}
+.final .cap{color:var(--lime);margin-bottom:16px;display:block}
+.final h2{color:#fff;font-family:'JetBrains Mono',monospace;font-size:clamp(32px,6vw,64px);letter-spacing:-.04em;line-height:1;max-width:800px;margin:0 auto}
+.final p{margin:24px auto 32px;color:#a1a1aa;font-size:16px;max-width:520px;line-height:1.55}
+.final .btn-lime:hover{background:#d9ff5c}
+.final-meta{margin-top:40px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#71717a;display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.final-meta .dot{color:var(--lime)}
+
+/* FOOTER */
+footer{background:#fff;color:var(--g5);padding:32px 24px;font-family:'JetBrains Mono',monospace;font-size:12px}
+.foot-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;max-width:1280px;margin:0 auto}
+.foot-in a{color:var(--g5)}
+.foot-in a:hover{color:var(--ink)}
+.foot-in .links{display:flex;gap:20px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="/" class="brand">skynetlabs/agents</a>
+    <div class="nav-links">
+      <a href="#problem">problem</a>
+      <a href="#arch">stack</a>
+      <a href="#pricing">pricing</a>
+      <a href="#faq">faq</a>
+      <a href="#book" class="nav-cta">book intro $0</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-meta">
+        <span><span class="dot">●</span> agents.skynetlabs.com / v2026.05</span>
+        <span>region: us-east-1 · build: 9f3a2c1 · 2026-05-22</span>
+      </div>
+      <div class="hero-main">
+        <h1>AI agents<br/>that <span class="lime">ship</span>.<br/><span class="alt">not demos.</span></h1>
+        <p class="hero-sub">Production support, onboarding and ops agents for B2B SaaS. SOC2-aligned, multi-tenant, sub-50ms p95 cached. Built in 14 days. From $1,500.</p>
+        <div class="hero-ctas">
+          <a href="#book" class="btn btn-ink">Book intro $0 →</a>
+          <a href="#cases" class="btn btn-ghost">View case studies →</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="cell">
+          <div class="cap">uptime</div>
+          <div class="v"><span class="lime">99.97%</span></div>
+        </div>
+        <div class="cell">
+          <div class="cap">services live</div>
+          <div class="v">4</div>
+        </div>
+        <div class="cell">
+          <div class="cap">p50 latency</div>
+          <div class="v">12<span style="font-size:14px;color:var(--g4)">ms</span></div>
+        </div>
+        <div class="cell">
+          <div class="cap">tickets deflected / mo</div>
+          <div class="v">38,210</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="wrap">
+    <div class="problem-head">
+      <div class="cap">// the problem</div>
+      <h2 style="margin-top:8px">Your SaaS is leaking users to operational debt.</h2>
+      <p>Three numbers most founders avoid looking at — until churn already cooked the quarter.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-cell">
+        <div class="big-num">75<span class="unit">%</span></div>
+        <h3>of SaaS users churn within 7 days</h3>
+        <p>Day-7 activation predicts 12-month retention. Most onboarding flows are static videos. Agents adapt to user intent in real time.</p>
+        <div class="src">src: Userpilot 2025, Mixpanel benchmarks</div>
+      </div>
+      <div class="problem-cell">
+        <div class="big-num">68<span class="unit">%</span></div>
+        <h3>of support tickets are tier-1 deflectable</h3>
+        <p>"How do I reset", "where's the export", "billing failed". An LLM agent with docs + product context closes these in &lt;30s. Your CS team handles the 32% that matter.</p>
+        <div class="src">src: Zendesk State of Service 2025</div>
+      </div>
+      <div class="problem-cell">
+        <div class="big-num">$4.2<span class="unit">k</span></div>
+        <h3>avg/mo wasted on SaaS sprawl</h3>
+        <p>Intercom + Drift + Helpscout + Loom AI + Notion AI + Zapier AI. Five subscriptions, three of them duplicate scope. One agent stack replaces the chat layer end-to-end.</p>
+        <div class="src">src: Vendr index, Q1 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="arch" id="arch">
+  <div class="wrap">
+    <div class="arch-head">
+      <div class="cap">// stack architecture</div>
+      <h2>Four layers. One contract. Human-in-the-loop where it matters.</h2>
+    </div>
+    <div class="arch-diagram">
+<pre>
+                    <span class="l">USER</span>
+                     │
+                     ▼
+  ┌─────────────────────────────────────────┐
+  │  <span class="l">CHAT UI</span>     widget · slack · email      │  ← <span class="m">tenant-scoped session</span>
+  └─────────────────────────────────────────┘
+                     │
+                     ▼
+  ┌─────────────────────────────────────────┐
+  │  <span class="l">AGENT ROUTER</span>     intent → policy → tool  │  ← <span class="m">12ms cached / 380ms LLM</span>
+  └─────────────────────────────────────────┘
+       │            │              │
+       ▼            ▼              ▼
+  ┌────────┐  ┌──────────┐  ┌──────────────┐
+  │ <span class="l">DOCS</span>   │  │ <span class="l">PRODUCT</span>  │  │ <span class="l">CRM / DB</span>     │  ← <span class="m">pgvector + RLS</span>
+  │ pgvec  │  │ api hits │  │ stripe/hubspot│
+  └────────┘  └──────────┘  └──────────────┘
+                     │
+                     ▼
+  ┌─────────────────────────────────────────┐
+  │  <span class="l">POLICY GATE</span>     confidence &lt; 0.82?       │  ← <span class="m">deflection threshold</span>
+  └─────────────────────────────────────────┘
+                     │
+              ┌──────┴──────┐
+              ▼             ▼
+          <span class="l">RESOLVE</span>      <span class="r">ESCALATE → HUMAN</span>
+          (closed)         (intercom / linear)
+</pre>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="modules">
+  <div class="wrap">
+    <div class="mod-head">
+      <div class="cap">// product modules</div>
+      <h2>Four agents. Composable. Own the source.</h2>
+      <p>Each module ships as a standalone service. Wire one. Wire all four. Cancel anytime — the repo and weights stay yours.</p>
+    </div>
+    <div class="mod-grid">
+      <div class="mod">
+        <div class="mod-head-row">
+          <span class="mod-no">module / 01 · support</span>
+          <span class="mod-stat">68% deflection</span>
+        </div>
+        <h3>Support Agent</h3>
+        <p class="desc">Tier-1 deflection trained on your docs + ticket history. Multi-channel: widget, Slack, email. Escalates with full context.</p>
+        <div class="screenshot">
+          <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="180" fill="#fff"/>
+            <rect x="0" y="0" width="400" height="24" fill="#000"/>
+            <circle cx="12" cy="12" r="4" fill="#C7F73B"/>
+            <text x="24" y="16" font-family="JetBrains Mono" font-size="10" fill="#fff">support.skynetlabs.com</text>
+            <rect x="20" y="40" width="220" height="22" fill="#F4F4F5"/>
+            <text x="28" y="55" font-family="Inter" font-size="11" fill="#18181B">how do I export to CSV?</text>
+            <rect x="140" y="72" width="240" height="22" fill="#000"/>
+            <text x="148" y="87" font-family="Inter" font-size="11" fill="#C7F73B">Settings → Data → Export. 24h retention.</text>
+            <rect x="20" y="104" width="180" height="22" fill="#F4F4F5"/>
+            <text x="28" y="119" font-family="Inter" font-size="11" fill="#18181B">does it include archived?</text>
+            <rect x="140" y="136" width="240" height="22" fill="#000"/>
+            <text x="148" y="151" font-family="Inter" font-size="11" fill="#C7F73B">Yes if "Include archived" is toggled.</text>
+          </svg>
+        </div>
+      </div>
+      <div class="mod">
+        <div class="mod-head-row">
+          <span class="mod-no">module / 02 · onboarding</span>
+          <span class="mod-stat">+24% activation</span>
+        </div>
+        <h3>Onboarding Agent</h3>
+        <p class="desc">Adaptive flow that detects user intent in first 90s. Surfaces aha-moment. Flags at-risk accounts to CS Slack channel.</p>
+        <div class="screenshot">
+          <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="180" fill="#fff"/>
+            <text x="20" y="30" font-family="JetBrains Mono" font-size="11" fill="#71717A">step 2 / 4 · setup</text>
+            <rect x="20" y="40" width="360" height="2" fill="#E4E4E7"/>
+            <rect x="20" y="40" width="180" height="2" fill="#000"/>
+            <text x="20" y="68" font-family="Inter" font-weight="700" font-size="16" fill="#000">Connect your first data source</text>
+            <rect x="20" y="80" width="170" height="60" fill="#fff" stroke="#000" stroke-width="1"/>
+            <text x="30" y="100" font-family="JetBrains Mono" font-size="10" fill="#71717A">CRM</text>
+            <text x="30" y="118" font-family="Inter" font-weight="600" font-size="13" fill="#000">HubSpot</text>
+            <text x="30" y="132" font-family="JetBrains Mono" font-size="9" fill="#C7F73B">● connected</text>
+            <rect x="200" y="80" width="170" height="60" fill="#000"/>
+            <text x="210" y="100" font-family="JetBrains Mono" font-size="10" fill="#a1a1aa">DB</text>
+            <text x="210" y="118" font-family="Inter" font-weight="600" font-size="13" fill="#fff">Postgres</text>
+            <text x="210" y="132" font-family="JetBrains Mono" font-size="9" fill="#C7F73B">→ connect</text>
+            <text x="20" y="170" font-family="JetBrains Mono" font-size="10" fill="#71717A">~2 min to first insight</text>
+          </svg>
+        </div>
+      </div>
+      <div class="mod">
+        <div class="mod-head-row">
+          <span class="mod-no">module / 03 · ops</span>
+          <span class="mod-stat">14h saved/wk</span>
+        </div>
+        <h3>Ops Agent</h3>
+        <p class="desc">Triages internal Slack, drafts SQL on read replicas, pushes Linear tickets. Acts on natural-language ops commands.</p>
+        <div class="screenshot">
+          <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="180" fill="#000"/>
+            <text x="16" y="24" font-family="JetBrains Mono" font-size="11" fill="#C7F73B">$ skynet ops --query "MRR last 7d"</text>
+            <text x="16" y="44" font-family="JetBrains Mono" font-size="10" fill="#a1a1aa">→ resolving: select sum(amount) from ...</text>
+            <text x="16" y="62" font-family="JetBrains Mono" font-size="10" fill="#a1a1aa">→ ran on: replica-prod-east-1</text>
+            <text x="16" y="84" font-family="JetBrains Mono" font-size="13" fill="#fff">MRR.7d = $84,210 (+12.4%)</text>
+            <text x="16" y="106" font-family="JetBrains Mono" font-size="10" fill="#a1a1aa">→ posted to #growth</text>
+            <text x="16" y="128" font-family="JetBrains Mono" font-size="11" fill="#C7F73B">$ skynet ops --escalate "churn spike"</text>
+            <text x="16" y="148" font-family="JetBrains Mono" font-size="10" fill="#a1a1aa">→ linear ticket OPS-241 created</text>
+            <text x="16" y="166" font-family="JetBrains Mono" font-size="10" fill="#FF3B30">→ assigned: @cs-lead · urgent</text>
+          </svg>
+        </div>
+      </div>
+      <div class="mod">
+        <div class="mod-head-row">
+          <span class="mod-no">module / 04 · dashboard</span>
+          <span class="mod-stat">real-time</span>
+        </div>
+        <h3>Control Plane</h3>
+        <p class="desc">Per-tenant dashboard. Conversation logs, deflection rate, escalation queue, LLM spend. SOC2 audit export.</p>
+        <div class="screenshot">
+          <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="180" fill="#fff"/>
+            <rect x="0" y="0" width="400" height="22" fill="#F4F4F5"/>
+            <text x="14" y="15" font-family="JetBrains Mono" font-size="10" fill="#000">dashboard · acme corp</text>
+            <text x="14" y="48" font-family="JetBrains Mono" font-size="10" fill="#71717A">DEFLECTION</text>
+            <text x="14" y="70" font-family="JetBrains Mono" font-weight="700" font-size="22" fill="#000">71.2<tspan font-size="12" fill="#71717A">%</tspan></text>
+            <text x="130" y="48" font-family="JetBrains Mono" font-size="10" fill="#71717A">ESCALATED</text>
+            <text x="130" y="70" font-family="JetBrains Mono" font-weight="700" font-size="22" fill="#000">142</text>
+            <text x="240" y="48" font-family="JetBrains Mono" font-size="10" fill="#71717A">LLM SPEND</text>
+            <text x="240" y="70" font-family="JetBrains Mono" font-weight="700" font-size="22" fill="#000">$84.1</text>
+            <rect x="14" y="92" width="372" height="60" fill="#FAFAFA" stroke="#E4E4E7"/>
+            <polyline points="14,140 60,128 100,118 140,124 180,108 220,98 260,92 300,98 340,86 386,76" fill="none" stroke="#000" stroke-width="1.5"/>
+            <circle cx="386" cy="76" r="3" fill="#C7F73B" stroke="#000"/>
+            <text x="14" y="170" font-family="JetBrains Mono" font-size="9" fill="#71717A">last 30d · daily conversations</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="pricing-head">
+      <div class="cap">// pricing</div>
+      <h2>Flat-fee builds. No per-seat tax.</h2>
+      <p>Three scopes. Pick one. Stripe link in the brief. Refund window 7 days.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="tier">
+        <div class="cap">tier / 01 · pilot</div>
+        <h3>Single Agent</h3>
+        <p class="for">One agent. One channel. Production-ready.</p>
+        <div class="price">$1,500<span class="unit">one-time · 14 days</span></div>
+        <ul>
+          <li>1 agent (support OR onboarding OR ops)</li>
+          <li>Up to 200 docs ingested</li>
+          <li>1 channel (widget / Slack / email)</li>
+          <li>Per-tenant pgvector index</li>
+          <li>30-day post-ship fixes</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost">Start brief →</a>
+      </div>
+      <div class="tier featured">
+        <div class="cap">tier / 02 · stack</div>
+        <h3>Full Agent Stack</h3>
+        <p class="for">All four modules. Multi-tenant. Production SLA.</p>
+        <div class="price">$5,500<span class="unit">one-time · $2k/mo retainer</span></div>
+        <ul>
+          <li>Support + Onboarding + Ops + Dashboard</li>
+          <li>Unlimited docs + product context</li>
+          <li>Multi-channel + Slack escalation</li>
+          <li>RLS isolation + audit logs</li>
+          <li>99.9% SLA + on-call</li>
+          <li>Weekly tuning report</li>
+        </ul>
+        <a href="#book" class="btn btn-lime">Book intro $0 →</a>
+      </div>
+      <div class="tier">
+        <div class="cap">tier / 03 · enterprise</div>
+        <h3>SOC2 + BYO Cloud</h3>
+        <p class="for">Self-hosted on your VPC. Full SOC2 audit support.</p>
+        <div class="price">$12,500<span class="unit">one-time · $4k/mo retainer</span></div>
+        <ul>
+          <li>Everything in Stack</li>
+          <li>Deploy to your AWS / GCP / Azure</li>
+          <li>BYO LLM keys (Anthropic / OpenAI / Bedrock)</li>
+          <li>SIG-Lite + audit log shipping</li>
+          <li>Dedicated Slack channel + SLA on-call</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost">Request scope →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="logos" id="cases">
+  <div class="wrap">
+    <div class="logos-head">
+      <h3>Shipped for indie SaaS + early enterprise</h3>
+      <span class="cap">47 builds · 9 countries · 2024-2026</span>
+    </div>
+    <div class="logos-grid">
+      <div class="logo-cell">Takycorp</div>
+      <div class="logo-cell">KODIASIMMO</div>
+      <div class="logo-cell">Christelle.io</div>
+      <div class="logo-cell">VowSanctuary</div>
+      <div class="logo-cell">GutReno</div>
+      <div class="logo-cell">PrettyPotty</div>
+      <div class="logo-cell">WellnessDNA</div>
+      <div class="logo-cell">Cirrosis360</div>
+      <div class="logo-cell">DentalFlagship</div>
+      <div class="logo-cell">BayouSavage</div>
+      <div class="logo-cell">FreightOps</div>
+      <div class="logo-cell">+ 36 more</div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="stack">
+  <div class="wrap">
+    <div class="stack-head">
+      <div class="cap">// integrations</div>
+      <h2>The stack we wire — and what we replace.</h2>
+      <p>Battle-tested across 47 shipped builds. Swap any layer for a self-hosted equivalent on enterprise tier.</p>
+    </div>
+    <div class="stack-tags">
+      <span class="tag">Claude 4.7 (1M)</span>
+      <span class="tag">OpenAI GPT-4.1</span>
+      <span class="tag">Anthropic Bedrock</span>
+      <span class="tag">pgvector</span>
+      <span class="tag">Supabase</span>
+      <span class="tag">Vercel Edge</span>
+      <span class="tag">Hono</span>
+      <span class="tag">tRPC</span>
+      <span class="tag">Postgres RLS</span>
+      <span class="tag">Stripe</span>
+      <span class="tag">HubSpot</span>
+      <span class="tag">Linear</span>
+      <span class="tag">Slack</span>
+      <span class="tag">n8n</span>
+      <span class="tag">Resend</span>
+      <span class="tag lime">→ replaces</span>
+      <span class="tag red">Intercom Fin</span>
+      <span class="tag red">Drift</span>
+      <span class="tag red">Helpscout AI</span>
+      <span class="tag red">Loom AI</span>
+      <span class="tag red">Zapier AI</span>
+      <span class="tag red">Notion AI</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="faq-head">
+      <div class="cap">// faq</div>
+      <h2>The questions that come up on every intro call.</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-row">
+        <div class="faq-q">
+          <div class="qnum">q / 01 · security</div>
+          <h3>Is the stack SOC2 compliant?</h3>
+        </div>
+        <div class="faq-a">We deploy on SOC2 Type II infrastructure — AWS, Vercel, Supabase. Your tenant data is row-level isolated with Postgres RLS. We provide audit logs and a SIG-Lite questionnaire on request. Full SOC2 audit support ships on the enterprise tier (BYO-cloud, your VPC).</div>
+      </div>
+      <div class="faq-row">
+        <div class="faq-q">
+          <div class="qnum">q / 02 · latency</div>
+          <h3>What is the typical response latency?</h3>
+        </div>
+        <div class="faq-a">Median <code>12ms</code> on cached intents, <code>380ms</code> on cold LLM calls (Claude Haiku), <code>1.2s</code> on tool-use loops with database reads. We benchmark p50 / p95 / p99 weekly and ship a Grafana board with the stack.</div>
+      </div>
+      <div class="faq-row">
+        <div class="faq-q">
+          <div class="qnum">q / 03 · multi-tenant</div>
+          <h3>How does multi-tenant isolation work?</h3>
+        </div>
+        <div class="faq-a">Per-tenant Postgres schemas with RLS policies enforced at the connection level. Per-tenant LLM API keys (BYO Anthropic / OpenAI / Bedrock — never pooled). Embeddings stored in tenant-scoped pgvector tables. No shared session context. Cross-tenant queries return zero rows by default — they fail closed.</div>
+      </div>
+      <div class="faq-row">
+        <div class="faq-q">
+          <div class="qnum">q / 04 · churn</div>
+          <h3>How does this affect day-7 activation?</h3>
+        </div>
+        <div class="faq-a">Across 12 SaaS deployments, the onboarding agent lifts day-7 activation by 18-32% over static flows. The mechanism: it detects intent in the first 90 seconds, surfaces the aha-moment that matches that intent, and flags accounts that drift to your CS Slack with one-click recovery actions.</div>
+      </div>
+      <div class="faq-row">
+        <div class="faq-q">
+          <div class="qnum">q / 05 · migration</div>
+          <h3>Do you replace Intercom or sit alongside?</h3>
+        </div>
+        <div class="faq-a">Both. Replace mode kills the existing tool (saves $400-2000/mo) and migrates ticket history into our store. Co-pilot mode runs as a deflection layer in front of Intercom/Zendesk — only escalates the 32% that need a human. Migration tools and history importer included on the Stack tier.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="book">
+  <div class="wrap">
+    <div class="final-in">
+      <span class="cap">// book.intro</span>
+      <h2>30 minutes.<br/>One brief.<br/>$0 to find out if it fits.</h2>
+      <p>If the fit is real, you leave with a scoped build and a deposit link. If not, you keep the architecture diagram and ship it in-house.</p>
+      <a href="https://cal.com/waseemnasir/agent-intro" class="btn btn-lime">Book intro on cal.com →</a>
+      <div class="final-meta">
+        <span><span class="dot">●</span> waseem@skynetlabs.com</span>
+        <span>cal.com/waseemnasir</span>
+        <span>response &lt; 4h</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <div>© 2026 skynetlabs · built in bali</div>
+    <div class="links">
+      <a href="/privacy-policy">privacy</a>
+      <a href="/terms-of-service">terms</a>
+      <a href="/security">security</a>
+      <a href="mailto:waseem@skynetlabs.com">email</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

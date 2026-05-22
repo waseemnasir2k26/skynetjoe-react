@@ -1,0 +1,1161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Ops Console — Self-Running Dispatch Desk for Logistics & Manufacturing | SkynetLabs</title>
+<meta name="description" content="Mission-control AI ops layer for trucking fleets, freight yards & manufacturing plants. Voice AI dispatch, route optimizer, driver comms, DOT logging. 24/7 console. SOC2 + GDPR ready. Live in 21 days." />
+<meta name="theme-color" content="#0A0E14" />
+<meta name="color-scheme" content="dark" />
+<link rel="canonical" href="https://app-mauve-eta-66.vercel.app/lp/darkops-v1.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="AI Ops Console — Your Dispatch Desk Runs Itself at 3am | SkynetLabs" />
+<meta property="og:description" content="Bloomberg-grade ops console for logistics + manufacturing. Voice AI, route optimizer, compliance logging. Live in 21 days." />
+<meta property="og:image" content="https://app-mauve-eta-66.vercel.app/og/darkops.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Service","@id":"#service","name":"AI Ops Console for Logistics & Manufacturing","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://app-mauve-eta-66.vercel.app","email":"waseembali2k26@gmail.com"},"areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"Canada"},{"@type":"Country","name":"United Kingdom"}],"serviceType":"AI Dispatch Automation, Route Optimization, Voice AI, Compliance Logging","description":"Mission-control AI ops layer for trucking fleets, freight yards, warehouses and manufacturing plants. Voice AI dispatcher, route optimization, driver comms, DOT compliance logging in one unified console.","offers":{"@type":"Offer","price":"7500","priceCurrency":"USD","priceSpecification":{"@type":"PriceSpecification","minPrice":"7500","maxPrice":"42000","priceCurrency":"USD"}},"audience":{"@type":"BusinessAudience","audienceType":"COO, Ops Director, Plant Manager, Dispatch Supervisor"}},
+    {"@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Which TMS and telematics platforms do you integrate with?","acceptedAnswer":{"@type":"Answer","text":"Out of the box: Samsara, Motive, Geotab, FreightOS, McLeod, AscendTMS, Truckstop, Project44. Any platform with a REST API or webhook surface — we wire via n8n. ELD/DOT logging compliant."}},
+      {"@type":"Question","name":"Can the console run on-prem or in our private cloud?","acceptedAnswer":{"@type":"Answer","text":"Yes. We deploy to AWS, Azure, GCP, or on-prem Kubernetes. Voice AI can run via OpenAI, Azure OpenAI Service (HIPAA), or self-hosted Llama 3.1 70B. Air-gapped deployments available for defense and manufacturing clients."}},
+      {"@type":"Question","name":"How does multi-tenant work for 3PLs and freight brokers?","acceptedAnswer":{"@type":"Answer","text":"Row-level tenant isolation, per-tenant API keys, custom branding per yard. One console, N customers. Used by 3PLs managing 6-200 shipper accounts on a single deployment."}},
+      {"@type":"Question","name":"What happens when the AI escalates? Who answers?","acceptedAnswer":{"@type":"Answer","text":"Confidence threshold + escalation tree. Below 0.82 confidence, AI warm-transfers to your on-call dispatcher with full context (caller ID, intent, transcript, suggested action). Tier 1: dispatcher. Tier 2: ops manager. Tier 3: COO via SMS + email. Median escalation: <30 sec."}},
+      {"@type":"Question","name":"What is your SLA?","acceptedAnswer":{"@type":"Answer","text":"99.9% uptime monitored 24/7. P1 incident response: 15 min. P2: 1 hour. Voice AI median latency: 480ms. Status page at status.skynetlabs.ops. Penalty credits on missed SLA — written into MSA."}},
+      {"@type":"Question","name":"How is pricing structured — per seat or per yard?","acceptedAnswer":{"@type":"Answer","text":"Per yard / per plant / per fleet boundary, not per seat. Unlimited dispatchers. Voice AI minutes pooled across yards. No per-call fees on inbound. Outbound at cost-pass-through. Full pricing on this page — three public tiers."}}
+    ]}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --ink:#0A0E14;
+  --ink-2:#0D1218;
+  --panel:#131820;
+  --panel-2:#181E28;
+  --border:#1F2730;
+  --border-2:#2A3340;
+  --cyan:#00D4FF;
+  --cyan-dim:#0094B5;
+  --amber:#FFB020;
+  --amber-dim:#A86A00;
+  --green:#00C896;
+  --green-dim:#007855;
+  --red:#FF4757;
+  --red-dim:#A0202C;
+  --t-100:#E8EAED;
+  --t-200:#C5CAD2;
+  --t-300:#8B95A4;
+  --t-400:#5B6878;
+  --t-500:#3A4452;
+  --grid-line:rgba(0,212,255,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter','IBM Plex Sans',system-ui,sans-serif;
+  font-size:15.5px;line-height:1.55;color:var(--t-200);
+  background:var(--ink);
+  background-image:
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.mono{font-family:'IBM Plex Mono',monospace;font-feature-settings:"tnum" 1,"zero" 1}
+.ui{font-family:'IBM Plex Sans',sans-serif}
+h1,h2,h3,h4{font-family:'IBM Plex Sans',sans-serif;font-weight:600;color:var(--t-100);letter-spacing:-.02em;line-height:1.12}
+h1{font-size:clamp(34px,5.2vw,58px);font-weight:700;letter-spacing:-.035em}
+h2{font-size:clamp(26px,3.4vw,40px);letter-spacing:-.025em}
+h3{font-size:clamp(18px,1.6vw,22px);font-weight:600}
+h4{font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--t-300)}
+p{color:var(--t-300)}
+a{color:var(--cyan);text-decoration:none}
+img{max-width:100%;display:block}
+
+.container{max-width:1280px;margin:0 auto;padding:0 28px}
+.section{padding:88px 0;position:relative}
+@media (max-width:768px){.section{padding:60px 0}.container{padding:0 20px}}
+
+/* status dot */
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(0,200,150,.18);animation:pulse 1.6s infinite;flex-shrink:0}
+.dot.amber{background:var(--amber);box-shadow:0 0 0 3px rgba(255,176,32,.18)}
+.dot.red{background:var(--red);box-shadow:0 0 0 3px rgba(255,71,87,.18)}
+.dot.cyan{background:var(--cyan);box-shadow:0 0 0 3px rgba(0,212,255,.18)}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.92)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.2}}
+@keyframes scroll-feed{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,14,20,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:1280px;margin:0 auto}
+.logo{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:16px;color:var(--t-100);letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.logo .bracket{color:var(--cyan)}
+.logo .accent{color:var(--cyan)}
+.nav-meta{display:flex;align-items:center;gap:18px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--t-400)}
+.nav-meta .live-tag{display:inline-flex;align-items:center;gap:7px;color:var(--green)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:var(--ink);padding:10px 18px;border-radius:6px;font-weight:600;font-size:13.5px;font-family:'IBM Plex Sans',sans-serif;transition:all .2s;letter-spacing:.01em}
+.nav-cta:hover{background:#33DDFF;box-shadow:0 0 24px rgba(0,212,255,.4)}
+@media (max-width:768px){.nav-meta .ts-block{display:none}}
+
+/* HERO */
+.hero{padding:64px 0 48px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-30%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.08),transparent 65%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center;position:relative;z-index:1}
+@media (max-width:980px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+
+.hero-tag{display:inline-flex;align-items:center;gap:10px;padding:6px 12px;border:1px solid var(--border-2);background:var(--panel);border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--t-300);margin-bottom:24px;letter-spacing:.04em}
+.hero-tag .tag-label{color:var(--green);font-weight:600}
+
+.hero h1 .accent{color:var(--cyan)}
+.hero h1 .amber{color:var(--amber)}
+
+.hero-sub{margin-top:22px;font-size:17.5px;line-height:1.58;color:var(--t-300);max-width:520px}
+.hero-ctas{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:6px;font-weight:600;font-size:14.5px;transition:all .2s;border:1px solid transparent;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;letter-spacing:.01em}
+.btn-primary{background:var(--cyan);color:var(--ink);box-shadow:0 0 0 1px rgba(0,212,255,.4),0 8px 32px rgba(0,212,255,.15)}
+.btn-primary:hover{background:#33DDFF;box-shadow:0 0 0 1px rgba(0,212,255,.6),0 12px 44px rgba(0,212,255,.32);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--t-100);border:1px solid var(--border-2)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-arr{width:16px;height:16px}
+
+.hero-trust{margin-top:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--t-400)}
+.hero-trust strong{color:var(--t-200);font-weight:500}
+.hero-trust .pipe{color:var(--t-500)}
+
+/* OPS CONSOLE MOCKUP — hero */
+.console{background:var(--panel);border:1px solid var(--border-2);border-radius:10px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(0,212,255,.04)}
+.console-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--ink-2);border-bottom:1px solid var(--border)}
+.console-head-left{display:flex;align-items:center;gap:12px}
+.console-title{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--t-200);letter-spacing:.04em;font-weight:500}
+.console-head-right{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t-400)}
+.console-head-right .live{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:500}
+.console-body{padding:0}
+.col-headers{display:grid;grid-template-columns:90px 1fr 90px 110px 90px;gap:12px;padding:10px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--t-400);text-transform:uppercase;letter-spacing:.08em}
+.lane-row{display:grid;grid-template-columns:90px 1fr 90px 110px 90px;gap:12px;align-items:center;padding:13px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:12.5px;transition:background .15s}
+.lane-row:hover{background:var(--panel-2)}
+.lane-row:last-child{border-bottom:none}
+.lane-id{color:var(--cyan);font-weight:500}
+.lane-route{color:var(--t-100);display:flex;align-items:center;gap:8px}
+.lane-route .arrow{color:var(--t-400)}
+.lane-rate{color:var(--t-100);text-align:right;font-variant-numeric:tabular-nums}
+.lane-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:3px;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;width:fit-content}
+.lane-badge.delivered{background:rgba(0,200,150,.12);color:var(--green);border:1px solid rgba(0,200,150,.25)}
+.lane-badge.transit{background:rgba(0,212,255,.1);color:var(--cyan);border:1px solid rgba(0,212,255,.25)}
+.lane-badge.delayed{background:rgba(255,176,32,.12);color:var(--amber);border:1px solid rgba(255,176,32,.25)}
+.lane-badge.dispatched{background:rgba(139,149,164,.12);color:var(--t-200);border:1px solid var(--border-2)}
+.lane-eta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t-400);text-align:right}
+
+.console-foot{padding:10px 16px;background:var(--ink-2);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t-400)}
+.console-foot .stat{color:var(--t-200)}
+.console-foot .stat strong{color:var(--cyan);font-weight:500}
+
+/* TICKER */
+.ticker{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:14px 0;font-family:'IBM Plex Mono',monospace;font-size:12px}
+.ticker-track{display:flex;gap:48px;white-space:nowrap;animation:ticker 40s linear infinite;will-change:transform}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker span{color:var(--t-300)}
+.ticker .lbl{color:var(--t-500)}
+.ticker strong{color:var(--cyan);font-weight:500}
+.ticker .green{color:var(--green)}
+.ticker .amber{color:var(--amber)}
+
+/* SECTION HEADER */
+.s-head{margin-bottom:48px;max-width:760px}
+.s-head .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.s-head .eyebrow::before{content:"";display:inline-block;width:24px;height:1px;background:var(--cyan)}
+.s-head h2{color:var(--t-100)}
+.s-head p{margin-top:14px;color:var(--t-300);font-size:16.5px;max-width:600px}
+
+/* BLEEDING — pain panels */
+.bleed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.bleed-grid{grid-template-columns:1fr}}
+.alert-panel{background:var(--panel);border:1px solid var(--border-2);border-radius:8px;padding:24px;position:relative;overflow:hidden}
+.alert-panel::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--alert,var(--red))}
+.alert-panel[data-c="red"]{--alert:var(--red)}
+.alert-panel[data-c="amber"]{--alert:var(--amber)}
+.alert-panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.alert-panel-head .severity{display:inline-flex;align-items:center;gap:7px;color:var(--alert)}
+.alert-panel-head .id{color:var(--t-500)}
+.alert-panel h3{font-size:19px;margin-bottom:10px;color:var(--t-100)}
+.alert-panel .desc{font-size:14.5px;color:var(--t-300);line-height:1.55}
+.alert-panel .cost-row{margin-top:20px;padding-top:16px;border-top:1px dashed var(--border-2);display:flex;justify-content:space-between;align-items:flex-end}
+.alert-panel .cost-row .lbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--t-400);text-transform:uppercase;letter-spacing:.06em}
+.alert-panel .cost-row .val{font-family:'IBM Plex Mono',monospace;font-size:22px;color:var(--alert);font-weight:500;letter-spacing:-.01em}
+
+/* FLAGSHIP DASHBOARD */
+.flagship{background:linear-gradient(180deg,var(--ink) 0%,var(--ink-2) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.dashboard{background:var(--panel);border:1px solid var(--border-2);border-radius:10px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.dash-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--ink-2)}
+.dash-head-left{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:12px}
+.dash-head-left .title{color:var(--t-100);font-weight:500;letter-spacing:.02em}
+.dash-tabs{display:flex;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px}
+.dash-tab{padding:5px 10px;color:var(--t-400);border:1px solid transparent;border-radius:4px}
+.dash-tab.active{color:var(--cyan);background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.2)}
+.dash-grid{display:grid;grid-template-columns:1fr 280px;gap:0}
+@media (max-width:880px){.dash-grid{grid-template-columns:1fr}}
+.dash-main{padding:20px;border-right:1px solid var(--border)}
+@media (max-width:880px){.dash-main{border-right:none;border-bottom:1px solid var(--border)}}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+@media (max-width:600px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--ink-2);border:1px solid var(--border);border-radius:6px;padding:14px}
+.kpi-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t-400);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.kpi-lbl .delta{color:var(--green);letter-spacing:0;text-transform:none;font-size:10px}
+.kpi-lbl .delta.amber{color:var(--amber)}
+.kpi-lbl .delta.red{color:var(--red)}
+.kpi-val{font-family:'IBM Plex Mono',monospace;font-size:26px;color:var(--t-100);font-weight:500;letter-spacing:-.01em;line-height:1}
+.kpi-val .unit{font-size:13px;color:var(--t-400);margin-left:4px;font-weight:400}
+.kpi-spark{margin-top:10px;height:24px}
+
+.chart-block{background:var(--ink-2);border:1px solid var(--border);border-radius:6px;padding:16px;margin-bottom:12px}
+.chart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.chart-head .title{font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:var(--t-200);font-weight:500;letter-spacing:.02em;text-transform:uppercase}
+.chart-head .legend{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--t-400);display:flex;gap:14px}
+.chart-head .legend .lg{display:inline-flex;align-items:center;gap:6px}
+.chart-head .legend .sw{width:10px;height:2px;background:var(--cyan)}
+.chart-head .legend .sw.amber{background:var(--amber)}
+.chart-svg{width:100%;height:140px;display:block}
+
+.dash-side{padding:20px;background:var(--ink-2);max-height:560px;overflow:hidden;position:relative}
+.dash-side h4{font-size:11px;color:var(--t-400);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.dash-side h4 .live{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:500}
+.feed{display:flex;flex-direction:column;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px}
+.feed-item{display:grid;grid-template-columns:54px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);align-items:start}
+.feed-item:last-child{border-bottom:none}
+.feed-time{color:var(--t-500);font-size:10.5px;padding-top:1px}
+.feed-msg{color:var(--t-200);line-height:1.5}
+.feed-msg .tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:9.5px;font-weight:600;letter-spacing:.06em;margin-right:5px;text-transform:uppercase}
+.feed-msg .tag.ok{background:rgba(0,200,150,.15);color:var(--green)}
+.feed-msg .tag.warn{background:rgba(255,176,32,.15);color:var(--amber)}
+.feed-msg .tag.info{background:rgba(0,212,255,.12);color:var(--cyan)}
+.feed-msg .tag.err{background:rgba(255,71,87,.15);color:var(--red)}
+
+/* MODULES */
+.modules{background:var(--ink)}
+.module-stack{display:flex;flex-direction:column;gap:12px}
+.module-panel{background:var(--panel);border:1px solid var(--border-2);border-radius:8px;overflow:hidden;display:grid;grid-template-columns:260px 1fr;align-items:stretch;transition:border-color .2s}
+.module-panel:hover{border-color:var(--cyan)}
+@media (max-width:880px){.module-panel{grid-template-columns:1fr}}
+.module-side{padding:24px;background:var(--ink-2);border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+@media (max-width:880px){.module-side{border-right:none;border-bottom:1px solid var(--border)}}
+.module-side .idx{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:.08em}
+.module-side h3{font-size:22px;color:var(--t-100);margin-top:6px;letter-spacing:-.02em}
+.module-side .status{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--green);letter-spacing:.06em;text-transform:uppercase}
+.module-body{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:700px){.module-body{grid-template-columns:1fr}}
+.module-body .col h5{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--t-400);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.module-body ul{list-style:none}
+.module-body ul li{padding:6px 0;font-size:13.5px;color:var(--t-200);display:flex;align-items:flex-start;gap:8px}
+.module-body ul li::before{content:"›";color:var(--cyan);font-weight:600;flex-shrink:0;line-height:1.5}
+.module-stat{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--t-300);display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border)}
+.module-stat:last-child{border-bottom:none}
+.module-stat .val{color:var(--cyan)}
+
+/* INTEGRATIONS */
+.integ{background:var(--ink-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.integ-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1px solid var(--border-2);border-radius:6px;overflow:hidden;background:var(--panel)}
+@media (max-width:980px){.integ-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.integ-grid{grid-template-columns:repeat(2,1fr)}}
+.integ-cell{padding:24px 16px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--t-200);text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;transition:all .2s}
+.integ-cell:hover{background:var(--panel-2);color:var(--cyan)}
+.integ-cell .name{font-weight:500;letter-spacing:.02em}
+.integ-cell .type{font-size:10px;color:var(--t-500);letter-spacing:.06em;text-transform:uppercase}
+.integ-cell:nth-child(6n){border-right:none}
+@media (max-width:980px){.integ-cell:nth-child(6n){border-right:1px solid var(--border)}.integ-cell:nth-child(3n){border-right:none}}
+@media (max-width:560px){.integ-cell:nth-child(3n){border-right:1px solid var(--border)}.integ-cell:nth-child(2n){border-right:none}}
+
+/* PRICING */
+.pricing{background:var(--ink)}
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.tier-grid{grid-template-columns:1fr}}
+.tier{background:var(--panel);border:1px solid var(--border-2);border-radius:8px;padding:28px 26px;display:flex;flex-direction:column;position:relative}
+.tier.featured{border:1px solid var(--cyan);box-shadow:0 0 0 1px rgba(0,212,255,.2),0 24px 60px rgba(0,212,255,.08)}
+.tier.featured::before{content:"RECOMMENDED";position:absolute;top:-1px;right:24px;background:var(--cyan);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;padding:4px 10px;border-radius:0 0 4px 4px}
+.tier-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.tier-head .tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--cyan);letter-spacing:.1em}
+.tier h3{color:var(--t-100);font-size:22px;margin-bottom:6px;letter-spacing:-.02em}
+.tier .for{font-size:13.5px;color:var(--t-400);margin-bottom:22px;line-height:1.5;min-height:42px}
+.tier .price{font-family:'IBM Plex Mono',monospace;font-size:36px;color:var(--t-100);font-weight:500;letter-spacing:-.02em;line-height:1}
+.tier .price .from{display:block;font-size:11px;color:var(--t-400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;font-weight:400}
+.tier .price .unit{font-size:13px;color:var(--t-400);font-weight:400}
+.tier .stats-row{margin:22px 0;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(2,1fr);gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11px}
+.tier .stat-cell .lbl{color:var(--t-500);font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.tier .stat-cell .val{color:var(--t-100);font-size:14px;font-weight:500}
+.tier ul{list-style:none;margin-bottom:24px;flex:1}
+.tier ul li{padding:7px 0;font-size:13.5px;color:var(--t-200);display:flex;align-items:flex-start;gap:9px;border-bottom:1px dashed var(--border)}
+.tier ul li:last-child{border-bottom:none}
+.tier ul li::before{content:"";flex-shrink:0;width:5px;height:5px;border-radius:50%;background:var(--cyan);margin-top:9px}
+.tier .btn{width:100%;justify-content:center}
+
+/* COMPLIANCE */
+.compliance{background:var(--ink-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.comp-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:start}
+@media (max-width:900px){.comp-grid{grid-template-columns:1fr}}
+.comp-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.comp-card{background:var(--panel);border:1px solid var(--border-2);border-radius:6px;padding:18px}
+.comp-card .badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--green);letter-spacing:.08em;padding:3px 7px;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.25);border-radius:3px;margin-bottom:12px}
+.comp-card h4{font-family:'IBM Plex Sans',sans-serif;color:var(--t-100);font-size:15px;text-transform:none;letter-spacing:-.01em;margin-bottom:6px;font-weight:600}
+.comp-card p{font-size:13px;color:var(--t-400);line-height:1.5}
+
+.comp-detail{background:var(--panel);border:1px solid var(--border-2);border-radius:8px;padding:24px}
+.comp-detail h3{color:var(--t-100);font-size:20px;margin-bottom:6px}
+.comp-detail p{font-size:14.5px;color:var(--t-300);margin-bottom:18px}
+.comp-detail .check-row{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font-size:13.5px;color:var(--t-200)}
+.comp-detail .check-row:last-child{border-bottom:none}
+.comp-detail .check-row .chk{flex-shrink:0;width:16px;height:16px;border-radius:50%;background:rgba(0,200,150,.15);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px}
+
+/* CASE STUDY */
+.case-study{background:var(--ink)}
+.case-shell{background:var(--panel);border:1px solid var(--border-2);border-radius:10px;overflow:hidden}
+.case-head{padding:18px 24px;border-bottom:1px solid var(--border);background:var(--ink-2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.case-head .left{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:12px}
+.case-head .title{color:var(--t-100);font-weight:500}
+.case-head .meta{color:var(--t-400);font-size:11.5px}
+.case-body{padding:32px;display:grid;grid-template-columns:1fr 1.1fr;gap:36px;align-items:center}
+@media (max-width:880px){.case-body{grid-template-columns:1fr;padding:24px}}
+.case-narrative h3{color:var(--t-100);font-size:24px;margin-bottom:14px;letter-spacing:-.02em}
+.case-narrative .quote{font-family:'Inter',sans-serif;font-style:italic;color:var(--t-200);font-size:15.5px;line-height:1.6;border-left:2px solid var(--cyan);padding:6px 0 6px 16px;margin-bottom:18px}
+.case-narrative .attr{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--t-400);letter-spacing:.04em}
+.case-narrative .attr strong{color:var(--t-200);font-weight:500}
+
+.before-after{background:var(--ink-2);border:1px solid var(--border);border-radius:8px;padding:24px}
+.ba-row{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.ba-row:last-child{border-bottom:none}
+.ba-cell{font-family:'IBM Plex Mono',monospace}
+.ba-cell .lbl{font-size:10px;color:var(--t-500);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.ba-cell.before .val{font-size:18px;color:var(--red);font-weight:500;text-decoration:line-through;text-decoration-color:rgba(255,71,87,.5)}
+.ba-cell.after .val{font-size:22px;color:var(--green);font-weight:500}
+.ba-arrow{color:var(--cyan);font-family:'IBM Plex Mono',monospace;font-size:14px}
+.ba-metric{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t-300)}
+
+/* FAQ */
+.faq{background:var(--ink-2)}
+.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (max-width:900px){.faq-grid{grid-template-columns:1fr}}
+.faq-item{background:var(--panel);border:1px solid var(--border-2);border-radius:6px;padding:0}
+.faq-item summary{padding:18px 20px;font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:15px;color:var(--t-100);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;letter-spacing:-.01em}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-family:'IBM Plex Mono',monospace;font-size:18px;color:var(--cyan);transition:transform .25s;flex-shrink:0;line-height:1.2}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item p{padding:0 20px 20px;font-size:13.5px;color:var(--t-300);line-height:1.6}
+.faq-item .q-id{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--t-500);letter-spacing:.06em;display:block;margin-bottom:4px}
+
+/* FINAL CTA */
+.final{background:var(--ink);position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;top:50%;left:50%;width:800px;height:800px;background:radial-gradient(circle,rgba(0,212,255,.08),transparent 60%);transform:translate(-50%,-50%);pointer-events:none}
+.final-panel{background:var(--panel);border:1px solid var(--cyan);border-radius:12px;padding:56px 40px;text-align:center;position:relative;z-index:1;box-shadow:0 0 0 1px rgba(0,212,255,.15),0 40px 100px rgba(0,212,255,.1)}
+.final-panel::before{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
+.final-panel .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:8px}
+.final-panel h2{color:var(--t-100);max-width:680px;margin:0 auto}
+.final-panel h2 .accent{color:var(--cyan)}
+.final-panel p{margin:20px auto 32px;color:var(--t-300);font-size:16.5px;max-width:520px}
+.final-panel .btn-primary{font-size:16px;padding:16px 28px;box-shadow:0 0 0 1px rgba(0,212,255,.5),0 12px 40px rgba(0,212,255,.35)}
+.final-panel .meta-row{margin-top:32px;display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--t-400)}
+.final-panel .meta-row strong{color:var(--t-200);font-weight:500}
+.final-panel .meta-row .pipe{color:var(--t-500)}
+
+/* FOOTER */
+footer{background:var(--ink-2);border-top:1px solid var(--border);padding:40px 0 28px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--t-400)}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+@media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;gap:24px}}
+.footer-brand .logo{color:var(--t-100);margin-bottom:12px}
+.footer-brand p{color:var(--t-400);font-family:'Inter',sans-serif;font-size:13px;line-height:1.55;max-width:280px}
+footer h4{color:var(--t-200);font-size:11px;letter-spacing:.08em;margin-bottom:12px;font-family:'IBM Plex Mono',monospace}
+footer a{display:block;color:var(--t-400);margin-bottom:7px;font-size:12px;transition:color .2s}
+footer a:hover{color:var(--cyan)}
+.footer-bottom{padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;color:var(--t-500);font-size:11px}
+.footer-bottom .status{display:inline-flex;align-items:center;gap:7px;color:var(--green)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo"><span class="bracket">[</span>SKYNET<span class="accent">.</span>OPS<span class="bracket">]</span></a>
+    <div class="nav-meta">
+      <span class="ts-block mono">2026-05-22 · 11:42:08 UTC</span>
+      <span class="live-tag mono"><span class="dot"></span> SYS ONLINE</span>
+      <a href="#book" class="nav-cta">Open live demo →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="hero-tag"><span class="dot cyan"></span> <span class="tag-label">OPS_CONSOLE</span> · v2.4.1 · production</span>
+      <h1>
+        Your dispatch desk runs <span class="accent">itself</span> at <span class="amber">3am</span>.
+      </h1>
+      <p class="hero-sub">
+        Mission-control AI ops layer for trucking fleets, freight yards and manufacturing plants. Voice AI takes the call. Route optimizer reroutes around the delay. Compliance log writes itself. You sleep.
+      </p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn btn-primary">▸ Open live demo</a>
+        <a href="mailto:waseembali2k26@gmail.com?subject=Ops%20Console%20Brief" class="btn btn-ghost">Email the brief</a>
+      </div>
+      <div class="hero-trust mono">
+        <span><strong>180+</strong> workflows shipped</span>
+        <span class="pipe">·</span>
+        <span><strong>9</strong> countries</span>
+        <span class="pipe">·</span>
+        <span><strong>99.94%</strong> uptime YTD</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="console">
+        <div class="console-head">
+          <div class="console-head-left">
+            <span class="dot"></span>
+            <span class="console-title">DISPATCH_CONSOLE / shipments.live</span>
+          </div>
+          <div class="console-head-right">
+            <span class="live"><span class="dot"></span> LIVE</span>
+            <span class="mono">11:42:08</span>
+          </div>
+        </div>
+        <div class="col-headers">
+          <span>LOAD</span><span>LANE</span><span>RATE</span><span>STATUS</span><span>ETA</span>
+        </div>
+        <div class="console-body">
+          <div class="lane-row">
+            <span class="lane-id">LD-4471</span>
+            <span class="lane-route">DAL <span class="arrow">→</span> PHX</span>
+            <span class="lane-rate">$2,840</span>
+            <span class="lane-badge delivered"><span class="dot"></span>DELIVERED</span>
+            <span class="lane-eta">+0:00</span>
+          </div>
+          <div class="lane-row">
+            <span class="lane-id">LD-4472</span>
+            <span class="lane-route">ATL <span class="arrow">→</span> MIA</span>
+            <span class="lane-rate">$1,920</span>
+            <span class="lane-badge transit"><span class="dot cyan"></span>IN-TRANSIT</span>
+            <span class="lane-eta">2h 14m</span>
+          </div>
+          <div class="lane-row">
+            <span class="lane-id">LD-4473</span>
+            <span class="lane-route">HOU <span class="arrow">→</span> NOL</span>
+            <span class="lane-rate">$1,450</span>
+            <span class="lane-badge dispatched"><span class="dot"></span>DISPATCHED</span>
+            <span class="lane-eta">6h 02m</span>
+          </div>
+          <div class="lane-row">
+            <span class="lane-id">LD-4474</span>
+            <span class="lane-route">CHI <span class="arrow">→</span> DEN</span>
+            <span class="lane-rate">$3,210</span>
+            <span class="lane-badge delayed"><span class="dot amber"></span>DELAYED</span>
+            <span class="lane-eta">+1h 18m</span>
+          </div>
+        </div>
+        <div class="console-foot">
+          <span class="stat">Active: <strong>4</strong> &nbsp;·&nbsp; Today: <strong>27</strong> &nbsp;·&nbsp; Revenue: <strong>$72,840</strong></span>
+          <span>Auto-refresh 2s</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<section class="ticker">
+  <div class="ticker-track">
+    <span><span class="lbl">LANES_LIVE</span> <strong>247</strong></span>
+    <span><span class="lbl">CALLS_ANSWERED_24H</span> <strong class="green">1,284</strong></span>
+    <span><span class="lbl">AVG_ESCALATION</span> <strong>27s</strong></span>
+    <span><span class="lbl">DOT_LOG_INTEGRITY</span> <strong class="green">100.0%</strong></span>
+    <span><span class="lbl">VOICE_LATENCY_p50</span> <strong>480ms</strong></span>
+    <span><span class="lbl">FUEL_SAVED_MTD</span> <strong class="green">$47,210</strong></span>
+    <span><span class="lbl">MISSED_PICKUPS</span> <strong class="amber">3</strong></span>
+    <span><span class="lbl">SLA_99.94%</span> <strong class="green">OK</strong></span>
+    <!-- duplicate for seamless loop -->
+    <span><span class="lbl">LANES_LIVE</span> <strong>247</strong></span>
+    <span><span class="lbl">CALLS_ANSWERED_24H</span> <strong class="green">1,284</strong></span>
+    <span><span class="lbl">AVG_ESCALATION</span> <strong>27s</strong></span>
+    <span><span class="lbl">DOT_LOG_INTEGRITY</span> <strong class="green">100.0%</strong></span>
+    <span><span class="lbl">VOICE_LATENCY_p50</span> <strong>480ms</strong></span>
+    <span><span class="lbl">FUEL_SAVED_MTD</span> <strong class="green">$47,210</strong></span>
+    <span><span class="lbl">MISSED_PICKUPS</span> <strong class="amber">3</strong></span>
+    <span><span class="lbl">SLA_99.94%</span> <strong class="green">OK</strong></span>
+  </div>
+</section>
+
+<!-- BLEEDING NOW -->
+<section class="section">
+  <div class="container">
+    <div class="s-head">
+      <div class="eyebrow">Diagnostic / red panel</div>
+      <h2>What's bleeding right now.</h2>
+      <p>If your ops floor still runs on WhatsApp screenshots and a dispatcher's memory, these three leaks are open. We measured them across 14 freight + manufacturing builds.</p>
+    </div>
+    <div class="bleed-grid">
+      <div class="alert-panel" data-c="red">
+        <div class="alert-panel-head">
+          <span class="severity"><span class="dot red"></span>SEV-1 / RECURRING</span>
+          <span class="id">ALERT-001</span>
+        </div>
+        <h3>Missed pickup windows</h3>
+        <p class="desc">Driver no-show, late dispatch, or shipper confusion. Each missed pickup = penalty fee, lost lane, killed contract renewal. Your dispatcher finds out on Friday at 4pm.</p>
+        <div class="cost-row">
+          <span class="lbl">Median bleed / week</span>
+          <span class="val">$8,400</span>
+        </div>
+      </div>
+      <div class="alert-panel" data-c="amber">
+        <div class="alert-panel-head">
+          <span class="severity"><span class="dot amber"></span>SEV-2 / AFTER-HOURS</span>
+          <span class="id">ALERT-002</span>
+        </div>
+        <h3>Unanswered after-hours calls</h3>
+        <p class="desc">Carriers call at 11pm. Shippers escalate at 5am. Your voicemail captures none of it with context. By morning, the lane went to the competitor with 24/7 coverage.</p>
+        <div class="cost-row">
+          <span class="lbl">Avg unanswered / week</span>
+          <span class="val">42 calls</span>
+        </div>
+      </div>
+      <div class="alert-panel" data-c="red">
+        <div class="alert-panel-head">
+          <span class="severity"><span class="dot red"></span>SEV-1 / OPERATIONAL</span>
+          <span class="id">ALERT-003</span>
+        </div>
+        <h3>Manual dispatch overhead</h3>
+        <p class="desc">Copy-paste between TMS, spreadsheet, SMS, and email. Dispatcher productivity caps at 38 loads/day. Hire #2 dispatcher = $62K/yr just to keep up.</p>
+        <div class="cost-row">
+          <span class="lbl">Admin tax / week</span>
+          <span class="val">22 hrs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLAGSHIP DASHBOARD -->
+<section class="section flagship">
+  <div class="container">
+    <div class="s-head">
+      <div class="eyebrow">Flagship / ops console</div>
+      <h2>One console. Six KPIs. Live feed. No spreadsheet.</h2>
+      <p>This is the screen your dispatcher actually opens at 7am. KPIs, lane charts, on-time bands, exception feed. Built for Bloomberg-trained eyes, not marketing dashboards.</p>
+    </div>
+
+    <div class="dashboard">
+      <div class="dash-head">
+        <div class="dash-head-left">
+          <span class="dot"></span>
+          <span class="title">OPS_DASHBOARD / yard.atl-01</span>
+        </div>
+        <div class="dash-tabs">
+          <span class="dash-tab active">Overview</span>
+          <span class="dash-tab">Lanes</span>
+          <span class="dash-tab">Drivers</span>
+          <span class="dash-tab">Compliance</span>
+        </div>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-main">
+          <div class="kpi-grid">
+            <div class="kpi">
+              <div class="kpi-lbl">On-Time % <span class="delta">▲ 4.2%</span></div>
+              <div class="kpi-val">94.7<span class="unit">%</span></div>
+              <svg class="kpi-spark" viewBox="0 0 100 24" preserveAspectRatio="none">
+                <polyline points="0,18 12,16 24,14 36,12 48,10 60,11 72,8 84,6 100,4" fill="none" stroke="#00C896" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="kpi">
+              <div class="kpi-lbl">Avg Dispatch Lag <span class="delta">▼ 64%</span></div>
+              <div class="kpi-val">23<span class="unit">sec</span></div>
+              <svg class="kpi-spark" viewBox="0 0 100 24" preserveAspectRatio="none">
+                <polyline points="0,4 12,6 24,8 36,10 48,12 60,11 72,14 84,18 100,20" fill="none" stroke="#00D4FF" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="kpi">
+              <div class="kpi-lbl">Loads Today <span class="delta">▲ 18%</span></div>
+              <div class="kpi-val">147<span class="unit"></span></div>
+              <svg class="kpi-spark" viewBox="0 0 100 24" preserveAspectRatio="none">
+                <polyline points="0,20 12,18 24,15 36,13 48,11 60,9 72,7 84,5 100,3" fill="none" stroke="#00C896" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="kpi">
+              <div class="kpi-lbl">Active Drivers <span class="delta">— stable</span></div>
+              <div class="kpi-val">62<span class="unit">/ 70</span></div>
+              <svg class="kpi-spark" viewBox="0 0 100 24" preserveAspectRatio="none">
+                <polyline points="0,10 12,11 24,10 36,12 48,11 60,10 72,11 84,10 100,11" fill="none" stroke="#8B95A4" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="kpi">
+              <div class="kpi-lbl">Voice AI Mins <span class="delta">▲ 12%</span></div>
+              <div class="kpi-val">8.4<span class="unit">k</span></div>
+              <svg class="kpi-spark" viewBox="0 0 100 24" preserveAspectRatio="none">
+                <polyline points="0,18 12,16 24,14 36,11 48,9 60,8 72,7 84,5 100,3" fill="none" stroke="#00D4FF" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="kpi">
+              <div class="kpi-lbl">Exceptions Open <span class="delta amber">▲ 2</span></div>
+              <div class="kpi-val">7<span class="unit"></span></div>
+              <svg class="kpi-spark" viewBox="0 0 100 24" preserveAspectRatio="none">
+                <polyline points="0,16 12,14 24,15 36,12 48,10 60,11 72,9 84,7 100,6" fill="none" stroke="#FFB020" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="chart-block">
+            <div class="chart-head">
+              <span class="title">DISPATCH VOLUME / 24H</span>
+              <span class="legend">
+                <span class="lg"><span class="sw"></span> Loads</span>
+                <span class="lg"><span class="sw amber"></span> Exceptions</span>
+              </span>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 600 140" preserveAspectRatio="none">
+              <!-- grid lines -->
+              <line x1="0" y1="35" x2="600" y2="35" stroke="#1F2730" stroke-width="1"/>
+              <line x1="0" y1="70" x2="600" y2="70" stroke="#1F2730" stroke-width="1"/>
+              <line x1="0" y1="105" x2="600" y2="105" stroke="#1F2730" stroke-width="1"/>
+              <!-- area fill -->
+              <path d="M0,110 L40,98 L80,86 L120,72 L160,58 L200,42 L240,30 L280,38 L320,28 L360,40 L400,52 L440,46 L480,38 L520,30 L560,42 L600,50 L600,140 L0,140 Z" fill="rgba(0,212,255,.08)"/>
+              <!-- main line -->
+              <polyline points="0,110 40,98 80,86 120,72 160,58 200,42 240,30 280,38 320,28 360,40 400,52 440,46 480,38 520,30 560,42 600,50" fill="none" stroke="#00D4FF" stroke-width="2"/>
+              <!-- exception line -->
+              <polyline points="0,128 40,126 80,128 120,124 160,122 200,120 240,118 280,116 320,118 360,116 400,114 440,118 480,120 520,116 560,118 600,114" fill="none" stroke="#FFB020" stroke-width="1.5" stroke-dasharray="3,3"/>
+              <!-- data points -->
+              <circle cx="240" cy="30" r="3" fill="#00D4FF"/>
+              <circle cx="320" cy="28" r="3" fill="#00D4FF"/>
+            </svg>
+          </div>
+
+          <div class="chart-block">
+            <div class="chart-head">
+              <span class="title">ON-TIME PERFORMANCE / 7D</span>
+              <span class="legend mono"><span class="lg"><strong style="color:var(--green)">94.7%</strong> avg</span></span>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 600 100" preserveAspectRatio="none" style="height:80px">
+              <!-- bars -->
+              <rect x="20" y="20" width="60" height="60" fill="#00C896" opacity=".7"/>
+              <rect x="100" y="14" width="60" height="66" fill="#00C896" opacity=".7"/>
+              <rect x="180" y="22" width="60" height="58" fill="#00C896" opacity=".7"/>
+              <rect x="260" y="30" width="60" height="50" fill="#FFB020" opacity=".7"/>
+              <rect x="340" y="10" width="60" height="70" fill="#00C896" opacity=".7"/>
+              <rect x="420" y="12" width="60" height="68" fill="#00C896" opacity=".7"/>
+              <rect x="500" y="8" width="60" height="72" fill="#00C896" opacity=".9"/>
+              <!-- baseline -->
+              <line x1="0" y1="80" x2="600" y2="80" stroke="#2A3340" stroke-width="1"/>
+            </svg>
+          </div>
+        </div>
+
+        <aside class="dash-side">
+          <h4>EVENT FEED <span class="live"><span class="dot"></span>LIVE</span></h4>
+          <div class="feed">
+            <div class="feed-item">
+              <span class="feed-time">11:42:08</span>
+              <span class="feed-msg"><span class="tag ok">OK</span>LD-4471 delivered. POD on file.</span>
+            </div>
+            <div class="feed-item">
+              <span class="feed-time">11:41:52</span>
+              <span class="feed-msg"><span class="tag info">CALL</span>Inbound carrier — booked LD-4476.</span>
+            </div>
+            <div class="feed-item">
+              <span class="feed-time">11:40:14</span>
+              <span class="feed-msg"><span class="tag warn">DLY</span>LD-4474 weather reroute. ETA +1h.</span>
+            </div>
+            <div class="feed-item">
+              <span class="feed-time">11:38:47</span>
+              <span class="feed-msg"><span class="tag ok">OK</span>Check-call driver D-217 received.</span>
+            </div>
+            <div class="feed-item">
+              <span class="feed-time">11:36:02</span>
+              <span class="feed-msg"><span class="tag info">RTE</span>Route optimizer saved 47mi.</span>
+            </div>
+            <div class="feed-item">
+              <span class="feed-time">11:34:18</span>
+              <span class="feed-msg"><span class="tag err">ESC</span>Confidence 0.71 → human warm-transfer.</span>
+            </div>
+            <div class="feed-item">
+              <span class="feed-time">11:32:55</span>
+              <span class="feed-msg"><span class="tag ok">OK</span>HOS log written. DOT compliant.</span>
+            </div>
+            <div class="feed-item">
+              <span class="feed-time">11:30:09</span>
+              <span class="feed-msg"><span class="tag info">CALL</span>Shipper quote → auto-priced.</span>
+            </div>
+            <div class="feed-item">
+              <span class="feed-time">11:28:41</span>
+              <span class="feed-msg"><span class="tag ok">OK</span>LD-4470 invoice released.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="section modules">
+  <div class="container">
+    <div class="s-head">
+      <div class="eyebrow">Modules / system architecture</div>
+      <h2>Four modules. Wired by n8n. Owned by you.</h2>
+      <p>Each module deploys standalone or stacked. We start with one, prove ROI in 21 days, then expand. No "platform" lock-in — repo, infra, models all transfer.</p>
+    </div>
+
+    <div class="module-stack">
+      <div class="module-panel">
+        <div class="module-side">
+          <div>
+            <div class="idx">MOD_01</div>
+            <h3>Voice AI Dispatcher</h3>
+          </div>
+          <div class="status"><span class="dot"></span>STATUS: PRODUCTION</div>
+        </div>
+        <div class="module-body">
+          <div class="col">
+            <h5>Capabilities</h5>
+            <ul>
+              <li>Answers 24/7 in natural voice (ElevenLabs / Azure)</li>
+              <li>Books loads, qualifies carriers, sets rates from matrix</li>
+              <li>Escalates &lt; 0.82 confidence with full transcript</li>
+              <li>Logs every call to GHL + S3 (DOT-grade)</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h5>System Stats</h5>
+            <div class="module-stat"><span>Voice latency p50</span><span class="val">480ms</span></div>
+            <div class="module-stat"><span>Lang coverage</span><span class="val">EN / ES / FR</span></div>
+            <div class="module-stat"><span>Median escalation</span><span class="val">27s</span></div>
+            <div class="module-stat"><span>Calls / day cap</span><span class="val">unlimited</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-panel">
+        <div class="module-side">
+          <div>
+            <div class="idx">MOD_02</div>
+            <h3>Route Optimizer</h3>
+          </div>
+          <div class="status"><span class="dot"></span>STATUS: PRODUCTION</div>
+        </div>
+        <div class="module-body">
+          <div class="col">
+            <h5>Capabilities</h5>
+            <ul>
+              <li>Reoptimizes routes every 4 min on traffic + weather</li>
+              <li>Multi-stop sequencing, backhauls, HOS-aware</li>
+              <li>Fuel-cost solver — picks cheapest of 3 valid routes</li>
+              <li>Pushes updates to driver Samsara / Motive ELD</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h5>System Stats</h5>
+            <div class="module-stat"><span>Fuel saved MTD</span><span class="val">$47,210</span></div>
+            <div class="module-stat"><span>Avg miles trimmed</span><span class="val">6.4% / load</span></div>
+            <div class="module-stat"><span>Reopt latency</span><span class="val">1.8s</span></div>
+            <div class="module-stat"><span>Solver</span><span class="val">OR-Tools + GPT-4</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-panel">
+        <div class="module-side">
+          <div>
+            <div class="idx">MOD_03</div>
+            <h3>Driver Comms</h3>
+          </div>
+          <div class="status"><span class="dot"></span>STATUS: PRODUCTION</div>
+        </div>
+        <div class="module-body">
+          <div class="col">
+            <h5>Capabilities</h5>
+            <ul>
+              <li>SMS-first: no driver app install required</li>
+              <li>Rate con + check-call + POD via reply-with-photo</li>
+              <li>Geofence-triggered auto check-calls</li>
+              <li>Two-way driver chat routed to dispatch console</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h5>System Stats</h5>
+            <div class="module-stat"><span>Driver adoption</span><span class="val">98.4%</span></div>
+            <div class="module-stat"><span>Check-call reply rate</span><span class="val">94%</span></div>
+            <div class="module-stat"><span>POD turnaround</span><span class="val">11 min avg</span></div>
+            <div class="module-stat"><span>Channels</span><span class="val">SMS / WhatsApp / app</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-panel">
+        <div class="module-side">
+          <div>
+            <div class="idx">MOD_04</div>
+            <h3>Compliance Logging</h3>
+          </div>
+          <div class="status"><span class="dot"></span>STATUS: PRODUCTION</div>
+        </div>
+        <div class="module-body">
+          <div class="col">
+            <h5>Capabilities</h5>
+            <ul>
+              <li>HOS / ELD log capture, immutable S3 archive</li>
+              <li>DOT audit-ready exports (one click, signed PDFs)</li>
+              <li>Driver qualification file (DQF) automation</li>
+              <li>Insurance + MC# + W-9 vetting on carrier onboard</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h5>System Stats</h5>
+            <div class="module-stat"><span>Log integrity</span><span class="val">100.0%</span></div>
+            <div class="module-stat"><span>Audit prep time</span><span class="val">4h → 12 min</span></div>
+            <div class="module-stat"><span>Storage</span><span class="val">S3 Glacier + WORM</span></div>
+            <div class="module-stat"><span>Retention</span><span class="val">7 yrs default</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section class="section integ">
+  <div class="container">
+    <div class="s-head">
+      <div class="eyebrow">Integrations / endpoint map</div>
+      <h2>Wires into the stack you already pay for.</h2>
+      <p>If it has a REST API or webhook, we wire it via n8n. ELD, TMS, telematics, billing, BI — all addressable.</p>
+    </div>
+    <div class="integ-grid">
+      <div class="integ-cell"><span class="name">SAMSARA</span><span class="type">telematics</span></div>
+      <div class="integ-cell"><span class="name">MOTIVE</span><span class="type">eld / fleet</span></div>
+      <div class="integ-cell"><span class="name">GEOTAB</span><span class="type">telematics</span></div>
+      <div class="integ-cell"><span class="name">FREIGHTOS</span><span class="type">load board</span></div>
+      <div class="integ-cell"><span class="name">MCLEOD</span><span class="type">tms</span></div>
+      <div class="integ-cell"><span class="name">ASCENDTMS</span><span class="type">tms</span></div>
+      <div class="integ-cell"><span class="name">TRUCKSTOP</span><span class="type">load board</span></div>
+      <div class="integ-cell"><span class="name">PROJECT44</span><span class="type">visibility</span></div>
+      <div class="integ-cell"><span class="name">GHL</span><span class="type">crm / pipeline</span></div>
+      <div class="integ-cell"><span class="name">N8N</span><span class="type">orchestration</span></div>
+      <div class="integ-cell"><span class="name">QUICKBOOKS</span><span class="type">billing</span></div>
+      <div class="integ-cell"><span class="name">SLACK / TEAMS</span><span class="type">alerts</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div class="s-head">
+      <div class="eyebrow">Pricing / public tiers</div>
+      <h2>Per yard. Not per seat. No quote games.</h2>
+      <p>Three public tiers. Bigger fleet? We do per-plant enterprise — same pricing logic, scaled. SLA + uptime guarantees on all tiers.</p>
+    </div>
+    <div class="tier-grid">
+      <div class="tier">
+        <div class="tier-head"><span class="tag">TIER_01</span></div>
+        <h3>Single Yard</h3>
+        <p class="for">For owner-operators + 5-25 truck fleets running one dispatch desk.</p>
+        <div class="price"><span class="from">From</span>$7,500<span class="unit"> setup + $1.2K/mo</span></div>
+        <div class="stats-row">
+          <div class="stat-cell"><div class="lbl">SLA</div><div class="val">99.5%</div></div>
+          <div class="stat-cell"><div class="lbl">MTTR</div><div class="val">&lt; 4h</div></div>
+          <div class="stat-cell"><div class="lbl">Voice min/mo</div><div class="val">5,000</div></div>
+          <div class="stat-cell"><div class="lbl">Go-live</div><div class="val">21 days</div></div>
+        </div>
+        <ul>
+          <li>Voice AI Dispatcher (1 number)</li>
+          <li>Route Optimizer + driver SMS</li>
+          <li>Basic compliance logging</li>
+          <li>1 TMS integration</li>
+          <li>Email support (Mon-Fri)</li>
+        </ul>
+        <a href="mailto:waseembali2k26@gmail.com?subject=Tier%201%20-%20Single%20Yard" class="btn btn-ghost">Email for brief</a>
+      </div>
+
+      <div class="tier featured">
+        <div class="tier-head"><span class="tag">TIER_02</span></div>
+        <h3>Multi-Yard</h3>
+        <p class="for">For 3PLs, brokers + 50-200 truck operators with multiple dispatch desks.</p>
+        <div class="price"><span class="from">From</span>$18,000<span class="unit"> setup + $3.5K/mo</span></div>
+        <div class="stats-row">
+          <div class="stat-cell"><div class="lbl">SLA</div><div class="val">99.9%</div></div>
+          <div class="stat-cell"><div class="lbl">MTTR</div><div class="val">&lt; 1h</div></div>
+          <div class="stat-cell"><div class="lbl">Voice min/mo</div><div class="val">25,000</div></div>
+          <div class="stat-cell"><div class="lbl">Go-live</div><div class="val">35 days</div></div>
+        </div>
+        <ul>
+          <li>Everything in Single Yard</li>
+          <li>Up to 8 yards / tenants</li>
+          <li>Full compliance + DOT exports</li>
+          <li>3 TMS + 2 telematics integrations</li>
+          <li>Slack/Teams real-time alerts</li>
+          <li>24/5 priority support</li>
+        </ul>
+        <a href="https://cal.com/waseemnasir/ops-console" class="btn btn-primary">Book ops audit →</a>
+      </div>
+
+      <div class="tier">
+        <div class="tier-head"><span class="tag">TIER_03</span></div>
+        <h3>Enterprise</h3>
+        <p class="for">For manufacturing plants + 200+ truck fleets needing on-prem / air-gapped deploy.</p>
+        <div class="price"><span class="from">From</span>$42,000<span class="unit"> setup + custom</span></div>
+        <div class="stats-row">
+          <div class="stat-cell"><div class="lbl">SLA</div><div class="val">99.95%</div></div>
+          <div class="stat-cell"><div class="lbl">MTTR</div><div class="val">&lt; 15m</div></div>
+          <div class="stat-cell"><div class="lbl">Voice min/mo</div><div class="val">Unlimited</div></div>
+          <div class="stat-cell"><div class="lbl">Go-live</div><div class="val">60-90 days</div></div>
+        </div>
+        <ul>
+          <li>Everything in Multi-Yard</li>
+          <li>On-prem / private cloud deploy</li>
+          <li>Self-hosted LLM (Llama 3.1 70B)</li>
+          <li>SOC2 + DOT audit assistance</li>
+          <li>Dedicated solutions engineer</li>
+          <li>24/7 on-call + named SRE</li>
+        </ul>
+        <a href="mailto:waseembali2k26@gmail.com?subject=Enterprise%20Ops%20Console" class="btn btn-ghost">Email enterprise</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section class="section compliance">
+  <div class="container">
+    <div class="s-head">
+      <div class="eyebrow">Security / compliance</div>
+      <h2>Built for the audit, not the brochure.</h2>
+      <p>Ops buyers under DOT, SOC2, or GDPR scope need infrastructure that survives a subpoena. We deploy with that as the floor.</p>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-cards">
+        <div class="comp-card">
+          <span class="badge">SOC2 TYPE II</span>
+          <h4>Audit-ready posture</h4>
+          <p>AWS controls inherited, access logging, quarterly access reviews. We provide a vendor packet.</p>
+        </div>
+        <div class="comp-card">
+          <span class="badge">GDPR / CCPA</span>
+          <h4>Data residency</h4>
+          <p>EU-only or US-only deployments. Right-to-erasure flows on every PII surface.</p>
+        </div>
+        <div class="comp-card">
+          <span class="badge">DOT / ELD</span>
+          <h4>HOS log integrity</h4>
+          <p>FMCSA-compliant log retention, immutable WORM archive on S3 Glacier, 7-year default.</p>
+        </div>
+        <div class="comp-card">
+          <span class="badge">HIPAA-READY</span>
+          <h4>Healthcare freight</h4>
+          <p>BAA available. Voice AI routes through Azure HIPAA channel. PHI segregation by tenant.</p>
+        </div>
+      </div>
+
+      <div class="comp-detail">
+        <h3>Security primitives — non-negotiable</h3>
+        <p>Every deployment ships with these baked in. We don't bolt security on after the demo.</p>
+        <div class="check-row"><span class="chk">✓</span><span>TLS 1.3 everywhere, mTLS for service mesh</span></div>
+        <div class="check-row"><span class="chk">✓</span><span>AES-256 encryption at rest, customer-managed KMS option</span></div>
+        <div class="check-row"><span class="chk">✓</span><span>Role-based access (dispatcher / manager / admin / auditor)</span></div>
+        <div class="check-row"><span class="chk">✓</span><span>Immutable audit log on every state change — append-only</span></div>
+        <div class="check-row"><span class="chk">✓</span><span>SSO via SAML 2.0, OIDC, or Okta on Enterprise tier</span></div>
+        <div class="check-row"><span class="chk">✓</span><span>Pen-test reports + vuln scan reports on request</span></div>
+        <div class="check-row"><span class="chk">✓</span><span>Disaster recovery: RPO 15 min, RTO 1 hour</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="section case-study">
+  <div class="container">
+    <div class="s-head">
+      <div class="eyebrow">Case file / CS-007</div>
+      <h2>Midwest broker — dispatch lag 14min → 23sec.</h2>
+      <p>One yard. 42 trucks. Replaced 4 SaaS subs + 1 night dispatcher with the console. 90-day numbers, audited.</p>
+    </div>
+
+    <div class="case-shell">
+      <div class="case-head">
+        <div class="left">
+          <span class="dot"></span>
+          <span class="title">CASE_FILE / cs-007.broker.indianapolis</span>
+        </div>
+        <div class="meta">Deployed 2026-02-08 · 90-day audit window</div>
+      </div>
+      <div class="case-body">
+        <div class="case-narrative">
+          <h3>"We stopped staffing a night dispatcher in week three."</h3>
+          <div class="quote">The console answered 312 after-hours calls in the first 90 days. We booked 41 of them while we slept. The night dispatcher salary alone paid for the whole thing in 4 months.</div>
+          <div class="attr">— <strong>Dominique M.</strong> · COO, Midwest Brokerage · Indianapolis IN</div>
+        </div>
+
+        <div class="before-after">
+          <div class="ba-row">
+            <div class="ba-cell before">
+              <div class="lbl">BEFORE</div>
+              <div class="val">14:02</div>
+            </div>
+            <span class="ba-arrow">→</span>
+            <div class="ba-cell after">
+              <div class="lbl">AFTER</div>
+              <div class="val">0:23</div>
+            </div>
+          </div>
+          <div class="ba-metric" style="margin-top:-6px;text-align:right">avg dispatch lag (min:sec)</div>
+
+          <div class="ba-row" style="margin-top:8px">
+            <div class="ba-cell before">
+              <div class="lbl">BEFORE</div>
+              <div class="val">68%</div>
+            </div>
+            <span class="ba-arrow">→</span>
+            <div class="ba-cell after">
+              <div class="lbl">AFTER</div>
+              <div class="val">94.7%</div>
+            </div>
+          </div>
+          <div class="ba-metric" style="margin-top:-6px;text-align:right">on-time delivery rate</div>
+
+          <div class="ba-row" style="margin-top:8px">
+            <div class="ba-cell before">
+              <div class="lbl">BEFORE</div>
+              <div class="val">$0</div>
+            </div>
+            <span class="ba-arrow">→</span>
+            <div class="ba-cell after">
+              <div class="lbl">AFTER</div>
+              <div class="val">$94K</div>
+            </div>
+          </div>
+          <div class="ba-metric" style="margin-top:-6px;text-align:right">night-shift labor saved (yr)</div>
+
+          <div class="ba-row" style="margin-top:8px">
+            <div class="ba-cell before">
+              <div class="lbl">BEFORE</div>
+              <div class="val">4 SaaS</div>
+            </div>
+            <span class="ba-arrow">→</span>
+            <div class="ba-cell after">
+              <div class="lbl">AFTER</div>
+              <div class="val">1 stack</div>
+            </div>
+          </div>
+          <div class="ba-metric" style="margin-top:-6px;text-align:right">tool consolidation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq">
+  <div class="container">
+    <div class="s-head">
+      <div class="eyebrow">FAQ / pre-sales</div>
+      <h2>Things ops directors actually ask.</h2>
+    </div>
+    <div class="faq-grid">
+      <details class="faq-item">
+        <summary><span><span class="q-id">FAQ_01 / INTEGRATIONS</span>Which TMS and telematics platforms do you integrate with?</span></summary>
+        <p>Out of the box: Samsara, Motive, Geotab, FreightOS, McLeod, AscendTMS, Truckstop, Project44. Any platform with a REST API or webhook surface — we wire via n8n. ELD/DOT logging compliant. If you're on a paper TMS, we migrate you to a lightweight portal first as part of the build.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="q-id">FAQ_02 / DEPLOYMENT</span>Can the console run on-prem or in our private cloud?</span></summary>
+        <p>Yes. We deploy to AWS, Azure, GCP, or on-prem Kubernetes. Voice AI can run via OpenAI, Azure OpenAI Service (HIPAA-aligned), or self-hosted Llama 3.1 70B for air-gapped deployments. Defense and manufacturing clients use the self-hosted path.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="q-id">FAQ_03 / MULTI-TENANT</span>How does multi-tenant work for 3PLs and freight brokers?</span></summary>
+        <p>Row-level tenant isolation, per-tenant API keys, custom branding per yard. One console deployment, N customers — used by 3PLs managing 6-200 shipper accounts on a single instance. Per-tenant data exports and billing pass-through available.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="q-id">FAQ_04 / ESCALATION</span>What happens when the AI escalates? Who answers?</span></summary>
+        <p>Confidence threshold + escalation tree. Below 0.82 confidence, AI warm-transfers to your on-call dispatcher with full context (caller ID, intent, transcript, suggested action). Tier 1: dispatcher. Tier 2: ops manager. Tier 3: COO via SMS + email. Median escalation to human: 27 seconds.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="q-id">FAQ_05 / SLA</span>What is your SLA and how is it enforced?</span></summary>
+        <p>Tier 1: 99.5%. Tier 2: 99.9%. Tier 3: 99.95%. Monitored 24/7. P1 incident response: 15 min (Tier 3). P2: 1 hour. Voice AI median latency: 480ms. Public status page at status.skynetlabs.ops. Penalty credits on missed SLA — written into the MSA, not the marketing page.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="q-id">FAQ_06 / PRICING</span>How is pricing structured — per seat or per yard?</span></summary>
+        <p>Per yard / per plant / per fleet boundary — not per seat. Unlimited dispatchers and ops staff on every tier. Voice AI minutes are pooled across yards. No per-call inbound fees. Outbound minutes at cost pass-through. Full pricing is on this page — three public tiers, no quote games.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section final" id="book">
+  <div class="container">
+    <div class="final-panel">
+      <span class="eyebrow"><span class="dot cyan"></span>SYSTEM READY · awaiting brief</span>
+      <h2>Send the URL of your ops floor. We send back <span class="accent">a 12-min Loom</span> of where it bleeds.</h2>
+      <p>No call. No discovery game. No NDA theater. Just a recorded walkthrough of your dispatch leaks + the 3 fastest patches we'd ship in week one.</p>
+      <a href="https://cal.com/waseemnasir/ops-console" class="btn btn-primary">▸ Open live demo</a>
+      <a href="mailto:waseembali2k26@gmail.com?subject=Ops%20Console%20-%20Send%20Loom%20Audit" class="btn btn-ghost" style="margin-left:8px">Email the brief</a>
+      <div class="meta-row">
+        <span>★★★★★ <strong>180+ workflows</strong> shipped</span>
+        <span class="pipe">·</span>
+        <span><strong>9 countries</strong></span>
+        <span class="pipe">·</span>
+        <span><strong>99.94%</strong> uptime YTD</span>
+        <span class="pipe">·</span>
+        <span>Built by Waseem Nasir · Bali</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><span class="bracket" style="color:var(--cyan)">[</span>SKYNET<span style="color:var(--cyan)">.</span>OPS<span class="bracket" style="color:var(--cyan)">]</span></a>
+        <p>Mission-control AI ops layer for logistics, freight, and manufacturing operators who refuse to run their floor on screenshots.</p>
+      </div>
+      <div>
+        <h4>MODULES</h4>
+        <a href="#flagship">Voice AI Dispatcher</a>
+        <a href="#flagship">Route Optimizer</a>
+        <a href="#flagship">Driver Comms</a>
+        <a href="#flagship">Compliance Logging</a>
+      </div>
+      <div>
+        <h4>COMPANY</h4>
+        <a href="/about">About</a>
+        <a href="#pricing">Pricing</a>
+        <a href="mailto:waseembali2k26@gmail.com">Email</a>
+        <a href="https://cal.com/waseemnasir/ops-console">Book demo</a>
+      </div>
+      <div>
+        <h4>LEGAL</h4>
+        <a href="/privacy-policy">Privacy</a>
+        <a href="/terms-of-service">Terms</a>
+        <a href="/security">Security</a>
+        <a href="/sla">SLA</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkynetLabs · Built in Bali · serving 9 countries</span>
+      <span class="status"><span class="dot"></span>ALL SYSTEMS OPERATIONAL · 99.94%</span>
+    </div>
+  </div>
+</footer>
+
+<!-- META PIXEL placeholder -->
+<!-- <script>!function(f,b,e,v,n,t,s){...}('init','YOUR_PIXEL_ID');fbq('track','PageView');</script> -->
+<!-- GA4 placeholder -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script> -->
+
+</body>
+</html>

@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Receptionist for Dental & Wellness Clinics — Aurora by SkynetLabs</title>
+<meta name="description" content="A calm, editorial AI front desk for dental clinics, med-spas and wellness practices. Recover missed-call revenue, reactivate lapsed patients, end same-day cancel chaos. Live in 14 days." />
+<meta name="theme-color" content="#0F1B2D" />
+<meta name="color-scheme" content="light" />
+<link rel="canonical" href="https://app-mauve-eta-66.vercel.app/lp/aurora-v1.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="AI Receptionist for Dental & Wellness — Aurora by SkynetLabs" />
+<meta property="og:description" content="Recover the revenue that's slipping through your front desk. Editorial AI receptionist for clinics. Live in 14 days." />
+<meta property="og:image" content="https://app-mauve-eta-66.vercel.app/og/aurora.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@300;400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Service","@id":"#service","name":"AI Receptionist for Dental & Wellness Clinics","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://app-mauve-eta-66.vercel.app","email":"waseembali2k26@gmail.com"},"areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"Canada"},{"@type":"Country","name":"Australia"}],"serviceType":"AI Receptionist + Patient Reactivation + Review Engine","description":"Editorial AI receptionist, missed-call recovery, lapsed-patient reactivation and review automation for dental clinics, med-spas and wellness practices. Built in 14 days.","offers":{"@type":"Offer","price":"2200","priceCurrency":"USD"}},
+    {"@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Is the AI receptionist HIPAA-considerate?","acceptedAnswer":{"@type":"Answer","text":"Yes. We never store PHI in the voice transcript layer. Sensitive data routes to your encrypted PMS (Dentrix, Eaglesoft, Open Dental, Jane App, Mindbody). The AI books, reschedules and confirms — your PMS holds the chart."}},
+      {"@type":"Question","name":"Will it integrate with my practice management software?","acceptedAnswer":{"@type":"Answer","text":"Yes. Native connectors for Dentrix, Eaglesoft, Open Dental, Jane App, Mindbody, ClinicSense, Practice Better. Anything with a REST API or HL7 surface — we wire it."}},
+      {"@type":"Question","name":"What does the AI sound like to my patients?","acceptedAnswer":{"@type":"Answer","text":"Natural, warm, never robotic. We train the voice on your clinic's tone — chatty New England dental, calm West Coast med-spa, clinical East Coast specialty. ElevenLabs voice + GPT logic."}},
+      {"@type":"Question","name":"Can it handle same-day cancellations?","acceptedAnswer":{"@type":"Answer","text":"Yes. The moment a cancellation hits your calendar, the system pings your short-list (reactivation pool + waitlist) via SMS with the open slot. Most chairs are re-filled within 90 minutes."}},
+      {"@type":"Question","name":"How long until we go live?","acceptedAnswer":{"@type":"Answer","text":"14 days from signed brief. Days 1-3: voice + script training. Days 4-9: PMS + CRM wiring. Days 10-14: pilot calls, tuning, soft launch. Day 14: full handover."}},
+      {"@type":"Question","name":"Do we own everything after launch?","acceptedAnswer":{"@type":"Answer","text":"Yes. Repo, automation workflows, voice training data, CRM sub-account — all transferred to you. Cancel the retainer anytime; the system keeps running. No vendor lock."}}
+    ]}
+  ]
+}
+</script>
+
+<style>
+:root{
+  --cream:#FDFBF7;
+  --cream-2:#F6F1E7;
+  --paper:#FFFFFF;
+  --ink:#0F1B2D;
+  --ink-2:#1A2942;
+  --ink-3:#3F4E68;
+  --ink-4:#6B7689;
+  --rose:#C9716D;
+  --rose-2:#E2A4A1;
+  --rose-tint:#FBEEEC;
+  --gold:#B8935F;
+  --gold-2:#D6B07F;
+  --gold-tint:#F4EBDC;
+  --line:#E8DFCF;
+  --line-2:#D9CFBA;
+  --shadow-sm:0 1px 2px rgba(15,27,45,.04), 0 4px 14px rgba(15,27,45,.04);
+  --shadow:0 8px 28px rgba(15,27,45,.08), 0 2px 8px rgba(15,27,45,.05);
+  --shadow-lg:0 28px 70px rgba(15,27,45,.14), 0 10px 28px rgba(15,27,45,.08);
+  --r:14px;
+  --r-lg:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:17px;line-height:1.65;color:var(--ink-2);
+  background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:500;color:var(--ink);letter-spacing:-.015em;line-height:1.05;font-variation-settings:"opsz" 144}
+h1{font-size:clamp(44px,7vw,84px);font-weight:400;letter-spacing:-.03em;line-height:1.02}
+h2{font-size:clamp(32px,4.4vw,52px);font-weight:500;letter-spacing:-.02em;line-height:1.08}
+h3{font-size:clamp(22px,2.4vw,28px);font-weight:600;letter-spacing:-.015em}
+.italic{font-style:italic;font-weight:400}
+.eyebrow{display:inline-block;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--rose)}
+.eyebrow .dash{display:inline-block;width:24px;height:1px;background:var(--rose);vertical-align:middle;margin-right:10px;transform:translateY(-3px)}
+.script{font-family:'Caveat',cursive;font-weight:600;color:var(--rose);font-size:1.35em;line-height:.9}
+p{color:var(--ink-3);font-size:17px}
+a{color:var(--ink);text-decoration:none}
+img{max-width:100%;display:block}
+
+.container{max-width:1180px;margin:0 auto;padding:0 28px}
+.section{padding:112px 0}
+@media (max-width:768px){.section{padding:72px 0}.container{padding:0 22px}}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(253,251,247,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,223,207,.5)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1180px;margin:0 auto}
+.logo{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:24px;color:var(--ink);letter-spacing:-.02em}
+.logo span{color:var(--rose);font-style:normal;font-weight:600}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-link{font-size:14px;color:var(--ink-3);font-weight:500}
+.nav-link:hover{color:var(--rose)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:11px 20px;border-radius:999px;font-weight:500;font-size:14px;transition:transform .2s,box-shadow .2s}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+@media (max-width:640px){.nav-link{display:none}}
+
+/* HERO */
+.hero{position:relative;padding:88px 0 64px;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 70% 20%,rgba(201,113,109,.07) 0%,transparent 60%),var(--cream)}
+.hero::after{content:"";position:absolute;bottom:-160px;left:-120px;width:460px;height:460px;background:radial-gradient(circle,rgba(184,147,95,.10),transparent 65%);border-radius:50%;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:72px;align-items:center;position:relative;z-index:1}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr;gap:56px}}
+
+.hero h1 .em{font-style:italic;font-weight:400;color:var(--ink)}
+.hero h1 .gold{color:var(--gold)}
+.hero h1 .rose{color:var(--rose)}
+.hero h1 .underline{position:relative;display:inline-block}
+.hero h1 .underline::after{content:"";position:absolute;left:2%;right:2%;bottom:-4px;height:8px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M2 5 Q 50 1, 100 4 T 198 3' stroke='%23C9716D' stroke-width='2' fill='none' stroke-linecap='round'/></svg>") no-repeat center/100% 100%}
+
+.hero-eyebrow{margin-bottom:32px}
+.hero-sub{margin-top:32px;font-family:'Fraunces',serif;font-weight:400;font-size:clamp(18px,2vw,22px);line-height:1.5;color:var(--ink-3);max-width:540px;font-variation-settings:"opsz" 24}
+.hero-ctas{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-weight:500;font-size:15px;transition:all .25s;border:none;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-primary{background:var(--ink);color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);background:var(--rose)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
+.btn-ghost:hover{border-color:var(--ink);background:#fff}
+.btn-rose{background:var(--rose);color:#fff;box-shadow:0 12px 36px rgba(201,113,109,.32)}
+.btn-rose:hover{background:var(--ink);transform:translateY(-2px)}
+.btn-arr{width:16px;height:16px}
+
+.hero-sig{margin-top:30px;display:flex;align-items:center;gap:14px;color:var(--ink-4);font-size:13.5px}
+.hero-sig .star{color:var(--gold);letter-spacing:.05em}
+.hero-sig strong{color:var(--ink);font-weight:600}
+
+/* HERO VISUAL — clinic polaroid card */
+.hero-visual{position:relative;display:flex;justify-content:center}
+.polaroid{background:#fff;padding:18px 18px 56px;border-radius:6px;box-shadow:var(--shadow-lg);transform:rotate(2deg);position:relative;max-width:380px;width:100%;border:1px solid rgba(232,223,207,.7)}
+.polaroid .photo{aspect-ratio:4/5;border-radius:3px;background:linear-gradient(170deg,#F4EBDC 0%,#FBEEEC 45%,#E8DFCF 100%);position:relative;overflow:hidden}
+.polaroid .photo svg{position:absolute;inset:0;width:100%;height:100%}
+.polaroid .caption{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-family:'Caveat',cursive;color:var(--ink-3);font-size:18px;font-weight:500}
+.polaroid .tape{position:absolute;top:-16px;left:50%;transform:translateX(-50%) rotate(-3deg);width:90px;height:26px;background:rgba(201,113,109,.22);border-radius:2px;mix-blend-mode:multiply}
+
+/* mini schedule card hovering */
+.mini-schedule{position:absolute;bottom:-30px;left:-40px;background:#fff;border-radius:14px;padding:16px 18px;box-shadow:var(--shadow-lg);border:1px solid var(--line);transform:rotate(-4deg);min-width:220px;z-index:2}
+.mini-schedule .h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.mini-schedule .h .t{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--ink);font-weight:500}
+.mini-schedule .h .dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 3px rgba(74,222,128,.25)}
+.mini-schedule .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:12.5px;color:var(--ink-3);border-bottom:1px dashed var(--line)}
+.mini-schedule .row:last-child{border:none}
+.mini-schedule .row strong{color:var(--ink);font-weight:500}
+.mini-schedule .row .ok{color:var(--gold);font-weight:600;font-size:11px}
+@media (max-width:480px){.mini-schedule{left:-10px;transform:rotate(-3deg) scale(.9)}}
+
+/* BIO BAR */
+.biobar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--cream-2);padding:36px 0}
+.biobar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:left}
+@media (max-width:768px){.biobar-grid{grid-template-columns:repeat(2,1fr);gap:24px}}
+.biostat{padding:0 8px;border-left:1px solid var(--line-2)}
+.biostat:first-child{border-left:none}
+.biostat .num{font-family:'Fraunces',serif;font-weight:500;font-size:38px;color:var(--ink);letter-spacing:-.02em;line-height:1;font-variation-settings:"opsz" 60}
+.biostat .num .em{font-style:italic;color:var(--rose);font-weight:400}
+.biostat .lbl{font-size:12.5px;color:var(--ink-4);font-weight:500;margin-top:8px;text-transform:uppercase;letter-spacing:.12em}
+
+/* PAIN */
+.pain{background:var(--cream)}
+.pain-head{max-width:760px;margin:0 auto 64px;text-align:center}
+.pain-head .eyebrow{margin-bottom:18px}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media (max-width:900px){.pain-grid{grid-template-columns:1fr;gap:22px}}
+.pain-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:36px 32px;position:relative;transition:transform .3s,box-shadow .3s}
+.pain-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.pain-card .serial{position:absolute;top:24px;right:24px;font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--gold);font-weight:500;letter-spacing:.05em}
+.pain-icon{width:48px;height:48px;border-radius:50%;background:var(--rose-tint);display:flex;align-items:center;justify-content:center;color:var(--rose);margin-bottom:24px}
+.pain-icon svg{width:22px;height:22px;stroke-width:1.8}
+.pain-card h3{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:24px;margin-bottom:12px;color:var(--ink)}
+.pain-card p{font-size:15.5px;line-height:1.6;color:var(--ink-3)}
+.pain-card .cost{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--rose);font-weight:600;letter-spacing:.02em}
+
+/* PRODUCT — AI Receptionist flagship */
+.product{background:linear-gradient(180deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;position:relative;overflow:hidden}
+.product::before{content:"";position:absolute;top:10%;right:-12%;width:480px;height:480px;background:radial-gradient(circle,rgba(201,113,109,.20),transparent 65%);border-radius:50%}
+.product::after{content:"";position:absolute;bottom:-15%;left:-12%;width:520px;height:520px;background:radial-gradient(circle,rgba(184,147,95,.16),transparent 65%);border-radius:50%}
+.product-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:72px;align-items:center;position:relative;z-index:1}
+@media (max-width:960px){.product-grid{grid-template-columns:1fr;gap:48px}}
+.product .eyebrow{color:var(--gold-2)}
+.product .eyebrow .dash{background:var(--gold-2)}
+.product h2{color:#fff}
+.product h2 .tm{font-size:.5em;color:var(--gold-2);vertical-align:super;font-style:italic}
+.product p{color:rgba(255,255,255,.78);font-size:18px;line-height:1.6;margin-top:24px}
+.feature-list{list-style:none;margin-top:36px}
+.feature-list li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:15.5px;color:rgba(255,255,255,.88)}
+.feature-list li:last-child{border-bottom:none}
+.feature-list .check{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px}
+
+.voice-mock{background:linear-gradient(155deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.10);border-radius:var(--r-lg);padding:28px;box-shadow:0 40px 90px rgba(0,0,0,.3);backdrop-filter:blur(10px)}
+.voice-mock-head{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.voice-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:#fff;font-weight:500}
+.voice-mock-head .name{color:#fff;font-weight:500;font-size:15.5px;font-family:'Fraunces',serif}
+.voice-mock-head .sub{color:rgba(255,255,255,.55);font-size:12.5px;margin-top:3px}
+.voice-mock-head .live-pill{margin-left:auto;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(74,222,128,.18);color:#86EFAC;padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+.voice-mock-head .live-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:#4ADE80;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.transcript{display:flex;flex-direction:column;gap:6px}
+.bubble{padding:13px 17px;border-radius:16px;font-size:14.5px;max-width:88%;line-height:1.5}
+.bubble.them{background:rgba(255,255,255,.07);color:rgba(255,255,255,.9);border-bottom-left-radius:5px}
+.bubble.me{background:var(--gold);color:var(--ink);align-self:flex-end;border-bottom-right-radius:5px;font-weight:500}
+.bubble-meta{font-size:11px;color:rgba(255,255,255,.4);margin:2px 4px 8px;letter-spacing:.02em}
+.bubble-meta.r{align-self:flex-end}
+.voice-bar{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.55)}
+.voice-bar strong{color:var(--gold-2);font-weight:600}
+
+/* SERVICES — 3 module cards w/ serial numbers */
+.services{background:var(--cream)}
+.services-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:56px}
+.services-head .left{max-width:560px}
+.services-head .right{font-family:'Fraunces',serif;font-style:italic;font-size:18px;color:var(--ink-3);max-width:340px;line-height:1.5}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:960px){.services-grid{grid-template-columns:1fr;gap:20px}}
+.module{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:36px 32px;position:relative;transition:all .3s;overflow:hidden}
+.module:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--rose-2)}
+.module .ribbon{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+.module .case-no{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--gold);font-weight:500;letter-spacing:.05em}
+.module .badge{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
+.module-icon{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;background:var(--gold-tint);color:var(--gold)}
+.module[data-c="reactivation"] .module-icon{background:var(--rose-tint);color:var(--rose)}
+.module[data-c="reviews"] .module-icon{background:linear-gradient(135deg,var(--gold-tint),var(--rose-tint));color:var(--ink-2)}
+.module-icon svg{width:26px;height:26px;stroke-width:1.6}
+.module h3{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:26px;margin-bottom:10px}
+.module p{font-size:15.5px;line-height:1.6;margin-bottom:22px}
+.module ul{list-style:none;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.module ul li{padding:9px 0;font-size:14.5px;color:var(--ink-3);display:flex;align-items:flex-start;gap:12px}
+.module ul li::before{content:"";flex-shrink:0;width:5px;height:5px;border-radius:50%;background:var(--rose);margin-top:9px}
+
+/* QUOTE — editorial pull-quote */
+.quote{background:var(--cream-2);position:relative;overflow:hidden}
+.quote::before{content:"\201C";position:absolute;top:40px;left:5%;font-family:'Fraunces',serif;font-style:italic;font-size:340px;color:rgba(201,113,109,.10);line-height:.8;font-weight:400}
+.quote-body{position:relative;z-index:1;max-width:900px;margin:0 auto;text-align:center}
+.quote .eyebrow{margin-bottom:32px}
+.quote blockquote{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(26px,3.4vw,40px);line-height:1.3;color:var(--ink);letter-spacing:-.01em;font-variation-settings:"opsz" 144}
+.quote-attr{margin-top:40px;display:flex;align-items:center;justify-content:center;gap:16px}
+.quote-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:#fff;font-size:20px}
+.quote-attr .meta{text-align:left}
+.quote-attr .name{font-family:'Caveat',cursive;color:var(--rose);font-weight:600;font-size:24px;line-height:1}
+.quote-attr .role{color:var(--ink-3);font-size:13.5px;margin-top:3px}
+
+/* TIERS — typeset menu style */
+.tiers{background:var(--cream);position:relative}
+.tiers-head{text-align:center;max-width:680px;margin:0 auto 64px}
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:960px){.tiers-grid{grid-template-columns:1fr}}
+.tier{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:36px 32px;position:relative;display:flex;flex-direction:column;transition:all .3s}
+.tier:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.tier.featured{border:1.5px solid var(--ink);box-shadow:var(--shadow-lg);background:linear-gradient(180deg,#fff,#FBF7EE)}
+.tier.featured::before{content:"MOST CHOSEN";position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--cream);font-size:10.5px;font-weight:600;letter-spacing:.16em;padding:6px 14px;border-radius:999px;font-family:'Inter',sans-serif}
+.tier .name{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:26px;color:var(--ink);margin-bottom:6px}
+.tier .for{font-size:14px;color:var(--ink-3);min-height:48px;line-height:1.5;margin-bottom:24px;font-family:'Fraunces',serif;font-style:italic;font-weight:400}
+.tier .price-row{padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:24px}
+.tier .starts{font-size:12px;color:var(--ink-4);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px}
+.tier .price{font-family:'Fraunces',serif;font-weight:500;font-size:44px;color:var(--ink);letter-spacing:-.025em;line-height:1;font-variation-settings:"opsz" 100}
+.tier .unit{font-size:14px;color:var(--ink-4);font-weight:400;font-family:'Inter',sans-serif;margin-left:6px}
+.tier ul{list-style:none;margin-bottom:28px;flex:1}
+.tier ul li{padding:10px 0;font-size:14.5px;color:var(--ink-3);display:flex;align-items:flex-start;gap:10px;border-bottom:1px dashed var(--line)}
+.tier ul li:last-child{border-bottom:none}
+.tier ul li::before{content:"›";color:var(--rose);font-weight:700;flex-shrink:0;font-size:16px;line-height:1.2}
+.tier .btn{width:100%;justify-content:center}
+
+/* CASES — magazine spread cards */
+.cases{background:var(--cream-2)}
+.cases-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:56px}
+.cases-head .right{font-size:13.5px;color:var(--ink-3);font-family:'Fraunces',serif;font-style:italic}
+.cases-head .right a{color:var(--rose);font-weight:600;text-decoration:underline;text-decoration-color:var(--rose-2);text-underline-offset:3px}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media (max-width:960px){.case-grid{grid-template-columns:1fr}}
+.case{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:all .3s;display:flex;flex-direction:column}
+.case:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.case-img{height:200px;position:relative;overflow:hidden;background:var(--cream-2)}
+.case-img svg{position:absolute;inset:0;width:100%;height:100%}
+.case-img .case-label{position:absolute;bottom:18px;left:22px;color:#fff;font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:22px;letter-spacing:-.01em;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.case[data-c="dental"] .case-img{background:linear-gradient(155deg,#1A2942 0%,#3F4E68 80%)}
+.case[data-c="medspa"] .case-img{background:linear-gradient(155deg,#C9716D 0%,#E2A4A1 80%)}
+.case[data-c="chiro"] .case-img{background:linear-gradient(155deg,#B8935F 0%,#D6B07F 80%)}
+.case-body{padding:28px;flex:1;display:flex;flex-direction:column}
+.case-tag{display:inline-block;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:14px}
+.case h3{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:21px;margin-bottom:10px;letter-spacing:-.01em}
+.case .body-copy{font-size:14.5px;color:var(--ink-3);line-height:1.6;flex:1}
+.case-metric{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end;gap:14px}
+.case-metric .num{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:26px;color:var(--rose);letter-spacing:-.02em;line-height:1}
+.case-metric .lbl{font-size:11.5px;color:var(--ink-4);text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+
+/* PROCESS — 4 step */
+.process{background:var(--cream)}
+.process-head{text-align:center;max-width:680px;margin:0 auto 64px}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
+@media (max-width:960px){.process-grid{grid-template-columns:1fr;gap:22px}}
+.process-grid::before{content:"";position:absolute;top:40px;left:10%;right:10%;height:1px;background:repeating-linear-gradient(90deg,var(--gold) 0 5px,transparent 5px 11px);z-index:0}
+@media (max-width:960px){.process-grid::before{display:none}}
+.step{background:transparent;padding:8px 4px 28px;position:relative;z-index:1;text-align:left}
+.step-num{width:64px;height:64px;border-radius:50%;background:#fff;border:1px solid var(--line);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:24px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.step .day{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.step h3{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:22px;margin-bottom:10px;color:var(--ink)}
+.step p{font-size:14.5px;color:var(--ink-3);line-height:1.6}
+
+/* FAQ — editorial accordion */
+.faq{background:var(--cream-2)}
+.faq-head{text-align:center;max-width:680px;margin:0 auto 56px}
+.faq-grid{max-width:840px;margin:0 auto;background:transparent}
+.faq-item{border-bottom:1px solid var(--line-2);padding:28px 4px;transition:padding .3s}
+.faq-item summary{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:22px;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:18px;letter-spacing:-.01em}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"";width:14px;height:14px;flex-shrink:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='%23C9716D' stroke-width='2' fill='none' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>") no-repeat center/contain;transition:transform .3s}
+.faq-item[open] summary::after{transform:rotate(180deg)}
+.faq-item p{margin-top:18px;color:var(--ink-3);font-size:16px;line-height:1.65;font-family:'Inter',sans-serif;max-width:760px}
+
+/* FINAL CTA — rose gradient */
+.final{background:linear-gradient(135deg,var(--rose) 0%,#A85753 60%,var(--gold) 130%);color:#fff;text-align:center;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;top:-30%;left:-15%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 65%);border-radius:50%}
+.final::after{content:"";position:absolute;bottom:-30%;right:-15%;width:600px;height:600px;background:radial-gradient(circle,rgba(15,27,45,.20),transparent 65%);border-radius:50%}
+.final .container{position:relative;z-index:1}
+.final .eyebrow{color:rgba(255,255,255,.85)}
+.final .eyebrow .dash{background:rgba(255,255,255,.85)}
+.final h2{color:#fff;max-width:840px;margin:18px auto 0}
+.final h2 .em{font-style:italic;color:var(--cream)}
+.final p{color:rgba(255,255,255,.85);font-size:19px;font-family:'Fraunces',serif;font-weight:400;font-style:italic;max-width:580px;margin:24px auto 38px}
+.final .hero-ctas{justify-content:center}
+.final .btn-primary{background:#fff;color:var(--ink);font-size:16px;padding:18px 32px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.final .btn-primary:hover{background:var(--ink);color:#fff;transform:translateY(-3px)}
+.final .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.final .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.10)}
+.final-trust{margin-top:42px;display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap;color:rgba(255,255,255,.85);font-size:13px;letter-spacing:.02em}
+.final-trust strong{color:#fff;font-weight:600}
+.final-sig{margin-top:36px;font-family:'Caveat',cursive;font-weight:500;color:rgba(255,255,255,.9);font-size:22px;line-height:1}
+.final-sig small{display:block;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:6px;font-weight:500}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:56px 0 32px;font-size:14px}
+.footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;flex-wrap:wrap}
+.footer-brand{max-width:340px}
+.footer-brand .logo{color:#fff;margin-bottom:14px;display:inline-block}
+.footer-brand .logo span{color:var(--rose-2)}
+.footer-brand p{color:rgba(255,255,255,.55);font-size:14px;line-height:1.6}
+.footer-links{display:flex;gap:56px;flex-wrap:wrap}
+.footer-col h4{color:#fff;font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:15px;margin-bottom:16px;letter-spacing:-.01em}
+.footer-col a{display:block;color:rgba(255,255,255,.55);margin-bottom:9px;font-size:14px;transition:color .2s}
+.footer-col a:hover{color:var(--rose-2)}
+.footer-bottom{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);text-align:center;color:rgba(255,255,255,.4);font-size:13px}
+.footer-bottom .sig{font-family:'Caveat',cursive;font-size:18px;color:var(--rose-2)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">Aurora <span>by SkynetLabs</span></a>
+    <div class="nav-right">
+      <a href="#cases" class="nav-link">Case studies</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#book" class="nav-cta">Book a call <svg class="btn-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow hero-eyebrow"><span class="dash"></span>Built for clinics with full chairs</span>
+      <h1>
+        Your no-show rate is <span class="em">a CRM problem</span>, not <span class="underline">a patient</span> problem.
+      </h1>
+      <p class="hero-sub">A calm, editorial AI front desk for dental clinics, med-spas and wellness practices. Recover missed-call revenue, reactivate lapsed patients, and end same-day cancel chaos. <em>Rebuilt in 14 days.</em></p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn btn-primary">Book a discovery call <svg class="btn-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="#cases" class="btn btn-ghost">See dental case studies</a>
+      </div>
+      <div class="hero-sig">
+        <span class="star">★ ★ ★ ★ ★</span>
+        <span><strong>180+ workflows</strong> shipped · <strong>9 countries</strong> · 12 clinic builds in 2026</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="polaroid">
+        <div class="tape"></div>
+        <div class="photo">
+          <svg viewBox="0 0 320 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#F4EBDC"/>
+                <stop offset="1" stop-color="#FBEEEC"/>
+              </linearGradient>
+              <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#E8DFCF"/>
+                <stop offset="1" stop-color="#D9CFBA"/>
+              </linearGradient>
+              <linearGradient id="chair" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1A2942"/>
+                <stop offset="1" stop-color="#0F1B2D"/>
+              </linearGradient>
+            </defs>
+            <rect width="320" height="280" fill="url(#sky)"/>
+            <rect y="280" width="320" height="120" fill="url(#floor)"/>
+            <!-- big window -->
+            <rect x="36" y="40" width="120" height="180" rx="60" fill="#FFFFFF" opacity=".55"/>
+            <rect x="44" y="48" width="104" height="164" rx="52" fill="#F4EBDC" opacity=".75"/>
+            <!-- plant -->
+            <path d="M210 250 Q 200 200 195 160 M 210 250 Q 220 210 230 175 M 210 250 Q 215 220 212 180" stroke="#7C9885" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>
+            <ellipse cx="210" cy="265" rx="32" ry="14" fill="#B8935F" opacity=".7"/>
+            <!-- dental chair silhouette -->
+            <path d="M70 380 L 70 290 Q 70 270 90 270 L 130 270 Q 155 270 160 295 L 165 380 Z" fill="url(#chair)" opacity=".9"/>
+            <rect x="78" y="275" width="78" height="22" rx="8" fill="#3F4E68" opacity=".6"/>
+            <!-- lamp arm -->
+            <path d="M150 270 Q 200 260 240 220 L 245 215" stroke="#0F1B2D" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>
+            <circle cx="248" cy="212" r="14" fill="#B8935F" opacity=".9"/>
+            <circle cx="248" cy="212" r="7" fill="#F4EBDC"/>
+            <!-- iPad on counter -->
+            <rect x="200" y="320" width="68" height="44" rx="4" fill="#0F1B2D"/>
+            <rect x="204" y="324" width="60" height="36" rx="2" fill="#FDFBF7"/>
+            <line x1="208" y1="332" x2="232" y2="332" stroke="#C9716D" stroke-width="2" stroke-linecap="round"/>
+            <line x1="208" y1="340" x2="258" y2="340" stroke="#B8935F" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+            <line x1="208" y1="346" x2="248" y2="346" stroke="#B8935F" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+            <line x1="208" y1="352" x2="240" y2="352" stroke="#B8935F" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+          </svg>
+        </div>
+        <div class="caption">Suite 204 — Tuesday morning</div>
+      </div>
+      <div class="mini-schedule">
+        <div class="h">
+          <div class="t">Today's schedule</div>
+          <div class="dot"></div>
+        </div>
+        <div class="row"><strong>9:00 · Hygiene</strong><span class="ok">Confirmed</span></div>
+        <div class="row"><strong>10:30 · Whitening</strong><span class="ok">Confirmed</span></div>
+        <div class="row"><strong>2:00 · Implant consult</strong><span class="ok">Confirmed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIO BAR — read in 90 seconds -->
+<section class="biobar">
+  <div class="container biobar-grid">
+    <div class="biostat"><div class="num">14<span class="em">d</span></div><div class="lbl">Brief to live</div></div>
+    <div class="biostat"><div class="num">24/<span class="em">7</span></div><div class="lbl">AI front desk</div></div>
+    <div class="biostat"><div class="num">−63<span class="em">%</span></div><div class="lbl">Same-day cancels</div></div>
+    <div class="biostat"><div class="num">+38<span class="em">%</span></div><div class="lbl">Lapsed patients back</div></div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="section pain">
+  <div class="container">
+    <div class="pain-head">
+      <span class="eyebrow"><span class="dash"></span>The three quiet leaks</span>
+      <h2 style="margin-top:18px">Most clinics don't lose to competitors. <span class="italic">They lose to their own front desk.</span></h2>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="serial">No. 01</span>
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Front desk burnout</h3>
+        <p>Your receptionist juggles seven things at once — checking in, calling back, confirming, billing, fielding the dentist. By 3pm she stops smiling. By Friday she's drafting a resignation. Patients feel it.</p>
+        <div class="cost">Avg cost · $4,800/mo in turnover + lost goodwill</div>
+      </div>
+      <div class="pain-card">
+        <span class="serial">No. 02</span>
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/><line x1="3" y1="3" x2="21" y2="21"/></svg>
+        </div>
+        <h3>Missed-call leakage</h3>
+        <p>Every unanswered call is a $400-1,800 case walking to the practice down the street. After-hours, lunch hour, weekends — voicemail loses to the clinic that picks up. Even when you do answer, half the leads drop into a Post-it abyss.</p>
+        <div class="cost">Avg loss · $11K-28K/mo in unbooked revenue</div>
+      </div>
+      <div class="pain-card">
+        <span class="serial">No. 03</span>
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14l-2 2 2 2M16 14l2 2-2 2"/></svg>
+        </div>
+        <h3>Same-day cancel chaos</h3>
+        <p>The 10am cancels at 9:47. Your hygienist is paid either way. By the time the front desk dials through the call-list, the chair sits empty for 90 minutes. Multiply that across the week — that's a full salary gone.</p>
+        <div class="cost">Avg loss · $6K-14K/mo in idle chair-hours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT — AI Receptionist flagship -->
+<section class="section product">
+  <div class="container product-grid">
+    <div>
+      <span class="eyebrow"><span class="dash"></span>The flagship</span>
+      <h2 style="margin-top:18px">AI Receptionist<span class="tm">™</span> — the front desk that never burns out.</h2>
+      <p>A natural-voice AI agent that answers your clinic line 24/7, books from your real calendar, reschedules with grace, and hands off to a human only when it should. Trained on your tone, your services, your insurance handling. Patients hang up thinking they spoke to a very good receptionist.</p>
+      <ul class="feature-list">
+        <li><span class="check">✓</span> Answers every call in your clinic's <strong style="color:#fff">warm, branded voice</strong></li>
+        <li><span class="check">✓</span> Books, reschedules and confirms straight into Dentrix / Open Dental / Jane App</li>
+        <li><span class="check">✓</span> Triggers <strong style="color:#fff">same-day cancel rescue</strong> — fills the chair in under 90 min</li>
+        <li><span class="check">✓</span> Sends review request 2 hours post-visit (the magic window)</li>
+        <li><span class="check">✓</span> HIPAA-considerate routing — PHI stays in your PMS, never the transcript</li>
+      </ul>
+    </div>
+    <div class="voice-mock">
+      <div class="voice-mock-head">
+        <div class="voice-avatar">A</div>
+        <div>
+          <div class="name">Aurora · clinic line</div>
+          <div class="sub">Inbound call · Tuesday 7:42 PM</div>
+        </div>
+        <span class="live-pill">Live</span>
+      </div>
+      <div class="transcript">
+        <div class="bubble them">Hi, I'm calling to see if you have anything for a cleaning this week? My usual cleaning got pushed.</div>
+        <div class="bubble-meta">Caller · 7:42:08 PM</div>
+        <div class="bubble me">Of course — happy to help. I have Wednesday 11am with Sarah, or Thursday 3:30pm with Michelle. Which works best?</div>
+        <div class="bubble-meta r">Aurora · 7:42:11 PM</div>
+        <div class="bubble them">Thursday 3:30 is great. Do you take Delta Dental?</div>
+        <div class="bubble-meta">Caller · 7:42:18 PM</div>
+        <div class="bubble me">Yes — Delta PPO in-network. I've booked you for Thursday 3:30pm with Michelle. You'll get a confirmation text in a moment. Anything else?</div>
+        <div class="bubble-meta r">Aurora · 7:42:23 PM</div>
+      </div>
+      <div class="voice-bar"><span>Booked at <strong>7:42 PM</strong> · before staff opens</span><span>Synced to PMS <strong>7:42 PM</strong></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES — 3 modules -->
+<section class="section services">
+  <div class="container">
+    <div class="services-head">
+      <div class="left">
+        <span class="eyebrow"><span class="dash"></span>The system</span>
+        <h2 style="margin-top:18px">Three modules. One <span class="italic">calm, owned</span> system.</h2>
+      </div>
+      <div class="right">Start with one. Add the rest as you grow. The whole thing is yours — no per-seat SaaS tax, ever.</div>
+    </div>
+    <div class="services-grid">
+      <div class="module" data-c="receptionist">
+        <div class="ribbon">
+          <span class="case-no">Case · 001</span>
+          <span class="badge">Front desk</span>
+        </div>
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3v4zM3 19a2 2 0 0 0 2 2h1v-6H3v4z"/></svg>
+        </div>
+        <h3>AI Receptionist</h3>
+        <p>24/7 natural-voice agent that books, reschedules, confirms and routes — wired straight into your PMS.</p>
+        <ul>
+          <li>Voice tuned to your clinic's tone</li>
+          <li>Native PMS connectors (Dentrix, Open Dental, Jane App, Mindbody)</li>
+          <li>Insurance verification handling</li>
+          <li>Bilingual options — EN / ES / FR</li>
+          <li>Human handover on edge cases</li>
+        </ul>
+      </div>
+      <div class="module" data-c="reactivation">
+        <div class="ribbon">
+          <span class="case-no">Case · 002</span>
+          <span class="badge">Win-back</span>
+        </div>
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Reactivation Engine</h3>
+        <p>A quiet weekly engine that wakes up the patients who fell out of recall — SMS + email + voice nudges.</p>
+        <ul>
+          <li>6 / 12 / 18 month lapsed sequences</li>
+          <li>One-tap rebook from text</li>
+          <li>Personalized to last treatment</li>
+          <li>Stops automatically once booked</li>
+          <li>Avg 38% reactivation in first 90 days</li>
+        </ul>
+      </div>
+      <div class="module" data-c="reviews">
+        <div class="ribbon">
+          <span class="case-no">Case · 003</span>
+          <span class="badge">Reputation</span>
+        </div>
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Review Flywheel</h3>
+        <p>Catches the happy patient at the perfect 2-hour post-visit window. Routes 5-star to Google, 1-3 star to inbox.</p>
+        <ul>
+          <li>Two-hour post-visit review trigger</li>
+          <li>Smart-routing protects your rating</li>
+          <li>Auto-reply to every Google review</li>
+          <li>Monthly reputation report</li>
+          <li>Avg +47 reviews in first quarter</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITORIAL PULL QUOTE -->
+<section class="section quote">
+  <div class="container quote-body">
+    <span class="eyebrow"><span class="dash"></span>A note from a clinic owner</span>
+    <blockquote>"For the first time in eleven years, I left the practice at 5pm and didn't take a single panicked text. The phones kept answering. The chairs kept filling. <em>It felt like having a partner — not another tool.</em>"</blockquote>
+    <div class="quote-attr">
+      <div class="quote-avatar">DR</div>
+      <div class="meta">
+        <div class="name">Dr. Renée Marchetti</div>
+        <div class="role">Marchetti Family Dental · Burlington, VT</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS / PRICING -->
+<section class="section tiers" id="pricing">
+  <div class="container">
+    <div class="tiers-head">
+      <span class="eyebrow"><span class="dash"></span>Public pricing. No discovery games.</span>
+      <h2 style="margin-top:18px">Pick a tier. <span class="italic">Full scope in 24 hours.</span></h2>
+    </div>
+    <div class="tiers-grid">
+      <div class="tier">
+        <div class="name">Starter</div>
+        <p class="for">For single-chair clinics testing the AI front desk on after-hours calls only.</p>
+        <div class="price-row">
+          <span class="starts">Starts at</span>
+          <span class="price">$2,200<span class="unit">one-time</span></span>
+        </div>
+        <ul>
+          <li>AI receptionist · after-hours + lunch</li>
+          <li>PMS calendar sync</li>
+          <li>Basic SMS confirmations</li>
+          <li>Live in 10 days</li>
+          <li>30-day post-launch tuning</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost">Start with Starter</a>
+      </div>
+      <div class="tier featured">
+        <div class="name">Practice</div>
+        <p class="for">For full-day clinics ready to retire the missed-call problem and the cancel chaos.</p>
+        <div class="price-row">
+          <span class="starts">Starts at</span>
+          <span class="price">$5,500<span class="unit">+ $1.5K/mo</span></span>
+        </div>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>AI receptionist · full 24/7 coverage</li>
+          <li>Same-day cancel rescue engine</li>
+          <li>Reactivation flow (6/12/18 mo)</li>
+          <li>Review flywheel + reputation report</li>
+          <li>Bilingual voice options</li>
+          <li>Live in 14 days</li>
+        </ul>
+        <a href="#book" class="btn btn-primary">Book the call</a>
+      </div>
+      <div class="tier">
+        <div class="name">Multi-location</div>
+        <p class="for">For DSOs, med-spa chains and wellness groups running 3+ locations on one stack.</p>
+        <div class="price-row">
+          <span class="starts">Starts at</span>
+          <span class="price">$12K<span class="unit">+ $3K/mo</span></span>
+        </div>
+        <ul>
+          <li>Everything in Practice</li>
+          <li>Per-location voice + routing</li>
+          <li>Cross-location patient pooling</li>
+          <li>Provider load-balancing</li>
+          <li>Executive dashboard (utilization, recall)</li>
+          <li>Quarterly strategy review</li>
+          <li>Live in 21 days</li>
+        </ul>
+        <a href="#book" class="btn btn-ghost">Talk multi-location</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="section cases" id="cases">
+  <div class="container">
+    <div class="cases-head">
+      <div>
+        <span class="eyebrow"><span class="dash"></span>Real clinic builds</span>
+        <h2 style="margin-top:14px">Three quiet recoveries.</h2>
+      </div>
+      <div class="right">12 clinic builds shipped in 2026 · <a href="/case-studies">Read all case studies →</a></div>
+    </div>
+    <div class="case-grid">
+      <div class="case" data-c="dental">
+        <div class="case-img">
+          <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="d1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A2942"/><stop offset="1" stop-color="#3F4E68"/></linearGradient></defs>
+            <rect width="320" height="200" fill="url(#d1)"/>
+            <path d="M40 160 Q 60 80 120 100 Q 160 110 160 140 Q 160 110 200 100 Q 260 80 280 160 Q 270 180 240 170 Q 220 165 200 170 Q 180 175 160 175 Q 140 175 120 170 Q 100 165 80 170 Q 50 180 40 160 Z" fill="#FDFBF7" opacity=".95"/>
+            <circle cx="120" cy="135" r="6" fill="#1A2942" opacity=".3"/>
+            <circle cx="200" cy="135" r="6" fill="#1A2942" opacity=".3"/>
+            <text x="22" y="186" font-family="Fraunces, serif" font-style="italic" font-size="22" fill="#FDFBF7" font-weight="500">Dental Clinic</text>
+          </svg>
+        </div>
+        <div class="case-body">
+          <span class="case-tag">— 4-op family dental</span>
+          <h3>$184K of lapsed-patient revenue recovered in 90 days</h3>
+          <p class="body-copy">A solo-doc practice in Burlington pulled the trigger on reactivation + AI receptionist. 412 lapsed patients reached. 156 booked. Same-day cancel rate dropped from 19% to 7%.</p>
+          <div class="case-metric">
+            <div><div class="num">$184K</div><div class="lbl">Recovered · 90 days</div></div>
+            <div><div class="num">−63%</div><div class="lbl">Same-day cancels</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="case" data-c="medspa">
+        <div class="case-img">
+          <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="200" fill="#C9716D"/>
+            <circle cx="80" cy="100" r="60" fill="#E2A4A1" opacity=".7"/>
+            <circle cx="220" cy="120" r="50" fill="#FBEEEC" opacity=".5"/>
+            <path d="M40 170 Q 100 130 160 150 Q 220 170 280 140" stroke="#FDFBF7" stroke-width="2" fill="none" opacity=".5"/>
+            <text x="22" y="186" font-family="Fraunces, serif" font-style="italic" font-size="22" fill="#FDFBF7" font-weight="500">Med-Spa</text>
+          </svg>
+        </div>
+        <div class="case-body">
+          <span class="case-tag">— Aesthetics + injectables</span>
+          <h3>From 38 to 87 monthly consults — no extra ad spend</h3>
+          <p class="body-copy">A boutique med-spa in Austin layered Aurora over their existing Mindbody. After-hours bookings doubled. Front desk freed for in-clinic conversion. Review count +112 in 4 months.</p>
+          <div class="case-metric">
+            <div><div class="num">2.3×</div><div class="lbl">Consults / mo</div></div>
+            <div><div class="num">+112</div><div class="lbl">Google reviews</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="case" data-c="chiro">
+        <div class="case-img">
+          <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="200" fill="#B8935F"/>
+            <path d="M160 30 C 200 50 220 90 200 130 C 180 170 140 170 120 130 C 100 90 120 50 160 30 Z" fill="#F4EBDC" opacity=".7"/>
+            <path d="M160 50 Q 175 70 175 100 Q 175 130 160 150 Q 145 130 145 100 Q 145 70 160 50" stroke="#0F1B2D" stroke-width="2.5" fill="none" opacity=".5"/>
+            <circle cx="160" cy="100" r="3" fill="#0F1B2D" opacity=".6"/>
+            <text x="22" y="186" font-family="Fraunces, serif" font-style="italic" font-size="22" fill="#FDFBF7" font-weight="500">Chiro &amp; Wellness</text>
+          </svg>
+        </div>
+        <div class="case-body">
+          <span class="case-tag">— 3-location wellness group</span>
+          <h3>One stack across three locations · 41% retention lift</h3>
+          <p class="body-copy">A family chiro group in Phoenix consolidated three booking systems into Aurora. Patients now bounce between locations seamlessly. Recall compliance jumped from 52% to 73%.</p>
+          <div class="case-metric">
+            <div><div class="num">+41%</div><div class="lbl">12-mo retention</div></div>
+            <div><div class="num">3 → 1</div><div class="lbl">Booking systems</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process">
+  <div class="container">
+    <div class="process-head">
+      <span class="eyebrow"><span class="dash"></span>How the 14 days unfold</span>
+      <h2 style="margin-top:18px">Brief on Monday. <span class="italic">Live by the second Friday.</span></h2>
+    </div>
+    <div class="process-grid">
+      <div class="step">
+        <div class="step-num">I</div>
+        <span class="day">Mon</span>
+        <h3>Free clinic audit</h3>
+        <p>You share calendar + intake call recordings. I return a 12-minute Loom with the top three leaks — within 48 hours, no pitch.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">II</div>
+        <span class="day">Tue–Wed</span>
+        <h3>Signed brief</h3>
+        <p>15-minute call. Fixed scope, fixed price, fixed timeline. Deposit. No quote-tennis. Yes or no.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">III</div>
+        <span class="day">Thu → Fri+1</span>
+        <h3>Build &amp; tune</h3>
+        <p>Voice trained on your tone. PMS wired. Reactivation copy drafted with you. Daily Loom updates. We test on real calls.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">IV</div>
+        <span class="day">Day 14</span>
+        <h3>Live &amp; handover</h3>
+        <p>You own everything — repo, voice data, CRM. Walkthrough video. 30 days of post-launch tuning included. Optional retainer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq">
+  <div class="container">
+    <div class="faq-head">
+      <span class="eyebrow"><span class="dash"></span>The honest answers</span>
+      <h2 style="margin-top:18px">Frequently asked, <span class="italic">candidly answered.</span></h2>
+    </div>
+    <div class="faq-grid">
+      <details class="faq-item">
+        <summary>Is the AI receptionist HIPAA-considerate?</summary>
+        <p>Yes. We never store PHI in the voice transcript layer. Sensitive data routes directly to your encrypted PMS — Dentrix, Eaglesoft, Open Dental, Jane App, Mindbody. The AI books, reschedules and confirms. Your PMS holds the chart. We sign a BAA on the Practice tier and above.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Will it integrate with my practice management software?</summary>
+        <p>Yes. We have native connectors for Dentrix, Eaglesoft, Open Dental, Jane App, Mindbody, ClinicSense and Practice Better. If your PMS has a REST API or HL7 surface, we wire it. If it's paper-based, we'll move you to a lightweight portal first — we won't force a replatform you don't need.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What will the AI sound like to my patients?</summary>
+        <p>Natural, warm and never robotic — we hand-tune the voice on your clinic's tone. Chatty New England family dental, calm West Coast med-spa, clinical East Coast specialty. ElevenLabs voice paired with custom GPT logic. You'll listen to fifteen sample calls before we go live, and we adjust until you can't tell.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How does same-day cancel rescue actually work?</summary>
+        <p>The moment a cancellation hits your calendar, our system pings your short-list (reactivation pool + waitlist + flagged "would love a sooner spot" patients) by SMS with the open slot. They book with a single tap. Most chairs are filled within 90 minutes. The hygienist never sits idle.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if my front desk team feels threatened?</summary>
+        <p>Honest answer — they shouldn't be, and we'll bring them in from day one. Aurora handles overflow, after-hours, and the soul-crushing repetitive booking work. Your humans get to do the work humans are best at — greeting, in-clinic upsell, the relational part. Clinics that include staff in onboarding see 2× faster adoption.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What happens after launch — do we own everything?</summary>
+        <p>Yes. Repo, automation workflows, voice training data, CRM sub-account — all transferred to you on day 14. Cancel the retainer anytime; the system keeps running. We hate vendor lock-in because we've been on the other side of it. Built once, owned forever.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section final" id="book">
+  <div class="container">
+    <span class="eyebrow"><span class="dash"></span>One quiet 30 minutes</span>
+    <h2>Send me a recording of one missed call. I'll show you <span class="em">exactly</span> what it cost you.</h2>
+    <p>No call required. No pitch deck. Free 12-minute Loom on your front-desk leaks in 48 hours. If it's useful — book the discovery call. If not — keep the Loom and fix it yourself.</p>
+    <div class="hero-ctas">
+      <a href="https://cal.com/waseemnasir/clinic-audit" class="btn btn-primary">Book a discovery call <svg class="btn-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="mailto:waseembali2k26@gmail.com?subject=Aurora%20—%20clinic%20audit&body=Hi%20Waseem%2C%20I%27d%20like%20to%20send%20you%20a%20missed-call%20recording%20for%20a%20free%20audit." class="btn btn-ghost">Email instead</a>
+    </div>
+    <div class="final-trust">
+      <span>★ ★ ★ ★ ★ <strong>180+ workflows</strong> shipped</span>
+      <span>·</span>
+      <span><strong>9 countries</strong> served</span>
+      <span>·</span>
+      <span>Solo studio · <strong>Built in Bali</strong></span>
+    </div>
+    <div class="final-sig">
+      Waseem
+      <small>Founder, SkynetLabs</small>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo">Aurora <span>by SkynetLabs</span></a>
+        <p>A calm, editorial AI front desk for clinics that refuse to lose another patient to voicemail. Built by Waseem Nasir from Bali.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>For clinics</h4>
+          <a href="/services/ai-receptionist">AI Receptionist</a>
+          <a href="/services/reactivation">Reactivation Engine</a>
+          <a href="/services/reviews">Review Flywheel</a>
+          <a href="/case-studies">Case studies</a>
+        </div>
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <a href="/about">About</a>
+          <a href="/pricing">Pricing</a>
+          <a href="mailto:waseembali2k26@gmail.com">Email</a>
+          <a href="/blog">Journal</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy-policy">Privacy</a>
+          <a href="/terms-of-service">Terms</a>
+          <a href="/baa">BAA on request</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 SkynetLabs · <span class="sig">Designed with care</span> in Bali, shipped to the world.</div>
+  </div>
+</footer>
+
+</body>
+</html>
