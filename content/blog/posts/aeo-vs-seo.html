@@ -1,0 +1,177 @@
+<style>
+  .wn-aeo-vs-seo { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-aeo-vs-seo h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-aeo-vs-seo h3 { color: #7ee4ff; font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+  .wn-aeo-vs-seo p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-aeo-vs-seo ul, .wn-aeo-vs-seo ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-aeo-vs-seo li { margin-bottom: 0.6rem; }
+  .wn-aeo-vs-seo strong { color: #fff; }
+  .wn-aeo-vs-seo a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-aeo-vs-seo a:hover { color: #7ee4ff; }
+  .wn-aeo-vs-seo .callout { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(20,184,166,0.08)); border-left: 3px solid #00D4FF; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-aeo-vs-seo .callout strong { color: #7ee4ff; }
+  .wn-aeo-vs-seo .verdict { background: linear-gradient(135deg, #1E88E5, #14B8A6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-aeo-vs-seo table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-aeo-vs-seo th { background: rgba(0,212,255,0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-aeo-vs-seo td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .wn-aeo-vs-seo code { background: rgba(0,212,255,0.12); color: #7ee4ff; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.9em; }
+</style>
+
+<p>AEO and SEO are not competing strategies. They're complementary, share 60% of the technical foundation, and target different surfaces. Anyone telling you to pick one or that "SEO is dead" is selling something. This post is the honest breakdown: what overlaps, what diverges, and why most businesses in 2026 need both.</p>
+
+<p>Two years into running AEO engagements alongside classic SEO, here's what's actually true.</p>
+
+<h2>The 30-second answer</h2>
+
+<div class="verdict">
+  AEO targets AI citation rate across ChatGPT, Claude, Gemini and Perplexity. SEO targets blue-link ranking position on Google. They share schema, content quality, technical hygiene and authority signals. They diverge on llms.txt, entity-rich content patterns, answer-format FAQ structures, and measurement (citation rate vs ranking). Most service businesses in 2026 need both because buyer behaviour is fragmenting.
+</div>
+
+<h2>Key differences in measurement</h2>
+
+<p>The clearest divide is what each discipline measures.</p>
+
+<table>
+  <thead>
+    <tr><th>Dimension</th><th>SEO</th><th>AEO</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Primary metric</td><td>Ranking position</td><td>Citation rate (% of prompts that name your brand)</td></tr>
+    <tr><td>Secondary metric</td><td>CTR, organic clicks</td><td>Share of voice across competitors</td></tr>
+    <tr><td>Lag to ROI</td><td>3-6 months typical</td><td>60-90 days typical</td></tr>
+    <tr><td>Measurement tool</td><td>GSC, Ahrefs, SEMrush</td><td>Manual prompt set + Otterly / Athena / Profound</td></tr>
+    <tr><td>Funnel attribution</td><td>Click → conversion direct</td><td>Citation → brand search → direct traffic → conversion</td></tr>
+  </tbody>
+</table>
+
+<p>These metrics correlate imperfectly. A first-ranking Google result may not appear in AI engine responses for identical queries. A brand cited heavily in ChatGPT may rank position 8 on Google for the same query. The two surfaces are scored by different systems with different weights.</p>
+
+<h2>The technical overlap (about 60%)</h2>
+
+<p>Both disciplines benefit from the same foundation:</p>
+
+<ul>
+  <li><strong>Schema markup</strong> — Organization, FAQPage, Article, Service, BreadcrumbList all help both Google ranking and AI citation.</li>
+  <li><strong>Content quality</strong> — answer-focused content that solves the buyer query wins on both surfaces.</li>
+  <li><strong>Internal linking architecture</strong> — clean site structure helps both Googlebot and the LLM crawlers.</li>
+  <li><strong>Page speed</strong> — slow pages get penalised by Google ranking and by AI engines that timeout on slow crawls.</li>
+  <li><strong>Technical hygiene</strong> — clean HTML, no broken canonicals, no duplicate content. Both disciplines need this.</li>
+  <li><strong>Authority signals</strong> — backlinks from trusted domains help both ranking and citation, though weights differ.</li>
+</ul>
+
+<p>If you've shipped strong SEO foundations, you're already 60% of the way to strong AEO. The other 40% is the divergence work below.</p>
+
+<h2>The strategic divergence (about 40%)</h2>
+
+<p>Where AEO requires distinct work SEO doesn't:</p>
+
+<ul>
+  <li><strong>llms.txt deployment</strong> — Google doesn't read it. AI engines do. Zero SEO impact, real AEO impact.</li>
+  <li><strong>Entity-rich content patterns</strong> — explicit entity references (your brand name, specific product names, named clients) lift AI citation. SEO ranking tolerates more generic copy.</li>
+  <li><strong>Answer-format FAQ structures</strong> — claim-plus-example pattern wins AEO citation. SEO can rank with marketing-paragraph FAQ.</li>
+  <li><strong>Wikidata + Crunchbase + LinkedIn sameAs</strong> — AI engines triangulate entity identity from these. Google ranks fine without them.</li>
+  <li><strong>Testing against AI engines, not ranking tools</strong> — Ahrefs won't tell you if Claude cites you. Manual prompt sets will.</li>
+</ul>
+
+<p>The divergence isn't huge but it's real. The teams that ignore the 40% AEO-specific work see strong SEO and zero AI citation rate, which is increasingly a problem as buyers shift more research to assistants.</p>
+
+<h2>Why both matter in 2026</h2>
+
+<p>Buyer behaviour is fragmenting between Google search and AI assistants. High-intent searches (transactional queries, "buy X near me") still favour Google for most users. Research-stage queries ("what's the best X for Y") increasingly start in ChatGPT or Claude or Perplexity.</p>
+
+<p>What I've seen in client analytics over the last 18 months:</p>
+
+<ul>
+  <li>Branded organic search lifts <em>before</em> direct conversion does — AI citation work plants the seed.</li>
+  <li>Direct traffic from Perplexity is real and growing, though still small.</li>
+  <li>Google still drives 70-85% of total search traffic for most service businesses.</li>
+  <li>The remaining 15-30% is AI-assistant-led, and that share is climbing month over month.</li>
+</ul>
+
+<p>Ignoring either channel risks lost pipeline. SEO-only misses the assistant-driven buyer. AEO-only misses the Google-driven buyer. Both is the answer for most service businesses with revenue above $500k/year.</p>
+
+<h2>Implementation order</h2>
+
+<p>How I sequence the work for clients:</p>
+
+<h3>For established sites with SEO foundations</h3>
+
+<p>Layer AEO optimisation on top of the existing SEO work. The schema is mostly there, the content is mostly there, the authority is mostly there. The AEO-specific additions:</p>
+
+<ol>
+  <li>Ship llms.txt at root</li>
+  <li>Add sameAs links to Wikidata, Crunchbase, LinkedIn in Organization schema</li>
+  <li>Rewrite top FAQ blocks in claim-plus-example pattern</li>
+  <li>Baseline citation rate against a fixed 20-prompt set</li>
+  <li>Iterate weekly</li>
+</ol>
+
+<p>Most established SEO sites lift from 0% to 20-30% citation rate in 8-12 weeks with this approach.</p>
+
+<h3>For new sites with no existing foundation</h3>
+
+<p>Run both strategies in parallel. The technical work compounds across platforms. Don't try to "do SEO first then AEO later" — they're cheaper to do together.</p>
+
+<h2>Common mistakes</h2>
+
+<ul>
+  <li><strong>Splitting work across uncoordinated agencies</strong> — paying two retainers for what's mostly the same foundation work.</li>
+  <li><strong>Skipping baseline prompt testing before implementing fixes</strong> — you have no way to measure delta.</li>
+  <li><strong>Optimising single AI engines while ignoring others</strong> — most AEO fixes lift all four engines at once.</li>
+  <li><strong>Writing long-form content instead of answer-format material</strong> — length doesn't beat structure for citation rate.</li>
+  <li><strong>Treating llms.txt as optional</strong> — it's the cheapest AEO win and consistently delivers.</li>
+  <li><strong>Updating metadata dates without content changes</strong> — engines flag fake freshness.</li>
+  <li><strong>Assuming SEO will "naturally" lift AEO</strong> — overlap is 60%, not 100%. The 40% specific work matters.</li>
+</ul>
+
+<h2>Measurement approach</h2>
+
+<p>ROI tracking differs between the two disciplines, but both deserve dashboards.</p>
+
+<h3>SEO funnel</h3>
+
+<p>Ranking → click → landing page → conversion. Track in Google Search Console + your analytics tool + your CRM. Lag from ranking lift to revenue: 30-90 days typical.</p>
+
+<h3>AEO funnel</h3>
+
+<p>Citation → brand search → direct traffic → conversion. Track in your manual prompt sheet + GSC for brand search lift + analytics for direct traffic + CRM for conversion. Lag from citation lift to revenue: 60-90 days typical.</p>
+
+<p>Both require 60-90 day evaluation windows for accurate assessment. Anyone judging either after 30 days is judging noise.</p>
+
+<h2>What I tell clients deciding between the two</h2>
+
+<div class="callout">
+  <strong>Don't decide between AEO and SEO. Decide your sequence.</strong> If you have no foundation, start with SEO-then-AEO is wrong — start with both. If you have strong SEO already, layer AEO on top. If you have strong AEO but no SEO, you're rare and you should fix that.
+</div>
+
+<p>Most service businesses I work with are in the third bucket — they've shipped some AEO work in 2024-2025 because it was new and exciting, and they neglected the SEO foundation that should have come first. That's expensive to fix backwards.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>Is SEO dead now that AI engines are taking traffic?</h3>
+
+<p>No. Google still drives 70-85% of search traffic for most service businesses. SEO is not dead. It's now alongside AEO instead of alone.</p>
+
+<h3>Can I do AEO without SEO?</h3>
+
+<p>Possible for new domains targeting emerging topics. Not advisable for established businesses — you'd leave the majority traffic source unworked.</p>
+
+<h3>Which costs more, SEO or AEO?</h3>
+
+<p>SEO retainers in 2026 range from $1,500/month (small business) to $20,000+/month (enterprise). AEO retainers run lower currently, $1,500-7,500/month, partly because the discipline is younger and partly because there's less ongoing content production needed. Both depend heavily on scope.</p>
+
+<h3>Should the same agency do both?</h3>
+
+<p>Ideally yes. The foundation overlap means one team can do both more efficiently than two teams doing each. Make sure the agency actually does both — many SEO agencies bolt on "AEO services" that are just retitled SEO work.</p>
+
+<h3>How do I know if my AEO is working?</h3>
+
+<p>Citation rate against your fixed 20-prompt set, run weekly. If it's not moving after 8-10 weeks of shipped fixes, something is broken — usually entity resolution or schema conflicts.</p>
+
+<h3>Will Google itself become an AEO engine?</h3>
+
+<p>Already happening. Google AI Overviews is the Google version of an answer engine. GEO (generative engine optimisation) is the term some practitioners use for Google-AI-Overview-specific work. The overlap with broader AEO is high.</p>
+
+<h2>Bottom line</h2>
+
+<p>SEO targets Google blue-link ranking. AEO targets AI citation rate across the four major engines. 60% shared foundation, 40% distinct work. Both matter in 2026 because buyer behaviour fragmented. The right answer is rarely either-or — it's both, sequenced sensibly, measured honestly.</p>

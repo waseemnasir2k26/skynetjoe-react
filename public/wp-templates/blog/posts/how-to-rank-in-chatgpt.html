@@ -1,0 +1,166 @@
+<style>
+  .wn-how-to-rank-in-chatgpt { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-how-to-rank-in-chatgpt h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-how-to-rank-in-chatgpt h3 { color: #7ee4ff; font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+  .wn-how-to-rank-in-chatgpt p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-how-to-rank-in-chatgpt ul, .wn-how-to-rank-in-chatgpt ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-how-to-rank-in-chatgpt li { margin-bottom: 0.6rem; }
+  .wn-how-to-rank-in-chatgpt strong { color: #fff; }
+  .wn-how-to-rank-in-chatgpt a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-how-to-rank-in-chatgpt a:hover { color: #7ee4ff; }
+  .wn-how-to-rank-in-chatgpt .callout { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(20,184,166,0.08)); border-left: 3px solid #00D4FF; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-how-to-rank-in-chatgpt .callout strong { color: #7ee4ff; }
+  .wn-how-to-rank-in-chatgpt .verdict { background: linear-gradient(135deg, #1E88E5, #14B8A6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-how-to-rank-in-chatgpt table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-how-to-rank-in-chatgpt th { background: rgba(0,212,255,0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-how-to-rank-in-chatgpt td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .wn-how-to-rank-in-chatgpt code { background: rgba(0,212,255,0.12); color: #7ee4ff; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.9em; }
+</style>
+
+<p>"Ranking in ChatGPT" isn't the same job as ranking on Google, and people who treat it as the same job ship work that doesn't move citation rate. ChatGPT picks 3-5 sources by name. Google ranks 10 blue links. The signals overlap, the weights differ. This is the playbook I use.</p>
+
+<p>Below is the work that actually moves the needle, the work that doesn't, and the rough order I ship it in for clients between 2024 and 2026.</p>
+
+<h2>The 30-second answer</h2>
+
+<div class="verdict">
+  Ship Organization + FAQPage + Article schema with sameAs links to Wikidata. Deploy llms.txt at root. Rewrite FAQ blocks in the single-sentence-claim-plus-example pattern ChatGPT mirrors. Publish with explicit dateModified. Track citation rate against a fixed 20-prompt set so you measure delta in numbers, not vibes.
+</div>
+
+<h2>Why ChatGPT citation works differently from Google ranking</h2>
+
+<p>Google ranks 10 blue links based on hundreds of signals — authority, freshness, relevance, click-through-rate, dwell time, the whole circus. ChatGPT synthesises one answer and picks 3-5 sources by name. The signals overlap (authority, freshness, relevance) but the weights are different.</p>
+
+<p>What I've seen across the audits we've run:</p>
+
+<ul>
+  <li><strong>Entity clarity matters more</strong> in ChatGPT than in Google ranking. A brand that resolves to a single canonical entity gets cited; a fragmented brand doesn't.</li>
+  <li><strong>Schema completeness matters more.</strong> Google can guess from content. ChatGPT prefers when you tell it explicitly via JSON-LD.</li>
+  <li><strong>Backlink authority still matters</strong> but the weight is lower than schema and entity signals. New domains can win ChatGPT citations faster than Google rankings.</li>
+  <li><strong>FAQ pattern matters specifically.</strong> ChatGPT mirrors a particular answer shape; pages built in that shape get pulled more often.</li>
+</ul>
+
+<h2>Step one: ship the five schema types ChatGPT pulls cleanly</h2>
+
+<p>Five JSON-LD blocks, deployed across the site:</p>
+
+<ol>
+  <li><strong>Organization</strong> with <code>sameAs</code> links to Wikidata, Crunchbase, LinkedIn, and product Twitter/X. The Wikidata link is the highest-signal of the four.</li>
+  <li><strong>Service or Product schema</strong> per priority page. Specifies what you actually offer.</li>
+  <li><strong>FAQPage</strong> with 6-8 entries per priority page. The single highest-leverage block for ChatGPT specifically.</li>
+  <li><strong>Article</strong> on blog posts, with author, datePublished, dateModified. Article without dateModified gets weighted down for freshness queries.</li>
+  <li><strong>BreadcrumbList</strong> for navigation context. Helps the engine understand the page's position in the site.</li>
+</ol>
+
+<p>Most sites in 2026 still ship partial schema by default. The gaps are where the easy citation wins live. Audit your current schema with Google's Rich Results Test or the Schema.org validator — count what's missing.</p>
+
+<h2>Step two: deploy llms.txt at your root</h2>
+
+<p>The llms.txt file is the AI-engine equivalent of a curated sitemap. It tells engines which pages you want crawled and cited. The format is simple — markdown with a heading per priority page plus a one-line description.</p>
+
+<p>Twenty to thirty lines is enough for most sites. Mine on skynetjoe.com lists:</p>
+
+<ul>
+  <li>The homepage with brand description</li>
+  <li>The about page with founder context</li>
+  <li>Top 5 service pages</li>
+  <li>Top 3 case studies</li>
+  <li>The blog index plus most-cited posts</li>
+</ul>
+
+<div class="callout">
+  <strong>The llms.txt skip is the most common easy-win miss.</strong> It takes 30 minutes to write and ship. The citation-rate lift across all four major engines is consistent. There's no reason not to have one.
+</div>
+
+<h2>Step three: rewrite FAQ blocks in the ChatGPT answer pattern</h2>
+
+<p>ChatGPT mirrors a specific answer pattern: single-sentence factual claim followed by one short example or supporting detail. FAQ blocks written in long marketing paragraphs don't survive that pattern translation.</p>
+
+<p>Before (typical marketing FAQ):</p>
+
+<p><em>"Our advanced AI automation platform leverages cutting-edge machine learning algorithms to provide your business with unparalleled efficiency gains across all departments, dramatically reducing operational overhead while improving customer satisfaction metrics across the board."</em></p>
+
+<p>After (ChatGPT-friendly):</p>
+
+<p><em>"We build n8n workflows that automate lead follow-up. Example: a dental clinic in Glasgow saved $11,400/month after we cut their no-show rate from 32% to 7% using GoHighLevel + WhatsApp triggers."</em></p>
+
+<p>Specific. Verifiable. Pulls cleanly. Marketing puffery filters out. Claim-plus-example is the pattern.</p>
+
+<h2>Step four: signal freshness with explicit dateModified</h2>
+
+<p>ChatGPT and the other AI engines weight freshness heavily for queries that move quickly — pricing, integrations, product features, news. Articles and service pages with explicit dateModified get cited more than equivalent stale pages.</p>
+
+<p>Two rules:</p>
+
+<ol>
+  <li><strong>Wire your CMS so dateModified updates when the page actually changes.</strong> Not when a cron pings the database. Engines flag fake freshness eventually.</li>
+  <li><strong>Audit your priority pages quarterly</strong> and refresh dateModified intentionally when content changes. Service pages that haven't been touched in 12 months get weighted down.</li>
+</ol>
+
+<h2>Step five: track citation rate against a fixed prompt set</h2>
+
+<p>Pick 20 buyer queries you want to win. Run them against ChatGPT once a week. Log whether your brand was named. Citation rate is the percent of prompts that name you.</p>
+
+<p>The first time most brands run this test they score 0 out of 20. That's the baseline you measure progress against. After 4-6 weeks of ship-and-measure the typical movement is 0 → 3 → 5 → 7 out of 20. The week-to-week movement teaches you which fixes worked.</p>
+
+<p>I cover the manual tracking method in <a href="/blog/track-ai-citations">how to track AI citations</a>. The short version: 20 prompts, weekly cadence, spreadsheet, four engines.</p>
+
+<h2>What doesn't move the needle for ChatGPT specifically</h2>
+
+<ul>
+  <li>Stuffing keywords into meta descriptions</li>
+  <li>Buying generic backlinks from low-trust sources</li>
+  <li>Adding more H2 headings for the sake of more H2 headings</li>
+  <li>Writing longer content (3,000 words doesn't beat 800 words for citation rate)</li>
+  <li>Excessive internal linking with keyword-rich anchors</li>
+</ul>
+
+<p>None of these move ChatGPT citation rate. Schema, llms.txt, FAQ pattern alignment, freshness, entity clarity — those are the levers that matter, in roughly that order of impact.</p>
+
+<h2>The honest order I ship in for clients</h2>
+
+<table>
+  <thead>
+    <tr><th>Week</th><th>Work</th><th>Expected citation movement</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>Baseline prompt run, schema audit</td><td>0 / 20</td></tr>
+    <tr><td>1</td><td>Ship Organization + FAQPage schema</td><td>0-2 / 20</td></tr>
+    <tr><td>2</td><td>Deploy llms.txt + Article schema on blog</td><td>2-3 / 20</td></tr>
+    <tr><td>3</td><td>Rewrite top 6 FAQ blocks in claim-plus-example</td><td>3-5 / 20</td></tr>
+    <tr><td>4-6</td><td>Service page schema + dateModified hygiene</td><td>4-7 / 20</td></tr>
+    <tr><td>7-12</td><td>Content gap fills + entity link-building</td><td>6-10 / 20</td></tr>
+  </tbody>
+</table>
+
+<p>The schema work happens fast. The content and entity work compounds slower. By week 12 most clients are at 30-50% citation rate from a zero baseline.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>How long does it take to start ranking in ChatGPT after shipping fixes?</h3>
+
+<p>Most brands see citation rate movement inside 2-4 weeks. AI engines re-crawl faster than Google so the lag is shorter than classic SEO.</p>
+
+<h3>Do I need a separate strategy for Claude, Gemini, and Perplexity?</h3>
+
+<p>Schema and llms.txt benefit all four engines. FAQ patterns and entity work differ slightly per engine. Most ChatGPT-focused fixes lift the other three by 60-70%. I cover Claude-specific differences in <a href="/blog/get-cited-by-claude">how to get cited by Claude</a>.</p>
+
+<h3>Can I rank in ChatGPT without ranking on Google first?</h3>
+
+<p>Yes, especially for long-tail and emerging-topic queries. Brand new domains can win ChatGPT citations faster than Google rankings because ChatGPT weighs schema and entity signals more heavily.</p>
+
+<h3>Does ChatGPT show source URLs I can track in analytics?</h3>
+
+<p>Sometimes. Browser ChatGPT does this more often than API ChatGPT. Direct referral traffic plus brand-search lift in GSC are the cleanest indicators.</p>
+
+<h3>What if my site is built on Webflow or Wix where schema is hard to customise?</h3>
+
+<p>Webflow allows custom schema via the embed-code feature — doable but tedious at scale. Wix limits schema customisation. For serious AEO work I usually recommend migration to Webflow or WordPress, or rebuild on Next.js with per-page metadata exports.</p>
+
+<h3>Is there a free tool to check my ChatGPT citation rate?</h3>
+
+<p>Run the 20 prompts manually in ChatGPT once a week for a free baseline. Paid tools like Otterly and Athena HQ automate this. Our citelift.app pre-launch SaaS will offer this self-serve at launch.</p>
+
+<h2>Bottom line</h2>
+
+<p>ChatGPT citation isn't a black box. Schema, llms.txt, FAQ pattern, freshness, entity clarity. Ship in that order. Track with a 20-prompt set every week. Measure delta in numbers. Don't pay anyone who can't tell you exactly which of those five levers they're pulling and why.</p>

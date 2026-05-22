@@ -1,0 +1,169 @@
+<style>
+  .wn-get-cited-by-claude { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-get-cited-by-claude h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-get-cited-by-claude h3 { color: #7ee4ff; font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+  .wn-get-cited-by-claude p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-get-cited-by-claude ul, .wn-get-cited-by-claude ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-get-cited-by-claude li { margin-bottom: 0.6rem; }
+  .wn-get-cited-by-claude strong { color: #fff; }
+  .wn-get-cited-by-claude a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-get-cited-by-claude a:hover { color: #7ee4ff; }
+  .wn-get-cited-by-claude .callout { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(20,184,166,0.08)); border-left: 3px solid #00D4FF; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-get-cited-by-claude .callout strong { color: #7ee4ff; }
+  .wn-get-cited-by-claude .verdict { background: linear-gradient(135deg, #1E88E5, #14B8A6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-get-cited-by-claude table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-get-cited-by-claude th { background: rgba(0,212,255,0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-get-cited-by-claude td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .wn-get-cited-by-claude code { background: rgba(0,212,255,0.12); color: #7ee4ff; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.9em; }
+</style>
+
+<p>Claude is a stricter citation engine than ChatGPT. Marketing copy that gets pulled by ChatGPT gets filtered out by Claude. Source-backed conservative claims get cited. This post is what I actually do to lift Claude citation rate, separate from the general AEO playbook.</p>
+
+<p>I use Claude every day — both as a working assistant and as the model behind a lot of the n8n automation we ship to clients. The citation behaviour described below comes from running our 20-prompt audit against Claude.ai, the Anthropic API, and Claude inside Cursor across 14 client engagements.</p>
+
+<h2>The 30-second answer</h2>
+
+<div class="verdict">
+  Deploy Organization schema with sameAs linking to Wikidata and Crunchbase. Write content in the claim-with-source pattern Claude mirrors. Ship llms.txt at root with neutral descriptions, no marketing language. Make sure your About page resolves your brand to a single entity. Track weekly across prompts your buyers use. Claude rewards conservative, verifiable content more than ChatGPT does.
+</div>
+
+<h2>Why Claude citation discipline is stricter than ChatGPT</h2>
+
+<p>Anthropic positions Claude as the careful and reliable assistant. The engine actively prioritises citing sources only when it can verify the brand-to-claim match. Marketing claims without verification get filtered. Conservative factual content with clear sourcing gets cited more frequently.</p>
+
+<p>The practical implications I've seen:</p>
+
+<ul>
+  <li>Adjective-heavy marketing copy underperforms versus specific factual statements.</li>
+  <li>Sources that disagree with each other across the web get cited less; sources that align across Wikidata, Crunchbase, LinkedIn get cited more.</li>
+  <li>Claude tends to verify a claim before citing — if it can't find a second source confirming you make the claim, it leaves you out.</li>
+  <li>Brand new domains lift slower on Claude than on ChatGPT because the verification web takes longer to build.</li>
+</ul>
+
+<h2>Step one: build entity clarity with sameAs</h2>
+
+<p>Claude resolves brand entities by triangulating across sources. Your Organization schema needs sameAs links to:</p>
+
+<ol>
+  <li><strong>Wikidata</strong> — the strongest signal by far. If you don't have a Wikidata entry, get one. Free, takes an afternoon to draft.</li>
+  <li><strong>Crunchbase</strong> — second strongest. Even a basic free profile counts.</li>
+  <li><strong>LinkedIn company page</strong> — required.</li>
+  <li><strong>Product Twitter/X</strong> — moderate signal.</li>
+  <li><strong>G2 or Capterra profile</strong> if you're SaaS.</li>
+</ol>
+
+<p>The more independent sources confirm your entity, the more confident Claude becomes in citing you. A brand with only LinkedIn + Twitter sameAs entries underperforms a brand with Wikidata + Crunchbase + LinkedIn + Twitter even when the second brand has fewer backlinks.</p>
+
+<h2>Step two: write in the Claude answer pattern</h2>
+
+<p>Claude mirrors a pattern of factual claim followed by source attribution or verification path. "X does Y, see their documentation at Z" gets cited more often than "X is the best at Y because of its incredible capabilities."</p>
+
+<p>Two examples from work we've shipped:</p>
+
+<p><strong>Underperforms on Claude:</strong> <em>"SkynetLabs is a leading AI automation agency providing transformative solutions that revolutionise how service businesses operate."</em></p>
+
+<p><strong>Cites well on Claude:</strong> <em>"SkynetLabs ships n8n + AI automation for service businesses. Recent shipped builds include a GoHighLevel + WhatsApp no-show automation for a Glasgow dental clinic (no-show rate cut from 32% to 7%) and a 768-page programmatic SEO matrix for the agency's own marketing site."</em></p>
+
+<p>Specific verbs. Specific outcomes. Specific entities. No "leading," no "transformative," no "revolutionise." Claude pulls the second version. The first one gets filtered.</p>
+
+<h2>Step three: FAQ blocks that match Claude reasoning steps</h2>
+
+<p>Claude often displays its reasoning in answers. FAQ blocks that break a question into reasoning steps mirror Claude's internal pattern and get pulled more frequently than monolithic answer paragraphs.</p>
+
+<p>Template that works:</p>
+
+<p><em>"Step one, X. Step two, Y. Result, Z."</em></p>
+
+<p>Applied:</p>
+
+<p><em>"How does the AEO audit work? Step one, baseline prompt run across four engines. Step two, schema and llms.txt audit. Step three, fix list with priority order. Result, a citation-rate movement plan with weekly tracking."</em></p>
+
+<p>Three-step structure with explicit step labels. Claude pulls it cleanly because the structure matches how Claude is trained to answer.</p>
+
+<h2>Step four: llms.txt with brief descriptions Claude can parse</h2>
+
+<p>Claude reads llms.txt files when available. List priority pages with one-line descriptions. The key rule:</p>
+
+<div class="callout">
+  <strong>Avoid marketing language in llms.txt descriptions.</strong> Claude specifically penalises adjective-heavy descriptions in this file. Write them like documentation comments, not landing-page subheads.
+</div>
+
+<p>Bad llms.txt description:</p>
+
+<p><em>"Our incredible flagship service that transforms your business with cutting-edge automation."</em></p>
+
+<p>Good llms.txt description:</p>
+
+<p><em>"n8n automation service — workflow design, deployment, and ongoing maintenance for service businesses with 5+ existing tools to integrate."</em></p>
+
+<p>Functional. Specific. No adjectives. Claude prefers this.</p>
+
+<h2>Step five: track Claude citations across the surfaces your buyers use</h2>
+
+<p>Claude appears in three surfaces, each with slightly different citation patterns:</p>
+
+<table>
+  <thead>
+    <tr><th>Surface</th><th>Buyer profile</th><th>Citation pattern</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Claude.ai (consumer)</td><td>End-user buyers researching solutions</td><td>Conservative; cites only verified brands</td></tr>
+    <tr><td>Anthropic API direct</td><td>Developers building on Claude</td><td>Looser; cites more brands per answer</td></tr>
+    <tr><td>Cursor / Continue (code-editor)</td><td>Engineers asking about libraries</td><td>Heavy weight on README, SDK docs, GitHub stars</td></tr>
+  </tbody>
+</table>
+
+<p>Test against the surface your buyers actually use. A B2B SaaS targeting marketers should run prompts against Claude.ai. A developer-tools company should run against Cursor and the API.</p>
+
+<h2>What doesn't move the needle for Claude specifically</h2>
+
+<ul>
+  <li>Adjective-heavy marketing copy</li>
+  <li>Generic backlinks from low-trust sources</li>
+  <li>Keyword density tuning</li>
+  <li>Long content padded for length</li>
+  <li>Stuffing testimonials into every page</li>
+</ul>
+
+<p>Claude weights these even less than ChatGPT does. Cleanliness, conservatism and source-backing are the Claude levers. Marketing tactics that worked in 2018 SEO actively underperform on Claude in 2026.</p>
+
+<h2>What's different from the general ChatGPT playbook</h2>
+
+<p>About 60% of ChatGPT-focused fixes lift Claude. The other 40% is Claude-specific. The biggest divergences:</p>
+
+<ol>
+  <li><strong>Wikidata matters disproportionately</strong> on Claude. Skipping it costs more citation rate on Claude than on ChatGPT.</li>
+  <li><strong>Marketing copy hurts more.</strong> ChatGPT will still pull a brand cited in puffy marketing copy if the brand entity is clear. Claude filters it harder.</li>
+  <li><strong>llms.txt tone matters.</strong> ChatGPT pulls llms.txt content regardless of tone. Claude penalises adjective-heavy descriptions.</li>
+  <li><strong>Source coherence matters.</strong> If your About page contradicts your Wikidata entry, Claude reads that as a verification failure and skips you.</li>
+</ol>
+
+<h2>Frequently asked questions</h2>
+
+<h3>How is Claude SEO different from ChatGPT visibility work?</h3>
+
+<p>Claude weights entity clarity and source coherence more than keyword density. Conservative source-backed content beats marketing copy. About 60% of ChatGPT-focused fixes lift Claude. 40% is Claude-specific (Wikidata, tone, source alignment).</p>
+
+<h3>Will Claude citations show up in my Google Analytics?</h3>
+
+<p>Indirectly. Claude doesn't always link out, so clicks don't always show up. Brand search lift in Google Search Console plus direct traffic in analytics are the leading indicators.</p>
+
+<h3>Can I optimise for Claude inside Cursor and other code editors?</h3>
+
+<p>Yes. Code-editor wrappers expose Claude to narrower context. Optimisation focuses on developer documentation, README files, SDK references and GitHub repo metadata. Different muscle from web-content AEO.</p>
+
+<h3>Does Claude penalise me if my schema has errors?</h3>
+
+<p>Yes. Broken or conflicting schema breaks entity resolution and Claude becomes more conservative about citing the brand. Fix conflicts before adding new schema.</p>
+
+<h3>How often should I update content to keep Claude citations stable?</h3>
+
+<p>Quarterly is enough for most pages. Fast-moving topics (pricing, integrations, product features) deserve monthly updates. Set dateModified accurately. Don't fake freshness with a cron — Claude flags it.</p>
+
+<h3>Is there a Claude version of Google Search Console?</h3>
+
+<p>Not yet. Anthropic publishes some research at anthropic.com but no direct webmaster tools exist. Citation tracking requires running prompts against the API or browser. Manual the first six months, automate after.</p>
+
+<h2>Bottom line</h2>
+
+<p>Claude is the conservative engine of the four. Reward it with conservative content. Wikidata + Crunchbase + LinkedIn sameAs. Claim-plus-source pattern. Step-by-step FAQ. Tone-neutral llms.txt. Track weekly. The work that makes Claude cite you is the work that makes a careful human source you — which is the whole point.</p>

@@ -1,0 +1,170 @@
+<style>
+  .wn-track-ai-citations { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-track-ai-citations h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-track-ai-citations h3 { color: #7ee4ff; font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+  .wn-track-ai-citations p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-track-ai-citations ul, .wn-track-ai-citations ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-track-ai-citations li { margin-bottom: 0.6rem; }
+  .wn-track-ai-citations strong { color: #fff; }
+  .wn-track-ai-citations a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-track-ai-citations a:hover { color: #7ee4ff; }
+  .wn-track-ai-citations .callout { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(20,184,166,0.08)); border-left: 3px solid #00D4FF; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-track-ai-citations .callout strong { color: #7ee4ff; }
+  .wn-track-ai-citations .verdict { background: linear-gradient(135deg, #1E88E5, #14B8A6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-track-ai-citations table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-track-ai-citations th { background: rgba(0,212,255,0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-track-ai-citations td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .wn-track-ai-citations code { background: rgba(0,212,255,0.12); color: #7ee4ff; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.9em; }
+</style>
+
+<p>You can't optimise what you can't measure. If you've shipped schema fixes, llms.txt, FAQ rewrites — and you have no idea whether ChatGPT actually cites you now — you're flying blind. This post is the manual tracking method I use on every AEO engagement before I touch a paid tool.</p>
+
+<p>It costs nothing to run. It works for the first 6 months minimum. It's the same approach we use on the citelift.app audit engine we're productising. Manual first, automate after the manual phase teaches you what to automate.</p>
+
+<h2>The 30-second answer</h2>
+
+<div class="verdict">
+  Pick 20 buyer queries. Run them weekly against ChatGPT, Claude, Gemini and Perplexity. Log whether your brand was mentioned and which competitors appeared alongside. Calculate citation rate as the percent of prompts naming your brand. Correlate weekly movement to brand search in GSC and direct traffic in analytics over a 60-90 day window.
+</div>
+
+<h2>Step one: pick a fixed prompt set of 20 queries</h2>
+
+<p>The prompt set is the most critical decision. The wrong prompt set produces beautiful charts of irrelevant signal. The right prompt set captures what your buyers actually ask.</p>
+
+<p>Twenty queries strikes the right balance — enough signal to detect meaningful movement, manageable enough for manual logging each week. Mix three types:</p>
+
+<ul>
+  <li><strong>Head terms</strong> — your industry plus AEO, e.g. "best AI automation agency."</li>
+  <li><strong>Comparison queries</strong> — "X vs Y," e.g. "n8n vs Zapier for service businesses."</li>
+  <li><strong>Long-tail intent</strong> — "how to Z for X," e.g. "how to automate lead follow-up for dental practice."</li>
+</ul>
+
+<p>Don't include vanity queries (your own brand name verbatim — engines will obviously cite you). Don't include queries your buyer would never search. Spend an afternoon listing 50 candidates, cut to 20.</p>
+
+<h2>Step two: run the prompts manually for the first month</h2>
+
+<p>Tools like Otterly, Athena HQ and Profound automate this. Skip them for the first month. The manual phase teaches you what the engines actually return, which the automated dashboards hide behind aggregate metrics.</p>
+
+<p>Open four browser tabs:</p>
+
+<ol>
+  <li>ChatGPT (chat.openai.com, web-search mode on)</li>
+  <li>Claude.ai (claude.ai)</li>
+  <li>Gemini (gemini.google.com)</li>
+  <li>Perplexity (perplexity.ai)</li>
+</ol>
+
+<p>Paste each query into each engine. Capture the response. Note whether your brand was named. Document which competitors appeared. Repeat for all 20 queries. First time takes 90 minutes. By week three you're down to 30 minutes.</p>
+
+<h2>Step three: log the results in a spreadsheet</h2>
+
+<p>Columns I use:</p>
+
+<ul>
+  <li>Prompt (one of the 20)</li>
+  <li>Engine (ChatGPT / Claude / Gemini / Perplexity)</li>
+  <li>Week (YYYY-MM-DD of the Monday)</li>
+  <li>Brand cited (yes / no)</li>
+  <li>Competitors cited (comma-separated)</li>
+  <li>Position in answer (first mentioned / middle / last / image-card)</li>
+  <li>Notes (any unusual context — e.g. engine flagged uncertainty)</li>
+</ul>
+
+<p>Rows accumulate. After four to six weeks, patterns emerge. You'll see which engines cite you, which prompts win, which competitors dominate, and which weeks moved.</p>
+
+<h2>Step four: calculate citation rate and share of voice</h2>
+
+<p>Two metrics, both useful:</p>
+
+<p><strong>Citation rate</strong> = percent of prompts in your set where your brand was named. If 5 out of 20 prompts mention you, citation rate is 25%. This is the absolute measure.</p>
+
+<p><strong>Share of voice</strong> = your citations divided by total brand citations across all competitors. If you got 5 citations and competitors collectively got 15, your share of voice is 25%. This captures relative shifts when total citation volume moves.</p>
+
+<p>Track both weekly. They diverge in useful ways — citation rate can stay flat while share of voice climbs (competitors getting filtered out), or share of voice can stay flat while citation rate climbs (whole category getting more citations).</p>
+
+<h2>Step five: correlate with brand search and direct traffic</h2>
+
+<div class="callout">
+  <strong>The lag is real.</strong> AI citation work lifts brand search before direct conversion. Plan for a 60-90 day window before judging ROI.
+</div>
+
+<p>Wire weekly citation rate into a simple dashboard alongside:</p>
+
+<ul>
+  <li>Brand search impressions from Google Search Console</li>
+  <li>Direct traffic from your analytics tool</li>
+  <li>Branded organic clicks</li>
+</ul>
+
+<p>The correlation builds over 60-90 days. The pattern I see most often: citation rate moves week 1-2, brand search lifts week 3-5, direct traffic lifts week 6-8, conversion improves week 8-12. Anyone promising faster is selling vibes.</p>
+
+<h2>Step six: automate after the manual phase</h2>
+
+<p>Once you understand patterns manually, automation makes sense. Tools I've used or evaluated:</p>
+
+<table>
+  <thead>
+    <tr><th>Tool</th><th>Best for</th><th>Price band</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Otterly</td><td>Solo founders, indie SaaS</td><td>$$ (low)</td></tr>
+    <tr><td>Athena HQ</td><td>Mid-market, marketing teams</td><td>$$$ (mid)</td></tr>
+    <tr><td>Profound</td><td>Enterprise, multi-brand</td><td>$$$$ (high)</td></tr>
+    <tr><td>citelift.app (preview)</td><td>Self-serve scan model</td><td>$ (free tier planned)</td></tr>
+  </tbody>
+</table>
+
+<p>Pick the tool that matches your budget and granularity requirements. None of them eliminate the need to understand the prompt set — they automate the logging, not the strategy.</p>
+
+<h2>Common tracking mistakes to avoid</h2>
+
+<ul>
+  <li><strong>Changing the prompt set mid-quarter</strong> destroys comparability. Lock it for at least 90 days.</li>
+  <li><strong>Tracking only ChatGPT</strong> misses signal. The four engines diverge enough to matter.</li>
+  <li><strong>Measuring citation rate without correlation</strong> to brand search and traffic obscures funnel impact.</li>
+  <li><strong>Running daily tracking</strong> creates noise that obscures weekly signal. Weekly is the right cadence.</li>
+  <li><strong>Including your own brand name as a query</strong> inflates citation rate with vanity matches.</li>
+</ul>
+
+<h2>What I actually do for SkynetLabs clients</h2>
+
+<p>Inside our AEO engagements, the tracking workflow is:</p>
+
+<ol>
+  <li>Discovery call — define the 20-prompt set together based on real buyer queries.</li>
+  <li>Week 0 baseline — manual run against all four engines, log to shared Google Sheet.</li>
+  <li>Weeks 1-12 — weekly manual run, audit calls every two weeks to interpret the movement.</li>
+  <li>Week 12 review — decide whether to automate via Otterly / Athena, or keep manual.</li>
+</ol>
+
+<p>The clients who keep tracking manually for longer than 3 months tend to learn faster than the clients who jump to automation week 1. The patterns are too easy to hide behind a dashboard.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>How often should I run the prompt set?</h3>
+
+<p>Weekly is the right cadence for most teams. Daily creates noise. Monthly misses fast movement. Lock to weekly and only change cadence if you have a specific reason.</p>
+
+<h3>How many queries should be in the prompt set?</h3>
+
+<p>Twenty is the sweet spot. Ten is too few for noise reduction. Fifty is too many to log manually. Twenty fits in 30 minutes a week and produces a stable signal after four runs.</p>
+
+<h3>Should I track Bing Copilot separately?</h3>
+
+<p>Bing Copilot draws heavily from ChatGPT under the hood. Most brands skip it and accept the indirect coverage from ChatGPT tracking. Add it as a fifth engine only if Bing is a strategic traffic channel for you.</p>
+
+<h3>Can I track AI citations through Google Analytics?</h3>
+
+<p>Partially. Direct referral traffic from Perplexity and Bing Copilot shows up in GA. Pure citations without click-through don't. You need the prompt-set method for that signal.</p>
+
+<h3>What's a good citation rate to target?</h3>
+
+<p>Highly variable by industry. Mid-market SaaS often targets 25% of prompts citing the brand. Healthcare and legal typically lower (15-20%). Ecommerce sometimes higher depending on category. The baseline matters more than the absolute — your week 12 vs your week 0.</p>
+
+<h3>Do I need expensive tools to track this?</h3>
+
+<p>No. The manual spreadsheet method works for the first six months. Tooling becomes useful when scaling past 20 prompts, tracking multiple brands, or wanting continuous (not weekly) tracking.</p>
+
+<h2>Bottom line</h2>
+
+<p>Tracking AI citations isn't complicated. Twenty prompts, four engines, one spreadsheet, weekly cadence. The discipline is doing it every week without changing the prompt set. The tooling can wait. Start manual, learn what the engines actually return, automate only what you understand.</p>
