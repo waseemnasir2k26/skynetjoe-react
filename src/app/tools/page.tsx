@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import { Calculator, Activity, Compass, ArrowRight } from "lucide-react";
+import { Calculator, Activity, Compass, ArrowLeftRight, Mic, FileText, CalendarDays, Target, Library, Film, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Free Tools — Revenue Calculator + Agency Stress Quiz | SkynetLabs",
@@ -39,6 +39,55 @@ const TOOLS = [
     blurb:
       "90 seconds. 10 questions. A 0 to 100 score plus a four-axis breakdown of foundation, process, demand and buy-in — and exactly what to fix first.",
     Icon: Compass,
+  },
+  {
+    slug: "before-after-slider",
+    name: "Before/After Slider",
+    blurb:
+      "Drag-to-compare 6 real workflows: lead response, content production, customer service, CRM data entry, reporting, lead qualification. Visualise the gap manual vs automated.",
+    Icon: ArrowLeftRight,
+  },
+  {
+    slug: "voice-persona-builder",
+    name: "Brand Voice Persona Builder",
+    blurb:
+      "Four steps, eight tone sliders, three example fields. Outputs a paste-ready Brand Voice Profile and AI system prompt that makes Claude and ChatGPT sound like your brand instead of themselves.",
+    Icon: Mic,
+  },
+  {
+    slug: "executive-summary-generator",
+    name: "Executive Summary Generator",
+    blurb:
+      "Paste raw notes, get five ready-to-send formats: TL;DR, email, Slack post, deck slide and investor 1-pager. Local-only, instant, uses your own words.",
+    Icon: FileText,
+  },
+  {
+    slug: "content-calendar",
+    name: "30-Day Content Calendar",
+    blurb:
+      "Niche, cadence and goal in. Thirty days of cross-platform post ideas out, across LinkedIn, X, IG, Shorts and email — with CSV, ICS and markdown export.",
+    Icon: CalendarDays,
+  },
+  {
+    slug: "automation-gap-analyzer",
+    name: "Automation Gap Analyzer",
+    blurb:
+      "90 seconds. 12 questions across lead capture, follow-up, reporting, team productivity. One automation gap %, four-axis radar, and the one biggest leak to fix first.",
+    Icon: Target,
+  },
+  {
+    slug: "prompt-library",
+    name: "Prompt Library",
+    blurb:
+      "Fifty production-tested AI prompts across sales, marketing, ops, content, data, recruitment, customer service and founder brain. Search, copy, open in Claude or ChatGPT.",
+    Icon: Library,
+  },
+  {
+    slug: "video-prompt-generator",
+    name: "Video Prompt Generator",
+    blurb:
+      "One scene, four formats. Build Runway, Pika, Sora and Veo prompts side-by-side from one set of inputs. Save the good ones to local history. Zero backend.",
+    Icon: Film,
   },
 ];
 
