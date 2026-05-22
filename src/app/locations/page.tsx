@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "AI Automation Services Across All 48 US States | SkynetLabs",
   description:
     "SkynetLabs delivers AI automation, n8n workflows, GoHighLevel CRM, AEO websites and WhatsApp chatbots to founders in all 48 contiguous US states. Pick your state — fixed scope, public pricing, 5–14 day ship.",
-  alternates: { canonical: "/locations" },
+  alternates: { canonical: `${SITE.url}/locations` },
   openGraph: {
     title: "SkynetLabs — Active in all 48 US states",
     description:
       "AI automation services delivered to founders across the lower 48. Local intent, global stack.",
-    url: "/locations",
+    url: `${SITE.url}/locations`,
     type: "website",
   },
 };

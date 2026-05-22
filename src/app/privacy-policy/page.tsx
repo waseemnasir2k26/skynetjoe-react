@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   title: "Privacy Policy — SkynetLabs",
   description:
     "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement. Last updated 2026-05-20.",
-  alternates: { canonical: "/privacy-policy" },
+  alternates: { canonical: `${SITE.url}/privacy-policy` },
   openGraph: {
     title: "SkynetLabs Privacy Policy",
     description:
       "How we handle your data. Minimum collection, no tracking cookies, deletion on request.",
-    url: "/privacy-policy",
+    url: `${SITE.url}/privacy-policy`,
     type: "article",
   },
 };
@@ -37,7 +37,7 @@ const schema = {
     "@type": "Organization",
     name: SITE.brand,
     url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.url}/apple-icon.png` },
+    logo: { "@type": "ImageObject", url: `${SITE.url}/waseem-portrait.jpg` },
   },
   mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/privacy-policy` },
 };

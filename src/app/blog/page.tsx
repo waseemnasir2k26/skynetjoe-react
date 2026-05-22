@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   title: "Journal — Long-form on AI Automation, AEO & Shipping | SkynetLabs",
   description:
     "Honest writing on n8n, GoHighLevel, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying.",
-  alternates: { canonical: "/blog" },
+  alternates: { canonical: `${SITE.url}/blog` },
   openGraph: {
     title: "SkynetLabs Journal",
     description:
       "Long-form writing on AI automation, AEO, and shipping software for service businesses.",
-    url: "/blog",
+    url: `${SITE.url}/blog`,
     type: "website",
   },
 };

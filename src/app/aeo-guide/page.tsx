@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
+import { SITE } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "aeo-guide.html"),
@@ -12,17 +14,46 @@ export const metadata: Metadata = {
     "The AEO Field Guide — Get Cited by Claude, ChatGPT, Perplexity & Gemini",
   description:
     "Eight chapters covering what Answer Engine Optimization actually is, the 5-layer stack to ship, llms.txt and the new robots ecosystem, citation-worthy content patterns, measurement, and a 90-day rollout for service businesses.",
-  alternates: { canonical: "/aeo-guide" },
+  alternates: { canonical: `${SITE.url}/aeo-guide` },
   openGraph: {
     title:
       "The AEO Field Guide — Get Cited by Claude, ChatGPT, Perplexity & Gemini",
     description:
       "How to structure content so LLM answer engines cite you. Schema, content, authority, distribution, freshness. 90-day rollout.",
-    url: "/aeo-guide",
+    url: `${SITE.url}/aeo-guide`,
     type: "article",
   },
 };
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline:
+    "The AEO Field Guide — Get Cited by Claude, ChatGPT, Perplexity & Gemini",
+  description:
+    "8-chapter guide to Answer Engine Optimization: 5-layer stack, llms.txt, citation patterns, measurement, 90-day rollout.",
+  url: `${SITE.url}/aeo-guide`,
+  inLanguage: "en",
+  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
+  publisher: {
+    "@type": "Organization",
+    name: SITE.brand,
+    url: SITE.url,
+    logo: { "@type": "ImageObject", url: `${SITE.url}/waseem-portrait.jpg` },
+  },
+  mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/aeo-guide` },
+  about: [
+    { "@type": "Thing", name: "Answer Engine Optimization" },
+    { "@type": "Thing", name: "Large Language Models" },
+    { "@type": "Thing", name: "llms.txt" },
+  ],
+};
+
 export default function AeoGuidePage() {
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <>
+      <JsonLd data={schema} />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </>
+  );
 }

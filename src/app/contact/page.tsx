@@ -32,12 +32,12 @@ export const metadata: Metadata = {
   title: "Contact — 8-hour reply guarantee from Bali | SkynetLabs",
   description:
     "Skip the discovery-call dance. Send a brief, get a fixed-price scope back in 48 hours. WhatsApp, email, LinkedIn, or formal application — pick your channel. Reply within 8h on weekdays.",
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: `${SITE.url}/contact` },
   openGraph: {
     title: "Talk to Waseem — SkynetLabs",
     description:
       "8-hour reply guarantee. No discovery funnels. Fixed scope back in 48 hours.",
-    url: "/contact",
+    url: `${SITE.url}/contact`,
     type: "website",
   },
 };
@@ -61,6 +61,7 @@ const schema = {
         "@type": "ContactPoint",
         contactType: "customer support",
         email: SITE.email,
+        telephone: SITE.whatsapp,
         availableLanguage: ["English"],
         areaServed: "Worldwide",
       },
@@ -68,6 +69,7 @@ const schema = {
         "@type": "ContactPoint",
         contactType: "sales",
         email: SITE.emailFounder,
+        telephone: SITE.whatsapp,
         availableLanguage: ["English"],
         areaServed: "Worldwide",
       },

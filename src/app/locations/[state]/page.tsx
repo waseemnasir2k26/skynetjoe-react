@@ -29,12 +29,18 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: `/locations/${s.slug}` },
+    alternates: { canonical: `${SITE.url}/locations/${s.slug}` },
     openGraph: {
       title,
       description,
-      url: `/locations/${s.slug}`,
+      url: `${SITE.url}/locations/${s.slug}`,
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      creator: "@Skynetjoe1",
     },
   };
 }

@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   title: "Terms of Service — SkynetLabs",
   description:
     "Terms governing engagements with SkynetLabs and use of skynetjoe.com. Plain-language contract: 50% deposit, IP transfer on payment, Indonesian jurisdiction. Last updated 2026-05-20.",
-  alternates: { canonical: "/terms-of-service" },
+  alternates: { canonical: `${SITE.url}/terms-of-service` },
   openGraph: {
     title: "SkynetLabs Terms of Service",
     description:
       "Engagement terms, payment, IP ownership, dispute resolution. Written plainly so both sides know where they stand.",
-    url: "/terms-of-service",
+    url: `${SITE.url}/terms-of-service`,
     type: "article",
   },
 };
@@ -37,7 +37,7 @@ const schema = {
     "@type": "Organization",
     name: SITE.brand,
     url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.url}/apple-icon.png` },
+    logo: { "@type": "ImageObject", url: `${SITE.url}/waseem-portrait.jpg` },
   },
   mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/terms-of-service` },
 };

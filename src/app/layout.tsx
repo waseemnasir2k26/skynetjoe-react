@@ -34,10 +34,13 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: "/og-default.png",
+        // /og-default.png does not exist yet — fall back to the founder portrait
+        // so social shares don't render a 404. Replace with a 1200x630 OG image
+        // when one is produced.
+        url: "/waseem-portrait.jpg",
         width: 1200,
-        height: 630,
-        alt: SITE.brand,
+        height: 1200,
+        alt: `${SITE.brand} — ${SITE.tagline}`,
       },
     ],
   },
@@ -46,14 +49,16 @@ export const metadata: Metadata = {
     title: `${SITE.brand} — ${SITE.tagline}`,
     description: SITE.description,
     creator: "@Skynetjoe1",
-    images: ["/og-default.png"],
+    site: "@Skynetjoe1",
+    images: ["/waseem-portrait.jpg"],
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
   },
-  icons: { icon: "/favicon.ico", apple: "/apple-icon.png" },
+  // apple-icon.png does not exist; rely on /favicon.ico only.
+  icons: { icon: "/favicon.ico" },
   alternates: { canonical: SITE.url },
 };
 

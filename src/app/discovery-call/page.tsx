@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: "Apply for a Discovery Call — 4 Clients/Month Max | SkynetLabs",
   description:
     "We only take 4 new builds per month. Send your brief and we'll reply within 8 hours with a yes, no, or referral. No calendar tag — we read first, share availability only if it's a fit.",
-  alternates: { canonical: "/discovery-call" },
+  alternates: { canonical: `${SITE.url}/discovery-call` },
   openGraph: {
     title: "Apply for a Discovery Call — SkynetLabs",
     description:
       "We only take 4 new builds per month. Send your brief — yes/no in 8 hours.",
-    url: "/discovery-call",
+    url: `${SITE.url}/discovery-call`,
     type: "website",
   },
 };
