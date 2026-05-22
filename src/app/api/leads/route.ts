@@ -1,50 +1,59 @@
 import { NextResponse } from "next/server";
+import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
 
 export const runtime = "nodejs";
 
 // ============================================================
 // /api/leads — discovery-call funnel lead drop
 //
-// POST shape:
+// POST shape (legacy shape preserved for the existing client form):
 //   {
 //     leadId?: string,
-//     source: "discovery-call",
+//     source?: "discovery-call" | "stress-quiz" | ...,
+//     email?: string,        // top-level OR inside qualification
+//     firstName?: string,
+//     lastName?: string,
+//     phone?: string,
+//     score?: "HOT" | "WARM" | "COLD",
+//     _honeypot?: string,    // anti-bot — silently 200 if filled
 //     qualification: {
-//       businessType?: string,
-//       teamSize?: string,
-//       biggestLeak?: string,
-//       monthlyLeads?: string,
-//       automateTargets?: string[],
-//       revenueRange?: string,
-//       urgency?: string,
-//       customAnswers?: Record<string, string>,
+//       email?, firstName?, lastName?, phone?,
+//       businessType?, teamSize?, biggestLeak?, bottleneck?,
+//       monthlyLeads?, automateTargets?, automationWishlist?,
+//       revenueRange?, urgency?, businessName?, website?,
+//       timezone?, customAnswers?
 //     },
 //     booking?: {
-//       event?: string,       // calendly invitee_uri
-//       invitee?: string,     // calendly event_uri
-//       scheduledAt?: string, // ISO
-//       inviteeEmail?: string,
-//       inviteeName?: string,
+//       event?, invitee?, scheduledAt?, inviteeEmail?, inviteeName?
 //     },
-//     utm?: { source?: string; medium?: string; campaign?: string },
+//     utm?: { source?, medium?, campaign? },
 //     submittedAt?: string,
 //   }
 //
 // Behavior:
-//   - Validates body
-//   - Mints a lead id if missing
-//   - POSTs to process.env.GHL_WEBHOOK_URL if set, else logs
-//   - Always returns 200 with { ok: true, leadId } so the UI can advance
+//   - Validates body (qualification OR booking + email required)
+//   - Honeypot rejection (_honeypot truthy → silent 200 fake-success)
+//   - Calls handleGhlLead — direct GHL REST (no webhook hop)
+//   - Always returns 200 so the client UI can advance
 // ============================================================
 
 type Qualification = {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
   businessType?: string;
   teamSize?: string;
   biggestLeak?: string;
-  monthlyLeads?: string;
+  bottleneck?: string;
+  monthlyLeads?: string | number;
   automateTargets?: string[];
+  automationWishlist?: string;
   revenueRange?: string;
   urgency?: string;
+  businessName?: string;
+  website?: string;
+  timezone?: string;
   customAnswers?: Record<string, string>;
 };
 
@@ -59,6 +68,12 @@ type Booking = {
 type Payload = {
   leadId?: string;
   source?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  score?: string;
+  _honeypot?: string;
   qualification?: Qualification;
   booking?: Booking;
   utm?: { source?: string; medium?: string; campaign?: string };
@@ -71,58 +86,33 @@ function mintLeadId() {
   return `lead_${ts}_${rnd}`;
 }
 
-function scoreLead(q?: Qualification): "HOT" | "WARM" | "COLD" {
+function scoreLead(
+  q: Qualification | undefined,
+  override: string | undefined,
+): GhlLeadScore {
+  if (override === "HOT" || override === "WARM" || override === "COLD")
+    return override;
   if (!q) return "COLD";
   const hotRev =
-    q.revenueRange === "100k-500k" || q.revenueRange === "500k-plus";
-  const hotUrgency = q.urgency === "this-month" || q.urgency === "30-60d";
+    q.revenueRange === "100k-500k" ||
+    q.revenueRange === "500k-plus" ||
+    /1m|5m|\$1m|\$5m|over/i.test(q.revenueRange || "");
+  const hotUrgency =
+    q.urgency === "this-month" ||
+    q.urgency === "30-60d" ||
+    /asap|now|urgent/i.test(q.urgency || "");
   if (hotRev && hotUrgency) return "HOT";
   if (hotRev || hotUrgency) return "WARM";
   return "COLD";
 }
 
-async function forwardToGhl(payload: Payload, leadId: string, score: string) {
-  const url = process.env.GHL_WEBHOOK_URL;
-  if (!url) {
-    console.info("[leads] GHL_WEBHOOK_URL not set; payload logged only", {
-      leadId,
-      score,
-    });
-    return { ok: false, skipped: true as const };
-  }
-
-  const body = {
-    lead_id: leadId,
-    source: payload.source || "discovery-call",
-    score,
-    qualification: payload.qualification || {},
-    booking: payload.booking || null,
-    utm: payload.utm || {},
-    submitted_at: payload.submittedAt || new Date().toISOString(),
-    tags: [
-      "discovery-call",
-      `score:${score}`,
-      payload.qualification?.urgency
-        ? `urgency:${payload.qualification.urgency}`
-        : null,
-      payload.qualification?.revenueRange
-        ? `revenue:${payload.qualification.revenueRange}`
-        : null,
-      payload.booking ? "booked" : "qualified-only",
-    ].filter(Boolean),
-  };
-
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    return { ok: res.ok, status: res.status, skipped: false as const };
-  } catch (err) {
-    console.error("[leads] GHL forward failed", err);
-    return { ok: false, error: String(err), skipped: false as const };
-  }
+/** Flatten automateTargets[] into the single LARGE_TEXT field GHL expects. */
+function flattenAutomation(q: Qualification | undefined): string | undefined {
+  if (!q) return undefined;
+  if (q.automationWishlist) return q.automationWishlist;
+  if (q.automateTargets && q.automateTargets.length)
+    return q.automateTargets.join(", ");
+  return undefined;
 }
 
 export async function POST(req: Request) {
@@ -133,7 +123,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  // Minimal validation — qualifier OR booking must be present
+  // Honeypot: filled = bot → fake-success, do nothing.
+  if (payload._honeypot) {
+    return NextResponse.json({ ok: true, leadId: mintLeadId() });
+  }
+
   if (!payload.qualification && !payload.booking) {
     return NextResponse.json(
       { error: "Either qualification or booking required" },
@@ -141,15 +135,80 @@ export async function POST(req: Request) {
     );
   }
 
-  const leadId = payload.leadId || mintLeadId();
-  const score = scoreLead(payload.qualification);
+  // Resolve email — top-level OR nested
+  const email =
+    payload.email ||
+    payload.qualification?.email ||
+    payload.booking?.inviteeEmail ||
+    "";
 
-  const ghlResult = await forwardToGhl(payload, leadId, score);
+  if (!email) {
+    return NextResponse.json(
+      { error: "email is required (top-level or in qualification/booking)" },
+      { status: 400 },
+    );
+  }
+
+  const leadId = payload.leadId || mintLeadId();
+  const score = scoreLead(payload.qualification, payload.score);
+  const source = payload.source || "discovery-call";
+
+  // Parse name out of booking.inviteeName if top-level is empty
+  const bookingNameParts =
+    (payload.booking?.inviteeName || "").trim().split(/\s+/);
+  const firstNameFromBooking = bookingNameParts[0] || undefined;
+  const lastNameFromBooking =
+    bookingNameParts.length > 1
+      ? bookingNameParts.slice(1).join(" ")
+      : undefined;
+
+  const ghl = await handleGhlLead({
+    qualification: {
+      email,
+      firstName:
+        payload.firstName ||
+        payload.qualification?.firstName ||
+        firstNameFromBooking,
+      lastName:
+        payload.lastName ||
+        payload.qualification?.lastName ||
+        lastNameFromBooking,
+      phone: payload.phone || payload.qualification?.phone,
+      businessType: payload.qualification?.businessType,
+      teamSize: payload.qualification?.teamSize,
+      bottleneck:
+        payload.qualification?.bottleneck ||
+        payload.qualification?.biggestLeak,
+      monthlyLeads: payload.qualification?.monthlyLeads,
+      automationWishlist: flattenAutomation(payload.qualification),
+      revenueRange: payload.qualification?.revenueRange,
+      urgency: payload.qualification?.urgency,
+      businessName: payload.qualification?.businessName,
+      website: payload.qualification?.website,
+      timezone: payload.qualification?.timezone,
+      source,
+      campaign: payload.utm?.campaign,
+    },
+    score,
+    stage: "inbound",
+    source,
+    extraTags: [
+      "discovery-call",
+      payload.booking ? "booked" : "qualified-only",
+      payload.qualification?.urgency
+        ? `urgency:${payload.qualification.urgency}`
+        : "",
+      payload.qualification?.revenueRange
+        ? `revenue:${payload.qualification.revenueRange}`
+        : "",
+    ].filter(Boolean) as string[],
+  });
 
   return NextResponse.json({
     ok: true,
     leadId,
     score,
-    ghl: ghlResult,
+    contactId: ghl.contactId,
+    opportunityId: ghl.opportunityId,
   });
 }

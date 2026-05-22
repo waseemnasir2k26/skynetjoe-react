@@ -1,40 +1,21 @@
 import { NextResponse } from "next/server";
+import {
+  handleGhlLead,
+  moveContactOpportunityToStage,
+  getOrCreateContactByEmail,
+} from "@/lib/ghl";
 
 export const runtime = "nodejs";
 
 // ============================================================
-// /api/webhooks/calendly — Calendly invitee.created webhook receiver
+// /api/webhooks/calendly — Calendly invitee.created / invitee.canceled
 //
-// Calendly POSTs JSON like:
-//   {
-//     "event": "invitee.created",
-//     "created_at": "...",
-//     "payload": {
-//       "event_type": { "uuid": "...", "name": "..." },
-//       "event": { "uuid": "...", "start_time": "...", "end_time": "..." },
-//       "invitee": { "uuid": "...", "name": "...", "email": "...",
-//                    "timezone": "...", "text_reminder_number": "..." },
-//       "questions_and_answers": [ { "question": "...", "answer": "..." } ],
-//       "tracking": { "utm_source": "...", "utm_medium": "...",
-//                     "utm_campaign": "...", "utm_content": "...",
-//                     "utm_term": "...", "salesforce_uuid": "..." }
-//     }
-//   }
-//
-// Auth: Calendly signs every request with HMAC-SHA256 over the raw body
-// using a secret shared at subscription creation. The signature ships in
-// the `Calendly-Webhook-Signature` header in the form:
-//   "t=<unix_ts>,v1=<hex_hmac>"
-// (Multiple v1=… pairs are possible during key rotation — accept any match.)
-// We compute HMAC-SHA256(`${t}.${rawBody}`, secret) and constant-time-compare.
-//
-// Behavior:
-//   1. Read raw body (signature verification requires raw bytes, not JSON).
-//   2. Verify Calendly-Webhook-Signature with CALENDLY_WEBHOOK_SECRET.
-//      If invalid → 401, no GHL forward.
-//   3. Parse JSON, derive lead tags from utm + questions_and_answers.
-//   4. Forward enriched payload to GHL_WEBHOOK_URL.
-//   5. Return 200 { ok, ghl_forwarded }.
+// 1. HMAC-SHA256 signature verification (Calendly-Webhook-Signature) —
+//    UNCHANGED from previous revision.
+// 2. On invitee.created → handleGhlLead w/ stage "appointment-set".
+//    handleGhlLead's upsert+findOpportunity logic ensures we MOVE an
+//    existing Inbound Lead opportunity rather than creating a duplicate.
+// 3. On invitee.canceled → move opportunity to "no-show" + tag.
 // ============================================================
 
 type CalendlyQA = { question?: string; answer?: string };
@@ -69,7 +50,8 @@ type CalendlyPayload = {
   };
 };
 
-// Constant-time string compare for hex hmacs.
+// ─── HMAC verification (unchanged) ─────────────────────────────────────────
+
 function timingSafeEqualHex(a: string, b: string): boolean {
   if (a.length !== b.length) return false;
   let diff = 0;
@@ -86,10 +68,7 @@ function toHex(buf: ArrayBuffer): string {
   return out;
 }
 
-async function hmacSha256Hex(
-  key: string,
-  message: string,
-): Promise<string> {
+async function hmacSha256Hex(key: string, message: string): Promise<string> {
   const enc = new TextEncoder();
   const cryptoKey = await crypto.subtle.importKey(
     "raw",
@@ -129,7 +108,6 @@ async function verifyCalendlySignature(
   const parsed = parseSignatureHeader(header);
   if (!parsed) return false;
 
-  // Optional freshness window — 5 min. Skip if t isn't a valid number.
   const tsNum = Number(parsed.t);
   if (Number.isFinite(tsNum)) {
     const ageSec = Math.abs(Math.floor(Date.now() / 1000) - tsNum);
@@ -143,8 +121,8 @@ async function verifyCalendlySignature(
   return false;
 }
 
-// Pull a few well-known qualification answers out of the QA array.
-// Keys are matched case-insensitively, substring match.
+// ─── Quiz answer extraction ────────────────────────────────────────────────
+
 function extractQA(
   qa: CalendlyQA[] | undefined,
   needles: string[],
@@ -153,122 +131,71 @@ function extractQA(
   for (const item of qa) {
     const q = (item.question || "").toLowerCase();
     for (const n of needles) {
-      if (q.includes(n)) return item.answer || undefined;
+      if (q.includes(n)) {
+        const a = (item.answer || "").trim();
+        if (a) return a;
+      }
     }
   }
   return undefined;
 }
 
-function buildGhlBody(parsed: CalendlyPayload) {
-  const p = parsed.payload || {};
+/**
+ * Map Calendly QA → the qualification fields our GHL client wants.
+ * Q1-Q7 = the discovery-call quiz answers (sometimes prefilled via custom
+ * Calendly form fields a1..a7).
+ */
+function extractQualification(payload: CalendlyPayload) {
+  const p = payload.payload || {};
   const inv = p.invitee || {};
-  const ev = p.event || {};
-  const evType = p.event_type || {};
-  const tracking = p.tracking || {};
   const qa = p.questions_and_answers || [];
 
-  // Sources priority: explicit utm_source > utm_campaign > "discovery-call"
-  const source =
-    tracking.utm_source ||
-    tracking.utm_campaign ||
-    "discovery-call";
-
-  const bucket = extractQA(qa, ["bucket", "stress bucket", "stress-bucket"]);
-  const readinessScore = extractQA(qa, [
-    "readiness score",
-    "readiness_score",
-    "ai readiness",
-  ]);
-  const monthlyLeads = extractQA(qa, [
-    "monthly leads",
-    "leads per month",
-    "lead count",
-  ]);
-  const monthlyRevenue = extractQA(qa, [
-    "monthly revenue",
-    "revenue range",
-    "mrr",
-  ]);
-  const urgency = extractQA(qa, ["urgency", "timeline", "when do you"]);
-  const biggestLeak = extractQA(qa, ["biggest leak", "main pain", "leak"]);
-
-  const tags = [
-    `source:${source}`,
-    bucket ? `bucket:${bucket}` : null,
-    readinessScore ? `readiness:${readinessScore}` : null,
-    urgency ? `urgency:${urgency}` : null,
-    monthlyRevenue ? `revenue:${monthlyRevenue}` : null,
-    "calendly-booked",
-    parsed.event === "invitee.canceled" ? "canceled" : null,
-  ].filter(Boolean);
+  const fullName = (inv.name || "").trim();
+  const splitName = fullName.split(/\s+/);
 
   return {
-    source,
-    event: parsed.event,
-    booked_at: parsed.created_at || new Date().toISOString(),
-    scheduled_at: ev.start_time,
-    scheduled_end: ev.end_time,
-    event_type: evType.name,
-    event_type_uuid: evType.uuid,
-    event_uuid: ev.uuid,
-    invitee_uuid: inv.uuid,
-    first_name: inv.first_name || (inv.name || "").split(" ")[0] || "",
-    last_name:
-      inv.last_name || (inv.name || "").split(" ").slice(1).join(" ") || "",
-    full_name: inv.name,
-    email: inv.email,
-    phone: inv.text_reminder_number,
-    timezone: inv.timezone,
-    qualification: {
-      bucket,
-      readiness_score: readinessScore,
-      monthly_leads: monthlyLeads,
-      monthly_revenue: monthlyRevenue,
-      urgency,
-      biggest_leak: biggestLeak,
-    },
-    utm: {
-      source: tracking.utm_source,
-      medium: tracking.utm_medium,
-      campaign: tracking.utm_campaign,
-      content: tracking.utm_content,
-      term: tracking.utm_term,
-    },
-    raw_qa: qa,
-    tags,
+    email: inv.email || "",
+    firstName: inv.first_name || splitName[0] || undefined,
+    lastName:
+      inv.last_name ||
+      (splitName.length > 1 ? splitName.slice(1).join(" ") : undefined),
+    phone: inv.text_reminder_number || undefined,
+    timezone: inv.timezone || undefined,
+    businessType:
+      extractQA(qa, ["business type", "what type of business", "biz model"]) ||
+      extractQA(qa, ["a1"]),
+    teamSize:
+      extractQA(qa, ["team size", "team", "employees"]) ||
+      extractQA(qa, ["a2"]),
+    bottleneck:
+      extractQA(qa, ["bottleneck", "biggest leak", "main pain", "challenge"]) ||
+      extractQA(qa, ["a3"]),
+    monthlyLeads:
+      extractQA(qa, ["monthly leads", "leads per month", "lead count"]) ||
+      extractQA(qa, ["a4"]),
+    automationWishlist:
+      extractQA(qa, ["automation", "automate", "wishlist"]) ||
+      extractQA(qa, ["a5"]),
+    revenueRange:
+      extractQA(qa, ["revenue range", "monthly revenue", "mrr", "revenue"]) ||
+      extractQA(qa, ["a6"]),
+    urgency:
+      extractQA(qa, ["urgency", "timeline", "when do you", "goal"]) ||
+      extractQA(qa, ["a7"]),
+    businessName:
+      extractQA(qa, ["business name", "company name", "company"]) || undefined,
+    website: extractQA(qa, ["website", "url", "site"]) || undefined,
   };
 }
 
-async function forwardToGhl(body: object) {
-  const url = process.env.GHL_WEBHOOK_URL;
-  if (!url) {
-    console.info("[calendly-webhook] GHL_WEBHOOK_URL not set; payload logged");
-    return false;
-  }
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (!res.ok) {
-      console.warn("[calendly-webhook] GHL non-2xx", res.status);
-    }
-    return res.ok;
-  } catch (err) {
-    console.error("[calendly-webhook] GHL forward failed", err);
-    return false;
-  }
-}
+// ─── Handlers ──────────────────────────────────────────────────────────────
 
 export async function POST(req: Request) {
   const secret = process.env.CALENDLY_WEBHOOK_SECRET;
 
-  // Raw body is required for HMAC verification — don't .json() first.
+  // Raw body for HMAC verification (must precede .json()).
   const rawBody = await req.text();
 
-  // If a secret is configured, signature MUST validate.
-  // If no secret is configured (local dev / pre-setup), allow through but log.
   if (secret) {
     const header = req.headers.get("calendly-webhook-signature");
     const ok = await verifyCalendlySignature(rawBody, header, secret);
@@ -288,25 +215,89 @@ export async function POST(req: Request) {
   try {
     parsed = JSON.parse(rawBody);
   } catch {
-    return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
+    return NextResponse.json(
+      { ok: false, error: "Invalid JSON" },
+      { status: 400 },
+    );
   }
 
-  const ghlBody = buildGhlBody(parsed);
-  const ghlForwarded = await forwardToGhl(ghlBody);
+  const event = parsed.event || "";
+  const qualification = extractQualification(parsed);
 
-  return NextResponse.json({
-    ok: true,
-    ghl_forwarded: ghlForwarded,
-  });
+  if (!qualification.email) {
+    console.warn("[calendly-webhook] payload missing invitee.email");
+    return NextResponse.json({ ok: true, skipped: "no-email" });
+  }
+
+  const tracking = parsed.payload?.tracking || {};
+  const source =
+    tracking.utm_source || tracking.utm_campaign || "calendly-booking";
+
+  // ── invitee.created → move/create at Appointment Set ──
+  if (event === "invitee.created") {
+    const result = await handleGhlLead({
+      qualification: {
+        ...qualification,
+        source,
+        campaign: tracking.utm_campaign,
+      },
+      score: null,
+      stage: "appointment-set",
+      source,
+      extraTags: [
+        "calendly-booked",
+        "discovery-call",
+        tracking.utm_source ? `utm:${tracking.utm_source}` : "",
+        tracking.utm_campaign ? `campaign:${tracking.utm_campaign}` : "",
+      ].filter(Boolean) as string[],
+    });
+
+    return NextResponse.json({
+      ok: true,
+      event,
+      contactId: result.contactId,
+      opportunityId: result.opportunityId,
+    });
+  }
+
+  // ── invitee.canceled → find opp, move to No Show, tag ──
+  if (event === "invitee.canceled") {
+    const contactId = await getOrCreateContactByEmail(qualification.email, {
+      firstName: qualification.firstName,
+      lastName: qualification.lastName,
+      phone: qualification.phone,
+      timezone: qualification.timezone,
+    });
+
+    if (!contactId) {
+      return NextResponse.json({ ok: true, event, skipped: "no-contact" });
+    }
+
+    const moved = await moveContactOpportunityToStage(
+      contactId,
+      "no-show",
+      ["calendly-canceled"],
+    );
+
+    return NextResponse.json({
+      ok: true,
+      event,
+      contactId,
+      moved,
+    });
+  }
+
+  // Other events (invitee.rescheduled, etc) — accept but no-op.
+  return NextResponse.json({ ok: true, event, skipped: "unhandled-event" });
 }
 
-// Calendly does not GET, but a quick health-check is useful for verifying the
-// route is live before configuring the webhook subscription.
+// Health check — useful for confirming the route is live before configuring
+// the webhook subscription.
 export async function GET() {
   return NextResponse.json({
     ok: true,
     route: "/api/webhooks/calendly",
     signature_required: Boolean(process.env.CALENDLY_WEBHOOK_SECRET),
-    ghl_configured: Boolean(process.env.GHL_WEBHOOK_URL),
+    ghl_api_configured: Boolean(process.env.GHL_API_TOKEN),
   });
 }
