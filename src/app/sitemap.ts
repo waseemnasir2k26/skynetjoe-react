@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools",
     "/tools/agency-stress-quiz",
     "/tools/revenue-calculator",
+    "/tools/ai-readiness-score",
     "/vibe-coding",
     "/pricing",
     "/about",

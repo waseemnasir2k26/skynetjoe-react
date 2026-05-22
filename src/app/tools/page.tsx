@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import { Calculator, Activity, ArrowRight } from "lucide-react";
+import { Calculator, Activity, Compass, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Free Tools — Revenue Calculator + Agency Stress Quiz | SkynetLabs",
@@ -32,6 +32,13 @@ const TOOLS = [
     blurb:
       "60 seconds. 7 questions. One brutally honest score. Diagnoses whether you're at chill operator or full chaos mode — pipes straight into the calculator.",
     Icon: Activity,
+  },
+  {
+    slug: "ai-readiness-score",
+    name: "AI Readiness Score",
+    blurb:
+      "90 seconds. 10 questions. A 0 to 100 score plus a four-axis breakdown of foundation, process, demand and buy-in — and exactly what to fix first.",
+    Icon: Compass,
   },
 ];
 
