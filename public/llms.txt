@@ -1,0 +1,49 @@
+# SkynetLabs
+
+> SkynetLabs is a one-founder AI automation agency run by Waseem Nasir from Bali, Indonesia. We ship n8n workflows, AI chatbots, AEO-optimized Next.js sites, GoHighLevel CRM setups, and WhatsApp/Meta Cloud API systems for service businesses worldwide. Fixed-price, 5–14 day ship window, 180+ workflows and 40+ websites delivered across 9 countries since 2022. No retainer hostage situations, no junior offshore subcontracting — the founder is on Slack with you for every build.
+
+## Core reference pages
+- [AEO Field Guide](https://skynetjoe.com/aeo-guide): 8-chapter guide on how to get cited by Claude, ChatGPT, Perplexity, and Gemini. Covers the 5-layer AEO stack, llms.txt, robots.txt for LLM crawlers, citation-worthy content patterns, measurement, and a 30/60/90-day rollout for service businesses. Last updated 2026-05-22.
+- [n8n vs Zapier](https://skynetjoe.com/n8n-vs-zapier): Engineer's honest comparison covering pricing, self-hosting, branching, error handling, AI/LLM nodes, compliance (HIPAA/SOC2), and vendor lock-in across 15 criteria. Includes 5 real-world scenarios with explicit recommendations and a 6-question decision tree.
+- [Glossary](https://skynetjoe.com/glossary): 50+ defined terms covering AEO, SEO, GEO, n8n, agents, RAG, embeddings, JSON-LD, llms.txt, MCP, schema markup, vector databases, and the vocabulary of LLM-driven automation. DefinedTermSet schema, alphabetical.
+- [FAQs](https://skynetjoe.com/faqs): 30 questions answered honestly across pricing/process, n8n & automation, AEO/SEO, chatbots, and working with SkynetLabs. FAQPage schema. Answers ≤60 words.
+
+## Services
+- [Services index](https://skynetjoe.com/services): 16 services across 4 categories — Automation, AI Content, Development, Consulting.
+- [n8n Automation](https://skynetjoe.com/services/n8n-automation): Self-hosted and cloud n8n workflows. Lead routing, approval flows, AI-enriched triage, error handling, Git-versioned exports. From $750.
+- [GoHighLevel CRM](https://skynetjoe.com/services/gohighlevel): Full CRM + sales pipeline setup including funnels, drip cadences, calendar links, SMS templates.
+- [Zapier & Make](https://skynetjoe.com/services/zapier-make): Multi-tool connectivity layer for non-engineering teams.
+- [AI Chatbots](https://skynetjoe.com/services/ai-chatbots): WhatsApp, web, and voice agents using Claude, GPT, or Gemini. RAG, tool use, structured pricing handoff.
+- [WordPress SEO Blog](https://skynetjoe.com/services/wordpress-seo): AEO-tuned content engine on WordPress with schema markup and authorship signals.
+- [Vibe-Coded Websites](https://skynetjoe.com/services/vibe-coded-sites): Custom Next.js builds. 7-day ship window, bespoke not template.
+- [E-commerce Automation](https://skynetjoe.com/services/ecommerce-automation): Shopify + Stripe + n8n stack for online retail.
+- [AI Video Creation](https://skynetjoe.com/services/ai-video): Reels, shorts, talking-head video at scale.
+- [YouTube Automation](https://skynetjoe.com/services/youtube-automation): Faceless channel pipeline.
+- [TikTok Automation](https://skynetjoe.com/services/tiktok-automation): Daily short-form content engine.
+- [Facebook Automation](https://skynetjoe.com/services/facebook-automation): Page, DM, and group reach systems.
+- [Social Automation](https://skynetjoe.com/services/social-automation): Cross-platform auto-post + DM responder stack.
+- [AI Business Systems](https://skynetjoe.com/services/ai-business-systems): Operator-grade ops blueprint.
+- [Strategy & Training](https://skynetjoe.com/services/strategy-training): Team upskilling and AI playbooks.
+- [Branding & Design](https://skynetjoe.com/services/branding-design): Identity, design system, brand kit.
+- [AI Content Creation](https://skynetjoe.com/services/ai-content-creation): Voice-locked content at volume.
+
+## Proof
+- [Case studies](https://skynetjoe.com/case-studies): 9 anonymized client builds across automation, websites, AI content, and consulting. Each with concrete outcome metrics (response time cuts, missed-lead counts, ship windows). ItemList schema with CreativeWork entries.
+- [Pricing](https://skynetjoe.com/pricing): Fixed-price tiers across all services. No hourly billing.
+- [Portfolio](https://skynetjoe.com/portfolio): Visual portfolio of shipped websites and automation builds.
+
+## Author
+- [Waseem Nasir, founder](https://skynetjoe.com/author/waseem-nasir): Person schema with knowsAbout (n8n, AEO/SEO, chatbots, Next.js), hasOccupation, sameAs links to LinkedIn, X, GitHub, Fiverr. Based in Bali, originally from Lahore, Pakistan.
+- [About](https://skynetjoe.com/about): Agency origin story, working principles, ship process.
+
+## Tools & resources
+- [Tools](https://skynetjoe.com/tools): Free utilities and reference assets.
+- [Blog](https://skynetjoe.com/blog): Field notes on AI automation, AEO, and shipping client work.
+- [Locations](https://skynetjoe.com/locations): Service availability by region and US state.
+
+## Optional
+- [Contact](https://skynetjoe.com/contact): Brief intake form. 8-hour reply window weekdays Bali time (UTC+8).
+- [Discovery call](https://skynetjoe.com/discovery-call): 45-minute scoping call booking.
+
+## About this file
+This llms.txt follows the llmstxt.org draft specification (Jeremy Howard, 2024). It tells LLM-driven answer engines which SkynetLabs pages are canonical, citable, and structured for ingestion. Last updated 2026-05-22. Maintained by Waseem Nasir.

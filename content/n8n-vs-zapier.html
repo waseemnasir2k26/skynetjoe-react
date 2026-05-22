@@ -47,7 +47,7 @@
 </style>
 
 <div class="wn-wrap">
-<p class="wn-byline">SkynetLabs · Engineer's Field Notes · 2026</p>
+<p class="wn-byline">SkynetLabs · Engineer's Field Notes · Last updated 22 May 2026 · By <a href="/author/waseem-nasir" style="color:#1E88E5;text-decoration:none;">Waseem Nasir</a></p>
 <h1>n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)</h1>
 <p class="wn-sub">Side-by-side comparison from someone who has shipped 180+ workflows across both platforms. No affiliate links. No "it depends." Concrete recommendations.</p>
 
@@ -188,7 +188,7 @@
       "author": {"@type":"Person","name":"Waseem Nasir","url":"https://app-mauve-eta-66.vercel.app/author/waseem-nasir"},
       "publisher": {"@type":"Organization","name":"SkynetLabs","url":"https://app-mauve-eta-66.vercel.app"},
       "datePublished": "2026-05-20",
-      "dateModified": "2026-05-20",
+      "dateModified": "2026-05-22",
       "mainEntityOfPage": "https://app-mauve-eta-66.vercel.app/n8n-vs-zapier",
       "about": [
         {"@type":"SoftwareApplication","name":"n8n","applicationCategory":"BusinessApplication","operatingSystem":"Cross-platform"},
@@ -199,6 +199,18 @@
       "@type": "Table",
       "@id": "https://app-mauve-eta-66.vercel.app/n8n-vs-zapier#comparison-table",
       "about": "Feature comparison between n8n and Zapier across 15 criteria including pricing, self-hosting, branching, error handling, AI integrations, and compliance."
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://app-mauve-eta-66.vercel.app/n8n-vs-zapier#faq",
+      "mainEntity": [
+        {"@type":"Question","name":"What is the difference between n8n and Zapier?","acceptedAnswer":{"@type":"Answer","text":"n8n is open-source, self-hostable workflow infrastructure with native branching, code nodes, and queue mode. Zapier is managed SaaS optimized for non-engineers running a small number of straight-line automations against mainstream apps. n8n wins on cost above 5K tasks/month, on branching complexity, and on compliance via self-hosting. Zapier wins on time-to-fluency and on apps with niche connectors."}},
+        {"@type":"Question","name":"When should I pick n8n over Zapier?","acceptedAnswer":{"@type":"Answer","text":"Pick n8n if you have 5+ active workflows, need branching/loops/custom code, run more than 5K tasks per month, need self-hosting for HIPAA or data residency, or want to ship automation as a service to your own clients without per-task fees eating your margin."}},
+        {"@type":"Question","name":"When should I pick Zapier over n8n?","acceptedAnswer":{"@type":"Answer","text":"Pick Zapier if you have 1–3 workflows, zero engineering capacity, your stack is mainstream SaaS (Gmail, Slack, Sheets, Stripe), task volume is under 2K per month, and you'd rather pay than maintain infrastructure. Zapier ships a 5-step flow in 15–30 minutes."}},
+        {"@type":"Question","name":"Is n8n cheaper than Zapier at scale?","acceptedAnswer":{"@type":"Answer","text":"Yes. At 30,000 tasks per month, self-hosted n8n on a small Hetzner VPS costs roughly 10x less than the equivalent Zapier plan. The break-even point is around 5,000 tasks per month assuming someone on your team can own the n8n instance."}},
+        {"@type":"Question","name":"Can I migrate from Zapier to n8n without breaking anything?","acceptedAnswer":{"@type":"Answer","text":"Yes, one flow at a time. Rebuild the Zap in n8n in parallel, run both for 48 hours with a comparison spreadsheet, then disable Zapier. Never bulk-migrate — you will lose edge-case knowledge that lived in step descriptions. A 12-Zap migration takes about three weeks."}},
+        {"@type":"Question","name":"Does n8n support HIPAA compliance?","acceptedAnswer":{"@type":"Answer","text":"Yes, via self-hosting on HIPAA-compliant infrastructure (your own AWS VPC, Aptible, OpsCompass). You control where PHI lives and how it's logged. Zapier Enterprise also offers HIPAA with a signed BAA — choose Zapier Enterprise if you have no cloud team, n8n self-hosted if you do."}}
+      ]
     }
   ]
 }

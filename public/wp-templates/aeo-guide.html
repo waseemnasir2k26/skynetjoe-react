@@ -5,6 +5,16 @@
 .wn-aeo-guide h1 { font-size:42px; font-weight:800; line-height:1.15; margin:0 0 16px; letter-spacing:-0.02em; color:#fafaf7; }
 .wn-aeo-guide .wn-sub { font-size:18px; color:#a8a8b3; margin:0 0 36px; max-width:760px; font-weight:300; }
 .wn-aeo-guide .wn-byline { font-size:13px; color:#6a6878; margin:0 0 40px; letter-spacing:.05em; text-transform:uppercase; }
+.wn-aeo-guide .wn-direct { background:linear-gradient(135deg, rgba(19,185,115,.08), rgba(139,92,246,.08)); border:1px solid #2a2832; border-radius:12px; padding:24px 28px; margin:0 0 24px; }
+.wn-aeo-guide .wn-direct .wn-direct-label { font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:#1E88E5; font-weight:700; margin:0 0 10px; }
+.wn-aeo-guide .wn-direct p { margin:0 0 10px; color:#d0d0d8; font-size:15.5px; }
+.wn-aeo-guide .wn-direct p:last-child { margin:0; }
+.wn-aeo-guide .wn-updated { font-size:13px; color:#6a6878; margin:0 0 36px; }
+.wn-aeo-guide .wn-quotables { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:24px 0 32px; }
+.wn-aeo-guide .wn-quotable { background:#17161d; border:1px solid #2a2832; border-left:3px solid #1E88E5; border-radius:0 10px 10px 0; padding:16px 18px; }
+.wn-aeo-guide .wn-quotable .wn-q-stat { font-size:22px; font-weight:800; color:#1E88E5; display:block; margin:0 0 6px; letter-spacing:-.01em; }
+.wn-aeo-guide .wn-quotable .wn-q-claim { font-size:13.5px; color:#c8c8d0; margin:0; line-height:1.55; }
+.wn-aeo-guide .wn-quotable .wn-q-source { font-size:11px; color:#6a6878; display:block; margin-top:8px; letter-spacing:.04em; }
 .wn-aeo-guide .wn-toc { background:#17161d; border:1px solid #2a2832; border-radius:12px; padding:24px 28px; margin:0 0 56px; }
 .wn-aeo-guide .wn-toc h3 { margin:0 0 14px; font-size:14px; text-transform:uppercase; letter-spacing:.1em; color:#14B8A6; font-weight:600; }
 .wn-aeo-guide .wn-toc ol { margin:0; padding-left:22px; color:#c8c8d0; }
@@ -51,6 +61,19 @@
 <p class="wn-byline">SkynetLabs · Field Notes · 2026</p>
 <h1>The AEO Field Guide — How to Get Cited by Claude, ChatGPT, Perplexity &amp; Gemini in 2026</h1>
 <p class="wn-sub">Eight chapters covering what Answer Engine Optimization actually is, the five-layer stack you ship, the new robots ecosystem, citation-worthy content patterns, what you can measure, and a 90-day rollout for service businesses.</p>
+<p class="wn-updated">Last updated 22 May 2026 by <a href="/author/waseem-nasir" style="color:#1E88E5;">Waseem Nasir</a>, founder of SkynetLabs (Bali).</p>
+
+<div class="wn-direct" aria-label="Direct answer summary">
+<p class="wn-direct-label">Direct answer</p>
+<p><strong>Answer Engine Optimization (AEO)</strong> is the practice of structuring website content so generative search interfaces — Claude, ChatGPT, Perplexity, Google's AI Overview, and Gemini — cite your page inside the natural-language answer they show users. AEO ranks <em>claims inside documents</em>, not whole documents like classic SEO. The five-layer stack to ship is: schema markup, citation-worthy content (definitions, comparison tables, decision trees), named-author authority, distribution on Reddit and Substack, and freshness (dateModified plus quarterly refreshes).</p>
+</div>
+
+<div class="wn-quotables" aria-label="Quotable stats">
+<div class="wn-quotable"><span class="wn-q-stat">5 layers</span><p class="wn-q-claim">The complete AEO stack: schema, content, authority, distribution, freshness — shipped in that order.</p><span class="wn-q-source">SkynetLabs, 2026</span></div>
+<div class="wn-quotable"><span class="wn-q-stat">2–12 weeks</span><p class="wn-q-claim">Typical time from publishing AEO-tuned content to first citation in Claude, ChatGPT, Perplexity, or Gemini.</p><span class="wn-q-source">SkynetLabs client tracking, 2026</span></div>
+<div class="wn-quotable"><span class="wn-q-stat">≤80 words</span><p class="wn-q-claim">Maximum length for the direct-answer paragraph at the top of any AEO page if you want it cited.</p><span class="wn-q-source">SkynetLabs AEO Field Guide</span></div>
+<div class="wn-quotable"><span class="wn-q-stat">6 crawlers</span><p class="wn-q-claim">LLM user-agents to know in 2026: GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Bytespider.</p><span class="wn-q-source">Verified robots.txt logs, 2026</span></div>
+</div>
 
 <nav class="wn-toc" aria-label="Table of contents">
 <h3>Contents</h3>
@@ -286,8 +309,28 @@ Plant 5–10 authentic mentions: niche subreddits, Substack posts, GitHub README
       "author": {"@type":"Person","name":"Waseem Nasir","url":"https://app-mauve-eta-66.vercel.app/author/waseem-nasir"},
       "publisher": {"@type":"Organization","name":"SkynetLabs","url":"https://app-mauve-eta-66.vercel.app"},
       "datePublished": "2026-05-20",
-      "dateModified": "2026-05-20",
+      "dateModified": "2026-05-22",
       "mainEntityOfPage": "https://app-mauve-eta-66.vercel.app/aeo-guide"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://app-mauve-eta-66.vercel.app/aeo-guide#term-aeo",
+      "name": "Answer Engine Optimization (AEO)",
+      "description": "The practice of structuring website content so generative search interfaces (Claude, ChatGPT, Perplexity, Google AI Overview, Gemini) cite the page inside their natural-language answer. AEO ranks claims inside documents rather than whole pages.",
+      "inDefinedTermSet": "https://app-mauve-eta-66.vercel.app/glossary#termset"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://app-mauve-eta-66.vercel.app/aeo-guide#faq",
+      "mainEntity": [
+        {"@type":"Question","name":"What is Answer Engine Optimization (AEO)?","acceptedAnswer":{"@type":"Answer","text":"AEO is the practice of structuring website content so generative search interfaces — Claude, ChatGPT, Perplexity, Google's AI Overview, Gemini — cite your page inside the natural-language answer they show users. AEO ranks claims inside documents, not whole documents like classic SEO."}},
+        {"@type":"Question","name":"How is AEO different from SEO?","acceptedAnswer":{"@type":"Answer","text":"SEO ranks documents and rewards long-form pages with backlinks. AEO ranks claims inside documents and rewards short direct answers, definitions, comparison tables, named authorship, and freshness. AEO citations appear in 2–12 weeks; SEO rankings take 3–6 months."}},
+        {"@type":"Question","name":"What are the five layers of the AEO stack?","acceptedAnswer":{"@type":"Answer","text":"Schema (JSON-LD markup), content (direct-answer paragraphs and definitions), authority (named author with Person schema), distribution (Reddit, Substack, GitHub README mentions), and freshness (dateModified plus quarterly refreshes). Ship in that order — schema before content, content before distribution."}},
+        {"@type":"Question","name":"Which LLM crawlers should I allow in robots.txt?","acceptedAnswer":{"@type":"Answer","text":"Allow GPTBot (OpenAI), ClaudeBot (Anthropic), PerplexityBot, Google-Extended (Gemini), and CCBot (Common Crawl). Block Bytespider unless you target the China/TikTok market. Add an llms.txt file at the root listing your canonical citable pages."}},
+        {"@type":"Question","name":"How long until AEO efforts show citations?","acceptedAnswer":{"@type":"Answer","text":"Two to twelve weeks. Perplexity updates fastest, often within 7 days of publishing. Claude with web search picks up new content within days. ChatGPT browse and Gemini take longer because they pull from Bing and Google indexes. If nothing appears in 8 weeks, the issue is content quality, not patience."}},
+        {"@type":"Question","name":"What is llms.txt and do I need it?","acceptedAnswer":{"@type":"Answer","text":"llms.txt is a draft standard (proposed by Jeremy Howard, 2024) for a markdown index file at /llms.txt that tells LLMs which pages on your site are canonical and citable. Claude, Perplexity, and a handful of newer engines have started honoring it. Cost to add: 30 minutes."}},
+        {"@type":"Question","name":"What's the maximum length of a direct-answer paragraph for AEO?","acceptedAnswer":{"@type":"Answer","text":"Aim for 60 words, never more than 80. The answer must lead with the noun phrase being defined, contain no preamble, and sit at the top of the page above any narrative or marketing copy. Long-form depth is fine below the answer block."}}
+      ]
     },
     {
       "@type": "HowTo",
