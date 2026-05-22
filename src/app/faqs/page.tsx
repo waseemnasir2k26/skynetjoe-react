@@ -12,7 +12,7 @@ const html = fs.readFileSync(
 export const metadata: Metadata = {
   title: "AI Automation FAQs — 30 Questions Answered",
   description:
-    "Real founder questions about n8n, Zapier, AEO/SEO, chatbots, WhatsApp, and working with SkynetLabs. Honest answers — including when the answer is 'don't hire us.'",
+    "Real founder questions about n8n, Zapier, AEO/SEO, chatbots, live chat, and working with SkynetLabs. Honest answers — including when the answer is 'don't hire us.'",
   alternates: { canonical: `${SITE.url}/faqs` },
   openGraph: {
     title: "AI Automation FAQs — 30 Questions Answered",

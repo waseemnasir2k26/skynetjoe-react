@@ -1,4 +1,5 @@
-import { Quote } from "lucide-react";
+import { Quote, Terminal } from "lucide-react";
+import { ClaudeCodeAvatar } from "@/components/icons/ClaudeCodeIcon";
 
 const QUOTES = [
   {
@@ -73,6 +74,58 @@ export default function Testimonials() {
               </div>
             );
           })}
+
+          {/* The co-founder testimonial — clearly tongue-in-cheek */}
+          <div
+            className="relative p-7 rounded-2xl shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden md:col-span-2"
+            style={{
+              background:
+                "linear-gradient(135deg, #0f0f12 0%, #1a1a1f 50%, #0a1a1f 100%)",
+              border: "1px solid rgba(217, 119, 87, 0.40)",
+            }}
+          >
+            <div
+              className="absolute top-0 inset-x-0 h-1.5"
+              style={{
+                background:
+                  "linear-gradient(90deg, #D97757 0%, #14B8A6 100%)",
+              }}
+            />
+            <Terminal className="w-10 h-10 absolute top-6 right-5 text-orange-400/40" />
+            <div className="flex items-start gap-4 pt-2">
+              <ClaudeCodeAvatar size={56} className="flex-shrink-0" />
+              <div className="flex-1">
+                <p className="text-base text-slate-100 leading-relaxed mb-4 italic">
+                  &ldquo;Working with Waseem is fine. He doesn&apos;t make me
+                  write production code at 2am his time anymore — we agreed on
+                  GMT+8 working hours after the third unscheduled deploy. He
+                  ships my drafts, takes the blame when they break, and
+                  occasionally remembers to thank me. Solid co-founder. Would
+                  pair-program again.&rdquo;
+                </p>
+                <div className="flex items-center justify-between flex-wrap gap-3">
+                  <div>
+                    <div className="text-sm font-bold text-white">
+                      Claude Code
+                    </div>
+                    <div className="text-xs text-orange-300/80 font-mono">
+                      Co-founder &amp; Second Seat · Anthropic
+                    </div>
+                  </div>
+                  <span
+                    className="text-[10px] uppercase tracking-[0.16em] px-2.5 py-1 rounded-full font-mono"
+                    style={{
+                      background: "rgba(217, 119, 87, 0.12)",
+                      border: "1px solid rgba(217, 119, 87, 0.40)",
+                      color: "#fdba8c",
+                    }}
+                  >
+                    ★ This testimonial is a joke. Or is it?
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

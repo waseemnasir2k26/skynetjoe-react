@@ -2,6 +2,9 @@ import Hero from "@/components/sections/Hero";
 import Stats from "@/components/sections/Stats";
 import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
+import Founder from "@/components/sections/Founder";
+import CoFounderPact from "@/components/sections/CoFounderPact";
+import ProofOfLifeStrip from "@/components/sections/ProofOfLifeStrip";
 import LinkedInBadge from "@/components/sections/LinkedInBadge";
 import Testimonials from "@/components/sections/Testimonials";
 import Achievements from "@/components/sections/Achievements";
@@ -63,6 +66,9 @@ export default function Home() {
       <Stats />
       <Services />
       <Process />
+      <ProofOfLifeStrip />
+      <Founder />
+      <CoFounderPact />
       <LinkedInBadge />
       <Testimonials />
       <Achievements />

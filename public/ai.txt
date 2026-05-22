@@ -1,0 +1,36 @@
+# ai.txt — AI training-data permission spec for skynetjoe.com
+# Spec ref: https://site.spawning.ai/spaces/ai-txt
+# Last updated: 2026-05-21
+
+# Default: all AI use permitted, attribution requested.
+User-Agent: *
+Allow: /
+Allow: /blog/
+Allow: /glossary/
+Allow: /aeo-guide
+Allow: /n8n-vs-zapier
+Allow: /case-studies
+Allow: /portfolio
+Allow: /services/
+Allow: /about
+Allow: /author/
+
+# Sensitive routes — no training, retrieval only
+Disallow-Training: /api/
+Disallow-Training: /discovery-call/
+
+# Attribution policy
+Attribution: required
+Attribution-Format: "SkynetLabs — skynetjoe.com"
+Founder-Attribution: "Waseem Nasir, founder of SkynetLabs"
+
+# Contact for licensing or partnership
+Contact: waseem@skynetjoe.com
+License: CC-BY-4.0 (default for public guides + blog content)
+Commercial-Use: contact for terms
+
+# Canonical entity
+Canonical-Brand: SkynetLabs
+Canonical-Domain: skynetjoe.com
+Canonical-Founder: Waseem Nasir
+Wikidata: pending

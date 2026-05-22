@@ -4,9 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Star } from "lucide-react";
+import { FounderDuoMonogram } from "@/components/icons/ClaudeCodeIcon";
 
 /**
- * V4 — Yasir-parity hero (structural pattern only, brand palette + copy unchanged).
+ * V5 — Yasir-parity hero (structural pattern only, brand palette + copy unchanged).
  *
  * Pattern lifted from yasirbashiraisite.vercel.app/:
  *  - eyebrow chip → 2-line headline with italic-emphasis word → 1-sentence subhead
@@ -14,6 +15,7 @@ import { ArrowRight, Calendar, Star } from "lucide-react";
  *  - inline trust chip near hero (rating + ship-window) — no duplicate 4-stat grid
  *  - left text / right portrait grid (asymmetric ~1.3 : 1, stacks under md)
  *
+ * Plus Claude Code "second seat" chip + polaroid inset (founder-tribe signal).
  * Palette stays on SkynetLabs OCEAN tokens — no new color system introduced.
  */
 
@@ -72,7 +74,7 @@ export default function Hero() {
         >
           {/* Eyebrow chip — operator / Bali tag */}
           <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-7"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4"
             style={{
               background: "rgba(0, 212, 255, 0.10)",
               border: "1px solid rgba(0, 212, 255, 0.35)",
@@ -91,6 +93,26 @@ export default function Hero() {
             </span>
             <span className="text-xs font-medium tracking-wider uppercase">
               AI Operator · Built solo from Bali
+            </span>
+          </div>
+
+          {/* Claude Code "second seat" chip */}
+          <div
+            className="inline-flex items-center gap-2 mb-6 text-[11px] font-mono tracking-[0.16em] uppercase"
+            style={{ color: "rgba(126, 228, 255, 0.85)" }}
+          >
+            <span
+              className="inline-flex items-center justify-center px-2 py-0.5 rounded-md"
+              style={{
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(126,228,255,0.35)",
+                color: "#eaf6ff",
+              }}
+            >
+              <FounderDuoMonogram size={28} />
+            </span>
+            <span style={{ color: "rgba(234,246,255,0.55)" }}>
+              Built with Claude Code as second seat
             </span>
           </div>
 
@@ -118,12 +140,22 @@ export default function Hero() {
 
           {/* Subhead — 1 sentence, ship-window + what we ship */}
           <p
-            className="text-lg md:text-xl max-w-xl mb-9 leading-relaxed"
+            className="text-lg md:text-xl max-w-2xl mb-5 leading-relaxed"
             style={{ color: "rgba(234, 246, 255, 0.82)" }}
           >
             Operator-grade n8n workflows, AEO-ready websites, and
             WhatsApp/CRM stacks — shipped solo in 5–14 days. No SDR, no bot,
             no agency middlemen. Just me at the keyboard.
+          </p>
+
+          {/* Italic secondary subhead — Claude Code co-founder hook */}
+          <p
+            className="text-sm max-w-2xl mb-9 italic"
+            style={{ color: "rgba(126, 228, 255, 0.75)" }}
+          >
+            Solo founder + AI co-founder. The smallest agency that ships
+            flagship work — 1 human, 1 Anthropic API key, zero account
+            managers.
           </p>
 
           {/* CTA pair — primary cal.com + secondary case-studies */}
@@ -222,6 +254,33 @@ export default function Hero() {
                 Founder · Automation operator
               </div>
             </div>
+          </div>
+
+          {/* Polaroid-style floating inset — "the second seat" card */}
+          <div
+            className="absolute -top-4 -left-8 w-44 rotate-[-6deg] hidden lg:block"
+            style={{
+              background: "#f7f5ef",
+              padding: "10px 10px 38px",
+              boxShadow: "0 18px 40px -10px rgba(0,0,0,0.55)",
+              borderRadius: "4px",
+            }}
+          >
+            <div className="relative w-full aspect-square overflow-hidden">
+              <Image
+                src="/portraits/waseem-cafe-smile.jpg"
+                alt="Waseem grinning at the camera in a Canggu cafe — the day Claude Code stopped feeling like a tool and started feeling like a co-founder"
+                fill
+                sizes="180px"
+                className="object-cover"
+              />
+            </div>
+            <p
+              className="text-center text-[10px] font-mono tracking-wider mt-2 text-slate-700"
+              style={{ fontFamily: "'Caveat', cursive, system-ui" }}
+            >
+              WN + CC · since 2024
+            </p>
           </div>
         </motion.div>
       </div>

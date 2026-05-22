@@ -31,7 +31,7 @@ const GithubIcon = ({ className }: { className?: string }) => (
 export const metadata: Metadata = {
   title: "Contact — 8-hour reply guarantee from Bali | SkynetLabs",
   description:
-    "Skip the discovery-call dance. Send a brief, get a fixed-price scope back in 48 hours. WhatsApp, email, LinkedIn, or formal application — pick your channel. Reply within 8h on weekdays.",
+    "Skip the discovery-call dance. Send a brief, get a fixed-price scope back in 48 hours. Email, LinkedIn, live chat, or formal application — pick your channel. Reply within 8h on weekdays.",
   alternates: { canonical: `${SITE.url}/contact` },
   openGraph: {
     title: "Talk to Waseem — SkynetLabs",
@@ -48,7 +48,7 @@ const schema = {
   name: "Contact SkynetLabs",
   url: `${SITE.url}/contact`,
   description:
-    "Multi-channel contact for SkynetLabs. WhatsApp, email, LinkedIn, discovery-call application. 8-hour reply on weekdays.",
+    "Multi-channel contact for SkynetLabs. Email, LinkedIn, live chat, discovery-call application. 8-hour reply on weekdays.",
   inLanguage: "en",
   mainEntity: {
     "@type": "Organization",
@@ -61,7 +61,6 @@ const schema = {
         "@type": "ContactPoint",
         contactType: "customer support",
         email: SITE.email,
-        telephone: SITE.whatsapp,
         availableLanguage: ["English"],
         areaServed: "Worldwide",
       },
@@ -69,7 +68,6 @@ const schema = {
         "@type": "ContactPoint",
         contactType: "sales",
         email: SITE.emailFounder,
-        telephone: SITE.whatsapp,
         availableLanguage: ["English"],
         areaServed: "Worldwide",
       },
@@ -79,13 +77,13 @@ const schema = {
 
 const channels = [
   {
-    name: "WhatsApp",
-    desc: "Fastest. I'm online most days 09:00–22:00 PKT.",
-    cta: "Send a voice note",
-    href: "https://wa.me/923001001957",
+    name: "Live chat",
+    desc: "Fastest live touch. Pops up bottom-right — answers basics + routes you to a call.",
+    cta: "Open the chat",
+    href: "#livechat-open",
     icon: MessageCircle,
     color: "from-green-400 to-emerald-500",
-    badge: "Reply in 8h",
+    badge: "Instant",
   },
   {
     name: "Email",
@@ -233,27 +231,25 @@ export default function ContactPage() {
 
               <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-8">
                 The fastest way to work with me: skip the discovery dance.
-                WhatsApp me a voice note, email a one-pager, or ping me on
-                LinkedIn — I&apos;ll send a fixed-price scope back within{" "}
+                Email a one-pager, ping me on LinkedIn, or open live chat
+                bottom-right — I&apos;ll send a fixed-price scope back within{" "}
                 <strong className="text-cyan-200">48 hours</strong>. If
                 I&apos;m not the right fit, I&apos;ll tell you who is.
               </p>
 
               <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://wa.me/923001001957"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/discovery-call"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white transition-transform hover:scale-[1.02]"
                   style={{
                     background:
-                      "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
-                    boxShadow: "0 8px 28px rgba(37, 211, 102, 0.40)",
+                      "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                    boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
                   }}
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  WhatsApp now
-                </a>
+                  <Calendar className="w-4 h-4" />
+                  Apply for a call
+                </Link>
                 <a
                   href="mailto:info@skynetjoe.com"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white transition-transform hover:scale-[1.02]"
@@ -266,17 +262,17 @@ export default function ContactPage() {
                   <Mail className="w-4 h-4" />
                   Email me
                 </a>
-                <Link
-                  href="/discovery-call"
+                <a
+                  href="#livechat-open"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-medium text-white transition-colors"
                   style={{
                     background: "rgba(255, 255, 255, 0.06)",
                     border: "1px solid rgba(255, 255, 255, 0.18)",
                   }}
                 >
-                  <Calendar className="w-4 h-4" />
-                  Or apply for a call
-                </Link>
+                  <MessageCircle className="w-4 h-4" />
+                  Or open live chat
+                </a>
               </div>
             </div>
 
@@ -453,14 +449,12 @@ export default function ContactPage() {
               <CheckCircle2 className="w-10 h-10 text-white/90 mx-auto mb-4" />
               <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4">
                 Still scrolling? Just{" "}
-                <a
-                  href="https://wa.me/923001001957"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/discovery-call"
                   className="underline decoration-2 underline-offset-4 hover:text-cyan-100"
                 >
-                  send the message
-                </a>
+                  send the brief
+                </Link>
                 .
               </h2>
               <p className="text-lg text-white/90 mb-8">
@@ -468,15 +462,13 @@ export default function ContactPage() {
                 and inbox stop fighting each other in 14 days.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
-                <a
-                  href="https://wa.me/923001001957"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/discovery-call"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition-colors"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  Open WhatsApp
-                </a>
+                  <Calendar className="w-4 h-4" />
+                  Apply for a call
+                </Link>
                 <Link
                   href="/pricing"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-colors"

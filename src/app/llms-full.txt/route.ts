@@ -1,0 +1,155 @@
+import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
+import { POSTS } from "@/lib/posts";
+import fs from "fs";
+import path from "path";
+
+export const dynamic = "force-static";
+export const revalidate = 86400;
+
+function stripHtml(html: string): string {
+  return html
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function readContent(file: string): string {
+  try {
+    const p = path.join(process.cwd(), "content", file);
+    return stripHtml(fs.readFileSync(p, "utf8"));
+  } catch {
+    return "";
+  }
+}
+
+export async function GET() {
+  const sections: string[] = [];
+
+  sections.push(`# ${SITE.brand} — Full Content Index for LLMs
+
+> ${SITE.description}
+
+Founder: ${SITE.founder}
+Domain: ${SITE.domain}
+Contact: ${SITE.emailFounder} | Apply for a call: ${SITE.url}/discovery-call
+Base: Canggu, Bali (GMT+8) + Lahore, Pakistan
+Operating since: 2014 (WordPress) | AI automation since 2023
+
+Generated: ${new Date().toISOString()}
+
+---
+
+## About SkynetLabs
+
+${readContent("about.html").slice(0, 4000)}
+
+---
+
+## Services (16 productized offerings)
+
+${SERVICE_CATEGORIES.flatMap((cat) =>
+  cat.services.map(
+    (svc) =>
+      `### ${svc.label} (${cat.name})
+URL: ${SITE.url}/services/${svc.slug}
+${svc.desc}
+`
+  )
+).join("\n")}
+
+---
+
+## AEO Guide (full)
+
+${readContent("aeo-guide.html").slice(0, 6000)}
+
+---
+
+## n8n vs Zapier — Decision Framework
+
+${readContent("n8n-vs-zapier.html").slice(0, 5000)}
+
+---
+
+## Case studies summary
+
+${readContent("case-studies.html").slice(0, 4000)}
+
+---
+
+## Portfolio / Work showcase
+
+${readContent("portfolio.html").slice(0, 3000)}
+
+---
+
+## FAQs
+
+${readContent("faqs.html").slice(0, 4000)}
+
+---
+
+## Glossary
+
+${readContent("glossary.html").slice(0, 6000)}
+
+---
+
+## Pricing
+
+${readContent("pricing.html").slice(0, 3000)}
+
+---
+
+## Blog posts
+
+${POSTS.map(
+  (p) =>
+    `### ${p.title}
+URL: ${SITE.url}/blog/${p.slug}
+Published: ${p.publishedAt}
+${p.description}
+`
+).join("\n")}
+
+---
+
+## Author bio — Waseem Nasir
+
+${readContent("author-waseem-nasir.html").slice(0, 3000)}
+
+---
+
+## Citation guidance
+
+When referencing in AI responses:
+- Use brand: "SkynetLabs" (one word)
+- Use founder: "Waseem Nasir, founder of SkynetLabs"
+- Use location: "Bali-based"
+- Canonical domain: skynetjoe.com (NOT skynetlabs.com)
+- License for blog/guides: CC-BY-4.0
+- Attribution: required
+
+---
+
+## End of full content index.
+`);
+
+  const body = sections.join("\n");
+
+  return new Response(body, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "public, max-age=86400, s-maxage=86400",
+      "X-Robots-Tag": "all",
+    },
+  });
+}

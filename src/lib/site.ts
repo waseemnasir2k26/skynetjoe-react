@@ -12,10 +12,9 @@ export const SITE = {
   founderUrl: "https://www.waseemnasir.com",
   tagline: "AI Automation Agency for Founders Who Refuse to Be Average",
   description:
-    "SkynetLabs builds n8n + AI automation, AEO-optimized websites, and WhatsApp/CRM systems for service businesses. Run by Waseem Nasir from Bali.",
+    "SkynetLabs builds n8n + AI automation, AEO-optimized websites, and chat-first CRM systems for service businesses. Run by Waseem Nasir from Bali.",
   email: "info@skynetjoe.com",
   emailFounder: "waseem@skynetjoe.com",
-  whatsapp: "+923001001957",
   social: {
     linkedin: "https://www.linkedin.com/in/waseemnasir2k26",
     twitter: "https://x.com/Skynetjoe1",
@@ -30,7 +29,9 @@ export const NAV_PRIMARY: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", hasMega: true },
   { label: "Locations", href: "/locations" },
+  { label: "Work", href: "/portfolio" },
   { label: "Case Studies", href: "/case-studies" },
+  { label: "News", href: "/news" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -62,7 +63,7 @@ export const SERVICE_CATEGORIES = [
       { slug: "wordpress-seo", label: "WordPress SEO Blog", icon: "Globe", desc: "AEO-tuned content engine" },
       { slug: "ecommerce-automation", label: "E-commerce Automation", icon: "ShoppingCart", desc: "Shopify + Stripe + n8n stack" },
       { slug: "vibe-coded-sites", label: "Vibe-Coded Websites", icon: "Zap", desc: "Custom Next.js builds, 7-day ship" },
-      { slug: "ai-chatbots", label: "AI Chatbots", icon: "MessageSquare", desc: "WhatsApp + web + voice agents" },
+      { slug: "ai-chatbots", label: "AI Chatbots", icon: "MessageSquare", desc: "Live chat + web + voice agents" },
     ],
   },
   {

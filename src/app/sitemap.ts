@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
 import { STATES } from "@/lib/states";
 import { POSTS } from "@/lib/posts";
+import { NEWS } from "@/lib/news";
 import { INDUSTRIES } from "@/data/industries";
 import { CASE_STUDIES } from "@/lib/case-studies";
 
@@ -27,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/n8n-vs-zapier",
     "/author/waseem-nasir",
     "/blog",
+    "/news",
     "/portfolio",
     "/privacy-policy",
     "/terms-of-service",
@@ -61,8 +63,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const newsRoutes = NEWS.map((n) => ({
+    url: `${base}/news/${n.slug}`,
+    lastModified: new Date(n.updatedAt || n.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
   // Full 16 services × 48 states programmatic matrix = 768 long-tail URLs.
-  // Restored 2026-05-22 after earlier agent collision reverted this to CA-only.
   const serviceStateRoutes = SERVICE_CATEGORIES.flatMap((cat) =>
     cat.services.flatMap((svc) =>
       STATES.map((s) => ({
@@ -75,7 +83,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   // Case study detail pages — drives /case-studies/[slug] dynamic route.
-  // Restored 2026-05-22 after collision wiped the original append.
   const caseStudyRoutes = CASE_STUDIES.map((c) => ({
     url: `${base}/case-studies/${c.slug}`,
     lastModified: now,
@@ -83,9 +90,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // ─── INDUSTRY VERTICAL LANDERS (appended 2026-05-22 — dedicated block) ────
-  // Added by industry-landers build. APPEND-ONLY; do not refactor with the
-  // other route blocks above. Drives /industries/[slug] dynamic route.
+  // Industry vertical landers — drives /industries/[slug] dynamic route.
   const industryRoutes = INDUSTRIES.map((i) => ({
     url: `${base}/industries/${i.slug}`,
     lastModified: now,
@@ -98,6 +103,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...serviceRoutes,
     ...stateRoutes,
     ...blogRoutes,
+    ...newsRoutes,
     ...serviceStateRoutes,
     ...caseStudyRoutes,
     ...industryRoutes,

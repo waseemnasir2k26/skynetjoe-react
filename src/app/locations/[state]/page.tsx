@@ -25,7 +25,7 @@ export async function generateMetadata({
   const s = getStateBySlug(state);
   if (!s) return {};
   const title = `AI Automation Expert in ${s.name} — n8n, GoHighLevel & AEO | ${SITE.brand}`;
-  const description = `Hire an AI automation expert serving ${s.name} founders. n8n workflows, GoHighLevel CRM, AEO websites and WhatsApp chatbots delivered to ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5–14 day ship.`;
+  const description = `Hire an AI automation expert serving ${s.name} founders. n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents delivered to ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5–14 day ship.`;
   return {
     title,
     description,
@@ -78,7 +78,7 @@ export default async function StatePage({
         "@type": "Service",
         "@id": `${SITE.url}/locations/${s.slug}#service`,
         name: `AI Automation in ${s.name}`,
-        description: `n8n workflows, AI chatbots, AEO-tuned websites, GoHighLevel CRM and WhatsApp automation for ${s.name} businesses across ${s.cities.join(", ")}.`,
+        description: `n8n workflows, AI chatbots, AEO-tuned websites, GoHighLevel CRM and live-chat automation for ${s.name} businesses across ${s.cities.join(", ")}.`,
         provider: {
           "@type": "Organization",
           name: SITE.brand,
@@ -153,22 +153,20 @@ export default async function StatePage({
               pricing, 5–14 day ship window — delivered remotely from Bali.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
-                href="https://wa.me/923001001957"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-semibold transition-colors"
-              >
-                <MessageCircle className="w-4 h-4" />
-                WhatsApp from {s.abbr}
-              </a>
               <Link
                 href="/discovery-call"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/40 hover:border-cyan-400/70 text-cyan-200 font-semibold transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-semibold transition-colors"
               >
                 <Calendar className="w-4 h-4" />
-                Apply for a call
+                Apply from {s.abbr}
               </Link>
+              <a
+                href="#livechat-open"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/40 hover:border-cyan-400/70 text-cyan-200 font-semibold transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Live chat
+              </a>
               <Link
                 href="/pricing"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 text-gray-200 font-semibold transition-colors"
@@ -283,13 +281,11 @@ export default async function StatePage({
                 Apply from {s.abbr}
               </Link>
               <a
-                href="https://wa.me/923001001957"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#livechat-open"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
-                WhatsApp instead
+                Live chat instead
               </a>
               <Link
                 href="/contact"
