@@ -14,6 +14,11 @@ import {
 import { SERVICE_CATEGORIES, SITE } from "@/lib/site";
 import { STATES, type StateEntry } from "@/lib/states";
 import JsonLd from "@/components/JsonLd";
+import { getEnrichment } from "@/data/service-state-enrichment";
+import {
+  isServiceStateIndexable,
+  serviceStateQualityScore,
+} from "@/lib/sitemap-quality";
 
 type ServiceItem = { slug: string; label: string; icon: string; desc: string };
 type CategoryName = (typeof SERVICE_CATEGORIES)[number]["name"];
@@ -190,10 +195,19 @@ export async function generateMetadata({
   const description = `${svc.label} for ${st.name} businesses across ${st.cities
     .slice(0, 3)
     .join(", ")} and ${st.abbr}. ${svc.desc}. Fixed scope, 5–14 day ship, no on-site.`;
+
+  // Thin-content protection: pages below the quality threshold ship with
+  // robots: { index: false, follow: true } so Google crawls links but won't
+  // index the duplicate-template shell.
+  const indexable = isServiceStateIndexable(svc.slug, st.slug);
+
   return {
     title,
     description,
     alternates: { canonical: `${SITE.url}/services/${svc.slug}/in/${st.slug}` },
+    robots: indexable
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
     openGraph: {
       title,
       description,
@@ -237,6 +251,8 @@ export default async function ServiceStatePage({
   const hourly = agencyRate(st.slug);
   const annualSavings = Math.round(hourly * 1.4 * 10) * 100; // ~1.4h/wk × 52 × hourly, rounded to $100
   const nearby = nearbyStates(st);
+  const enrichment = getEnrichment(svc.slug, st.slug);
+  const qualityScore = serviceStateQualityScore(svc.slug, st.slug);
 
   const schema = {
     "@context": "https://schema.org",
@@ -504,6 +520,17 @@ export default async function ServiceStatePage({
               {svc.label.toLowerCase()} engagements in the state cluster around
               three verticals — and we&apos;ve standardized playbooks for each.
             </p>
+
+            {enrichment && (
+              <div
+                className="mb-6 p-6 rounded-2xl bg-white/95 border border-cyan-200/60 shadow-md shadow-cyan-500/10"
+                data-quality-score={qualityScore}
+              >
+                <p className="text-slate-700 leading-relaxed text-sm md:text-base">
+                  {enrichment}
+                </p>
+              </div>
+            )}
             <ul className="space-y-3 mb-2">
               {st.industries.map((ind) => (
                 <li
