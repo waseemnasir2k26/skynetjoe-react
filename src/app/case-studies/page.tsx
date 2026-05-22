@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
+import InlineCTABand from "@/components/cta/InlineCTABand";
 
 const rawHtml = fs.readFileSync(
   path.join(process.cwd(), "content", "case-studies.html"),
@@ -65,6 +66,16 @@ export default function CaseStudiesPage() {
     <>
       <JsonLd data={schema} />
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      <InlineCTABand
+        variant="default"
+        headline="Want your name on this page next quarter?"
+        subhead="9 builds shipped. 4 slots open per month. 30-min call decides if we're the right fit — yes/no in 8 hours."
+        primaryCTA={{
+          label: "Apply for a discovery call",
+          href: "/discovery-call",
+        }}
+        secondaryCTA={{ label: "See pricing", href: "/pricing" }}
+      />
     </>
   );
 }

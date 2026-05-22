@@ -9,6 +9,8 @@ import AISignals from "@/components/aeo/AISignals";
 import LiveChat from "@/components/LiveChat";
 import DiscoveryPopup from "@/components/DiscoveryPopup";
 import IncomingCallPopup from "@/components/IncomingCallPopup";
+import StickyBookCallBar from "@/components/cta/StickyBookCallBar";
+import ExitIntentModal from "@/components/cta/ExitIntentModal";
 import "./globals.css";
 
 const lexend = Lexend({
@@ -94,6 +96,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <DiscoveryPopup />
         </Suspense>
         <IncomingCallPopup />
+        <StickyBookCallBar />
+        <Suspense fallback={null}>
+          <ExitIntentModal />
+        </Suspense>
       </body>
     </html>
   );
