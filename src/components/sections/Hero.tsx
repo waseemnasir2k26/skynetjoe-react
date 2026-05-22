@@ -3,10 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Calendar, Star } from "lucide-react";
 
-// V3 OCEAN hero — picked from /gradient-lab#picked-03
-// Dark ocean gradient bg + 3 orbs (deep blue, cyan, teal) + cyan→mint text gradient
+/**
+ * V4 — Yasir-parity hero (structural pattern only, brand palette + copy unchanged).
+ *
+ * Pattern lifted from yasirbashiraisite.vercel.app/:
+ *  - eyebrow chip → 2-line headline with italic-emphasis word → 1-sentence subhead
+ *  - dual CTA (primary solid gradient + ghost secondary with arrow)
+ *  - inline trust chip near hero (rating + ship-window) — no duplicate 4-stat grid
+ *  - left text / right portrait grid (asymmetric ~1.3 : 1, stacks under md)
+ *
+ * Palette stays on SkynetLabs OCEAN tokens — no new color system introduced.
+ */
 
 export default function Hero() {
   return (
@@ -18,7 +27,7 @@ export default function Hero() {
         color: "#eaf6ff",
       }}
     >
-      {/* 3 floating orbs — deep blue, cyan, teal */}
+      {/* 3 floating orbs — deep blue, cyan, teal (kept from V3 for brand continuity) */}
       <span
         className="orb"
         style={{
@@ -55,30 +64,46 @@ export default function Hero() {
         }}
       />
 
-      <div className="container-x px-6 relative z-10 grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 items-center">
+      <div className="container-x px-6 relative z-10 grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
+          {/* Eyebrow chip — operator / Bali tag */}
           <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-7"
             style={{
-              background: "rgba(0, 212, 255, 0.12)",
-              border: "1px solid rgba(0, 212, 255, 0.40)",
+              background: "rgba(0, 212, 255, 0.10)",
+              border: "1px solid rgba(0, 212, 255, 0.35)",
               color: "#7ee4ff",
             }}
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <span className="relative flex h-2 w-2">
+              <span
+                className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
+                style={{ background: "#5eead4" }}
+              />
+              <span
+                className="relative inline-flex h-2 w-2 rounded-full"
+                style={{ background: "#5eead4" }}
+              />
+            </span>
             <span className="text-xs font-medium tracking-wider uppercase">
-              Cited by ChatGPT · Claude · Perplexity · Gemini
+              AI Operator · Built solo from Bali
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
-            Your CRM, calendar, and inbox{" "}
+          {/* Headline — Yasir-style italic-emphasis on the punch word */}
+          <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.04] tracking-tight mb-6">
+            AI automation,
+            <br />
+            built by{" "}
             <span
+              className="italic font-semibold"
               style={{
+                fontFamily:
+                  '"Playfair Display", Georgia, "Times New Roman", serif',
                 background:
                   "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)",
                 WebkitBackgroundClip: "text",
@@ -87,88 +112,79 @@ export default function Hero() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              never talk to each other.
+              hand.
             </span>
           </h1>
 
+          {/* Subhead — 1 sentence, ship-window + what we ship */}
           <p
-            className="text-lg md:text-xl max-w-2xl mb-10 leading-relaxed"
+            className="text-lg md:text-xl max-w-xl mb-9 leading-relaxed"
             style={{ color: "rgba(234, 246, 255, 0.82)" }}
           >
-            We wire them in n8n, replace 4 paid tools with one stack, and hand
-            it back so it runs without you. Built solo in Bali, shipped in 5–14
-            days, served to 9 countries.
+            Operator-grade n8n workflows, AEO-ready websites, and
+            WhatsApp/CRM stacks — shipped solo in 5–14 days. No SDR, no bot,
+            no agency middlemen. Just me at the keyboard.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          {/* CTA pair — primary cal.com + secondary case-studies */}
+          <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white transition-transform"
+              href="https://cal.com/waseemnasir/strategy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white transition-transform hover:-translate-y-0.5"
               style={{
                 background:
                   "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
                 boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
               }}
             >
-              Wire it up
-              <ArrowRight className="w-4 h-4" />
+              <Calendar className="w-4 h-4" />
+              Book a 30-min strategy call
             </Link>
             <Link
-              href="/n8n-vs-zapier"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-medium transition-colors"
+              href="/case-studies"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-medium transition-colors hover:border-cyan-300/60"
               style={{
-                background: "rgba(255, 255, 255, 0.06)",
+                background: "rgba(255, 255, 255, 0.04)",
                 border: "1px solid rgba(255, 255, 255, 0.18)",
                 color: "#eaf6ff",
               }}
             >
-              n8n vs Zapier — honest take
+              See case studies
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div
-            className="mt-14 pt-6 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl"
-            style={{ borderTop: "1px solid rgba(255, 255, 255, 0.14)" }}
-          >
-            <div className="flex flex-col gap-1">
-              <b className="text-2xl font-extrabold tracking-tight">180+</b>
-              <span
-                className="text-xs uppercase tracking-wider"
-                style={{ color: "rgba(234, 246, 255, 0.65)" }}
-              >
-                Workflows shipped
+          {/* Trust chip near hero — single line, no duplicate of Stats section */}
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="flex">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Star
+                    key={i}
+                    className="w-4 h-4 fill-amber-300 text-amber-300"
+                  />
+                ))}
+              </div>
+              <span style={{ color: "rgba(234, 246, 255, 0.78)" }}>
+                <b className="text-white">Top Rated Plus</b> on Upwork
               </span>
             </div>
-            <div className="flex flex-col gap-1">
-              <b className="text-2xl font-extrabold tracking-tight">40+</b>
-              <span
-                className="text-xs uppercase tracking-wider"
-                style={{ color: "rgba(234, 246, 255, 0.65)" }}
-              >
-                Websites delivered
-              </span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <b className="text-2xl font-extrabold tracking-tight">9</b>
-              <span
-                className="text-xs uppercase tracking-wider"
-                style={{ color: "rgba(234, 246, 255, 0.65)" }}
-              >
-                Countries served
-              </span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <b className="text-2xl font-extrabold tracking-tight">5–14d</b>
-              <span
-                className="text-xs uppercase tracking-wider"
-                style={{ color: "rgba(234, 246, 255, 0.65)" }}
-              >
-                Ship window
-              </span>
-            </div>
+            <span
+              className="hidden sm:inline"
+              style={{ color: "rgba(234, 246, 255, 0.30)" }}
+            >
+              ·
+            </span>
+            <span style={{ color: "rgba(234, 246, 255, 0.78)" }}>
+              <b className="text-white">180+</b> workflows shipped across{" "}
+              <b className="text-white">9</b> countries
+            </span>
           </div>
         </motion.div>
 
+        {/* Right — Waseem portrait, framed, builder pose */}
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -183,13 +199,14 @@ export default function Hero() {
             }}
           >
             <Image
-              src="/portraits/waseem-cafe-arch.jpg"
-              alt="Waseem Nasir, founder of SkynetLabs, building automation from a Bali cafe"
+              src="/portraits/waseem-builder-hero.jpg"
+              alt="Waseem Nasir, founder of SkynetLabs, building AI automation solo from a Bali cafe"
               fill
               priority
               sizes="(min-width: 1024px) 440px, (min-width: 768px) 380px, 0"
               className="object-cover"
             />
+            {/* Caption bar */}
             <div
               className="absolute inset-x-0 bottom-0 p-5 pt-12"
               style={{
@@ -197,12 +214,12 @@ export default function Hero() {
                   "linear-gradient(180deg, transparent 0%, rgba(6,24,39,0.92) 100%)",
               }}
             >
-              <div className="text-xs uppercase tracking-[0.18em] text-cyan-300 mb-1">
-                Built solo · 🌴 Bali
+              <div className="text-[11px] uppercase tracking-[0.18em] text-cyan-300 mb-1">
+                Built solo · Bali, Indonesia
               </div>
               <div className="text-white font-semibold">Waseem Nasir</div>
               <div className="text-sm text-gray-300">
-                Founder · automation operator
+                Founder · Automation operator
               </div>
             </div>
           </div>

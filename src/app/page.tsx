@@ -4,6 +4,7 @@ import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
 import LinkedInBadge from "@/components/sections/LinkedInBadge";
 import Testimonials from "@/components/sections/Testimonials";
+import Achievements from "@/components/sections/Achievements";
 import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
 import JsonLd from "@/components/JsonLd";
@@ -64,6 +65,7 @@ export default function Home() {
       <Process />
       <LinkedInBadge />
       <Testimonials />
+      <Achievements />
       <FAQ />
       <CTA />
     </>
