@@ -45,25 +45,8 @@
     radial-gradient(at 50% 95%, rgba(20, 184, 166, 0.24) 0px, transparent 55%);
 }
 
-html.light {
-  /* LIGHT alt theme — cream + warm white (opt-in via toggle) */
-  --bg: #fbfaf6;
-  --bg-alt: #f3f1ea;
-  --surface: #ffffff;
-  --surface-alt: #f7f5ef;
-  --skynet-darker: #f3f1ea;
-  --skynet-surface: #ffffff;
-  --fg: #0f1419;
-  --fg-muted: #3d4654;
-  --fg-faint: #6b7280;
-  --border: rgba(15, 20, 25, 0.08);
-  --border-strong: rgba(15, 20, 25, 0.14);
-  --glass-bg: rgba(255, 255, 255, 0.78);
-  --gradient-mesh:
-    radial-gradient(at 18% 22%, rgba(30, 136, 229, 0.18) 0px, transparent 55%),
-    radial-gradient(at 82% 28%, rgba(0, 212, 255, 0.14) 0px, transparent 55%),
-    radial-gradient(at 50% 95%, rgba(20, 184, 166, 0.12) 0px, transparent 55%);
-}
+/* LIGHT theme removed — site is locked to single dark/ocean brand.
+   All html.light .* selectors below are inert (class never applied). */
 
 @theme inline {
   --color-background: var(--bg);

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Phone, PhoneOff, Signal } from "lucide-react";
 
 const SESSION_KEY = "incoming-call-shown";
-const FIRE_DELAY_MS = 8000;
+const FIRE_DELAY_MS = 10000;
 const RING_SECONDS = 12;
 
 export default function IncomingCallPopup() {

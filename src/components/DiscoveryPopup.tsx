@@ -36,7 +36,7 @@ export default function DiscoveryPopup() {
       setOpen(true);
     };
 
-    const timer = window.setTimeout(fire, 12000);
+    const timer = window.setTimeout(fire, 22000);
 
     const onMouseLeave = (e: MouseEvent) => {
       // Exit-intent: cursor leaving viewport from the TOP

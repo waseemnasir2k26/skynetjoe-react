@@ -4,6 +4,7 @@ import { NEWS } from "@/lib/news";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { LetterShell } from "@/components/letter/LetterArticle";
+import { ClaudeCodeBadge } from "@/components/icons/ClaudeCodeIcon";
 
 export const metadata: Metadata = {
   title: "Latest news & field notes from SkynetLabs",
@@ -57,6 +58,9 @@ export default function NewsIndex() {
           <section className="index-hero">
             <div className="wrap">
               <div className="hero-mark">The journal · Volume II · 2026</div>
+              <div style={{ margin: "12px 0 18px" }}>
+                <ClaudeCodeBadge label="Claude Code · co-founder" />
+              </div>
               <h1>
                 Field notes from <em>one operator</em>, shipping.
               </h1>

@@ -80,22 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://calendly.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
 
-        {/* theme-color — mobile browser chrome color, matches OCEAN palette.
-            Ported from WP header.php line 18 (#030208 → OCEAN equivalent).
-            Dark scheme uses surface tint; light scheme uses deep ocean. */}
-        <meta name="theme-color" content="#0a2d4a" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#061827" media="(prefers-color-scheme: light)" />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var t = localStorage.getItem('theme');
-                if (t === 'light') document.documentElement.classList.add('light');
-              } catch (e) {}
-            `,
-          }}
-        />
+        <meta name="theme-color" content="#061827" />
         <Analytics />
         <AISignals />
       </head>
