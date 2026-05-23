@@ -1,15 +1,8 @@
-import Hero from "@/components/sections/Hero";
-import Stats from "@/components/sections/Stats";
-import Services from "@/components/sections/Services";
-import Process from "@/components/sections/Process";
-import Founder from "@/components/sections/Founder";
-import CoFounderPact from "@/components/sections/CoFounderPact";
-import ProofOfLifeStrip from "@/components/sections/ProofOfLifeStrip";
-import LinkedInBadge from "@/components/sections/LinkedInBadge";
+import HeroFunnel from "@/components/funnel/HeroFunnel";
+import PainPoints from "@/components/funnel/PainPoints";
+import Outcomes from "@/components/funnel/Outcomes";
 import Testimonials from "@/components/sections/Testimonials";
-import Achievements from "@/components/sections/Achievements";
-import FAQ from "@/components/sections/FAQ";
-import CTA from "@/components/sections/CTA";
+import FinalCTA from "@/components/funnel/FinalCTA";
 import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 
@@ -24,7 +17,13 @@ export default function Home() {
         url: SITE.url,
         description: SITE.description,
         founder: { "@id": `${SITE.url}/#person` },
-        sameAs: [SITE.social.linkedin, SITE.social.twitter, SITE.social.github, SITE.social.youtube, SITE.social.fiverr],
+        sameAs: [
+          SITE.social.linkedin,
+          SITE.social.twitter,
+          SITE.social.github,
+          SITE.social.youtube,
+          SITE.social.fiverr,
+        ],
       },
       {
         "@type": "Person",
@@ -54,7 +53,13 @@ export default function Home() {
         url: SITE.url,
         provider: { "@id": `${SITE.url}/#organization` },
         areaServed: "Worldwide",
-        serviceType: ["AI Automation", "n8n Workflow", "WordPress Development", "AEO/SEO", "Chatbot Development"],
+        serviceType: [
+          "AI Automation",
+          "n8n Workflow",
+          "WordPress Development",
+          "AEO/SEO",
+          "Chatbot Development",
+        ],
       },
     ],
   };
@@ -62,18 +67,11 @@ export default function Home() {
   return (
     <>
       <JsonLd data={orgSchema} />
-      <Hero />
-      <Stats />
-      <Services />
-      <Process />
-      <ProofOfLifeStrip />
-      <Founder />
-      <CoFounderPact />
-      <LinkedInBadge />
+      <HeroFunnel />
+      <PainPoints />
+      <Outcomes />
       <Testimonials />
-      <Achievements />
-      <FAQ />
-      <CTA />
+      <FinalCTA />
     </>
   );
 }
