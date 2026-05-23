@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Achievements from "@/components/sections/Achievements";
+import Community from "@/components/sections/Community";
 
 const PHOTO_STRIP = [
   {
@@ -134,6 +135,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <Community />
       <Achievements />
     </>
   );
