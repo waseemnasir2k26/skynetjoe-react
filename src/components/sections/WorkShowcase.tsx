@@ -8,98 +8,116 @@ const Github = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 type Gig = {
+  slug: string;
   title: string;
   client: string;
+  niche: string;
   stack: string[];
   outcome: string;
-  liveUrl?: string;
-  githubUrl?: string;
-  thumb: "n8n" | "wp" | "next" | "shopify" | "ghl" | "ai";
+  liveUrl: string;
 };
 
 const GIGS: Gig[] = [
   {
-    title: "Dental no-show automation",
-    client: "Manhattan dental atelier",
-    stack: ["GHL", "Signal", "n8n", "Twilio"],
-    outcome: "30% no-show → 8% in 6 weeks. +$24K/mo recovered.",
-    githubUrl: "https://github.com/waseemnasir2k26/dental-noshow-flow",
-    thumb: "ghl",
+    slug: "kitts-recovery-services",
+    title: "Kitts Recovery Services",
+    client: "Majesta Kitts · EdD MPH CPRS · Rhode Island",
+    niche: "Wellness / Peer Recovery",
+    stack: ["Custom HTML", "Tailwind", "HeyPeers", "Google Sites"],
+    outcome: "Live peer-led recovery practice. Booking + brand kit shipped in 4 days.",
+    liveUrl: "https://www.kittsrecoveryservices.com",
   },
   {
-    title: "EU logistics dispatch flow",
-    client: "Meta Logistics — Berlin",
-    stack: ["n8n", "Airtable", "Slack", "Postgres"],
-    outcome: "4 paid SaaS tools replaced. €2.1K/mo saved.",
-    githubUrl: "https://github.com/waseemnasir2k26/meta-logistics-relaunch",
-    thumb: "n8n",
+    slug: "skynetlabs-dental-flagship",
+    title: "Grand Mercer Dental · Atelier No. 1",
+    client: "Bespoke flagship · SoHo, New York",
+    niche: "Luxury Healthcare",
+    stack: ["Next.js 16", "Tailwind", "Vercel"],
+    outcome: "$50K-tier flagship demo. Distilled from niche-demo audit — zero template DNA.",
+    liveUrl: "https://skynetlabs-dental-flagship.vercel.app",
   },
   {
-    title: "KSA retail Signal catalog",
-    client: "Riyadh fashion boutique",
-    stack: ["Signal API", "n8n", "Shopify"],
-    outcome: "47% reply→sale conversion. 800 SKUs synced live.",
-    thumb: "shopify",
-  },
-  {
-    title: "Wellness DNA flagship site",
-    client: "Vow Sanctuary — Asheville NC",
-    stack: ["Next.js 16", "Tailwind", "Vercel", "Sanity"],
-    outcome: "Lighthouse 98/100. 3-day ship. $7K MRR pipeline.",
-    liveUrl: "https://vow-sanctuary.vercel.app",
-    githubUrl: "https://github.com/waseemnasir2k26/vow-sanctuary",
-    thumb: "next",
-  },
-  {
-    title: "GutReno LP + funnel",
-    client: "Functional medicine clinic",
-    stack: ["WordPress", "GHL", "Stripe", "Calendly"],
-    outcome: "12% landing→booked-consult. $4K/mo lead value.",
-    githubUrl: "https://github.com/waseemnasir2k26/gutreno-funnel",
-    thumb: "wp",
-  },
-  {
-    title: "Christelle French → English flow",
-    client: "Paris translation agency",
-    stack: ["n8n", "OpenAI", "DeepL", "Google Docs API"],
-    outcome: "60% turnaround cut. 200+ docs/month auto-routed.",
-    thumb: "ai",
-  },
-  {
-    title: "AEO content engine",
-    client: "SkynetLabs internal + 5 clients",
-    stack: ["Claude API", "n8n", "Next.js", "Pinecone"],
-    outcome: "Cited by Perplexity + ChatGPT for 14 brand queries.",
-    githubUrl: "https://github.com/waseemnasir2k26/skynet-aeo-engine",
-    thumb: "ai",
-  },
-  {
-    title: "26-niche demo battery",
-    client: "SkynetLabs sales arm",
+    slug: "skynet-flagship-realestate",
+    title: "Adrián Vega · Compass Beverly Hills",
+    client: "Luxury real estate flagship",
+    niche: "Luxury Real Estate",
     stack: ["Next.js", "Tailwind", "Vercel"],
-    outcome: "26 deployable niche sites, 7-day swap-in per client.",
-    githubUrl: "https://github.com/waseemnasir2k26/wt-skynet",
-    thumb: "next",
+    outcome: "Serhant-tier bespoke build. Listings + insights + SEO sitemap.",
+    liveUrl: "https://skynet-flagship-realestate.vercel.app",
+  },
+  {
+    slug: "auberlin-estate-flagship",
+    title: "Auberlin Estate · Hudson Valley Wedding Venue",
+    client: "Heritage event venue · Est. 1908",
+    niche: "Event Venue / Weddings",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    outcome: "Heritage-brand flagship. Editorial design + booking funnel.",
+    liveUrl: "https://auberlin-estate-flagship.vercel.app",
+  },
+  {
+    slug: "restaurant-mu-two",
+    title: "Ostería Marquez · Modern Mediterranean Chicago",
+    client: "Restaurant flagship",
+    niche: "Restaurant / Hospitality",
+    stack: ["Next.js", "Tailwind", "Resy"],
+    outcome: "Bespoke restaurant build w/ reservations + gallery + IG embed.",
+    liveUrl: "https://restaurant-mu-two.vercel.app",
+  },
+  {
+    slug: "skynetlabs-law-demo",
+    title: "Harrington Lex LLP · Chicago Trial Boutique",
+    client: "Law firm flagship",
+    niche: "Legal / Litigation",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    outcome: "Commercial litigation boutique. SEO sitemap + robots tuned.",
+    liveUrl: "https://skynetlabs-law-demo.vercel.app",
+  },
+  {
+    slug: "skynetlabs-ariapura-relaunch",
+    title: "Ariapura · Sanificazione Condizionatori",
+    client: "Italian HVAC client · Bologna",
+    niche: "HVAC / Sanitation (IT)",
+    stack: ["Next.js", "Tailwind", "Italian-language SEO"],
+    outcome: "Live client relaunch. Multilingual conversion funnel.",
+    liveUrl: "https://skynetlabs-ariapura-relaunch.vercel.app",
+  },
+  {
+    slug: "skynetlabs-medical-demo",
+    title: "Riverside Internal Medicine · Concierge Care",
+    client: "Concierge healthcare · Chicago",
+    niche: "Concierge Healthcare",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    outcome: "Concierge medicine flagship with patient booking funnel.",
+    liveUrl: "https://skynetlabs-medical-demo.vercel.app",
+  },
+  {
+    slug: "skynetlabs-clinic",
+    title: "CQC Compliance & Safeguarding Consultancy",
+    client: "UK healthcare compliance",
+    niche: "Healthcare Compliance (UK)",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    outcome: "CQC consultancy site. Compliance-grade copy + lead capture.",
+    liveUrl: "https://skynetlabs-clinic.vercel.app",
+  },
+  {
+    slug: "skynetlabs-ariapura-cinema",
+    title: "Ariapura · Cinema Concept",
+    client: "Boutique cinema/villa concept",
+    niche: "Hospitality / Cinema",
+    stack: ["Next.js", "Tailwind", "Vercel"],
+    outcome: "Concept demo for villa-cinema hybrid. Immersive editorial layout.",
+    liveUrl: "https://skynetlabs-ariapura-cinema.vercel.app",
+  },
+  {
+    slug: "skynetjoe",
+    title: "SkynetLabs · Agency HQ",
+    client: "SkynetLabs (in-house · Bali + Lahore)",
+    niche: "Agency / Automation",
+    stack: ["Next.js 16", "GHL", "n8n", "Vercel"],
+    outcome: "Main agency site. AEO-tuned. $5K-$15K niche pitch funnel.",
+    liveUrl: "https://skynetjoe.com",
   },
 ];
-
-const thumbColor: Record<Gig["thumb"], string> = {
-  n8n: "from-rose-500 via-rose-600 to-pink-700",
-  wp: "from-sky-500 via-blue-600 to-indigo-700",
-  next: "from-slate-700 via-slate-900 to-black",
-  shopify: "from-emerald-500 via-green-600 to-teal-700",
-  ghl: "from-amber-500 via-orange-600 to-rose-700",
-  ai: "from-violet-500 via-purple-600 to-fuchsia-700",
-};
-
-const thumbLabel: Record<Gig["thumb"], string> = {
-  n8n: "n8n",
-  wp: "WordPress",
-  next: "Next.js",
-  shopify: "Shopify",
-  ghl: "GoHighLevel",
-  ai: "AI / Claude",
-};
 
 export default function WorkShowcase() {
   return (
@@ -125,19 +143,18 @@ export default function WorkShowcase() {
       <div className="container-x px-6 relative z-10">
         <div className="max-w-3xl mb-10">
           <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
-            Real gigs, real repos
+            Real gigs, real screenshots
           </p>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-4 leading-[1.05]">
-            55+ builds shipped.{" "}
+            Every site shipped.{" "}
             <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-              GitHub open.
+              Click any tile.
             </span>
           </h1>
           <p className="text-base md:text-lg text-gray-200 leading-relaxed">
-            Source-controlled deliverables. Click any tile to see the actual repo
-            or live deploy — no PDF case-study theater. The video below shows how
-            a WordPress plugin gets built end-to-end using Claude Code in a
-            single afternoon.
+            Live screenshots, not stock mockups. Every tile links to the
+            deployed site. Built solo from Bali + Lahore. Video below walks
+            through one being built end-to-end in Claude Code.
           </p>
         </div>
 
@@ -151,30 +168,42 @@ export default function WorkShowcase() {
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
           {GIGS.map((g) => (
-            <article
-              key={g.title}
-              className="group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-cyan-400/60 transition-all hover:-translate-y-1"
+            <a
+              key={g.slug}
+              href={g.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-cyan-400/60 transition-all hover:-translate-y-1 flex flex-col"
             >
-              <div
-                className={`relative aspect-video bg-gradient-to-br ${thumbColor[g.thumb]} p-4 flex flex-col justify-between`}
-              >
-                <span className="self-start text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-black/40 text-white/90 backdrop-blur">
-                  {thumbLabel[g.thumb]}
+              <div className="relative aspect-video bg-black/40 overflow-hidden">
+                <Image
+                  src={`/portfolio/${g.slug}.jpg`}
+                  alt={`${g.title} — live screenshot`}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-black/55 text-white/95 backdrop-blur border border-white/10">
+                  {g.niche}
                 </span>
-                <div className="text-white/90 text-xs font-mono opacity-70 group-hover:opacity-100 transition">
-                  {g.client}
-                </div>
+                <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded bg-cyan-400/15 text-cyan-100 border border-cyan-300/40 backdrop-blur opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ExternalLink className="w-3 h-3" /> Live
+                </span>
               </div>
-              <div className="p-5">
-                <h3 className="text-white font-bold mb-2 leading-tight">
+              <div className="p-5 flex-1 flex flex-col">
+                <h3 className="text-white font-bold mb-1 leading-tight">
                   {g.title}
                 </h3>
-                <p className="text-sm text-gray-300 mb-3 leading-relaxed">
+                <p className="text-[11px] text-cyan-300/80 font-mono mb-3 truncate">
+                  {g.client}
+                </p>
+                <p className="text-sm text-gray-300 mb-4 leading-relaxed">
                   {g.outcome}
                 </p>
-                <div className="flex flex-wrap gap-1.5 mb-4">
+                <div className="flex flex-wrap gap-1.5 mt-auto">
                   {g.stack.map((s) => (
                     <span
                       key={s}
@@ -184,30 +213,8 @@ export default function WorkShowcase() {
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-2 text-xs">
-                  {g.githubUrl && (
-                    <a
-                      href={g.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-gray-200 hover:border-cyan-400 hover:text-cyan-200 transition"
-                    >
-                      <Github className="w-3.5 h-3.5" /> Repo
-                    </a>
-                  )}
-                  {g.liveUrl && (
-                    <a
-                      href={g.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-cyan-400/10 border border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/20 transition"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" /> Live
-                    </a>
-                  )}
-                </div>
               </div>
-            </article>
+            </a>
           ))}
         </div>
 
@@ -252,7 +259,7 @@ export default function WorkShowcase() {
                 boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
               }}
             >
-              <Play className="w-4 h-4" /> Apply for a call
+              <Play className="w-4 h-4" /> Book free audit
             </a>
           </div>
         </div>
