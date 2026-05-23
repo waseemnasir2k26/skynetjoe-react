@@ -24,16 +24,28 @@ export const SITE = {
   },
 } as const;
 
-export type NavItem = { label: string; href: string; hasMega?: boolean };
+export type NavSubItem = { label: string; href: string; desc?: string };
+export type NavItem = {
+  label: string;
+  href: string;
+  hasMega?: boolean;
+  subItems?: NavSubItem[];
+};
 export const NAV_PRIMARY: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services", hasMega: true },
-  { label: "Locations", href: "/locations" },
-  { label: "Work", href: "/portfolio" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "News", href: "/news" },
-  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Services", href: "/services", hasMega: true },
+  {
+    label: "Portfolio",
+    href: "/portfolio",
+    subItems: [
+      { label: "Recent Projects", href: "/portfolio", desc: "Live screenshots of every shipped build" },
+      { label: "Case Studies", href: "/case-studies", desc: "Deep dives — problem, fix, numbers" },
+      { label: "Locations", href: "/locations", desc: "Service coverage map" },
+    ],
+  },
+  { label: "Latest News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
 

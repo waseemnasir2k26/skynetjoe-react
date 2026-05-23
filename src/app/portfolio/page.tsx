@@ -1,24 +1,17 @@
-import fs from "fs";
-import path from "path";
 import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import WorkShowcase from "@/components/sections/WorkShowcase";
 
-const html = fs.readFileSync(
-  path.join(process.cwd(), "content", "portfolio.html"),
-  "utf8"
-);
-
 export const metadata: Metadata = {
-  title: "Work — 55+ shipped builds, GitHub-open | SkynetLabs",
+  title: "Portfolio — Recent Projects | SkynetLabs",
   description:
-    "Real client gigs from SkynetLabs: dental no-show flow, EU logistics, KSA retail, wellness funnels, AEO engines. Source-controlled. Click any repo. Built solo from Bali + Lahore by Waseem Nasir.",
+    "Live screenshots of every shipped SkynetLabs build: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. 20+ deployed sites. Built solo from Bali by Waseem Nasir.",
   alternates: { canonical: `${SITE.url}/portfolio` },
   openGraph: {
-    title: "SkynetLabs Work — 55+ builds, repos open",
+    title: "SkynetLabs Portfolio — Recent Projects",
     description:
-      "Visual showcase of shipped builds. GitHub-open, live demos linked. Built solo by Waseem Nasir.",
+      "Live screenshots of 20+ shipped builds. Click any tile for the deployed site.",
     url: `${SITE.url}/portfolio`,
     type: "website",
   },
@@ -27,9 +20,9 @@ export const metadata: Metadata = {
 const schema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: "SkynetLabs Portfolio",
+  name: "SkynetLabs Portfolio — Recent Projects",
   description:
-    "Twelve anonymized builds shipped by SkynetLabs across nine countries.",
+    "Live screenshots of every shipped build across nine countries.",
   url: `${SITE.url}/portfolio`,
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },
@@ -42,7 +35,6 @@ export default function PortfolioPage() {
     <>
       <JsonLd data={schema} />
       <WorkShowcase />
-      <div dangerouslySetInnerHTML={{ __html: html }} />
     </>
   );
 }

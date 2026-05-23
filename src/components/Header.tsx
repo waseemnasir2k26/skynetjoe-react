@@ -50,8 +50,8 @@ export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
   const closeTimer = useRef<number | null>(null);
 
   if (pathname?.startsWith("/lp/")) return null;
@@ -64,22 +64,22 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    setMegaOpen(false);
+    setOpenDropdown(null);
     setMobileOpen(false);
-    setMobileServicesOpen(false);
+    setMobileSubOpen(null);
   }, [pathname]);
 
-  const openMega = () => {
+  const openDrop = (key: string) => {
     if (closeTimer.current) {
       window.clearTimeout(closeTimer.current);
       closeTimer.current = null;
     }
-    setMegaOpen(true);
+    setOpenDropdown(key);
   };
 
-  const scheduleCloseMega = () => {
+  const scheduleClose = () => {
     if (closeTimer.current) window.clearTimeout(closeTimer.current);
-    closeTimer.current = window.setTimeout(() => setMegaOpen(false), 180);
+    closeTimer.current = window.setTimeout(() => setOpenDropdown(null), 180);
   };
 
   return (
@@ -99,108 +99,152 @@ export default function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center">
-          {NAV_PRIMARY.map((item) => (
-            <div
-              key={item.href}
-              className="relative"
-              onMouseEnter={() => item.hasMega && openMega()}
-              onMouseLeave={() => item.hasMega && scheduleCloseMega()}
-            >
-              <Link
-                href={item.href}
-                className="flex items-center gap-1 px-3.5 py-2 text-[13px] font-medium text-fg-muted hover:text-fg transition-colors"
-                onClick={() => item.hasMega && setMegaOpen(false)}
+          {NAV_PRIMARY.map((item) => {
+            const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
+            return (
+              <div
+                key={item.href}
+                className="relative"
+                onMouseEnter={() => hasDrop && openDrop(item.href)}
+                onMouseLeave={() => hasDrop && scheduleClose()}
               >
-                {item.label}
-                {item.hasMega && (
-                  <ChevronDown
-                    className={`w-3 h-3 opacity-50 transition-transform ${
-                      megaOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                )}
-              </Link>
-
-              {item.hasMega && megaOpen && (
-                <div
-                  className="absolute top-full left-1/2 -translate-x-1/2 w-[1040px] pt-3"
-                  onMouseEnter={openMega}
-                  onMouseLeave={scheduleCloseMega}
+                <Link
+                  href={item.href}
+                  className="flex items-center gap-1 px-3.5 py-2 text-[13px] font-medium text-fg-muted hover:text-fg transition-colors"
+                  onClick={() => hasDrop && setOpenDropdown(null)}
                 >
+                  {item.label}
+                  {hasDrop && (
+                    <ChevronDown
+                      className={`w-3 h-3 opacity-50 transition-transform ${
+                        openDropdown === item.href ? "rotate-180" : ""
+                      }`}
+                    />
+                  )}
+                </Link>
+
+                {/* Services mega-menu */}
+                {item.hasMega && openDropdown === item.href && (
                   <div
-                    className="rounded-2xl p-7 grid grid-cols-4 gap-5 shadow-2xl"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(10,32,52,0.98) 0%, rgba(6,24,39,0.98) 100%)",
-                      border: "1px solid rgba(126,228,255,0.14)",
-                      boxShadow:
-                        "0 30px 80px -10px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02) inset",
-                    }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-[1040px] pt-3"
+                    onMouseEnter={() => openDrop(item.href)}
+                    onMouseLeave={scheduleClose}
                   >
-                    {SERVICE_CATEGORIES.map((cat) => (
-                      <div key={cat.name}>
-                        <div className="flex items-center gap-2 mb-4 pb-2.5 border-b border-white/[0.06]">
-                          <span className="w-1 h-1 rounded-full bg-skynet-primary-light" />
-                          <h4 className="text-[10.5px] uppercase tracking-[0.18em] text-skynet-primary-light font-semibold">
-                            {cat.name}
-                          </h4>
-                        </div>
-                        <ul className="space-y-1">
-                          {cat.services.map((svc) => {
-                            const Icon = ICONS[svc.icon];
-                            return (
-                              <li key={svc.slug}>
-                                <Link
-                                  href={`/services/${svc.slug}`}
-                                  className="group flex items-start gap-2.5 p-2 -mx-2 rounded-lg hover:bg-white/[0.04] transition-colors"
-                                >
-                                  {Icon && (
-                                    <span className="flex-shrink-0 mt-0.5 w-7 h-7 rounded-md flex items-center justify-center bg-skynet-primary/10 border border-skynet-primary/20 group-hover:bg-skynet-primary/20 group-hover:border-skynet-primary/40 transition-colors">
-                                      <Icon className="w-3.5 h-3.5 text-skynet-primary-light" />
-                                    </span>
-                                  )}
-                                  <span className="min-w-0">
-                                    <span className="block text-[13px] font-medium text-fg leading-tight">
-                                      {svc.label}
-                                    </span>
-                                    <span className="block text-[11px] text-fg-muted leading-snug mt-0.5 line-clamp-2">
-                                      {svc.desc}
-                                    </span>
-                                  </span>
-                                </Link>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                    ))}
                     <div
-                      className="col-span-4 mt-3 pt-4 flex items-center justify-between text-sm"
-                      style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+                      className="rounded-2xl p-7 grid grid-cols-4 gap-5 shadow-2xl"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(10,32,52,0.98) 0%, rgba(6,24,39,0.98) 100%)",
+                        border: "1px solid rgba(126,228,255,0.14)",
+                        boxShadow:
+                          "0 30px 80px -10px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02) inset",
+                      }}
                     >
-                      <div className="flex items-center gap-4 text-[12px] text-fg-muted">
-                        <span className="flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                          16 services
-                        </span>
-                        <span className="text-fg-faint">·</span>
-                        <span>Ship in 5–14 days</span>
-                        <span className="text-fg-faint">·</span>
-                        <span>Solo operator, no agency tax</span>
-                      </div>
-                      <Link
-                        href="/services"
-                        className="inline-flex items-center gap-1.5 text-[13px] text-skynet-primary-light hover:text-skynet-primary font-semibold group"
+                      {SERVICE_CATEGORIES.map((cat) => (
+                        <div key={cat.name}>
+                          <div className="flex items-center gap-2 mb-4 pb-2.5 border-b border-white/[0.06]">
+                            <span className="w-1 h-1 rounded-full bg-skynet-primary-light" />
+                            <h4 className="text-[10.5px] uppercase tracking-[0.18em] text-skynet-primary-light font-semibold">
+                              {cat.name}
+                            </h4>
+                          </div>
+                          <ul className="space-y-1">
+                            {cat.services.map((svc) => {
+                              const Icon = ICONS[svc.icon];
+                              return (
+                                <li key={svc.slug}>
+                                  <Link
+                                    href={`/services/${svc.slug}`}
+                                    className="group flex items-start gap-2.5 p-2 -mx-2 rounded-lg hover:bg-white/[0.04] transition-colors"
+                                  >
+                                    {Icon && (
+                                      <span className="flex-shrink-0 mt-0.5 w-7 h-7 rounded-md flex items-center justify-center bg-skynet-primary/10 border border-skynet-primary/20 group-hover:bg-skynet-primary/20 group-hover:border-skynet-primary/40 transition-colors">
+                                        <Icon className="w-3.5 h-3.5 text-skynet-primary-light" />
+                                      </span>
+                                    )}
+                                    <span className="min-w-0">
+                                      <span className="block text-[13px] font-medium text-fg leading-tight">
+                                        {svc.label}
+                                      </span>
+                                      <span className="block text-[11px] text-fg-muted leading-snug mt-0.5 line-clamp-2">
+                                        {svc.desc}
+                                      </span>
+                                    </span>
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      ))}
+                      <div
+                        className="col-span-4 mt-3 pt-4 flex items-center justify-between text-sm"
+                        style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
                       >
-                        View all services
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-                      </Link>
+                        <div className="flex items-center gap-4 text-[12px] text-fg-muted">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            16 services
+                          </span>
+                          <span className="text-fg-faint">·</span>
+                          <span>Ship in 5–14 days</span>
+                          <span className="text-fg-faint">·</span>
+                          <span>Solo operator, no agency tax</span>
+                        </div>
+                        <Link
+                          href="/services"
+                          className="inline-flex items-center gap-1.5 text-[13px] text-skynet-primary-light hover:text-skynet-primary font-semibold group"
+                        >
+                          View all services
+                          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+
+                {/* Simple subItems dropdown */}
+                {item.subItems && openDropdown === item.href && (
+                  <div
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-[320px] pt-3"
+                    onMouseEnter={() => openDrop(item.href)}
+                    onMouseLeave={scheduleClose}
+                  >
+                    <div
+                      className="rounded-2xl p-2 shadow-2xl"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(10,32,52,0.98) 0%, rgba(6,24,39,0.98) 100%)",
+                        border: "1px solid rgba(126,228,255,0.14)",
+                        boxShadow:
+                          "0 30px 80px -10px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02) inset",
+                      }}
+                    >
+                      {item.subItems.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          className="group flex items-start gap-3 p-3 rounded-lg hover:bg-white/[0.04] transition-colors"
+                        >
+                          <span className="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-skynet-primary-light group-hover:bg-skynet-primary transition-colors" />
+                          <span className="min-w-0">
+                            <span className="block text-[13px] font-semibold text-fg leading-tight">
+                              {sub.label}
+                            </span>
+                            {sub.desc && (
+                              <span className="block text-[11px] text-fg-muted leading-snug mt-0.5">
+                                {sub.desc}
+                              </span>
+                            )}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
@@ -232,22 +276,34 @@ export default function Header() {
       {mobileOpen && (
         <div className="lg:hidden backdrop-blur-xl bg-[#061827]/95 border-t border-white/[0.08] max-h-[calc(100vh-64px)] overflow-y-auto">
           <nav className="container-x px-6 py-6 flex flex-col gap-1">
-            {NAV_PRIMARY.map((item) =>
-              item.hasMega ? (
+            {NAV_PRIMARY.map((item) => {
+              const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
+              const open = mobileSubOpen === item.href;
+              if (!hasDrop) {
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="py-3 text-base font-medium text-fg hover:text-skynet-primary-light border-b border-white/[0.06]"
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+              return (
                 <div key={item.href} className="border-b border-white/[0.06]">
                   <button
-                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    onClick={() => setMobileSubOpen(open ? null : item.href)}
                     className="w-full flex items-center justify-between py-3 text-base font-medium text-fg"
-                    aria-expanded={mobileServicesOpen}
+                    aria-expanded={open}
                   >
                     <span>{item.label}</span>
                     <ChevronDown
-                      className={`w-4 h-4 transition-transform ${
-                        mobileServicesOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`}
                     />
                   </button>
-                  {mobileServicesOpen && (
+                  {open && item.hasMega && (
                     <div className="pb-4 pl-1 space-y-4">
                       {SERVICE_CATEGORIES.map((cat) => (
                         <div key={cat.name}>
@@ -285,18 +341,28 @@ export default function Header() {
                       </Link>
                     </div>
                   )}
+                  {open && item.subItems && (
+                    <div className="pb-4 pl-1 space-y-1">
+                      {item.subItems.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="block py-2 text-sm text-fg-muted hover:text-skynet-primary-light"
+                        >
+                          {sub.label}
+                          {sub.desc && (
+                            <span className="block text-[11px] text-fg-faint mt-0.5">
+                              {sub.desc}
+                            </span>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="py-3 text-base font-medium text-fg hover:text-skynet-primary-light border-b border-white/[0.06]"
-                >
-                  {item.label}
-                </Link>
-              )
-            )}
+              );
+            })}
             <div className="mt-5">
               <Link
                 href="/discovery-call"
