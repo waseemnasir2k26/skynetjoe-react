@@ -512,16 +512,16 @@ export default function Generator({ calUrl }: { calUrl: string }) {
       <div
         className="rounded-3xl p-6 md:p-8 mb-6"
         style={{
-          background: "rgba(10, 45, 74, 0.55)",
-          border: "1px solid rgba(126, 228, 255, 0.22)",
+          background: "var(--cream-2)",
+          border: "1px solid rgba(26,26,26,0.18)",
           backdropFilter: "blur(14px)",
         }}
       >
         <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-          <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold">
+          <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold">
             1. Paste your raw notes
           </p>
-          <span className="text-xs text-gray-400 tabular-nums">
+          <span className="text-xs text-[var(--ink-faint)] tabular-nums">
             {wordCount} words · {charCount.toLocaleString()} / 8,000 chars
           </span>
         </div>
@@ -537,7 +537,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         {/* Controls */}
         <div className="grid sm:grid-cols-3 gap-4 mt-5">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1.5">
+            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
               Audience
             </label>
             <select
@@ -557,7 +557,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             </select>
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1.5">
+            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
               Desired length · {inputs.length} words
             </label>
             <input
@@ -579,7 +579,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             />
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1.5">
+            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
               Tone
             </label>
             <select
@@ -603,9 +603,9 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             type="button"
             onClick={generate}
             disabled={!canGenerate}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-white disabled:opacity-40 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-[var(--ink)] disabled:opacity-40 disabled:cursor-not-allowed"
             style={{
-              background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+              background: "var(--ink)",
             }}
           >
             {generating ? (
@@ -622,7 +622,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             <button
               type="button"
               onClick={generate}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-white/20 text-white/90 hover:bg-white/10 transition"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-[rgba(26,26,26,0.18)] text-[var(--ink-2)] hover:bg-[var(--cream-2)] transition"
             >
               Regenerate
             </button>
@@ -630,7 +630,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         </div>
 
         {inputs.text.trim().length < 40 && (
-          <p className="mt-3 text-xs text-amber-300/90">
+          <p className="mt-3 text-xs text-[var(--terracotta)]/90">
             Paste at least 40 characters of text to enable generation.
           </p>
         )}
@@ -642,15 +642,15 @@ export default function Generator({ calUrl }: { calUrl: string }) {
           <div
             className="rounded-3xl p-6 md:p-8 mb-6"
             style={{
-              background: "rgba(10, 45, 74, 0.65)",
-              border: "1px solid rgba(126, 228, 255, 0.28)",
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.18)",
               backdropFilter: "blur(14px)",
             }}
           >
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-2">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-2">
               2. Pick the format you need
             </p>
-            <h3 className="text-xl md:text-2xl font-extrabold text-white mb-5">
+            <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-5">
               {bundle.title}
             </h3>
 
@@ -669,14 +669,14 @@ export default function Generator({ calUrl }: { calUrl: string }) {
                       active
                         ? {
                             background:
-                              "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                              "var(--ink)",
                             color: "#fff",
-                            border: "1px solid rgba(126, 228, 255, 0.35)",
+                            border: "1px solid rgba(26,26,26,0.18)",
                           }
                         : {
                             background: "rgba(6, 24, 39, 0.55)",
                             color: "rgba(203, 213, 225, 0.85)",
-                            border: "1px solid rgba(126, 228, 255, 0.18)",
+                            border: "1px solid rgba(26,26,26,0.12)",
                           }
                     }
                   >
@@ -692,16 +692,16 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             <div
               className="rounded-2xl p-4 sm:p-5"
               style={{
-                background: "rgba(6, 24, 39, 0.65)",
-                border: "1px solid rgba(126, 228, 255, 0.18)",
+                background: "rgba(26,26,26,0.65)",
+                border: "1px solid rgba(26,26,26,0.12)",
               }}
             >
               {activeTab === "tldr" && (
                 <div>
-                  <ul className="space-y-2 text-base text-gray-100 leading-relaxed list-none">
+                  <ul className="space-y-2 text-base text-[var(--ink)] leading-relaxed list-none">
                     {bundle.tldr.bullets.map((b, i) => (
                       <li key={i} className="flex gap-2">
-                        <span className="text-cyan-300">•</span>
+                        <span className="text-[var(--terracotta)]">•</span>
                         <span>{b}</span>
                       </li>
                     ))}
@@ -711,39 +711,39 @@ export default function Generator({ calUrl }: { calUrl: string }) {
 
               {activeTab === "email" && (
                 <div className="space-y-3">
-                  <p className="text-xs uppercase tracking-wider text-cyan-300/80 font-semibold">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold">
                     Subject
                   </p>
-                  <p className="text-base text-white font-semibold">
+                  <p className="text-base text-[var(--ink)] font-semibold">
                     {bundle.email.subject}
                   </p>
-                  <p className="text-xs uppercase tracking-wider text-cyan-300/80 font-semibold mt-3">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mt-3">
                     Body
                   </p>
-                  <pre className="text-sm text-gray-100 leading-relaxed whitespace-pre-wrap font-sans">
+                  <pre className="text-sm text-[var(--ink)] leading-relaxed whitespace-pre-wrap font-sans">
                     {bundle.email.body}
                   </pre>
                 </div>
               )}
 
               {activeTab === "slack" && (
-                <pre className="text-sm text-gray-100 leading-relaxed whitespace-pre-wrap font-sans">
+                <pre className="text-sm text-[var(--ink)] leading-relaxed whitespace-pre-wrap font-sans">
                   {bundle.slack.body}
                 </pre>
               )}
 
               {activeTab === "deck" && (
                 <div>
-                  <p className="text-xs uppercase tracking-wider text-cyan-300/80 font-semibold mb-2">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-2">
                     Slide title
                   </p>
-                  <h4 className="text-xl md:text-2xl font-extrabold text-white mb-4">
+                  <h4 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-4">
                     {bundle.deck.title}
                   </h4>
-                  <ul className="space-y-2.5 text-base text-gray-100 leading-relaxed">
+                  <ul className="space-y-2.5 text-base text-[var(--ink)] leading-relaxed">
                     {bundle.deck.bullets.map((b, i) => (
                       <li key={i} className="flex gap-2">
-                        <span className="text-cyan-300 font-bold">{i + 1}.</span>
+                        <span className="text-[var(--terracotta)] font-bold">{i + 1}.</span>
                         <span>{b}</span>
                       </li>
                     ))}
@@ -752,19 +752,19 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               )}
 
               {activeTab === "investor" && (
-                <div className="space-y-4 text-sm md:text-base text-gray-100 leading-relaxed">
+                <div className="space-y-4 text-sm md:text-base text-[var(--ink)] leading-relaxed">
                   <Section label="Problem">{bundle.investor.problem}</Section>
                   <Section label="Solution">{bundle.investor.solution}</Section>
                   <Section label="Traction">{bundle.investor.traction}</Section>
                   <Section label="Ask">{bundle.investor.ask}</Section>
                   <div>
-                    <p className="text-[11px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1.5">
+                    <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
                       Next steps
                     </p>
                     <ul className="space-y-1.5">
                       {bundle.investor.next.map((b, i) => (
                         <li key={i} className="flex gap-2">
-                          <span className="text-cyan-300">→</span>
+                          <span className="text-[var(--terracotta)]">→</span>
                           <span>{b}</span>
                         </li>
                       ))}
@@ -775,7 +775,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             </div>
 
             <div className="flex items-center justify-between flex-wrap gap-3 mt-4">
-              <p className="text-xs text-gray-400 tabular-nums">
+              <p className="text-xs text-[var(--ink-faint)] tabular-nums">
                 {(() => {
                   if (activeTab === "tldr")
                     return `${bundle.tldr.words} words · ${
@@ -793,7 +793,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               <button
                 type="button"
                 onClick={() => onCopy(activeTab)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white border border-cyan-300/40 bg-cyan-300/10 hover:bg-cyan-300/20 transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition"
               >
                 {copied === activeTab ? (
                   <Check className="w-4 h-4" />
@@ -813,17 +813,17 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             style={{
               background:
                 "linear-gradient(135deg, rgba(30, 136, 229, 0.18) 0%, rgba(20, 184, 166, 0.18) 100%)",
-              border: "1px solid rgba(126, 228, 255, 0.30)",
+              border: "1px solid rgba(26,26,26,0.18)",
             }}
           >
             <div className="max-w-xl">
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-2">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-2">
                 Want a REAL AI-powered summary?
               </p>
-              <h3 className="text-xl md:text-2xl font-extrabold text-white mb-2">
+              <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-2">
                 Book a 30-min call to scope a custom prompt for your workflow.
               </h3>
-              <p className="text-sm text-gray-300 leading-relaxed">
+              <p className="text-sm text-[var(--ink-2)] leading-relaxed">
                 This tool is a structured-prettifier. We&apos;ll scope a real
                 LLM pipeline that ingests your transcripts and writes in your
                 voice every time. Free call. No pitch unless the math works.
@@ -833,9 +833,9 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               href={calUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-white whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--ink)] whitespace-nowrap"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                background: "var(--ink)",
               }}
             >
               <CalendarCheck className="w-4 h-4" />
@@ -846,7 +846,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         )}
 
         {bundle && (
-          <p className="mt-4 text-[11px] text-gray-500 inline-flex items-center gap-1.5">
+          <p className="mt-4 text-[11px] text-[var(--ink-faint)] inline-flex items-center gap-1.5">
             <Sparkles className="w-3 h-3" />
             Generated locally. Nothing was sent to a server.
           </p>
@@ -857,7 +857,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         .esg-input {
           width: 100%;
           background: rgba(6, 24, 39, 0.55);
-          border: 1px solid rgba(126, 228, 255, 0.22);
+          border: 1px solid rgba(26,26,26,0.18);
           border-radius: 0.75rem;
           padding: 0.7rem 0.9rem;
           color: #fff;
@@ -868,8 +868,8 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         }
         .esg-input::placeholder { color: rgba(203, 213, 225, 0.45); }
         .esg-input:focus {
-          border-color: rgba(94, 234, 212, 0.7);
-          box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.15);
+          border-color: rgba(198,107,63,0.50);
+          box-shadow: 0 0 0 3px rgba(198,107,63,0.15);
         }
         .esg-textarea { resize: vertical; min-height: 180px; font-family: inherit; }
 
@@ -886,23 +886,23 @@ export default function Generator({ calUrl }: { calUrl: string }) {
           border-radius: 999px;
           background: linear-gradient(
             90deg,
-            #5eead4 0%,
-            #7ee4ff var(--rc-fill, 50%),
-            rgba(126, 228, 255, 0.15) var(--rc-fill, 50%),
-            rgba(126, 228, 255, 0.15) 100%
+            var(--terracotta) 0%,
+            var(--terracotta) var(--rc-fill, 50%),
+            rgba(26,26,26,0.12) var(--rc-fill, 50%),
+            rgba(26,26,26,0.12) 100%
           );
-          border: 1px solid rgba(126, 228, 255, 0.30);
+          border: 1px solid rgba(26,26,26,0.18);
         }
         .rc-range::-moz-range-track {
           height: 8px;
           border-radius: 999px;
-          background: rgba(126, 228, 255, 0.15);
-          border: 1px solid rgba(126, 228, 255, 0.30);
+          background: rgba(26,26,26,0.12);
+          border: 1px solid rgba(26,26,26,0.18);
         }
         .rc-range::-moz-range-progress {
           height: 8px;
           border-radius: 999px;
-          background: linear-gradient(90deg, #5eead4 0%, #7ee4ff 100%);
+          background: linear-gradient(90deg, var(--terracotta) 0%, var(--terracotta) 100%);
         }
         .rc-range::-webkit-slider-thumb {
           -webkit-appearance: none;
@@ -911,19 +911,19 @@ export default function Generator({ calUrl }: { calUrl: string }) {
           height: 22px;
           border-radius: 50%;
           background: #ffffff;
-          border: 2px solid #14B8A6;
+          border: 2px solid var(--terracotta);
           margin-top: -8px;
           box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(126, 228, 255, 0.12);
+            0 0 0 4px rgba(26,26,26,0.12);
         }
         .rc-range::-moz-range-thumb {
           width: 22px;
           height: 22px;
           border-radius: 50%;
           background: #ffffff;
-          border: 2px solid #14B8A6;
+          border: 2px solid var(--terracotta);
           box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(126, 228, 255, 0.12);
+            0 0 0 4px rgba(26,26,26,0.12);
         }
         @media (prefers-reduced-motion: reduce) {
           .rc-range::-webkit-slider-thumb,
@@ -937,7 +937,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1">
+      <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1">
         {label}
       </p>
       <p>{children}</p>
