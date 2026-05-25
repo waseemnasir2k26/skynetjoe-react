@@ -2,12 +2,12 @@ import Image from "next/image";
 import { MapPin, Users } from "lucide-react";
 
 const EVENTS = [
-  { src: "/community/event-1.jpg", caption: "Bali founders circle · May 2026" },
-  { src: "/community/event-2.jpg", caption: "Canggu builders meetup" },
+  { src: "/bali-trek/heart-frame-group.jpg", caption: "Heart-frame viewpoint · Bali trek crew · May 2026" },
+  { src: "/bali-trek/cafe-group.jpg", caption: "Cafe meetup with the Bali community" },
+  { src: "/bali-trek/selfie-friend.jpg", caption: "Trek viewpoint with a builder friend" },
   { src: "/community/event-3.jpg", caption: "Cross-border ops dinner" },
   { src: "/community/event-4.jpg", caption: "AI operators Bali · monthly" },
-  { src: "/community/event-5.jpg", caption: "Founder roundtable · Ubud" },
-  { src: "/community/event-6.jpg", caption: "Friday wrap · the network" },
+  { src: "/bali-trek/heart-frame-wide.jpg", caption: "Heart frame, jungle vista behind · Friday wrap" },
 ];
 
 export default function Community() {

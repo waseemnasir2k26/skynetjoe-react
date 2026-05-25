@@ -50,14 +50,14 @@ const TIMELINE = [
 ];
 
 const BALI_GRID = [
-  { src: "/portraits/waseem-cafe-arch.jpg", alt: "Canggu cafe — first deploy of the day", span: "row-span-2" },
-  { src: "/portraits/waseem-rooftop-coffee.jpg", alt: "Pererenan rooftop, morning coffee", span: "" },
+  { src: "/bali-trek/mountain-vista.jpg", alt: "Mountain vista from the May 2026 Bali trek", span: "row-span-2" },
+  { src: "/bali-trek/trek-path-palms.jpg", alt: "Trek path through Balinese palms", span: "" },
+  { src: "/bali-trek/jungle-stairs.jpg", alt: "Jungle stairs near the waterfall", span: "" },
+  { src: "/bali-trek/river-rocks.jpg", alt: "River rocks rest stop, mid-trek", span: "" },
+  { src: "/portraits/waseem-cafe-arch.jpg", alt: "Canggu cafe — first deploy of the day", span: "" },
   { src: "/portraits/waseem-poolside-laptop.jpg", alt: "Poolside push after a green migration", span: "" },
-  { src: "/portraits/waseem-veranda-thinking.jpg", alt: "Veranda — thinking through a flow", span: "" },
+  { src: "/bali-trek/villa-arrival.jpg", alt: "Morning at the Bali villa before the trek", span: "" },
   { src: "/portraits/waseem-rooftop-smile.jpg", alt: "Friday ship, phone on DND", span: "" },
-  { src: "/portraits/waseem-cafe-postit.jpg", alt: "Cafe postits — solving a routing problem", span: "" },
-  { src: "/portraits/waseem-garden-tropical.jpg", alt: "Tropical garden break", span: "" },
-  { src: "/portraits/waseem-cafe-smile.jpg", alt: "After a client demo lands", span: "" },
 ];
 
 export const metadata: Metadata = {
@@ -356,11 +356,12 @@ export default function AboutPage() {
               The builder life
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mt-2 mb-3">
-              Bali cafes. Rooftops. Deploys.
+              Bali treks. Cafes. Deploys.
             </h2>
             <p className="text-base text-fg-muted">
-              Same Waseem you&apos;d hire — actually here, actually shipping. No
-              stock photos. No agency Zoom mask.
+              Same Waseem you&apos;d hire — actually here, actually shipping.
+              Latest batch: a 24-May 2026 jungle trek with the Bali builder
+              crew. No stock photos. No agency Zoom mask.
             </p>
           </div>
 
