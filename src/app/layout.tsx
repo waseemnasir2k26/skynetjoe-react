@@ -11,6 +11,7 @@ import DiscoveryPopup from "@/components/DiscoveryPopup";
 import IncomingCallPopup from "@/components/IncomingCallPopup";
 import StickyBookCallBar from "@/components/cta/StickyBookCallBar";
 import ExitIntentModal from "@/components/cta/ExitIntentModal";
+import SocialProofPopup from "@/components/cta/SocialProofPopup";
 import "./globals.css";
 
 const lexend = Lexend({
@@ -115,6 +116,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StickyBookCallBar />
         <Suspense fallback={null}>
           <ExitIntentModal />
+        </Suspense>
+        <Suspense fallback={null}>
+          <SocialProofPopup />
         </Suspense>
       </body>
     </html>
