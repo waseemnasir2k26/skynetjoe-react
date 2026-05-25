@@ -14,22 +14,35 @@ const rawHtml = fs.readFileSync(
 // Wrap each `<article class="wn-x-card">…</article>` block in an anchor that
 // links to the matching detail page. Cards appear in numerical order (01..09)
 // inside `<section class="wn-x-grid">…</section>`, matching CASE_STUDIES
-// ordered by `position`. Each card body gets a "Read full case study →" link.
+// ordered by `position`. Also injects a real AI-generated hero image into the
+// `.wn-x-thumb` div (replaces the gradient placeholder + glyph text) and a
+// "Read full case study →" link inside each card body.
 function injectCardLinks(html: string): string {
   const ordered = [...CASE_STUDIES].sort((a, b) => a.position - b.position);
   let i = 0;
-  return html.replace(/<article class="wn-x-card">/g, () => {
-    const c = ordered[i++];
-    if (!c) return '<article class="wn-x-card">';
-    return `<article class="wn-x-card" data-slug="${c.slug}" style="position:relative;">`;
-  }).replace(/<\/ul>\s*<\/div>\s*<\/article>/g, (match) => {
-    // Append a "Read full case study" link inside each card body, just after
-    // the outcomes <ul>. We rely on the closing sequence being unique to cards.
-    const c = ordered.shift();
-    if (!c) return match;
-    const link = `</ul><a href="/case-studies/${c.slug}" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.85rem;color:#5EEAD4;font-size:.85rem;font-weight:600;text-decoration:none;">Read full case study →</a></div></article>`;
-    return link;
-  });
+  let j = 0;
+  return html
+    .replace(/<article class="wn-x-card">/g, () => {
+      const c = ordered[i++];
+      if (!c) return '<article class="wn-x-card">';
+      return `<article class="wn-x-card" data-slug="${c.slug}" style="position:relative;">`;
+    })
+    // Insert real image inside .wn-x-thumb (keep the number badge, drop the glyph)
+    .replace(
+      /<div class="wn-x-thumb (g\d+)" aria-hidden="true">\s*<span class="wn-x-thumb-num">([^<]+)<\/span>\s*<span class="wn-x-thumb-glyph">[^<]+<\/span>\s*<\/div>/g,
+      (_match, gClass, num) => {
+        const c = ordered[j++];
+        if (!c)
+          return `<div class="wn-x-thumb ${gClass}" aria-hidden="true"><span class="wn-x-thumb-num">${num}</span></div>`;
+        return `<a href="/case-studies/${c.slug}" class="wn-x-thumb ${gClass}" style="display:block;position:relative;text-decoration:none;"><img src="${c.coverImage}" alt="${c.clientName} — ${c.industry}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" /><span class="wn-x-thumb-num" style="z-index:3;">${num}</span><span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,24,39,0) 55%, rgba(6,24,39,0.55) 100%);z-index:2;"></span></a>`;
+      }
+    )
+    .replace(/<\/ul>\s*<\/div>\s*<\/article>/g, (match) => {
+      const c = ordered.shift();
+      if (!c) return match;
+      const link = `</ul><a href="/case-studies/${c.slug}" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.85rem;color:#5EEAD4;font-size:.85rem;font-weight:600;text-decoration:none;">Read full case study →</a></div></article>`;
+      return link;
+    });
 }
 
 const html = injectCardLinks(rawHtml);

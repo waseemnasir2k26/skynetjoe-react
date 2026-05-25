@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -35,7 +36,7 @@ export async function generateMetadata({
       type: "article",
       publishedTime: c.publishDate,
       authors: [SITE.founder],
-      images: [`${SITE.url}/og-default.png`],
+      images: [`${SITE.url}${c.coverImage}`],
     },
     twitter: {
       card: "summary_large_image",
@@ -69,6 +70,7 @@ export default async function CaseStudyDetail({
       name: SITE.founder,
       url: `${SITE.url}/author/waseem-nasir`,
     },
+    image: `${SITE.url}${c.coverImage}`,
     publisher: {
       "@type": "Organization",
       name: SITE.brand,
@@ -194,6 +196,36 @@ export default async function CaseStudyDetail({
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
               {c.oneLineOutcome}
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* HERO IMAGE */}
+      <section className="relative -mt-2">
+        <div className="container-x px-6 max-w-5xl mx-auto">
+          <div
+            className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl"
+            style={{
+              border: "1px solid rgba(0, 212, 255, 0.30)",
+              boxShadow: "0 30px 80px -12px rgba(0, 212, 255, 0.30)",
+            }}
+          >
+            <Image
+              src={c.coverImage}
+              alt={`${c.clientName} — ${c.industry}`}
+              fill
+              priority
+              sizes="(min-width: 1024px) 1024px, 100vw"
+              className="object-cover"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(6,24,39,0) 60%, rgba(6,24,39,0.55) 100%)",
+              }}
+            />
           </div>
         </div>
       </section>
