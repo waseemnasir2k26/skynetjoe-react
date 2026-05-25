@@ -55,9 +55,9 @@ export default function ReferralForm() {
 
   if (status === "success") {
     return (
-      <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-400/30 text-emerald-100">
+      <div className="p-6 rounded-2xl bg-emerald-500/10 border border-[rgba(198,107,63,0.30)] text-emerald-100">
         <p className="font-semibold mb-1">Got it. Thanks for the intro.</p>
-        <p className="text-sm text-emerald-200/80">
+        <p className="text-sm text-[var(--terracotta)]/80">
           I&apos;ll reach out within 24 hours. If they sign for a build, $200 credit
           lands on your next invoice automatically.
         </p>
@@ -99,7 +99,7 @@ export default function ReferralForm() {
         placeholder="founder@theircompany.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:bg-white/10 transition"
+        className="px-4 py-3 rounded-xl bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] text-[var(--ink)] placeholder-gray-500 focus:outline-none focus:border-[var(--terracotta)] focus:bg-[var(--cream-2)] transition"
       />
 
       <label className="sr-only" htmlFor="referrer-email">
@@ -111,13 +111,13 @@ export default function ReferralForm() {
         placeholder="your email (for the credit)"
         value={referrerEmail}
         onChange={(e) => setReferrerEmail(e.target.value)}
-        className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:bg-white/10 transition"
+        className="px-4 py-3 rounded-xl bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] text-[var(--ink)] placeholder-gray-500 focus:outline-none focus:border-[var(--terracotta)] focus:bg-[var(--cream-2)] transition"
       />
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 disabled:opacity-60 disabled:cursor-not-allowed transition"
+        className="px-6 py-3 rounded-xl font-semibold text-[var(--ink)] bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] hover:from-[var(--terracotta)] hover:to-[var(--ink)] disabled:opacity-60 disabled:cursor-not-allowed transition"
       >
         {status === "loading" ? "Sending…" : "Send intro"}
       </button>
