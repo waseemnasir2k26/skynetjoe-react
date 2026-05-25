@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import InlineCTABand from "@/components/cta/InlineCTABand";
+import ServicePricingTabs from "@/components/pricing/ServicePricingTabs";
+import PricingCalculator from "@/components/pricing/PricingCalculator";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "pricing.html"),
@@ -79,17 +81,21 @@ export default function PricingPage() {
     <>
       <JsonLd data={schema} />
       <JsonLd data={offerCatalog} />
-      <InlineCTABand
-        variant="dense"
-        headline="Not sure which tier fits?"
-        subhead="30-min strategy call — I tell you which tier (or refer you out). Yes/no in 8 hours."
-        primaryCTA={{
-          label: "Book a strategy call",
-          href: "/discovery-call",
-        }}
-        secondaryCTA={{ label: "See case studies", href: "/case-studies" }}
-      />
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div className="pt-24 md:pt-28">
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <ServicePricingTabs />
+        <PricingCalculator />
+        <InlineCTABand
+          variant="default"
+          headline="Not sure which tier fits?"
+          subhead="30-min strategy call — I tell you which tier (or refer you out). Yes/no in 8 hours."
+          primaryCTA={{
+            label: "Book a strategy call",
+            href: "/discovery-call",
+          }}
+          secondaryCTA={{ label: "See case studies", href: "/case-studies" }}
+        />
+      </div>
     </>
   );
 }
