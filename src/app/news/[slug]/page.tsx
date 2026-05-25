@@ -224,6 +224,7 @@ export default async function NewsArticlePage({
               priority
               sizes="(min-width: 1024px) 800px, 100vw"
               className="object-cover"
+              style={{ objectPosition: a.heroPosition ?? "center" }}
             />
             <span
               aria-hidden
@@ -273,31 +274,64 @@ export default async function NewsArticlePage({
       <section className="pb-16">
         <div className="container-x px-6 max-w-3xl mx-auto">
           <div
-            className="rounded-3xl p-7 md:p-9 text-center"
+            className="rounded-3xl p-7 md:p-9"
             style={{
               background:
                 "linear-gradient(135deg, rgba(30,136,229,0.18) 0%, rgba(20,184,166,0.14) 100%)",
               border: "1px solid rgba(0,212,255,0.30)",
             }}
           >
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-3">
-              Want this kind of build for your business?
-            </h2>
-            <p className="text-base text-fg-muted max-w-xl mx-auto mb-6">
-              Send a 3-sentence brief. Scope + price back in 8 hours.
-            </p>
-            <Link
-              href="/discovery-call"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
-              style={{
-                background:
-                  "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
-              }}
-            >
-              Book the audit
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            {a.cta ? (
+              <>
+                <div className="text-[11px] uppercase tracking-[0.18em] font-bold text-cyan-200 mb-3">
+                  Related service · {a.cta.serviceLabel}
+                </div>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-3 leading-tight">
+                  {a.cta.tagline}
+                </h2>
+                <div className="flex flex-wrap gap-3 mt-5">
+                  <Link
+                    href={a.cta.href}
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                      boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                    }}
+                  >
+                    {a.cta.label}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="/discovery-call"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white border border-white/15 bg-white/[0.04] hover:border-cyan-400/40 transition"
+                  >
+                    Book a strategy call
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <div className="text-center">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-3">
+                  Want this kind of build for your business?
+                </h2>
+                <p className="text-base text-fg-muted max-w-xl mx-auto mb-6">
+                  Send a 3-sentence brief. Scope + price back in 8 hours.
+                </p>
+                <Link
+                  href="/discovery-call"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                    boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                  }}
+                >
+                  Book the audit
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </section>

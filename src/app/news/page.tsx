@@ -156,6 +156,7 @@ export default function NewsIndex() {
                 priority
                 sizes="(min-width: 768px) 55vw, 100vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                style={{ objectPosition: featured.heroPosition ?? "center" }}
               />
               <span
                 aria-hidden
@@ -230,6 +231,7 @@ export default function NewsIndex() {
                       fill
                       sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      style={{ objectPosition: n.heroPosition ?? "center" }}
                     />
                     <span
                       aria-hidden
