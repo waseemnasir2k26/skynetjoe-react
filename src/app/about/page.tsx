@@ -8,27 +8,32 @@ import Community from "@/components/sections/Community";
 
 const TIMELINE = [
   {
+    year: "2017",
+    title: "Uni starts — Lahore",
+    note: "Enrolled in a 4-year bachelor's program. Books by day, internet rabbit-holes by night.",
+  },
+  {
     year: "2019",
     title: "First $10 on Fiverr",
-    note: "University student in Lahore. First gig pays $10. Could have quit there. Didn't.",
+    note: "Still a uni student. First gig pays $10. Could have quit there. Didn't — kept stacking gigs between lectures.",
   },
   {
     year: "2020",
     title: "Video editing — failed",
-    note: "Tried to scale a video-editing side hustle. Burned out before it scaled. Lesson: skill ≠ business.",
+    note: "Tried to scale a video-editing side hustle alongside uni. Burned out before it scaled. Lesson: skill ≠ business.",
   },
   {
-    year: "2021",
+    year: "2020",
     title: "Ecommerce — failed",
     note: "Dropshipping and Shopify stores. Lost money on ads. Lesson: I'm a builder, not a marketer-of-other-people's-junk.",
   },
   {
-    year: "2022",
+    year: "2021",
     title: "Amazon warehouse — failed",
-    note: "Inventory, logistics, FBA. Three months of pain, zero traction. Lesson: stop chasing what's trending.",
+    note: "Inventory, logistics, FBA. Months of pain, zero traction. Lesson: stop chasing what's trending.",
   },
   {
-    year: "2023",
+    year: "2021",
     title: "Bachelor's done · service-first pivot",
     note: "Graduated. Killed the side hustles. Committed full-time to building for clients. Real work, real bills, real ship.",
   },
@@ -168,9 +173,10 @@ export default function AboutPage() {
               to 180+ workflows.
             </h1>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl mb-6">
-              I&apos;m Waseem. I started in 2019 as a uni student in Lahore.
-              Failed at video editing, ecommerce, Amazon warehousing — kept
-              building anyway. Today I run SkynetLabs solo from Bali.
+              I&apos;m Waseem. Started uni in Lahore in 2017. Took my first $10
+              Fiverr gig in 2019 — still a student. Failed at video editing,
+              ecommerce, Amazon. Graduated in 2021 and went service-first. Today
+              I run SkynetLabs solo from Bali.
             </p>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-300">
               <span className="inline-flex items-center gap-1.5">
