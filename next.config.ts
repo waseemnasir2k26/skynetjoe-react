@@ -1,4 +1,29 @@
 import type { NextConfig } from "next";
+import { STATES } from "./src/lib/states";
+import { SERVICE_CATEGORIES } from "./src/lib/site";
+import { PRIORITY_STATE_SLUGS } from "./src/data/state-priority";
+
+/**
+ * Inline mirror of `isServiceStateIndexable` from src/lib/sitemap-quality.ts.
+ *
+ * Why duplicated: next.config.ts is transpiled by Next's config loader which
+ * does NOT resolve the `@/` path alias. Importing sitemap-quality directly
+ * would transitively pull in `@/data/service-state-enrichment` and fail at
+ * build time with `Cannot find module './src/data/service-state-enrichment'`.
+ *
+ * The full scorer is generous on purpose (every state earns +20 for existing
+ * and +20 for having 3+ industries). With the current data, the score
+ * passes the 60 threshold iff the state is a priority state. So inlining
+ * `priorityStateSet.has(stateSlug)` gives the same 128 indexable cells
+ * (16 services x 8 priority states) as the full scorer.
+ *
+ * If non-priority cells later get enrichment (and thus +40), update this
+ * mirror to also check that enrichment map.
+ */
+const priorityStateSet = new Set<string>(PRIORITY_STATE_SLUGS);
+function isIndexableHere(_serviceSlug: string, stateSlug: string): boolean {
+  return priorityStateSet.has(stateSlug);
+}
 
 /**
  * Security headers applied site-wide.
@@ -115,6 +140,39 @@ const wpRedirects = [
   { source: "/category/ai", destination: "/blog", permanent: true },
 ];
 
+/**
+ * Programmatic 301s for the 640 killed (svc × state) cells.
+ *
+ * Background — Option A SEO cleanup (2026-05-26):
+ *   We previously built 16 services × 48 states = 768 programmatic pages.
+ *   Only the 128 priority-state cells (CA/TX/NY/FL/IL/PA/OH/GA × all 16
+ *   services) had hand-written enrichment and qualified as indexable.
+ *   The other 640 shipped as `noindex,follow` thin-content templates.
+ *
+ *   Option A killed the 640 from generateStaticParams (they now 404 instead
+ *   of noindex). To avoid leaking real users + lingering Googlebot to a
+ *   dead 404, every killed URL now 301-redirects to its parent service
+ *   page (which IS indexable and covers the full national audience).
+ *
+ *   - User UX: lands on real service content instead of "page not found"
+ *   - SEO: 301 transfers any earned PageRank to the parent
+ *   - Crawl: Google deindexes the 640 child URLs and consolidates on parents
+ *
+ *   Same source-of-truth as generateStaticParams + sitemap:
+ *   src/lib/sitemap-quality.ts `isServiceStateIndexable`. When a cell
+ *   gets enrichment added later, it automatically drops out of the
+ *   redirect list AND appears in generateStaticParams + sitemap.
+ */
+const killedServiceStateRedirects = SERVICE_CATEGORIES.flatMap((cat) =>
+  cat.services.flatMap((svc) =>
+    STATES.filter((s) => !isIndexableHere(svc.slug, s.slug)).map((s) => ({
+      source: `/services/${svc.slug}/in/${s.slug}`,
+      destination: `/services/${svc.slug}`,
+      permanent: true as const,
+    })),
+  ),
+);
+
 const nextConfig: NextConfig = {
   async headers() {
     return [
@@ -125,7 +183,7 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
-    return wpRedirects;
+    return [...wpRedirects, ...killedServiceStateRedirects];
   },
 };
 

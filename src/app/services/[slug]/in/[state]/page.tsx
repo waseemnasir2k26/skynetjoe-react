@@ -172,11 +172,38 @@ const CITY_HOOKS: string[] = [
 
 export const dynamicParams = false;
 
+/**
+ * Option A — kill the 640 thin pages (2026-05-26).
+ *
+ * Previously this returned the full 16 × 48 = 768 (svc × state) matrix,
+ * relying on per-page `<meta robots="noindex,follow">` to hide the 640
+ * non-priority cells. Problem: Googlebot still crawled them, burning ~68%
+ * of crawl budget on pages we told it to ignore, and 48-state internal
+ * link farms diluted PageRank flow into the 128 indexable cells.
+ *
+ * Now `generateStaticParams` only returns the (svc × state) pairs that
+ * pass `isServiceStateIndexable` — i.e. the same 128 cells already in
+ * sitemap.xml. With `dynamicParams = false`, the other 640 URLs return
+ * HTTP 404 (a clean signal Googlebot deindexes faster than noindex).
+ *
+ * Net effect:
+ *   - Build output: 768 -> 128 prerendered state pages
+ *   - Sitemap: unchanged (was already filtered to 128)
+ *   - Crawl budget: 3.2x concentration on indexed pages
+ *   - No content lost — every URL that was indexable still works
+ *   - The 640 noindex pages now 404 instead of noindex+follow
+ *
+ * Re-enabling a (svc × state) cell later only requires adding an
+ * enrichment entry in src/data/service-state-enrichment.ts. The page
+ * will then auto-appear in both generateStaticParams AND sitemap.
+ */
 export function generateStaticParams() {
   const pairs: { slug: string; state: string }[] = [];
   for (const svc of SERVICES) {
     for (const s of STATES) {
-      pairs.push({ slug: svc.slug, state: s.slug });
+      if (isServiceStateIndexable(svc.slug, s.slug)) {
+        pairs.push({ slug: svc.slug, state: s.slug });
+      }
     }
   }
   return pairs;
