@@ -1148,13 +1148,13 @@ export default function AuditFunnel() {
       </section>
 
       {/* ============================================================
-          FINAL CTA
+          FINAL CTA — full terracotta color event
           ============================================================ */}
       <section
         ref={ctaRef}
         style={{
           padding: "88px 0 100px",
-          background: C.ink,
+          background: C.terra,
           position: "relative",
           zIndex: 2,
         }}
@@ -1173,8 +1173,9 @@ export default function AuditFunnel() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: C.terra,
+              color: C.cream3,
               marginBottom: 20,
+              opacity: 0.85,
             }}
           >
             — 4 audit slots left this month
@@ -1191,14 +1192,22 @@ export default function AuditFunnel() {
             }}
           >
             Every week you wait,{" "}
-            <em style={{ fontStyle: "italic", color: C.terra }}>
+            <em
+              style={{
+                fontStyle: "italic",
+                color: C.cream3,
+                textDecoration: "underline",
+                textDecorationThickness: "1px",
+                textUnderlineOffset: "8px",
+              }}
+            >
               the bleed gets bigger.
             </em>
           </h2>
           <p
             style={{
               fontSize: 17,
-              color: "rgba(242, 239, 230, 0.78)",
+              color: "rgba(250, 247, 240, 0.92)",
               maxWidth: "44ch",
               margin: "0 auto 32px",
               lineHeight: 1.6,
@@ -1211,8 +1220,8 @@ export default function AuditFunnel() {
             type="button"
             onClick={goBook}
             style={{
-              background: C.terra,
-              color: C.cream3,
+              background: C.cream3,
+              color: C.terra,
               border: "none",
               padding: "18px 32px",
               fontFamily: "var(--font-sans)",
@@ -1223,10 +1232,11 @@ export default function AuditFunnel() {
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
-              transition: "background 0.18s",
+              transition: "transform 0.18s",
+              boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = C.terra2)}
-            onMouseLeave={(e) => (e.currentTarget.style.background = C.terra)}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
           >
             Book my free 30-min audit
             <ArrowRight style={{ width: 16, height: 16 }} />
@@ -1237,7 +1247,7 @@ export default function AuditFunnel() {
               fontSize: 10,
               textTransform: "uppercase",
               letterSpacing: "0.12em",
-              color: "rgba(242, 239, 230, 0.55)",
+              color: "rgba(250, 247, 240, 0.78)",
               marginTop: 22,
             }}
           >
