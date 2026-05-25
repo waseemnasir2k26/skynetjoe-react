@@ -93,7 +93,7 @@ const toolchain = [
     when:
       "Every build. From the first scaffold to the final deploy. It reads the whole repo and plans the work.",
     icon: Brain,
-    accent: "from-cyan-300 to-teal-300",
+    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
   {
     name: "Replit",
@@ -102,7 +102,7 @@ const toolchain = [
     when:
       "Throwaway demos, client pitch sandboxes, the 'can you just show me' builds that don't deserve a full repo.",
     icon: Rocket,
-    accent: "from-orange-300 to-pink-300",
+    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
   {
     name: "Cursor",
@@ -111,7 +111,7 @@ const toolchain = [
     when:
       "Mid-build, when I'm touching specific files and want tab-complete + a small chat that sees only the open buffer.",
     icon: Code2,
-    accent: "from-purple-300 to-blue-300",
+    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
   {
     name: "Codex",
@@ -120,7 +120,7 @@ const toolchain = [
     when:
       "When I need 40 similar API route handlers, or a CSV-to-TS-types pipeline. It's the boring-bulk specialist.",
     icon: FileCode,
-    accent: "from-emerald-300 to-cyan-300",
+    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
   {
     name: "Gemini",
@@ -129,7 +129,7 @@ const toolchain = [
     when:
       "When the client sends a 90-page PDF spec, or 30 screenshots of their old site. Million-token window earns its keep.",
     icon: Sparkles,
-    accent: "from-yellow-300 to-orange-300",
+    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
 ];
 
@@ -300,76 +300,67 @@ export default function VibeCodingPage() {
 
       {/* HERO ============================================ */}
       <section
-        className="relative overflow-hidden pt-24 md:pt-32 pb-20"
+        className="relative pt-28 md:pt-36 pb-20"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.55,
-          }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 520,
-            height: 520,
-            background: "#00D4FF",
-            top: 100,
-            right: -140,
-            opacity: 0.40,
-            animationDelay: "-7s",
-          }}
-        />
-
         <div className="container-x px-6 relative z-10">
           <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
             <div>
               <div
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+                className="inline-flex items-center gap-3 mb-6"
                 style={{
-                  background: "rgba(94, 234, 212, 0.12)",
-                  border: "1px solid rgba(94, 234, 212, 0.40)",
-                  color: "#5eead4",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "var(--terracotta)",
                 }}
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span className="text-xs font-medium tracking-wider uppercase">
-                  Vibe Coding by SkynetLabs
-                </span>
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.04] tracking-tight mb-6 text-white">
-                Real human at a real keyboard.{" "}
                 <span
                   style={{
-                    background:
-                      "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    WebkitTextFillColor: "transparent",
+                    width: 28,
+                    height: 1,
+                    background: "var(--terracotta)",
+                    display: "inline-block",
+                  }}
+                />
+                <Sparkles className="w-3.5 h-3.5" />
+                Vibe Coding by SkynetLabs
+              </div>
+
+              <h1
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 500,
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1.04,
+                  color: "var(--ink)",
+                  fontSize: "clamp(40px, 6vw, 72px)",
+                  margin: "0 0 24px",
+                }}
+              >
+                Real human at a real keyboard.{" "}
+                <em
+                  style={{
+                    fontStyle: "italic",
+                    color: "var(--terracotta)",
+                    fontWeight: 500,
                   }}
                 >
                   Just one that types 12x faster now.
-                </span>
+                </em>
               </h1>
 
-              <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-4">
+              <p className="text-lg md:text-xl text-[var(--ink-2)] leading-relaxed mb-4">
                 Vibe coding is how I (Waseem, the actual person you&apos;ll be
                 talking to) ship real apps, sites, and tools from a cafe in
                 Bali, with Claude Code as my pair partner and the rest of the
                 AI toolchain on the bench.
               </p>
-              <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-8">
+              <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed mb-8">
                 5 to 14 days from brief to live. No agency layer, no PM email
                 chain, no SDR funnel. You talk to me. I talk to the keyboard.
                 The keyboard talks to the models. The thing ships.
@@ -396,9 +387,9 @@ export default function VibeCodingPage() {
               <div
                 className="relative aspect-[4/5] rounded-3xl overflow-hidden border"
                 style={{
-                  borderColor: "rgba(126, 228, 255, 0.30)",
+                  borderColor: "rgba(26,26,26,0.12)",
                   boxShadow:
-                    "0 20px 60px rgba(0, 212, 255, 0.20), 0 0 0 1px rgba(94, 234, 212, 0.15) inset",
+                    "0 20px 60px rgba(26,26,26,0.10), 0 0 0 1px rgba(198,107,63,0.15) inset",
                 }}
               >
                 <Image
@@ -413,20 +404,32 @@ export default function VibeCodingPage() {
                   className="absolute inset-0 pointer-events-none"
                   style={{
                     background:
-                      "linear-gradient(180deg, transparent 55%, rgba(6,24,39,0.75) 100%)",
+                      "linear-gradient(180deg, transparent 55%, rgba(26,26,26,0.75) 100%)",
                   }}
                 />
                 <div className="absolute bottom-5 left-5 right-5">
                   <div
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
+                    className="inline-flex items-center gap-2 px-3 py-1.5"
                     style={{
-                      background: "rgba(6, 24, 39, 0.65)",
-                      border: "1px solid rgba(126, 228, 255, 0.30)",
-                      backdropFilter: "blur(8px)",
+                      background: "var(--cream-3)",
+                      border: "1px solid rgba(26,26,26,0.18)",
+                      borderRadius: 2,
                     }}
                   >
-                    <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
-                    <span className="text-xs font-medium text-cyan-100">
+                    <span
+                      className="w-2 h-2 rounded-full animate-pulse"
+                      style={{ background: "var(--terracotta)" }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 11,
+                        fontWeight: 600,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                        color: "var(--ink)",
+                      }}
+                    >
                       Live from Canggu, Bali
                     </span>
                   </div>
@@ -441,12 +444,12 @@ export default function VibeCodingPage() {
       <section className="section">
         <div className="container-x">
           <div className="max-w-4xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
               Direct answer
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-8 text-center text-white">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
               What is{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                 vibe coding
               </span>
               ?
@@ -454,18 +457,18 @@ export default function VibeCodingPage() {
             <div
               className="rounded-3xl p-8 md:p-10 relative"
               style={{
-                background: "rgba(10, 45, 74, 0.45)",
-                border: "1px solid rgba(126, 228, 255, 0.18)",
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.12)",
                 backdropFilter: "blur(14px)",
               }}
             >
               <div
                 aria-hidden
-                className="absolute -top-4 left-8 text-6xl font-serif text-cyan-300/40 select-none"
+                className="absolute -top-4 left-8 text-6xl font-serif text-[var(--terracotta)]/40 select-none"
               >
                 &ldquo;
               </div>
-              <p className="text-lg md:text-xl text-gray-100 leading-[1.7]">
+              <p className="text-lg md:text-xl text-[var(--ink)] leading-[1.7]">
                 Vibe coding is a human-led, AI-paired build workflow in which
                 an experienced developer drives the design and judgment calls
                 while large language models like Claude Code, Cursor, and
@@ -486,7 +489,7 @@ export default function VibeCodingPage() {
         <div className="container-x">
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16 items-center">
             <div className="grid grid-cols-3 gap-3">
-              <div className="col-span-2 aspect-[4/5] relative rounded-2xl overflow-hidden border border-cyan-400/20">
+              <div className="col-span-2 aspect-[4/5] relative rounded-2xl overflow-hidden border border-[rgba(26,26,26,0.18)]">
                 <Image
                   src="/portraits/waseem-cafe-arch.jpg"
                   alt="Waseem working under the cafe arch in Bali, blue polo, laptop open"
@@ -496,7 +499,7 @@ export default function VibeCodingPage() {
                 />
               </div>
               <div className="grid grid-rows-2 gap-3">
-                <div className="relative rounded-2xl overflow-hidden border border-cyan-400/20">
+                <div className="relative rounded-2xl overflow-hidden border border-[rgba(26,26,26,0.18)]">
                   <Image
                     src="/portraits/waseem-veranda-gaze.jpg"
                     alt="Waseem on the veranda, direct gaze, thinking through a build"
@@ -505,7 +508,7 @@ export default function VibeCodingPage() {
                     className="object-cover"
                   />
                 </div>
-                <div className="relative rounded-2xl overflow-hidden border border-cyan-400/20">
+                <div className="relative rounded-2xl overflow-hidden border border-[rgba(26,26,26,0.18)]">
                   <Image
                     src="/portraits/waseem-poolside-laptop.jpg"
                     alt="Waseem poolside in Bali with the laptop, nomad work setup"
@@ -518,28 +521,28 @@ export default function VibeCodingPage() {
             </div>
 
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
                 The human in the loop
               </p>
-              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-white">
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-[var(--ink)]">
                 You talk to me.{" "}
-                <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                   Not a chatbot.
                 </span>
               </h2>
-              <p className="text-lg text-gray-200 leading-relaxed mb-4">
+              <p className="text-lg text-[var(--ink-2)] leading-relaxed mb-4">
                 I sit at the cafe under the brick arch in Canggu most
                 mornings. Blue polo, oat-milk americano, a 14-inch laptop, and
                 Claude Code humming in the terminal. That&apos;s where your
                 build happens. No offshored ticketing system, no &quot;your
                 account manager will be in touch&quot;, no AI-only agency.
               </p>
-              <p className="text-lg text-gray-200 leading-relaxed mb-4">
+              <p className="text-lg text-[var(--ink-2)] leading-relaxed mb-4">
                 When you ping me on email, you get me. When we hop on a call,
                 you see my face. When something breaks on production at 2am
                 Bali time, you get a reply from me, not from a queue.
               </p>
-              <p className="text-base text-gray-300 leading-relaxed">
+              <p className="text-base text-[var(--ink-2)] leading-relaxed">
                 The AI part of the stack is loud and impressive and it
                 deserves a page like this. The human part is the part that
                 actually decides if your thing is any good.
@@ -553,16 +556,16 @@ export default function VibeCodingPage() {
       <section id="toolchain" className="section">
         <div className="container-x">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
               The toolchain
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
               5 models on the bench.{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                 One picks the lineup.
               </span>
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-[var(--ink-2)]">
               No single model is best at everything. Here&apos;s the lineup
               and when each one comes in.
             </p>
@@ -576,8 +579,8 @@ export default function VibeCodingPage() {
                   key={t.name}
                   className="rounded-2xl p-6 relative overflow-hidden transition-transform hover:-translate-y-1"
                   style={{
-                    background: "rgba(10, 45, 74, 0.55)",
-                    border: "1px solid rgba(126, 228, 255, 0.18)",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
                     backdropFilter: "blur(14px)",
                   }}
                 >
@@ -590,30 +593,30 @@ export default function VibeCodingPage() {
                     <span
                       className="text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full"
                       style={{
-                        background: "rgba(94, 234, 212, 0.14)",
-                        color: "#5eead4",
-                        border: "1px solid rgba(94, 234, 212, 0.30)",
+                        background: "rgba(198,107,63,0.30)",
+                        color: "var(--terracotta)",
+                        border: "1px solid rgba(198,107,63,0.30)",
                       }}
                     >
                       {t.badge}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">
+                  <h3 className="text-xl font-bold text-[var(--ink)] mb-2">
                     {t.name}
                   </h3>
-                  <p className="text-sm text-cyan-100/90 leading-relaxed mb-3">
+                  <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-3">
                     {t.role}
                   </p>
                   <div
                     className="pt-3 mt-2"
                     style={{
-                      borderTop: "1px dashed rgba(126, 228, 255, 0.22)",
+                      borderTop: "1px dashed rgba(26,26,26,0.18)",
                     }}
                   >
-                    <p className="text-xs uppercase tracking-widest text-cyan-300/80 mb-1">
+                    <p className="text-xs uppercase tracking-widest text-[var(--terracotta)]/80 mb-1">
                       When we reach for it
                     </p>
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <p className="text-sm text-[var(--ink-2)] leading-relaxed">
                       {t.when}
                     </p>
                   </div>
@@ -628,16 +631,16 @@ export default function VibeCodingPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
               The pipe coding flow
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
               From vibe check to live,{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                 in 5 moves.
               </span>
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-[var(--ink-2)]">
               Same flow for every build. Same fixed window. No surprise
               invoices, no &quot;phase 2 of 6&quot; deck.
             </p>
@@ -656,39 +659,38 @@ export default function VibeCodingPage() {
                       : "md:grid-cols-[1fr_3fr]"
                   } gap-6 items-center`}
                   style={{
-                    background: "rgba(10, 45, 74, 0.45)",
-                    border: "1px solid rgba(126, 228, 255, 0.18)",
-                    backdropFilter: "blur(12px)",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
+                    borderRadius: 2,
                   }}
                 >
                   <div className="flex items-center gap-4">
                     <div
-                      className="text-4xl md:text-5xl font-extrabold font-mono"
                       style={{
-                        background:
-                          "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)",
-                        WebkitBackgroundClip: "text",
-                        backgroundClip: "text",
-                        color: "transparent",
-                        WebkitTextFillColor: "transparent",
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 500,
+                        fontSize: "clamp(36px, 5vw, 56px)",
+                        color: "var(--terracotta)",
+                        letterSpacing: "-0.025em",
+                        lineHeight: 1,
                       }}
                     >
                       {s.num}
                     </div>
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/20 to-teal-400/20 flex items-center justify-center border border-cyan-400/30">
-                      <Icon className="w-6 h-6 text-cyan-300" />
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--terracotta)]/20 to-[var(--ink)]/20 flex items-center justify-center border border-[rgba(198,107,63,0.30)]">
+                      <Icon className="w-6 h-6 text-[var(--terracotta)]" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">
+                    <h3 className="text-2xl font-bold text-[var(--ink)] mb-2">
                       {s.label}
                     </h3>
-                    <p className="text-base text-gray-200 leading-relaxed">
+                    <p className="text-base text-[var(--ink-2)] leading-relaxed">
                       {s.body}
                     </p>
                   </div>
                   {hasPhoto && s.photo && (
-                    <div className="relative aspect-square rounded-2xl overflow-hidden border border-cyan-400/20">
+                    <div className="relative aspect-square rounded-2xl overflow-hidden border border-[rgba(26,26,26,0.18)]">
                       <Image
                         src={s.photo.src}
                         alt={s.photo.alt}
@@ -709,16 +711,16 @@ export default function VibeCodingPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
               What we vibe-code
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
               Six lanes,{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                 all fixed-price.
               </span>
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-[var(--ink-2)]">
               If it&apos;s code that ships in under two weeks, it probably
               fits in one of these.
             </p>
@@ -732,36 +734,36 @@ export default function VibeCodingPage() {
                   key={b.title}
                   className="rounded-2xl p-6 relative"
                   style={{
-                    background: "rgba(10, 45, 74, 0.55)",
-                    border: "1px solid rgba(126, 228, 255, 0.18)",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
                     backdropFilter: "blur(14px)",
                   }}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-400/20 to-teal-400/20 flex items-center justify-center border border-cyan-400/30">
-                      <Icon className="w-5 h-5 text-cyan-300" />
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[var(--terracotta)]/20 to-[var(--ink)]/20 flex items-center justify-center border border-[rgba(198,107,63,0.30)]">
+                      <Icon className="w-5 h-5 text-[var(--terracotta)]" />
                     </div>
                     <span
                       className="text-[11px] font-semibold px-2.5 py-1 rounded-full"
                       style={{
-                        background: "rgba(94, 234, 212, 0.14)",
-                        color: "#5eead4",
-                        border: "1px solid rgba(94, 234, 212, 0.30)",
+                        background: "rgba(198,107,63,0.30)",
+                        color: "var(--terracotta)",
+                        border: "1px solid rgba(198,107,63,0.30)",
                       }}
                     >
                       {b.ship} ship
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-1.5">
+                  <h3 className="text-lg font-bold text-[var(--ink)] mb-1.5">
                     {b.title}
                   </h3>
-                  <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                  <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-4">
                     {b.body}
                   </p>
                   <div
-                    className="text-sm font-semibold text-cyan-200"
+                    className="text-sm font-semibold text-[var(--terracotta)]"
                     style={{
-                      borderTop: "1px dashed rgba(126, 228, 255, 0.22)",
+                      borderTop: "1px dashed rgba(26,26,26,0.18)",
                       paddingTop: "0.75rem",
                     }}
                   >
@@ -778,16 +780,16 @@ export default function VibeCodingPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
               A few we&apos;ve shipped
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
               Real builds,{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                 real domains.
               </span>
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-[var(--ink-2)]">
               Three vibe-coded case studies you can read in full.
             </p>
           </div>
@@ -799,28 +801,28 @@ export default function VibeCodingPage() {
                 href={`/case-studies/${c.slug}`}
                 className="group rounded-2xl p-6 block transition-transform hover:-translate-y-1"
                 style={{
-                  background: "rgba(10, 45, 74, 0.55)",
-                  border: "1px solid rgba(126, 228, 255, 0.18)",
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
                   backdropFilter: "blur(14px)",
                 }}
               >
                 <span
                   className="text-[11px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full inline-block mb-4"
                   style={{
-                    background: "rgba(94, 234, 212, 0.14)",
-                    color: "#5eead4",
-                    border: "1px solid rgba(94, 234, 212, 0.30)",
+                    background: "rgba(198,107,63,0.30)",
+                    color: "var(--terracotta)",
+                    border: "1px solid rgba(198,107,63,0.30)",
                   }}
                 >
                   {c.tag}
                 </span>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors">
+                <h3 className="text-xl font-bold text-[var(--ink)] mb-3 group-hover:text-[var(--terracotta)] transition-colors">
                   {c.title}
                 </h3>
-                <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-4">
                   {c.outcome}
                 </p>
-                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-300">
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--terracotta)]">
                   Read the build story
                   <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -834,28 +836,27 @@ export default function VibeCodingPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div
-            className="rounded-3xl p-8 md:p-14 grid md:grid-cols-[1.4fr_1fr] gap-10 items-center"
+            className="p-8 md:p-14 grid md:grid-cols-[1.4fr_1fr] gap-10 items-center"
             style={{
-              background:
-                "linear-gradient(135deg, rgba(10, 45, 74, 0.75) 0%, rgba(7, 56, 70, 0.65) 100%)",
-              border: "1px solid rgba(126, 228, 255, 0.22)",
-              backdropFilter: "blur(14px)",
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.18)",
+              borderRadius: 2,
             }}
           >
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-4">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-4">
                 Real talk
               </p>
-              <p className="text-2xl md:text-3xl font-bold text-white leading-[1.35] mb-6">
+              <p className="text-2xl md:text-3xl font-bold text-[var(--ink)] leading-[1.35] mb-6">
                 &ldquo;AI doesn&apos;t replace the builder. It replaces the
                 typing. The judgment, the taste, the &lsquo;no, that button
                 needs to live on the right&rsquo;{" "}
-                <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                   that&apos;s still me.
                 </span>
                 &rdquo;
               </p>
-              <p className="text-base text-gray-300 leading-relaxed">
+              <p className="text-base text-[var(--ink-2)] leading-relaxed">
                 A team of agents can scaffold a Next.js app in 90 seconds.
                 None of them know your client base. None of them know that
                 the dental atelier in Manhattan won&apos;t trust a site that
@@ -864,11 +865,11 @@ export default function VibeCodingPage() {
                 already meditate&quot; objection in the hero. That&apos;s the
                 judgment layer. That&apos;s what you&apos;re paying for.
               </p>
-              <div className="mt-6 text-sm text-cyan-100/80">
+              <div className="mt-6 text-sm text-[var(--ink-2)]">
                 Waseem Nasir, founder, SkynetLabs
               </div>
             </div>
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-cyan-400/30">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-[rgba(198,107,63,0.30)]">
               <Image
                 src="/portraits/waseem-rooftop-smile.jpg"
                 alt="Waseem Nasir, founder of SkynetLabs, on a Bali rooftop"
@@ -885,12 +886,12 @@ export default function VibeCodingPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
               FAQ
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-10 text-center text-white">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
               The{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                 honest answers.
               </span>
             </h2>
@@ -901,16 +902,16 @@ export default function VibeCodingPage() {
                   key={f.q}
                   className="group rounded-2xl p-5 md:p-6"
                   style={{
-                    background: "rgba(10, 45, 74, 0.55)",
-                    border: "1px solid rgba(126, 228, 255, 0.18)",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
                     backdropFilter: "blur(14px)",
                   }}
                 >
-                  <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-lg font-semibold text-white">
+                  <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-lg font-semibold text-[var(--ink)]">
                     <span>{f.q}</span>
-                    <ChevronRight className="w-5 h-5 text-cyan-300 transition-transform group-open:rotate-90 shrink-0" />
+                    <ChevronRight className="w-5 h-5 text-[var(--terracotta)] transition-transform group-open:rotate-90 shrink-0" />
                   </summary>
-                  <p className="text-base text-gray-300 leading-relaxed mt-4">
+                  <p className="text-base text-[var(--ink-2)] leading-relaxed mt-4">
                     {f.a}
                   </p>
                 </details>
@@ -924,30 +925,67 @@ export default function VibeCodingPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div
-            className="rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
+            className="p-10 md:p-14 text-center relative"
             style={{
-              background:
-                "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+              background: "var(--ink)",
+              borderRadius: 2,
             }}
           >
             <div className="relative z-10 max-w-2xl mx-auto">
               <div
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+                className="inline-flex items-center gap-3 mb-6"
                 style={{
-                  background: "rgba(255, 255, 255, 0.15)",
-                  border: "1px solid rgba(255, 255, 255, 0.30)",
-                  color: "#ffffff",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "var(--terracotta)",
                 }}
               >
+                <span
+                  style={{
+                    width: 28,
+                    height: 1,
+                    background: "var(--terracotta)",
+                    display: "inline-block",
+                  }}
+                />
                 <Calendar className="w-3.5 h-3.5" />
-                <span className="text-xs font-medium tracking-wider uppercase">
-                  30-min call, free
-                </span>
+                30-min call, free
               </div>
-              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-5">
-                Book a vibe check
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 500,
+                  fontSize: "clamp(32px, 5vw, 56px)",
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1.05,
+                  color: "var(--cream-3)",
+                  margin: "0 0 18px",
+                }}
+              >
+                Book a{" "}
+                <em
+                  style={{
+                    fontStyle: "italic",
+                    color: "var(--terracotta)",
+                    fontWeight: 500,
+                  }}
+                >
+                  vibe check.
+                </em>
               </h2>
-              <p className="text-lg text-white/90 mb-8 leading-relaxed">
+              <p
+                style={{
+                  fontSize: 17,
+                  color: "rgba(242,239,230,0.85)",
+                  lineHeight: 1.6,
+                  marginBottom: 28,
+                  maxWidth: "52ch",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
                 A real call with me. Not a salesperson, not a bot, not a
                 discovery funnel. You describe what you want built, I tell you
                 if I can ship it in the window, we either book it or we
@@ -958,22 +996,53 @@ export default function VibeCodingPage() {
                   href={CAL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition-colors"
+                  className="inline-flex items-center gap-2"
+                  style={{
+                    background: "var(--terracotta)",
+                    color: "var(--cream-3)",
+                    padding: "16px 28px",
+                    fontFamily: "var(--font-sans)",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    borderRadius: 2,
+                    border: "none",
+                    textDecoration: "none",
+                  }}
                 >
                   <Calendar className="w-4 h-4" />
                   Grab a 30-min slot
                 </a>
                 <a
                   href={`mailto:${SITE.emailFounder}?subject=Vibe%20coding%20brief`}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/10 text-white font-semibold border border-white/30 hover:bg-white/20 transition-colors"
+                  className="inline-flex items-center gap-2"
+                  style={{
+                    background: "transparent",
+                    color: "var(--cream-3)",
+                    border: "1px solid rgba(242,239,230,0.4)",
+                    padding: "15px 26px",
+                    fontFamily: "var(--font-sans)",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    borderRadius: 2,
+                    textDecoration: "none",
+                  }}
                 >
                   <Mail className="w-4 h-4" />
                   Email me the brief
                 </a>
               </div>
-              <p className="text-sm text-white/75 mt-6">
-                {SITE.emailFounder} &middot; Bali timezone (GMT+8) &middot;
-                Replies within 8 working hours
+              <p
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  color: "rgba(242,239,230,0.6)",
+                  marginTop: 24,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.14em",
+                }}
+              >
+                {SITE.emailFounder} · Bali timezone (GMT+8) · Replies within 8
+                working hours
               </p>
             </div>
           </div>
