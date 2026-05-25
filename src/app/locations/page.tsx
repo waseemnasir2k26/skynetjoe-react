@@ -1,3 +1,15 @@
+/**
+ * /locations — index of the 48 contiguous US state pages.
+ *
+ * Cream-pivot port 2026-05-25:
+ *   - Hero: cream-3 bg, Fraunces H1 with terracotta <em>, mono eyebrow
+ *   - Service hub: cream cards with 1px ink border, terracotta icon wash
+ *   - 48-state grid: cream-2 cards with state abbr in terracotta mono
+ *   - CTA strip: ink panel (was cyan→teal gradient)
+ *   - State cards demoted h2 → h3 to fix heading-level skip
+ *     (H1 hero → H2 section headers → H3 state cards).
+ */
+
 import Link from "next/link";
 import type { Metadata } from "next";
 import * as Icons from "lucide-react";
@@ -21,6 +33,38 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+};
+
+// Shared cream-pivot inline styles
+const eyebrow = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11 as const,
+  textTransform: "uppercase" as const,
+  letterSpacing: "0.16em",
+  color: "var(--terracotta)",
+  display: "inline-flex" as const,
+  alignItems: "center" as const,
+  gap: 12,
+};
+const eyebrowRule = {
+  width: 28,
+  height: 1,
+  background: "var(--terracotta)",
+  display: "inline-block" as const,
+};
+const h2Style = {
+  fontFamily: "var(--font-display)",
+  fontWeight: 500,
+  letterSpacing: "-0.02em",
+  lineHeight: 1.08,
+  color: "var(--ink)",
+  fontSize: "clamp(28px, 4vw, 44px)",
+  marginBottom: 14,
+};
+const emTerra = {
+  fontStyle: "italic" as const,
+  color: "var(--terracotta)",
+  fontWeight: 500,
 };
 
 export default function LocationsIndexPage() {
@@ -62,85 +106,184 @@ export default function LocationsIndexPage() {
     <>
       <JsonLd data={schema} />
 
-      <section className="section pt-16 md:pt-24 pb-10">
-        <div className="container-x">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-400/10 border border-green-400/30 text-green-300 text-xs font-semibold uppercase tracking-[0.18em] mb-5">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              Active in all 48 states
-            </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-              AI Automation Services,{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                delivered across the lower 48.
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
-              SkynetLabs ships n8n workflows, GoHighLevel CRM systems, AEO-tuned
-              websites and live-chat agents to founders in every contiguous US
-              state — from{" "}
-              <Link href="/locations/california" className="text-cyan-300 hover:text-cyan-100 underline decoration-cyan-400/40 underline-offset-4">
-                California
-              </Link>{" "}
-              and{" "}
-              <Link href="/locations/texas" className="text-cyan-300 hover:text-cyan-100 underline decoration-cyan-400/40 underline-offset-4">
-                Texas
-              </Link>{" "}
-              to{" "}
-              <Link href="/locations/new-york" className="text-cyan-300 hover:text-cyan-100 underline decoration-cyan-400/40 underline-offset-4">
-                New York
-              </Link>{" "}
-              and{" "}
-              <Link href="/locations/minnesota" className="text-cyan-300 hover:text-cyan-100 underline decoration-cyan-400/40 underline-offset-4">
-                Minnesota
-              </Link>
-              . All engagements run remote from Bali (GMT+8) with an 8-hour
-              weekday reply guarantee.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/discovery-call"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-semibold transition-colors"
-              >
-                <Calendar className="w-4 h-4" />
-                Apply for a call
-              </Link>
-              <a
-                href="#livechat-open"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/40 hover:border-cyan-400/70 text-cyan-200 font-semibold transition-colors"
-              >
-                <MessageCircle className="w-4 h-4" />
-                Live chat
-              </a>
-            </div>
+      {/* HERO — cream editorial */}
+      <section
+        className="relative pt-28 md:pt-36 pb-16"
+        style={{
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
+        <div className="container-x px-6 max-w-4xl">
+          <div className="mb-6" style={eyebrow}>
+            <span style={eyebrowRule} />
+            <span
+              className="w-2 h-2 rounded-full animate-pulse"
+              style={{ background: "var(--terracotta)", display: "inline-block" }}
+            />
+            Active in all 48 states
+          </div>
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.04,
+              color: "var(--ink)",
+              fontSize: "clamp(40px, 6vw, 68px)",
+              margin: "0 0 24px",
+            }}
+          >
+            AI Automation Services,{" "}
+            <em style={emTerra}>delivered across the lower 48.</em>
+          </h1>
+          <p
+            style={{
+              fontSize: 18,
+              color: "var(--ink-2)",
+              lineHeight: 1.6,
+              maxWidth: "62ch",
+              marginBottom: 28,
+            }}
+          >
+            SkynetLabs ships n8n workflows, GoHighLevel CRM systems, AEO-tuned
+            websites and live-chat agents to founders in every contiguous US
+            state — from{" "}
+            <Link
+              href="/locations/california"
+              style={{
+                color: "var(--terracotta)",
+                textDecoration: "underline",
+                textDecorationColor: "rgba(198,107,63,0.4)",
+                textUnderlineOffset: 4,
+              }}
+            >
+              California
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/locations/texas"
+              style={{
+                color: "var(--terracotta)",
+                textDecoration: "underline",
+                textDecorationColor: "rgba(198,107,63,0.4)",
+                textUnderlineOffset: 4,
+              }}
+            >
+              Texas
+            </Link>{" "}
+            to{" "}
+            <Link
+              href="/locations/new-york"
+              style={{
+                color: "var(--terracotta)",
+                textDecoration: "underline",
+                textDecorationColor: "rgba(198,107,63,0.4)",
+                textUnderlineOffset: 4,
+              }}
+            >
+              New York
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/locations/minnesota"
+              style={{
+                color: "var(--terracotta)",
+                textDecoration: "underline",
+                textDecorationColor: "rgba(198,107,63,0.4)",
+                textUnderlineOffset: 4,
+              }}
+            >
+              Minnesota
+            </Link>
+            . All engagements run remote from Bali (GMT+8) with an 8-hour
+            weekday reply guarantee.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/discovery-call"
+              className="inline-flex items-center gap-2"
+              style={{
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                padding: "16px 28px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+                border: "none",
+              }}
+            >
+              <Calendar className="w-4 h-4" />
+              Apply for a call
+            </Link>
+            <a
+              href="#livechat-open"
+              className="inline-flex items-center gap-2"
+              style={{
+                background: "transparent",
+                color: "var(--ink)",
+                border: "1px solid var(--ink)",
+                padding: "15px 26px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+              }}
+            >
+              <MessageCircle className="w-4 h-4" />
+              Live chat
+            </a>
           </div>
         </div>
       </section>
 
       {/* All Services Hub + Book a Call */}
-      <section className="section">
-        <div className="container-x">
-          <div className="max-w-3xl mb-10">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
-              16 services · 50 states · One operator
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+        <div className="container-x px-6">
+          <div className="max-w-3xl mb-12">
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
+              16 services · 50 states · one operator
+            </div>
+            <h2 style={h2Style}>
               Every service ships{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                into every state.
-              </span>
+              <em style={emTerra}>into every state.</em>
             </h2>
-            <p className="text-base md:text-lg text-gray-300">
+            <p
+              style={{
+                fontSize: 16,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+              }}
+            >
               Pick a service to scope it, or pick a state below to see local
               intent keywords + city coverage.
             </p>
           </div>
 
-          <div className="space-y-10 mb-10">
+          <div style={{ display: "flex", flexDirection: "column", gap: 40, marginBottom: 40 }}>
             {SERVICE_CATEGORIES.map((cat) => (
               <div key={cat.name}>
-                <h3 className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-5 flex items-center gap-3">
-                  <span className="w-8 h-px bg-cyan-300/40" />
+                <h3
+                  className="flex items-center gap-3 mb-5"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.16em",
+                    color: "var(--terracotta)",
+                    fontWeight: 500,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 28,
+                      height: 1,
+                      background: "var(--terracotta)",
+                      display: "inline-block",
+                    }}
+                  />
                   {cat.name}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -152,18 +295,53 @@ export default function LocationsIndexPage() {
                       <Link
                         key={svc.slug}
                         href={`/services/${svc.slug}`}
-                        className="group relative p-5 rounded-2xl bg-white/95 border border-white/60 shadow-md shadow-cyan-500/5 hover:shadow-xl hover:shadow-cyan-500/20 hover:border-skynet-primary/60 hover:bg-white transition-all duration-300 hover:-translate-y-1"
+                        className="group relative"
+                        style={{
+                          background: "var(--cream-2)",
+                          border: "1px solid rgba(26,26,26,0.12)",
+                          padding: 20,
+                          borderRadius: 2,
+                          textDecoration: "none",
+                          transition: "border-color 0.18s",
+                        }}
                       >
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-skynet-primary/20 to-cyan-400/20 flex items-center justify-center mb-3">
-                          <Icon className="w-5 h-5 text-skynet-primary" />
+                        <div
+                          className="flex items-center justify-center mb-3"
+                          style={{
+                            width: 40,
+                            height: 40,
+                            background: "rgba(198,107,63,0.10)",
+                            border: "1px solid rgba(198,107,63,0.30)",
+                            borderRadius: 2,
+                          }}
+                        >
+                          <Icon className="w-5 h-5" />
                         </div>
-                        <h4 className="text-base font-semibold text-slate-900 mb-1.5">
+                        <h4
+                          style={{
+                            fontFamily: "var(--font-display)",
+                            fontWeight: 500,
+                            fontSize: 16,
+                            color: "var(--ink)",
+                            marginBottom: 6,
+                            letterSpacing: "-0.01em",
+                          }}
+                        >
                           {svc.label}
                         </h4>
-                        <p className="text-xs text-slate-500 leading-relaxed">
+                        <p
+                          style={{
+                            fontSize: 12,
+                            color: "var(--ink-faint)",
+                            lineHeight: 1.5,
+                          }}
+                        >
                           {svc.desc}
                         </p>
-                        <ArrowUpRight className="absolute top-4 right-4 w-4 h-4 text-slate-400 group-hover:text-skynet-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                        <ArrowUpRight
+                          className="absolute top-4 right-4 w-4 h-4"
+                          style={{ color: "var(--terracotta)" }}
+                        />
                       </Link>
                     );
                   })}
@@ -172,13 +350,41 @@ export default function LocationsIndexPage() {
             ))}
           </div>
 
-          <div className="rounded-3xl p-8 md:p-10 text-center"
-            style={{ background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)" }}>
-            <CheckCircle2 className="w-10 h-10 text-white/90 mx-auto mb-3" />
-            <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-3">
+          {/* Ink CTA strip — replaces dark blue→teal gradient panel */}
+          <div
+            style={{
+              background: "var(--ink)",
+              color: "var(--cream-3)",
+              padding: "40px 32px",
+              borderRadius: 2,
+              textAlign: "center",
+            }}
+          >
+            <CheckCircle2
+              className="mx-auto mb-3"
+              style={{ color: "var(--terracotta)", width: 36, height: 36 }}
+            />
+            <h3
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                fontSize: "clamp(22px, 3vw, 30px)",
+                letterSpacing: "-0.02em",
+                lineHeight: 1.15,
+                marginBottom: 14,
+              }}
+            >
               Not sure which service fits your state?
             </h3>
-            <p className="text-lg text-white/90 mb-6 max-w-2xl mx-auto">
+            <p
+              style={{
+                fontSize: 16,
+                color: "rgba(242,239,230,0.85)",
+                maxWidth: "52ch",
+                margin: "0 auto 24px",
+                lineHeight: 1.55,
+              }}
+            >
               Send a brief through our short application. If we&apos;re a fit,
               you&apos;ll have a Cal.com link in your inbox within 8 hours. No
               funnel, no upsell.
@@ -186,21 +392,51 @@ export default function LocationsIndexPage() {
             <div className="flex flex-wrap justify-center gap-3">
               <Link
                 href="/discovery-call"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition-colors"
+                className="inline-flex items-center gap-2"
+                style={{
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  padding: "14px 22px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  borderRadius: 2,
+                  border: "none",
+                }}
               >
                 <Calendar className="w-4 h-4" />
                 Apply for a call
               </Link>
               <a
                 href="#livechat-open"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-colors"
+                className="inline-flex items-center gap-2"
+                style={{
+                  background: "transparent",
+                  color: "var(--cream-3)",
+                  border: "1px solid rgba(242,239,230,0.4)",
+                  padding: "13px 21px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  borderRadius: 2,
+                }}
               >
                 <MessageCircle className="w-4 h-4" />
                 Live chat instead
               </a>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-colors"
+                className="inline-flex items-center gap-2"
+                style={{
+                  background: "transparent",
+                  color: "var(--cream-3)",
+                  border: "1px solid rgba(242,239,230,0.4)",
+                  padding: "13px 21px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  borderRadius: 2,
+                }}
               >
                 See all contact options
                 <ArrowRight className="w-4 h-4" />
@@ -211,19 +447,24 @@ export default function LocationsIndexPage() {
       </section>
 
       {/* 48-state grid */}
-      <section className="section">
-        <div className="container-x">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
+        <div className="container-x px-6">
           <div className="max-w-3xl mb-10">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
               Pick your state
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
+            </div>
+            <h2 style={h2Style}>
               Every contiguous US state,{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                local-intent ready.
-              </span>
+              <em style={emTerra}>local-intent ready.</em>
             </h2>
-            <p className="text-base md:text-lg text-gray-300">
+            <p
+              style={{
+                fontSize: 16,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+              }}
+            >
               Each state page lists every service expressed with local keywords,
               5 major-city callouts, and the industries we&apos;ve already
               served there.
@@ -235,21 +476,59 @@ export default function LocationsIndexPage() {
               <Link
                 key={s.slug}
                 href={`/locations/${s.slug}`}
-                className="group relative p-5 rounded-2xl bg-white/95 border border-white/60 shadow-md shadow-cyan-500/5 hover:shadow-xl hover:shadow-cyan-500/20 hover:border-skynet-primary/60 hover:bg-white transition-all duration-300 hover:-translate-y-1"
+                className="group relative"
+                style={{
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  padding: 20,
+                  borderRadius: 2,
+                  textDecoration: "none",
+                  transition: "border-color 0.18s",
+                }}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <MapPin className="w-4 h-4 text-skynet-primary" />
-                  <span className="text-xs text-slate-500 font-semibold tracking-wider">
+                  <MapPin
+                    className="w-4 h-4"
+                    style={{ color: "var(--terracotta)" }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      color: "var(--terracotta)",
+                      fontWeight: 600,
+                      letterSpacing: "0.14em",
+                    }}
+                  >
                     {s.abbr}
                   </span>
                 </div>
-                <h2 className="text-base font-semibold text-slate-900 mb-1">
+                {/* Demoted h2 → h3: state cards live under section H2 */}
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                    fontSize: 16,
+                    color: "var(--ink)",
+                    marginBottom: 4,
+                    letterSpacing: "-0.01em",
+                    lineHeight: 1.2,
+                  }}
+                >
                   AI Automation in {s.name}
-                </h2>
-                <p className="text-xs text-slate-500">
+                </h3>
+                <p
+                  style={{
+                    fontSize: 12,
+                    color: "var(--ink-faint)",
+                  }}
+                >
                   {s.cities.slice(0, 2).join(", ")}
                 </p>
-                <ArrowUpRight className="absolute top-4 right-4 w-4 h-4 text-slate-400 group-hover:text-skynet-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                <ArrowUpRight
+                  className="absolute top-4 right-4 w-4 h-4"
+                  style={{ color: "var(--terracotta)" }}
+                />
               </Link>
             ))}
           </div>
