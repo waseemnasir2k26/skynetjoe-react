@@ -41,7 +41,7 @@ export default function R3FHeroBackground() {
     <div
       aria-hidden
       className="absolute inset-0 pointer-events-none"
-      style={{ opacity: 0.85 }}
+      style={{ opacity: 0.55 }}
     >
       <WorkflowNodes3D />
     </div>
