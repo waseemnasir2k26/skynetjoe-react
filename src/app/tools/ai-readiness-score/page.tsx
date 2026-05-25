@@ -135,9 +135,9 @@ export default function AIReadinessPage() {
             <div
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
               style={{
-                background: "rgba(94, 234, 212, 0.14)",
-                border: "1px solid rgba(94, 234, 212, 0.40)",
-                color: "#5eead4",
+                background: "rgba(198,107,63,0.10)",
+                border: "1px solid rgba(198,107,63,0.40)",
+                color: "var(--terracotta)",
               }}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -151,7 +151,7 @@ export default function AIReadinessPage() {
               <span
                 style={{
                   background:
-                    "linear-gradient(120deg, #7ee4ff 0%, #5eead4 50%, #fde68a 100%)",
+                    "linear-gradient(120deg, var(--terracotta) 0%, var(--ink) 100%)",
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
                   color: "transparent",
@@ -179,13 +179,13 @@ export default function AIReadinessPage() {
               {heroStats.map(({ icon: Icon, label, body }) => (
                 <div
                   key={label}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
+                  className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-4 py-3"
                 >
-                  <div className="flex items-center gap-2 text-white">
-                    <Icon className="w-4 h-4 text-cyan-300" />
+                  <div className="flex items-center gap-2 text-[var(--ink)]">
+                    <Icon className="w-4 h-4 text-[var(--terracotta)]" />
                     <span className="text-sm font-semibold">{label}</span>
                   </div>
-                  <p className="mt-1 text-xs text-gray-400 leading-relaxed">
+                  <p className="mt-1 text-xs text-[var(--ink-faint)] leading-relaxed">
                     {body}
                   </p>
                 </div>
@@ -208,25 +208,25 @@ export default function AIReadinessPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
               The four axes
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
               What we&apos;re actually measuring.
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {DIMENSIONS.map((d) => (
                 <div
                   key={d.key}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                  className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5"
                 >
-                  <div className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] mb-3 bg-cyan-300/10 text-cyan-200 border border-cyan-300/30">
+                  <div className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] mb-3 bg-[rgba(198,107,63,0.10)] text-[var(--terracotta)] border border-[rgba(198,107,63,0.30)]">
                     {d.questionCount} Qs · max {d.maxScore}
                   </div>
-                  <h3 className="text-white text-lg font-extrabold mb-1">
+                  <h3 className="text-[var(--ink)] text-lg font-extrabold mb-1">
                     {d.label}
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm text-[var(--ink-faint)] leading-relaxed">
                     {d.short}
                   </p>
                 </div>
@@ -240,17 +240,17 @@ export default function AIReadinessPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
               The four outcomes
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
               Where will you land?
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {BUCKETS.map((b) => (
                 <div
                   key={b.key}
-                  className="rounded-2xl border bg-white/5 p-5"
+                  className="rounded-2xl border bg-[var(--cream-2)] p-5"
                   style={{ borderColor: `${b.color}55` }}
                 >
                   <div
@@ -263,10 +263,10 @@ export default function AIReadinessPage() {
                     />
                     {b.range[0]}–{b.range[1]}
                   </div>
-                  <h3 className="text-white text-lg font-extrabold mb-1">
+                  <h3 className="text-[var(--ink)] text-lg font-extrabold mb-1">
                     {b.label}
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm text-[var(--ink-faint)] leading-relaxed">
                     {b.headline}
                   </p>
                 </div>
@@ -280,15 +280,15 @@ export default function AIReadinessPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mx-auto">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12 backdrop-blur-md">
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-8 md:p-12 backdrop-blur-md">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
                 Why this diagnostic exists
               </p>
-              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-6 text-white">
+              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-6 text-[var(--ink)]">
                 Most businesses fail at automation because they buy first and
                 think second.
               </h2>
-              <div className="space-y-5 text-gray-200 leading-relaxed text-base md:text-lg">
+              <div className="space-y-5 text-[var(--ink-2)] leading-relaxed text-base md:text-lg">
                 <p>
                   I&apos;ve killed more automation projects than I&apos;ve
                   shipped. Not because the tech failed, but because the
@@ -308,7 +308,7 @@ export default function AIReadinessPage() {
                   book me this week. Both answers save us both money.
                 </p>
               </div>
-              <p className="mt-6 text-sm text-gray-500">
+              <p className="mt-6 text-sm text-[var(--ink-faint)]">
                 Waseem, building from Bali · waseem@skynetjoe.com
               </p>
             </div>
@@ -320,25 +320,25 @@ export default function AIReadinessPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
               Quick answers
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
               Honest FAQ
             </h2>
             <div className="space-y-3">
               {faqs.map((f) => (
                 <details
                   key={f.q}
-                  className="group rounded-2xl border border-white/10 bg-white/5 px-5 py-4 transition open:bg-white/8"
+                  className="group rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 transition open:bg-[var(--cream-2)]"
                 >
-                  <summary className="flex cursor-pointer items-center justify-between gap-4 text-white font-semibold list-none">
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 text-[var(--ink)] font-semibold list-none">
                     <span>{f.q}</span>
-                    <span className="text-cyan-300 transition group-open:rotate-45 text-xl leading-none">
+                    <span className="text-[var(--terracotta)] transition group-open:rotate-45 text-xl leading-none">
                       +
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm md:text-base text-gray-300 leading-relaxed">
+                  <p className="mt-3 text-sm md:text-base text-[var(--ink-2)] leading-relaxed">
                     {f.a}
                   </p>
                 </details>

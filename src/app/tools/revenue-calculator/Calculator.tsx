@@ -270,7 +270,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
       ? "linear-gradient(120deg, #fbbf24 0%, #f59e0b 100%)"
       : tier === "green"
         ? "linear-gradient(120deg, #34d399 0%, #10b981 100%)"
-        : "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)";
+        : "linear-gradient(120deg, var(--terracotta) 0%, var(--ink) 100%)";
 
   // Magnitude-aware leak headline font size
   const leakMagnitude =
@@ -290,12 +290,12 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
             <div
               className="rounded-3xl p-6 md:p-10 mb-6 relative overflow-hidden"
               style={{
-                background: "rgba(10, 45, 74, 0.55)",
-                border: "1px solid rgba(126, 228, 255, 0.22)",
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.18)",
                 backdropFilter: "blur(14px)",
               }}
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
                 Money leaking right now
               </p>
               <CountUp
@@ -303,7 +303,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 format={(v) => fmtUSD(v)}
                 className={`${leakMagnitude} font-extrabold tracking-tight block leading-none mb-2`}
               />
-              <p className="text-sm md:text-base text-gray-300 mt-3">
+              <p className="text-sm md:text-base text-[var(--ink-2)] mt-3">
                 per month — across missed revenue and wasted labor
               </p>
 
@@ -321,7 +321,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                   <CountUp
                     value={math.missedRevenueMo}
                     format={(v) => fmtUSD(v)}
-                    className="text-2xl md:text-3xl font-bold text-white block"
+                    className="text-2xl md:text-3xl font-bold text-[var(--ink)] block"
                   />
                 </div>
                 <div
@@ -331,13 +331,13 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                     border: "1px solid rgba(251, 191, 36, 0.25)",
                   }}
                 >
-                  <p className="text-[11px] uppercase tracking-wider text-amber-300 font-semibold mb-1">
+                  <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)] font-semibold mb-1">
                     Wasted labor / mo
                   </p>
                   <CountUp
                     value={math.wastedLaborMo}
                     format={(v) => fmtUSD(v)}
-                    className="text-2xl md:text-3xl font-bold text-white block"
+                    className="text-2xl md:text-3xl font-bold text-[var(--ink)] block"
                   />
                 </div>
               </div>
@@ -347,12 +347,12 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
             <div
               className="rounded-3xl p-6 md:p-8 mb-6"
               style={{
-                background: "rgba(10, 45, 74, 0.45)",
-                border: "1px solid rgba(126, 228, 255, 0.18)",
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.12)",
                 backdropFilter: "blur(14px)",
               }}
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-6">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-6">
                 Your inputs · move the sliders
               </p>
 
@@ -365,11 +365,11 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                       <div className="flex items-baseline justify-between gap-3 mb-2">
                         <label
                           htmlFor={`slider-${s.key}`}
-                          className="text-sm font-semibold text-white truncate"
+                          className="text-sm font-semibold text-[var(--ink)] truncate"
                         >
                           {s.label}
                         </label>
-                        <span className="text-base md:text-lg font-extrabold text-cyan-200 tabular-nums whitespace-nowrap">
+                        <span className="text-base md:text-lg font-extrabold text-[var(--terracotta)] tabular-nums whitespace-nowrap">
                           {formatBySliderUnit(s.unit, v)}
                         </span>
                       </div>
@@ -391,7 +391,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                           } as React.CSSProperties
                         }
                       />
-                      <p className="text-xs text-gray-400 mt-1.5 leading-snug">
+                      <p className="text-xs text-[var(--ink-faint)] mt-1.5 leading-snug">
                         {s.description}
                       </p>
                     </div>
@@ -404,32 +404,32 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
             <div
               className="rounded-3xl p-6 md:p-10 mb-6 relative overflow-hidden"
               style={{
-                background: "rgba(10, 45, 74, 0.65)",
-                border: "1px solid rgba(126, 228, 255, 0.28)",
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.18)",
                 backdropFilter: "blur(14px)",
               }}
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
                 With SkynetLabs · net recovery
               </p>
 
               <div className="grid sm:grid-cols-2 gap-5 mb-6">
                 <div>
-                  <p className="text-xs uppercase tracking-wider text-emerald-300 font-semibold mb-1">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)] font-semibold mb-1">
                     Recovered / mo
                   </p>
                   <CountUp
                     value={math.totalMonthlyGain}
                     format={(v) => fmtUSD(v)}
-                    className="text-3xl md:text-4xl font-bold text-white block"
+                    className="text-3xl md:text-4xl font-bold text-[var(--ink)] block"
                   />
-                  <p className="text-xs text-gray-400 mt-1">
+                  <p className="text-xs text-[var(--ink-faint)] mt-1">
                     {fmtUSD(math.recoveredRevenueMo)} revenue +{" "}
                     {fmtUSD(math.savedLaborMo)} labor
                   </p>
                 </div>
                 <div className="sm:text-right">
-                  <p className="text-xs uppercase tracking-wider text-cyan-300 font-semibold mb-1">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)] font-semibold mb-1">
                     Net annual gain
                   </p>
                   <CountUp
@@ -451,19 +451,19 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                           ? "rgba(251, 191, 36, 0.15)"
                           : tier === "green"
                             ? "rgba(52, 211, 153, 0.15)"
-                            : "rgba(94, 234, 212, 0.15)",
+                            : "rgba(198,107,63,0.15)",
                       color:
                         tier === "gold"
                           ? "#fbbf24"
                           : tier === "green"
                             ? "#34d399"
-                            : "#5eead4",
+                            : "var(--terracotta)",
                       border: `1px solid ${
                         tier === "gold"
                           ? "rgba(251, 191, 36, 0.40)"
                           : tier === "green"
                             ? "rgba(52, 211, 153, 0.40)"
-                            : "rgba(94, 234, 212, 0.40)"
+                            : "rgba(198,107,63,0.40)"
                       }`,
                     }}
                   >
@@ -476,7 +476,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 </div>
               </div>
 
-              <p className="text-xs md:text-sm text-gray-400 leading-relaxed">
+              <p className="text-xs md:text-sm text-[var(--ink-faint)] leading-relaxed">
                 Estimates based on average outcomes from 240+ AI automations
                 shipped since 2019. Your mileage varies — book a free call to
                 get a real number for your business.
@@ -504,43 +504,43 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
             <details
               className="group rounded-2xl p-5 md:p-6"
               style={{
-                background: "rgba(10, 45, 74, 0.45)",
-                border: "1px solid rgba(126, 228, 255, 0.18)",
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.12)",
                 backdropFilter: "blur(14px)",
               }}
             >
-              <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-base font-semibold text-white">
+              <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-base font-semibold text-[var(--ink)]">
                 <span>How we calculated this</span>
-                <ChevronDown className="w-5 h-5 text-cyan-300 transition-transform group-open:rotate-180 shrink-0" />
+                <ChevronDown className="w-5 h-5 text-[var(--terracotta)] transition-transform group-open:rotate-180 shrink-0" />
               </summary>
-              <div className="mt-4 space-y-3 text-sm text-gray-300 leading-relaxed">
+              <div className="mt-4 space-y-3 text-sm text-[var(--ink-2)] leading-relaxed">
                 <p>
-                  <strong className="text-white">Missed revenue per month</strong> ={" "}
+                  <strong className="text-[var(--ink)]">Missed revenue per month</strong> ={" "}
                   leads × missed_rate × close_rate × deal_size. If you get 50
                   leads, miss 35% of them, would close 12%, at $500 a deal —
                   that&apos;s 50 × 0.35 × 0.12 × $500 = $1,050 a month walking
                   out the door.
                 </p>
                 <p>
-                  <strong className="text-white">Wasted labor per month</strong> ={" "}
+                  <strong className="text-[var(--ink)]">Wasted labor per month</strong> ={" "}
                   manual_hours × 4.33 weeks × hourly_value. 12 hrs/wk × 4.33 ×
                   $75/hr = $3,897/month on follow-ups you should not be doing.
                 </p>
                 <p>
-                  <strong className="text-white">Recovered revenue</strong> = 80%
+                  <strong className="text-[var(--ink)]">Recovered revenue</strong> = 80%
                   of missed_revenue. After-hours auto-reply, AI voice-pickup
                   and inbox triage reliably recapture 4 out of 5 leads that
                   went silent.
                 </p>
                 <p>
-                  <strong className="text-white">Saved labor</strong> = 70% of
+                  <strong className="text-[var(--ink)]">Saved labor</strong> = 70% of
                   wasted_hours × hourly_value. Automation handles the routine
                   follow-up sequences, CRM data entry and email triage. The
                   remaining 30% is the human-judgment work that should never be
                   automated.
                 </p>
                 <p>
-                  <strong className="text-white">Net annual gain</strong> =
+                  <strong className="text-[var(--ink)]">Net annual gain</strong> =
                   (recovered + saved) × 12. Calibrated against 240+ live
                   automations shipped from Bali since 2019.
                 </p>
@@ -553,12 +553,12 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
             <div
               className="rounded-3xl p-6"
               style={{
-                background: "rgba(10, 45, 74, 0.65)",
-                border: "1px solid rgba(126, 228, 255, 0.28)",
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.18)",
                 backdropFilter: "blur(14px)",
               }}
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
                 Live · your annual gain
               </p>
               <CountUp
@@ -567,7 +567,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 className="text-4xl xl:text-5xl font-extrabold tracking-tight leading-none block mb-3"
                 duration={700}
               />
-              <p className="text-xs text-gray-400 mb-5 leading-relaxed">
+              <p className="text-xs text-[var(--ink-faint)] mb-5 leading-relaxed">
                 Updates as you move the sliders. Bookmark or share the URL to
                 save these inputs.
               </p>
@@ -587,21 +587,21 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
               </Link>
               <div
                 className="mt-5 pt-5 grid grid-cols-2 gap-3"
-                style={{ borderTop: "1px dashed rgba(126, 228, 255, 0.22)" }}
+                style={{ borderTop: "1px dashed rgba(26,26,26,0.18)" }}
               >
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-cyan-300/80">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]/80">
                     Leak / mo
                   </p>
-                  <p className="text-base font-bold text-white tabular-nums">
+                  <p className="text-base font-bold text-[var(--ink)] tabular-nums">
                     {fmtUSD(math.totalMonthlyLeak)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-cyan-300/80">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]/80">
                     Gain / mo
                   </p>
-                  <p className="text-base font-bold text-white tabular-nums">
+                  <p className="text-base font-bold text-[var(--ink)] tabular-nums">
                     {fmtUSD(math.totalMonthlyGain)}
                   </p>
                 </div>
@@ -622,17 +622,17 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
         <div
           className="rounded-2xl p-3 flex items-center gap-3"
           style={{
-            background: "rgba(10, 45, 74, 0.95)",
-            border: "1px solid rgba(126, 228, 255, 0.30)",
+            background: "var(--ink)",
+            border: "1px solid rgba(26,26,26,0.18)",
             backdropFilter: "blur(14px)",
             boxShadow: "0 -8px 30px rgba(0, 0, 0, 0.45)",
           }}
         >
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] uppercase tracking-wider text-cyan-300/80">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]/80">
               Annual gain
             </p>
-            <p className="text-lg font-extrabold text-white truncate tabular-nums">
+            <p className="text-lg font-extrabold text-[var(--ink)] truncate tabular-nums">
               {fmtUSD(math.annualGain)}
             </p>
           </div>
@@ -640,9 +640,9 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
             href={calUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold text-sm text-white shrink-0"
+            className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold text-sm text-[var(--ink)] shrink-0"
             style={{
-              background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+              background: "var(--ink)",
             }}
           >
             Book call
@@ -665,23 +665,23 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
           border-radius: 999px;
           background: linear-gradient(
             90deg,
-            #5eead4 0%,
-            #7ee4ff var(--rc-fill, 50%),
-            rgba(126, 228, 255, 0.15) var(--rc-fill, 50%),
-            rgba(126, 228, 255, 0.15) 100%
+            var(--terracotta) 0%,
+            var(--terracotta) var(--rc-fill, 50%),
+            rgba(26,26,26,0.12) var(--rc-fill, 50%),
+            rgba(26,26,26,0.12) 100%
           );
-          border: 1px solid rgba(126, 228, 255, 0.30);
+          border: 1px solid rgba(26,26,26,0.18);
         }
         .rc-range::-moz-range-track {
           height: 8px;
           border-radius: 999px;
-          background: rgba(126, 228, 255, 0.15);
-          border: 1px solid rgba(126, 228, 255, 0.30);
+          background: rgba(26,26,26,0.12);
+          border: 1px solid rgba(26,26,26,0.18);
         }
         .rc-range::-moz-range-progress {
           height: 8px;
           border-radius: 999px;
-          background: linear-gradient(90deg, #5eead4 0%, #7ee4ff 100%);
+          background: linear-gradient(90deg, var(--terracotta) 0%, var(--terracotta) 100%);
         }
         .rc-range::-webkit-slider-thumb {
           -webkit-appearance: none;
@@ -690,10 +690,10 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
           height: 22px;
           border-radius: 50%;
           background: #ffffff;
-          border: 2px solid #14B8A6;
+          border: 2px solid var(--terracotta);
           margin-top: -8px;
           box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(126, 228, 255, 0.12);
+            0 0 0 4px rgba(26,26,26,0.12);
           transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
         .rc-range::-moz-range-thumb {
@@ -701,9 +701,9 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
           height: 22px;
           border-radius: 50%;
           background: #ffffff;
-          border: 2px solid #14B8A6;
+          border: 2px solid var(--terracotta);
           box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(126, 228, 255, 0.12);
+            0 0 0 4px rgba(26,26,26,0.12);
           transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
         .rc-range:hover::-webkit-slider-thumb,

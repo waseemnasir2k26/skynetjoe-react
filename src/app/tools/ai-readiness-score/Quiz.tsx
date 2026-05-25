@@ -247,13 +247,13 @@ export default function Quiz() {
     return (
       <div
         ref={cardRef}
-        className="rounded-3xl border border-white/10 bg-white/5 p-10 md:p-16 text-center backdrop-blur-md"
+        className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-10 md:p-16 text-center backdrop-blur-md"
       >
-        <Loader2 className="mx-auto mb-6 h-12 w-12 animate-spin text-cyan-300" />
-        <p className="text-xl md:text-2xl font-semibold text-white">
+        <Loader2 className="mx-auto mb-6 h-12 w-12 animate-spin text-[var(--terracotta)]" />
+        <p className="text-xl md:text-2xl font-semibold text-[var(--ink)]">
           Calculating your readiness score…
         </p>
-        <p className="mt-2 text-sm text-gray-400">
+        <p className="mt-2 text-sm text-[var(--ink-faint)]">
           Scoring 10 answers across 4 dimensions.
         </p>
       </div>
@@ -283,46 +283,46 @@ export default function Quiz() {
     <div ref={cardRef} className="relative">
       {/* progress bar */}
       <div className="mb-6 flex items-center justify-between gap-4">
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--terracotta)]">
           Question {step + 1} of {QUESTIONS.length}
         </div>
-        <div className="text-xs text-gray-400">
+        <div className="text-xs text-[var(--ink-faint)]">
           {Math.round(progressPct)}% complete
         </div>
       </div>
-      <div className="mb-8 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+      <div className="mb-8 h-1.5 w-full overflow-hidden rounded-full bg-[var(--cream-2)]">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-teal-300 transition-[width] duration-500 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] transition-[width] duration-500 ease-out"
           style={{ width: `${progressPct}%` }}
         />
       </div>
 
       {/* card with sliding question */}
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-7 md:p-10 backdrop-blur-md">
+      <div className="relative overflow-hidden rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-7 md:p-10 backdrop-blur-md">
         <div
           key={current.id}
           className="ai-readiness-slide"
           style={{ animationDuration: "320ms" }}
         >
           <div className="mb-5 flex flex-wrap items-center gap-2">
-            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
+            <div className="inline-flex items-center gap-3 rounded-full border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-4 py-1.5">
               <span className="text-xl leading-none" aria-hidden>
                 {current.icon}
               </span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-200">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--terracotta)]">
                 Step {current.step}
               </span>
             </div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-white/[0.06] text-white/70 border border-white/10">
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full bg-[var(--cream-2)] text-[var(--ink-faint)] border border-[rgba(26,26,26,0.12)]">
               {dimensionLabel(current.dimension)}
             </span>
           </div>
 
-          <h2 className="mb-2 text-2xl font-extrabold leading-tight tracking-tight text-white md:text-3xl">
+          <h2 className="mb-2 text-2xl font-extrabold leading-tight tracking-tight text-[var(--ink)] md:text-3xl">
             {current.prompt}
           </h2>
           {current.hint && (
-            <p className="mb-6 text-sm text-gray-400 md:text-base">
+            <p className="mb-6 text-sm text-[var(--ink-faint)] md:text-base">
               {current.hint}
             </p>
           )}
@@ -337,18 +337,18 @@ export default function Quiz() {
                   onClick={() => pick(opt.value, opt.score)}
                   className={
                     selected
-                      ? "group flex items-center justify-between gap-3 rounded-xl border-2 border-cyan-400 bg-cyan-500/10 px-4 py-4 text-left transition"
-                      : "group flex items-center justify-between gap-3 rounded-xl border-2 border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-cyan-400/50 hover:bg-white/8"
+                      ? "group flex items-center justify-between gap-3 rounded-xl border-2 border-[var(--terracotta)] bg-[rgba(198,107,63,0.10)] px-4 py-4 text-left transition"
+                      : "group flex items-center justify-between gap-3 rounded-xl border-2 border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-4 py-4 text-left transition hover:border-[var(--terracotta)]/50 hover:bg-[var(--cream-2)]"
                   }
                 >
-                  <span className="text-sm font-semibold text-white md:text-base">
+                  <span className="text-sm font-semibold text-[var(--ink)] md:text-base">
                     {opt.label}
                   </span>
                   <ArrowRight
                     className={
                       selected
-                        ? "h-4 w-4 text-cyan-300"
-                        : "h-4 w-4 text-gray-500 transition group-hover:translate-x-0.5 group-hover:text-cyan-300"
+                        ? "h-4 w-4 text-[var(--terracotta)]"
+                        : "h-4 w-4 text-[var(--ink-faint)] transition group-hover:translate-x-0.5 group-hover:text-[var(--terracotta)]"
                     }
                   />
                 </button>
@@ -361,7 +361,7 @@ export default function Quiz() {
               type="button"
               onClick={back}
               disabled={step === 0}
-              className="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 transition hover:text-cyan-300 disabled:cursor-not-allowed disabled:opacity-30"
+              className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)] disabled:cursor-not-allowed disabled:opacity-30"
             >
               ← Back
             </button>
@@ -369,7 +369,7 @@ export default function Quiz() {
               <button
                 type="button"
                 onClick={saveForLater}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 transition hover:text-cyan-300"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)]"
               >
                 <Save className="h-3 w-3" />
                 {savedToast ? "Saved" : "Save & resume later"}
@@ -377,7 +377,7 @@ export default function Quiz() {
               <button
                 type="button"
                 onClick={restart}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 transition hover:text-cyan-300"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)]"
               >
                 <RotateCcw className="h-3 w-3" />
                 Start over
@@ -459,7 +459,7 @@ function ScoreCountUp({
       style={{ color }}
     >
       {display}
-      <span className="text-2xl text-gray-500 md:text-3xl">/{MAX_SCORE}</span>
+      <span className="text-2xl text-[var(--ink-faint)] md:text-3xl">/{MAX_SCORE}</span>
     </span>
   );
 }
@@ -554,7 +554,7 @@ function RadarChart({
             cy={a.py}
             r={3.5}
             fill={color}
-            stroke="#061827"
+            stroke="var(--ink)"
             strokeWidth={1.5}
           />
         ))}
@@ -643,7 +643,7 @@ function ResultCard({
   const callout = `Fix this first: ${weakest.label}. ${weakest.short.toLowerCase()} is the dimension where you scored lowest. Closing this gap unlocks everything else.`;
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md">
+    <div className="overflow-hidden rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md">
       {/* diagnosis header */}
       <div
         className="relative px-7 py-10 md:px-12 md:py-14"
@@ -669,17 +669,17 @@ function ResultCard({
               Readiness
             </div>
             <h2
-              className="text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl"
+              className="text-3xl font-extrabold leading-tight tracking-tight text-[var(--ink)] md:text-5xl"
               style={{ textShadow: `0 0 28px ${bucket.color}55` }}
             >
               {bucket.label}
             </h2>
-            <p className="mt-3 max-w-2xl text-base text-gray-200 md:text-lg">
+            <p className="mt-3 max-w-2xl text-base text-[var(--ink-2)] md:text-lg">
               {bucket.headline}
             </p>
           </div>
           <div className="text-right">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-1">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--ink-faint)] mb-1">
               AI Readiness Score
             </div>
             <ScoreCountUp value={score} color={bucket.color} />
@@ -690,7 +690,7 @@ function ResultCard({
       {/* radar + recommendation body */}
       <div className="grid grid-cols-1 gap-8 px-7 py-8 md:grid-cols-[1fr_1.2fr] md:px-12 md:py-10">
         <div>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta)]">
             Four-axis breakdown
           </p>
           <RadarChart subscores={subscores} color={bucket.color} />
@@ -701,14 +701,14 @@ function ResultCard({
               return (
                 <div
                   key={d.key}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5"
+                  className="rounded-lg border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-2.5 py-1.5"
                 >
-                  <div className="text-white/60 uppercase tracking-wider">
+                  <div className="text-[var(--ink)]/60 uppercase tracking-wider">
                     {d.label}
                   </div>
-                  <div className="text-white font-semibold">
+                  <div className="text-[var(--ink)] font-semibold">
                     {raw}/{d.maxScore}{" "}
-                    <span className="text-gray-500">· {pct}%</span>
+                    <span className="text-[var(--ink-faint)]">· {pct}%</span>
                   </div>
                 </div>
               );
@@ -717,24 +717,24 @@ function ResultCard({
         </div>
 
         <div>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta)]">
             Recommendation
           </p>
-          <p className="mb-5 text-base leading-relaxed text-gray-200 md:text-lg">
+          <p className="mb-5 text-base leading-relaxed text-[var(--ink-2)] md:text-lg">
             {bucket.recommendation}
           </p>
           <ul className="space-y-3">
             {/* weakest-dim callout always rendered first */}
-            <li className="flex gap-3 rounded-xl border border-cyan-400/30 bg-cyan-400/[0.06] px-4 py-3 text-sm leading-relaxed text-cyan-100 md:text-base">
-              <Sparkles className="mt-0.5 h-4 w-4 flex-shrink-0 text-cyan-300" />
+            <li className="flex gap-3 rounded-xl border border-[rgba(198,107,63,0.30)] bg-[var(--terracotta)]/[0.06] px-4 py-3 text-sm leading-relaxed text-[var(--terracotta)] md:text-base">
+              <Sparkles className="mt-0.5 h-4 w-4 flex-shrink-0 text-[var(--terracotta)]" />
               {callout}
             </li>
             {bucket.bullets.map((line, idx) => (
               <li
                 key={line}
-                className="flex gap-3 text-sm leading-relaxed text-gray-200 md:text-base"
+                className="flex gap-3 text-sm leading-relaxed text-[var(--ink-2)] md:text-base"
               >
-                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-cyan-400/15 text-xs font-bold text-cyan-300">
+                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta)]">
                   {idx + 1}
                 </span>
                 {line}
@@ -745,17 +745,17 @@ function ResultCard({
       </div>
 
       {/* CTAs */}
-      <div className="border-t border-white/10 bg-white/[0.02] px-7 py-7 md:px-12 md:py-8">
+      <div className="border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-7 py-7 md:px-12 md:py-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a
             href={`${CAL_URL}?${bookingQuery}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
+            className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--ink)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
             style={{
               background:
-                "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-              boxShadow: "0 10px 32px rgba(0, 212, 255, 0.30)",
+                "var(--ink)",
+              boxShadow: "0 10px 32px rgba(26,26,26,0.15)",
             }}
           >
             <CalendarCheck className="h-4 w-4" />
@@ -764,7 +764,7 @@ function ResultCard({
           </a>
           <a
             href={`/tools/revenue-calculator?${calcQuery}`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-4 text-sm font-semibold text-white transition hover:border-cyan-400 hover:bg-white/10 sm:text-base"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-6 py-4 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:bg-[var(--cream-2)] sm:text-base"
           >
             <Calculator className="h-4 w-4" />
             See exactly how much you&apos;re losing
@@ -773,11 +773,11 @@ function ResultCard({
           <button
             type="button"
             onClick={onCopy}
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-sm font-semibold text-gray-200 transition hover:border-cyan-400 hover:text-cyan-200"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 text-sm font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta)]"
           >
             {copyState === "copied" ? (
               <>
-                <Check className="h-4 w-4 text-emerald-300" />
+                <Check className="h-4 w-4 text-[var(--terracotta)]" />
                 Link copied
               </>
             ) : (
@@ -792,7 +792,7 @@ function ResultCard({
         <button
           type="button"
           onClick={onRestart}
-          className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 transition hover:text-cyan-300"
+          className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)]"
         >
           <RotateCcw className="h-3 w-3" />
           Retake the quiz
