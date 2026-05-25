@@ -1,3 +1,18 @@
+/**
+ * /thank-you — booking confirmation page (post-Calendly + post-quiz funnel).
+ *
+ * Cream-pivot port 2026-05-25:
+ *   - Hero: cream-3 bg, terracotta check SVG, Fraunces H1 with terracotta em
+ *   - Portrait: cream-2 frame with mono caption
+ *   - Timeline: cream-2 cards, terracotta icon wash, mono eyebrow per step
+ *   - AI Audit Preview: cream-2 panel (was dark gradient from-[#0a2d4a])
+ *   - Pre-call homework: cream-2 panel with terracotta CTA + ink-outline secondary
+ *   - Case study trio: cream-2 cards with terracotta hover
+ *   - Referral nudge: cream-2 panel with terracotta gift accent (was amber)
+ *   - SVG check animation, ReferralForm, schema, helpers all unchanged.
+ *   - Searchparam handling + Calendly redirect parsing unchanged.
+ */
+
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,7 +65,6 @@ function firstParam(
 
 function formatBookedTime(raw: string | undefined): string {
   if (!raw) return "soon";
-  // Calendly typically passes ISO 8601 — graceful fallback if it's anything else.
   try {
     const d = new Date(raw);
     if (Number.isNaN(d.getTime())) return raw;
@@ -101,11 +115,9 @@ function leakBulletsFor(bucket: string | undefined): string[] {
       "Onboarding is bespoke per client — you re-invent the welcome sequence every time. A 3-template library would cut delivery time by a third.",
     ];
   }
-  // "clean" or unknown — light-touch optimization framing
   return generic;
 }
 
-// 4-step "what happens next" timeline
 const TIMELINE = [
   {
     icon: Mail,
@@ -133,6 +145,44 @@ const TIMELINE = [
   },
 ] as const;
 
+// Shared cream-pivot inline styles
+const eyebrow = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11 as const,
+  textTransform: "uppercase" as const,
+  letterSpacing: "0.16em",
+  color: "var(--terracotta)",
+  display: "inline-flex" as const,
+  alignItems: "center" as const,
+  gap: 12,
+};
+const eyebrowRule = {
+  width: 28,
+  height: 1,
+  background: "var(--terracotta)",
+  display: "inline-block" as const,
+};
+const h2Style = {
+  fontFamily: "var(--font-display)",
+  fontWeight: 500,
+  letterSpacing: "-0.02em",
+  lineHeight: 1.08,
+  color: "var(--ink)",
+  fontSize: "clamp(28px, 4vw, 44px)",
+  marginBottom: 14,
+};
+const emTerra = {
+  fontStyle: "italic" as const,
+  color: "var(--terracotta)",
+  fontWeight: 500,
+};
+const cardCream = {
+  background: "var(--cream-2)",
+  border: "1px solid rgba(26,26,26,0.12)",
+  padding: 24,
+  borderRadius: 2,
+};
+
 export default async function ThankYouPage({
   searchParams,
 }: {
@@ -142,7 +192,6 @@ export default async function ThankYouPage({
   const ref = firstParam(sp.ref);
   const bucket = firstParam(sp.bucket);
   const score = firstParam(sp.score);
-  // Calendly redirect params (best-effort — may or may not be present)
   const startTime =
     firstParam(sp.event_start_time) ||
     firstParam(sp.invitee_event_start_time) ||
@@ -183,7 +232,7 @@ export default async function ThankYouPage({
     <>
       <JsonLd data={breadcrumbSchema} />
 
-      {/* Reduced-motion overrides — defined inline so this page is self-contained */}
+      {/* Reduced-motion overrides — animation tokens re-skinned to terracotta */}
       <style>{`
         @keyframes tyCheckDraw {
           to { stroke-dashoffset: 0; }
@@ -229,36 +278,12 @@ export default async function ThankYouPage({
 
       {/* HERO */}
       <section
-        className="relative overflow-hidden pt-24 md:pt-32 pb-16"
+        className="relative pt-28 md:pt-36 pb-16"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.55,
-          }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#00D4FF",
-            top: 80,
-            right: -160,
-            opacity: 0.45,
-            animationDelay: "-7s",
-          }}
-        />
-
         <div className="container-x px-6 relative z-10">
           <div className="grid md:grid-cols-[1.3fr_1fr] gap-10 items-center">
             <div>
@@ -275,14 +300,14 @@ export default async function ThankYouPage({
                     cx="28"
                     cy="28"
                     r="26"
-                    stroke="#5EEAD4"
+                    stroke="var(--terracotta)"
                     strokeWidth="3"
-                    fill="rgba(94, 234, 212, 0.12)"
+                    fill="rgba(198, 107, 63, 0.10)"
                   />
                   <path
                     className="ty-check-path"
                     d="M16 29 L25 38 L40 20"
-                    stroke="#5EEAD4"
+                    stroke="var(--terracotta)"
                     strokeWidth="4"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -290,49 +315,78 @@ export default async function ThankYouPage({
                   />
                 </svg>
                 <div
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full"
+                  className="inline-flex items-center gap-2 px-4 py-1.5"
                   style={{
-                    background: "rgba(94, 234, 212, 0.14)",
-                    border: "1px solid rgba(94, 234, 212, 0.40)",
-                    color: "#9ff5dc",
+                    background: "rgba(198, 107, 63, 0.10)",
+                    border: "1px solid rgba(198, 107, 63, 0.40)",
+                    color: "var(--terracotta)",
+                    borderRadius: 9999,
+                    fontFamily: "var(--font-mono)",
                   }}
                 >
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span className="text-xs font-medium tracking-wider uppercase">
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 600,
+                      letterSpacing: "0.16em",
+                      textTransform: "uppercase",
+                    }}
+                  >
                     Booking confirmed
                   </span>
                 </div>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-extrabold leading-[1.06] tracking-tight mb-5 text-white">
+              <h1
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 500,
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1.06,
+                  color: "var(--ink)",
+                  fontSize: "clamp(40px, 6vw, 64px)",
+                  margin: "0 0 20px",
+                }}
+              >
                 {greetingName ? `${greetingName}, ` : ""}you&apos;re in.{" "}
-                <span
-                  style={{
-                    background:
-                      "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  Talk to you on {bookedTime}.
-                </span>
+                <em style={emTerra}>Talk to you on {bookedTime}.</em>
               </h1>
 
-              <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-3">
+              <p
+                style={{
+                  fontSize: 19,
+                  color: "var(--ink-2)",
+                  lineHeight: 1.6,
+                  marginBottom: 12,
+                  maxWidth: "60ch",
+                }}
+              >
                 I&apos;ll personally show up to this call. No SDR, no junior, no
                 discovery script. Just me, your funnel on screen, and a working
                 doc we&apos;ll build together.
               </p>
-              <p className="text-base text-gray-300 leading-relaxed">
+              <p
+                style={{
+                  fontSize: 16,
+                  color: "var(--ink-faint)",
+                  lineHeight: 1.55,
+                  maxWidth: "60ch",
+                }}
+              >
                 Scroll down — there&apos;s 1 small thing I need from you before we
                 talk, and a preview of what I&apos;ll likely find inside your
                 stack.
               </p>
             </div>
 
-            <div className="relative aspect-[4/5] max-w-sm mx-auto md:mx-0 md:justify-self-end w-full rounded-3xl overflow-hidden border border-cyan-400/20 shadow-2xl shadow-cyan-500/10">
+            <div
+              className="relative aspect-[4/5] max-w-sm mx-auto md:mx-0 md:justify-self-end w-full overflow-hidden"
+              style={{
+                border: "1px solid rgba(26,26,26,0.18)",
+                borderRadius: 2,
+              }}
+            >
               <Image
                 src="/portraits/waseem-rooftop-smile.jpg"
                 alt="Waseem Nasir, founder of SkynetLabs"
@@ -341,9 +395,32 @@ export default async function ThankYouPage({
                 sizes="(max-width: 768px) 80vw, 360px"
                 className="object-cover"
               />
-              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
-                <p className="text-white font-semibold text-sm">Waseem Nasir</p>
-                <p className="text-cyan-200 text-xs">
+              <div
+                className="absolute inset-x-0 bottom-0 p-4"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(26,26,26,0.85), rgba(26,26,26,0.35), transparent)",
+                }}
+              >
+                <p
+                  style={{
+                    color: "var(--cream-3)",
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                    fontSize: 16,
+                    marginBottom: 4,
+                  }}
+                >
+                  Waseem Nasir
+                </p>
+                <p
+                  style={{
+                    color: "rgba(242,239,230,0.85)",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    letterSpacing: "0.12em",
+                  }}
+                >
                   Founder · SkynetLabs · Bali (GMT+8)
                 </p>
               </div>
@@ -353,17 +430,16 @@ export default async function ThankYouPage({
       </section>
 
       {/* TIMELINE */}
-      <section className="section">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
         <div className="container-x px-6">
           <div className="max-w-2xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
               What happens next
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+            </div>
+            <h2 style={h2Style}>
               From now until your scope doc lands —{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                4 beats.
-              </span>
+              <em style={emTerra}>4 beats.</em>
             </h2>
           </div>
 
@@ -371,20 +447,46 @@ export default async function ThankYouPage({
             {TIMELINE.map((step) => {
               const Icon = step.icon;
               return (
-                <li
-                  key={step.title}
-                  className="ty-step relative p-5 rounded-2xl bg-white/5 border border-white/10"
-                >
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-400/25 to-teal-400/25 flex items-center justify-center mb-4 border border-cyan-400/30">
-                    <Icon className="w-5 h-5 text-cyan-200" />
+                <li key={step.title} className="ty-step relative" style={cardCream}>
+                  <div
+                    className="flex items-center justify-center mb-4"
+                    style={{
+                      width: 44,
+                      height: 44,
+                      background: "rgba(198,107,63,0.10)",
+                      border: "1px solid rgba(198,107,63,0.30)",
+                      borderRadius: 2,
+                    }}
+                  >
+                    <Icon className="w-5 h-5" style={{ color: "var(--terracotta)" }} />
                   </div>
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-cyan-300/90 font-semibold mb-1">
+                  <p
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.16em",
+                      color: "var(--terracotta)",
+                      fontWeight: 600,
+                      marginBottom: 6,
+                    }}
+                  >
                     {step.when}
                   </p>
-                  <h3 className="text-white font-semibold mb-2">
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 500,
+                      fontSize: 17,
+                      color: "var(--ink)",
+                      marginBottom: 10,
+                      letterSpacing: "-0.01em",
+                      lineHeight: 1.2,
+                    }}
+                  >
                     {step.title}
                   </h3>
-                  <p className="text-sm text-gray-300 leading-relaxed">
+                  <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.55 }}>
                     {step.body}
                   </p>
                 </li>
@@ -395,28 +497,27 @@ export default async function ThankYouPage({
       </section>
 
       {/* AI AUDIT PREVIEW */}
-      <section className="section pt-0">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
         <div className="container-x px-6">
-          <div className="rounded-3xl bg-gradient-to-br from-[#0a2d4a]/80 via-[#073846]/60 to-[#0a2d4a]/80 border border-cyan-400/20 p-8 md:p-12 backdrop-blur-md">
+          <div style={{ ...cardCream, padding: "40px 32px", border: "1px solid rgba(26,26,26,0.18)" }}>
             <div className="grid md:grid-cols-[1fr_1.4fr] gap-8 md:gap-12">
               <div>
-                <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+                <div className="mb-5" style={eyebrow}>
+                  <span style={eyebrowRule} />
                   While you wait
-                </p>
-                <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4">
+                </div>
+                <h2 style={h2Style}>
                   Here&apos;s what I&apos;ll{" "}
-                  <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                    likely find.
-                  </span>
+                  <em style={emTerra}>likely find.</em>
                 </h2>
-                <p className="text-gray-300 leading-relaxed">
+                <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6 }}>
                   After 200+ service businesses, the leak patterns rhyme. I&apos;m
                   not bluffing — these are the 4 we find inside roughly 8 out
                   of every 10 funnels we audit.
                   {bucket ? (
                     <>
                       {" "}
-                      <span className="text-cyan-200">
+                      <span style={{ color: "var(--terracotta)", fontWeight: 600 }}>
                         Tuned for your &quot;{bucket}&quot; bucket from the stress
                         quiz.
                       </span>
@@ -425,16 +526,40 @@ export default async function ThankYouPage({
                 </p>
               </div>
 
-              <ul className="space-y-4">
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
                 {leakBullets.map((bullet, i) => (
                   <li
                     key={i}
-                    className="flex gap-3 p-4 rounded-xl bg-white/5 border border-white/10"
+                    style={{
+                      display: "flex",
+                      gap: 12,
+                      padding: 16,
+                      background: "var(--cream-3)",
+                      border: "1px solid rgba(26,26,26,0.10)",
+                      borderRadius: 2,
+                    }}
                   >
-                    <span className="flex-shrink-0 w-7 h-7 rounded-md bg-cyan-400/15 border border-cyan-400/30 text-cyan-200 text-xs font-bold flex items-center justify-center mt-0.5">
+                    <span
+                      style={{
+                        flexShrink: 0,
+                        width: 28,
+                        height: 28,
+                        background: "rgba(198,107,63,0.10)",
+                        border: "1px solid rgba(198,107,63,0.30)",
+                        color: "var(--terracotta)",
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 11,
+                        fontWeight: 700,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: 2,
+                        marginTop: 2,
+                      }}
+                    >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="text-gray-200 leading-relaxed text-[15px]">
+                    <p style={{ color: "var(--ink-2)", fontSize: 15, lineHeight: 1.6 }}>
                       {bullet}
                     </p>
                   </li>
@@ -446,28 +571,39 @@ export default async function ThankYouPage({
       </section>
 
       {/* PRE-CALL HOMEWORK */}
-      <section className="section pt-0">
+      <section className="py-16 md:py-20 pt-0" style={{ background: "var(--cream-3)" }}>
         <div className="container-x px-6">
           <div
-            className="rounded-3xl p-8 md:p-12 text-center md:text-left relative overflow-hidden"
             style={{
-              background:
-                "linear-gradient(135deg, rgba(30, 136, 229, 0.18) 0%, rgba(20, 184, 166, 0.18) 100%)",
-              border: "1px solid rgba(94, 234, 212, 0.30)",
+              ...cardCream,
+              padding: "40px 32px",
+              border: "1px solid rgba(198,107,63,0.30)",
+              background: "rgba(198,107,63,0.06)",
             }}
+            className="text-center md:text-left"
           >
             <div className="grid md:grid-cols-[auto_1fr_auto] gap-6 items-center">
-              <div className="w-16 h-16 mx-auto md:mx-0 rounded-2xl bg-cyan-400/15 border border-cyan-400/40 flex items-center justify-center">
-                <Video className="w-7 h-7 text-cyan-200" />
+              <div
+                className="mx-auto md:mx-0 flex items-center justify-center"
+                style={{
+                  width: 64,
+                  height: 64,
+                  background: "rgba(198,107,63,0.10)",
+                  border: "1px solid rgba(198,107,63,0.40)",
+                  borderRadius: 2,
+                }}
+              >
+                <Video className="w-7 h-7" style={{ color: "var(--terracotta)" }} />
               </div>
               <div>
-                <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-2">
+                <div className="mb-3" style={eyebrow}>
+                  <span style={eyebrowRule} />
                   1 thing to do before our call
-                </p>
-                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-3">
+                </div>
+                <h2 style={{ ...h2Style, fontSize: "clamp(22px, 3vw, 32px)", marginBottom: 12 }}>
                   Send me ONE Loom of your current funnel.
                 </h2>
-                <p className="text-gray-200 leading-relaxed max-w-2xl">
+                <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
                   2 minutes max. Just screen-record and walk me through how a
                   lead enters, what tools touch them, and where you think
                   it&apos;s leaking. I prep against your real funnel — not a
@@ -479,21 +615,52 @@ export default async function ThankYouPage({
                   href="https://www.loom.com/looms/videos"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 transition whitespace-nowrap"
+                  className="inline-flex items-center justify-center gap-2"
+                  style={{
+                    background: "var(--terracotta)",
+                    color: "var(--cream-3)",
+                    padding: "14px 22px",
+                    fontFamily: "var(--font-sans)",
+                    fontWeight: 600,
+                    fontSize: 14,
+                    borderRadius: 2,
+                    border: "none",
+                    whiteSpace: "nowrap",
+                    textDecoration: "none",
+                  }}
                 >
                   Open Loom <ArrowRight className="w-4 h-4" />
                 </a>
                 <a
                   href={`mailto:${SITE.emailFounder}?subject=${loomSubject}&body=${loomBody}`}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-cyan-100 border border-cyan-400/40 hover:bg-cyan-400/10 transition whitespace-nowrap"
+                  className="inline-flex items-center justify-center gap-2"
+                  style={{
+                    background: "transparent",
+                    color: "var(--ink)",
+                    border: "1px solid var(--ink)",
+                    padding: "13px 21px",
+                    fontFamily: "var(--font-sans)",
+                    fontWeight: 600,
+                    fontSize: 14,
+                    borderRadius: 2,
+                    whiteSpace: "nowrap",
+                    textDecoration: "none",
+                  }}
                 >
                   Email Waseem the link
                 </a>
               </div>
             </div>
             {inviteeEmail ? (
-              <p className="text-xs text-cyan-200/70 mt-6">
-                Email pre-filled to send from <strong>{inviteeEmail}</strong>.
+              <p
+                style={{
+                  fontSize: 12,
+                  color: "var(--ink-faint)",
+                  marginTop: 24,
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
+                Email pre-filled to send from <strong style={{ color: "var(--terracotta)" }}>{inviteeEmail}</strong>.
                 If you&apos;d rather drop the Loom in Slack or LinkedIn DM, that
                 works too.
               </p>
@@ -503,17 +670,16 @@ export default async function ThankYouPage({
       </section>
 
       {/* 3 CASE STUDIES */}
-      <section className="section pt-0">
+      <section className="py-16 md:py-20 pt-0" style={{ background: "var(--cream-3)" }}>
         <div className="container-x px-6">
           <div className="max-w-2xl mb-10">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
               While you wait
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+            </div>
+            <h2 style={h2Style}>
               See what we built for{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                3 founders just like you.
-              </span>
+              <em style={emTerra}>3 founders just like you.</em>
             </h2>
           </div>
 
@@ -522,18 +688,54 @@ export default async function ThankYouPage({
               <Link
                 key={c.slug}
                 href={`/case-studies/${c.slug}`}
-                className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/40 hover:bg-white/10 transition"
+                className="group"
+                style={{ ...cardCream, textDecoration: "none", transition: "border-color 0.18s" }}
               >
-                <div className="text-xs uppercase tracking-[0.2em] text-cyan-300/90 font-semibold mb-3">
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.16em",
+                    color: "var(--terracotta)",
+                    fontWeight: 600,
+                    marginBottom: 12,
+                  }}
+                >
                   {c.industryTag} · {c.location}
                 </div>
-                <h3 className="text-white font-bold text-lg mb-3 leading-snug">
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                    fontSize: 18,
+                    color: "var(--ink)",
+                    marginBottom: 12,
+                    letterSpacing: "-0.015em",
+                    lineHeight: 1.2,
+                  }}
+                >
                   {c.clientName}
                 </h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                <p
+                  style={{
+                    fontSize: 14,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.55,
+                    marginBottom: 16,
+                  }}
+                >
                   {c.oneLineOutcome}
                 </p>
-                <div className="inline-flex items-center gap-2 text-cyan-200 text-sm font-semibold group-hover:gap-3 transition-all">
+                <div
+                  className="inline-flex items-center gap-2"
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: "var(--terracotta)",
+                  }}
+                >
                   Read the breakdown <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
@@ -543,26 +745,44 @@ export default async function ThankYouPage({
       </section>
 
       {/* REFERRAL NUDGE */}
-      <section className="section pt-0">
+      <section className="py-16 md:py-20 pt-0" style={{ background: "var(--cream-3)" }}>
         <div className="container-x px-6">
-          <div className="rounded-3xl p-8 md:p-10 bg-white/5 border border-white/10">
+          <div style={{ ...cardCream, padding: "40px 32px" }}>
             <div className="grid md:grid-cols-[auto_1fr] gap-5 items-start mb-6">
-              <div className="w-12 h-12 rounded-xl bg-amber-400/15 border border-amber-400/40 flex items-center justify-center">
-                <Gift className="w-5 h-5 text-amber-200" />
+              <div
+                className="flex items-center justify-center"
+                style={{
+                  width: 48,
+                  height: 48,
+                  background: "rgba(198,107,63,0.10)",
+                  border: "1px solid rgba(198,107,63,0.40)",
+                  borderRadius: 2,
+                }}
+              >
+                <Gift className="w-5 h-5" style={{ color: "var(--terracotta)" }} />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-2">
+                <h2 style={{ ...h2Style, fontSize: "clamp(22px, 3vw, 30px)", marginBottom: 10 }}>
                   Know another founder drowning in manual ops?
                 </h2>
-                <p className="text-gray-300 leading-relaxed max-w-2xl">
+                <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
                   Send the intro. If they sign for a build, I&apos;ll drop{" "}
-                  <strong className="text-amber-200">$200 credit</strong> on
-                  your next invoice. No expiry, no fine print, no MLM nonsense.
+                  <strong style={{ color: "var(--terracotta)", fontWeight: 600 }}>
+                    $200 credit
+                  </strong>{" "}
+                  on your next invoice. No expiry, no fine print, no MLM nonsense.
                 </p>
               </div>
             </div>
             <ReferralForm />
-            <p className="text-xs text-gray-400 mt-4">
+            <p
+              style={{
+                fontSize: 12,
+                color: "var(--ink-faint)",
+                marginTop: 16,
+                fontFamily: "var(--font-mono)",
+              }}
+            >
               I&apos;ll reach out to them within 24h. Your name goes in the
               intro only if you tell me to.
             </p>
