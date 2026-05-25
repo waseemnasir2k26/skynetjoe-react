@@ -210,17 +210,17 @@ export default function StressQuizPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
               The four buckets
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
               Where do you land?
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {BUCKETS.map((b) => (
                 <div
                   key={b.key}
-                  className="rounded-2xl border bg-white/5 p-5"
+                  className="rounded-2xl border bg-[var(--cream-2)] p-5"
                   style={{ borderColor: `${b.color}55` }}
                 >
                   <div
@@ -233,10 +233,10 @@ export default function StressQuizPage() {
                     />
                     {b.range[0]}–{b.range[1]}
                   </div>
-                  <h3 className="text-white text-lg font-extrabold mb-1">
+                  <h3 className="text-[var(--ink)] text-lg font-extrabold mb-1">
                     {b.label}
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm text-[var(--ink-faint)] leading-relaxed">
                     {b.headline}
                   </p>
                 </div>
@@ -250,14 +250,14 @@ export default function StressQuizPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mx-auto">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12 backdrop-blur-md">
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-8 md:p-12 backdrop-blur-md">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
                 Why this quiz exists
               </p>
-              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-6 text-white">
+              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-6 text-[var(--ink)]">
                 The same five patterns. Over and over.
               </h2>
-              <div className="space-y-5 text-gray-200 leading-relaxed text-base md:text-lg">
+              <div className="space-y-5 text-[var(--ink-2)] leading-relaxed text-base md:text-lg">
                 <p>
                   Every cold-call I take starts the same way. Founder pulls up
                   their numbers and says revenue is fine. Then I ask about
@@ -274,7 +274,7 @@ export default function StressQuizPage() {
                   once you stop running on adrenaline long enough to see it.
                 </p>
               </div>
-              <p className="mt-6 text-sm text-gray-500">
+              <p className="mt-6 text-sm text-[var(--ink-faint)]">
                 Waseem, building from Bali · waseem@skynetjoe.com
               </p>
             </div>
@@ -286,25 +286,25 @@ export default function StressQuizPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
               Quick answers
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
               Honest FAQ
             </h2>
             <div className="space-y-3">
               {faqs.map((f) => (
                 <details
                   key={f.q}
-                  className="group rounded-2xl border border-white/10 bg-white/5 px-5 py-4 transition open:bg-white/8"
+                  className="group rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 transition open:bg-[var(--cream-2)]"
                 >
-                  <summary className="flex cursor-pointer items-center justify-between gap-4 text-white font-semibold list-none">
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 text-[var(--ink)] font-semibold list-none">
                     <span>{f.q}</span>
-                    <span className="text-cyan-300 transition group-open:rotate-45 text-xl leading-none">
+                    <span className="text-[var(--terracotta)] transition group-open:rotate-45 text-xl leading-none">
                       +
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm md:text-base text-gray-300 leading-relaxed">
+                  <p className="mt-3 text-sm md:text-base text-[var(--ink-2)] leading-relaxed">
                     {f.a}
                   </p>
                 </details>

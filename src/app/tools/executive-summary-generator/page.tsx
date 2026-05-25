@@ -106,9 +106,9 @@ export default function ExecutiveSummaryGeneratorPage() {
             <div
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
               style={{
-                background: "rgba(94, 234, 212, 0.14)",
-                border: "1px solid rgba(94, 234, 212, 0.40)",
-                color: "#5eead4",
+                background: "rgba(198,107,63,0.10)",
+                border: "1px solid rgba(198,107,63,0.40)",
+                color: "var(--terracotta)",
               }}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -122,7 +122,7 @@ export default function ExecutiveSummaryGeneratorPage() {
               <span
                 style={{
                   background:
-                    "linear-gradient(120deg, #7ee4ff 0%, #5eead4 50%, #fde68a 100%)",
+                    "linear-gradient(120deg, var(--terracotta) 0%, var(--ink) 100%)",
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
                   color: "transparent",
@@ -147,13 +147,13 @@ export default function ExecutiveSummaryGeneratorPage() {
               {heroStats.map(({ icon: Icon, label, body }) => (
                 <div
                   key={label}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
+                  className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-4 py-3"
                 >
-                  <div className="flex items-center gap-2 text-white">
-                    <Icon className="w-4 h-4 text-cyan-300" />
+                  <div className="flex items-center gap-2 text-[var(--ink)]">
+                    <Icon className="w-4 h-4 text-[var(--terracotta)]" />
                     <span className="text-sm font-semibold">{label}</span>
                   </div>
-                  <p className="mt-1 text-xs text-gray-400 leading-relaxed">
+                  <p className="mt-1 text-xs text-[var(--ink-faint)] leading-relaxed">
                     {body}
                   </p>
                 </div>
@@ -176,25 +176,25 @@ export default function ExecutiveSummaryGeneratorPage() {
       <section className="section pt-0">
         <div className="container-x px-6">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
               Quick answers
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
               Honest FAQ
             </h2>
             <div className="space-y-3">
               {faqs.map((f) => (
                 <details
                   key={f.q}
-                  className="group rounded-2xl border border-white/10 bg-white/5 px-5 py-4 transition open:bg-white/8"
+                  className="group rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 transition open:bg-[var(--cream-2)]"
                 >
-                  <summary className="flex cursor-pointer items-center justify-between gap-4 text-white font-semibold list-none">
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 text-[var(--ink)] font-semibold list-none">
                     <span>{f.q}</span>
-                    <span className="text-cyan-300 transition group-open:rotate-45 text-xl leading-none">
+                    <span className="text-[var(--terracotta)] transition group-open:rotate-45 text-xl leading-none">
                       +
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm md:text-base text-gray-300 leading-relaxed">
+                  <p className="mt-3 text-sm md:text-base text-[var(--ink-2)] leading-relaxed">
                     {f.a}
                   </p>
                 </details>

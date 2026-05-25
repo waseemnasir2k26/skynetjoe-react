@@ -15,6 +15,11 @@
  *   8. Final CTA
  *
  * All copy is driven by the Industry config in src/data/industries.ts.
+ *
+ * Cream-pivot port 2026-05-25 — matches sitewide editorial system:
+ *   bg cream/cream-2/cream-3, Fraunces H1+H2 with terracotta <em>,
+ *   1px ink border cards, flat terracotta CTAs, no dark gradients.
+ *   Data shape (Industry config) intentionally unchanged.
  */
 
 import Link from "next/link";
@@ -32,64 +37,192 @@ import type { Industry } from "@/data/industries";
 
 type Props = { industry: Industry };
 
+// Shared inline styles for repeated cream-pivot patterns.
+const eyebrow = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11 as const,
+  textTransform: "uppercase" as const,
+  letterSpacing: "0.16em",
+  color: "var(--terracotta)",
+  display: "inline-flex" as const,
+  alignItems: "center" as const,
+  gap: 12,
+};
+const eyebrowRule = {
+  width: 28,
+  height: 1,
+  background: "var(--terracotta)",
+  display: "inline-block" as const,
+};
+const h1Style = {
+  fontFamily: "var(--font-display)",
+  fontWeight: 500,
+  letterSpacing: "-0.025em",
+  lineHeight: 1.04,
+  color: "var(--ink)",
+  fontSize: "clamp(40px, 6vw, 68px)",
+  margin: "0 0 24px",
+};
+const h2Style = {
+  fontFamily: "var(--font-display)",
+  fontWeight: 500,
+  letterSpacing: "-0.02em",
+  lineHeight: 1.08,
+  color: "var(--ink)",
+  fontSize: "clamp(28px, 4vw, 44px)",
+  marginBottom: 14,
+};
+const cardCream = {
+  background: "var(--cream-2)",
+  border: "1px solid rgba(26,26,26,0.12)",
+  padding: 28,
+  borderRadius: 2,
+};
+const ctaPrimary = {
+  background: "var(--terracotta)",
+  color: "var(--cream-3)",
+  padding: "16px 28px",
+  fontFamily: "var(--font-sans)",
+  fontWeight: 600,
+  fontSize: 15,
+  borderRadius: 2,
+  border: "none",
+};
+const ctaSecondary = {
+  background: "transparent",
+  color: "var(--ink)",
+  border: "1px solid var(--ink)",
+  padding: "15px 26px",
+  fontFamily: "var(--font-sans)",
+  fontWeight: 600,
+  fontSize: 15,
+  borderRadius: 2,
+};
+
 export default function IndustryLanding({ industry: i }: Props) {
   return (
     <>
       {/* 1. HERO ─────────────────────────────────────────────────────────── */}
-      <section className="section pt-16 md:pt-24">
-        <div className="container-x">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-fuchsia-400/10 border border-fuchsia-400/30 text-fuchsia-300 text-xs font-semibold uppercase tracking-[0.18em] mb-6">
-              <Sparkles className="w-3 h-3" />
-              {i.eyebrowChip}
-            </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6">
-              {i.heroH1}
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl">
-              {i.heroSubhead}
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={i.heroCtaPrimary.href}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-gradient-to-r from-cyan-400 to-teal-400 text-black font-bold hover:from-cyan-300 hover:to-teal-300 transition"
-              >
-                {i.heroCtaPrimary.label}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href={i.heroCtaSecondary.href}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-white/5 border border-white/15 text-white font-semibold hover:bg-white/10 transition"
-              >
-                {i.heroCtaSecondary.label}
-              </Link>
-            </div>
+      <section
+        className="relative pt-28 md:pt-36 pb-16"
+        style={{
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
+        <div className="container-x px-6 relative z-10 max-w-4xl">
+          <div className="mb-6" style={eyebrow}>
+            <span style={eyebrowRule} />
+            <Sparkles className="w-3 h-3" /> {i.eyebrowChip}
+          </div>
+          <h1 style={h1Style}>
+            {i.heroH1.split(/(?<=[.!?])\s+/).map((sentence, idx, arr) =>
+              idx === arr.length - 1 && arr.length > 1 ? (
+                <em
+                  key={idx}
+                  style={{
+                    fontStyle: "italic",
+                    color: "var(--terracotta)",
+                    fontWeight: 500,
+                  }}
+                >
+                  {sentence}
+                </em>
+              ) : (
+                <span key={idx}>{sentence} </span>
+              ),
+            )}
+          </h1>
+          <p
+            style={{
+              fontSize: 19,
+              color: "var(--ink-2)",
+              maxWidth: "54ch",
+              lineHeight: 1.55,
+              marginBottom: 28,
+            }}
+          >
+            {i.heroSubhead}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href={i.heroCtaPrimary.href}
+              className="inline-flex items-center gap-2"
+              style={ctaPrimary}
+            >
+              {i.heroCtaPrimary.label}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href={i.heroCtaSecondary.href}
+              className="inline-flex items-center gap-2"
+              style={ctaSecondary}
+            >
+              {i.heroCtaSecondary.label}
+            </Link>
           </div>
         </div>
       </section>
 
       {/* 2. 3-PAIN BLOCK ─────────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-x">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+        <div className="container-x px-6">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
               Where the leakage is
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-              Three problems every {i.shortName} operator is paying for, whether they know it or not.
+            </div>
+            <h2 style={h2Style}>
+              Three problems every {i.shortName} operator is{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                paying for, whether they know it or not.
+              </em>
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {i.painPoints.map((p, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-fuchsia-400/40 transition"
-              >
-                <div className="text-5xl font-extrabold text-fuchsia-300/40 mb-2">
+              <div key={idx} style={cardCream}>
+                <div
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                    fontSize: 44,
+                    color: "var(--terracotta)",
+                    opacity: 0.35,
+                    lineHeight: 1,
+                    marginBottom: 14,
+                  }}
+                >
                   {String(idx + 1).padStart(2, "0")}
                 </div>
-                <h3 className="text-xl font-bold mb-3">{p.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{p.body}</p>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                    fontSize: 20,
+                    color: "var(--ink)",
+                    lineHeight: 1.2,
+                    marginBottom: 12,
+                    letterSpacing: "-0.015em",
+                  }}
+                >
+                  {p.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 14,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {p.body}
+                </p>
               </div>
             ))}
           </div>
@@ -97,68 +230,141 @@ export default function IndustryLanding({ industry: i }: Props) {
       </section>
 
       {/* 3. FLAGSHIP PRODUCT ────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-x">
-          <div className="rounded-3xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/5 to-teal-400/5 p-8 md:p-12">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
-                The flagship system
-              </p>
-              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-5">
-                {i.flagshipProductName}
-              </h2>
-              <p className="text-lg text-gray-200 mb-8 leading-relaxed">
-                {i.flagshipProductLede}
-              </p>
-              <ul className="space-y-3 mb-8">
-                {i.flagshipProductBullets.map((b, idx) => (
-                  <li key={idx} className="flex gap-3 items-start text-gray-200">
-                    <CheckCircle2 className="w-5 h-5 text-cyan-300 mt-0.5 shrink-0" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/discovery-call"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-400 to-teal-400 text-black font-bold hover:from-cyan-300 hover:to-teal-300 transition"
-              >
-                Scope the build
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
+        <div className="container-x px-6">
+          <div
+            style={{
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.18)",
+              padding: "48px 32px",
+              borderRadius: 2,
+              maxWidth: "880px",
+              margin: "0 auto",
+            }}
+          >
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
+              The flagship system
             </div>
+            <h2 style={{ ...h2Style, marginBottom: 18 }}>
+              {i.flagshipProductName}
+            </h2>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 28,
+              }}
+            >
+              {i.flagshipProductLede}
+            </p>
+            <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px" }}>
+              {i.flagshipProductBullets.map((b, idx) => (
+                <li
+                  key={idx}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "24px 1fr",
+                    gap: 14,
+                    alignItems: "start",
+                    padding: "12px 0",
+                    borderBottom: "1px solid rgba(26,26,26,0.08)",
+                    fontSize: 15,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.55,
+                  }}
+                >
+                  <CheckCircle2
+                    className="w-5 h-5"
+                    style={{ color: "var(--terracotta)", marginTop: 2 }}
+                  />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/discovery-call"
+              className="inline-flex items-center gap-2"
+              style={ctaPrimary}
+            >
+              Scope the build
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* 4. 3-MODULE STACK ──────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-x">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+        <div className="container-x px-6">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
               The three modules
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-              Built in three layers. Buy them together, or ship one at a time.
+            </div>
+            <h2 style={h2Style}>
+              Built in three layers.{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                Buy them together, or ship one at a time.
+              </em>
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {i.modules.map((m, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-cyan-400/40 transition flex flex-col"
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <Boxes className="w-5 h-5 text-cyan-300" />
-                  <span className="text-xs uppercase tracking-[0.18em] text-cyan-300 font-semibold">
-                    Module {idx + 1}
-                  </span>
+              <div key={idx} style={{ ...cardCream, display: "flex", flexDirection: "column" }}>
+                <div className="flex items-center gap-2 mb-3" style={{ ...eyebrow, fontSize: 10 }}>
+                  <Boxes className="w-4 h-4" />
+                  Module {idx + 1}
                 </div>
-                <h3 className="text-2xl font-bold mb-2">{m.name}</h3>
-                <p className="text-gray-300 mb-4">{m.oneLine}</p>
-                <ul className="space-y-2 mt-auto">
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                    fontSize: 22,
+                    color: "var(--ink)",
+                    lineHeight: 1.2,
+                    marginBottom: 10,
+                    letterSpacing: "-0.015em",
+                  }}
+                >
+                  {m.name}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 14,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.55,
+                    marginBottom: 18,
+                  }}
+                >
+                  {m.oneLine}
+                </p>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, marginTop: "auto" }}>
                   {m.bullets.map((b, j) => (
-                    <li key={j} className="flex gap-2 items-start text-sm text-gray-300">
-                      <CheckCircle2 className="w-4 h-4 text-teal-300 mt-0.5 shrink-0" />
+                    <li
+                      key={j}
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "18px 1fr",
+                        gap: 10,
+                        alignItems: "start",
+                        padding: "8px 0",
+                        fontSize: 13,
+                        color: "var(--ink-2)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      <CheckCircle2
+                        className="w-4 h-4"
+                        style={{ color: "var(--terracotta)", marginTop: 2 }}
+                      />
                       <span>{b}</span>
                     </li>
                   ))}
@@ -170,42 +376,118 @@ export default function IndustryLanding({ industry: i }: Props) {
       </section>
 
       {/* 5. CASE TEASERS ─────────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-x">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
+        <div className="container-x px-6">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
               Already shipped for {i.shortName} operators
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-              Proof, not pitch decks.
+            </div>
+            <h2 style={h2Style}>
+              Proof,{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                not pitch decks.
+              </em>
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {i.caseTeasers.map((c, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-fuchsia-400/40 transition flex flex-col"
-              >
-                <div className="flex items-center gap-2 text-xs text-gray-400 mb-3">
-                  <MapPin className="w-3.5 h-3.5 text-cyan-300" />
+              <div key={idx} style={{ ...cardCream, display: "flex", flexDirection: "column" }}>
+                <div
+                  className="flex items-center gap-2 mb-3"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    color: "var(--ink-faint)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.12em",
+                  }}
+                >
+                  <MapPin className="w-3.5 h-3.5" style={{ color: "var(--terracotta)" }} />
                   {c.location}
                 </div>
-                <h3 className="text-lg font-bold mb-2">{c.clientName}</h3>
-                <p className="text-gray-300 text-sm mb-5 flex-1">{c.oneLineOutcome}</p>
-                <div className="border-t border-white/10 pt-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-cyan-300 font-semibold mb-1">
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                    fontSize: 18,
+                    color: "var(--ink)",
+                    marginBottom: 10,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {c.clientName}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 14,
+                    color: "var(--ink-2)",
+                    marginBottom: 18,
+                    flex: 1,
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {c.oneLineOutcome}
+                </p>
+                <div
+                  style={{
+                    borderTop: "1px solid rgba(26,26,26,0.10)",
+                    paddingTop: 14,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.14em",
+                      color: "var(--terracotta)",
+                      marginBottom: 6,
+                    }}
+                  >
                     {c.metricLabel}
-                  </p>
+                  </div>
                   <div className="flex items-baseline gap-3">
-                    <span className="text-sm text-gray-400 line-through">{c.metricBefore}</span>
-                    <TrendingUp className="w-4 h-4 text-teal-300" />
-                    <span className="text-xl font-extrabold text-teal-300">{c.metricAfter}</span>
+                    <span
+                      style={{
+                        fontSize: 13,
+                        color: "var(--ink-faint)",
+                        textDecoration: "line-through",
+                      }}
+                    >
+                      {c.metricBefore}
+                    </span>
+                    <TrendingUp className="w-4 h-4" style={{ color: "var(--terracotta)" }} />
+                    <span
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 500,
+                        fontSize: 22,
+                        color: "var(--ink)",
+                        letterSpacing: "-0.015em",
+                      }}
+                    >
+                      {c.metricAfter}
+                    </span>
                   </div>
                 </div>
                 {c.caseStudySlug && (
                   <Link
                     href={`/case-studies/${c.caseStudySlug}`}
-                    className="inline-flex items-center gap-1.5 text-cyan-300 text-sm font-semibold mt-4 hover:text-cyan-200"
+                    className="inline-flex items-center gap-1.5 mt-4"
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "var(--terracotta)",
+                      textDecoration: "none",
+                    }}
                   >
                     Read full case study
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -218,10 +500,34 @@ export default function IndustryLanding({ industry: i }: Props) {
       </section>
 
       {/* 5.5 FOUNDER MINI-BIO ────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-x">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10 grid md:grid-cols-[260px_1fr] gap-8 items-center">
-            <div className="relative w-[200px] h-[200px] md:w-[240px] md:h-[240px] mx-auto md:mx-0 rounded-2xl overflow-hidden border border-white/20">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+        <div className="container-x px-6">
+          <div
+            style={{
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.12)",
+              padding: 40,
+              borderRadius: 2,
+              maxWidth: "920px",
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "260px 1fr",
+              gap: 32,
+              alignItems: "center",
+            }}
+            className="md:grid-cols-[260px_1fr]"
+          >
+            <div
+              style={{
+                position: "relative",
+                width: 240,
+                height: 240,
+                borderRadius: 2,
+                overflow: "hidden",
+                border: "1px solid rgba(26,26,26,0.18)",
+                margin: "0 auto",
+              }}
+            >
               <Image
                 src={i.bioPhoto}
                 alt={i.bioPhotoAlt}
@@ -231,11 +537,30 @@ export default function IndustryLanding({ industry: i }: Props) {
               />
             </div>
             <div>
-              <Quote className="w-6 h-6 text-fuchsia-300 mb-3" />
-              <h2 className="text-2xl md:text-3xl font-bold mb-3">{i.bioHeadline}</h2>
-              <p className="text-gray-300 text-lg leading-relaxed">{i.bioCopy}</p>
-              <p className="text-sm text-gray-400 mt-4">
-                Waseem Nasir, founder, SkynetLabs — Bali (GMT+8)
+              <Quote className="w-6 h-6 mb-3" style={{ color: "var(--terracotta)" }} />
+              <h2 style={{ ...h2Style, fontSize: "clamp(24px, 3vw, 32px)", marginBottom: 14 }}>
+                {i.bioHeadline}
+              </h2>
+              <p
+                style={{
+                  fontSize: 17,
+                  color: "var(--ink-2)",
+                  lineHeight: 1.6,
+                  marginBottom: 14,
+                }}
+              >
+                {i.bioCopy}
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  color: "var(--ink-faint)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.14em",
+                }}
+              >
+                Waseem Nasir · founder · SkynetLabs · Bali (GMT+8)
               </p>
             </div>
           </div>
@@ -243,86 +568,240 @@ export default function IndustryLanding({ industry: i }: Props) {
       </section>
 
       {/* 6. PRICING STRIP ───────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container-x">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
+        <div className="container-x px-6">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
               Pricing
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-              Three tiers, tuned to your {i.shortName} stage.
+            </div>
+            <h2 style={h2Style}>
+              Three tiers,{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                tuned to your {i.shortName} stage.
+              </em>
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {i.pricingTiers.map((tier, idx) => (
-              <div
-                key={idx}
-                className={`rounded-2xl p-6 flex flex-col border ${
-                  tier.featured
-                    ? "border-cyan-400/60 bg-gradient-to-b from-cyan-400/10 to-transparent"
-                    : "border-white/10 bg-white/5"
-                }`}
-              >
-                {tier.featured && (
-                  <div className="inline-flex self-start px-2.5 py-1 rounded-full bg-cyan-400/20 text-cyan-200 text-[10px] uppercase tracking-[0.18em] font-bold mb-3">
-                    Most picked
-                  </div>
-                )}
-                <h3 className="text-2xl font-extrabold mb-1">{tier.tierName}</h3>
-                <p className="text-sm text-gray-400 mb-4">{tier.positioning}</p>
-                <div className="mb-5">
-                  <span className="text-4xl font-extrabold">{tier.price}</span>
-                  <span className="text-sm text-gray-400 ml-1">{tier.cadence}</span>
-                </div>
-                <ul className="space-y-2 mb-6 flex-1">
-                  {tier.includes.map((line, j) => (
-                    <li key={j} className="flex gap-2 items-start text-sm text-gray-200">
-                      <CheckCircle2 className="w-4 h-4 text-teal-300 mt-0.5 shrink-0" />
-                      <span>{line}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={tier.ctaHref}
-                  className={`inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-bold transition ${
-                    tier.featured
-                      ? "bg-gradient-to-r from-cyan-400 to-teal-400 text-black hover:from-cyan-300 hover:to-teal-300"
-                      : "bg-white/10 border border-white/15 text-white hover:bg-white/15"
-                  }`}
+            {i.pricingTiers.map((tier, idx) => {
+              const featured = tier.featured;
+              return (
+                <div
+                  key={idx}
+                  style={{
+                    background: featured ? "var(--ink)" : "var(--cream-2)",
+                    color: featured ? "var(--cream-3)" : "var(--ink)",
+                    border: featured
+                      ? "1px solid var(--ink)"
+                      : "1px solid rgba(26,26,26,0.12)",
+                    padding: 28,
+                    borderRadius: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
                 >
-                  {tier.ctaLabel}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            ))}
+                  {featured && (
+                    <div
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.16em",
+                        color: "var(--terracotta)",
+                        marginBottom: 14,
+                        alignSelf: "flex-start",
+                      }}
+                    >
+                      Most picked
+                    </div>
+                  )}
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 500,
+                      fontSize: 24,
+                      lineHeight: 1.15,
+                      marginBottom: 6,
+                      letterSpacing: "-0.015em",
+                    }}
+                  >
+                    {tier.tierName}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: featured ? "rgba(242,239,230,0.7)" : "var(--ink-faint)",
+                      marginBottom: 18,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {tier.positioning}
+                  </p>
+                  <div style={{ marginBottom: 22 }}>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 500,
+                        fontSize: 38,
+                        letterSpacing: "-0.025em",
+                      }}
+                    >
+                      {tier.price}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 12,
+                        color: featured ? "rgba(242,239,230,0.6)" : "var(--ink-faint)",
+                        marginLeft: 8,
+                      }}
+                    >
+                      {tier.cadence}
+                    </span>
+                  </div>
+                  <ul
+                    style={{
+                      listStyle: "none",
+                      padding: 0,
+                      margin: 0,
+                      marginBottom: 22,
+                      flex: 1,
+                    }}
+                  >
+                    {tier.includes.map((line, j) => (
+                      <li
+                        key={j}
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "18px 1fr",
+                          gap: 10,
+                          alignItems: "start",
+                          padding: "8px 0",
+                          fontSize: 14,
+                          color: featured ? "rgba(242,239,230,0.9)" : "var(--ink-2)",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        <CheckCircle2
+                          className="w-4 h-4"
+                          style={{ color: "var(--terracotta)", marginTop: 2 }}
+                        />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={tier.ctaHref}
+                    className="inline-flex items-center justify-center gap-2"
+                    style={
+                      featured
+                        ? {
+                            background: "var(--terracotta)",
+                            color: "var(--cream-3)",
+                            padding: "14px 22px",
+                            fontFamily: "var(--font-sans)",
+                            fontWeight: 600,
+                            fontSize: 14,
+                            borderRadius: 2,
+                            border: "none",
+                            textDecoration: "none",
+                          }
+                        : {
+                            background: "transparent",
+                            color: "var(--ink)",
+                            border: "1px solid var(--ink)",
+                            padding: "13px 21px",
+                            fontFamily: "var(--font-sans)",
+                            fontWeight: 600,
+                            fontSize: 14,
+                            borderRadius: 2,
+                            textDecoration: "none",
+                          }
+                    }
+                  >
+                    {tier.ctaLabel}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* 7. FAQ (server-rendered details/summary so it's AEO-crawlable) ──── */}
-      <section className="section">
-        <div className="container-x max-w-3xl">
+      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+        <div className="container-x px-6" style={{ maxWidth: "780px", margin: "0 auto" }}>
           <div className="mb-10">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div className="mb-5" style={eyebrow}>
+              <span style={eyebrowRule} />
               FAQs for {i.shortName} operators
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-              Questions {i.shortName} owners ask before booking.
+            </div>
+            <h2 style={h2Style}>
+              Questions {i.shortName} owners ask{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                before booking.
+              </em>
             </h2>
           </div>
-          <div className="space-y-3">
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {i.faqs.map((f, idx) => (
               <details
                 key={idx}
-                className="group rounded-xl border border-white/10 bg-white/5 p-5 hover:border-fuchsia-400/40 transition"
+                className="group"
+                style={{
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  padding: 20,
+                  borderRadius: 2,
+                }}
               >
-                <summary className="cursor-pointer text-lg font-semibold flex justify-between items-center gap-4 list-none">
+                <summary
+                  className="cursor-pointer flex justify-between items-center gap-4 list-none"
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                    lineHeight: 1.4,
+                  }}
+                >
                   <span>{f.q}</span>
-                  <span className="text-fuchsia-300 text-2xl leading-none group-open:rotate-45 transition">
+                  <span
+                    className="group-open:rotate-45 transition"
+                    style={{
+                      color: "var(--terracotta)",
+                      fontSize: 24,
+                      lineHeight: 1,
+                      fontWeight: 300,
+                      flexShrink: 0,
+                    }}
+                  >
                     +
                   </span>
                 </summary>
-                <p className="text-gray-300 mt-4 leading-relaxed">{f.a}</p>
+                <p
+                  style={{
+                    fontSize: 15,
+                    color: "var(--ink-2)",
+                    marginTop: 16,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {f.a}
+                </p>
               </details>
             ))}
           </div>
@@ -330,26 +809,55 @@ export default function IndustryLanding({ industry: i }: Props) {
       </section>
 
       {/* 8. FINAL CTA ────────────────────────────────────────────────────── */}
-      <section className="section pb-24">
-        <div className="container-x">
-          <div className="rounded-3xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-400/10 via-cyan-400/5 to-teal-400/10 p-10 md:p-16 text-center">
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 max-w-3xl mx-auto">
-              {i.finalCtaHeadline}
-            </h2>
-            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-              {i.finalCtaSubhead}
-            </p>
-            <Link
-              href={i.finalCtaHref}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-cyan-400 to-teal-400 text-black font-bold text-lg hover:from-cyan-300 hover:to-teal-300 transition"
-            >
-              {i.finalCtaButtonLabel}
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <p className="text-sm text-gray-400 mt-5">
-              30-minute call. Bali daytime: 1-hour reply. Otherwise: within 6 hours.
-            </p>
-          </div>
+      <section
+        className="py-20 md:py-24"
+        style={{
+          background: "var(--cream-3)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
+        <div className="container-x px-6 max-w-3xl mx-auto text-center">
+          <h2
+            style={{
+              ...h2Style,
+              fontSize: "clamp(32px, 4.5vw, 48px)",
+              maxWidth: "32ch",
+              margin: "0 auto 18px",
+            }}
+          >
+            {i.finalCtaHeadline}
+          </h2>
+          <p
+            style={{
+              fontSize: 17,
+              color: "var(--ink-2)",
+              maxWidth: "52ch",
+              margin: "0 auto 28px",
+              lineHeight: 1.6,
+            }}
+          >
+            {i.finalCtaSubhead}
+          </p>
+          <Link
+            href={i.finalCtaHref}
+            className="inline-flex items-center gap-2"
+            style={ctaPrimary}
+          >
+            {i.finalCtaButtonLabel}
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              color: "var(--ink-faint)",
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              marginTop: 20,
+            }}
+          >
+            30-minute call · Bali hours: 1-hour reply · otherwise within 6 hours
+          </p>
         </div>
       </section>
     </>

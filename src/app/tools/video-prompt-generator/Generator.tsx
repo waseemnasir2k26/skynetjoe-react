@@ -198,12 +198,12 @@ const FORMAT_META: Record<
   runway: {
     label: "Runway Gen-3",
     description: "Verbose w/ technical params",
-    color: "#1E88E5",
+    color: "var(--terracotta)",
   },
   pika: {
     label: "Pika",
     description: "Shorter, motion-focused",
-    color: "#14B8A6",
+    color: "var(--terracotta)",
   },
   sora: {
     label: "Sora",
@@ -355,15 +355,15 @@ export default function Generator() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-6">
       {/* INPUTS */}
-      <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 md:p-7 h-fit lg:sticky lg:top-24">
+      <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md p-5 md:p-7 h-fit lg:sticky lg:top-24">
         <div className="flex items-center gap-2 mb-5">
-          <Film className="h-5 w-5 text-cyan-300" />
-          <h2 className="text-lg font-extrabold text-white">Inputs</h2>
+          <Film className="h-5 w-5 text-[var(--terracotta)]" />
+          <h2 className="text-lg font-extrabold text-[var(--ink)]">Inputs</h2>
         </div>
 
         {/* Subject */}
         <label className="block mb-5">
-          <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-cyan-200 mb-2">
+          <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-2">
             Subject / scene
           </span>
           <textarea
@@ -371,7 +371,7 @@ export default function Generator() {
             onChange={(e) => update("subject", e.target.value)}
             rows={3}
             placeholder="e.g. a Bali cafe at sunrise with rain on the window"
-            className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2.5 text-white placeholder:text-gray-500 focus:outline-none focus:border-cyan-400 focus:bg-white/[0.06] transition text-sm resize-y"
+            className="w-full bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] rounded-xl px-3 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] focus:outline-none focus:border-[var(--terracotta)] focus:bg-[var(--cream-2)] transition text-sm resize-y"
           />
         </label>
 
@@ -432,15 +432,15 @@ export default function Generator() {
 
         {/* Negative */}
         <label className="block mb-5">
-          <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-cyan-200 mb-2">
-            Negative prompts <span className="text-gray-500">(optional)</span>
+          <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-2">
+            Negative prompts <span className="text-[var(--ink-faint)]">(optional)</span>
           </span>
           <input
             type="text"
             value={inputs.negative}
             onChange={(e) => update("negative", e.target.value)}
             placeholder="e.g. blurry, distorted faces, text on screen"
-            className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2.5 text-white placeholder:text-gray-500 focus:outline-none focus:border-cyan-400 focus:bg-white/[0.06] transition text-sm"
+            className="w-full bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] rounded-xl px-3 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] focus:outline-none focus:border-[var(--terracotta)] focus:bg-[var(--cream-2)] transition text-sm"
           />
         </label>
 
@@ -448,9 +448,9 @@ export default function Generator() {
           <button
             type="button"
             onClick={regenerate}
-            className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-white transition hover:scale-[1.02]"
+            className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--ink)] transition hover:scale-[1.02]"
             style={{
-              background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+              background: "var(--ink)",
             }}
           >
             <Sparkles className="h-4 w-4" />
@@ -460,7 +460,7 @@ export default function Generator() {
             <button
               type="button"
               onClick={saveToHistory}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-xs font-semibold text-gray-200 hover:border-cyan-400 hover:text-cyan-200 transition"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-2.5 text-xs font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta)] transition"
             >
               <Save className="h-3.5 w-3.5" />
               {savedToast ? "Saved" : "Save"}
@@ -468,7 +468,7 @@ export default function Generator() {
             <button
               type="button"
               onClick={reset}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-xs font-semibold text-gray-200 hover:border-cyan-400 hover:text-cyan-200 transition"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-2.5 text-xs font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta)] transition"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
@@ -487,7 +487,7 @@ export default function Generator() {
             return (
               <div
                 key={fmt}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 flex flex-col"
+                className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5 flex flex-col"
               >
                 <div className="flex items-center justify-between mb-3">
                   <div>
@@ -496,31 +496,31 @@ export default function Generator() {
                         className="inline-block h-2 w-2 rounded-full"
                         style={{ background: meta.color }}
                       />
-                      <h3 className="text-white font-extrabold text-base">
+                      <h3 className="text-[var(--ink)] font-extrabold text-base">
                         {meta.label}
                       </h3>
                     </div>
-                    <p className="text-[11px] text-gray-500">
+                    <p className="text-[11px] text-[var(--ink-faint)]">
                       {meta.description}
                     </p>
                   </div>
-                  <span className="text-[10px] uppercase tracking-wider text-gray-500">
+                  <span className="text-[10px] uppercase tracking-wider text-[var(--ink-faint)]">
                     {text.length} chars
                   </span>
                 </div>
 
-                <pre className="whitespace-pre-wrap break-words font-mono text-[12px] leading-relaxed text-gray-200 bg-black/30 border border-white/10 rounded-xl p-3.5 mb-3 flex-1 min-h-[140px]">
+                <pre className="whitespace-pre-wrap break-words font-mono text-[12px] leading-relaxed text-[var(--ink-2)] bg-[rgba(26,26,26,0.30)] border border-[rgba(26,26,26,0.12)] rounded-xl p-3.5 mb-3 flex-1 min-h-[140px]">
                   {text}
                 </pre>
 
                 <button
                   type="button"
                   onClick={() => copyOne(fmt)}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-xs font-semibold text-white transition hover:border-cyan-400 hover:bg-white/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-4 py-2.5 text-xs font-semibold text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:bg-[var(--cream-2)]"
                 >
                   {copied ? (
                     <>
-                      <Check className="h-3.5 w-3.5 text-emerald-300" />
+                      <Check className="h-3.5 w-3.5 text-[var(--terracotta)]" />
                       Copied
                     </>
                   ) : (
@@ -537,20 +537,20 @@ export default function Generator() {
 
         {/* History */}
         {history.length > 0 && (
-          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 md:p-6">
+          <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md p-5 md:p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-cyan-200 mb-0.5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-0.5">
                   Saved history
                 </p>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-[var(--ink-faint)]">
                   {history.length} of {HISTORY_MAX} max · stored locally
                 </p>
               </div>
               <button
                 type="button"
                 onClick={clearHistory}
-                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-400 hover:text-red-400 transition"
+                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] hover:text-red-400 transition"
               >
                 Clear all
               </button>
@@ -559,17 +559,17 @@ export default function Generator() {
               {history.map((h) => (
                 <div
                   key={h.id}
-                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 group"
+                  className="flex items-center gap-2 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-2.5 group"
                 >
                   <button
                     type="button"
                     onClick={() => loadFromHistory(h)}
                     className="flex-1 text-left"
                   >
-                    <div className="text-sm font-semibold text-white truncate group-hover:text-cyan-200 transition">
+                    <div className="text-sm font-semibold text-[var(--ink)] truncate group-hover:text-[var(--terracotta)] transition">
                       {h.inputs.subject || "(no subject)"}
                     </div>
-                    <div className="text-[10px] text-gray-500 uppercase tracking-wider">
+                    <div className="text-[10px] text-[var(--ink-faint)] uppercase tracking-wider">
                       {h.inputs.style} · {h.inputs.mood} ·{" "}
                       {h.inputs.duration} · {h.inputs.aspect}
                     </div>
@@ -577,7 +577,7 @@ export default function Generator() {
                   <button
                     type="button"
                     onClick={() => deleteHistory(h.id)}
-                    className="text-gray-500 hover:text-red-400 transition p-1.5"
+                    className="text-[var(--ink-faint)] hover:text-red-400 transition p-1.5"
                     aria-label="Delete from history"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
@@ -603,7 +603,7 @@ function Field({
 }) {
   return (
     <div className="mb-5">
-      <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-cyan-200 mb-2">
+      <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-2">
         {label}
       </div>
       {children}
@@ -624,7 +624,7 @@ function Select<T extends string>({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value as T)}
-      className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-cyan-400 focus:bg-white/[0.06] transition appearance-none cursor-pointer"
+      className="w-full bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] rounded-xl px-3 py-2.5 text-[var(--ink)] text-sm focus:outline-none focus:border-[var(--terracotta)] focus:bg-[var(--cream-2)] transition appearance-none cursor-pointer"
       style={{
         backgroundImage:
           "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237ee4ff' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>\")",
@@ -637,7 +637,7 @@ function Select<T extends string>({
         <option
           key={o.value}
           value={o.value}
-          className="bg-[#061827] text-white"
+          className="bg-[var(--ink)] text-[var(--ink)]"
         >
           {o.label}
         </option>
@@ -668,8 +668,8 @@ function RadioRow<T extends string>({
             onClick={() => onChange(o.value)}
             className={
               selected
-                ? "rounded-lg border-2 border-cyan-400 bg-cyan-500/10 px-2.5 py-1.5 text-xs font-semibold text-cyan-100 transition"
-                : "rounded-lg border-2 border-white/10 bg-white/5 px-2.5 py-1.5 text-xs font-semibold text-gray-300 transition hover:border-cyan-400/50 hover:bg-white/10"
+                ? "rounded-lg border-2 border-[var(--terracotta)] bg-[rgba(198,107,63,0.10)] px-2.5 py-1.5 text-xs font-semibold text-[var(--terracotta)] transition"
+                : "rounded-lg border-2 border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-2.5 py-1.5 text-xs font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)]/50 hover:bg-[var(--cream-2)]"
             }
             aria-pressed={selected}
           >

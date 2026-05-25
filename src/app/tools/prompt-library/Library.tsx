@@ -82,22 +82,22 @@ export default function Library() {
   return (
     <div className="space-y-8">
       {/* Search + filters */}
-      <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 md:p-7">
+      <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md p-5 md:p-7">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-cyan-300" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--terracotta)]" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Search ${PROMPTS.length} prompts by title, use-case, or keyword…`}
-            className="w-full bg-white/[0.04] border border-white/10 rounded-xl pl-11 pr-10 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-cyan-400 focus:bg-white/[0.06] transition"
+            className="w-full bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] rounded-xl pl-11 pr-10 py-3 text-[var(--ink)] placeholder:text-[var(--ink-faint)] focus:outline-none focus:border-[var(--terracotta)] focus:bg-[var(--cream-2)] transition"
             aria-label="Search prompts"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-cyan-300"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--ink-faint)] hover:text-[var(--terracotta)]"
               aria-label="Clear search"
             >
               <X className="h-4 w-4" />
@@ -116,14 +116,14 @@ export default function Library() {
                 onClick={() => toggleCat(c.key)}
                 className={
                   isActive
-                    ? "inline-flex items-center gap-1.5 rounded-full border border-cyan-400 bg-cyan-400/15 px-3 py-1.5 text-xs font-semibold text-cyan-100 transition"
-                    : "inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-gray-300 transition hover:border-cyan-400/40 hover:text-cyan-200"
+                    ? "inline-flex items-center gap-1.5 rounded-full border border-[var(--terracotta)] bg-[var(--terracotta)]/15 px-3 py-1.5 text-xs font-semibold text-[var(--terracotta)] transition"
+                    : "inline-flex items-center gap-1.5 rounded-full border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-1.5 text-xs font-semibold text-[var(--ink-2)] transition hover:border-[rgba(198,107,63,0.40)] hover:text-[var(--terracotta)]"
                 }
                 aria-pressed={isActive}
               >
                 <span aria-hidden>{c.icon}</span>
                 {c.label}
-                <span className="text-[10px] text-gray-500">· {count}</span>
+                <span className="text-[10px] text-[var(--ink-faint)]">· {count}</span>
               </button>
             );
           })}
@@ -131,7 +131,7 @@ export default function Library() {
             <button
               type="button"
               onClick={clearFilters}
-              className="ml-auto inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-400 hover:text-cyan-300 transition"
+              className="ml-auto inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] hover:text-[var(--terracotta)] transition"
             >
               <X className="h-3 w-3" />
               Clear
@@ -139,8 +139,8 @@ export default function Library() {
           )}
         </div>
 
-        <div className="mt-4 text-xs text-gray-400">
-          Showing <span className="text-cyan-300 font-bold">{filtered.length}</span>{" "}
+        <div className="mt-4 text-xs text-[var(--ink-faint)]">
+          Showing <span className="text-[var(--terracotta)] font-bold">{filtered.length}</span>{" "}
           of {PROMPTS.length} prompts
           {activeCats.length > 0 && (
             <>
@@ -156,15 +156,15 @@ export default function Library() {
 
       {/* Grid */}
       {filtered.length === 0 ? (
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-10 text-center">
-          <p className="text-lg font-semibold text-white">No prompts match.</p>
-          <p className="mt-2 text-sm text-gray-400">
+        <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-10 text-center">
+          <p className="text-lg font-semibold text-[var(--ink)]">No prompts match.</p>
+          <p className="mt-2 text-sm text-[var(--ink-faint)]">
             Try clearing the filters or searching for a broader keyword.
           </p>
           <button
             type="button"
             onClick={clearFilters}
-            className="mt-5 inline-flex items-center gap-2 rounded-xl border border-cyan-400/50 bg-cyan-400/10 px-4 py-2 text-sm font-semibold text-cyan-100 hover:bg-cyan-400/20 transition"
+            className="mt-5 inline-flex items-center gap-2 rounded-xl border border-[var(--terracotta)]/50 bg-[var(--terracotta)]/10 px-4 py-2 text-sm font-semibold text-[var(--terracotta)] hover:bg-[var(--terracotta)]/20 transition"
           >
             Reset
           </button>
@@ -179,25 +179,25 @@ export default function Library() {
                 key={p.id}
                 type="button"
                 onClick={() => setOpenPrompt(p)}
-                className="group text-left rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-cyan-400/50 hover:bg-white/[0.06]"
+                className="group text-left rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5 transition hover:border-[var(--terracotta)]/50 hover:bg-[var(--cream-2)]"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-cyan-300/10 text-cyan-200 border border-cyan-300/30">
+                  <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-[rgba(198,107,63,0.10)] text-[var(--terracotta)] border border-[rgba(198,107,63,0.30)]">
                     <span aria-hidden>{cat?.icon}</span>
                     {cat?.label}
                   </span>
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-500">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--ink-faint)]">
                     {p.model}
                   </span>
                 </div>
-                <h3 className="text-white text-base md:text-lg font-extrabold leading-tight mb-2 group-hover:text-cyan-200 transition">
+                <h3 className="text-[var(--ink)] text-base md:text-lg font-extrabold leading-tight mb-2 group-hover:text-[var(--terracotta)] transition">
                   {p.title}
                 </h3>
-                <p className="text-sm text-gray-400 leading-relaxed mb-4">
+                <p className="text-sm text-[var(--ink-faint)] leading-relaxed mb-4">
                   {p.useCase}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] uppercase tracking-wider text-gray-500">
+                  <span className="text-[11px] uppercase tracking-wider text-[var(--ink-faint)]">
                     {p.body.length} chars
                   </span>
                   <span
@@ -214,12 +214,12 @@ export default function Library() {
                         copyPrompt(p);
                       }
                     }}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-gray-300 hover:border-cyan-400 hover:text-cyan-200 transition cursor-pointer"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-[rgba(26,26,26,0.12)] px-2.5 py-1 text-[11px] font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta)] transition cursor-pointer"
                     aria-label="Copy prompt"
                   >
                     {copied ? (
                       <>
-                        <Check className="h-3 w-3 text-emerald-300" />
+                        <Check className="h-3 w-3 text-[var(--terracotta)]" />
                         Copied
                       </>
                     ) : (
@@ -237,20 +237,20 @@ export default function Library() {
       )}
 
       {/* Submit-prompt CTA */}
-      <div className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 text-center">
-        <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+      <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8 text-center">
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
           Missing a prompt?
         </p>
-        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-3">
+        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-3">
           Send me yours, I&apos;ll add the good ones.
         </h3>
-        <p className="text-sm text-gray-300 max-w-xl mx-auto mb-5">
+        <p className="text-sm text-[var(--ink-2)] max-w-xl mx-auto mb-5">
           The library grows from real working prompts, not theoretical ones.
           Send the prompt + the result it produced and I&apos;ll add it with credit.
         </p>
         <a
           href="mailto:waseem@skynetjoe.com?subject=Prompt%20Library%20submission&body=Category%3A%20%0AUse-case%3A%20%0APrompt%20body%3A%20%0AResult%20it%20produced%3A%20"
-          className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/50 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-100 hover:bg-cyan-400/20 transition"
+          className="inline-flex items-center gap-2 rounded-xl border border-[var(--terracotta)]/50 bg-[var(--terracotta)]/10 px-5 py-2.5 text-sm font-semibold text-[var(--terracotta)] hover:bg-[var(--terracotta)]/20 transition"
         >
           <Mail className="h-4 w-4" />
           Submit a prompt
@@ -285,64 +285,64 @@ function PromptModal({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start md:items-center justify-center p-4 md:p-8 bg-black/70 backdrop-blur-sm prompt-modal-bg"
+      className="fixed inset-0 z-[100] flex items-start md:items-center justify-center p-4 md:p-8 bg-[rgba(26,26,26,0.70)] backdrop-blur-sm prompt-modal-bg"
       role="dialog"
       aria-modal="true"
       aria-labelledby="prompt-modal-title"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 bg-[#061827] shadow-2xl prompt-modal-card"
+        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--ink)] shadow-2xl prompt-modal-card"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 rounded-full p-2 text-gray-400 hover:text-white hover:bg-white/10 transition"
+          className="absolute top-4 right-4 rounded-full p-2 text-[var(--ink-faint)] hover:text-[var(--ink)] hover:bg-[var(--cream-2)] transition"
           aria-label="Close"
         >
           <X className="h-5 w-5" />
         </button>
 
-        <div className="px-6 md:px-8 pt-7 pb-5 border-b border-white/10">
+        <div className="px-6 md:px-8 pt-7 pb-5 border-b border-[rgba(26,26,26,0.12)]">
           <div className="flex flex-wrap items-center gap-2 mb-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-cyan-300/10 text-cyan-200 border border-cyan-300/30">
+            <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-[rgba(198,107,63,0.10)] text-[var(--terracotta)] border border-[rgba(198,107,63,0.30)]">
               <span aria-hidden>{cat?.icon}</span>
               {cat?.label}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-white/[0.06] text-white/70 border border-white/10">
+            <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-[var(--cream-2)] text-[var(--ink-faint)] border border-[rgba(26,26,26,0.12)]">
               <Sparkles className="h-3 w-3" />
               {prompt.model}
             </span>
-            <span className="text-[10px] uppercase tracking-wider text-gray-500">
+            <span className="text-[10px] uppercase tracking-wider text-[var(--ink-faint)]">
               {prompt.body.length} chars
             </span>
           </div>
           <h2
             id="prompt-modal-title"
-            className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-2"
+            className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-2"
           >
             {prompt.title}
           </h2>
-          <p className="text-sm text-gray-300">{prompt.useCase}</p>
+          <p className="text-sm text-[var(--ink-2)]">{prompt.useCase}</p>
         </div>
 
         <div className="px-6 md:px-8 py-6">
-          <pre className="whitespace-pre-wrap break-words font-mono text-[13px] leading-relaxed text-gray-200 bg-black/30 border border-white/10 rounded-2xl p-5">
+          <pre className="whitespace-pre-wrap break-words font-mono text-[13px] leading-relaxed text-[var(--ink-2)] bg-[rgba(26,26,26,0.30)] border border-[rgba(26,26,26,0.12)] rounded-2xl p-5">
             {prompt.body}
           </pre>
         </div>
 
-        <div className="px-6 md:px-8 pb-7 pt-2 border-t border-white/10 bg-white/[0.02]">
+        <div className="px-6 md:px-8 pb-7 pt-2 border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)]">
           <div className="flex flex-col sm:flex-row gap-2.5">
             <button
               type="button"
               onClick={copy}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white transition"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-[var(--ink)] transition"
               style={{
                 background: copied
                   ? "linear-gradient(135deg, #10b981 0%, #059669 100%)"
-                  : "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                  : "var(--ink)",
               }}
             >
               {copied ? (
@@ -361,7 +361,7 @@ function PromptModal({
               href={buildModelLink("claude", prompt.body)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-400 hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:bg-[var(--cream-2)]"
             >
               Open in Claude
               <ExternalLink className="h-3.5 w-3.5" />
@@ -370,7 +370,7 @@ function PromptModal({
               href={buildModelLink("chatgpt", prompt.body)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-400 hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:bg-[var(--cream-2)]"
             >
               Open in ChatGPT
               <ExternalLink className="h-3.5 w-3.5" />

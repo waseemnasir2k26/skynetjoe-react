@@ -120,9 +120,9 @@ export default function RevenueCalculatorPage() {
             <div
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
               style={{
-                background: "rgba(94, 234, 212, 0.12)",
-                border: "1px solid rgba(94, 234, 212, 0.40)",
-                color: "#5eead4",
+                background: "rgba(198,107,63,0.10)",
+                border: "1px solid rgba(198,107,63,0.40)",
+                color: "var(--terracotta)",
               }}
             >
               <CalcIcon className="w-3.5 h-3.5" />
@@ -136,7 +136,7 @@ export default function RevenueCalculatorPage() {
               <span
                 style={{
                   background:
-                    "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)",
+                    "linear-gradient(120deg, var(--terracotta) 0%, var(--ink) 100%)",
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
                   color: "transparent",
@@ -147,7 +147,7 @@ export default function RevenueCalculatorPage() {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl">
+            <p className="text-lg md:text-xl text-[var(--ink-2)] leading-relaxed max-w-3xl">
               Move 6 sliders. The calculator runs the math live. You walk away
               knowing what missed leads, low close rate and manual follow-ups
               are costing you every month, and what an automation stack would
@@ -165,11 +165,11 @@ export default function RevenueCalculatorPage() {
               <div
                 className="rounded-3xl p-10 text-center"
                 style={{
-                  background: "rgba(10, 45, 74, 0.45)",
-                  border: "1px solid rgba(126, 228, 255, 0.18)",
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
                 }}
               >
-                <p className="text-gray-300">Loading the calculator…</p>
+                <p className="text-[var(--ink-2)]">Loading the calculator…</p>
               </div>
             </div>
           </section>
@@ -182,16 +182,16 @@ export default function RevenueCalculatorPage() {
       <section className="section pt-0">
         <div className="container-x px-6">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
               Real recoveries
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
               Three clients who actually{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                 ran this play.
               </span>
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-[var(--ink-2)]">
               Same math, real businesses, public case studies. The numbers in
               the calculator are calibrated against outcomes like these.
             </p>
@@ -204,25 +204,25 @@ export default function RevenueCalculatorPage() {
                 href={`/case-studies/${c.slug}`}
                 className="group rounded-2xl p-6 block transition-transform hover:-translate-y-1"
                 style={{
-                  background: "rgba(10, 45, 74, 0.55)",
-                  border: "1px solid rgba(126, 228, 255, 0.18)",
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
                   backdropFilter: "blur(14px)",
                 }}
               >
                 <span
                   className="text-[11px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full inline-block mb-4"
                   style={{
-                    background: "rgba(94, 234, 212, 0.14)",
-                    color: "#5eead4",
-                    border: "1px solid rgba(94, 234, 212, 0.30)",
+                    background: "rgba(198,107,63,0.10)",
+                    color: "var(--terracotta)",
+                    border: "1px solid rgba(198,107,63,0.30)",
                   }}
                 >
                   {c.industryTag}
                 </span>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors">
+                <h3 className="text-xl font-bold text-[var(--ink)] mb-3 group-hover:text-[var(--terracotta)] transition-colors">
                   {c.clientName}
                 </h3>
-                <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-4">
                   {c.oneLineOutcome}
                 </p>
                 <div className="grid grid-cols-2 gap-2 mb-4">
@@ -232,17 +232,17 @@ export default function RevenueCalculatorPage() {
                       className="rounded-lg p-2"
                       style={{
                         background: "rgba(6, 24, 39, 0.45)",
-                        border: "1px solid rgba(126, 228, 255, 0.12)",
+                        border: "1px solid rgba(26,26,26,0.12)",
                       }}
                     >
-                      <p className="text-[10px] uppercase tracking-wider text-cyan-300/80 mb-1">
+                      <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]/80 mb-1">
                         {m.label}
                       </p>
-                      <p className="text-sm font-bold text-white">{m.delta}</p>
+                      <p className="text-sm font-bold text-[var(--ink)]">{m.delta}</p>
                     </div>
                   ))}
                 </div>
-                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-300">
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--terracotta)]">
                   Read the full case
                   <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -256,12 +256,12 @@ export default function RevenueCalculatorPage() {
       <section className="section pt-0">
         <div className="container-x px-6">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
               FAQ
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-10 text-center text-white">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
               The{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
                 honest answers.
               </span>
             </h2>
@@ -272,16 +272,16 @@ export default function RevenueCalculatorPage() {
                   key={f.q}
                   className="group rounded-2xl p-5 md:p-6"
                   style={{
-                    background: "rgba(10, 45, 74, 0.55)",
-                    border: "1px solid rgba(126, 228, 255, 0.18)",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
                     backdropFilter: "blur(14px)",
                   }}
                 >
-                  <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-lg font-semibold text-white">
+                  <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-lg font-semibold text-[var(--ink)]">
                     <span>{f.q}</span>
-                    <ChevronRight className="w-5 h-5 text-cyan-300 transition-transform group-open:rotate-90 shrink-0" />
+                    <ChevronRight className="w-5 h-5 text-[var(--terracotta)] transition-transform group-open:rotate-90 shrink-0" />
                   </summary>
-                  <p className="text-base text-gray-300 leading-relaxed mt-4">
+                  <p className="text-base text-[var(--ink-2)] leading-relaxed mt-4">
                     {f.a}
                   </p>
                 </details>
@@ -297,15 +297,15 @@ export default function RevenueCalculatorPage() {
           <div
             className="rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+              background: "var(--ink)",
             }}
           >
             <div className="relative z-10 max-w-2xl mx-auto">
               <div
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
                 style={{
-                  background: "rgba(255, 255, 255, 0.15)",
-                  border: "1px solid rgba(255, 255, 255, 0.30)",
+                  background: "rgba(242,239,230,0.15)",
+                  border: "1px solid rgba(242,239,230,0.30)",
                   color: "#ffffff",
                 }}
               >
@@ -314,10 +314,10 @@ export default function RevenueCalculatorPage() {
                   Personalize the number
                 </span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-5">
+              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[var(--ink)] mb-5">
                 Get your real annual gain.
               </h2>
-              <p className="text-lg text-white/90 mb-8 leading-relaxed">
+              <p className="text-lg text-[var(--ink-2)] mb-8 leading-relaxed">
                 The calculator gives you the order of magnitude. A 30-minute
                 call gives you the number — what your stack would actually
                 recover, what it would cost to build, and whether the math is
@@ -328,19 +328,19 @@ export default function RevenueCalculatorPage() {
                   href={CAL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-[var(--ink)] font-semibold hover:bg-[var(--cream-3)] transition-colors"
                 >
                   Get my custom recovery plan
                 </a>
                 <Link
                   href="/case-studies"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/10 text-white font-semibold border border-white/30 hover:bg-white/20 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--cream-2)] text-[var(--ink)] font-semibold border border-[rgba(26,26,26,0.18)] hover:bg-[var(--cream-2)] transition-colors"
                 >
                   See real case studies
                   <ChevronRight className="w-4 h-4" />
                 </Link>
               </div>
-              <p className="text-sm text-white/75 mt-6">
+              <p className="text-sm text-[var(--ink-2)] mt-6">
                 Free 30-min call · Bali timezone · Replies within 8 working
                 hours
               </p>
