@@ -2,63 +2,102 @@
 
 import { useCallback, useRef } from "react";
 import Image from "next/image";
+import { Fraunces, Onest, IBM_Plex_Mono } from "next/font/google";
 import { motion } from "framer-motion";
 import {
-  Sparkles,
   ArrowRight,
-  CalendarClock,
   Star,
   Check,
   X,
   Quote,
   Clock,
-  ShieldCheck,
   MapPin,
-  Zap,
-  AlertTriangle,
-  Workflow,
-  TrendingUp,
 } from "lucide-react";
 
 /**
- * Cold-traffic LP for Meta / paid social.
- *  - No site nav, no footer (already hidden on /lp/* by Header.tsx + Footer.tsx)
- *  - ONE primary action: Book strategy call (Calendly-linked)
- *  - CTA repeated 4-5x, each contextually placed
- *  - Mobile-first (Meta = mostly mobile)
- *  - Pattern-interrupt hero, hard pain agitation, named-client proof, soft scarcity
+ * Cream editorial pivot — anti-AI-slop test on /lp/audit only.
+ *
+ *  - Cream paper ground (#F2EFE6) · ink (#1A1A1A) · terracotta accent (#C66B3F)
+ *  - Playfair Display + Inter Tight + JetBrains Mono · serif italic for accent words
+ *  - SVG paper grain at 10% multiply blend
+ *  - Asymmetric editorial grid · no centered hero
+ *  - Flat terracotta CTAs · 2px radius · no glow · no gradient text
+ *  - Mono metadata eyebrows with em-dash prefix (drops Lucide chip+icon combo)
+ *  - 1deg / -1deg rotation on cards and portrait for hand-set feel
+ *
+ * Rollback: replace this file with the previous dark-navy version.
  */
 
+// Fraunces — variable serif with optical sizing + dramatic swashy italics.
+// Stripe-tier editorial, far less overused than Playfair.
+const serif = Fraunces({
+  subsets: ["latin"],
+  weight: "variable",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+  axes: ["opsz", "SOFT", "WONK"],
+});
+
+// Onest — modern geometric sans. Distinctive without being weird.
+// Avoids the Inter / Geist / Lexend "AI agency default" tell.
+const sans = Onest({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+// IBM Plex Mono — premium-feel mono, instantly recognizable as "designed for"
+// not "default code font". Used by IBM brand work, Order Type Foundry refs.
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const C = {
+  cream: "#F2EFE6",
+  cream2: "#EDE8DC",
+  cream3: "#FAF7F0",
+  ink: "#1A1A1A",
+  ink2: "#3A3A36",
+  inkFaint: "#6B6B65",
+  terra: "#C66B3F",
+  terra2: "#B85A30",
+  sage: "#8A9A7B",
+  oxblood: "#6B2C2C",
+  ochre: "#C9A96E",
+  rule: "rgba(26,26,26,0.12)",
+  ruleSoft: "rgba(26,26,26,0.06)",
+};
+
 const PAINS = [
-  {
-    text: "Leads ghost you because nobody replies in under 90 seconds",
-  },
-  {
-    text: "Your team copy-pastes the same data between 4 tools every day",
-  },
-  {
-    text: "Your website looks like 2019 and the contact form is silently broken",
-  },
-  {
-    text: "You spent $4k on \"AI consultants\" and got a PDF you never opened",
-  },
+  "Leads ghost you because nobody replies in under 90 seconds",
+  "Your team copy-pastes the same data between 4 tools every day",
+  "Your website looks like 2019 and the contact form is silently broken",
+  "You spent $4k on \"AI consultants\" and got a PDF you never opened",
 ];
 
 const BENEFITS = [
   {
-    icon: Workflow,
+    n: "01",
     title: "Find the leak",
-    body: "30-min audit walks your funnel + stack live. I name the top 3 fixable losses by dollar value, not vague advice.",
+    body:
+      "30-min audit walks your funnel + stack live. Top 3 fixable losses by dollar value — not vague advice.",
   },
   {
-    icon: Zap,
+    n: "02",
     title: "Plug it in 14 days",
-    body: "Fixed-price scope back in your inbox in 48 hours. Most builds ship in 5-14 days, paid 50/50.",
+    body:
+      "Fixed-price scope back in your inbox in 48 hours. Most builds ship in 5-14 days, paid 50/50.",
   },
   {
-    icon: TrendingUp,
+    n: "03",
     title: "Keep the plan either way",
-    body: "If we're not the right fit, you still walk with a written 60-day plan + 3 vetted operator referrals. Free.",
+    body:
+      "Not the right fit? Walk with a written 60-day plan + 3 vetted operator referrals. Free.",
   },
 ];
 
@@ -76,7 +115,7 @@ const PROOFS = [
     label: "response time",
     client: "Operations Director · EU Logistics",
     quote:
-      "We'd tried three automation contractors before. Waseem was the first one who asked us to print our inbox and walk through 100 threads with him before writing a single node.",
+      "We'd tried three automation contractors before. Waseem was the first who asked us to print our inbox and walk through 100 threads with him before writing a single node.",
     image: "/case-studies/eu-logistics-email-triage-n8n.jpg",
   },
   {
@@ -84,7 +123,7 @@ const PROOFS = [
     label: "monthly bookings",
     client: "Christelle · Wellness practitioner, Ubud",
     quote:
-      "I stopped explaining the same things in DMs five times a day. The site does it now, and in my voice. I didn't realize how much energy that was draining until it stopped.",
+      "I stopped explaining the same things in DMs five times a day. The site does it now, and in my voice.",
     image: "/case-studies/bali-wellness-conversion-funnel.jpg",
   },
 ];
@@ -118,25 +157,29 @@ const STEPS = [
 const FAQS = [
   {
     q: "Is this actually free?",
-    a: "Yes. No payment, no card, no \"upgrade to access.\" The 30 min costs you nothing and you walk with the audit findings in writing whether you hire me or not. I'm a builder who needs leads — the call is my marketing.",
+    a: "Yes. No payment, no card, no \"upgrade to access.\" The 30 min costs you nothing and you walk with the audit findings in writing whether you hire me or not.",
   },
   {
     q: "Is this just a sales pitch in disguise?",
-    a: "No. I run audits, not pitches. About 60% of people I audit don't hire me on the call — they sit on it for 2-6 weeks, then come back. I'd rather you book later than buy something you regret.",
+    a: "No. I run audits, not pitches. About 60% of people I audit don't hire me on the call — they sit on it for 2-6 weeks, then come back.",
   },
   {
     q: "What if my business is too small / too big?",
-    a: "Too small (<$2k builds): I'll point you to my productized offers or a vetted operator. Too big (enterprise of 200+): I'll point you to an agency partner. Either way you get the audit + a real referral, not a no.",
+    a: "Too small (<$2k builds): I point you to my productized offers or a vetted operator. Too big (enterprise of 200+): I point you to an agency partner. Either way you get the audit + a real referral.",
   },
   {
     q: "How fast can you start?",
-    a: "Same-week kickoff if scope is locked + 50% deposit in by Friday. Most builds ship 5-14 days after kickoff. I run 4 builds a month max — fast, but capped.",
+    a: "Same-week kickoff if scope is locked + 50% deposit in by Friday. Most builds ship 5-14 days after kickoff. 4 builds a month max.",
   },
   {
     q: "What tools do you actually use?",
-    a: "n8n (self-hosted), GoHighLevel, Claude + GPT-4o, Next.js + Vercel, Shopify, ManyChat. I don't sell tools — I sell the system. If your stack already has half of these, we keep what works.",
+    a: "n8n (self-hosted), GoHighLevel, Claude + GPT-4o, Next.js + Vercel, Shopify, ManyChat. I don't sell tools — I sell the system.",
   },
 ];
+
+// Inline SVG grain — paper texture overlay
+const GRAIN_URI =
+  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/></svg>\")";
 
 export default function AuditFunnel() {
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -153,205 +196,285 @@ export default function AuditFunnel() {
   }, []);
 
   const goBook = useCallback(() => {
-    // Send to the main discovery-call page (which has the full Calendly flow)
     if (typeof window !== "undefined") {
       window.location.href = "/discovery-call#qualify";
     }
   }, []);
 
   return (
-    <div style={{ background: "#061827", color: "white", minHeight: "100vh" }}>
-      {/* Pixel-thin trust bar at the very top */}
+    <div
+      className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+      style={{
+        background: C.cream,
+        color: C.ink,
+        fontFamily: "var(--font-sans)",
+        minHeight: "100vh",
+        position: "relative",
+      }}
+    >
+      {/* Paper grain overlay — fixed, full viewport */}
       <div
-        className="w-full text-center py-2.5 text-[11px] uppercase tracking-[0.22em] font-bold"
+        aria-hidden
         style={{
-          background: "linear-gradient(90deg, #1E88E5 0%, #14B8A6 100%)",
-          color: "#061827",
+          position: "fixed",
+          inset: 0,
+          backgroundImage: GRAIN_URI,
+          opacity: 0.10,
+          mixBlendMode: "multiply",
+          pointerEvents: "none",
+          zIndex: 1,
+        }}
+      />
+
+      {/* Top utility strip */}
+      <div
+        style={{
+          background: C.terra,
+          color: C.cream3,
+          fontFamily: "var(--font-mono)",
+          fontSize: 11,
+          textTransform: "uppercase",
+          letterSpacing: "0.16em",
+          textAlign: "center",
+          padding: "10px 16px",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        Free · 30-min audit · Yes / no in 48 hours · 4 builds left this month
+        — free 30-min audit · yes/no in 48h · 4 builds left this month
       </div>
 
       {/* ============================================================
-          HERO
+          HERO — asymmetric editorial
           ============================================================ */}
       <section
-        className="relative overflow-hidden pt-16 md:pt-20 pb-16 md:pb-24"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          padding: "72px 0 80px",
+          borderBottom: `1px solid ${C.rule}`,
+          background: C.cream3,
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <span
-          className="orb"
+        <div
           style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -110,
-            left: -150,
-            opacity: 0.40,
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 32px",
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: 40,
           }}
-          aria-hidden
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#00D4FF",
-            top: 120,
-            right: -180,
-            opacity: 0.30,
-            animationDelay: "-7s",
-          }}
-          aria-hidden
-        />
+          className="hero-grid"
+        >
+          <style>{`
+            @media (min-width: 900px) {
+              .hero-grid { grid-template-columns: 7fr 5fr !important; align-items: end !important; }
+            }
+          `}</style>
 
-        <div className="container-x px-6 relative z-10">
-          <div className="grid lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-14 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          <div>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: C.terra,
+                marginBottom: 24,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 12,
+              }}
             >
-              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-                <Sparkles className="w-3 h-3" />
-                For founders losing leads to slow follow-up
-              </span>
-
-              <h1 className="text-4xl md:text-6xl lg:text-[64px] font-extrabold leading-[1.05] tracking-tight text-white mb-5">
-                Find the leak.{" "}
-                <span
-                  className="italic font-semibold"
-                  style={{
-                    fontFamily:
-                      '"Playfair Display", Georgia, "Times New Roman", serif',
-                    background:
-                      "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  Plug it in 14 days.
-                </span>
-              </h1>
-
-              <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-7 max-w-xl">
-                Free 30-min audit. The top 3 revenue leaks in your funnel,
-                ranked by dollar value. Fixed-price scope back in your inbox 48
-                hours later. No deck. No SDR. No fake urgency.
-              </p>
-
-              {/* Trust strip */}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-300 mb-7">
-                <span className="inline-flex items-center gap-1.5">
-                  <Star className="w-3.5 h-3.5 text-amber-300 fill-current" />
-                  <b className="text-white">4.9 / 5</b> · 47 reviews
-                </span>
-                <span className="text-cyan-300/30">·</span>
-                <span>
-                  <b className="text-white">180+</b> workflows shipped
-                </span>
-                <span className="text-cyan-300/30">·</span>
-                <span>
-                  <b className="text-white">9</b> countries
-                </span>
-              </div>
-
-              {/* Primary CTA */}
-              <div className="flex flex-col sm:flex-row gap-3">
-                <motion.button
-                  type="button"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={goBook}
-                  className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-bold text-white text-base motion-reduce:transform-none"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                    boxShadow: "0 12px 36px rgba(0, 212, 255, 0.35)",
-                  }}
-                >
-                  Book my free audit
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
-                <button
-                  type="button"
-                  onClick={scrollToCTA}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-cyan-200 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-cyan-400/5 transition"
-                >
-                  See what's inside
-                </button>
-              </div>
-
-              <p className="mt-4 text-xs text-fg-faint">
-                Bali hours · GMT+8 · usually books within 48-72 hours
-              </p>
-            </motion.div>
-
-            {/* Founder portrait card */}
-            <motion.aside
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div
-                className="rounded-3xl overflow-hidden"
+              <span
                 style={{
-                  background:
-                    "linear-gradient(155deg, rgba(10,32,52,0.7) 0%, rgba(7,56,70,0.55) 100%)",
-                  border: "1px solid rgba(0,212,255,0.25)",
-                  boxShadow: "0 30px 80px -25px rgba(0,212,255,0.32)",
-                  backdropFilter: "blur(14px) saturate(140%)",
+                  width: 28,
+                  height: 1,
+                  background: C.terra,
+                  display: "inline-block",
+                }}
+              />
+              Field notes · audit · 2026
+            </div>
+
+            <h1
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(40px, 6.5vw, 76px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.02,
+                color: C.ink,
+                margin: "0 0 24px",
+              }}
+            >
+              Your funnel is leaking money.{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: C.terra,
+                  fontWeight: 500,
                 }}
               >
-                <div className="relative aspect-[4/5]">
-                  <Image
-                    src="/portraits/waseem-builder-hero.jpg"
-                    alt="Waseem Nasir — Founder, SkynetLabs"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 420px, 100vw"
-                    className="object-cover"
-                    style={{ objectPosition: "center top" }}
-                  />
-                  <span
-                    aria-hidden
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, transparent 50%, rgba(6,24,39,0.92) 100%)",
-                    }}
-                  />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <div className="inline-flex items-center gap-1.5 mb-2 text-[10px] uppercase tracking-[0.18em] text-cyan-300 font-bold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      Runs every call personally
-                    </div>
-                    <div className="text-white font-extrabold text-lg leading-tight">
-                      Waseem Nasir
-                    </div>
-                    <div className="text-sm text-gray-300 mt-0.5">
-                      Founder · SkynetLabs
-                    </div>
-                    <div className="flex items-center gap-3 text-xs text-cyan-200/85 mt-2">
-                      <span className="inline-flex items-center gap-1">
-                        <MapPin className="w-3 h-3" />
-                        Bali · GMT+8
-                      </span>
-                      <span className="text-cyan-300/30">·</span>
-                      <span className="inline-flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        Solo since 2019
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                I&apos;ll find it.
+              </em>
+            </h1>
+
+            <p
+              style={{
+                fontSize: 19,
+                color: C.ink2,
+                maxWidth: "52ch",
+                lineHeight: 1.55,
+                marginBottom: 28,
+              }}
+            >
+              30-min audit. Top 3 leaks ranked by dollar value. Fixed-price
+              scope back in 48 hours. One operator from Bali. No SDR, no deck,
+              no fake urgency.
+            </p>
+
+            {/* Trust strip — mono, minimal */}
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+                color: C.inkFaint,
+                marginBottom: 28,
+              }}
+            >
+              <span style={{ color: C.ochre }}>
+                <Star
+                  style={{
+                    display: "inline-block",
+                    width: 12,
+                    height: 12,
+                    verticalAlign: "-2px",
+                    marginRight: 4,
+                    fill: C.ochre,
+                    stroke: "none",
+                  }}
+                />
+                4.9
+              </span>
+              <span style={{ margin: "0 12px", color: C.rule }}>·</span>
+              <span><span style={{ color: C.ink }}>180+</span> workflows</span>
+              <span style={{ margin: "0 12px", color: C.rule }}>·</span>
+              <span><span style={{ color: C.ink }}>9</span> countries</span>
+              <span style={{ margin: "0 12px", color: C.rule }}>·</span>
+              <span>solo since 2019</span>
+            </div>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+              <button
+                type="button"
+                onClick={goBook}
+                style={{
+                  background: C.terra,
+                  color: C.cream3,
+                  border: "none",
+                  padding: "16px 28px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 15,
+                  cursor: "pointer",
+                  borderRadius: 2,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  transition: "background 0.18s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = C.terra2)}
+                onMouseLeave={(e) => (e.currentTarget.style.background = C.terra)}
+              >
+                Book my free audit
+                <ArrowRight style={{ width: 16, height: 16 }} />
+              </button>
+              <button
+                type="button"
+                onClick={scrollToCTA}
+                style={{
+                  background: "transparent",
+                  color: C.ink,
+                  border: `1px solid ${C.ink}`,
+                  padding: "15px 26px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 15,
+                  cursor: "pointer",
+                  borderRadius: 2,
+                }}
+              >
+                See what&apos;s inside
+              </button>
+            </div>
+
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: C.inkFaint,
+                marginTop: 20,
+              }}
+            >
+              — Bali hours · GMT+8 · usually books within 48-72 hours
+            </div>
+          </div>
+
+          {/* Portrait — polaroid-style with rotation */}
+          <div>
+            <figure
+              style={{
+                margin: 0,
+                transform: "rotate(-1.2deg)",
+                background: C.cream3,
+                padding: 10,
+                border: `1px solid ${C.rule}`,
+                boxShadow: "0 18px 48px rgba(26,37,64,0.18)",
+                maxWidth: 400,
+                marginLeft: "auto",
+              }}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "4 / 5",
+                  overflow: "hidden",
+                }}
+              >
+                <Image
+                  src="/portraits/waseem-builder-hero.jpg"
+                  alt="Waseem Nasir — Founder, SkynetLabs"
+                  fill
+                  priority
+                  sizes="(min-width: 900px) 400px, 90vw"
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: "center top",
+                    filter: "sepia(0.10) saturate(0.95) contrast(1.02)",
+                  }}
+                />
               </div>
-            </motion.aside>
+              <figcaption
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.10em",
+                  color: C.inkFaint,
+                  textAlign: "center",
+                  paddingTop: 12,
+                }}
+              >
+                Waseem · founder · Bali · GMT+8
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -359,244 +482,358 @@ export default function AuditFunnel() {
       {/* ============================================================
           PAIN AGITATION
           ============================================================ */}
-      <section className="py-16 md:py-24 border-t border-white/[0.05]">
-        <div className="container-x px-6 max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5 }}
-            className="mb-8 text-center"
+      <section
+        style={{
+          padding: "72px 0",
+          borderBottom: `1px solid ${C.rule}`,
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 32px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.oxblood,
+              marginBottom: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
           >
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-rose-300 mb-4 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-400/25">
-              <AlertTriangle className="w-3 h-3" />
-              Sound familiar?
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-snug">
-              You&apos;re probably losing money on{" "}
-              <span
-                className="italic"
-                style={{
-                  fontFamily: '"Playfair Display", Georgia, serif',
-                  color: "#fda4a4",
-                }}
-              >
-                at least one of these.
-              </span>
-            </h2>
-          </motion.div>
+            <span style={{ width: 28, height: 1, background: C.oxblood }} />
+            Sound familiar?
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: C.ink,
+              marginBottom: 36,
+              maxWidth: "22ch",
+            }}
+          >
+            You&apos;re probably losing money on{" "}
+            <em style={{ fontStyle: "italic", color: C.oxblood }}>
+              at least one of these.
+            </em>
+          </h2>
 
-          <ul className="space-y-3">
+          <ul style={{ listStyle: "none", padding: 0, margin: "0 0 40px" }}>
             {PAINS.map((p, i) => (
               <motion.li
                 key={i}
-                initial={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, x: -8 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.03] border border-rose-400/15"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "24px 1fr",
+                  gap: 18,
+                  alignItems: "start",
+                  padding: "18px 0",
+                  borderBottom: `1px solid ${C.ruleSoft}`,
+                  fontSize: 17,
+                  color: C.ink2,
+                  lineHeight: 1.55,
+                }}
               >
-                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center bg-rose-500/15 border border-rose-400/30 mt-0.5">
-                  <X className="w-3.5 h-3.5 text-rose-300" />
-                </span>
-                <span className="text-base md:text-lg text-fg-muted leading-snug">
-                  {p.text}
-                </span>
+                <X
+                  style={{
+                    width: 18,
+                    height: 18,
+                    color: C.oxblood,
+                    marginTop: 3,
+                  }}
+                />
+                <span>{p}</span>
               </motion.li>
             ))}
           </ul>
 
-          <div className="mt-10 text-center">
-            <button
-              type="button"
-              onClick={goBook}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
-              style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
-              }}
-            >
-              I&apos;ll fix at least one of these — book my audit
-              <ArrowRight className="w-4 h-4" />
-            </button>
+          <button
+            type="button"
+            onClick={goBook}
+            style={{
+              background: C.terra,
+              color: C.cream3,
+              border: "none",
+              padding: "14px 24px",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              fontSize: 14,
+              cursor: "pointer",
+              borderRadius: 2,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            I&apos;ll fix at least one — book my audit
+            <ArrowRight style={{ width: 16, height: 16 }} />
+          </button>
+        </div>
+      </section>
+
+      {/* ============================================================
+          BENEFITS
+          ============================================================ */}
+      <section
+        style={{
+          padding: "72px 0",
+          borderBottom: `1px solid ${C.rule}`,
+          background: C.cream3,
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.terra,
+              marginBottom: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <span style={{ width: 28, height: 1, background: C.terra }} />
+            Here&apos;s the shift
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: C.ink,
+              marginBottom: 40,
+              maxWidth: "26ch",
+            }}
+          >
+            Three things change after our{" "}
+            <em style={{ fontStyle: "italic", color: C.terra }}>
+              30 minutes together.
+            </em>
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 24,
+            }}
+          >
+            {BENEFITS.map((b, i) => (
+              <motion.div
+                key={b.n}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
+                style={{
+                  background: C.cream2,
+                  border: `1px solid ${C.rule}`,
+                  padding: "28px 28px 32px",
+                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontStyle: "italic",
+                    fontSize: 36,
+                    fontWeight: 500,
+                    color: C.terra,
+                    lineHeight: 1,
+                    marginBottom: 12,
+                  }}
+                >
+                  {b.n}
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: 22,
+                    fontWeight: 600,
+                    color: C.ink,
+                    marginBottom: 10,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {b.title}
+                </h3>
+                <p
+                  style={{
+                    color: C.ink2,
+                    fontSize: 14,
+                    lineHeight: 1.65,
+                    margin: 0,
+                  }}
+                >
+                  {b.body}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ============================================================
-          BENEFITS — 3 cards
+          PROOF
           ============================================================ */}
       <section
-        className="py-16 md:py-24 border-t border-white/[0.05]"
         style={{
-          background:
-            "linear-gradient(180deg, #061827 0%, #082234 100%)",
+          padding: "72px 0",
+          borderBottom: `1px solid ${C.rule}`,
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <div className="container-x px-6 max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto text-center mb-12"
-          >
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-              Here&apos;s the shift
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-[1.08]">
-              Three things change after our{" "}
-              <span
-                className="italic"
-                style={{
-                  fontFamily: '"Playfair Display", Georgia, serif',
-                  background:
-                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                30 minutes together.
-              </span>
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.08 } },
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.sage,
+              marginBottom: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
             }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-5"
           >
-            {BENEFITS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <motion.div
-                  key={b.title}
-                  variants={{
-                    hidden: { opacity: 0, y: 16 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
-                    },
-                  }}
-                  className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/35 transition"
-                >
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(30,136,229,0.20), rgba(20,184,166,0.20))",
-                      border: "1px solid rgba(126,228,255,0.32)",
-                    }}
-                  >
-                    <Icon className="w-5 h-5 text-cyan-300" />
-                  </div>
-                  <h3 className="text-white font-extrabold text-lg mb-2 tracking-tight">
-                    {b.title}
-                  </h3>
-                  <p className="text-sm text-fg-muted leading-relaxed">
-                    {b.body}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ============================================================
-          PROOF — 3 cards
-          ============================================================ */}
-      <section className="py-16 md:py-24 border-t border-white/[0.05]">
-        <div className="container-x px-6 max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto text-center mb-12"
+            <span style={{ width: 28, height: 1, background: C.sage }} />
+            Real shipped builds
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: C.ink,
+              marginBottom: 40,
+              maxWidth: "22ch",
+            }}
           >
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-emerald-300 mb-4 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/25">
-              <ShieldCheck className="w-3 h-3" />
-              Real shipped builds
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-[1.08]">
-              Same call, same audit,{" "}
-              <span
-                className="italic"
-                style={{
-                  fontFamily: '"Playfair Display", Georgia, serif',
-                  background:
-                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                these results.
-              </span>
-            </h2>
-          </motion.div>
+            Same call, same audit,{" "}
+            <em style={{ fontStyle: "italic", color: C.terra }}>
+              these results.
+            </em>
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {PROOFS.map((p) => (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 24,
+            }}
+          >
+            {PROOFS.map((p, i) => (
               <motion.article
                 key={p.client}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5 }}
-                className="rounded-3xl overflow-hidden bg-white/[0.03] border border-white/10 flex flex-col"
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                style={{
+                  background: C.cream3,
+                  border: `1px solid ${C.rule}`,
+                  display: "flex",
+                  flexDirection: "column",
+                  transform: i === 1 ? "rotate(0.3deg)" : "rotate(-0.3deg)",
+                }}
               >
-                <div className="relative aspect-[16/10] overflow-hidden">
+                <div
+                  style={{
+                    position: "relative",
+                    aspectRatio: "16 / 10",
+                    overflow: "hidden",
+                    borderBottom: `1px solid ${C.rule}`,
+                  }}
+                >
                   <Image
                     src={p.image}
                     alt={p.client}
                     fill
                     sizes="(min-width: 768px) 33vw, 100vw"
-                    className="object-cover"
-                  />
-                  <span
-                    aria-hidden
-                    className="absolute inset-0"
                     style={{
-                      background:
-                        "linear-gradient(180deg, rgba(6,24,39,0.10) 0%, rgba(6,24,39,0.85) 100%)",
+                      objectFit: "cover",
+                      filter: "sepia(0.10) saturate(0.92)",
                     }}
                   />
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <div
-                      className="text-3xl font-extrabold tracking-tight"
-                      style={{
-                        background:
-                          "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                        WebkitBackgroundClip: "text",
-                        backgroundClip: "text",
-                        color: "transparent",
-                        WebkitTextFillColor: "transparent",
-                      }}
-                    >
-                      {p.metric}
-                    </div>
-                    <div className="text-[11px] uppercase tracking-wider text-cyan-200/85 font-bold">
-                      {p.label}
-                    </div>
-                  </div>
                 </div>
-                <div className="p-5 flex-1 flex flex-col">
-                  <Quote className="w-4 h-4 text-cyan-300 mb-2" />
-                  <p className="text-sm text-fg-muted leading-relaxed italic mb-4 flex-1">
+                <div style={{ padding: "24px 26px", flex: 1, display: "flex", flexDirection: "column" }}>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: 32,
+                      fontWeight: 600,
+                      color: C.terra,
+                      letterSpacing: "-0.01em",
+                      lineHeight: 1,
+                      marginBottom: 4,
+                    }}
+                  >
+                    {p.metric}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.16em",
+                      color: C.inkFaint,
+                      marginBottom: 16,
+                    }}
+                  >
+                    — {p.label}
+                  </div>
+                  <Quote
+                    style={{
+                      width: 16,
+                      height: 16,
+                      color: C.terra,
+                      marginBottom: 8,
+                    }}
+                  />
+                  <p
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontStyle: "italic",
+                      fontSize: 15,
+                      lineHeight: 1.55,
+                      color: C.ink,
+                      flex: 1,
+                      marginBottom: 14,
+                    }}
+                  >
                     &ldquo;{p.quote}&rdquo;
                   </p>
-                  <footer className="text-xs text-cyan-200 font-semibold">
+                  <footer
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                      color: C.inkFaint,
+                    }}
+                  >
                     — {p.client}
                   </footer>
                 </div>
@@ -610,139 +847,212 @@ export default function AuditFunnel() {
           WHAT'S INSIDE — checklist
           ============================================================ */}
       <section
-        className="py-16 md:py-24 border-t border-white/[0.05]"
         style={{
-          background:
-            "linear-gradient(180deg, #061827 0%, #073846 100%)",
+          padding: "72px 0",
+          borderBottom: `1px solid ${C.rule}`,
+          background: C.cream3,
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <div className="container-x px-6 max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5 }}
-            className="mb-10"
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 32px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.terra,
+              marginBottom: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
           >
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-              What you actually get
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-[1.08]">
-              Five things in the box.{" "}
-              <span
-                className="italic"
-                style={{
-                  fontFamily: '"Playfair Display", Georgia, serif',
-                  background:
-                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                All free.
-              </span>
-            </h2>
-          </motion.div>
+            <span style={{ width: 28, height: 1, background: C.terra }} />
+            What you actually get
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: C.ink,
+              marginBottom: 32,
+              maxWidth: "20ch",
+            }}
+          >
+            Five things in the box.{" "}
+            <em style={{ fontStyle: "italic", color: C.terra }}>All free.</em>
+          </h2>
 
-          <ul className="space-y-3 mb-10">
+          <ul style={{ listStyle: "none", padding: 0, margin: "0 0 36px" }}>
             {WHATS_INSIDE.map((line, i) => (
               <motion.li
                 key={i}
-                initial={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, x: -8 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="flex items-start gap-3 p-4 rounded-xl bg-cyan-500/[0.05] border border-cyan-400/20"
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "28px 1fr",
+                  gap: 16,
+                  padding: "16px 0",
+                  borderBottom: `1px solid ${C.ruleSoft}`,
+                  fontSize: 16,
+                  color: C.ink,
+                  lineHeight: 1.5,
+                }}
               >
-                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center bg-cyan-500/20 border border-cyan-400/40 mt-0.5">
-                  <Check className="w-4 h-4 text-cyan-300" />
-                </span>
-                <span className="text-base text-white leading-snug">
-                  {line}
-                </span>
+                <Check
+                  style={{
+                    width: 18,
+                    height: 18,
+                    color: C.terra,
+                    marginTop: 3,
+                  }}
+                />
+                <span>{line}</span>
               </motion.li>
             ))}
           </ul>
 
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={goBook}
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
-              style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 12px 36px rgba(0, 212, 255, 0.30)",
-              }}
-            >
-              Claim my free audit slot
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <p className="mt-3 text-xs text-fg-faint">
-              4 builds left this month · bookings move fast on Mondays
-            </p>
+          <button
+            type="button"
+            onClick={goBook}
+            style={{
+              background: C.terra,
+              color: C.cream3,
+              border: "none",
+              padding: "16px 28px",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              fontSize: 15,
+              cursor: "pointer",
+              borderRadius: 2,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = C.terra2)}
+            onMouseLeave={(e) => (e.currentTarget.style.background = C.terra)}
+          >
+            Claim my free audit slot
+            <ArrowRight style={{ width: 16, height: 16 }} />
+          </button>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: C.inkFaint,
+              marginTop: 14,
+            }}
+          >
+            — 4 builds left this month · bookings move fast on Mondays
           </div>
         </div>
       </section>
 
       {/* ============================================================
-          HOW IT WORKS — 3 steps
+          HOW IT WORKS
           ============================================================ */}
-      <section className="py-16 md:py-24 border-t border-white/[0.05]">
-        <div className="container-x px-6 max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto text-center mb-12"
+      <section
+        style={{
+          padding: "72px 0",
+          borderBottom: `1px solid ${C.rule}`,
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 32px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.terra,
+              marginBottom: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
           >
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-              How it works
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-[1.08]">
-              Three steps,{" "}
-              <span
-                className="italic"
-                style={{
-                  fontFamily: '"Playfair Display", Georgia, serif',
-                  background:
-                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                no surprises.
-              </span>
-            </h2>
-          </motion.div>
+            <span style={{ width: 28, height: 1, background: C.terra }} />
+            How it works
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: C.ink,
+              marginBottom: 40,
+              maxWidth: "20ch",
+            }}
+          >
+            Three steps,{" "}
+            <em style={{ fontStyle: "italic", color: C.terra }}>no surprises.</em>
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {STEPS.map((s) => (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: 24,
+            }}
+          >
+            {STEPS.map((s, i) => (
               <div
                 key={s.n}
-                className="p-6 rounded-3xl bg-white/[0.03] border border-white/10"
+                style={{
+                  background: C.cream2,
+                  border: `1px solid ${C.rule}`,
+                  padding: "28px",
+                  transform: i === 1 ? "rotate(0.3deg)" : "rotate(-0.3deg)",
+                }}
               >
                 <div
-                  className="text-4xl font-black tracking-tight mb-3"
                   style={{
-                    background:
-                      "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    WebkitTextFillColor: "transparent",
+                    fontFamily: "var(--font-serif)",
+                    fontStyle: "italic",
+                    fontSize: 44,
+                    fontWeight: 500,
+                    color: C.terra,
+                    lineHeight: 1,
+                    marginBottom: 12,
                   }}
                 >
                   {s.n}
                 </div>
-                <h3 className="text-white font-extrabold text-lg mb-2 tracking-tight">
+                <h3
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: 20,
+                    fontWeight: 600,
+                    color: C.ink,
+                    marginBottom: 8,
+                  }}
+                >
                   {s.title}
                 </h3>
-                <p className="text-sm text-fg-muted leading-relaxed">{s.body}</p>
+                <p
+                  style={{
+                    color: C.ink2,
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  {s.body}
+                </p>
               </div>
             ))}
           </div>
@@ -753,57 +1063,84 @@ export default function AuditFunnel() {
           FAQ
           ============================================================ */}
       <section
-        className="py-16 md:py-24 border-t border-white/[0.05]"
         style={{
-          background:
-            "linear-gradient(180deg, #061827 0%, #082234 100%)",
+          padding: "72px 0",
+          borderBottom: `1px solid ${C.rule}`,
+          background: C.cream3,
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <div className="container-x px-6 max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-10"
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 32px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.terra,
+              marginBottom: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
           >
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-              Before you book
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-[1.08]">
-              The questions{" "}
-              <span
-                className="italic"
-                style={{
-                  fontFamily: '"Playfair Display", Georgia, serif',
-                  background:
-                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                I get most.
-              </span>
-            </h2>
-          </motion.div>
+            <span style={{ width: 28, height: 1, background: C.terra }} />
+            Before you book
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: C.ink,
+              marginBottom: 32,
+              maxWidth: "20ch",
+            }}
+          >
+            The questions{" "}
+            <em style={{ fontStyle: "italic", color: C.terra }}>I get most.</em>
+          </h2>
 
-          <div className="space-y-2.5">
+          <div>
             {FAQS.map((f) => (
               <details
                 key={f.q}
-                className="group rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition overflow-hidden"
+                style={{
+                  borderBottom: `1px solid ${C.rule}`,
+                  padding: "20px 0",
+                  cursor: "pointer",
+                }}
               >
-                <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4 text-white font-semibold">
+                <summary
+                  style={{
+                    listStyle: "none",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: 16,
+                    fontFamily: "var(--font-serif)",
+                    fontSize: 19,
+                    fontWeight: 600,
+                    color: C.ink,
+                    letterSpacing: "-0.005em",
+                  }}
+                >
                   <span>{f.q}</span>
-                  <span className="text-cyan-300 text-xl leading-none group-open:rotate-45 transition-transform">
-                    +
-                  </span>
+                  <span style={{ color: C.terra, fontSize: 22, lineHeight: 1 }}>+</span>
                 </summary>
-                <div className="px-5 pb-5 text-fg-muted text-sm leading-relaxed">
+                <p
+                  style={{
+                    marginTop: 14,
+                    color: C.ink2,
+                    fontSize: 15,
+                    lineHeight: 1.65,
+                  }}
+                >
                   {f.a}
-                </div>
+                </p>
               </details>
             ))}
           </div>
@@ -811,63 +1148,101 @@ export default function AuditFunnel() {
       </section>
 
       {/* ============================================================
-          FINAL CTA BAND
+          FINAL CTA
           ============================================================ */}
       <section
         ref={ctaRef}
-        className="py-20 md:py-28 relative overflow-hidden"
         style={{
-          background:
-            "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+          padding: "88px 0 100px",
+          background: C.ink,
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <span
-          aria-hidden
-          className="absolute inset-0 opacity-20"
+        <div
           style={{
-            background:
-              "radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(0,0,0,0.3) 0%, transparent 50%)",
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 32px",
+            textAlign: "center",
           }}
-        />
-
-        <div className="container-x px-6 relative z-10 max-w-3xl mx-auto text-center">
-          <span className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.22em] uppercase text-white/85 mb-5 px-3 py-1 rounded-full bg-white/15 border border-white/25">
-            <CalendarClock className="w-3 h-3" />
-            4 audit slots left this month
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.05] mb-5">
+        >
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.terra,
+              marginBottom: 20,
+            }}
+          >
+            — 4 audit slots left this month
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(30px, 5vw, 52px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.08,
+              color: C.cream3,
+              marginBottom: 20,
+            }}
+          >
             Every week you wait,{" "}
-            <span
-              className="italic"
-              style={{
-                fontFamily: '"Playfair Display", Georgia, serif',
-              }}
-            >
+            <em style={{ fontStyle: "italic", color: C.terra }}>
               the bleed gets bigger.
-            </span>
+            </em>
           </h2>
-          <p className="text-base md:text-lg text-white/90 max-w-xl mx-auto mb-8">
+          <p
+            style={{
+              fontSize: 17,
+              color: "rgba(242, 239, 230, 0.78)",
+              maxWidth: "44ch",
+              margin: "0 auto 32px",
+              lineHeight: 1.6,
+            }}
+          >
             30 free minutes. 3 concrete plays. A scope in 48 hours. Yes, no, or
             referral — you walk with the findings either way.
           </p>
-          <motion.button
+          <button
             type="button"
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.97 }}
             onClick={goBook}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-extrabold text-base motion-reduce:transform-none"
             style={{
-              background: "white",
-              color: "#061827",
-              boxShadow: "0 16px 40px rgba(0,0,0,0.30)",
+              background: C.terra,
+              color: C.cream3,
+              border: "none",
+              padding: "18px 32px",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 700,
+              fontSize: 16,
+              cursor: "pointer",
+              borderRadius: 2,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              transition: "background 0.18s",
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = C.terra2)}
+            onMouseLeave={(e) => (e.currentTarget.style.background = C.terra)}
           >
             Book my free 30-min audit
-            <ArrowRight className="w-4 h-4" />
-          </motion.button>
-          <p className="mt-5 text-xs text-white/70">
-            No card. No SDR. No spam. Just the audit.
-          </p>
+            <ArrowRight style={{ width: 16, height: 16 }} />
+          </button>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: "rgba(242, 239, 230, 0.55)",
+              marginTop: 22,
+            }}
+          >
+            — no card · no SDR · no spam · just the audit
+          </div>
         </div>
       </section>
     </div>
