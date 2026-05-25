@@ -6,7 +6,7 @@ const person = {
   name: SITE.founder,
   url: SITE.founderUrl,
   jobTitle: "Founder, SkynetLabs",
-  image: `${SITE.url}/portraits/waseem-rooftop.jpg`,
+  image: `${SITE.assetsUrl}/portraits/waseem-rooftop.jpg`,
   email: SITE.emailFounder,
   worksFor: { "@id": `${SITE.url}/#organization` },
   sameAs: [
@@ -63,7 +63,7 @@ export function articleSchema(opts: {
     "@id": `${SITE.url}/blog/${opts.slug}#article`,
     headline: opts.title,
     description: opts.description,
-    image: opts.image || `${SITE.url}/portraits/waseem-rooftop.jpg`,
+    image: opts.image || `${SITE.assetsUrl}/portraits/waseem-rooftop.jpg`,
     datePublished: opts.datePublished,
     dateModified: opts.dateModified || opts.datePublished,
     author: person,

@@ -52,7 +52,7 @@ export async function generateMetadata({
       publishedTime: a.publishedAt,
       modifiedTime: a.updatedAt || a.publishedAt,
       authors: [SITE.founder],
-      images: [`${SITE.url}${a.heroImage}`],
+      images: [`${SITE.assetsUrl}${a.heroImage}`],
     },
     twitter: {
       card: "summary_large_image",
@@ -91,7 +91,7 @@ export default async function NewsArticlePage({
     url: `${SITE.url}/news/${a.slug}`,
     datePublished: a.publishedAt,
     dateModified: a.updatedAt || a.publishedAt,
-    image: `${SITE.url}${a.heroImage}`,
+    image: `${SITE.assetsUrl}${a.heroImage}`,
     author: {
       "@type": "Person",
       name: SITE.founder,

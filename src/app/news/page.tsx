@@ -36,7 +36,7 @@ const schema = {
     url: `${SITE.url}/news/${p.slug}`,
     datePublished: p.publishedAt,
     dateModified: p.updatedAt || p.publishedAt,
-    image: `${SITE.url}${p.heroImage}`,
+    image: `${SITE.assetsUrl}${p.heroImage}`,
     author: { "@type": "Person", name: SITE.founder },
   })),
 };

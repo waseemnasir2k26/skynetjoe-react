@@ -46,7 +46,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE.url),
+  // Use assetsUrl (vercel host) for og:image resolution while apex doesn't
+  // host the /public assets yet. Canonicals below still use SITE.url.
+  metadataBase: new URL(SITE.assetsUrl),
   title: {
     default: `${SITE.brand} — ${SITE.tagline}`,
     template: `%s | ${SITE.brand}`,

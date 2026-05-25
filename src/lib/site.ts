@@ -3,11 +3,36 @@
  * Ported from v5.5 WP theme (front-page.php + header.php + footer.php).
  */
 
+/**
+ * Asset host used for og:image / twitter:image resolution.
+ *
+ * Why split from SITE.url:
+ *   SITE.url stays "https://skynetjoe.com" so canonicals + structured data
+ *   point at the production domain (SEO contract).
+ *   But og/twitter images live in /public and only exist at the host that
+ *   actually serves them. Until the apex domain is cut over, social
+ *   crawlers (Slack, X, LinkedIn) hit the vercel preview host instead.
+ *
+ * Precedence:
+ *   1. NEXT_PUBLIC_SITE_ASSETS_URL (explicit override)
+ *   2. NEXT_PUBLIC_VERCEL_URL (auto-set by Vercel — preview + prod)
+ *   3. https://skynetjoe.com (final fallback for local dev/build)
+ */
+function resolveAssetsUrl(): string {
+  const override = process.env.NEXT_PUBLIC_SITE_ASSETS_URL;
+  if (override) return override.replace(/\/+$/, "");
+  const vercel = process.env.NEXT_PUBLIC_VERCEL_URL;
+  if (vercel) return `https://${vercel.replace(/\/+$/, "")}`;
+  return "https://skynetjoe.com";
+}
+
 export const SITE = {
   name: "SkynetLabs",
   brand: "SkynetLabs",
   domain: "skynetjoe.com",
   url: "https://skynetjoe.com",
+  // Asset host for og:image / twitter:image — see resolveAssetsUrl() above.
+  assetsUrl: resolveAssetsUrl(),
   founder: "Waseem Nasir",
   founderUrl: "https://www.waseemnasir.com",
   tagline: "AI Automation Agency for Founders Who Refuse to Be Average",

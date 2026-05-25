@@ -16,7 +16,7 @@ export const metadata: Metadata = {
       "Find the leak. Plug it in 14 days. Free audit + 3 concrete plays + fixed scope in 48h.",
     url: `${SITE.url}/lp/audit`,
     type: "website",
-    images: [`${SITE.url}/portraits/waseem-builder-hero.jpg`],
+    images: [`${SITE.assetsUrl}/portraits/waseem-builder-hero.jpg`],
   },
 };
 

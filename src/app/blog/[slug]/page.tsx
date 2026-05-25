@@ -71,7 +71,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       "@type": "Organization",
       name: SITE.brand,
       url: SITE.url,
-      logo: { "@type": "ImageObject", url: `${SITE.url}/og-default.png` },
+      logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/og-default.png` },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/blog/${post.slug}` },
     keywords: post.tags.join(", "),

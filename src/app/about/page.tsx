@@ -73,7 +73,7 @@ export const metadata: Metadata = {
       "Solo founder. Bali base. 7 years of failing in public and building in public. Public pricing, AI as second seat.",
     url: `${SITE.url}/about`,
     type: "website",
-    images: [`${SITE.url}/portraits/waseem-builder-hero.jpg`],
+    images: [`${SITE.assetsUrl}/portraits/waseem-builder-hero.jpg`],
   },
 };
 

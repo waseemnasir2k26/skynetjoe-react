@@ -57,6 +57,20 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
+/**
+ * Local palette for the audit funnel.
+ *
+ * Accent contract (deliberate — do NOT collapse to a single accent):
+ *   terra (#C66B3F)  = primary accent. Hero eyebrow, CTAs, "I'll find it"
+ *                      emphasis. Matches the sitewide --terracotta token.
+ *   oxblood (#6B2C2C) = secondary semantic-pain accent. Only used inside
+ *                      the "Sound familiar?" pain section (eyebrow rule,
+ *                      H2 <em>, X-mark glyphs). Reads as a wound color
+ *                      against cream, which is the correct emotional cue
+ *                      for the pain inventory. Flagged by the
+ *                      2026-05-25 cream-pivot audit and confirmed intentional.
+ *   sage / ochre     = unused buffer slots reserved for module variants.
+ */
 const C = {
   cream: "#F2EFE6",
   cream2: "#EDE8DC",
@@ -67,7 +81,7 @@ const C = {
   terra: "#C66B3F",
   terra2: "#B85A30",
   sage: "#8A9A7B",
-  oxblood: "#6B2C2C",
+  oxblood: "#6B2C2C", // secondary — pain-section only, see header comment
   ochre: "#C9A96E",
   rule: "rgba(26,26,26,0.12)",
   ruleSoft: "rgba(26,26,26,0.06)",

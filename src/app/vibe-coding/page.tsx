@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${SITE.url}/portraits/waseem-cafe-builder.jpg`,
+        url: `${SITE.assetsUrl}/portraits/waseem-cafe-builder.jpg`,
         width: 1200,
         height: 1200,
         alt: "Waseem Nasir vibe coding at a Bali cafe with Claude Code",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: "Vibe Coding — SkynetLabs",
     description:
       "Human-led, AI-paired builds from Bali. Ship real apps in 5–14 days.",
-    images: [`${SITE.url}/portraits/waseem-cafe-builder.jpg`],
+    images: [`${SITE.assetsUrl}/portraits/waseem-cafe-builder.jpg`],
   },
 };
 
@@ -268,7 +268,7 @@ const schema = {
         url: SITE.founderUrl,
         jobTitle: "Founder and lead builder",
         worksFor: { "@id": `${SITE.url}/#organization` },
-        image: `${SITE.url}/portraits/waseem-cafe-builder.jpg`,
+        image: `${SITE.assetsUrl}/portraits/waseem-cafe-builder.jpg`,
         homeLocation: { "@type": "Place", name: "Bali, Indonesia" },
         knowsAbout: [
           "Claude Code",

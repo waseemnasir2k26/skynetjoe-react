@@ -30,7 +30,7 @@ export default function Page() {
     description: article.description,
     slug: SLUG,
     datePublished: article.publishedAt,
-    image: `${SITE.url}${article.heroImage}`,
+    image: `${SITE.assetsUrl}${article.heroImage}`,
     keywords: article.tags,
   });
 

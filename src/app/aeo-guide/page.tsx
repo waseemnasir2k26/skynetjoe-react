@@ -40,7 +40,7 @@ const schema = {
     "@type": "Organization",
     name: SITE.brand,
     url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.url}/waseem-portrait.jpg` },
+    logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/waseem-portrait.jpg` },
   },
   mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/aeo-guide` },
   about: [

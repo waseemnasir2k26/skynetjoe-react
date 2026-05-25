@@ -58,7 +58,7 @@ const schema = {
       givenName: "Waseem",
       familyName: "Nasir",
       url: SITE.founderUrl,
-      image: `${SITE.url}/waseem-portrait.jpg`,
+      image: `${SITE.assetsUrl}/waseem-portrait.jpg`,
       jobTitle: "Founder",
       worksFor: { "@id": `${SITE.url}/#organization` },
       nationality: { "@type": "Country", name: "Pakistan" },

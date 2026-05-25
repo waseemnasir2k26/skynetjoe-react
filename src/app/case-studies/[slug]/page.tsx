@@ -36,7 +36,7 @@ export async function generateMetadata({
       type: "article",
       publishedTime: c.publishDate,
       authors: [SITE.founder],
-      images: [`${SITE.url}${c.coverImage}`],
+      images: [`${SITE.assetsUrl}${c.coverImage}`],
     },
     twitter: {
       card: "summary_large_image",
@@ -70,12 +70,12 @@ export default async function CaseStudyDetail({
       name: SITE.founder,
       url: `${SITE.url}/author/waseem-nasir`,
     },
-    image: `${SITE.url}${c.coverImage}`,
+    image: `${SITE.assetsUrl}${c.coverImage}`,
     publisher: {
       "@type": "Organization",
       name: SITE.brand,
       url: SITE.url,
-      logo: { "@type": "ImageObject", url: `${SITE.url}/og-default.png` },
+      logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/og-default.png` },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
