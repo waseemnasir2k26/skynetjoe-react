@@ -1,5 +1,19 @@
 "use client";
 
+/**
+ * WorkShowcase — /portfolio gallery of 23 shipped builds.
+ *
+ * Cream-pivot port 2026-05-25:
+ *   - bg cream-3 (was dark gradient #061827 → #073846)
+ *   - Fraunces H1 with terracotta <em> accent
+ *   - Cards: cream-2 bg, 1px ink border, ink heading, ink-2 body,
+ *     terracotta hover accent (was cyan-400 hover, white/5 cards)
+ *   - Founder strip: cream-2 panel with terracotta CTA (was dark
+ *     gradient pill with cyan glow)
+ *   - Category chips re-tinted to cream-safe terracotta / sage / ink
+ *   - Gigs data shape + URLs unchanged.
+ */
+
 import Image from "next/image";
 import { ExternalLink, Play, Star } from "lucide-react";
 
@@ -254,52 +268,106 @@ const GIGS: Gig[] = [
   },
 ];
 
-const CATEGORY_LABELS: Record<Gig["category"], { label: string; color: string }> = {
-  client: { label: "Real Client", color: "bg-emerald-400/15 text-emerald-200 border-emerald-300/40" },
-  flagship: { label: "Flagship", color: "bg-amber-400/15 text-amber-200 border-amber-300/40" },
-  demo: { label: "Niche Demo", color: "bg-cyan-400/15 text-cyan-200 border-cyan-300/40" },
+// Category chip styles, cream-safe.
+const CATEGORY_CHIP: Record<Gig["category"], React.CSSProperties> = {
+  client: {
+    background: "rgba(198,107,63,0.10)",
+    color: "var(--terracotta)",
+    border: "1px solid rgba(198,107,63,0.40)",
+  },
+  flagship: {
+    background: "var(--ink)",
+    color: "var(--cream-3)",
+    border: "1px solid var(--ink)",
+  },
+  demo: {
+    background: "rgba(26,26,26,0.04)",
+    color: "var(--ink-2)",
+    border: "1px solid rgba(26,26,26,0.18)",
+  },
+};
+const CATEGORY_LABEL: Record<Gig["category"], string> = {
+  client: "Real Client",
+  flagship: "Flagship",
+  demo: "Niche Demo",
 };
 
 export default function WorkShowcase() {
   return (
     <section
-      className="relative overflow-hidden pt-24 md:pt-32 pb-12"
+      className="relative pt-24 md:pt-32 pb-16"
       style={{
-        background:
-          "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+        background: "var(--cream-3)",
       }}
     >
-      <span
-        className="orb"
-        style={{
-          width: 540,
-          height: 540,
-          background: "#1E88E5",
-          top: -90,
-          left: -130,
-          opacity: 0.5,
-        }}
-      />
-
       <div className="container-x px-6 relative z-10">
+        {/* HERO */}
         <div className="max-w-3xl mb-10">
-          <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
-            Recent Projects · Real screenshots
-          </p>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-4 leading-[1.05]">
+          <div
+            className="inline-flex items-center gap-3 mb-5"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+            }}
+          >
+            <span
+              style={{
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
+            Recent projects · real screenshots
+          </div>
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.04,
+              color: "var(--ink)",
+              fontSize: "clamp(40px, 6vw, 68px)",
+              margin: "0 0 18px",
+            }}
+          >
             23 builds shipped.{" "}
-            <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
+              }}
+            >
               Click any tile.
-            </span>
+            </em>
           </h1>
-          <p className="text-base md:text-lg text-gray-200 leading-relaxed">
+          <p
+            style={{
+              fontSize: 17,
+              color: "var(--ink-2)",
+              lineHeight: 1.6,
+              maxWidth: "62ch",
+            }}
+          >
             Live screenshots, not mockups. Every tile links to the deployed
             site. Built solo from Bali + Lahore. Video below walks through one
             being built end-to-end in Claude Code.
           </p>
         </div>
 
-        <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-12 aspect-video bg-black/40">
+        {/* Video — 1px ink border on cream, no dark frame */}
+        <div
+          className="overflow-hidden mb-12 aspect-video"
+          style={{
+            border: "1px solid rgba(26,26,26,0.18)",
+            borderRadius: 2,
+            background: "var(--ink)",
+          }}
+        >
           <iframe
             src="https://www.youtube.com/embed/5lT9vrzssU0"
             title="WordPress plugin development using Claude Code by Anthropic — Waseem Nasir"
@@ -309,65 +377,164 @@ export default function WorkShowcase() {
           />
         </div>
 
+        {/* GIG GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
-          {GIGS.map((g) => {
-            const cat = CATEGORY_LABELS[g.category];
-            return (
-              <a
-                key={g.slug}
-                href={g.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-cyan-400/60 transition-all hover:-translate-y-1 flex flex-col"
+          {GIGS.map((g) => (
+            <a
+              key={g.slug}
+              href={g.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col"
+              style={{
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.12)",
+                borderRadius: 2,
+                overflow: "hidden",
+                textDecoration: "none",
+                transition: "border-color 0.18s, transform 0.18s",
+              }}
+            >
+              <div
+                className="relative aspect-video overflow-hidden"
+                style={{ background: "rgba(26,26,26,0.06)" }}
               >
-                <div className="relative aspect-video bg-black/40 overflow-hidden">
-                  <Image
-                    src={`/portfolio/${g.slug}.jpg`}
-                    alt={`${g.title} — live screenshot`}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-black/55 text-white/95 backdrop-blur border border-white/10">
-                    {g.niche}
-                  </span>
-                  <span className={`absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border backdrop-blur ${cat.color}`}>
-                    {cat.label}
-                  </span>
-                  <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded bg-cyan-400/15 text-cyan-100 border border-cyan-300/40 backdrop-blur opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ExternalLink className="w-3 h-3" /> Live
-                  </span>
+                <Image
+                  src={`/portfolio/${g.slug}.jpg`}
+                  alt={`${g.title} — live screenshot`}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+                <span
+                  className="absolute top-3 left-3"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    padding: "4px 8px",
+                    borderRadius: 2,
+                    background: "var(--cream-3)",
+                    color: "var(--ink)",
+                    border: "1px solid rgba(26,26,26,0.18)",
+                  }}
+                >
+                  {g.niche}
+                </span>
+                <span
+                  className="absolute top-3 right-3"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    padding: "4px 8px",
+                    borderRadius: 2,
+                    ...CATEGORY_CHIP[g.category],
+                  }}
+                >
+                  {CATEGORY_LABEL[g.category]}
+                </span>
+                <span
+                  className="absolute bottom-3 right-3 inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    padding: "4px 8px",
+                    borderRadius: 2,
+                    background: "var(--terracotta)",
+                    color: "var(--cream-3)",
+                    border: "1px solid var(--terracotta)",
+                  }}
+                >
+                  <ExternalLink className="w-3 h-3" /> Live
+                </span>
+              </div>
+              <div className="p-5 flex-1 flex flex-col">
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                    fontSize: 17,
+                    lineHeight: 1.2,
+                    color: "var(--ink)",
+                    marginBottom: 4,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {g.title}
+                </h2>
+                <p
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    color: "var(--terracotta)",
+                    marginBottom: 12,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {g.client}
+                </p>
+                <p
+                  style={{
+                    fontSize: 13,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.55,
+                    marginBottom: 16,
+                  }}
+                >
+                  {g.outcome}
+                </p>
+                <div className="flex flex-wrap gap-1.5 mt-auto">
+                  {g.stack.map((s) => (
+                    <span
+                      key={s}
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        padding: "3px 8px",
+                        borderRadius: 9999,
+                        background: "var(--cream-3)",
+                        border: "1px solid rgba(26,26,26,0.12)",
+                        color: "var(--ink-faint)",
+                      }}
+                    >
+                      {s}
+                    </span>
+                  ))}
                 </div>
-                <div className="p-5 flex-1 flex flex-col">
-                  <h2 className="text-white font-bold mb-1 leading-tight">
-                    {g.title}
-                  </h2>
-                  <p className="text-[11px] text-cyan-300/80 font-mono mb-3 truncate">
-                    {g.client}
-                  </p>
-                  <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-                    {g.outcome}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {g.stack.map((s) => (
-                      <span
-                        key={s}
-                        className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </a>
-            );
-          })}
+              </div>
+            </a>
+          ))}
         </div>
 
-        <div className="rounded-3xl p-8 md:p-10 bg-gradient-to-br from-[#0a2d4a]/80 via-[#073846]/60 to-[#0a2d4a]/80 border border-cyan-400/20 backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        {/* Founder strip */}
+        <div
+          style={{
+            background: "var(--cream-2)",
+            border: "1px solid rgba(26,26,26,0.18)",
+            padding: 32,
+            borderRadius: 2,
+          }}
+          className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+        >
           <div className="flex items-center gap-5">
-            <div className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-cyan-400/40 flex-shrink-0">
+            <div
+              className="relative w-20 h-20 flex-shrink-0"
+              style={{
+                borderRadius: 2,
+                overflow: "hidden",
+                border: "1px solid rgba(26,26,26,0.18)",
+              }}
+            >
               <Image
                 src="/portraits/waseem-poolside.jpg"
                 alt="Waseem Nasir"
@@ -377,33 +544,74 @@ export default function WorkShowcase() {
               />
             </div>
             <div>
-              <p className="text-cyan-300 text-xs uppercase tracking-wider font-semibold mb-1">
-                Built by Waseem · solo, Bali-based
-              </p>
-              <p className="text-white font-bold text-lg leading-tight">
+              <div
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 10,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "var(--terracotta)",
+                  marginBottom: 6,
+                }}
+              >
+                Built by Waseem · solo · Bali-based
+              </div>
+              <div
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 500,
+                  fontSize: 22,
+                  color: "var(--ink)",
+                  letterSpacing: "-0.015em",
+                  marginBottom: 4,
+                }}
+              >
                 Want yours on this page next?
-              </p>
-              <p className="text-gray-300 text-sm">
-                3-min brief. 8-hour reply. 4 slots/month.
-              </p>
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  color: "var(--ink-2)",
+                  lineHeight: 1.55,
+                }}
+              >
+                3-min brief · 8-hour reply · 4 slots/month.
+              </div>
             </div>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-shrink-0">
             <a
               href="https://github.com/waseemnasir2k26"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 border border-white/15 text-white hover:border-cyan-400 transition"
+              className="inline-flex items-center gap-2"
+              style={{
+                background: "transparent",
+                color: "var(--ink)",
+                border: "1px solid var(--ink)",
+                padding: "13px 21px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 14,
+                borderRadius: 2,
+                textDecoration: "none",
+              }}
             >
               <Star className="w-4 h-4" /> All repos
             </a>
             <a
               href="/discovery-call"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-white transition hover:scale-[1.02]"
+              className="inline-flex items-center gap-2"
               style={{
-                background:
-                  "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                padding: "14px 22px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 14,
+                borderRadius: 2,
+                border: "none",
+                textDecoration: "none",
               }}
             >
               <Play className="w-4 h-4" /> Book free audit
