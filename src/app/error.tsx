@@ -4,6 +4,22 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { AlertTriangle, RotateCcw, Home, MessageCircle } from "lucide-react";
 
+/**
+ * Cream editorial pivot 2026-05-25 — error boundary.
+ */
+
+const C = {
+  cream: "#F2EFE6",
+  cream2: "#EDE8DC",
+  cream3: "#FAF7F0",
+  ink: "#1A1A1A",
+  ink2: "#3A3A36",
+  inkFaint: "#6B6B65",
+  terra: "#C66B3F",
+  oxblood: "#6B2C2C",
+  rule: "rgba(26,26,26,0.12)",
+};
+
 export default function ErrorBoundary({
   error,
   reset,
@@ -17,54 +33,124 @@ export default function ErrorBoundary({
 
   return (
     <section
-      className="relative overflow-hidden min-h-[80vh] flex items-center pt-24 pb-16"
       style={{
-        background:
-          "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+        position: "relative",
+        overflow: "hidden",
+        minHeight: "80vh",
+        display: "flex",
+        alignItems: "center",
+        padding: "96px 0 64px",
+        background: C.cream3,
+        color: C.ink,
       }}
     >
-      <span className="orb" style={{ width: 540, height: 540, background: "#1E88E5", top: -90, left: -130, opacity: 0.5 }} />
-
       <div className="container-x px-6 relative z-10">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 bg-rose-500/10 border border-rose-400/40 text-rose-200">
-            <AlertTriangle className="w-3.5 h-3.5" />
-            <span className="text-xs font-medium tracking-wider uppercase">Something broke</span>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.oxblood,
+              fontWeight: 600,
+              marginBottom: 22,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <AlertTriangle style={{ width: 12, height: 12 }} />
+            Something broke
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-4">
-            Our bad.
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(40px, 6vw, 72px)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.05,
+              color: C.ink,
+              marginBottom: 16,
+            }}
+          >
+            Our{" "}
+            <em style={{ fontStyle: "italic", color: C.oxblood }}>bad.</em>
           </h1>
-          <p className="text-lg text-gray-300 mb-2">
+          <p style={{ fontSize: 17, color: C.ink2, lineHeight: 1.6, marginBottom: 8 }}>
             Something on this page crashed. We&apos;ve been notified automatically.
           </p>
           {error.digest && (
-            <p className="text-xs text-gray-500 font-mono mb-8">
-              Error ID: {error.digest}
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                color: C.inkFaint,
+                marginBottom: 28,
+              }}
+            >
+              — Error ID: {error.digest}
             </p>
           )}
 
           <div className="flex flex-wrap gap-3">
             <button
               onClick={reset}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-slate-900"
-              style={{ background: "linear-gradient(135deg, #7ee4ff 0%, #5eead4 100%)" }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "14px 22px",
+                background: C.terra,
+                color: C.cream3,
+                border: "none",
+                fontWeight: 600,
+                fontSize: 14,
+                borderRadius: 2,
+                cursor: "pointer",
+                fontFamily: "var(--font-sans)",
+              }}
             >
-              <RotateCcw className="w-4 h-4" />
+              <RotateCcw style={{ width: 14, height: 14 }} />
               Try again
             </button>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-white border border-white/20 hover:border-white/40"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "13px 20px",
+                background: "transparent",
+                border: `1px solid ${C.ink}`,
+                color: C.ink,
+                fontWeight: 600,
+                fontSize: 14,
+                borderRadius: 2,
+                fontFamily: "var(--font-sans)",
+              }}
             >
-              <Home className="w-4 h-4" />
+              <Home style={{ width: 14, height: 14 }} />
               Go home
             </Link>
             <Link
               href="/discovery-call"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-white border border-white/20 hover:border-white/40"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "13px 20px",
+                background: "transparent",
+                border: `1px solid ${C.ink}`,
+                color: C.ink,
+                fontWeight: 600,
+                fontSize: 14,
+                borderRadius: 2,
+                fontFamily: "var(--font-sans)",
+              }}
             >
-              <MessageCircle className="w-4 h-4" />
+              <MessageCircle style={{ width: 14, height: 14 }} />
               Tell us about it
             </Link>
           </div>

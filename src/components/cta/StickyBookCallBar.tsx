@@ -1,20 +1,20 @@
 "use client";
 
 /**
- * StickyBookCallBar — global sitewide CTA bar.
+ * StickyBookCallBar — sitewide CTA bar, cream editorial version.
  *
- * Psychology stack:
+ * Psychology stack unchanged:
  *   - Cialdini scarcity ("3 slots left this week", real number from data/availability)
  *   - Fogg ability (1-click route to /discovery-call, no form first)
  *   - Hick's Law (1 destination, no choice paralysis)
  *
- * Behavior:
- *   - Hidden until scroll > 600px (don't compete with hero CTAs)
- *   - Dismissible via X — sets localStorage for 24h (don't nag)
- *   - Desktop: slides in from TOP
- *   - Mobile (<768px): bottom-fixed pill bar (thumb-zone)
- *   - prefers-reduced-motion: fade only, no slide
- *   - Hidden on /discovery-call itself (don't sell what they're already on)
+ * Behavior unchanged:
+ *   - Hidden until scroll > 600px
+ *   - Dismissible via X — sets localStorage for 24h
+ *   - Desktop: top bar
+ *   - Mobile: bottom-fixed pill bar
+ *   - prefers-reduced-motion: fade only
+ *   - Hidden on /discovery-call, /lp/*, /api/*
  */
 
 import { useEffect, useState } from "react";
@@ -43,7 +43,6 @@ export default function StickyBookCallBar() {
     if (disabled) return;
     if (typeof window === "undefined") return;
 
-    // Check dismissal TTL
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
@@ -52,7 +51,6 @@ export default function StickyBookCallBar() {
       }
     } catch {}
 
-    // Reduced motion
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduceMotion(mq.matches);
     const mqHandler = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
@@ -92,17 +90,15 @@ export default function StickyBookCallBar() {
 
   return (
     <>
-      {/* DESKTOP: top bar */}
+      {/* DESKTOP: top bar — flat terracotta */}
       <div
         role="region"
         aria-label="Book a strategy call"
         className="hidden md:flex fixed top-0 left-0 right-0 z-[60] items-center justify-center px-4 py-2.5"
         style={{
-          background:
-            "linear-gradient(90deg, rgba(6,24,39,0.96) 0%, rgba(10,45,74,0.96) 50%, rgba(7,56,70,0.96) 100%)",
-          borderBottom: "1px solid rgba(126, 228, 255, 0.22)",
-          backdropFilter: "blur(14px) saturate(140%)",
-          WebkitBackdropFilter: "blur(14px) saturate(140%)",
+          background: "var(--terracotta)",
+          color: "var(--cream-3)",
+          fontFamily: "var(--font-sans)",
           transform: visible
             ? "translateY(0)"
             : reduceMotion
@@ -111,15 +107,13 @@ export default function StickyBookCallBar() {
           opacity: visible ? 1 : 0,
           pointerEvents: visible ? "auto" : "none",
           transition: baseTransition,
-          boxShadow: "0 6px 24px -10px rgba(0, 212, 255, 0.30)",
         }}
       >
         <div className="flex items-center gap-3 max-w-[1200px] w-full">
           <span
             className="inline-block w-2 h-2 rounded-full"
             style={{
-              background: "#FF6B9D",
-              boxShadow: "0 0 12px rgba(255, 107, 157, 0.65)",
+              background: "var(--cream-3)",
               animation: reduceMotion
                 ? "none"
                 : "skynet-cta-pulse 2.2s ease-in-out infinite",
@@ -128,38 +122,53 @@ export default function StickyBookCallBar() {
           />
           <Link
             href="/discovery-call"
-            className="flex-1 text-sm font-medium text-white hover:text-cyan-200 transition flex items-center gap-2"
+            className="flex-1 flex items-center gap-2"
+            style={{
+              fontSize: 13,
+              fontWeight: 600,
+              color: "var(--cream-3)",
+              textDecoration: "none",
+              fontFamily: "var(--font-mono)",
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+            }}
           >
             <span>
               Book a 30-min strategy call ·{" "}
-              <span className="text-cyan-300 font-semibold">
+              <span style={{ fontWeight: 700 }}>
                 {SLOTS_LEFT_THIS_WEEK} slots left this week
               </span>
             </span>
-            <ArrowRight className="w-3.5 h-3.5 text-cyan-300" />
+            <ArrowRight className="w-3.5 h-3.5" style={{ color: "var(--cream-3)" }} />
           </Link>
           <button
             type="button"
             onClick={dismiss}
             aria-label="Dismiss for 24 hours"
-            className="w-7 h-7 rounded-md flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition"
+            className="w-7 h-7 flex items-center justify-center transition"
+            style={{
+              color: "rgba(250, 247, 240, 0.80)",
+              background: "transparent",
+              border: "none",
+              borderRadius: 2,
+              cursor: "pointer",
+            }}
           >
             <X className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
 
-      {/* MOBILE: bottom pill bar (T23) */}
+      {/* MOBILE: bottom pill — cream-3 with terracotta button */}
       <div
         role="region"
         aria-label="Book a strategy call"
-        className="md:hidden fixed bottom-3 left-3 right-3 z-[60] flex items-center gap-2 px-4 py-3 rounded-2xl"
+        className="md:hidden fixed bottom-3 left-3 right-3 z-[60] flex items-center gap-2 px-3 py-3"
         style={{
-          background:
-            "linear-gradient(135deg, rgba(6,24,39,0.97) 0%, rgba(10,45,74,0.97) 100%)",
-          border: "1px solid rgba(126, 228, 255, 0.32)",
-          backdropFilter: "blur(14px) saturate(140%)",
-          WebkitBackdropFilter: "blur(14px) saturate(140%)",
+          background: "var(--cream-3)",
+          border: "1px solid rgba(26,26,26,0.18)",
+          borderRadius: 2,
+          fontFamily: "var(--font-sans)",
           transform: visible
             ? "translateY(0)"
             : reduceMotion
@@ -168,14 +177,13 @@ export default function StickyBookCallBar() {
           opacity: visible ? 1 : 0,
           pointerEvents: visible ? "auto" : "none",
           transition: baseTransition,
-          boxShadow: "0 12px 30px -8px rgba(0, 212, 255, 0.45)",
+          boxShadow: "0 18px 40px rgba(26,26,26,0.22)",
         }}
       >
         <span
           className="inline-block w-2 h-2 rounded-full shrink-0"
           style={{
-            background: "#FF6B9D",
-            boxShadow: "0 0 12px rgba(255, 107, 157, 0.65)",
+            background: "var(--terracotta)",
             animation: reduceMotion
               ? "none"
               : "skynet-cta-pulse 2.2s ease-in-out infinite",
@@ -184,17 +192,30 @@ export default function StickyBookCallBar() {
         />
         <Link
           href="/discovery-call"
-          className="flex-1 text-[13px] font-semibold text-white leading-snug"
+          className="flex-1 leading-snug"
+          style={{
+            fontSize: 13,
+            fontWeight: 600,
+            color: "var(--ink)",
+            textDecoration: "none",
+          }}
         >
           Book a 30-min call ·{" "}
-          <span className="text-cyan-300">{SLOTS_LEFT_THIS_WEEK} slots left</span>
+          <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
+            {SLOTS_LEFT_THIS_WEEK} slots left
+          </span>
         </Link>
         <Link
           href="/discovery-call"
-          className="inline-flex items-center justify-center px-3 py-1.5 rounded-lg text-xs font-bold text-white shrink-0"
+          className="inline-flex items-center justify-center shrink-0"
           style={{
-            background: "linear-gradient(135deg, #FF6B9D 0%, #FF8FB1 100%)",
-            boxShadow: "0 4px 14px rgba(255, 107, 157, 0.45)",
+            background: "var(--terracotta)",
+            color: "var(--cream-3)",
+            padding: "8px 14px",
+            borderRadius: 2,
+            fontSize: 12,
+            fontWeight: 700,
+            textDecoration: "none",
           }}
         >
           Book
@@ -204,7 +225,13 @@ export default function StickyBookCallBar() {
           type="button"
           onClick={dismiss}
           aria-label="Dismiss for 24 hours"
-          className="w-6 h-6 rounded-md flex items-center justify-center text-white/60 hover:text-white shrink-0"
+          className="w-6 h-6 flex items-center justify-center shrink-0"
+          style={{
+            color: "var(--ink-faint)",
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+          }}
         >
           <X className="w-3 h-3" />
         </button>

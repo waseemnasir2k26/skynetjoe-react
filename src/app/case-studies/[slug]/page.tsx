@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, Calendar, MapPin, Wrench } from "lucide-react";
+import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
@@ -105,6 +105,12 @@ export default async function CaseStudyDetail({
     ],
   };
 
+  const dateFmt = new Date(c.publishDate).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <>
       <JsonLd data={articleSchema} />
@@ -112,143 +118,196 @@ export default async function CaseStudyDetail({
 
       {/* HERO */}
       <section
-        className="relative overflow-hidden pt-24 md:pt-28 pb-12"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          padding: "112px 0 56px",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.5,
-          }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#00D4FF",
-            top: 80,
-            right: -160,
-            opacity: 0.35,
-            animationDelay: "-7s",
-          }}
-        />
-
-        <div className="container-x px-6 relative z-10">
-          {/* Breadcrumb */}
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
           <nav
             aria-label="Breadcrumb"
-            className="text-xs text-cyan-200/80 mb-6 flex items-center flex-wrap gap-2"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+              color: "var(--ink-faint)",
+              marginBottom: 20,
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 8,
+              alignItems: "center",
+            }}
           >
-            <Link href="/" className="hover:text-cyan-100">
+            <Link href="/" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>
               Home
             </Link>
-            <span aria-hidden="true">/</span>
-            <Link href="/case-studies" className="hover:text-cyan-100">
+            <span aria-hidden>/</span>
+            <Link href="/case-studies" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>
               Case Studies
             </Link>
-            <span aria-hidden="true">/</span>
-            <span className="text-white/90">{c.clientName}</span>
+            <span aria-hidden>/</span>
+            <span style={{ color: "var(--ink)" }}>{c.clientName}</span>
           </nav>
 
           <Link
             href="/case-studies"
-            className="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-200 text-sm mb-6"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              color: "var(--terracotta)",
+              fontFamily: "var(--font-mono)",
+              fontSize: 12,
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+              marginBottom: 28,
+              textDecoration: "none",
+            }}
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft style={{ width: 14, height: 14 }} />
             Back to all case studies
           </Link>
 
-          <div className="max-w-3xl">
-            <div className="flex flex-wrap items-center gap-3 mb-5 text-xs text-gray-400">
-              <span className="px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-200 uppercase tracking-wider font-semibold">
-                {c.industryTag}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5" />
-                {c.location}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5" />
-                {new Date(c.publishDate).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Wrench className="w-3.5 h-3.5" />
-                {c.implementationPeriod}
-              </span>
+          <div style={{ maxWidth: 820 }}>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: "var(--ink-faint)",
+                marginBottom: 18,
+                lineHeight: 1.7,
+              }}
+            >
+              <span style={{ color: "var(--terracotta)" }}>— {c.industryTag}</span>
+              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>·</span>
+              {c.location}
+              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>·</span>
+              {dateFmt}
+              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>·</span>
+              {c.implementationPeriod}
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.1] mb-5">
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(34px, 5.5vw, 64px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.05,
+                color: "var(--ink)",
+                margin: "0 0 18px",
+              }}
+            >
               {c.clientName}
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p
+              style={{
+                fontSize: 19,
+                color: "var(--ink-2)",
+                lineHeight: 1.55,
+                maxWidth: "60ch",
+                margin: 0,
+              }}
+            >
               {c.oneLineOutcome}
             </p>
           </div>
         </div>
       </section>
 
-      {/* HERO IMAGE */}
-      <section className="relative -mt-2">
-        <div className="container-x px-6 max-w-5xl mx-auto">
-          <div
-            className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl"
+      {/* HERO IMAGE — polaroid frame */}
+      <section style={{ padding: "40px 0 24px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 24px" }}>
+          <figure
             style={{
-              border: "1px solid rgba(0, 212, 255, 0.30)",
-              boxShadow: "0 30px 80px -12px rgba(0, 212, 255, 0.30)",
+              margin: 0,
+              transform: "rotate(-0.6deg)",
+              background: "var(--cream-3)",
+              padding: 12,
+              border: "1px solid rgba(26,26,26,0.14)",
+              boxShadow: "0 24px 64px rgba(26,26,26,0.14)",
             }}
           >
-            <Image
-              src={c.coverImage}
-              alt={`${c.clientName} — ${c.industry}`}
-              fill
-              priority
-              sizes="(min-width: 1024px) 1024px, 100vw"
-              className="object-cover"
-            />
-            <span
-              aria-hidden
-              className="absolute inset-0"
+            <div
               style={{
-                background:
-                  "linear-gradient(180deg, rgba(6,24,39,0) 60%, rgba(6,24,39,0.55) 100%)",
+                position: "relative",
+                aspectRatio: "16 / 9",
+                overflow: "hidden",
+                background: "var(--cream-2)",
               }}
-            />
-          </div>
+            >
+              <Image
+                src={c.coverImage}
+                alt={`${c.clientName} — ${c.industry}`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 1000px, 100vw"
+                style={{
+                  objectFit: "cover",
+                  filter: "sepia(0.06) saturate(0.95)",
+                }}
+              />
+            </div>
+          </figure>
         </div>
       </section>
 
       {/* KPI STRIP */}
-      <section className="section pt-12">
-        <div className="container-x px-6 max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {c.keyMetrics.map((m) => (
+      <section style={{ padding: "32px 0 56px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 24px" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: 16,
+            }}
+          >
+            {c.keyMetrics.map((m, i) => (
               <div
                 key={m.label}
-                className="rounded-2xl bg-white/5 border border-white/10 p-4 md:p-5"
+                style={{
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                  padding: "20px 22px",
+                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                }}
               >
-                <div className="text-[11px] uppercase tracking-wider text-cyan-300 font-semibold mb-2">
-                  {m.label}
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.18em",
+                    color: "var(--sage)",
+                    fontWeight: 600,
+                    marginBottom: 12,
+                  }}
+                >
+                  — {m.label}
                 </div>
-                <div className="text-xs text-gray-400 mb-1">
-                  Before: <span className="text-gray-200">{m.before}</span>
+                <div style={{ fontSize: 12, color: "var(--ink-faint)", marginBottom: 4 }}>
+                  Before: <span style={{ color: "var(--ink-2)" }}>{m.before}</span>
                 </div>
-                <div className="text-xs text-gray-400 mb-2">
-                  After: <span className="text-white font-semibold">{m.after}</span>
+                <div style={{ fontSize: 12, color: "var(--ink-faint)", marginBottom: 10 }}>
+                  After: <span style={{ color: "var(--ink)", fontWeight: 600 }}>{m.after}</span>
                 </div>
-                <div className="text-base md:text-lg font-extrabold text-cyan-200">
+                <div
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontStyle: "italic",
+                    fontSize: 28,
+                    fontWeight: 500,
+                    color: "var(--terracotta)",
+                    lineHeight: 1,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
                   {m.delta}
                 </div>
               </div>
@@ -258,35 +317,115 @@ export default async function CaseStudyDetail({
       </section>
 
       {/* THE PROBLEM */}
-      <section className="section">
-        <div className="container-x px-6 max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
-            The problem
+      <section
+        style={{
+          padding: "56px 0",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--oxblood)",
+              marginBottom: 14,
+            }}
+          >
+            — The problem
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(26px, 3.6vw, 36px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
+              marginBottom: 20,
+              lineHeight: 1.15,
+            }}
+          >
+            What was{" "}
+            <em style={{ fontStyle: "italic", color: "var(--oxblood)" }}>actually broken.</em>
           </h2>
-          <div className="space-y-4 text-gray-200 leading-relaxed">
+          <div style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.75 }}>
             {c.problemStatement.map((p, i) => (
-              <p key={i}>{p}</p>
+              <p key={i} style={{ marginBottom: 14 }}>
+                {p}
+              </p>
             ))}
           </div>
         </div>
       </section>
 
       {/* WHAT WE BUILT */}
-      <section className="section">
-        <div className="container-x px-6 max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
-            What we built
+      <section
+        style={{
+          padding: "56px 0",
+          background: "var(--cream-3)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+              marginBottom: 14,
+            }}
+          >
+            — What we built
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(26px, 3.6vw, 36px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
+              marginBottom: 24,
+              lineHeight: 1.15,
+            }}
+          >
+            The{" "}
+            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>solution stack.</em>
           </h2>
 
-          <div className="mb-6">
-            <div className="text-xs uppercase tracking-wider text-cyan-300 font-semibold mb-3">
-              Solution stack
+          <div style={{ marginBottom: 28 }}>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--ink-faint)",
+                marginBottom: 10,
+              }}
+            >
+              — Tools
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {c.solutionStack.map((tool) => (
                 <span
                   key={tool}
-                  className="px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/25 text-cyan-100 text-sm"
+                  style={{
+                    padding: "7px 14px",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.14)",
+                    color: "var(--ink)",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 12,
+                    letterSpacing: "0.02em",
+                  }}
                 >
                   {tool}
                 </span>
@@ -294,13 +433,34 @@ export default async function CaseStudyDetail({
             </div>
           </div>
 
-          <div className="mb-2 text-xs uppercase tracking-wider text-cyan-300 font-semibold">
-            Implementation ({c.implementationPeriod})
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--ink-faint)",
+              marginBottom: 10,
+            }}
+          >
+            — Implementation ({c.implementationPeriod})
           </div>
-          <ul className="space-y-2 text-gray-200 leading-relaxed list-none pl-0">
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {c.implementationBreakdown.map((b, i) => (
-              <li key={i} className="flex gap-3">
-                <span className="text-cyan-300 font-bold flex-shrink-0">→</span>
+              <li
+                key={i}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "20px 1fr",
+                  gap: 12,
+                  padding: "12px 0",
+                  borderBottom: "1px solid rgba(26,26,26,0.06)",
+                  fontSize: 15,
+                  color: "var(--ink-2)",
+                  lineHeight: 1.6,
+                }}
+              >
+                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>→</span>
                 <span>{b}</span>
               </li>
             ))}
@@ -309,34 +469,94 @@ export default async function CaseStudyDetail({
       </section>
 
       {/* RESULTS */}
-      <section className="section">
-        <div className="container-x px-6 max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
-            Results
+      <section
+        style={{
+          padding: "56px 0",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--sage)",
+              marginBottom: 14,
+            }}
+          >
+            — Results
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(26px, 3.6vw, 36px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
+              marginBottom: 20,
+              lineHeight: 1.15,
+            }}
+          >
+            What{" "}
+            <em style={{ fontStyle: "italic", color: "var(--sage)" }}>changed.</em>
           </h2>
-          <div className="space-y-4 text-gray-200 leading-relaxed">
+          <div style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.75 }}>
             {c.longFormStory.map((p, i) => (
-              <p key={i}>{p}</p>
+              <p key={i} style={{ marginBottom: 14 }}>
+                {p}
+              </p>
             ))}
           </div>
         </div>
       </section>
 
       {/* PULL QUOTE */}
-      <section className="section">
-        <div className="container-x px-6 max-w-3xl mx-auto">
+      <section style={{ padding: "32px 0 56px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
           <blockquote
-            className="relative rounded-3xl p-8 md:p-10"
             style={{
-              background:
-                "linear-gradient(135deg, rgba(30,136,229,0.12) 0%, rgba(20,184,166,0.12) 100%)",
-              border: "1px solid rgba(255,255,255,0.12)",
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.12)",
+              padding: "32px 36px",
+              margin: 0,
+              transform: "rotate(-0.3deg)",
             }}
           >
-            <p className="text-xl md:text-2xl text-white font-semibold leading-snug mb-4">
+            <Quote
+              style={{
+                width: 18,
+                height: 18,
+                color: "var(--terracotta)",
+                marginBottom: 12,
+              }}
+            />
+            <p
+              style={{
+                fontFamily: "var(--font-display)",
+                fontStyle: "italic",
+                fontSize: 22,
+                fontWeight: 400,
+                color: "var(--ink)",
+                lineHeight: 1.45,
+                marginBottom: 16,
+                letterSpacing: "-0.005em",
+              }}
+            >
               &ldquo;{c.testimonialQuote}&rdquo;
             </p>
-            <footer className="text-sm text-cyan-200">
+            <footer
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: "var(--ink-faint)",
+              }}
+            >
               — {c.testimonialAuthor}
             </footer>
           </blockquote>
@@ -345,22 +565,55 @@ export default async function CaseStudyDetail({
 
       {/* TOOLS / RELATED SERVICES */}
       {c.relatedServices.length > 0 && (
-        <section className="section">
-          <div className="container-x px-6 max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
-              Tools & services used
+        <section
+          style={{
+            padding: "56px 0",
+            background: "var(--cream-3)",
+            borderTop: "1px solid rgba(26,26,26,0.10)",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(24px, 3.2vw, 32px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                marginBottom: 18,
+              }}
+            >
+              Tools &amp; services used
             </h2>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {c.relatedServices.map((s) => (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12 }}>
+              {c.relatedServices.map((s, i) => (
                 <Link
                   key={s.slug}
                   href={`/services/${s.slug}`}
-                  className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/50 transition group flex items-center justify-between"
+                  style={{
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.10)",
+                    padding: "16px 18px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    textDecoration: "none",
+                    transform: i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
+                  }}
                 >
-                  <span className="font-semibold text-white group-hover:text-cyan-200">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: "var(--ink)",
+                    }}
+                  >
                     {s.label}
                   </span>
-                  <ArrowRight className="w-4 h-4 text-cyan-300" />
+                  <ArrowRight style={{ width: 14, height: 14, color: "var(--terracotta)" }} />
                 </Link>
               ))}
             </div>
@@ -369,29 +622,83 @@ export default async function CaseStudyDetail({
       )}
 
       {/* CTA */}
-      <section className="section">
-        <div className="container-x px-6 max-w-3xl mx-auto">
+      <section
+        style={{
+          padding: "88px 0",
+          background: "var(--terracotta)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
           <div
-            className="rounded-3xl p-8 md:p-10 text-center"
             style={{
-              background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.18em",
+              color: "var(--cream-3)",
+              opacity: 0.85,
+              marginBottom: 18,
             }}
           >
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-3">
-              Want a result like this for your business?
-            </h2>
-            <p className="text-white/90 mb-6">
-              Send the brief. Fixed-price scope back in 48 hours. No retainer
-              hostage situation.
-            </p>
-            <Link
-              href="/discovery-call"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition"
-            >
-              Apply for a discovery call
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            — Same builder · same playbook
           </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(28px, 4.4vw, 44px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: "var(--cream-3)",
+              marginBottom: 16,
+            }}
+          >
+            Want a result{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                textDecoration: "underline",
+                textDecorationThickness: "1px",
+                textUnderlineOffset: "8px",
+              }}
+            >
+              like this?
+            </em>
+          </h2>
+          <p
+            style={{
+              fontSize: 16,
+              color: "rgba(250, 247, 240, 0.92)",
+              maxWidth: "44ch",
+              margin: "0 auto 28px",
+              lineHeight: 1.6,
+            }}
+          >
+            Send the brief. Fixed-price scope back in 48 hours. No retainer
+            hostage situation.
+          </p>
+          <Link
+            href="/discovery-call"
+            style={{
+              background: "var(--cream-3)",
+              color: "var(--terracotta)",
+              padding: "16px 28px",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 700,
+              fontSize: 15,
+              borderRadius: 2,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              textDecoration: "none",
+              boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
+            }}
+          >
+            Apply for a discovery call
+            <ArrowRight style={{ width: 16, height: 16 }} />
+          </Link>
         </div>
       </section>
     </>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Sparkles, MapPin, Calendar } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Community from "@/components/sections/Community";
@@ -50,15 +50,17 @@ const TIMELINE = [
 ];
 
 const BALI_GRID = [
-  { src: "/bali-trek/mountain-vista.jpg", alt: "Mountain vista from the May 2026 Bali trek", span: "row-span-2" },
-  { src: "/bali-trek/trek-path-palms.jpg", alt: "Trek path through Balinese palms", span: "" },
-  { src: "/bali-trek/jungle-stairs.jpg", alt: "Jungle stairs near the waterfall", span: "" },
-  { src: "/bali-trek/river-rocks.jpg", alt: "River rocks rest stop, mid-trek", span: "" },
-  { src: "/portraits/waseem-cafe-arch.jpg", alt: "Canggu cafe — first deploy of the day", span: "" },
-  { src: "/portraits/waseem-poolside-laptop.jpg", alt: "Poolside push after a green migration", span: "" },
-  { src: "/bali-trek/villa-arrival.jpg", alt: "Morning at the Bali villa before the trek", span: "" },
-  { src: "/portraits/waseem-rooftop-smile.jpg", alt: "Friday ship, phone on DND", span: "" },
+  { src: "/bali-trek/mountain-vista.jpg", alt: "Mountain vista from the May 2026 Bali trek" },
+  { src: "/bali-trek/trek-path-palms.jpg", alt: "Trek path through Balinese palms" },
+  { src: "/bali-trek/jungle-stairs.jpg", alt: "Jungle stairs near the waterfall" },
+  { src: "/bali-trek/river-rocks.jpg", alt: "River rocks rest stop, mid-trek" },
+  { src: "/portraits/waseem-cafe-arch.jpg", alt: "Canggu cafe — first deploy of the day" },
+  { src: "/portraits/waseem-poolside-laptop.jpg", alt: "Poolside push after a green migration" },
+  { src: "/bali-trek/villa-arrival.jpg", alt: "Morning at the Bali villa before the trek" },
+  { src: "/portraits/waseem-rooftop-smile.jpg", alt: "Friday ship, phone on DND" },
 ];
+
+const ROT = ["-1.0deg", "0.7deg", "-0.6deg", "1.1deg", "-0.9deg", "0.5deg", "-1.2deg", "0.8deg"];
 
 export const metadata: Metadata = {
   title: "About — From a $10 Fiverr gig (2019) to 180+ workflows (2026)",
@@ -117,276 +119,440 @@ export default function AboutPage() {
 
       {/* HERO */}
       <section
-        className="relative overflow-hidden pt-28 md:pt-36 pb-16"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          padding: "112px 0 80px",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <span
-          className="orb"
+        <div
           style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.45,
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: 40,
+            alignItems: "end",
           }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#00D4FF",
-            top: 80,
-            right: -160,
-            opacity: 0.35,
-            animationDelay: "-7s",
-          }}
-        />
+          className="about-hero"
+        >
+          <style>{`
+            @media (min-width: 900px) {
+              .about-hero { grid-template-columns: 7fr 5fr !important; }
+            }
+          `}</style>
 
-        <div className="container-x px-6 relative z-10 grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-              <Sparkles className="w-3 h-3" />
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+                marginBottom: 24,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
               About · since 2019
-            </span>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.05] mb-6">
+            </div>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(40px, 6.5vw, 76px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.02,
+                color: "var(--ink)",
+                margin: "0 0 24px",
+              }}
+            >
               From a{" "}
-              <span
-                className="italic font-semibold"
-                style={{
-                  fontFamily:
-                    '"Playfair Display", Georgia, "Times New Roman", serif',
-                  background:
-                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
                 $10 Fiverr gig
-              </span>{" "}
+              </em>{" "}
               to 180+ workflows.
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl mb-6">
+            <p
+              style={{
+                fontSize: 19,
+                color: "var(--ink-2)",
+                maxWidth: "56ch",
+                lineHeight: 1.6,
+                marginBottom: 24,
+              }}
+            >
               I&apos;m Waseem. Started uni in Lahore in 2017. Took my first $10
               Fiverr gig in 2019 — still a student. Failed at video editing,
               ecommerce, Amazon. Graduated in 2021 and went service-first. Today
               I run SkynetLabs solo from Bali.
             </p>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-300">
-              <span className="inline-flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-cyan-300" />
-                <b className="text-white">7 years</b> shipping
-              </span>
-              <span className="text-cyan-300/30">·</span>
-              <span className="inline-flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-cyan-300" />
-                Lahore → <b className="text-white">Bali</b>
-              </span>
-              <span className="text-cyan-300/30">·</span>
-              <span>
-                <b className="text-white">9</b> countries served
-              </span>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+                color: "var(--ink-faint)",
+                lineHeight: 1.8,
+              }}
+            >
+              <span style={{ color: "var(--ink)" }}>7 years</span> shipping
+              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>·</span>
+              Lahore → <span style={{ color: "var(--ink)" }}>Bali</span>
+              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>·</span>
+              <span style={{ color: "var(--ink)" }}>9</span> countries served
             </div>
           </div>
 
-          <div className="relative">
-            <div
-              className="relative aspect-[4/5] w-full max-w-md mx-auto lg:ml-auto rounded-3xl overflow-hidden"
+          <div>
+            <figure
               style={{
-                border: "1px solid rgba(0, 212, 255, 0.30)",
-                boxShadow: "0 30px 80px -10px rgba(0, 212, 255, 0.40)",
+                margin: 0,
+                transform: "rotate(-1.2deg)",
+                background: "var(--cream-3)",
+                padding: 10,
+                border: "1px solid rgba(26,26,26,0.14)",
+                boxShadow: "0 18px 48px rgba(26,26,26,0.15)",
+                maxWidth: 400,
+                marginLeft: "auto",
               }}
             >
-              <Image
-                src="/portraits/waseem-builder-hero.jpg"
-                alt="Waseem Nasir, founder of SkynetLabs"
-                fill
-                priority
-                sizes="(min-width: 1024px) 440px, (min-width: 640px) 380px, 90vw"
-                className="object-cover"
-              />
               <div
-                className="absolute inset-x-0 bottom-0 p-5 pt-16"
                 style={{
-                  background:
-                    "linear-gradient(180deg, transparent 0%, rgba(6,24,39,0.92) 100%)",
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "4 / 5",
+                  overflow: "hidden",
                 }}
               >
-                <div className="text-[11px] uppercase tracking-[0.18em] text-cyan-300 mb-1">
-                  Solo · Bali base · ships in 14 days
-                </div>
-                <div className="text-white font-semibold text-lg">
-                  Waseem Nasir
-                </div>
-                <div className="text-sm text-gray-300">
-                  Founder · Automation operator
-                </div>
+                <Image
+                  src="/portraits/waseem-builder-hero.jpg"
+                  alt="Waseem Nasir, founder of SkynetLabs"
+                  fill
+                  priority
+                  sizes="(min-width: 900px) 400px, 90vw"
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: "center top",
+                    filter: "sepia(0.10) saturate(0.95) contrast(1.02)",
+                  }}
+                />
               </div>
-            </div>
+              <figcaption
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.10em",
+                  color: "var(--ink-faint)",
+                  textAlign: "center",
+                  paddingTop: 12,
+                }}
+              >
+                Waseem · founder · Bali · GMT+8
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
       {/* TIMELINE */}
-      <section className="py-16 md:py-24 border-t border-white/[0.08]">
-        <div className="container-x px-6 max-w-4xl mx-auto">
-          <div className="mb-10">
-            <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300">
-              The arc
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mt-2 mb-3">
-              Seven years of failing in public.
-            </h2>
-            <p className="text-base text-fg-muted max-w-2xl">
-              Every pivot below was a real bet. Most of them lost. The wins
-              taught me what to stop doing.
-            </p>
+      <section
+        style={{
+          padding: "72px 0",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 24px" }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+              marginBottom: 14,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+            The arc
           </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(28px, 4vw, 44px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: "var(--ink)",
+              marginBottom: 12,
+            }}
+          >
+            Seven years of{" "}
+            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+              failing in public.
+            </em>
+          </h2>
+          <p style={{ fontSize: 16, color: "var(--ink-2)", maxWidth: "56ch", marginBottom: 36, lineHeight: 1.6 }}>
+            Every pivot below was a real bet. Most of them lost. The wins taught
+            me what to stop doing.
+          </p>
 
-          <ol className="relative space-y-6 pl-6 md:pl-8 border-l border-cyan-400/25">
-            {TIMELINE.map((t) => (
-              <li key={t.year} className="relative">
-                <span
-                  aria-hidden
-                  className="absolute -left-[34px] md:-left-[42px] top-1 w-3.5 h-3.5 rounded-full"
+          <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {TIMELINE.map((t, i) => {
+              const rotate = i % 2 === 0 ? "-0.2deg" : "0.2deg";
+              return (
+                <li
+                  key={`${t.year}-${t.title}`}
                   style={{
-                    background:
-                      "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                    boxShadow: "0 0 0 4px rgba(6, 24, 39, 1), 0 0 0 5px rgba(0, 212, 255, 0.35)",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.10)",
+                    padding: "20px 22px 22px",
+                    marginBottom: 14,
+                    transform: `rotate(${rotate})`,
+                    display: "grid",
+                    gridTemplateColumns: "14px 1fr",
+                    gap: 16,
                   }}
-                />
-                <div className="flex flex-wrap items-baseline gap-3 mb-1.5">
-                  <span className="text-cyan-300 font-bold text-sm tracking-wider">
-                    {t.year}
-                  </span>
-                  <h3 className="text-lg md:text-xl font-bold text-white">
-                    {t.title}
-                  </h3>
-                </div>
-                <p className="text-fg-muted text-sm md:text-base leading-relaxed">
-                  {t.note}
-                </p>
-              </li>
-            ))}
+                >
+                  <span
+                    aria-hidden
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: "50%",
+                      background: "var(--terracotta)",
+                      marginTop: 8,
+                    }}
+                  />
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        alignItems: "baseline",
+                        gap: 12,
+                        marginBottom: 4,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 11,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.16em",
+                          color: "var(--terracotta)",
+                          fontWeight: 600,
+                        }}
+                      >
+                        {t.year}
+                      </span>
+                      <h3
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: 19,
+                          fontWeight: 600,
+                          color: "var(--ink)",
+                          margin: 0,
+                          letterSpacing: "-0.01em",
+                        }}
+                      >
+                        {t.title}
+                      </h3>
+                    </div>
+                    <p
+                      style={{
+                        color: "var(--ink-2)",
+                        fontSize: 15,
+                        lineHeight: 1.6,
+                        margin: 0,
+                      }}
+                    >
+                      {t.note}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </section>
 
-      {/* THE LETTER — centerpiece quote */}
+      {/* THE LETTER — centerpiece quote on terracotta */}
       <section
-        className="relative py-20 md:py-28 overflow-hidden border-t border-white/[0.08]"
         style={{
-          background:
-            "linear-gradient(180deg, #061827 0%, #0a2d4a 100%)",
+          background: "var(--terracotta)",
+          padding: "96px 0",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <span
-          className="orb"
+        <div
           style={{
-            width: 600,
-            height: 600,
-            background: "#14B8A6",
-            top: "10%",
-            left: "10%",
-            opacity: 0.25,
+            maxWidth: 820,
+            margin: "0 auto",
+            padding: "0 24px",
+            textAlign: "center",
           }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 500,
-            height: 500,
-            background: "#1E88E5",
-            bottom: "10%",
-            right: "10%",
-            opacity: 0.25,
-            animationDelay: "-9s",
-          }}
-        />
-        <div className="container-x px-6 relative z-10 max-w-3xl mx-auto text-center">
-          <span className="text-[11px] font-semibold tracking-[0.22em] uppercase text-cyan-300 mb-6 inline-block">
-            A letter to 2019
-          </span>
-          <blockquote
-            className="text-2xl md:text-4xl lg:text-5xl font-semibold leading-[1.25] tracking-tight text-white"
+        >
+          <div
             style={{
-              fontFamily:
-                '"Playfair Display", Georgia, "Times New Roman", serif',
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.22em",
+              color: "var(--cream-3)",
+              opacity: 0.85,
+              marginBottom: 20,
             }}
           >
-            <span className="text-cyan-300/60 text-5xl md:text-7xl leading-none align-top mr-1">
-              &ldquo;
-            </span>
-            If I could go back to 2019, I&apos;d say:{" "}
-            <span
-              className="italic"
-              style={{
-                background:
-                  "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              2026 Waseem is proud of you. Just don&apos;t quit.
-            </span>{" "}
-            You did it — with the blessing of God.
-            <span className="text-cyan-300/60 text-5xl md:text-7xl leading-none align-top ml-1">
-              &rdquo;
-            </span>
+            — A letter to 2019
+          </div>
+          <blockquote
+            style={{
+              fontFamily: "var(--font-display)",
+              fontStyle: "italic",
+              fontSize: "clamp(24px, 4.4vw, 44px)",
+              fontWeight: 400,
+              lineHeight: 1.25,
+              letterSpacing: "-0.015em",
+              color: "var(--cream-3)",
+              margin: 0,
+            }}
+          >
+            &ldquo;If I could go back to 2019, I&apos;d say: 2026 Waseem is proud
+            of you. Just don&apos;t quit. You did it — with the blessing of
+            God.&rdquo;
           </blockquote>
-          <footer className="mt-8 text-sm text-cyan-200 tracking-wider">
+          <footer
+            style={{
+              marginTop: 24,
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.18em",
+              color: "var(--cream-3)",
+              opacity: 0.85,
+            }}
+          >
             — Waseem · 2026
           </footer>
         </div>
       </section>
 
       {/* BALI LIFE — photo grid */}
-      <section className="py-16 md:py-24 border-t border-white/[0.08]">
-        <div className="container-x px-6 max-w-6xl mx-auto">
-          <div className="mb-10 max-w-2xl">
-            <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300">
+      <section
+        style={{
+          padding: "72px 0",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ maxWidth: 720, marginBottom: 40 }}>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+                marginBottom: 14,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
               The builder life
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mt-2 mb-3">
-              Bali treks. Cafes. Deploys.
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(28px, 4vw, 44px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.1,
+                color: "var(--ink)",
+                marginBottom: 12,
+              }}
+            >
+              Bali treks. Cafes.{" "}
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+                Deploys.
+              </em>
             </h2>
-            <p className="text-base text-fg-muted">
+            <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
               Same Waseem you&apos;d hire — actually here, actually shipping.
               Latest batch: a 24-May 2026 jungle trek with the Bali builder
               crew. No stock photos. No agency Zoom mask.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[220px] gap-3 md:gap-4">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: 28,
+            }}
+          >
             {BALI_GRID.map((p, i) => (
               <figure
                 key={p.src}
-                className={`relative rounded-2xl overflow-hidden ring-1 ring-white/10 group ${p.span} ${i === 0 ? "col-span-2" : ""}`}
+                style={{
+                  margin: 0,
+                  transform: `rotate(${ROT[i] ?? "0deg"})`,
+                  background: "var(--cream-3)",
+                  padding: 10,
+                  border: "1px solid rgba(26,26,26,0.14)",
+                  boxShadow: "0 14px 36px rgba(26,26,26,0.10)",
+                }}
               >
-                <Image
-                  src={p.src}
-                  alt={p.alt}
-                  fill
-                  sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 50vw"
-                  className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                />
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
                   style={{
-                    background:
-                      "linear-gradient(180deg, transparent 50%, rgba(6,24,39,0.92) 100%)",
+                    position: "relative",
+                    width: "100%",
+                    aspectRatio: "4 / 3",
+                    overflow: "hidden",
+                    background: "var(--cream-2)",
                   }}
-                />
-                <figcaption className="absolute inset-x-0 bottom-0 p-3 opacity-0 group-hover:opacity-100 transition text-xs md:text-sm text-white/95 font-medium">
-                  {p.alt}
+                >
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 90vw"
+                    style={{
+                      objectFit: "cover",
+                      filter: "sepia(0.08) saturate(0.92)",
+                    }}
+                  />
+                </div>
+                <figcaption
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.10em",
+                    color: "var(--ink-faint)",
+                    paddingTop: 10,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  — {p.alt}
                 </figcaption>
               </figure>
             ))}
@@ -395,39 +561,63 @@ export default function AboutPage() {
       </section>
 
       {/* BY THE NUMBERS */}
-      <section className="py-14 border-t border-white/[0.08]">
-        <div className="container-x px-6 max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+      <section
+        style={{
+          padding: "64px 0",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: 20,
+            }}
+          >
             {[
               { num: "7", label: "Years shipping" },
               { num: "180+", label: "Workflows" },
               { num: "40+", label: "Websites" },
               { num: "9", label: "Countries" },
-            ].map((s) => (
+            ].map((s, i) => (
               <div
                 key={s.label}
-                className="rounded-2xl p-5 md:p-6 text-center"
                 style={{
-                  background:
-                    "linear-gradient(135deg, rgba(30,136,229,0.10), rgba(20,184,166,0.08))",
-                  border: "1px solid rgba(0,212,255,0.20)",
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  padding: "28px 22px",
+                  textAlign: "center",
+                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
                 <div
-                  className="text-4xl md:text-5xl font-extrabold mb-1 tracking-tight"
                   style={{
-                    background:
-                      "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    WebkitTextFillColor: "transparent",
+                    fontFamily: "var(--font-display)",
+                    fontStyle: "italic",
+                    fontSize: 52,
+                    fontWeight: 500,
+                    color: "var(--terracotta)",
+                    lineHeight: 1,
+                    marginBottom: 8,
+                    letterSpacing: "-0.02em",
                   }}
                 >
                   {s.num}
                 </div>
-                <div className="text-xs md:text-sm uppercase tracking-wider text-fg-muted font-semibold">
-                  {s.label}
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.16em",
+                    color: "var(--ink-faint)",
+                  }}
+                >
+                  — {s.label}
                 </div>
               </div>
             ))}
@@ -439,30 +629,79 @@ export default function AboutPage() {
       <Community />
 
       {/* CLOSER */}
-      <section className="py-16 md:py-20 border-t border-white/[0.08]">
-        <div className="container-x px-6 max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
-            Want to ship something real?
+      <section
+        style={{
+          padding: "80px 0",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(28px, 4vw, 44px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: "var(--ink)",
+              marginBottom: 14,
+            }}
+          >
+            Want to ship{" "}
+            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+              something real?
+            </em>
           </h2>
-          <p className="text-base text-fg-muted max-w-xl mx-auto mb-7">
+          <p
+            style={{
+              fontSize: 16,
+              color: "var(--ink-2)",
+              maxWidth: "44ch",
+              margin: "0 auto 28px",
+              lineHeight: 1.6,
+            }}
+          >
             Send a 3-sentence brief. Scope + price back in 8 hours. Same
             builder, same hands.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
             <Link
               href="/discovery-call"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                padding: "16px 28px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                textDecoration: "none",
               }}
             >
               Start a brief
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white border border-white/15 bg-white/[0.04] hover:border-cyan-400/40 transition"
+              style={{
+                background: "transparent",
+                color: "var(--ink)",
+                padding: "15px 26px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                border: "1px solid var(--ink)",
+                borderRadius: 2,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                textDecoration: "none",
+              }}
             >
               See case studies
             </Link>

@@ -3,183 +3,244 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Star, AlertCircle } from "lucide-react";
-import R3FHeroBackground from "@/components/r3f/R3FHeroBackground";
+import { ArrowRight, Star } from "lucide-react";
+
+/**
+ * Cream editorial hero — converted from dark navy + R3F orbs.
+ *
+ *  - Cream paper ground, ink type, terracotta accent (mirrors /lp/audit)
+ *  - Fraunces serif h1 with italic terracotta accent on key phrase
+ *  - Mono em-dash eyebrow (drops chip/pill)
+ *  - Flat terracotta primary CTA + ghost ink-border secondary, 2px radius, no glow
+ *  - Polaroid portrait, rotated, sepia filter, 1px ink border
+ *  - Trust strip in mono with bullet separators
+ *  - R3F orbs removed (no decorative noise on cream)
+ */
 
 export default function HeroFunnel() {
   return (
     <section
-      className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28"
+      className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28"
       style={{
-        background:
-          "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
-        color: "#eaf6ff",
+        background: "var(--cream-3)",
+        color: "var(--ink)",
+        fontFamily: "var(--font-sans)",
+        borderBottom: "1px solid rgba(26,26,26,0.12)",
       }}
     >
-      <span
-        className="orb"
-        style={{
-          width: 540,
-          height: 540,
-          background: "#1E88E5",
-          top: -90,
-          left: -130,
-          opacity: 0.5,
-        }}
-      />
-      <span
-        className="orb"
-        style={{
-          width: 580,
-          height: 580,
-          background: "#00D4FF",
-          top: 80,
-          right: -160,
-          opacity: 0.4,
-          animationDelay: "-7s",
-        }}
-      />
-
-      {/* Cinematic R3F scene — desktop-only + reduced-motion-aware (skipped on mobile) */}
-      <R3FHeroBackground />
-
-      <div className="container-x px-6 relative z-10 grid md:grid-cols-[1.25fr_1fr] gap-10 md:gap-14 items-center">
+      <div className="container-x px-6 relative z-10 grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-14 items-end">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
+          {/* Mono em-dash eyebrow */}
           <div
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-6"
             style={{
-              background: "rgba(244, 114, 114, 0.10)",
-              border: "1px solid rgba(244, 114, 114, 0.30)",
-              color: "#fda4a4",
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+              marginBottom: 22,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
             }}
           >
-            <AlertCircle className="w-3.5 h-3.5" />
-            <span className="text-[11px] font-medium tracking-wider uppercase">
-              For founders losing leads to slow follow-up
-            </span>
+            <span
+              style={{
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
+            For founders losing leads to slow follow-up
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.02] tracking-tight mb-6">
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.02,
+              color: "var(--ink)",
+              fontSize: "clamp(36px, 6vw, 72px)",
+              margin: "0 0 24px",
+            }}
+          >
             Your business{" "}
-            <span
-              className="italic font-semibold"
+            <em
               style={{
-                fontFamily:
-                  '"Playfair Display", Georgia, "Times New Roman", serif',
-                background:
-                  "linear-gradient(120deg, #fda4a4 0%, #fbbf24 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                WebkitTextFillColor: "transparent",
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
               }}
             >
               leaks money
-            </span>
+            </em>
             <br />
             every hour you don&apos;t automate.
           </h1>
 
           <p
-            className="text-lg md:text-xl max-w-xl mb-9 leading-relaxed"
-            style={{ color: "rgba(234, 246, 255, 0.82)" }}
+            style={{
+              fontSize: 19,
+              color: "var(--ink-2)",
+              maxWidth: "52ch",
+              lineHeight: 1.55,
+              marginBottom: 28,
+            }}
           >
             Leads ghost. Follow-ups slip. Content rots in drafts. We plug the
             leaks in 14 days with AI automation that pays for itself.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3">
+          {/* Trust strip — mono, minimal */}
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+              color: "var(--ink-faint)",
+              marginBottom: 28,
+            }}
+          >
+            <span style={{ color: "var(--ochre)" }}>
+              <Star
+                style={{
+                  display: "inline-block",
+                  width: 12,
+                  height: 12,
+                  verticalAlign: "-2px",
+                  marginRight: 4,
+                  fill: "var(--ochre)",
+                  stroke: "none",
+                }}
+              />
+              Top Rated Plus · Upwork
+            </span>
+            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span>
+              <span style={{ color: "var(--ink)" }}>180+</span> automations
+            </span>
+            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span>
+              <span style={{ color: "var(--ink)" }}>9</span> countries
+            </span>
+          </div>
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
             <Link
               href="/discovery-call"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-semibold text-white transition-transform hover:-translate-y-0.5"
               style={{
-                background:
-                  "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                padding: "14px 24px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                transition: "background 0.18s",
+                textDecoration: "none",
               }}
             >
               Book free 30-min leak audit
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <Link
               href="/case-studies"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-medium transition-colors hover:border-cyan-300/60"
               style={{
-                background: "rgba(255, 255, 255, 0.04)",
-                border: "1px solid rgba(255, 255, 255, 0.18)",
-                color: "#eaf6ff",
+                background: "transparent",
+                color: "var(--ink)",
+                border: "1px solid var(--ink)",
+                padding: "13px 22px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
               }}
             >
               See real results
             </Link>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <Star
-                    key={i}
-                    className="w-4 h-4 fill-amber-300 text-amber-300"
-                  />
-                ))}
-              </div>
-              <span style={{ color: "rgba(234, 246, 255, 0.78)" }}>
-                <b className="text-white">Top Rated Plus</b> · Upwork
-              </span>
-            </div>
-            <span style={{ color: "rgba(234, 246, 255, 0.30)" }}>·</span>
-            <span style={{ color: "rgba(234, 246, 255, 0.78)" }}>
-              <b className="text-white">180+</b> automations shipped
-            </span>
-            <span style={{ color: "rgba(234, 246, 255, 0.30)" }}>·</span>
-            <span style={{ color: "rgba(234, 246, 255, 0.78)" }}>
-              <b className="text-white">9</b> countries
-            </span>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: "var(--ink-faint)",
+              marginTop: 20,
+            }}
+          >
+            — Bali hours · GMT+8 · usually books within 48 hours
           </div>
         </motion.div>
 
+        {/* Polaroid portrait — rotated, sepia, 1px ink border */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
           className="relative hidden md:block"
         >
-          <div
-            className="relative aspect-[4/5] w-full max-w-md ml-auto rounded-3xl overflow-hidden"
+          <figure
             style={{
-              border: "1px solid rgba(0, 212, 255, 0.30)",
-              boxShadow: "0 30px 80px -10px rgba(0, 212, 255, 0.35)",
+              margin: 0,
+              transform: "rotate(-1.2deg)",
+              background: "var(--cream-3)",
+              padding: 10,
+              border: "1px solid rgba(26,26,26,0.18)",
+              boxShadow: "0 18px 48px rgba(26,26,26,0.18)",
+              maxWidth: 420,
+              marginLeft: "auto",
             }}
           >
-            <Image
-              src="/portraits/waseem-builder-hero.jpg"
-              alt="Waseem Nasir, founder of SkynetLabs"
-              fill
-              priority
-              sizes="(min-width: 1024px) 440px, (min-width: 768px) 380px, 0"
-              className="object-cover"
-            />
             <div
-              className="absolute inset-x-0 bottom-0 p-5 pt-12"
               style={{
-                background:
-                  "linear-gradient(180deg, transparent 0%, rgba(6,24,39,0.92) 100%)",
+                position: "relative",
+                width: "100%",
+                aspectRatio: "4 / 5",
+                overflow: "hidden",
               }}
             >
-              <div className="text-[11px] uppercase tracking-[0.18em] text-cyan-300 mb-1">
-                Built solo · ships in 14 days
-              </div>
-              <div className="text-white font-semibold">Waseem Nasir</div>
-              <div className="text-sm text-gray-300">
-                Founder · Automation operator
-              </div>
+              <Image
+                src="/portraits/waseem-builder-hero.jpg"
+                alt="Waseem Nasir, founder of SkynetLabs"
+                fill
+                priority
+                sizes="(min-width: 1024px) 420px, (min-width: 768px) 380px, 0"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                  filter: "sepia(0.10) saturate(0.95) contrast(1.02)",
+                }}
+              />
             </div>
-          </div>
+            <figcaption
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+                color: "var(--ink-faint)",
+                textAlign: "center",
+                paddingTop: 12,
+              }}
+            >
+              Waseem · founder · Bali · GMT+8
+            </figcaption>
+          </figure>
         </motion.div>
       </div>
     </section>

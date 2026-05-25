@@ -37,27 +37,30 @@ export type ScarcityChipProps = {
   className?: string;
 };
 
+// Cream editorial — semantic warm tones only.
+// Legacy keys ("amber"/"rose"/"cyan") retained for API stability.
+// amber → ochre, rose → oxblood, cyan → terracotta.
 const TONE = {
   amber: {
-    dot: "#F59E0B",
-    glow: "rgba(245, 158, 11, 0.65)",
-    bg: "rgba(245, 158, 11, 0.10)",
-    border: "rgba(245, 158, 11, 0.40)",
-    text: "#FCD34D",
+    dot: "#C9A96E",
+    glow: "rgba(201, 169, 110, 0.45)",
+    bg: "rgba(201, 169, 110, 0.10)",
+    border: "rgba(201, 169, 110, 0.35)",
+    text: "#6B2C2C",
   },
   rose: {
-    dot: "#FF6B9D",
-    glow: "rgba(255, 107, 157, 0.65)",
-    bg: "rgba(255, 107, 157, 0.10)",
-    border: "rgba(255, 107, 157, 0.40)",
-    text: "#FFB3CC",
+    dot: "#6B2C2C",
+    glow: "rgba(107, 44, 44, 0.45)",
+    bg: "rgba(107, 44, 44, 0.08)",
+    border: "rgba(107, 44, 44, 0.30)",
+    text: "#6B2C2C",
   },
   cyan: {
-    dot: "#00D4FF",
-    glow: "rgba(0, 212, 255, 0.65)",
-    bg: "rgba(0, 212, 255, 0.10)",
-    border: "rgba(0, 212, 255, 0.40)",
-    text: "#7ee4ff",
+    dot: "#C66B3F",
+    glow: "rgba(198, 107, 63, 0.45)",
+    bg: "rgba(198, 107, 63, 0.10)",
+    border: "rgba(198, 107, 63, 0.35)",
+    text: "#B85A30",
   },
 };
 

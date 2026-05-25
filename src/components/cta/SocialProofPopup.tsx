@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Sitewide social-proof popup.
+ * Sitewide social-proof popup — cream paper variant.
  *
  *  - Appears 10s after first load
  *  - Rotates through real recent ships every 12s
@@ -114,67 +114,143 @@ export default function SocialProofPopup() {
       className="fixed z-[60] bottom-4 left-4 max-w-[340px] w-[calc(100vw-2rem)] sm:w-auto"
       style={{
         animation: "skynet-proof-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both",
+        fontFamily: "var(--font-sans)",
       }}
     >
       <div
-        className="relative rounded-2xl overflow-hidden"
         style={{
-          background:
-            "linear-gradient(155deg, rgba(10,32,52,0.95) 0%, rgba(6,24,39,0.95) 100%)",
-          border: "1px solid rgba(0,212,255,0.25)",
-          boxShadow:
-            "0 20px 60px -15px rgba(0,212,255,0.35), 0 0 0 1px rgba(255,255,255,0.04) inset",
-          backdropFilter: "blur(14px) saturate(140%)",
+          position: "relative",
+          background: "var(--cream-3)",
+          border: "1px solid rgba(26,26,26,0.18)",
+          borderRadius: 2,
+          boxShadow: "0 18px 48px rgba(26,26,26,0.18)",
+          overflow: "hidden",
         }}
       >
+        {/* Terracotta rule top */}
+        <span
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 3,
+            background: "var(--terracotta)",
+          }}
+        />
+
         <button
           onClick={dismiss}
           aria-label="Dismiss"
-          className="absolute top-2.5 right-2.5 w-7 h-7 rounded-md flex items-center justify-center text-white/55 hover:text-white hover:bg-white/10 transition z-10"
+          className="absolute top-2.5 right-2.5 w-7 h-7 flex items-center justify-center transition z-10"
+          style={{
+            color: "var(--ink-faint)",
+            background: "transparent",
+            border: "none",
+            borderRadius: 2,
+            cursor: "pointer",
+          }}
         >
           <X className="w-3.5 h-3.5" />
         </button>
 
-        <Link href={p.href} className="block p-4 pr-10">
-          <div className="flex items-center gap-2 mb-2">
+        <Link href={p.href} className="block p-4 pr-10" style={{ textDecoration: "none" }}>
+          <div className="flex items-center gap-2 mb-2 mt-1">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[10px] uppercase tracking-[0.15em] text-emerald-300 font-bold">
+              <span
+                className="w-2 h-2 rounded-full animate-pulse"
+                style={{ background: "var(--terracotta)" }}
+              />
+              <span
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 10,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "var(--terracotta)",
+                  fontWeight: 700,
+                }}
+              >
                 Shipped
               </span>
             </span>
-            <span className="text-[10px] text-cyan-300/60">·</span>
-            <span className="text-[10px] text-cyan-200/80 font-medium">
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                color: "var(--ink-faint)",
+              }}
+            >
+              ·
+            </span>
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                color: "var(--ink-faint)",
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+              }}
+            >
               {p.when}
             </span>
           </div>
 
           <div className="flex items-start gap-3">
             <span
-              className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
+              className="flex-shrink-0 w-9 h-9 flex items-center justify-center"
               style={{
-                background:
-                  "linear-gradient(135deg, rgba(30,136,229,0.30), rgba(20,184,166,0.30))",
-                border: "1px solid rgba(126,228,255,0.30)",
+                background: "rgba(198, 107, 63, 0.12)",
+                border: "1px solid rgba(198, 107, 63, 0.35)",
+                borderRadius: 2,
               }}
             >
-              <CheckCircle2 className="w-4 h-4 text-cyan-300" />
+              <CheckCircle2 className="w-4 h-4" style={{ color: "var(--terracotta)" }} />
             </span>
             <div className="min-w-0">
-              <div className="text-sm font-bold text-white leading-tight mb-0.5 truncate">
+              <div
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 15,
+                  fontWeight: 600,
+                  color: "var(--ink)",
+                  lineHeight: 1.2,
+                  marginBottom: 2,
+                }}
+                className="truncate"
+              >
                 {p.client}
               </div>
-              <div className="text-[12px] text-fg-muted leading-snug">
+              <div
+                style={{
+                  fontSize: 12,
+                  color: "var(--ink-2)",
+                  lineHeight: 1.4,
+                }}
+              >
                 {p.outcome}
               </div>
             </div>
           </div>
 
-          <div className="mt-3 pt-2.5 border-t border-white/[0.07] flex items-center justify-between text-[11px]">
-            <span className="text-fg-faint">
+          <div
+            className="mt-3 pt-2.5 flex items-center justify-between"
+            style={{
+              borderTop: "1px solid rgba(26,26,26,0.10)",
+              fontFamily: "var(--font-mono)",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+            }}
+          >
+            <span style={{ color: "var(--ink-faint)" }}>
               {idx + 1} / {PROOFS.length} recent builds
             </span>
-            <span className="inline-flex items-center gap-1 text-cyan-300 font-semibold">
+            <span
+              className="inline-flex items-center gap-1"
+              style={{ color: "var(--terracotta)", fontWeight: 700 }}
+            >
               Read case
               <ArrowRight className="w-3 h-3" />
             </span>

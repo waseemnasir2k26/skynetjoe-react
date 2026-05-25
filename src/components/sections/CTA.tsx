@@ -1,35 +1,109 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+/**
+ * Cream editorial pivot 2026-05-25 — generic CTA section.
+ * Terracotta colour event with cream-3 text + flat 2px button.
+ */
+
+const C = {
+  cream3: "#FAF7F0",
+  terra: "#C66B3F",
+  terra2: "#B85A30",
+};
+
 export default function CTA() {
   return (
     <section className="section">
       <div className="container-x">
-        <div className="relative overflow-hidden rounded-3xl p-12 md:p-16 text-center">
-          <div className="absolute inset-0 bg-gradient-to-br from-skynet-primary/20 via-skynet-secondary/15 to-transparent" />
-          <div className="orb w-[400px] h-[400px] bg-skynet-primary/30 -top-32 -left-32" />
-          <div className="orb w-[400px] h-[400px] bg-skynet-secondary/20 -bottom-32 -right-32" style={{ animationDelay: "-5s" }} />
-
+        <div
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            padding: "72px 32px",
+            textAlign: "center",
+            background: C.terra,
+          }}
+        >
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
-              Stop trading hours for dollars.
-              <br />
-              <span className="gradient-text">Start trading systems for revenue.</span>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.18em",
+                color: C.cream3,
+                opacity: 0.85,
+                marginBottom: 18,
+              }}
+            >
+              — Stop trading hours for dollars
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(30px, 5vw, 52px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.08,
+                color: C.cream3,
+                marginBottom: 16,
+              }}
+            >
+              Start trading{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  textDecoration: "underline",
+                  textDecorationThickness: "1px",
+                  textUnderlineOffset: "8px",
+                }}
+              >
+                systems for revenue.
+              </em>
             </h2>
-            <p className="text-lg text-fg-muted mb-8">
+            <p
+              style={{
+                fontSize: 17,
+                color: "rgba(250, 247, 240, 0.92)",
+                maxWidth: "44ch",
+                margin: "0 auto 32px",
+                lineHeight: 1.6,
+              }}
+            >
               Free 20-min audit. We&apos;ll Loom you the leak in your funnel and the 1 automation that closes it.
               No deck. No pitch. Pure signal.
             </p>
             <Link
               href="/contact"
-              className="btn-primary text-base px-8 py-4"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "16px 28px",
+                background: C.cream3,
+                color: C.terra,
+                fontWeight: 700,
+                fontSize: 16,
+                borderRadius: 2,
+                fontFamily: "var(--font-sans)",
+              }}
             >
               Start a project
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <p className="text-xs text-fg-faint mt-4">
-              Replies within 6 hours · Bali timezone (GMT+8) · 9 countries served
-            </p>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.14em",
+                color: "rgba(250, 247, 240, 0.78)",
+                marginTop: 18,
+              }}
+            >
+              — Replies in 6 hours · Bali · 9 countries served
+            </div>
           </div>
         </div>
       </div>

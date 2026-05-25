@@ -87,15 +87,25 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-xl bg-[#061827]/85 border-b border-white/[0.06] shadow-[0_2px_24px_rgba(0,0,0,0.35)]"
+          ? "backdrop-blur-md bg-[#F2EFE6]/92 border-b border-[rgba(26,26,26,0.10)] shadow-[0_1px_12px_rgba(26,26,26,0.06)]"
           : "bg-transparent"
       }`}
     >
       <div className="container-x flex items-center justify-between px-6 py-3.5">
         <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-[1.35rem] font-extrabold tracking-tight">
-            <span className="gradient-primary-text">Skynet</span>
-            <span className="text-fg">Labs</span>
+          <span
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "1.5rem",
+              fontWeight: 600,
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
+            }}
+          >
+            Skynet
+            <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+              Labs
+            </em>
           </span>
         </Link>
 
@@ -111,7 +121,10 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 px-3.5 py-2 text-[13px] font-medium text-fg-muted hover:text-fg transition-colors"
+                  className="flex items-center gap-1 px-3.5 py-2 text-[13px] font-medium transition-colors"
+                  style={{ color: "var(--ink-2)" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-2)")}
                   onClick={() => hasDrop && setOpenDropdown(null)}
                 >
                   {item.label}
@@ -180,15 +193,17 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <span className="h-5 w-px bg-white/10" aria-hidden="true" />
+          <span className="h-5 w-px" style={{ background: "var(--border)" }} aria-hidden="true" />
           <Link
             href="/discovery-call"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[13px] font-semibold text-white transition-all hover:-translate-y-0.5"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold transition-all hover:-translate-y-0.5"
             style={{
-              background:
-                "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-              boxShadow: "0 6px 20px rgba(30,136,229,0.35)",
+              background: "var(--terracotta)",
+              color: "var(--cream-3)",
+              borderRadius: 2,
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--terracotta-2)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--terracotta)")}
           >
             Book free audit
             <ArrowRight className="w-3.5 h-3.5" />
@@ -197,7 +212,8 @@ export default function Header() {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden p-3 -mr-1 text-fg"
+          className="lg:hidden p-3 -mr-1"
+          style={{ color: "var(--ink)" }}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
         >
@@ -206,7 +222,13 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden backdrop-blur-xl bg-[#061827]/95 border-t border-white/[0.08] max-h-[calc(100vh-64px)] overflow-y-auto">
+        <div
+          className="lg:hidden backdrop-blur-md max-h-[calc(100vh-64px)] overflow-y-auto"
+          style={{
+            background: "rgba(242, 239, 230, 0.97)",
+            borderTop: "1px solid var(--border)",
+          }}
+        >
           <nav className="container-x px-6 py-6 flex flex-col gap-1">
             {NAV_PRIMARY.map((item) => {
               const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);

@@ -7,7 +7,6 @@ import {
   Calendar,
   ArrowRight,
   Clock,
-  Sparkles,
   CheckCircle2,
   Zap,
   Globe,
@@ -82,7 +81,6 @@ const channels = [
     cta: "Open the chat",
     href: "#livechat-open",
     icon: MessageCircle,
-    color: "from-green-400 to-emerald-500",
     badge: "Instant",
   },
   {
@@ -91,7 +89,6 @@ const channels = [
     cta: "info@skynetjoe.com",
     href: "mailto:info@skynetjoe.com",
     icon: Mail,
-    color: "from-cyan-400 to-sky-500",
     badge: "48h scope",
   },
   {
@@ -100,7 +97,6 @@ const channels = [
     cta: "Open my profile",
     href: "https://www.linkedin.com/in/waseemnasir2k26",
     icon: LinkedInIcon,
-    color: "from-blue-400 to-indigo-500",
     badge: "Daily active",
   },
   {
@@ -109,179 +105,190 @@ const channels = [
     cta: "Open application form",
     href: "/discovery-call",
     icon: Calendar,
-    color: "from-violet-400 to-purple-500",
     badge: "Filtered",
   },
 ];
 
 const guarantees = [
-  {
-    icon: Clock,
-    title: "8-hour reply",
-    body: "On weekdays. Bali is GMT+8 — your morning is my afternoon.",
-  },
-  {
-    icon: Zap,
-    title: "48-hour fixed scope",
-    body: "Send a brief, get back a one-pager with price and timeline.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "No NDA dance",
-    body: "I sign yours, you don't sign mine. Or skip it entirely.",
-  },
-  {
-    icon: Globe,
-    title: "9 countries served",
-    body: "Bali, Pakistan, US, UK, France, Australia, UAE, Singapore, Italy.",
-  },
+  { icon: Clock, title: "8-hour reply", body: "On weekdays. Bali is GMT+8 — your morning is my afternoon." },
+  { icon: Zap, title: "48-hour fixed scope", body: "Send a brief, get back a one-pager with price and timeline." },
+  { icon: ShieldCheck, title: "No NDA dance", body: "I sign yours, you don't sign mine. Or skip it entirely." },
+  { icon: Globe, title: "9 countries served", body: "Bali, Pakistan, US, UK, France, Australia, UAE, Singapore, Italy." },
 ];
 
 const expect = [
-  {
-    step: "01",
-    title: "You send a brief",
-    body: "Bullet points are fine. Loom video is great. Don't pre-design — that's my job.",
-  },
-  {
-    step: "02",
-    title: "I reply within 8 hours",
-    body: "Either a clarifying question or 'this is doable — scope in 48h'.",
-  },
-  {
-    step: "03",
-    title: "Fixed scope arrives",
-    body: "One pager: deliverables, price, timeline, stack. No surprises.",
-  },
-  {
-    step: "04",
-    title: "You say yes/no",
-    body: "If yes: 50% deposit, work starts in 24h. If no: file stays useful — yours.",
-  },
+  { step: "01", title: "You send a brief", body: "Bullet points are fine. Loom video is great. Don't pre-design — that's my job." },
+  { step: "02", title: "I reply within 8 hours", body: "Either a clarifying question or 'this is doable — scope in 48h'." },
+  { step: "03", title: "Fixed scope arrives", body: "One pager: deliverables, price, timeline, stack. No surprises." },
+  { step: "04", title: "You say yes/no", body: "If yes: 50% deposit, work starts in 24h. If no: file stays useful — yours." },
 ];
+
+const eyebrow = (text: string, color = "var(--terracotta)") => (
+  <div
+    style={{
+      fontFamily: "var(--font-mono)",
+      fontSize: 11,
+      textTransform: "uppercase",
+      letterSpacing: "0.16em",
+      color,
+      marginBottom: 14,
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 12,
+    }}
+  >
+    <span style={{ width: 28, height: 1, background: color }} />
+    {text}
+  </div>
+);
 
 export default function ContactPage() {
   return (
     <>
       <JsonLd data={schema} />
 
+      {/* HERO */}
       <section
-        className="relative overflow-hidden pt-24 md:pt-32 pb-16"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          padding: "112px 0 80px",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <span
-          className="orb"
+        <div
           style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.55,
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: 40,
+            alignItems: "center",
           }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#00D4FF",
-            top: 80,
-            right: -160,
-            opacity: 0.45,
-            animationDelay: "-7s",
-          }}
-        />
-
-        <div className="container-x px-6 relative z-10">
-          <div className="grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-14 items-center">
-            <div className="max-w-2xl">
-              <div
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+          className="contact-hero"
+        >
+          <style>{`
+            @media (min-width: 900px) {
+              .contact-hero { grid-template-columns: 1.3fr 1fr !important; }
+            }
+          `}</style>
+          <div>
+            {eyebrow("Open for 2 builds — June 2026")}
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(40px, 6.5vw, 76px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.02,
+                color: "var(--ink)",
+                margin: "0 0 22px",
+              }}
+            >
+              Don&apos;t book a call.{" "}
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+                Send a brief.
+              </em>
+            </h1>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "58ch",
+                marginBottom: 26,
+              }}
+            >
+              The fastest way to work with me: skip the discovery dance. Email a
+              one-pager, ping me on LinkedIn, or open live chat bottom-right —
+              I&apos;ll send a fixed-price scope back within{" "}
+              <strong style={{ color: "var(--terracotta)" }}>48 hours</strong>. If
+              I&apos;m not the right fit, I&apos;ll tell you who is.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+              <Link
+                href="/discovery-call"
                 style={{
-                  background: "rgba(0, 212, 255, 0.12)",
-                  border: "1px solid rgba(0, 212, 255, 0.40)",
-                  color: "#7ee4ff",
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  padding: "14px 24px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  borderRadius: 2,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  textDecoration: "none",
                 }}
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span className="text-xs font-medium tracking-wider uppercase">
-                  Open for 2 builds — June 2026
-                </span>
-              </div>
-
-              <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.04] tracking-tight mb-6 text-white">
-                Don&apos;t book a call.{" "}
-                <span
-                  style={{
-                    background:
-                      "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  Send a brief.
-                </span>
-              </h1>
-
-              <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-8">
-                The fastest way to work with me: skip the discovery dance.
-                Email a one-pager, ping me on LinkedIn, or open live chat
-                bottom-right — I&apos;ll send a fixed-price scope back within{" "}
-                <strong className="text-cyan-200">48 hours</strong>. If
-                I&apos;m not the right fit, I&apos;ll tell you who is.
-              </p>
-
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/discovery-call"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white transition-transform hover:scale-[1.02]"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                    boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
-                  }}
-                >
-                  <Calendar className="w-4 h-4" />
-                  Apply for a call
-                </Link>
-                <a
-                  href="mailto:info@skynetjoe.com"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white transition-transform hover:scale-[1.02]"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                    boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
-                  }}
-                >
-                  <Mail className="w-4 h-4" />
-                  Email me
-                </a>
-                <a
-                  href="#livechat-open"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-medium text-white transition-colors"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.06)",
-                    border: "1px solid rgba(255, 255, 255, 0.18)",
-                  }}
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  Or open live chat
-                </a>
-              </div>
-            </div>
-
-            <div className="relative hidden md:block">
-              <div
-                className="relative aspect-[4/5] w-full max-w-md ml-auto rounded-3xl overflow-hidden"
+                <Calendar style={{ width: 14, height: 14 }} />
+                Apply for a call
+              </Link>
+              <a
+                href="mailto:info@skynetjoe.com"
                 style={{
-                  border: "1px solid rgba(0, 212, 255, 0.30)",
-                  boxShadow: "0 30px 80px -10px rgba(0, 212, 255, 0.40)",
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  padding: "14px 24px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  borderRadius: 2,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  textDecoration: "none",
+                }}
+              >
+                <Mail style={{ width: 14, height: 14 }} />
+                Email me
+              </a>
+              <a
+                href="#livechat-open"
+                style={{
+                  background: "transparent",
+                  color: "var(--ink)",
+                  padding: "13px 22px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  border: "1px solid var(--ink)",
+                  borderRadius: 2,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  textDecoration: "none",
+                }}
+              >
+                <MessageCircle style={{ width: 14, height: 14 }} />
+                Or open live chat
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <figure
+              style={{
+                margin: 0,
+                transform: "rotate(-1.2deg)",
+                background: "var(--cream-3)",
+                padding: 10,
+                border: "1px solid rgba(26,26,26,0.14)",
+                boxShadow: "0 18px 48px rgba(26,26,26,0.15)",
+                maxWidth: 400,
+                marginLeft: "auto",
+              }}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "4 / 5",
+                  overflow: "hidden",
+                  background: "var(--cream-2)",
                 }}
               >
                 <Image
@@ -289,83 +296,139 @@ export default function ContactPage() {
                   alt="Waseem Nasir, founder of SkynetLabs, available for new builds"
                   fill
                   priority
-                  sizes="(min-width: 1024px) 440px, 380px"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-x-0 bottom-0 p-5 pt-14"
+                  sizes="(min-width: 900px) 400px, 90vw"
                   style={{
-                    background:
-                      "linear-gradient(180deg, transparent 0%, rgba(6,24,39,0.94) 100%)",
+                    objectFit: "cover",
+                    filter: "sepia(0.10) saturate(0.95)",
                   }}
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-xs uppercase tracking-[0.18em] text-green-300">
-                      Available now
-                    </span>
-                  </div>
-                  <div className="text-white font-semibold text-lg">
-                    Waseem Nasir
-                  </div>
-                  <div className="text-sm text-gray-300">
-                    Founder · Bali (GMT+8)
-                  </div>
-                </div>
+                />
               </div>
-            </div>
+              <figcaption
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.10em",
+                  color: "var(--ink-faint)",
+                  textAlign: "center",
+                  paddingTop: 12,
+                }}
+              >
+                — Waseem · Bali · GMT+8 · open
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-x">
-          <div className="max-w-3xl mb-10">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
-              Pick your channel
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
+      {/* CHANNELS */}
+      <section
+        style={{ padding: "72px 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
+      >
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ maxWidth: 700, marginBottom: 32 }}>
+            {eyebrow("Pick your channel")}
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(28px, 4vw, 42px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                margin: "0 0 12px",
+                lineHeight: 1.1,
+              }}
+            >
               Four ways to start.{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
                 One reply guarantee.
-              </span>
+              </em>
             </h2>
-            <p className="text-base md:text-lg text-gray-300">
-              All four hit the same inbox. Use whichever feels least like
-              homework.
+            <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
+              All four hit the same inbox. Use whichever feels least like homework.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {channels.map((c) => {
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+            {channels.map((c, i) => {
               const Icon = c.icon;
+              const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
               return (
                 <a
                   key={c.name}
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group relative p-6 rounded-2xl bg-white/95 border border-white/60 shadow-lg shadow-cyan-500/5 hover:shadow-xl hover:shadow-cyan-500/25 hover:border-skynet-primary/60 hover:bg-white transition-all duration-300 hover:-translate-y-2"
+                  style={{
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
+                    padding: "22px",
+                    textDecoration: "none",
+                    color: "var(--ink)",
+                    transform: `rotate(${rotate})`,
+                  }}
                 >
                   <div
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-gradient-to-br ${c.color}`}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      background: "var(--terracotta)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 2,
+                      marginBottom: 14,
+                    }}
                   >
-                    <Icon className="w-6 h-6 text-white" />
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-lg font-bold text-slate-900">
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: 18,
+                        fontWeight: 600,
+                        margin: 0,
+                        color: "var(--ink)",
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
                       {c.name}
                     </h3>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800">
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 9,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.16em",
+                        padding: "3px 7px",
+                        background: "var(--cream-3)",
+                        color: "var(--terracotta)",
+                        border: "1px solid rgba(198,107,63,0.30)",
+                        fontWeight: 600,
+                      }}
+                    >
                       {c.badge}
                     </span>
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                  <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.55, margin: "0 0 12px" }}>
                     {c.desc}
                   </p>
-                  <div className="inline-flex items-center gap-1.5 text-skynet-primary font-semibold text-sm group-hover:gap-2.5 transition-all">
+                  <div
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                      color: "var(--terracotta)",
+                      fontWeight: 600,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                    }}
+                  >
                     {c.cta}
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight style={{ width: 12, height: 12 }} />
                   </div>
                 </a>
               );
@@ -374,61 +437,126 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-x">
-          <div className="rounded-3xl bg-gradient-to-br from-[#0a2d4a]/80 via-[#073846]/60 to-[#0a2d4a]/80 border border-cyan-400/20 p-8 md:p-12 backdrop-blur-md">
-            <div className="max-w-2xl mb-10">
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
-                What to expect
-              </p>
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3 text-white">
-                Four steps,{" "}
-                <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                  zero funnel.
-                </span>
-              </h2>
-              <p className="text-base md:text-lg text-gray-300">
-                No CRM auto-replies. No discovery-call upsell. No 14-day
-                follow-up sequence. Just one human writing back.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {expect.map((e) => (
+      {/* WHAT TO EXPECT */}
+      <section
+        style={{
+          padding: "72px 0",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ maxWidth: 640, marginBottom: 36 }}>
+            {eyebrow("What to expect")}
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(28px, 4vw, 42px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                margin: "0 0 12px",
+                lineHeight: 1.1,
+              }}
+            >
+              Four steps,{" "}
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>zero funnel.</em>
+            </h2>
+            <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
+              No CRM auto-replies. No discovery-call upsell. No 14-day follow-up
+              sequence. Just one human writing back.
+            </p>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+            {expect.map((e, i) => (
+              <div
+                key={e.step}
+                style={{
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  padding: "22px",
+                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                }}
+              >
                 <div
-                  key={e.step}
-                  className="p-5 rounded-2xl bg-white/5 border border-white/10"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontStyle: "italic",
+                    fontSize: 36,
+                    fontWeight: 500,
+                    color: "var(--terracotta)",
+                    lineHeight: 1,
+                    marginBottom: 10,
+                  }}
                 >
-                  <div className="text-3xl font-extrabold text-cyan-300 mb-2 font-mono">
-                    {e.step}
-                  </div>
-                  <h3 className="text-white font-semibold mb-2">{e.title}</h3>
-                  <p className="text-sm text-gray-300 leading-relaxed">
-                    {e.body}
-                  </p>
+                  {e.step}
                 </div>
-              ))}
-            </div>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 17,
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                    margin: "0 0 6px",
+                  }}
+                >
+                  {e.title}
+                </h3>
+                <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
+                  {e.body}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-x">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {guarantees.map((g) => {
+      {/* GUARANTEES */}
+      <section
+        style={{ padding: "72px 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
+      >
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+            {guarantees.map((g, i) => {
               const Icon = g.icon;
               return (
                 <div
                   key={g.title}
-                  className="p-6 rounded-2xl bg-white/95 border border-white/60 shadow-md"
+                  style={{
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
+                    padding: "22px",
+                    transform: i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
+                  }}
                 >
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-skynet-primary/20 to-cyan-400/20 flex items-center justify-center mb-3">
-                    <Icon className="w-5 h-5 text-skynet-primary" />
+                  <div
+                    style={{
+                      width: 38,
+                      height: 38,
+                      background: "var(--terracotta)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 2,
+                      marginBottom: 12,
+                    }}
+                  >
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-semibold text-slate-900 mb-1">
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: "var(--ink)",
+                      margin: "0 0 6px",
+                    }}
+                  >
                     {g.title}
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
+                  <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
                     {g.body}
                   </p>
                 </div>
@@ -438,54 +566,111 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-x">
-          <div className="rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"
+      {/* CLOSER */}
+      <section
+        style={{ padding: "88px 0", background: "var(--terracotta)", position: "relative", zIndex: 2 }}
+      >
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+          <CheckCircle2 style={{ width: 36, height: 36, color: "var(--cream-3)", margin: "0 auto 16px" }} />
+          <h2
             style={{
-              background:
-                "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-            }}>
-            <div className="relative z-10 max-w-2xl mx-auto">
-              <CheckCircle2 className="w-10 h-10 text-white/90 mx-auto mb-4" />
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4">
-                Still scrolling? Just{" "}
-                <Link
-                  href="/discovery-call"
-                  className="underline decoration-2 underline-offset-4 hover:text-cyan-100"
-                >
-                  send the brief
-                </Link>
-                .
-              </h2>
-              <p className="text-lg text-white/90 mb-8">
-                Worst case: you waste 2 minutes. Best case: your CRM, calendar
-                and inbox stop fighting each other in 14 days.
-              </p>
-              <div className="flex flex-wrap justify-center gap-3">
-                <Link
-                  href="/discovery-call"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition-colors"
-                >
-                  <Calendar className="w-4 h-4" />
-                  Apply for a call
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-colors"
-                >
-                  See public pricing first
-                </Link>
-                <a
-                  href={SITE.social.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-colors"
-                >
-                  <GithubIcon className="w-4 h-4" />
-                  Browse my code
-                </a>
-              </div>
-            </div>
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(28px, 4.4vw, 44px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: "var(--cream-3)",
+              marginBottom: 16,
+            }}
+          >
+            Still scrolling? Just{" "}
+            <Link
+              href="/discovery-call"
+              style={{
+                color: "var(--cream-3)",
+                textDecoration: "underline",
+                textDecorationThickness: "1px",
+                textUnderlineOffset: "8px",
+                fontStyle: "italic",
+              }}
+            >
+              send the brief
+            </Link>
+            .
+          </h2>
+          <p
+            style={{
+              fontSize: 16,
+              color: "rgba(250, 247, 240, 0.92)",
+              maxWidth: "50ch",
+              margin: "0 auto 28px",
+              lineHeight: 1.6,
+            }}
+          >
+            Worst case: you waste 2 minutes. Best case: your CRM, calendar and
+            inbox stop fighting each other in 14 days.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+            <Link
+              href="/discovery-call"
+              style={{
+                background: "var(--cream-3)",
+                color: "var(--terracotta)",
+                padding: "14px 24px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 700,
+                fontSize: 14,
+                borderRadius: 2,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                textDecoration: "none",
+              }}
+            >
+              <Calendar style={{ width: 14, height: 14 }} />
+              Apply for a call
+            </Link>
+            <Link
+              href="/pricing"
+              style={{
+                background: "transparent",
+                color: "var(--cream-3)",
+                padding: "13px 22px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 14,
+                border: "1px solid var(--cream-3)",
+                borderRadius: 2,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                textDecoration: "none",
+              }}
+            >
+              See public pricing first
+            </Link>
+            <a
+              href={SITE.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: "transparent",
+                color: "var(--cream-3)",
+                padding: "13px 22px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 14,
+                border: "1px solid var(--cream-3)",
+                borderRadius: 2,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                textDecoration: "none",
+              }}
+            >
+              <GithubIcon className="w-4 h-4" />
+              Browse my code
+            </a>
           </div>
         </div>
       </section>

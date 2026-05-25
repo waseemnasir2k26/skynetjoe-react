@@ -31,12 +31,12 @@ const SERVICES: (ServiceItem & { category: CategoryName })[] =
     }))
   );
 
-// Category -> ribbon-top gradient (OCEAN palette)
+// Category -> ribbon-top accent (CREAM editorial — muted warm semantic colors)
 const CATEGORY_RIBBON: Record<CategoryName, string> = {
-  Automation: "linear-gradient(90deg, #1E88E5 0%, #14B8A6 100%)",
-  "AI Content": "linear-gradient(90deg, #14B8A6 0%, #06b6d4 100%)",
-  Development: "linear-gradient(90deg, #06b6d4 0%, #1E88E5 100%)",
-  Consulting: "linear-gradient(90deg, #5eead4 0%, #1E88E5 100%)",
+  Automation: "var(--terracotta)",
+  "AI Content": "var(--ochre)",
+  Development: "var(--sage)",
+  Consulting: "var(--oxblood)",
 };
 
 // Mid-market hourly benchmarks (USD/hr) used in comparison snippet.
@@ -391,103 +391,165 @@ export default async function ServiceStatePage({
   return (
     <>
       <JsonLd data={schema} />
+      <style>{`
+        .cream-state-pill:hover { border-color: var(--terracotta) !important; color: var(--terracotta) !important; }
+      `}</style>
 
-      {/* Ribbon-top category strip */}
+      {/* Ribbon-top category strip — flat semantic accent */}
       <div className="h-1.5 w-full" style={{ background: ribbon }} aria-hidden />
 
-      {/* Hero */}
+      {/* Hero — cream editorial */}
       <section
-        className="relative overflow-hidden pt-20 md:pt-28 pb-14"
+        className="relative pt-20 md:pt-28 pb-14"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.55,
-          }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#00D4FF",
-            top: 80,
-            right: -160,
-            opacity: 0.45,
-            animationDelay: "-7s",
-          }}
-        />
-
         <div className="container-x px-6 relative z-10">
-          <nav className="text-xs text-gray-400 mb-6 flex items-center gap-2 flex-wrap">
-            <Link href="/" className="hover:text-cyan-300">
+          <nav
+            className="mb-6 flex items-center gap-2 flex-wrap"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: "var(--ink-faint)",
+            }}
+          >
+            <Link href="/" style={{ color: "var(--ink-faint)" }}>
               Home
             </Link>
             <span>/</span>
-            <Link href="/services" className="hover:text-cyan-300">
+            <Link href="/services" style={{ color: "var(--ink-faint)" }}>
               Services
             </Link>
             <span>/</span>
             <Link
               href={`/services/${svc.slug}`}
-              className="hover:text-cyan-300"
+              style={{ color: "var(--ink-faint)" }}
             >
               {svc.label}
             </Link>
             <span>/</span>
-            <Link href="/locations" className="hover:text-cyan-300">
+            <Link href="/locations" style={{ color: "var(--ink-faint)" }}>
               Locations
             </Link>
             <span>/</span>
-            <span className="text-cyan-300">{st.name}</span>
+            <span style={{ color: "var(--terracotta)" }}>{st.name}</span>
           </nav>
 
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 bg-cyan-500/12 border border-cyan-400/40 text-cyan-200">
+            <div
+              className="inline-flex items-center gap-3 mb-6"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
               <MapPin className="w-3.5 h-3.5" />
-              <span className="text-xs font-semibold tracking-wider uppercase">
-                {svc.category} · Serving {st.name} ({st.abbr})
-              </span>
+              {svc.category} · Serving {st.name} ({st.abbr})
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight mb-5 text-white">
-              {svc.label} in {st.name}
-              <span className="block text-2xl md:text-3xl mt-3 font-semibold text-cyan-200/90">
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                fontSize: "clamp(36px, 5.5vw, 60px)",
+                margin: "0 0 18px",
+              }}
+            >
+              {svc.label} in{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                {st.name}.
+              </em>
+              <span
+                className="block mt-3"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(20px, 2.5vw, 26px)",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  color: "var(--ink-2)",
+                }}
+              >
                 {st.cities[0]} to {st.cities[st.cities.length - 1]} — one
                 operator, fixed scope.
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl">
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.55,
+                marginBottom: 28,
+                maxWidth: "44rem",
+              }}
+            >
               {svc.desc}. Built for {st.name} businesses across{" "}
               {st.cities.slice(0, 4).join(", ")} and beyond — fixed-price,
               ship-ready in 5–14 days, remote-first from Bali.
             </p>
 
             {/* State-anchored stat strip */}
-            <div className="inline-flex items-center gap-3 mb-8 px-5 py-3 rounded-2xl bg-white/5 border border-cyan-400/20">
-              <TrendingUp className="w-5 h-5 text-cyan-300" />
-              <span className="text-sm text-gray-200">
-                <strong className="text-white">{stat.value}</strong> {stat.label}{" "}
-                — including operators across {st.abbr}
+            <div
+              className="inline-flex items-center gap-3 mb-8"
+              style={{
+                padding: "12px 20px",
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.10)",
+                borderLeft: "3px solid var(--terracotta)",
+              }}
+            >
+              <TrendingUp
+                className="w-5 h-5"
+                style={{ color: "var(--terracotta)" }}
+              />
+              <span
+                style={{
+                  fontSize: 13.5,
+                  color: "var(--ink-2)",
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
+                <strong style={{ color: "var(--ink)" }}>{stat.value}</strong>{" "}
+                {stat.label} — including operators across {st.abbr}
               </span>
             </div>
 
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/discovery-call"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white"
+                className="inline-flex items-center gap-2"
                 style={{
-                  background:
-                    "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  padding: "16px 28px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 15,
+                  borderRadius: 2,
+                  border: "none",
                 }}
               >
                 <Calendar className="w-4 h-4" />
@@ -495,7 +557,17 @@ export default async function ServiceStatePage({
               </Link>
               <a
                 href="#livechat-open"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-medium text-white border border-white/20 hover:border-white/40"
+                className="inline-flex items-center gap-2"
+                style={{
+                  background: "transparent",
+                  color: "var(--ink)",
+                  border: "1px solid var(--ink)",
+                  padding: "15px 26px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 15,
+                  borderRadius: 2,
+                }}
               >
                 <MessageCircle className="w-4 h-4" />
                 Live chat
@@ -506,16 +578,62 @@ export default async function ServiceStatePage({
       </section>
 
       {/* Why-state-specific block (industry-tuned) */}
-      <section className="section pt-14">
+      <section
+        className="section pt-14"
+        style={{ background: "var(--cream)" }}
+      >
         <div className="container-x">
           <div className="max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div
+              className="inline-flex items-center gap-3 mb-3"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
               Why {st.name} specifically
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-6">
-              {svc.label} built for {st.abbr} verticals
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                lineHeight: 1.1,
+                marginBottom: 20,
+              }}
+            >
+              {svc.label} built for{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                {st.abbr} verticals.
+              </em>
             </h2>
-            <p className="text-gray-300 leading-relaxed mb-5">
+            <p
+              style={{
+                color: "var(--ink-2)",
+                fontSize: 16,
+                lineHeight: 1.6,
+                marginBottom: 20,
+              }}
+            >
               {st.name} has a distinct operator profile. Our{" "}
               {svc.label.toLowerCase()} engagements in the state cluster around
               three verticals — and we&apos;ve standardized playbooks for each.
@@ -523,231 +641,490 @@ export default async function ServiceStatePage({
 
             {enrichment && (
               <div
-                className="mb-6 p-6 rounded-2xl bg-white/95 border border-cyan-200/60 shadow-md shadow-cyan-500/10"
+                style={{
+                  marginBottom: 24,
+                  padding: 24,
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                  borderLeft: "3px solid var(--terracotta)",
+                }}
                 data-quality-score={qualityScore}
               >
-                <p className="text-slate-700 leading-relaxed text-sm md:text-base">
+                <p
+                  style={{
+                    color: "var(--ink-2)",
+                    lineHeight: 1.65,
+                    fontSize: 15,
+                  }}
+                >
                   {enrichment}
                 </p>
               </div>
             )}
             <ul className="space-y-3 mb-2">
-              {st.industries.map((ind) => (
-                <li
-                  key={ind}
-                  className="flex items-start gap-3 p-4 rounded-2xl bg-white/95 border border-white/60 shadow-md shadow-cyan-500/5"
-                >
-                  <Building2 className="w-5 h-5 text-skynet-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700 text-sm md:text-base leading-relaxed">
-                    {tuneForIndustry(svc.label, ind)}.
-                  </span>
-                </li>
-              ))}
+              {st.industries.map((ind, idx) => {
+                const accent =
+                  ["var(--terracotta)", "var(--ochre)", "var(--sage)"][idx % 3];
+                return (
+                  <li
+                    key={ind}
+                    className="flex items-start gap-3"
+                    style={{
+                      padding: 18,
+                      background: "var(--cream-2)",
+                      border: "1px solid rgba(26,26,26,0.10)",
+                      borderLeft: `3px solid ${accent}`,
+                    }}
+                  >
+                    <Building2
+                      className="w-5 h-5 flex-shrink-0 mt-0.5"
+                      style={{ color: accent }}
+                    />
+                    <span
+                      style={{
+                        color: "var(--ink-2)",
+                        fontSize: 15,
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {tuneForIndustry(svc.label, ind)}.
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
       </section>
 
       {/* Local-intent block: 5 unique city paragraphs */}
-      <section className="section">
+      <section
+        className="section"
+        style={{
+          background: "var(--cream-3)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
         <div className="container-x">
           <div className="max-w-4xl mb-10">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div
+              className="inline-flex items-center gap-3 mb-3"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
               City-by-city · {st.name}
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
-              {svc.label} across {st.abbr}
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                lineHeight: 1.1,
+                marginBottom: 12,
+              }}
+            >
+              {svc.label} across {st.abbr}.
             </h2>
-            <p className="text-gray-300">
+            <p style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.55 }}>
               Same operator, same fixed-scope build, slightly different first
               workflow depending on where in {st.name} you sit.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-5">
-            {st.cities.map((city, idx) => (
-              <article
-                key={city}
-                className="p-6 rounded-2xl bg-white/95 border border-white/60 shadow-lg shadow-cyan-500/5"
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <MapPin className="w-4 h-4 text-skynet-primary" />
-                  <h3 className="text-base font-bold text-slate-900">
-                    {svc.label} in {city}, {st.abbr}
-                  </h3>
-                </div>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {CITY_HOOKS[idx % CITY_HOOKS.length]} For {city} operators,
-                  the {svc.label.toLowerCase()} engagement maps cleanly to the{" "}
-                  {st.industries[idx % st.industries.length]} pattern we&apos;ve
-                  shipped repeatedly.
-                </p>
-              </article>
-            ))}
+            {st.cities.map((city, idx) => {
+              const rotate = idx % 2 === 0 ? "-0.2deg" : "0.2deg";
+              return (
+                <article
+                  key={city}
+                  style={{
+                    padding: 24,
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.10)",
+                    transform: `rotate(${rotate})`,
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <MapPin
+                      className="w-4 h-4"
+                      style={{ color: "var(--terracotta)" }}
+                    />
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: 16,
+                        fontWeight: 600,
+                        color: "var(--ink)",
+                        letterSpacing: "-0.005em",
+                      }}
+                    >
+                      {svc.label} in {city}, {st.abbr}
+                    </h3>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: "var(--ink-2)",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {CITY_HOOKS[idx % CITY_HOOKS.length]} For {city} operators,
+                    the {svc.label.toLowerCase()} engagement maps cleanly to the{" "}
+                    {st.industries[idx % st.industries.length]} pattern
+                    we&apos;ve shipped repeatedly.
+                  </p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Comparison snippet: SkynetLabs vs local agency w/ state cost benchmarks */}
-      <section className="section">
+      <section className="section" style={{ background: "var(--cream)" }}>
         <div className="container-x">
           <div className="max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div
+              className="inline-flex items-center gap-3 mb-3"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
               Cost comparison · {st.name}
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-6">
-              {svc.label} vs hiring a {st.name} agency
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                lineHeight: 1.1,
+                marginBottom: 24,
+              }}
+            >
+              {svc.label} vs hiring a{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                {st.name} agency.
+              </em>
             </h2>
-            <div className="rounded-3xl bg-gradient-to-br from-[#0a2d4a]/80 via-[#073846]/60 to-[#0a2d4a]/80 border border-cyan-400/20 p-7 md:p-9 backdrop-blur-md">
-              <ul className="space-y-4 text-gray-200">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-cyan-300 flex-shrink-0 mt-0.5" />
-                  <span>
+            <div
+              style={{
+                padding: "28px 32px",
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.10)",
+              }}
+            >
+              <ul className="space-y-4">
+                {[
+                  <span key="1">
                     Mid-market {st.name} agency rates average{" "}
-                    <strong className="text-white">${hourly}/hr</strong>. A
-                    typical {svc.label.toLowerCase()} build runs 30–60 hours
+                    <strong style={{ color: "var(--ink)" }}>${hourly}/hr</strong>.
+                    A typical {svc.label.toLowerCase()} build runs 30–60 hours
                     locally — that&apos;s{" "}
-                    <strong className="text-white">
+                    <strong style={{ color: "var(--ink)" }}>
                       ${(hourly * 30).toLocaleString()}–$
                       {(hourly * 60).toLocaleString()}
                     </strong>{" "}
                     before retainer.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-cyan-300 flex-shrink-0 mt-0.5" />
-                  <span>
+                  </span>,
+                  <span key="2">
                     Our fixed-scope {svc.label.toLowerCase()} engagement lands{" "}
-                    <strong className="text-white">$500–$8,000</strong>{" "}
+                    <strong style={{ color: "var(--ink)" }}>$500–$8,000</strong>{" "}
                     depending on complexity — typically 30–50% under {st.abbr}{" "}
                     agency hourly totals, with no scope-creep billing.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-cyan-300 flex-shrink-0 mt-0.5" />
-                  <span>
+                  </span>,
+                  <span key="3">
                     Even after build, automated workflows save the average{" "}
                     {st.name} operator ~1.4 hours of admin/week — about{" "}
-                    <strong className="text-white">
+                    <strong style={{ color: "var(--ink)" }}>
                       ${annualSavings.toLocaleString()}/yr
                     </strong>{" "}
                     in recovered owner time at local market rates.
-                  </span>
-                </li>
+                  </span>,
+                ].map((node, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3"
+                    style={{
+                      color: "var(--ink-2)",
+                      fontSize: 15,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    <CheckCircle2
+                      className="w-5 h-5 flex-shrink-0 mt-0.5"
+                      style={{ color: "var(--terracotta)" }}
+                    />
+                    {node}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Cities + FAQ + Aside */}
-      <section className="section">
+      {/* FAQ + Aside */}
+      <section
+        className="section"
+        style={{
+          background: "var(--cream-3)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
         <div className="container-x">
           <div className="grid lg:grid-cols-[1.5fr_1fr] gap-10">
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+              <div
+                className="inline-flex items-center gap-3 mb-3"
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "var(--terracotta)",
+                }}
+              >
+                <span
+                  style={{
+                    width: 28,
+                    height: 1,
+                    background: "var(--terracotta)",
+                    display: "inline-block",
+                  }}
+                />
                 Common questions from {st.name}
-              </p>
-              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-6">
-                {svc.label} FAQ · {st.abbr}
-              </h2>
-              <div className="space-y-3">
-                <details
-                  open
-                  className="rounded-xl bg-white/5 border border-white/10 p-5"
+              </div>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 500,
+                  letterSpacing: "-0.02em",
+                  color: "var(--ink)",
+                  fontSize: "clamp(24px, 3.2vw, 34px)",
+                  lineHeight: 1.15,
+                  marginBottom: 24,
+                }}
+              >
+                {svc.label} FAQ ·{" "}
+                <em
+                  style={{
+                    fontStyle: "italic",
+                    color: "var(--terracotta)",
+                    fontWeight: 500,
+                  }}
                 >
-                  <summary className="font-semibold text-white cursor-pointer">
-                    Do you offer {svc.label} in {st.name}?
-                  </summary>
-                  <p className="text-sm text-gray-300 mt-3 leading-relaxed">
-                    Yes — we serve all of {st.name} including{" "}
-                    {st.cities.join(", ")}. Remote-first, no on-site travel
-                    required. Standard ship window is 5–14 days from kickoff.
-                  </p>
-                </details>
-                <details className="rounded-xl bg-white/5 border border-white/10 p-5">
-                  <summary className="font-semibold text-white cursor-pointer">
-                    How much does {svc.label} cost in {st.name} vs hiring a
-                    local agency?
-                  </summary>
-                  <p className="text-sm text-gray-300 mt-3 leading-relaxed">
-                    Mid-market {st.name} agency rates average ${hourly}/hr — a
-                    30–60 hour {svc.label.toLowerCase()} build runs $
-                    {(hourly * 30).toLocaleString()}–$
-                    {(hourly * 60).toLocaleString()} locally. Our fixed-scope
-                    range is $500–$8,000, often 30–50% lower than {st.abbr}{" "}
-                    agency hourly totals.
-                  </p>
-                </details>
-                <details className="rounded-xl bg-white/5 border border-white/10 p-5">
-                  <summary className="font-semibold text-white cursor-pointer">
-                    Which {st.name} industries do you typically build for?
-                  </summary>
-                  <p className="text-sm text-gray-300 mt-3 leading-relaxed">
-                    Most {st.name} engagements come from {st.industries[0]},{" "}
-                    {st.industries[1]} and {st.industries[2]} operators —
-                    verticals with high admin overhead that respond well to{" "}
-                    {svc.label.toLowerCase()}.
-                  </p>
-                </details>
-                <details className="rounded-xl bg-white/5 border border-white/10 p-5">
-                  <summary className="font-semibold text-white cursor-pointer">
-                    How fast can you ship for a {st.name} business?
-                  </summary>
-                  <p className="text-sm text-gray-300 mt-3 leading-relaxed">
-                    Typical 5–14 day window. Urgent {st.name} projects ship
-                    faster with premium rate. We&apos;re based in Bali (GMT+8) —
-                    your morning email gets answered during our afternoon, which
-                    keeps async tight.
-                  </p>
-                </details>
+                  {st.abbr}.
+                </em>
+              </h2>
+              <div>
+                {[
+                  {
+                    q: `Do you offer ${svc.label} in ${st.name}?`,
+                    a: `Yes — we serve all of ${st.name} including ${st.cities.join(
+                      ", "
+                    )}. Remote-first, no on-site travel required. Standard ship window is 5–14 days from kickoff.`,
+                    open: true,
+                  },
+                  {
+                    q: `How much does ${svc.label} cost in ${st.name} vs hiring a local agency?`,
+                    a: `Mid-market ${st.name} agency rates average $${hourly}/hr — a 30–60 hour ${svc.label.toLowerCase()} build runs $${(hourly * 30).toLocaleString()}–$${(hourly * 60).toLocaleString()} locally. Our fixed-scope range is $500–$8,000, often 30–50% lower than ${st.abbr} agency hourly totals.`,
+                  },
+                  {
+                    q: `Which ${st.name} industries do you typically build for?`,
+                    a: `Most ${st.name} engagements come from ${st.industries[0]}, ${st.industries[1]} and ${st.industries[2]} operators — verticals with high admin overhead that respond well to ${svc.label.toLowerCase()}.`,
+                  },
+                  {
+                    q: `How fast can you ship for a ${st.name} business?`,
+                    a: `Typical 5–14 day window. Urgent ${st.name} projects ship faster with premium rate. We're based in Bali (GMT+8) — your morning email gets answered during our afternoon, which keeps async tight.`,
+                  },
+                ].map((f) => (
+                  <details
+                    key={f.q}
+                    open={f.open}
+                    style={{
+                      borderBottom: "1px solid rgba(26,26,26,0.12)",
+                      padding: "20px 0",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <summary
+                      style={{
+                        listStyle: "none",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: 16,
+                        fontFamily: "var(--font-display)",
+                        fontSize: 17,
+                        fontWeight: 600,
+                        color: "var(--ink)",
+                        letterSpacing: "-0.005em",
+                      }}
+                    >
+                      <span>{f.q}</span>
+                      <span
+                        style={{
+                          color: "var(--terracotta)",
+                          fontSize: 22,
+                          lineHeight: 1,
+                        }}
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <p
+                      style={{
+                        marginTop: 12,
+                        color: "var(--ink-2)",
+                        fontSize: 14.5,
+                        lineHeight: 1.65,
+                      }}
+                    >
+                      {f.a}
+                    </p>
+                  </details>
+                ))}
               </div>
             </div>
 
             <aside className="space-y-4">
-              <div className="p-6 rounded-2xl bg-white/95 border border-white/60 shadow-lg shadow-cyan-500/5">
+              <div
+                style={{
+                  padding: 24,
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                }}
+              >
                 <div
-                  className="h-1 -mx-6 -mt-6 mb-5 rounded-t-2xl"
-                  style={{ background: ribbon }}
+                  style={{
+                    height: 3,
+                    margin: "-24px -24px 18px",
+                    background: ribbon,
+                  }}
                   aria-hidden
                 />
-                <h3 className="text-base font-bold text-slate-900 mb-3">
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                    marginBottom: 14,
+                  }}
+                >
                   {svc.label} · {st.name}
                 </h3>
-                <ul className="space-y-2 text-sm text-slate-600">
+                <ul
+                  className="space-y-2"
+                  style={{ fontSize: 13.5, color: "var(--ink-2)" }}
+                >
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />{" "}
+                    <CheckCircle2
+                      className="w-4 h-4 flex-shrink-0 mt-0.5"
+                      style={{ color: "var(--sage)" }}
+                    />{" "}
                     5–14 day ship into {st.abbr}
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />{" "}
+                    <CheckCircle2
+                      className="w-4 h-4 flex-shrink-0 mt-0.5"
+                      style={{ color: "var(--sage)" }}
+                    />{" "}
                     Fixed-price, no hourly
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />{" "}
+                    <CheckCircle2
+                      className="w-4 h-4 flex-shrink-0 mt-0.5"
+                      style={{ color: "var(--sage)" }}
+                    />{" "}
                     Remote / async / no on-site
                   </li>
                   <li className="flex items-start gap-2">
-                    <Clock className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />{" "}
+                    <Clock
+                      className="w-4 h-4 flex-shrink-0 mt-0.5"
+                      style={{ color: "var(--sage)" }}
+                    />{" "}
                     8h weekday reply (Bali GMT+8)
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />{" "}
+                    <CheckCircle2
+                      className="w-4 h-4 flex-shrink-0 mt-0.5"
+                      style={{ color: "var(--sage)" }}
+                    />{" "}
                     Cancel before kickoff, full refund
                   </li>
                 </ul>
                 <Link
                   href="/discovery-call"
-                  className="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-skynet-primary text-white font-semibold hover:bg-skynet-primary/90 transition"
+                  className="mt-5 w-full inline-flex items-center justify-center gap-2"
+                  style={{
+                    padding: "14px 18px",
+                    background: "var(--terracotta)",
+                    color: "var(--cream-3)",
+                    fontFamily: "var(--font-sans)",
+                    fontWeight: 600,
+                    fontSize: 14,
+                    borderRadius: 2,
+                  }}
                 >
                   Apply for a call
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
-                <h4 className="text-sm font-semibold text-white mb-3">
-                  Related services in {st.name}
+              <div
+                style={{
+                  padding: 20,
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                }}
+              >
+                <h4
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.16em",
+                    color: "var(--ink-faint)",
+                    marginBottom: 12,
+                  }}
+                >
+                  — Related services in {st.name}
                 </h4>
                 <ul className="space-y-2">
                   {SERVICES.filter((s) => s.slug !== svc.slug)
@@ -756,7 +1133,12 @@ export default async function ServiceStatePage({
                       <li key={s.slug}>
                         <Link
                           href={`/services/${s.slug}/in/${st.slug}`}
-                          className="text-sm text-cyan-300 hover:text-cyan-200 inline-flex items-center gap-1 group"
+                          className="inline-flex items-center gap-1 group"
+                          style={{
+                            fontSize: 13.5,
+                            color: "var(--terracotta)",
+                            fontWeight: 500,
+                          }}
                         >
                           {s.label} in {st.name}
                           <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition" />
@@ -766,23 +1148,54 @@ export default async function ServiceStatePage({
                 </ul>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
-                <h4 className="text-sm font-semibold text-white mb-3">
-                  {svc.label} in other states
+              <div
+                style={{
+                  padding: 20,
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                }}
+              >
+                <h4
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.16em",
+                    color: "var(--ink-faint)",
+                    marginBottom: 12,
+                  }}
+                >
+                  — {svc.label} in other states
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {nearby.map((other) => (
                     <Link
                       key={other.slug}
                       href={`/services/${svc.slug}/in/${other.slug}`}
-                      className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-200 hover:border-cyan-400/60 hover:text-cyan-200 transition"
+                      className="cream-state-pill"
+                      style={{
+                        padding: "4px 10px",
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 11,
+                        background: "var(--cream-3)",
+                        border: "1px solid rgba(26,26,26,0.10)",
+                        color: "var(--ink-2)",
+                        transition: "all 0.18s",
+                      }}
                     >
                       {other.abbr}
                     </Link>
                   ))}
                   <Link
                     href={`/services/${svc.slug}`}
-                    className="px-2.5 py-1 rounded-full bg-cyan-400 text-slate-900 text-xs font-semibold hover:bg-cyan-300 transition"
+                    style={{
+                      padding: "4px 10px",
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      background: "var(--terracotta)",
+                      color: "var(--cream-3)",
+                    }}
                   >
                     All 48 →
                   </Link>
@@ -793,26 +1206,74 @@ export default async function ServiceStatePage({
         </div>
       </section>
 
-      {/* Closing CTA */}
-      <section className="section">
+      {/* Closing CTA — full terracotta event */}
+      <section className="section" style={{ background: "var(--terracotta)" }}>
         <div className="container-x">
-          <div
-            className="rounded-3xl p-8 md:p-12 text-center"
-            style={{
-              background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-            }}
-          >
-            <CheckCircle2 className="w-10 h-10 text-white/90 mx-auto mb-3" />
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-3">
-              {svc.label} for {st.name}?
+          <div className="text-center max-w-3xl mx-auto px-4">
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--cream-3)",
+                opacity: 0.85,
+                marginBottom: 18,
+              }}
+            >
+              — Ready when you are
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--cream-3)",
+                fontSize: "clamp(28px, 4.5vw, 48px)",
+                lineHeight: 1.08,
+                marginBottom: 16,
+              }}
+            >
+              {svc.label} for{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--cream-3)",
+                  fontWeight: 500,
+                  textDecoration: "underline",
+                  textDecorationThickness: "1px",
+                  textUnderlineOffset: "8px",
+                }}
+              >
+                {st.name}?
+              </em>
             </h2>
-            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            <p
+              style={{
+                fontSize: 17,
+                color: "rgba(250, 247, 240, 0.92)",
+                marginBottom: 28,
+                maxWidth: "44ch",
+                margin: "0 auto 28px",
+                lineHeight: 1.55,
+              }}
+            >
               Send a brief. Yes/no in 8 hours. Fixed scope in 48. Shipped to{" "}
               {st.cities[0]}, {st.cities[1]} or anywhere in {st.abbr}.
             </p>
             <Link
               href="/discovery-call"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition"
+              className="inline-flex items-center gap-2"
+              style={{
+                background: "var(--cream-3)",
+                color: "var(--terracotta)",
+                padding: "16px 28px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 700,
+                fontSize: 15,
+                borderRadius: 2,
+                border: "none",
+              }}
             >
               Apply for a discovery call
               <ArrowRight className="w-4 h-4" />

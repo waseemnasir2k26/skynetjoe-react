@@ -3,6 +3,7 @@ import path from "path";
 import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "faqs.html"),
@@ -69,7 +70,7 @@ export default function FaqsPage() {
   return (
     <>
       <JsonLd data={schema} />
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <HtmlCreamWrap html={html} />
     </>
   );
 }

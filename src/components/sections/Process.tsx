@@ -1,6 +1,23 @@
 import Image from "next/image";
 import { Search, Wrench, Rocket, TrendingUp, ArrowRight, Calendar, Terminal } from "lucide-react";
 
+/**
+ * Cream editorial pivot 2026-05-25 — process section.
+ * cream-2 cards with alternating rotation, terracotta step number.
+ */
+
+const C = {
+  cream2: "#EDE8DC",
+  cream3: "#FAF7F0",
+  ink: "#1A1A1A",
+  ink2: "#3A3A36",
+  inkFaint: "#6B6B65",
+  terra: "#C66B3F",
+  ochre: "#C9A96E",
+  sage: "#8A9A7B",
+  rule: "rgba(26,26,26,0.12)",
+};
+
 const STEPS = [
   {
     icon: Search,
@@ -9,7 +26,7 @@ const STEPS = [
     when: "Mon",
     desc: "Free 20-min Loom audit. We map your funnel, find the leak, name the leverage.",
     deliverable: "20-min Loom + 1-pager",
-    color: "from-cyan-400 to-sky-500",
+    color: C.terra,
   },
   {
     icon: Wrench,
@@ -18,7 +35,7 @@ const STEPS = [
     when: "Tue–Thu",
     desc: "I build the workflow / site / chatbot in 5–14 days. You see daily Loom updates.",
     deliverable: "Daily Looms · live preview URL",
-    color: "from-sky-400 to-blue-500",
+    color: C.ochre,
   },
   {
     icon: Rocket,
@@ -27,7 +44,7 @@ const STEPS = [
     when: "Fri",
     desc: "Deploy to production. Train your team. Hand over Notion SOPs + Loom library.",
     deliverable: "Production deploy · SOPs · Loom library",
-    color: "from-blue-400 to-indigo-500",
+    color: C.sage,
   },
   {
     icon: TrendingUp,
@@ -36,87 +53,164 @@ const STEPS = [
     when: "Mo+",
     desc: "Optional retainer: I monitor, optimize, and stack new automations monthly.",
     deliverable: "Monthly stack + dashboard",
-    color: "from-teal-400 to-cyan-500",
+    color: C.terra,
   },
 ];
 
 export default function Process() {
   return (
-    <section className="section relative overflow-hidden">
+    <section className="section relative">
       <div className="container-x relative z-10">
         <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-semibold uppercase tracking-[0.18em] mb-5">
-            <Calendar className="w-3.5 h-3.5" />
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.terra,
+              fontWeight: 600,
+              marginBottom: 14,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <Calendar style={{ width: 12, height: 12 }} />
             Mon audit · Fri build · Next-Fri ship
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+          </p>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(32px, 5vw, 56px)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.08,
+              color: C.ink,
+              marginBottom: 16,
+            }}
+          >
             Four steps.{" "}
-            <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-              No SOW theater.
-            </span>
+            <em style={{ fontStyle: "italic", color: C.terra }}>No SOW theater.</em>
           </h2>
-          <p className="text-lg text-gray-300">
+          <p style={{ fontSize: 17, color: C.ink2, lineHeight: 1.6 }}>
             No 14-slide proposal deck. No 6-week discovery phase. Audit Monday,
             build by Friday, ship by next Friday.
           </p>
         </div>
 
         <div className="relative">
-          {/* Desktop horizontal connector */}
-          <div className="hidden lg:block absolute top-[88px] left-[8%] right-[8%] h-px pointer-events-none">
-            <div
-              className="w-full h-full"
-              style={{
-                background:
-                  "repeating-linear-gradient(to right, rgba(0,212,255,0.45) 0 6px, transparent 6px 12px)",
-              }}
-            />
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {STEPS.map((s, i) => (
-              <div key={s.n} className="relative">
-                {/* Mobile vertical connector */}
-                {i < STEPS.length - 1 && (
+              <div
+                key={s.n}
+                style={{ position: "relative" }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: 20,
+                  }}
+                >
                   <div
-                    className="lg:hidden absolute left-8 top-full w-px h-5 z-0"
                     style={{
-                      background:
-                        "repeating-linear-gradient(to bottom, rgba(0,212,255,0.45) 0 4px, transparent 4px 8px)",
+                      position: "relative",
+                      width: 56,
+                      height: 56,
+                      background: s.color,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 2,
                     }}
-                  />
-                )}
-
-                {/* Step number bubble (sits on connector) */}
-                <div className="relative flex items-center justify-between mb-5 lg:mb-6">
-                  <div
-                    className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center shadow-xl shadow-cyan-500/30 z-10`}
                   >
-                    <s.icon className="w-7 h-7 text-white" />
-                    <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-slate-900 border-2 border-cyan-300 flex items-center justify-center text-[10px] font-extrabold text-cyan-300">
+                    <s.icon style={{ width: 26, height: 26, color: C.cream3 }} />
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: -10,
+                        right: -10,
+                        width: 26,
+                        height: 26,
+                        borderRadius: "50%",
+                        background: C.cream3,
+                        border: `1px solid ${C.ink}`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: C.ink,
+                      }}
+                    >
                       {s.n}
                     </span>
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-300 bg-cyan-400/10 border border-cyan-400/30 px-3 py-1.5 rounded-full">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.16em",
+                      color: C.terra,
+                      background: C.cream3,
+                      border: `1px solid ${C.rule}`,
+                      padding: "6px 12px",
+                      borderRadius: 999,
+                    }}
+                  >
                     {s.when}
                   </span>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-white/95 border border-white/60 shadow-xl shadow-cyan-500/10 hover:shadow-2xl hover:shadow-cyan-500/25 hover:-translate-y-1 transition-all duration-300">
-                  <h3 className="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                <div
+                  style={{
+                    padding: 24,
+                    background: C.cream2,
+                    border: `1px solid ${C.rule}`,
+                    transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 19,
+                      fontWeight: 600,
+                      color: C.ink,
+                      marginBottom: 8,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
                     {s.title}
                     {i < STEPS.length - 1 && (
-                      <ArrowRight className="w-4 h-4 text-slate-300" />
+                      <ArrowRight style={{ width: 16, height: 16, color: C.inkFaint }} />
                     )}
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                  <p style={{ fontSize: 14, color: C.ink2, lineHeight: 1.6, marginBottom: 16 }}>
                     {s.desc}
                   </p>
-                  <div className="pt-3 border-t border-slate-200/70">
-                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400 font-semibold mb-1">
-                      You get
+                  <div style={{ paddingTop: 12, borderTop: `1px solid ${C.rule}` }}>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.18em",
+                        color: C.inkFaint,
+                        fontWeight: 600,
+                        marginBottom: 4,
+                      }}
+                    >
+                      — You get
                     </p>
-                    <p className="text-xs text-slate-700 font-medium">
+                    <p style={{ fontSize: 12, color: C.ink, fontWeight: 500 }}>
                       {s.deliverable}
                     </p>
                   </div>
@@ -126,56 +220,138 @@ export default function Process() {
           </div>
         </div>
 
-        {/* How we actually split the work — the co-founder pact */}
-        <div className="mt-14 grid md:grid-cols-[180px_1fr] gap-6 items-center p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/10">
-          <div className="relative w-full md:w-[180px] aspect-square rounded-xl overflow-hidden border border-white/10 mx-auto">
+        {/* Co-founder pact card */}
+        <div
+          className="mt-14 grid md:grid-cols-[180px_1fr] gap-6 items-center"
+          style={{
+            padding: 32,
+            background: C.cream3,
+            border: `1px solid ${C.rule}`,
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              maxWidth: 180,
+              aspectRatio: "1/1",
+              overflow: "hidden",
+              border: `1px solid ${C.rule}`,
+              margin: "0 auto",
+            }}
+          >
             <Image
               src="/portraits/waseem-cafe-working-side.jpg"
               alt="Waseem at a cafe laptop — the human half of the 2-person team"
               fill
               loading="lazy"
               sizes="(min-width: 768px) 180px, 50vw"
-              className="object-cover"
+              style={{ objectFit: "cover", filter: "sepia(0.12) saturate(0.94)" }}
             />
           </div>
           <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.16em] text-orange-300 mb-2">
-              <Terminal className="w-3.5 h-3.5" />
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: C.terra,
+                fontWeight: 600,
+                marginBottom: 10,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <Terminal style={{ width: 12, height: 12 }} />
               How the 2-person team splits the work
             </div>
-            <h3 className="text-xl md:text-2xl font-bold mb-3 text-white">
-              You brief Waseem. Claude drafts. Waseem ships.
+            <h3
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(20px, 2.6vw, 26px)",
+                fontWeight: 600,
+                color: C.ink,
+                marginBottom: 12,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              You brief Waseem. Claude drafts.{" "}
+              <em style={{ fontStyle: "italic", color: C.terra }}>Waseem ships.</em>
             </h3>
-            <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-3">
+            <p style={{ fontSize: 15, color: C.ink2, lineHeight: 1.6, marginBottom: 10 }}>
               You send a brief in 3 sentences. I read it, scope it, and pair
               with Claude Code in a terminal next to my coffee. Claude drafts
               architecture, writes the first 70% of the code, audits diffs, and
               writes the docs. I make the calls, talk to you, ship the
-              deliverable, and take the blame if it breaks. You get a
-              production deploy in 14 days. No account manager in the loop.
+              deliverable, and take the blame if it breaks.
             </p>
-            <p className="text-xs text-gray-500 italic">
-              Most agencies have 12 humans. We have 1 human + 1 Anthropic API
-              key. The math works.
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                color: C.inkFaint,
+                fontStyle: "italic",
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+              }}
+            >
+              — Most agencies have 12 humans. We have 1 human + 1 API key.
             </p>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-[#0a2d4a]/60 via-[#073846]/40 to-[#0a2d4a]/60 border border-cyan-400/20 backdrop-blur-sm">
+        <div
+          className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style={{
+            padding: 24,
+            background: C.cream2,
+            border: `1px solid ${C.rule}`,
+          }}
+        >
           <div className="flex-1">
-            <p className="text-sm font-semibold text-cyan-200 mb-1">
+            <p
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: 15,
+                fontWeight: 600,
+                color: C.ink,
+                marginBottom: 4,
+                letterSpacing: "-0.005em",
+              }}
+            >
               Total clock: 14 days from first Loom to production deploy.
             </p>
-            <p className="text-xs text-gray-400">
-              No discovery phases. No invoice surprises. Cancel anytime before
-              Build kickoff for a full refund.
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                color: C.inkFaint,
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+              }}
+            >
+              — No discovery phases. No invoice surprises.
             </p>
           </div>
           <a
             href="/discovery-call"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-semibold text-sm transition-colors whitespace-nowrap"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "12px 22px",
+              background: C.terra,
+              color: C.cream3,
+              fontWeight: 600,
+              fontSize: 14,
+              borderRadius: 2,
+              fontFamily: "var(--font-sans)",
+              whiteSpace: "nowrap",
+            }}
           >
-            <Calendar className="w-4 h-4" />
+            <Calendar style={{ width: 14, height: 14 }} />
             Apply for a discovery call
           </a>
         </div>

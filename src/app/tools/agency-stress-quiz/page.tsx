@@ -114,92 +114,79 @@ export default function StressQuizPage() {
       <JsonLd data={softwareSchema} />
       <JsonLd data={faqSchema} />
 
-      {/* HERO */}
+      {/* HERO — cream paper */}
       <section
-        className="relative overflow-hidden pt-24 md:pt-32 pb-12"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.5,
-          }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#ef4444",
-            top: 80,
-            right: -160,
-            opacity: 0.32,
-            animationDelay: "-7s",
-          }}
-        />
-
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
             <div
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
               style={{
-                background: "rgba(239, 68, 68, 0.14)",
-                border: "1px solid rgba(239, 68, 68, 0.40)",
-                color: "#fda4af",
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--oxblood)",
+                fontWeight: 600,
+                marginBottom: 22,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 12,
               }}
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span className="text-xs font-medium tracking-wider uppercase">
-                Free diagnostic · No email gate
-              </span>
+              <Sparkles style={{ width: 12, height: 12 }} />
+              Free diagnostic · no email gate
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.04] tracking-tight mb-6 text-white">
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               60 seconds.{" "}
-              <span
-                style={{
-                  background:
-                    "linear-gradient(120deg, #fda4af 0%, #fde68a 50%, #7ee4ff 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
+              <em style={{ fontStyle: "italic", color: "var(--oxblood)" }}>
                 7 questions.
-              </span>{" "}
+              </em>{" "}
               One brutally honest score.
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-4 max-w-2xl">
+            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
               I&apos;ve sat inside 200+ service businesses. The same five
               patterns blow up every founder I talk to. This quiz scores you
               against those patterns and tells you where to fix first.
             </p>
-            <p className="text-base text-gray-300 leading-relaxed max-w-2xl">
+            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
               No email gate. No drip sequence. No data leaves your browser. Just
               a number from 0 to 70 and three priorities.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
-              {heroStats.map(({ icon: Icon, label, body }) => (
+              {heroStats.map(({ icon: Icon, label, body }, i) => (
                 <div
                   key={label}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
+                  style={{
+                    padding: 16,
+                    background: "var(--cream-2)",
+                    border: "1px solid var(--border)",
+                    transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                  }}
                 >
-                  <div className="flex items-center gap-2 text-white">
-                    <Icon className="w-4 h-4 text-cyan-300" />
-                    <span className="text-sm font-semibold">{label}</span>
+                  <div className="flex items-center gap-2" style={{ color: "var(--ink)" }}>
+                    <Icon className="w-4 h-4" style={{ color: "var(--terracotta)" }} />
+                    <span style={{ fontSize: 13, fontWeight: 600, fontFamily: "var(--font-sans)" }}>{label}</span>
                   </div>
-                  <p className="mt-1 text-xs text-gray-400 leading-relaxed">
+                  <p style={{ marginTop: 6, fontSize: 12, color: "var(--ink-faint)", lineHeight: 1.5 }}>
                     {body}
                   </p>
                 </div>

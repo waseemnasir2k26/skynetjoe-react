@@ -112,36 +112,8 @@ export default function RevenueCalculatorPage() {
 
       {/* HERO */}
       <section
-        className="relative overflow-hidden pt-24 md:pt-32 pb-12 md:pb-16"
-        style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
-        }}
+        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 480,
-            height: 480,
-            background: "#1E88E5",
-            top: -80,
-            left: -120,
-            opacity: 0.5,
-          }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 460,
-            height: 460,
-            background: "#00D4FF",
-            top: 60,
-            right: -120,
-            opacity: 0.35,
-            animationDelay: "-7s",
-          }}
-        />
-
         <div className="container-x px-6 relative z-10">
           <div className="max-w-4xl">
             <div
@@ -158,7 +130,7 @@ export default function RevenueCalculatorPage() {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.04] tracking-tight mb-5 text-white">
+            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
               How much money is your business{" "}
               <span
                 style={{

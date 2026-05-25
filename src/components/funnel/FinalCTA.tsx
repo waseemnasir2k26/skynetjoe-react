@@ -3,48 +3,104 @@ import { ArrowRight } from "lucide-react";
 
 export default function FinalCTA() {
   return (
-    <section className="section">
+    <section
+      style={{
+        background: "var(--terracotta)",
+        padding: "88px 0 100px",
+        fontFamily: "var(--font-sans)",
+      }}
+    >
       <div className="container-x">
         <div
-          className="relative overflow-hidden rounded-3xl p-12 md:p-16 text-center"
           style={{
-            background:
-              "linear-gradient(135deg, #061827 0%, #0a2d4a 50%, #082b3e 100%)",
-            border: "1px solid rgba(126,228,255,0.18)",
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 16px",
+            textAlign: "center",
           }}
         >
-          <div className="orb w-[400px] h-[400px] bg-skynet-primary/30 -top-32 -left-32" />
           <div
-            className="orb w-[400px] h-[400px] bg-cyan-400/20 -bottom-32 -right-32"
-            style={{ animationDelay: "-5s" }}
-          />
-
-          <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-fg">
-              Find your biggest leak in{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">
-                30 minutes.
-              </span>
-            </h2>
-            <p className="text-lg text-fg-muted mb-8">
-              Free audit. We screen-share, find the one automation that pays for
-              itself fastest, and Loom you a build plan. No pitch deck.
-            </p>
-            <Link
-              href="/discovery-call"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white text-base transition-transform hover:-translate-y-0.5"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--cream-3)",
+              marginBottom: 20,
+              opacity: 0.85,
+            }}
+          >
+            — 4 audit slots left this month
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(30px, 5vw, 52px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.08,
+              color: "var(--cream-3)",
+              marginBottom: 20,
+            }}
+          >
+            Find your biggest leak in{" "}
+            <em
               style={{
-                background:
-                  "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                fontStyle: "italic",
+                color: "var(--cream-3)",
+                fontWeight: 500,
+                textDecoration: "underline",
+                textDecorationThickness: "1px",
+                textUnderlineOffset: "8px",
               }}
             >
-              Book free 30-min audit
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <p className="text-xs text-fg-faint mt-4">
-              Replies within 6 hours · Bali (GMT+8) · 9 countries served
-            </p>
+              30 minutes.
+            </em>
+          </h2>
+          <p
+            style={{
+              fontSize: 17,
+              color: "rgba(250, 247, 240, 0.92)",
+              maxWidth: "46ch",
+              margin: "0 auto 32px",
+              lineHeight: 1.6,
+            }}
+          >
+            Free audit. We screen-share, find the one automation that pays for
+            itself fastest, and Loom you a build plan. No pitch deck.
+          </p>
+          <Link
+            href="/discovery-call"
+            style={{
+              background: "var(--cream-3)",
+              color: "var(--terracotta)",
+              padding: "16px 28px",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 700,
+              fontSize: 16,
+              borderRadius: 2,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              textDecoration: "none",
+              transition: "transform 0.18s",
+              boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
+            }}
+          >
+            Book free 30-min audit
+            <ArrowRight style={{ width: 16, height: 16 }} />
+          </Link>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: "rgba(250, 247, 240, 0.78)",
+              marginTop: 22,
+            }}
+          >
+            — Replies within 6 hours · Bali (GMT+8) · 9 countries served
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import PainSolverGrid from "@/components/services/PainSolverGrid";
@@ -77,73 +77,87 @@ export default function ServicesIndexPage() {
     <>
       <JsonLd data={schema} />
 
-      {/* HERO — pain-first reframe */}
+      {/* HERO — cream editorial · pain-first reframe */}
       <section
-        className="relative overflow-hidden pt-28 md:pt-36 pb-16"
+        className="relative pt-28 md:pt-36 pb-16"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.45,
-          }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#00D4FF",
-            top: 80,
-            right: -160,
-            opacity: 0.35,
-            animationDelay: "-7s",
-          }}
-        />
-
         <div className="container-x px-6 relative z-10 max-w-4xl">
-          <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-            <Sparkles className="w-3 h-3" />
-            Pain-solver · not service-seller
-          </span>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.04] mb-6">
-            I don&apos;t sell services.{" "}
+          <div
+            className="inline-flex items-center gap-3 mb-6"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+            }}
+          >
             <span
-              className="italic font-semibold"
               style={{
-                fontFamily:
-                  '"Playfair Display", Georgia, "Times New Roman", serif',
-                background:
-                  "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                WebkitTextFillColor: "transparent",
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
+            Pain-solver · not service-seller
+          </div>
+
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.04,
+              color: "var(--ink)",
+              fontSize: "clamp(40px, 6vw, 68px)",
+              margin: "0 0 24px",
+            }}
+          >
+            I don&apos;t sell services.{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
               }}
             >
               I close pain points.
-            </span>
+            </em>
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mb-7">
+
+          <p
+            style={{
+              fontSize: 19,
+              color: "var(--ink-2)",
+              maxWidth: "52ch",
+              lineHeight: 1.55,
+              marginBottom: 28,
+            }}
+          >
             Every founder brief lands in one of eight pains. Pick the one
             bleeding you this week — see the fix, see the metric, see the
             tools. The service menu is just the toolkit.
           </p>
+
           <div className="flex flex-wrap gap-3">
             <Link
               href="/discovery-call"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                padding: "16px 28px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+                border: "none",
+                transition: "background 0.18s",
               }}
             >
               Send a 3-sentence brief
@@ -151,10 +165,33 @@ export default function ServicesIndexPage() {
             </Link>
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white border border-white/15 bg-white/[0.04] hover:border-cyan-400/40 transition"
+              className="inline-flex items-center gap-2"
+              style={{
+                background: "transparent",
+                color: "var(--ink)",
+                border: "1px solid var(--ink)",
+                padding: "15px 26px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+              }}
             >
               See real fixes
             </Link>
+          </div>
+
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: "var(--ink-faint)",
+              marginTop: 20,
+            }}
+          >
+            — Bali hours · GMT+8 · usually books within 48-72 hours
           </div>
         </div>
       </section>
@@ -165,38 +202,82 @@ export default function ServicesIndexPage() {
       {/* COLLAPSED FULL MENU (SEO + power browsers) */}
       <ServiceMenuCollapsed />
 
-      {/* CLOSER */}
-      <section className="py-16 md:py-20 border-t border-white/[0.08]">
+      {/* CLOSER — cream editorial */}
+      <section
+        className="py-16 md:py-20"
+        style={{
+          background: "var(--cream-3)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
         <div className="container-x px-6 max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
-            Every week you wait,{" "}
+          <div
+            className="inline-flex items-center gap-3 mb-5"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+            }}
+          >
             <span
-              className="italic"
               style={{
-                fontFamily:
-                  '"Playfair Display", Georgia, "Times New Roman", serif',
-                background:
-                  "linear-gradient(120deg, #FF6B6B 0%, #FFB547 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                WebkitTextFillColor: "transparent",
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
+            One last thing
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.08,
+              color: "var(--ink)",
+              fontSize: "clamp(28px, 4vw, 44px)",
+              marginBottom: 14,
+            }}
+          >
+            Every week you wait,{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
               }}
             >
               the bleed gets bigger.
-            </span>
+            </em>
           </h2>
-          <p className="text-base text-fg-muted max-w-xl mx-auto mb-7">
+          <p
+            style={{
+              fontSize: 17,
+              color: "var(--ink-2)",
+              maxWidth: "44ch",
+              margin: "0 auto 28px",
+              lineHeight: 1.6,
+            }}
+          >
             One 30-min call. Honest scope. Fixed price. No discovery dance.
             Yes/no in 8 hours.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/discovery-call"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                padding: "16px 28px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+                border: "none",
               }}
             >
               Book my strategy call
@@ -204,7 +285,17 @@ export default function ServicesIndexPage() {
             </Link>
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white border border-white/15 bg-white/[0.04] hover:border-cyan-400/40 transition"
+              className="inline-flex items-center gap-2"
+              style={{
+                background: "transparent",
+                color: "var(--ink)",
+                border: "1px solid var(--ink)",
+                padding: "15px 26px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+              }}
             >
               See pricing
             </Link>

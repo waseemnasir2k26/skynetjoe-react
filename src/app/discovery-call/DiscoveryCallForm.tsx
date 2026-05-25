@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -18,6 +18,24 @@ import {
   DollarSign,
   Zap,
 } from "lucide-react";
+
+/**
+ * Cream editorial pivot 2026-05-25 — legacy form (cream surfaces, 1px ink
+ * border inputs, terracotta primary button). All form logic preserved.
+ */
+
+const C = {
+  cream: "#F2EFE6",
+  cream2: "#EDE8DC",
+  cream3: "#FAF7F0",
+  ink: "#1A1A1A",
+  ink2: "#3A3A36",
+  inkFaint: "#6B6B65",
+  terra: "#C66B3F",
+  terra2: "#B85A30",
+  rule: "rgba(26,26,26,0.12)",
+  ruleSoft: "rgba(26,26,26,0.06)",
+};
 
 const BUDGETS = [
   { value: "under-500", label: "Under $500", description: "Likely DIY territory — we'll send resources.", roi: 0 },
@@ -97,6 +115,18 @@ const STEPS = [
   { id: 3, title: "The brief", icon: Sparkles },
 ] as const;
 
+const INPUT_STYLE: React.CSSProperties = {
+  width: "100%",
+  padding: "12px 16px",
+  background: C.cream3,
+  border: `1px solid ${C.rule}`,
+  color: C.ink,
+  fontFamily: "var(--font-sans)",
+  fontSize: 15,
+  outline: "none",
+  borderRadius: 2,
+};
+
 export default function DiscoveryCallForm() {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<FormState>(initial);
@@ -145,7 +175,7 @@ export default function DiscoveryCallForm() {
   }, [form]);
 
   function triggerConfetti() {
-    const colors = ["#00D4FF", "#14B8A6", "#1E88E5", "#5EEAD4", "#7EE4FF"];
+    const colors = [C.terra, C.terra2, "#C9A96E", "#8A9A7B"];
     const pieces = Array.from({ length: 60 }, () => ({
       x: Math.random() * 100,
       y: -10,
@@ -199,7 +229,7 @@ export default function DiscoveryCallForm() {
                 initial={{ x: `${p.x}vw`, y: "-5vh", rotate: 0 }}
                 animate={{ y: "105vh", rotate: p.r + 720 }}
                 transition={{ duration: 3 + p.d, ease: "easeIn" }}
-                className="absolute w-2 h-3 rounded-sm"
+                className="absolute w-2 h-3"
                 style={{ background: p.c }}
               />
             ))}
@@ -208,36 +238,72 @@ export default function DiscoveryCallForm() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="rounded-2xl bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 border border-emerald-400/40 p-8 text-center"
+          style={{
+            background: C.cream2,
+            border: `1px solid ${C.terra}`,
+            padding: 32,
+            textAlign: "center",
+          }}
         >
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
           >
-            <CheckCircle2 className="w-16 h-16 text-emerald-300 mx-auto mb-4" />
+            <CheckCircle2 style={{ width: 64, height: 64, color: C.terra, margin: "0 auto 16px" }} />
           </motion.div>
-          <h3 className="text-3xl font-extrabold text-white mb-3">Brief received.</h3>
-          <p className="text-gray-200 mb-3 text-lg">
+          <h3
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: 30,
+              fontWeight: 600,
+              color: C.ink,
+              marginBottom: 12,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Brief received.
+          </h3>
+          <p style={{ color: C.ink2, marginBottom: 12, fontSize: 17 }}>
             We&apos;ll reply within{" "}
-            <strong className="text-emerald-300">8 hours</strong> on weekday Bali
+            <strong style={{ color: C.terra }}>8 hours</strong> on weekday Bali
             time (GMT+8).
           </p>
-          <div className="mt-6 p-4 rounded-xl bg-slate-900/40 border border-white/10 text-left max-w-sm mx-auto">
-            <p className="text-xs uppercase text-cyan-300 font-semibold tracking-wider mb-2">
-              What happens next
+          <div
+            style={{
+              marginTop: 24,
+              padding: 16,
+              background: C.cream3,
+              border: `1px solid ${C.rule}`,
+              textAlign: "left",
+              maxWidth: 360,
+              margin: "24px auto 0",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                color: C.terra,
+                fontWeight: 600,
+                letterSpacing: "0.16em",
+                marginBottom: 8,
+              }}
+            >
+              — What happens next
             </p>
-            <ol className="text-sm text-gray-300 space-y-1.5">
+            <ol style={{ fontSize: 14, color: C.ink2, lineHeight: 1.7, margin: 0, paddingLeft: 0, listStyle: "none" }}>
               <li>1. Waseem reads your brief personally</li>
               <li>2. You get a yes + Cal.com, or referral, or 1 question</li>
               <li>3. If yes — fixed scope in 48 hours</li>
             </ol>
           </div>
-          <p className="text-sm text-gray-400 mt-6">
+          <p style={{ fontSize: 14, color: C.inkFaint, marginTop: 24 }}>
             Urgent? Email{" "}
             <a
               href="mailto:waseem@skynetjoe.com"
-              className="text-cyan-300 underline font-semibold"
+              style={{ color: C.terra, textDecoration: "underline", fontWeight: 600 }}
             >
               waseem@skynetjoe.com
             </a>{" "}
@@ -247,9 +313,6 @@ export default function DiscoveryCallForm() {
       </>
     );
   }
-
-  const inputClass =
-    "w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder-gray-500 focus:border-cyan-400 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-cyan-400/30 transition";
 
   return (
     <form onSubmit={onSubmit} className="space-y-6">
@@ -267,62 +330,74 @@ export default function DiscoveryCallForm() {
                   onClick={() => done && setStep(s.id)}
                   className="flex items-center gap-2 group"
                   disabled={!done}
+                  style={{ background: "transparent", border: "none", cursor: done ? "pointer" : "default" }}
                 >
                   <motion.div
-                    animate={{
-                      scale: active ? 1.1 : 1,
-                      backgroundColor: done
-                        ? "rgba(16,185,129,0.2)"
-                        : active
-                        ? "rgba(0,212,255,0.18)"
-                        : "rgba(255,255,255,0.05)",
+                    animate={{ scale: active ? 1.1 : 1 }}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: done || active ? C.terra : C.cream2,
+                      border: `2px solid ${done || active ? C.terra : C.rule}`,
+                      color: done || active ? C.cream3 : C.inkFaint,
                     }}
-                    className={`w-9 h-9 rounded-full flex items-center justify-center border-2 ${
-                      done
-                        ? "border-emerald-400"
-                        : active
-                        ? "border-cyan-400"
-                        : "border-white/15"
-                    }`}
                   >
                     {done ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                      <CheckCircle2 style={{ width: 16, height: 16 }} />
                     ) : (
-                      <Icon
-                        className={`w-4 h-4 ${
-                          active ? "text-cyan-300" : "text-gray-500"
-                        }`}
-                      />
+                      <Icon style={{ width: 16, height: 16 }} />
                     )}
                   </motion.div>
                   <span
-                    className={`hidden sm:inline text-xs font-semibold ${
-                      active
-                        ? "text-cyan-200"
-                        : done
-                        ? "text-emerald-300"
-                        : "text-gray-500"
-                    }`}
+                    className="hidden sm:inline"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.10em",
+                      fontWeight: 600,
+                      color: active || done ? C.terra : C.inkFaint,
+                    }}
                   >
                     {s.title}
                   </span>
                 </button>
                 {idx < STEPS.length - 1 && (
-                  <div className="flex-1 h-px bg-white/10 mx-2" />
+                  <div className="flex-1 h-px mx-2" style={{ background: C.rule }} />
                 )}
               </div>
             );
           })}
         </div>
-        <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+        <div
+          style={{
+            height: 6,
+            background: C.cream2,
+            overflow: "hidden",
+            border: `1px solid ${C.ruleSoft}`,
+          }}
+        >
           <motion.div
             animate={{ width: `${fillPct}%` }}
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-teal-400"
+            style={{ height: "100%", background: C.terra }}
           />
         </div>
-        <p className="text-[11px] text-gray-500 mt-1.5">
-          {fillPct}% complete · step {step} of {STEPS.length}
+        <p
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            color: C.inkFaint,
+            marginTop: 6,
+          }}
+        >
+          — {fillPct}% complete · step {step} of {STEPS.length}
         </p>
       </div>
 
@@ -344,7 +419,7 @@ export default function DiscoveryCallForm() {
                   value={form.name}
                   onChange={(e) => update("name", e.target.value)}
                   placeholder="Stephanie Chen"
-                  className={inputClass}
+                  style={INPUT_STYLE}
                   autoFocus
                 />
               </Field>
@@ -355,7 +430,7 @@ export default function DiscoveryCallForm() {
                   value={form.email}
                   onChange={(e) => update("email", e.target.value)}
                   placeholder="you@company.com"
-                  className={inputClass}
+                  style={INPUT_STYLE}
                 />
               </Field>
             </div>
@@ -367,7 +442,7 @@ export default function DiscoveryCallForm() {
                   value={form.whatsapp}
                   onChange={(e) => update("whatsapp", e.target.value)}
                   placeholder="+1 415 555 0100"
-                  className={inputClass}
+                  style={INPUT_STYLE}
                 />
               </Field>
               <Field label="Your role" hint="Founder, Ops, Marketing…">
@@ -376,7 +451,7 @@ export default function DiscoveryCallForm() {
                   value={form.role}
                   onChange={(e) => update("role", e.target.value)}
                   placeholder="Founder"
-                  className={inputClass}
+                  style={INPUT_STYLE}
                 />
               </Field>
             </div>
@@ -388,7 +463,7 @@ export default function DiscoveryCallForm() {
                   value={form.company}
                   onChange={(e) => update("company", e.target.value)}
                   placeholder="Acme Dental"
-                  className={inputClass}
+                  style={INPUT_STYLE}
                 />
               </Field>
               <Field label="Website">
@@ -397,7 +472,7 @@ export default function DiscoveryCallForm() {
                   value={form.website}
                   onChange={(e) => update("website", e.target.value)}
                   placeholder="https://acmedental.com"
-                  className={inputClass}
+                  style={INPUT_STYLE}
                 />
               </Field>
             </div>
@@ -455,11 +530,30 @@ export default function DiscoveryCallForm() {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="overflow-hidden"
+                  style={{ overflow: "hidden" }}
                 >
-                  <div className="rounded-2xl p-5 bg-gradient-to-br from-cyan-500/10 to-teal-500/10 border border-cyan-400/30">
-                    <p className="text-xs uppercase tracking-wider text-cyan-300 font-semibold flex items-center gap-2 mb-3">
-                      <TrendingUp className="w-3.5 h-3.5" /> Rough estimate (not a quote)
+                  <div
+                    style={{
+                      padding: 20,
+                      background: C.cream2,
+                      border: `1px solid ${C.rule}`,
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 11,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.16em",
+                        color: C.terra,
+                        fontWeight: 600,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        marginBottom: 12,
+                      }}
+                    >
+                      <TrendingUp style={{ width: 14, height: 14 }} /> Rough estimate (not a quote)
                     </p>
                     <div className="grid grid-cols-3 gap-3">
                       <Stat
@@ -484,7 +578,7 @@ export default function DiscoveryCallForm() {
                         }
                       />
                     </div>
-                    <p className="text-[11px] text-gray-400 mt-3 leading-relaxed">
+                    <p style={{ fontSize: 11, color: C.inkFaint, marginTop: 12, lineHeight: 1.6 }}>
                       Based on similar gigs. Real scope locked in 48h after
                       brief review.
                     </p>
@@ -517,11 +611,17 @@ export default function DiscoveryCallForm() {
                       key={s}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => toggleStack(s)}
-                      className={
-                        active
-                          ? "px-3.5 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-cyan-400 to-teal-400 text-slate-900 border border-cyan-300 transition"
-                          : "px-3.5 py-2 rounded-full text-sm font-medium bg-white/5 border border-white/15 text-gray-300 hover:border-cyan-400 hover:text-cyan-200 transition"
-                      }
+                      style={{
+                        padding: "8px 14px",
+                        background: active ? C.terra : C.cream3,
+                        color: active ? C.cream3 : C.ink,
+                        border: `1px solid ${active ? C.terra : C.rule}`,
+                        fontFamily: "var(--font-sans)",
+                        fontWeight: 600,
+                        fontSize: 14,
+                        cursor: "pointer",
+                        borderRadius: 999,
+                      }}
                     >
                       {s}
                     </motion.button>
@@ -541,15 +641,20 @@ export default function DiscoveryCallForm() {
                 value={form.pain}
                 onChange={(e) => update("pain", e.target.value)}
                 placeholder="Example: We get 40 leads/week from Facebook but 30% no-show on consult calls. CRM is GHL but reminders aren't firing. Want SMS + email reminder flow + auto-rebook for cancellations."
-                className={inputClass + " resize-none"}
+                style={{ ...INPUT_STYLE, resize: "none" }}
               />
-              <div className="flex justify-between text-[11px] text-gray-500 mt-1.5">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: 11,
+                  color: C.inkFaint,
+                  marginTop: 6,
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
                 <span>{form.pain.length} chars</span>
-                <span
-                  className={
-                    form.pain.length > 80 ? "text-emerald-300" : "text-gray-500"
-                  }
-                >
+                <span style={{ color: form.pain.length > 80 ? C.terra : C.inkFaint }}>
                   {form.pain.length > 80 ? "✓ Detailed enough" : "Aim for 80+ chars"}
                 </span>
               </div>
@@ -564,11 +669,17 @@ export default function DiscoveryCallForm() {
                       type="button"
                       key={h.value}
                       onClick={() => update("heard", h.value)}
-                      className={
-                        active
-                          ? "px-3 py-2 rounded-lg text-xs font-semibold bg-cyan-400/15 border border-cyan-400 text-cyan-200 transition"
-                          : "px-3 py-2 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-gray-400 hover:border-cyan-400/50 transition"
-                      }
+                      style={{
+                        padding: "8px 12px",
+                        background: active ? C.cream2 : C.cream3,
+                        color: active ? C.terra : C.ink2,
+                        border: active ? `1px solid ${C.terra}` : `1px solid ${C.rule}`,
+                        fontFamily: "var(--font-sans)",
+                        fontWeight: 600,
+                        fontSize: 12,
+                        cursor: "pointer",
+                        borderRadius: 2,
+                      }}
                     >
                       {h.label}
                     </button>
@@ -577,15 +688,25 @@ export default function DiscoveryCallForm() {
               </div>
             </Field>
 
-            <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/30 transition">
+            <label
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 12,
+                cursor: "pointer",
+                padding: 16,
+                background: C.cream2,
+                border: `1px solid ${C.rule}`,
+              }}
+            >
               <input
                 type="checkbox"
                 required
                 checked={form.consent}
                 onChange={(e) => update("consent", e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded border-white/30 bg-white/5 accent-cyan-400"
+                style={{ marginTop: 2, width: 16, height: 16, accentColor: C.terra }}
               />
-              <span className="text-sm text-gray-300 leading-relaxed">
+              <span style={{ fontSize: 14, color: C.ink2, lineHeight: 1.55 }}>
                 OK to reply via email. We don&apos;t share your data,
                 sell it, or add you to a drip. One-touch unsubscribe always.
               </span>
@@ -595,19 +716,26 @@ export default function DiscoveryCallForm() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="rounded-xl bg-rose-500/10 border border-rose-400/40 p-4 flex items-start gap-3"
+                style={{
+                  padding: 16,
+                  background: "rgba(107, 44, 44, 0.08)",
+                  border: `1px solid #6B2C2C`,
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 12,
+                }}
               >
-                <AlertTriangle className="w-5 h-5 text-rose-300 flex-shrink-0 mt-0.5" />
-                <div className="text-sm">
-                  <p className="text-rose-200 font-semibold mb-1">
+                <AlertTriangle style={{ width: 20, height: 20, color: "#6B2C2C", flexShrink: 0, marginTop: 2 }} />
+                <div style={{ fontSize: 14 }}>
+                  <p style={{ color: "#6B2C2C", fontWeight: 600, marginBottom: 4 }}>
                     Couldn&apos;t submit
                   </p>
-                  <p className="text-rose-100/80">{errorMsg}</p>
-                  <p className="text-rose-100/60 mt-2">
+                  <p style={{ color: C.ink2 }}>{errorMsg}</p>
+                  <p style={{ color: C.inkFaint, marginTop: 8 }}>
                     Fallback:{" "}
                     <a
                       href="mailto:waseem@skynetjoe.com"
-                      className="underline"
+                      style={{ textDecoration: "underline", color: C.terra }}
                     >
                       email Waseem
                     </a>{" "}
@@ -620,14 +748,36 @@ export default function DiscoveryCallForm() {
         )}
       </AnimatePresence>
 
-      <div className="flex items-center justify-between gap-3 pt-3 border-t border-white/5">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 12,
+          paddingTop: 12,
+          borderTop: `1px solid ${C.ruleSoft}`,
+        }}
+      >
         {step > 1 ? (
           <button
             type="button"
             onClick={() => setStep((s) => s - 1)}
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/5 border border-white/15 text-gray-300 hover:border-cyan-400 hover:text-cyan-200 transition"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "12px 18px",
+              background: "transparent",
+              color: C.ink,
+              border: `1px solid ${C.ink}`,
+              cursor: "pointer",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              fontSize: 14,
+              borderRadius: 2,
+            }}
           >
-            <ArrowLeft className="w-4 h-4" /> Back
+            <ArrowLeft style={{ width: 14, height: 14 }} /> Back
           </button>
         ) : (
           <span />
@@ -640,16 +790,23 @@ export default function DiscoveryCallForm() {
             whileTap={canAdvance ? { scale: 0.98 } : {}}
             onClick={() => canAdvance && setStep((s) => s + 1)}
             disabled={!canAdvance}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition disabled:opacity-40 disabled:cursor-not-allowed"
             style={{
-              background:
-                "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-              boxShadow: canAdvance
-                ? "0 8px 28px rgba(0, 212, 255, 0.30)"
-                : "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "12px 22px",
+              background: canAdvance ? C.terra : C.cream2,
+              color: canAdvance ? C.cream3 : C.inkFaint,
+              border: canAdvance ? "none" : `1px solid ${C.rule}`,
+              cursor: canAdvance ? "pointer" : "not-allowed",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              fontSize: 14,
+              borderRadius: 2,
+              opacity: canAdvance ? 1 : 0.5,
             }}
           >
-            Continue <ArrowRight className="w-4 h-4" />
+            Continue <ArrowRight style={{ width: 14, height: 14 }} />
           </motion.button>
         ) : (
           <motion.button
@@ -657,29 +814,38 @@ export default function DiscoveryCallForm() {
             whileHover={status !== "submitting" ? { scale: 1.02 } : {}}
             whileTap={status !== "submitting" ? { scale: 0.98 } : {}}
             disabled={status === "submitting" || !canAdvance}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition disabled:opacity-40 disabled:cursor-not-allowed"
             style={{
-              background:
-                "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-              boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "12px 22px",
+              background: status !== "submitting" && canAdvance ? C.terra : C.cream2,
+              color: status !== "submitting" && canAdvance ? C.cream3 : C.inkFaint,
+              border: status !== "submitting" && canAdvance ? "none" : `1px solid ${C.rule}`,
+              cursor: status === "submitting" || !canAdvance ? "not-allowed" : "pointer",
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              fontSize: 14,
+              borderRadius: 2,
+              opacity: status === "submitting" || !canAdvance ? 0.5 : 1,
             }}
           >
             {status === "submitting" ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" /> Sending brief…
+                <Loader2 style={{ width: 14, height: 14 }} className="animate-spin" /> Sending brief…
               </>
             ) : (
               <>
-                <Send className="w-4 h-4" /> Send brief — reply in 8 hours
+                <Send style={{ width: 14, height: 14 }} /> Send brief — reply in 8 hours
               </>
             )}
           </motion.button>
         )}
       </div>
 
-      <p className="text-xs text-gray-500">
+      <p style={{ fontSize: 11, color: C.inkFaint }}>
         By submitting you agree to our{" "}
-        <a href="/privacy-policy" className="underline hover:text-cyan-300">
+        <a href="/privacy-policy" style={{ textDecoration: "underline", color: C.terra }}>
           Privacy Policy
         </a>
         . No spam, no sequences.
@@ -701,11 +867,26 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-gray-100 mb-1.5">
+      <label
+        style={{
+          display: "block",
+          fontSize: 13,
+          fontWeight: 600,
+          color: C.ink,
+          marginBottom: 6,
+          fontFamily: "var(--font-mono)",
+          textTransform: "uppercase",
+          letterSpacing: "0.10em",
+        }}
+      >
         {label}
-        {required && <span className="text-cyan-400 ml-1">*</span>}
+        {required && <span style={{ color: C.terra, marginLeft: 4 }}>*</span>}
       </label>
-      {hint && <p className="text-xs text-gray-400 mb-2.5">{hint}</p>}
+      {hint && (
+        <p style={{ fontSize: 12, color: C.inkFaint, marginBottom: 10 }}>
+          {hint}
+        </p>
+      )}
       {children}
     </div>
   );
@@ -729,11 +910,14 @@ function RadioCard({
   return (
     <motion.label
       whileTap={{ scale: 0.98 }}
-      className={
-        checked
-          ? "block p-3.5 rounded-xl cursor-pointer border-2 bg-cyan-500/10 border-cyan-400 transition"
-          : "block p-3.5 rounded-xl cursor-pointer border-2 bg-white/5 border-white/10 hover:border-cyan-400/50 transition"
-      }
+      style={{
+        display: "block",
+        padding: 14,
+        cursor: "pointer",
+        background: checked ? C.cream2 : C.cream3,
+        border: checked ? `2px solid ${C.terra}` : `1px solid ${C.rule}`,
+        borderRadius: 2,
+      }}
     >
       <input
         type="radio"
@@ -745,19 +929,26 @@ function RadioCard({
       />
       <div className="flex items-start gap-3">
         <div
-          className={
-            checked
-              ? "mt-1 w-4 h-4 rounded-full border-2 border-cyan-300 bg-cyan-400 flex items-center justify-center flex-shrink-0"
-              : "mt-1 w-4 h-4 rounded-full border-2 border-gray-500 flex-shrink-0"
-          }
+          style={{
+            marginTop: 4,
+            width: 16,
+            height: 16,
+            borderRadius: "50%",
+            border: `2px solid ${checked ? C.terra : "#6B6B65"}`,
+            background: checked ? C.terra : "transparent",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+          }}
         >
           {checked && (
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-900" />
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.cream3 }} />
           )}
         </div>
-        <div className="flex-1">
-          <div className="font-semibold text-white text-sm">{label}</div>
-          <div className="text-xs text-gray-400 mt-0.5 leading-snug">
+        <div style={{ flex: 1 }}>
+          <div style={{ fontWeight: 600, color: C.ink, fontSize: 14 }}>{label}</div>
+          <div style={{ fontSize: 12, color: C.inkFaint, marginTop: 2, lineHeight: 1.4 }}>
             {description}
           </div>
         </div>
@@ -776,10 +967,28 @@ function Stat({
   value: string;
 }) {
   return (
-    <div className="text-center">
-      <Icon className="w-4 h-4 text-cyan-300 mx-auto mb-1" />
-      <div className="text-lg font-extrabold text-white">{value}</div>
-      <div className="text-[10px] uppercase text-gray-400 tracking-wider">
+    <div style={{ textAlign: "center" }}>
+      <Icon style={{ width: 16, height: 16, color: C.terra, margin: "0 auto 4px" }} />
+      <div
+        style={{
+          fontFamily: "var(--font-display)",
+          fontStyle: "italic",
+          fontSize: 18,
+          fontWeight: 600,
+          color: C.ink,
+        }}
+      >
+        {value}
+      </div>
+      <div
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: 10,
+          textTransform: "uppercase",
+          color: C.inkFaint,
+          letterSpacing: "0.10em",
+        }}
+      >
         {label}
       </div>
     </div>
@@ -789,71 +998,140 @@ function Stat({
 export function DiscoveryProofSidebar() {
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl p-5 bg-white/5 border border-white/10">
+      <div
+        style={{
+          padding: 20,
+          background: C.cream2,
+          border: `1px solid ${C.rule}`,
+          transform: "rotate(-0.3deg)",
+        }}
+      >
         <div className="flex items-center gap-3 mb-3">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-cyan-400/40 flex-shrink-0">
+          <div
+            style={{
+              position: "relative",
+              width: 48,
+              height: 48,
+              borderRadius: "50%",
+              overflow: "hidden",
+              border: `2px solid ${C.terra}`,
+              flexShrink: 0,
+            }}
+          >
             <Image
               src="/portraits/waseem-cafe-arch.jpg"
               alt="Waseem"
               fill
               sizes="48px"
-              className="object-cover"
+              style={{ objectFit: "cover" }}
             />
           </div>
           <div>
-            <p className="text-white font-semibold text-sm">Waseem reads every brief</p>
-            <p className="text-xs text-gray-400">Solo founder · Bali based</p>
+            <p style={{ color: C.ink, fontWeight: 600, fontSize: 14 }}>Waseem reads every brief</p>
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                color: C.inkFaint,
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+              }}
+            >
+              — Solo founder · Bali based
+            </p>
           </div>
         </div>
-        <p className="text-sm text-gray-300 leading-relaxed">
+        <p
+          style={{
+            fontFamily: "var(--font-display)",
+            fontStyle: "italic",
+            fontSize: 14,
+            color: C.ink2,
+            lineHeight: 1.6,
+            margin: 0,
+          }}
+        >
           &quot;You don&apos;t get a sales rep. You get me. I read your brief,
           map your stack, then reply yes / no / referral. No funnel.&quot;
         </p>
       </div>
 
-      {/* The 2-person team card — co-founder hook */}
       <div
-        className="rounded-2xl p-5 overflow-hidden"
         style={{
-          background:
-            "linear-gradient(135deg, rgba(217, 119, 87, 0.10) 0%, rgba(20, 184, 166, 0.08) 100%)",
-          border: "1px solid rgba(217, 119, 87, 0.30)",
+          padding: 20,
+          background: C.cream3,
+          border: `1px solid ${C.terra}`,
+          transform: "rotate(0.3deg)",
         }}
       >
         <div className="flex items-center gap-3 mb-3">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-orange-400/40 flex-shrink-0">
+          <div
+            style={{
+              position: "relative",
+              width: 48,
+              height: 48,
+              borderRadius: "50%",
+              overflow: "hidden",
+              border: `2px solid ${C.terra}`,
+              flexShrink: 0,
+            }}
+          >
             <Image
               src="/portraits/waseem-veranda-thinking.jpg"
               alt="Waseem"
               fill
               sizes="48px"
-              className="object-cover"
+              style={{ objectFit: "cover" }}
             />
           </div>
           <div
-            className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm border-2"
             style={{
-              background:
-                "linear-gradient(135deg, #D97757 0%, #14B8A6 100%)",
-              color: "#fff",
-              fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-              borderColor: "rgba(217, 119, 87, 0.40)",
+              width: 48,
+              height: 48,
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: 700,
+              fontSize: 14,
+              background: C.terra,
+              color: C.cream3,
+              fontFamily: "var(--font-mono)",
+              border: `2px solid ${C.terra}`,
+              flexShrink: 0,
             }}
           >
             CC
           </div>
           <div>
-            <p className="text-white font-semibold text-sm">
-              <span className="text-cyan-300">WN</span>{" "}
-              <span className="text-orange-300">+</span>{" "}
-              <span className="text-orange-300">CC</span>
+            <p style={{ color: C.ink, fontWeight: 600, fontSize: 14 }}>
+              <span style={{ color: C.terra }}>WN</span>{" "}
+              <span style={{ color: C.inkFaint }}>+</span>{" "}
+              <span style={{ color: C.terra }}>CC</span>
             </p>
-            <p className="text-xs text-gray-400 font-mono">
-              2-person team. Yes that&apos;s it.
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                color: C.inkFaint,
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+              }}
+            >
+              — 2-person team. Yes that&apos;s it.
             </p>
           </div>
         </div>
-        <p className="text-sm text-gray-300 leading-relaxed italic">
+        <p
+          style={{
+            fontFamily: "var(--font-display)",
+            fontStyle: "italic",
+            fontSize: 14,
+            color: C.ink2,
+            lineHeight: 1.6,
+            margin: 0,
+          }}
+        >
           You brief me. Claude drafts. I ship. Most agencies have 12 humans —
           we have 1 human + 1 Anthropic API key. The math works.
         </p>

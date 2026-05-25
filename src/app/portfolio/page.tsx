@@ -34,7 +34,35 @@ export default function PortfolioPage() {
   return (
     <>
       <JsonLd data={schema} />
-      <WorkShowcase />
+      <div
+        className="portfolio-cream-wrap"
+        style={{
+          background: "var(--cream-3)",
+          padding: "112px 0 64px",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <style>{`
+          .portfolio-cream-wrap { color: var(--ink); }
+          .portfolio-cream-wrap h1,
+          .portfolio-cream-wrap h2,
+          .portfolio-cream-wrap h3 { color: var(--ink) !important; font-family: var(--font-display) !important; }
+          .portfolio-cream-wrap p { color: var(--ink-2) !important; }
+          .portfolio-cream-wrap .text-white,
+          .portfolio-cream-wrap .text-gray-100,
+          .portfolio-cream-wrap .text-gray-200,
+          .portfolio-cream-wrap .text-gray-300,
+          .portfolio-cream-wrap .text-gray-400 { color: var(--ink-2) !important; }
+          .portfolio-cream-wrap .bg-white\\/5,
+          .portfolio-cream-wrap .bg-white\\/10 { background-color: var(--cream-2) !important; }
+          .portfolio-cream-wrap .border-white\\/10,
+          .portfolio-cream-wrap .border-white\\/15,
+          .portfolio-cream-wrap .border-white\\/20 { border-color: rgba(26,26,26,0.12) !important; }
+          .portfolio-cream-wrap section { background: transparent !important; }
+        `}</style>
+        <WorkShowcase />
+      </div>
     </>
   );
 }

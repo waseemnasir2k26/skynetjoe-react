@@ -23,6 +23,18 @@ function fmt(n: number) {
   return `$${n.toLocaleString("en-US")}`;
 }
 
+// Shared field styles — 1px ink border, cream-3 bg
+const FIELD_STYLE: React.CSSProperties = {
+  padding: "10px 14px",
+  background: "var(--cream-3)",
+  border: "1px solid rgba(26,26,26,0.20)",
+  color: "var(--ink)",
+  fontFamily: "var(--font-sans)",
+  fontSize: 14,
+  borderRadius: 2,
+  outline: "none",
+};
+
 export default function PricingCalculator() {
   const [rows, setRows] = useState<Selection[]>([
     emptySelection(SERVICE_PRICING[0].slug),
@@ -32,7 +44,6 @@ export default function PricingCalculator() {
     setRows((prev) => {
       const next = [...prev];
       next[i] = { ...next[i], ...patch };
-      // Reset addons if service changed
       if (patch.serviceSlug) next[i].addonIds = [];
       return next;
     });
@@ -68,17 +79,58 @@ export default function PricingCalculator() {
   }, [rows]);
 
   return (
-    <section className="relative py-16 md:py-24 border-t border-white/[0.08]">
+    <section
+      className="relative py-16 md:py-24"
+      style={{
+        background: "var(--cream-3)",
+        borderTop: "1px solid rgba(26,26,26,0.10)",
+      }}
+    >
       <div className="container-x px-6 max-w-5xl mx-auto">
         <div className="mb-10">
-          <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-            <Calculator className="w-3 h-3" />
-            Pricing calculator
-          </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
-            Stack services. See your real number.
+          <div
+            className="inline-flex items-center gap-3 mb-3"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+            }}
+          >
+            <Calculator className="w-3.5 h-3.5" />
+            — Pricing calculator
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              lineHeight: 1.1,
+              marginBottom: 12,
+            }}
+          >
+            Stack services.{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
+              }}
+            >
+              See your real number.
+            </em>
           </h2>
-          <p className="text-lg text-fg-muted max-w-2xl">
+          <p
+            style={{
+              fontSize: 17,
+              color: "var(--ink-2)",
+              maxWidth: "44rem",
+              lineHeight: 1.55,
+            }}
+          >
             Add any combination of services + add-ons. Total updates live. No
             sign-up. No email gate. Just an honest estimate before any call.
           </p>
@@ -92,16 +144,40 @@ export default function PricingCalculator() {
             return (
               <div
                 key={i}
-                className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 md:p-6"
+                style={{
+                  padding: 22,
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                }}
               >
                 <div className="flex items-start justify-between gap-3 mb-4">
-                  <span className="text-xs uppercase tracking-wider text-cyan-300 font-semibold">
-                    Line {i + 1}
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.16em",
+                      color: "var(--terracotta)",
+                      fontWeight: 600,
+                    }}
+                  >
+                    — Line {i + 1}
                   </span>
                   {rows.length > 1 && (
                     <button
                       onClick={() => removeRow(i)}
-                      className="inline-flex items-center gap-1 text-xs text-rose-300 hover:text-rose-200 font-medium"
+                      className="inline-flex items-center gap-1"
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 11,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                        color: "var(--oxblood)",
+                        fontWeight: 600,
+                        background: "transparent",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
                     >
                       <Minus className="w-3 h-3" />
                       Remove
@@ -111,7 +187,16 @@ export default function PricingCalculator() {
 
                 <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_auto] gap-3 mb-4">
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-[11px] uppercase tracking-wider text-fg-faint font-semibold">
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10.5,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                        color: "var(--ink-faint)",
+                        fontWeight: 600,
+                      }}
+                    >
                       Service
                     </span>
                     <select
@@ -119,14 +204,10 @@ export default function PricingCalculator() {
                       onChange={(e) =>
                         updateRow(i, { serviceSlug: e.target.value })
                       }
-                      className="px-3 py-2.5 rounded-lg bg-white/[0.05] border border-white/15 text-white text-sm focus:outline-none focus:border-cyan-400/60"
+                      style={FIELD_STYLE}
                     >
                       {SERVICE_PRICING.map((s) => (
-                        <option
-                          key={s.slug}
-                          value={s.slug}
-                          className="bg-[#061827]"
-                        >
+                        <option key={s.slug} value={s.slug}>
                           {s.category} — {s.label}
                         </option>
                       ))}
@@ -134,7 +215,16 @@ export default function PricingCalculator() {
                   </label>
 
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-[11px] uppercase tracking-wider text-fg-faint font-semibold">
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10.5,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                        color: "var(--ink-faint)",
+                        fontWeight: 600,
+                      }}
+                    >
                       Tier
                     </span>
                     <select
@@ -144,14 +234,10 @@ export default function PricingCalculator() {
                           tierName: e.target.value as ServiceTier["name"],
                         })
                       }
-                      className="px-3 py-2.5 rounded-lg bg-white/[0.05] border border-white/15 text-white text-sm focus:outline-none focus:border-cyan-400/60"
+                      style={FIELD_STYLE}
                     >
                       {svc.tiers.map((t) => (
-                        <option
-                          key={t.name}
-                          value={t.name}
-                          className="bg-[#061827]"
-                        >
+                        <option key={t.name} value={t.name}>
                           {t.name} — {fmt(t.price)}
                           {t.cadence === "monthly" ? "/mo" : ""}
                         </option>
@@ -160,7 +246,16 @@ export default function PricingCalculator() {
                   </label>
 
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-[11px] uppercase tracking-wider text-fg-faint font-semibold">
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10.5,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                        color: "var(--ink-faint)",
+                        fontWeight: 600,
+                      }}
+                    >
                       Qty
                     </span>
                     <input
@@ -170,17 +265,30 @@ export default function PricingCalculator() {
                       value={row.qty}
                       onChange={(e) =>
                         updateRow(i, {
-                          qty: Math.max(1, Math.min(20, Number(e.target.value) || 1)),
+                          qty: Math.max(
+                            1,
+                            Math.min(20, Number(e.target.value) || 1)
+                          ),
                         })
                       }
-                      className="w-20 px-3 py-2.5 rounded-lg bg-white/[0.05] border border-white/15 text-white text-sm focus:outline-none focus:border-cyan-400/60"
+                      style={{ ...FIELD_STYLE, width: 80 }}
                     />
                   </label>
                 </div>
 
                 {svc.addons.length > 0 && (
                   <div>
-                    <div className="text-[11px] uppercase tracking-wider text-fg-faint font-semibold mb-2">
+                    <div
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10.5,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                        color: "var(--ink-faint)",
+                        fontWeight: 600,
+                        marginBottom: 8,
+                      }}
+                    >
                       Add-ons
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -196,14 +304,32 @@ export default function PricingCalculator() {
                                   : [...row.addonIds, a.id],
                               })
                             }
-                            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-                              checked
-                                ? "bg-cyan-500/20 border border-cyan-400/60 text-white"
-                                : "bg-white/[0.03] border border-white/10 text-fg-muted hover:border-white/25 hover:text-white"
-                            }`}
+                            className="inline-flex items-center gap-2"
+                            style={{
+                              padding: "7px 12px",
+                              fontFamily: "var(--font-sans)",
+                              fontSize: 12.5,
+                              fontWeight: 500,
+                              color: checked ? "var(--ink)" : "var(--ink-2)",
+                              background: checked
+                                ? "var(--cream-3)"
+                                : "transparent",
+                              border: `1px solid ${checked ? "var(--terracotta)" : "rgba(26,26,26,0.18)"}`,
+                              borderLeft: checked
+                                ? "3px solid var(--terracotta)"
+                                : "1px solid rgba(26,26,26,0.18)",
+                              cursor: "pointer",
+                              transition: "all 0.18s",
+                            }}
                           >
                             <span>{a.label}</span>
-                            <span className="text-cyan-300 font-semibold">
+                            <span
+                              style={{
+                                fontFamily: "var(--font-mono)",
+                                color: "var(--terracotta)",
+                                fontWeight: 700,
+                              }}
+                            >
                               +{fmt(a.price)}
                               {a.cadence === "monthly" ? "/mo" : ""}
                             </span>
@@ -220,44 +346,107 @@ export default function PricingCalculator() {
 
         <button
           onClick={addRow}
-          className="mb-8 inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-cyan-300 border border-cyan-400/30 bg-cyan-500/10 hover:bg-cyan-500/15 transition"
+          className="mb-8 inline-flex items-center gap-2"
+          style={{
+            padding: "11px 18px",
+            fontFamily: "var(--font-sans)",
+            fontSize: 13.5,
+            fontWeight: 600,
+            color: "var(--ink)",
+            background: "transparent",
+            border: "1px solid var(--ink)",
+            borderRadius: 2,
+            cursor: "pointer",
+          }}
         >
           <Plus className="w-4 h-4" />
           Add another service
         </button>
 
-        {/* Total card */}
+        {/* Total card — terracotta */}
         <div
-          className="rounded-3xl p-6 md:p-8"
           style={{
-            background:
-              "linear-gradient(135deg, rgba(30,136,229,0.14) 0%, rgba(20,184,166,0.14) 100%)",
-            border: "1px solid rgba(0, 212, 255, 0.35)",
-            boxShadow: "0 30px 80px -20px rgba(0, 212, 255, 0.25)",
+            padding: 32,
+            background: "var(--terracotta)",
+            color: "var(--cream-3)",
           }}
         >
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-center">
-            <div className="space-y-2">
-              <div className="text-[11px] uppercase tracking-wider text-cyan-300 font-semibold">
-                Estimated investment
+            <div>
+              <div
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "rgba(250,247,240,0.85)",
+                  marginBottom: 10,
+                }}
+              >
+                — Estimated investment
               </div>
-              <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
+              <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 mb-3">
                 <div>
-                  <span className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 44,
+                      fontWeight: 600,
+                      color: "var(--cream-3)",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
                     {fmt(totals.oneTime)}
                   </span>
-                  <span className="text-sm text-fg-muted ml-2">one-time</span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 12,
+                      color: "rgba(250,247,240,0.8)",
+                      marginLeft: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                    }}
+                  >
+                    one-time
+                  </span>
                 </div>
                 {totals.monthly > 0 && (
                   <div>
-                    <span className="text-2xl md:text-3xl font-bold text-cyan-200 tracking-tight">
+                    <span
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: 28,
+                        fontWeight: 500,
+                        fontStyle: "italic",
+                        color: "var(--cream-3)",
+                      }}
+                    >
                       + {fmt(totals.monthly)}
                     </span>
-                    <span className="text-sm text-fg-muted ml-2">/month</span>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 12,
+                        color: "rgba(250,247,240,0.8)",
+                        marginLeft: 10,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                      }}
+                    >
+                      /month
+                    </span>
                   </div>
                 )}
               </div>
-              <p className="text-sm text-fg-muted max-w-xl">
+              <p
+                style={{
+                  fontSize: 14,
+                  color: "rgba(250,247,240,0.88)",
+                  maxWidth: "44ch",
+                  lineHeight: 1.55,
+                }}
+              >
                 Estimate only. Final scope locks on the call — usually within
                 ±10% of this number. No surprise upsells.
               </p>
@@ -265,10 +454,17 @@ export default function PricingCalculator() {
 
             <Link
               href="/discovery-call"
-              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold text-white whitespace-nowrap transition-transform hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                whiteSpace: "nowrap",
+                padding: "18px 26px",
+                fontFamily: "var(--font-sans)",
+                fontSize: 15,
+                fontWeight: 700,
+                background: "var(--cream-3)",
+                color: "var(--terracotta)",
+                borderRadius: 2,
+                border: "none",
               }}
             >
               Lock this scope on a call

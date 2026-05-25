@@ -1,16 +1,29 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 import { Loader2, CalendarClock } from "lucide-react";
 import type { QualifierState } from "./Qualifier";
 
+/**
+ * Cream editorial pivot 2026-05-25 — Calendly container.
+ * Cream-3 paper container with 1px ink border. No gradient, no glow.
+ */
+
+const C = {
+  cream2: "#EDE8DC",
+  cream3: "#FAF7F0",
+  ink: "#1A1A1A",
+  ink2: "#3A3A36",
+  inkFaint: "#6B6B65",
+  terra: "#C66B3F",
+  rule: "rgba(26,26,26,0.12)",
+};
+
 const CALENDLY_URL =
   "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
-// Map qualifier answers into Calendly's customAnswers slots (a1..a10).
-// Order is locked so Calendly's intake form receives consistent fields.
 function buildPrefill(q: QualifierState | null) {
   if (!q) return undefined;
   const businessLabel =
@@ -63,7 +76,6 @@ export default function CalendlyEmbed({
   );
   const utm = useMemo(() => buildUtm(leadId), [leadId]);
 
-  // Listen for the calendly.event_scheduled message
   useCalendlyEventListener({
     onEventScheduled: async (e) => {
       if (scheduled) return;
@@ -93,7 +105,6 @@ export default function CalendlyEmbed({
       } catch (err) {
         console.error("[discovery-call] booking POST failed", err);
       }
-      // DataLayer event for GTM
       if (
         typeof window !== "undefined" &&
         (window as unknown as { dataLayer?: unknown[] }).dataLayer
@@ -104,7 +115,6 @@ export default function CalendlyEmbed({
         });
       }
       onScheduled?.();
-      // Brief delay so Calendly's success UI flashes before redirect
       window.setTimeout(() => {
         router.push("/thank-you?ref=discovery-call");
       }, 1200);
@@ -113,17 +123,22 @@ export default function CalendlyEmbed({
 
   return (
     <div
-      className="rounded-3xl p-1 md:p-1.5 relative overflow-hidden"
       style={{
-        background:
-          "linear-gradient(135deg, #1E88E5 0%, #14B8A6 60%, #073846 100%)",
-        boxShadow:
-          "0 30px 80px -20px rgba(0, 212, 255, 0.35), 0 0 0 1px rgba(126, 228, 255, 0.20)",
+        background: C.cream3,
+        border: `1px solid ${C.ink}`,
+        padding: 6,
+        position: "relative",
+        overflow: "hidden",
+        boxShadow: "0 18px 48px rgba(26,26,26,0.10)",
       }}
     >
       <div
-        className="rounded-[22px] overflow-hidden relative bg-white"
-        style={{ minHeight: 720 }}
+        style={{
+          overflow: "hidden",
+          position: "relative",
+          background: "#fff",
+          minHeight: 720,
+        }}
       >
         <InlineWidget
           url={CALENDLY_URL}
@@ -131,22 +146,57 @@ export default function CalendlyEmbed({
           utm={utm}
           styles={{ height: "720px", minWidth: "320px" }}
           pageSettings={{
-            backgroundColor: "ffffff",
-            primaryColor: "1E88E5",
-            textColor: "0a2d4a",
+            backgroundColor: "FAF7F0",
+            primaryColor: "C66B3F",
+            textColor: "1A1A1A",
             hideEventTypeDetails: false,
             hideGdprBanner: true,
             hideLandingPageDetails: false,
           }}
           iframeTitle="SkynetLabs · Free 30-minute strategy call"
           LoadingSpinner={() => (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-white">
-              <Loader2 className="w-10 h-10 text-cyan-500 animate-spin mb-3" />
-              <p className="text-sm font-semibold text-slate-700">
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                background: C.cream3,
+              }}
+            >
+              <Loader2
+                style={{
+                  width: 36,
+                  height: 36,
+                  color: C.terra,
+                  marginBottom: 12,
+                }}
+                className="animate-spin"
+              />
+              <p
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 15,
+                  fontWeight: 600,
+                  color: C.ink,
+                  margin: 0,
+                }}
+              >
                 Loading calendar…
               </p>
-              <p className="text-xs text-slate-500 mt-1">
-                Bali hours · GMT+8 · auto-converted to your timezone
+              <p
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 10,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: C.inkFaint,
+                  marginTop: 6,
+                }}
+              >
+                — Bali · GMT+8 · auto-converts to your timezone
               </p>
             </div>
           )}
@@ -154,14 +204,49 @@ export default function CalendlyEmbed({
       </div>
 
       {scheduled && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/85 backdrop-blur-sm rounded-3xl z-10">
-          <div className="text-center px-6">
-            <CalendarClock className="w-12 h-12 text-cyan-300 mx-auto mb-4" />
-            <p className="text-xl font-extrabold text-white mb-1">
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "rgba(250, 247, 240, 0.94)",
+            zIndex: 10,
+          }}
+        >
+          <div style={{ textAlign: "center", padding: "0 24px" }}>
+            <CalendarClock
+              style={{
+                width: 48,
+                height: 48,
+                color: C.terra,
+                margin: "0 auto 16px",
+              }}
+            />
+            <p
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: 22,
+                fontWeight: 600,
+                color: C.ink,
+                marginBottom: 6,
+                letterSpacing: "-0.01em",
+              }}
+            >
               Slot locked. Redirecting…
             </p>
-            <p className="text-sm text-cyan-200">
-              Sending your prep notes to Waseem now.
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: C.inkFaint,
+                margin: 0,
+              }}
+            >
+              — Sending your prep notes to Waseem now
             </p>
           </div>
         </div>
@@ -170,5 +255,4 @@ export default function CalendlyEmbed({
   );
 }
 
-// Used by parent to scroll to embed via id
 export const CALENDLY_SECTION_ID = "calendly-embed";

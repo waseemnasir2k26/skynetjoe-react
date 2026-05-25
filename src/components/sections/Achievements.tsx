@@ -17,7 +17,6 @@ type Card = {
   suffix: string;
   label: string;
   sub: string;
-  accent: { grad: string; ring: string; glow: string; chip: string };
 };
 
 const CARDS: Card[] = [
@@ -27,12 +26,6 @@ const CARDS: Card[] = [
     suffix: "+",
     label: "Marketing campaigns",
     sub: "Ad sets, funnels, email drips, content engines.",
-    accent: {
-      grad: "from-cyan-300 to-sky-400",
-      ring: "ring-cyan-300/30",
-      glow: "shadow-cyan-500/30",
-      chip: "text-cyan-300 bg-cyan-400/10 border-cyan-400/30",
-    },
   },
   {
     icon: Palette,
@@ -40,12 +33,6 @@ const CARDS: Card[] = [
     suffix: "+",
     label: "Branding builds",
     sub: "Logos, design systems, deck rebrands, brand books.",
-    accent: {
-      grad: "from-amber-300 to-orange-400",
-      ring: "ring-amber-300/30",
-      glow: "shadow-amber-500/30",
-      chip: "text-amber-300 bg-amber-400/10 border-amber-400/30",
-    },
   },
   {
     icon: Bot,
@@ -53,12 +40,6 @@ const CARDS: Card[] = [
     suffix: "+",
     label: "AI automations",
     sub: "n8n + GHL + custom agents. The kind that survive Mondays.",
-    accent: {
-      grad: "from-teal-300 to-emerald-400",
-      ring: "ring-teal-300/30",
-      glow: "shadow-teal-500/30",
-      chip: "text-teal-300 bg-teal-400/10 border-teal-400/30",
-    },
   },
   {
     icon: Code2,
@@ -66,12 +47,6 @@ const CARDS: Card[] = [
     suffix: "+",
     label: "Vibe-coded apps & sites",
     sub: "Next.js, internal tools, one-shot dashboards, weekend builds.",
-    accent: {
-      grad: "from-fuchsia-300 to-pink-400",
-      ring: "ring-fuchsia-300/30",
-      glow: "shadow-fuchsia-500/30",
-      chip: "text-fuchsia-300 bg-fuchsia-400/10 border-fuchsia-400/30",
-    },
   },
   {
     icon: Puzzle,
@@ -79,12 +54,6 @@ const CARDS: Card[] = [
     suffix: "+",
     label: "Chrome extensions",
     sub: "Scrapers, overlays, productivity hacks shipped to the store.",
-    accent: {
-      grad: "from-violet-300 to-purple-400",
-      ring: "ring-violet-300/30",
-      glow: "shadow-violet-500/30",
-      chip: "text-violet-300 bg-violet-400/10 border-violet-400/30",
-    },
   },
   {
     icon: Wrench,
@@ -92,12 +61,6 @@ const CARDS: Card[] = [
     suffix: "+",
     label: "Custom plugins",
     sub: "WordPress, n8n nodes, GHL workflows — glue you can read.",
-    accent: {
-      grad: "from-rose-300 to-red-400",
-      ring: "ring-rose-300/30",
-      glow: "shadow-rose-500/30",
-      chip: "text-rose-300 bg-rose-400/10 border-rose-400/30",
-    },
   },
 ];
 
@@ -112,7 +75,6 @@ function useCount(target: number, durationMs = 1400, start: boolean) {
       if (startedAt.current === null) startedAt.current = now;
       const elapsed = now - startedAt.current;
       const t = Math.min(elapsed / durationMs, 1);
-      // ease-out cubic
       const eased = 1 - Math.pow(1 - t, 3);
       setValue(Math.round(target * eased));
       if (t < 1) raf.current = requestAnimationFrame(tick);
@@ -126,35 +88,74 @@ function useCount(target: number, durationMs = 1400, start: boolean) {
   return value;
 }
 
-function StatCard({ card, start }: { card: Card; start: boolean }) {
+function StatCard({ card, start, i }: { card: Card; start: boolean; i: number }) {
   const value = useCount(card.count, 1500, start);
   const Icon = card.icon;
+  const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
   return (
     <div
-      className={`relative p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 shadow-xl ${card.accent.glow}`}
+      style={{
+        background: "var(--cream-2)",
+        border: "1px solid rgba(26,26,26,0.12)",
+        padding: "28px",
+        transform: `rotate(${rotate})`,
+        transition: "transform 0.25s ease",
+      }}
     >
-      <div className="flex items-start justify-between mb-4">
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
         <div
-          className={`w-11 h-11 rounded-xl bg-gradient-to-br ${card.accent.grad} flex items-center justify-center shadow-lg`}
+          style={{
+            width: 40,
+            height: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "var(--terracotta)",
+            borderRadius: 2,
+          }}
         >
-          <Icon className="w-5 h-5 text-slate-900" />
+          <Icon className="w-5 h-5" />
         </div>
         <span
-          className={`text-[10px] font-semibold uppercase tracking-[0.16em] px-2 py-1 rounded-full border ${card.accent.chip}`}
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            textTransform: "uppercase",
+            letterSpacing: "0.16em",
+            color: "var(--ink-faint)",
+          }}
         >
-          Shipped
+          — shipped
         </span>
       </div>
       <div
-        className={`text-5xl md:text-6xl font-extrabold mb-2 bg-gradient-to-br ${card.accent.grad} bg-clip-text text-transparent tabular-nums leading-none`}
+        style={{
+          fontFamily: "var(--font-display)",
+          fontStyle: "italic",
+          fontSize: 56,
+          fontWeight: 500,
+          color: "var(--terracotta)",
+          lineHeight: 1,
+          marginBottom: 10,
+          letterSpacing: "-0.02em",
+        }}
       >
         {value}
-        <span className="text-3xl md:text-4xl align-top">{card.suffix}</span>
+        <span style={{ fontSize: 32 }}>{card.suffix}</span>
       </div>
-      <div className="text-sm md:text-base font-semibold text-white mb-1">
+      <div
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: 20,
+          fontWeight: 600,
+          color: "var(--ink)",
+          marginBottom: 6,
+          letterSpacing: "-0.01em",
+        }}
+      >
         {card.label}
       </div>
-      <p className="text-xs md:text-sm text-gray-400 leading-relaxed">
+      <p style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
         {card.sub}
       </p>
     </div>
@@ -186,105 +187,177 @@ export default function Achievements() {
   return (
     <section
       ref={sectionRef}
-      className="relative section overflow-hidden"
       aria-labelledby="achievements-heading"
       style={{
-        background:
-          "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+        background: "var(--cream-3)",
+        padding: "72px 0",
+        borderTop: "1px solid rgba(26,26,26,0.10)",
+        borderBottom: "1px solid rgba(26,26,26,0.10)",
+        position: "relative",
+        zIndex: 2,
       }}
     >
-      {/* ambient orbs */}
-      <span
-        className="orb"
-        style={{
-          width: 460,
-          height: 460,
-          background: "#00D4FF",
-          top: -100,
-          left: -120,
-          opacity: 0.35,
-        }}
-      />
-      <span
-        className="orb"
-        style={{
-          width: 520,
-          height: 520,
-          background: "#14B8A6",
-          bottom: -160,
-          right: -120,
-          opacity: 0.3,
-          animationDelay: "-6s",
-        }}
-      />
-
-      <div className="container-x relative z-10 px-6">
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-semibold uppercase tracking-[0.18em] mb-5">
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 720, marginBottom: 40 }}>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+              marginBottom: 14,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
             The receipts · 2022 → 2026
           </div>
           <h2
             id="achievements-heading"
-            className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 text-white"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(32px, 5vw, 56px)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.06,
+              color: "var(--ink)",
+              marginBottom: 14,
+            }}
           >
             1,000+ shipped.{" "}
-            <span
-              style={{
-                background:
-                  "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
+            <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
               Most under one keyboard.
-            </span>
+            </em>
           </h2>
-          <p className="text-base md:text-lg text-gray-300 max-w-2xl">
+          <p
+            style={{
+              fontSize: 17,
+              color: "var(--ink-2)",
+              lineHeight: 1.6,
+              maxWidth: "52ch",
+            }}
+          >
             Four years, one operator, one AI cofounder. No SDR team, no offshore
             handoff — just one human stacking work, week after week, from a Bali
             cafe.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {CARDS.map((c) => (
-            <StatCard key={c.label} card={c} start={start} />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 20,
+          }}
+        >
+          {CARDS.map((c, i) => (
+            <StatCard key={c.label} card={c} start={start} i={i} />
           ))}
         </div>
 
-        {/* The human behind the number */}
-        <div className="mt-14 md:mt-16 grid md:grid-cols-[auto_1fr] gap-7 md:gap-9 items-center">
-          <div
-            className="relative w-40 h-52 md:w-56 md:h-72 rounded-2xl overflow-hidden ring-1 ring-cyan-400/30 shadow-2xl shadow-cyan-500/20 mx-auto md:mx-0"
-            style={{ flexShrink: 0 }}
+        <div
+          style={{
+            marginTop: 56,
+            display: "grid",
+            gridTemplateColumns: "auto 1fr",
+            gap: 28,
+            alignItems: "center",
+          }}
+          className="ach-author"
+        >
+          <style>{`
+            @media (max-width: 640px) {
+              .ach-author { grid-template-columns: 1fr !important; text-align: center; }
+              .ach-author figure { margin: 0 auto; }
+            }
+          `}</style>
+          <figure
+            style={{
+              margin: 0,
+              transform: "rotate(-1.2deg)",
+              background: "var(--cream-3)",
+              padding: 10,
+              border: "1px solid rgba(26,26,26,0.12)",
+              boxShadow: "0 18px 48px rgba(26,26,26,0.12)",
+              width: 220,
+            }}
           >
-            <Image
-              src="/portraits/waseem-builder-portrait.jpg"
-              alt="Waseem Nasir, founder of SkynetLabs, at a Bali cafe — the one who actually ships"
-              fill
-              sizes="(min-width: 768px) 224px, 160px"
-              className="object-cover"
-            />
             <div
-              className="absolute inset-x-0 bottom-0 h-1/3"
               style={{
-                background:
-                  "linear-gradient(180deg, transparent 0%, rgba(6,24,39,0.85) 100%)",
+                position: "relative",
+                width: "100%",
+                aspectRatio: "4 / 5",
+                overflow: "hidden",
               }}
-            />
-          </div>
-          <div className="text-center md:text-left">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-2">
-              The person behind the count
+            >
+              <Image
+                src="/portraits/waseem-builder-portrait.jpg"
+                alt="Waseem Nasir, founder of SkynetLabs, at a Bali cafe — the one who actually ships"
+                fill
+                sizes="220px"
+                style={{
+                  objectFit: "cover",
+                  filter: "sepia(0.08) saturate(0.95)",
+                }}
+              />
+            </div>
+            <figcaption
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: "var(--ink-faint)",
+                textAlign: "center",
+                paddingTop: 10,
+              }}
+            >
+              Waseem · Bali · GMT+8
+            </figcaption>
+          </figure>
+          <div>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.18em",
+                color: "var(--terracotta)",
+                marginBottom: 10,
+              }}
+            >
+              — The person behind the count
+            </div>
+            <p
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(20px, 2.4vw, 26px)",
+                fontWeight: 500,
+                color: "var(--ink)",
+                lineHeight: 1.25,
+                margin: "0 0 10px",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Waseem Nasir — founder, builder, the one who{" "}
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+                actually ships.
+              </em>
             </p>
-            <p className="text-xl md:text-2xl font-bold text-white mb-2 leading-snug">
-              Waseem Nasir — founder, builder, the one who actually ships.
-            </p>
-            <p className="text-sm md:text-base text-gray-300 leading-relaxed max-w-xl">
-              No account managers. No junior layer. When you hire SkynetLabs
-              you hire this guy and the Claude session running on his second
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.65,
+                maxWidth: "52ch",
+                margin: 0,
+              }}
+            >
+              No account managers. No junior layer. When you hire SkynetLabs you
+              hire this guy and the Claude session running on his second
               monitor. Bali → your business, in 5–14 days.
             </p>
           </div>

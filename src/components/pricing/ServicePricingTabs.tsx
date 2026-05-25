@@ -31,7 +31,10 @@ import {
   type ServiceTier,
 } from "@/lib/service-pricing";
 
-const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+const ICONS: Record<
+  string,
+  React.ComponentType<{ className?: string; style?: React.CSSProperties }>
+> = {
   Bot,
   Target,
   Link: LinkIcon,
@@ -54,49 +57,115 @@ function formatPrice(p: number) {
   return `$${p.toLocaleString("en-US")}`;
 }
 
-function TierCard({ tier }: { tier: ServiceTier }) {
+function TierCard({ tier, idx }: { tier: ServiceTier; idx: number }) {
   const featured = tier.badge === "Most picked" || tier.badge === "Best value";
+  const rotate = idx % 2 === 0 ? "-0.2deg" : "0.2deg";
   return (
     <div
-      className={`relative flex flex-col rounded-2xl p-6 transition ${
-        featured
-          ? "bg-gradient-to-b from-cyan-500/10 to-white/[0.02] border border-cyan-400/40 shadow-[0_8px_40px_rgba(0,212,255,0.18)]"
-          : "bg-white/[0.03] border border-white/10 hover:border-white/20"
-      }`}
+      className="relative flex flex-col"
+      style={{
+        padding: 24,
+        background: featured ? "var(--cream-3)" : "var(--cream-2)",
+        border: `1px solid ${featured ? "var(--terracotta)" : "rgba(26,26,26,0.10)"}`,
+        borderTop: featured
+          ? "3px solid var(--terracotta)"
+          : "1px solid rgba(26,26,26,0.10)",
+        transform: `rotate(${rotate})`,
+      }}
     >
       {tier.badge && (
         <span
-          className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase whitespace-nowrap"
           style={{
-            background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-            color: "#0a0a0a",
+            position: "absolute",
+            top: -12,
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "4px 10px",
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            whiteSpace: "nowrap",
+            background: featured ? "var(--terracotta)" : "var(--ochre)",
+            color: "var(--cream-3)",
           }}
         >
           {tier.badge}
         </span>
       )}
 
-      <div className="text-[11px] uppercase tracking-wider text-cyan-300 font-semibold mb-1">
-        {tier.name}
+      <div
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: 11,
+          textTransform: "uppercase",
+          letterSpacing: "0.16em",
+          color: "var(--terracotta)",
+          fontWeight: 600,
+          marginBottom: 6,
+        }}
+      >
+        — {tier.name}
       </div>
-      <p className="text-sm text-fg-muted mb-4">{tier.tagline}</p>
+      <p
+        style={{
+          fontSize: 13.5,
+          color: "var(--ink-2)",
+          marginBottom: 18,
+          lineHeight: 1.5,
+        }}
+      >
+        {tier.tagline}
+      </p>
 
       <div className="flex items-baseline gap-1 mb-1">
-        <span className="text-3xl font-extrabold text-white tracking-tight">
+        <span
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 34,
+            fontWeight: 600,
+            color: "var(--ink)",
+            letterSpacing: "-0.02em",
+          }}
+        >
           {formatPrice(tier.price)}
         </span>
         {tier.cadence === "monthly" && (
-          <span className="text-sm text-fg-faint">/mo</span>
+          <span style={{ fontSize: 13, color: "var(--ink-faint)" }}>/mo</span>
         )}
       </div>
-      <div className="inline-flex w-fit text-xs text-skynet-primary-light bg-skynet-primary/10 border border-skynet-primary/20 px-2 py-1 rounded-md mb-5">
+      <div
+        className="inline-flex w-fit mb-5"
+        style={{
+          padding: "4px 9px",
+          fontFamily: "var(--font-mono)",
+          fontSize: 10.5,
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          color: "var(--ink-2)",
+          background: "var(--cream)",
+          border: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
         Ships in {tier.ship}
       </div>
 
       <ul className="space-y-2.5 mb-6 flex-1">
         {tier.features.map((f) => (
-          <li key={f} className="flex gap-2 text-sm text-fg-muted leading-snug">
-            <Check className="w-4 h-4 text-cyan-300 flex-shrink-0 mt-0.5" />
+          <li
+            key={f}
+            className="flex gap-2"
+            style={{
+              fontSize: 13.5,
+              color: "var(--ink-2)",
+              lineHeight: 1.5,
+            }}
+          >
+            <Check
+              className="w-4 h-4 flex-shrink-0 mt-0.5"
+              style={{ color: "var(--terracotta)" }}
+            />
             <span>{f}</span>
           </li>
         ))}
@@ -104,19 +173,29 @@ function TierCard({ tier }: { tier: ServiceTier }) {
 
       <Link
         href={tier.ctaHref}
-        className={`mt-auto inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
-          featured
-            ? "text-white"
-            : "text-white border border-white/15 bg-white/[0.04] hover:border-cyan-400/40"
-        }`}
+        className="mt-auto inline-flex items-center justify-center gap-1.5"
         style={
           featured
             ? {
-                background:
-                  "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 6px 20px rgba(30,136,229,0.35)",
+                padding: "12px 18px",
+                fontFamily: "var(--font-sans)",
+                fontSize: 14,
+                fontWeight: 700,
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                borderRadius: 2,
+                border: "none",
               }
-            : undefined
+            : {
+                padding: "11px 17px",
+                fontFamily: "var(--font-sans)",
+                fontSize: 14,
+                fontWeight: 600,
+                background: "transparent",
+                color: "var(--ink)",
+                border: "1px solid var(--ink)",
+                borderRadius: 2,
+              }
         }
       >
         {tier.ctaLabel}
@@ -132,43 +211,93 @@ function ServicePanel({ service }: { service: ServicePricing }) {
     <div className="space-y-6">
       <div className="flex items-center gap-3">
         {Icon && (
-          <span className="w-11 h-11 rounded-xl flex items-center justify-center bg-cyan-500/12 border border-cyan-400/25">
-            <Icon className="w-5 h-5 text-cyan-300" />
+          <span
+            className="w-11 h-11 flex items-center justify-center"
+            style={{
+              background: "var(--cream-3)",
+              border: "1px solid var(--terracotta)",
+              color: "var(--terracotta)",
+            }}
+          >
+            <Icon className="w-5 h-5" />
           </span>
         )}
         <div>
-          <h3 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+          <h3
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(20px, 2.5vw, 24px)",
+              fontWeight: 600,
+              color: "var(--ink)",
+              letterSpacing: "-0.01em",
+            }}
+          >
             {service.label}
           </h3>
-          <p className="text-sm text-fg-muted">{service.tagline}</p>
+          <p style={{ fontSize: 13.5, color: "var(--ink-2)" }}>
+            {service.tagline}
+          </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-        {service.tiers.map((t) => (
-          <TierCard key={t.name} tier={t} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 pt-3">
+        {service.tiers.map((t, i) => (
+          <TierCard key={t.name} tier={t} idx={i} />
         ))}
       </div>
 
       {service.addons.length > 0 && (
-        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
-          <div className="flex items-center gap-2 mb-3">
-            <Sparkles className="w-4 h-4 text-cyan-300" />
-            <span className="text-[11px] uppercase tracking-wider text-cyan-300 font-semibold">
-              Optional add-ons
-            </span>
+        <div
+          style={{
+            padding: 20,
+            background: "var(--cream-2)",
+            border: "1px solid rgba(26,26,26,0.10)",
+          }}
+        >
+          <div
+            className="flex items-center gap-2 mb-3"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+            }}
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            — Optional add-ons
           </div>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {service.addons.map((a) => (
               <li
                 key={a.id}
-                className="flex items-center justify-between gap-3 py-2 px-3 rounded-lg bg-white/[0.03] border border-white/[0.06] text-sm"
+                className="flex items-center justify-between gap-3"
+                style={{
+                  padding: "10px 14px",
+                  background: "var(--cream-3)",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                  fontSize: 13,
+                }}
               >
-                <span className="text-fg-muted">{a.label}</span>
-                <span className="text-white font-semibold whitespace-nowrap">
+                <span style={{ color: "var(--ink-2)" }}>{a.label}</span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    color: "var(--terracotta)",
+                    fontWeight: 700,
+                    whiteSpace: "nowrap",
+                  }}
+                >
                   +{formatPrice(a.price)}
                   {a.cadence === "monthly" && (
-                    <span className="text-fg-faint font-normal">/mo</span>
+                    <span
+                      style={{
+                        color: "var(--ink-faint)",
+                        fontWeight: 400,
+                      }}
+                    >
+                      /mo
+                    </span>
                   )}
                 </span>
               </li>
@@ -180,7 +309,13 @@ function ServicePanel({ service }: { service: ServicePricing }) {
       <div className="pt-2">
         <Link
           href={`/services/${service.slug}`}
-          className="inline-flex items-center gap-1.5 text-sm text-cyan-300 hover:text-cyan-200 font-semibold"
+          className="inline-flex items-center gap-1.5"
+          style={{
+            fontSize: 13.5,
+            color: "var(--terracotta)",
+            fontWeight: 600,
+            textUnderlineOffset: 4,
+          }}
         >
           Read full {service.label} service page
           <ArrowRight className="w-4 h-4" />
@@ -200,16 +335,65 @@ export default function ServicePricingTabs() {
     services.find((s) => s.slug === activeSlug) ?? services[0] ?? SERVICE_PRICING[0];
 
   return (
-    <section className="relative py-16 md:py-24 border-t border-white/[0.08]">
+    <section
+      className="relative py-16 md:py-24"
+      style={{
+        background: "var(--cream)",
+        borderTop: "1px solid rgba(26,26,26,0.10)",
+      }}
+    >
       <div className="container-x px-6 max-w-6xl mx-auto">
         <div className="mb-10 md:mb-12">
-          <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
+          <div
+            className="inline-flex items-center gap-3 mb-3"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+            }}
+          >
+            <span
+              style={{
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
             Per-service pricing
-          </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
-            Pick a service. See real numbers.
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              lineHeight: 1.1,
+              marginBottom: 12,
+            }}
+          >
+            Pick a service.{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
+              }}
+            >
+              See real numbers.
+            </em>
           </h2>
-          <p className="text-lg text-fg-muted max-w-2xl">
+          <p
+            style={{
+              fontSize: 17,
+              color: "var(--ink-2)",
+              maxWidth: "44rem",
+              lineHeight: 1.55,
+            }}
+          >
             16 services across 4 categories. Each has 3 tiers — Starter, Pro,
             Custom — plus optional add-ons. Same transparency, scoped per
             service.
@@ -234,11 +418,25 @@ export default function ServicePricingTabs() {
                   const first = servicesByCategory(cat)[0]?.slug;
                   if (first) setActiveSlug(first);
                 }}
-                className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
-                  isActive
-                    ? "bg-gradient-to-r from-skynet-primary to-skynet-secondary text-[#0a0a0a] shadow-[0_4px_18px_rgba(30,136,229,0.35)]"
-                    : "bg-white/[0.04] text-fg-muted border border-white/10 hover:border-cyan-400/30 hover:text-white"
-                }`}
+                style={{
+                  padding: "10px 18px",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: isActive ? "var(--cream-3)" : "var(--ink)",
+                  background: isActive ? "var(--terracotta)" : "var(--cream-2)",
+                  border: `1px solid ${isActive ? "var(--terracotta)" : "rgba(26,26,26,0.12)"}`,
+                  transition: "all 0.18s",
+                  borderRadius: 2,
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive)
+                    e.currentTarget.style.background = "var(--cream-3)";
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive)
+                    e.currentTarget.style.background = "var(--cream-2)";
+                }}
               >
                 {cat}
               </button>
@@ -250,7 +448,7 @@ export default function ServicePricingTabs() {
         <div
           role="tablist"
           aria-label="Services"
-          className="flex flex-wrap gap-2 mb-10 pb-1 -mx-1 px-1"
+          className="flex flex-wrap gap-2 mb-10 pb-1"
         >
           {services.map((s) => {
             const Icon = ICONS[s.icon];
@@ -261,13 +459,35 @@ export default function ServicePricingTabs() {
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActiveSlug(s.slug)}
-                className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-[13px] font-medium transition ${
-                  isActive
-                    ? "bg-cyan-500/15 text-white border border-cyan-400/50"
-                    : "bg-white/[0.02] text-fg-muted border border-white/[0.06] hover:border-white/20 hover:text-white"
-                }`}
+                className="inline-flex items-center gap-2"
+                style={{
+                  padding: "8px 14px",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  color: isActive ? "var(--ink)" : "var(--ink-2)",
+                  background: isActive ? "var(--cream-3)" : "transparent",
+                  border: `1px solid ${isActive ? "var(--terracotta)" : "rgba(26,26,26,0.10)"}`,
+                  borderLeft: isActive
+                    ? "3px solid var(--terracotta)"
+                    : "1px solid rgba(26,26,26,0.10)",
+                  transition: "all 0.18s",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive)
+                    e.currentTarget.style.background = "var(--cream-3)";
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive)
+                    e.currentTarget.style.background = "transparent";
+                }}
               >
-                {Icon && <Icon className="w-3.5 h-3.5 text-cyan-300" />}
+                {Icon && (
+                  <Icon
+                    className="w-3.5 h-3.5"
+                    style={{ color: "var(--terracotta)" }}
+                  />
+                )}
                 {s.label}
               </button>
             );

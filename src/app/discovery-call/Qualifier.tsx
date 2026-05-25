@@ -10,6 +10,25 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+/**
+ * Cream editorial pivot 2026-05-25 — qualifier form.
+ * Form questions on cream surfaces, 1px ink border inputs,
+ * terracotta primary button. All client state preserved.
+ */
+
+const C = {
+  cream: "#F2EFE6",
+  cream2: "#EDE8DC",
+  cream3: "#FAF7F0",
+  ink: "#1A1A1A",
+  ink2: "#3A3A36",
+  inkFaint: "#6B6B65",
+  terra: "#C66B3F",
+  terra2: "#B85A30",
+  rule: "rgba(26,26,26,0.12)",
+  ruleSoft: "rgba(26,26,26,0.06)",
+};
+
 export type QualifierState = {
   businessType: string;
   businessTypeOther?: string;
@@ -140,7 +159,6 @@ export default function Qualifier({
   const [state, setState] = useState<QualifierState>(QUALIFIER_INITIAL);
   const [computing, setComputing] = useState(false);
 
-  // Hydrate from localStorage
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
@@ -156,7 +174,6 @@ export default function Qualifier({
     }
   }, []);
 
-  // Persist on change
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
@@ -197,7 +214,7 @@ export default function Qualifier({
       return state.biggestLeak !== "" &&
         (state.biggestLeak !== "other" || !!state.biggestLeakOther);
     }
-    if (q.id === "monthlyLeads") return true; // slider always has value
+    if (q.id === "monthlyLeads") return true;
     if (q.id === "automateTargets") {
       if (state.automateTargets.length === 0) return false;
       if (state.automateTargets.includes("other")) {
@@ -215,7 +232,6 @@ export default function Qualifier({
     if (step < totalSteps - 1) {
       setStep((s) => s + 1);
     } else {
-      // Final step — show calculating spinner then complete
       setComputing(true);
       window.setTimeout(() => {
         onComplete(state);
@@ -229,18 +245,38 @@ export default function Qualifier({
 
   if (computing) {
     return (
-      <div className="rounded-2xl bg-white/5 border border-cyan-400/30 p-10 md:p-14 text-center min-h-[280px] flex flex-col items-center justify-center">
+      <div
+        style={{
+          background: C.cream3,
+          border: `1px solid ${C.rule}`,
+          padding: "56px 40px",
+          textAlign: "center",
+          minHeight: 280,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
-          className="mb-5"
+          style={{ marginBottom: 20 }}
         >
-          <Loader2 className="w-12 h-12 text-cyan-300" />
+          <Loader2 style={{ width: 48, height: 48, color: C.terra }} />
         </motion.div>
-        <p className="text-cyan-200 font-semibold text-lg mb-1">
+        <p
+          style={{
+            fontFamily: "var(--font-display)",
+            color: C.ink,
+            fontWeight: 600,
+            fontSize: 18,
+            marginBottom: 4,
+          }}
+        >
           Calculating your readiness score…
         </p>
-        <p className="text-sm text-gray-400">
+        <p style={{ fontSize: 14, color: C.inkFaint, margin: 0 }}>
           Matching slot type and prep notes.
         </p>
       </div>
@@ -248,36 +284,74 @@ export default function Qualifier({
   }
 
   return (
-    <div className="rounded-2xl bg-white/5 border border-white/10 p-6 md:p-8 min-h-[420px] flex flex-col">
+    <div
+      style={{
+        background: C.cream3,
+        border: `1px solid ${C.rule}`,
+        padding: "32px 32px",
+        minHeight: 420,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {/* Progress bar + skip */}
-      <div className="mb-6">
+      <div style={{ marginBottom: 24 }}>
         <div className="flex items-center justify-between mb-2 gap-4">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-cyan-300 font-semibold">
-            Question {step + 1} of {totalSteps}
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.terra,
+              fontWeight: 600,
+              margin: 0,
+            }}
+          >
+            — Question {step + 1} of {totalSteps}
           </p>
           <button
             type="button"
             onClick={onSkip}
-            className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-cyan-300 transition"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              fontSize: 12,
+              color: C.inkFaint,
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              fontFamily: "var(--font-mono)",
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = C.terra)}
+            onMouseLeave={(e) => (e.currentTarget.style.color = C.inkFaint)}
           >
-            <SkipForward className="w-3.5 h-3.5" />
+            <SkipForward style={{ width: 12, height: 12 }} />
             Skip to calendar
           </button>
         </div>
-        <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+        <div
+          style={{
+            height: 6,
+            borderRadius: 0,
+            background: C.cream2,
+            overflow: "hidden",
+            border: `1px solid ${C.ruleSoft}`,
+          }}
+        >
           <motion.div
             animate={{ width: `${progress}%` }}
             transition={{ type: "spring", stiffness: 110, damping: 20 }}
-            className="h-full rounded-full"
-            style={{
-              background: "linear-gradient(90deg, #1E88E5 0%, #14B8A6 100%)",
-            }}
+            style={{ height: "100%", background: C.terra }}
           />
         </div>
       </div>
 
       {/* Question */}
-      <div className="flex-1">
+      <div style={{ flex: 1 }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={currentQ.id as string}
@@ -285,15 +359,26 @@ export default function Qualifier({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -24 }}
             transition={{ duration: 0.22 }}
-            className="motion-reduce:transform-none motion-reduce:transition-none"
           >
-            <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight mb-2">
+            <h3
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: 24,
+                fontWeight: 600,
+                color: C.ink,
+                letterSpacing: "-0.01em",
+                lineHeight: 1.2,
+                marginBottom: 6,
+              }}
+            >
               {currentQ.title}
             </h3>
             {currentQ.helper && (
-              <p className="text-sm text-gray-400 mb-5">{currentQ.helper}</p>
+              <p style={{ fontSize: 14, color: C.inkFaint, marginBottom: 20 }}>
+                {currentQ.helper}
+              </p>
             )}
-            {!currentQ.helper && <div className="mb-5" />}
+            {!currentQ.helper && <div style={{ marginBottom: 20 }} />}
 
             {currentQ.id === "businessType" && (
               <OptionGrid
@@ -362,14 +447,38 @@ export default function Qualifier({
       </div>
 
       {/* Nav */}
-      <div className="flex items-center justify-between gap-3 pt-6 mt-6 border-t border-white/5">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 12,
+          paddingTop: 24,
+          marginTop: 24,
+          borderTop: `1px solid ${C.ruleSoft}`,
+        }}
+      >
         <button
           type="button"
           onClick={prev}
           disabled={step === 0}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-gray-300 hover:border-cyan-400 hover:text-cyan-200 transition disabled:opacity-30 disabled:cursor-not-allowed"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "10px 16px",
+            background: "transparent",
+            color: C.ink,
+            border: `1px solid ${C.ink}`,
+            cursor: step === 0 ? "not-allowed" : "pointer",
+            opacity: step === 0 ? 0.3 : 1,
+            fontFamily: "var(--font-sans)",
+            fontWeight: 600,
+            fontSize: 14,
+            borderRadius: 2,
+          }}
         >
-          <ArrowLeft className="w-4 h-4" /> Back
+          <ArrowLeft style={{ width: 14, height: 14 }} /> Back
         </button>
 
         <motion.button
@@ -378,21 +487,29 @@ export default function Qualifier({
           whileTap={canAdvance ? { scale: 0.98 } : {}}
           onClick={next}
           disabled={!canAdvance}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition disabled:opacity-40 disabled:cursor-not-allowed motion-reduce:transform-none"
           style={{
-            background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-            boxShadow: canAdvance
-              ? "0 8px 28px rgba(0, 212, 255, 0.30)"
-              : "none",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "12px 22px",
+            background: canAdvance ? C.terra : C.cream2,
+            color: canAdvance ? C.cream3 : C.inkFaint,
+            border: canAdvance ? "none" : `1px solid ${C.rule}`,
+            cursor: canAdvance ? "pointer" : "not-allowed",
+            opacity: canAdvance ? 1 : 0.6,
+            fontFamily: "var(--font-sans)",
+            fontWeight: 600,
+            fontSize: 14,
+            borderRadius: 2,
           }}
         >
           {step === totalSteps - 1 ? (
             <>
-              See my slot <CheckCircle2 className="w-4 h-4" />
+              See my slot <CheckCircle2 style={{ width: 16, height: 16 }} />
             </>
           ) : (
             <>
-              Next <ArrowRight className="w-4 h-4" />
+              Next <ArrowRight style={{ width: 16, height: 16 }} />
             </>
           )}
         </motion.button>
@@ -441,23 +558,41 @@ function OptionGrid({
               type="button"
               whileTap={{ scale: 0.97 }}
               onClick={() => onChange(o.value)}
-              className={`text-left rounded-xl border-2 transition motion-reduce:transform-none ${
-                compact ? "p-3" : "p-4"
-              } ${
-                active
-                  ? "bg-cyan-500/10 border-cyan-400"
-                  : "bg-white/5 border-white/10 hover:border-cyan-400/50"
-              }`}
+              style={{
+                textAlign: "left",
+                background: active ? C.cream2 : C.cream3,
+                border: active ? `2px solid ${C.terra}` : `1px solid ${C.rule}`,
+                padding: compact ? 12 : 16,
+                cursor: "pointer",
+                borderRadius: 2,
+                transition: "border-color 0.18s",
+              }}
+              onMouseEnter={(e) => {
+                if (!active) e.currentTarget.style.borderColor = C.terra;
+              }}
+              onMouseLeave={(e) => {
+                if (!active) e.currentTarget.style.borderColor = C.rule;
+              }}
             >
               <div
-                className={`font-semibold text-white ${
-                  compact ? "text-sm" : "text-base"
-                }`}
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  color: C.ink,
+                  fontSize: compact ? 14 : 15,
+                }}
               >
                 {o.label}
               </div>
               {o.sub && (
-                <div className="text-xs text-gray-400 mt-1 leading-snug">
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: C.inkFaint,
+                    marginTop: 4,
+                    lineHeight: 1.4,
+                  }}
+                >
                   {o.sub}
                 </div>
               )}
@@ -473,7 +608,18 @@ function OptionGrid({
           value={otherValue || ""}
           onChange={(e) => onOtherChange(e.target.value)}
           placeholder="Type it in — short is fine"
-          className="mt-3 w-full px-4 py-3 rounded-xl bg-white/5 border border-cyan-400/40 text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30 transition"
+          style={{
+            marginTop: 12,
+            width: "100%",
+            padding: "12px 16px",
+            background: C.cream3,
+            border: `1px solid ${C.ink}`,
+            color: C.ink,
+            fontFamily: "var(--font-sans)",
+            fontSize: 15,
+            outline: "none",
+            borderRadius: 2,
+          }}
           autoFocus
         />
       )}
@@ -505,11 +651,17 @@ function MultiSelectGrid({
               type="button"
               whileTap={{ scale: 0.95 }}
               onClick={() => onToggle(o.value)}
-              className={`px-4 py-2.5 rounded-full text-sm font-semibold transition motion-reduce:transform-none ${
-                active
-                  ? "bg-gradient-to-r from-cyan-400 to-teal-400 text-slate-900 border border-cyan-300"
-                  : "bg-white/5 border border-white/15 text-gray-300 hover:border-cyan-400 hover:text-cyan-200"
-              }`}
+              style={{
+                padding: "10px 18px",
+                background: active ? C.terra : C.cream3,
+                color: active ? C.cream3 : C.ink,
+                border: `1px solid ${active ? C.terra : C.rule}`,
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 14,
+                cursor: "pointer",
+                borderRadius: 999,
+              }}
             >
               {active ? "✓ " : ""}
               {o.label}
@@ -525,7 +677,18 @@ function MultiSelectGrid({
           value={otherValue || ""}
           onChange={(e) => onOtherChange(e.target.value)}
           placeholder="What else? Short answer"
-          className="mt-3 w-full px-4 py-3 rounded-xl bg-white/5 border border-cyan-400/40 text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/30 transition"
+          style={{
+            marginTop: 12,
+            width: "100%",
+            padding: "12px 16px",
+            background: C.cream3,
+            border: `1px solid ${C.ink}`,
+            color: C.ink,
+            fontFamily: "var(--font-sans)",
+            fontSize: 15,
+            outline: "none",
+            borderRadius: 2,
+          }}
           autoFocus
         />
       )}
@@ -542,12 +705,36 @@ function LeadSlider({
 }) {
   const idx = Math.max(0, LEAD_RANGES.indexOf(value as (typeof LEAD_RANGES)[number]));
   return (
-    <div className="rounded-xl bg-white/5 border border-white/10 p-5">
+    <div
+      style={{
+        background: C.cream2,
+        border: `1px solid ${C.rule}`,
+        padding: 20,
+      }}
+    >
       <div className="flex items-baseline justify-between mb-4">
-        <span className="text-3xl md:text-4xl font-extrabold text-white">
+        <span
+          style={{
+            fontFamily: "var(--font-display)",
+            fontStyle: "italic",
+            fontSize: 32,
+            fontWeight: 600,
+            color: C.terra,
+          }}
+        >
           {LEAD_LABELS[value] || LEAD_LABELS["200"]}
         </span>
-        <span className="text-xs text-gray-400">leads or inquiries</span>
+        <span
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            color: C.inkFaint,
+            textTransform: "uppercase",
+            letterSpacing: "0.10em",
+          }}
+        >
+          leads or inquiries
+        </span>
       </div>
       <input
         type="range"
@@ -556,12 +743,12 @@ function LeadSlider({
         step={1}
         value={idx}
         onChange={(e) => onChange(LEAD_RANGES[parseInt(e.target.value, 10)])}
-        className="w-full accent-cyan-400 cursor-pointer"
+        style={{ width: "100%", accentColor: C.terra, cursor: "pointer" }}
         aria-label="Monthly leads"
       />
-      <div className="flex justify-between mt-2 text-[10px] text-gray-500 font-mono">
+      <div className="flex justify-between mt-2" style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}>
         {LEAD_RANGES.map((r) => (
-          <span key={r} className={r === value ? "text-cyan-300" : ""}>
+          <span key={r} style={{ color: r === value ? C.terra : C.inkFaint }}>
             {LEAD_LABELS[r].replace(" / mo", "").replace("~", "")}
           </span>
         ))}

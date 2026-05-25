@@ -1,155 +1,87 @@
-// Aesthetic: Retro arcade / 8-bit pixel — chunky Press Start 2P, scanline overlay,
-// blinking cursor, "PLAYER 1 — PRESS START" energy. Picked for broad nerd appeal
-// and clean CSS-only execution that matches Waseem's builder vibe.
+// Cream editorial pivot 2026-05-25 — 404 reframed as paper field-note.
+// Was: retro 8-bit GAME OVER (Press Start 2P + scanlines + CRT flicker).
+// Now: typewriter field-note on cream paper — IBM Plex Mono + Fraunces.
+// Konami easter egg preserved.
 
 import Link from "next/link";
-import { Press_Start_2P } from "next/font/google";
 import { SITE } from "@/lib/site";
 import KonamiUnlock from "@/components/easter/KonamiUnlock";
 
-const pixel = Press_Start_2P({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-pixel",
-});
-
 export const metadata = {
-  title: `404 — GAME OVER · ${SITE.brand}`,
-  description: "Level not found. Respawn at the homepage or send Waseem a flare.",
+  title: `404 — Page not found · ${SITE.brand}`,
+  description: "Page not found. Try the homepage or send Waseem a note.",
   robots: { index: false, follow: false },
 };
 
+const C = {
+  cream: "#F2EFE6",
+  cream2: "#EDE8DC",
+  cream3: "#FAF7F0",
+  ink: "#1A1A1A",
+  ink2: "#3A3A36",
+  inkFaint: "#6B6B65",
+  terra: "#C66B3F",
+  terra2: "#B85A30",
+  ochre: "#C9A96E",
+  oxblood: "#6B2C2C",
+  rule: "rgba(26,26,26,0.12)",
+};
+
 const LEVELS = [
-  { href: "/", label: "HOMEPAGE", tag: "WORLD-1" },
-  { href: "/services", label: "SERVICES", tag: "WORLD-2" },
-  { href: "/case-studies", label: "CASE-STUDIES", tag: "WORLD-3" },
-  { href: "/pricing", label: "PRICING", tag: "WORLD-4" },
-  { href: "/blog", label: "BLOG", tag: "WORLD-5" },
+  { href: "/", label: "Homepage", tag: "Page 01" },
+  { href: "/services", label: "Services", tag: "Page 02" },
+  { href: "/case-studies", label: "Case studies", tag: "Page 03" },
+  { href: "/pricing", label: "Pricing", tag: "Page 04" },
+  { href: "/blog", label: "Blog", tag: "Page 05" },
 ];
 
 export default function NotFound() {
   return (
     <section
-      className={`${pixel.variable} relative overflow-hidden min-h-[88vh] flex items-center justify-center py-20 px-4`}
       style={{
-        background:
-          "radial-gradient(ellipse at 50% 30%, #0a2d4a 0%, #061827 55%, #03101a 100%)",
-        fontFamily: "var(--font-pixel), ui-monospace, monospace",
-        color: "#eaf6ff",
+        position: "relative",
+        minHeight: "88vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "80px 24px",
+        background: C.cream3,
+        color: C.ink,
       }}
     >
-      {/* CSS-only retro background: scanlines + grid + starfield */}
-      <style>{`
-        .crt-scanlines {
-          position: absolute; inset: 0; pointer-events: none; z-index: 2;
-          background: repeating-linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.0) 0px,
-            rgba(0, 0, 0, 0.0) 2px,
-            rgba(0, 0, 0, 0.18) 3px,
-            rgba(0, 0, 0, 0.18) 4px
-          );
-          mix-blend-mode: multiply;
-        }
-        .crt-grid {
-          position: absolute; inset: 0; pointer-events: none; z-index: 1;
-          background-image:
-            linear-gradient(to right, rgba(94, 234, 212, 0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(94, 234, 212, 0.08) 1px, transparent 1px);
-          background-size: 40px 40px;
-          mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-          -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-        }
-        .crt-stars {
-          position: absolute; inset: 0; pointer-events: none; z-index: 0;
-          background-image:
-            radial-gradient(1px 1px at 12% 18%, #fff, transparent 50%),
-            radial-gradient(1px 1px at 22% 72%, #5EEAD4, transparent 50%),
-            radial-gradient(1px 1px at 38% 42%, #fff, transparent 50%),
-            radial-gradient(1px 1px at 52% 88%, #00D4FF, transparent 50%),
-            radial-gradient(1px 1px at 68% 22%, #fff, transparent 50%),
-            radial-gradient(1px 1px at 78% 62%, #5EEAD4, transparent 50%),
-            radial-gradient(1px 1px at 88% 12%, #fff, transparent 50%),
-            radial-gradient(1px 1px at 8% 92%, #fff, transparent 50%);
-        }
-        .crt-flicker {
-          animation: crt-flicker 6s infinite steps(1);
-        }
-        @keyframes crt-flicker {
-          0%, 92%, 100% { opacity: 1; }
-          93% { opacity: 0.82; }
-          94% { opacity: 1; }
-          96% { opacity: 0.88; }
-          97% { opacity: 1; }
-        }
-        .blink-cursor::after {
-          content: "_";
-          margin-left: 4px;
-          animation: blink 1s steps(2) infinite;
-          color: #5EEAD4;
-        }
-        @keyframes blink {
-          0%, 50% { opacity: 1; }
-          51%, 100% { opacity: 0; }
-        }
-        .pixel-shake:hover {
-          animation: pxshake 0.25s steps(2) infinite;
-        }
-        @keyframes pxshake {
-          0% { transform: translate(0, 0); }
-          50% { transform: translate(1px, -1px); }
-          100% { transform: translate(-1px, 1px); }
-        }
-        .glow-cyan {
-          text-shadow:
-            0 0 6px #00D4FF,
-            0 0 14px rgba(0, 212, 255, 0.55),
-            4px 4px 0 #061827;
-        }
-        .glow-magenta {
-          text-shadow:
-            0 0 6px #ff5ec8,
-            0 0 14px rgba(255, 94, 200, 0.45),
-            3px 3px 0 #061827;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .crt-flicker,
-          .blink-cursor::after,
-          .pixel-shake:hover {
-            animation: none !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .pixel-404 { font-size: 64px !important; }
-          .pixel-h1 { font-size: 14px !important; line-height: 1.6 !important; }
-          .pixel-p { font-size: 9px !important; }
-          .pixel-cta { font-size: 9px !important; padding: 12px 14px !important; }
-          .pixel-lvl { font-size: 9px !important; padding: 12px !important; }
-        }
-      `}</style>
-
-      <div className="crt-stars" />
-      <div className="crt-grid" />
-      <div className="crt-scanlines" />
-
-      <div className="relative z-10 w-full max-w-3xl mx-auto text-center crt-flicker">
-        {/* Top status bar */}
-        <div className="flex items-center justify-between text-[8px] md:text-[10px] tracking-[0.25em] mb-8 opacity-80">
-          <span style={{ color: "#5EEAD4" }}>PLAYER-1</span>
-          <span style={{ color: "#00D4FF" }}>{SITE.brand.toUpperCase()}</span>
-          <span style={{ color: "#5EEAD4" }}>SCORE 000404</span>
+      <div style={{ position: "relative", zIndex: 10, width: "100%", maxWidth: 720, margin: "0 auto" }}>
+        {/* Top status strip */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            textTransform: "uppercase",
+            letterSpacing: "0.22em",
+            color: C.inkFaint,
+            marginBottom: 36,
+            fontWeight: 600,
+          }}
+        >
+          <span>— Field notes</span>
+          <span style={{ color: C.terra }}>{SITE.brand}</span>
+          <span>Status 404</span>
         </div>
 
         {/* Big 404 */}
         <div
-          className="pixel-404 glow-cyan"
           style={{
-            fontSize: "clamp(72px, 18vw, 168px)",
-            color: "#00D4FF",
+            fontFamily: "var(--font-display)",
+            fontStyle: "italic",
+            fontSize: "clamp(96px, 22vw, 200px)",
+            fontWeight: 500,
+            color: C.terra,
             lineHeight: 1,
-            marginBottom: "1.5rem",
-            letterSpacing: "0.04em",
+            marginBottom: 24,
+            letterSpacing: "-0.04em",
+            textAlign: "center",
           }}
         >
           404
@@ -157,126 +89,172 @@ export default function NotFound() {
 
         {/* Heading */}
         <h1
-          className="pixel-h1 glow-magenta"
           style={{
-            fontSize: "clamp(14px, 3vw, 22px)",
-            color: "#ff5ec8",
-            lineHeight: 1.6,
-            marginBottom: "1rem",
-            letterSpacing: "0.04em",
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(28px, 4vw, 44px)",
+            fontWeight: 500,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
+            color: C.ink,
+            marginBottom: 16,
+            textAlign: "center",
+            maxWidth: "20ch",
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         >
-          GAME OVER
+          This page{" "}
+          <em style={{ fontStyle: "italic", color: C.terra }}>
+            doesn&apos;t exist yet.
+          </em>
         </h1>
 
-        {/* Sub-copy w/ blinking cursor */}
         <p
-          className="pixel-p blink-cursor"
           style={{
-            fontSize: "clamp(9px, 1.6vw, 12px)",
-            color: "#eaf6ff",
-            lineHeight: 1.9,
-            margin: "0 auto 0.75rem",
-            maxWidth: "640px",
-            letterSpacing: "0.06em",
+            fontSize: 16,
+            color: C.ink2,
+            lineHeight: 1.65,
+            margin: "0 auto 12px",
+            maxWidth: "52ch",
+            textAlign: "center",
           }}
         >
-          THIS LEVEL DOESN&apos;T EXIST.
+          Either it never did, or it moved. Either way, here are the rooms that
+          definitely do exist.
         </p>
         <p
-          className="pixel-p"
           style={{
-            fontSize: "clamp(9px, 1.5vw, 11px)",
-            color: "#7ea3bf",
-            lineHeight: 1.9,
-            margin: "0 auto 2.5rem",
-            maxWidth: "640px",
-            letterSpacing: "0.06em",
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            color: C.inkFaint,
+            margin: "0 auto 48px",
+            textAlign: "center",
+            textTransform: "uppercase",
+            letterSpacing: "0.14em",
           }}
         >
-          HAVE YOU TRIED <span style={{ color: "#5EEAD4" }}>git checkout main</span> ?
+          — Have you tried{" "}
+          <span style={{ color: C.terra }}>git checkout main</span>?
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center mb-12">
+        <div
+          className="flex flex-col sm:flex-row gap-3 justify-center"
+          style={{ marginBottom: 48 }}
+        >
           <Link
             href="/"
-            className="pixel-cta pixel-shake inline-block"
             style={{
-              fontFamily: "var(--font-pixel), monospace",
-              fontSize: "clamp(10px, 1.5vw, 12px)",
-              padding: "16px 22px",
-              color: "#061827",
-              background: "linear-gradient(180deg, #5EEAD4 0%, #14B8A6 100%)",
-              border: "3px solid #061827",
-              boxShadow: "0 0 0 3px #5EEAD4, 6px 6px 0 0 rgba(0, 0, 0, 0.55)",
-              letterSpacing: "0.18em",
+              padding: "14px 22px",
+              background: C.terra,
+              color: C.cream3,
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              fontSize: 14,
+              borderRadius: 2,
               textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
             }}
           >
-            ▶ RESPAWN (HOME)
+            ← Back to homepage
           </Link>
           <Link
             href="/contact"
-            className="pixel-cta pixel-shake inline-block"
             style={{
-              fontFamily: "var(--font-pixel), monospace",
-              fontSize: "clamp(10px, 1.5vw, 12px)",
-              padding: "16px 22px",
-              color: "#5EEAD4",
-              background: "#061827",
-              border: "3px solid #5EEAD4",
-              boxShadow: "6px 6px 0 0 rgba(0, 0, 0, 0.55)",
-              letterSpacing: "0.18em",
+              padding: "13px 20px",
+              background: "transparent",
+              color: C.ink,
+              border: `1px solid ${C.ink}`,
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              fontSize: 14,
+              borderRadius: 2,
               textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
             }}
           >
-            ⚡ CHEAT CODE (CONTACT)
+            Tell Waseem about it
           </Link>
         </div>
 
-        {/* LEVEL SELECT */}
-        <div className="text-left mx-auto" style={{ maxWidth: "640px" }}>
+        {/* Level select */}
+        <div style={{ maxWidth: 560, margin: "0 auto" }}>
           <div
-            className="text-[10px] md:text-xs mb-4 text-center"
             style={{
-              color: "#ff5ec8",
-              letterSpacing: "0.3em",
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.22em",
+              color: C.terra,
+              marginBottom: 16,
+              textAlign: "center",
+              fontWeight: 600,
             }}
           >
-            ── LEVEL SELECT ──
+            — Other pages —
           </div>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {LEVELS.map((lvl) => (
+          <ul
+            className="grid grid-cols-1 sm:grid-cols-2 gap-2"
+            style={{ listStyle: "none", padding: 0, margin: 0 }}
+          >
+            {LEVELS.map((lvl, i) => (
               <li key={lvl.href}>
                 <Link
                   href={lvl.href}
-                  className="pixel-lvl pixel-shake flex items-center justify-between gap-3 px-4 py-3"
                   style={{
-                    fontFamily: "var(--font-pixel), monospace",
-                    fontSize: "clamp(9px, 1.3vw, 11px)",
-                    color: "#eaf6ff",
-                    background: "rgba(10, 45, 74, 0.55)",
-                    border: "2px solid rgba(94, 234, 212, 0.35)",
-                    letterSpacing: "0.12em",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 12,
+                    padding: "12px 16px",
+                    background: C.cream2,
+                    border: `1px solid ${C.rule}`,
+                    color: C.ink,
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 14,
                     textDecoration: "none",
+                    transform: i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
                   }}
                 >
-                  <span style={{ color: "#5EEAD4" }}>{lvl.tag}</span>
-                  <span>{lvl.label}</span>
-                  <span style={{ color: "#00D4FF" }}>▶</span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      color: C.terra,
+                      letterSpacing: "0.10em",
+                      textTransform: "uppercase",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {lvl.tag}
+                  </span>
+                  <span style={{ fontWeight: 600 }}>{lvl.label}</span>
+                  <span style={{ color: C.inkFaint }}>→</span>
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Footer credits strip */}
+        {/* Footer */}
         <div
-          className="mt-12 text-[8px] md:text-[10px] tracking-[0.3em] opacity-70"
-          style={{ color: "#7ea3bf" }}
+          style={{
+            marginTop: 64,
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            textTransform: "uppercase",
+            letterSpacing: "0.22em",
+            color: C.inkFaint,
+            textAlign: "center",
+          }}
         >
-          PRESS START · INSERT COIN · BUILT BY {SITE.founder.toUpperCase()}
+          — Built by {SITE.founder} · Canggu, Bali · GMT+8
         </div>
       </div>
 

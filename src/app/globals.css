@@ -5,28 +5,64 @@
    ============================================ */
 
 :root {
-  /* Static brand colors (do not flip on theme) — OCEAN palette */
-  --skynet-primary: #1E88E5;
-  --skynet-primary-glow: rgba(30, 136, 229, 0.30);
-  --skynet-primary-dark: #1565C0;
-  --skynet-primary-light: #42A5F5;
+  /* ============================================================
+     CREAM EDITORIAL THEME · DEFAULT (anti-AI-slop pivot 2026-05-25)
+     ============================================================ */
 
-  --skynet-secondary: #14B8A6;
-  --skynet-secondary-glow: rgba(20, 184, 166, 0.30);
-  --skynet-secondary-dark: #0F766E;
-  --skynet-secondary-light: #5EEAD4;
+  /* Primary palette — cream ground, ink type, terracotta accent */
+  --cream:        #F2EFE6;
+  --cream-2:      #EDE8DC;
+  --cream-3:      #FAF7F0;
+  --ink:          #1A1A1A;
+  --ink-2:        #3A3A36;
+  --ink-faint:    #6B6B65;
+  --terracotta:   #C66B3F;
+  --terracotta-2: #B85A30;
+  --sage:         #8A9A7B;
+  --oxblood:      #6B2C2C;
+  --ochre:        #C9A96E;
 
-  --ai-neon-green: #5EEAD4;   /* legacy var name kept — retinted to mint-teal */
-  --ai-neon-cyan: #00D4FF;
-  --ai-neon-purple: #14B8A6;  /* legacy var name kept — retinted to teal */
+  /* Semantic mappings (most components use these) */
+  --bg:           var(--cream);
+  --bg-alt:       var(--cream-2);
+  --surface:      var(--cream-2);
+  --surface-alt:  var(--cream-3);
+  --fg:           var(--ink);
+  --fg-muted:     var(--ink-2);
+  --fg-faint:     var(--ink-faint);
+  --border:       rgba(26, 26, 26, 0.10);
+  --border-strong:rgba(26, 26, 26, 0.20);
+  --glass-bg:     var(--cream-3);
 
-  /* Gradients — Ocean */
-  --gradient-primary: linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%);
-  --gradient-primary-hover: linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%);
-  --gradient-neural: linear-gradient(90deg, #1E88E5 0%, #00D4FF 50%, #14B8A6 100%);
-  --gradient-neon: linear-gradient(135deg, #00D4FF 0%, #14B8A6 100%);
+  /* Static "skynet" brand tokens — retargeted from cyan/teal to cream-friendly.
+     Most legacy components reference these directly; the swap flips the brand. */
+  --skynet-primary:        var(--terracotta);
+  --skynet-primary-glow:   rgba(198, 107, 63, 0.28);
+  --skynet-primary-dark:   var(--terracotta-2);
+  --skynet-primary-light:  var(--terracotta);
+  --skynet-secondary:      var(--ochre);
+  --skynet-secondary-glow: rgba(201, 169, 110, 0.25);
+  --skynet-secondary-dark: #B89958;
+  --skynet-secondary-light:#D6BC85;
+  --skynet-darker:         var(--cream-3);
+  --skynet-surface:        var(--cream-2);
 
-  /* DARK OCEAN theme — DEFAULT (matches Hero v03) */
+  /* Legacy neon vars — kept but retargeted to muted warm tones */
+  --ai-neon-green:  var(--sage);
+  --ai-neon-cyan:   var(--terracotta);
+  --ai-neon-purple: var(--ochre);
+
+  /* Gradients — replaced cyan/teal with flat terracotta (no glow, no slop) */
+  --gradient-primary:       var(--terracotta);
+  --gradient-primary-hover: var(--terracotta-2);
+  --gradient-neural:        var(--terracotta);
+  --gradient-neon:          var(--terracotta);
+  --gradient-mesh: none;
+}
+
+/* OPT-IN dark-ocean theme — kept for /lp/* legacy + emergency rollback.
+   Apply via <html class="theme-dark"> if a route needs the old look. */
+html.theme-dark {
   --bg: #061827;
   --bg-alt: #03101a;
   --surface: #0a2d4a;
@@ -39,14 +75,26 @@
   --border: rgba(126, 228, 255, 0.10);
   --border-strong: rgba(126, 228, 255, 0.20);
   --glass-bg: rgba(6, 24, 39, 0.78);
+  --skynet-primary: #1E88E5;
+  --skynet-primary-glow: rgba(30, 136, 229, 0.30);
+  --skynet-primary-dark: #1565C0;
+  --skynet-primary-light: #42A5F5;
+  --skynet-secondary: #14B8A6;
+  --skynet-secondary-glow: rgba(20, 184, 166, 0.30);
+  --skynet-secondary-dark: #0F766E;
+  --skynet-secondary-light: #5EEAD4;
+  --ai-neon-green:  #5EEAD4;
+  --ai-neon-cyan:   #00D4FF;
+  --ai-neon-purple: #14B8A6;
+  --gradient-primary: linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%);
+  --gradient-neural: linear-gradient(90deg, #1E88E5 0%, #00D4FF 50%, #14B8A6 100%);
+  --gradient-neon: linear-gradient(135deg, #00D4FF 0%, #14B8A6 100%);
   --gradient-mesh:
     radial-gradient(at 18% 22%, rgba(30, 136, 229, 0.32) 0px, transparent 55%),
     radial-gradient(at 82% 28%, rgba(0, 212, 255, 0.22) 0px, transparent 55%),
     radial-gradient(at 50% 95%, rgba(20, 184, 166, 0.24) 0px, transparent 55%);
 }
-
-/* LIGHT theme removed — site is locked to single dark/ocean brand.
-   All html.light .* selectors below are inert (class never applied). */
 
 @theme inline {
   --color-background: var(--bg);
@@ -70,17 +118,54 @@
   --color-neon-cyan: var(--ai-neon-cyan);
   --color-neon-purple: var(--ai-neon-purple);
 
-  --font-sans: var(--font-lexend);
-  --font-display: var(--font-lexend);
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: var(--font-sans-onest, var(--font-lexend));
+  --font-display: var(--font-serif-fraunces, var(--font-lexend));
+  --font-mono: var(--font-mono-plex, ui-monospace), SFMono-Regular, Menlo, monospace;
+  --color-terracotta: var(--terracotta);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-sage: var(--sage);
+  --color-ochre: var(--ochre);
+  --color-oxblood: var(--oxblood);
 }
 
 html, body {
+  background: var(--bg);
   color: var(--fg);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: 'cv11', 'ss01';
   transition: color 0.2s ease;
   min-height: 100%;
+}
+
+/* Paper grain — site-wide texture, anti-AI-slop signal */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/></svg>");
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1;
+}
+html.theme-dark body::before {
+  mix-blend-mode: overlay;
+  opacity: 0.06;
+}
+body > * { position: relative; z-index: 2; }
+
+/* Editorial typography defaults */
+h1, h2, h3, .display, .serif {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+em.accent, .serif-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--terracotta);
 }
 
 /* ============================================
@@ -124,27 +209,26 @@ html, body {
   }
 }
 
-/* OCEAN BODY — gradient + 3 fixed floating orbs across every page */
+/* CREAM BODY — default. Ocean kept as opt-in via html.theme-dark */
 body {
-  background:
-    linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%);
-  background-attachment: fixed;
+  background: var(--bg);
   position: relative;
   overflow-x: hidden;
 }
-html.light body {
+html.theme-dark body {
   background:
-    radial-gradient(at 18% 22%, rgba(30, 136, 229, 0.18) 0px, transparent 55%),
-    radial-gradient(at 82% 28%, rgba(0, 212, 255, 0.14) 0px, transparent 55%),
-    radial-gradient(at 50% 95%, rgba(20, 184, 166, 0.12) 0px, transparent 55%),
-    linear-gradient(135deg, #fbfaf6 0%, #f3f1ea 100%);
+    linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%);
   background-attachment: fixed;
 }
 
-/* 3 floating orbs — visible across all pages */
-body::before,
-body::after,
-main::before {
+/* Legacy orbs — only render under opt-in ocean theme. On cream default
+   we hide all .orb spans so legacy markup doesn't paint blue blobs on
+   the editorial paper background. */
+.orb { display: none !important; }
+html.theme-dark .orb { display: block !important; }
+
+html.theme-dark body::after,
+html.theme-dark main::before {
   content: "";
   position: fixed;
   border-radius: 50%;
@@ -153,15 +237,7 @@ main::before {
   z-index: 0;
   animation: float-orb 14s ease-in-out infinite;
 }
-body::before {
-  top: -120px;
-  left: -150px;
-  width: 540px;
-  height: 540px;
-  background: #1E88E5;
-  opacity: 0.40;
-}
-body::after {
+html.theme-dark body::after {
   top: 100px;
   right: -180px;
   width: 580px;
@@ -170,7 +246,7 @@ body::after {
   opacity: 0.30;
   animation-delay: -7s;
 }
-main::before {
+html.theme-dark main::before {
   bottom: -160px;
   left: 30%;
   width: 480px;
@@ -179,9 +255,6 @@ main::before {
   opacity: 0.35;
   animation-delay: -3s;
 }
-html.light body::before { opacity: 0.22; }
-html.light body::after { opacity: 0.18; }
-html.light main::before { opacity: 0.22; }
 
 /* Lift content above orbs */
 main {
@@ -552,4 +625,272 @@ html.light .text-cyan-600 {
 html.light header.glass {
   background: var(--glass-bg) !important;
   border-bottom: 1px solid var(--border) !important;
+}
+
+/* ============================================================
+   CREAM-DEFAULT AUTO-FLIP (2026-05-25 anti-AI-slop pivot)
+   These rules apply when html is NOT .theme-dark. They retarget every
+   dark-built component (tools/, sections/, error pages) to cream paper +
+   ink type + terracotta accents WITHOUT touching the TSX files.
+   Each rule is :not(.theme-dark) scoped so the dark ocean theme rollback
+   still works for /lp/* via <html class="theme-dark">.
+   ============================================================ */
+
+/* Hardcoded text-gray-* utilities → ink-muted on cream */
+html:not(.theme-dark) .text-gray-100,
+html:not(.theme-dark) .text-gray-200,
+html:not(.theme-dark) .text-gray-300,
+html:not(.theme-dark) .text-gray-400,
+html:not(.theme-dark) .text-gray-500,
+html:not(.theme-dark) .text-gray-600,
+html:not(.theme-dark) .text-slate-200,
+html:not(.theme-dark) .text-slate-300,
+html:not(.theme-dark) .text-slate-400 {
+  color: var(--ink-2) !important;
+}
+html:not(.theme-dark) .text-white,
+html:not(.theme-dark) .text-white\/90,
+html:not(.theme-dark) .text-white\/80,
+html:not(.theme-dark) .text-white\/75,
+html:not(.theme-dark) .text-white\/70 {
+  color: var(--ink) !important;
+}
+
+/* Cyan tints → terracotta on cream (eyebrows, accent text, links) */
+html:not(.theme-dark) .text-cyan-100,
+html:not(.theme-dark) .text-cyan-200,
+html:not(.theme-dark) .text-cyan-300,
+html:not(.theme-dark) .text-cyan-400,
+html:not(.theme-dark) .text-cyan-500,
+html:not(.theme-dark) .text-cyan-600,
+html:not(.theme-dark) .text-teal-200,
+html:not(.theme-dark) .text-teal-300,
+html:not(.theme-dark) .text-teal-400,
+html:not(.theme-dark) .text-emerald-200,
+html:not(.theme-dark) .text-emerald-300 {
+  color: var(--terracotta) !important;
+}
+html:not(.theme-dark) .text-fuchsia-300,
+html:not(.theme-dark) .text-rose-200,
+html:not(.theme-dark) .text-rose-300 {
+  color: var(--oxblood) !important;
+}
+
+/* Borders + bg overlays for dark-themed cards → ink-tinted cream */
+html:not(.theme-dark) .border-white\/5,
+html:not(.theme-dark) .border-white\/10,
+html:not(.theme-dark) .border-white\/15,
+html:not(.theme-dark) .border-white\/20,
+html:not(.theme-dark) .border-white\/40,
+html:not(.theme-dark) .border-white\/60 {
+  border-color: var(--border) !important;
+}
+html:not(.theme-dark) .bg-white\/5,
+html:not(.theme-dark) .bg-white\/8,
+html:not(.theme-dark) .bg-white\/10,
+html:not(.theme-dark) .bg-white\/15,
+html:not(.theme-dark) .bg-white\/\[0\.03\],
+html:not(.theme-dark) .bg-white\/\[0\.05\],
+html:not(.theme-dark) .bg-white\/\[0\.06\],
+html:not(.theme-dark) .bg-white\/\[0\.07\] {
+  background-color: var(--cream-2) !important;
+}
+html:not(.theme-dark) .bg-white,
+html:not(.theme-dark) .bg-white\/95 {
+  background-color: var(--cream-3) !important;
+}
+
+/* Slate-900 / dark surface bg utilities → cream-3 */
+html:not(.theme-dark) .bg-slate-900,
+html:not(.theme-dark) .bg-slate-900\/40,
+html:not(.theme-dark) .bg-slate-900\/50,
+html:not(.theme-dark) .bg-slate-900\/60,
+html:not(.theme-dark) .bg-slate-900\/85 {
+  background-color: var(--cream-3) !important;
+  color: var(--ink) !important;
+}
+html:not(.theme-dark) .text-slate-700,
+html:not(.theme-dark) .text-slate-900 {
+  color: var(--ink) !important;
+}
+html:not(.theme-dark) .text-slate-600 {
+  color: var(--ink-2) !important;
+}
+
+/* Inline ocean gradients on sections → cream-3 */
+html:not(.theme-dark) section[style*="#061827"],
+html:not(.theme-dark) section[style*="#0a2d4a"],
+html:not(.theme-dark) section[style*="#073846"],
+html:not(.theme-dark) section[style*="#082234"],
+html:not(.theme-dark) section[style*="#03101a"],
+html:not(.theme-dark) main[class*="bg-gradient"][class*="#061827"],
+html:not(.theme-dark) main[class*="bg-gradient"][class*="#0a2d4a"],
+html:not(.theme-dark) main[class*="bg-gradient"][class*="#073846"] {
+  background: var(--cream-3) !important;
+  color: var(--ink) !important;
+}
+
+/* Inline ocean gradient backgrounds via class hook */
+html:not(.theme-dark) .theme-hero-ocean {
+  background: var(--cream-3) !important;
+  color: var(--ink) !important;
+}
+html:not(.theme-dark) .theme-hero-ocean h1,
+html:not(.theme-dark) .theme-hero-ocean h2,
+html:not(.theme-dark) .theme-hero-ocean h3,
+html:not(.theme-dark) .theme-hero-ocean p {
+  color: var(--ink) !important;
+}
+
+/* Cyan→teal text gradients used in headlines → terracotta solid */
+html:not(.theme-dark) .from-cyan-300,
+html:not(.theme-dark) .from-cyan-400 {
+  --tw-gradient-from: var(--terracotta) !important;
+}
+html:not(.theme-dark) .to-teal-300,
+html:not(.theme-dark) .to-teal-400,
+html:not(.theme-dark) .to-emerald-400 {
+  --tw-gradient-to: var(--terracotta-2) !important;
+}
+html:not(.theme-dark) .via-cyan-300 {
+  --tw-gradient-via: var(--terracotta) !important;
+}
+
+/* Backdrop blur — kill on cream (looks weird on paper) */
+html:not(.theme-dark) .backdrop-blur,
+html:not(.theme-dark) .backdrop-blur-sm,
+html:not(.theme-dark) .backdrop-blur-md,
+html:not(.theme-dark) .backdrop-blur-lg,
+html:not(.theme-dark) .backdrop-blur-xl {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Skynet-darker / skynet-surface (legacy bg utilities) → cream */
+html:not(.theme-dark) .bg-skynet-darker,
+html:not(.theme-dark) .bg-skynet-darker\/40,
+html:not(.theme-dark) .bg-skynet-darker\/50,
+html:not(.theme-dark) .bg-skynet-surface\/60,
+html:not(.theme-dark) .bg-skynet-surface\/40 {
+  background-color: var(--cream-2) !important;
+  background-image: none !important;
+  border-color: var(--border) !important;
+}
+html:not(.theme-dark) footer.bg-skynet-darker {
+  background-color: var(--cream-2) !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+/* Accent / chip backgrounds (cyan/emerald/teal overlays) → muted cream */
+html:not(.theme-dark) .bg-cyan-500\/10,
+html:not(.theme-dark) .bg-cyan-400\/10,
+html:not(.theme-dark) .bg-cyan-400\/15,
+html:not(.theme-dark) .bg-cyan-300\/10,
+html:not(.theme-dark) .bg-emerald-500\/10,
+html:not(.theme-dark) .bg-emerald-500\/20,
+html:not(.theme-dark) .bg-teal-500\/10,
+html:not(.theme-dark) .bg-fuchsia-400\/10 {
+  background-color: rgba(198, 107, 63, 0.08) !important;
+}
+html:not(.theme-dark) .border-cyan-400\/25,
+html:not(.theme-dark) .border-cyan-400\/30,
+html:not(.theme-dark) .border-cyan-400\/35,
+html:not(.theme-dark) .border-cyan-400\/40,
+html:not(.theme-dark) .border-cyan-400\/60,
+html:not(.theme-dark) .border-cyan-300\/35,
+html:not(.theme-dark) .border-cyan-300\/40,
+html:not(.theme-dark) .border-cyan-300\/60,
+html:not(.theme-dark) .border-emerald-400\/40,
+html:not(.theme-dark) .border-teal-400\/40,
+html:not(.theme-dark) .border-fuchsia-400\/30 {
+  border-color: rgba(198, 107, 63, 0.30) !important;
+}
+
+/* Calendly iframe surround — cream-3 paper */
+html:not(.theme-dark) .bg-gradient-to-br.from-\[\#1E88E5\],
+html:not(.theme-dark) [style*="linear-gradient(135deg, #1E88E5"] {
+  background: var(--cream-3) !important;
+}
+
+/* btn-primary gradient → flat terracotta on cream (kills the ocean blue) */
+html:not(.theme-dark) .btn-primary {
+  background: var(--terracotta) !important;
+  color: var(--cream-3) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+html:not(.theme-dark) .btn-primary:hover {
+  background: var(--terracotta-2) !important;
+  box-shadow: none !important;
+}
+
+/* gradient-text + gradient-primary-text → flat terracotta on cream */
+html:not(.theme-dark) .gradient-text,
+html:not(.theme-dark) .gradient-primary-text {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--terracotta) !important;
+  color: var(--terracotta) !important;
+}
+
+/* Cyan/teal accent fill on stars/icons → ochre */
+html:not(.theme-dark) .fill-amber-300,
+html:not(.theme-dark) .text-amber-300,
+html:not(.theme-dark) .fill-current.text-amber-300 {
+  color: var(--ochre) !important;
+}
+
+/* Glass utility on cream → flat cream-3 panel */
+html:not(.theme-dark) .glass {
+  background: var(--cream-3) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Inline rgba cyan/teal panel backgrounds → muted cream
+   (catches the eyebrow chips in tool pages that use inline rgba()) */
+html:not(.theme-dark) [style*="rgba(94, 234, 212"],
+html:not(.theme-dark) [style*="rgba(94,234,212"],
+html:not(.theme-dark) [style*="rgba(0, 212, 255"],
+html:not(.theme-dark) [style*="rgba(0,212,255"],
+html:not(.theme-dark) [style*="rgba(20, 184, 166"],
+html:not(.theme-dark) [style*="rgba(20,184,166"] {
+  /* Soft override — only re-tints if inline color leaks through */
+  border-color: rgba(198, 107, 63, 0.30) !important;
+}
+
+/* CTA gradient bars (linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)) → flat terracotta */
+html:not(.theme-dark) [style*="linear-gradient(135deg, #1E88E5"],
+html:not(.theme-dark) [style*="linear-gradient(135deg,#1E88E5"] {
+  background: var(--terracotta) !important;
+}
+
+/* Headline text-gradients (cyan→teal, cyan→mint, etc) — flat terracotta on cream */
+html:not(.theme-dark) span[style*="linear-gradient(120deg, #7ee4ff"],
+html:not(.theme-dark) span[style*="linear-gradient(120deg, #00D4FF"],
+html:not(.theme-dark) span[style*="linear-gradient(120deg,#7ee4ff"] {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--terracotta) !important;
+  color: var(--terracotta) !important;
+  font-style: italic !important;
+}
+
+/* Tailwind text-gradient utility (from-cyan-300 to-teal-300 + bg-clip-text) — flatten */
+html:not(.theme-dark) .bg-clip-text.text-transparent {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--terracotta) !important;
+  color: var(--terracotta) !important;
+  font-style: italic !important;
+}
+
+/* Auto-flip the main body container of tool pages from gradient navy to cream */
+html:not(.theme-dark) main.bg-gradient-to-br[class*="061827"] {
+  background: var(--cream) !important;
+  color: var(--ink) !important;
 }

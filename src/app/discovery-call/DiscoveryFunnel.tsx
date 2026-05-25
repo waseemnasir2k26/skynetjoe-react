@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Sparkles,
   CalendarClock,
   Star,
   Hammer,
@@ -20,7 +19,35 @@ import {
 import Qualifier, { type QualifierState } from "./Qualifier";
 import CalendlyEmbed, { CALENDLY_SECTION_ID } from "./CalendlyEmbed";
 
+/**
+ * Cream editorial pivot 2026-05-25 — discovery call funnel.
+ * Mirrors /lp/audit visual system:
+ *  - cream paper ground, ink type, terracotta accent
+ *  - Fraunces serif headlines with italic terracotta accent words
+ *  - mono em-dash eyebrows
+ *  - flat 2px-radius terracotta buttons, no glow
+ *  - polaroid portrait with rotation
+ *  - cream-2 cards with 1px ink border + alternating rotation
+ *  - cream-3 form inputs with 1px ink border, focus terracotta
+ */
+
 const QUAL_SECTION_ID = "qualify";
+
+const C = {
+  cream: "#F2EFE6",
+  cream2: "#EDE8DC",
+  cream3: "#FAF7F0",
+  ink: "#1A1A1A",
+  ink2: "#3A3A36",
+  inkFaint: "#6B6B65",
+  terra: "#C66B3F",
+  terra2: "#B85A30",
+  sage: "#8A9A7B",
+  oxblood: "#6B2C2C",
+  ochre: "#C9A96E",
+  rule: "rgba(26,26,26,0.12)",
+  ruleSoft: "rgba(26,26,26,0.06)",
+};
 
 const STEPS = [
   { id: "brief", label: "Share the brief", short: "Brief" },
@@ -76,8 +103,13 @@ const FAQS: { q: string; a: string }[] = [
 function StickyProgress({ activeStep }: { activeStep: number }) {
   return (
     <div
-      className="sticky top-[64px] z-30 backdrop-blur-xl border-b border-white/[0.06]"
-      style={{ background: "rgba(6,24,39,0.78)" }}
+      style={{
+        position: "sticky",
+        top: 64,
+        zIndex: 30,
+        background: C.cream3,
+        borderBottom: `1px solid ${C.rule}`,
+      }}
     >
       <div className="container-x px-6 py-3">
         <ol className="flex items-center justify-center gap-2 sm:gap-4">
@@ -87,33 +119,32 @@ function StickyProgress({ activeStep }: { activeStep: number }) {
             return (
               <li key={s.id} className="flex items-center gap-2 sm:gap-3">
                 <span
-                  className={`flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold transition-all ${
-                    done
-                      ? "bg-cyan-400 text-[#061827]"
-                      : current
-                        ? "bg-gradient-to-br from-cyan-400 to-teal-400 text-[#061827] ring-4 ring-cyan-400/25"
-                        : "bg-white/10 text-fg-muted"
-                  }`}
+                  className="flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold transition-all"
+                  style={{
+                    background: done || current ? C.terra : C.cream2,
+                    color: done || current ? C.cream3 : C.inkFaint,
+                    border: `1px solid ${done || current ? C.terra : C.rule}`,
+                  }}
                 >
                   {done ? <Check className="w-3.5 h-3.5" /> : i + 1}
                 </span>
                 <span
-                  className={`text-xs sm:text-sm font-semibold transition-colors ${
-                    current
-                      ? "text-white"
-                      : done
-                        ? "text-cyan-200"
-                        : "text-fg-faint"
-                  }`}
+                  className="text-xs sm:text-sm font-semibold transition-colors"
+                  style={{
+                    color: current ? C.ink : done ? C.terra : C.inkFaint,
+                    fontFamily: "var(--font-mono)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.10em",
+                    fontSize: 11,
+                  }}
                 >
                   <span className="hidden sm:inline">{s.label}</span>
                   <span className="sm:hidden">{s.short}</span>
                 </span>
                 {i < STEPS.length - 1 && (
                   <span
-                    className={`w-6 sm:w-12 h-px transition-colors ${
-                      done ? "bg-cyan-400/60" : "bg-white/15"
-                    }`}
+                    className="w-6 sm:w-12 h-px transition-colors"
+                    style={{ background: done ? C.terra : C.rule }}
                   />
                 )}
               </li>
@@ -152,7 +183,6 @@ export default function DiscoveryFunnel() {
     });
   }, []);
 
-  // Track active step via intersection observers on section refs
   useEffect(() => {
     if (typeof window === "undefined") return;
     const onScroll = () => {
@@ -215,97 +245,116 @@ export default function DiscoveryFunnel() {
     }
   }, [scrollTo]);
 
+  const eyebrow = (color: string, label: string) => (
+    <div
+      style={{
+        fontFamily: "var(--font-mono)",
+        fontSize: 11,
+        textTransform: "uppercase",
+        letterSpacing: "0.16em",
+        color,
+        marginBottom: 16,
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 12,
+      }}
+    >
+      <span style={{ width: 28, height: 1, background: color }} />
+      {label}
+    </div>
+  );
+
   return (
-    <>
+    <div style={{ background: C.cream, color: C.ink, fontFamily: "var(--font-sans)" }}>
       <StickyProgress activeStep={activeStep} />
 
       {/* ============================================================
-          HERO — elegant, story-first
+          HERO — cream paper, polaroid portrait
           ============================================================ */}
       <section
-        className="relative overflow-hidden pt-16 md:pt-20 pb-20 md:pb-28"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          padding: "72px 0 80px",
+          borderBottom: `1px solid ${C.rule}`,
+          background: C.cream3,
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -110,
-            left: -150,
-            opacity: 0.35,
-          }}
-          aria-hidden
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#00D4FF",
-            top: 120,
-            right: -180,
-            opacity: 0.25,
-            animationDelay: "-7s",
-          }}
-          aria-hidden
-        />
-
-        <div className="container-x px-6 relative z-10">
-          <div className="grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-16 items-center">
+        <div className="container-x px-6">
+          <div className="grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-16 items-end">
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-6 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-                <Sparkles className="w-3 h-3" />
-                30-min strategy call · Bali hours · No SDR
-              </span>
+              {eyebrow(C.terra, "Field notes · discovery · 2026")}
 
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.04] tracking-tight text-white mb-6">
+              <h1
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(40px, 6.5vw, 72px)",
+                  fontWeight: 500,
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1.04,
+                  color: C.ink,
+                  margin: "0 0 24px",
+                }}
+              >
                 Find the leak.{" "}
-                <span
-                  className="italic font-semibold"
+                <em
                   style={{
-                    fontFamily:
-                      '"Playfair Display", Georgia, "Times New Roman", serif',
-                    background:
-                      "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    WebkitTextFillColor: "transparent",
+                    fontStyle: "italic",
+                    color: C.terra,
+                    fontWeight: 500,
                   }}
                 >
                   Plug it in 14 days.
-                </span>
+                </em>
               </h1>
 
-              <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-7 max-w-xl">
+              <p
+                style={{
+                  fontSize: 19,
+                  color: C.ink2,
+                  maxWidth: "52ch",
+                  lineHeight: 1.55,
+                  marginBottom: 28,
+                }}
+              >
                 30-minute audit. 3 concrete plays you can ship this quarter. A
                 fixed-price scope back in your inbox 48 hours later. No deck.
                 No SDR. No fake urgency.
               </p>
 
-              {/* Trust strip — softer */}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-300 mb-8">
-                <span className="inline-flex items-center gap-1.5">
-                  <Star className="w-3.5 h-3.5 text-amber-300 fill-current" />
-                  <b className="text-white">4.9 / 5</b> · 47 reviews
+              {/* Trust strip */}
+              <div
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.10em",
+                  color: C.inkFaint,
+                  marginBottom: 28,
+                }}
+              >
+                <span style={{ color: C.ochre }}>
+                  <Star
+                    style={{
+                      display: "inline-block",
+                      width: 12,
+                      height: 12,
+                      verticalAlign: "-2px",
+                      marginRight: 4,
+                      fill: C.ochre,
+                      stroke: "none",
+                    }}
+                  />
+                  4.9 / 5
                 </span>
-                <span className="text-cyan-300/30">·</span>
-                <span>
-                  <b className="text-white">180+</b> workflows
-                </span>
-                <span className="text-cyan-300/30">·</span>
-                <span>
-                  <b className="text-white">9</b> countries
-                </span>
+                <span style={{ margin: "0 12px", color: C.rule }}>·</span>
+                <span><span style={{ color: C.ink }}>180+</span> workflows</span>
+                <span style={{ margin: "0 12px", color: C.rule }}>·</span>
+                <span><span style={{ color: C.ink }}>9</span> countries</span>
               </div>
 
               {/* CTAs */}
@@ -315,11 +364,19 @@ export default function DiscoveryFunnel() {
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => scrollTo(qualRef)}
-                  className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-bold text-white text-base motion-reduce:transform-none"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                    boxShadow: "0 12px 36px rgba(0, 212, 255, 0.30)",
+                    background: C.terra,
+                    color: C.cream3,
+                    border: "none",
+                    padding: "16px 28px",
+                    fontFamily: "var(--font-sans)",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    cursor: "pointer",
+                    borderRadius: 2,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
                   }}
                 >
                   Start the brief
@@ -328,134 +385,187 @@ export default function DiscoveryFunnel() {
                 <button
                   type="button"
                   onClick={() => scrollTo(calRef)}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-cyan-200 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-cyan-400/5 transition"
+                  style={{
+                    background: "transparent",
+                    color: C.ink,
+                    border: `1px solid ${C.ink}`,
+                    padding: "15px 26px",
+                    fontFamily: "var(--font-sans)",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    cursor: "pointer",
+                    borderRadius: 2,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                  }}
                 >
                   <CalendarClock className="w-4 h-4" />
                   Skip to calendar
                 </button>
               </div>
 
-              {/* Pull quote */}
+              {/* Pull quote — cream-2 paper */}
               <blockquote
-                className="rounded-2xl p-5 max-w-xl"
                 style={{
-                  background:
-                    "linear-gradient(135deg, rgba(0,212,255,0.06) 0%, rgba(20,184,166,0.04) 100%)",
-                  border: "1px solid rgba(0,212,255,0.18)",
+                  background: C.cream2,
+                  border: `1px solid ${C.rule}`,
+                  padding: 20,
+                  maxWidth: 560,
+                  margin: 0,
+                  borderRadius: 2,
+                  transform: "rotate(-0.4deg)",
                 }}
               >
                 <div className="flex items-start gap-3">
-                  <Quote className="w-5 h-5 text-cyan-300 flex-shrink-0 mt-0.5" />
+                  <Quote style={{ width: 18, height: 18, color: C.terra, flexShrink: 0, marginTop: 4 }} />
                   <div>
-                    <p className="text-base md:text-lg text-white leading-snug font-medium">
+                    <p
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontStyle: "italic",
+                        fontSize: 17,
+                        lineHeight: 1.45,
+                        color: C.ink,
+                        margin: 0,
+                      }}
+                    >
                       23% show-rate to{" "}
-                      <span
-                        className="italic"
-                        style={{
-                          fontFamily:
-                            '"Playfair Display", Georgia, serif',
-                          color: "#5EEAD4",
-                        }}
-                      >
+                      <span style={{ color: C.terra, fontWeight: 600 }}>
                         71% in 6 weeks.
                       </span>
                     </p>
-                    <p className="text-xs text-fg-faint mt-1.5">
-                      — Dr. Elena Marchetti, Grand Mercer Dental
+                    <p
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                        color: C.inkFaint,
+                        marginTop: 8,
+                      }}
+                    >
+                      — Dr. Elena Marchetti · Grand Mercer Dental
                     </p>
                   </div>
                 </div>
               </blockquote>
             </motion.div>
 
-            {/* Founder card — elegant, larger portrait */}
+            {/* Polaroid portrait */}
             <motion.aside
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="lg:sticky lg:top-[140px]"
             >
-              <div
-                className="rounded-3xl overflow-hidden"
+              <figure
                 style={{
-                  background:
-                    "linear-gradient(155deg, rgba(10,32,52,0.65) 0%, rgba(7,56,70,0.55) 100%)",
-                  border: "1px solid rgba(0,212,255,0.22)",
-                  boxShadow: "0 30px 80px -25px rgba(0,212,255,0.30)",
-                  backdropFilter: "blur(14px) saturate(140%)",
+                  margin: 0,
+                  transform: "rotate(-1.2deg)",
+                  background: C.cream3,
+                  padding: 10,
+                  border: `1px solid ${C.rule}`,
+                  boxShadow: "0 18px 48px rgba(26,26,26,0.14)",
+                  maxWidth: 420,
+                  marginLeft: "auto",
                 }}
               >
-                <div className="relative aspect-[4/5]">
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    aspectRatio: "4 / 5",
+                    overflow: "hidden",
+                  }}
+                >
                   <Image
                     src="/portraits/waseem-builder-hero.jpg"
                     alt="Waseem Nasir — Founder, SkynetLabs"
                     fill
                     priority
                     sizes="(min-width: 1024px) 420px, 100vw"
-                    className="object-cover"
-                    style={{ objectPosition: "center top" }}
-                  />
-                  <span
-                    aria-hidden
-                    className="absolute inset-0"
                     style={{
-                      background:
-                        "linear-gradient(180deg, transparent 50%, rgba(6,24,39,0.92) 100%)",
+                      objectFit: "cover",
+                      objectPosition: "center top",
+                      filter: "sepia(0.10) saturate(0.95) contrast(1.02)",
                     }}
                   />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <div className="inline-flex items-center gap-1.5 mb-2 text-[10px] uppercase tracking-[0.18em] text-cyan-300 font-bold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      Runs every call personally
-                    </div>
-                    <div className="text-white font-extrabold text-lg leading-tight">
-                      Waseem Nasir
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-300 mt-1">
-                      <span>Founder · SkynetLabs</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-xs text-cyan-200/85 mt-2">
-                      <span className="inline-flex items-center gap-1">
-                        <MapPin className="w-3 h-3" />
-                        Bali · GMT+8
-                      </span>
-                      <span className="text-cyan-300/30">·</span>
-                      <span className="inline-flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        Solo since 2019
-                      </span>
-                    </div>
-                  </div>
                 </div>
-
-                <div className="p-5">
-                  <p className="text-sm text-fg-muted leading-relaxed italic mb-4">
+                <figcaption
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.10em",
+                    color: C.inkFaint,
+                    textAlign: "center",
+                    paddingTop: 12,
+                  }}
+                >
+                  Waseem · founder · Bali · GMT+8
+                </figcaption>
+                <div style={{ padding: "12px 6px 6px" }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontStyle: "italic",
+                      fontSize: 14,
+                      lineHeight: 1.5,
+                      color: C.ink2,
+                      margin: "0 0 14px",
+                    }}
+                  >
                     &ldquo;You don&apos;t get an SDR. You get me on Zoom with
-                    your funnel pulled up on my second monitor. We ship plans,
-                    not proposals.&rdquo;
+                    your funnel pulled up on my second monitor.&rdquo;
                   </p>
-                  <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/[0.07]">
+                  <div className="grid grid-cols-3 gap-2" style={{ borderTop: `1px solid ${C.ruleSoft}`, paddingTop: 12 }}>
                     <Stat value="180+" label="Workflows" />
                     <Stat value="40+" label="Sites" />
                     <Stat value="9" label="Countries" />
                   </div>
+                  <div
+                    style={{
+                      marginTop: 12,
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                      color: C.inkFaint,
+                      display: "flex",
+                      gap: 12,
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <span className="inline-flex items-center gap-1">
+                      <MapPin style={{ width: 11, height: 11 }} />
+                      Bali · GMT+8
+                    </span>
+                    <span style={{ color: C.rule }}>·</span>
+                    <span className="inline-flex items-center gap-1">
+                      <Clock style={{ width: 11, height: 11 }} />
+                      Solo since 2019
+                    </span>
+                  </div>
                 </div>
-              </div>
+              </figure>
             </motion.aside>
           </div>
         </div>
       </section>
 
       {/* ============================================================
-          STEP 1 — Qualifier
+          STEP 1 — Qualifier (cream bg)
           ============================================================ */}
       <section
         id={QUAL_SECTION_ID}
         ref={qualRef}
-        className="py-20 md:py-28 relative"
         style={{
-          background:
-            "linear-gradient(180deg, #061827 0%, #082234 100%)",
+          padding: "80px 0",
+          borderBottom: `1px solid ${C.rule}`,
+          background: C.cream,
+          position: "relative",
+          zIndex: 2,
         }}
       >
         <div className="container-x px-6">
@@ -466,28 +576,33 @@ export default function DiscoveryFunnel() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl mx-auto text-center mb-12"
           >
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-              Step 1 · The brief
-            </span>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white leading-[1.08]">
+            <div style={{ display: "inline-block", textAlign: "left" }}>
+              {eyebrow(C.terra, "Step 1 · The brief")}
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(28px, 4vw, 44px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.08,
+                color: C.ink,
+                margin: "0 0 16px",
+              }}
+            >
               Seven quick questions.{" "}
-              <span
-                className="italic"
-                style={{
-                  fontFamily:
-                    '"Playfair Display", Georgia, "Times New Roman", serif',
-                  background:
-                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
+              <em style={{ fontStyle: "italic", color: C.terra }}>
                 Ninety seconds.
-              </span>
+              </em>
             </h2>
-            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+            <p
+              style={{
+                fontSize: 16,
+                color: C.ink2,
+                lineHeight: 1.6,
+                margin: 0,
+              }}
+            >
               I read these before our call so we don&apos;t burn 20 minutes on
               context. Rather skip? Hit <em>Skip to calendar</em> on any
               question.
@@ -503,31 +618,61 @@ export default function DiscoveryFunnel() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.4 }}
-                  className="rounded-3xl p-8 text-center"
                   style={{
-                    background:
-                      "linear-gradient(135deg, rgba(20,184,166,0.12) 0%, rgba(0,212,255,0.08) 100%)",
-                    border: "1px solid rgba(20,184,166,0.35)",
+                    background: C.cream2,
+                    border: `1px solid ${C.rule}`,
+                    padding: 32,
+                    textAlign: "center",
+                    transform: "rotate(-0.3deg)",
                   }}
                 >
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full mb-4 bg-emerald-500/20 border border-emerald-400/40">
-                    <ShieldCheck className="w-6 h-6 text-emerald-300" />
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: 56,
+                      height: 56,
+                      borderRadius: "50%",
+                      background: C.cream3,
+                      border: `1px solid ${C.terra}`,
+                      marginBottom: 16,
+                    }}
+                  >
+                    <ShieldCheck style={{ width: 24, height: 24, color: C.terra }} />
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-2">
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 28,
+                      fontWeight: 600,
+                      color: C.ink,
+                      letterSpacing: "-0.01em",
+                      marginBottom: 8,
+                    }}
+                  >
                     Brief saved.
                   </h3>
-                  <p className="text-sm text-fg-muted mb-6">
+                  <p style={{ fontSize: 14, color: C.ink2, marginBottom: 24 }}>
                     I&apos;ll have your answers open during the call so we go
                     straight to the audit.
                   </p>
                   <button
                     type="button"
                     onClick={() => scrollTo(calRef)}
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
                     style={{
-                      background:
-                        "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                      boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                      background: C.terra,
+                      color: C.cream3,
+                      border: "none",
+                      padding: "14px 24px",
+                      fontFamily: "var(--font-sans)",
+                      fontWeight: 600,
+                      fontSize: 15,
+                      cursor: "pointer",
+                      borderRadius: 2,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
                     }}
                   >
                     Pick my slot
@@ -553,31 +698,20 @@ export default function DiscoveryFunnel() {
       </section>
 
       {/* ============================================================
-          STEP 2 — Calendly
+          STEP 2 — Calendly (cream-2 section, cream-3 paper container)
           ============================================================ */}
       <section
         id={CALENDLY_SECTION_ID}
         ref={calRef}
-        className="py-20 md:py-28 relative overflow-hidden"
         style={{
-          background:
-            "linear-gradient(180deg, #082234 0%, #0a2d4a 50%, #061827 100%)",
+          padding: "80px 0",
+          borderBottom: `1px solid ${C.rule}`,
+          background: C.cream2,
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 460,
-            height: 460,
-            background: "#14B8A6",
-            top: 40,
-            right: -120,
-            opacity: 0.25,
-          }}
-          aria-hidden
-        />
-
-        <div className="container-x px-6 relative z-10">
+        <div className="container-x px-6">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -585,28 +719,26 @@ export default function DiscoveryFunnel() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center mb-12"
           >
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-              Step 2 · Pick your slot
-            </span>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white leading-[1.08]">
+            <div style={{ display: "inline-block", textAlign: "left" }}>
+              {eyebrow(C.terra, "Step 2 · Pick your slot")}
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(28px, 4vw, 44px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.08,
+                color: C.ink,
+                margin: "0 0 16px",
+              }}
+            >
               Thirty minutes.{" "}
-              <span
-                className="italic"
-                style={{
-                  fontFamily:
-                    '"Playfair Display", Georgia, "Times New Roman", serif',
-                  background:
-                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
+              <em style={{ fontStyle: "italic", color: C.terra }}>
                 One real audit.
-              </span>
+              </em>
             </h2>
-            <p className="text-base md:text-lg text-gray-200 leading-relaxed">
+            <p style={{ fontSize: 16, color: C.ink2, lineHeight: 1.6, margin: 0 }}>
               No deck. No SDR. Just me, your funnel, and a shared screen. Show
               up with your numbers — you leave with a roadmap.
             </p>
@@ -619,10 +751,20 @@ export default function DiscoveryFunnel() {
             />
           </div>
 
-          {/* Trust block */}
+          {/* Trust cards — cream-2 with rotation */}
           <div className="max-w-5xl mx-auto mt-16">
-            <p className="text-center text-[11px] uppercase tracking-[0.22em] text-cyan-300 font-bold mb-8">
-              What you walk away with
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.22em",
+                color: C.terra,
+                marginBottom: 28,
+                textAlign: "center",
+              }}
+            >
+              — What you walk away with
             </p>
             <motion.div
               initial="hidden"
@@ -634,7 +776,7 @@ export default function DiscoveryFunnel() {
               }}
               className="grid grid-cols-1 md:grid-cols-3 gap-5"
             >
-              {TRUST_CARDS.map((c) => {
+              {TRUST_CARDS.map((c, i) => {
                 const Icon = c.icon;
                 return (
                   <motion.div
@@ -647,22 +789,40 @@ export default function DiscoveryFunnel() {
                         transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
                       },
                     }}
-                    className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/30 transition"
+                    style={{
+                      background: C.cream3,
+                      border: `1px solid ${C.rule}`,
+                      padding: 24,
+                      transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                    }}
                   >
                     <div
-                      className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
                       style={{
-                        background:
-                          "linear-gradient(135deg, rgba(30,136,229,0.18), rgba(20,184,166,0.18))",
-                        border: "1px solid rgba(126,228,255,0.28)",
+                        width: 44,
+                        height: 44,
+                        background: C.cream2,
+                        border: `1px solid ${C.rule}`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: 16,
                       }}
                     >
-                      <Icon className="w-5 h-5 text-cyan-300" />
+                      <Icon style={{ width: 20, height: 20, color: C.terra }} />
                     </div>
-                    <h3 className="text-white font-bold text-base mb-2 tracking-tight">
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: 17,
+                        fontWeight: 600,
+                        color: C.ink,
+                        marginBottom: 8,
+                        letterSpacing: "-0.005em",
+                      }}
+                    >
                       {c.title}
                     </h3>
-                    <p className="text-sm text-fg-muted leading-relaxed">
+                    <p style={{ fontSize: 14, color: C.ink2, lineHeight: 1.6, margin: 0 }}>
                       {c.body}
                     </p>
                   </motion.div>
@@ -674,11 +834,13 @@ export default function DiscoveryFunnel() {
       </section>
 
       {/* ============================================================
-          FAQ
+          FAQ — cream-2 cards with terracotta + icon
           ============================================================ */}
       <section
-        className="py-20 md:py-28"
-        style={{ background: "var(--bg, #061827)" }}
+        style={{
+          padding: "80px 0",
+          background: C.cream,
+        }}
       >
         <div className="container-x px-6">
           <motion.div
@@ -688,50 +850,76 @@ export default function DiscoveryFunnel() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl mx-auto text-center mb-12"
           >
-            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-              Before you book
-            </span>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3 text-white leading-[1.08]">
+            <div style={{ display: "inline-block", textAlign: "left" }}>
+              {eyebrow(C.terra, "Before you book")}
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(28px, 4vw, 44px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.08,
+                color: C.ink,
+                margin: 0,
+              }}
+            >
               The six questions{" "}
-              <span
-                className="italic"
-                style={{
-                  fontFamily:
-                    '"Playfair Display", Georgia, "Times New Roman", serif',
-                  background:
-                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
+              <em style={{ fontStyle: "italic", color: C.terra }}>
                 I get most.
-              </span>
+              </em>
             </h2>
           </motion.div>
 
-          <div className="max-w-3xl mx-auto space-y-2.5">
+          <div className="max-w-3xl mx-auto space-y-3">
             {FAQS.map((f, i) => {
               const open = openFaq === i;
               return (
                 <div
                   key={f.q}
-                  className="rounded-2xl bg-white/[0.03] border border-white/10 overflow-hidden hover:border-white/20 transition-colors"
+                  style={{
+                    background: C.cream2,
+                    border: `1px solid ${C.rule}`,
+                    overflow: "hidden",
+                  }}
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaq(open ? null : i)}
-                    className="w-full flex items-center justify-between text-left p-5 md:p-6"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 16,
+                      padding: 20,
+                      background: "transparent",
+                      border: "none",
+                      cursor: "pointer",
+                      textAlign: "left",
+                    }}
                     aria-expanded={open}
                   >
-                    <span className="text-base md:text-lg font-semibold text-white pr-4">
+                    <span
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: 18,
+                        fontWeight: 600,
+                        color: C.ink,
+                        paddingRight: 16,
+                      }}
+                    >
                       {f.q}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 text-cyan-300 flex-shrink-0 transition-transform motion-reduce:transition-none ${
-                        open ? "rotate-180" : ""
-                      }`}
+                      style={{
+                        width: 20,
+                        height: 20,
+                        color: C.terra,
+                        flexShrink: 0,
+                        transition: "transform 0.2s",
+                        transform: open ? "rotate(180deg)" : "rotate(0deg)",
+                      }}
                     />
                   </button>
                   <AnimatePresence initial={false}>
@@ -742,9 +930,17 @@ export default function DiscoveryFunnel() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden"
+                        style={{ overflow: "hidden" }}
                       >
-                        <p className="px-5 md:px-6 pb-5 md:pb-6 text-sm md:text-base text-fg-muted leading-relaxed">
+                        <p
+                          style={{
+                            padding: "0 20px 20px",
+                            fontSize: 15,
+                            color: C.ink2,
+                            lineHeight: 1.65,
+                            margin: 0,
+                          }}
+                        >
                           {f.a}
                         </p>
                       </motion.div>
@@ -756,16 +952,34 @@ export default function DiscoveryFunnel() {
           </div>
 
           <div className="max-w-2xl mx-auto text-center mt-14">
-            <p className="text-sm text-fg-faint mb-4">
-              Still reading? You&apos;ve got more than enough info.
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: C.inkFaint,
+                marginBottom: 16,
+              }}
+            >
+              — Still reading? You&apos;ve got more than enough info.
             </p>
             <button
               type="button"
               onClick={() => scrollTo(calRef)}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                background: C.terra,
+                color: C.cream3,
+                border: "none",
+                padding: "14px 24px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                cursor: "pointer",
+                borderRadius: 2,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
               }}
             >
               <CalendarClock className="w-4 h-4" />
@@ -774,17 +988,35 @@ export default function DiscoveryFunnel() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
-    <div className="text-center">
-      <div className="text-lg font-extrabold text-cyan-300 tracking-tight">
+    <div style={{ textAlign: "center" }}>
+      <div
+        style={{
+          fontFamily: "var(--font-display)",
+          fontStyle: "italic",
+          fontSize: 18,
+          fontWeight: 600,
+          color: "#C66B3F",
+          letterSpacing: "-0.01em",
+        }}
+      >
         {value}
       </div>
-      <div className="text-[10px] uppercase text-fg-faint tracking-wider mt-0.5">
+      <div
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: 9,
+          textTransform: "uppercase",
+          letterSpacing: "0.16em",
+          color: "#6B6B65",
+          marginTop: 2,
+        }}
+      >
         {label}
       </div>
     </div>

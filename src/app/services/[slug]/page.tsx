@@ -125,22 +125,67 @@ export default async function ServicePage({
   return (
     <>
       <JsonLd data={schema} />
+      <style>{`
+        .cream-state-pill:hover { border-color: var(--terracotta) !important; }
+      `}</style>
       <div
         className="wn-service-shell"
         dangerouslySetInnerHTML={{ __html: html }}
       />
 
       {/* Available in 48 states — feeds the /services/[slug]/in/[state] matrix */}
-      <section className="section">
+      <section
+        className="section"
+        style={{
+          background: "var(--cream-3)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
         <div className="container-x">
           <div className="max-w-4xl mb-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+            <div
+              className="inline-flex items-center gap-3 mb-3"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
               Available nationwide
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
-              {svc.label} in all 48 states
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                lineHeight: 1.1,
+                marginBottom: 12,
+              }}
+            >
+              {svc.label} in all{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                48 states.
+              </em>
             </h2>
-            <p className="text-gray-300">
+            <p style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.55 }}>
               Same fixed-scope build, delivered remotely to any US state.
               Tap your state to see {svc.label.toLowerCase()} tuned for local
               verticals, agency cost benchmarks and city-level intent.
@@ -151,13 +196,28 @@ export default async function ServicePage({
               <Link
                 key={s.slug}
                 href={`/services/${svc.slug}/in/${s.slug}`}
-                className="group flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-cyan-400/60 hover:bg-white/10 transition"
+                className="group cream-state-pill flex items-center justify-between gap-2"
+                style={{
+                  padding: "10px 14px",
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                  transition: "border-color 0.18s",
+                }}
               >
-                <span className="flex items-center gap-1.5 text-xs text-gray-200">
-                  <MapPin className="w-3 h-3 text-cyan-300" />
+                <span
+                  className="flex items-center gap-1.5"
+                  style={{ fontSize: 12, color: "var(--ink)" }}
+                >
+                  <MapPin
+                    className="w-3 h-3"
+                    style={{ color: "var(--terracotta)" }}
+                  />
                   {s.name}
                 </span>
-                <ArrowRight className="w-3 h-3 text-gray-500 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition" />
+                <ArrowRight
+                  className="w-3 h-3 group-hover:translate-x-0.5 transition"
+                  style={{ color: "var(--ink-faint)" }}
+                />
               </Link>
             ))}
           </div>

@@ -2,13 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { NEWS, getArticle, relatedFor } from "@/lib/news";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 /**
- * Dynamic /news/[slug] — renders ocean-themed article pages for entries
+ * Dynamic /news/[slug] — cream editorial pivot. Renders cream pages for entries
  * with a `body` field. Legacy hand-written articles (own page.tsx folders)
  * win the route match automatically and bypass this.
  */
@@ -21,14 +21,15 @@ export function generateStaticParams() {
   }));
 }
 
+// Per-category accent (cream-palette: terracotta / ochre / sage / oxblood)
 const CATEGORY_COLORS: Record<string, string> = {
-  Automation: "#7EE4FF",
-  AEO: "#5EEAD4",
-  Stack: "#C4B5FD",
-  Operations: "#FCD34D",
-  Pricing: "#FF8FB1",
-  Tools: "#F472B6",
-  "Field notes": "#FFB547",
+  Automation: "var(--terracotta)",
+  AEO: "var(--sage)",
+  Stack: "var(--ochre)",
+  Operations: "var(--oxblood)",
+  Pricing: "var(--terracotta)",
+  Tools: "var(--ochre)",
+  "Field notes": "var(--sage)",
 };
 
 export async function generateMetadata({
@@ -79,7 +80,7 @@ export default async function NewsArticlePage({
   const a = getArticle(slug);
   if (!a || !a.body) notFound();
 
-  const accent = CATEGORY_COLORS[a.category] ?? "#7EE4FF";
+  const accent = CATEGORY_COLORS[a.category] ?? "var(--terracotta)";
   const related = relatedFor(a.slug, 3);
 
   const articleSchema = {
@@ -135,131 +136,219 @@ export default async function NewsArticlePage({
 
       {/* HERO */}
       <section
-        className="relative overflow-hidden pt-28 md:pt-32 pb-10"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          padding: "112px 0 40px",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 480,
-            height: 480,
-            background: "#1E88E5",
-            top: -80,
-            left: -120,
-            opacity: 0.40,
-          }}
-        />
-
-        <div className="container-x px-6 relative z-10 max-w-3xl">
+        <div style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px" }}>
           <nav
             aria-label="Breadcrumb"
-            className="text-xs text-cyan-200/80 mb-5 flex items-center flex-wrap gap-2"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+              color: "var(--ink-faint)",
+              marginBottom: 18,
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 8,
+              alignItems: "center",
+            }}
           >
-            <Link href="/" className="hover:text-cyan-100">
-              Home
-            </Link>
+            <Link href="/" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>Home</Link>
             <span aria-hidden>/</span>
-            <Link href="/news" className="hover:text-cyan-100">
-              News
-            </Link>
+            <Link href="/news" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>News</Link>
             <span aria-hidden>/</span>
-            <span className="text-white/85 truncate">{a.title}</span>
+            <span style={{ color: "var(--ink)", maxWidth: "40ch", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {a.title}
+            </span>
           </nav>
 
           <Link
             href="/news"
-            className="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-200 text-sm mb-6"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              color: "var(--terracotta)",
+              fontFamily: "var(--font-mono)",
+              fontSize: 12,
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+              marginBottom: 24,
+              textDecoration: "none",
+            }}
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft style={{ width: 14, height: 14 }} />
             Back to all field notes
           </Link>
 
-          <div className="flex items-center gap-3 mb-5">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              marginBottom: 18,
+              flexWrap: "wrap",
+            }}
+          >
             <span
-              className="text-[10px] uppercase tracking-[0.18em] font-bold px-2.5 py-1 rounded-md"
               style={{
-                color: accent,
-                background: `${accent}1a`,
-                border: `1px solid ${accent}40`,
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                fontWeight: 600,
+                padding: "5px 10px",
+                color: "var(--cream-3)",
+                background: accent,
+                borderRadius: 2,
               }}
             >
               {a.category}
             </span>
-            <span className="inline-flex items-center gap-1.5 text-xs text-fg-muted">
-              <Calendar className="w-3 h-3" />
-              {formatDate(a.publishedAt)}
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-xs text-fg-muted">
-              <Clock className="w-3 h-3" />
-              {a.readingTime} min read
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+                color: "var(--ink-faint)",
+              }}
+            >
+              — {formatDate(a.publishedAt)} · {a.readingTime} min read
             </span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.08] mb-5">
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(32px, 5.2vw, 60px)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.04,
+              color: "var(--ink)",
+              margin: "0 0 18px",
+            }}
+          >
             {a.title}
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+          <p
+            style={{
+              fontSize: 19,
+              color: "var(--ink-2)",
+              lineHeight: 1.55,
+              margin: 0,
+            }}
+          >
             {a.deck}
           </p>
         </div>
       </section>
 
-      {/* HERO IMAGE */}
-      <section className="relative -mt-2">
-        <div className="container-x px-6 max-w-4xl mx-auto">
-          <div
-            className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl"
+      {/* HERO IMAGE — polaroid */}
+      <section style={{ padding: "32px 0 16px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
+          <figure
             style={{
-              border: `1px solid ${accent}40`,
-              boxShadow: `0 30px 80px -15px ${accent}30`,
+              margin: 0,
+              transform: "rotate(-0.5deg)",
+              background: "var(--cream-3)",
+              padding: 12,
+              border: "1px solid rgba(26,26,26,0.14)",
+              boxShadow: "0 24px 60px rgba(26,26,26,0.14)",
             }}
           >
-            <Image
-              src={a.heroImage}
-              alt={a.heroCaption}
-              fill
-              priority
-              sizes="(min-width: 1024px) 800px, 100vw"
-              className="object-cover"
-              style={{ objectPosition: a.heroPosition ?? "center" }}
-            />
-            <span
-              aria-hidden
-              className="absolute inset-0"
+            <div
               style={{
-                background:
-                  "linear-gradient(180deg, transparent 60%, rgba(6,24,39,0.55) 100%)",
+                position: "relative",
+                aspectRatio: "16 / 9",
+                overflow: "hidden",
+                background: "var(--cream-2)",
               }}
-            />
-          </div>
-          <p className="text-xs text-fg-faint italic text-center mt-3">
-            {a.heroCaption}
-          </p>
+            >
+              <Image
+                src={a.heroImage}
+                alt={a.heroCaption}
+                fill
+                priority
+                sizes="(min-width: 1024px) 880px, 100vw"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: a.heroPosition ?? "center",
+                  filter: "sepia(0.06) saturate(0.95)",
+                }}
+              />
+            </div>
+            <figcaption
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.10em",
+                color: "var(--ink-faint)",
+                textAlign: "center",
+                paddingTop: 12,
+              }}
+            >
+              — {a.heroCaption}
+            </figcaption>
+          </figure>
         </div>
       </section>
 
       {/* BODY */}
-      <article className="py-12 md:py-16">
-        <div className="container-x px-6 max-w-3xl mx-auto">
-          <div className="prose-body text-fg-muted text-[17px] md:text-[18px] leading-[1.75] space-y-5">
+      <article style={{ padding: "48px 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px" }}>
+          <div
+            style={{
+              color: "var(--ink-2)",
+              fontSize: 17,
+              lineHeight: 1.75,
+            }}
+          >
             {a.body!.map((p, i) => (
-              <p key={i}>{p}</p>
+              <p key={i} style={{ marginBottom: 18 }}>{p}</p>
             ))}
           </div>
 
           {a.tags.length > 0 && (
-            <div className="mt-12 pt-6 border-t border-white/[0.08]">
-              <div className="text-[11px] uppercase tracking-wider text-cyan-300 font-semibold mb-3">
-                Tags
+            <div
+              style={{
+                marginTop: 40,
+                paddingTop: 22,
+                borderTop: "1px solid rgba(26,26,26,0.10)",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "var(--terracotta)",
+                  marginBottom: 12,
+                }}
+              >
+                — Tags
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                 {a.tags.map((t) => (
                   <span
                     key={t}
-                    className="px-2.5 py-1 rounded-md text-xs bg-white/[0.04] border border-white/10 text-fg-muted"
+                    style={{
+                      padding: "5px 11px",
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 12,
+                      color: "var(--ink-2)",
+                      background: "var(--cream-2)",
+                      border: "1px solid rgba(26,26,26,0.10)",
+                    }}
                   >
                     #{t}
                   </span>
@@ -271,64 +360,129 @@ export default async function NewsArticlePage({
       </article>
 
       {/* INLINE CTA */}
-      <section className="pb-16">
-        <div className="container-x px-6 max-w-3xl mx-auto">
+      <section style={{ padding: "16px 0 56px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
           <div
-            className="rounded-3xl p-7 md:p-9"
             style={{
-              background:
-                "linear-gradient(135deg, rgba(30,136,229,0.18) 0%, rgba(20,184,166,0.14) 100%)",
-              border: "1px solid rgba(0,212,255,0.30)",
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.12)",
+              padding: "32px 32px 36px",
+              transform: "rotate(-0.2deg)",
             }}
           >
             {a.cta ? (
               <>
-                <div className="text-[11px] uppercase tracking-[0.18em] font-bold text-cyan-200 mb-3">
-                  Related service · {a.cta.serviceLabel}
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.18em",
+                    color: "var(--terracotta)",
+                    fontWeight: 600,
+                    marginBottom: 12,
+                  }}
+                >
+                  — Related service · {a.cta.serviceLabel}
                 </div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-3 leading-tight">
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(22px, 3vw, 30px)",
+                    fontWeight: 500,
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.15,
+                    color: "var(--ink)",
+                    margin: "0 0 18px",
+                  }}
+                >
                   {a.cta.tagline}
                 </h2>
-                <div className="flex flex-wrap gap-3 mt-5">
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
                   <Link
                     href={a.cta.href}
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
                     style={{
-                      background:
-                        "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                      boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                      background: "var(--terracotta)",
+                      color: "var(--cream-3)",
+                      padding: "14px 24px",
+                      fontFamily: "var(--font-sans)",
+                      fontWeight: 600,
+                      fontSize: 14,
+                      borderRadius: 2,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      textDecoration: "none",
                     }}
                   >
                     {a.cta.label}
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight style={{ width: 14, height: 14 }} />
                   </Link>
                   <Link
                     href="/discovery-call"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white border border-white/15 bg-white/[0.04] hover:border-cyan-400/40 transition"
+                    style={{
+                      background: "transparent",
+                      color: "var(--ink)",
+                      padding: "13px 22px",
+                      fontFamily: "var(--font-sans)",
+                      fontWeight: 600,
+                      fontSize: 14,
+                      border: "1px solid var(--ink)",
+                      borderRadius: 2,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      textDecoration: "none",
+                    }}
                   >
                     Book a strategy call
                   </Link>
                 </div>
               </>
             ) : (
-              <div className="text-center">
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-3">
-                  Want this kind of build for your business?
+              <div style={{ textAlign: "center" }}>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(22px, 3vw, 30px)",
+                    fontWeight: 500,
+                    letterSpacing: "-0.02em",
+                    color: "var(--ink)",
+                    margin: "0 0 14px",
+                  }}
+                >
+                  Want this kind of build for{" "}
+                  <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>your business?</em>
                 </h2>
-                <p className="text-base text-fg-muted max-w-xl mx-auto mb-6">
+                <p
+                  style={{
+                    fontSize: 15,
+                    color: "var(--ink-2)",
+                    maxWidth: "48ch",
+                    margin: "0 auto 22px",
+                    lineHeight: 1.6,
+                  }}
+                >
                   Send a 3-sentence brief. Scope + price back in 8 hours.
                 </p>
                 <Link
                   href="/discovery-call"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                    boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                    background: "var(--terracotta)",
+                    color: "var(--cream-3)",
+                    padding: "14px 24px",
+                    fontFamily: "var(--font-sans)",
+                    fontWeight: 600,
+                    fontSize: 14,
+                    borderRadius: 2,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    textDecoration: "none",
                   }}
                 >
                   Book the audit
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight style={{ width: 14, height: 14 }} />
                 </Link>
               </div>
             )}
@@ -338,44 +492,120 @@ export default async function NewsArticlePage({
 
       {/* RELATED */}
       {related.length > 0 && (
-        <section className="pb-20 border-t border-white/[0.08] pt-14">
-          <div className="container-x px-6 max-w-5xl mx-auto">
-            <div className="text-[11px] uppercase tracking-[0.18em] text-cyan-300 font-bold mb-2">
-              More from the journal
+        <section
+          style={{
+            padding: "56px 0 88px",
+            borderTop: "1px solid rgba(26,26,26,0.10)",
+            background: "var(--cream-3)",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+                marginBottom: 10,
+              }}
+            >
+              — More from the journal
             </div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-6">
-              Keep reading.
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(24px, 3.4vw, 34px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                margin: "0 0 24px",
+              }}
+            >
+              Keep{" "}
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>reading.</em>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {related.map((r) => {
-                const a2 = CATEGORY_COLORS[r.category] ?? "#7EE4FF";
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                gap: 20,
+              }}
+            >
+              {related.map((r, i) => {
+                const a2 = CATEGORY_COLORS[r.category] ?? "var(--terracotta)";
+                const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
                 return (
                   <Link
                     key={r.slug}
                     href={`/news/${r.slug}`}
-                    className="group rounded-2xl overflow-hidden flex flex-col bg-white/[0.03] border border-white/10 hover:border-cyan-400/40 transition-all hover:-translate-y-1"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      background: "var(--cream-2)",
+                      border: "1px solid rgba(26,26,26,0.12)",
+                      textDecoration: "none",
+                      transform: `rotate(${rotate})`,
+                    }}
                   >
-                    <div className="relative aspect-[16/10] overflow-hidden">
+                    <div
+                      style={{
+                        position: "relative",
+                        aspectRatio: "16 / 10",
+                        overflow: "hidden",
+                        background: "var(--cream-3)",
+                        borderBottom: "1px solid rgba(26,26,26,0.10)",
+                      }}
+                    >
                       <Image
                         src={r.heroImage}
                         alt={r.heroCaption}
                         fill
                         sizes="(min-width: 1024px) 33vw, 50vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        style={{
+                          objectFit: "cover",
+                          filter: "sepia(0.06) saturate(0.95)",
+                        }}
                       />
                     </div>
-                    <div className="p-4">
+                    <div style={{ padding: "16px 18px" }}>
                       <span
-                        className="text-[10px] uppercase tracking-[0.16em] font-bold"
-                        style={{ color: a2 }}
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 10,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.16em",
+                          fontWeight: 600,
+                          color: a2,
+                        }}
                       >
                         {r.category}
                       </span>
-                      <h3 className="text-sm font-bold text-white tracking-tight leading-snug mt-1 mb-1 line-clamp-2">
+                      <h3
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: 16,
+                          fontWeight: 600,
+                          color: "var(--ink)",
+                          margin: "6px 0 6px",
+                          letterSpacing: "-0.01em",
+                          lineHeight: 1.25,
+                        }}
+                      >
                         {r.title}
                       </h3>
-                      <span className="text-xs text-fg-faint">
-                        {r.readingTime} min · {formatDate(r.publishedAt)}
+                      <span
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 11,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.10em",
+                          color: "var(--ink-faint)",
+                        }}
+                      >
+                        — {r.readingTime} min · {formatDate(r.publishedAt)}
                       </span>
                     </div>
                   </Link>

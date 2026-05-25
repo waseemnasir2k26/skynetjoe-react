@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Lexend } from "next/font/google";
+import { Lexend, Fraunces, Onest, IBM_Plex_Mono } from "next/font/google";
 import { SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -17,7 +17,31 @@ import "./globals.css";
 const lexend = Lexend({
   variable: "--font-lexend",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+// Cream editorial pivot 2026-05-25 — distinctive non-generic font stack.
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: "variable",
+  style: ["normal", "italic"],
+  variable: "--font-serif-fraunces",
+  display: "swap",
+  axes: ["opsz", "SOFT", "WONK"],
+});
+
+const onest = Onest({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans-onest",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono-plex",
   display: "swap",
 });
 
@@ -74,14 +98,18 @@ const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${lexend.variable} h-full antialiased`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${lexend.variable} ${fraunces.variable} ${onest.variable} ${plexMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Calendly preconnect — speeds iframe load on /discovery-call.
             Ported from WP header-enhanced.php (lines 11, dns-prefetch chain). */}
         <link rel="preconnect" href="https://calendly.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
 
-        <meta name="theme-color" content="#061827" />
+        <meta name="theme-color" content="#F2EFE6" />
         <Analytics />
         <AISignals />
       </head>

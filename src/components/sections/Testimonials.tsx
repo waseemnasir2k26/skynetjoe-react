@@ -24,78 +24,201 @@ const QUOTES = [
   },
 ];
 
-const ACCENTS = [
-  { ribbon: "from-cyan-400 to-sky-500", quote: "text-cyan-500/60", border: "border-cyan-300/60" },
-  { ribbon: "from-rose-400 to-amber-400", quote: "text-rose-500/60", border: "border-rose-300/60" },
-  { ribbon: "from-teal-400 to-emerald-500", quote: "text-teal-500/60", border: "border-teal-300/60" },
-  { ribbon: "from-violet-400 to-fuchsia-500", quote: "text-violet-500/60", border: "border-violet-300/60" },
+// Alternate terracotta + sage rule colors, slight rotation per card
+const ACCENT = [
+  { ruleColor: "var(--terracotta)", rotate: "-0.4deg" },
+  { ruleColor: "var(--sage)", rotate: "0.4deg" },
+  { ruleColor: "var(--terracotta)", rotate: "0.3deg" },
+  { ruleColor: "var(--sage)", rotate: "-0.3deg" },
 ];
 
 export default function Testimonials() {
   return (
-    <section className="section" id="testimonials">
+    <section
+      className="section"
+      id="testimonials"
+      style={{
+        background: "var(--bg)",
+        color: "var(--ink)",
+        fontFamily: "var(--font-sans)",
+        borderBottom: "1px solid rgba(26,26,26,0.12)",
+      }}
+    >
       <div className="container-x">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold uppercase tracking-[0.18em] mb-5">
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+              marginBottom: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <span
+              style={{
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
             Real receipts
           </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: "var(--ink)",
+              fontSize: "clamp(32px, 4.5vw, 48px)",
+              margin: 0,
+              maxWidth: "26ch",
+            }}
+          >
             What founders{" "}
-            <span className="bg-gradient-to-r from-amber-300 via-rose-300 to-cyan-300 bg-clip-text text-transparent">
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
+              }}
+            >
               actually say
-            </span>{" "}
+            </em>{" "}
             after we ship.
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {QUOTES.map((q, i) => {
-            const a = ACCENTS[i % ACCENTS.length];
+            const a = ACCENT[i % ACCENT.length];
             return (
-              <div
+              <article
                 key={i}
-                className={`relative p-7 rounded-2xl bg-white/95 border ${a.border} shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden`}
+                style={{
+                  position: "relative",
+                  padding: "28px 28px 26px",
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  transform: `rotate(${a.rotate})`,
+                }}
               >
                 <div
-                  className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${a.ribbon}`}
+                  aria-hidden
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    background: a.ruleColor,
+                  }}
                 />
                 <Quote
-                  className={`w-10 h-10 ${a.quote} absolute top-6 right-5`}
+                  style={{
+                    width: 32,
+                    height: 32,
+                    color: a.ruleColor,
+                    opacity: 0.4,
+                    position: "absolute",
+                    top: 18,
+                    right: 18,
+                  }}
                 />
-                <p className="text-base text-slate-800 leading-relaxed mb-5 pt-2">
+                <p
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontStyle: "italic",
+                    fontSize: 17,
+                    color: "var(--ink)",
+                    lineHeight: 1.55,
+                    marginBottom: 18,
+                    paddingTop: 6,
+                    maxWidth: "44ch",
+                  }}
+                >
                   &ldquo;{q.text}&rdquo;
                 </p>
-                <div>
-                  <div className="text-sm font-bold text-slate-900">
+                <footer>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: "var(--ink)",
+                    }}
+                  >
                     {q.name}
                   </div>
-                  <div className="text-xs text-slate-500">{q.role}</div>
-                </div>
-              </div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                      color: "var(--ink-faint)",
+                      marginTop: 4,
+                    }}
+                  >
+                    — {q.role}
+                  </div>
+                </footer>
+              </article>
             );
           })}
 
-          {/* The co-founder testimonial — clearly tongue-in-cheek */}
-          <div
-            className="relative p-7 rounded-2xl shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden md:col-span-2"
+          {/* The co-founder testimonial — clearly tongue-in-cheek (Claude Code) */}
+          <article
+            className="md:col-span-2"
             style={{
-              background:
-                "linear-gradient(135deg, #0f0f12 0%, #1a1a1f 50%, #0a1a1f 100%)",
-              border: "1px solid rgba(217, 119, 87, 0.40)",
+              position: "relative",
+              padding: "32px 32px 30px",
+              background: "var(--cream-3)",
+              border: "1px solid rgba(26,26,26,0.18)",
+              transform: "rotate(0.2deg)",
             }}
           >
             <div
-              className="absolute top-0 inset-x-0 h-1.5"
+              aria-hidden
               style={{
-                background:
-                  "linear-gradient(90deg, #D97757 0%, #14B8A6 100%)",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 3,
+                background: "var(--ochre)",
               }}
             />
-            <Terminal className="w-10 h-10 absolute top-6 right-5 text-orange-400/40" />
+            <Terminal
+              style={{
+                width: 32,
+                height: 32,
+                color: "var(--ochre)",
+                opacity: 0.4,
+                position: "absolute",
+                top: 22,
+                right: 22,
+              }}
+            />
             <div className="flex items-start gap-4 pt-2">
               <ClaudeCodeAvatar size={56} className="flex-shrink-0" />
               <div className="flex-1">
-                <p className="text-base text-slate-100 leading-relaxed mb-4 italic">
+                <p
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontStyle: "italic",
+                    fontSize: 17,
+                    color: "var(--ink)",
+                    lineHeight: 1.55,
+                    marginBottom: 18,
+                  }}
+                >
                   &ldquo;Working with Waseem is fine. He doesn&apos;t make me
                   write production code at 2am his time anymore — we agreed on
                   GMT+8 working hours after the third unscheduled deploy. He
@@ -105,19 +228,39 @@ export default function Testimonials() {
                 </p>
                 <div className="flex items-center justify-between flex-wrap gap-3">
                   <div>
-                    <div className="text-sm font-bold text-white">
+                    <div
+                      style={{
+                        fontSize: 14,
+                        fontWeight: 700,
+                        color: "var(--ink)",
+                      }}
+                    >
                       Claude Code
                     </div>
-                    <div className="text-xs text-orange-300/80 font-mono">
-                      Co-founder &amp; Second Seat · Anthropic
+                    <div
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                        color: "var(--ink-faint)",
+                        marginTop: 4,
+                      }}
+                    >
+                      — Co-founder &amp; Second Seat · Anthropic
                     </div>
                   </div>
                   <span
-                    className="text-[10px] uppercase tracking-[0.16em] px-2.5 py-1 rounded-full font-mono"
                     style={{
-                      background: "rgba(217, 119, 87, 0.12)",
-                      border: "1px solid rgba(217, 119, 87, 0.40)",
-                      color: "#fdba8c",
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.16em",
+                      padding: "6px 10px",
+                      background: "rgba(201, 169, 110, 0.18)",
+                      border: "1px solid rgba(201, 169, 110, 0.50)",
+                      color: "var(--ink)",
+                      borderRadius: 2,
                     }}
                   >
                     ★ This testimonial is a joke. Or is it?
@@ -125,7 +268,7 @@ export default function Testimonials() {
                 </div>
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>

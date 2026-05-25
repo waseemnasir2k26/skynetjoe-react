@@ -14,6 +14,16 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+// Cream editorial — 5 muted semantic accent tones cycled across the 8 cards.
+// Replaces saturated rainbow (rose/amber/cyan/violet/teal/emerald/fuchsia/indigo).
+const ACCENTS = [
+  "var(--terracotta)", // #C66B3F
+  "var(--ochre)", // #C9A96E
+  "var(--sage)", // #8A9A7B
+  "var(--oxblood)", // #6B2C2C
+  "var(--ink-faint)", // #6B6B65
+] as const;
+
 const PAINS = [
   {
     icon: Ghost,
@@ -26,9 +36,6 @@ const PAINS = [
       { slug: "gohighlevel", label: "GoHighLevel CRM" },
       { slug: "ai-chatbots", label: "AI Chatbots" },
     ],
-    accent: "from-rose-500/30 via-rose-400/10 to-transparent",
-    border: "rose-400/30",
-    glow: "rgba(244,114,114,0.20)",
   },
   {
     icon: Clock,
@@ -41,9 +48,6 @@ const PAINS = [
       { slug: "zapier-make", label: "Zapier & Make" },
       { slug: "ai-business-systems", label: "AI Business Systems" },
     ],
-    accent: "from-amber-500/30 via-amber-400/10 to-transparent",
-    border: "amber-400/30",
-    glow: "rgba(255,181,71,0.20)",
   },
   {
     icon: Plug,
@@ -56,9 +60,6 @@ const PAINS = [
       { slug: "n8n-automation", label: "n8n Automation" },
       { slug: "zapier-make", label: "Zapier & Make" },
     ],
-    accent: "from-cyan-500/30 via-cyan-400/10 to-transparent",
-    border: "cyan-400/30",
-    glow: "rgba(0,212,255,0.22)",
   },
   {
     icon: Sparkles,
@@ -74,9 +75,6 @@ const PAINS = [
       { slug: "youtube-automation", label: "YouTube Automation" },
       { slug: "facebook-automation", label: "Facebook Automation" },
     ],
-    accent: "from-violet-500/30 via-violet-400/10 to-transparent",
-    border: "violet-400/30",
-    glow: "rgba(167,139,250,0.22)",
   },
   {
     icon: Globe,
@@ -88,9 +86,6 @@ const PAINS = [
       { slug: "vibe-coded-sites", label: "Vibe-Coded Websites" },
       { slug: "branding-design", label: "Branding & Design" },
     ],
-    accent: "from-teal-500/30 via-teal-400/10 to-transparent",
-    border: "teal-400/30",
-    glow: "rgba(20,184,166,0.22)",
   },
   {
     icon: Search,
@@ -102,9 +97,6 @@ const PAINS = [
       { slug: "wordpress-seo", label: "WordPress SEO Blog" },
       { slug: "ai-content-creation", label: "AI Content Creation" },
     ],
-    accent: "from-emerald-500/30 via-emerald-400/10 to-transparent",
-    border: "emerald-400/30",
-    glow: "rgba(52,211,153,0.22)",
   },
   {
     icon: ShoppingCart,
@@ -115,9 +107,6 @@ const PAINS = [
     services: [
       { slug: "ecommerce-automation", label: "E-commerce Automation" },
     ],
-    accent: "from-fuchsia-500/30 via-fuchsia-400/10 to-transparent",
-    border: "fuchsia-400/30",
-    glow: "rgba(232,121,249,0.22)",
   },
   {
     icon: Brain,
@@ -129,9 +118,6 @@ const PAINS = [
       { slug: "strategy-training", label: "Strategy & Training" },
       { slug: "ai-business-systems", label: "AI Business Systems" },
     ],
-    accent: "from-indigo-500/30 via-indigo-400/10 to-transparent",
-    border: "indigo-400/30",
-    glow: "rgba(129,140,248,0.22)",
   },
 ];
 
@@ -153,7 +139,10 @@ const cardVariants = {
 
 export default function PainSolverGrid() {
   return (
-    <section className="relative py-16 md:py-24">
+    <section
+      className="relative py-16 md:py-24"
+      style={{ background: "var(--cream)" }}
+    >
       <div className="container-x px-6 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -162,30 +151,57 @@ export default function PainSolverGrid() {
           transition={{ duration: 0.5 }}
           className="mb-12 md:mb-16"
         >
-          <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-            <Sparkles className="w-3 h-3" />
-            Pick the bleed
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.05] mb-4">
-            Which one is{" "}
+          <div
+            className="inline-flex items-center gap-3 mb-5"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+            }}
+          >
             <span
-              className="italic font-semibold"
               style={{
-                fontFamily:
-                  '"Playfair Display", Georgia, "Times New Roman", serif',
-                background:
-                  "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                WebkitTextFillColor: "transparent",
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
+            Pick the bleed
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.05,
+              color: "var(--ink)",
+              fontSize: "clamp(28px, 5vw, 48px)",
+              marginBottom: 14,
+            }}
+          >
+            Which one is{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
               }}
             >
               costing you
-            </span>{" "}
+            </em>{" "}
             this week?
           </h2>
-          <p className="text-base md:text-lg text-fg-muted max-w-2xl">
+          <p
+            style={{
+              fontSize: 17,
+              color: "var(--ink-2)",
+              maxWidth: "44rem",
+              lineHeight: 1.55,
+            }}
+          >
             Every brief lands in one of these eight. We close the pain — the
             services below are just the tools we use to do it.
           </p>
@@ -198,90 +214,167 @@ export default function PainSolverGrid() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"
         >
-          {PAINS.map((p) => {
+          {PAINS.map((p, i) => {
             const Icon = p.icon;
+            const accent = ACCENTS[i % ACCENTS.length];
+            const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
             return (
               <motion.article
                 key={p.pain}
                 variants={cardVariants}
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                className="group relative overflow-hidden rounded-3xl p-6 md:p-7 flex flex-col bg-white/[0.03] border border-white/10 hover:border-white/25 transition-colors"
+                className="group relative flex flex-col"
                 style={{
-                  boxShadow: `0 20px 60px -30px ${p.glow}`,
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                  padding: "28px 28px 30px",
+                  transform: `rotate(${rotate})`,
+                  borderLeft: `3px solid ${accent}`,
                 }}
               >
-                {/* Color wash on hover */}
-                <span
-                  aria-hidden
-                  className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${p.accent} pointer-events-none`}
-                />
-
-                <div className="relative flex items-start justify-between gap-4 mb-4">
+                <div className="flex items-start justify-between gap-4 mb-4">
                   <span
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    className="w-11 h-11 flex items-center justify-center flex-shrink-0"
                     style={{
-                      background:
-                        "linear-gradient(135deg, rgba(30,136,229,0.18), rgba(20,184,166,0.18))",
-                      border: "1px solid rgba(126,228,255,0.30)",
+                      background: "var(--cream-3)",
+                      border: `1px solid ${accent}`,
+                      color: accent,
                     }}
                   >
-                    <Icon className="w-5 h-5 text-cyan-300" />
+                    <Icon className="w-5 h-5" />
                   </span>
-                  <span className="text-[10px] uppercase tracking-[0.18em] text-fg-faint font-semibold mt-1.5">
-                    Pain →
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.16em",
+                      color: accent,
+                      marginTop: 6,
+                    }}
+                  >
+                    — Pain
                   </span>
                 </div>
 
-                <h3 className="relative text-xl md:text-2xl font-extrabold text-white tracking-tight leading-snug mb-2">
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(20px, 2.5vw, 24px)",
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                    letterSpacing: "-0.01em",
+                    lineHeight: 1.2,
+                    marginBottom: 10,
+                  }}
+                >
                   &ldquo;{p.pain}&rdquo;
                 </h3>
 
-                <p className="relative text-sm md:text-[15px] text-fg-muted leading-relaxed mb-5">
+                <p
+                  style={{
+                    fontSize: 14.5,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.6,
+                    marginBottom: 18,
+                  }}
+                >
                   {p.fix}
                 </p>
 
-                <div className="relative flex items-center gap-2 mb-5">
-                  <span className="text-[11px] uppercase tracking-wider text-cyan-300 font-semibold">
-                    Real outcome
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    gap: 8,
+                    marginBottom: 18,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.16em",
+                      color: "var(--ink-faint)",
+                    }}
+                  >
+                    — Real outcome
                   </span>
-                  <span className="text-[11px] text-fg-faint">·</span>
-                  <span className="text-sm font-bold text-white">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "var(--ink)",
+                    }}
+                  >
                     {p.metric}
                   </span>
                 </div>
 
-                <div className="relative flex flex-wrap gap-1.5 mb-5">
+                <div className="flex flex-wrap gap-1.5 mb-5">
                   {p.tools.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-white/[0.05] border border-white/10 text-fg-muted"
+                      style={{
+                        padding: "4px 9px",
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10.5,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        background: "var(--cream-3)",
+                        border: "1px solid rgba(26,26,26,0.10)",
+                        color: "var(--ink-2)",
+                      }}
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="relative mt-auto pt-4 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex flex-wrap gap-2">
+                <div
+                  className="mt-auto pt-4 flex flex-wrap items-center justify-between gap-3"
+                  style={{ borderTop: "1px solid rgba(26,26,26,0.10)" }}
+                >
+                  <div className="flex flex-wrap gap-x-3 gap-y-1">
                     {p.services.slice(0, 2).map((s) => (
                       <Link
                         key={s.slug}
                         href={`/services/${s.slug}`}
-                        className="text-xs text-cyan-300 hover:text-cyan-200 font-semibold underline-offset-4 hover:underline"
+                        style={{
+                          fontSize: 12.5,
+                          color: accent,
+                          fontWeight: 600,
+                          textUnderlineOffset: 4,
+                        }}
+                        className="hover:underline"
                       >
                         {s.label}
                       </Link>
                     ))}
                     {p.services.length > 2 && (
-                      <span className="text-xs text-fg-faint">
+                      <span
+                        style={{
+                          fontSize: 12,
+                          color: "var(--ink-faint)",
+                          fontFamily: "var(--font-mono)",
+                        }}
+                      >
                         + {p.services.length - 2} more
                       </span>
                     )}
                   </div>
                   <Link
                     href="/discovery-call"
-                    className="inline-flex items-center gap-1.5 text-sm font-bold text-white transition-transform group-hover:translate-x-1"
+                    className="inline-flex items-center gap-1.5 transition-transform group-hover:translate-x-1"
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 700,
+                      color: "var(--ink)",
+                    }}
                   >
                     Fix this
                     <ArrowRight className="w-4 h-4" />

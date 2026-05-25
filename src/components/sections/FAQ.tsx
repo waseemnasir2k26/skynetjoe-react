@@ -3,6 +3,21 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
+/**
+ * Cream editorial pivot 2026-05-25 — FAQ section.
+ * cream-2 cards with 1px ink border, terracotta accent icon.
+ */
+
+const C = {
+  cream2: "#EDE8DC",
+  cream3: "#FAF7F0",
+  ink: "#1A1A1A",
+  ink2: "#3A3A36",
+  inkFaint: "#6B6B65",
+  terra: "#C66B3F",
+  rule: "rgba(26,26,26,0.12)",
+};
+
 const FAQS = [
   {
     q: "How fast can you ship?",
@@ -37,14 +52,37 @@ export default function FAQ() {
     <section className="section">
       <div className="container-x max-w-3xl">
         <div className="mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-fuchsia-400/10 border border-fuchsia-400/30 text-fuchsia-300 text-xs font-semibold uppercase tracking-[0.18em] mb-5">
-            Frequently Asked
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: C.terra,
+              fontWeight: 600,
+              marginBottom: 14,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <span style={{ width: 28, height: 1, background: C.terra }} />
+            Frequently asked
+          </p>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(32px, 5vw, 56px)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.08,
+              color: C.ink,
+            }}
+          >
             Things founders ask{" "}
-            <span className="bg-gradient-to-r from-fuchsia-300 via-cyan-300 to-teal-300 bg-clip-text text-transparent">
+            <em style={{ fontStyle: "italic", color: C.terra }}>
               before booking.
-            </span>
+            </em>
           </h2>
         </div>
 
@@ -54,31 +92,53 @@ export default function FAQ() {
             return (
               <div
                 key={i}
-                className={`rounded-2xl overflow-hidden transition-all duration-300 ${
-                  isOpen
-                    ? "bg-white/95 border border-cyan-300/60 shadow-xl shadow-cyan-500/15"
-                    : "bg-white/5 border border-white/10 hover:bg-white/10 hover:border-cyan-400/30"
-                }`}
+                style={{
+                  background: isOpen ? C.cream3 : C.cream2,
+                  border: isOpen ? `1px solid ${C.terra}` : `1px solid ${C.rule}`,
+                  overflow: "hidden",
+                  transition: "border-color 0.2s",
+                }}
               >
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 p-5 text-left transition-colors"
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 16,
+                    padding: 20,
+                    background: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    textAlign: "left",
+                  }}
                 >
                   <span
-                    className={`text-base font-semibold ${
-                      isOpen ? "text-slate-900" : "text-white"
-                    }`}
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 17,
+                      fontWeight: 600,
+                      color: C.ink,
+                    }}
                   >
                     {f.q}
                   </span>
                   {isOpen ? (
-                    <Minus className="w-5 h-5 text-cyan-600 flex-shrink-0" />
+                    <Minus style={{ width: 18, height: 18, color: C.terra, flexShrink: 0 }} />
                   ) : (
-                    <Plus className="w-5 h-5 text-cyan-300 flex-shrink-0" />
+                    <Plus style={{ width: 18, height: 18, color: C.terra, flexShrink: 0 }} />
                   )}
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 text-sm text-slate-700 leading-relaxed">
+                  <div
+                    style={{
+                      padding: "0 20px 20px",
+                      fontSize: 15,
+                      color: C.ink2,
+                      lineHeight: 1.65,
+                    }}
+                  >
                     {f.a}
                   </div>
                 )}

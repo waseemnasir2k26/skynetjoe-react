@@ -4,6 +4,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+/**
+ * Cream editorial pivot 2026-05-25 — HeroVariant.
+ * default + bold variants now render on cream (was navy ocean).
+ * cream variant kept intact (already light). Orbs removed entirely.
+ */
+
 export type HeroVariantProps = {
   id: number;
   archetype: string;
@@ -34,37 +40,54 @@ export default function HeroVariant({
   const isBold = style === "bold";
 
   return (
-    <section className="relative border-b border-[var(--border)] py-24 md:py-32 overflow-hidden">
+    <section
+      className="relative py-24 md:py-32 overflow-hidden"
+      style={{
+        borderBottom: "1px solid var(--border)",
+        background: isCream ? "#fafaf7" : "var(--cream-3)",
+        color: "var(--ink)",
+      }}
+    >
       {/* Annotation strip */}
       <div className="container-x px-6 mb-10 flex items-center gap-3 text-xs">
-        <span className="px-2.5 py-1 rounded-md bg-skynet-primary/10 text-skynet-primary-light font-semibold">
+        <span
+          style={{
+            padding: "4px 10px",
+            background: "var(--cream-2)",
+            color: "var(--terracotta)",
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            fontWeight: 600,
+            letterSpacing: "0.10em",
+            textTransform: "uppercase",
+            border: "1px solid var(--border)",
+          }}
+        >
           V{id.toString().padStart(2, "0")}
         </span>
-        <span className="text-fg-muted">{archetype}</span>
-        <span className="text-fg-faint">·</span>
-        <span className="text-fg-faint">lever: {lever}</span>
+        <span style={{ color: "var(--ink-2)", fontFamily: "var(--font-mono)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.10em" }}>
+          {archetype}
+        </span>
+        <span style={{ color: "var(--ink-faint)" }}>·</span>
+        <span style={{ color: "var(--ink-faint)", fontFamily: "var(--font-mono)", fontSize: 11 }}>lever: {lever}</span>
       </div>
 
-      {/* Variant body */}
       <div
         className={
           isCream
-            ? "container-x px-6 py-16 rounded-3xl bg-[#fafaf7] text-[#100f14] mx-6 max-w-[1140px]"
+            ? "container-x px-6 py-16 mx-6 max-w-[1140px]"
             : isMinimal
               ? "container-x px-6 text-center"
               : isTerminal
                 ? "container-x px-6 font-mono"
                 : "container-x px-6 relative"
         }
+        style={
+          isCream
+            ? { background: "#fafaf7", color: "#100f14", border: "1px solid var(--border)" }
+            : undefined
+        }
       >
-        {/* Decorative orbs for default + bold */}
-        {(style === "default" || isBold) && (
-          <>
-            <div className="orb w-[400px] h-[400px] bg-skynet-primary/30 -top-20 -left-20" />
-            <div className="orb w-[500px] h-[500px] bg-skynet-secondary/25 top-40 -right-40" style={{ animationDelay: "-7s" }} />
-          </>
-        )}
-
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -75,39 +98,59 @@ export default function HeroVariant({
           <div>
             {isTerminal ? (
               <div className="mb-6">
-                <span className="text-skynet-primary-light text-sm">$ </span>
-                <span className="text-fg text-sm">skynetlabs --version 2026.05.20</span>
+                <span style={{ color: "var(--terracotta)", fontSize: 14 }}>$ </span>
+                <span style={{ color: "var(--ink)", fontSize: 14 }}>skynetlabs --version 2026.05.20</span>
               </div>
             ) : null}
 
             <h1
-              className={
-                isMinimal
-                  ? "text-3xl sm:text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6"
-                  : isTerminal
-                    ? "text-2xl sm:text-3xl md:text-5xl font-bold leading-tight mb-6 text-fg"
-                    : isBold
-                      ? "text-4xl sm:text-6xl md:text-8xl font-black leading-[0.95] tracking-tighter mb-6"
-                      : isCream
-                        ? "text-3xl sm:text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6 text-[#100f14]"
-                        : "text-3xl sm:text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6"
-              }
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: isCream ? "#100f14" : "var(--ink)",
+                marginBottom: 24,
+                fontSize: isBold
+                  ? "clamp(40px, 9vw, 96px)"
+                  : isMinimal || isCream
+                    ? "clamp(36px, 6vw, 72px)"
+                    : isTerminal
+                      ? "clamp(24px, 4vw, 44px)"
+                      : "clamp(36px, 6vw, 72px)",
+              }}
             >
               {headline}
             </h1>
 
             <p
-              className={
-                isCream
-                  ? "text-lg md:text-xl text-[#4a4a52] max-w-2xl mb-10 leading-relaxed"
-                  : "text-lg md:text-xl text-fg-muted max-w-2xl mb-10 leading-relaxed"
-              }
+              style={{
+                fontSize: 18,
+                color: isCream ? "#4a4a52" : "var(--ink-2)",
+                maxWidth: "52ch",
+                marginBottom: 40,
+                lineHeight: 1.6,
+              }}
             >
               {sub}
             </p>
 
             <div className={`flex flex-col sm:flex-row gap-4 ${isMinimal ? "justify-center" : ""}`}>
-              <Link href={primaryCta.href} className="btn-primary">
+              <Link
+                href={primaryCta.href}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "14px 22px",
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  borderRadius: 2,
+                  fontFamily: "var(--font-sans)",
+                }}
+              >
                 {primaryCta.label}
                 <ArrowRight className="w-4 h-4" />
               </Link>
@@ -115,7 +158,19 @@ export default function HeroVariant({
                 href={secondaryCta.href}
                 target={secondaryCta.href.startsWith("http") ? "_blank" : undefined}
                 rel={secondaryCta.href.startsWith("http") ? "noopener" : undefined}
-                className="btn-ghost"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "13px 20px",
+                  background: "transparent",
+                  border: "1px solid var(--ink)",
+                  color: "var(--ink)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  borderRadius: 2,
+                  fontFamily: "var(--font-sans)",
+                }}
               >
                 {secondaryCta.label}
               </Link>
@@ -123,15 +178,40 @@ export default function HeroVariant({
           </div>
 
           {isSplit && (
-            <div className="relative h-72 lg:h-96 rounded-2xl bg-skynet-surface/40 border border-[var(--border)] flex items-center justify-center text-fg-faint text-sm p-8">
+            <div
+              style={{
+                position: "relative",
+                height: 384,
+                background: "var(--cream-2)",
+                border: "1px solid var(--border)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "var(--ink-faint)",
+                fontSize: 14,
+                padding: 32,
+                borderRadius: 2,
+              }}
+            >
               [ {visualNote} ]
             </div>
           )}
         </motion.div>
 
-        {/* Visual note footer for non-split */}
         {!isSplit && (
-          <p className="mt-10 text-xs text-fg-faint italic">visual concept: {visualNote}</p>
+          <p
+            style={{
+              marginTop: 32,
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              color: "var(--ink-faint)",
+              fontStyle: "italic",
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+            }}
+          >
+            — visual concept: {visualNote}
+          </p>
         )}
       </div>
     </section>

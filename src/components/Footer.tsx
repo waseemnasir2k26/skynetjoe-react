@@ -18,40 +18,93 @@ export default function Footer() {
   const pathname = usePathname();
   if (pathname?.startsWith("/lp/")) return null;
   return (
-    <footer className="bg-skynet-darker border-t border-white/5 mt-24">
+    <footer
+      className="mt-24 border-t"
+      style={{
+        background: "var(--cream-2)",
+        borderColor: "var(--border)",
+      }}
+    >
       <div className="container-x px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
           <div className="lg:col-span-2">
-            <Link href="/" className="text-2xl font-extrabold tracking-tight inline-block mb-4">
-              <span className="gradient-primary-text">Skynet</span>
-              <span className="text-fg">Labs</span>
+            <Link
+              href="/"
+              className="inline-block mb-4"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "1.75rem",
+                fontWeight: 600,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                borderBottom: "none",
+              }}
+            >
+              Skynet<em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>Labs</em>
             </Link>
-            <p className="text-sm text-fg-muted leading-relaxed max-w-sm">
+            <p className="text-sm leading-relaxed max-w-sm" style={{ color: "var(--ink-2)" }}>
               {SITE.description}
             </p>
-            <div className="flex items-center gap-3 mt-6">
-              <a href={SITE.social.linkedin} target="_blank" rel="noopener" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-skynet-primary/20 flex items-center justify-center transition-colors" aria-label="LinkedIn">
-                <SocialIcon d={ICON_LI} label="LinkedIn" />
-              </a>
-              <a href={SITE.social.twitter} target="_blank" rel="noopener" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-skynet-primary/20 flex items-center justify-center transition-colors" aria-label="X / Twitter">
-                <SocialIcon d={ICON_X} label="X" />
-              </a>
-              <a href={SITE.social.github} target="_blank" rel="noopener" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-skynet-primary/20 flex items-center justify-center transition-colors" aria-label="GitHub">
-                <SocialIcon d={ICON_GH} label="GitHub" />
-              </a>
-              <a href={SITE.social.youtube} target="_blank" rel="noopener" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-skynet-primary/20 flex items-center justify-center transition-colors" aria-label="YouTube">
-                <SocialIcon d={ICON_YT} label="YouTube" />
-              </a>
+            <div className="flex items-center gap-2 mt-6">
+              {[
+                { d: ICON_LI, href: SITE.social.linkedin, label: "LinkedIn" },
+                { d: ICON_X, href: SITE.social.twitter, label: "X" },
+                { d: ICON_GH, href: SITE.social.github, label: "GitHub" },
+                { d: ICON_YT, href: SITE.social.youtube, label: "YouTube" },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={s.label}
+                  className="w-9 h-9 flex items-center justify-center transition-colors"
+                  style={{
+                    border: "1px solid var(--border)",
+                    color: "var(--ink-2)",
+                    background: "var(--cream-3)",
+                    borderRadius: 2,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "var(--terracotta)";
+                    e.currentTarget.style.borderColor = "var(--terracotta)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "var(--ink-2)";
+                    e.currentTarget.style.borderColor = "var(--border)";
+                  }}
+                >
+                  <SocialIcon d={s.d} label={s.label} />
+                </a>
+              ))}
             </div>
           </div>
 
           {FOOTER_COLUMNS.map((col) => (
             <div key={col.title}>
-              <h4 className="text-sm font-semibold text-fg mb-4">{col.title}</h4>
-              <ul className="space-y-3">
+              <h4
+                className="mb-4"
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "var(--terracotta)",
+                  fontWeight: 600,
+                }}
+              >
+                — {col.title}
+              </h4>
+              <ul className="space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-fg-muted hover:text-skynet-primary-light transition-colors">
+                    <Link
+                      href={link.href}
+                      className="text-sm transition-colors"
+                      style={{ color: "var(--ink-2)", borderBottom: "none" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-2)")}
+                    >
                       {link.label}
                     </Link>
                   </li>
@@ -61,16 +114,40 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-fg-faint">
-            © {new Date().getFullYear()} {SITE.brand}. Built in Bali by{" "}
-            <a href={SITE.founderUrl} className="text-fg-muted hover:text-skynet-primary-light">
+        <div
+          className="mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+          style={{ borderTop: "1px solid var(--border)" }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+              color: "var(--ink-faint)",
+            }}
+          >
+            © {new Date().getFullYear()} {SITE.brand} · Built in Bali by{" "}
+            <a
+              href={SITE.founderUrl}
+              style={{ color: "var(--terracotta)", borderBottom: "1px solid var(--terracotta)" }}
+            >
               {SITE.founder}
             </a>
-            .
           </p>
-          <p className="text-xs text-fg-faint">
-            <a href={`mailto:${SITE.email}`} className="hover:text-skynet-primary-light">
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.10em",
+              color: "var(--ink-faint)",
+            }}
+          >
+            <a
+              href={`mailto:${SITE.email}`}
+              style={{ color: "var(--ink-2)", borderBottom: "1px solid var(--border)" }}
+            >
               {SITE.email}
             </a>
           </p>

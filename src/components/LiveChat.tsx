@@ -84,7 +84,6 @@ export default function LiveChat() {
   const [msgs, setMsgs] = useState<Msg[]>([INITIAL]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Listen for external trigger links (href="#livechat-open")
   useEffect(() => {
     function onAnchor(e: MouseEvent) {
       const t = e.target as HTMLElement | null;
@@ -129,47 +128,85 @@ export default function LiveChat() {
 
   return (
     <>
-      {/* Floating button */}
+      {/* Floating button — flat terracotta */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
           aria-label="Open live chat"
-          className="fixed bottom-5 right-5 z-[60] w-14 h-14 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-105 active:scale-95 transition"
+          className="fixed bottom-5 right-5 z-[60] w-14 h-14 flex items-center justify-center transition"
           style={{
-            background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-            boxShadow: "0 10px 30px rgba(0, 212, 255, 0.40)",
+            background: "var(--terracotta)",
+            color: "var(--cream-3)",
+            borderRadius: 2,
+            border: "1px solid rgba(26,26,26,0.18)",
+            boxShadow: "0 18px 40px rgba(26,26,26,0.22)",
+            cursor: "pointer",
           }}
         >
           <MessageCircle className="w-6 h-6" />
         </button>
       )}
 
-      {/* Panel */}
+      {/* Panel — cream paper */}
       {open && (
         <div
-          className="fixed bottom-5 right-5 z-[60] w-[360px] max-w-[calc(100vw-1.5rem)] rounded-2xl overflow-hidden flex flex-col"
+          className="fixed bottom-5 right-5 z-[60] w-[360px] max-w-[calc(100vw-1.5rem)] overflow-hidden flex flex-col"
           style={{
             maxHeight: "70vh",
-            background: "var(--surface)",
-            border: "1px solid var(--border-strong)",
-            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.30)",
+            background: "var(--cream-3)",
+            border: "1px solid rgba(26,26,26,0.20)",
+            borderRadius: 2,
+            boxShadow: "0 28px 70px rgba(26,26,26,0.28)",
+            fontFamily: "var(--font-sans)",
+            position: "fixed",
           }}
         >
+          {/* Terracotta top rule */}
+          <span
+            aria-hidden
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 3,
+              background: "var(--terracotta)",
+            }}
+          />
+
           {/* Header */}
           <div
             className="flex items-center justify-between px-4 py-3"
             style={{
-              background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+              background: "var(--cream-2)",
+              borderBottom: "1px solid rgba(26,26,26,0.12)",
+              marginTop: 3,
             }}
           >
-            <div className="flex items-center gap-2 text-white">
-              <MessageCircle className="w-4 h-4" />
-              <span className="font-semibold text-sm">Chat with SkynetLabs</span>
+            <div className="flex items-center gap-2">
+              <MessageCircle className="w-4 h-4" style={{ color: "var(--terracotta)" }} />
+              <span
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.14em",
+                  fontWeight: 700,
+                  color: "var(--ink)",
+                }}
+              >
+                Chat with SkynetLabs
+              </span>
             </div>
             <button
               onClick={() => setOpen(false)}
               aria-label="Close chat"
-              className="text-white/80 hover:text-white"
+              style={{
+                color: "var(--ink-faint)",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+              }}
             >
               <X className="w-4 h-4" />
             </button>
@@ -179,7 +216,7 @@ export default function LiveChat() {
           <div
             ref={scrollRef}
             className="flex-1 overflow-y-auto px-3 py-3 space-y-2.5"
-            style={{ background: "var(--bg-alt)" }}
+            style={{ background: "var(--cream-3)" }}
           >
             {msgs.map((m) => (
               <div
@@ -187,21 +224,19 @@ export default function LiveChat() {
                 className={`flex ${m.from === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
-                    m.from === "user"
-                      ? "rounded-br-md text-white"
-                      : "rounded-bl-md"
-                  }`}
+                  className="max-w-[85%] px-3.5 py-2 text-sm leading-relaxed"
                   style={
                     m.from === "user"
                       ? {
-                          background:
-                            "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                          background: "var(--terracotta)",
+                          color: "var(--cream-3)",
+                          borderRadius: 2,
                         }
                       : {
-                          background: "var(--surface-alt)",
-                          color: "var(--fg)",
-                          border: "1px solid var(--border)",
+                          background: "var(--cream-2)",
+                          color: "var(--ink)",
+                          border: "1px solid rgba(26,26,26,0.10)",
+                          borderRadius: 2,
                         }
                   }
                 >
@@ -210,8 +245,19 @@ export default function LiveChat() {
                     <Link
                       href={m.cta.href}
                       onClick={() => setOpen(false)}
-                      className="mt-2 inline-flex items-center gap-1 text-xs font-semibold"
-                      style={{ color: "var(--skynet-primary-light)" }}
+                      className="mt-2 inline-flex items-center gap-1"
+                      style={{
+                        color:
+                          m.from === "user"
+                            ? "var(--cream-3)"
+                            : "var(--terracotta)",
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 11,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                        fontWeight: 700,
+                        textDecoration: "none",
+                      }}
                     >
                       {m.cta.label} <ArrowRight className="w-3 h-3" />
                     </Link>
@@ -229,28 +275,35 @@ export default function LiveChat() {
             }}
             className="flex items-center gap-2 px-3 py-2.5"
             style={{
-              borderTop: "1px solid var(--border)",
-              background: "var(--surface)",
+              borderTop: "1px solid rgba(26,26,26,0.12)",
+              background: "var(--cream-2)",
             }}
           >
             <input
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               placeholder="Type a question…"
-              className="flex-1 px-3 py-2 text-sm rounded-lg outline-none"
+              className="flex-1 px-3 py-2 text-sm outline-none"
               style={{
-                background: "var(--bg-alt)",
-                color: "var(--fg)",
-                border: "1px solid var(--border)",
+                background: "var(--cream-3)",
+                color: "var(--ink)",
+                border: "1px solid rgba(26,26,26,0.18)",
+                borderRadius: 2,
+                fontFamily: "var(--font-sans)",
               }}
             />
             <button
               type="submit"
               disabled={!draft.trim()}
               aria-label="Send"
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-white disabled:opacity-40"
+              className="w-9 h-9 flex items-center justify-center"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                borderRadius: 2,
+                border: "none",
+                cursor: draft.trim() ? "pointer" : "not-allowed",
+                opacity: draft.trim() ? 1 : 0.4,
               }}
             >
               <Send className="w-4 h-4" />

@@ -114,37 +114,106 @@ export default function ToolsIndexPage() {
   return (
     <>
       <JsonLd data={schema} />
-      <main className="min-h-screen bg-gradient-to-br from-[#061827] via-[#0a2d4a] to-[#073846] text-white">
-        <section className="container-x px-6 pt-32 pb-16 md:pt-40">
+      <main
+        style={{
+          minHeight: "100vh",
+          background: "var(--cream)",
+          color: "var(--ink)",
+        }}
+      >
+        <section
+          className="container-x px-6 pt-32 pb-16 md:pt-40"
+          style={{ background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        >
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase mb-6 border border-cyan-300/35 bg-cyan-300/10 text-cyan-200">
-              Free · No email gate
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+                fontWeight: 600,
+                marginBottom: 22,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+              Free · no email gate
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-5">
-              Find out what your business is leaking.
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(40px, 6vw, 64px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.05,
+                color: "var(--ink)",
+                marginBottom: 18,
+              }}
+            >
+              Find out what your business is{" "}
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+                leaking.
+              </em>
             </h1>
-            <p className="text-lg text-white/75 max-w-2xl">
+            <p style={{ fontSize: 18, color: "var(--ink-2)", maxWidth: "52ch", lineHeight: 1.6 }}>
               Two utilities I built for myself before I built them for clients.
               No signup, no funnel, no follow-up email sequence. Just numbers.
             </p>
           </div>
         </section>
-        <section className="container-x px-6 pb-32">
+        <section className="container-x px-6 py-20">
           <div className="grid md:grid-cols-2 gap-6">
-            {TOOLS.map(({ slug, name, blurb, Icon }) => (
+            {TOOLS.map(({ slug, name, blurb, Icon }, i) => (
               <Link
                 key={slug}
                 href={`/tools/${slug}`}
-                className="group relative rounded-2xl p-7 border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-cyan-300/40 transition-all"
+                className="group relative"
+                style={{
+                  display: "block",
+                  padding: 28,
+                  background: "var(--cream-2)",
+                  border: "1px solid var(--border)",
+                  textDecoration: "none",
+                  color: "var(--ink)",
+                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                }}
               >
                 <div className="flex items-start justify-between mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1E88E5] to-[#14B8A6] flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-white" />
+                  <div
+                    style={{
+                      width: 48,
+                      height: 48,
+                      background: "var(--cream-3)",
+                      border: "1px solid var(--border)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Icon className="w-6 h-6" style={{ color: "var(--terracotta)" }} />
                   </div>
-                  <ArrowRight className="w-5 h-5 text-white/40 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all" />
+                  <ArrowRight
+                    className="w-5 h-5 group-hover:translate-x-1 transition-all"
+                    style={{ color: "var(--ink-faint)" }}
+                  />
                 </div>
-                <h2 className="text-2xl font-bold mb-3">{name}</h2>
-                <p className="text-white/70 leading-relaxed">{blurb}</p>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 22,
+                    fontWeight: 600,
+                    marginBottom: 12,
+                    color: "var(--ink)",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {name}
+                </h2>
+                <p style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6 }}>{blurb}</p>
               </Link>
             ))}
           </div>

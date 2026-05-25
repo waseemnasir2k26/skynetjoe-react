@@ -98,36 +98,8 @@ export default function ContentCalendarPage() {
 
       {/* HERO */}
       <section
-        className="relative overflow-hidden pt-24 md:pt-32 pb-12"
-        style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
-        }}
+        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -120,
-            opacity: 0.5,
-          }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#14B8A6",
-            top: 80,
-            right: -150,
-            opacity: 0.32,
-            animationDelay: "-7s",
-          }}
-        />
-
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
             <div
@@ -144,7 +116,7 @@ export default function ContentCalendarPage() {
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.04] tracking-tight mb-5 text-white">
+            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
               30 days of content,{" "}
               <span
                 style={{
@@ -160,12 +132,12 @@ export default function ContentCalendarPage() {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-4 max-w-2xl">
+            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
               Tell us your niche, your audience, your weekly cadence and the
               goal of the month. Get back a 30-day, 5-platform calendar grid
               with hooks, body angles, CTAs, tags and asset recommendations.
             </p>
-            <p className="text-base text-gray-300 leading-relaxed max-w-2xl">
+            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
               Export to CSV, ICS or markdown. Nothing leaves your browser.
             </p>
 

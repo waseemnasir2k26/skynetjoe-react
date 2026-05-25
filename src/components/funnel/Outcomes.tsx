@@ -1,23 +1,20 @@
 import Link from "next/link";
-import { Zap, LayoutDashboard, Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 const OUTCOMES = [
   {
-    icon: Zap,
     title: "60-second follow-up, every lead, 24/7",
     promise:
       "Auto-DM + WhatsApp + email triggers fire the moment a lead lands. No app to open. No reminder to set.",
     proof: "Show-rate jumped 23% → 71% — Grand Mercer Dental, NY",
   },
   {
-    icon: LayoutDashboard,
     title: "One dashboard. Every deal. Zero screenshots.",
     promise:
       "GoHighLevel CRM wired into your stack. Every quote, call, and reply in one pipeline you can actually see.",
     proof: "200+ debtor calls/week handled in French — KODIASIMMO",
   },
   {
-    icon: Sparkles,
     title: "Content that ships itself, in your voice",
     promise:
       "AI content engine generates 30 voice-locked posts/month across LinkedIn, IG, FB. You approve, it posts.",
@@ -30,55 +27,150 @@ export default function Outcomes() {
     <section
       className="section relative overflow-hidden"
       style={{
-        background:
-          "linear-gradient(180deg, #061827 0%, #082234 100%)",
+        background: "var(--cream-3)",
+        color: "var(--ink)",
+        fontFamily: "var(--font-sans)",
+        borderBottom: "1px solid rgba(26,26,26,0.12)",
       }}
     >
       <div className="container-x relative z-10">
-        <div className="max-w-2xl mb-12 text-center mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-400/30 text-emerald-300 text-xs font-semibold uppercase tracking-[0.18em] mb-5">
-            The fix
+        <div className="max-w-2xl mb-12">
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--sage)",
+              marginBottom: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+          >
+            <span
+              style={{
+                width: 28,
+                height: 1,
+                background: "var(--sage)",
+                display: "inline-block",
+              }}
+            />
+            Real shipped builds
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-fg">
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: "var(--ink)",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              margin: 0,
+              maxWidth: "22ch",
+            }}
+          >
             Plug every leak.{" "}
-            <span className="bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent">
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
+              }}
+            >
               Shipped in 14 days.
-            </span>
+            </em>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {OUTCOMES.map((o) => {
-            const Icon = o.icon;
-            return (
+          {OUTCOMES.map((o, i) => (
+            <div
+              key={o.title}
+              style={{
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.12)",
+                padding: "28px 28px 24px",
+                transform: i === 1 ? "rotate(0.3deg)" : "rotate(-0.3deg)",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <div
-                key={o.title}
-                className="group p-6 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-skynet-primary/40 hover:bg-white/[0.05] transition-all"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontStyle: "italic",
+                  fontSize: 36,
+                  fontWeight: 500,
+                  color: "var(--terracotta)",
+                  lineHeight: 1,
+                  marginBottom: 12,
+                }}
               >
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 bg-gradient-to-br from-skynet-primary/20 to-cyan-400/10 border border-skynet-primary/30">
-                  <Icon className="w-5 h-5 text-skynet-primary-light" />
-                </div>
-                <h3 className="text-lg font-bold text-fg mb-2 leading-snug">
-                  {o.title}
-                </h3>
-                <p className="text-sm text-fg-muted leading-relaxed mb-4">
-                  {o.promise}
-                </p>
-                <div className="pt-3 border-t border-white/[0.06] text-[12px] text-emerald-300/90 font-medium">
-                  ✓ {o.proof}
-                </div>
+                0{i + 1}
               </div>
-            );
-          })}
+              <h3
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 20,
+                  fontWeight: 600,
+                  color: "var(--ink)",
+                  marginBottom: 10,
+                  lineHeight: 1.25,
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                {o.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: "var(--ink-2)",
+                  lineHeight: 1.6,
+                  marginBottom: 16,
+                  flex: 1,
+                }}
+              >
+                {o.promise}
+              </p>
+              <div
+                style={{
+                  paddingTop: 12,
+                  borderTop: "1px solid rgba(26,26,26,0.10)",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  letterSpacing: "0.04em",
+                  color: "var(--sage)",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 6,
+                }}
+              >
+                <Check style={{ width: 13, height: 13, marginTop: 2, flexShrink: 0 }} />
+                <span>{o.proof}</span>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-10">
           <Link
             href="/services"
-            className="inline-flex items-center gap-1.5 text-sm text-skynet-primary-light hover:text-skynet-primary font-semibold"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 12,
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              color: "var(--terracotta)",
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              fontWeight: 600,
+            }}
           >
-            See all 16 services
-            <ArrowRight className="w-3.5 h-3.5" />
+            — See all 16 services
+            <ArrowRight style={{ width: 13, height: 13 }} />
           </Link>
         </div>
       </div>

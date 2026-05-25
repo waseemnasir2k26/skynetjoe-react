@@ -1,15 +1,16 @@
 /**
  * InlineCTABand — mid-page horizontal CTA band (server component, no client JS).
+ * Cream editorial variant.
  *
  * Psychology stack:
- *   - Pattern interrupt: gradient band breaks the page rhythm, anchors attention
+ *   - Pattern interrupt: terracotta/cream-2 band breaks page rhythm
  *   - Hick's Law: ONE primary CTA (book), ONE secondary (proof)
- *   - Loss-frame variant uses Kahneman/Tversky dollar framing
+ *   - loss-frame variant: oxblood-accented urgency
  *
  * Variants:
- *   - default: ocean gradient, balanced
- *   - dense: tighter padding, slot it between content sections
- *   - loss-frame: rose-accented urgency, dollar-loss subhead
+ *   - default: terracotta block + cream text + cream-bg button (mirrors /lp/audit final CTA)
+ *   - dense: cream-2 inline band, terracotta CTA, tighter padding
+ *   - loss-frame: oxblood block, cream text + cream button
  */
 
 import Link from "next/link";
@@ -32,27 +33,47 @@ export type InlineCTABandProps = {
   id?: string;
 };
 
-const VARIANT_STYLES: Record<
-  InlineCTAVariant,
-  { bg: string; border: string; primary: string; primaryShadow: string }
-> = {
+type VariantStyle = {
+  bg: string;
+  textOn: string;
+  subhead: string;
+  primaryBg: string;
+  primaryFg: string;
+  secondaryBorder: string;
+  secondaryFg: string;
+  border: string;
+};
+
+const VARIANT_STYLES: Record<InlineCTAVariant, VariantStyle> = {
   default: {
-    bg: "linear-gradient(135deg, #061827 0%, #0a2d4a 50%, #073846 100%)",
-    border: "1px solid rgba(126, 228, 255, 0.20)",
-    primary: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-    primaryShadow: "0 12px 32px rgba(0, 212, 255, 0.35)",
+    bg: "var(--terracotta)",
+    textOn: "var(--cream-3)",
+    subhead: "rgba(250, 247, 240, 0.92)",
+    primaryBg: "var(--cream-3)",
+    primaryFg: "var(--terracotta)",
+    secondaryBorder: "rgba(250, 247, 240, 0.55)",
+    secondaryFg: "var(--cream-3)",
+    border: "none",
   },
   dense: {
-    bg: "linear-gradient(120deg, rgba(10,45,74,0.78) 0%, rgba(7,56,70,0.78) 100%)",
-    border: "1px solid rgba(126, 228, 255, 0.16)",
-    primary: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-    primaryShadow: "0 8px 24px rgba(0, 212, 255, 0.30)",
+    bg: "var(--cream-2)",
+    textOn: "var(--ink)",
+    subhead: "var(--ink-2)",
+    primaryBg: "var(--terracotta)",
+    primaryFg: "var(--cream-3)",
+    secondaryBorder: "var(--ink)",
+    secondaryFg: "var(--ink)",
+    border: "1px solid rgba(26,26,26,0.12)",
   },
   "loss-frame": {
-    bg: "linear-gradient(135deg, #1a0a18 0%, #2b0e1f 50%, #3a0a1a 100%)",
-    border: "1px solid rgba(255, 107, 157, 0.30)",
-    primary: "linear-gradient(135deg, #FF6B9D 0%, #FF8FB1 100%)",
-    primaryShadow: "0 12px 32px rgba(255, 107, 157, 0.40)",
+    bg: "var(--oxblood)",
+    textOn: "var(--cream-3)",
+    subhead: "rgba(250, 247, 240, 0.85)",
+    primaryBg: "var(--cream-3)",
+    primaryFg: "var(--oxblood)",
+    secondaryBorder: "rgba(250, 247, 240, 0.55)",
+    secondaryFg: "var(--cream-3)",
+    border: "none",
   },
 };
 
@@ -72,53 +93,41 @@ export default function InlineCTABand({
       id={id}
       className={isDense ? "px-4 md:px-6 my-10" : "px-4 md:px-6 my-14 md:my-20"}
       aria-label="Strategy call invitation"
+      style={{ fontFamily: "var(--font-sans)" }}
     >
       <div
-        className={`relative overflow-hidden mx-auto max-w-[1200px] rounded-3xl ${
-          isDense ? "p-6 md:p-8" : "p-8 md:p-12"
+        className={`relative mx-auto max-w-[1200px] ${
+          isDense ? "p-6 md:p-8" : "p-8 md:p-14"
         }`}
         style={{
           background: v.bg,
           border: v.border,
-          boxShadow: "0 24px 60px -20px rgba(0, 0, 0, 0.55)",
+          borderRadius: 2,
         }}
       >
-        {/* Decorative orbs */}
-        <span
-          aria-hidden
-          className="absolute -top-24 -left-20 w-72 h-72 rounded-full pointer-events-none"
-          style={{
-            background: variant === "loss-frame" ? "#FF6B9D" : "#1E88E5",
-            opacity: 0.22,
-            filter: "blur(70px)",
-          }}
-        />
-        <span
-          aria-hidden
-          className="absolute -bottom-20 -right-16 w-64 h-64 rounded-full pointer-events-none"
-          style={{
-            background: variant === "loss-frame" ? "#1E88E5" : "#14B8A6",
-            opacity: 0.20,
-            filter: "blur(70px)",
-          }}
-        />
-
         <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
           <div className="max-w-2xl">
             <h2
-              className={`font-extrabold tracking-tight text-white leading-tight ${
-                isDense
-                  ? "text-2xl md:text-3xl mb-2"
-                  : "text-3xl md:text-4xl mb-3"
-              }`}
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: v.textOn,
+                lineHeight: 1.1,
+                fontSize: isDense ? "clamp(22px, 3.5vw, 30px)" : "clamp(28px, 4vw, 42px)",
+                marginBottom: subhead ? 12 : 0,
+              }}
             >
               {headline}
             </h2>
             {subhead && (
               <p
-                className={`text-gray-200 leading-relaxed ${
-                  isDense ? "text-sm md:text-base" : "text-base md:text-lg"
-                }`}
+                style={{
+                  color: v.subhead,
+                  lineHeight: 1.55,
+                  fontSize: isDense ? 14 : 17,
+                  margin: 0,
+                }}
               >
                 {subhead}
               </p>
@@ -127,10 +136,16 @@ export default function InlineCTABand({
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <Link
               href={primaryCTA.href}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-white transition-transform hover:scale-[1.02] text-sm md:text-base"
+              className="inline-flex items-center justify-center gap-2"
               style={{
-                background: v.primary,
-                boxShadow: v.primaryShadow,
+                background: v.primaryBg,
+                color: v.primaryFg,
+                padding: "14px 22px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 700,
+                fontSize: 14,
+                borderRadius: 2,
+                textDecoration: "none",
               }}
             >
               {primaryCTA.label}
@@ -139,11 +154,17 @@ export default function InlineCTABand({
             {secondaryCTA && (
               <Link
                 href={secondaryCTA.href}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition border text-sm md:text-base"
+                className="inline-flex items-center justify-center"
                 style={{
-                  color: "#eaf6ff",
-                  background: "rgba(255, 255, 255, 0.06)",
-                  borderColor: "rgba(126, 228, 255, 0.30)",
+                  background: "transparent",
+                  color: v.secondaryFg,
+                  border: `1px solid ${v.secondaryBorder}`,
+                  padding: "13px 20px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  borderRadius: 2,
+                  textDecoration: "none",
                 }}
               >
                 {secondaryCTA.label}

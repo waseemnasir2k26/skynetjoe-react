@@ -1,30 +1,24 @@
 "use client";
 
 /**
- * ExitIntentModal — capture leaving visitors with a free Loom-audit offer (T14).
+ * ExitIntentModal — capture leaving visitors with a free Loom-audit offer.
+ * Cream paper variant — converted from dark ocean.
  *
- * Psychology stack:
+ * Psychology unchanged:
  *   - Reciprocity (Cialdini): free funnel teardown before any ask
- *   - Loss aversion (Kahneman/Tversky): "leaving without a plan" frames exit as loss
- *   - Fogg ability: 2 fields + submit, no calendar tag required
+ *   - Loss aversion: "leaving without a plan" frames exit as loss
+ *   - Fogg ability: 2 fields + submit
  *
- * Behavior:
- *   - Desktop: mouseleave to TOP of viewport triggers once per session
- *   - Mobile: pagehide after >30s on page AND >50% scroll triggers once
- *   - One-shot per session (localStorage `skynet:exit-intent:shown`)
- *   - Close: Esc, backdrop click, X button, or successful submit
- *   - Disabled on /discovery-call, /lp/*, /api/*
- *   - Coexists with DiscoveryPopup: different storage key, different copy,
- *     12s delay so DiscoveryPopup wins the early window
+ * Behavior unchanged.
  */
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Sparkles, X, Loader2, CheckCircle2 } from "lucide-react";
+import { X, Loader2, CheckCircle2 } from "lucide-react";
 
 const STORAGE_KEY = "skynet:exit-intent:shown";
-const MIN_TIME_ON_PAGE_MS = 12000; // give DiscoveryPopup priority for first 12s
+const MIN_TIME_ON_PAGE_MS = 12000;
 const MOBILE_MIN_TIME_MS = 30000;
 const MOBILE_MIN_SCROLL_PCT = 0.5;
 
@@ -53,14 +47,12 @@ export default function ExitIntentModal() {
     if (disabled) return;
     if (typeof window === "undefined") return;
 
-    // One-shot: already shown this session?
     try {
       if (localStorage.getItem(STORAGE_KEY) === "1") return;
     } catch {}
 
     const fire = () => {
       if (triggeredRef.current) return;
-      // Respect minimum dwell time (let DiscoveryPopup go first)
       if (Date.now() - mountedAtRef.current < MIN_TIME_ON_PAGE_MS) return;
       triggeredRef.current = true;
       try {
@@ -69,12 +61,10 @@ export default function ExitIntentModal() {
       setOpen(true);
     };
 
-    // DESKTOP: cursor leaves to top
     const onMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0) fire();
     };
 
-    // MOBILE: pagehide after dwell + scroll thresholds
     const onPageHide = () => {
       const dwellOk = Date.now() - mountedAtRef.current >= MOBILE_MIN_TIME_MS;
       const docH = document.documentElement.scrollHeight - window.innerHeight;
@@ -91,16 +81,13 @@ export default function ExitIntentModal() {
     };
   }, [disabled, pathname]);
 
-  // Esc to close + focus trap
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
     document.addEventListener("keydown", onKey);
-    // Focus the close button on mount for accessibility
     closeBtnRef.current?.focus();
-    // Lock body scroll
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -135,8 +122,6 @@ export default function ExitIntentModal() {
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        // /api/leads may not exist yet (parallel agent building it). Log + treat success
-        // so we don't punish the user for our backend race condition.
         console.log("[exit-intent] /api/leads non-OK, stubbing success", {
           status: res.status,
           payload,
@@ -149,7 +134,6 @@ export default function ExitIntentModal() {
       });
     }
     setStatus("success");
-    // Auto-close after 2s on success
     setTimeout(() => setOpen(false), 2000);
   };
 
@@ -159,7 +143,7 @@ export default function ExitIntentModal() {
     <div
       className="fixed inset-0 z-[80] flex items-center justify-center px-4 py-4 md:py-6 overflow-y-auto"
       style={{
-        background: "rgba(0, 0, 0, 0.78)",
+        background: "rgba(26, 26, 26, 0.55)",
         animation: "skynet-exit-fade 0.28s ease-out forwards",
       }}
       onClick={() => setOpen(false)}
@@ -169,33 +153,26 @@ export default function ExitIntentModal() {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-[540px] rounded-3xl overflow-hidden"
+        className="relative w-full max-w-[540px] overflow-hidden"
         style={{
-          background:
-            "linear-gradient(155deg, #061827 0%, #0a2d4a 50%, #073846 100%)",
-          border: "1px solid rgba(0, 212, 255, 0.35)",
-          boxShadow:
-            "0 40px 90px -12px rgba(0, 212, 255, 0.38), 0 0 0 1px rgba(0, 212, 255, 0.10)",
+          background: "var(--cream-3)",
+          border: "1px solid rgba(26,26,26,0.20)",
+          borderRadius: 2,
+          boxShadow: "0 32px 80px rgba(26,26,26,0.30)",
           animation: "skynet-exit-scale 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+          fontFamily: "var(--font-sans)",
         }}
       >
-        {/* Decorative ocean glow */}
+        {/* Terracotta rule top */}
         <span
           aria-hidden
-          className="absolute -top-24 -left-24 w-72 h-72 rounded-full pointer-events-none"
           style={{
-            background: "#1E88E5",
-            opacity: 0.32,
-            filter: "blur(70px)",
-          }}
-        />
-        <span
-          aria-hidden
-          className="absolute -bottom-32 -right-20 w-80 h-80 rounded-full pointer-events-none"
-          style={{
-            background: "#FF6B9D",
-            opacity: 0.22,
-            filter: "blur(80px)",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 4,
+            background: "var(--terracotta)",
           }}
         />
 
@@ -203,47 +180,109 @@ export default function ExitIntentModal() {
           ref={closeBtnRef}
           onClick={() => setOpen(false)}
           aria-label="Close"
-          className="absolute top-3 right-3 w-9 h-9 rounded-lg flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition z-10"
+          className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center transition z-10"
+          style={{
+            color: "var(--ink-faint)",
+            background: "transparent",
+            border: "none",
+            borderRadius: 2,
+            cursor: "pointer",
+          }}
         >
           <X className="w-4 h-4" />
         </button>
 
         <div className="relative p-7 md:p-9">
           <div
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-4"
             style={{
-              background: "rgba(255, 107, 157, 0.14)",
-              border: "1px solid rgba(255, 107, 157, 0.45)",
-              color: "#FFB3CC",
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+              marginBottom: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
             }}
           >
-            <Sparkles className="w-3 h-3" />
-            <span className="text-[10px] font-semibold tracking-wider uppercase">
-              Free · No call required
-            </span>
+            <span
+              style={{
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
+            Free · no call required
           </div>
 
           <h2
             id="exit-intent-title"
-            className="text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-tight mb-3"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(24px, 4vw, 32px)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
+              color: "var(--ink)",
+              marginBottom: 14,
+              maxWidth: "20ch",
+            }}
           >
-            Leaving without a plan?
+            Leaving without{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
+              }}
+            >
+              a plan?
+            </em>
           </h2>
 
-          <p className="text-sm md:text-base text-gray-200 leading-relaxed mb-6 max-w-[420px]">
+          <p
+            style={{
+              fontSize: 15,
+              color: "var(--ink-2)",
+              lineHeight: 1.55,
+              marginBottom: 24,
+              maxWidth: "44ch",
+            }}
+          >
             Drop your URL —{" "}
-            <span className="text-cyan-200 font-semibold">
+            <span style={{ color: "var(--terracotta)", fontWeight: 600 }}>
               I&apos;ll Loom-audit your funnel free
             </span>
             . Honest 8-min teardown of where leads leak. No call. No pitch.
           </p>
 
           {status === "success" ? (
-            <div className="flex items-center gap-3 p-5 rounded-2xl bg-white/5 border border-white/10">
-              <CheckCircle2 className="w-6 h-6 text-cyan-300 shrink-0" />
+            <div
+              className="flex items-center gap-3 p-5"
+              style={{
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.12)",
+                borderRadius: 2,
+              }}
+            >
+              <CheckCircle2
+                className="w-6 h-6 shrink-0"
+                style={{ color: "var(--terracotta)" }}
+              />
               <div>
-                <div className="font-semibold text-white">Got it.</div>
-                <div className="text-sm text-gray-300">
+                <div
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                  }}
+                >
+                  Got it.
+                </div>
+                <div style={{ fontSize: 13, color: "var(--ink-2)" }}>
                   Loom lands in your inbox within 48 hrs.
                 </div>
               </div>
@@ -251,7 +290,16 @@ export default function ExitIntentModal() {
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <label className="flex flex-col gap-1.5">
-                <span className="text-[11px] uppercase tracking-wider text-cyan-300 font-semibold">
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    color: "var(--ink-faint)",
+                    fontWeight: 600,
+                  }}
+                >
                   Your email
                 </span>
                 <input
@@ -260,11 +308,29 @@ export default function ExitIntentModal() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
-                  className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-white/35 focus:outline-none focus:border-cyan-300/60 focus:bg-white/10 transition text-sm"
+                  style={{
+                    background: "var(--cream-2)",
+                    color: "var(--ink)",
+                    border: "1px solid rgba(26,26,26,0.18)",
+                    borderRadius: 2,
+                    padding: "10px 14px",
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 14,
+                    outline: "none",
+                  }}
                 />
               </label>
               <label className="flex flex-col gap-1.5">
-                <span className="text-[11px] uppercase tracking-wider text-cyan-300 font-semibold">
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    color: "var(--ink-faint)",
+                    fontWeight: 600,
+                  }}
+                >
                   Site URL
                 </span>
                 <input
@@ -273,21 +339,38 @@ export default function ExitIntentModal() {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://your-site.com"
-                  className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-white/35 focus:outline-none focus:border-cyan-300/60 focus:bg-white/10 transition text-sm"
+                  style={{
+                    background: "var(--cream-2)",
+                    color: "var(--ink)",
+                    border: "1px solid rgba(26,26,26,0.18)",
+                    borderRadius: 2,
+                    padding: "10px 14px",
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 14,
+                    outline: "none",
+                  }}
                 />
               </label>
 
               {status === "error" && errorMsg && (
-                <p className="text-xs text-rose-300">{errorMsg}</p>
+                <p style={{ fontSize: 12, color: "var(--oxblood)" }}>{errorMsg}</p>
               )}
 
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="mt-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-white transition-transform hover:scale-[1.01] disabled:opacity-60 disabled:hover:scale-100"
+                className="mt-1 inline-flex items-center justify-center gap-2"
                 style={{
-                  background: "linear-gradient(135deg, #FF6B9D 0%, #FF8FB1 100%)",
-                  boxShadow: "0 10px 30px rgba(255, 107, 157, 0.40)",
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  padding: "14px 24px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 700,
+                  fontSize: 15,
+                  borderRadius: 2,
+                  border: "none",
+                  cursor: status === "submitting" ? "not-allowed" : "pointer",
+                  opacity: status === "submitting" ? 0.6 : 1,
                 }}
               >
                 {status === "submitting" ? (
@@ -299,8 +382,18 @@ export default function ExitIntentModal() {
                   <>Get my free Loom audit</>
                 )}
               </button>
-              <p className="text-[11px] text-white/45 text-center">
-                One-shot · I personally review every URL · No newsletter spam
+              <p
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 10,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.12em",
+                  color: "var(--ink-faint)",
+                  textAlign: "center",
+                  marginTop: 4,
+                }}
+              >
+                — One-shot · I personally review every URL · No spam
               </p>
             </form>
           )}
@@ -309,9 +402,12 @@ export default function ExitIntentModal() {
         {/* Waseem polaroid bottom-right */}
         <div
           aria-hidden
-          className="hidden sm:block absolute bottom-3 right-3 w-20 h-20 rounded-xl overflow-hidden border-2 border-cyan-300/40 shadow-xl pointer-events-none rotate-[6deg]"
+          className="hidden sm:block absolute bottom-3 right-3 w-20 h-20 overflow-hidden pointer-events-none"
           style={{
-            boxShadow: "0 12px 30px -8px rgba(0, 212, 255, 0.45)",
+            borderRadius: 2,
+            border: "1px solid rgba(26,26,26,0.25)",
+            transform: "rotate(6deg)",
+            boxShadow: "0 10px 24px rgba(26,26,26,0.18)",
           }}
         >
           <Image
@@ -319,7 +415,10 @@ export default function ExitIntentModal() {
             alt=""
             fill
             sizes="80px"
-            className="object-cover"
+            style={{
+              objectFit: "cover",
+              filter: "sepia(0.10) saturate(0.95)",
+            }}
           />
         </div>
       </div>

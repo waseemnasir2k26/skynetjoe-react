@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import ServicePricingTabs from "@/components/pricing/ServicePricingTabs";
@@ -124,82 +124,97 @@ export default function PricingPage() {
       <JsonLd data={priceSchema} />
       <JsonLd data={offerCatalog} />
       <JsonLd data={faqSchema} />
+      <style>{`
+        .cream-micro-card:hover { border-color: var(--terracotta) !important; }
+      `}</style>
 
-      {/* HERO */}
+      {/* HERO — cream editorial */}
       <section
-        className="relative overflow-hidden pt-32 md:pt-40 pb-16"
+        className="relative pt-32 md:pt-40 pb-16"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <span
-          className="orb"
-          style={{
-            width: 540,
-            height: 540,
-            background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.45,
-          }}
-        />
-        <span
-          className="orb"
-          style={{
-            width: 580,
-            height: 580,
-            background: "#00D4FF",
-            top: 80,
-            right: -160,
-            opacity: 0.35,
-            animationDelay: "-7s",
-          }}
-        />
-
         <div className="container-x px-6 relative z-10 max-w-4xl">
-          <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
-            <Sparkles className="w-3 h-3" />
-            Pricing · SkynetLabs
-          </span>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.05] mb-5">
-            Public pricing for people who hate{" "}
+          <div
+            className="inline-flex items-center gap-3 mb-5"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--terracotta)",
+            }}
+          >
             <span
-              className="italic font-semibold"
               style={{
-                fontFamily:
-                  '"Playfair Display", Georgia, "Times New Roman", serif',
-                background:
-                  "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                WebkitTextFillColor: "transparent",
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
+            Pricing · SkynetLabs
+          </div>
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.04,
+              color: "var(--ink)",
+              fontSize: "clamp(40px, 6vw, 68px)",
+              margin: "0 0 20px",
+            }}
+          >
+            Public pricing for people who hate{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
               }}
             >
-              &ldquo;request a quote&rdquo;
-            </span>
-            .
+              &ldquo;request a quote&rdquo;.
+            </em>
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mb-8">
+          <p
+            style={{
+              fontSize: 19,
+              color: "var(--ink-2)",
+              maxWidth: "52ch",
+              lineHeight: 1.55,
+              marginBottom: 24,
+            }}
+          >
             16 services. 3 tiers each. Optional add-ons. Live calculator below.
             You see the price before we see your calendar.
           </p>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-300">
+          <div
+            className="flex flex-wrap items-center gap-x-5 gap-y-2"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              color: "var(--ink-faint)",
+            }}
+          >
             <span>
-              <b className="text-white">180+</b> workflows
+              <b style={{ color: "var(--ink)" }}>180+</b> workflows
             </span>
-            <span className="text-cyan-300/30">·</span>
+            <span style={{ color: "rgba(26,26,26,0.20)" }}>·</span>
             <span>
-              <b className="text-white">40+</b> websites
+              <b style={{ color: "var(--ink)" }}>40+</b> websites
             </span>
-            <span className="text-cyan-300/30">·</span>
+            <span style={{ color: "rgba(26,26,26,0.20)" }}>·</span>
             <span>
-              <b className="text-white">9</b> countries
+              <b style={{ color: "var(--ink)" }}>9</b> countries
             </span>
-            <span className="text-cyan-300/30">·</span>
+            <span style={{ color: "rgba(26,26,26,0.20)" }}>·</span>
             <span>
-              <b className="text-white">5-14d</b> ship
+              <b style={{ color: "var(--ink)" }}>5-14d</b> ship
             </span>
           </div>
         </div>
@@ -212,22 +227,46 @@ export default function PricingPage() {
       <PricingCalculator />
 
       {/* VULNERABILITY QUOTE */}
-      <section className="py-12 border-t border-white/[0.08]">
+      <section
+        className="py-12"
+        style={{
+          background: "var(--cream)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
         <div className="container-x px-6 max-w-3xl mx-auto">
           <blockquote
-            className="relative rounded-2xl p-6 md:p-8 italic text-fg-muted"
             style={{
-              background: "rgba(20, 184, 166, 0.06)",
-              borderLeft: "3px solid #14B8A6",
+              padding: "26px 32px",
+              background: "var(--cream-2)",
+              borderLeft: "3px solid var(--terracotta)",
+              fontFamily: "var(--font-display)",
+              fontStyle: "italic",
+              color: "var(--ink-2)",
             }}
           >
-            <p className="text-base md:text-lg leading-relaxed">
+            <p
+              style={{
+                fontSize: 18,
+                lineHeight: 1.55,
+              }}
+            >
               Most agencies hide the price because the price doesn&apos;t match
               the work. I&apos;ve been on the other side of three of those
               proposals. Every one ended in renegotiation. I&apos;d rather quote
               you out of a deal than nickel you through one.
             </p>
-            <footer className="mt-3 text-sm not-italic text-cyan-200">
+            <footer
+              style={{
+                marginTop: 14,
+                fontStyle: "normal",
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: "var(--terracotta)",
+              }}
+            >
               — Waseem Nasir
             </footer>
           </blockquote>
@@ -235,63 +274,205 @@ export default function PricingPage() {
       </section>
 
       {/* MICROS */}
-      <section className="py-16 md:py-20 border-t border-white/[0.08]">
+      <section
+        className="py-16 md:py-20"
+        style={{
+          background: "var(--cream-3)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
         <div className="container-x px-6 max-w-5xl mx-auto">
           <div className="mb-8">
-            <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300">
+            <div
+              className="inline-flex items-center gap-3 mb-3"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
               Smaller engagements
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mt-2 mb-3">
-              Need just one thing? Pick a micro.
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                lineHeight: 1.1,
+                marginBottom: 12,
+              }}
+            >
+              Need just one thing?{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                Pick a micro.
+              </em>
             </h2>
-            <p className="text-base text-fg-muted max-w-2xl">
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                maxWidth: "44rem",
+                lineHeight: 1.55,
+              }}
+            >
               Six fixed-scope wedges. Each is a single deliverable, 1-2 weeks,
               no retainer commitment. Use to test the working relationship
               before scaling.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {MICROS.map((m) => (
-              <div
-                key={m.name}
-                className="flex items-center justify-between gap-3 px-4 py-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/40 transition"
-              >
-                <span className="text-sm font-semibold text-white">
-                  {m.name}
-                </span>
-                <span className="text-sm font-bold text-cyan-300 whitespace-nowrap">
-                  ${m.price.toLocaleString("en-US")}
-                </span>
-              </div>
-            ))}
+            {MICROS.map((m, i) => {
+              const rotate = i % 2 === 0 ? "-0.2deg" : "0.2deg";
+              return (
+                <div
+                  key={m.name}
+                  className="cream-micro-card flex items-center justify-between gap-3"
+                  style={{
+                    padding: "16px 20px",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.10)",
+                    transform: `rotate(${rotate})`,
+                    transition: "border-color 0.18s",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: "var(--ink)",
+                    }}
+                  >
+                    {m.name}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: "var(--terracotta)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    ${m.price.toLocaleString("en-US")}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-16 md:py-20 border-t border-white/[0.08]">
+      <section
+        className="py-16 md:py-20"
+        style={{
+          background: "var(--cream)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
         <div className="container-x px-6 max-w-3xl mx-auto">
           <div className="mb-8">
-            <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300">
+            <div
+              className="inline-flex items-center gap-3 mb-3"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
               FAQ
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mt-2">
-              Pricing questions we get often.
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                lineHeight: 1.1,
+              }}
+            >
+              Pricing questions{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                we get often.
+              </em>
             </h2>
           </div>
-          <div className="space-y-2.5">
+          <div>
             {FAQS.map((f) => (
               <details
                 key={f.q}
-                className="group rounded-xl bg-white/[0.03] border border-white/10 overflow-hidden"
+                className="group"
+                style={{
+                  borderBottom: "1px solid rgba(26,26,26,0.12)",
+                  padding: "20px 0",
+                }}
               >
-                <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4 text-white font-semibold">
+                <summary
+                  className="cursor-pointer flex items-center justify-between gap-4"
+                  style={{
+                    listStyle: "none",
+                    fontFamily: "var(--font-display)",
+                    fontSize: 18,
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                    letterSpacing: "-0.005em",
+                  }}
+                >
                   <span>{f.q}</span>
-                  <span className="text-cyan-300 text-xl leading-none group-open:rotate-45 transition-transform">
+                  <span
+                    className="group-open:rotate-45 transition-transform"
+                    style={{
+                      color: "var(--terracotta)",
+                      fontSize: 22,
+                      lineHeight: 1,
+                    }}
+                  >
                     +
                   </span>
                 </summary>
-                <div className="px-5 pb-5 text-fg-muted text-sm leading-relaxed">
+                <div
+                  style={{
+                    paddingTop: 12,
+                    fontSize: 14.5,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.65,
+                  }}
+                >
                   {f.a}
                 </div>
               </details>
@@ -300,23 +481,71 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* CLOSER */}
-      <section className="py-16 md:py-20 border-t border-white/[0.08]">
+      {/* CLOSER — flat terracotta event */}
+      <section className="py-20 md:py-24" style={{ background: "var(--terracotta)" }}>
         <div className="container-x px-6 max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
-            180 workflows · 40 websites · 9 countries.
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--cream-3)",
+              opacity: 0.85,
+              marginBottom: 18,
+            }}
+          >
+            — 180 workflows · 40 websites · 9 countries
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              color: "var(--cream-3)",
+              fontSize: "clamp(28px, 4.5vw, 48px)",
+              lineHeight: 1.08,
+              marginBottom: 16,
+            }}
+          >
+            Send a brief.{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--cream-3)",
+                fontWeight: 500,
+                textDecoration: "underline",
+                textDecorationThickness: "1px",
+                textUnderlineOffset: "8px",
+              }}
+            >
+              Get scope + price in 8 hours.
+            </em>
           </h2>
-          <p className="text-base text-fg-muted max-w-xl mx-auto mb-7">
-            No quote form. No 30-min discovery dance. Send a 3-sentence brief
-            and you get scope + price back in 8 hours.
+          <p
+            style={{
+              fontSize: 17,
+              color: "rgba(250, 247, 240, 0.92)",
+              maxWidth: "44ch",
+              margin: "0 auto 28px",
+              lineHeight: 1.55,
+            }}
+          >
+            No quote form. No 30-min discovery dance. Just a written reply with
+            scope, price and ship window.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/discovery-call"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                background: "var(--cream-3)",
+                color: "var(--terracotta)",
+                padding: "16px 28px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 700,
+                fontSize: 15,
+                borderRadius: 2,
               }}
             >
               Start a brief
@@ -324,7 +553,17 @@ export default function PricingPage() {
             </Link>
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white border border-white/15 bg-white/[0.04] hover:border-cyan-400/40 transition"
+              className="inline-flex items-center gap-2"
+              style={{
+                background: "transparent",
+                color: "var(--cream-3)",
+                border: "1px solid var(--cream-3)",
+                padding: "15px 26px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+              }}
             >
               See case studies
             </Link>
