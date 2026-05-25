@@ -2,47 +2,47 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
-  ArrowDown,
   CalendarClock,
   Star,
-  Award,
   Hammer,
   Quote,
   ShieldCheck,
   Compass,
-  Rocket,
   ChevronDown,
+  Check,
+  ArrowRight,
+  MapPin,
+  Clock,
 } from "lucide-react";
 import Qualifier, { type QualifierState } from "./Qualifier";
 import CalendlyEmbed, { CALENDLY_SECTION_ID } from "./CalendlyEmbed";
 
 const QUAL_SECTION_ID = "qualify";
 
-// 5 weekly slots, ~3 remaining (real-feeling scarcity, adjustable)
-const SLOTS_TOTAL = 5;
-const SLOTS_REMAINING = 3;
+const STEPS = [
+  { id: "brief", label: "Share the brief", short: "Brief" },
+  { id: "pick", label: "Pick a slot", short: "Pick" },
+  { id: "plan", label: "Get the plan", short: "Plan" },
+];
 
 const TRUST_CARDS = [
   {
     icon: Compass,
-    title: "Your 60-day automation roadmap",
-    body:
-      "Top 3 leaks ranked by $ recovered. Sequenced so you ship the biggest first.",
+    title: "Your 60-day roadmap",
+    body: "Top 3 leaks ranked by recovered revenue. Sequenced so you ship the biggest first.",
   },
   {
     icon: Hammer,
-    title: "A fixed-price scope in 48 hours",
-    body:
-      "One-pager: deliverables, timeline, stack, price. No tier ladders, no upsell.",
+    title: "Fixed scope in 48 hours",
+    body: "One-pager: deliverables, timeline, stack, price. No tier ladders, no upsell theatre.",
   },
   {
     icon: ShieldCheck,
-    title: "Honest 'no' if we're wrong fit",
-    body:
-      "If your job needs an agency of 20, I'll point you to one of 30+ vetted operators.",
+    title: "Honest 'no' if wrong fit",
+    body: "If your job needs an agency of 20, I'll point you to one of 30+ vetted operators.",
   },
 ];
 
@@ -53,7 +53,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What if I'm not ready to commit to anything?",
-    a: "Most folks on this call aren't. About 60% take the audit, sit on it for 2 – 6 weeks, then come back when budget clears. I'd rather you book later than buy something you regret.",
+    a: "Most folks on this call aren't. About 60% take the audit, sit on it for 2–6 weeks, then come back when budget clears. I'd rather you book later than buy something you regret.",
   },
   {
     q: "Can I bring my team?",
@@ -61,7 +61,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What if I'm in a different timezone?",
-    a: "Calendly auto-converts. My slots are 9am – 6pm Bali (GMT+8), which covers Europe mornings, US evenings, Australia mid-day, and all of Asia. If literally nothing fits, email me.",
+    a: "Calendly auto-converts. My slots are 9am–6pm Bali (GMT+8), which covers Europe mornings, US evenings, Australia mid-day, and all of Asia. If literally nothing fits, email me.",
   },
   {
     q: "How long until you scope my project?",
@@ -69,9 +69,61 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What if my budget is small?",
-    a: "I'll tell you straight on the call. Builds under $2k I usually point to my Fiverr productized offers or a 30+ vetted-operator referral list. No 'let me put together a custom proposal' theatre.",
+    a: "I'll tell you straight on the call. Builds under $2k I usually point to my productized offers or a 30+ vetted-operator referral list. No 'let me put together a custom proposal' theatre.",
   },
 ];
+
+function StickyProgress({ activeStep }: { activeStep: number }) {
+  return (
+    <div
+      className="sticky top-[64px] z-30 backdrop-blur-xl border-b border-white/[0.06]"
+      style={{ background: "rgba(6,24,39,0.78)" }}
+    >
+      <div className="container-x px-6 py-3">
+        <ol className="flex items-center justify-center gap-2 sm:gap-4">
+          {STEPS.map((s, i) => {
+            const done = i < activeStep;
+            const current = i === activeStep;
+            return (
+              <li key={s.id} className="flex items-center gap-2 sm:gap-3">
+                <span
+                  className={`flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold transition-all ${
+                    done
+                      ? "bg-cyan-400 text-[#061827]"
+                      : current
+                        ? "bg-gradient-to-br from-cyan-400 to-teal-400 text-[#061827] ring-4 ring-cyan-400/25"
+                        : "bg-white/10 text-fg-muted"
+                  }`}
+                >
+                  {done ? <Check className="w-3.5 h-3.5" /> : i + 1}
+                </span>
+                <span
+                  className={`text-xs sm:text-sm font-semibold transition-colors ${
+                    current
+                      ? "text-white"
+                      : done
+                        ? "text-cyan-200"
+                        : "text-fg-faint"
+                  }`}
+                >
+                  <span className="hidden sm:inline">{s.label}</span>
+                  <span className="sm:hidden">{s.short}</span>
+                </span>
+                {i < STEPS.length - 1 && (
+                  <span
+                    className={`w-6 sm:w-12 h-px transition-colors ${
+                      done ? "bg-cyan-400/60" : "bg-white/15"
+                    }`}
+                  />
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    </div>
+  );
+}
 
 export default function DiscoveryFunnel() {
   const [leadId] = useState<string | null>(() => {
@@ -84,6 +136,7 @@ export default function DiscoveryFunnel() {
     null,
   );
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   const qualRef = useRef<HTMLDivElement>(null);
   const calRef = useRef<HTMLDivElement>(null);
@@ -99,8 +152,22 @@ export default function DiscoveryFunnel() {
     });
   }, []);
 
-  // When the qualifier completes, POST partial lead (qualification only) so
-  // GHL gets the answers even if the user bounces before scheduling.
+  // Track active step via intersection observers on section refs
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onScroll = () => {
+      const qualTop = qualRef.current?.getBoundingClientRect().top ?? Infinity;
+      const calTop = calRef.current?.getBoundingClientRect().top ?? Infinity;
+      const offset = 200;
+      if (calTop < offset) setActiveStep(2);
+      else if (qualTop < offset) setActiveStep(1);
+      else setActiveStep(0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const handleQualifyComplete = useCallback(
     async (state: QualifierState) => {
       setQualification(state);
@@ -118,7 +185,6 @@ export default function DiscoveryFunnel() {
       } catch (err) {
         console.error("[discovery-call] qualifier POST failed", err);
       }
-      // DataLayer
       if (
         typeof window !== "undefined" &&
         (window as unknown as { dataLayer?: unknown[] }).dataLayer
@@ -130,7 +196,6 @@ export default function DiscoveryFunnel() {
           revenueRange: state.revenueRange,
         });
       }
-      // Scroll to calendar
       window.setTimeout(() => scrollTo(calRef), 80);
     },
     [leadId, scrollTo],
@@ -140,7 +205,6 @@ export default function DiscoveryFunnel() {
     scrollTo(calRef);
   }, [scrollTo]);
 
-  // Hash deep-link support
   useEffect(() => {
     if (typeof window === "undefined") return;
     const hash = window.location.hash.replace("#", "");
@@ -153,11 +217,13 @@ export default function DiscoveryFunnel() {
 
   return (
     <>
+      <StickyProgress activeStep={activeStep} />
+
       {/* ============================================================
-          PHASE 1 — Landing hero
+          HERO — elegant, story-first
           ============================================================ */}
       <section
-        className="relative overflow-hidden pt-24 md:pt-32 pb-20 md:pb-24"
+        className="relative overflow-hidden pt-16 md:pt-20 pb-20 md:pb-28"
         style={{
           background:
             "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
@@ -169,9 +235,9 @@ export default function DiscoveryFunnel() {
             width: 540,
             height: 540,
             background: "#1E88E5",
-            top: -90,
-            left: -130,
-            opacity: 0.55,
+            top: -110,
+            left: -150,
+            opacity: 0.35,
           }}
           aria-hidden
         />
@@ -181,274 +247,321 @@ export default function DiscoveryFunnel() {
             width: 580,
             height: 580,
             background: "#00D4FF",
-            top: 80,
-            right: -160,
-            opacity: 0.45,
+            top: 120,
+            right: -180,
+            opacity: 0.25,
             animationDelay: "-7s",
           }}
           aria-hidden
         />
 
         <div className="container-x px-6 relative z-10">
-          <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-14 items-start">
-            <div className="max-w-3xl">
-              {/* Eyebrow chip */}
-              <div
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
-                style={{
-                  background: "rgba(0, 212, 255, 0.12)",
-                  border: "1px solid rgba(0, 212, 255, 0.40)",
-                  color: "#7ee4ff",
-                }}
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span className="text-xs font-medium tracking-wider uppercase">
-                  Free 30-min strategy call · Bali hours · No SDR
-                </span>
-              </div>
+          <div className="grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-6 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
+                <Sparkles className="w-3 h-3" />
+                30-min strategy call · Bali hours · No SDR
+              </span>
 
-              {/* Hero headline — pain-driven, loss-framed */}
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.04] tracking-tight mb-5 text-white">
-                Your CRM is bleeding{" "}
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.04] tracking-tight text-white mb-6">
+                Find the leak.{" "}
                 <span
+                  className="italic font-semibold"
                   style={{
+                    fontFamily:
+                      '"Playfair Display", Georgia, "Times New Roman", serif',
                     background:
-                      "linear-gradient(120deg, #FF6B6B 0%, #ffb86b 100%)",
+                      "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
                     color: "transparent",
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  $4,200/month.
-                </span>{" "}
-                Let&apos;s plug it in{" "}
-                <span
-                  style={{
-                    background:
-                      "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  14 days.
+                  Plug it in 14 days.
                 </span>
               </h1>
 
-              {/* Subhead — what they get */}
-              <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-6 max-w-2xl">
-                30-minute audit, 3 concrete plays you can ship this quarter, and
-                a fixed-price scope back in your inbox 48 hours later. No tier
-                ladders. No SDR follow-up. No fake urgency.
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-7 max-w-xl">
+                30-minute audit. 3 concrete plays you can ship this quarter. A
+                fixed-price scope back in your inbox 48 hours later. No deck.
+                No SDR. No fake urgency.
               </p>
 
-              {/* Trust chip row */}
-              <div className="flex flex-wrap items-center gap-3 mb-7">
-                <div
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{
-                    background: "rgba(255, 215, 0, 0.10)",
-                    border: "1px solid rgba(255, 215, 0, 0.35)",
-                    color: "#ffd54f",
-                  }}
-                >
-                  <Star className="w-3.5 h-3.5 fill-current" />
-                  4.9 / 5 · 47 reviews
-                </div>
-                <div
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{
-                    background: "rgba(126, 228, 255, 0.10)",
-                    border: "1px solid rgba(126, 228, 255, 0.30)",
-                    color: "#7ee4ff",
-                  }}
-                >
-                  <Award className="w-3.5 h-3.5" />
-                  Top Rated Plus on Upwork
-                </div>
-                <div
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{
-                    background: "rgba(94, 234, 212, 0.10)",
-                    border: "1px solid rgba(94, 234, 212, 0.30)",
-                    color: "#5eead4",
-                  }}
-                >
-                  <Hammer className="w-3.5 h-3.5" />
-                  180+ workflows shipped
-                </div>
+              {/* Trust strip — softer */}
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-300 mb-8">
+                <span className="inline-flex items-center gap-1.5">
+                  <Star className="w-3.5 h-3.5 text-amber-300 fill-current" />
+                  <b className="text-white">4.9 / 5</b> · 47 reviews
+                </span>
+                <span className="text-cyan-300/30">·</span>
+                <span>
+                  <b className="text-white">180+</b> workflows
+                </span>
+                <span className="text-cyan-300/30">·</span>
+                <span>
+                  <b className="text-white">9</b> countries
+                </span>
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+              <div className="flex flex-col sm:flex-row gap-3 mb-7">
                 <motion.button
                   type="button"
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => scrollTo(qualRef)}
                   className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-bold text-white text-base motion-reduce:transform-none"
                   style={{
                     background:
                       "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                    boxShadow: "0 12px 36px rgba(0, 212, 255, 0.35)",
+                    boxShadow: "0 12px 36px rgba(0, 212, 255, 0.30)",
                   }}
                 >
-                  Get my custom recovery plan
-                  <ArrowDown className="w-4 h-4" />
+                  Start the brief
+                  <ArrowRight className="w-4 h-4" />
                 </motion.button>
                 <button
                   type="button"
                   onClick={() => scrollTo(calRef)}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-cyan-200 border-2 border-cyan-400/40 hover:border-cyan-400 hover:bg-cyan-400/5 transition"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-cyan-200 border border-cyan-400/30 hover:border-cyan-400/60 hover:bg-cyan-400/5 transition"
                 >
                   <CalendarClock className="w-4 h-4" />
                   Skip to calendar
                 </button>
               </div>
 
-              {/* Concrete testimonial under CTA */}
-              <div className="rounded-2xl bg-white/5 border border-cyan-400/20 p-4 max-w-xl mb-5">
+              {/* Pull quote */}
+              <blockquote
+                className="rounded-2xl p-5 max-w-xl"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(0,212,255,0.06) 0%, rgba(20,184,166,0.04) 100%)",
+                  border: "1px solid rgba(0,212,255,0.18)",
+                }}
+              >
                 <div className="flex items-start gap-3">
                   <Quote className="w-5 h-5 text-cyan-300 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-base md:text-lg text-white font-semibold leading-snug">
-                      &ldquo;23% show-rate to{" "}
-                      <span className="text-cyan-300">71% in 6 weeks.</span>
-                      &rdquo;
+                    <p className="text-base md:text-lg text-white leading-snug font-medium">
+                      23% show-rate to{" "}
+                      <span
+                        className="italic"
+                        style={{
+                          fontFamily:
+                            '"Playfair Display", Georgia, serif',
+                          color: "#5EEAD4",
+                        }}
+                      >
+                        71% in 6 weeks.
+                      </span>
                     </p>
-                    <p className="text-xs text-gray-400 mt-1">
+                    <p className="text-xs text-fg-faint mt-1.5">
                       — Dr. Elena Marchetti, Grand Mercer Dental
                     </p>
                   </div>
                 </div>
-              </div>
+              </blockquote>
+            </motion.div>
 
-              {/* Scarcity */}
-              <div className="flex items-center gap-2 text-sm">
-                <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-emerald-300 font-semibold">
-                  {SLOTS_REMAINING} of {SLOTS_TOTAL} free strategy slots left
-                  this week
-                </span>
-              </div>
-            </div>
-
-            {/* Founder card — right rail */}
-            <aside className="lg:sticky lg:top-32">
+            {/* Founder card — elegant, larger portrait */}
+            <motion.aside
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:sticky lg:top-[140px]"
+            >
               <div
-                className="rounded-2xl p-5 backdrop-blur-md"
+                className="rounded-3xl overflow-hidden"
                 style={{
-                  background: "rgba(6, 24, 39, 0.55)",
-                  border: "1px solid rgba(126, 228, 255, 0.20)",
+                  background:
+                    "linear-gradient(155deg, rgba(10,32,52,0.65) 0%, rgba(7,56,70,0.55) 100%)",
+                  border: "1px solid rgba(0,212,255,0.22)",
+                  boxShadow: "0 30px 80px -25px rgba(0,212,255,0.30)",
+                  backdropFilter: "blur(14px) saturate(140%)",
                 }}
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-cyan-400/50 flex-shrink-0">
-                    <Image
-                      src="/portraits/waseem-bluepolo.jpg"
-                      alt="Waseem Nasir"
-                      fill
-                      sizes="56px"
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-sm">Waseem Nasir</p>
-                    <p className="text-xs text-cyan-200">
-                      Founder · runs every call personally
-                    </p>
-                    <p className="text-[11px] text-gray-400">
-                      Bali · GMT+8 · solo since 2014
-                    </p>
+                <div className="relative aspect-[4/5]">
+                  <Image
+                    src="/portraits/waseem-builder-hero.jpg"
+                    alt="Waseem Nasir — Founder, SkynetLabs"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 420px, 100vw"
+                    className="object-cover"
+                    style={{ objectPosition: "center top" }}
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(180deg, transparent 50%, rgba(6,24,39,0.92) 100%)",
+                    }}
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <div className="inline-flex items-center gap-1.5 mb-2 text-[10px] uppercase tracking-[0.18em] text-cyan-300 font-bold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Runs every call personally
+                    </div>
+                    <div className="text-white font-extrabold text-lg leading-tight">
+                      Waseem Nasir
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-300 mt-1">
+                      <span>Founder · SkynetLabs</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-cyan-200/85 mt-2">
+                      <span className="inline-flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />
+                        Bali · GMT+8
+                      </span>
+                      <span className="text-cyan-300/30">·</span>
+                      <span className="inline-flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        Solo since 2019
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <p className="text-sm text-gray-300 leading-relaxed italic">
-                  &ldquo;You don&apos;t get an SDR. You get me on Zoom with your
-                  funnel pulled up on my second monitor. We ship plans, not
-                  proposals.&rdquo;
-                </p>
-                <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-white/10">
-                  <Stat value="180+" label="Workflows" />
-                  <Stat value="40+" label="Sites" />
-                  <Stat value="9" label="Countries" />
+
+                <div className="p-5">
+                  <p className="text-sm text-fg-muted leading-relaxed italic mb-4">
+                    &ldquo;You don&apos;t get an SDR. You get me on Zoom with
+                    your funnel pulled up on my second monitor. We ship plans,
+                    not proposals.&rdquo;
+                  </p>
+                  <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/[0.07]">
+                    <Stat value="180+" label="Workflows" />
+                    <Stat value="40+" label="Sites" />
+                    <Stat value="9" label="Countries" />
+                  </div>
                 </div>
               </div>
-            </aside>
+            </motion.aside>
           </div>
         </div>
       </section>
 
       {/* ============================================================
-          PHASE 2 — Qualifier
+          STEP 1 — Qualifier
           ============================================================ */}
       <section
         id={QUAL_SECTION_ID}
         ref={qualRef}
-        className="py-20 md:py-24 relative"
-        style={{ background: "var(--bg)" }}
+        className="py-20 md:py-28 relative"
+        style={{
+          background:
+            "linear-gradient(180deg, #061827 0%, #082234 100%)",
+        }}
       >
         <div className="container-x px-6">
-          <div className="max-w-2xl mx-auto text-center mb-10">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
-              Step 1 of 2
-            </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
-              7 quick questions.{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                90 seconds.
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+            className="max-w-2xl mx-auto text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
+              Step 1 · The brief
+            </span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white leading-[1.08]">
+              Seven quick questions.{" "}
+              <span
+                className="italic"
+                style={{
+                  fontFamily:
+                    '"Playfair Display", Georgia, "Times New Roman", serif',
+                  background:
+                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Ninety seconds.
               </span>
             </h2>
             <p className="text-base md:text-lg text-gray-300 leading-relaxed">
               I read these before our call so we don&apos;t burn 20 minutes on
-              context. If you&apos;d rather skip and just grab a slot, hit{" "}
-              <em>Skip to calendar</em> at the top of any question.
+              context. Rather skip? Hit <em>Skip to calendar</em> on any
+              question.
             </p>
-          </div>
+          </motion.div>
 
           <div className="max-w-2xl mx-auto">
-            {qualification ? (
-              <div className="rounded-2xl bg-emerald-500/10 border border-emerald-400/30 p-6 md:p-8 text-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-200 text-xs font-semibold uppercase tracking-wider mb-3">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  Brief saved
-                </div>
-                <h3 className="text-2xl font-extrabold text-white mb-2">
-                  Got your answers. Calendar below.
-                </h3>
-                <p className="text-sm text-gray-300 mb-5">
-                  I&apos;ll have your answers open during the call so we can go
-                  straight to the audit.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => scrollTo(calRef)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-cyan-500 to-teal-500 hover:scale-[1.02] transition"
+            <AnimatePresence mode="wait">
+              {qualification ? (
+                <motion.div
+                  key="done"
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="rounded-3xl p-8 text-center"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(20,184,166,0.12) 0%, rgba(0,212,255,0.08) 100%)",
+                    border: "1px solid rgba(20,184,166,0.35)",
+                  }}
                 >
-                  Pick my slot <ArrowDown className="w-4 h-4" />
-                </button>
-              </div>
-            ) : (
-              <Qualifier
-                onComplete={handleQualifyComplete}
-                onSkip={handleSkipQualify}
-              />
-            )}
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full mb-4 bg-emerald-500/20 border border-emerald-400/40">
+                    <ShieldCheck className="w-6 h-6 text-emerald-300" />
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-2">
+                    Brief saved.
+                  </h3>
+                  <p className="text-sm text-fg-muted mb-6">
+                    I&apos;ll have your answers open during the call so we go
+                    straight to the audit.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => scrollTo(calRef)}
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                      boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+                    }}
+                  >
+                    Pick my slot
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <Qualifier
+                    onComplete={handleQualifyComplete}
+                    onSkip={handleSkipQualify}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </section>
 
       {/* ============================================================
-          PHASE 3 — Calendly embed + close
+          STEP 2 — Calendly
           ============================================================ */}
       <section
         id={CALENDLY_SECTION_ID}
         ref={calRef}
-        className="py-20 md:py-24 relative overflow-hidden"
+        className="py-20 md:py-28 relative overflow-hidden"
         style={{
           background:
-            "linear-gradient(180deg, #061827 0%, #0a2d4a 60%, #061827 100%)",
+            "linear-gradient(180deg, #082234 0%, #0a2d4a 50%, #061827 100%)",
         }}
       >
         <span
@@ -459,27 +572,45 @@ export default function DiscoveryFunnel() {
             background: "#14B8A6",
             top: 40,
             right: -120,
-            opacity: 0.35,
+            opacity: 0.25,
           }}
           aria-hidden
         />
 
         <div className="container-x px-6 relative z-10">
-          <div className="max-w-3xl mx-auto text-center mb-10">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
-              Step 2 of 2
-            </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-white">
-              Pick your slot.{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                30 minutes, real audit.
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl mx-auto text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
+              Step 2 · Pick your slot
+            </span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-white leading-[1.08]">
+              Thirty minutes.{" "}
+              <span
+                className="italic"
+                style={{
+                  fontFamily:
+                    '"Playfair Display", Georgia, "Times New Roman", serif',
+                  background:
+                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                One real audit.
               </span>
             </h2>
             <p className="text-base md:text-lg text-gray-200 leading-relaxed">
               No deck. No SDR. Just me, your funnel, and a shared screen. Show
-              up with your numbers — you&apos;ll leave with a roadmap.
+              up with your numbers — you leave with a roadmap.
             </p>
-          </div>
+          </motion.div>
 
           <div className="max-w-4xl mx-auto">
             <CalendlyEmbed
@@ -488,69 +619,113 @@ export default function DiscoveryFunnel() {
             />
           </div>
 
-          {/* Trust block — 3 cards */}
-          <div className="max-w-5xl mx-auto mt-14">
-            <p className="text-center text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-6">
+          {/* Trust block */}
+          <div className="max-w-5xl mx-auto mt-16">
+            <p className="text-center text-[11px] uppercase tracking-[0.22em] text-cyan-300 font-bold mb-8">
               What you walk away with
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.08 } },
+              }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-5"
+            >
               {TRUST_CARDS.map((c) => {
                 const Icon = c.icon;
                 return (
-                  <div
+                  <motion.div
                     key={c.title}
-                    className="p-6 rounded-2xl bg-white/5 border border-white/10"
+                    variants={{
+                      hidden: { opacity: 0, y: 14 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+                      },
+                    }}
+                    className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/30 transition"
                   >
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-400/20 to-teal-400/20 flex items-center justify-center mb-4">
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(30,136,229,0.18), rgba(20,184,166,0.18))",
+                        border: "1px solid rgba(126,228,255,0.28)",
+                      }}
+                    >
                       <Icon className="w-5 h-5 text-cyan-300" />
                     </div>
-                    <h3 className="text-white font-bold text-base mb-2">
+                    <h3 className="text-white font-bold text-base mb-2 tracking-tight">
                       {c.title}
                     </h3>
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <p className="text-sm text-fg-muted leading-relaxed">
                       {c.body}
                     </p>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* ============================================================
-          FAQ — buyer-objection close
+          FAQ
           ============================================================ */}
-      <section className="py-20 md:py-24" style={{ background: "var(--bg)" }}>
+      <section
+        className="py-20 md:py-28"
+        style={{ background: "var(--bg, #061827)" }}
+      >
         <div className="container-x px-6">
-          <div className="max-w-2xl mx-auto text-center mb-10">
-            <Rocket className="w-8 h-8 text-cyan-300 mx-auto mb-3" />
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+            className="max-w-2xl mx-auto text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
               Before you book
-            </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-white">
-              The 6 questions{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
+            </span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3 text-white leading-[1.08]">
+              The six questions{" "}
+              <span
+                className="italic"
+                style={{
+                  fontFamily:
+                    '"Playfair Display", Georgia, "Times New Roman", serif',
+                  background:
+                    "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
                 I get most.
               </span>
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="max-w-3xl mx-auto space-y-3">
+          <div className="max-w-3xl mx-auto space-y-2.5">
             {FAQS.map((f, i) => {
               const open = openFaq === i;
               return (
                 <div
                   key={f.q}
-                  className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden"
+                  className="rounded-2xl bg-white/[0.03] border border-white/10 overflow-hidden hover:border-white/20 transition-colors"
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaq(open ? null : i)}
-                    className="w-full flex items-center justify-between text-left p-5 md:p-6 hover:bg-white/[0.07] transition"
+                    className="w-full flex items-center justify-between text-left p-5 md:p-6"
                     aria-expanded={open}
                   >
-                    <span className="text-base md:text-lg font-bold text-white pr-4">
+                    <span className="text-base md:text-lg font-semibold text-white pr-4">
                       {f.q}
                     </span>
                     <ChevronDown
@@ -559,38 +734,42 @@ export default function DiscoveryFunnel() {
                       }`}
                     />
                   </button>
-                  {open && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      className="px-5 md:px-6 pb-5 md:pb-6 motion-reduce:transition-none"
-                    >
-                      <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                        {f.a}
-                      </p>
-                    </motion.div>
-                  )}
+                  <AnimatePresence initial={false}>
+                    {open && (
+                      <motion.div
+                        key="content"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-5 md:px-6 pb-5 md:pb-6 text-sm md:text-base text-fg-muted leading-relaxed">
+                          {f.a}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}
           </div>
 
-          {/* Final scroll-back nudge */}
-          <div className="max-w-2xl mx-auto text-center mt-12">
-            <p className="text-sm text-gray-400 mb-3">
+          <div className="max-w-2xl mx-auto text-center mt-14">
+            <p className="text-sm text-fg-faint mb-4">
               Still reading? You&apos;ve got more than enough info.
             </p>
             <button
               type="button"
               onClick={() => scrollTo(calRef)}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
               style={{
                 background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
                 boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
               }}
             >
               <CalendarClock className="w-4 h-4" />
-              Grab my slot now
+              Grab my slot
             </button>
           </div>
         </div>
@@ -602,8 +781,10 @@ export default function DiscoveryFunnel() {
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="text-center">
-      <div className="text-lg font-extrabold text-cyan-300">{value}</div>
-      <div className="text-[10px] uppercase text-gray-400 tracking-wider">
+      <div className="text-lg font-extrabold text-cyan-300 tracking-tight">
+        {value}
+      </div>
+      <div className="text-[10px] uppercase text-fg-faint tracking-wider mt-0.5">
         {label}
       </div>
     </div>
