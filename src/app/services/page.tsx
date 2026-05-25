@@ -1,27 +1,20 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Ghost, Plug, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import InlineCTABand from "@/components/cta/InlineCTABand";
-import ScarcityChip from "@/components/cta/ScarcityChip";
-
-const html = fs.readFileSync(
-  path.join(process.cwd(), "content", "services-index.html"),
-  "utf8"
-);
+import PainSolverGrid from "@/components/services/PainSolverGrid";
+import ServiceMenuCollapsed from "@/components/services/ServiceMenuCollapsed";
 
 export const metadata: Metadata = {
-  title: "Services — 16 builds across automation, AI content, development & consulting",
+  title: "Services — I don't sell services. I close pain points.",
   description:
-    "Sixteen production-grade services from SkynetLabs across n8n automation, AI content, Next.js development and operator consulting. Fixed scope, public pricing, 5–14d ship.",
+    "Eight founder pains, eight closed-loop fixes. Behind them: 16 production-grade services across automation, AI content, websites and consulting. Fixed scope, public pricing, 5-14 day ship.",
   alternates: { canonical: `${SITE.url}/services` },
   openGraph: {
-    title: "SkynetLabs Services — 16 builds, 4 categories",
+    title: "SkynetLabs — Pain-solver, not service-seller",
     description:
-      "Automation, AI content, development, consulting. Sixteen real services, fixed scopes, 5–14 day ship window.",
+      "Pick the bleed. We close it. Eight founder pains mapped to 16 production services. Fixed scope, public pricing.",
     url: `${SITE.url}/services`,
     type: "website",
   },
@@ -40,7 +33,7 @@ const schema = {
       "@id": `${SITE.url}/services#collection`,
       name: `${SITE.brand} Services`,
       description:
-        "Sixteen production-grade services across n8n automation, AI content, Next.js development and operator consulting.",
+        "Eight founder pains, eight closed-loop fixes. Sixteen production-grade services across n8n automation, AI content, Next.js development and operator consulting.",
       url: `${SITE.url}/services`,
       inLanguage: "en",
       isPartOf: { "@id": `${SITE.url}/#website` },
@@ -79,132 +72,145 @@ const schema = {
   ],
 };
 
-/**
- * T01 — Hick's Law collapse: 16 services -> 3 outcome shortcuts above the grid.
- * Keeps the full 16-service catalog below for SEO + intent-rich browsers.
- */
-const OUTCOMES = [
-  {
-    icon: Ghost,
-    title: "Leads that ghost.",
-    body: "Auto-route every inquiry to WhatsApp + email in under 90 sec — n8n + GoHighLevel.",
-    href: "/services/n8n-automation",
-    cta: "Fix lead leakage",
-  },
-  {
-    icon: Plug,
-    title: "Tools that don't talk.",
-    body: "Stitch your CRM, calendar, Stripe, Slack into one chat-first command surface.",
-    href: "/services/gohighlevel",
-    cta: "Wire my stack",
-  },
-  {
-    icon: Sparkles,
-    title: "Content you don't have time to make.",
-    body: "AI content engine: 20 LinkedIn posts + 8 reels + a blog drop, monthly, your voice.",
-    href: "/services/ai-content-creation",
-    cta: "See content engine",
-  },
-] as const;
-
-function ThreeOutcomesBlock() {
+export default function ServicesIndexPage() {
   return (
-    <section
-      className="px-4 md:px-6 pt-24 md:pt-28 pb-10 md:pb-16"
-      aria-label="Three outcome shortcuts"
-    >
-      <div className="container-x">
-        <div className="max-w-2xl mb-8 md:mb-10">
-          <div className="mb-4">
-            <ScarcityChip tone="amber" size="sm" />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.04] text-white mb-4">
-            I fix{" "}
+    <>
+      <JsonLd data={schema} />
+
+      {/* HERO — pain-first reframe */}
+      <section
+        className="relative overflow-hidden pt-28 md:pt-36 pb-16"
+        style={{
+          background:
+            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+        }}
+      >
+        <span
+          className="orb"
+          style={{
+            width: 540,
+            height: 540,
+            background: "#1E88E5",
+            top: -90,
+            left: -130,
+            opacity: 0.45,
+          }}
+        />
+        <span
+          className="orb"
+          style={{
+            width: 580,
+            height: 580,
+            background: "#00D4FF",
+            top: 80,
+            right: -160,
+            opacity: 0.35,
+            animationDelay: "-7s",
+          }}
+        />
+
+        <div className="container-x px-6 relative z-10 max-w-4xl">
+          <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-cyan-300 mb-5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25">
+            <Sparkles className="w-3 h-3" />
+            Pain-solver · not service-seller
+          </span>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.04] mb-6">
+            I don&apos;t sell services.{" "}
             <span
+              className="italic font-semibold"
               style={{
+                fontFamily:
+                  '"Playfair Display", Georgia, "Times New Roman", serif',
                 background:
-                  "linear-gradient(120deg, #7ee4ff 0%, #5eead4 100%)",
+                  "linear-gradient(120deg, #00D4FF 0%, #14B8A6 100%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 color: "transparent",
                 WebkitTextFillColor: "transparent",
               }}
             >
-              3 things.
+              I close pain points.
             </span>
           </h1>
-          <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-            16 deliverables, 4 categories — but every brief lands in one of
-            these three. Pick the bleed, see the fix.
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mb-7">
+            Every founder brief lands in one of eight pains. Pick the one
+            bleeding you this week — see the fix, see the metric, see the
+            tools. The service menu is just the toolkit.
           </p>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/discovery-call"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
+              style={{
+                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+              }}
+            >
+              Send a 3-sentence brief
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/case-studies"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white border border-white/15 bg-white/[0.04] hover:border-cyan-400/40 transition"
+            >
+              See real fixes
+            </Link>
+          </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {OUTCOMES.map((o) => {
-            const Icon = o.icon;
-            return (
-              <Link
-                key={o.title}
-                href={o.href}
-                className="group relative rounded-2xl p-6 md:p-7 transition-transform hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
-                style={{
-                  background:
-                    "linear-gradient(155deg, rgba(10,45,74,0.65) 0%, rgba(7,56,70,0.55) 100%)",
-                  border: "1px solid rgba(126, 228, 255, 0.18)",
-                  boxShadow: "0 20px 40px -20px rgba(0, 212, 255, 0.30)",
-                  backdropFilter: "blur(14px) saturate(140%)",
-                  WebkitBackdropFilter: "blur(14px) saturate(140%)",
-                }}
-              >
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(30,136,229,0.30) 0%, rgba(20,184,166,0.30) 100%)",
-                    border: "1px solid rgba(126, 228, 255, 0.30)",
-                  }}
-                >
-                  <Icon className="w-5 h-5 text-cyan-300" />
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight mb-2">
-                  {o.title}
-                </h3>
-                <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-5">
-                  {o.body}
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-cyan-300 text-sm font-semibold group-hover:gap-2.5 transition-all">
-                  {o.cta}
-                  <ArrowRight className="w-4 h-4" />
-                </span>
-              </Link>
-            );
-          })}
+      {/* 8 PAIN CARDS */}
+      <PainSolverGrid />
+
+      {/* COLLAPSED FULL MENU (SEO + power browsers) */}
+      <ServiceMenuCollapsed />
+
+      {/* CLOSER */}
+      <section className="py-16 md:py-20 border-t border-white/[0.08]">
+        <div className="container-x px-6 max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
+            Every week you wait,{" "}
+            <span
+              className="italic"
+              style={{
+                fontFamily:
+                  '"Playfair Display", Georgia, "Times New Roman", serif',
+                background:
+                  "linear-gradient(120deg, #FF6B6B 0%, #FFB547 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              the bleed gets bigger.
+            </span>
+          </h2>
+          <p className="text-base text-fg-muted max-w-xl mx-auto mb-7">
+            One 30-min call. Honest scope. Fixed price. No discovery dance.
+            Yes/no in 8 hours.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/discovery-call"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
+              style={{
+                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                boxShadow: "0 8px 28px rgba(0, 212, 255, 0.30)",
+              }}
+            >
+              Book my strategy call
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/pricing"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white border border-white/15 bg-white/[0.04] hover:border-cyan-400/40 transition"
+            >
+              See pricing
+            </Link>
+          </div>
         </div>
-
-        <p className="text-xs text-gray-400 mt-8 text-center">
-          Need the full menu? The 16-service catalog is just below.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-export default function ServicesIndexPage() {
-  return (
-    <>
-      <JsonLd data={schema} />
-      <ThreeOutcomesBlock />
-      <div dangerouslySetInnerHTML={{ __html: html }} />
-      <InlineCTABand
-        variant="loss-frame"
-        headline="Every week you wait is leads landing in someone else's inbox."
-        subhead="One 30-min call. Honest scope. Fixed price. No discovery dance."
-        primaryCTA={{
-          label: "Book my strategy call",
-          href: "/discovery-call",
-        }}
-        secondaryCTA={{ label: "See pricing", href: "/pricing" }}
-      />
+      </section>
     </>
   );
 }
