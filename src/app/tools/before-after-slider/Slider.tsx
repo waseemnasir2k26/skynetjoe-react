@@ -121,7 +121,7 @@ export default function Slider() {
     <div className="space-y-12">
       {/* PICKER */}
       <div>
-        <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
           Pick a scenario
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -135,8 +135,8 @@ export default function Slider() {
                 aria-pressed={isActive}
                 className={`text-left rounded-2xl p-4 border transition group ${
                   isActive
-                    ? "border-cyan-300/60 bg-cyan-300/10"
-                    : "border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-cyan-300/30"
+                    ? "border-[rgba(198,107,63,0.50)] bg-[rgba(198,107,63,0.10)]"
+                    : "border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] hover:bg-[var(--cream-2)] hover:border-[rgba(198,107,63,0.30)]"
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -144,12 +144,12 @@ export default function Slider() {
                     {s.icon}
                   </span>
                   <div>
-                    <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-cyan-200/80 mb-1">
+                    <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)]/80 mb-1">
                       {s.category}
                     </div>
                     <div
                       className={`font-extrabold text-base ${
-                        isActive ? "text-white" : "text-white/90"
+                        isActive ? "text-[var(--ink)]" : "text-[var(--ink-2)]"
                       }`}
                     >
                       {s.title}
@@ -166,17 +166,17 @@ export default function Slider() {
       <div>
         <div className="flex items-end justify-between mb-3 gap-3">
           <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-1">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-1">
               {active.category}
             </p>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--ink)] tracking-tight">
               {active.title}
             </h2>
           </div>
           <button
             type="button"
             onClick={() => setPosition(50)}
-            className="inline-flex items-center gap-1.5 text-xs text-cyan-200 hover:text-white px-2 py-1 rounded-md border border-cyan-300/30 hover:border-cyan-300/60"
+            className="inline-flex items-center gap-1.5 text-xs text-[var(--terracotta)] hover:text-[var(--ink)] px-2 py-1 rounded-md border border-[rgba(198,107,63,0.30)] hover:border-[rgba(198,107,63,0.50)]"
             aria-label="Reset slider to center"
           >
             <RotateCcw className="w-3 h-3" />
@@ -184,7 +184,7 @@ export default function Slider() {
           </button>
         </div>
 
-        <p className="text-xs text-white/60 mb-4 inline-flex items-center gap-1.5">
+        <p className="text-xs text-[var(--ink)]/60 mb-4 inline-flex items-center gap-1.5">
           <Hand className="w-3.5 h-3.5" />
           {isTouch
             ? "Tap the left or right side to flip the view."
@@ -196,12 +196,12 @@ export default function Slider() {
         <div
           ref={trackRef}
           onClick={onTrackClick}
-          className="relative overflow-hidden rounded-3xl border border-white/10 select-none"
+          className="relative overflow-hidden rounded-3xl border border-[rgba(26,26,26,0.12)] select-none"
           style={{
             // Use CSS height for consistent ratio; mobile uses smaller pad
             minHeight: "520px",
             background:
-              "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+              "var(--cream-3)",
             cursor: dragging ? "grabbing" : isTouch ? "pointer" : "grab",
           }}
         >
@@ -235,7 +235,7 @@ export default function Slider() {
             style={{
               left: `${position}%`,
               background:
-                "linear-gradient(180deg, rgba(126,228,255,0.85) 0%, rgba(94,234,212,0.85) 100%)",
+                "var(--terracotta)",
               boxShadow: "0 0 12px rgba(0,212,255,0.5)",
               transform: "translateX(-0.5px)",
               transition: reduceMotion || dragging ? "none" : "left 120ms ease-out",
@@ -265,7 +265,7 @@ export default function Slider() {
               }}
             >
               <div
-                className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1E88E5] to-[#14B8A6] flex items-center justify-center shadow-[0_0_24px_rgba(0,212,255,0.7)] cursor-grab active:cursor-grabbing ring-2 ring-white/40"
+                className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--terracotta)] to-[var(--terracotta)] flex items-center justify-center  cursor-grab active:cursor-grabbing ring-2 ring-[rgba(26,26,26,0.18)]"
                 aria-hidden
               >
                 <svg
@@ -277,7 +277,7 @@ export default function Slider() {
                   strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-white"
+                  className="text-[var(--ink)]"
                 >
                   <polyline points="15 18 9 12 15 6" />
                   <polyline points="9 18 15 12 9 6" transform="translate(0,0)" />
@@ -290,7 +290,7 @@ export default function Slider() {
           <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] bg-red-500/30 border border-red-300/40 text-red-100 z-[5]">
             Manual
           </div>
-          <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] bg-cyan-400/25 border border-cyan-300/50 text-cyan-100 z-[5]">
+          <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] bg-[var(--terracotta)]/25 border border-[rgba(198,107,63,0.40)] text-[var(--terracotta)] z-[5]">
             Automated
           </div>
         </div>
@@ -298,26 +298,26 @@ export default function Slider() {
 
       {/* KPI TILES */}
       <div>
-        <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-3">
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
           The delta
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {active.kpis.map((k) => (
             <div
               key={k.label}
-              className="rounded-2xl border border-white/10 bg-white/5 p-4"
+              className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-4"
             >
-              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-cyan-200/80 mb-2">
+              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)]/80 mb-2">
                 {k.label}
               </div>
               <div className="flex items-baseline gap-2 mb-1">
                 <span className="text-sm text-red-300/90 line-through decoration-red-400/60">
                   {k.before}
                 </span>
-                <span className="text-white/40 text-xs">→</span>
-                <span className="text-lg font-extrabold text-white">{k.after}</span>
+                <span className="text-[var(--ink)]/40 text-xs">→</span>
+                <span className="text-lg font-extrabold text-[var(--ink)]">{k.after}</span>
               </div>
-              <div className="text-xs text-emerald-300 font-semibold">
+              <div className="text-xs text-[var(--terracotta)] font-semibold">
                 {k.delta}
               </div>
             </div>
@@ -329,13 +329,13 @@ export default function Slider() {
       <div
         className="rounded-3xl p-8 md:p-10 text-center"
         style={{
-          background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+          background: "var(--ink)",
         }}
       >
-        <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-3">
+        <h3 className="text-2xl md:text-3xl font-extrabold text-[var(--ink)] mb-3">
           Want this for your business?
         </h3>
-        <p className="text-white/90 mb-6 max-w-xl mx-auto">
+        <p className="text-[var(--ink-2)] mb-6 max-w-xl mx-auto">
           30-minute call, no slides, no funnel. Tell me the workflow that wastes
           your week — I&apos;ll sketch the automation on the call.
         </p>
@@ -343,7 +343,7 @@ export default function Slider() {
           href={CAL_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[var(--ink)] font-semibold hover:bg-[var(--cream-3)] transition"
         >
           Book a 30-min call
           <ArrowRight className="w-4 h-4" />
@@ -366,7 +366,7 @@ function Panel({
   if (side === "manual") {
     const d = data as ManualData;
     return (
-      <div className="flex flex-col h-full text-white">
+      <div className="flex flex-col h-full text-[var(--ink)]">
         <div className="mb-3 text-3xl" aria-hidden>
           {d.mood}
         </div>
@@ -407,39 +407,39 @@ function Panel({
 
   const d = data as AutomatedData;
   return (
-    <div className="flex flex-col h-full text-white items-end text-right">
+    <div className="flex flex-col h-full text-[var(--ink)] items-end text-right">
       <div className="mb-3 text-3xl" aria-hidden>
         {d.mood}
       </div>
-      <h3 className="text-xl md:text-2xl font-extrabold mb-2 text-cyan-100">
+      <h3 className="text-xl md:text-2xl font-extrabold mb-2 text-[var(--terracotta)]">
         {d.headline}
       </h3>
-      <p className="text-sm md:text-base text-cyan-50/85 mb-4 max-w-md">{d.sub}</p>
+      <p className="text-sm md:text-base text-[var(--ink-2)] mb-4 max-w-md">{d.sub}</p>
       <ul className="space-y-1.5 mb-4 w-full">
         {d.wins.map((w) => (
           <li
             key={w}
-            className="text-sm text-cyan-50/90 flex items-start gap-2 leading-snug justify-end"
+            className="text-sm text-[var(--ink-2)] flex items-start gap-2 leading-snug justify-end"
           >
-            <span className="order-2 text-emerald-300 mt-0.5" aria-hidden>
+            <span className="order-2 text-[var(--terracotta)] mt-0.5" aria-hidden>
               ✓
             </span>
             <span className="order-1">{w}</span>
           </li>
         ))}
       </ul>
-      <div className="mt-auto pt-4 border-t border-cyan-300/20 grid grid-cols-2 gap-3 text-xs w-full">
+      <div className="mt-auto pt-4 border-t border-[rgba(198,107,63,0.20)] grid grid-cols-2 gap-3 text-xs w-full">
         <div>
-          <div className="text-cyan-200/70 uppercase tracking-wider text-[10px] mb-0.5">
+          <div className="text-[var(--terracotta)]/70 uppercase tracking-wider text-[10px] mb-0.5">
             Output
           </div>
-          <div className="font-semibold text-cyan-50">{d.metric}</div>
+          <div className="font-semibold text-[var(--ink)]">{d.metric}</div>
         </div>
         <div>
-          <div className="text-cyan-200/70 uppercase tracking-wider text-[10px] mb-0.5">
+          <div className="text-[var(--terracotta)]/70 uppercase tracking-wider text-[10px] mb-0.5">
             Cost
           </div>
-          <div className="font-semibold text-cyan-50">{d.cost}</div>
+          <div className="font-semibold text-[var(--ink)]">{d.cost}</div>
         </div>
       </div>
     </div>

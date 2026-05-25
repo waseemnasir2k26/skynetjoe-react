@@ -444,12 +444,12 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
       <div
         className="rounded-3xl p-6 md:p-8 mb-6"
         style={{
-          background: "rgba(10, 45, 74, 0.55)",
-          border: "1px solid rgba(126, 228, 255, 0.22)",
+          background: "var(--cream-2)",
+          border: "1px solid rgba(26,26,26,0.18)",
           backdropFilter: "blur(14px)",
         }}
       >
-        <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-5">
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-5">
           1. Configure your calendar
         </p>
 
@@ -508,7 +508,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           </Field>
         </div>
 
-        <p className="text-xs uppercase tracking-[0.22em] text-cyan-300/80 font-semibold mb-3">
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)]/80 font-semibold mb-3">
           Posting cadence — posts per week (0–7)
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -519,7 +519,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             return (
               <div key={p}>
                 <div className="flex items-baseline justify-between gap-3 mb-2">
-                  <label className="text-sm font-semibold text-white flex items-center gap-2">
+                  <label className="text-sm font-semibold text-[var(--ink)] flex items-center gap-2">
                     <span
                       className="inline-flex items-center justify-center rounded-md w-7 h-7 text-[10px] font-bold"
                       style={{ background: meta.bg, color: meta.color, border: `1px solid ${meta.color}40` }}
@@ -528,7 +528,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                     </span>
                     {meta.label}
                   </label>
-                  <span className="text-sm font-extrabold text-cyan-200 tabular-nums">
+                  <span className="text-sm font-extrabold text-[var(--terracotta)] tabular-nums">
                     {v}/wk
                   </span>
                 </div>
@@ -553,12 +553,12 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
       <div
         className="rounded-2xl p-4 md:p-5 mb-6 flex flex-wrap items-center justify-between gap-3"
         style={{
-          background: "rgba(10, 45, 74, 0.45)",
-          border: "1px solid rgba(126, 228, 255, 0.18)",
+          background: "var(--cream-2)",
+          border: "1px solid rgba(26,26,26,0.12)",
           backdropFilter: "blur(14px)",
         }}
       >
-        <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold">
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold">
           2. {posts.length} posts scheduled across 30 days
         </p>
         <div className="flex flex-wrap gap-2">
@@ -566,7 +566,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             type="button"
             onClick={onDownloadCsv}
             disabled={posts.length === 0}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white border border-cyan-300/40 bg-cyan-300/10 hover:bg-cyan-300/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <Download className="w-4 h-4" /> CSV
           </button>
@@ -574,7 +574,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             type="button"
             onClick={onDownloadIcs}
             disabled={posts.length === 0}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white border border-cyan-300/40 bg-cyan-300/10 hover:bg-cyan-300/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <Download className="w-4 h-4" /> ICS
           </button>
@@ -582,7 +582,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             type="button"
             onClick={onCopyMarkdown}
             disabled={posts.length === 0}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white border border-cyan-300/40 bg-cyan-300/10 hover:bg-cyan-300/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {mdCopied ? <ClipboardList className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
             {mdCopied ? "MD copied" : "Markdown"}
@@ -590,7 +590,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           <button
             type="button"
             onClick={regen}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white border border-white/20 bg-white/5 hover:bg-white/10 transition"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] hover:bg-[var(--cream-2)] transition"
           >
             <RefreshCw className="w-4 h-4" /> Regenerate
           </button>
@@ -601,8 +601,8 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
       <div
         className="rounded-3xl p-3 md:p-5 mb-6"
         style={{
-          background: "rgba(10, 45, 74, 0.45)",
-          border: "1px solid rgba(126, 228, 255, 0.18)",
+          background: "var(--cream-2)",
+          border: "1px solid rgba(26,26,26,0.12)",
           backdropFilter: "blur(14px)",
         }}
       >
@@ -610,7 +610,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           {DAY_LABELS.map((d) => (
             <div
               key={d}
-              className="text-[10px] sm:text-xs uppercase tracking-wider text-cyan-300/70 font-semibold text-center"
+              className="text-[10px] sm:text-xs uppercase tracking-wider text-[var(--terracotta)]/70 font-semibold text-center"
             >
               {d}
             </div>
@@ -635,15 +635,15 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                 style={{
                   background: inRange ? "rgba(6, 24, 39, 0.55)" : "rgba(6, 24, 39, 0.25)",
                   border: `1px solid ${
-                    isToday ? "rgba(94, 234, 212, 0.6)" : "rgba(126, 228, 255, 0.14)"
+                    isToday ? "var(--terracotta)" : "rgba(26,26,26,0.10)"
                   }`,
                   opacity: inRange ? 1 : 0.45,
                 }}
               >
-                <p className="text-[9px] sm:text-[10px] uppercase tracking-wider text-gray-400 mb-1 flex items-center justify-between">
+                <p className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[var(--ink-faint)] mb-1 flex items-center justify-between">
                   <span>{cell.date.slice(8, 10)}</span>
                   {isToday && (
-                    <span className="text-cyan-300 font-bold">Today</span>
+                    <span className="text-[var(--terracotta)] font-bold">Today</span>
                   )}
                 </p>
                 <div className="flex flex-col gap-1 overflow-hidden">
@@ -671,7 +671,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                     <button
                       type="button"
                       onClick={() => setOpenPost(cellPosts[3])}
-                      className="text-[10px] sm:text-[11px] text-cyan-300 hover:text-cyan-200 text-left"
+                      className="text-[10px] sm:text-[11px] text-[var(--terracotta)] hover:text-[var(--terracotta)] text-left"
                     >
                       +{cellPosts.length - 3} more
                     </button>
@@ -710,17 +710,17 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         style={{
           background:
             "linear-gradient(135deg, rgba(30, 136, 229, 0.18) 0%, rgba(20, 184, 166, 0.18) 100%)",
-          border: "1px solid rgba(126, 228, 255, 0.30)",
+          border: "1px solid rgba(26,26,26,0.18)",
         }}
       >
         <div className="max-w-xl">
-          <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-2">
+          <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-2">
             Want this on autopilot?
           </p>
-          <h3 className="text-xl md:text-2xl font-extrabold text-white mb-2">
+          <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-2">
             We&apos;ll wire the calendar into your GHL / Buffer / n8n.
           </h3>
-          <p className="text-sm text-gray-300 leading-relaxed">
+          <p className="text-sm text-[var(--ink-2)] leading-relaxed">
             30-minute call to scope. If automation is worth doing for your
             business, we&apos;ll build it. If it isn&apos;t, we&apos;ll say
             so.
@@ -730,9 +730,9 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           href={calUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-white whitespace-nowrap"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--ink)] whitespace-nowrap"
           style={{
-            background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+            background: "var(--ink)",
           }}
         >
           <CalendarCheck className="w-4 h-4" /> Book the call <ArrowRight className="w-4 h-4" />
@@ -746,14 +746,14 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           aria-modal="true"
           aria-label="Post detail"
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 sm:p-6"
-          style={{ background: "rgba(6, 24, 39, 0.75)", backdropFilter: "blur(6px)" }}
+          style={{ background: "rgba(26,26,26,0.75)", backdropFilter: "blur(6px)" }}
           onClick={() => setOpenPost(null)}
         >
           <div
             className="w-full max-w-2xl rounded-3xl p-6 md:p-8 max-h-[90vh] overflow-y-auto"
             style={{
-              background: "linear-gradient(135deg, #0a2d4a 0%, #073846 100%)",
-              border: "1px solid rgba(126, 228, 255, 0.35)",
+              background: "var(--ink)",
+              border: "1px solid rgba(26,26,26,0.18)",
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -769,23 +769,23 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                 >
                   {PLATFORM_META[openPost.platform].label}
                 </span>
-                <span className="text-[11px] uppercase tracking-wider text-gray-400">
+                <span className="text-[11px] uppercase tracking-wider text-[var(--ink-faint)]">
                   {openPost.date} · {openPost.kind}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setOpenPost(null)}
-                className="text-gray-300 hover:text-white"
+                className="text-[var(--ink-2)] hover:text-[var(--ink)]"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <h3 className="text-xl md:text-2xl font-extrabold text-white mb-4 leading-snug">
+            <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-4 leading-snug">
               {openPost.hook}
             </h3>
-            <div className="space-y-4 text-sm text-gray-200 leading-relaxed">
+            <div className="space-y-4 text-sm text-[var(--ink-2)] leading-relaxed">
               <ModalRow label="Body angle">{openPost.body}</ModalRow>
               <ModalRow label="Suggested CTA">{openPost.cta}</ModalRow>
               <ModalRow label="Suggested asset">
@@ -798,9 +798,9 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                       key={t}
                       className="text-[11px] px-2 py-0.5 rounded-full"
                       style={{
-                        background: "rgba(94, 234, 212, 0.12)",
-                        color: "#5eead4",
-                        border: "1px solid rgba(94, 234, 212, 0.30)",
+                        background: "rgba(198,107,63,0.10)",
+                        color: "var(--terracotta)",
+                        border: "1px solid rgba(198,107,63,0.30)",
                       }}
                     >
                       #{t}
@@ -822,14 +822,14 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                     // ignore
                   }
                 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white border border-cyan-300/40 bg-cyan-300/10 hover:bg-cyan-300/20 transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition"
               >
                 <Copy className="w-4 h-4" /> Copy post
               </button>
               <button
                 type="button"
                 onClick={() => setOpenPost(null)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-white/20 text-white/90 hover:bg-white/10 transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-[rgba(26,26,26,0.18)] text-[var(--ink-2)] hover:bg-[var(--cream-2)] transition"
               >
                 Close
               </button>
@@ -842,7 +842,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         .cc-input {
           width: 100%;
           background: rgba(6, 24, 39, 0.55);
-          border: 1px solid rgba(126, 228, 255, 0.22);
+          border: 1px solid rgba(26,26,26,0.18);
           border-radius: 0.75rem;
           padding: 0.7rem 0.9rem;
           color: #fff;
@@ -853,8 +853,8 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         }
         .cc-input::placeholder { color: rgba(203, 213, 225, 0.45); }
         .cc-input:focus {
-          border-color: rgba(94, 234, 212, 0.7);
-          box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.15);
+          border-color: rgba(198,107,63,0.50);
+          box-shadow: 0 0 0 3px rgba(198,107,63,0.15);
         }
 
         .rc-range {
@@ -870,23 +870,23 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           border-radius: 999px;
           background: linear-gradient(
             90deg,
-            #5eead4 0%,
-            #7ee4ff var(--rc-fill, 50%),
-            rgba(126, 228, 255, 0.15) var(--rc-fill, 50%),
-            rgba(126, 228, 255, 0.15) 100%
+            var(--terracotta) 0%,
+            var(--terracotta) var(--rc-fill, 50%),
+            rgba(26,26,26,0.12) var(--rc-fill, 50%),
+            rgba(26,26,26,0.12) 100%
           );
-          border: 1px solid rgba(126, 228, 255, 0.30);
+          border: 1px solid rgba(26,26,26,0.18);
         }
         .rc-range::-moz-range-track {
           height: 8px;
           border-radius: 999px;
-          background: rgba(126, 228, 255, 0.15);
-          border: 1px solid rgba(126, 228, 255, 0.30);
+          background: rgba(26,26,26,0.12);
+          border: 1px solid rgba(26,26,26,0.18);
         }
         .rc-range::-moz-range-progress {
           height: 8px;
           border-radius: 999px;
-          background: linear-gradient(90deg, #5eead4 0%, #7ee4ff 100%);
+          background: linear-gradient(90deg, var(--terracotta) 0%, var(--terracotta) 100%);
         }
         .rc-range::-webkit-slider-thumb {
           -webkit-appearance: none;
@@ -895,19 +895,19 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           height: 20px;
           border-radius: 50%;
           background: #ffffff;
-          border: 2px solid #14B8A6;
+          border: 2px solid var(--terracotta);
           margin-top: -7px;
           box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(126, 228, 255, 0.12);
+            0 0 0 4px rgba(26,26,26,0.12);
         }
         .rc-range::-moz-range-thumb {
           width: 20px;
           height: 20px;
           border-radius: 50%;
           background: #ffffff;
-          border: 2px solid #14B8A6;
+          border: 2px solid var(--terracotta);
           box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(126, 228, 255, 0.12);
+            0 0 0 4px rgba(26,26,26,0.12);
         }
         @media (prefers-reduced-motion: reduce) {
           .rc-range::-webkit-slider-thumb,
@@ -927,7 +927,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-[11px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1.5">
+      <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
         {label}
       </label>
       {children}
@@ -938,10 +938,10 @@ function Field({
 function ModalRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-wider text-cyan-300/80 font-semibold mb-1">
+      <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1">
         {label}
       </p>
-      <div className="text-sm text-gray-100">{children}</div>
+      <div className="text-sm text-[var(--ink)]">{children}</div>
     </div>
   );
 }

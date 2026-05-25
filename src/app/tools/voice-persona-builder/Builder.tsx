@@ -498,19 +498,19 @@ export default function Builder({ calUrl }: { calUrl: string }) {
       <div
         className="rounded-3xl p-5 md:p-6 mb-6"
         style={{
-          background: "rgba(10, 45, 74, 0.55)",
-          border: "1px solid rgba(126, 228, 255, 0.22)",
+          background: "var(--cream-2)",
+          border: "1px solid rgba(26,26,26,0.18)",
           backdropFilter: "blur(14px)",
         }}
       >
         <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-          <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold">
+          <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold">
             {phase === "result" ? "Profile generated" : `Step ${state.step + 1} of 4`}
           </p>
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-cyan-200 transition"
+            className="inline-flex items-center gap-1.5 text-xs text-[var(--ink-faint)] hover:text-[var(--terracotta)] transition"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             Reset
@@ -526,13 +526,13 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                   className="h-1.5 rounded-full transition-colors"
                   style={{
                     background: done || active
-                      ? "linear-gradient(90deg, #5eead4 0%, #7ee4ff 100%)"
-                      : "rgba(126, 228, 255, 0.15)",
+                      ? "linear-gradient(90deg, var(--terracotta) 0%, var(--terracotta) 100%)"
+                      : "rgba(26,26,26,0.12)",
                   }}
                 />
                 <p
                   className={`mt-2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider ${
-                    active || done ? "text-cyan-200" : "text-gray-500"
+                    active || done ? "text-[var(--terracotta)]" : "text-[var(--ink-faint)]"
                   }`}
                 >
                   {s.n}. {s.label}
@@ -548,18 +548,18 @@ export default function Builder({ calUrl }: { calUrl: string }) {
         <div
           className="rounded-3xl p-6 md:p-8 mb-6"
           style={{
-            background: "rgba(10, 45, 74, 0.45)",
-            border: "1px solid rgba(126, 228, 255, 0.18)",
+            background: "var(--cream-2)",
+            border: "1px solid rgba(26,26,26,0.12)",
             backdropFilter: "blur(14px)",
           }}
         >
           {state.step === 0 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 text-white">
+                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 text-[var(--ink)]">
                   Step 1 — Identity
                 </h2>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-[var(--ink-faint)]">
                   The basics. Five fields, two minutes.
                 </p>
               </div>
@@ -615,10 +615,10 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           {state.step === 1 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 text-white">
+                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 text-[var(--ink)]">
                   Step 2 — Tone sliders
                 </h2>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-[var(--ink-faint)]">
                   Drag each axis toward the side that feels true. Mid is a fine answer.
                 </p>
               </div>
@@ -630,12 +630,12 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                   return (
                     <div key={s.key} className="min-w-0">
                       <div className="flex items-baseline justify-between gap-3 mb-2">
-                        <div className="text-sm font-semibold text-white">
+                        <div className="text-sm font-semibold text-[var(--ink)]">
                           {s.left}{" "}
-                          <span className="text-gray-500">↔</span>{" "}
+                          <span className="text-[var(--ink-faint)]">↔</span>{" "}
                           {s.right}
                         </div>
-                        <span className="text-sm font-extrabold text-cyan-200 tabular-nums whitespace-nowrap">
+                        <span className="text-sm font-extrabold text-[var(--terracotta)] tabular-nums whitespace-nowrap">
                           {v}/10
                         </span>
                       </div>
@@ -650,8 +650,8 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                         aria-label={`${s.left} to ${s.right}`}
                         style={{ ["--rc-fill" as never]: `${pct}%` } as React.CSSProperties}
                       />
-                      <p className="text-xs text-gray-400 mt-1.5 leading-snug">
-                        {s.caption} <span className="text-cyan-300/80">— {describeTone(s, v)}</span>
+                      <p className="text-xs text-[var(--ink-faint)] mt-1.5 leading-snug">
+                        {s.caption} <span className="text-[var(--terracotta)]/80">— {describeTone(s, v)}</span>
                       </p>
                     </div>
                   );
@@ -663,10 +663,10 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           {state.step === 2 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 text-white">
+                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 text-[var(--ink)]">
                   Step 3 — Vocabulary
                 </h2>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-[var(--ink-faint)]">
                   Comma- or newline-separated. The model treats these as hard rules.
                 </p>
               </div>
@@ -703,10 +703,10 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           {state.step === 3 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 text-white">
+                <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-2 text-[var(--ink)]">
                   Step 4 — Examples
                 </h2>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-[var(--ink-faint)]">
                   Show the model what good looks like. And what to never sound like.
                 </p>
               </div>
@@ -746,7 +746,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               type="button"
               onClick={onBack}
               disabled={state.step === 0}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-white/20 text-white/90 hover:bg-white/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-[rgba(26,26,26,0.18)] text-[var(--ink-2)] hover:bg-[var(--cream-2)] transition disabled:opacity-30 disabled:cursor-not-allowed"
             >
               <ArrowLeft className="w-4 h-4" />
               Back
@@ -755,9 +755,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               type="button"
               onClick={onNext}
               disabled={!stepValid}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-white disabled:opacity-40 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-[var(--ink)] disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                background: "var(--ink)",
               }}
             >
               {state.step < 3 ? "Next step" : "Generate profile"}
@@ -765,7 +765,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
             </button>
           </div>
           {state.step === 0 && !stepValid && (
-            <p className="mt-3 text-xs text-amber-300/90">
+            <p className="mt-3 text-xs text-[var(--terracotta)]/90">
               Brand name and target audience are required. Everything else is optional but improves output.
             </p>
           )}
@@ -777,17 +777,17 @@ export default function Builder({ calUrl }: { calUrl: string }) {
         <div
           className="rounded-3xl p-6 md:p-8 mb-6"
           style={{
-            background: "rgba(10, 45, 74, 0.65)",
-            border: "1px solid rgba(126, 228, 255, 0.28)",
+            background: "var(--cream-2)",
+            border: "1px solid rgba(26,26,26,0.18)",
             backdropFilter: "blur(14px)",
           }}
         >
           <div className="flex items-start justify-between flex-wrap gap-3 mb-5">
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-2">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-2">
                 Your Brand Voice Profile
               </p>
-              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
+              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)]">
                 Paste this into Claude or ChatGPT.
               </h2>
             </div>
@@ -795,7 +795,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               <button
                 type="button"
                 onClick={onCopy}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white border border-cyan-300/40 bg-cyan-300/10 hover:bg-cyan-300/20 transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition"
               >
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 {copied ? "Copied" : "Copy doc"}
@@ -803,7 +803,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               <button
                 type="button"
                 onClick={onDownload}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white border border-white/20 bg-white/5 hover:bg-white/10 transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-[var(--ink)] border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] hover:bg-[var(--cream-2)] transition"
               >
                 <Download className="w-4 h-4" />
                 Download .md
@@ -811,7 +811,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               <button
                 type="button"
                 onClick={() => setPhase("build")}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white/80 border border-white/15 hover:bg-white/10 transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-[var(--ink-2)] border border-[rgba(26,26,26,0.18)] hover:bg-[var(--cream-2)] transition"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Edit
@@ -820,10 +820,10 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           </div>
 
           <pre
-            className="text-xs sm:text-sm leading-relaxed text-gray-200 overflow-x-auto rounded-2xl p-4 sm:p-5 whitespace-pre-wrap break-words"
+            className="text-xs sm:text-sm leading-relaxed text-[var(--ink-2)] overflow-x-auto rounded-2xl p-4 sm:p-5 whitespace-pre-wrap break-words"
             style={{
-              background: "rgba(6, 24, 39, 0.65)",
-              border: "1px solid rgba(126, 228, 255, 0.18)",
+              background: "rgba(26,26,26,0.65)",
+              border: "1px solid rgba(26,26,26,0.12)",
               maxHeight: "60vh",
               overflowY: "auto",
             }}
@@ -835,14 +835,14 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           <div className="mt-6 rounded-2xl p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
             style={{
               background: "linear-gradient(135deg, rgba(30, 136, 229, 0.18) 0%, rgba(20, 184, 166, 0.18) 100%)",
-              border: "1px solid rgba(126, 228, 255, 0.30)",
+              border: "1px solid rgba(26,26,26,0.18)",
             }}
           >
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-300 font-semibold mb-1">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-1">
                 Want a voice audit?
               </p>
-              <p className="text-white text-base md:text-lg font-semibold">
+              <p className="text-[var(--ink)] text-base md:text-lg font-semibold">
                 I&apos;ll review your profile + 3 pieces of live copy on a 30-minute call. Free.
               </p>
             </div>
@@ -850,9 +850,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               href={calUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-white whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--ink)] whitespace-nowrap"
               style={{
-                background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
+                background: "var(--ink)",
               }}
             >
               <CalendarCheck className="w-4 h-4" />
@@ -861,7 +861,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
             </a>
           </div>
 
-          <p className="mt-4 text-[11px] text-gray-500 inline-flex items-center gap-1.5">
+          <p className="mt-4 text-[11px] text-[var(--ink-faint)] inline-flex items-center gap-1.5">
             <Sparkles className="w-3 h-3" />
             Generated locally. Nothing was sent to a server.
           </p>
@@ -873,7 +873,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
         .vpb-input {
           width: 100%;
           background: rgba(6, 24, 39, 0.55);
-          border: 1px solid rgba(126, 228, 255, 0.22);
+          border: 1px solid rgba(26,26,26,0.18);
           border-radius: 0.75rem;
           padding: 0.7rem 0.9rem;
           color: #fff;
@@ -884,8 +884,8 @@ export default function Builder({ calUrl }: { calUrl: string }) {
         }
         .vpb-input::placeholder { color: rgba(203, 213, 225, 0.45); }
         .vpb-input:focus {
-          border-color: rgba(94, 234, 212, 0.7);
-          box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.15);
+          border-color: rgba(198,107,63,0.50);
+          box-shadow: 0 0 0 3px rgba(198,107,63,0.15);
         }
         .vpb-textarea { resize: vertical; min-height: 96px; }
 
@@ -902,23 +902,23 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           border-radius: 999px;
           background: linear-gradient(
             90deg,
-            #5eead4 0%,
-            #7ee4ff var(--rc-fill, 50%),
-            rgba(126, 228, 255, 0.15) var(--rc-fill, 50%),
-            rgba(126, 228, 255, 0.15) 100%
+            var(--terracotta) 0%,
+            var(--terracotta) var(--rc-fill, 50%),
+            rgba(26,26,26,0.12) var(--rc-fill, 50%),
+            rgba(26,26,26,0.12) 100%
           );
-          border: 1px solid rgba(126, 228, 255, 0.30);
+          border: 1px solid rgba(26,26,26,0.18);
         }
         .rc-range::-moz-range-track {
           height: 8px;
           border-radius: 999px;
-          background: rgba(126, 228, 255, 0.15);
-          border: 1px solid rgba(126, 228, 255, 0.30);
+          background: rgba(26,26,26,0.12);
+          border: 1px solid rgba(26,26,26,0.18);
         }
         .rc-range::-moz-range-progress {
           height: 8px;
           border-radius: 999px;
-          background: linear-gradient(90deg, #5eead4 0%, #7ee4ff 100%);
+          background: linear-gradient(90deg, var(--terracotta) 0%, var(--terracotta) 100%);
         }
         .rc-range::-webkit-slider-thumb {
           -webkit-appearance: none;
@@ -927,10 +927,10 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           height: 22px;
           border-radius: 50%;
           background: #ffffff;
-          border: 2px solid #14B8A6;
+          border: 2px solid var(--terracotta);
           margin-top: -8px;
           box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(126, 228, 255, 0.12);
+            0 0 0 4px rgba(26,26,26,0.12);
           transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
         .rc-range::-moz-range-thumb {
@@ -938,9 +938,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           height: 22px;
           border-radius: 50%;
           background: #ffffff;
-          border: 2px solid #14B8A6;
+          border: 2px solid var(--terracotta);
           box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(126, 228, 255, 0.12);
+            0 0 0 4px rgba(26,26,26,0.12);
           transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
         .rc-range:hover::-webkit-slider-thumb,
@@ -969,12 +969,12 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-white mb-1.5">
+      <label className="block text-sm font-semibold text-[var(--ink)] mb-1.5">
         {label}
-        {required ? <span className="text-cyan-300 ml-1">*</span> : null}
+        {required ? <span className="text-[var(--terracotta)] ml-1">*</span> : null}
       </label>
       {children}
-      {hint ? <p className="text-xs text-gray-400 mt-1.5">{hint}</p> : null}
+      {hint ? <p className="text-xs text-[var(--ink-faint)] mt-1.5">{hint}</p> : null}
     </div>
   );
 }
