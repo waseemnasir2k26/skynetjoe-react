@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Star, AlertCircle } from "lucide-react";
+import R3FHeroBackground from "@/components/r3f/R3FHeroBackground";
 
 export default function HeroFunnel() {
   return (
@@ -38,6 +39,9 @@ export default function HeroFunnel() {
           animationDelay: "-7s",
         }}
       />
+
+      {/* Cinematic R3F scene — desktop-only + reduced-motion-aware (skipped on mobile) */}
+      <R3FHeroBackground />
 
       <div className="container-x px-6 relative z-10 grid md:grid-cols-[1.25fr_1fr] gap-10 md:gap-14 items-center">
         <motion.div
