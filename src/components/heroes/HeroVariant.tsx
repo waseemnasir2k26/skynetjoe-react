@@ -83,14 +83,14 @@ export default function HeroVariant({
             <h1
               className={
                 isMinimal
-                  ? "text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6"
+                  ? "text-3xl sm:text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6"
                   : isTerminal
-                    ? "text-3xl md:text-5xl font-bold leading-tight mb-6 text-fg"
+                    ? "text-2xl sm:text-3xl md:text-5xl font-bold leading-tight mb-6 text-fg"
                     : isBold
-                      ? "text-6xl md:text-8xl font-black leading-[0.95] tracking-tighter mb-6"
+                      ? "text-4xl sm:text-6xl md:text-8xl font-black leading-[0.95] tracking-tighter mb-6"
                       : isCream
-                        ? "text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6 text-[#100f14]"
-                        : "text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6"
+                        ? "text-3xl sm:text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6 text-[#100f14]"
+                        : "text-3xl sm:text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6"
               }
             >
               {headline}

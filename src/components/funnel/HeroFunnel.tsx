@@ -59,7 +59,7 @@ export default function HeroFunnel() {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.02] tracking-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.02] tracking-tight mb-6">
             Your business{" "}
             <span
               className="italic font-semibold"

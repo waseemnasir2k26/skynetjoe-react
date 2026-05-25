@@ -157,7 +157,7 @@ export default function ExitIntentModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-center justify-center px-4 py-6 overflow-y-auto"
+      className="fixed inset-0 z-[80] flex items-center justify-center px-4 py-4 md:py-6 overflow-y-auto"
       style={{
         background: "rgba(0, 0, 0, 0.78)",
         animation: "skynet-exit-fade 0.28s ease-out forwards",

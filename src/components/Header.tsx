@@ -265,7 +265,7 @@ export default function Header() {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden p-2 text-fg"
+          className="lg:hidden p-3 -mr-1 text-fg"
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
         >
