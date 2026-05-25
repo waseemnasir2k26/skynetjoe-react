@@ -19,7 +19,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { INDUSTRIES } from "@/data/industries";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -33,6 +33,7 @@ export const metadata: Metadata = {
       "AI systems built for the vertical, not glued on top of it. Dental, wellness, freight. Each one ships fixed-scope, 5-14 days.",
     url: `${SITE.url}/industries`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 
@@ -231,7 +232,7 @@ export default function IndustriesIndexPage() {
                   {i.shortName} · vertical
                 </div>
 
-                <h3
+                <h2
                   style={{
                     fontFamily: "var(--font-display)",
                     fontWeight: 500,
@@ -243,7 +244,7 @@ export default function IndustriesIndexPage() {
                   }}
                 >
                   {i.name}
-                </h3>
+                </h2>
 
                 <p
                   style={{

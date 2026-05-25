@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import ServicePricingTabs from "@/components/pricing/ServicePricingTabs";
 import PricingCalculator from "@/components/pricing/PricingCalculator";
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
       "16 services × 3 tiers each. Live calculator. Public prices. No quote form.",
     url: `${SITE.url}/pricing`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

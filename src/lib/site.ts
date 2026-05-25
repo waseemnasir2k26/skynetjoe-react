@@ -26,6 +26,27 @@ function resolveAssetsUrl(): string {
   return "https://skynetjoe.com";
 }
 
+/**
+ * Default Open Graph / Twitter image used by every page that doesn't
+ * specify its own. Per Next.js docs, page-level openGraph blocks
+ * SHALLOWLY OVERWRITE the root layout's openGraph — so without
+ * re-including `images:`, social shares from /pricing, /services,
+ * /case-studies, /tools etc. render with no thumbnail. Spread these
+ * into the page's openGraph.images (and twitter.images) to inherit.
+ *
+ * Path is relative; metadataBase in layout.tsx resolves it against
+ * SITE.assetsUrl at build time so the final absolute URL is correct.
+ */
+export const DEFAULT_OG_IMAGE_URL = "/waseem-portrait.jpg";
+export const DEFAULT_OG_IMAGES = [
+  {
+    url: DEFAULT_OG_IMAGE_URL,
+    width: 1200,
+    height: 1200,
+    alt: "SkynetLabs — AI Automation Agency for Founders Who Refuse to Be Average",
+  },
+] as const;
+
 export const SITE = {
   name: "SkynetLabs",
   brand: "SkynetLabs",

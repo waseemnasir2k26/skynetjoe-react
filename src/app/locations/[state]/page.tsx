@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import * as Icons from "lucide-react";
 import { ArrowRight, MessageCircle, Calendar, MapPin, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { STATES, getStateBySlug, type StateEntry } from "@/lib/states";
-import { SERVICE_CATEGORIES, SITE } from "@/lib/site";
+import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
@@ -35,6 +35,7 @@ export async function generateMetadata({
       description,
       url: `${SITE.url}/locations/${s.slug}`,
       type: "website",
+      images: [...DEFAULT_OG_IMAGES],
     },
     twitter: {
       card: "summary_large_image",

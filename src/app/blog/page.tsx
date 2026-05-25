@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { POSTS } from "@/lib/posts";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
       "Long-form writing on AI automation, AEO, and shipping software for service businesses.",
     url: `${SITE.url}/blog`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

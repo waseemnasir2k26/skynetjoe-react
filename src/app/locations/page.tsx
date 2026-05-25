@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import * as Icons from "lucide-react";
 import { MapPin, ArrowUpRight, ArrowRight, MessageCircle, Calendar, CheckCircle2 } from "lucide-react";
 import { STATES } from "@/lib/states";
-import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
+import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
       "AI automation services delivered to founders across the lower 48. Local intent, global stack.",
     url: `${SITE.url}/locations`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

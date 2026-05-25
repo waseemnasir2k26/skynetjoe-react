@@ -11,7 +11,7 @@ import {
   Building2,
   Clock,
 } from "lucide-react";
-import { SERVICE_CATEGORIES, SITE } from "@/lib/site";
+import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { STATES, type StateEntry } from "@/lib/states";
 import JsonLd from "@/components/JsonLd";
 import { getEnrichment } from "@/data/service-state-enrichment";
@@ -213,6 +213,7 @@ export async function generateMetadata({
       description,
       url: `${SITE.url}/services/${svc.slug}/in/${st.slug}`,
       type: "article",
+      images: [...DEFAULT_OG_IMAGES],
     },
     twitter: {
       card: "summary_large_image",

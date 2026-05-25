@@ -3,7 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { NEWS } from "@/lib/news";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
       "Field notes on AI automation, n8n, AEO, and shipping software from Bali.",
     url: `${SITE.url}/news`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

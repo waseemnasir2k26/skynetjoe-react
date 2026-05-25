@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Calendar from "./Calendar";
 import { Sparkles, CalendarDays, Layers, Download } from "lucide-react";
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
       "Niche + cadence + goal → 30 days of cross-platform post ideas. Free, no email gate.",
     url: `${SITE.url}${PATH}`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",

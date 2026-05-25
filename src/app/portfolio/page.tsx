@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import WorkShowcase from "@/components/sections/WorkShowcase";
 
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
       "Live screenshots of 20+ shipped builds. Click any tile for the deployed site.",
     url: `${SITE.url}/portfolio`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { Calculator, Activity, Compass, ArrowLeftRight, Mic, FileText, CalendarDays, Target, Library, Film, ArrowRight } from "lucide-react";
 
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
       "Find out what your business is leaking. Two free tools, no email gate.",
     url: `${SITE.url}/tools`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

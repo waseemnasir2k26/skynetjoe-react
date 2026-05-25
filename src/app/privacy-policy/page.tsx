@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 const html = fs.readFileSync(
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
       "How we handle your data. Minimum collection, no tracking cookies, deletion on request.",
     url: `${SITE.url}/privacy-policy`,
     type: "article",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

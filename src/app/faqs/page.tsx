@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
       "30 real founder questions on n8n, AEO, chatbots, and working with SkynetLabs. Concrete answers, no hedging.",
     url: `${SITE.url}/faqs`,
     type: "article",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

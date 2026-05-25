@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MapPin, ArrowRight } from "lucide-react";
-import { SERVICE_CATEGORIES, SITE } from "@/lib/site";
+import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { STATES } from "@/lib/states";
 import JsonLd from "@/components/JsonLd";
 
@@ -49,6 +49,7 @@ export async function generateMetadata({
       description: longDesc,
       url: `${SITE.url}/services/${svc.slug}`,
       type: "article",
+      images: [...DEFAULT_OG_IMAGES],
     },
     twitter: {
       card: "summary_large_image",

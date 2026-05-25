@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
       "50 definitions covering AEO, SEO, n8n, automation, LLMs, RAG, agents, schema markup. By Waseem Nasir, SkynetLabs.",
     url: `${SITE.url}/glossary`,
     type: "article",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

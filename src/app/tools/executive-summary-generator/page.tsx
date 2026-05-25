@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Generator from "./Generator";
 import { Sparkles, Timer, ShieldCheck, Wand2 } from "lucide-react";
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
       "TL;DR, email, Slack, deck and investor 1-pager from any raw text. Free, local-only, no email gate.",
     url: `${SITE.url}${PATH}`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",

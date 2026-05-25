@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
+import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import PainSolverGrid from "@/components/services/PainSolverGrid";
 import ServiceMenuCollapsed from "@/components/services/ServiceMenuCollapsed";
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
       "Pick the bleed. We close it. Eight founder pains mapped to 16 production services. Fixed scope, public pricing.",
     url: `${SITE.url}/services`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

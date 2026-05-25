@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Slider from "./Slider";
 import { SCENARIOS } from "@/data/before-after-scenarios";
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
       "Six preset scenarios with drag-to-compare visuals and KPI deltas. Free, no email gate.",
     url: `${SITE.url}${PATH}`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",

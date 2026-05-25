@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Quiz from "./Quiz";
 import { QUESTIONS, AXES } from "@/data/automation-gap-questions";
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
       "12 questions, 4 axes, one honest automation gap score. Find the biggest leak and the moves to plug it.",
     url: `${SITE.url}${PATH}`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",

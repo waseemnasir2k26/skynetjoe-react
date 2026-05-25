@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -22,6 +22,7 @@ export const metadata: Metadata = {
       "180+ workflows shipped across both. Pricing, self-hosting, branching, compliance, AI nodes — and 5 scenarios with explicit picks.",
     url: `${SITE.url}/n8n-vs-zapier`,
     type: "article",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

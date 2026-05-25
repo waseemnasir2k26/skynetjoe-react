@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Generator from "./Generator";
 import { Sparkles, Film, Layers, Zap } from "lucide-react";
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
       "Generate AI video prompts in 4 formats side-by-side. Free, no email gate. Built for creators who ship.",
     url: `${SITE.url}${PATH}`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",

@@ -12,7 +12,7 @@ import {
   Globe,
   ShieldCheck,
 } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
@@ -38,6 +38,7 @@ export const metadata: Metadata = {
       "8-hour reply guarantee. No discovery funnels. Fixed scope back in 48 hours.",
     url: `${SITE.url}/contact`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

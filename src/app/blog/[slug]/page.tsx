@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { POSTS, getPost } from "@/lib/posts";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 export const dynamicParams = false;
@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       modifiedTime: post.updatedAt,
       authors: [SITE.founder],
       tags: post.tags,
+      images: [...DEFAULT_OG_IMAGES],
     },
     twitter: {
       card: "summary_large_image",

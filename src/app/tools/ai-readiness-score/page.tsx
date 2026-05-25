@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Quiz from "./Quiz";
 import {
@@ -24,6 +24,7 @@ export const metadata: Metadata = {
       "10 questions, one 0 to 100 score, four-axis breakdown of where you're strong and where you'll stall. No email gate.",
     url: `${SITE.url}${PATH}`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",

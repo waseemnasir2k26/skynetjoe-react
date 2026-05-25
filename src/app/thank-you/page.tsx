@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
 import ReferralForm from "./ReferralForm";
@@ -28,6 +28,7 @@ export const metadata: Metadata = {
       "Your discovery call with Waseem is confirmed. Here's exactly what happens next.",
     url: `${SITE.url}/thank-you`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

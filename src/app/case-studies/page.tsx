@@ -3,7 +3,7 @@ import path from "path";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
 
@@ -59,6 +59,7 @@ export const metadata: Metadata = {
       "EU logistics, Manhattan dental, Bali wellness, KSA retail and more — anonymized where contracts require it.",
     url: `${SITE.url}/case-studies`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
 };
 

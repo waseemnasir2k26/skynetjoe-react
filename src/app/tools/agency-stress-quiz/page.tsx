@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Quiz from "./Quiz";
 import { QUIZ, BUCKETS } from "@/data/quiz-questions";
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
       "7 questions, one honest score (0 to 70). Tells you exactly where your service business is leaking leads, cash, and sleep.",
     url: `${SITE.url}${PATH}`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import DiscoveryFunnel from "./DiscoveryFunnel";
 
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
       "Free audit + 3 concrete plays + fixed-price scope back in 48 hours. Bali hours, no SDR.",
     url: `${SITE.url}/discovery-call`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",

@@ -340,9 +340,9 @@ export default function WorkShowcase() {
                   </span>
                 </div>
                 <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="text-white font-bold mb-1 leading-tight">
+                  <h2 className="text-white font-bold mb-1 leading-tight">
                     {g.title}
-                  </h3>
+                  </h2>
                   <p className="text-[11px] text-cyan-300/80 font-mono mb-3 truncate">
                     {g.client}
                   </p>

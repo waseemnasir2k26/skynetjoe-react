@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Builder from "./Builder";
 import { Sparkles, Timer, ShieldCheck, FileText } from "lucide-react";
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
       "4 steps. 8 tone sliders. One downloadable Brand Voice Profile + system prompt. Free, no signup.",
     url: `${SITE.url}${PATH}`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",

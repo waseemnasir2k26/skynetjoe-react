@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { ChevronRight, Calculator as CalcIcon, Sparkles } from "lucide-react";
 import { CASE_STUDIES } from "@/lib/case-studies";
@@ -22,6 +22,7 @@ export const metadata: Metadata = {
       "Interactive ROI calculator. 6 sliders, live math, real number. Built by SkynetLabs to size the actual recovery opportunity in your business.",
     url: `${SITE.url}/tools/revenue-calculator`,
     type: "website",
+    images: [...DEFAULT_OG_IMAGES],
   },
   twitter: {
     card: "summary_large_image",
