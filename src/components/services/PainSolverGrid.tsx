@@ -236,7 +236,7 @@ export default function PainSolverGrid() {
                 style={{
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.10)",
-                  padding: "28px 28px 30px",
+                  padding: "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(22px, 5vw, 30px)",
                   transform: `rotate(${rotate})`,
                   borderLeft: `3px solid ${accent}`,
                 }}

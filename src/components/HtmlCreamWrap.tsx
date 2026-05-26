@@ -275,6 +275,174 @@ export default function HtmlCreamWrap({ html }: { html: string }) {
           background: var(--cream-2) !important;
           border: 1px solid rgba(26,26,26,0.14) !important;
         }
+
+        /* ============================================================
+           MOBILE RESPONSIVE LAYER — 360-414px Android dominant traffic.
+           Lives here so HTML payloads using dangerouslySetInnerHTML get
+           mobile-safe sizing even if globals.css load order is later or
+           a payload's own inline <style> wins specificity.
+           ============================================================ */
+
+        /* Always-on: hold viewport, scroll tables/pre, break long links */
+        .cream-html-wrap article[class*="wn-"] {
+          max-width: 100% !important;
+          overflow-x: hidden !important;
+        }
+        .cream-html-wrap article[class*="wn-"] table {
+          display: block !important;
+          overflow-x: auto !important;
+          max-width: 100% !important;
+          -webkit-overflow-scrolling: touch;
+        }
+        .cream-html-wrap article[class*="wn-"] pre {
+          overflow-x: auto !important;
+          max-width: 100% !important;
+          -webkit-overflow-scrolling: touch;
+        }
+        .cream-html-wrap article[class*="wn-"] img,
+        .cream-html-wrap article[class*="wn-"] iframe,
+        .cream-html-wrap article[class*="wn-"] video {
+          max-width: 100% !important;
+          height: auto !important;
+        }
+
+        @media (max-width: 768px) {
+          .cream-html-wrap {
+            padding-top: 64px !important;
+          }
+          .cream-html-wrap article[class*="wn-"] {
+            padding: clamp(28px, 7vw, 48px) clamp(14px, 4vw, 20px) !important;
+          }
+          /* Hero compact */
+          .cream-html-wrap article[class*="wn-"] .wn-hero {
+            padding: 28px 16px !important;
+          }
+          /* Heading clamps */
+          .cream-html-wrap article[class*="wn-"] h1 {
+            font-size: clamp(22px, 6.8vw, 28px) !important;
+            line-height: 1.15 !important;
+            letter-spacing: -0.015em !important;
+          }
+          .cream-html-wrap article[class*="wn-"] h2 {
+            font-size: clamp(19px, 5.2vw, 24px) !important;
+            line-height: 1.2 !important;
+            margin-top: 36px !important;
+          }
+          .cream-html-wrap article[class*="wn-"] h3 {
+            font-size: clamp(16px, 4.4vw, 20px) !important;
+            line-height: 1.25 !important;
+          }
+          .cream-html-wrap article[class*="wn-"] h4 {
+            font-size: 15px !important;
+          }
+          /* Body type — readable 15px */
+          .cream-html-wrap article[class*="wn-"] p,
+          .cream-html-wrap article[class*="wn-"] li {
+            font-size: 15px !important;
+            line-height: 1.6 !important;
+          }
+          /* Stack ALL multi-col grids inside payload */
+          .cream-html-wrap article[class*="wn-"] .wn-verdict,
+          .cream-html-wrap article[class*="wn-"] .wn-quotables,
+          .cream-html-wrap article[class*="wn-"] .wn-grid,
+          .cream-html-wrap article[class*="wn-"] .wn-2col,
+          .cream-html-wrap article[class*="wn-"] .wn-3col,
+          .cream-html-wrap article[class*="wn-"] [style*="grid-template-columns"] {
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
+          }
+          /* Quotable padding tighter */
+          .cream-html-wrap article[class*="wn-"] .wn-quotable {
+            padding: 14px 16px !important;
+          }
+          .cream-html-wrap article[class*="wn-"] .wn-q-stat {
+            font-size: 20px !important;
+          }
+          /* Cards: tighter padding */
+          .cream-html-wrap article[class*="wn-"] details,
+          .cream-html-wrap article[class*="wn-"] .wn-card,
+          .cream-html-wrap article[class*="wn-"] .wn-proof-item,
+          .cream-html-wrap article[class*="wn-"] .wn-block,
+          .cream-html-wrap article[class*="wn-"] .wn-feature,
+          .cream-html-wrap article[class*="wn-"] .wn-toc,
+          .cream-html-wrap article[class*="wn-"] .wn-week,
+          .cream-html-wrap article[class*="wn-"] .wn-anti,
+          .cream-html-wrap article[class*="wn-"] .wn-scenario,
+          .cream-html-wrap article[class*="wn-"] .wn-tldr,
+          .cream-html-wrap article[class*="wn-"] .wn-direct,
+          .cream-html-wrap article[class*="wn-"] .wn-cta,
+          .cream-html-wrap article[class*="wn-"] .wn-final-cta {
+            padding: 16px !important;
+          }
+          /* Summary: 44px min tap area */
+          .cream-html-wrap article[class*="wn-"] summary {
+            font-size: 15px !important;
+            line-height: 1.4 !important;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+          }
+          /* Tables: smaller font + min-width per cell so scroll feels intentional */
+          .cream-html-wrap article[class*="wn-"] table {
+            font-size: 12.5px !important;
+          }
+          .cream-html-wrap article[class*="wn-"] th,
+          .cream-html-wrap article[class*="wn-"] td {
+            padding: 8px 10px !important;
+            min-width: 110px;
+          }
+          /* CTA / final-cta anchors: 44px tap target */
+          .cream-html-wrap article[class*="wn-"] .wn-cta a,
+          .cream-html-wrap article[class*="wn-"] .wn-final-cta a,
+          .cream-html-wrap article[class*="wn-"] .wn-jump a {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 14px !important;
+            font-size: 13.5px !important;
+          }
+          /* Long words / URLs break instead of overflowing */
+          .cream-html-wrap article[class*="wn-"] p,
+          .cream-html-wrap article[class*="wn-"] li,
+          .cream-html-wrap article[class*="wn-"] a,
+          .cream-html-wrap article[class*="wn-"] code,
+          .cream-html-wrap article[class*="wn-"] h1,
+          .cream-html-wrap article[class*="wn-"] h2,
+          .cream-html-wrap article[class*="wn-"] h3 {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+          }
+          /* Author page: portrait 220px col + 5-col stat strip stack */
+          .cream-html-wrap article.wn-author [style*="grid-template-columns: 220px"],
+          .cream-html-wrap article.wn-author .wn-a-hero,
+          .cream-html-wrap article.wn-author .wn-a-portrait-row {
+            grid-template-columns: 1fr !important;
+          }
+          .cream-html-wrap article.wn-author .wn-a-stats,
+          .cream-html-wrap article.wn-author [style*="grid-template-columns: repeat(5"] {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .cream-html-wrap article.wn-author .wn-a-creds,
+          .cream-html-wrap article.wn-author .wn-a-bullets {
+            grid-template-columns: 1fr !important;
+          }
+          /* Stack indented ladder rows flatter on phone */
+          .cream-html-wrap article[class*="wn-"] .wn-stack .wn-l2,
+          .cream-html-wrap article[class*="wn-"] .wn-stack .wn-l3,
+          .cream-html-wrap article[class*="wn-"] .wn-stack .wn-l4,
+          .cream-html-wrap article[class*="wn-"] .wn-stack .wn-l5 {
+            margin-left: 8px !important;
+          }
+        }
+
+        @media (max-width: 414px) {
+          .cream-html-wrap article[class*="wn-"] h1 {
+            font-size: clamp(20px, 6.4vw, 24px) !important;
+          }
+          .cream-html-wrap article[class*="wn-"] h2 {
+            font-size: 19px !important;
+          }
+        }
       `}</style>
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </div>

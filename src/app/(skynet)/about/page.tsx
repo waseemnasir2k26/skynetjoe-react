@@ -121,7 +121,7 @@ export default function AboutPage() {
       <section
         style={{
           background: "var(--cream-3)",
-          padding: "112px 0 80px",
+          padding: "clamp(88px, 18vw, 112px) 0 clamp(48px, 12vw, 80px)",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
@@ -131,7 +131,7 @@ export default function AboutPage() {
           style={{
             maxWidth: 1100,
             margin: "0 auto",
-            padding: "0 24px",
+            padding: "0 clamp(16px, 5vw, 24px)",
             display: "grid",
             gridTemplateColumns: "1fr",
             gap: 40,
@@ -142,6 +142,12 @@ export default function AboutPage() {
           <style>{`
             @media (min-width: 900px) {
               .about-hero { grid-template-columns: 7fr 5fr !important; }
+            }
+            @media (max-width: 640px) {
+              .about-hero-portrait { transform: rotate(0) !important; padding: 8px !important; margin-left: 0 !important; }
+              .about-timeline-card { transform: none !important; }
+              .about-stat-card { transform: none !important; }
+              .about-bali-figure { transform: rotate(0) !important; padding: 8px !important; }
             }
           `}</style>
 
@@ -213,6 +219,7 @@ export default function AboutPage() {
 
           <div>
             <figure
+              className="about-hero-portrait"
               style={{
                 margin: 0,
                 transform: "rotate(-1.2deg)",
@@ -266,13 +273,13 @@ export default function AboutPage() {
       {/* TIMELINE */}
       <section
         style={{
-          padding: "72px 0",
+          padding: "clamp(48px, 12vw, 72px) 0",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -316,6 +323,7 @@ export default function AboutPage() {
               return (
                 <li
                   key={`${t.year}-${t.title}`}
+                  className="about-timeline-card"
                   style={{
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.10)",
@@ -394,7 +402,7 @@ export default function AboutPage() {
       <section
         style={{
           background: "var(--terracotta)",
-          padding: "96px 0",
+          padding: "clamp(64px, 16vw, 96px) 0",
           position: "relative",
           zIndex: 2,
         }}
@@ -403,7 +411,7 @@ export default function AboutPage() {
           style={{
             maxWidth: 820,
             margin: "0 auto",
-            padding: "0 24px",
+            padding: "0 clamp(16px, 5vw, 24px)",
             textAlign: "center",
           }}
         >
@@ -455,13 +463,13 @@ export default function AboutPage() {
       {/* BALI LIFE — photo grid */}
       <section
         style={{
-          padding: "72px 0",
+          padding: "clamp(48px, 12vw, 72px) 0",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div style={{ maxWidth: 720, marginBottom: 40 }}>
             <div
               style={{
@@ -512,6 +520,7 @@ export default function AboutPage() {
             {BALI_GRID.map((p, i) => (
               <figure
                 key={p.src}
+                className="about-bali-figure"
                 style={{
                   margin: 0,
                   transform: `rotate(${ROT[i] ?? "0deg"})`,
@@ -563,14 +572,14 @@ export default function AboutPage() {
       {/* BY THE NUMBERS */}
       <section
         style={{
-          padding: "64px 0",
+          padding: "clamp(44px, 11vw, 64px) 0",
           background: "var(--cream-3)",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               display: "grid",
@@ -586,6 +595,7 @@ export default function AboutPage() {
             ].map((s, i) => (
               <div
                 key={s.label}
+                className="about-stat-card"
                 style={{
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
@@ -631,13 +641,13 @@ export default function AboutPage() {
       {/* CLOSER */}
       <section
         style={{
-          padding: "80px 0",
+          padding: "clamp(56px, 14vw, 80px) 0",
           borderTop: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
           <h2
             style={{
               fontFamily: "var(--font-display)",

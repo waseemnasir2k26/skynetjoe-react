@@ -91,7 +91,7 @@ export default function Header() {
           : "bg-transparent"
       }`}
     >
-      <div className="container-x flex items-center justify-between px-6 py-3.5">
+      <div className="container-x flex items-center justify-between px-4 sm:px-6 py-3.5 gap-2">
         <Link href="/" className="flex items-center gap-2 group">
           <span
             style={{
@@ -251,7 +251,7 @@ export default function Header() {
             borderTop: "1px solid var(--border)",
           }}
         >
-          <nav className="container-x px-6 py-6 flex flex-col gap-1">
+          <nav className="container-x px-4 sm:px-6 py-6 flex flex-col gap-1">
             {NAV_PRIMARY.map((item) => {
               const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
               const open = mobileSubOpen === item.href;
@@ -325,7 +325,7 @@ export default function Header() {
                           href={sub.href}
                           onClick={() => setMobileOpen(false)}
                           className="block py-2 text-sm transition-colors"
-                          style={{ color: "var(--ink-2)" }}
+                          style={{ color: "var(--ink-2)", wordBreak: "break-word" }}
                           onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
                           onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-2)")}
                         >
@@ -333,7 +333,7 @@ export default function Header() {
                           {sub.desc && (
                             <span
                               className="block text-[11px] mt-0.5"
-                              style={{ color: "var(--ink-faint)" }}
+                              style={{ color: "var(--ink-faint)", wordBreak: "break-word" }}
                             >
                               {sub.desc}
                             </span>

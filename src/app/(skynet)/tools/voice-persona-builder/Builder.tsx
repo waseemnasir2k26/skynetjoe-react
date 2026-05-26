@@ -545,9 +545,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                         : "rgba(26,26,26,0.12)",
                   }}
                 />
-                <div className="mt-2 flex items-center gap-2">
+                <div className="mt-2 flex items-center gap-1.5 sm:gap-2 min-w-0">
                   <span
-                    className="inline-flex items-center justify-center rounded-full w-5 h-5 text-[10px] font-extrabold transition-colors"
+                    className="inline-flex items-center justify-center rounded-full w-5 h-5 text-[10px] font-extrabold transition-colors flex-shrink-0"
                     style={{
                       background: bg,
                       color: textColor,
@@ -558,7 +558,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                     {done ? "✓" : s.n}
                   </span>
                   <p
-                    className={`text-[11px] sm:text-xs font-semibold uppercase tracking-wider ${
+                    className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider truncate ${
                       active
                         ? "text-[var(--terracotta)]"
                         : done

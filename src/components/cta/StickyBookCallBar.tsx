@@ -163,8 +163,9 @@ export default function StickyBookCallBar() {
       <div
         role="region"
         aria-label="Book a strategy call"
-        className="md:hidden fixed bottom-3 left-3 right-3 z-40 flex items-center gap-2 px-3 py-3"
+        className="md:hidden fixed left-3 right-3 z-40 flex items-center gap-2 px-3 py-3"
         style={{
+          bottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)",
           background: "var(--cream-3)",
           border: "1px solid rgba(26,26,26,0.18)",
           borderRadius: 2,
@@ -211,11 +212,12 @@ export default function StickyBookCallBar() {
           style={{
             background: "var(--terracotta)",
             color: "var(--cream-3)",
-            padding: "8px 14px",
+            padding: "10px 14px",
             borderRadius: 2,
             fontSize: 12,
             fontWeight: 700,
             textDecoration: "none",
+            minHeight: 40,
           }}
         >
           Book
@@ -225,15 +227,17 @@ export default function StickyBookCallBar() {
           type="button"
           onClick={dismiss}
           aria-label="Dismiss for 24 hours"
-          className="w-6 h-6 flex items-center justify-center shrink-0"
+          className="flex items-center justify-center shrink-0"
           style={{
+            width: 32,
+            height: 32,
             color: "var(--ink-faint)",
             background: "transparent",
             border: "none",
             cursor: "pointer",
           }}
         >
-          <X className="w-3 h-3" />
+          <X className="w-4 h-4" />
         </button>
       </div>
 

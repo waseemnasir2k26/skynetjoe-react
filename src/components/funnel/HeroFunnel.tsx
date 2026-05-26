@@ -20,15 +20,24 @@ import { ArrowRight, Star } from "lucide-react";
 export default function HeroFunnel() {
   return (
     <section
-      className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28"
+      className="relative overflow-hidden"
       style={{
         background: "var(--cream-3)",
         color: "var(--ink)",
         fontFamily: "var(--font-sans)",
         borderBottom: "1px solid rgba(26,26,26,0.12)",
+        paddingTop: "clamp(96px, 18vw, 144px)",
+        paddingBottom: "clamp(56px, 12vw, 112px)",
       }}
     >
-      <div className="container-x px-6 relative z-10 grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-14 items-end">
+      <div
+        className="container-x relative z-10 grid md:grid-cols-[1.3fr_1fr] items-end"
+        style={{
+          paddingLeft: "clamp(16px, 5vw, 24px)",
+          paddingRight: "clamp(16px, 5vw, 24px)",
+          gap: "clamp(28px, 6vw, 56px)",
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,10 +73,11 @@ export default function HeroFunnel() {
               fontFamily: "var(--font-display)",
               fontWeight: 500,
               letterSpacing: "-0.025em",
-              lineHeight: 1.02,
+              lineHeight: 1.05,
               color: "var(--ink)",
-              fontSize: "clamp(36px, 6vw, 72px)",
+              fontSize: "clamp(32px, 8vw, 72px)",
               margin: "0 0 24px",
+              wordBreak: "break-word",
             }}
           >
             Your business{" "}
@@ -86,7 +96,7 @@ export default function HeroFunnel() {
 
           <p
             style={{
-              fontSize: 19,
+              fontSize: "clamp(16px, 4vw, 19px)",
               color: "var(--ink-2)",
               maxWidth: "52ch",
               lineHeight: 1.55,
@@ -106,6 +116,10 @@ export default function HeroFunnel() {
               letterSpacing: "0.10em",
               color: "var(--ink-faint)",
               marginBottom: 28,
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              rowGap: 8,
             }}
           >
             <span style={{ color: "var(--terracotta)" }}>
@@ -163,6 +177,7 @@ export default function HeroFunnel() {
                 gap: 8,
                 transition: "background 0.18s",
                 textDecoration: "none",
+                minHeight: 48,
               }}
             >
               Book free 30-min leak audit
@@ -182,6 +197,7 @@ export default function HeroFunnel() {
                 textDecoration: "none",
                 display: "inline-flex",
                 alignItems: "center",
+                minHeight: 48,
               }}
             >
               See real results
@@ -217,6 +233,7 @@ export default function HeroFunnel() {
               padding: 10,
               border: "1px solid rgba(26,26,26,0.18)",
               boxShadow: "0 18px 48px rgba(26,26,26,0.18)",
+              width: "100%",
               maxWidth: 420,
               marginLeft: "auto",
             }}

@@ -6,7 +6,7 @@ export default function FinalCTA() {
     <section
       style={{
         background: "var(--terracotta)",
-        padding: "88px 0 100px",
+        padding: "clamp(56px, 12vw, 100px) 0 clamp(64px, 14vw, 112px)",
         fontFamily: "var(--font-sans)",
       }}
     >
@@ -15,7 +15,7 @@ export default function FinalCTA() {
           style={{
             maxWidth: 760,
             margin: "0 auto",
-            padding: "0 16px",
+            padding: "0 clamp(16px, 5vw, 24px)",
             textAlign: "center",
           }}
         >
@@ -35,12 +35,13 @@ export default function FinalCTA() {
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(30px, 5vw, 52px)",
+              fontSize: "clamp(28px, 7vw, 52px)",
               fontWeight: 500,
               letterSpacing: "-0.02em",
               lineHeight: 1.08,
               color: "var(--cream-3)",
               marginBottom: 20,
+              wordBreak: "break-word",
             }}
           >
             Find your biggest leak in{" "}
@@ -59,7 +60,7 @@ export default function FinalCTA() {
           </h2>
           <p
             style={{
-              fontSize: 17,
+              fontSize: "clamp(15px, 3.6vw, 17px)",
               color: "rgba(250, 247, 240, 0.92)",
               maxWidth: "46ch",
               margin: "0 auto 32px",
@@ -85,6 +86,7 @@ export default function FinalCTA() {
               textDecoration: "none",
               transition: "transform 0.18s",
               boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
+              minHeight: 48,
             }}
           >
             Book free 30-min audit

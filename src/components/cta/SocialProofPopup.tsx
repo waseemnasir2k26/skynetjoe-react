@@ -143,7 +143,7 @@ export default function SocialProofPopup() {
         <button
           onClick={dismiss}
           aria-label="Dismiss"
-          className="absolute top-2.5 right-2.5 w-7 h-7 flex items-center justify-center transition z-10"
+          className="absolute top-1 right-1 w-9 h-9 flex items-center justify-center transition z-10"
           style={{
             color: "var(--ink-faint)",
             background: "transparent",

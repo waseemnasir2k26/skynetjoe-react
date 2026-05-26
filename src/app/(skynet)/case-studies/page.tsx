@@ -85,13 +85,13 @@ export default function CaseStudiesPage() {
       <section
         style={{
           background: "var(--cream-3)",
-          padding: "112px 0 64px",
+          padding: "clamp(88px, 18vw, 112px) 0 clamp(44px, 12vw, 64px)",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -172,6 +172,9 @@ export default function CaseStudiesPage() {
           }
           .cs-html-wrap .wn-x-card:nth-child(odd) { transform: rotate(-0.3deg); }
           .cs-html-wrap .wn-x-card:nth-child(even) { transform: rotate(0.3deg); }
+          @media (max-width: 640px) {
+            .cs-html-wrap .wn-x-card { transform: none !important; }
+          }
         `}</style>
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </div>
@@ -179,7 +182,7 @@ export default function CaseStudiesPage() {
       {/* CLOSER */}
       <section
         style={{
-          padding: "88px 0",
+          padding: "clamp(56px, 14vw, 88px) 0",
           background: "var(--terracotta)",
           position: "relative",
           zIndex: 2,
@@ -189,7 +192,7 @@ export default function CaseStudiesPage() {
           style={{
             maxWidth: 720,
             margin: "0 auto",
-            padding: "0 24px",
+            padding: "0 clamp(16px, 5vw, 24px)",
             textAlign: "center",
           }}
         >

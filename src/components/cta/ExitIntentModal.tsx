@@ -159,8 +159,9 @@ export default function ExitIntentModal() {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-[540px] overflow-hidden"
+        className="relative w-full overflow-hidden"
         style={{
+          maxWidth: "min(540px, calc(100vw - 32px))",
           background: "var(--cream-3)",
           border: "1px solid rgba(26,26,26,0.20)",
           borderRadius: 2,
@@ -186,7 +187,7 @@ export default function ExitIntentModal() {
           ref={closeBtnRef}
           onClick={() => setOpen(false)}
           aria-label="Close"
-          className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center transition z-10"
+          className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center transition z-10"
           style={{
             color: "var(--ink-faint)",
             background: "transparent",
@@ -198,7 +199,7 @@ export default function ExitIntentModal() {
           <X className="w-4 h-4" />
         </button>
 
-        <div className="relative p-7 md:p-9">
+        <div className="relative p-5 sm:p-7 md:p-9">
           <div
             style={{
               fontFamily: "var(--font-mono)",

@@ -38,8 +38,8 @@ export default function Footer() {
         borderColor: "var(--border)",
       }}
     >
-      <div className="container-x px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
+      <div className="container-x px-5 sm:px-6 py-12 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-10">
           <div className="lg:col-span-2">
             <Link
               href="/"
@@ -138,6 +138,7 @@ export default function Footer() {
               textTransform: "uppercase",
               letterSpacing: "0.10em",
               color: "var(--ink-faint)",
+              wordBreak: "break-word",
             }}
           >
             © {new Date().getFullYear()} {SITE.brand} · Built in Bali by{" "}
@@ -155,6 +156,8 @@ export default function Footer() {
               textTransform: "uppercase",
               letterSpacing: "0.10em",
               color: "var(--ink-faint)",
+              wordBreak: "break-word",
+              overflowWrap: "anywhere",
             }}
           >
             <a

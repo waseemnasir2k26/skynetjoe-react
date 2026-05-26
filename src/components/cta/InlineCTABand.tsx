@@ -97,7 +97,7 @@ export default function InlineCTABand({
     >
       <div
         className={`relative mx-auto max-w-[1200px] ${
-          isDense ? "p-6 md:p-8" : "p-8 md:p-14"
+          isDense ? "p-5 sm:p-6 md:p-8" : "p-6 sm:p-8 md:p-14"
         }`}
         style={{
           background: v.bg,
@@ -114,8 +114,9 @@ export default function InlineCTABand({
                 letterSpacing: "-0.02em",
                 color: v.textOn,
                 lineHeight: 1.1,
-                fontSize: isDense ? "clamp(22px, 3.5vw, 30px)" : "clamp(28px, 4vw, 42px)",
+                fontSize: isDense ? "clamp(20px, 5vw, 30px)" : "clamp(24px, 6vw, 42px)",
                 marginBottom: subhead ? 12 : 0,
+                wordBreak: "break-word",
               }}
             >
               {headline}
@@ -146,6 +147,7 @@ export default function InlineCTABand({
                 fontSize: 14,
                 borderRadius: 2,
                 textDecoration: "none",
+                minHeight: 48,
               }}
             >
               {primaryCTA.label}
@@ -165,6 +167,7 @@ export default function InlineCTABand({
                   fontSize: 14,
                   borderRadius: 2,
                   textDecoration: "none",
+                  minHeight: 48,
                 }}
               >
                 {secondaryCTA.label}

@@ -61,9 +61,10 @@ export default function PainPoints() {
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--ink)",
-              fontSize: "clamp(28px, 4vw, 40px)",
+              fontSize: "clamp(26px, 6vw, 40px)",
               margin: 0,
               maxWidth: "26ch",
+              wordBreak: "break-word",
             }}
           >
             Three reasons your revenue is{" "}
@@ -87,7 +88,7 @@ export default function PainPoints() {
               style={{
                 background: "var(--cream-2)",
                 border: "1px solid rgba(26,26,26,0.12)",
-                padding: "28px",
+                padding: "clamp(20px, 5vw, 28px)",
                 transform: i === 1 ? "rotate(0.3deg)" : "rotate(-0.3deg)",
               }}
             >

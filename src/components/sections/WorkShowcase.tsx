@@ -519,7 +519,7 @@ export default function WorkShowcase() {
           style={{
             background: "var(--cream-2)",
             border: "1px solid rgba(26,26,26,0.18)",
-            padding: 32,
+            padding: "clamp(20px, 5vw, 32px)",
             borderRadius: 2,
           }}
           className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
@@ -577,7 +577,7 @@ export default function WorkShowcase() {
               </div>
             </div>
           </div>
-          <div className="flex gap-3 flex-shrink-0">
+          <div className="flex flex-wrap gap-3 w-full md:w-auto md:flex-shrink-0">
             <a
               href="https://github.com/waseemnasir2k26"
               target="_blank"

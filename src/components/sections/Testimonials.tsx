@@ -76,9 +76,10 @@ export default function Testimonials() {
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--ink)",
-              fontSize: "clamp(32px, 4.5vw, 48px)",
+              fontSize: "clamp(28px, 6.5vw, 48px)",
               margin: 0,
               maxWidth: "26ch",
+              wordBreak: "break-word",
             }}
           >
             What founders{" "}
@@ -103,7 +104,7 @@ export default function Testimonials() {
                 key={i}
                 style={{
                   position: "relative",
-                  padding: "28px 28px 26px",
+                  padding: "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4.5vw, 26px)",
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
                   transform: `rotate(${a.rotate})`,
@@ -135,7 +136,7 @@ export default function Testimonials() {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontStyle: "italic",
-                    fontSize: 17,
+                    fontSize: "clamp(15px, 3.6vw, 17px)",
                     color: "var(--ink)",
                     lineHeight: 1.55,
                     marginBottom: 18,
@@ -178,7 +179,7 @@ export default function Testimonials() {
             className="md:col-span-2"
             style={{
               position: "relative",
-              padding: "32px 32px 30px",
+              padding: "clamp(22px, 5vw, 32px) clamp(22px, 5vw, 32px) clamp(20px, 4.5vw, 30px)",
               background: "var(--cream-3)",
               border: "1px solid rgba(26,26,26,0.18)",
               transform: "rotate(0.2deg)",
@@ -213,7 +214,7 @@ export default function Testimonials() {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontStyle: "italic",
-                    fontSize: 17,
+                    fontSize: "clamp(15px, 3.6vw, 17px)",
                     color: "var(--ink)",
                     lineHeight: 1.55,
                     marginBottom: 18,

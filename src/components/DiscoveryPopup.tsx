@@ -67,8 +67,9 @@ export default function DiscoveryPopup() {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-[480px] overflow-hidden"
+        className="relative w-full overflow-hidden"
         style={{
+          maxWidth: "min(480px, calc(100vw - 32px))",
           background: "var(--cream-3)",
           border: "1px solid rgba(26,26,26,0.20)",
           borderRadius: 2,
@@ -92,7 +93,7 @@ export default function DiscoveryPopup() {
         <button
           onClick={() => setOpen(false)}
           aria-label="Close popup"
-          className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center transition"
+          className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center transition"
           style={{
             color: "var(--ink-faint)",
             background: "transparent",
@@ -104,7 +105,7 @@ export default function DiscoveryPopup() {
           <X className="w-4 h-4" />
         </button>
 
-        <div className="p-7 md:p-8">
+        <div className="p-5 sm:p-7 md:p-8">
           <div
             style={{
               fontFamily: "var(--font-mono)",

@@ -120,13 +120,13 @@ export default async function CaseStudyDetail({
       <section
         style={{
           background: "var(--cream-3)",
-          padding: "112px 0 56px",
+          padding: "clamp(88px, 18vw, 112px) 0 clamp(40px, 10vw, 56px)",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <nav
             aria-label="Breadcrumb"
             style={{
@@ -196,12 +196,14 @@ export default async function CaseStudyDetail({
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(34px, 5.5vw, 64px)",
+                fontSize: "clamp(30px, 5.5vw, 64px)",
                 fontWeight: 500,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.05,
                 color: "var(--ink)",
                 margin: "0 0 18px",
+                wordBreak: "break-word",
+                overflowWrap: "anywhere",
               }}
             >
               {c.clientName}
@@ -222,9 +224,10 @@ export default async function CaseStudyDetail({
       </section>
 
       {/* HERO IMAGE â€” polaroid frame */}
-      <section style={{ padding: "40px 0 24px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 24px" }}>
+      <section style={{ padding: "clamp(24px, 6vw, 40px) 0 24px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <figure
+            className="cs-hero-polaroid"
             style={{
               margin: 0,
               transform: "rotate(-0.6deg)",
@@ -234,6 +237,11 @@ export default async function CaseStudyDetail({
               boxShadow: "0 24px 64px rgba(26,26,26,0.14)",
             }}
           >
+            <style>{`
+              @media (max-width: 640px) {
+                .cs-hero-polaroid { transform: rotate(0) !important; padding: 8px !important; }
+              }
+            `}</style>
             <div
               style={{
                 position: "relative",
@@ -259,15 +267,21 @@ export default async function CaseStudyDetail({
       </section>
 
       {/* KPI STRIP */}
-      <section style={{ padding: "32px 0 56px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 24px" }}>
+      <section style={{ padding: "clamp(20px, 6vw, 32px) 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
+            className="cs-kpi-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
               gap: 16,
             }}
           >
+            <style>{`
+              @media (max-width: 640px) {
+                .cs-kpi-grid > div { transform: none !important; }
+              }
+            `}</style>
             {c.keyMetrics.map((m, i) => (
               <div
                 key={m.label}
@@ -319,13 +333,13 @@ export default async function CaseStudyDetail({
       {/* THE PROBLEM */}
       <section
         style={{
-          padding: "56px 0",
+          padding: "clamp(40px, 10vw, 56px) 0",
           borderTop: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -365,14 +379,14 @@ export default async function CaseStudyDetail({
       {/* WHAT WE BUILT */}
       <section
         style={{
-          padding: "56px 0",
+          padding: "clamp(40px, 10vw, 56px) 0",
           background: "var(--cream-3)",
           borderTop: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -471,13 +485,13 @@ export default async function CaseStudyDetail({
       {/* RESULTS */}
       <section
         style={{
-          padding: "56px 0",
+          padding: "clamp(40px, 10vw, 56px) 0",
           borderTop: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -515,17 +529,23 @@ export default async function CaseStudyDetail({
       </section>
 
       {/* PULL QUOTE */}
-      <section style={{ padding: "32px 0 56px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+      <section style={{ padding: "clamp(20px, 6vw, 32px) 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <blockquote
+            className="cs-pull-quote"
             style={{
               background: "var(--cream-2)",
               border: "1px solid rgba(26,26,26,0.12)",
-              padding: "32px 36px",
+              padding: "clamp(24px, 6vw, 32px) clamp(20px, 5vw, 36px)",
               margin: 0,
               transform: "rotate(-0.3deg)",
             }}
           >
+            <style>{`
+              @media (max-width: 640px) {
+                .cs-pull-quote { transform: none !important; }
+              }
+            `}</style>
             <Quote
               style={{
                 width: 18,
@@ -567,14 +587,14 @@ export default async function CaseStudyDetail({
       {c.relatedServices.length > 0 && (
         <section
           style={{
-            padding: "56px 0",
+            padding: "clamp(40px, 10vw, 56px) 0",
             background: "var(--cream-3)",
             borderTop: "1px solid rgba(26,26,26,0.10)",
             position: "relative",
             zIndex: 2,
           }}
         >
-          <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
             <h2
               style={{
                 fontFamily: "var(--font-display)",
@@ -624,13 +644,13 @@ export default async function CaseStudyDetail({
       {/* CTA */}
       <section
         style={{
-          padding: "88px 0",
+          padding: "clamp(56px, 14vw, 88px) 0",
           background: "var(--terracotta)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",

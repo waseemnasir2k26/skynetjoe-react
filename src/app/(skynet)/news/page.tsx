@@ -77,13 +77,13 @@ export default function NewsIndex() {
       <section
         style={{
           background: "var(--cream-3)",
-          padding: "112px 0 56px",
+          padding: "clamp(88px, 18vw, 112px) 0 clamp(40px, 9vw, 56px)",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -134,8 +134,8 @@ export default function NewsIndex() {
       </section>
 
       {/* FEATURED */}
-      <section style={{ padding: "56px 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+      <section style={{ padding: "clamp(40px, 9vw, 56px) 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <Link
             href={`/news/${featured.slug}`}
             style={{
@@ -152,7 +152,8 @@ export default function NewsIndex() {
           >
             <style>{`
               @media (max-width: 768px) {
-                .news-featured { grid-template-columns: 1fr !important; }
+                .news-featured { grid-template-columns: 1fr !important; transform: rotate(0) !important; }
+                .news-featured-body { padding: 24px 20px !important; }
               }
             `}</style>
             <div
@@ -200,6 +201,7 @@ export default function NewsIndex() {
               </span>
             </div>
             <div
+              className="news-featured-body"
               style={{
                 padding: "36px 36px",
                 display: "flex",
@@ -264,8 +266,8 @@ export default function NewsIndex() {
       </section>
 
       {/* GRID */}
-      <section style={{ padding: "16px 0 72px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+      <section style={{ padding: "16px 0 clamp(56px, 12vw, 72px)", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               display: "flex",
@@ -436,7 +438,7 @@ export default function NewsIndex() {
       {/* CLOSER */}
       <section
         style={{
-          padding: "88px 0",
+          padding: "clamp(56px, 14vw, 88px) 0",
           background: "var(--terracotta)",
           position: "relative",
           zIndex: 2,
@@ -446,7 +448,7 @@ export default function NewsIndex() {
           style={{
             maxWidth: 720,
             margin: "0 auto",
-            padding: "0 24px",
+            padding: "0 clamp(16px, 5vw, 24px)",
             textAlign: "center",
           }}
         >

@@ -133,8 +133,9 @@ export default function LiveChat() {
         <button
           onClick={() => setOpen(true)}
           aria-label="Open live chat"
-          className="fixed bottom-5 right-5 z-[60] w-14 h-14 flex items-center justify-center transition"
+          className="fixed right-5 z-[60] w-14 h-14 flex items-center justify-center transition"
           style={{
+            bottom: "calc(env(safe-area-inset-bottom, 0px) + 88px)",
             background: "var(--terracotta)",
             color: "var(--cream-3)",
             borderRadius: 2,
@@ -150,9 +151,10 @@ export default function LiveChat() {
       {/* Panel — cream paper */}
       {open && (
         <div
-          className="fixed bottom-5 right-5 z-[60] w-[360px] max-w-[calc(100vw-1.5rem)] overflow-hidden flex flex-col"
+          className="fixed right-3 sm:right-5 z-[60] w-[360px] max-w-[calc(100vw-1.5rem)] overflow-hidden flex flex-col"
           style={{
-            maxHeight: "70vh",
+            bottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)",
+            maxHeight: "min(70vh, 540px)",
             background: "var(--cream-3)",
             border: "1px solid rgba(26,26,26,0.20)",
             borderRadius: 2,

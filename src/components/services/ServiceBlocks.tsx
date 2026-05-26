@@ -134,7 +134,7 @@ function HeroSection({ block }: { block: HeroBlock }) {
     <section
       style={{
         background: 'var(--cream)',
-        padding: '96px 24px',
+        padding: 'clamp(56px, 12vw, 96px) clamp(16px, 5vw, 24px)',
         borderBottom: '1px solid rgba(26,26,26,0.10)',
       }}
     >
@@ -143,8 +143,8 @@ function HeroSection({ block }: { block: HeroBlock }) {
           maxWidth: 1180,
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
-          gap: 64,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(420px, 100%), 1fr))',
+          gap: 'clamp(32px, 6vw, 64px)',
           alignItems: 'center',
         }}
       >
@@ -167,7 +167,7 @@ function HeroSection({ block }: { block: HeroBlock }) {
           <h1
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(40px, 6vw, 56px)',
+              fontSize: 'clamp(32px, 8vw, 56px)',
               fontWeight: 500,
               letterSpacing: '-0.02em',
               lineHeight: 1.05,
@@ -181,7 +181,7 @@ function HeroSection({ block }: { block: HeroBlock }) {
             <p
               style={{
                 fontFamily: 'var(--font-sans)',
-                fontSize: 18,
+                fontSize: 'clamp(16px, 2.5vw, 18px)',
                 lineHeight: 1.55,
                 color: 'var(--ink-2)',
                 maxWidth: '52ch',
@@ -204,6 +204,8 @@ function HeroSection({ block }: { block: HeroBlock }) {
                 borderRadius: 2,
                 display: 'inline-block',
                 textDecoration: 'none',
+                minHeight: 44,
+                lineHeight: '1.4',
               }}
             >
               {ctaLabel}
@@ -223,6 +225,7 @@ function HeroSection({ block }: { block: HeroBlock }) {
                 border: '1px solid rgba(26,26,26,0.12)',
                 boxShadow: '0 18px 48px rgba(26,37,64,0.18)',
                 maxWidth: 460,
+                width: '100%',
                 marginLeft: 'auto',
               }}
             >
@@ -269,7 +272,7 @@ function PainCardsSection({ block }: { block: PainCardsBlock }) {
     <section
       style={{
         background: 'var(--cream-2)',
-        padding: '96px 24px',
+        padding: 'clamp(56px, 12vw, 96px) clamp(16px, 5vw, 24px)',
         borderBottom: '1px solid rgba(26,26,26,0.10)',
       }}
     >
@@ -292,12 +295,12 @@ function PainCardsSection({ block }: { block: PainCardsBlock }) {
         <h2
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 32,
+            fontSize: 'clamp(24px, 5vw, 32px)',
             fontWeight: 500,
             letterSpacing: '-0.02em',
             lineHeight: 1.1,
             color: 'var(--ink)',
-            margin: '0 0 48px',
+            margin: '0 0 clamp(28px, 6vw, 48px)',
             textAlign: 'center',
           }}
         >
@@ -306,7 +309,7 @@ function PainCardsSection({ block }: { block: PainCardsBlock }) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))',
             gap: 24,
           }}
         >
@@ -318,7 +321,7 @@ function PainCardsSection({ block }: { block: PainCardsBlock }) {
                 style={{
                   background: 'var(--cream-3)',
                   border: '1px solid rgba(26,26,26,0.10)',
-                  padding: 32,
+                  padding: 'clamp(20px, 5vw, 32px)',
                   transform: `rotate(${rotation})`,
                 }}
               >
@@ -378,7 +381,7 @@ function ProofNumeralSection({ block }: { block: ProofNumeralBlock }) {
     <section
       style={{
         background: 'var(--cream)',
-        padding: '96px 24px',
+        padding: 'clamp(56px, 12vw, 96px) clamp(16px, 5vw, 24px)',
         borderBottom: '1px solid rgba(26,26,26,0.10)',
         textAlign: 'center',
       }}
@@ -387,7 +390,7 @@ function ProofNumeralSection({ block }: { block: ProofNumeralBlock }) {
         <div
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(96px, 16vw, 160px)',
+            fontSize: 'clamp(64px, 18vw, 160px)',
             fontWeight: 500,
             lineHeight: 0.85,
             letterSpacing: '-0.04em',
@@ -402,7 +405,7 @@ function ProofNumeralSection({ block }: { block: ProofNumeralBlock }) {
             style={{
               fontFamily: 'var(--font-display)',
               fontStyle: 'italic',
-              fontSize: 22,
+              fontSize: 'clamp(17px, 3vw, 22px)',
               lineHeight: 1.4,
               color: 'var(--ink-2)',
               maxWidth: 600,
@@ -437,7 +440,7 @@ function TestimonialSection({ block }: { block: TestimonialBlock }) {
     <section
       style={{
         background: 'var(--cream-3)',
-        padding: '96px 24px',
+        padding: 'clamp(56px, 12vw, 96px) clamp(16px, 5vw, 24px)',
         borderBottom: '1px solid rgba(26,26,26,0.10)',
       }}
     >
@@ -447,9 +450,9 @@ function TestimonialSection({ block }: { block: TestimonialBlock }) {
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: imgUrl
-            ? 'repeat(auto-fit, minmax(280px, 1fr))'
+            ? 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))'
             : '1fr',
-          gap: 56,
+          gap: 'clamp(28px, 5vw, 56px)',
           alignItems: 'center',
         }}
       >
@@ -495,7 +498,7 @@ function TestimonialSection({ block }: { block: TestimonialBlock }) {
             style={{
               fontFamily: 'var(--font-display)',
               fontStyle: 'italic',
-              fontSize: 24,
+              fontSize: 'clamp(18px, 3.2vw, 24px)',
               lineHeight: 1.4,
               color: 'var(--ink)',
               margin: '0 0 20px',
@@ -546,7 +549,7 @@ function BeforeAfterSection({ block }: { block: BeforeAfterBlock }) {
     <section
       style={{
         background: 'var(--cream-2)',
-        padding: '96px 24px',
+        padding: 'clamp(56px, 12vw, 96px) clamp(16px, 5vw, 24px)',
         borderBottom: '1px solid rgba(26,26,26,0.10)',
       }}
     >
@@ -554,7 +557,7 @@ function BeforeAfterSection({ block }: { block: BeforeAfterBlock }) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
             gap: 24,
           }}
         >
@@ -564,7 +567,7 @@ function BeforeAfterSection({ block }: { block: BeforeAfterBlock }) {
               background: 'var(--cream-3)',
               border: '1px solid rgba(26,26,26,0.10)',
               borderLeft: '4px solid var(--oxblood)',
-              padding: 40,
+              padding: 'clamp(24px, 6vw, 40px)',
             }}
           >
             <div
@@ -630,7 +633,7 @@ function BeforeAfterSection({ block }: { block: BeforeAfterBlock }) {
               background: 'var(--cream-3)',
               border: '1px solid rgba(26,26,26,0.10)',
               borderLeft: '4px solid var(--sage)',
-              padding: 40,
+              padding: 'clamp(24px, 6vw, 40px)',
             }}
           >
             <div
@@ -706,7 +709,7 @@ function FinalCtaSection({ block }: { block: FinalCtaBlock }) {
     <section
       style={{
         background: 'var(--cream)',
-        padding: '120px 24px',
+        padding: 'clamp(64px, 14vw, 120px) clamp(16px, 5vw, 24px)',
         textAlign: 'center',
       }}
     >
@@ -750,6 +753,8 @@ function FinalCtaSection({ block }: { block: FinalCtaBlock }) {
             borderRadius: 2,
             display: 'inline-block',
             textDecoration: 'none',
+            minHeight: 44,
+            lineHeight: '1.4',
           }}
         >
           {ctaLabel}

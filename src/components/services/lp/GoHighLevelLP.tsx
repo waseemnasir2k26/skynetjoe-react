@@ -74,7 +74,7 @@ export default function GoHighLevelLP() {
       {/* HERO */}
       <section
         style={{
-          padding: "72px 0 80px",
+          padding: "clamp(48px, 10vw, 72px) 0 clamp(56px, 12vw, 80px)",
           borderBottom: "1px solid rgba(26,26,26,0.12)",
           background: "var(--cream-3)",
         }}
@@ -84,7 +84,7 @@ export default function GoHighLevelLP() {
           style={{
             maxWidth: 1100,
             margin: "0 auto",
-            padding: "0 32px",
+            padding: "0 clamp(16px, 5vw, 32px)",
             display: "grid",
             gridTemplateColumns: "1fr",
             gap: 40,
@@ -122,7 +122,7 @@ export default function GoHighLevelLP() {
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(40px, 6.5vw, 76px)",
+                fontSize: "clamp(32px, 8vw, 76px)",
                 fontWeight: 500,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.02,
@@ -143,7 +143,7 @@ export default function GoHighLevelLP() {
             </h1>
             <p
               style={{
-                fontSize: 19,
+                fontSize: "clamp(16px, 2.5vw, 19px)",
                 color: "var(--ink-2)",
                 maxWidth: "52ch",
                 lineHeight: 1.55,
@@ -168,6 +168,7 @@ export default function GoHighLevelLP() {
                 alignItems: "center",
                 gap: 8,
                 textDecoration: "none",
+                minHeight: 44,
               }}
             >
               Book a 30-min call
@@ -196,6 +197,7 @@ export default function GoHighLevelLP() {
                 border: "1px solid rgba(26,26,26,0.12)",
                 boxShadow: "0 18px 48px rgba(26,37,64,0.18)",
                 maxWidth: 400,
+                width: "100%",
                 marginLeft: "auto",
               }}
             >
@@ -240,12 +242,12 @@ export default function GoHighLevelLP() {
       {/* PAIN CARDS */}
       <section
         style={{
-          padding: "72px 0",
+          padding: "clamp(48px, 10vw, 72px) 0",
           borderBottom: "1px solid rgba(26,26,26,0.12)",
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -344,13 +346,13 @@ export default function GoHighLevelLP() {
       {/* BIG PROOF NUMBER */}
       <section
         style={{
-          padding: "96px 0",
+          padding: "clamp(56px, 12vw, 96px) 0",
           borderBottom: "1px solid rgba(26,26,26,0.12)",
           background: "var(--cream)",
           textAlign: "center",
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -380,7 +382,7 @@ export default function GoHighLevelLP() {
             style={{
               fontFamily: "var(--font-display)",
               fontStyle: "italic",
-              fontSize: 22,
+              fontSize: "clamp(17px, 3vw, 22px)",
               color: "var(--ink-2)",
               lineHeight: 1.4,
               maxWidth: "34ch",
@@ -396,7 +398,7 @@ export default function GoHighLevelLP() {
       {/* TESTIMONIAL / CASE WITH FACE */}
       <section
         style={{
-          padding: "80px 0",
+          padding: "clamp(48px, 11vw, 80px) 0",
           borderBottom: "1px solid rgba(26,26,26,0.12)",
           background: "var(--cream-3)",
         }}
@@ -406,7 +408,7 @@ export default function GoHighLevelLP() {
           style={{
             maxWidth: 1100,
             margin: "0 auto",
-            padding: "0 32px",
+            padding: "0 clamp(16px, 5vw, 32px)",
             display: "grid",
             gridTemplateColumns: "1fr",
             gap: 48,
@@ -467,7 +469,7 @@ export default function GoHighLevelLP() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontStyle: "italic",
-                fontSize: 24,
+                fontSize: "clamp(18px, 3.2vw, 24px)",
                 lineHeight: 1.4,
                 color: "var(--ink)",
                 margin: "0 0 20px",
@@ -495,12 +497,12 @@ export default function GoHighLevelLP() {
       {/* BEFORE / AFTER */}
       <section
         style={{
-          padding: "80px 0",
+          padding: "clamp(48px, 11vw, 80px) 0",
           borderBottom: "1px solid rgba(26,26,26,0.12)",
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -660,7 +662,7 @@ export default function GoHighLevelLP() {
       {/* FINAL CTA */}
       <section
         style={{
-          padding: "88px 0 100px",
+          padding: "clamp(56px, 12vw, 88px) 0 clamp(64px, 14vw, 100px)",
           background: "var(--cream)",
         }}
       >
@@ -668,7 +670,7 @@ export default function GoHighLevelLP() {
           style={{
             maxWidth: 760,
             margin: "0 auto",
-            padding: "0 32px",
+            padding: "0 clamp(16px, 5vw, 32px)",
             textAlign: "center",
           }}
         >
@@ -702,7 +704,7 @@ export default function GoHighLevelLP() {
           </h2>
           <p
             style={{
-              fontSize: 17,
+              fontSize: "clamp(15px, 2.5vw, 17px)",
               color: "var(--ink-2)",
               maxWidth: "44ch",
               margin: "0 auto 32px",
@@ -726,6 +728,7 @@ export default function GoHighLevelLP() {
               alignItems: "center",
               gap: 8,
               textDecoration: "none",
+              minHeight: 44,
             }}
           >
             Book a 30-min call

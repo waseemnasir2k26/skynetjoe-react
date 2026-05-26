@@ -139,13 +139,13 @@ export default async function NewsArticlePage({
       <section
         style={{
           background: "var(--cream-3)",
-          padding: "112px 0 40px",
+          padding: "clamp(88px, 18vw, 112px) 0 clamp(28px, 7vw, 40px)",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 820, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <nav
             aria-label="Breadcrumb"
             style={{
@@ -253,9 +253,10 @@ export default async function NewsArticlePage({
       </section>
 
       {/* HERO IMAGE — polaroid */}
-      <section style={{ padding: "32px 0 16px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
+      <section style={{ padding: "clamp(20px, 5vw, 32px) 0 16px", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <figure
+            className="news-hero-polaroid"
             style={{
               margin: 0,
               transform: "rotate(-0.5deg)",
@@ -265,6 +266,11 @@ export default async function NewsArticlePage({
               boxShadow: "0 24px 60px rgba(26,26,26,0.14)",
             }}
           >
+            <style>{`
+              @media (max-width: 640px) {
+                .news-hero-polaroid { transform: rotate(0) !important; padding: 8px !important; }
+              }
+            `}</style>
             <div
               style={{
                 position: "relative",
@@ -304,8 +310,8 @@ export default async function NewsArticlePage({
       </section>
 
       {/* BODY */}
-      <article style={{ padding: "48px 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px" }}>
+      <article style={{ padding: "clamp(32px, 8vw, 48px) 0", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               color: "var(--ink-2)",
@@ -361,13 +367,13 @@ export default async function NewsArticlePage({
       </article>
 
       {/* INLINE CTA */}
-      <section style={{ padding: "16px 0 56px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
+      <section style={{ padding: "16px 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               background: "var(--cream-2)",
               border: "1px solid rgba(26,26,26,0.12)",
-              padding: "32px 32px 36px",
+              padding: "clamp(24px, 6vw, 36px) clamp(20px, 5vw, 32px)",
               transform: "rotate(-0.2deg)",
             }}
           >
@@ -495,14 +501,14 @@ export default async function NewsArticlePage({
       {related.length > 0 && (
         <section
           style={{
-            padding: "56px 0 88px",
+            padding: "clamp(40px, 10vw, 56px) 0 clamp(56px, 14vw, 88px)",
             borderTop: "1px solid rgba(26,26,26,0.10)",
             background: "var(--cream-3)",
             position: "relative",
             zIndex: 2,
           }}
         >
-          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
             <div
               style={{
                 fontFamily: "var(--font-mono)",
