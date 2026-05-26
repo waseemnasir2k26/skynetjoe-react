@@ -219,7 +219,8 @@ export default function Hero() {
                 ))}
               </span>
               <span>
-                <span style={{ color: C.ink, fontWeight: 600 }}>Top Rated Plus</span> on Upwork
+                <span style={{ color: C.ink, fontWeight: 600 }}>Top Rated Plus</span> on Upwork ·{" "}
+                <span style={{ color: C.ink, fontWeight: 600 }}>Top Rated</span> on Fiverr
               </span>
             </div>
             <span style={{ color: C.rule }}>·</span>

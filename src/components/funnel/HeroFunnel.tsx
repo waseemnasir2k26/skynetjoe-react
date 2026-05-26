@@ -123,6 +123,21 @@ export default function HeroFunnel() {
               Top Rated Plus · Upwork
             </span>
             <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span style={{ color: "var(--terracotta)" }}>
+              <Star
+                style={{
+                  display: "inline-block",
+                  width: 12,
+                  height: 12,
+                  verticalAlign: "-2px",
+                  marginRight: 4,
+                  fill: "var(--terracotta)",
+                  stroke: "none",
+                }}
+              />
+              Top Rated · Fiverr
+            </span>
+            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
             <span>
               <span style={{ color: "var(--ink)" }}>180+</span> automations
             </span>

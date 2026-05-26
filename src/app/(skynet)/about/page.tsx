@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Community from "@/components/sections/Community";
+import ZoomableImage from "@/components/ZoomableImage";
 
 const TIMELINE = [
   {
@@ -232,7 +232,7 @@ export default function AboutPage() {
                   overflow: "hidden",
                 }}
               >
-                <Image
+                <ZoomableImage
                   src="/portraits/waseem-builder-hero.jpg"
                   alt="Waseem Nasir, founder of SkynetLabs"
                   fill
@@ -530,7 +530,7 @@ export default function AboutPage() {
                     background: "var(--cream-2)",
                   }}
                 >
-                  <Image
+                  <ZoomableImage
                     src={p.src}
                     alt={p.alt}
                     fill

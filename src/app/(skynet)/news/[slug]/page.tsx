@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { NEWS, getArticle, relatedFor } from "@/lib/news";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import ZoomableImage from "@/components/ZoomableImage";
 
 /**
  * Dynamic /news/[slug] — cream editorial pivot. Renders cream pages for entries
@@ -272,7 +273,7 @@ export default async function NewsArticlePage({
                 background: "var(--cream-2)",
               }}
             >
-              <Image
+              <ZoomableImage
                 src={a.heroImage}
                 alt={a.heroCaption}
                 fill

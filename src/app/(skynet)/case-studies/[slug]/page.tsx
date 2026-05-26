@@ -1,11 +1,11 @@
-﻿import Image from "next/image";
-import Link from "next/link";
+﻿import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import ZoomableImage from "@/components/ZoomableImage";
 
 export const dynamicParams = false;
 
@@ -242,7 +242,7 @@ export default async function CaseStudyDetail({
                 background: "var(--cream-2)",
               }}
             >
-              <Image
+              <ZoomableImage
                 src={c.coverImage}
                 alt={`${c.clientName} â€” ${c.industry}`}
                 fill

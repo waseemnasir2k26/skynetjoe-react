@@ -16,6 +16,7 @@
 
 import Image from "next/image";
 import { ExternalLink, Play, Star } from "lucide-react";
+import PortfolioScreenshot from "@/components/PortfolioScreenshot";
 
 const Github = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6a3.1 3.1 0 0 0-1.3-1.7c-1.1-.7.1-.7.1-.7a2.5 2.5 0 0 1 1.8 1.2 2.5 2.5 0 0 0 3.4 1 2.5 2.5 0 0 1 .8-1.6c-2.7-.3-5.5-1.3-5.5-6a4.7 4.7 0 0 1 1.3-3.3 4.3 4.3 0 0 1 .1-3.2s1-.3 3.3 1.3a11.5 11.5 0 0 1 6 0c2.3-1.6 3.3-1.3 3.3-1.3a4.3 4.3 0 0 1 .1 3.2 4.7 4.7 0 0 1 1.3 3.3c0 4.7-2.9 5.7-5.6 6a2.8 2.8 0 0 1 .8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>
@@ -399,12 +400,9 @@ export default function WorkShowcase() {
                 className="relative aspect-video overflow-hidden"
                 style={{ background: "rgba(26,26,26,0.06)" }}
               >
-                <Image
+                <PortfolioScreenshot
                   src={`/portfolio/${g.slug}.jpg`}
                   alt={`${g.title} — live screenshot`}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 <span
                   className="absolute top-3 left-3"

@@ -894,3 +894,71 @@ html:not(.theme-dark) main.bg-gradient-to-br[class*="061827"] {
   background: var(--cream) !important;
   color: var(--ink) !important;
 }
+
+/* ============================================================
+   IMAGE LIGHTBOX — react-medium-image-zoom cream editorial skin
+   Used by <ZoomableImage> across about / case-studies / news / portfolio.
+   ============================================================ */
+.cream-zoom-dialog [data-rmiz-modal-overlay="visible"] {
+  background: rgba(26, 26, 26, 0.88) !important;
+}
+.cream-zoom-dialog [data-rmiz-modal-overlay="hidden"] {
+  background: rgba(26, 26, 26, 0) !important;
+}
+.cream-zoom-dialog [data-rmiz-btn-unzoom] {
+  background: var(--cream-3) !important;
+  color: var(--ink) !important;
+  border-radius: 2px !important;
+  border: 1px solid rgba(26, 26, 26, 0.18) !important;
+  box-shadow: 0 6px 18px rgba(26, 26, 26, 0.22) !important;
+}
+.cream-zoom-dialog [data-rmiz-btn-zoom] {
+  background: var(--terracotta) !important;
+  color: var(--cream-3) !important;
+  border-radius: 2px !important;
+  border: 1px solid var(--terracotta) !important;
+}
+.cream-zoom-dialog [data-rmiz-btn-zoom]:hover,
+.cream-zoom-dialog [data-rmiz-btn-unzoom]:hover {
+  filter: brightness(1.05);
+}
+/* Make the zoom trigger ignore the parent's filter (sepia/saturate)
+   so the full-screen view shows the true image colors. */
+.cream-zoom-dialog [data-rmiz-modal-img] {
+  filter: none !important;
+}
+
+/* Small magnifier badge used by portfolio cards. Sits on top of the
+   screenshot, opens zoom without triggering the card's outer <a> nav. */
+.zoom-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 2px;
+  background: var(--cream-3);
+  color: var(--ink);
+  border: 1px solid rgba(26, 26, 26, 0.18);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: zoom-in;
+  opacity: 0;
+  transition: opacity 0.18s ease, background 0.18s ease;
+}
+.group:hover .zoom-badge,
+.zoom-badge:focus-visible {
+  opacity: 1;
+}
+.zoom-badge:hover {
+  background: var(--terracotta);
+  color: var(--cream-3);
+  border-color: var(--terracotta);
+}
+

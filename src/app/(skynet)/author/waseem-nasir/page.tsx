@@ -100,6 +100,7 @@ const schema = {
         "180+ n8n workflows shipped (2022â€“2026)",
         "40+ websites delivered across 9 countries",
         "Top Rated Plus on Upwork",
+        "Top Rated on Fiverr",
       ],
       sameAs: [
         "https://www.linkedin.com/in/waseemnasir",

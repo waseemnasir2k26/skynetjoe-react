@@ -1,0 +1,194 @@
+[
+  {
+    "slug": "n8n-vs-zapier-2026-switch",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/37730212/pexels-photo-37730212.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "cookiecutter",
+    "credit_url": "https://www.pexels.com/photo/data-center-server-racks-with-active-equipment-37730212/",
+    "concept": "Data center server racks (VPS/self-hosted vibe)"
+  },
+  {
+    "slug": "8-hour-reply-rule",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/97078/pexels-photo-97078.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Negative Space",
+    "credit_url": "https://www.pexels.com/photo/marketing-iphone-smartphone-notebook-97078/",
+    "concept": "Phone + notebook on table (Signal queue + Notion)"
+  },
+  {
+    "slug": "dental-no-show-n8n-flow",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/6812461/pexels-photo-6812461.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Pavel Danilyuk",
+    "credit_url": "https://www.pexels.com/photo/empty-dentist-office-6812461/",
+    "concept": "Empty dentist office interior"
+  },
+  {
+    "slug": "aeo-2026-meaning",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Tara Winstead",
+    "credit_url": "https://www.pexels.com/photo/robot-pointing-on-a-wall-8386440/",
+    "concept": "AI/robot conceptual (AEO + retrieval)"
+  },
+  {
+    "slug": "small-fleet-paid-tools-2026",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/3245123/pexels-photo-3245123.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Tom Fisk",
+    "credit_url": "https://www.pexels.com/photo/aerial-photography-of-parked-trucks-3245123/",
+    "concept": "Aerial of parked trucks (fleet)"
+  },
+  {
+    "slug": "public-pricing-ai-builds",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/7688365/pexels-photo-7688365.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Kindel Media",
+    "credit_url": "https://www.pexels.com/photo/close-up-shot-of-a-calculator-on-white-surface-7688365/",
+    "concept": "Calculator close-up (pricing math)"
+  },
+  {
+    "slug": "weekend-with-claude-code",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Pixabay",
+    "credit_url": "https://www.pexels.com/photo/computer-codes-207580/",
+    "concept": "Terminal/code on screen"
+  },
+  {
+    "slug": "bali-canggu-coworking-economics",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/33979107/pexels-photo-33979107.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Igonkin",
+    "credit_url": "https://www.pexels.com/photo/dynamic-street-scene-with-scooter-in-bali-33979107/",
+    "concept": "Bali scooter street scene"
+  },
+  {
+    "slug": "fiverr-10-to-9-country-agency",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/4559527/pexels-photo-4559527.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Ketut Subiyanto",
+    "credit_url": "https://www.pexels.com/photo/laptop-and-diary-on-table-in-garden-4559527/",
+    "concept": "Laptop + diary on garden table (journey)"
+  },
+  {
+    "slug": "story-beats-grids-portfolio-redesign",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/6193077/pexels-photo-6193077.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Ekaterina Bolovtsova",
+    "credit_url": "https://www.pexels.com/photo/sticky-notes-in-pastel-colors-6193077/",
+    "concept": "Designer sticky notes"
+  },
+  {
+    "slug": "aeo-content-engine-not-seo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/346731/pexels-photo-346731.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "nurseryart",
+    "credit_url": "https://www.pexels.com/photo/white-and-yellow-notebook-placed-near-keyboard-and-eyeglasses-346731/",
+    "concept": "Editorial notebook + keyboard"
+  },
+  {
+    "slug": "23-build-portfolio-weekend",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/13009911/pexels-photo-13009911.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "altman",
+    "credit_url": "https://www.pexels.com/photo/a-laptop-on-a-chair-by-the-swimming-pool-13009911/",
+    "concept": "Laptop on chair poolside"
+  },
+  {
+    "slug": "bali-trek-2026-roadmap-reset",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/36947695/pexels-photo-36947695.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Tom Fisk",
+    "credit_url": "https://www.pexels.com/photo/aerial-view-of-lush-greenery-and-village-in-bali-36947695/",
+    "concept": "Lush green Bali aerial (Ubud vista)"
+  },
+  {
+    "slug": "claude-code-second-seat-2026",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/32270229/pexels-photo-32270229.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "nurbis",
+    "credit_url": "https://www.pexels.com/photo/coffee-break-with-keyboard-on-wooden-desk-32270229/",
+    "concept": "Keyboard + coffee on wooden desk"
+  },
+  {
+    "slug": "dental-clinic-cafe-breakthrough",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/20825644/pexels-photo-20825644.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "iramezatil",
+    "credit_url": "https://www.pexels.com/photo/brown-chairs-standing-next-to-a-countertop-with-decorations-inside-the-fahriye-cafe-20825644/",
+    "concept": "Warm cafe interior (Crate Cafe vibe)"
+  },
+  {
+    "slug": "whatsapp-silence-loom-funnel",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/20716657/pexels-photo-20716657.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "BM Amaro",
+    "credit_url": "https://www.pexels.com/photo/whatsapp-logo-on-smartphone-20716657/",
+    "concept": "WhatsApp on smartphone"
+  },
+  {
+    "slug": "i-deleted-50-page-notion-playbook",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/940298/pexels-photo-940298.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Heftiba",
+    "credit_url": "https://www.pexels.com/photo/white-table-940298/",
+    "concept": "Clean minimal white desk"
+  },
+  {
+    "slug": "riyadh-shoes-checkout-rescue",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/9660945/pexels-photo-9660945.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "theShutterVision",
+    "credit_url": "https://www.pexels.com/photo/nike-shoe-boxes-in-various-sizes-on-wooden-floor-9660945/",
+    "concept": "Shoe boxes stacked (retail / KSA Shopify)"
+  },
+  {
+    "slug": "friday-i-stopped-editing-reels",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/29505140/pexels-photo-29505140.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Kadi Remir",
+    "credit_url": "https://www.pexels.com/photo/video-editing-software-interface-close-up-29505140/",
+    "concept": "Video editing software UI close-up"
+  },
+  {
+    "slug": "founder-dm-2am-instagram",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/1392093/pexels-photo-1392093.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "kobeboy",
+    "credit_url": "https://www.pexels.com/photo/person-holding-space-gray-iphone-6-with-string-lights-during-nighttime-1392093/",
+    "concept": "Phone glow at night (2am DM)"
+  },
+  {
+    "slug": "chatbot-for-client-who-hates-chatbots",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/11681097/pexels-photo-11681097.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Cristian Dina",
+    "credit_url": "https://www.pexels.com/photo/social-media-symbols-and-a-cell-phone-11681097/",
+    "concept": "Chat / social bubbles on a phone"
+  },
+  {
+    "slug": "dental-atelier-no-contact-form",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/4269265/pexels-photo-4269265.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Cedric Fauntleroy",
+    "credit_url": "https://www.pexels.com/photo/a-dental-chair-in-a-clinic-4269265/",
+    "concept": "Modern dental chair (atelier interior)"
+  },
+  {
+    "slug": "three-months-of-claude-citations",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/1181595/pexels-photo-1181595.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Christina Morillo",
+    "credit_url": "https://www.pexels.com/photo/person-holding-open-book-on-table-inside-room-1181595/",
+    "concept": "Books + laptop on table (citation tracking)"
+  },
+  {
+    "slug": "brand-kit-reconcile-18-hours",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/5292188/pexels-photo-5292188.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "AI25 Studio",
+    "credit_url": "https://www.pexels.com/photo/person-holding-color-palettes-5292188/",
+    "concept": "Color palettes / swatches (brand kit)"
+  }
+]

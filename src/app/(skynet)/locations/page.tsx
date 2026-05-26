@@ -16,7 +16,9 @@ import * as Icons from "lucide-react";
 import { MapPin, ArrowUpRight, ArrowRight, MessageCircle, Calendar, CheckCircle2 } from "lucide-react";
 import { STATES } from "@/lib/states";
 import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
 import JsonLd from "@/components/JsonLd";
+import USStatesMap from "@/components/locations/USStatesMap";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
 
@@ -234,6 +236,130 @@ export default function LocationsIndexPage() {
               <MessageCircle className="w-4 h-4" />
               Live chat
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Coverage MAP — interactive 48-state SVG */}
+      <section
+        className="py-20 md:py-24"
+        style={{
+          background: "var(--cream)",
+          borderBottom: "1px solid rgba(26,26,26,0.08)",
+        }}
+      >
+        <div
+          className="container-x px-6"
+          style={{ maxWidth: 1180, margin: "0 auto", textAlign: "center" }}
+        >
+          <div
+            className="mb-5"
+            style={{ ...eyebrow, justifyContent: "center" }}
+          >
+            <span style={eyebrowRule} />
+            Coverage · 2026
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.08,
+              color: "var(--ink)",
+              fontSize: "clamp(32px, 5vw, 48px)",
+              marginBottom: 18,
+            }}
+          >
+            Available in <em style={emTerra}>all 48 states.</em>
+          </h2>
+          <p
+            style={{
+              fontSize: 18,
+              color: "var(--ink-2)",
+              lineHeight: 1.6,
+              maxWidth: 720,
+              margin: "0 auto 48px",
+            }}
+          >
+            One operator, every state. Click any state for local-intent
+            keywords + a 5-city map of where we&apos;ve already shipped.
+            The 8 terracotta states are our priority programmatic landing
+            pages — enriched first, indexed first.
+          </p>
+
+          <USStatesMap />
+
+          {/* Stats grid */}
+          <div
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            style={{ marginTop: 64 }}
+          >
+            {[
+              { value: "48", label: "Contiguous states served" },
+              { value: String(PRIORITY_STATE_SLUGS.length), label: "Priority programmatic landing pages" },
+              { value: "180+", label: "Workflows shipped" },
+              { value: "9", label: "Countries (US is one)" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                style={{
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  padding: "28px 20px",
+                  borderRadius: 2,
+                  textAlign: "left",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(36px, 5vw, 52px)",
+                    fontWeight: 500,
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1,
+                    color: "var(--terracotta)",
+                    marginBottom: 10,
+                  }}
+                >
+                  {stat.value}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    color: "var(--ink-2)",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div style={{ marginTop: 48 }}>
+            <Link
+              href="/discovery-call"
+              className="inline-flex items-center gap-2"
+              style={{
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                padding: "16px 28px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+                border: "none",
+                textDecoration: "none",
+              }}
+            >
+              <Calendar className="w-4 h-4" />
+              Book a free 30-min call
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

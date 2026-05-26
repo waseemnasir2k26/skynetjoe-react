@@ -50,3 +50,4 @@ next-env.d.ts
 /payload.db-shm
 /public/media
 /src/payload/payload-types.ts
+.qa-dev.log

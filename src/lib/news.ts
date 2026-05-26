@@ -35,7 +35,7 @@ export const NEWS: NewsArticle[] = [
     deck: "After 180+ shipped automations, the Zapier bill stopped making sense. Here's the unglamorous math behind switching every client over to n8n — and the three workflows where I still pay for Zapier anyway.",
     description:
       "An honest essay on why SkynetLabs replaced Zapier with self-hosted n8n on a $7/mo Hostinger VPS across 9 client accounts in 2026. Cost math, migration pain, and the three Zaps I kept.",
-    heroImage: "/news/n8n-zapier-switch.jpg",
+    heroImage: "/news/n8n-vs-zapier-2026-switch.jpg",
     heroCaption: "VPS dashboard · self-hosted n8n · Lahore office",
     publishedAt: "2026-05-04",
     readingTime: 11,
@@ -49,7 +49,7 @@ export const NEWS: NewsArticle[] = [
     deck: "How SkynetLabs handles four builds a month from a cafe in Bali without missing replies, dropping builds, or burning out. The unsexy Signal-and-Notion stack that actually runs the shop.",
     description:
       "The exact operating rhythm — Signal queue, Notion build board, eight-hour weekday reply window — that lets one operator ship 4 client builds/month from Canggu without slipping.",
-    heroImage: "/news/8-hour-reply.jpg",
+    heroImage: "/news/8-hour-reply-rule.jpg",
     heroCaption: "Crate Cafe · Canggu · 7am scooter slot",
     publishedAt: "2026-05-07",
     readingTime: 9,
@@ -63,7 +63,7 @@ export const NEWS: NewsArticle[] = [
     deck: "A real Karachi dental flagship was losing PKR 480,000/month to no-shows. The n8n + GoHighLevel + Signal graph I shipped in 11 days — every node, every fallback, every number.",
     description:
       "Full breakdown of the dental no-show n8n flow that took a Karachi practice from 32% to under 10% cancellation rate. Architecture, message timing, fallback logic, and the cost math.",
-    heroImage: "/news/dental-no-show.jpg",
+    heroImage: "/news/dental-no-show-n8n-flow.jpg",
     heroCaption: "Dental flagship · Defence Karachi · production graph",
     publishedAt: "2026-05-09",
     readingTime: 12,
@@ -77,7 +77,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Answer-engine optimization is not SEO with a new label. It's the discipline of getting your business cited inside ChatGPT, Claude, and Perplexity answers — and most agencies selling it don't understand the underlying retrieval mechanics.",
     description:
       "A grounded explainer on what AEO is, why it's structurally different from SEO, what retrieval-augmented generation cares about, and the five things SkynetLabs ships on every AEO-tuned client site.",
-    heroImage: "/news/aeo-2026.jpg",
+    heroImage: "/news/aeo-2026-meaning.jpg",
     heroCaption: "AEO retrieval map · client whiteboard · Lahore",
     publishedAt: "2026-05-11",
     readingTime: 13,
@@ -91,7 +91,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Most 8-to-20-truck operators are paying $800–$1,400/month for tools that don't talk to each other. After auditing twelve fleets in early 2026, here are the four you can delete this week.",
     description:
       "An audit of the typical $800/mo small-fleet SaaS stack — load board, ELD, dispatch, factoring portal, two CRMs, accounting — with specific recommendations on which to keep, which to consolidate, and which to delete.",
-    heroImage: "/news/small-fleet-tools.jpg",
+    heroImage: "/news/small-fleet-paid-tools-2026.jpg",
     heroCaption: "Truckstop receipts · client stack audit · April",
     publishedAt: "2026-05-13",
     readingTime: 10,
@@ -105,7 +105,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Four tiers. No \"custom quote\" theater. Why public pricing kills the worst clients before they reach the call, and the one tier I refused to publish because nobody ever needed it.",
     description:
       "An essay on the strategic case for public pricing in AI services — how SkynetLabs filtered out a year of wrong-fit briefs by publishing four flat-rate tiers, and what we still negotiate.",
-    heroImage: "/news/public-pricing.jpg",
+    heroImage: "/news/public-pricing-ai-builds.jpg",
     heroCaption: "Pricing whiteboard · Bali rooftop · April retreat",
     publishedAt: "2026-05-15",
     readingTime: 8,
@@ -119,7 +119,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Two days, one Next.js 16 rebuild, zero Cursor. What changed about how I ship sites when the IDE became a CLI agent with full repo context — and the five places it still doesn't help.",
     description:
       "A weekend rebuild of the SkynetJoe theme using Claude Code as the primary tooling. What got faster, what got harder, and the five things I still do by hand.",
-    heroImage: "/news/claude-code-weekend.jpg",
+    heroImage: "/news/weekend-with-claude-code.jpg",
     heroCaption: "Claude Code session · TUI logs · weekend rebuild",
     publishedAt: "2026-05-17",
     readingTime: 9,
@@ -133,7 +133,7 @@ export const NEWS: NewsArticle[] = [
     deck: "The honest monthly burn for one operator running client builds out of Canggu — visa, scooter, villa, coffee shops, fiber, gym, food. With Lahore comparison so the numbers feel real.",
     description:
       "A line-by-line breakdown of the monthly cost of running SkynetLabs from Canggu, Bali — including the categories digital-nomad blogs leave out: visa runs, scooter rental, fast Wi-Fi tax, and food delivery.",
-    heroImage: "/news/canggu-economics.jpg",
+    heroImage: "/news/bali-canggu-coworking-economics.jpg",
     heroCaption: "Canggu rooftop · scooter parked · 5pm work block",
     publishedAt: "2026-05-19",
     readingTime: 11,
@@ -149,7 +149,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon warehousing. Graduated in 2021 and went service-first. Here's what each failed pivot actually taught me.",
     description:
       "A first-person field note tracing the SkynetLabs arc from a 2019 university Fiverr gig in Lahore to a Bali-based agency shipping across 9 countries. What every failed pivot taught.",
-    heroImage: "/portraits/waseem-builder-hero.jpg",
+    heroImage: "/news/fiverr-10-to-9-country-agency.jpg",
     heroCaption: "Bali villa · before a Monday ship · May 2026",
     publishedAt: "2026-05-25",
     readingTime: 9,
@@ -173,7 +173,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Replaced the standard 9-tile case-study grid with a story-first detail page per build. Conversion to discovery-call click jumped from 4% to 11% in two weeks. Here's what changed.",
     description:
       "A breakdown of the SkynetLabs case-study redesign — from a generic 3x3 tile grid to story-driven detail pages with real KPI strips, founder quote pull-blocks, and an inline CTA per case.",
-    heroImage: "/portraits/waseem-veranda-thinking.jpg",
+    heroImage: "/news/story-beats-grids-portfolio-redesign.jpg",
     heroCaption: "Pererenan veranda · case-study restructure · weekend block",
     publishedAt: "2026-05-23",
     readingTime: 7,
@@ -195,7 +195,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Google sends less traffic every quarter. ChatGPT, Claude, and Perplexity send more. If you're still writing for the old engine, you're optimizing for the wrong audience. Here's what AEO actually requires.",
     description:
       "A field guide to building an AEO content engine — schema, direct-answer blocks, llms.txt, AI-crawler allow rules — distilled from shipping AEO-tuned sites for 12 clients in 2026.",
-    heroImage: "/portraits/waseem-cafe-arch.jpg",
+    heroImage: "/news/aeo-content-engine-not-seo.jpg",
     heroCaption: "Canggu cafe · AEO outline session · morning",
     publishedAt: "2026-05-22",
     readingTime: 10,
@@ -217,7 +217,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Old portfolio had 11 cards. The new one has 23 — every niche demo, real client win, and flagship case study. Built end-to-end in a weekend using 4 parallel Playwright agents and a sharp resize pipeline.",
     description:
       "A weekend build log on how SkynetLabs scaled the portfolio from 11 to 23 cards using 4 parallel Playwright agents for screenshot capture and a sharp Node pipeline for resize.",
-    heroImage: "/portraits/waseem-poolside-laptop.jpg",
+    heroImage: "/news/23-build-portfolio-weekend.jpg",
     heroCaption: "Poolside push · 23-card portfolio ship · Saturday",
     publishedAt: "2026-05-24",
     readingTime: 8,
@@ -240,7 +240,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Closed the laptop Friday night. Spent Saturday on a Ubud mountain trek with the builder crew — heart-shaped viewpoint, river crossing, the works. Came back with three product decisions I'd been ducking for a month.",
     description:
       "A field note on a 24-hour Bali jungle trek with the Canggu builder community — and the three product decisions that resolved themselves once the laptop was closed.",
-    heroImage: "/bali-trek/mountain-vista.jpg",
+    heroImage: "/news/bali-trek-2026-roadmap-reset.jpg",
     heroCaption: "Mountain vista · Ubud trek · May 24 2026",
     publishedAt: "2026-05-25",
     readingTime: 6,
@@ -263,7 +263,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Six months of running Claude Code as the primary IDE for client builds. The wins, the surprises, and the three categories of work it still doesn't help with — written from a Bali rooftop because that's where the work happened.",
     description:
       "An honest six-month review of using Claude Code as the primary build tool for SkynetLabs client work. Where it changed the velocity, where it added cost, and the three task categories it still doesn't help.",
-    heroImage: "/portraits/waseem-rooftop-coffee.jpg",
+    heroImage: "/news/claude-code-second-seat-2026.jpg",
     heroCaption: "Pererenan rooftop · Claude Code session · morning coffee",
     publishedAt: "2026-05-20",
     readingTime: 8,
@@ -288,7 +288,7 @@ export const NEWS: NewsArticle[] = [
     deck: "A Karachi dental practice was hemorrhaging revenue every Tuesday. I sat in a Canggu cafe for three days with the patient inquiry data open in front of me. By Thursday morning the loop was closed.",
     description:
       "A storytelling field note on diagnosing a dental clinic's no-show loop from a Bali cafe, and the small n8n + GoHighLevel intervention that recovered six-figures of monthly revenue.",
-    heroImage: "/portraits/waseem-cafe-builder.jpg",
+    heroImage: "/news/dental-clinic-cafe-breakthrough.jpg",
     heroPosition: "center top",
     heroCaption: "Crate Cafe · Canggu · day two of the dental dig",
     publishedAt: "2026-05-26",
@@ -319,7 +319,7 @@ export const NEWS: NewsArticle[] = [
     deck: "A SaaS founder had been ghosting me for two weeks after our discovery call. I almost wrote her off. Then I sent one 4-minute Loom — and she replied in seventeen minutes with a yes.",
     description:
       "A storytelling field note on how a single asynchronous Loom video closed a stalled SaaS founder deal — and why sales-funnel automation should leave room for the human gesture.",
-    heroImage: "/portraits/waseem-veranda-gaze.jpg",
+    heroImage: "/news/whatsapp-silence-loom-funnel.jpg",
     heroPosition: "center top",
     heroCaption: "Pererenan veranda · after the Loom sent · Friday",
     publishedAt: "2026-05-26",
@@ -349,7 +349,7 @@ export const NEWS: NewsArticle[] = [
     deck: "We'd spent eleven days writing it. Three founders, six rewrites, two design passes, one Loom walkthrough. On Tuesday morning I deleted the whole thing and shipped a 22-minute video instead. Their team finally started using it.",
     description:
       "A storytelling field note on why a 50-page Notion playbook failed and a 22-minute Loom replaced it — and what it taught me about how teams actually absorb training in 2026.",
-    heroImage: "/portraits/waseem-veranda.jpg",
+    heroImage: "/news/i-deleted-50-page-notion-playbook.jpg",
     heroPosition: "center top",
     heroCaption: "Veranda · Notion archived · Tuesday morning",
     publishedAt: "2026-05-26",
@@ -380,7 +380,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Bilingual Shopify store, beautiful product, real demand. Yet 38% of carts bounced the second the courier rate showed up. We surfaced the rate on the cart page instead of the checkout — and the bounce collapsed in a week.",
     description:
       "A storytelling field note on diagnosing a 38% cart-abandon rate on a Riyadh fashion Shopify store, and the small UX shift on the cart page that recovered most of the lost revenue.",
-    heroImage: "/portraits/waseem-bluepolo.jpg",
+    heroImage: "/news/riyadh-shoes-checkout-rescue.jpg",
     heroPosition: "center top",
     heroCaption: "Studio shot · before the KSA Shopify launch · April",
     publishedAt: "2026-05-26",
@@ -410,7 +410,7 @@ export const NEWS: NewsArticle[] = [
     deck: "Six months of editing my own short-form video taught me one thing: I'm a builder, not a colorist. Last Friday I shipped an AI-video pipeline that does the cuts, the captions, and the b-roll — and gave me my Saturdays back.",
     description:
       "A storytelling field note on shipping an AI-video pipeline that took weekly reel production from 4 hours to under 45 minutes — and what it freed up to focus on.",
-    heroImage: "/portraits/waseem-cafe-side.jpg",
+    heroImage: "/news/friday-i-stopped-editing-reels.jpg",
     heroPosition: "center top",
     heroCaption: "Cafe-side cut · last reel I edited by hand · Friday",
     publishedAt: "2026-05-26",
@@ -441,7 +441,7 @@ export const NEWS: NewsArticle[] = [
     deck: "She had 84,000 followers, three reels going viral that week, and absolute panic. The DMs were drowning her — leads, fans, spam, partnership requests, all in one feed. I shipped a triage bot the next morning. Two weeks later she sent me a voice note saying she'd slept seven hours straight.",
     description:
       "A storytelling field note on building an Instagram DM triage automation for a founder drowning in inbound — and why social automation should reduce noise, not amplify it.",
-    heroImage: "/portraits/waseem-rooftop.jpg",
+    heroImage: "/news/founder-dm-2am-instagram.jpg",
     heroPosition: "center top",
     heroCaption: "Rooftop · the morning after the 2am DM · Pererenan",
     publishedAt: "2026-05-26",
@@ -471,7 +471,7 @@ export const NEWS: NewsArticle[] = [
     deck: "He'd spent fifteen years building a relationship-led practice. The last thing he wanted was a bot pretending to be him. So we built the opposite: a bot that openly admitted it was a bot, did the boring intake, and handed every real conversation to a human within 90 seconds.",
     description:
       "A storytelling field note on building an honest AI chatbot for a clinician who refused to ship anything that pretended to be human — and why that constraint made the deployment work.",
-    heroImage: "/portraits/waseem-rooftop-thumbsup.jpg",
+    heroImage: "/news/chatbot-for-client-who-hates-chatbots.jpg",
     heroPosition: "center top",
     heroCaption: "Rooftop · launch-day thumbs-up · Pererenan",
     publishedAt: "2026-05-26",
@@ -501,7 +501,7 @@ export const NEWS: NewsArticle[] = [
     deck: "We replaced their contact form with a four-step HIPAA-aware intake flow. Inquiry completion rate jumped from 34% to 71% in the first month. The form they thought was \"working fine\" was quietly costing them two patients a week.",
     description:
       "A storytelling field note on rebuilding a Manhattan dental clinic's lead intake from a generic contact form into a four-step HIPAA-aware flow — and the conversion lift it produced.",
-    heroImage: "/portraits/waseem-cafe-postit.jpg",
+    heroImage: "/news/dental-atelier-no-contact-form.jpg",
     heroPosition: "center top",
     heroCaption: "Cafe postit notes · intake flow planning · February",
     publishedAt: "2026-05-26",
@@ -531,7 +531,7 @@ export const NEWS: NewsArticle[] = [
     deck: "We tracked every Claude, ChatGPT, and Perplexity answer that cited a SkynetLabs page for ninety days. The patterns surprised me. Some pages I thought were strong got zero citations. Two pages I almost killed turned into citation magnets.",
     description:
       "A storytelling field note on tracking AEO citations across Claude, ChatGPT, and Perplexity for ninety days — what surprised us, what got cited, and what didn't.",
-    heroImage: "/portraits/waseem-garden-tropical.jpg",
+    heroImage: "/news/three-months-of-claude-citations.jpg",
     heroPosition: "center top",
     heroCaption: "Garden corner · citation tracker review · Sunday",
     publishedAt: "2026-05-26",
@@ -562,7 +562,7 @@ export const NEWS: NewsArticle[] = [
     deck: "A clinical recovery network had inherited a half-finished brand kit from a previous agency. The palette was off-spec, the logo on the site was a re-render, the founder's actual asset was sitting on a Dropbox. We reconciled the whole thing in a working day — and the partnership announcement went live on schedule.",
     description:
       "A storytelling field note on a 24-hour brand-kit rescue for a clinical recovery network before a partnership announcement — the unglamorous design work nobody writes about.",
-    heroImage: "/portraits/waseem-flight-transit.jpg",
+    heroImage: "/news/brand-kit-reconcile-18-hours.jpg",
     heroPosition: "center top",
     heroCaption: "Transit window · between Jakarta and Bali · Wednesday",
     publishedAt: "2026-05-26",
