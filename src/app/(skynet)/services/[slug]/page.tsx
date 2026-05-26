@@ -5,14 +5,18 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { FC } from "react";
 import { MapPin, ArrowRight } from "lucide-react";
+import { getPayload } from "payload";
+import config from "@payload-config";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { STATES } from "@/lib/states";
 import JsonLd from "@/components/JsonLd";
+import ServiceBlocks from "@/components/services/ServiceBlocks";
 import N8nAutomationLP from "@/components/services/lp/N8nAutomationLP";
 import GoHighLevelLP from "@/components/services/lp/GoHighLevelLP";
 import AiChatbotsLP from "@/components/services/lp/AiChatbotsLP";
 import WordpressSeoLP from "@/components/services/lp/WordpressSeoLP";
 import VibeCodedSitesLP from "@/components/services/lp/VibeCodedSitesLP";
+import type { Service } from "@/payload/payload-types";
 
 /**
  * Top-5 service slugs that render a bespoke funnel LP component
@@ -87,14 +91,33 @@ export default async function ServicePage({
   const { slug } = await params;
   if (!SLUGS.includes(slug)) notFound();
 
+  // Fetch CMS-managed service doc. depth: 2 populates Media relations
+  // (heroImage, photo) inside Blocks so ServiceBlocks gets URLs not IDs.
+  // Soft-fail if Payload/DB unavailable so the site still renders.
+  let cmsDoc: Service | null = null;
+  try {
+    const payload = await getPayload({ config });
+    const res = await payload.find({
+      collection: "services",
+      where: { slug: { equals: slug } },
+      limit: 1,
+      depth: 2,
+    });
+    cmsDoc = (res.docs[0] as Service | undefined) ?? null;
+  } catch (err) {
+    console.warn(`[services/${slug}] Payload fetch failed, using file fallback`, err);
+  }
+
+  const hasCmsBlocks = (cmsDoc?.blocks?.length ?? 0) > 0;
   const LPComponent = TOP_5_LP[slug];
-  // Only load the HTML payload for slugs that still use the generic render.
-  const html = LPComponent
-    ? null
-    : fs.readFileSync(
-        path.join(process.cwd(), "content", "services", `${slug}.html`),
-        "utf8"
-      );
+  // Load HTML payload ONLY when neither CMS blocks nor LP component will render.
+  const html =
+    hasCmsBlocks || LPComponent
+      ? null
+      : fs.readFileSync(
+          path.join(process.cwd(), "content", "services", `${slug}.html`),
+          "utf8"
+        );
   const svc = SERVICES.find((s) => s.slug === slug)!;
 
   const schema = {
@@ -149,7 +172,9 @@ export default async function ServicePage({
       <style>{`
         .cream-state-pill:hover { border-color: var(--terracotta) !important; }
       `}</style>
-      {LPComponent ? (
+      {hasCmsBlocks ? (
+        <ServiceBlocks blocks={cmsDoc!.blocks!} />
+      ) : LPComponent ? (
         <LPComponent />
       ) : (
         <div

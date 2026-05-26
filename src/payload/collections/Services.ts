@@ -69,9 +69,8 @@ export const Services: CollectionConfig = {
             {
               name: 'blocks',
               type: 'blocks',
-              required: true,
               blocks: [HeroBlock, PainCardsBlock, ProofNumeralBlock, TestimonialBlock, BeforeAfterBlock, FinalCtaBlock],
-              admin: { description: 'Compose page sections. Typical order: hero -> pain cards -> proof -> testimonial -> before/after -> final CTA.' },
+              admin: { description: 'Compose page sections. Typical order: hero -> pain cards -> proof -> testimonial -> before/after -> final CTA. Empty = falls back to hardcoded LP component content.' },
             },
           ],
         },
