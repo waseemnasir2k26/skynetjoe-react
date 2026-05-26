@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "skynetlabs-medical-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/7789603/pexels-photo-7789603.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Babydov",
+    "credit_url": "https://www.pexels.com/photo/blue-and-white-clinic-bed-7789603/",
+    "concept": "Modern concierge medical office interior with treatment bed"
+  },
+  {
+    "slug": "skynetlabs-accountant-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/33175673/pexels-photo-33175673.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Bia Limova",
+    "credit_url": "https://www.pexels.com/photo/close-up-of-finance-document-with-calculator-and-glasses-33175673/",
+    "concept": "Finance document with calculator, pen, and glasses (CPA / fractional CFO)"
+  },
+  {
+    "slug": "skynetlabs-autorepair-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/33814732/pexels-photo-33814732.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Renee Razumov",
+    "credit_url": "https://www.pexels.com/photo/modern-car-repair-garage-interior-view-33814732/",
+    "concept": "Modern auto-repair garage interior with vehicle on lift"
+  },
+  {
+    "slug": "skynetlabs-gym-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/29224211/pexels-photo-29224211.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Foadshariyati",
+    "credit_url": "https://www.pexels.com/photo/modern-gym-interior-with-geometric-lighting-29224211/",
+    "concept": "Sleek boutique gym interior with geometric ceiling lights"
+  },
+  {
+    "slug": "skynetlabs-landscaping-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/33821319/pexels-photo-33821319.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "strannik-sk",
+    "credit_url": "https://www.pexels.com/photo/lush-garden-with-wooden-pergola-and-green-foliage-33821319/",
+    "concept": "Lush designed garden with wooden pergola and climbing foliage"
+  },
+  {
+    "slug": "skynetlabs-logistics-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/33587048/pexels-photo-33587048.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Thorl5",
+    "credit_url": "https://www.pexels.com/photo/vibrant-sunset-at-an-industrial-shipping-port-33587048/",
+    "concept": "Industrial shipping port with container cranes at sunset (drayage / POLB)"
+  },
+  {
+    "slug": "skynetlabs-moving-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/5025500/pexels-photo-5025500.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Artem Podrez",
+    "credit_url": "https://www.pexels.com/photo/brown-carton-boxes-5025500/",
+    "concept": "Stacked cardboard moving boxes in warm sunlight"
+  },
+  {
+    "slug": "skynetlabs-pestcontrol-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/14744642/pexels-photo-14744642.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Gordon Plant",
+    "credit_url": "https://www.pexels.com/photo/wooden-trellis-on-pillars-in-front-of-a-building-14744642/",
+    "concept": "Phoenix AZ terracotta building with wooden trellis (desert / scorpion territory)"
+  },
+  {
+    "slug": "skynetlabs-plumbing-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/28169591/pexels-photo-28169591.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "nic-scrollstoppingphotos",
+    "credit_url": "https://www.pexels.com/photo/copper-pluming-fitting-28169591/",
+    "concept": "Copper plumbing fittings close-up (craftsman trade)"
+  },
+  {
+    "slug": "skynetlabs-roofing-demo",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/17314421/pexels-photo-17314421.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Benjamin Kupke",
+    "credit_url": "https://www.pexels.com/photo/red-tiled-roof-17314421/",
+    "concept": "Close-up of modern house tile roof against sky"
+  },
+  {
+    "slug": "auberlin-estate-flagship",
+    "source": "pexels",
+    "url": "https://images.pexels.com/photos/10172663/pexels-photo-10172663.jpeg?auto=compress&cs=tinysrgb&w=2000",
+    "credit": "Steven Van Elk",
+    "credit_url": "https://www.pexels.com/photo/the-grand-little-barn-at-artisan-acres-estate-10172663/",
+    "concept": "Rustic heritage barn venue surrounded by lush greenery (Hudson Valley wedding estate vibe)"
+  }
+]
