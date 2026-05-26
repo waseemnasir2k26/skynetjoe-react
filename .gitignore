@@ -42,3 +42,11 @@ next-env.d.ts
 
 .vercel
 .claude/worktrees/
+
+# payload cms
+/payload.db
+/payload.db-journal
+/payload.db-wal
+/payload.db-shm
+/public/media
+/src/payload/payload-types.ts

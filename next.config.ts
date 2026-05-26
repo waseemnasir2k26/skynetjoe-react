@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withPayload } from "@payloadcms/next/withPayload";
 import { STATES } from "./src/lib/states";
 import { SERVICE_CATEGORIES } from "./src/lib/site";
 import { PRIORITY_STATE_SLUGS } from "./src/data/state-priority";
@@ -187,4 +188,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);

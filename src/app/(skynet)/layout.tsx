@@ -12,7 +12,7 @@ import IncomingCallPopup from "@/components/IncomingCallPopup";
 import StickyBookCallBar from "@/components/cta/StickyBookCallBar";
 import ExitIntentModal from "@/components/cta/ExitIntentModal";
 import SocialProofPopup from "@/components/cta/SocialProofPopup";
-import "./globals.css";
+import "../globals.css";
 
 // Cream editorial pivot 2026-05-25 â€” distinctive non-generic font stack.
 const fraunces = Fraunces({
