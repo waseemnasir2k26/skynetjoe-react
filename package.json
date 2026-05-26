@@ -2,6 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "predev": "node scripts/sync-wp-templates.mjs",
     "dev": "next dev",
@@ -9,7 +10,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync-wp": "node scripts/sync-wp-templates.mjs"
+    "sync-wp": "node scripts/sync-wp-templates.mjs",
+    "payload": "payload",
+    "generate:importmap": "payload generate:importmap",
+    "generate:types": "payload generate:types"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.84.1",

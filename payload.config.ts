@@ -7,6 +7,10 @@ import sharp from 'sharp'
 
 import { Users } from './src/payload/collections/Users'
 import { Media } from './src/payload/collections/Media'
+import { Services } from './src/payload/collections/Services'
+import { News } from './src/payload/collections/News'
+import { CaseStudies } from './src/payload/collections/CaseStudies'
+import { Settings } from './src/payload/globals/Settings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,7 +25,8 @@ export default buildConfig({
       titleSuffix: ' · SkynetLabs CMS',
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Services, News, CaseStudies],
+  globals: [Settings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'dev-secret-change-me',
   typescript: {
