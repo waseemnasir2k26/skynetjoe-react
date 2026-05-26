@@ -448,9 +448,9 @@ export default function Generator() {
           <button
             type="button"
             onClick={regenerate}
-            className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--ink)] transition hover:scale-[1.02]"
+            className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--cream-3)] transition hover:opacity-90 hover:scale-[1.02]"
             style={{
-              background: "var(--ink)",
+              background: "var(--terracotta)",
             }}
           >
             <Sparkles className="h-4 w-4" />
@@ -509,7 +509,7 @@ export default function Generator() {
                   </span>
                 </div>
 
-                <pre className="whitespace-pre-wrap break-words font-mono text-[12px] leading-relaxed text-[var(--ink-2)] bg-[rgba(26,26,26,0.30)] border border-[rgba(26,26,26,0.12)] rounded-xl p-3.5 mb-3 flex-1 min-h-[140px]">
+                <pre className="whitespace-pre-wrap break-words font-mono text-[12px] leading-relaxed text-[var(--ink)] bg-[var(--cream-3)] border border-[rgba(26,26,26,0.12)] rounded-xl p-3.5 mb-3 flex-1 min-h-[140px]">
                   {text}
                 </pre>
 
@@ -627,7 +627,7 @@ function Select<T extends string>({
       className="w-full bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] rounded-xl px-3 py-2.5 text-[var(--ink)] text-sm focus:outline-none focus:border-[var(--terracotta)] focus:bg-[var(--cream-2)] transition appearance-none cursor-pointer"
       style={{
         backgroundImage:
-          "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237ee4ff' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>\")",
+          "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C66B3F' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>\")",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "right 0.75rem center",
         paddingRight: "2rem",
@@ -637,7 +637,7 @@ function Select<T extends string>({
         <option
           key={o.value}
           value={o.value}
-          className="bg-[var(--ink)] text-[var(--ink)]"
+          className="bg-[var(--cream-3)] text-[var(--ink)]"
         >
           {o.label}
         </option>

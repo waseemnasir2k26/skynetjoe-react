@@ -187,7 +187,11 @@ export default function NewsIndex() {
                   letterSpacing: "0.16em",
                   fontWeight: 600,
                   padding: "5px 10px",
-                  color: "var(--cream-3)",
+                  color:
+                    (CATEGORY_COLORS[featured.category] ?? "var(--terracotta)") === "var(--ochre)" ||
+                    (CATEGORY_COLORS[featured.category] ?? "var(--terracotta)") === "var(--sage)"
+                      ? "var(--ink)"
+                      : "var(--cream-3)",
                   background: CATEGORY_COLORS[featured.category] ?? "var(--terracotta)",
                   borderRadius: 2,
                 }}
@@ -304,6 +308,11 @@ export default function NewsIndex() {
           >
             {rest.map((n, i) => {
               const accent = CATEGORY_COLORS[n.category] ?? "var(--terracotta)";
+              // Light accents (ochre/sage) need ink text for AA contrast on chip bg.
+              const chipTextColor =
+                accent === "var(--ochre)" || accent === "var(--sage)"
+                  ? "var(--ink)"
+                  : "var(--cream-3)";
               const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
               return (
                 <Link
@@ -351,7 +360,7 @@ export default function NewsIndex() {
                         letterSpacing: "0.14em",
                         fontWeight: 600,
                         padding: "4px 9px",
-                        color: "var(--cream-3)",
+                        color: chipTextColor,
                         background: accent,
                         borderRadius: 2,
                       }}

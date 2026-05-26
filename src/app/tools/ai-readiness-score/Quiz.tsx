@@ -751,11 +751,11 @@ function ResultCard({
             href={`${CAL_URL}?${bookingQuery}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--ink)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
+            className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
             style={{
               background:
-                "var(--ink)",
-              boxShadow: "0 10px 32px rgba(26,26,26,0.15)",
+                "var(--terracotta)",
+              boxShadow: "0 10px 32px rgba(198,107,63,0.25)",
             }}
           >
             <CalendarCheck className="h-4 w-4" />

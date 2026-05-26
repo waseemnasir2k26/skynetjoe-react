@@ -3,11 +3,11 @@ import type { ReactNode } from "react";
 
 export const LETTER_CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Caveat:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
-.lp-v3 { --paper:#f7f3ec; --paper-2:#efe9da; --navy:#1a2540; --navy-2:#2b3a5e; --ink:#1a1a1a; --gold:#c9985a; --rule:rgba(26,37,64,0.16); background:var(--paper); background-image:radial-gradient(circle at 20% 10%,rgba(201,152,90,0.05) 0%,transparent 40%),radial-gradient(circle at 80% 80%,rgba(26,37,64,0.04) 0%,transparent 50%); color:var(--ink); font-family:'Lora',Georgia,serif; font-size:18px; line-height:1.7; min-height:100vh; }
+.lp-v3 { --paper:#F2EFE6; --paper-2:#EDE8DC; --navy:#1A1A1A; --navy-2:#3A3A36; --ink:#1A1A1A; --gold:#C66B3F; --rule:rgba(26,26,26,0.12); background:var(--paper); color:var(--ink); font-family:'Lora',Georgia,serif; font-size:18px; line-height:1.7; min-height:100vh; }
 .lp-v3 *,.lp-v3 *::before,.lp-v3 *::after { box-sizing:border-box; }
 .lp-v3 img { max-width:100%; height:auto; display:block; }
-.lp-v3 a { color:var(--navy); text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; }
-.lp-v3 a:hover { color:var(--gold); }
+.lp-v3 a { color:var(--gold); text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; }
+.lp-v3 a:hover { color:var(--ink); }
 .lp-v3 ::selection { background:var(--gold); color:var(--paper); }
 .lp-v3 .wrap { max-width:720px; margin:0 auto; padding:0 24px; }
 .lp-v3 .wide { max-width:1100px; margin:0 auto; padding:0 24px; }
@@ -25,7 +25,7 @@ export const LETTER_CSS = `
 .lp-v3 .hero h1 em { color:var(--gold); font-style:italic; font-weight:500; }
 .lp-v3 .hero-sub { text-align:center; font-style:italic; font-size:19px; color:var(--navy-2); max-width:50ch; margin:0 auto 48px; }
 .lp-v3 .hero-photo-wrap { max-width:620px; margin:0 auto 56px; border:1px solid var(--rule); padding:12px; background:var(--paper-2); transform:rotate(-0.6deg); box-shadow:0 18px 48px rgba(26,37,64,0.16); }
-.lp-v3 .hero-photo { width:100%; aspect-ratio:16/10; object-fit:cover; filter:sepia(0.18) saturate(0.92) brightness(1.02); }
+.lp-v3 .hero-photo { width:100%; aspect-ratio:16/10; object-fit:cover; filter:sepia(0.08) saturate(0.95) brightness(1.02); }
 .lp-v3 .hero-photo-cap { margin-top:12px; text-align:center; font-family:'Caveat',cursive; font-size:22px; color:var(--gold); }
 .lp-v3 .meta-line { text-align:center; margin-bottom:48px; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:0.08em; color:var(--navy-2); text-transform:uppercase; }
 .lp-v3 .meta-line span { margin:0 10px; }
@@ -42,7 +42,7 @@ export const LETTER_CSS = `
 .lp-v3 .letter blockquote cite { display:block; margin-top:12px; font-family:'Inter',sans-serif; font-style:normal; font-size:13px; letter-spacing:0.06em; color:var(--navy-2); text-transform:uppercase; }
 .lp-v3 .letter mark { background:linear-gradient(to bottom,transparent 60%,rgba(201,152,90,0.4) 60%); padding:0 2px; }
 .lp-v3 .letter code { font-family:'JetBrains Mono','Courier New',monospace; font-size:15px; background:var(--paper-2); padding:2px 6px; border:1px solid var(--rule); border-radius:2px; }
-.lp-v3 .letter pre { background:var(--navy); color:var(--paper); padding:20px; border-radius:2px; overflow-x:auto; margin:24px 0; font-size:14px; line-height:1.5; max-width:64ch; }
+.lp-v3 .letter pre { background:var(--paper-2); color:var(--ink); padding:20px; border:1px solid var(--rule); border-radius:2px; overflow-x:auto; margin:24px 0; font-size:14px; line-height:1.5; max-width:64ch; }
 .lp-v3 .letter pre code { background:transparent; border:0; color:inherit; padding:0; }
 .lp-v3 .margin-note { position:relative; padding:16px 0 16px 24px; font-family:'Caveat',cursive; font-size:22px; color:var(--gold); line-height:1.3; border-left:2px solid var(--gold); margin:28px 0 28px 16px; transform:rotate(-0.4deg); }
 .lp-v3 .margin-note::before { content:'← '; font-size:24px; }
@@ -59,16 +59,16 @@ export const LETTER_CSS = `
 .lp-v3 .related-card-meta { font-family:'Inter',sans-serif; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
 .lp-v3 .related-card-title { font-family:'Lora',serif; font-weight:600; font-size:19px; color:var(--navy); margin-bottom:8px; line-height:1.3; }
 .lp-v3 .related-card-deck { font-size:14px; color:var(--navy-2); line-height:1.5; font-style:italic; }
-.lp-v3 .closer { background:var(--navy); color:var(--paper); padding:96px 24px; text-align:center; }
-.lp-v3 .closer h2 { font-family:'Lora',serif; font-style:italic; font-weight:500; font-size:clamp(32px,5vw,52px); margin-bottom:24px; letter-spacing:-0.015em; max-width:24ch; margin-left:auto; margin-right:auto; }
+.lp-v3 .closer { background:var(--paper-2); color:var(--ink); padding:96px 24px; text-align:center; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+.lp-v3 .closer h2 { font-family:'Lora',serif; font-style:italic; font-weight:500; font-size:clamp(32px,5vw,52px); margin-bottom:24px; letter-spacing:-0.015em; max-width:24ch; margin-left:auto; margin-right:auto; color:var(--ink); }
 .lp-v3 .closer h2 em { color:var(--gold); font-style:italic; }
-.lp-v3 .closer p { font-style:italic; opacity:0.85; max-width:50ch; margin:0 auto 36px; font-size:19px; line-height:1.55; }
+.lp-v3 .closer p { font-style:italic; color:var(--navy-2); max-width:50ch; margin:0 auto 36px; font-size:19px; line-height:1.55; }
 .lp-v3 .closer-cta-row { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
 .lp-v3 .btn { font-family:'Inter',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.04em; padding:14px 24px; text-decoration:none; border-radius:2px; transition:background 0.18s,transform 0.18s,color 0.18s; display:inline-flex; align-items:center; gap:8px; }
-.lp-v3 .btn-gold { background:var(--gold); color:var(--ink); }
-.lp-v3 .btn-gold:hover { background:var(--paper); transform:translateY(-2px); }
-.lp-v3 .btn-paper { background:transparent; color:var(--paper); border:1.5px solid var(--paper); }
-.lp-v3 .btn-paper:hover { background:var(--paper); color:var(--navy); }
+.lp-v3 .btn-gold { background:var(--gold); color:var(--paper); }
+.lp-v3 .btn-gold:hover { background:var(--ink); color:var(--paper); transform:translateY(-2px); }
+.lp-v3 .btn-paper { background:transparent; color:var(--ink); border:1.5px solid var(--ink); }
+.lp-v3 .btn-paper:hover { background:var(--ink); color:var(--paper); }
 .lp-v3 .news-foot { padding:48px 0 32px; background:var(--paper-2); border-top:1px solid var(--rule); font-family:'Inter',sans-serif; font-size:13px; color:var(--navy-2); text-align:center; }
 .lp-v3 .news-foot a { color:var(--navy-2); margin:0 12px; }
 .lp-v3 .news-foot a:hover { color:var(--gold); }
@@ -83,7 +83,7 @@ export const LETTER_CSS = `
 .lp-v3 .card { background:var(--paper); border:1px solid var(--rule); padding:0; transition:border-color 0.2s,transform 0.2s; text-decoration:none; color:inherit; display:flex; flex-direction:column; }
 .lp-v3 .card:hover { border-color:var(--gold); transform:translateY(-4px); }
 .lp-v3 .card-photo { width:100%; aspect-ratio:16/10; overflow:hidden; background:var(--paper-2); }
-.lp-v3 .card-photo img { width:100%; height:100%; object-fit:cover; filter:sepia(0.12) saturate(0.94); transition:transform 0.4s; }
+.lp-v3 .card-photo img { width:100%; height:100%; object-fit:cover; filter:sepia(0.08) saturate(0.94); transition:transform 0.4s; }
 .lp-v3 .card:hover .card-photo img { transform:scale(1.03); }
 .lp-v3 .card-body { padding:24px; flex:1; display:flex; flex-direction:column; }
 .lp-v3 .card-meta { font-family:'Inter',sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
@@ -126,17 +126,6 @@ export function LetterShell({ children }: { children: ReactNode }) {
   return (
     <div className="lp-v3">
       <style dangerouslySetInnerHTML={{ __html: LETTER_CSS }} />
-
-      <header className="nav">
-        <div className="nav-inner">
-          <Link href="/" className="brand">
-            Skynet<em>Labs</em>
-          </Link>
-          <a href="https://cal.com/skynetjoe/audit" className="nav-cta">
-            Book audit
-          </a>
-        </div>
-      </header>
 
       {children}
     </div>
@@ -218,13 +207,7 @@ export default function LetterArticle({
             Either way you walk with findings.
           </p>
           <div className="closer-cta-row">
-            <a href="https://cal.com/skynetjoe/audit" className="btn btn-gold">
-              Book the audit →
-            </a>
-            <a
-              href="/discovery-call"
-              className="btn btn-paper"
-            >
+            <a href="/discovery-call" className="btn btn-gold">
               Apply for a call →
             </a>
           </div>

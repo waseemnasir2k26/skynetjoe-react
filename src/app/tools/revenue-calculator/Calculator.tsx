@@ -616,20 +616,19 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
         className="lg:hidden fixed bottom-0 left-0 right-0 z-40 px-4 pb-4 pt-3"
         style={{
           background:
-            "linear-gradient(180deg, rgba(6,24,39,0) 0%, rgba(6,24,39,0.95) 35%, rgba(6,24,39,0.98) 100%)",
+            "linear-gradient(180deg, rgba(242,239,230,0) 0%, rgba(242,239,230,0.95) 35%, rgba(242,239,230,0.98) 100%)",
         }}
       >
         <div
           className="rounded-2xl p-3 flex items-center gap-3"
           style={{
-            background: "var(--ink)",
+            background: "var(--cream-3)",
             border: "1px solid rgba(26,26,26,0.18)",
-            backdropFilter: "blur(14px)",
-            boxShadow: "0 -8px 30px rgba(0, 0, 0, 0.45)",
+            boxShadow: "0 -8px 30px rgba(26,26,26,0.18)",
           }}
         >
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]/80">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]">
               Annual gain
             </p>
             <p className="text-lg font-extrabold text-[var(--ink)] truncate tabular-nums">
@@ -640,9 +639,9 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
             href={calUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold text-sm text-[var(--ink)] shrink-0"
+            className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold text-sm text-[var(--cream-3)] shrink-0 hover:opacity-90 transition"
             style={{
-              background: "var(--ink)",
+              background: "var(--terracotta)",
             }}
           >
             Book call

@@ -66,7 +66,22 @@ export default function HtmlCreamWrap({ html }: { html: string }) {
         .cream-html-wrap article[class*="wn-"] .wn-price,
         .cream-html-wrap article[class*="wn-"] .wn-block,
         .cream-html-wrap article[class*="wn-"] .wn-row,
-        .cream-html-wrap article[class*="wn-"] .wn-feature {
+        .cream-html-wrap article[class*="wn-"] .wn-feature,
+        .cream-html-wrap article[class*="wn-"] .wn-toc,
+        .cream-html-wrap article[class*="wn-"] .wn-stack,
+        .cream-html-wrap article[class*="wn-"] .wn-tree,
+        .cream-html-wrap article[class*="wn-"] .wn-week,
+        .cream-html-wrap article[class*="wn-"] .wn-anti,
+        .cream-html-wrap article[class*="wn-"] .wn-jump,
+        .cream-html-wrap article[class*="wn-"] .wn-jump a,
+        .cream-html-wrap article[class*="wn-"] .wn-scenario,
+        .cream-html-wrap article[class*="wn-"] .wn-quotables,
+        .cream-html-wrap article[class*="wn-"] .wn-quotable,
+        .cream-html-wrap article[class*="wn-"] .wn-node,
+        .cream-html-wrap article[class*="wn-"] [class*="wn-leaf-"],
+        .cream-html-wrap article[class*="wn-"] .wn-direct,
+        .cream-html-wrap article[class*="wn-"] .wn-tldr,
+        .cream-html-wrap article[class*="wn-"] [class*="wn-pick-"] {
           background: var(--cream-2) !important;
           border: 1px solid rgba(26,26,26,0.12) !important;
           backdrop-filter: none !important;

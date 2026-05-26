@@ -24,6 +24,13 @@ const ACCENTS = [
   "var(--ink-faint)", // #6B6B65
 ] as const;
 
+// Text-only accents — WCAG AA on cream. Ochre/sage fail body-text contrast
+// (1.83-2.09:1), so for any text-color use rotate only terracotta ↔ oxblood.
+const TEXT_ACCENTS = [
+  "var(--terracotta)", // #C66B3F
+  "var(--oxblood)", // #6B2C2C
+] as const;
+
 const PAINS = [
   {
     icon: Ghost,
@@ -217,6 +224,7 @@ export default function PainSolverGrid() {
           {PAINS.map((p, i) => {
             const Icon = p.icon;
             const accent = ACCENTS[i % ACCENTS.length];
+            const textAccent = TEXT_ACCENTS[i % TEXT_ACCENTS.length];
             const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
             return (
               <motion.article
@@ -239,7 +247,7 @@ export default function PainSolverGrid() {
                     style={{
                       background: "var(--cream-3)",
                       border: `1px solid ${accent}`,
-                      color: accent,
+                      color: textAccent,
                     }}
                   >
                     <Icon className="w-5 h-5" />
@@ -250,7 +258,7 @@ export default function PainSolverGrid() {
                       fontSize: 10,
                       textTransform: "uppercase",
                       letterSpacing: "0.16em",
-                      color: accent,
+                      color: textAccent,
                       marginTop: 6,
                     }}
                   >
@@ -346,7 +354,7 @@ export default function PainSolverGrid() {
                         href={`/services/${s.slug}`}
                         style={{
                           fontSize: 12.5,
-                          color: accent,
+                          color: textAccent,
                           fontWeight: 600,
                           textUnderlineOffset: 4,
                         }}

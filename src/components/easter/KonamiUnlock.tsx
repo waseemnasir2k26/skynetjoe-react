@@ -43,15 +43,15 @@ export default function KonamiUnlock() {
 
   return (
     <>
-      {/* Hint chip — bottom-right, pixel font */}
+      {/* Hint chip — bottom-left (moved from right to avoid StickyBookCallBar overlap), pixel font */}
       <div
         aria-hidden="true"
-        className="fixed bottom-3 right-3 z-40 px-2 py-1 text-[10px] tracking-widest"
+        className="fixed bottom-3 left-3 z-40 px-2 py-1 text-[10px] tracking-widest"
         style={{
           fontFamily: "var(--font-pixel, monospace)",
-          color: progress > 0 ? "#5EEAD4" : "rgba(234, 246, 255, 0.45)",
-          background: "rgba(3, 16, 26, 0.55)",
-          border: "1px solid rgba(94, 234, 212, 0.25)",
+          color: "var(--ink-faint, #6B6B65)",
+          background: "rgba(26,26,26,0.06)",
+          border: "1px solid rgba(26,26,26,0.12)",
           letterSpacing: "0.18em",
         }}
       >

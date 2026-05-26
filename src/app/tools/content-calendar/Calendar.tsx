@@ -730,9 +730,9 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           href={calUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--ink)] whitespace-nowrap"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] whitespace-nowrap hover:opacity-90 transition"
           style={{
-            background: "var(--ink)",
+            background: "var(--terracotta)",
           }}
         >
           <CalendarCheck className="w-4 h-4" /> Book the call <ArrowRight className="w-4 h-4" />
@@ -752,7 +752,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           <div
             className="w-full max-w-2xl rounded-3xl p-6 md:p-8 max-h-[90vh] overflow-y-auto"
             style={{
-              background: "var(--ink)",
+              background: "var(--cream-3)",
               border: "1px solid rgba(26,26,26,0.18)",
             }}
             onClick={(e) => e.stopPropagation()}

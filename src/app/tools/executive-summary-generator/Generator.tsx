@@ -603,9 +603,9 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             type="button"
             onClick={generate}
             disabled={!canGenerate}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-[var(--ink)] disabled:opacity-40 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 transition"
             style={{
-              background: "var(--ink)",
+              background: "var(--terracotta)",
             }}
           >
             {generating ? (
@@ -668,14 +668,13 @@ export default function Generator({ calUrl }: { calUrl: string }) {
                     style={
                       active
                         ? {
-                            background:
-                              "var(--ink)",
-                            color: "#fff",
-                            border: "1px solid rgba(26,26,26,0.18)",
+                            background: "var(--terracotta)",
+                            color: "var(--cream-3)",
+                            border: "1px solid var(--terracotta)",
                           }
                         : {
-                            background: "rgba(6, 24, 39, 0.55)",
-                            color: "rgba(203, 213, 225, 0.85)",
+                            background: "var(--cream-3)",
+                            color: "var(--ink-2)",
                             border: "1px solid rgba(26,26,26,0.12)",
                           }
                     }
@@ -692,7 +691,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             <div
               className="rounded-2xl p-4 sm:p-5"
               style={{
-                background: "rgba(26,26,26,0.65)",
+                background: "var(--cream-3)",
                 border: "1px solid rgba(26,26,26,0.12)",
               }}
             >
@@ -811,9 +810,8 @@ export default function Generator({ calUrl }: { calUrl: string }) {
           <div
             className="rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
             style={{
-              background:
-                "linear-gradient(135deg, rgba(30, 136, 229, 0.18) 0%, rgba(20, 184, 166, 0.18) 100%)",
-              border: "1px solid rgba(26,26,26,0.18)",
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.14)",
             }}
           >
             <div className="max-w-xl">
@@ -833,9 +831,9 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               href={calUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--ink)] whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] whitespace-nowrap hover:opacity-90 transition"
               style={{
-                background: "var(--ink)",
+                background: "var(--terracotta)",
               }}
             >
               <CalendarCheck className="w-4 h-4" />

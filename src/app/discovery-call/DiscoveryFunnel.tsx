@@ -157,12 +157,13 @@ function StickyProgress({ activeStep }: { activeStep: number }) {
 }
 
 export default function DiscoveryFunnel() {
-  const [leadId] = useState<string | null>(() => {
-    if (typeof window === "undefined") return null;
+  const [leadId, setLeadId] = useState<string | null>(null);
+
+  useEffect(() => {
     const ts = Date.now().toString(36);
     const rnd = Math.random().toString(36).slice(2, 8);
-    return `lead_${ts}_${rnd}`;
-  });
+    setLeadId(`lead_${ts}_${rnd}`);
+  }, []);
   const [qualification, setQualification] = useState<QualifierState | null>(
     null,
   );
@@ -337,7 +338,7 @@ export default function DiscoveryFunnel() {
                   marginBottom: 28,
                 }}
               >
-                <span style={{ color: C.ochre }}>
+                <span style={{ color: C.terra }}>
                   <Star
                     style={{
                       display: "inline-block",
@@ -345,7 +346,7 @@ export default function DiscoveryFunnel() {
                       height: 12,
                       verticalAlign: "-2px",
                       marginRight: 4,
-                      fill: C.ochre,
+                      fill: C.terra,
                       stroke: "none",
                     }}
                   />

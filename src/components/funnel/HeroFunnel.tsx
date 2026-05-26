@@ -108,7 +108,7 @@ export default function HeroFunnel() {
               marginBottom: 28,
             }}
           >
-            <span style={{ color: "var(--ochre)" }}>
+            <span style={{ color: "var(--terracotta)" }}>
               <Star
                 style={{
                   display: "inline-block",
@@ -116,7 +116,7 @@ export default function HeroFunnel() {
                   height: 12,
                   verticalAlign: "-2px",
                   marginRight: 4,
-                  fill: "var(--ochre)",
+                  fill: "var(--terracotta)",
                   stroke: "none",
                 }}
               />

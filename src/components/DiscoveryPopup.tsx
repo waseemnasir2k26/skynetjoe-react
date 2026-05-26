@@ -6,6 +6,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 
 const STORAGE_KEY = "discovery-popup-shown";
+const SHARED_POPUP_KEY = "skynet-popup-fired";
 
 export default function DiscoveryPopup() {
   const pathname = usePathname();
@@ -23,6 +24,9 @@ export default function DiscoveryPopup() {
     setMounted(true);
     if (disabled) return;
     if (typeof window === "undefined") return;
+    try {
+      if (sessionStorage.getItem(SHARED_POPUP_KEY) === "1") return;
+    } catch {}
     if (sessionStorage.getItem(STORAGE_KEY) === "1") return;
 
     let triggered = false;
@@ -31,11 +35,12 @@ export default function DiscoveryPopup() {
       triggered = true;
       try {
         sessionStorage.setItem(STORAGE_KEY, "1");
+        sessionStorage.setItem(SHARED_POPUP_KEY, "1");
       } catch {}
       setOpen(true);
     };
 
-    const timer = window.setTimeout(fire, 22000);
+    const timer = window.setTimeout(fire, 30000);
 
     const onMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0) fire();

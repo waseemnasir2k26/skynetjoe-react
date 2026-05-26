@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Lexend, Fraunces, Onest, IBM_Plex_Mono } from "next/font/google";
+import { Fraunces, Onest, IBM_Plex_Mono } from "next/font/google";
 import { SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,13 +13,6 @@ import StickyBookCallBar from "@/components/cta/StickyBookCallBar";
 import ExitIntentModal from "@/components/cta/ExitIntentModal";
 import SocialProofPopup from "@/components/cta/SocialProofPopup";
 import "./globals.css";
-
-const lexend = Lexend({
-  variable: "--font-lexend",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 // Cream editorial pivot 2026-05-25 — distinctive non-generic font stack.
 const fraunces = Fraunces({
@@ -102,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${lexend.variable} ${fraunces.variable} ${onest.variable} ${plexMono.variable} h-full antialiased`}
+      className={`light ${fraunces.variable} ${onest.variable} ${plexMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

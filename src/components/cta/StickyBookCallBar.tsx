@@ -94,7 +94,7 @@ export default function StickyBookCallBar() {
       <div
         role="region"
         aria-label="Book a strategy call"
-        className="hidden md:flex fixed top-0 left-0 right-0 z-[60] items-center justify-center px-4 py-2.5"
+        className="hidden md:flex fixed top-0 left-0 right-0 z-40 items-center justify-center px-4 py-2.5"
         style={{
           background: "var(--terracotta)",
           color: "var(--cream-3)",
@@ -163,7 +163,7 @@ export default function StickyBookCallBar() {
       <div
         role="region"
         aria-label="Book a strategy call"
-        className="md:hidden fixed bottom-3 left-3 right-3 z-[60] flex items-center gap-2 px-3 py-3"
+        className="md:hidden fixed bottom-3 left-3 right-3 z-40 flex items-center gap-2 px-3 py-3"
         style={{
           background: "var(--cream-3)",
           border: "1px solid rgba(26,26,26,0.18)",

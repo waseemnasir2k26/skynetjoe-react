@@ -755,9 +755,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               type="button"
               onClick={onNext}
               disabled={!stepValid}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-[var(--ink)] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 transition"
               style={{
-                background: "var(--ink)",
+                background: "var(--terracotta)",
               }}
             >
               {state.step < 3 ? "Next step" : "Generate profile"}
@@ -820,9 +820,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           </div>
 
           <pre
-            className="text-xs sm:text-sm leading-relaxed text-[var(--ink-2)] overflow-x-auto rounded-2xl p-4 sm:p-5 whitespace-pre-wrap break-words"
+            className="text-xs sm:text-sm leading-relaxed text-[var(--ink)] overflow-x-auto rounded-2xl p-4 sm:p-5 whitespace-pre-wrap break-words"
             style={{
-              background: "rgba(26,26,26,0.65)",
+              background: "var(--cream-3)",
               border: "1px solid rgba(26,26,26,0.12)",
               maxHeight: "60vh",
               overflowY: "auto",
@@ -834,8 +834,8 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           {/* CTA */}
           <div className="mt-6 rounded-2xl p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
             style={{
-              background: "linear-gradient(135deg, rgba(30, 136, 229, 0.18) 0%, rgba(20, 184, 166, 0.18) 100%)",
-              border: "1px solid rgba(26,26,26,0.18)",
+              background: "var(--cream-3)",
+              border: "1px solid rgba(26,26,26,0.14)",
             }}
           >
             <div>
@@ -850,9 +850,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               href={calUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--ink)] whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] whitespace-nowrap hover:opacity-90 transition"
               style={{
-                background: "var(--ink)",
+                background: "var(--terracotta)",
               }}
             >
               <CalendarCheck className="w-4 h-4" />

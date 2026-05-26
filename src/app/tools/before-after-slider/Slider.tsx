@@ -327,9 +327,9 @@ export default function Slider() {
 
       {/* CTA */}
       <div
-        className="rounded-3xl p-8 md:p-10 text-center"
+        className="rounded-3xl p-8 md:p-10 text-center border border-[rgba(26,26,26,0.12)]"
         style={{
-          background: "var(--ink)",
+          background: "var(--cream-2)",
         }}
       >
         <h3 className="text-2xl md:text-3xl font-extrabold text-[var(--ink)] mb-3">
@@ -343,7 +343,8 @@ export default function Slider() {
           href={CAL_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[var(--ink)] font-semibold hover:bg-[var(--cream-3)] transition"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition hover:opacity-90"
+          style={{ background: "var(--terracotta)", color: "var(--cream-3)" }}
         >
           Book a 30-min call
           <ArrowRight className="w-4 h-4" />

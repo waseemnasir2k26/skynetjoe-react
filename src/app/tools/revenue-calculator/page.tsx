@@ -295,18 +295,18 @@ export default function RevenueCalculatorPage() {
       <section className="section pt-0">
         <div className="container-x px-6">
           <div
-            className="rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
+            className="rounded-3xl p-10 md:p-14 text-center relative overflow-hidden border border-[rgba(26,26,26,0.12)]"
             style={{
-              background: "var(--ink)",
+              background: "var(--cream-2)",
             }}
           >
             <div className="relative z-10 max-w-2xl mx-auto">
               <div
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
                 style={{
-                  background: "rgba(242,239,230,0.15)",
-                  border: "1px solid rgba(242,239,230,0.30)",
-                  color: "#ffffff",
+                  background: "rgba(198,107,63,0.10)",
+                  border: "1px solid rgba(198,107,63,0.30)",
+                  color: "var(--terracotta)",
                 }}
               >
                 <Sparkles className="w-3.5 h-3.5" />
@@ -328,7 +328,8 @@ export default function RevenueCalculatorPage() {
                   href={CAL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-[var(--ink)] font-semibold hover:bg-[var(--cream-3)] transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                  style={{ background: "var(--terracotta)", color: "var(--cream-3)" }}
                 >
                   Get my custom recovery plan
                 </a>

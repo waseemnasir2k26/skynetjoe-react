@@ -118,8 +118,8 @@ html.theme-dark {
   --color-neon-cyan: var(--ai-neon-cyan);
   --color-neon-purple: var(--ai-neon-purple);
 
-  --font-sans: var(--font-sans-onest, var(--font-lexend));
-  --font-display: var(--font-serif-fraunces, var(--font-lexend));
+  --font-sans: var(--font-sans-onest, system-ui, -apple-system, "Segoe UI", sans-serif);
+  --font-display: var(--font-serif-fraunces, Georgia, "Times New Roman", serif);
   --font-mono: var(--font-mono-plex, ui-monospace), SFMono-Regular, Menlo, monospace;
   --color-terracotta: var(--terracotta);
   --color-ink: var(--ink);

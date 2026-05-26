@@ -18,6 +18,7 @@ import { usePathname } from "next/navigation";
 import { X, Loader2, CheckCircle2 } from "lucide-react";
 
 const STORAGE_KEY = "skynet:exit-intent:shown";
+const SHARED_POPUP_KEY = "skynet-popup-fired";
 const MIN_TIME_ON_PAGE_MS = 12000;
 const MOBILE_MIN_TIME_MS = 30000;
 const MOBILE_MIN_SCROLL_PCT = 0.5;
@@ -48,6 +49,10 @@ export default function ExitIntentModal() {
     if (typeof window === "undefined") return;
 
     try {
+      if (sessionStorage.getItem(SHARED_POPUP_KEY) === "1") return;
+    } catch {}
+
+    try {
       if (localStorage.getItem(STORAGE_KEY) === "1") return;
     } catch {}
 
@@ -57,6 +62,7 @@ export default function ExitIntentModal() {
       triggeredRef.current = true;
       try {
         localStorage.setItem(STORAGE_KEY, "1");
+        sessionStorage.setItem(SHARED_POPUP_KEY, "1");
       } catch {}
       setOpen(true);
     };

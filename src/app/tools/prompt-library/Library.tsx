@@ -292,7 +292,7 @@ function PromptModal({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--ink)] shadow-2xl prompt-modal-card"
+        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-3)] shadow-2xl prompt-modal-card"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -328,7 +328,7 @@ function PromptModal({
         </div>
 
         <div className="px-6 md:px-8 py-6">
-          <pre className="whitespace-pre-wrap break-words font-mono text-[13px] leading-relaxed text-[var(--ink-2)] bg-[rgba(26,26,26,0.30)] border border-[rgba(26,26,26,0.12)] rounded-2xl p-5">
+          <pre className="whitespace-pre-wrap break-words font-mono text-[13px] leading-relaxed text-[var(--ink)] bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] rounded-2xl p-5">
             {prompt.body}
           </pre>
         </div>
@@ -338,11 +338,11 @@ function PromptModal({
             <button
               type="button"
               onClick={copy}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-[var(--ink)] transition"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-[var(--cream-3)] transition hover:opacity-90"
               style={{
                 background: copied
-                  ? "linear-gradient(135deg, #10b981 0%, #059669 100%)"
-                  : "var(--ink)",
+                  ? "var(--sage)"
+                  : "var(--terracotta)",
               }}
             >
               {copied ? (
