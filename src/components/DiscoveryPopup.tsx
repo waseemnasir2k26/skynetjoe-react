@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
@@ -13,12 +13,20 @@ export default function DiscoveryPopup() {
   const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const disabled =
     pathname?.startsWith("/lp/freight-") ||
     pathname === "/discovery-call" ||
     pathname?.startsWith("/api/") ||
     searchParams?.get("popup") === "off";
+
+  const handleClose = () => {
+    setOpen(false);
+    try {
+      sessionStorage.removeItem(SHARED_POPUP_KEY);
+    } catch {}
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -53,6 +61,21 @@ export default function DiscoveryPopup() {
     };
   }, [disabled, pathname]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    document.addEventListener("keydown", onKey);
+    closeBtnRef.current?.focus();
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   if (!mounted || disabled || !open) return null;
 
   return (
@@ -63,7 +86,10 @@ export default function DiscoveryPopup() {
         animation: "discovery-popup-fade 0.3s ease-out forwards",
         fontFamily: "var(--font-sans)",
       }}
-      onClick={() => setOpen(false)}
+      onClick={handleClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="discovery-popup-heading"
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -91,7 +117,8 @@ export default function DiscoveryPopup() {
         />
 
         <button
-          onClick={() => setOpen(false)}
+          ref={closeBtnRef}
+          onClick={handleClose}
           aria-label="Close popup"
           className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center transition"
           style={{
@@ -131,6 +158,7 @@ export default function DiscoveryPopup() {
           </div>
 
           <h2
+            id="discovery-popup-heading"
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(24px, 4vw, 32px)",
@@ -168,7 +196,7 @@ export default function DiscoveryPopup() {
           <div className="flex flex-col gap-3">
             <Link
               href="/discovery-call"
-              onClick={() => setOpen(false)}
+              onClick={handleClose}
               className="inline-flex items-center justify-center gap-2"
               style={{
                 background: "var(--terracotta)",
@@ -186,7 +214,7 @@ export default function DiscoveryPopup() {
             </Link>
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={handleClose}
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,

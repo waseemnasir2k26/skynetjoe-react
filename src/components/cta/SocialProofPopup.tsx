@@ -63,6 +63,7 @@ const PROOFS: Proof[] = [
 ];
 
 const STORAGE_KEY = "skynet:proof-popup:dismissed";
+const SHARED_POPUP_KEY = "skynet-popup-fired";
 const SHOW_DELAY_MS = 10_000;
 const ROTATE_MS = 12_000;
 
@@ -81,10 +82,16 @@ export default function SocialProofPopup() {
     if (typeof window === "undefined") return;
 
     try {
+      if (sessionStorage.getItem(SHARED_POPUP_KEY) === "1") return;
       if (sessionStorage.getItem(STORAGE_KEY) === "1") return;
     } catch {}
 
-    const showTimer = window.setTimeout(() => setVisible(true), SHOW_DELAY_MS);
+    const showTimer = window.setTimeout(() => {
+      try {
+        sessionStorage.setItem(SHARED_POPUP_KEY, "1");
+      } catch {}
+      setVisible(true);
+    }, SHOW_DELAY_MS);
     return () => window.clearTimeout(showTimer);
   }, [disabled]);
 
@@ -99,6 +106,7 @@ export default function SocialProofPopup() {
   const dismiss = () => {
     try {
       sessionStorage.setItem(STORAGE_KEY, "1");
+      sessionStorage.removeItem(SHARED_POPUP_KEY);
     } catch {}
     setVisible(false);
   };

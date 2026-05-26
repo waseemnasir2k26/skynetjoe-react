@@ -11,11 +11,11 @@ const article = getArticle(SLUG)!;
 export const metadata: Metadata = {
   title: `${article.title} | SkynetLabs`,
   description: article.description,
-  alternates: { canonical: `/news/${SLUG}` },
+  alternates: { canonical: `${SITE.url}/news/${SLUG}` },
   openGraph: {
     title: article.title,
     description: article.description,
-    url: `/news/${SLUG}`,
+    url: `${SITE.url}/news/${SLUG}`,
     type: "article",
     publishedTime: article.publishedAt,
     authors: [SITE.founder],

@@ -12,6 +12,7 @@ import { Phone, PhoneOff, Signal } from "lucide-react";
  */
 
 const SESSION_KEY = "incoming-call-shown";
+const SHARED_POPUP_KEY = "skynet-popup-fired";
 const FIRE_DELAY_MS = 10000;
 const RING_SECONDS = 12;
 
@@ -28,12 +29,16 @@ export default function IncomingCallPopup() {
     if (pathname.startsWith("/api/")) return;
 
     if (typeof window === "undefined") return;
+    if (sessionStorage.getItem(SHARED_POPUP_KEY) === "1") return;
     if (sessionStorage.getItem(SESSION_KEY) === "1") return;
     if (new URLSearchParams(window.location.search).get("popup") === "off") return;
 
     const t = setTimeout(() => {
       setVisible(true);
       sessionStorage.setItem(SESSION_KEY, "1");
+      try {
+        sessionStorage.setItem(SHARED_POPUP_KEY, "1");
+      } catch {}
     }, FIRE_DELAY_MS);
 
     return () => clearTimeout(t);
@@ -51,11 +56,20 @@ export default function IncomingCallPopup() {
 
   if (!visible) return null;
 
+  const clearShared = () => {
+    try {
+      sessionStorage.removeItem(SHARED_POPUP_KEY);
+    } catch {}
+  };
   const accept = () => {
+    clearShared();
     setVisible(false);
     router.push("/discovery-call");
   };
-  const decline = () => setVisible(false);
+  const decline = () => {
+    clearShared();
+    setVisible(false);
+  };
 
   return (
     <>

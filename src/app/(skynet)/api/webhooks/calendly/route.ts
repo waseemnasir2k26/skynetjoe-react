@@ -206,8 +206,19 @@ export async function POST(req: Request) {
       );
     }
   } else {
+    // Fail-closed in prod: refuse unsigned bodies so a missing env var can't
+    // silently turn the webhook into a public unauthenticated lead injector.
+    if (process.env.NODE_ENV === "production") {
+      console.error(
+        "[calendly-webhook] CALENDLY_WEBHOOK_SECRET missing in prod — rejecting unsigned payload",
+      );
+      return NextResponse.json(
+        { ok: false, error: "server misconfigured" },
+        { status: 503 },
+      );
+    }
     console.warn(
-      "[calendly-webhook] CALENDLY_WEBHOOK_SECRET not set — skipping signature verification (dev mode)",
+      "[calendly-webhook] dev mode — skipping signature verification (CALENDLY_WEBHOOK_SECRET unset)",
     );
   }
 

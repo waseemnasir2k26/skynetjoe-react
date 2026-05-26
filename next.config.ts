@@ -175,6 +175,9 @@ const killedServiceStateRedirects = SERVICE_CATEGORIES.flatMap((cat) =>
 );
 
 const nextConfig: NextConfig = {
+  // Produces .next/standalone/server.js for smaller cold-boot on
+  // Hostinger Node.js Web Apps (and any non-Vercel host).
+  output: "standalone",
   async headers() {
     return [
       {

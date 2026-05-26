@@ -9,7 +9,7 @@ import { ArrowRight, X, Check } from "lucide-react";
  *
  * Asset paths confirmed against /public glob 2026-05-26:
  *  - /portraits/waseem-veranda-thinking.jpg
- *  - /news/8-hour-reply.jpg
+ *  - /news/8-hour-reply-rule.jpg
  *  - /case-studies/manhattan-dental-atelier-flagship.jpg
  */
 

@@ -1,6 +1,6 @@
 <article class="wn-service wn-service-ai-business-systems">
 <style>
-.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B65;--wn-bg:#F2EFE6;--wn-surface:#EDE8DC;--wn-surface-alt:#FAF7F0;--wn-border:rgba(26,26,26,.10);--wn-green:#C66B3F;--wn-purple:#8A9A7B;--wn-cyan:#C9A96E;--wn-coral:#C66B3F;--wn-blue:#6B2C2C;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-onest,system-ui,sans-serif);line-height:1.65;display:block}
 .wn-service *{box-sizing:border-box}
 .wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
 .wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
@@ -8,7 +8,7 @@
 .wn-service .wn-hero>*{position:relative;z-index:1}
 .wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
 .wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
-.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service h1 .wn-grad{color:var(--wn-accent-a);-webkit-text-fill-color:var(--wn-accent-a)}
 .wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
 .wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
 .wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
@@ -26,7 +26,7 @@
 .wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
 .wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
 .wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
-.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:var(--wn-accent-a);color:#FAF7F0;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
 .wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
 .wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
 .wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
@@ -44,30 +44,31 @@
 .wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .wn-service details summary::-webkit-details-marker{display:none}
 .wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
-.wn-service details[open] summary::after{content:"–"}
+.wn-service details[open] summary::after{content:"−"}
 .wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
 .wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
 .wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
 .wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
-.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
-.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-primary{background:var(--wn-accent-a);color:#FAF7F0;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 50%,transparent);filter:brightness(1.08)}
 .wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
 .wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
 .wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
-html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
-.wn-service-ai-business-systems{--wn-accent-a:#14B8A6;--wn-accent-b:#FF6B6B}
+html.light .wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B65;--wn-bg:#F2EFE6;--wn-surface:#EDE8DC;--wn-surface-alt:#FAF7F0;--wn-border:rgba(26,26,26,.10)}
+@media(max-width:640px){.wn-service .wn-hero{padding:2.5rem 1.25rem 2.25rem}.wn-service .wn-section{padding:2.25rem 1.25rem}.wn-service .wn-cta-block{padding:2.5rem 1.25rem}.wn-service .wn-wrap{padding:0 1.25rem}.wn-service h1{font-size:clamp(1.65rem,7vw,2.4rem);line-height:1.12}.wn-service .wn-lede{font-size:1rem}.wn-service h2{font-size:clamp(1.25rem,5vw,1.6rem)}.wn-service .wn-card{padding:1.15rem 1rem}.wn-service .wn-btn{min-height:44px;padding:.85rem 1.25rem}.wn-service details summary{padding:.95rem 1rem;min-height:44px}}
+.wn-service-ai-business-systems{--wn-accent-a:#C66B3F;--wn-accent-b:#8A9A7B}
 </style>
 
 <header class="wn-hero">
   <div class="wn-wrap">
     <span class="wn-eyebrow">Consulting · AI Business Systems</span>
     <h1>Your team uses 14 SaaS tools. <span class="wn-grad">Nobody can name what each one costs.</span></h1>
-    <p class="wn-lede">The CFO can't explain the SaaS bill. The COO can't tell you which tool owns the customer record. The CEO bought three AI tools last quarter and none of them shipped. We audit the entire operating stack — tools, workflows, data ownership, AI surface area — and write the 90-day plan that consolidates, retires, and AI-enables the parts that actually move the business.</p>
+    <p class="wn-lede">CFO can't explain the SaaS bill. COO can't say which tool owns the customer record. CEO bought three AI tools last quarter, none shipped. I audit the whole stack — tools, workflows, data ownership, AI surface — and write the 90-day plan that consolidates, retires, and AI-enables the parts that move revenue. Built for ops teams from a desk in Canggu.</p>
     <div class="wn-cta-row">
-      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
-      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+      <a href="/discovery-call" class="wn-btn wn-btn-primary">Book the audit</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See real builds</a>
     </div>
-    <aside aria-label="Direct answer" style="margin-top:2rem;background:linear-gradient(135deg,rgba(30,136,229,.08),rgba(0,212,255,.06));border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.2rem 1.4rem;">
+    <aside aria-label="Direct answer" style="margin-top:2rem;background:linear-gradient(135deg,rgba(198,107,63,.08),rgba(201,169,110,.06));border:1px solid rgba(26,26,26,.10);border-radius:12px;padding:1.2rem 1.4rem;">
       <p style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--wn-accent-a);font-weight:700;margin:0 0 8px;">What is an AI business systems audit?</p>
       <p style="margin:0;color:var(--wn-fg-muted);font-size:15px;line-height:1.6;">An <strong style="color:var(--wn-fg);">AI business systems audit</strong> is an end-to-end review of a company's SaaS stack, ops workflows, data ownership model, and AI surface area, producing a 90-day plan to consolidate redundant tools, retire dead software spend, and AI-enable the workflows that materially move revenue. SkynetLabs delivers the audit, the tool-stack diagram, the build backlog, and the change-management script needed to get a small/mid team to actually adopt the new stack.</p>
     </aside>
@@ -113,14 +114,14 @@ html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e
   </div>
 </section>
 
-<div class="wn-vuln wn-wrap" style="max-width:62rem">McKinsey will charge you $400k for a deck and never write a line of code. Boutique AI consultancies will sell you "AI strategy" without ever opening your tool stack. We do both halves — strategy on Monday, implementation by Friday — because we're a small team that has to ship, not a partner deck protecting a billable hour.</div>
+<div class="wn-vuln wn-wrap" style="max-width:62rem">McKinsey charges $400k for a deck and never writes a line of code. Boutique AI consultancies sell "AI strategy" without ever opening your tool stack. I do both halves — Monday strategy, Friday implementation — because the burn rate in Canggu is in IDR not USD, and a partner-deck markup doesn't survive that math.</div>
 
 <section class="wn-section">
   <div class="wn-wrap">
     <p class="wn-section-title">Process</p>
     <h2>Audit, plan, implement (if you want)</h2>
     <div class="wn-grid wn-grid-4">
-      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>4 interview sessions with CEO, COO, CFO, head of ops. Tool access (read-only). Two weeks of inbox shadowing. Process observation.</p><span class="wn-step-day">Week 1–2</span></div>
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>4 interview sessions with CEO, COO, CFO, head of ops. Tool access (read-only). Two weeks of inbox shadowing. Process observation.</p><span class="wn-step-day">Week 1—2</span></div>
       <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Draft the audit, share with leadership, iterate on the plan. Pressure-test the kill list against political reality. Lock the 90-day sprint plan.</p><span class="wn-step-day">Week 3</span></div>
       <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Final deliverable: 30-page audit + 90-day plan + AI surface map + vendor list. Leadership presentation. Q&amp;A session with the team.</p><span class="wn-step-day">Week 4</span></div>
       <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>Plan is yours. We either step back, or roll into implementation as a separate engagement at our automation / development rates.</p><span class="wn-step-day">End of week 4</span></div>
@@ -143,9 +144,9 @@ html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e
     <p class="wn-section-title">Proof</p>
     <h2>Real engagements</h2>
     <div class="wn-proof">
-      <div class="wn-proof-item"><span class="wn-metric">14 SaaS → 7</span>Mid-market wellness brand consolidated stack after a 30-day audit. Operational complexity halved.</div>
-      <div class="wn-proof-item"><span class="wn-metric">12-week plan</span>French logistics client (TakyCorp) — full email automation gate, 17-node audit, blocker + 4 risks identified.</div>
-      <div class="wn-proof-item"><span class="wn-metric">3 sprint plan</span>Dental flagship engagement: positioning audit, brand v2 plan, JotForm Healthcare wire, sequenced over 90 days.</div>
+      <div class="wn-proof-item"><span class="wn-metric">Takycorp · 14 → 7</span>French ops stack consolidated in a 30-day audit. Two retainers killed, every workflow they actually used kept.</div>
+      <div class="wn-proof-item"><span class="wn-metric">KODIASIMMO · 17 nodes</span>Real-estate automation map. One blocker plus four downstream risks named before a single Zap got wired.</div>
+      <div class="wn-proof-item"><span class="wn-metric">180+ ships · 9 countries</span>Audits written from a corner table at Crate Cafe, Canggu since 2022. Plan ships or we don't bill the rebuild.</div>
     </div>
   </div>
 </section>
@@ -156,7 +157,7 @@ html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e
     <h2>Audit-first, never retainer-first</h2>
     <div class="wn-price-tiers">
       <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$1,000</div><div class="wn-cadence">Single-function audit (sales OR ops OR marketing), 10-page report, 30-day mini-plan.</div></div>
-      <div class="wn-price"><div class="wn-tier">Typical engagement</div><div class="wn-amt">$2,500–$5,000</div><div class="wn-cadence">Full operating audit, 90-day plan, AI surface map, vendor recommendations, leadership presentation.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical engagement</div><div class="wn-amt">$2,500—$5,000</div><div class="wn-cadence">Full operating audit, 90-day plan, AI surface map, vendor recommendations, leadership presentation.</div></div>
       <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $997/mo</div><div class="wn-cadence">Monthly strategic review, quarterly re-audit, on-call advisor, exec-team office hours.</div></div>
     </div>
   </div>
@@ -179,8 +180,8 @@ html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e
     <h2>Stop guessing which tools are pulling weight.</h2>
     <p class="wn-lede" style="margin:0 auto">30-minute discovery call. If we're a fit, the audit kicks off the same week.</p>
     <div class="wn-cta-row">
-      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
-      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+      <a href="/discovery-call" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See real builds</a>
     </div>
   </div>
 </div>

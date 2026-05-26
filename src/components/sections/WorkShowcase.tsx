@@ -535,7 +535,7 @@ export default function WorkShowcase() {
             >
               <Image
                 src="/portraits/waseem-poolside.jpg"
-                alt="Waseem Nasir"
+                alt="Waseem Nasir — founder, available for new builds"
                 fill
                 sizes="80px"
                 className="object-cover"

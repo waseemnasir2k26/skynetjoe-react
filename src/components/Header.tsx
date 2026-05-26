@@ -55,8 +55,6 @@ export default function Header() {
   const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
   const closeTimer = useRef<number | null>(null);
 
-  if (pathname?.startsWith("/lp/")) return null;
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -69,6 +67,10 @@ export default function Header() {
     setMobileOpen(false);
     setMobileSubOpen(null);
   }, [pathname]);
+
+  // Guard AFTER all hooks — preserves Rules-of-Hooks invariants when
+  // navigating between /lp/* (returns null) and regular routes.
+  if (pathname?.startsWith("/lp/")) return null;
 
   const openDrop = (key: string) => {
     if (closeTimer.current) {
@@ -118,6 +120,8 @@ export default function Header() {
                 className="relative"
                 onMouseEnter={() => hasDrop && openDrop(item.href)}
                 onMouseLeave={() => hasDrop && scheduleClose()}
+                onFocus={() => hasDrop && openDrop(item.href)}
+                onBlur={() => hasDrop && scheduleClose()}
               >
                 <Link
                   href={item.href}
@@ -125,7 +129,15 @@ export default function Header() {
                   style={{ color: "var(--ink-2)" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
                   onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-2)")}
-                  onClick={() => hasDrop && setOpenDropdown(null)}
+                  onClick={(e) => {
+                    if (hasDrop) {
+                      e.preventDefault();
+                      setOpenDropdown(openDropdown === item.href ? null : item.href);
+                    }
+                  }}
+                  aria-expanded={hasDrop ? openDropdown === item.href : undefined}
+                  aria-haspopup={hasDrop ? "menu" : undefined}
+                  aria-current={pathname === item.href ? "page" : undefined}
                 >
                   {item.label}
                   {hasDrop && (
@@ -140,6 +152,7 @@ export default function Header() {
                 {/* Services mega-menu — redesigned: left rail + featured + remainder */}
                 {item.hasMega && openDropdown === item.href && (
                   <div
+                    role="menu"
                     className="absolute top-full left-1/2 -translate-x-1/2 w-[1040px] pt-3"
                     onMouseEnter={() => openDrop(item.href)}
                     onMouseLeave={scheduleClose}
@@ -151,6 +164,7 @@ export default function Header() {
                 {/* Simple subItems dropdown — cream editorial, terracotta accent */}
                 {item.subItems && openDropdown === item.href && (
                   <div
+                    role="menu"
                     className={`absolute top-full left-1/2 -translate-x-1/2 ${
                       item.subItems.length > 6 ? "w-[420px]" : "w-[340px]"
                     } pt-3`}
@@ -171,6 +185,7 @@ export default function Header() {
                         <Link
                           key={sub.href}
                           href={sub.href}
+                          aria-current={pathname === sub.href ? "page" : undefined}
                           className="group flex items-start gap-3 p-3 transition-colors"
                           style={{
                             borderLeft: "3px solid transparent",
@@ -262,6 +277,7 @@ export default function Header() {
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
                     className="py-3 text-base font-medium text-fg hover:text-skynet-primary-light border-b border-white/[0.06]"
+                    aria-current={pathname === item.href ? "page" : undefined}
                   >
                     {item.label}
                   </Link>
@@ -324,6 +340,7 @@ export default function Header() {
                           key={sub.href}
                           href={sub.href}
                           onClick={() => setMobileOpen(false)}
+                          aria-current={pathname === sub.href ? "page" : undefined}
                           className="block py-2 text-sm transition-colors"
                           style={{ color: "var(--ink-2)", wordBreak: "break-word" }}
                           onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
@@ -349,11 +366,15 @@ export default function Header() {
               <Link
                 href="/discovery-call"
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center justify-center gap-1.5 w-full px-4 py-3 rounded-lg text-sm font-semibold text-white"
+                className="inline-flex items-center justify-center gap-1.5 w-full"
                 style={{
-                  background:
-                    "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",
-                  boxShadow: "0 6px 20px rgba(30,136,229,0.35)",
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  borderRadius: 2,
+                  padding: "14px 24px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 15,
                 }}
               >
                 Book free audit

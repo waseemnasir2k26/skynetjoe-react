@@ -412,8 +412,9 @@ export default function DiscoveryCallForm() {
             className="space-y-5"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label="Your name" required>
+              <Field htmlFor="df-name" label="Your name" required>
                 <input
+                  id="df-name"
                   type="text"
                   required
                   value={form.name}
@@ -423,8 +424,9 @@ export default function DiscoveryCallForm() {
                   autoFocus
                 />
               </Field>
-              <Field label="Email" required>
+              <Field htmlFor="df-email" label="Email" required>
                 <input
+                  id="df-email"
                   type="email"
                   required
                   value={form.email}
@@ -436,8 +438,9 @@ export default function DiscoveryCallForm() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label="Phone" hint="Optional. Include country code.">
+              <Field htmlFor="df-phone" label="Phone" hint="Optional. Include country code.">
                 <input
+                  id="df-phone"
                   type="tel"
                   value={form.whatsapp}
                   onChange={(e) => update("whatsapp", e.target.value)}
@@ -445,8 +448,9 @@ export default function DiscoveryCallForm() {
                   style={INPUT_STYLE}
                 />
               </Field>
-              <Field label="Your role" hint="Founder, Ops, Marketing…">
+              <Field htmlFor="df-role" label="Your role" hint="Founder, Ops, Marketing…">
                 <input
+                  id="df-role"
                   type="text"
                   value={form.role}
                   onChange={(e) => update("role", e.target.value)}
@@ -457,8 +461,9 @@ export default function DiscoveryCallForm() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label="Company">
+              <Field htmlFor="df-company" label="Company">
                 <input
+                  id="df-company"
                   type="text"
                   value={form.company}
                   onChange={(e) => update("company", e.target.value)}
@@ -466,8 +471,9 @@ export default function DiscoveryCallForm() {
                   style={INPUT_STYLE}
                 />
               </Field>
-              <Field label="Website">
+              <Field htmlFor="df-website" label="Website">
                 <input
+                  id="df-website"
                   type="url"
                   value={form.website}
                   onChange={(e) => update("website", e.target.value)}
@@ -631,11 +637,13 @@ export default function DiscoveryCallForm() {
             </Field>
 
             <Field
+              htmlFor="df-pain"
               label="What's the main pain?"
               required
               hint="2–4 sentences. Be specific: 'no-shows costing $8K/mo' beats 'need automation'."
             >
               <textarea
+                id="df-pain"
                 required
                 rows={5}
                 value={form.pain}
@@ -855,11 +863,13 @@ export default function DiscoveryCallForm() {
 }
 
 function Field({
+  htmlFor,
   label,
   hint,
   required,
   children,
 }: {
+  htmlFor?: string;
   label: string;
   hint?: string;
   required?: boolean;
@@ -868,6 +878,7 @@ function Field({
   return (
     <div>
       <label
+        htmlFor={htmlFor}
         style={{
           display: "block",
           fontSize: 13,
@@ -883,7 +894,8 @@ function Field({
         {required && <span style={{ color: C.terra, marginLeft: 4 }}>*</span>}
       </label>
       {hint && (
-        <p style={{ fontSize: 12, color: C.inkFaint, marginBottom: 10 }}>
+        // ink2 (was inkFaint) — bumps 12px hint to WCAG AAA contrast on cream
+        <p style={{ fontSize: 12, color: C.ink2, marginBottom: 10 }}>
           {hint}
         </p>
       )}

@@ -169,6 +169,29 @@ em.accent, .serif-italic {
 }
 
 /* ============================================
+   A11Y — Global :focus-visible outline (WCAG 2.4.7 + 2.4.11)
+   Keyboard-only users get a visible terracotta ring on every interactive
+   element. Mouse-click focus stays clean (`:focus-visible` only, not `:focus`).
+   Component-level :focus-visible rules below (skip-link, zoom-badge) still
+   override — they appear later in the cascade.
+   ============================================ */
+*:focus { outline: none; }
+*:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+/* ============================================
    A11Y — Skip-to-main-content link.
    Ported from WP header.php line 49. WCAG 2.1 SC 2.4.1.
    ============================================ */

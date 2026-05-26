@@ -61,12 +61,9 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        // /og-default.png does not exist yet â€” fall back to the founder portrait
-        // so social shares don't render a 404. Replace with a 1200x630 OG image
-        // when one is produced.
-        url: "/waseem-portrait.jpg",
+        url: "/og-default.png",
         width: 1200,
-        height: 1200,
+        height: 630,
         alt: `${SITE.brand} â€” ${SITE.tagline}`,
       },
     ],
@@ -77,15 +74,18 @@ export const metadata: Metadata = {
     description: SITE.description,
     creator: "@skynetlabs",
     site: "@skynetlabs",
-    images: ["/waseem-portrait.jpg"],
+    images: ["/og-default.png"],
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
   },
-  // apple-icon.png does not exist; rely on /favicon.ico only.
-  icons: { icon: "/favicon.ico" },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/manifest.webmanifest",
   alternates: { canonical: SITE.url },
 };
 

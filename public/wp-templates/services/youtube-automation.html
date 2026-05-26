@@ -1,6 +1,6 @@
 <article class="wn-service wn-service-youtube-automation">
 <style>
-.wn-service{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-green:#1E88E5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;--wn-coral:#FF6B6B;--wn-blue:#3B82F6;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.65;display:block}
+.wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B65;--wn-bg:#F2EFE6;--wn-surface:#EDE8DC;--wn-surface-alt:#FAF7F0;--wn-border:rgba(26,26,26,.10);--wn-green:#C66B3F;--wn-purple:#8A9A7B;--wn-cyan:#C9A96E;--wn-coral:#C66B3F;--wn-blue:#6B2C2C;--wn-accent-a:var(--wn-green);--wn-accent-b:var(--wn-cyan);color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-onest,system-ui,sans-serif);line-height:1.65;display:block}
 .wn-service *{box-sizing:border-box}
 .wn-service .wn-wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
 .wn-service .wn-hero{position:relative;padding:5rem 1.5rem 4rem;overflow:hidden}
@@ -8,7 +8,7 @@
 .wn-service .wn-hero>*{position:relative;z-index:1}
 .wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
 .wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
-.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service h1 .wn-grad{color:var(--wn-accent-a);-webkit-text-fill-color:var(--wn-accent-a)}
 .wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
 .wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
 .wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
@@ -26,7 +26,7 @@
 .wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
 .wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
 .wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
-.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:var(--wn-accent-a);color:#FAF7F0;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
 .wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
 .wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
 .wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
@@ -44,30 +44,31 @@
 .wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .wn-service details summary::-webkit-details-marker{display:none}
 .wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
-.wn-service details[open] summary::after{content:"–"}
+.wn-service details[open] summary::after{content:"−"}
 .wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
 .wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
 .wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
 .wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
-.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
-.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-primary{background:var(--wn-accent-a);color:#FAF7F0;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 50%,transparent);filter:brightness(1.08)}
 .wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
 .wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
 .wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
-html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08)}
-.wn-service-youtube-automation{--wn-accent-a:#FF6B6B;--wn-accent-b:#FF1744}
+html.light .wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B65;--wn-bg:#F2EFE6;--wn-surface:#EDE8DC;--wn-surface-alt:#FAF7F0;--wn-border:rgba(26,26,26,.10)}
+@media(max-width:640px){.wn-service .wn-hero{padding:2.5rem 1.25rem 2.25rem}.wn-service .wn-section{padding:2.25rem 1.25rem}.wn-service .wn-cta-block{padding:2.5rem 1.25rem}.wn-service .wn-wrap{padding:0 1.25rem}.wn-service h1{font-size:clamp(1.65rem,7vw,2.4rem);line-height:1.12}.wn-service .wn-lede{font-size:1rem}.wn-service h2{font-size:clamp(1.25rem,5vw,1.6rem)}.wn-service .wn-card{padding:1.15rem 1rem}.wn-service .wn-btn{min-height:44px;padding:.85rem 1.25rem}.wn-service details summary{padding:.95rem 1rem;min-height:44px}}
+.wn-service-youtube-automation{--wn-accent-a:#C66B3F;--wn-accent-b:#C9A96E}
 </style>
 
 <header class="wn-hero">
   <div class="wn-wrap">
     <span class="wn-eyebrow">AI Content · YouTube</span>
     <h1>Your faceless channel has 14 subscribers. <span class="wn-grad">It's not the niche. It's the thumbnail.</span></h1>
-    <p class="wn-lede">You bought a course, you wrote 30 scripts, you used the cheapest TTS voice you could find. The videos look like 11 other channels in your niche because the workflow that built them was the same one. We rebuild a faceless YouTube pipeline that picks topics by gap analysis, writes scripts in a real voice, and tests three thumbnail variants before publishing.</p>
+    <p class="wn-lede">Bought a course, wrote 30 scripts, used the cheapest TTS voice you could find. The videos look like 11 other channels in your niche because the workflow that built them was the same one. I rebuild a faceless YouTube pipeline that picks topics by gap analysis, scripts in a real voice, and tests three thumbnail variants before publishing. Kitts Recovery ships 10 videos a month on this exact stack.</p>
     <div class="wn-cta-row">
-      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
-      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+      <a href="/discovery-call" class="wn-btn wn-btn-primary">Book the channel audit</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See real builds</a>
     </div>
-    <aside aria-label="Direct answer" style="margin-top:2rem;background:linear-gradient(135deg,rgba(255,107,107,.08),rgba(255,23,68,.06));border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.2rem 1.4rem;">
+    <aside aria-label="Direct answer" style="margin-top:2rem;background:linear-gradient(135deg,rgba(198,107,63,.08),rgba(107,44,44,.06));border:1px solid rgba(26,26,26,.10);border-radius:12px;padding:1.2rem 1.4rem;">
       <p style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--wn-accent-a);font-weight:700;margin:0 0 8px;">What is YouTube automation?</p>
       <p style="margin:0;color:var(--wn-fg-muted);font-size:15px;line-height:1.6;"><strong style="color:var(--wn-fg);">YouTube automation</strong> is a production system that runs a faceless or founder-led channel using AI for topic research, scripts, voiceover, visuals, and thumbnail testing. It serves operators who want owned-media reach without filming themselves daily. SkynetLabs builds the full stack — VidIQ-style gap analysis, Claude/GPT-4o scripts written to your voice profile, ElevenLabs voiceover, layered B-roll, and three-thumbnail A/B/C testing via the YouTube experiment API. Engagements from $500.</p>
     </aside>
@@ -120,10 +121,10 @@ html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e
     <p class="wn-section-title">Process</p>
     <h2>Niche audit to first ten videos</h2>
     <div class="wn-grid wn-grid-4">
-      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Channel audit, niche gap analysis, competitor teardown. You get a written 10-video topic plan with predicted view ranges.</p><span class="wn-step-day">Day 1–4</span></div>
-      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Voice profile, thumbnail style guide, end-card layout, sponsor-read template. We lock the look on one fully-produced pilot video.</p><span class="wn-step-day">Day 5–7</span></div>
-      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Build the pipeline in your environment. Produce the first three videos with us on-screen to catch edge cases. Schedule via YouTube API.</p><span class="wn-step-day">Day 8–14</span></div>
-      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>One-command runner, weekly batch SOP, thumbnail Figma file, retention-curve dashboard. Your editor takes it from there.</p><span class="wn-step-day">Day 15–18</span></div>
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>Channel audit, niche gap analysis, competitor teardown. You get a written 10-video topic plan with predicted view ranges.</p><span class="wn-step-day">Day 1—4</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Voice profile, thumbnail style guide, end-card layout, sponsor-read template. We lock the look on one fully-produced pilot video.</p><span class="wn-step-day">Day 5—7</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Build the pipeline in your environment. Produce the first three videos with us on-screen to catch edge cases. Schedule via YouTube API.</p><span class="wn-step-day">Day 8—14</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>One-command runner, weekly batch SOP, thumbnail Figma file, retention-curve dashboard. Your editor takes it from there.</p><span class="wn-step-day">Day 15—18</span></div>
     </div>
   </div>
 </section>
@@ -143,9 +144,9 @@ html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e
     <p class="wn-section-title">Proof</p>
     <h2>What we've shipped</h2>
     <div class="wn-proof">
-      <div class="wn-proof-item"><span class="wn-metric">10 videos / month</span>Niche education channel ships on a Tuesday-Friday schedule, fully pipelined, one editor reviewing.</div>
-      <div class="wn-proof-item"><span class="wn-metric">CTR 8.4%</span>Thumbnail A/B/C testing lifted average CTR from 3.1% baseline on a creator channel.</div>
-      <div class="wn-proof-item"><span class="wn-metric">22 min batch</span>Script-to-publish wall-clock for a 9-minute video, once the pipeline is dialed.</div>
+      <div class="wn-proof-item"><span class="wn-metric">Kitts Recovery · 10/mo</span>Recovery-coach channel ships on a Tue-Fri schedule, fully pipelined, one editor reviewing each batch. Jessie Kitts EdD on camera, voice cloned for B-segments.</div>
+      <div class="wn-proof-item"><span class="wn-metric">Bayou Savage · CTR 8.4%</span>Thumbnail A/B/C testing lifted CTR from 3.1% baseline on the Asheville graphic-novel channel. Three variants, YouTube experiment API picked the winner.</div>
+      <div class="wn-proof-item"><span class="wn-metric">22min · script→publish</span>Wall-clock for a 9-minute video once the pipeline is dialed. Edited from a Hungry Bird table on bad wifi, still shipped on schedule.</div>
     </div>
   </div>
 </section>
@@ -156,8 +157,8 @@ html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e
     <h2>Build the engine. Then run it.</h2>
     <div class="wn-price-tiers">
       <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$500</div><div class="wn-cadence">Niche audit, 10-topic plan, voice profile, single pilot video.</div></div>
-      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$1,000–$2,500</div><div class="wn-cadence">Full pipeline, three produced videos, thumbnail framework, channel schedule, retention dashboard.</div></div>
-      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $397/mo</div><div class="wn-cadence">4–8 videos a month, thumbnail testing, monthly channel review, sponsor-read inserts.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$1,000—$2,500</div><div class="wn-cadence">Full pipeline, three produced videos, thumbnail framework, channel schedule, retention dashboard.</div></div>
+      <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $397/mo</div><div class="wn-cadence">4—8 videos a month, thumbnail testing, monthly channel review, sponsor-read inserts.</div></div>
     </div>
   </div>
 </section>
@@ -179,8 +180,8 @@ html.light .wn-service{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e
     <h2>Stop being channel number 412 in your niche.</h2>
     <p class="wn-lede" style="margin:0 auto">Niche audit, gap analysis, 10-video plan — written, sent, yours.</p>
     <div class="wn-cta-row">
-      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
-      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+      <a href="/discovery-call" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See real builds</a>
     </div>
   </div>
 </div>

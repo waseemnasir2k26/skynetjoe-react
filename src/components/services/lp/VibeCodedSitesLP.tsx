@@ -9,7 +9,7 @@ import { ArrowRight, X, Check } from "lucide-react";
  *
  * Asset paths confirmed against /public glob 2026-05-26:
  *  - /portraits/waseem-poolside-laptop.jpg
- *  - /news/claude-code-weekend.jpg
+ *  - /news/weekend-with-claude-code.jpg
  *  - /case-studies/premium-auto-dealership-network-demo.jpg
  */
 

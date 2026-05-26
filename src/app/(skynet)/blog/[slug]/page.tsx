@@ -82,25 +82,40 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     <>
       <JsonLd data={schema} />
 
+      {/* Cream editorial hero — flat cream-3 paper, 1px ink border, terracotta accents */}
       <section
-        className="relative overflow-hidden pt-24 md:pt-28 pb-12"
+        className="relative pt-24 md:pt-28 pb-12"
         style={{
-          background:
-            "linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%)",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
         }}
       >
-        <span className="orb" style={{ width: 540, height: 540, background: "#1E88E5", top: -90, left: -130, opacity: 0.5 }} />
-        <span className="orb" style={{ width: 580, height: 580, background: "#00D4FF", top: 80, right: -160, opacity: 0.35, animationDelay: "-7s" }} />
-
-        <div className="container-x px-6 relative z-10">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-200 text-sm mb-6">
+        <div className="container-x px-6 relative">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-sm mb-6"
+            style={{ color: "var(--terracotta)" }}
+          >
             <ArrowLeft className="w-4 h-4" />
             Back to journal
           </Link>
 
           <div className="max-w-3xl">
-            <div className="flex flex-wrap items-center gap-3 mb-5 text-xs text-gray-400">
-              <span className="px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-200 uppercase tracking-wider font-semibold">
+            <div
+              className="flex flex-wrap items-center gap-3 mb-5 text-xs"
+              style={{ color: "var(--ink-2)" }}
+            >
+              <span
+                className="px-3 py-1 uppercase tracking-wider font-semibold"
+                style={{
+                  background: "rgba(198, 107, 63, 0.10)",
+                  border: "1px solid rgba(198, 107, 63, 0.30)",
+                  color: "var(--terracotta)",
+                  borderRadius: 2,
+                  fontFamily: "var(--font-mono)",
+                  letterSpacing: "0.14em",
+                }}
+              >
                 {post.category}
               </span>
               <span className="inline-flex items-center gap-1.5">
@@ -113,10 +128,20 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.1] mb-5">
+            <h1
+              className="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1] mb-5"
+              style={{
+                color: "var(--ink)",
+                fontFamily: "var(--font-display)",
+                letterSpacing: "-0.02em",
+              }}
+            >
               {post.title}
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p
+              className="text-lg md:text-xl leading-relaxed"
+              style={{ color: "var(--ink-2)" }}
+            >
               {post.description}
             </p>
           </div>
@@ -135,40 +160,88 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             {prev && (
               <Link
                 href={`/blog/${prev.slug}`}
-                className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/50 transition group"
+                className="p-5 transition group"
+                style={{
+                  background: "var(--cream-3)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 2,
+                }}
               >
-                <div className="text-xs uppercase tracking-wider text-cyan-300 mb-2 inline-flex items-center gap-1.5">
+                <div
+                  className="text-xs uppercase tracking-wider mb-2 inline-flex items-center gap-1.5"
+                  style={{
+                    color: "var(--terracotta)",
+                    fontFamily: "var(--font-mono)",
+                    letterSpacing: "0.14em",
+                  }}
+                >
                   <ArrowLeft className="w-3 h-3" /> Previous
                 </div>
-                <div className="font-semibold text-white group-hover:text-cyan-200">{prev.title}</div>
+                <div className="font-semibold" style={{ color: "var(--ink)" }}>
+                  {prev.title}
+                </div>
               </Link>
             )}
             {next && (
               <Link
                 href={`/blog/${next.slug}`}
-                className={`p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/50 transition group ${!prev ? "sm:col-start-2" : ""}`}
+                className={`p-5 transition group ${!prev ? "sm:col-start-2" : ""}`}
+                style={{
+                  background: "var(--cream-3)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 2,
+                }}
               >
-                <div className="text-xs uppercase tracking-wider text-cyan-300 mb-2 inline-flex items-center gap-1.5 justify-end w-full">
+                <div
+                  className="text-xs uppercase tracking-wider mb-2 inline-flex items-center gap-1.5 justify-end w-full"
+                  style={{
+                    color: "var(--terracotta)",
+                    fontFamily: "var(--font-mono)",
+                    letterSpacing: "0.14em",
+                  }}
+                >
                   Next <ArrowRight className="w-3 h-3" />
                 </div>
-                <div className="font-semibold text-white group-hover:text-cyan-200 sm:text-right">{next.title}</div>
+                <div
+                  className="font-semibold sm:text-right"
+                  style={{ color: "var(--ink)" }}
+                >
+                  {next.title}
+                </div>
               </Link>
             )}
           </div>
 
           <div
-            className="mt-10 rounded-3xl p-8 text-center"
-            style={{ background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)" }}
+            className="mt-10 p-8 text-center"
+            style={{
+              background: "var(--cream-3)",
+              border: "1px solid var(--border)",
+              borderRadius: 2,
+            }}
           >
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-3">
+            <h2
+              className="text-2xl md:text-3xl font-extrabold mb-3"
+              style={{
+                color: "var(--ink)",
+                fontFamily: "var(--font-display)",
+                letterSpacing: "-0.02em",
+              }}
+            >
               Want this kind of result for your business?
             </h2>
-            <p className="text-white/90 mb-6">
+            <p className="mb-6" style={{ color: "var(--ink-2)" }}>
               Send a brief. Yes/no in 8 hours. No funnel.
             </p>
             <Link
               href="/discovery-call"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold hover:bg-cyan-50 transition"
+              className="inline-flex items-center gap-2 px-6 py-3 font-semibold transition"
+              style={{
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                borderRadius: 2,
+                fontFamily: "var(--font-sans)",
+              }}
             >
               Apply for a discovery call
               <ArrowRight className="w-4 h-4" />

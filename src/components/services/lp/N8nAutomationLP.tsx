@@ -10,7 +10,7 @@ import { ArrowRight, X, Check } from "lucide-react";
  *
  * Asset paths confirmed against /public glob 2026-05-26:
  *  - /portraits/waseem-cafe-builder.jpg
- *  - /news/n8n-zapier-switch.jpg
+ *  - /news/n8n-vs-zapier-2026-switch.jpg
  *  - /case-studies/eu-logistics-email-triage-n8n.jpg
  */
 

@@ -46,12 +46,12 @@ function resolveAssetsUrl(): string {
 export const CAL_URL =
   "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
-export const DEFAULT_OG_IMAGE_URL = "/waseem-portrait.jpg";
+export const DEFAULT_OG_IMAGE_URL = "/og-default.png";
 export const DEFAULT_OG_IMAGES = [
   {
     url: DEFAULT_OG_IMAGE_URL,
     width: 1200,
-    height: 1200,
+    height: 630,
     alt: "SkynetLabs â€” AI Automation Agency for Founders Who Refuse to Be Average",
   },
 ] as const;
@@ -59,8 +59,11 @@ export const DEFAULT_OG_IMAGES = [
 export const SITE = {
   name: "SkynetLabs",
   brand: "SkynetLabs",
-  domain: "skynetjoe.com",
-  url: "https://skynetjoe.com",
+  // Env-parameterized so Hostinger / future apex flips (waseemnasir.com etc.)
+  // can override at build time without code edits. Falls back to skynetjoe.com
+  // so local dev + existing Vercel deploys continue to work unchanged.
+  domain: process.env.NEXT_PUBLIC_SITE_DOMAIN ?? "skynetjoe.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://skynetjoe.com",
   // Asset host for og:image / twitter:image â€” see resolveAssetsUrl() above.
   assetsUrl: resolveAssetsUrl(),
   founder: "Waseem Nasir",

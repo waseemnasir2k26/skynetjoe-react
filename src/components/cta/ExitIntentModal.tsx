@@ -87,10 +87,17 @@ export default function ExitIntentModal() {
     };
   }, [disabled, pathname]);
 
+  const closeModal = () => {
+    setOpen(false);
+    try {
+      sessionStorage.removeItem(SHARED_POPUP_KEY);
+    } catch {}
+  };
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") closeModal();
     };
     document.addEventListener("keydown", onKey);
     closeBtnRef.current?.focus();
@@ -128,19 +135,29 @@ export default function ExitIntentModal() {
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        console.log("[exit-intent] /api/leads non-OK, stubbing success", {
+        console.error("[exit-intent] /api/leads non-OK", {
           status: res.status,
           payload,
         });
+        setStatus("error");
+        setErrorMsg(
+          "Couldn't reach our inbox. Try email: info@skynetjoe.com"
+        );
+        return;
       }
     } catch (err) {
-      console.log("[exit-intent] /api/leads not reachable, stubbing success", {
+      console.error("[exit-intent] /api/leads not reachable", {
         err,
         payload,
       });
+      setStatus("error");
+      setErrorMsg(
+        "Couldn't reach our inbox. Try email: info@skynetjoe.com"
+      );
+      return;
     }
     setStatus("success");
-    setTimeout(() => setOpen(false), 2000);
+    setTimeout(() => closeModal(), 2000);
   };
 
   if (!mounted || disabled || !open) return null;
@@ -152,7 +169,7 @@ export default function ExitIntentModal() {
         background: "rgba(26, 26, 26, 0.55)",
         animation: "skynet-exit-fade 0.28s ease-out forwards",
       }}
-      onClick={() => setOpen(false)}
+      onClick={closeModal}
       role="dialog"
       aria-modal="true"
       aria-labelledby="exit-intent-title"
@@ -185,7 +202,7 @@ export default function ExitIntentModal() {
 
         <button
           ref={closeBtnRef}
-          onClick={() => setOpen(false)}
+          onClick={closeModal}
           aria-label="Close"
           className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center transition z-10"
           style={{
@@ -292,6 +309,58 @@ export default function ExitIntentModal() {
                 <div style={{ fontSize: 13, color: "var(--ink-2)" }}>
                   Loom lands in your inbox within 48 hrs.
                 </div>
+              </div>
+            </div>
+          ) : status === "error" ? (
+            <div
+              className="flex items-start gap-3 p-5"
+              style={{
+                background: "var(--cream-2)",
+                border: "1px solid rgba(107,44,44,0.30)",
+                borderLeft: "3px solid var(--oxblood)",
+                borderRadius: 2,
+              }}
+              role="alert"
+            >
+              <div className="min-w-0">
+                <div
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                    marginBottom: 4,
+                  }}
+                >
+                  Something broke.
+                </div>
+                <div
+                  style={{
+                    fontSize: 13,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.5,
+                    marginBottom: 8,
+                  }}
+                >
+                  {errorMsg ||
+                    "Couldn't reach our inbox. Try email: info@skynetjoe.com"}
+                </div>
+                <a
+                  href="mailto:info@skynetjoe.com?subject=Free%20Loom%20funnel%20audit"
+                  style={{
+                    display: "inline-block",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: "var(--terracotta)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.10em",
+                    textDecoration: "underline",
+                    textUnderlineOffset: 3,
+                  }}
+                >
+                  Email info@skynetjoe.com
+                </a>
               </div>
             </div>
           ) : (
