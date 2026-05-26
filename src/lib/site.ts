@@ -37,6 +37,15 @@ function resolveAssetsUrl(): string {
  * Path is relative; metadataBase in layout.tsx resolves it against
  * SITE.assetsUrl at build time so the final absolute URL is correct.
  */
+/**
+ * Canonical booking URL — Calendly.
+ * Single source of truth. Per-tool UTM appended at call site:
+ *   `${CAL_URL}?utm_source=<tool-slug>`
+ *   `${CAL_URL}?${bookingQuery}`
+ */
+export const CAL_URL =
+  "https://calendly.com/skynetlabs/schedule-a-free-consultation";
+
 export const DEFAULT_OG_IMAGE_URL = "/waseem-portrait.jpg";
 export const DEFAULT_OG_IMAGES = [
   {
@@ -77,11 +86,33 @@ export type NavItem = {
   hasMega?: boolean;
   subItems?: NavSubItem[];
 };
+/**
+ * Free tools — canonical list mirroring `src/app/tools/page.tsx`.
+ * Keep in sync when a tool is added/removed.
+ */
+export const TOOL_LINKS: NavSubItem[] = [
+  { label: "AI Readiness Score", href: "/tools/ai-readiness-score", desc: "10 questions, 0-100 score + 4-axis breakdown" },
+  { label: "Agency Stress Quiz", href: "/tools/agency-stress-quiz", desc: "60-second diagnostic — chill to chaos" },
+  { label: "Automation Gap Analyzer", href: "/tools/automation-gap-analyzer", desc: "Find the biggest leak in your ops" },
+  { label: "Before/After Slider", href: "/tools/before-after-slider", desc: "Drag to compare manual vs automated" },
+  { label: "Content Calendar", href: "/tools/content-calendar", desc: "30-day cross-platform post engine" },
+  { label: "Executive Summary Generator", href: "/tools/executive-summary-generator", desc: "Raw notes → TL;DR, email, deck slide" },
+  { label: "Prompt Library", href: "/tools/prompt-library", desc: "50 production-tested AI prompts" },
+  { label: "Revenue Calculator", href: "/tools/revenue-calculator", desc: "What your missed leads cost per month" },
+  { label: "Video Prompt Generator", href: "/tools/video-prompt-generator", desc: "Runway, Pika, Sora, Veo — side-by-side" },
+  { label: "Voice Persona Builder", href: "/tools/voice-persona-builder", desc: "AI system prompt in your brand voice" },
+];
+
 export const NAV_PRIMARY: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Pricing", href: "/pricing" },
   { label: "Services", href: "/services", hasMega: true },
+  {
+    label: "Tools",
+    href: "/tools",
+    subItems: TOOL_LINKS,
+  },
   {
     label: "Portfolio",
     href: "/portfolio",

@@ -11,6 +11,7 @@ import {
   RotateCcw,
   Sparkles,
 } from "lucide-react";
+import EmailGate from "@/components/cta/EmailGate";
 
 const STORAGE_KEY = "skynet:voice-persona-builder:v1";
 
@@ -382,6 +383,7 @@ function isStepValid(state: State): boolean {
 
 export default function Builder({ calUrl }: { calUrl: string }) {
   const [state, setState] = useState<State>(INITIAL_STATE);
+  const [unlocked, setUnlocked] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [phase, setPhase] = useState<"build" | "result">("build");
   const [copied, setCopied] = useState(false);
@@ -518,25 +520,55 @@ export default function Builder({ calUrl }: { calUrl: string }) {
         </div>
         <div className="grid grid-cols-4 gap-2">
           {STEPS.map((s, i) => {
-            const active = phase === "build" ? i === state.step : true;
+            const active = phase === "build" ? i === state.step : false;
             const done = phase === "result" || i < state.step;
+            const bg = done
+              ? "var(--sage)"
+              : active
+                ? "var(--terracotta)"
+                : "var(--cream-3)";
+            const textColor = done || active ? "var(--cream-3)" : "var(--ink-faint)";
+            const borderCol = done
+              ? "var(--sage)"
+              : active
+                ? "var(--terracotta)"
+                : "rgba(26,26,26,0.18)";
             return (
               <div key={s.n}>
                 <div
                   className="h-1.5 rounded-full transition-colors"
                   style={{
-                    background: done || active
-                      ? "linear-gradient(90deg, var(--terracotta) 0%, var(--terracotta) 100%)"
-                      : "rgba(26,26,26,0.12)",
+                    background: done
+                      ? "var(--sage)"
+                      : active
+                        ? "var(--terracotta)"
+                        : "rgba(26,26,26,0.12)",
                   }}
                 />
-                <p
-                  className={`mt-2 text-[11px] sm:text-xs font-semibold uppercase tracking-wider ${
-                    active || done ? "text-[var(--terracotta)]" : "text-[var(--ink-faint)]"
-                  }`}
-                >
-                  {s.n}. {s.label}
-                </p>
+                <div className="mt-2 flex items-center gap-2">
+                  <span
+                    className="inline-flex items-center justify-center rounded-full w-5 h-5 text-[10px] font-extrabold transition-colors"
+                    style={{
+                      background: bg,
+                      color: textColor,
+                      border: `1px solid ${borderCol}`,
+                    }}
+                    aria-hidden
+                  >
+                    {done ? "✓" : s.n}
+                  </span>
+                  <p
+                    className={`text-[11px] sm:text-xs font-semibold uppercase tracking-wider ${
+                      active
+                        ? "text-[var(--terracotta)]"
+                        : done
+                          ? "text-[var(--sage)]"
+                          : "text-[var(--ink-faint)]"
+                    }`}
+                  >
+                    {s.label}
+                  </p>
+                </div>
               </div>
             );
           })}
@@ -773,7 +805,16 @@ export default function Builder({ calUrl }: { calUrl: string }) {
       )}
 
       {/* RESULT */}
-      {phase === "result" && (
+      {phase === "result" && !unlocked && (
+        <EmailGate
+          toolSlug="voice-persona-builder"
+          toolName="Voice Persona Builder"
+          promise="your full brand voice profile"
+          onUnlock={() => setUnlocked(true)}
+        />
+      )}
+
+      {phase === "result" && unlocked && (
         <div
           className="rounded-3xl p-6 md:p-8 mb-6"
           style={{
@@ -868,26 +909,80 @@ export default function Builder({ calUrl }: { calUrl: string }) {
         </div>
       )}
 
+      {/* FEEDBACK */}
+      <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+          — Feedback · 30-second form
+        </p>
+        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+          What should this tool do next?
+        </h3>
+        <p className="text-sm text-[var(--ink-2)] mb-4">
+          One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+        </p>
+        <form action="/api/tool-feedback" method="POST" className="space-y-3">
+          <input type="hidden" name="tool" value="voice-persona-builder" />
+          <textarea
+            name="message"
+            required
+            rows={3}
+            placeholder="What should we improve, fix, or build?"
+            className="vpb-input vpb-textarea"
+            style={{ fontFamily: "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)" }}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email (optional — only if you want a reply)"
+            className="vpb-input"
+          />
+          <button
+            type="submit"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+            style={{ background: "var(--terracotta)" }}
+          >
+            Send feedback →
+          </button>
+        </form>
+      </div>
+
       {/* shared inputs + slider css */}
       <style>{`
         .vpb-input {
           width: 100%;
-          background: rgba(6, 24, 39, 0.55);
+          background: var(--cream-3);
           border: 1px solid rgba(26,26,26,0.18);
-          border-radius: 0.75rem;
-          padding: 0.7rem 0.9rem;
-          color: #fff;
+          border-radius: 12px;
+          padding: 0.85rem 1rem;
+          color: var(--ink);
           font-size: 0.95rem;
           line-height: 1.5;
           outline: none;
-          transition: border-color 0.15s ease, box-shadow 0.15s ease;
+          box-shadow: inset 0 1px 2px rgba(26,26,26,0.04);
+          transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
         }
-        .vpb-input::placeholder { color: rgba(203, 213, 225, 0.45); }
+        .vpb-input::placeholder {
+          color: var(--ink-faint);
+          font-style: italic;
+          font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+          font-size: 0.85rem;
+        }
+        .vpb-input:hover { border-color: rgba(26,26,26,0.28); }
         .vpb-input:focus {
-          border-color: rgba(198,107,63,0.50);
-          box-shadow: 0 0 0 3px rgba(198,107,63,0.15);
+          border-color: var(--terracotta);
+          box-shadow: 0 0 0 3px rgba(198,107,63,0.10), inset 0 1px 2px rgba(26,26,26,0.04);
+          background: #ffffff;
         }
-        .vpb-textarea { resize: vertical; min-height: 96px; }
+        .vpb-textarea { resize: vertical; min-height: 96px; font-family: inherit; }
+        select.vpb-input {
+          appearance: none;
+          -webkit-appearance: none;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C66B3F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+          background-repeat: no-repeat;
+          background-position: right 0.9rem center;
+          background-size: 14px;
+          padding-right: 2.5rem;
+        }
 
         .rc-range {
           -webkit-appearance: none;
@@ -969,12 +1064,12 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-[var(--ink)] mb-1.5">
+      <label className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-1.5">
         {label}
         {required ? <span className="text-[var(--terracotta)] ml-1">*</span> : null}
       </label>
       {children}
-      {hint ? <p className="text-xs text-[var(--ink-faint)] mt-1.5">{hint}</p> : null}
+      {hint ? <p className="text-xs italic text-[var(--ink-faint)] mt-1.5">{hint}</p> : null}
     </div>
   );
 }

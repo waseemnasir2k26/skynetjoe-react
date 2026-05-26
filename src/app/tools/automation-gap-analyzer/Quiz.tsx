@@ -28,10 +28,11 @@ import {
   type AxisMeta,
   type Bucket,
 } from "@/data/automation-gap-questions";
+import EmailGate from "@/components/cta/EmailGate";
 
 const STORAGE_KEY = "skynet:automation-gap:v1";
 const RESULT_TTL_MS = 14 * 24 * 60 * 60 * 1000;
-const CAL_URL = "https://cal.com/waseemnasir/strategy";
+const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 type Phase = "quiz" | "loading" | "result";
 
@@ -67,6 +68,7 @@ export default function Quiz() {
   const [copyState, setCopyState] = useState<"idle" | "copied">("idle");
   const [savedToast, setSavedToast] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   /* hydrate */
@@ -253,6 +255,18 @@ export default function Quiz() {
 
   /* RESULT */
   if (phase === "result") {
+    if (!unlocked) {
+      return (
+        <div ref={cardRef}>
+          <EmailGate
+            toolSlug="automation-gap-analyzer"
+            toolName="Automation Gap Analyzer"
+            promise="your top 3 automation gaps"
+            onUnlock={() => setUnlocked(true)}
+          />
+        </div>
+      );
+    }
     return (
       <div ref={cardRef}>
         <ResultCard

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE, FOOTER_COLUMNS } from "@/lib/site";
+import ToolsStrip from "@/components/cta/ToolsStrip";
 
 const SocialIcon = ({ d, label }: { d: string; label: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-label={label} className="w-4 h-4">
@@ -17,7 +18,19 @@ const ICON_YT = "M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.54
 export default function Footer() {
   const pathname = usePathname();
   if (pathname?.startsWith("/lp/")) return null;
+
+  // ToolsStrip cross-promo: render on every route EXCEPT homepage + /lp/* (already filtered above).
+  // On /tools/[slug] pages, hide the current tool from the strip.
+  const showToolsStrip = pathname !== "/" && pathname !== null && pathname !== undefined;
+  let currentSlug: string | undefined;
+  if (pathname?.startsWith("/tools/")) {
+    const seg = pathname.split("/")[2];
+    if (seg) currentSlug = seg;
+  }
+
   return (
+    <>
+      {showToolsStrip && <ToolsStrip currentSlug={currentSlug} />}
     <footer
       className="mt-24 border-t"
       style={{
@@ -154,5 +167,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

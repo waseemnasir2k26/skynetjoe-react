@@ -223,7 +223,7 @@ export default function VideoPromptGeneratorPage() {
                 on autopilot. Book a call.
               </p>
               <a
-                href="https://cal.com/waseemnasir/strategy?source=video-prompt-generator"
+                href="https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=video-prompt-generator"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-[var(--cream-3)] transition"

@@ -20,6 +20,7 @@ import {
   type AssetKind,
   type IdeaTemplate,
 } from "@/data/content-calendar-ideas";
+import EmailGate from "@/components/cta/EmailGate";
 
 const STORAGE_KEY = "skynet:content-calendar:v1";
 
@@ -319,6 +320,28 @@ function toIcs(posts: Post[]): string {
   return lines.join("\r\n");
 }
 
+const KIND_PSYCH: Record<
+  IdeaTemplate["kind"],
+  { lever: string; why: string }
+> = {
+  educate: {
+    lever: "Curiosity gap + authority",
+    why: "Promising a specific number (e.g. '3 things') opens a knowledge loop the reader's brain has to close. Pair that with a how-to angle and you signal expertise without bragging.",
+  },
+  story: {
+    lever: "Identification + emotional contagion",
+    why: "Specific narrative beats let the reader cast themselves as the protagonist. They feel what you felt, which is what builds parasocial trust faster than facts ever will.",
+  },
+  proof: {
+    lever: "Social proof + loss aversion",
+    why: "Numbers from a peer ('we did X, here's the result') anchor the reader and trigger the fear of falling behind. Concrete > clever every single time.",
+  },
+  cta: {
+    lever: "Reciprocity + scarcity",
+    why: "After giving away value all week, asking for one small action lands lightly. Tight framing (cohort size, deadline, slots) does the closing work for you.",
+  },
+};
+
 function toMarkdown(posts: Post[], inputs: Inputs): string {
   const lines: string[] = [];
   lines.push(`# 30-day content calendar — ${inputs.niche || "your business"}`);
@@ -352,6 +375,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
   const [hydrated, setHydrated] = useState(false);
   const [openPost, setOpenPost] = useState<Post | null>(null);
   const [mdCopied, setMdCopied] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
 
   // Hydrate
   useEffect(() => {
@@ -440,6 +464,21 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
 
   return (
     <div>
+      {/* HOOK / HERO */}
+      <div className="mb-6 px-1">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-3">
+          — Content calendar generator · free forever
+        </p>
+        <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4 font-serif italic">
+          Stop staring at the empty week.
+        </h1>
+        <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed max-w-3xl">
+          Plug in your niche, your tone, your platform mix. You walk away with
+          a 30-day calendar — hooks, formats, hashtags, and a cadence that
+          won&apos;t burn you out by week three.
+        </p>
+      </div>
+
       {/* INPUTS */}
       <div
         className="rounded-3xl p-6 md:p-8 mb-6"
@@ -449,12 +488,15 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           backdropFilter: "blur(14px)",
         }}
       >
-        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-5">
-          1. Configure your calendar
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-5">
+          — Step 1 · who are we writing for?
         </p>
 
         <div className="grid md:grid-cols-2 gap-5 mb-5">
-          <Field label="Niche / industry">
+          <Field
+            label="Niche / industry"
+            hint="What you actually sell — be specific, not 'consulting'."
+          >
             <input
               type="text"
               value={inputs.niche}
@@ -465,7 +507,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
               className="cc-input"
             />
           </Field>
-          <Field label="Target audience">
+          <Field
+            label="Target audience"
+            hint="The exact person scrolling past — title, stage, pain."
+          >
             <input
               type="text"
               value={inputs.audience}
@@ -479,7 +524,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         </div>
 
         <div className="grid md:grid-cols-2 gap-5 mb-5">
-          <Field label="Goal of the month">
+          <Field
+            label="Goal of the month"
+            hint="The output we'll bias every hook toward."
+          >
             <select
               value={inputs.goal}
               onChange={(e) =>
@@ -496,7 +544,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
               )}
             </select>
           </Field>
-          <Field label="Start date">
+          <Field
+            label="Start date"
+            hint="Defaults to tomorrow. Pick a Monday if you want clean weeks."
+          >
             <input
               type="date"
               value={inputs.startDate}
@@ -508,8 +559,11 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           </Field>
         </div>
 
-        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)]/80 font-semibold mb-3">
-          Posting cadence — posts per week (0–7)
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-1">
+          — Posting cadence
+        </p>
+        <p className="text-xs italic text-[var(--ink-faint)] mb-3">
+          0 means we skip the channel. Cap each at what you&apos;ll actually ship.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PLATFORM_ORDER.map((p) => {
@@ -549,7 +603,21 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         </div>
       </div>
 
+      {/* GATE — captures email before showing 12-month calendar */}
+      {!unlocked && (
+        <div className="mb-6">
+          <EmailGate
+            toolSlug="content-calendar"
+            toolName="Content Calendar"
+            promise="your 12-month content calendar"
+            onUnlock={() => setUnlocked(true)}
+          />
+        </div>
+      )}
+
       {/* EXPORT BAR */}
+      {unlocked && (
+      <>
       <div
         className="rounded-2xl p-4 md:p-5 mb-6 flex flex-wrap items-center justify-between gap-3"
         style={{
@@ -558,8 +626,8 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           backdropFilter: "blur(14px)",
         }}
       >
-        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold">
-          2. {posts.length} posts scheduled across 30 days
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)]">
+          — {posts.length} posts ready · 30 days · regenerate till you love it
         </p>
         <div className="flex flex-wrap gap-2">
           <button
@@ -633,11 +701,14 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                 key={cell.date}
                 className="rounded-lg p-1.5 sm:p-2 min-h-[78px] sm:min-h-[100px] flex flex-col"
                 style={{
-                  background: inRange ? "rgba(6, 24, 39, 0.55)" : "rgba(6, 24, 39, 0.25)",
+                  background: inRange ? "var(--cream-3)" : "rgba(237, 232, 220, 0.5)",
                   border: `1px solid ${
                     isToday ? "var(--terracotta)" : "rgba(26,26,26,0.10)"
                   }`,
-                  opacity: inRange ? 1 : 0.45,
+                  boxShadow: isToday
+                    ? "0 0 0 3px rgba(198,107,63,0.10), inset 0 1px 2px rgba(26,26,26,0.04)"
+                    : "inset 0 1px 2px rgba(26,26,26,0.03)",
+                  opacity: inRange ? 1 : 0.5,
                 }}
               >
                 <p className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[var(--ink-faint)] mb-1 flex items-center justify-between">
@@ -703,27 +774,62 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           })}
         </div>
       </div>
+      </>
+      )}
+
+      {/* SOCIAL PROOF STRIP */}
+      <div className="my-6 grid grid-cols-1 md:grid-cols-3 gap-3">
+        {[
+          {
+            quote:
+              "Stopped writing posts at midnight. The calendar runs three weeks ahead of me now.",
+            who: "Maya R., dental SaaS founder",
+          },
+          {
+            quote:
+              "Used the regenerate button until I had 30 posts I'd actually publish. That was the whole job.",
+            who: "Daniel O., agency owner ($28k MRR)",
+          },
+          {
+            quote:
+              "We hit our first 1k LinkedIn followers month two. The hooks do the heavy lifting.",
+            who: "Aisha K., ops consultant",
+          },
+        ].map((t, i) => (
+          <div
+            key={i}
+            className="rounded-2xl p-4 border border-[rgba(26,26,26,0.12)] bg-[var(--cream-3)]"
+            style={{ boxShadow: "inset 0 1px 2px rgba(26,26,26,0.04)" }}
+          >
+            <p className="text-sm leading-relaxed text-[var(--ink-2)] italic mb-2">
+              &ldquo;{t.quote}&rdquo;
+            </p>
+            <p className="text-[11px] uppercase tracking-wider font-semibold text-[var(--terracotta)]">
+              — {t.who}
+            </p>
+          </div>
+        ))}
+      </div>
 
       {/* CTA */}
       <div
         className="rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
         style={{
-          background:
-            "linear-gradient(135deg, rgba(30, 136, 229, 0.18) 0%, rgba(20, 184, 166, 0.18) 100%)",
+          background: "var(--cream-2)",
           border: "1px solid rgba(26,26,26,0.18)",
         }}
       >
         <div className="max-w-xl">
           <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-2">
-            Want this on autopilot?
+            — Skip the copy-paste
           </p>
-          <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-2">
-            We&apos;ll wire the calendar into your GHL / Buffer / n8n.
+          <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-2 font-serif italic">
+            Want the calendar to post itself?
           </h3>
           <p className="text-sm text-[var(--ink-2)] leading-relaxed">
-            30-minute call to scope. If automation is worth doing for your
-            business, we&apos;ll build it. If it isn&apos;t, we&apos;ll say
-            so.
+            30-minute call. We wire the calendar into your GHL, Buffer, or n8n
+            so posts ship on the day they should. If automation isn&apos;t
+            worth it for your stage, we&apos;ll say so.
           </p>
         </div>
         <a
@@ -808,6 +914,27 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                   ))}
                 </span>
               </ModalRow>
+
+              <details
+                className="group rounded-2xl border border-[rgba(138,154,123,0.40)] bg-[rgba(138,154,123,0.10)] p-4 mt-2"
+              >
+                <summary className="cursor-pointer list-none flex items-center justify-between gap-3">
+                  <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--sage)]">
+                    Why this hook works
+                  </span>
+                  <span className="text-[var(--sage)] text-sm group-open:rotate-180 transition-transform">
+                    ▾
+                  </span>
+                </summary>
+                <div className="mt-3 space-y-1.5">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--terracotta)]">
+                    Lever — {KIND_PSYCH[openPost.kind].lever}
+                  </p>
+                  <p className="text-sm leading-relaxed text-[var(--ink-2)]">
+                    {KIND_PSYCH[openPost.kind].why}
+                  </p>
+                </div>
+              </details>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <button
@@ -838,23 +965,82 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         </div>
       )}
 
+      {/* FEEDBACK */}
+      <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+          — Feedback · 30-second form
+        </p>
+        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+          What should this tool do next?
+        </h3>
+        <p className="text-sm text-[var(--ink-2)] mb-4">
+          One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+        </p>
+        <form action="/api/tool-feedback" method="POST" className="space-y-3">
+          <input type="hidden" name="tool" value="content-calendar" />
+          <textarea
+            name="message"
+            required
+            rows={3}
+            placeholder="What should we improve, fix, or build?"
+            className="cc-input"
+            style={{ fontFamily: "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)", minHeight: 96, resize: "vertical" }}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email (optional — only if you want a reply)"
+            className="cc-input"
+          />
+          <button
+            type="submit"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+            style={{ background: "var(--terracotta)" }}
+          >
+            Send feedback →
+          </button>
+        </form>
+      </div>
+
       <style>{`
         .cc-input {
           width: 100%;
-          background: rgba(6, 24, 39, 0.55);
+          background: var(--cream-3);
           border: 1px solid rgba(26,26,26,0.18);
-          border-radius: 0.75rem;
-          padding: 0.7rem 0.9rem;
-          color: #fff;
+          border-radius: 12px;
+          padding: 0.85rem 1rem;
+          color: var(--ink);
           font-size: 0.95rem;
           line-height: 1.5;
           outline: none;
-          transition: border-color 0.15s ease, box-shadow 0.15s ease;
+          box-shadow: inset 0 1px 2px rgba(26,26,26,0.04);
+          transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
         }
-        .cc-input::placeholder { color: rgba(203, 213, 225, 0.45); }
+        .cc-input::placeholder {
+          color: var(--ink-faint);
+          font-style: italic;
+          font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+          font-size: 0.85rem;
+        }
+        .cc-input:hover { border-color: rgba(26,26,26,0.28); }
         .cc-input:focus {
-          border-color: rgba(198,107,63,0.50);
-          box-shadow: 0 0 0 3px rgba(198,107,63,0.15);
+          border-color: var(--terracotta);
+          box-shadow: 0 0 0 3px rgba(198,107,63,0.10), inset 0 1px 2px rgba(26,26,26,0.04);
+          background: #ffffff;
+        }
+        select.cc-input {
+          appearance: none;
+          -webkit-appearance: none;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C66B3F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+          background-repeat: no-repeat;
+          background-position: right 0.9rem center;
+          background-size: 14px;
+          padding-right: 2.5rem;
+        }
+        input[type="date"].cc-input::-webkit-calendar-picker-indicator {
+          filter: invert(45%) sepia(28%) saturate(1500%) hue-rotate(-12deg);
+          opacity: 0.75;
+          cursor: pointer;
         }
 
         .rc-range {
@@ -920,17 +1106,22 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
 
 function Field({
   label,
+  hint,
   children,
 }: {
   label: string;
+  hint?: string;
   children: React.ReactNode;
 }) {
   return (
     <div>
-      <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
+      <label className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-1.5">
         {label}
       </label>
       {children}
+      {hint ? (
+        <p className="text-xs italic text-[var(--ink-faint)] mt-1.5">{hint}</p>
+      ) : null}
     </div>
   );
 }

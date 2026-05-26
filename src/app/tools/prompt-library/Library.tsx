@@ -81,16 +81,39 @@ export default function Library() {
 
   return (
     <div className="space-y-8">
+      {/* HOOK / HERO */}
+      <div className="px-1">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-3">
+          — Prompt library · {PROMPTS.length} working prompts
+        </p>
+        <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4 font-serif italic">
+          The prompts I actually use.
+        </h1>
+        <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed max-w-3xl">
+          Pulled from 18 months of shipped client work — automations, copy,
+          ops, audits. Copy, paste, ship. No course, no Notion template, no
+          upsell. Just the prompts that earned me six figures.
+        </p>
+      </div>
+
       {/* Search + filters */}
       <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md p-5 md:p-7">
+        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-3">
+          — Search the library
+        </p>
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--terracotta)]" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--terracotta)] pointer-events-none" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Search ${PROMPTS.length} prompts by title, use-case, or keyword…`}
-            className="w-full bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] rounded-xl pl-11 pr-10 py-3 text-[var(--ink)] placeholder:text-[var(--ink-faint)] focus:outline-none focus:border-[var(--terracotta)] focus:bg-[var(--cream-2)] transition"
+            className="pl-prompt-search w-full rounded-xl pl-11 pr-10 py-3 text-[var(--ink)] focus:outline-none transition"
+            style={{
+              background: "var(--cream-3)",
+              border: "1px solid rgba(26,26,26,0.18)",
+              boxShadow: "inset 0 1px 2px rgba(26,26,26,0.04)",
+            }}
             aria-label="Search prompts"
           />
           {query && (
@@ -236,29 +259,135 @@ export default function Library() {
         </div>
       )}
 
+      {/* CLOSING PSYCHOLOGY CARD */}
+      <div
+        className="rounded-3xl p-6 md:p-8"
+        style={{
+          background: "var(--cream-2)",
+          border: "1px solid rgba(138,154,123,0.50)",
+          boxShadow: "0 0 0 3px rgba(138,154,123,0.10)",
+        }}
+      >
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--sage)] mb-2">
+          — What you should do next
+        </p>
+        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-4 font-serif italic">
+          Stop collecting prompts. Start shipping outputs.
+        </h3>
+        <ul className="space-y-2.5 mb-6 text-[var(--ink-2)] text-sm md:text-base leading-relaxed">
+          <li className="flex gap-3">
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta)]">
+              1
+            </span>
+            Pick the one prompt your business loses the most time on right now (sales, ops, content). Run it three times this week.
+          </li>
+          <li className="flex gap-3">
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta)]">
+              2
+            </span>
+            Notice what it gets wrong. Edit the prompt, lock the wins, save it inside your CRM or helpdesk.
+          </li>
+          <li className="flex gap-3">
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta)]">
+              3
+            </span>
+            When it&apos;s earning its keep, book a call and we&apos;ll wire it into the rest of your stack.
+          </li>
+        </ul>
+        <a
+          href="https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=prompt-library-closing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+          style={{ background: "var(--terracotta)" }}
+        >
+          Book the call →
+        </a>
+      </div>
+
       {/* Submit-prompt CTA */}
       <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8 text-center">
-        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
-          Missing a prompt?
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-3">
+          — Missing a prompt?
         </p>
-        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-3">
-          Send me yours, I&apos;ll add the good ones.
+        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-3 font-serif italic">
+          Send me yours. I&apos;ll add the good ones.
         </h3>
-        <p className="text-sm text-[var(--ink-2)] max-w-xl mx-auto mb-5">
+        <p className="text-sm text-[var(--ink-2)] max-w-xl mx-auto mb-5 leading-relaxed">
           The library grows from real working prompts, not theoretical ones.
-          Send the prompt + the result it produced and I&apos;ll add it with credit.
+          Send the prompt plus the result it produced — I&apos;ll add it with credit.
         </p>
         <a
           href="mailto:waseem@skynetjoe.com?subject=Prompt%20Library%20submission&body=Category%3A%20%0AUse-case%3A%20%0APrompt%20body%3A%20%0AResult%20it%20produced%3A%20"
-          className="inline-flex items-center gap-2 rounded-xl border border-[var(--terracotta)]/50 bg-[var(--terracotta)]/10 px-5 py-2.5 text-sm font-semibold text-[var(--terracotta)] hover:bg-[var(--terracotta)]/20 transition"
+          className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+          style={{ background: "var(--terracotta)" }}
         >
           <Mail className="h-4 w-4" />
           Submit a prompt
         </a>
       </div>
 
+      {/* FEEDBACK */}
+      <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+          — Feedback · 30-second form
+        </p>
+        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+          What should this tool do next?
+        </h3>
+        <p className="text-sm text-[var(--ink-2)] mb-4">
+          One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+        </p>
+        <form action="/api/tool-feedback" method="POST" className="space-y-3">
+          <input type="hidden" name="tool" value="prompt-library" />
+          <textarea
+            name="message"
+            required
+            rows={3}
+            placeholder="What should we improve, fix, or build?"
+            className="w-full rounded-xl px-4 py-3 text-[var(--ink)] focus:outline-none transition"
+            style={{
+              background: "var(--cream-3)",
+              border: "1px solid rgba(26,26,26,0.18)",
+              boxShadow: "inset 0 1px 2px rgba(26,26,26,0.04)",
+              fontFamily: "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
+              fontSize: "0.875rem",
+            }}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email (optional — only if you want a reply)"
+            className="w-full rounded-xl px-4 py-2.5 text-[var(--ink)] text-sm focus:outline-none transition"
+            style={{
+              background: "var(--cream-3)",
+              border: "1px solid rgba(26,26,26,0.18)",
+              boxShadow: "inset 0 1px 2px rgba(26,26,26,0.04)",
+            }}
+          />
+          <button
+            type="submit"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+            style={{ background: "var(--terracotta)" }}
+          >
+            Send feedback →
+          </button>
+        </form>
+      </div>
+
       {/* Modal */}
       {openPrompt && <PromptModal prompt={openPrompt} onClose={() => setOpenPrompt(null)} />}
+
+      <style jsx>{`
+        .pl-prompt-search:focus {
+          border-color: var(--terracotta) !important;
+          box-shadow: 0 0 0 3px rgba(198,107,63,0.10), inset 0 1px 2px rgba(26,26,26,0.04) !important;
+        }
+        .pl-prompt-search::placeholder {
+          color: var(--ink-faint);
+          font-style: italic;
+        }
+      `}</style>
     </div>
   );
 }

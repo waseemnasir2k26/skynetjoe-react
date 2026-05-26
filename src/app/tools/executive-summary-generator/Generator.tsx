@@ -10,6 +10,7 @@ import {
   Sparkles,
   Wand2,
 } from "lucide-react";
+import EmailGate from "@/components/cta/EmailGate";
 
 const STORAGE_KEY = "skynet:exec-summary:v1";
 
@@ -436,6 +437,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
   const [activeTab, setActiveTab] = useState<TabKey>("tldr");
   const [copied, setCopied] = useState<TabKey | null>(null);
   const [hydrated, setHydrated] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
   const resultRef = useRef<HTMLDivElement | null>(null);
 
   // Hydrate
@@ -622,7 +624,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             <button
               type="button"
               onClick={generate}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-[rgba(26,26,26,0.18)] text-[var(--ink-2)] hover:bg-[var(--cream-2)] transition"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-[rgba(26,26,26,0.18)] bg-[var(--cream-3)] text-[var(--ink)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta)] transition"
             >
               Regenerate
             </button>
@@ -638,7 +640,15 @@ export default function Generator({ calUrl }: { calUrl: string }) {
 
       {/* OUTPUT */}
       <div ref={resultRef}>
-        {bundle && (
+        {bundle && !unlocked && (
+          <EmailGate
+            toolSlug="executive-summary-generator"
+            toolName="Executive Summary Generator"
+            promise="5 polished summary formats"
+            onUnlock={() => setUnlocked(true)}
+          />
+        )}
+        {bundle && unlocked && (
           <div
             className="rounded-3xl p-6 md:p-8 mb-6"
             style={{
@@ -792,7 +802,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               <button
                 type="button"
                 onClick={() => onCopy(activeTab)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.20)] hover:border-[var(--terracotta)] transition"
               >
                 {copied === activeTab ? (
                   <Check className="w-4 h-4" />
@@ -849,27 +859,74 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             Generated locally. Nothing was sent to a server.
           </p>
         )}
+
+        {/* FEEDBACK FORM */}
+        <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
+          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+            — Feedback · 30-second form
+          </p>
+          <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+            What should this tool do next?
+          </h3>
+          <p className="text-sm text-[var(--ink-2)] mb-4">
+            One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+          </p>
+          <form action="/api/tool-feedback" method="POST" className="space-y-3">
+            <input type="hidden" name="tool" value="executive-summary-generator" />
+            <textarea
+              name="message"
+              required
+              rows={3}
+              placeholder="What should we improve, fix, or build?"
+              className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-3 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm font-mono focus:outline-none transition"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email (optional — only if you want a reply)"
+              className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm focus:outline-none transition"
+            />
+            <button type="submit" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition" style={{ background: "var(--terracotta)" }}>
+              Send feedback →
+            </button>
+          </form>
+        </div>
       </div>
 
       <style>{`
         .esg-input {
           width: 100%;
-          background: rgba(6, 24, 39, 0.55);
+          background: var(--cream-3);
           border: 1px solid rgba(26,26,26,0.18);
           border-radius: 0.75rem;
-          padding: 0.7rem 0.9rem;
-          color: #fff;
+          padding: 0.85rem 1.1rem;
+          color: var(--ink);
           font-size: 0.95rem;
           line-height: 1.5;
           outline: none;
+          box-shadow: inset 0 1px 2px rgba(26,26,26,0.04);
           transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
-        .esg-input::placeholder { color: rgba(203, 213, 225, 0.45); }
+        .esg-input::placeholder { color: var(--ink-faint); }
         .esg-input:focus {
           border-color: rgba(198,107,63,0.50);
-          box-shadow: 0 0 0 3px rgba(198,107,63,0.15);
+          box-shadow:
+            inset 0 1px 2px rgba(26,26,26,0.04),
+            0 0 0 3px rgba(198,107,63,0.15);
         }
-        .esg-textarea { resize: vertical; min-height: 180px; font-family: inherit; }
+        .esg-textarea {
+          resize: vertical;
+          min-height: 200px;
+          font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          font-size: 0.9rem;
+          padding: 1rem 1.25rem;
+        }
+        .esg-textarea::placeholder {
+          font-style: italic;
+          font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          font-size: 0.85rem;
+          color: var(--ink-faint);
+        }
 
         .rc-range {
           -webkit-appearance: none;
@@ -908,20 +965,22 @@ export default function Generator({ calUrl }: { calUrl: string }) {
           width: 22px;
           height: 22px;
           border-radius: 50%;
-          background: #ffffff;
+          background: var(--cream-3);
           border: 2px solid var(--terracotta);
           margin-top: -8px;
-          box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(26,26,26,0.12);
+          box-shadow:
+            0 4px 14px rgba(198,107,63,0.30),
+            0 0 0 4px rgba(26,26,26,0.06);
         }
         .rc-range::-moz-range-thumb {
           width: 22px;
           height: 22px;
           border-radius: 50%;
-          background: #ffffff;
+          background: var(--cream-3);
           border: 2px solid var(--terracotta);
-          box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
-            0 0 0 4px rgba(26,26,26,0.12);
+          box-shadow:
+            0 4px 14px rgba(198,107,63,0.30),
+            0 0 0 4px rgba(26,26,26,0.06);
         }
         @media (prefers-reduced-motion: reduce) {
           .rc-range::-webkit-slider-thumb,

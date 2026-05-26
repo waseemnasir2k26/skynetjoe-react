@@ -227,25 +227,32 @@ export default function PromptLibraryPage() {
             <div
               className="rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"
               style={{
-                background:
-                  "var(--ink)",
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.18)",
               }}
             >
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--ink)] mb-4">
-                Want these prompts wired into your stack?
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-3">
+                — Stop collecting prompts
+              </p>
+              <h2
+                className="text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--ink)] mb-4 font-serif italic"
+              >
+                Start shipping outputs.
               </h2>
-              <p className="text-base md:text-lg text-[var(--ink-2)] mb-6 max-w-2xl mx-auto">
-                The prompts work standalone. They work 10x better wired into
-                your CRM, helpdesk, or n8n workflow. Book a strategy call and
-                we&apos;ll map the integration.
+              <p className="text-base md:text-lg text-[var(--ink-2)] mb-6 max-w-2xl mx-auto leading-relaxed">
+                Standalone, the prompts work. Wired into your CRM, helpdesk,
+                or n8n flow they earn back their rent every week. Book a
+                strategy call and we&apos;ll map the integration on a
+                whiteboard with you.
               </p>
               <a
-                href="https://cal.com/waseemnasir/strategy?source=prompt-library"
+                href="https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=prompt-library"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-[var(--cream-3)] transition"
+                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+                style={{ background: "var(--terracotta)" }}
               >
-                Book a strategy call
+                Book the call →
               </a>
             </div>
           </div>

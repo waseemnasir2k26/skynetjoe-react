@@ -7,7 +7,7 @@ import { ChevronRight, Calculator as CalcIcon, Sparkles } from "lucide-react";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import Calculator from "./Calculator";
 
-const CAL_URL = "https://cal.com/skynetjoe/30min";
+const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 export const metadata: Metadata = {
   title:

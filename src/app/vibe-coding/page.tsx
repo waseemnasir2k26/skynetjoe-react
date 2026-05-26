@@ -26,7 +26,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-const CAL_URL = "https://cal.com/skynetjoe/30min";
+const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 export const metadata: Metadata = {
   title:

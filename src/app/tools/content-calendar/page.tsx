@@ -5,7 +5,7 @@ import Calendar from "./Calendar";
 import { Sparkles, CalendarDays, Layers, Download } from "lucide-react";
 
 const PATH = "/tools/content-calendar";
-const CAL_URL = "https://cal.com/skynetjoe/30min?utm_source=content-calendar";
+const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=content-calendar";
 
 export const metadata: Metadata = {
   title:

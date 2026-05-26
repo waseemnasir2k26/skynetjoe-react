@@ -26,10 +26,11 @@ import {
   type Dimension,
   type DimensionMeta,
 } from "@/data/ai-readiness-questions";
+import EmailGate from "@/components/cta/EmailGate";
 
 const STORAGE_KEY = "skynet:ai-readiness:v1";
 const RESULT_TTL_MS = 14 * 24 * 60 * 60 * 1000; // 14 days
-const CAL_URL = "https://cal.com/skynetjoe/30min";
+const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 type Phase = "quiz" | "loading" | "result";
 
@@ -66,6 +67,7 @@ export default function Quiz() {
   const [copyState, setCopyState] = useState<"idle" | "copied">("idle");
   const [savedToast, setSavedToast] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   /* ───── hydrate from URL or localStorage ───── */
@@ -262,6 +264,18 @@ export default function Quiz() {
 
   /* ─────────── RESULT ─────────── */
   if (phase === "result") {
+    if (!unlocked) {
+      return (
+        <div ref={cardRef}>
+          <EmailGate
+            toolSlug="ai-readiness-score"
+            toolName="AI Readiness Score"
+            promise="your AI readiness score + custom roadmap"
+            onUnlock={() => setUnlocked(true)}
+          />
+        </div>
+      );
+    }
     return (
       <div ref={cardRef}>
         <ResultCard

@@ -5,7 +5,7 @@ import Generator from "./Generator";
 import { Sparkles, Timer, ShieldCheck, Wand2 } from "lucide-react";
 
 const PATH = "/tools/executive-summary-generator";
-const CAL_URL = "https://cal.com/skynetjoe/30min?utm_source=exec-summary-generator";
+const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=exec-summary-generator";
 
 export const metadata: Metadata = {
   title:

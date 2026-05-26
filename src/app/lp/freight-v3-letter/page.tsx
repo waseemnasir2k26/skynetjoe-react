@@ -109,7 +109,7 @@ export default function V3Letter() {
       <header className="nav">
         <div className="nav-inner">
           <a href="#" className="brand">Skynet<em>Labs</em></a>
-          <a href="https://cal.com/skynetjoe/audit" className="nav-cta">Book audit</a>
+          <a href="https://calendly.com/skynetlabs/schedule-a-free-consultation" className="nav-cta">Book audit</a>
         </div>
       </header>
 
@@ -199,7 +199,7 @@ export default function V3Letter() {
           <h2>Four slots a month. <em>Two left for June.</em><br />The audit takes fifteen minutes.</h2>
           <p>Eight-hour reply on weekday Bali time. Yes, no, or referral. No commitment. No funnel. Either way you walk with the audit findings.</p>
           <div className="closer-cta-row">
-            <a href="https://cal.com/skynetjoe/audit" className="btn btn-gold">Book the audit →</a>
+            <a href="https://calendly.com/skynetlabs/schedule-a-free-consultation" className="btn btn-gold">Book the audit →</a>
             <a href="/discovery-call" className="btn btn-paper">Apply for a call</a>
           </div>
         </section>
@@ -209,7 +209,7 @@ export default function V3Letter() {
             <div className="grid">
               <div><h5>SkynetLabs</h5><p>One operator. One stack. One roof.<br />Waseem Nasir · Canggu, Bali (GMT+8) + Lahore, Pakistan.</p></div>
               <div><h5>Pages</h5><a href="/services">Services</a><a href="/portfolio">Work</a><a href="/pricing">Pricing</a></div>
-              <div><h5>Reach</h5><a href="https://cal.com/skynetjoe/audit">Book audit</a><a href="/discovery-call">Signal</a><a href="mailto:waseem@skynetjoe.com">Email</a></div>
+              <div><h5>Reach</h5><a href="https://calendly.com/skynetlabs/schedule-a-free-consultation">Book audit</a><a href="/discovery-call">Signal</a><a href="mailto:waseem@skynetjoe.com">Email</a></div>
               <div><h5>Elsewhere</h5><a href="https://www.linkedin.com/in/waseemnasir2k26">LinkedIn</a><a href="https://github.com/waseemnasir2k26">GitHub</a><a href="https://youtube.com/@skynetlabs">YouTube</a></div>
             </div>
             <p className="disclaimer">SkynetLabs provides software, design, and marketing services. Not a freight broker or motor carrier. No FMCSA authority. Software demos are inbound-only and require user consent (TCPA-compliant). Reference 49 CFR 371 governs broker authority and is not implicated by services described herein. Public pricing reflects standard scope as of 2026-06-01 and may vary by custom requirements. © 2026 SkynetLabs · Waseem Nasir.</p>

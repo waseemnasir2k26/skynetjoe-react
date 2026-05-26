@@ -146,7 +146,7 @@ export default function Hero() {
           {/* CTA pair */}
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              href="https://cal.com/waseemnasir/strategy"
+              href="https://calendly.com/skynetlabs/schedule-a-free-consultation"
               target="_blank"
               rel="noopener noreferrer"
               style={{

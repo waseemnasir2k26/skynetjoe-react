@@ -148,36 +148,58 @@ export default function Header() {
                   </div>
                 )}
 
-                {/* Simple subItems dropdown */}
+                {/* Simple subItems dropdown — cream editorial, terracotta accent */}
                 {item.subItems && openDropdown === item.href && (
                   <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 w-[320px] pt-3"
+                    className={`absolute top-full left-1/2 -translate-x-1/2 ${
+                      item.subItems.length > 6 ? "w-[420px]" : "w-[340px]"
+                    } pt-3`}
                     onMouseEnter={() => openDrop(item.href)}
                     onMouseLeave={scheduleClose}
                   >
                     <div
-                      className="rounded-2xl p-2 shadow-2xl"
+                      className="p-2"
                       style={{
-                        background:
-                          "linear-gradient(180deg, rgba(10,32,52,0.98) 0%, rgba(6,24,39,0.98) 100%)",
-                        border: "1px solid rgba(126,228,255,0.14)",
-                        boxShadow:
-                          "0 30px 80px -10px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02) inset",
+                        background: "var(--cream-3)",
+                        border: "1px solid rgba(26,26,26,0.18)",
+                        boxShadow: "0 30px 60px -20px rgba(26,26,26,0.20)",
+                        maxHeight: "min(70vh, 560px)",
+                        overflowY: "auto",
                       }}
                     >
                       {item.subItems.map((sub) => (
                         <Link
                           key={sub.href}
                           href={sub.href}
-                          className="group flex items-start gap-3 p-3 rounded-lg hover:bg-white/[0.04] transition-colors"
+                          className="group flex items-start gap-3 p-3 transition-colors"
+                          style={{
+                            borderLeft: "3px solid transparent",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = "var(--cream-2)";
+                            e.currentTarget.style.borderLeftColor = "var(--terracotta)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "transparent";
+                            e.currentTarget.style.borderLeftColor = "transparent";
+                          }}
                         >
-                          <span className="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-skynet-primary-light group-hover:bg-skynet-primary transition-colors" />
+                          <span
+                            className="flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full"
+                            style={{ background: "var(--terracotta)" }}
+                          />
                           <span className="min-w-0">
-                            <span className="block text-[13px] font-semibold text-fg leading-tight">
+                            <span
+                              className="block text-[13px] font-semibold leading-tight"
+                              style={{ color: "var(--ink)", fontFamily: "var(--font-display)" }}
+                            >
                               {sub.label}
                             </span>
                             {sub.desc && (
-                              <span className="block text-[11px] text-fg-muted leading-snug mt-0.5">
+                              <span
+                                className="block text-[11px] leading-snug mt-0.5"
+                                style={{ color: "var(--ink-2)" }}
+                              >
                                 {sub.desc}
                               </span>
                             )}
@@ -302,11 +324,17 @@ export default function Header() {
                           key={sub.href}
                           href={sub.href}
                           onClick={() => setMobileOpen(false)}
-                          className="block py-2 text-sm text-fg-muted hover:text-skynet-primary-light"
+                          className="block py-2 text-sm transition-colors"
+                          style={{ color: "var(--ink-2)" }}
+                          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-2)")}
                         >
                           {sub.label}
                           {sub.desc && (
-                            <span className="block text-[11px] text-fg-faint mt-0.5">
+                            <span
+                              className="block text-[11px] mt-0.5"
+                              style={{ color: "var(--ink-faint)" }}
+                            >
                               {sub.desc}
                             </span>
                           )}

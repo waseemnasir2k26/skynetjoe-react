@@ -185,6 +185,7 @@ export default function Quiz() {
           onCopy={copyShareLink}
           copyState={copyState}
         />
+        <FeedbackForm />
       </div>
     );
   }
@@ -416,11 +417,10 @@ function ResultCard({
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
               href={`/tools/revenue-calculator?${calcQuery}`}
-              className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--ink)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
+              className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
               style={{
-                background:
-                  "var(--ink)",
-                boxShadow: "0 10px 32px rgba(26,26,26,0.15)",
+                background: "var(--terracotta)",
+                boxShadow: "0 10px 32px rgba(198,107,63,0.25)",
               }}
             >
               <Calculator className="h-4 w-4" />
@@ -429,7 +429,7 @@ function ResultCard({
             </a>
             <a
               href="/discovery-call"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-6 py-4 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:bg-[var(--cream-2)] sm:text-base"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-6 py-4 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:bg-[var(--cream-3)] sm:text-base"
             >
               <CalendarCheck className="h-4 w-4" />
               Book a free 30-min audit
@@ -456,12 +456,49 @@ function ResultCard({
           <button
             type="button"
             onClick={onRestart}
-            className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)]"
+            className="mt-5 inline-flex items-center gap-1.5 rounded-lg border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta)]"
           >
             <RotateCcw className="h-3 w-3" />
             Retake the quiz
           </button>
         </div>
       </div>
+  );
+}
+
+/* ─────────── Feedback form ─────────── */
+
+function FeedbackForm() {
+  return (
+    <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
+      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+        — Feedback · 30-second form
+      </p>
+      <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+        What should this tool do next?
+      </h3>
+      <p className="text-sm text-[var(--ink-2)] mb-4">
+        One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+      </p>
+      <form action="/api/tool-feedback" method="POST" className="space-y-3">
+        <input type="hidden" name="tool" value="agency-stress-quiz" />
+        <textarea
+          name="message"
+          required
+          rows={3}
+          placeholder="What should we improve, fix, or build?"
+          className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-3 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm font-mono focus:outline-none transition"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email (optional — only if you want a reply)"
+          className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm focus:outline-none transition"
+        />
+        <button type="submit" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition" style={{ background: "var(--terracotta)" }}>
+          Send feedback →
+        </button>
+      </form>
+    </div>
   );
 }

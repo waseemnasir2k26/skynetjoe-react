@@ -5,7 +5,7 @@ import Builder from "./Builder";
 import { Sparkles, Timer, ShieldCheck, FileText } from "lucide-react";
 
 const PATH = "/tools/voice-persona-builder";
-const CAL_URL = "https://cal.com/skynetjoe/30min?utm_source=voice-persona-builder";
+const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=voice-persona-builder";
 
 export const metadata: Metadata = {
   title:
