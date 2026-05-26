@@ -1,12 +1,31 @@
-import fs from "fs";
+﻿import fs from "fs";
 import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import type { FC } from "react";
 import { MapPin, ArrowRight } from "lucide-react";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { STATES } from "@/lib/states";
 import JsonLd from "@/components/JsonLd";
+import N8nAutomationLP from "@/components/services/lp/N8nAutomationLP";
+import GoHighLevelLP from "@/components/services/lp/GoHighLevelLP";
+import AiChatbotsLP from "@/components/services/lp/AiChatbotsLP";
+import WordpressSeoLP from "@/components/services/lp/WordpressSeoLP";
+import VibeCodedSitesLP from "@/components/services/lp/VibeCodedSitesLP";
+
+/**
+ * Top-5 service slugs that render a bespoke funnel LP component
+ * instead of the generic <div dangerouslySetInnerHTML> HTML payload.
+ * All other slugs continue on the existing HTML render.
+ */
+const TOP_5_LP: Partial<Record<string, FC>> = {
+  "n8n-automation": N8nAutomationLP,
+  gohighlevel: GoHighLevelLP,
+  "ai-chatbots": AiChatbotsLP,
+  "wordpress-seo": WordpressSeoLP,
+  "vibe-coded-sites": VibeCodedSitesLP,
+};
 
 type ServiceItem = { slug: string; label: string; icon: string; desc: string };
 const SERVICES: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
@@ -14,14 +33,14 @@ const SERVICES: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
 );
 const SLUGS = SERVICES.map((s) => s.slug);
 
-// Build a SEO-grade description (≥140 chars) from the short svc.desc tagline
+// Build a SEO-grade description (â‰¥140 chars) from the short svc.desc tagline
 // so meta-description, OG description, and Service schema all pass length floors.
 function buildLongDescription(svc: ServiceItem): string {
   return (
-    `${svc.label} from ${SITE.brand} — ${svc.desc}. ` +
+    `${svc.label} from ${SITE.brand} â€” ${svc.desc}. ` +
     `Fixed-price scope returned within 48 hours of brief, ship window 5 to 14 days, ` +
     `delivered remotely from Bali by founder ${SITE.founder}. ` +
-    `8-hour weekday reply guarantee, source-controlled deliverables, public pricing — no quote dance.`
+    `8-hour weekday reply guarantee, source-controlled deliverables, public pricing â€” no quote dance.`
   );
 }
 
@@ -41,11 +60,11 @@ export async function generateMetadata({
   if (!svc) return {};
   const longDesc = buildLongDescription(svc);
   return {
-    title: `${svc.label} — ${SITE.brand}`,
+    title: `${svc.label} â€” ${SITE.brand}`,
     description: longDesc,
     alternates: { canonical: `${SITE.url}/services/${svc.slug}` },
     openGraph: {
-      title: `${svc.label} — ${SITE.brand}`,
+      title: `${svc.label} â€” ${SITE.brand}`,
       description: longDesc,
       url: `${SITE.url}/services/${svc.slug}`,
       type: "article",
@@ -53,9 +72,9 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${svc.label} — ${SITE.brand}`,
+      title: `${svc.label} â€” ${SITE.brand}`,
       description: longDesc,
-      creator: "@Skynetjoe1",
+      creator: "@skynetlabs",
     },
   };
 }
@@ -68,13 +87,14 @@ export default async function ServicePage({
   const { slug } = await params;
   if (!SLUGS.includes(slug)) notFound();
 
-  const file = path.join(
-    process.cwd(),
-    "content",
-    "services",
-    `${slug}.html`
-  );
-  const html = fs.readFileSync(file, "utf8");
+  const LPComponent = TOP_5_LP[slug];
+  // Only load the HTML payload for slugs that still use the generic render.
+  const html = LPComponent
+    ? null
+    : fs.readFileSync(
+        path.join(process.cwd(), "content", "services", `${slug}.html`),
+        "utf8"
+      );
   const svc = SERVICES.find((s) => s.slug === slug)!;
 
   const schema = {
@@ -129,12 +149,16 @@ export default async function ServicePage({
       <style>{`
         .cream-state-pill:hover { border-color: var(--terracotta) !important; }
       `}</style>
-      <div
-        className="wn-service-shell"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      {LPComponent ? (
+        <LPComponent />
+      ) : (
+        <div
+          className="wn-service-shell"
+          dangerouslySetInnerHTML={{ __html: html ?? "" }}
+        />
+      )}
 
-      {/* Available in 48 states — feeds the /services/[slug]/in/[state] matrix */}
+      {/* Available in 48 states â€” feeds the /services/[slug]/in/[state] matrix */}
       <section
         className="section"
         style={{

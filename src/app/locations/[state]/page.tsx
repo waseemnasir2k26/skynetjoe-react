@@ -1,11 +1,11 @@
-/**
- * /locations/[state] — programmatic SEO landing for each of 48 US states.
+﻿/**
+ * /locations/[state] â€” programmatic SEO landing for each of 48 US states.
  *
  * Cream-pivot port 2026-05-25:
  *   - Hero: cream-3 bg, Fraunces H1 with terracotta <em>, mono eyebrow
  *   - Stats cards: cream-2 with 1px ink border, Fraunces large numbers
  *   - Service hub: cream cards, terracotta icon wash, no cyan glow
- *   - CTA strip: ink panel with terracotta button (was cyan→teal gradient)
+ *   - CTA strip: ink panel with terracotta button (was cyanâ†’teal gradient)
  *   - Keyword chips: cream-2 with terracotta hover (was cyan-50/200)
  *   - Cities + industries panel: cream-2 with 1px ink border (was dark gradient)
  *   - Nearby states: cream chips with terracotta hover.
@@ -38,8 +38,8 @@ export async function generateMetadata({
   const { state } = await params;
   const s = getStateBySlug(state);
   if (!s) return {};
-  const title = `AI Automation Expert in ${s.name} — n8n, GoHighLevel & AEO | ${SITE.brand}`;
-  const description = `Hire an AI automation expert serving ${s.name} founders. n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents delivered to ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5–14 day ship.`;
+  const title = `AI Automation Expert in ${s.name} â€” n8n, GoHighLevel & AEO | ${SITE.brand}`;
+  const description = `Hire an AI automation expert serving ${s.name} founders. n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents delivered to ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5â€“14 day ship.`;
   return {
     title,
     description,
@@ -55,12 +55,12 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      creator: "@Skynetjoe1",
+      creator: "@skynetlabs",
     },
   };
 }
 
-// Local SEO keyword variants per service × state
+// Local SEO keyword variants per service Ã— state
 function buildKeywordPhrases(svc: SvcItem, s: StateEntry): string[] {
   const label = svc.label;
   return [
@@ -210,7 +210,7 @@ export default async function StatePage({
                 className="w-2 h-2 rounded-full animate-pulse"
                 style={{ background: "var(--terracotta)", display: "inline-block" }}
               />
-              Serving {s.name} · {s.abbr}
+              Serving {s.name} Â· {s.abbr}
             </div>
             <h1
               style={{
@@ -239,7 +239,7 @@ export default async function StatePage({
               already be doing. SkynetLabs builds n8n workflows, GoHighLevel CRM
               systems, AI chatbots and AEO-tuned websites for operators across{" "}
               {s.cities.slice(0, 3).join(", ")} and beyond. Fixed scope, public
-              pricing, 5–14 day ship window — delivered remotely from Bali.
+              pricing, 5â€“14 day ship window â€” delivered remotely from Bali.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -304,7 +304,7 @@ export default async function StatePage({
             {[
               { k: "180+", v: "workflows shipped" },
               { k: "9", v: "countries served" },
-              { k: "5–14d", v: `ship window into ${s.abbr}` },
+              { k: "5â€“14d", v: `ship window into ${s.abbr}` },
             ].map((stat) => (
               <div key={stat.v} style={cardCream}>
                 <div
@@ -349,7 +349,7 @@ export default async function StatePage({
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
               From {s.industries[0]} practices in {s.cities[0]} to{" "}
               {s.industries[1]} firms in {s.cities[1]} and{" "}
-              {s.industries[2]} operations in {s.cities[2]} — these 16 services
+              {s.industries[2]} operations in {s.cities[2]} â€” these 16 services
               are ready to ship into your stack.
             </p>
           </div>
@@ -376,7 +376,7 @@ export default async function StatePage({
                       display: "inline-block",
                     }}
                   />
-                  {cat.name} · {s.name}
+                  {cat.name} Â· {s.name}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {cat.services.map((svc) => {
@@ -551,16 +551,16 @@ export default async function StatePage({
           <div className="max-w-3xl mb-12">
             <div className="mb-5" style={eyebrow}>
               <span style={eyebrowRule} />
-              Local intent · {s.name}
+              Local intent Â· {s.name}
             </div>
             <h2 style={h2Style}>
               Searching in {s.abbr}?{" "}
               <em style={emTerra}>You&apos;re in the right place.</em>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
-              Whatever exact phrase brought you here — &ldquo;n8n expert near{" "}
+              Whatever exact phrase brought you here â€” &ldquo;n8n expert near{" "}
               {s.cities[0]}&rdquo;, &ldquo;GoHighLevel agency in {s.abbr}&rdquo;,
-              &ldquo;AI chatbot consultant for {s.industries[0]}&rdquo; — these
+              &ldquo;AI chatbot consultant for {s.industries[0]}&rdquo; â€” these
               are all the same one operator. Click any phrase to scope that
               service for {s.name}.
             </p>
@@ -598,7 +598,7 @@ export default async function StatePage({
                           letterSpacing: "-0.01em",
                         }}
                       >
-                        {svc.label} — {s.name}
+                        {svc.label} â€” {s.name}
                       </h3>
                       <p style={{ fontSize: 13, color: "var(--ink-faint)", lineHeight: 1.5 }}>
                         {svc.desc}
@@ -809,7 +809,7 @@ export default async function StatePage({
                   border: "1px solid var(--terracotta)",
                 }}
               >
-                All 48 states →
+                All 48 states â†’
               </Link>
             </div>
           </div>

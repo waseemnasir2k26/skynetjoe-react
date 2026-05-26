@@ -8,7 +8,7 @@
 .wn-service .wn-hero>*{position:relative;z-index:1}
 .wn-service .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--wn-accent-a);padding:.35rem .75rem;border:1px solid color-mix(in srgb,var(--wn-accent-a) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--wn-accent-a) 8%,transparent);margin-bottom:1.25rem}
 .wn-service h1{font-size:clamp(1.85rem,4vw,3rem);font-weight:800;line-height:1.1;margin:0 0 1.25rem;letter-spacing:-.02em}
-.wn-service h1 .wn-grad{background:linear-gradient(120deg,var(--wn-accent-a),var(--wn-accent-b));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-service h1 .wn-grad{color:var(--wn-accent-a);-webkit-text-fill-color:var(--wn-accent-a)}
 .wn-service .wn-lede{font-size:1.1rem;color:var(--wn-fg-muted);max-width:62ch;margin:0 0 1.5rem}
 .wn-service h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;margin:0 0 1.25rem;letter-spacing:-.01em;color:var(--wn-fg)}
 .wn-service h3{font-size:1.05rem;font-weight:600;margin:0 0 .5rem;color:var(--wn-fg)}
@@ -26,7 +26,7 @@
 .wn-service .wn-card:hover{border-color:color-mix(in srgb,var(--wn-accent-a) 45%,var(--wn-border))}
 .wn-service .wn-card svg{color:var(--wn-accent-a);width:22px;height:22px;margin-bottom:.75rem}
 .wn-service .wn-card p{font-size:.95rem;margin:0;color:var(--wn-fg-muted)}
-.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
+.wn-service .wn-step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:var(--wn-accent-a);color:#FAF7F0;font-weight:800;font-size:.9rem;margin-bottom:.65rem}
 .wn-service .wn-step-day{display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wn-accent-b);margin-top:.5rem;padding:.2rem .55rem;border:1px solid color-mix(in srgb,var(--wn-accent-b) 35%,transparent);border-radius:999px}
 .wn-service .wn-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
 .wn-service .wn-stack span{font-size:.85rem;padding:.4rem .8rem;background:var(--wn-surface-alt);border:1px solid var(--wn-border);border-radius:8px;color:var(--wn-fg)}
@@ -44,28 +44,28 @@
 .wn-service details summary{cursor:pointer;padding:1rem 1.15rem;font-weight:600;color:var(--wn-fg);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .wn-service details summary::-webkit-details-marker{display:none}
 .wn-service details summary::after{content:"+";font-size:1.3rem;color:var(--wn-accent-a);transition:transform .2s ease}
-.wn-service details[open] summary::after{content:"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ"}
+.wn-service details[open] summary::after{content:"−"}
 .wn-service details .wn-faq-body{padding:0 1.15rem 1.15rem;color:var(--wn-fg-muted);font-size:.95rem}
 .wn-service .wn-cta-block{text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--wn-border);background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--wn-accent-a) 6%,transparent))}
 .wn-service .wn-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
 .wn-service .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease}
-.wn-service .wn-btn-primary{background:linear-gradient(135deg,var(--wn-accent-a),var(--wn-accent-b));color:#0a0a0a;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
-.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 40%,transparent)}
+.wn-service .wn-btn-primary{background:var(--wn-accent-a);color:#FAF7F0;box-shadow:0 4px 20px color-mix(in srgb,var(--wn-accent-a) 30%,transparent)}
+.wn-service .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px color-mix(in srgb,var(--wn-accent-a) 50%,transparent);filter:brightness(1.08)}
 .wn-service .wn-btn-ghost{background:transparent;color:var(--wn-fg);border:1px solid var(--wn-border)}
 .wn-service .wn-btn-ghost:hover{border-color:var(--wn-accent-a);color:var(--wn-accent-a)}
 .wn-service .wn-vuln{padding:1.4rem 1.5rem;border-left:3px solid var(--wn-accent-b);background:color-mix(in srgb,var(--wn-accent-b) 6%,transparent);font-style:italic;color:var(--wn-fg-muted);margin:1.5rem 0;border-radius:0 8px 8px 0}
 html.light .wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B65;--wn-bg:#F2EFE6;--wn-surface:#EDE8DC;--wn-surface-alt:#FAF7F0;--wn-border:rgba(26,26,26,.10)}
-.wn-service-social-automation{--wn-accent-a:#6B2C2C;--wn-accent-b:#C9A96E}
+.wn-service-social-automation{--wn-accent-a:#C66B3F;--wn-accent-b:#C9A96E}
 </style>
 
 <header class="wn-hero">
   <div class="wn-wrap">
-    <span class="wn-eyebrow">Social ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Auto-post + DM</span>
+    <span class="wn-eyebrow">Social · Auto-post + DM</span>
     <h1>Your DMs sit unread for 48 hours. <span class="wn-grad">The buyer already followed someone else.</span></h1>
-    <p class="wn-lede">You posted three reels this week and replied to two DMs out of forty. The window for an Instagram first-reply is six minutes, not six hours. We wire the auto-post calendar, the keyword-triggered DM responder, and the human escalation layer so the ones that matter still land on your screen.</p>
+    <p class="wn-lede">Posted three reels this week and replied to two DMs out of forty. The window for an Instagram first-reply is six minutes, not six hours. I wire the auto-post calendar, the keyword-triggered DM responder, and the human-escalation layer so the buyers that matter still land on your screen. Same pattern Wellness DNA runs today.</p>
     <div class="wn-cta-row">
-      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
-      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+      <a href="/discovery-call" class="wn-btn wn-btn-primary">Book the channel audit</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See real builds</a>
     </div>
     <aside aria-label="Direct answer" style="margin-top:2rem;background:linear-gradient(135deg,rgba(198,107,63,.08),rgba(201,169,110,.06));border:1px solid rgba(26,26,26,.10);border-radius:12px;padding:1.2rem 1.4rem;">
       <p style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--wn-accent-a);font-weight:700;margin:0 0 8px;">What is social media automation?</p>
@@ -87,7 +87,7 @@ html.light .wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B
       <div class="wn-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/><path d="M9 16h6"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
         <h3>Keyword DM responder</h3>
-        <p>Someone comments "price" or DMs "info" ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ManyChat or a custom Signal Cloud API flow sends the menu, the calendar link, and routes to a human if they keep going.</p>
+        <p>Someone comments "price" or DMs "info" — ManyChat or a custom Signal Cloud API flow sends the menu, the calendar link, and routes to a human if they keep going.</p>
       </div>
       <div class="wn-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
@@ -113,17 +113,17 @@ html.light .wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B
   </div>
 </section>
 
-<div class="wn-vuln wn-wrap" style="max-width:62rem">There's a reason "social automation" sounds shady ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â half the tools selling it are using grey-hat session hijacking that wakes you up to a banned account. We use only official Meta, TikTok, and LinkedIn APIs. Slower to set up. Doesn't get banned.</div>
+<div class="wn-vuln wn-wrap" style="max-width:62rem">There's a reason "social automation" sounds shady — half the tools selling it are using grey-hat session hijacking that wakes you up to a banned account. We use only official Meta, TikTok, and LinkedIn APIs. Slower to set up. Doesn't get banned.</div>
 
 <section class="wn-section">
   <div class="wn-wrap">
     <p class="wn-section-title">Process</p>
     <h2>From three posts a week to a real channel</h2>
     <div class="wn-grid wn-grid-4">
-      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>We audit your platforms, your posting cadence, your DM inbox, and your reply latency. You get a weekly content brief template.</p><span class="wn-step-day">Day 1ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ3</span></div>
-      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Content pillar map, posting calendar, DM responder script, keyword triggers, escalation rules. You sign off the tone and the trigger words.</p><span class="wn-step-day">Day 4ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ6</span></div>
-      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Wire ManyChat or Signal Cloud API, connect Buffer or Hootsuite or Publer, hook up Looker Studio, run a parallel week before going live.</p><span class="wn-step-day">Day 7ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ11</span></div>
-      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>Loom walkthroughs, runbook per platform, one calendar your team owns, monthly review booked.</p><span class="wn-step-day">Day 12ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ14</span></div>
+      <div class="wn-card"><span class="wn-step-num">1</span><h3>Discover</h3><p>We audit your platforms, your posting cadence, your DM inbox, and your reply latency. You get a weekly content brief template.</p><span class="wn-step-day">Day 1—3</span></div>
+      <div class="wn-card"><span class="wn-step-num">2</span><h3>Design</h3><p>Content pillar map, posting calendar, DM responder script, keyword triggers, escalation rules. You sign off the tone and the trigger words.</p><span class="wn-step-day">Day 4—6</span></div>
+      <div class="wn-card"><span class="wn-step-num">3</span><h3>Ship</h3><p>Wire ManyChat or Signal Cloud API, connect Buffer or Hootsuite or Publer, hook up Looker Studio, run a parallel week before going live.</p><span class="wn-step-day">Day 7—11</span></div>
+      <div class="wn-card"><span class="wn-step-num">4</span><h3>Hand-off</h3><p>Loom walkthroughs, runbook per platform, one calendar your team owns, monthly review booked.</p><span class="wn-step-day">Day 12—14</span></div>
     </div>
   </div>
 </section>
@@ -143,9 +143,9 @@ html.light .wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B
     <p class="wn-section-title">Proof</p>
     <h2>Real channels we wired</h2>
     <div class="wn-proof">
-      <div class="wn-proof-item"><span class="wn-metric">6 min reply</span>Wellness brand's DM-to-first-reply dropped from 9 hours via keyword triggers.</div>
-      <div class="wn-proof-item"><span class="wn-metric">6 platforms</span>One calendar driving IG, FB, LI, TikTok, X, Pinterest for a Bali consultancy. No platform-specific rewrites needed.</div>
-      <div class="wn-proof-item"><span class="wn-metric">0 bans</span>Two years running on Meta + TikTok official APIs across nine accounts. No grey-hat automations.</div>
+      <div class="wn-proof-item"><span class="wn-metric">Wellness DNA · 6min reply</span>DM-to-first-reply dropped from 9 hours via ManyChat keyword triggers + Signal handoff. Booked calls doubled in 30 days.</div>
+      <div class="wn-proof-item"><span class="wn-metric">GutReno · 6 platforms</span>One calendar driving IG, FB, LI, TikTok, X, Pinterest. No platform-specific rewrites. Runs in 45min/day from Milk &amp; Madu.</div>
+      <div class="wn-proof-item"><span class="wn-metric">0 bans · 2 years</span>Meta + TikTok official APIs across 9 accounts. No grey-hat automations. Survives every platform audit.</div>
     </div>
   </div>
 </section>
@@ -156,7 +156,7 @@ html.light .wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B
     <h2>Build then run, not run then guess</h2>
     <div class="wn-price-tiers">
       <div class="wn-price"><div class="wn-tier">Starts at</div><div class="wn-amt">$750</div><div class="wn-cadence">Two platforms wired, DM responder, scheduling, one dashboard.</div></div>
-      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$1,500ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ$3,000</div><div class="wn-cadence">Four to six platforms, ManyChat + Signal Cloud API, full content calendar, escalation routing.</div></div>
+      <div class="wn-price"><div class="wn-tier">Typical build</div><div class="wn-amt">$1,500—$3,000</div><div class="wn-cadence">Four to six platforms, ManyChat + Signal Cloud API, full content calendar, escalation routing.</div></div>
       <div class="wn-price"><div class="wn-tier">Retainer</div><div class="wn-amt">From $497/mo</div><div class="wn-cadence">Monthly content scheduling, responder script updates, weekly dashboard review.</div></div>
     </div>
   </div>
@@ -167,8 +167,8 @@ html.light .wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B
     <p class="wn-section-title">Questions</p>
     <h2>Common questions</h2>
     <details><summary>Will my account get banned?</summary><div class="wn-faq-body">Not if we build it with official APIs. The bans you see online come from session-hijack tools that scrape DMs or auto-follow at scale. We use Meta Graph, TikTok Business, and LinkedIn's official APIs. They are rate-limited and slower, but they are also approved and audited.</div></details>
-    <details><summary>Do you write the content too?</summary><div class="wn-faq-body">If you want. Our default is wiring the engine and training your team to feed it. We have a sister content workflow that ships 5 to 10 posts a week in your voice using a locked template ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â that's a separate engagement. Most clients run their own content and just want the plumbing.</div></details>
-    <details><summary>What about LinkedIn ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â can we automate it?</summary><div class="wn-faq-body">Selectively. LinkedIn is the most aggressive about banning. We use the official API for posting, the official content library for scheduling, and we do not touch automated outreach or connection requests. Connections still go through a human.</div></details>
+    <details><summary>Do you write the content too?</summary><div class="wn-faq-body">If you want. Our default is wiring the engine and training your team to feed it. We have a sister content workflow that ships 5 to 10 posts a week in your voice using a locked template — that's a separate engagement. Most clients run their own content and just want the plumbing.</div></details>
+    <details><summary>What about LinkedIn — can we automate it?</summary><div class="wn-faq-body">Selectively. LinkedIn is the most aggressive about banning. We use the official API for posting, the official content library for scheduling, and we do not touch automated outreach or connection requests. Connections still go through a human.</div></details>
     <details><summary>How does the Signal side stay compliant?</summary><div class="wn-faq-body">We use the Signal Cloud API, not WA Web scrapers. That means business-initiated messages need approved templates (we get them approved), and any session message has to be inside the 24-hour window. We document every flow so you can pass a Meta business audit.</div></details>
     <details><summary>Can you measure conversions, not just vanity metrics?</summary><div class="wn-faq-body">Yes. We tag every keyword-triggered DM with a source label, pass it through to your CRM, and join it back to closed deal value in Looker Studio. The weekly digest shows DMs to booked calls to closed work, not "impressions up 14 percent".</div></details>
   </div>
@@ -177,15 +177,15 @@ html.light .wn-service{--wn-fg:#1A1A1A;--wn-fg-muted:#3A3A36;--wn-fg-faint:#6B6B
 <div class="wn-cta-block">
   <div class="wn-wrap">
     <h2>Stop losing buyers in your unread folder.</h2>
-    <p class="wn-lede" style="margin:0 auto">60-minute audit, posting calendar template, DM responder script ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â yours either way.</p>
+    <p class="wn-lede" style="margin:0 auto">60-minute audit, posting calendar template, DM responder script — yours either way.</p>
     <div class="wn-cta-row">
-      <a href="/contact" class="wn-btn wn-btn-primary">Start the brief</a>
-      <a href="/case-studies" class="wn-btn wn-btn-ghost">See case studies</a>
+      <a href="/discovery-call" class="wn-btn wn-btn-primary">Start the brief</a>
+      <a href="/case-studies" class="wn-btn wn-btn-ghost">See real builds</a>
     </div>
   </div>
 </div>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Social Media Automation","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Cross-platform scheduling, keyword-triggered DM responder, Signal Cloud API handoff, and weekly performance dashboard.","serviceType":"Social media automation"},{"@type":"Offer","name":"Social Automation engagement","priceCurrency":"USD","price":"750","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"750","maxPrice":"3000"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does social media automation cost?","acceptedAnswer":{"@type":"Answer","text":"SkynetLabs social media automation builds start at $750 for a cross-platform scheduler plus a single ManyChat keyword funnel. Typical builds with multi-platform DM funnels and Signal handoff run $1,500-$3,000. Ongoing retainers from $497/mo."}},{"@type":"Question","name":"What is the difference between Hootsuite and social media automation?","acceptedAnswer":{"@type":"Answer","text":"Hootsuite is a scheduler ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it queues posts. Social media automation as SkynetLabs ships it includes the scheduler plus a keyword-triggered DM responder, Signal handoff, human escalation layer, and attribution dashboard. The DM layer is where the bookings actually come from."}},{"@type":"Question","name":"Do I need a separate tool for each platform?","acceptedAnswer":{"@type":"Answer","text":"No. The pipeline uses one scheduling tool (typically Metricool, Buffer, or n8n direct API calls) across Instagram, TikTok, Facebook, LinkedIn, and X. DM responders are unified through ManyChat (Meta platforms) plus Signal Cloud API. One operator can run all five channels in 45 minutes a day."}},{"@type":"Question","name":"How fast does the DM responder reply to leads?","acceptedAnswer":{"@type":"Answer","text":"Under 30 seconds on average for ManyChat keyword matches, including the Signal template send. Human escalation routes to your phone via Telegram or Slack within five minutes for any non-matched buyer-intent message."}}]}]}
+{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Social Media Automation","provider":{"@type":"Organization","name":"SkynetLabs","url":"https://skynetjoe.com"},"areaServed":"Worldwide","description":"Cross-platform scheduling, keyword-triggered DM responder, Signal Cloud API handoff, and weekly performance dashboard.","serviceType":"Social media automation"},{"@type":"Offer","name":"Social Automation engagement","priceCurrency":"USD","price":"750","priceSpecification":{"@type":"PriceSpecification","priceCurrency":"USD","minPrice":"750","maxPrice":"3000"},"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SkynetLabs"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does social media automation cost?","acceptedAnswer":{"@type":"Answer","text":"SkynetLabs social media automation builds start at $750 for a cross-platform scheduler plus a single ManyChat keyword funnel. Typical builds with multi-platform DM funnels and Signal handoff run $1,500-$3,000. Ongoing retainers from $497/mo."}},{"@type":"Question","name":"What is the difference between Hootsuite and social media automation?","acceptedAnswer":{"@type":"Answer","text":"Hootsuite is a scheduler — it queues posts. Social media automation as SkynetLabs ships it includes the scheduler plus a keyword-triggered DM responder, Signal handoff, human escalation layer, and attribution dashboard. The DM layer is where the bookings actually come from."}},{"@type":"Question","name":"Do I need a separate tool for each platform?","acceptedAnswer":{"@type":"Answer","text":"No. The pipeline uses one scheduling tool (typically Metricool, Buffer, or n8n direct API calls) across Instagram, TikTok, Facebook, LinkedIn, and X. DM responders are unified through ManyChat (Meta platforms) plus Signal Cloud API. One operator can run all five channels in 45 minutes a day."}},{"@type":"Question","name":"How fast does the DM responder reply to leads?","acceptedAnswer":{"@type":"Answer","text":"Under 30 seconds on average for ManyChat keyword matches, including the Signal template send. Human escalation routes to your phone via Telegram or Slack within five minutes for any non-matched buyer-intent message."}}]}]}
 </script>
 </article>

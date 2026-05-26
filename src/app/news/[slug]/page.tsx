@@ -58,7 +58,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: a.title,
       description: a.description,
-      creator: "@Skynetjoe1",
+      creator: "@skynetlabs",
     },
   };
 }
@@ -280,7 +280,7 @@ export default async function NewsArticlePage({
                 sizes="(min-width: 1024px) 880px, 100vw"
                 style={{
                   objectFit: "cover",
-                  objectPosition: a.heroPosition ?? "center",
+                  objectPosition: a.heroPosition ?? "center top",
                   filter: "sepia(0.06) saturate(0.95)",
                 }}
               />
@@ -566,6 +566,7 @@ export default async function NewsArticlePage({
                         sizes="(min-width: 1024px) 33vw, 50vw"
                         style={{
                           objectFit: "cover",
+                          objectPosition: r.heroPosition ?? "center top",
                           filter: "sepia(0.06) saturate(0.95)",
                         }}
                       />

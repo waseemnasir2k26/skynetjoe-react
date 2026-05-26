@@ -1,4 +1,4 @@
-import fs from "fs";
+﻿import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
@@ -11,14 +11,14 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "Waseem Nasir — Founder, SkynetLabs",
+  title: "Waseem Nasir â€” Founder, SkynetLabs",
   description:
-    "I build automation that doesn't need me to babysit it. Lahore → Singapore → Bangkok → KL → Bali. 180+ workflows, 40+ websites, 9 countries served.",
+    "I build automation that doesn't need me to babysit it. Lahore â†’ Singapore â†’ Bangkok â†’ KL â†’ Bali. 180+ workflows, 40+ websites, 9 countries served.",
   alternates: { canonical: `${SITE.url}/author/waseem-nasir` },
   openGraph: {
-    title: "Waseem Nasir — Founder, SkynetLabs",
+    title: "Waseem Nasir â€” Founder, SkynetLabs",
     description:
-      "Founder of SkynetLabs. n8n automation, AI chatbots and conversion-tuned websites — built from Bali.",
+      "Founder of SkynetLabs. n8n automation, AI chatbots and conversion-tuned websites â€” built from Bali.",
     url: `${SITE.url}/author/waseem-nasir`,
     type: "profile",
     images: [
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Waseem Nasir — Founder, SkynetLabs",
+    title: "Waseem Nasir â€” Founder, SkynetLabs",
     description:
       "I build automation that doesn't need me to babysit it. 180+ workflows, 40+ websites, 9 countries.",
-    creator: "@Skynetjoe1",
+    creator: "@skynetlabs",
     images: ["/waseem-portrait.jpg"],
   },
 };
@@ -47,7 +47,7 @@ const schema = {
       "@type": "ProfilePage",
       "@id": `${SITE.url}/author/waseem-nasir#profilepage`,
       url: `${SITE.url}/author/waseem-nasir`,
-      name: `${SITE.founder} — Founder, ${SITE.brand}`,
+      name: `${SITE.founder} â€” Founder, ${SITE.brand}`,
       mainEntity: { "@id": `${SITE.url}/#person` },
       inLanguage: "en",
     },
@@ -94,17 +94,17 @@ const schema = {
       },
       alumniOf: {
         "@type": "EducationalOrganization",
-        name: "Self-taught — 180+ shipped automation workflows and 40+ websites since 2022",
+        name: "Self-taught â€” 180+ shipped automation workflows and 40+ websites since 2022",
       },
       award: [
-        "180+ n8n workflows shipped (2022–2026)",
+        "180+ n8n workflows shipped (2022â€“2026)",
         "40+ websites delivered across 9 countries",
         "Top Rated Plus on Upwork",
       ],
       sameAs: [
         "https://www.linkedin.com/in/waseemnasir",
         SITE.social.linkedin,
-        "https://x.com/waseemnasir",
+        "https://x.com/skynetlabs",
         SITE.social.twitter,
         SITE.social.github,
         SITE.social.fiverr,

@@ -31,6 +31,69 @@ export default function HtmlCreamWrap({ html }: { html: string }) {
         .cream-html-wrap article[class*="wn-"] {
           background: var(--cream) !important;
           font-family: var(--font-sans) !important;
+
+          /* CSS-custom-prop overrides — fixes author page + any payload
+             that drives surface via --a-*, --x-*, --p-* dark tokens. */
+          --a-bg: var(--cream) !important;
+          --a-bg-alt: var(--cream-2) !important;
+          --a-surface: var(--cream-2) !important;
+          --a-surface-2: var(--cream-3) !important;
+          --a-fg: var(--ink) !important;
+          --a-fg-muted: var(--ink-2) !important;
+          --a-fg-faint: var(--ink-faint) !important;
+          --a-border: rgba(26,26,26,0.10) !important;
+          --a-border-strong: rgba(26,26,26,0.18) !important;
+          --a-green: var(--terracotta) !important;
+          --a-green-dark: var(--oxblood) !important;
+          --a-green-light: var(--terracotta) !important;
+          --a-purple: var(--ochre) !important;
+          --a-purple-light: var(--ochre) !important;
+          --a-cyan: var(--terracotta) !important;
+
+          /* Generic dark-token names other payloads may use */
+          --bg: var(--cream) !important;
+          --surface: var(--cream-2) !important;
+          --panel: var(--cream-2) !important;
+          --card: var(--cream-2) !important;
+          --fg: var(--ink) !important;
+          --muted: var(--ink-2) !important;
+          --accent: var(--terracotta) !important;
+        }
+
+        /* Direct descendants — force cream surface on any wn-* sub-element
+           that escaped the explicit whitelist below. Safety net. */
+        .cream-html-wrap article[class*="wn-"] [class*="wn-a-"],
+        .cream-html-wrap article[class*="wn-"] [class*="wn-l"],
+        .cream-html-wrap article[class*="wn-"] .wn-wrap,
+        .cream-html-wrap article[class*="wn-"] .wn-verdict,
+        .cream-html-wrap article[class*="wn-"] .wn-verdict > div,
+        .cream-html-wrap article[class*="wn-"] .wn-verdict-line,
+        .cream-html-wrap article[class*="wn-"] .wn-arrow,
+        .cream-html-wrap article[class*="wn-"] .wn-byline,
+        .cream-html-wrap article[class*="wn-"] .wn-updated,
+        .cream-html-wrap article[class*="wn-"] .wn-direct-label,
+        .cream-html-wrap article[class*="wn-"] .wn-q-stat,
+        .cream-html-wrap article[class*="wn-"] .wn-q-claim,
+        .cream-html-wrap article[class*="wn-"] .wn-q-source {
+          background-color: transparent !important;
+          color: var(--ink-2) !important;
+        }
+
+        /* Layer chips (.wn-l1 etc) — keep accent tint but on cream */
+        .cream-html-wrap article[class*="wn-"] [class*="wn-l"][class*="wn-l1"],
+        .cream-html-wrap article[class*="wn-"] [class*="wn-l"][class*="wn-l2"],
+        .cream-html-wrap article[class*="wn-"] [class*="wn-l"][class*="wn-l3"],
+        .cream-html-wrap article[class*="wn-"] [class*="wn-l"][class*="wn-l4"],
+        .cream-html-wrap article[class*="wn-"] [class*="wn-l"][class*="wn-l5"] {
+          background-color: var(--cream-3) !important;
+          border-color: rgba(198,107,63,0.30) !important;
+        }
+
+        /* Quotables stat numerals → terracotta (single color event) */
+        .cream-html-wrap article[class*="wn-"] .wn-q-stat,
+        .cream-html-wrap article[class*="wn-"] .wn-direct-label {
+          color: var(--terracotta) !important;
+          font-family: var(--font-display) !important;
         }
 
         /* Headings → Fraunces, ink */
@@ -185,8 +248,32 @@ export default function HtmlCreamWrap({ html }: { html: string }) {
         .cream-html-wrap article[class*="wn-"] [style*="color:#1E88E5"],
         .cream-html-wrap article[class*="wn-"] [style*="color:#14B8A6"],
         .cream-html-wrap article[class*="wn-"] [style*="color:#00D4FF"],
-        .cream-html-wrap article[class*="wn-"] [style*="color:#5EEAD4"] {
+        .cream-html-wrap article[class*="wn-"] [style*="color:#5EEAD4"],
+        .cream-html-wrap article[class*="wn-"] [style*="color:#a78bfa"],
+        .cream-html-wrap article[class*="wn-"] [style*="color:#f472b6"],
+        .cream-html-wrap article[class*="wn-"] [style*="color:#1565C0"],
+        .cream-html-wrap article[class*="wn-"] [style*="color:#42A5F5"],
+        .cream-html-wrap article[class*="wn-"] [style*="color:#fbbf24"],
+        .cream-html-wrap article[class*="wn-"] [style*="color:#60a5fa"] {
           color: var(--terracotta) !important;
+        }
+
+        /* Inline-style backgrounds w/ known dark hex → cream-2 */
+        .cream-html-wrap article[class*="wn-"] [style*="background:#100f14"],
+        .cream-html-wrap article[class*="wn-"] [style*="background:#17161d"],
+        .cream-html-wrap article[class*="wn-"] [style*="background:#1f1d28"],
+        .cream-html-wrap article[class*="wn-"] [style*="background:#1a1318"],
+        .cream-html-wrap article[class*="wn-"] [style*="background-color:#100f14"],
+        .cream-html-wrap article[class*="wn-"] [style*="background-color:#17161d"] {
+          background: var(--cream-2) !important;
+          background-color: var(--cream-2) !important;
+        }
+
+        /* Gradient backgrounds on .wn-cta / .wn-direct / .wn-tldr → flat cream-2 */
+        .cream-html-wrap article[class*="wn-"] .wn-direct,
+        .cream-html-wrap article[class*="wn-"] .wn-tldr {
+          background: var(--cream-2) !important;
+          border: 1px solid rgba(26,26,26,0.14) !important;
         }
       `}</style>
       <div dangerouslySetInnerHTML={{ __html: html }} />

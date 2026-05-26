@@ -1,4 +1,4 @@
-import fs from "fs";
+﻿import fs from "fs";
 import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      creator: "@Skynetjoe1",
+      creator: "@skynetlabs",
     },
   };
 }
@@ -72,7 +72,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       "@type": "Organization",
       name: SITE.brand,
       url: SITE.url,
-      logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/og-default.png` },
+      logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/waseem-portrait.jpg`, width: 1200, height: 1200 },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/blog/${post.slug}` },
     keywords: post.tags.join(", "),

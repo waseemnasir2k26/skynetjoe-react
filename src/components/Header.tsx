@@ -176,7 +176,7 @@ export default function Header() {
                             borderLeft: "3px solid transparent",
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.background = "var(--cream-2)";
+                            e.currentTarget.style.background = "rgba(198, 107, 63, 0.06)";
                             e.currentTarget.style.borderLeftColor = "var(--terracotta)";
                           }}
                           onMouseLeave={(e) => {

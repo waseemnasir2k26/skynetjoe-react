@@ -172,7 +172,7 @@ export default function NewsIndex() {
                 sizes="(min-width: 768px) 55vw, 100vw"
                 style={{
                   objectFit: "cover",
-                  objectPosition: featured.heroPosition ?? "center",
+                  objectPosition: featured.heroPosition ?? "center top",
                   filter: "sepia(0.06) saturate(0.95)",
                 }}
               />
@@ -345,7 +345,7 @@ export default function NewsIndex() {
                       sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                       style={{
                         objectFit: "cover",
-                        objectPosition: n.heroPosition ?? "center",
+                        objectPosition: n.heroPosition ?? "center top",
                         filter: "sepia(0.06) saturate(0.95)",
                       }}
                     />
