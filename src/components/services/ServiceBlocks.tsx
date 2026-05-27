@@ -248,7 +248,7 @@ function HeroSection({ block }: { block: HeroBlock }) {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    filter: 'sepia(0.06) saturate(0.95)',
+                    filter: 'none',
                   }}
                 />
               </div>
@@ -487,7 +487,7 @@ function TestimonialSection({ block }: { block: TestimonialBlock }) {
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  filter: 'sepia(0.08) saturate(0.95)',
+                  filter: 'none',
                 }}
               />
             </div>

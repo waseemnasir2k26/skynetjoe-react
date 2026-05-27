@@ -79,10 +79,17 @@ function botReply(input: string, nextId: number): Msg {
 
 export default function LiveChat() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [draft, setDraft] = useState("");
   const [msgs, setMsgs] = useState<Msg[]>([INITIAL]);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try {
+      const closed = sessionStorage.getItem("livechat-closed");
+      if (closed === "1") setOpen(false);
+    } catch {}
+  }, []);
 
   useEffect(() => {
     function onAnchor(e: MouseEvent) {
@@ -92,14 +99,21 @@ export default function LiveChat() {
       if (a) {
         e.preventDefault();
         setOpen(true);
+        try { sessionStorage.removeItem("livechat-closed"); } catch {}
       }
     }
     function onHashChange() {
-      if (window.location.hash === "#livechat-open") setOpen(true);
+      if (window.location.hash === "#livechat-open") {
+        setOpen(true);
+        try { sessionStorage.removeItem("livechat-closed"); } catch {}
+      }
     }
     document.addEventListener("click", onAnchor);
     window.addEventListener("hashchange", onHashChange);
-    if (window.location.hash === "#livechat-open") setOpen(true);
+    if (window.location.hash === "#livechat-open") {
+      setOpen(true);
+      try { sessionStorage.removeItem("livechat-closed"); } catch {}
+    }
     return () => {
       document.removeEventListener("click", onAnchor);
       window.removeEventListener("hashchange", onHashChange);
@@ -128,37 +142,94 @@ export default function LiveChat() {
 
   return (
     <>
-      {/* Floating button — flat terracotta */}
+      <style>{`
+        @keyframes livechat-pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.08); }
+        }
+        @keyframes livechat-ring {
+          0% { transform: scale(1); opacity: 0.6; }
+          100% { transform: scale(1.6); opacity: 0; }
+        }
+        @keyframes livechat-dot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.55; transform: scale(1.25); }
+        }
+      `}</style>
+
+      {/* Floating button — flat terracotta, pulsing + ring + "Chat" label */}
       {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          aria-label="Open live chat"
-          className="fixed right-5 z-[60] w-14 h-14 flex items-center justify-center transition"
-          style={{
-            bottom: "calc(env(safe-area-inset-bottom, 0px) + 88px)",
-            background: "var(--terracotta)",
-            color: "var(--cream-3)",
-            borderRadius: 2,
-            border: "1px solid rgba(26,26,26,0.18)",
-            boxShadow: "0 18px 40px rgba(26,26,26,0.22)",
-            cursor: "pointer",
-          }}
+        <div
+          className="fixed right-5 z-[60] flex items-center gap-2"
+          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 88px)" }}
         >
-          <MessageCircle className="w-6 h-6" />
-        </button>
+          <span
+            aria-hidden
+            style={{
+              background: "var(--ink)",
+              color: "var(--cream-3)",
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              padding: "6px 10px",
+              borderRadius: 2,
+              boxShadow: "0 8px 20px rgba(26,26,26,0.25)",
+            }}
+          >
+            Chat
+          </span>
+          <div style={{ position: "relative", width: 64, height: 64 }}>
+            <span
+              aria-hidden
+              style={{
+                position: "absolute",
+                inset: 0,
+                borderRadius: 2,
+                background: "var(--terracotta)",
+                opacity: 0.5,
+                animation: "livechat-ring 2s ease-out infinite",
+                pointerEvents: "none",
+              }}
+            />
+            <button
+              onClick={() => {
+                setOpen(true);
+                try { sessionStorage.removeItem("livechat-closed"); } catch {}
+              }}
+              aria-label="Open live chat"
+              className="w-16 h-16 flex items-center justify-center transition"
+              style={{
+                position: "relative",
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                borderRadius: 2,
+                border: "1px solid rgba(26,26,26,0.18)",
+                boxShadow:
+                  "0 24px 60px rgba(198,107,63,0.45), 0 8px 20px rgba(26,26,26,0.25)",
+                cursor: "pointer",
+                animation: "livechat-pulse 1.5s ease-in-out infinite",
+              }}
+            >
+              <MessageCircle className="w-7 h-7" />
+            </button>
+          </div>
+        </div>
       )}
 
       {/* Panel — cream paper */}
       {open && (
         <div
-          className="fixed right-3 sm:right-5 z-[60] w-[360px] max-w-[calc(100vw-1.5rem)] overflow-hidden flex flex-col"
+          className="fixed right-3 sm:right-5 z-[60] w-[380px] max-w-[calc(100vw-1.5rem)] overflow-hidden flex flex-col"
           style={{
             bottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)",
             maxHeight: "min(70vh, 540px)",
             background: "var(--cream-3)",
             border: "1px solid rgba(26,26,26,0.20)",
             borderRadius: 2,
-            boxShadow: "0 28px 70px rgba(26,26,26,0.28)",
+            boxShadow:
+              "0 32px 80px rgba(26,26,26,0.35), 0 12px 30px rgba(198,107,63,0.18)",
             fontFamily: "var(--font-sans)",
             position: "fixed",
           }}
@@ -199,9 +270,26 @@ export default function LiveChat() {
               >
                 Chat with SkynetLabs
               </span>
+              <span
+                aria-hidden
+                title="Online"
+                style={{
+                  display: "inline-block",
+                  width: 8,
+                  height: 8,
+                  borderRadius: 999,
+                  background: "var(--sage, #8A9A7B)",
+                  marginLeft: 4,
+                  animation: "livechat-dot 1.4s ease-in-out infinite",
+                  boxShadow: "0 0 0 2px rgba(138,154,123,0.18)",
+                }}
+              />
             </div>
             <button
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false);
+                try { sessionStorage.setItem("livechat-closed", "1"); } catch {}
+              }}
               aria-label="Close chat"
               style={{
                 color: "var(--ink-faint)",
@@ -246,7 +334,10 @@ export default function LiveChat() {
                   {m.cta && (
                     <Link
                       href={m.cta.href}
-                      onClick={() => setOpen(false)}
+                      onClick={() => {
+                        setOpen(false);
+                        try { sessionStorage.setItem("livechat-closed", "1"); } catch {}
+                      }}
                       className="mt-2 inline-flex items-center gap-1"
                       style={{
                         color:

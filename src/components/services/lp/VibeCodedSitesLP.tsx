@@ -217,7 +217,7 @@ export default function VibeCodedSitesLP() {
                   sizes="(min-width: 900px) 400px, 90vw"
                   style={{
                     objectFit: "cover",
-                    filter: "sepia(0.06) saturate(0.96) contrast(1.02)",
+                    filter: "contrast(1.02)",
                   }}
                 />
               </div>
@@ -446,7 +446,7 @@ export default function VibeCodedSitesLP() {
                 sizes="(min-width: 900px) 380px, 90vw"
                 style={{
                   objectFit: "cover",
-                  filter: "sepia(0.06) saturate(0.95)",
+                  filter: "none",
                 }}
               />
             </div>

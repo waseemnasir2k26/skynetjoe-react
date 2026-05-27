@@ -25,7 +25,7 @@ export const LETTER_CSS = `
 .lp-v3 .hero h1 em { color:var(--gold); font-style:italic; font-weight:500; }
 .lp-v3 .hero-sub { text-align:center; font-style:italic; font-size:19px; color:var(--navy-2); max-width:50ch; margin:0 auto 48px; }
 .lp-v3 .hero-photo-wrap { max-width:620px; margin:0 auto 56px; border:1px solid var(--rule); padding:12px; background:var(--paper-2); transform:rotate(-0.6deg); box-shadow:0 18px 48px rgba(26,37,64,0.16); }
-.lp-v3 .hero-photo { width:100%; aspect-ratio:16/10; object-fit:cover; filter:sepia(0.08) saturate(0.95) brightness(1.02); }
+.lp-v3 .hero-photo { width:100%; aspect-ratio:16/10; object-fit:cover; filter:brightness(1.02); }
 .lp-v3 .hero-photo-cap { margin-top:12px; text-align:center; font-family:'Caveat',cursive; font-size:22px; color:var(--gold); }
 .lp-v3 .meta-line { text-align:center; margin-bottom:48px; font-family:'Inter',sans-serif; font-size:12px; letter-spacing:0.08em; color:var(--navy-2); text-transform:uppercase; }
 .lp-v3 .meta-line span { margin:0 10px; }
@@ -83,7 +83,7 @@ export const LETTER_CSS = `
 .lp-v3 .card { background:var(--paper); border:1px solid var(--rule); padding:0; transition:border-color 0.2s,transform 0.2s; text-decoration:none; color:inherit; display:flex; flex-direction:column; }
 .lp-v3 .card:hover { border-color:var(--gold); transform:translateY(-4px); }
 .lp-v3 .card-photo { width:100%; aspect-ratio:16/10; overflow:hidden; background:var(--paper-2); }
-.lp-v3 .card-photo img { width:100%; height:100%; object-fit:cover; filter:sepia(0.08) saturate(0.94); transition:transform 0.4s; }
+.lp-v3 .card-photo img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
 .lp-v3 .card:hover .card-photo img { transform:scale(1.03); }
 .lp-v3 .card-body { padding:24px; flex:1; display:flex; flex-direction:column; }
 .lp-v3 .card-meta { font-family:'Inter',sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }

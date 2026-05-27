@@ -288,7 +288,7 @@ export default async function NewsArticlePage({
                 style={{
                   objectFit: "cover",
                   objectPosition: a.heroPosition ?? "center top",
-                  filter: "sepia(0.06) saturate(0.95)",
+                  filter: "none",
                 }}
               />
             </div>
@@ -574,7 +574,7 @@ export default async function NewsArticlePage({
                         style={{
                           objectFit: "cover",
                           objectPosition: r.heroPosition ?? "center top",
-                          filter: "sepia(0.06) saturate(0.95)",
+                          filter: "none",
                         }}
                       />
                     </div>

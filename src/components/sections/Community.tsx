@@ -122,7 +122,7 @@ export default function Community() {
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   style={{
                     objectFit: "cover",
-                    filter: "sepia(0.08) saturate(0.92)",
+                    filter: "none",
                   }}
                   priority={i === 0}
                 />

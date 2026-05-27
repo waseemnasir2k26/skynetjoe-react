@@ -255,7 +255,7 @@ export default function HeroFunnel() {
                 style={{
                   objectFit: "cover",
                   objectPosition: "center top",
-                  filter: "sepia(0.10) saturate(0.95) contrast(1.02)",
+                  filter: "contrast(1.02)",
                 }}
               />
             </div>
