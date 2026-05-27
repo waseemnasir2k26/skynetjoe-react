@@ -33,8 +33,8 @@ const TOP_5_LP: Partial<Record<string, FC>> = {
 
 type ServiceItem = { slug: string; label: string; icon: string; desc: string };
 const SERVICES: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
-  (c) => c.services as readonly ServiceItem[]
-);
+  (c) => c.services as readonly (ServiceItem & { href?: string })[]
+).filter((s): s is ServiceItem => !("href" in s) || !s.href);
 const SLUGS = SERVICES.map((s) => s.slug);
 
 // Build a SEO-grade description (â‰¥140 chars) from the short svc.desc tagline

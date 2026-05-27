@@ -134,6 +134,7 @@ export const SERVICE_CATEGORIES = [
   {
     name: "Automation",
     services: [
+      { slug: "freightops-logistics", label: "FreightOps — Dispatch Canvas", icon: "Truck", desc: "Site + dispatch + AI voice agent for US small-fleet carriers, 14 days", href: "/lp/logistics", badge: "NEW" },
       { slug: "n8n-automation", label: "n8n Automation", icon: "Bot", desc: "Workflow automation that runs while you sleep" },
       { slug: "gohighlevel", label: "GoHighLevel CRM", icon: "Target", desc: "Full CRM + sales pipeline setup" },
       { slug: "zapier-make", label: "Zapier & Make", icon: "Link", desc: "Multi-tool connectivity layer" },

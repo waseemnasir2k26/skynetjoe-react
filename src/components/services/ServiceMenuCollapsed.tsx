@@ -20,6 +20,7 @@ import {
   BookOpen,
   Palette,
   PenTool,
+  Truck,
   ChevronDown,
   ArrowRight,
 } from "lucide-react";
@@ -42,6 +43,7 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   BookOpen,
   Palette,
   PenTool,
+  Truck,
 };
 
 // Category-level muted accents — terracotta / ochre / sage / oxblood.
@@ -186,7 +188,7 @@ export default function ServiceMenuCollapsed() {
                           return (
                             <Link
                               key={svc.slug}
-                              href={`/services/${svc.slug}`}
+                              href={("href" in svc && typeof svc.href === "string" ? svc.href : `/services/${svc.slug}`) as string}
                               className="group flex items-start gap-3"
                               style={{
                                 padding: 16,
@@ -227,6 +229,11 @@ export default function ServiceMenuCollapsed() {
                                   }}
                                 >
                                   {svc.label}
+                                  {"badge" in svc && typeof svc.badge === "string" && (
+                                    <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", padding: "2px 7px", background: "var(--terracotta)", color: "var(--cream)", borderRadius: 999, marginLeft: 6, verticalAlign: "middle" }}>
+                                      {svc.badge}
+                                    </span>
+                                  )}
                                   <ArrowRight
                                     className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition"
                                     style={{ color: accent }}

@@ -19,6 +19,7 @@ import {
   BookOpen,
   Palette,
   PenTool,
+  Truck,
   ArrowRight,
 } from "lucide-react";
 import { SERVICE_CATEGORIES } from "@/lib/site";
@@ -40,6 +41,7 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   BookOpen,
   Palette,
   PenTool,
+  Truck,
 };
 
 /**
@@ -310,7 +312,7 @@ export default function ServicesMegaMenu({ onClose }: Props) {
 
         {/* Featured service */}
         <Link
-          href={`/services/${featured.slug}`}
+          href={("href" in featured && typeof featured.href === "string" ? featured.href : `/services/${featured.slug}`) as string}
           onClick={onClose}
           className="group block mb-4 transition-transform hover:-translate-y-0.5"
           style={{
@@ -363,6 +365,11 @@ export default function ServicesMegaMenu({ onClose }: Props) {
                 >
                   {featured.label}
                 </h3>
+                {"badge" in featured && typeof featured.badge === "string" && (
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", padding: "2px 7px", background: "var(--terracotta)", color: "var(--cream)", borderRadius: 999, marginLeft: 8 }}>
+                    {featured.badge}
+                  </span>
+                )}
                 <span style={{ color: accent.color }}>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </span>
@@ -387,7 +394,7 @@ export default function ServicesMegaMenu({ onClose }: Props) {
             return (
               <Link
                 key={svc.slug}
-                href={`/services/${svc.slug}`}
+                href={("href" in svc && typeof svc.href === "string" ? svc.href : `/services/${svc.slug}`) as string}
                 onClick={onClose}
                 className="group"
                 style={{
@@ -427,6 +434,11 @@ export default function ServicesMegaMenu({ onClose }: Props) {
                   >
                     {svc.label}
                   </span>
+                  {"badge" in svc && typeof svc.badge === "string" && (
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: 8, fontWeight: 700, letterSpacing: "0.12em", padding: "1px 5px", background: "var(--terracotta)", color: "var(--cream)", borderRadius: 999, marginLeft: 4, verticalAlign: "middle" }}>
+                      {svc.badge}
+                    </span>
+                  )}
                 </div>
                 <p
                   style={{

@@ -23,6 +23,7 @@ import {
   BookOpen,
   Palette,
   PenTool,
+  Truck,
   ArrowRight,
 } from "lucide-react";
 import { NAV_PRIMARY, SERVICE_CATEGORIES } from "@/lib/site";
@@ -45,6 +46,7 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   BookOpen,
   Palette,
   PenTool,
+  Truck,
 };
 
 export default function Header() {
@@ -305,10 +307,13 @@ export default function Header() {
                           <ul className="space-y-1">
                             {cat.services.map((svc) => {
                               const Icon = ICONS[svc.icon];
+                              const href = ("href" in svc && typeof svc.href === "string"
+                                ? svc.href
+                                : `/services/${svc.slug}`) as string;
                               return (
                                 <li key={svc.slug}>
                                   <Link
-                                    href={`/services/${svc.slug}`}
+                                    href={href}
                                     onClick={() => setMobileOpen(false)}
                                     className="flex items-center gap-2.5 py-1.5 text-sm text-fg-muted hover:text-skynet-primary-light"
                                   >
@@ -316,6 +321,23 @@ export default function Header() {
                                       <Icon className="w-3.5 h-3.5 text-skynet-primary-light/70 flex-shrink-0" />
                                     )}
                                     {svc.label}
+                                    {"badge" in svc && typeof svc.badge === "string" && (
+                                      <span
+                                        style={{
+                                          fontFamily: "var(--font-mono)",
+                                          fontSize: 9,
+                                          fontWeight: 700,
+                                          letterSpacing: "0.12em",
+                                          padding: "2px 7px",
+                                          background: "var(--terracotta)",
+                                          color: "var(--cream)",
+                                          borderRadius: 999,
+                                          marginLeft: 6,
+                                        }}
+                                      >
+                                        {svc.badge}
+                                      </span>
+                                    )}
                                   </Link>
                                 </li>
                               );
