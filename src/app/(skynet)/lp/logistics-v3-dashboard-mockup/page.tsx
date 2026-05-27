@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const css = `
-.lp-log-v3 { --cream:#F2EFE6; --cream-2:#EAE6D9; --cream-3:#DCD7C7; --ink:#1A1A1A; --ink-2:#3a3a3a; --ink-faint:#6B6B65; --ink-mute:#9a988f; --terracotta:#C66B3F; --terracotta-2:#A8552E; --terracotta-soft:rgba(198,107,63,0.10); --ochre:#C9A96E; --sage:#8A9A7B; --sage-soft:rgba(138,154,123,0.16); --oxblood:#6B2C2C; --rule:rgba(26,26,26,0.10); --rule-strong:rgba(26,26,26,0.22); background:var(--cream); color:var(--ink); font-family:var(--font-sans-onest),-apple-system,system-ui,sans-serif; font-size:16px; line-height:1.55; letter-spacing:-0.005em; min-height:100vh; -webkit-font-smoothing:antialiased; }
+.lp-log-v3 { --cream:#F2EFE6; --cream-2:#EDE8DC; --cream-3:#FAF7F0; --ink:#1A1A1A; --ink-2:#3A3A36; --ink-faint:#6B6B65; --ink-mute:#9a988f; --terracotta:#C66B3F; --terracotta-2:#B85A30; --terracotta-soft:rgba(198,107,63,0.10); --ochre:#C9A96E; --sage:#8A9A7B; --sage-soft:rgba(138,154,123,0.16); --oxblood:#6B2C2C; --rule:rgba(26,26,26,0.10); --rule-strong:rgba(26,26,26,0.22); background:var(--cream); color:var(--ink); font-family:var(--font-sans-onest),-apple-system,system-ui,sans-serif; font-size:16px; line-height:1.55; letter-spacing:-0.005em; min-height:100vh; -webkit-font-smoothing:antialiased; }
 .lp-log-v3 *,.lp-log-v3 *::before,.lp-log-v3 *::after { box-sizing:border-box; }
 .lp-log-v3 a { color:var(--ink); text-decoration:none; }
 .lp-log-v3 img { max-width:100%; height:auto; display:block; }
