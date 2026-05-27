@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "A letter from Crate Cafe — Waseem Nasir / SkynetLabs",
+  title: "Freight ops, one roof — site + dispatch + AI voice | SkynetLabs",
   description:
-    "One operator, one stack, one roof. A founder letter to US small-fleet carriers from Canggu, Bali. 14-day ship window, public pricing, source-controlled deliverables.",
-  alternates: { canonical: "/lp/freight-v3-letter" },
-  robots: { index: false, follow: false },
+    "One operator, one stack, one roof. For US small-fleet carriers running 5–50 trucks. 14-day ship window, public pricing, source-controlled deliverables. A founder letter from Canggu, Bali.",
+  alternates: { canonical: "/lp/freight" },
+  robots: { index: true, follow: true },
+  openGraph: {
+    title: "Freight ops, one roof — site + dispatch + AI voice | SkynetLabs",
+    description:
+      "One operator, one stack, one roof. US small-fleet carriers. 14-day ship, public pricing.",
+    url: "/lp/freight",
+    type: "website",
+  },
 };
 
 const css = `
@@ -94,12 +101,9 @@ const css = `
 .lp-v3 footer.lp a { display:block; padding:3px 0; color:var(--navy-2); text-decoration:none; }
 .lp-v3 footer.lp a:hover { color:var(--gold); }
 .lp-v3 .disclaimer { padding-top:24px; border-top:1px solid var(--rule); font-size:11px; line-height:1.65; color:var(--navy-2); max-width:90ch; }
-.lp-v3 .wa-sticky { position:fixed; bottom:24px; right:24px; z-index:60; background:var(--gold); color:var(--ink); font-family:'Inter',sans-serif; font-size:13px; font-weight:600; padding:14px 20px; border-radius:32px; text-decoration:none; box-shadow:0 12px 28px rgba(201,152,90,0.32); display:inline-flex; align-items:center; gap:8px; transition:transform 0.18s; }
-.lp-v3 .wa-sticky:hover { transform:translateY(-3px); }
-.lp-v3 .wa-sticky svg { width:16px; height:16px; fill:currentColor; }
+.lp-v3 .audit-sticky { position:fixed; bottom:24px; right:24px; z-index:60; background:var(--gold); color:var(--ink); font-family:'Inter',sans-serif; font-size:13px; font-weight:600; padding:14px 22px; border-radius:32px; text-decoration:none; box-shadow:0 12px 28px rgba(201,152,90,0.32); display:inline-flex; align-items:center; gap:8px; transition:transform 0.18s; letter-spacing:0.02em; }
+.lp-v3 .audit-sticky:hover { transform:translateY(-3px); background:var(--paper); color:var(--navy); }
 `;
-
-const WA_ICON = "M17.5 14c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 2 .6 3.9 1.7 5.5L2 22l4.6-1.2c1.5.8 3.3 1.3 5.4 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z";
 
 export default function V3Letter() {
   return (
@@ -217,9 +221,7 @@ export default function V3Letter() {
         </footer>
       </main>
 
-      <a href="/discovery-call" className="wa-sticky">
-        <svg viewBox="0 0 24 24"><path d={WA_ICON} /></svg>WA
-      </a>
+      <a href="https://cal.com/skynetjoe/audit" className="audit-sticky">Book audit →</a>
     </div>
   );
 }
