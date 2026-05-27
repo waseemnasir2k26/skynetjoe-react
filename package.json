@@ -9,7 +9,7 @@
   "scripts": {
     "predev": "node scripts/sync-wp-templates.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/sync-wp-templates.mjs",
+    "prebuild": "node scripts/sync-wp-templates.mjs && payload generate:types",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

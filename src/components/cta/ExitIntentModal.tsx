@@ -428,10 +428,6 @@ export default function ExitIntentModal() {
                 />
               </label>
 
-              {status === "error" && errorMsg && (
-                <p style={{ fontSize: 12, color: "var(--oxblood)" }}>{errorMsg}</p>
-              )}
-
               <button
                 type="submit"
                 disabled={status === "submitting"}
