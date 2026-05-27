@@ -157,6 +157,42 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .driver-card .st.idle { color:var(--ink-mute); }
 .lp-log-v3 .driver-card .st.off { color:var(--terracotta); }
 .lp-log-v3 .driver-card .meta { font-size:11px; color:var(--ink-faint); margin-top:6px; }
+
+/* AI AGENTS interactive tabs (right panel) */
+.lp-log-v3 .ai-radio { position:absolute; opacity:0; pointer-events:none; }
+.lp-log-v3 .mockup:has(#ai-voice:checked) .ai-tab[data-for="ai-voice"],
+.lp-log-v3 .mockup:has(#ai-sms:checked) .ai-tab[data-for="ai-sms"],
+.lp-log-v3 .mockup:has(#ai-rate:checked) .ai-tab[data-for="ai-rate"] { background:#fff; color:var(--ink); box-shadow:inset 0 0 0 1px var(--rule); border-left:2px solid var(--terracotta); padding-left:8px; }
+.lp-log-v3 .ai-panel { display:none; }
+.lp-log-v3 .mockup:has(#ai-voice:checked) .ai-panel-voice,
+.lp-log-v3 .mockup:has(#ai-sms:checked) .ai-panel-sms,
+.lp-log-v3 .mockup:has(#ai-rate:checked) .ai-panel-rate { display:block; animation:fade-up 0.32s ease-out both; }
+
+/* MOBILE TAB PILLS */
+.lp-log-v3 .mobile-tabs { display:none; overflow-x:auto; gap:8px; padding:12px 16px; background:var(--cream); border-bottom:1px solid var(--rule); -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.lp-log-v3 .mobile-tabs::-webkit-scrollbar { display:none; }
+.lp-log-v3 .mobile-tabs label { flex:0 0 auto; font-size:12px; font-weight:600; color:var(--ink-2); padding:8px 14px; border:1px solid var(--rule-strong); border-radius:999px; cursor:pointer; background:var(--cream); transition:all 0.18s; white-space:nowrap; }
+.lp-log-v3 .mobile-tabs label:hover { color:var(--terracotta); border-color:var(--terracotta); }
+.lp-log-v3 .mockup:has(#ws-dispatch:checked) .mobile-tabs label[data-for="ws-dispatch"],
+.lp-log-v3 .mockup:has(#ws-lanes:checked) .mobile-tabs label[data-for="ws-lanes"],
+.lp-log-v3 .mockup:has(#ws-brokers:checked) .mobile-tabs label[data-for="ws-brokers"],
+.lp-log-v3 .mockup:has(#ws-drivers:checked) .mobile-tabs label[data-for="ws-drivers"],
+.lp-log-v3 .mockup:has(#ws-factoring:checked) .mobile-tabs label[data-for="ws-factoring"] { background:var(--ink); color:var(--cream); border-color:var(--ink); }
+@media (max-width:980px) { .lp-log-v3 .mobile-tabs { display:flex; } .lp-log-v3 .interactive-hint { display:none; } }
+
+/* TILE NUM live pulse — suggests fresh data */
+@keyframes val-pulse { 0%,92%,100% { background-color:transparent; } 95% { background-color:rgba(198,107,63,0.12); } }
+.lp-log-v3 .mock-tile-num { padding:0 4px; border-radius:4px; animation:val-pulse 5s ease-in-out infinite; }
+.lp-log-v3 .mock-tile:nth-child(2) .mock-tile-num { animation-delay:1.6s; }
+.lp-log-v3 .mock-tile:nth-child(3) .mock-tile-num { animation-delay:3.2s; }
+
+/* STICKY NAV SCROLL-AWARE SHRINK */
+@supports (animation-timeline: scroll()) {
+  .lp-log-v3 .nav { animation:nav-shrink linear both; animation-timeline:scroll(root); animation-range:0 240px; }
+  @keyframes nav-shrink { to { padding-top:10px; padding-bottom:10px; box-shadow:0 4px 24px rgba(26,26,26,0.06); } }
+  .lp-log-v3 .nav .brand { animation:brand-shrink linear both; animation-timeline:scroll(root); animation-range:0 240px; }
+  @keyframes brand-shrink { to { font-size:18px; } }
+}
 .lp-log-v3 .mock-main { padding:22px 24px; background:#fff; }
 .lp-log-v3 .mock-h { font-family:var(--font-serif-fraunces),serif; font-size:20px; font-weight:600; margin:0 0 4px; letter-spacing:-0.02em; color:var(--ink); }
 .lp-log-v3 .mock-sub { font-size:12px; color:var(--ink-faint); margin-bottom:18px; }
@@ -478,6 +514,18 @@ export default function LogisticsLP() {
               <input className="ws-radio" type="radio" name="ws" id="ws-brokers" />
               <input className="ws-radio" type="radio" name="ws" id="ws-drivers" />
               <input className="ws-radio" type="radio" name="ws" id="ws-factoring" />
+              <input className="ai-radio" type="radio" name="ai" id="ai-voice" defaultChecked />
+              <input className="ai-radio" type="radio" name="ai" id="ai-sms" />
+              <input className="ai-radio" type="radio" name="ai" id="ai-rate" />
+
+              {/* Mobile horizontal tab pills — only <980px */}
+              <div className="mobile-tabs" role="tablist" aria-label="Workspace tabs">
+                <label htmlFor="ws-dispatch" data-for="ws-dispatch">Dispatch</label>
+                <label htmlFor="ws-lanes" data-for="ws-lanes">Lanes</label>
+                <label htmlFor="ws-brokers" data-for="ws-brokers">Brokers</label>
+                <label htmlFor="ws-drivers" data-for="ws-drivers">Drivers</label>
+                <label htmlFor="ws-factoring" data-for="ws-factoring">Factoring</label>
+              </div>
 
               <div className="mockup-bar">
                 <div className="mockup-dots"><span></span><span></span><span></span></div>
@@ -492,9 +540,9 @@ export default function LogisticsLP() {
                   <label htmlFor="ws-drivers" className="mock-side-item tab" data-for="ws-drivers">Drivers</label>
                   <label htmlFor="ws-factoring" className="mock-side-item tab" data-for="ws-factoring">Factoring</label>
                   <div className="mock-side-head" style={{ marginTop: 20 }}>AI Agents</div>
-                  <div className="mock-side-item">Voice intake <span className="badge">3</span></div>
-                  <div className="mock-side-item">SMS confirm</div>
-                  <div className="mock-side-item">Rate qualifier</div>
+                  <label htmlFor="ai-voice" className="mock-side-item ai-tab" data-for="ai-voice">Voice intake <span className="badge">3</span></label>
+                  <label htmlFor="ai-sms" className="mock-side-item ai-tab" data-for="ai-sms">SMS confirm</label>
+                  <label htmlFor="ai-rate" className="mock-side-item ai-tab" data-for="ai-rate">Rate qualifier</label>
                 </aside>
 
                 <div className="mock-main">
@@ -600,20 +648,61 @@ export default function LogisticsLP() {
                 </div>
 
                 <aside className="mock-right">
-                  <div className="agent-card">
-                    <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">LIVE</div><div className="agent-title">Voice intake</div></div>
-                    <div className="agent-body">Inbound from <code>(214) 555-0192</code> · <strong>Maverick dispatch</strong> · Dallas → Phoenix offered at $2,650 · counter pushed to $2,840.</div>
+                  {/* AI agent panel — VOICE (default) */}
+                  <div className="ai-panel ai-panel-voice">
+                    <div className="agent-card">
+                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">LIVE</div><div className="agent-title">Voice intake</div></div>
+                      <div className="agent-body">Inbound from <code>(214) 555-0192</code> · <strong>Maverick dispatch</strong> · Dallas → Phoenix offered at $2,650 · counter pushed to $2,840.</div>
+                    </div>
+                    <div className="agent-card">
+                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">LIVE</div><div className="agent-title">Voice intake</div></div>
+                      <div className="agent-body">Inbound from <code>(404) 555-0288</code> · <strong>CRST</strong> · Atlanta → Charlotte at $1,120 · qualified, routed to dispatcher.</div>
+                    </div>
+                    <div className="factor-card">
+                      <div className="agent-title" style={{ marginBottom: 4 }}>Today · Voice intake</div>
+                      <div className="factor-num">47 calls</div>
+                      <div className="factor-sub">22 qualified · 8 booked · 17 referred</div>
+                      <div className="factor-bar"><div className="factor-bar-fill"></div></div>
+                      <div className="factor-sub" style={{ marginTop: 6 }}>74% qualified rate · avg 8.2s response</div>
+                    </div>
                   </div>
-                  <div className="agent-card">
-                    <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">QUEUED</div><div className="agent-title">SMS confirm</div></div>
-                    <div className="agent-body">Driver Alvin C. confirmed pickup at <code>15:40 CDT</code>. ETA Phoenix Friday 09:20 MST.</div>
+
+                  {/* AI agent panel — SMS confirm */}
+                  <div className="ai-panel ai-panel-sms">
+                    <div className="agent-card">
+                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">QUEUED</div><div className="agent-title">SMS confirm</div></div>
+                      <div className="agent-body">Driver Alvin C. confirmed pickup at <code>15:40 CDT</code>. ETA Phoenix Friday 09:20 MST.</div>
+                    </div>
+                    <div className="agent-card">
+                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">SENT</div><div className="agent-title">SMS confirm</div></div>
+                      <div className="agent-body">Driver Diego R. → load <code>L-4291</code> · rate $2,840 · POD reminder queued for delivery.</div>
+                    </div>
+                    <div className="factor-card">
+                      <div className="agent-title" style={{ marginBottom: 4 }}>Today · SMS confirm</div>
+                      <div className="factor-num">114 sent</div>
+                      <div className="factor-sub">94 ack · 18 pending · 2 escalated</div>
+                      <div className="factor-bar"><div className="factor-bar-fill"></div></div>
+                      <div className="factor-sub" style={{ marginTop: 6 }}>82% driver ack rate · avg 4 min</div>
+                    </div>
                   </div>
-                  <div className="factor-card">
-                    <div className="agent-title" style={{ marginBottom: 4 }}>Factoring · Triumph</div>
-                    <div className="factor-num">$28,640</div>
-                    <div className="factor-sub">settled today · 4 invoices</div>
-                    <div className="factor-bar"><div className="factor-bar-fill"></div></div>
-                    <div className="factor-sub" style={{ marginTop: 6 }}>74% of June queue settled</div>
+
+                  {/* AI agent panel — Rate qualifier */}
+                  <div className="ai-panel ai-panel-rate">
+                    <div className="agent-card">
+                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">PASS</div><div className="agent-title">Rate qualifier</div></div>
+                      <div className="agent-body">Lane Houston → Phoenix · offered $2,400 · floor $2,650 · <strong>auto-rejected.</strong> Counter sent at $2,840.</div>
+                    </div>
+                    <div className="agent-card">
+                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">FLAG</div><div className="agent-title">Rate qualifier</div></div>
+                      <div className="agent-body">Memphis → Nashville at $960 · margin <code>22%</code> · below 28% target · dispatcher review.</div>
+                    </div>
+                    <div className="factor-card">
+                      <div className="agent-title" style={{ marginBottom: 4 }}>Today · Rate qualifier</div>
+                      <div className="factor-num">+$3,420</div>
+                      <div className="factor-sub">recovered via counters · 6 of 8 hit</div>
+                      <div className="factor-bar"><div className="factor-bar-fill"></div></div>
+                      <div className="factor-sub" style={{ marginTop: 6 }}>74% counter-acceptance · avg uplift $428</div>
+                    </div>
                   </div>
                 </aside>
               </div>
