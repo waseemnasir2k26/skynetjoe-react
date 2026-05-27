@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
 
 export const metadata: Metadata = {
   title: "Dispatch canvas for small-fleet carriers — SkynetLabs",
@@ -467,6 +468,8 @@ html { scroll-behavior:smooth; }
 export default function LogisticsLP() {
   return (
     <div className="lp-log-v3">
+      <MetaPixel />
+      <MetaPixelEvents />
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
@@ -490,7 +493,7 @@ export default function LogisticsLP() {
               <h1>Your dispatch stack is <em>bleeding loads.</em> We rebuild it in 14 days.</h1>
               <p className="hero-sub">Six paid tabs. <strong>$847/mo SaaS bill.</strong> Voicemail after 8pm. SkynetLabs ships the dispatch canvas — AI voice agent, factoring widget, lane economics — under one roof. Public pricing. Source-controlled. <strong>Repo in your GitHub on launch day.</strong></p>
               <div className="cta-row">
-                <a href="/discovery-call" className="btn-primary">Book a 15-min discovery call →</a>
+                <a href="/discovery-call" className="btn-primary" data-meta-event="Schedule" data-meta-name="hero-book-audit">Book a 15-min discovery call →</a>
                 <a href="#pricing" className="btn-line">See public pricing</a>
               </div>
               <div className="hero-scarcity"><strong>2 slots left</strong>&nbsp;· June 2026 · 8-hour reply window</div>
@@ -819,7 +822,7 @@ export default function LogisticsLP() {
           <div className="mid-cta-inner reveal">
             <h3>Reading this at <em>2am</em> because dispatch died again?</h3>
             <p>Audit takes 15 minutes. Reply window: 8 hours, weekday Bali time. Yes, no, or referral — you walk with the findings.</p>
-            <a href="/discovery-call" className="btn-primary">Book the audit — free →</a>
+            <a href="/discovery-call" className="btn-primary" data-meta-event="Schedule" data-meta-name="mid-cta-2am">Book the audit — free →</a>
           </div>
         </section>
 
@@ -984,7 +987,7 @@ export default function LogisticsLP() {
                   <h3 className="ec-h">Get the <em>12-tab dispatch teardown PDF.</em></h3>
                   <p className="ec-p">Real audit of a 12-truck Houston operator&apos;s six-tab stack. Where the leaks live, what to replace, what to keep. 9 pages. Instant inbox.</p>
                 </div>
-                <form className="ec-form" action="/discovery-call" method="GET">
+                <form className="ec-form" action="/discovery-call" method="GET" data-meta-event="Lead">
                   <input className="ec-input" type="email" name="email" placeholder="you@yourcarrier.com" required aria-label="Email address" />
                   <input type="hidden" name="source" value="teardown-pdf" />
                   <button className="ec-btn" type="submit">Send me the PDF →</button>
@@ -1010,7 +1013,7 @@ export default function LogisticsLP() {
                 <div className="price-amount">$1,497</div>
                 <div className="price-recur">flat · no retainer</div>
                 <ul className="price-list"><li>Five-page premium site</li><li>GHL CRM pipeline wired</li><li>Inbound contact inbox</li><li>Meta Pixel + CAPI</li><li>Two revision rounds</li></ul>
-                <a href="/discovery-call" className="price-cta">Book discovery →</a>
+                <a href="/discovery-call" className="price-cta" data-meta-event="InitiateCheckout" data-meta-name="Starter" data-meta-value="1497">Book discovery →</a>
               </div>
               <div className="price-cell">
                 <div className="price-tier">Pro</div>
@@ -1018,7 +1021,7 @@ export default function LogisticsLP() {
                 <div className="price-amount">$3,997</div>
                 <div className="price-recur">+ $497/mo ops</div>
                 <ul className="price-list"><li>Everything in Starter</li><li>Dispatch dashboard</li><li>Factoring widget (Triumph/Apex)</li><li>SMS auto-confirms</li><li>Monthly opt call</li></ul>
-                <a href="/discovery-call" className="price-cta">Book discovery →</a>
+                <a href="/discovery-call" className="price-cta" data-meta-event="InitiateCheckout" data-meta-name="Pro" data-meta-value="3997">Book discovery →</a>
               </div>
               <div className="price-cell featured">
                 <div className="price-badge">MOST PICKED</div>
@@ -1027,7 +1030,7 @@ export default function LogisticsLP() {
                 <div className="price-amount">$7,997</div>
                 <div className="price-recur">+ $997/mo ops</div>
                 <ul className="price-list"><li>Everything in Pro</li><li>Meta + LinkedIn ad ops</li><li>Lead-gen automation</li><li>Monthly content batch</li><li>Weekly review call</li></ul>
-                <a href="/discovery-call" className="price-cta">Book Premium →</a>
+                <a href="/discovery-call" className="price-cta" data-meta-event="InitiateCheckout" data-meta-name="Premium" data-meta-value="7997">Book Premium →</a>
               </div>
               <div className="price-cell">
                 <div className="price-tier">Flagship</div>
@@ -1035,7 +1038,7 @@ export default function LogisticsLP() {
                 <div className="price-amount">$9,500</div>
                 <div className="price-recur">+ $1,997/mo ops</div>
                 <ul className="price-list"><li>Everything in Premium</li><li>Vapi voice agent, branded</li><li>24/7 phone coverage</li><li>Custom load qualifier</li><li>Inbound load auto-book</li></ul>
-                <a href="/discovery-call" className="price-cta">Talk Flagship →</a>
+                <a href="/discovery-call" className="price-cta" data-meta-event="InitiateCheckout" data-meta-name="Flagship" data-meta-value="9500">Talk Flagship →</a>
               </div>
             </div>
           </div>
@@ -1125,7 +1128,7 @@ export default function LogisticsLP() {
           <h2>Fifteen minutes. <em>Yes, no, or referral.</em></h2>
           <p>Eight-hour reply on weekday Bali time. No funnel, no quote theater, no commitment. You walk with the audit findings either way.</p>
           <div className="cta-row">
-            <a href="/discovery-call" className="btn-primary">Book the discovery call →</a>
+            <a href="/discovery-call" className="btn-primary" data-meta-event="Schedule" data-meta-name="closer-book-audit">Book the discovery call →</a>
             <a href="#pricing" className="btn-line">Review pricing</a>
           </div>
         </section>
@@ -1143,7 +1146,7 @@ export default function LogisticsLP() {
         </footer>
 
         {/* MOBILE STICKY CTA */}
-        <a href="/discovery-call" className="mobile-cta"><span><strong>2 slots left</strong> · Book audit</span></a>
+        <a href="/discovery-call" className="mobile-cta" data-meta-event="Schedule" data-meta-name="mobile-sticky"><span><strong>2 slots left</strong> · Book audit</span></a>
       </main>
     </div>
   );
