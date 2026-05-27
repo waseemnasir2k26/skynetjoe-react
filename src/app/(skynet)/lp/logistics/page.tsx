@@ -123,6 +123,40 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .mock-side-item:hover { background:rgba(198,107,63,0.06); color:var(--ink); }
 .lp-log-v3 .mock-side-item.active { background:#fff; color:var(--ink); box-shadow:inset 0 0 0 1px var(--rule); border-left:2px solid var(--terracotta); padding-left:8px; }
 .lp-log-v3 .mock-side-item .badge { margin-left:auto; font-size:10px; background:var(--terracotta); color:var(--cream); padding:1px 6px; border-radius:8px; font-family:var(--font-mono-plex),monospace; animation:pulse-soft 2.4s infinite; }
+
+/* INTERACTIVE TABS — radio-driven CSS-only */
+.lp-log-v3 .ws-radio { position:absolute; opacity:0; pointer-events:none; }
+.lp-log-v3 .mock-side-item.tab { cursor:pointer; user-select:none; }
+.lp-log-v3 .mockup:has(#ws-dispatch:checked) .tab[data-for="ws-dispatch"],
+.lp-log-v3 .mockup:has(#ws-lanes:checked) .tab[data-for="ws-lanes"],
+.lp-log-v3 .mockup:has(#ws-brokers:checked) .tab[data-for="ws-brokers"],
+.lp-log-v3 .mockup:has(#ws-drivers:checked) .tab[data-for="ws-drivers"],
+.lp-log-v3 .mockup:has(#ws-factoring:checked) .tab[data-for="ws-factoring"] { background:#fff; color:var(--ink); box-shadow:inset 0 0 0 1px var(--rule); border-left:2px solid var(--terracotta); padding-left:8px; }
+.lp-log-v3 .panel { display:none; }
+.lp-log-v3 .mockup:has(#ws-dispatch:checked) .panel-dispatch,
+.lp-log-v3 .mockup:has(#ws-lanes:checked) .panel-lanes,
+.lp-log-v3 .mockup:has(#ws-brokers:checked) .panel-brokers,
+.lp-log-v3 .mockup:has(#ws-drivers:checked) .panel-drivers,
+.lp-log-v3 .mockup:has(#ws-factoring:checked) .panel-factoring { display:block; animation:fade-up 0.32s ease-out both; }
+.lp-log-v3 .interactive-hint { position:absolute; top:14px; right:14px; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--terracotta); font-weight:700; padding:5px 10px; background:var(--terracotta-soft); border-radius:999px; z-index:3; pointer-events:none; animation:pulse-terracotta 2s infinite; }
+
+/* Panel-specific styles */
+.lp-log-v3 .panel-lanes table,.lp-log-v3 .panel-brokers table,.lp-log-v3 .panel-drivers table,.lp-log-v3 .panel-factoring table { width:100%; border-collapse:collapse; font-size:12.5px; margin-top:6px; }
+.lp-log-v3 .panel th { text-align:left; padding:8px 10px; font-size:10px; font-weight:700; color:var(--ink-mute); letter-spacing:0.10em; text-transform:uppercase; border-bottom:1px solid var(--rule); }
+.lp-log-v3 .panel td { padding:10px; border-bottom:1px solid var(--rule); color:var(--ink-2); }
+.lp-log-v3 .panel td:first-child { color:var(--ink); font-weight:600; }
+.lp-log-v3 .panel .num { font-family:var(--font-mono-plex),monospace; font-weight:600; color:var(--ink); }
+.lp-log-v3 .panel .num.up { color:var(--sage); }
+.lp-log-v3 .panel .num.warm { color:var(--terracotta); }
+.lp-log-v3 .panel tr:hover { background:rgba(198,107,63,0.04); }
+.lp-log-v3 .driver-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:8px; }
+.lp-log-v3 .driver-card { padding:12px; border:1px solid var(--rule); border-radius:8px; background:var(--cream); }
+.lp-log-v3 .driver-card .nm { font-weight:600; font-size:13px; color:var(--ink); }
+.lp-log-v3 .driver-card .st { font-size:10px; font-weight:700; letter-spacing:0.06em; margin-top:2px; }
+.lp-log-v3 .driver-card .st.route { color:var(--sage); }
+.lp-log-v3 .driver-card .st.idle { color:var(--ink-mute); }
+.lp-log-v3 .driver-card .st.off { color:var(--terracotta); }
+.lp-log-v3 .driver-card .meta { font-size:11px; color:var(--ink-faint); margin-top:6px; }
 .lp-log-v3 .mock-main { padding:22px 24px; background:#fff; }
 .lp-log-v3 .mock-h { font-family:var(--font-serif-fraunces),serif; font-size:20px; font-weight:600; margin:0 0 4px; letter-spacing:-0.02em; color:var(--ink); }
 .lp-log-v3 .mock-sub { font-size:12px; color:var(--ink-faint); margin-bottom:18px; }
@@ -273,7 +307,7 @@ html { scroll-behavior:smooth; }
 
 /* TESTIMONIALS */
 .lp-log-v3 .testi-row { display:grid; grid-template-columns:1fr; gap:20px; }
-@media (min-width:768px) { .lp-log-v3 .testi-row { grid-template-columns:repeat(2,1fr); } }
+@media (min-width:768px) { .lp-log-v3 .testi-row { grid-template-columns:repeat(3,1fr); } }
 .lp-log-v3 .testi-card { padding:32px; border:1px solid var(--rule); border-radius:16px; background:var(--cream); position:relative; transition:transform 0.18s,border-color 0.18s,box-shadow 0.18s; }
 .lp-log-v3 .testi-card:hover { transform:translateY(-3px); border-color:var(--terracotta); box-shadow:0 18px 36px rgba(26,26,26,0.06); }
 .lp-log-v3 .testi-stars { color:var(--terracotta); font-size:14px; letter-spacing:3px; margin-bottom:14px; }
@@ -318,6 +352,34 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .price-cta:hover { background:var(--ink); color:var(--cream); }
 .lp-log-v3 .price-cell.featured .price-cta { background:var(--ink); color:var(--cream); border-color:var(--ink); }
 .lp-log-v3 .price-cell.featured .price-cta:hover { background:var(--terracotta); border-color:var(--terracotta); }
+
+/* EMAIL CAPTURE LEAD MAGNET */
+.lp-log-v3 .email-capture { max-width:780px; margin:0 auto; padding:40px 36px; background:linear-gradient(140deg,var(--ink) 0%,#2a2a26 100%); border-radius:20px; color:var(--cream); position:relative; overflow:hidden; box-shadow:0 24px 56px rgba(26,26,26,0.18); }
+.lp-log-v3 .email-capture::before { content:''; position:absolute; top:-80px; right:-80px; width:340px; height:340px; background:radial-gradient(circle,rgba(201,169,110,0.22),transparent 70%); }
+.lp-log-v3 .email-capture-inner { position:relative; z-index:1; display:grid; grid-template-columns:1fr; gap:24px; align-items:center; }
+@media (min-width:768px) { .lp-log-v3 .email-capture-inner { grid-template-columns:1.1fr 1fr; gap:36px; } }
+.lp-log-v3 .ec-kicker { font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--ochre); font-weight:700; margin-bottom:12px; }
+.lp-log-v3 .ec-h { font-family:var(--font-serif-fraunces),serif; font-size:clamp(22px,3vw,30px); font-weight:500; letter-spacing:-0.02em; line-height:1.15; margin:0 0 10px; color:var(--cream); }
+.lp-log-v3 .ec-h em { font-style:italic; color:var(--ochre); }
+.lp-log-v3 .ec-p { font-size:14.5px; color:rgba(242,239,230,0.72); line-height:1.55; margin:0; }
+.lp-log-v3 .ec-form { display:flex; flex-direction:column; gap:10px; }
+.lp-log-v3 .ec-input { background:rgba(242,239,230,0.08); border:1px solid rgba(242,239,230,0.2); color:var(--cream); padding:14px 18px; font-size:14px; border-radius:999px; font-family:inherit; transition:border-color 0.18s,background 0.18s; outline:none; }
+.lp-log-v3 .ec-input::placeholder { color:rgba(242,239,230,0.45); }
+.lp-log-v3 .ec-input:focus { border-color:var(--ochre); background:rgba(242,239,230,0.12); }
+.lp-log-v3 .ec-btn { font-size:14px; font-weight:700; padding:14px 22px; background:var(--terracotta); color:var(--cream); border-radius:999px; border:0; cursor:pointer; transition:background 0.18s,transform 0.18s; letter-spacing:0.03em; font-family:inherit; }
+.lp-log-v3 .ec-btn:hover { background:var(--ochre); color:var(--ink); transform:translateY(-1px); }
+.lp-log-v3 .ec-note { font-size:11px; color:rgba(242,239,230,0.5); text-align:left; letter-spacing:0.02em; }
+
+/* OBJECTION GRID */
+.lp-log-v3 .obj-grid { display:grid; grid-template-columns:1fr; gap:14px; }
+@media (min-width:640px) { .lp-log-v3 .obj-grid { grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1024px) { .lp-log-v3 .obj-grid { grid-template-columns:repeat(3,1fr); } }
+.lp-log-v3 .obj-card { padding:24px 22px; border:1px solid var(--rule); border-radius:14px; background:var(--cream); transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s; }
+.lp-log-v3 .obj-card:hover { border-color:var(--terracotta); transform:translateY(-2px); box-shadow:0 14px 28px rgba(198,107,63,0.08); }
+.lp-log-v3 .obj-q { font-family:var(--font-serif-fraunces),serif; font-style:italic; font-size:17px; font-weight:500; color:var(--oxblood); line-height:1.3; margin:0 0 12px; letter-spacing:-0.01em; }
+.lp-log-v3 .obj-q::before { content:'\\201C'; font-family:var(--font-serif-fraunces),serif; font-size:32px; color:var(--terracotta); line-height:0; vertical-align:-12px; margin-right:4px; }
+.lp-log-v3 .obj-a { font-size:14px; color:var(--ink-2); line-height:1.55; margin:0; }
+.lp-log-v3 .obj-a strong { color:var(--ink); font-weight:600; }
 
 /* FAQ */
 .lp-log-v3 .faq-wrap { max-width:780px; margin:0 auto; border-top:1px solid var(--rule); }
@@ -406,9 +468,17 @@ export default function LogisticsLP() {
             </div>
           </div>
 
-          {/* DASHBOARD MOCKUP */}
+          {/* DASHBOARD MOCKUP — interactive tabs */}
           <div className="mockup-wrap">
-            <div className="mockup" role="img" aria-label="FreightOps dispatch canvas preview">
+            <div className="mockup" role="region" aria-label="FreightOps dispatch canvas preview — interactive">
+              <span className="interactive-hint">Click tabs →</span>
+              {/* hidden radios drive panel switching */}
+              <input className="ws-radio" type="radio" name="ws" id="ws-dispatch" defaultChecked />
+              <input className="ws-radio" type="radio" name="ws" id="ws-lanes" />
+              <input className="ws-radio" type="radio" name="ws" id="ws-brokers" />
+              <input className="ws-radio" type="radio" name="ws" id="ws-drivers" />
+              <input className="ws-radio" type="radio" name="ws" id="ws-factoring" />
+
               <div className="mockup-bar">
                 <div className="mockup-dots"><span></span><span></span><span></span></div>
                 <div className="mockup-addr">freightops.skynetlabs.app/dispatch/today</div>
@@ -416,11 +486,11 @@ export default function LogisticsLP() {
               <div className="mockup-body">
                 <aside className="mock-side">
                   <div className="mock-side-head">Workspace</div>
-                  <div className="mock-side-item active">Dispatch <span className="badge">12</span></div>
-                  <div className="mock-side-item">Lanes</div>
-                  <div className="mock-side-item">Brokers</div>
-                  <div className="mock-side-item">Drivers</div>
-                  <div className="mock-side-item">Factoring</div>
+                  <label htmlFor="ws-dispatch" className="mock-side-item tab" data-for="ws-dispatch">Dispatch <span className="badge">12</span></label>
+                  <label htmlFor="ws-lanes" className="mock-side-item tab" data-for="ws-lanes">Lanes</label>
+                  <label htmlFor="ws-brokers" className="mock-side-item tab" data-for="ws-brokers">Brokers</label>
+                  <label htmlFor="ws-drivers" className="mock-side-item tab" data-for="ws-drivers">Drivers</label>
+                  <label htmlFor="ws-factoring" className="mock-side-item tab" data-for="ws-factoring">Factoring</label>
                   <div className="mock-side-head" style={{ marginTop: 20 }}>AI Agents</div>
                   <div className="mock-side-item">Voice intake <span className="badge">3</span></div>
                   <div className="mock-side-item">SMS confirm</div>
@@ -428,33 +498,104 @@ export default function LogisticsLP() {
                 </aside>
 
                 <div className="mock-main">
-                  <div className="mock-h">Dispatch · Thursday, June 12</div>
-                  <div className="mock-sub">Live load + lane economics across your 9 trucks</div>
-                  <div className="mock-tiles">
-                    <div className="mock-tile up"><div className="mock-tile-lbl">Booked today</div><div className="mock-tile-num">112</div><div className="mock-tile-delta">+18 vs avg</div></div>
-                    <div className="mock-tile up"><div className="mock-tile-lbl">$/mi avg</div><div className="mock-tile-num">$3.41</div><div className="mock-tile-delta">+$0.22 vs Mon</div></div>
-                    <div className="mock-tile warm"><div className="mock-tile-lbl">Qualify time</div><div className="mock-tile-num">8.2s</div><div className="mock-tile-delta">−72% vs human</div></div>
+                  {/* PANEL: DISPATCH (default) */}
+                  <div className="panel panel-dispatch">
+                    <div className="mock-h">Dispatch · Thursday, June 12</div>
+                    <div className="mock-sub">Live load + lane economics across your 9 trucks</div>
+                    <div className="mock-tiles">
+                      <div className="mock-tile up"><div className="mock-tile-lbl">Booked today</div><div className="mock-tile-num">112</div><div className="mock-tile-delta">+18 vs avg</div></div>
+                      <div className="mock-tile up"><div className="mock-tile-lbl">$/mi avg</div><div className="mock-tile-num">$3.41</div><div className="mock-tile-delta">+$0.22 vs Mon</div></div>
+                      <div className="mock-tile warm"><div className="mock-tile-lbl">Qualify time</div><div className="mock-tile-num">8.2s</div><div className="mock-tile-delta">−72% vs human</div></div>
+                    </div>
+                    <div className="mock-lanes-h"><span>Active lanes</span><span className="live">Live</span></div>
+                    <div className="mock-lane">
+                      <div className="mock-lane-route">Dallas → Phoenix<small>53ft dry · 1,066 mi · Maverick</small></div>
+                      <div className="mock-lane-rate">$2,840</div>
+                      <div className="mock-lane-status status-booked">BOOKED</div>
+                    </div>
+                    <div className="mock-lane">
+                      <div className="mock-lane-route">Atlanta → Charlotte<small>Reefer · 244 mi · CRST</small></div>
+                      <div className="mock-lane-rate">$1,120</div>
+                      <div className="mock-lane-status status-routing">ROUTING</div>
+                    </div>
+                    <div className="mock-lane">
+                      <div className="mock-lane-route">Chicago → Indianapolis<small>Flatbed · 184 mi · Landstar</small></div>
+                      <div className="mock-lane-rate">$890</div>
+                      <div className="mock-lane-status status-booked">BOOKED</div>
+                    </div>
+                    <div className="mock-lane">
+                      <div className="mock-lane-route">Memphis → Nashville<small>Dry van · 213 mi · ArcBest</small></div>
+                      <div className="mock-lane-rate">$960</div>
+                      <div className="mock-lane-status status-pending">PENDING</div>
+                    </div>
                   </div>
-                  <div className="mock-lanes-h"><span>Active lanes</span><span className="live">Live</span></div>
-                  <div className="mock-lane">
-                    <div className="mock-lane-route">Dallas → Phoenix<small>53ft dry · 1,066 mi · Maverick</small></div>
-                    <div className="mock-lane-rate">$2,840</div>
-                    <div className="mock-lane-status status-booked">BOOKED</div>
+
+                  {/* PANEL: LANES */}
+                  <div className="panel panel-lanes">
+                    <div className="mock-h">Lanes · Top 5 this month</div>
+                    <div className="mock-sub">Repeat lanes ranked by $/mi · last 30 days</div>
+                    <div className="mock-tiles">
+                      <div className="mock-tile up"><div className="mock-tile-lbl">Lanes booked</div><div className="mock-tile-num">348</div><div className="mock-tile-delta">+42 vs May</div></div>
+                      <div className="mock-tile up"><div className="mock-tile-lbl">Best $/mi</div><div className="mock-tile-num">$4.12</div><div className="mock-tile-delta">DAL → DEN</div></div>
+                      <div className="mock-tile warm"><div className="mock-tile-lbl">Avg margin</div><div className="mock-tile-num">28%</div><div className="mock-tile-delta">+3 pts</div></div>
+                    </div>
+                    <table><thead><tr><th>Lane</th><th>Loads</th><th>Avg $/mi</th><th>Margin</th></tr></thead><tbody>
+                      <tr><td>Dallas → Denver</td><td>42</td><td className="num up">$4.12</td><td>34%</td></tr>
+                      <tr><td>Atlanta → Charlotte</td><td>38</td><td className="num up">$3.86</td><td>31%</td></tr>
+                      <tr><td>Houston → Phoenix</td><td>31</td><td className="num up">$3.74</td><td>29%</td></tr>
+                      <tr><td>Chicago → Indianapolis</td><td>28</td><td className="num">$3.41</td><td>27%</td></tr>
+                      <tr><td>Memphis → Nashville</td><td>24</td><td className="num warm">$2.98</td><td>22%</td></tr>
+                    </tbody></table>
                   </div>
-                  <div className="mock-lane">
-                    <div className="mock-lane-route">Atlanta → Charlotte<small>Reefer · 244 mi · CRST</small></div>
-                    <div className="mock-lane-rate">$1,120</div>
-                    <div className="mock-lane-status status-routing">ROUTING</div>
+
+                  {/* PANEL: BROKERS */}
+                  <div className="panel panel-brokers">
+                    <div className="mock-h">Brokers · Top relationships</div>
+                    <div className="mock-sub">Repeat brokers ranked by lifetime revenue</div>
+                    <div className="mock-tiles">
+                      <div className="mock-tile up"><div className="mock-tile-lbl">Active brokers</div><div className="mock-tile-num">24</div><div className="mock-tile-delta">+4 this qtr</div></div>
+                      <div className="mock-tile up"><div className="mock-tile-lbl">Top broker rev</div><div className="mock-tile-num">$184K</div><div className="mock-tile-delta">YTD · Maverick</div></div>
+                      <div className="mock-tile warm"><div className="mock-tile-lbl">Win rate</div><div className="mock-tile-num">62%</div><div className="mock-tile-delta">on quoted</div></div>
+                    </div>
+                    <table><thead><tr><th>Broker</th><th>Loads YTD</th><th>Avg rate</th><th>Win %</th></tr></thead><tbody>
+                      <tr><td>Maverick Transport</td><td>87</td><td className="num up">$2,640</td><td>71%</td></tr>
+                      <tr><td>CH Robinson</td><td>62</td><td className="num">$2,420</td><td>58%</td></tr>
+                      <tr><td>Landstar</td><td>54</td><td className="num up">$2,820</td><td>66%</td></tr>
+                      <tr><td>CRST</td><td>41</td><td className="num">$1,890</td><td>52%</td></tr>
+                      <tr><td>ArcBest</td><td>38</td><td className="num warm">$1,720</td><td>48%</td></tr>
+                    </tbody></table>
                   </div>
-                  <div className="mock-lane">
-                    <div className="mock-lane-route">Chicago → Indianapolis<small>Flatbed · 184 mi · Landstar</small></div>
-                    <div className="mock-lane-rate">$890</div>
-                    <div className="mock-lane-status status-booked">BOOKED</div>
+
+                  {/* PANEL: DRIVERS */}
+                  <div className="panel panel-drivers">
+                    <div className="mock-h">Drivers · 9 trucks, live status</div>
+                    <div className="mock-sub">Real-time ETA + last comms across fleet</div>
+                    <div className="driver-grid">
+                      <div className="driver-card"><div className="nm">Alvin C.</div><div className="st route">● On route · ATL→CLT</div><div className="meta">ETA 18:42 EDT · last ping 4m</div></div>
+                      <div className="driver-card"><div className="nm">Diego R.</div><div className="st route">● On route · DAL→PHX</div><div className="meta">ETA Fri 09:20 MST · last ping 11m</div></div>
+                      <div className="driver-card"><div className="nm">Marcus T.</div><div className="st route">● On route · CHI→IND</div><div className="meta">ETA 21:08 CDT · last ping 2m</div></div>
+                      <div className="driver-card"><div className="nm">Sarah W.</div><div className="st idle">○ Available · Memphis TN</div><div className="meta">Off-deck 4h · home base</div></div>
+                      <div className="driver-card"><div className="nm">James K.</div><div className="st route">● On route · HOU→PHX</div><div className="meta">ETA Sat 14:00 MST · last ping 7m</div></div>
+                      <div className="driver-card"><div className="nm">Tony M.</div><div className="st off">○ Off-duty · 34hr reset</div><div className="meta">Resumes Friday 06:00 CDT</div></div>
+                    </div>
                   </div>
-                  <div className="mock-lane">
-                    <div className="mock-lane-route">Memphis → Nashville<small>Dry van · 213 mi · ArcBest</small></div>
-                    <div className="mock-lane-rate">$960</div>
-                    <div className="mock-lane-status status-pending">PENDING</div>
+
+                  {/* PANEL: FACTORING */}
+                  <div className="panel panel-factoring">
+                    <div className="mock-h">Factoring · Triumph queue</div>
+                    <div className="mock-sub">Same-day settle ranked by fee efficiency</div>
+                    <div className="mock-tiles">
+                      <div className="mock-tile up"><div className="mock-tile-lbl">Settled today</div><div className="mock-tile-num">$28,640</div><div className="mock-tile-delta">4 invoices</div></div>
+                      <div className="mock-tile up"><div className="mock-tile-lbl">Avg cash-to-day</div><div className="mock-tile-num">1.4d</div><div className="mock-tile-delta">−15.6d vs no widget</div></div>
+                      <div className="mock-tile warm"><div className="mock-tile-lbl">Fee saved YTD</div><div className="mock-tile-num">$4,820</div><div className="mock-tile-delta">vs flat rate</div></div>
+                    </div>
+                    <table><thead><tr><th>Invoice</th><th>Broker</th><th>Net</th><th>Status</th></tr></thead><tbody>
+                      <tr><td>INV-4291</td><td>Maverick</td><td className="num up">$2,756</td><td>Settled</td></tr>
+                      <tr><td>INV-4288</td><td>Landstar</td><td className="num up">$2,723</td><td>Settled</td></tr>
+                      <tr><td>INV-4284</td><td>CH Robinson</td><td className="num">$2,348</td><td>Settled</td></tr>
+                      <tr><td>INV-4282</td><td>CRST</td><td className="num">$1,086</td><td>Settled</td></tr>
+                      <tr><td>INV-4279</td><td>ArcBest</td><td className="num warm">$931</td><td>Pending</td></tr>
+                    </tbody></table>
                   </div>
                 </div>
 
@@ -732,6 +873,35 @@ export default function LogisticsLP() {
                   <div><div className="testi-name">Diego R.</div><div className="testi-role">Dispatch lead · 9-truck regional · Houston TX</div></div>
                 </div>
               </div>
+              <div className="testi-card">
+                <div className="testi-stars">★★★★★</div>
+                <p className="testi-quote">&quot;Closed <em>6 new lanes</em> the month we launched. Factoring widget alone saved us 4 days of cash float — that&apos;s $18K of trucks not sitting at the bank.&quot;</p>
+                <div className="testi-meta">
+                  <div className="testi-avatar">MT</div>
+                  <div><div className="testi-name">Marcus T.</div><div className="testi-role">Owner-op · 14-truck regional · Dallas TX</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* EMAIL CAPTURE LEAD MAGNET */}
+        <section className="section tinted">
+          <div className="wrap">
+            <div className="email-capture reveal">
+              <div className="email-capture-inner">
+                <div>
+                  <div className="ec-kicker">Free teardown · No call required</div>
+                  <h3 className="ec-h">Get the <em>12-tab dispatch teardown PDF.</em></h3>
+                  <p className="ec-p">Real audit of a 12-truck Houston operator&apos;s six-tab stack. Where the leaks live, what to replace, what to keep. 9 pages. Instant inbox.</p>
+                </div>
+                <form className="ec-form" action="/discovery-call" method="GET">
+                  <input className="ec-input" type="email" name="email" placeholder="you@yourcarrier.com" required aria-label="Email address" />
+                  <input type="hidden" name="source" value="teardown-pdf" />
+                  <button className="ec-btn" type="submit">Send me the PDF →</button>
+                  <p className="ec-note">No spam. One email, one PDF. Unsubscribe one click.</p>
+                </form>
+              </div>
             </div>
           </div>
         </section>
@@ -782,8 +952,45 @@ export default function LogisticsLP() {
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* OBJECTION KILLER GRID */}
         <section className="section">
+          <div className="wrap">
+            <div className="section-head reveal">
+              <div className="section-kicker">The six excuses</div>
+              <h2>You&apos;re probably thinking <em>one of these.</em></h2>
+              <p className="section-sub">Cold ad clicks land here with the same six objections. We&apos;ve heard them on every audit call. Honest answers below.</p>
+            </div>
+            <div className="obj-grid reveal">
+              <div className="obj-card">
+                <p className="obj-q">We tried tools before — they didn&apos;t talk to each other.</p>
+                <p className="obj-a">Exactly the point. <strong>We don&apos;t sell tools</strong> — we glue your existing stack together. DAT, your TMS, QuickBooks, GHL all into one screen.</p>
+              </div>
+              <div className="obj-card">
+                <p className="obj-q">We only run 5–8 trucks. Too small for this.</p>
+                <p className="obj-a"><strong>Starter is built for 5–10 trucks.</strong> $1,497 flat. No retainer. Site + CRM + inbound inbox in 14 days. Cancel anytime, walk with the build.</p>
+              </div>
+              <div className="obj-card">
+                <p className="obj-q">We already pay for DAT and a TMS.</p>
+                <p className="obj-a">Better — <strong>we integrate them.</strong> Dashboard pulls DAT loads, your TMS data, factoring activity into one canvas. Don&apos;t replace working tools; glue them.</p>
+              </div>
+              <div className="obj-card">
+                <p className="obj-q">Burned $40K on an agency last year. Why different?</p>
+                <p className="obj-a"><strong>Public pricing</strong> fixes that. <strong>14-day ship window</strong> fixes that. <strong>Repo handed to you day 1</strong> fixes that. Miss the window, we work nights free.</p>
+              </div>
+              <div className="obj-card">
+                <p className="obj-q">FMCSA, TCPA — too much compliance risk.</p>
+                <p className="obj-a">No FMCSA filings on our end — <strong>broker authority stays with you.</strong> Vapi voice agent is inbound-only by default = TCPA compliant. We write the consent flow.</p>
+              </div>
+              <div className="obj-card">
+                <p className="obj-q">What if you ghost us after launch?</p>
+                <p className="obj-a"><strong>Repo + n8n + GHL handed to your org day 1.</strong> Cancel the retainer anytime — stack stays live, code is yours. No vendor lock-in, no hostage data.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="section tinted">
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">Operators ask first</div>
