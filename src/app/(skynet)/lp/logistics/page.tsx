@@ -90,6 +90,20 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .hero-scarcity { display:inline-flex; align-items:center; gap:10px; font-size:12px; color:var(--ink-2); padding:8px 14px; background:var(--cream-2); border:1px solid var(--rule); border-radius:999px; letter-spacing:0.04em; margin-top:4px; animation:fade-up 0.8s ease-out 0.4s both,scarcity-flash 3s infinite; }
 .lp-log-v3 .hero-scarcity strong { color:var(--terracotta); font-weight:700; }
 .lp-log-v3 .hero-scarcity::before { content:'●'; color:var(--terracotta); animation:pulse-terracotta 1.6s ease-in-out infinite; }
+.lp-log-v3 .featured-in { margin-top:32px; display:flex; gap:18px 28px; justify-content:center; flex-wrap:wrap; align-items:center; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-faint); font-weight:600; animation:fade-up 0.8s ease-out 0.5s both; }
+.lp-log-v3 .featured-in span { color:var(--ink-2); display:inline-flex; align-items:center; gap:6px; }
+.lp-log-v3 .featured-in span::before { content:''; width:4px; height:4px; background:var(--terracotta); border-radius:50%; }
+.lp-log-v3 .featured-lbl { color:var(--terracotta); font-weight:700; }
+.lp-log-v3 .scroll-indicator { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); width:34px; height:34px; border:1px solid var(--rule-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--ink-2); font-size:14px; text-decoration:none; animation:bounce-down 2.4s ease-in-out infinite; background:var(--cream); z-index:2; }
+.lp-log-v3 .scroll-indicator:hover { border-color:var(--terracotta); color:var(--terracotta); }
+@keyframes bounce-down { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(6px); } }
+
+/* LIVE TICKER */
+.lp-log-v3 .live-ticker { background:var(--ink); color:var(--cream); padding:14px 24px; display:flex; align-items:center; justify-content:center; gap:14px; font-size:13px; letter-spacing:0.02em; flex-wrap:wrap; }
+.lp-log-v3 .live-ticker strong { color:var(--ochre); font-family:var(--font-mono-plex),monospace; font-weight:700; padding:0 4px; }
+.lp-log-v3 .live-ticker .ticker-pulse { width:8px; height:8px; background:var(--terracotta); border-radius:50%; box-shadow:0 0 0 4px rgba(198,107,63,0.22); animation:pulse-terracotta 1.6s infinite; }
+.lp-log-v3 .live-ticker .ticker-lbl { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ochre); font-weight:700; padding-right:6px; }
+.lp-log-v3 .live-ticker .sep { color:rgba(242,239,230,0.32); }
 
 /* DASHBOARD MOCKUP */
 .lp-log-v3 .mockup-wrap { max-width:1140px; margin:48px auto 0; padding:0 16px; position:relative; animation:fade-up 1s ease-out 0.5s both; }
@@ -147,6 +161,37 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .factor-bar-fill { height:100%; background:linear-gradient(90deg,var(--terracotta),var(--ochre)); width:74%; border-radius:3px; animation:bar-fill 2s ease-out 0.8s both; }
 .lp-log-v3 .factor-num { font-family:var(--font-mono-plex),monospace; font-size:24px; font-weight:700; color:var(--terracotta); margin-top:4px; letter-spacing:-0.02em; }
 .lp-log-v3 .factor-sub { font-size:11px; color:var(--ink-faint); }
+
+/* COMPARISON TABLE */
+.lp-log-v3 .compare-wrap { overflow-x:auto; border:1px solid var(--rule-strong); border-radius:16px; background:var(--cream); }
+.lp-log-v3 .compare-tbl { width:100%; min-width:760px; border-collapse:collapse; font-size:14px; }
+.lp-log-v3 .compare-tbl thead th { padding:18px 16px; text-align:left; font-family:var(--font-serif-fraunces),serif; font-size:13px; font-weight:600; color:var(--ink); border-bottom:2px solid var(--ink); letter-spacing:-0.005em; background:var(--cream-2); }
+.lp-log-v3 .compare-tbl thead th.us { background:linear-gradient(180deg,var(--terracotta-soft),transparent); color:var(--terracotta); border-bottom-color:var(--terracotta); }
+.lp-log-v3 .compare-tbl tbody td { padding:14px 16px; border-bottom:1px solid var(--rule); vertical-align:top; }
+.lp-log-v3 .compare-tbl tbody td:first-child { font-weight:500; color:var(--ink); font-size:14px; }
+.lp-log-v3 .compare-tbl tbody td.us { background:rgba(198,107,63,0.04); color:var(--ink); font-weight:500; }
+.lp-log-v3 .compare-tbl tbody td.us strong { color:var(--terracotta); font-weight:700; }
+.lp-log-v3 .compare-tbl tbody td.bad { color:var(--ink-faint); }
+.lp-log-v3 .compare-tbl tbody tr:hover { background:rgba(198,107,63,0.03); }
+.lp-log-v3 .check { color:var(--sage); font-weight:700; font-family:var(--font-mono-plex),monospace; }
+.lp-log-v3 .xmark { color:var(--ink-mute); font-family:var(--font-mono-plex),monospace; }
+
+/* PROCESS TIMELINE */
+.lp-log-v3 .process-track { position:relative; display:grid; grid-template-columns:1fr; gap:24px; }
+@media (min-width:768px) { .lp-log-v3 .process-track { grid-template-columns:repeat(4,1fr); gap:16px; } .lp-log-v3 .process-track::before { content:''; position:absolute; top:36px; left:6%; right:6%; height:2px; background:linear-gradient(90deg,var(--terracotta),var(--ochre),var(--sage)); opacity:0.35; z-index:0; } }
+.lp-log-v3 .process-step { position:relative; z-index:1; }
+.lp-log-v3 .process-marker { width:72px; height:72px; border-radius:50%; background:var(--cream); border:2px solid var(--terracotta); display:flex; align-items:center; justify-content:center; font-family:var(--font-serif-fraunces),serif; font-weight:500; font-size:22px; color:var(--terracotta); margin:0 auto 18px; position:relative; transition:transform 0.2s,box-shadow 0.2s; box-shadow:0 0 0 6px var(--cream); }
+.lp-log-v3 .process-step:hover .process-marker { transform:scale(1.08); box-shadow:0 0 0 6px var(--cream),0 12px 28px rgba(198,107,63,0.24); }
+.lp-log-v3 .process-marker small { position:absolute; bottom:-6px; right:-6px; background:var(--terracotta); color:var(--cream); font-family:var(--font-mono-plex),monospace; font-size:10px; font-weight:700; padding:3px 8px; border-radius:999px; letter-spacing:0.04em; border:2px solid var(--cream); }
+.lp-log-v3 .process-step:nth-child(2) .process-marker { border-color:var(--ochre); color:#7a6435; }
+.lp-log-v3 .process-step:nth-child(2) .process-marker small { background:var(--ochre); color:var(--ink); }
+.lp-log-v3 .process-step:nth-child(3) .process-marker { border-color:var(--sage); color:var(--sage); }
+.lp-log-v3 .process-step:nth-child(3) .process-marker small { background:var(--sage); color:var(--cream); }
+.lp-log-v3 .process-step:nth-child(4) .process-marker { border-color:var(--ink); color:var(--ink); background:var(--ink); }
+.lp-log-v3 .process-step:nth-child(4) .process-marker { color:var(--cream); }
+.lp-log-v3 .process-step:nth-child(4) .process-marker small { background:var(--cream); color:var(--ink); border-color:var(--cream); }
+.lp-log-v3 .process-step h4 { font-family:var(--font-serif-fraunces),serif; font-size:19px; font-weight:500; color:var(--ink); margin:0 0 8px; text-align:center; letter-spacing:-0.015em; }
+.lp-log-v3 .process-step p { font-size:13.5px; color:var(--ink-2); text-align:center; line-height:1.55; margin:0; }
 
 /* LOGO STRIP — marquee */
 .lp-log-v3 .logo-strip { padding:36px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); background:var(--cream-2); margin-top:64px; overflow:hidden; }
@@ -351,6 +396,13 @@ export default function LogisticsLP() {
                 <a href="#pricing" className="btn-line">See public pricing</a>
               </div>
               <div className="hero-scarcity"><strong>2 slots left</strong>&nbsp;· June 2026 · 8-hour reply window</div>
+              <div className="featured-in">
+                <span className="featured-lbl">Featured</span>
+                <span>Claude Code Partner</span>
+                <span>Upwork Top Rated Plus</span>
+                <span>Vercel SaaS</span>
+                <span>Canggu Builders Bali</span>
+              </div>
             </div>
           </div>
 
@@ -426,7 +478,19 @@ export default function LogisticsLP() {
               </div>
             </div>
           </div>
+          <a href="#problem" className="scroll-indicator" aria-label="Scroll to problem section">↓</a>
         </section>
+
+        {/* LIVE TICKER — across-cohort activity */}
+        <div className="live-ticker">
+          <span className="ticker-pulse"></span>
+          <span className="ticker-lbl">LIVE</span>
+          <span><strong>47</strong> calls qualified across cohort today</span>
+          <span className="sep">·</span>
+          <span><strong>$184K</strong> in loads booked this week</span>
+          <span className="sep">·</span>
+          <span><strong>9.2s</strong> avg AI response</span>
+        </div>
 
         {/* MARQUEE LOGO STRIP */}
         <section className="logo-strip">
@@ -455,7 +519,7 @@ export default function LogisticsLP() {
         </section>
 
         {/* PAIN */}
-        <section className="section">
+        <section className="section" id="problem">
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">The problem</div>
@@ -483,6 +547,39 @@ export default function LogisticsLP() {
                 <div className="pain-line">tools that talk. Dispatcher does the <strong>glue manually</strong>, every shift.</div>
                 <div className="pain-src">Every audit, no exceptions</div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* COMPARISON TABLE */}
+        <section className="section tinted">
+          <div className="wrap">
+            <div className="section-head reveal">
+              <div className="section-kicker">The 5-line map</div>
+              <h2>Where the others <em>stop,</em> SkynetLabs begins.</h2>
+              <p className="section-sub">Brokerage tools own the load board. Agencies own the brand. Dev shops own the code. SkynetLabs ships all three under one roof, in 14 days, at public price.</p>
+            </div>
+            <div className="compare-wrap reveal">
+              <table className="compare-tbl">
+                <thead>
+                  <tr>
+                    <th>Capability</th>
+                    <th className="us">SkynetLabs FreightOps</th>
+                    <th>DAT / TruckingOffice</th>
+                    <th>Brand agency</th>
+                    <th>Dev shop</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Marketing site + CRM</td><td className="us"><strong>✓ 14 days</strong></td><td className="bad"><span className="xmark">— not their scope</span></td><td><span className="check">✓ 60 days</span></td><td className="bad"><span className="xmark">— sub-contracted</span></td></tr>
+                  <tr><td>Live dispatch dashboard</td><td className="us"><strong>✓ included Pro tier</strong></td><td><span className="check">✓ but their UI only</span></td><td className="bad"><span className="xmark">—</span></td><td><span className="check">✓ 180 days, T&amp;M</span></td></tr>
+                  <tr><td>AI voice agent (Vapi)</td><td className="us"><strong>✓ branded, your voice</strong></td><td className="bad"><span className="xmark">—</span></td><td className="bad"><span className="xmark">—</span></td><td className="bad"><span className="xmark">— specialized hire</span></td></tr>
+                  <tr><td>Factoring widget</td><td className="us"><strong>✓ Triumph/Apex/RTS</strong></td><td className="bad"><span className="xmark">— external</span></td><td className="bad"><span className="xmark">—</span></td><td><span className="check">✓ custom build</span></td></tr>
+                  <tr><td>Public, fixed pricing</td><td className="us"><strong>✓ four tiers, visible</strong></td><td><span className="check">✓ per-seat SaaS</span></td><td className="bad"><span className="xmark">— custom quote</span></td><td className="bad"><span className="xmark">— T&amp;M</span></td></tr>
+                  <tr><td>Source-controlled hand-off</td><td className="us"><strong>✓ your GitHub day 1</strong></td><td className="bad"><span className="xmark">— vendor SaaS</span></td><td className="bad"><span className="xmark">— hostage data</span></td><td><span className="check">✓ partial</span></td></tr>
+                  <tr><td>Ship guarantee</td><td className="us"><strong>✓ miss = free nights</strong></td><td className="bad"><span className="xmark">—</span></td><td className="bad"><span className="xmark">—</span></td><td className="bad"><span className="xmark">— scope creep</span></td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -533,8 +630,41 @@ export default function LogisticsLP() {
           </div>
         </section>
 
-        {/* VALUE STACK */}
+        {/* PROCESS TIMELINE */}
         <section className="section">
+          <div className="wrap">
+            <div className="section-head reveal">
+              <div className="section-kicker">The 14-day ship</div>
+              <h2>Day 1 to live, <em>no scope theater.</em></h2>
+              <p className="section-sub">Fixed gates. Public timeline. Miss it and we work nights + weekends free until live — written into the SOW. Below = exact Starter tier track.</p>
+            </div>
+            <div className="process-track reveal">
+              <div className="process-step">
+                <div className="process-marker">I<small>Day 1</small></div>
+                <h4>Kickoff + audit</h4>
+                <p>Live walkthrough of your six tabs. We map the gaps. Domain + GHL subaccount provisioned. You get a Loom recap by EOD.</p>
+              </div>
+              <div className="process-step">
+                <div className="process-marker">II<small>Day 4</small></div>
+                <h4>Wireframe lock</h4>
+                <p>Site map + CRM pipeline + inbound routing in Figma. Two revision rounds inside this window. Lock means lock.</p>
+              </div>
+              <div className="process-step">
+                <div className="process-marker">III<small>Day 10</small></div>
+                <h4>Build review</h4>
+                <p>Staging URL live. We walk every page on a Loom. You approve copy + Pixel + CAPI. Last polish window.</p>
+              </div>
+              <div className="process-step">
+                <div className="process-marker">IV<small>Day 14</small></div>
+                <h4>Live + handoff</h4>
+                <p>Production push. GitHub repo transferred to your org. n8n + GHL credentials handed over. Walk anytime — you own everything.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* VALUE STACK */}
+        <section className="section tinted">
           <div className="wrap">
             <div className="section-head reveal" style={{ textAlign: "center", marginLeft: "auto", marginRight: "auto" }}>
               <div className="section-kicker" style={{ marginLeft: "auto", marginRight: "auto" }}>What you get</div>
@@ -559,7 +689,7 @@ export default function LogisticsLP() {
         </section>
 
         {/* RISK REVERSAL */}
-        <section className="section tinted">
+        <section className="section">
           <div className="wrap">
             <div className="risk reveal">
               <div className="risk-inner">
