@@ -142,33 +142,32 @@ const wpRedirects = [
 ];
 
 /**
- * Programmatic 301s for the 640 killed (svc × state) cells.
+ * Programmatic 301s for ALL 768 svc × state URLs (16 services × 48 states).
  *
- * Background — Option A SEO cleanup (2026-05-26):
- *   We previously built 16 services × 48 states = 768 programmatic pages.
- *   Only the 128 priority-state cells (CA/TX/NY/FL/IL/PA/OH/GA × all 16
- *   services) had hand-written enrichment and qualified as indexable.
- *   The other 640 shipped as `noindex,follow` thin-content templates.
+ * Background — Hub-consolidation cleanup (2026-05-28):
+ *   Old structure had 128 indexable svc×state pages (priority states) + 640
+ *   redirected pages (non-priority). Now collapsed entirely: ALL svc×state
+ *   URLs 301 to the parent hub with a state-anchor fragment.
  *
- *   Option A killed the 640 from generateStaticParams (they now 404 instead
- *   of noindex). To avoid leaking real users + lingering Googlebot to a
- *   dead 404, every killed URL now 301-redirects to its parent service
- *   page (which IS indexable and covers the full national audience).
+ *   The 8 priority-state enrichment paragraphs now render in an accordion
+ *   inside the service hub page (see /services/[slug]/page.tsx) with stable
+ *   anchor IDs like #state-texas. So an old URL like:
  *
- *   - User UX: lands on real service content instead of "page not found"
- *   - SEO: 301 transfers any earned PageRank to the parent
- *   - Crawl: Google deindexes the 640 child URLs and consolidates on parents
+ *     /services/n8n-automation/in/texas
  *
- *   Same source-of-truth as generateStaticParams + sitemap:
- *   src/lib/sitemap-quality.ts `isServiceStateIndexable`. When a cell
- *   gets enrichment added later, it automatically drops out of the
- *   redirect list AND appears in generateStaticParams + sitemap.
+ *   permanently redirects to:
+ *
+ *     /services/n8n-automation#state-texas
+ *
+ *   Result: one strong canonical hub per service (16 total) instead of
+ *   17 thin pages per service (1 hub + 16 doorway cells). All link equity
+ *   consolidated. Sitemap drops from ~275 to ~139 indexable URLs.
  */
 const killedServiceStateRedirects = SERVICE_CATEGORIES.flatMap((cat) =>
   cat.services.flatMap((svc) =>
-    STATES.filter((s) => !isIndexableHere(svc.slug, s.slug)).map((s) => ({
+    STATES.map((s) => ({
       source: `/services/${svc.slug}/in/${s.slug}`,
-      destination: `/services/${svc.slug}`,
+      destination: `/services/${svc.slug}#state-${s.slug}`,
       permanent: true as const,
     })),
   ),
