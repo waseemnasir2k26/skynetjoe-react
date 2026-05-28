@@ -48,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy-policy",
     "/terms-of-service",
     "/locations",
+    "/industries/freight-logistics/texas",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,

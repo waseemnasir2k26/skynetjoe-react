@@ -303,6 +303,73 @@ export default async function StatePage({
         </div>
       </section>
 
+      {/* Texas-specific industry deep-guide callout */}
+      {s.slug === "texas" && (
+        <section
+          className="py-10"
+          style={{
+            background: "var(--ink)",
+            color: "var(--cream-3)",
+            borderBottom: "1px solid rgba(26,26,26,0.10)",
+          }}
+        >
+          <div className="container-x px-6">
+            <div className="max-w-4xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div>
+                <div
+                  className="mb-2"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.16em",
+                    color: "var(--terracotta)",
+                  }}
+                >
+                  Industry deep guide
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                    fontSize: "clamp(22px, 3vw, 30px)",
+                    color: "var(--cream-3)",
+                    margin: 0,
+                  }}
+                >
+                  Building for Texas freight or logistics?
+                </h3>
+                <p
+                  style={{
+                    fontSize: 14,
+                    color: "rgba(245, 240, 230, 0.78)",
+                    margin: "6px 0 0",
+                  }}
+                >
+                  3,000-word deep guide — Houston midstream, DFW wholesale,
+                  Austin tech-trucking, Laredo cross-border, Permian oilfield.
+                </p>
+              </div>
+              <Link
+                href="/industries/freight-logistics/texas"
+                className="inline-flex items-center gap-2 flex-shrink-0"
+                style={{
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  padding: "14px 24px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  borderRadius: 2,
+                }}
+              >
+                Open the TX freight guide →
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ENRICHMENT — state-specific 220-280 word block, indexability-gated */}
       {enrichment && (
         <section
