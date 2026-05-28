@@ -20,6 +20,7 @@ import {
   SERVICE_STATE_ENRICHMENT,
   getEnrichment,
 } from "@/data/service-state-enrichment";
+import { getStateEnrichment } from "@/data/state-enrichment";
 import { isPriorityState } from "@/data/state-priority";
 import { STATES } from "@/lib/states";
 import { POSTS } from "@/lib/posts";
@@ -57,6 +58,31 @@ export function isServiceStateIndexable(
   stateSlug: string,
 ): boolean {
   return serviceStateQualityScore(serviceSlug, stateSlug) >= INDEX_THRESHOLD;
+}
+
+// ── Location pages (/locations/[state]) ─────────────────────────────────────
+// Scoring:
+//   - Unique 200+ word enrichment paragraph     40 pts
+//   - State has 3+ industries listed            20 pts
+//   - State has 3+ cities listed                20 pts
+//   - Base (page exists, JSON-LD emitted)       20 pts
+// Threshold 60 → index. Below → noindex, follow.
+
+export function locationQualityScore(stateSlug: string): number {
+  let score = 0;
+  const enrichment = getStateEnrichment(stateSlug);
+  const state = STATES.find((s) => s.slug === stateSlug);
+
+  if (enrichment && enrichment.length >= 800) score += 40;
+  if (state && state.industries.length >= 3) score += 20;
+  if (state && state.cities.length >= 3) score += 20;
+  if (state) score += 20;
+
+  return score;
+}
+
+export function isLocationIndexable(stateSlug: string): boolean {
+  return locationQualityScore(stateSlug) >= INDEX_THRESHOLD;
 }
 
 // ── Case studies ────────────────────────────────────────────────────────────

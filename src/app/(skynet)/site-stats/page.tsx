@@ -71,9 +71,13 @@ function walkApi(root: string): string[] {
 }
 
 export default function SiteStats() {
-  const services = SERVICE_CATEGORIES.flatMap((c) => c.services);
-  const servicesNoHref = services.filter((s) => !("href" in s && s.href));
-  const indexableServiceStates = publishedServiceStatePairs([...servicesNoHref]).length;
+  const services: { slug: string }[] = SERVICE_CATEGORIES.flatMap(
+    (c) => c.services as readonly { slug: string }[],
+  );
+  const servicesNoHref = services.filter(
+    (s) => !("href" in s && (s as { href?: string }).href),
+  );
+  const indexableServiceStates = publishedServiceStatePairs(servicesNoHref).length;
 
   const newsCount = NEWS.length;
   const indexableNewsCount = NEWS.filter((n) => isNewsIndexable(n.slug)).length;

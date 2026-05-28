@@ -20,6 +20,8 @@ import { ArrowRight, MessageCircle, Calendar, MapPin, CheckCircle2 } from "lucid
 import { STATES, getStateBySlug, type StateEntry } from "@/lib/states";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { getStateEnrichment } from "@/data/state-enrichment";
+import { isLocationIndexable } from "@/lib/sitemap-quality";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
 type SvcItem = { slug: string; label: string; icon: string; desc: string };
@@ -40,10 +42,12 @@ export async function generateMetadata({
   if (!s) return {};
   const title = `AI Automation Expert in ${s.name} â€” n8n, GoHighLevel & AEO | ${SITE.brand}`;
   const description = `Hire an AI automation expert serving ${s.name} founders. n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents delivered to ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5â€“14 day ship.`;
+  const indexable = isLocationIndexable(state);
   return {
     title,
     description,
     alternates: { canonical: `${SITE.url}/locations/${s.slug}` },
+    robots: indexable ? undefined : { index: false, follow: true },
     openGraph: {
       title,
       description,
@@ -123,6 +127,8 @@ export default async function StatePage({
   const allServices: SvcItem[] = SERVICE_CATEGORIES.flatMap(
     (c) => c.services as readonly SvcItem[]
   );
+
+  const enrichment = getStateEnrichment(s.slug);
 
   const schema = {
     "@context": "https://schema.org",
@@ -296,6 +302,37 @@ export default async function StatePage({
           </div>
         </div>
       </section>
+
+      {/* ENRICHMENT — state-specific 220-280 word block, indexability-gated */}
+      {enrichment && (
+        <section
+          className="py-16 md:py-20"
+          style={{
+            background: "var(--cream-2)",
+            borderBottom: "1px solid rgba(26,26,26,0.10)",
+          }}
+        >
+          <div className="container-x px-6">
+            <div className="max-w-3xl">
+              <div className="mb-6" style={eyebrow}>
+                <span style={eyebrowRule} />
+                What we ship in {s.name}
+              </div>
+              <p
+                style={{
+                  fontFamily: "var(--font-serif, var(--font-display))",
+                  fontSize: 18,
+                  lineHeight: 1.72,
+                  color: "var(--ink)",
+                  margin: 0,
+                }}
+              >
+                {enrichment}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Stats */}
       <section className="py-12" style={{ background: "var(--cream)" }}>

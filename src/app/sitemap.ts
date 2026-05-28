@@ -11,6 +11,7 @@ import {
   isIndustryIndexable,
   isPostIndexable,
   isNewsIndexable,
+  isLocationIndexable,
 } from "@/lib/sitemap-quality";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -64,12 +65,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  const stateRoutes = STATES.map((s) => ({
-    url: `${base}/locations/${s.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
+  // Location pages — quality-gated by isLocationIndexable (state-enrichment.ts).
+  // States without an enrichment paragraph stay SSG'd but emit noindex, follow.
+  const stateRoutes = STATES.filter((s) => isLocationIndexable(s.slug)).map(
+    (s) => ({
+      url: `${base}/locations/${s.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }),
+  );
 
   const blogRoutes = POSTS.filter((p) => isPostIndexable(p.slug)).map((p) => ({
     url: `${base}/blog/${p.slug}`,
