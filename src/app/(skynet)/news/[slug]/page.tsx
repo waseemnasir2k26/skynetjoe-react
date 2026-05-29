@@ -41,8 +41,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const a = getArticle(slug);
   if (!a) return { title: "Article not found" };
+  // SERP title: prefer the short seoTitle (≤55 chars) when set so the global
+  // `%s | SkynetLabs` template doesn't push us past the ~60-char truncation
+  // line. Falls back to the long editorial headline. og/twitter keep the full
+  // title for social cards (no width limit there).
   return {
-    title: `${a.title} — SkynetLabs`,
+    title: a.seoTitle ?? a.title,
     description: a.description,
     alternates: { canonical: `${SITE.url}/news/${a.slug}` },
     openGraph: {
@@ -59,7 +63,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: a.title,
       description: a.description,
-      creator: "@skynetlabs",
+      creator: "@Skynetjoe1",
     },
   };
 }
@@ -84,15 +88,21 @@ export default async function NewsArticlePage({
   const accent = CATEGORY_COLORS[a.category] ?? "var(--terracotta)";
   const related = relatedFor(a.slug, 3);
 
+  // NewsArticle (not BlogPosting) is the correct type for /news content and
+  // unlocks Google News / Top Stories eligibility. Built inline here — the
+  // shared schema.ts helper is owned elsewhere and deliberately left untouched.
+  // Required NewsArticle fields per schema.org/Google: headline, image,
+  // datePublished, dateModified, author (Person), publisher (Organization +
+  // logo ImageObject), mainEntityOfPage. All sourced from existing data only.
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    "@type": "NewsArticle",
     headline: a.title,
     description: a.description,
     url: `${SITE.url}/news/${a.slug}`,
     datePublished: a.publishedAt,
     dateModified: a.updatedAt || a.publishedAt,
-    image: `${SITE.assetsUrl}${a.heroImage}`,
+    image: [`${SITE.assetsUrl}${a.heroImage}`],
     author: {
       "@type": "Person",
       name: SITE.founder,
@@ -102,6 +112,12 @@ export default async function NewsArticlePage({
       "@type": "Organization",
       name: SITE.brand,
       url: SITE.url,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE.assetsUrl}/icon-512.png`,
+        width: 512,
+        height: 512,
+      },
     },
     mainEntityOfPage: {
       "@type": "WebPage",

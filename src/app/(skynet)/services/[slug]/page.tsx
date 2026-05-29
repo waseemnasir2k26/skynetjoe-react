@@ -1,22 +1,18 @@
-﻿import fs from "fs";
+import fs from "fs";
 import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { FC } from "react";
 import { MapPin, ArrowRight } from "lucide-react";
-import { getPayload } from "payload";
-import config from "@payload-config";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { STATES } from "@/lib/states";
 import JsonLd from "@/components/JsonLd";
-import ServiceBlocks from "@/components/services/ServiceBlocks";
 import N8nAutomationLP from "@/components/services/lp/N8nAutomationLP";
 import GoHighLevelLP from "@/components/services/lp/GoHighLevelLP";
 import AiChatbotsLP from "@/components/services/lp/AiChatbotsLP";
 import WordpressSeoLP from "@/components/services/lp/WordpressSeoLP";
 import VibeCodedSitesLP from "@/components/services/lp/VibeCodedSitesLP";
-import type { Service } from "@/payload/payload-types";
 
 /**
  * Top-5 service slugs that render a bespoke funnel LP component
@@ -37,14 +33,14 @@ const SERVICES: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
 ).filter((s): s is ServiceItem => !("href" in s) || !s.href);
 const SLUGS = SERVICES.map((s) => s.slug);
 
-// Build a SEO-grade description (â‰¥140 chars) from the short svc.desc tagline
+// Build a SEO-grade description (≤140 chars) from the short svc.desc tagline
 // so meta-description, OG description, and Service schema all pass length floors.
 function buildLongDescription(svc: ServiceItem): string {
   return (
-    `${svc.label} from ${SITE.brand} â€” ${svc.desc}. ` +
+    `${svc.label} from ${SITE.brand} — ${svc.desc}. ` +
     `Fixed-price scope returned within 48 hours of brief, ship window 5 to 14 days, ` +
     `delivered remotely from Bali by founder ${SITE.founder}. ` +
-    `8-hour weekday reply guarantee, source-controlled deliverables, public pricing â€” no quote dance.`
+    `8-hour weekday reply guarantee, source-controlled deliverables, public pricing — no quote dance.`
   );
 }
 
@@ -64,11 +60,11 @@ export async function generateMetadata({
   if (!svc) return {};
   const longDesc = buildLongDescription(svc);
   return {
-    title: `${svc.label} â€” ${SITE.brand}`,
+    title: `${svc.label} — ${SITE.brand}`,
     description: longDesc,
     alternates: { canonical: `${SITE.url}/services/${svc.slug}` },
     openGraph: {
-      title: `${svc.label} â€” ${SITE.brand}`,
+      title: `${svc.label} — ${SITE.brand}`,
       description: longDesc,
       url: `${SITE.url}/services/${svc.slug}`,
       type: "article",
@@ -76,9 +72,9 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${svc.label} â€” ${SITE.brand}`,
+      title: `${svc.label} — ${SITE.brand}`,
       description: longDesc,
-      creator: "@skynetlabs",
+      creator: "@Skynetjoe1",
     },
   };
 }
@@ -91,33 +87,16 @@ export default async function ServicePage({
   const { slug } = await params;
   if (!SLUGS.includes(slug)) notFound();
 
-  // Fetch CMS-managed service doc. depth: 2 populates Media relations
-  // (heroImage, photo) inside Blocks so ServiceBlocks gets URLs not IDs.
-  // Soft-fail if Payload/DB unavailable so the site still renders.
-  let cmsDoc: Service | null = null;
-  try {
-    const payload = await getPayload({ config });
-    const res = await payload.find({
-      collection: "services",
-      where: { slug: { equals: slug } },
-      limit: 1,
-      depth: 2,
-    });
-    cmsDoc = (res.docs[0] as Service | undefined) ?? null;
-  } catch (err) {
-    console.warn(`[services/${slug}] Payload fetch failed, using file fallback`, err);
-  }
-
-  const hasCmsBlocks = (cmsDoc?.blocks?.length ?? 0) > 0;
+  // Content source: bespoke LP component for the top-5 funnels, else the
+  // static HTML payload from content/services/{slug}.html. (Git is the CMS —
+  // Payload was removed 2026-05-29; public pages are fully data-file driven.)
   const LPComponent = TOP_5_LP[slug];
-  // Load HTML payload ONLY when neither CMS blocks nor LP component will render.
-  const html =
-    hasCmsBlocks || LPComponent
-      ? null
-      : fs.readFileSync(
-          path.join(process.cwd(), "content", "services", `${slug}.html`),
-          "utf8"
-        );
+  const html = LPComponent
+    ? null
+    : fs.readFileSync(
+        path.join(process.cwd(), "content", "services", `${slug}.html`),
+        "utf8"
+      );
   const svc = SERVICES.find((s) => s.slug === slug)!;
 
   const schema = {
@@ -172,9 +151,7 @@ export default async function ServicePage({
       <style>{`
         .cream-state-pill:hover { border-color: var(--terracotta) !important; }
       `}</style>
-      {hasCmsBlocks ? (
-        <ServiceBlocks blocks={cmsDoc!.blocks!} />
-      ) : LPComponent ? (
+      {LPComponent ? (
         <LPComponent />
       ) : (
         <div
@@ -183,7 +160,7 @@ export default async function ServicePage({
         />
       )}
 
-      {/* Available in 48 states â€” feeds the /services/[slug]/in/[state] matrix */}
+      {/* Available in 48 states — feeds the /services/[slug]/in/[state] matrix */}
       <section
         className="section"
         style={{

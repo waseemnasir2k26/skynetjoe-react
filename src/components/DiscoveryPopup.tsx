@@ -40,6 +40,11 @@ export default function DiscoveryPopup() {
     let triggered = false;
     const fire = () => {
       if (triggered) return;
+      // Re-check shared mutex at fire time (not just on mount) so a popup that
+      // already opened this session blocks this one. 2026-05-29.
+      try {
+        if (sessionStorage.getItem(SHARED_POPUP_KEY)) return;
+      } catch {}
       triggered = true;
       try {
         sessionStorage.setItem(STORAGE_KEY, "1");
@@ -48,31 +53,32 @@ export default function DiscoveryPopup() {
       setOpen(true);
     };
 
-    const timer = window.setTimeout(fire, 30000);
-
-    const onMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0) fire();
-    };
-    document.addEventListener("mouseleave", onMouseLeave);
+    // 2026-05-29 popup de-clutter: 30s → 75s, and exit-intent handed to
+    // ExitIntentModal so the two don't both fire on mouse-leave.
+    const timer = window.setTimeout(fire, 75000);
 
     return () => {
       window.clearTimeout(timer);
-      document.removeEventListener("mouseleave", onMouseLeave);
     };
   }, [disabled, pathname]);
 
   useEffect(() => {
     if (!open) return;
+    // Tell StickyBar + LiveChat to hide so only ONE overlay shows at a time.
+    window.dispatchEvent(new CustomEvent("skynet:modal", { detail: true }));
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") handleClose();
     };
     document.addEventListener("keydown", onKey);
-    closeBtnRef.current?.focus();
+    // preventScroll: modal lives at end of <body>; focusing it without this
+    // scrolls the page to the bottom on open. 2026-05-29.
+    closeBtnRef.current?.focus({ preventScroll: true });
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      window.dispatchEvent(new CustomEvent("skynet:modal", { detail: false }));
     };
   }, [open]);
 

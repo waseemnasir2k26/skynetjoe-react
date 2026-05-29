@@ -3,37 +3,41 @@ import PainPoints from "@/components/funnel/PainPoints";
 import Outcomes from "@/components/funnel/Outcomes";
 import Testimonials from "@/components/sections/Testimonials";
 import FinalCTA from "@/components/funnel/FinalCTA";
+import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import { SITE } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { organization, person } from "@/lib/schema";
+
+// Explicit homepage metadata. `title.absolute` skips the global "%s | SkynetLabs"
+// template so the home tab/SERP title is the full brand line, not suffixed.
+export const metadata: Metadata = {
+  title: { absolute: `${SITE.brand} — ${SITE.tagline}` },
+  description: SITE.description,
+  alternates: { canonical: SITE.url },
+  openGraph: {
+    title: `${SITE.brand} — ${SITE.tagline}`,
+    description: SITE.description,
+    url: SITE.url,
+    type: "website",
+    images: [...DEFAULT_OG_IMAGES],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.brand} — ${SITE.tagline}`,
+    description: SITE.description,
+    creator: "@Skynetjoe1",
+  },
+};
 
 export default function Home() {
   const orgSchema = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Organization",
-        "@id": `${SITE.url}/#organization`,
-        name: SITE.brand,
-        url: SITE.url,
-        description: SITE.description,
-        founder: { "@id": `${SITE.url}/#person` },
-        sameAs: [
-          SITE.social.linkedin,
-          SITE.social.twitter,
-          SITE.social.github,
-          SITE.social.youtube,
-          SITE.social.fiverr,
-        ],
-      },
-      {
-        "@type": "Person",
-        "@id": `${SITE.url}/#person`,
-        name: SITE.founder,
-        url: SITE.founderUrl,
-        jobTitle: "Founder, SkynetLabs",
-        worksFor: { "@id": `${SITE.url}/#organization` },
-        sameAs: [SITE.social.linkedin, SITE.social.twitter, SITE.social.github],
-      },
+      // Spread the shared, richer Organization/Person from lib/schema.ts
+      // (includes logo/address/email). @id values stay identical so Google
+      // merges these nodes with the lean references in WebSite/ProfessionalService.
+      { ...organization },
+      { ...person },
       {
         "@type": "WebSite",
         "@id": `${SITE.url}/#website`,

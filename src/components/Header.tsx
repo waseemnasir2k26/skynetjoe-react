@@ -87,6 +87,33 @@ export default function Header() {
     closeTimer.current = window.setTimeout(() => setOpenDropdown(null), 180);
   };
 
+  const closeNow = () => {
+    if (closeTimer.current) {
+      window.clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setOpenDropdown(null);
+  };
+
+  // a11y: Escape closes the open dropdown and returns focus to its trigger link.
+  // The trigger is the first focusable child of the relatedItem wrapper.
+  const onMenuKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Escape" && openDropdown) {
+      e.stopPropagation();
+      closeNow();
+      const trigger = e.currentTarget.querySelector<HTMLElement>("a,button");
+      trigger?.focus();
+    }
+  };
+
+  // a11y: close only when focus actually leaves the wrapper (not when moving
+  // between the trigger and items inside the same menu).
+  const onMenuBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+      scheduleClose();
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -123,7 +150,8 @@ export default function Header() {
                 onMouseEnter={() => hasDrop && openDrop(item.href)}
                 onMouseLeave={() => hasDrop && scheduleClose()}
                 onFocus={() => hasDrop && openDrop(item.href)}
-                onBlur={() => hasDrop && scheduleClose()}
+                onBlur={(e) => hasDrop && onMenuBlur(e)}
+                onKeyDown={hasDrop ? onMenuKeyDown : undefined}
               >
                 <Link
                   href={item.href}

@@ -6,6 +6,11 @@
 export type NewsArticle = {
   slug: string;
   title: string;
+  /** Optional SERP-tuned title (≤55 chars) used for <title>/metadata only.
+   *  Falls back to `title` when absent. Keeps the long editorial headline on
+   *  the page while preventing truncation in search results (the global
+   *  `%s | SkynetLabs` template adds ~13 chars on top). */
+  seoTitle?: string;
   eyebrow: string;
   deck: string;
   description: string;
@@ -87,6 +92,7 @@ export const NEWS: NewsArticle[] = [
   {
     slug: "small-fleet-paid-tools-2026",
     title: "The 6 paid tools every small fleet uses (and which 4 to delete)",
+    seoTitle: "6 Paid Tools Every Small Fleet Uses (Delete 4)",
     eyebrow: "Stack audit · Volume II · 2026",
     deck: "Most 8-to-20-truck operators are paying $800–$1,400/month for tools that don't talk to each other. After auditing twelve fleets in early 2026, here are the four you can delete this week.",
     description:
@@ -101,6 +107,7 @@ export const NEWS: NewsArticle[] = [
   {
     slug: "public-pricing-ai-builds",
     title: "Why I price my AI builds publicly while every agency hides the number",
+    seoTitle: "Why I Price AI Builds Publicly",
     eyebrow: "Pricing essay · Volume II · 2026",
     deck: "Four tiers. No \"custom quote\" theater. Why public pricing kills the worst clients before they reach the call, and the one tier I refused to publish because nobody ever needed it.",
     description:
@@ -129,6 +136,7 @@ export const NEWS: NewsArticle[] = [
   {
     slug: "bali-canggu-coworking-economics",
     title: "Bali co-working economics — what shipping from Canggu actually costs",
+    seoTitle: "Bali Co-Working Economics: The Real Monthly Cost",
     eyebrow: "Field notes · Volume II · 2026",
     deck: "The honest monthly burn for one operator running client builds out of Canggu — visa, scooter, villa, coffee shops, fiber, gym, food. With Lahore comparison so the numbers feel real.",
     description:
@@ -145,6 +153,7 @@ export const NEWS: NewsArticle[] = [
   {
     slug: "fiverr-10-to-9-country-agency",
     title: "From a $10 Fiverr gig to a 9-country agency — the 7-year arc",
+    seoTitle: "$10 Fiverr Gig to a 9-Country Agency",
     eyebrow: "Field notes · 2026",
     deck: "Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon warehousing. Graduated in 2021 and went service-first. Here's what each failed pivot actually taught me.",
     description:
@@ -169,6 +178,7 @@ export const NEWS: NewsArticle[] = [
   {
     slug: "story-beats-grids-portfolio-redesign",
     title: "Why story beats grids — the case-study redesign that closed 3 deals",
+    seoTitle: "Why Story Beats Grids in Case Studies",
     eyebrow: "Stack notes · 2026",
     deck: "Replaced the standard 9-tile case-study grid with a story-first detail page per build. Conversion to discovery-call click jumped from 4% to 11% in two weeks. Here's what changed.",
     description:

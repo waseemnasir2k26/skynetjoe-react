@@ -18,7 +18,29 @@ export const dynamic = "force-dynamic";
 // NOT documented publicly. We send X-Robots-Tag: noindex anyway.
 // ============================================================
 
-export async function GET() {
+export async function GET(req: Request) {
+  // Gate: this endpoint writes a real contact to the GHL CRM on every hit,
+  // so an unauthenticated public GET would let anyone spam the CRM.
+  // In production, require ?key=<GHL_TEST_SECRET>; otherwise return 404 so the
+  // endpoint is indistinguishable from a non-existent route. In dev it stays
+  // open for the existing smoke-test workflow.
+  if (process.env.NODE_ENV === "production") {
+    const secret = process.env.GHL_TEST_SECRET;
+    const key = new URL(req.url).searchParams.get("key");
+    if (!secret || key !== secret) {
+      return NextResponse.json(
+        { error: "Not found" },
+        {
+          status: 404,
+          headers: {
+            "X-Robots-Tag": "noindex, nofollow",
+            "Cache-Control": "no-store",
+          },
+        },
+      );
+    }
+  }
+
   const tokenSet = Boolean(process.env.GHL_API_TOKEN);
   const locationSet = Boolean(process.env.GHL_LOCATION_ID);
 

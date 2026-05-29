@@ -51,3 +51,6 @@ next-env.d.ts
 /public/media
 /src/payload/payload-types.ts
 .qa-dev.log
+
+# build/run logs
+*.log

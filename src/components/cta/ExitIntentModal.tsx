@@ -19,8 +19,9 @@ import { X, Loader2, CheckCircle2 } from "lucide-react";
 
 const STORAGE_KEY = "skynet:exit-intent:shown";
 const SHARED_POPUP_KEY = "skynet-popup-fired";
-const MIN_TIME_ON_PAGE_MS = 12000;
-const MOBILE_MIN_TIME_MS = 30000;
+// 2026-05-29 popup de-clutter: slower triggers (12s → 35s desktop, 30s → 45s mobile).
+const MIN_TIME_ON_PAGE_MS = 35000;
+const MOBILE_MIN_TIME_MS = 45000;
 const MOBILE_MIN_SCROLL_PCT = 0.5;
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
@@ -59,6 +60,11 @@ export default function ExitIntentModal() {
     const fire = () => {
       if (triggeredRef.current) return;
       if (Date.now() - mountedAtRef.current < MIN_TIME_ON_PAGE_MS) return;
+      // Re-check shared mutex at fire time so DiscoveryPopup (or any other)
+      // already shown this session blocks this one. 2026-05-29.
+      try {
+        if (sessionStorage.getItem(SHARED_POPUP_KEY) === "1") return;
+      } catch {}
       triggeredRef.current = true;
       try {
         localStorage.setItem(STORAGE_KEY, "1");
@@ -96,16 +102,21 @@ export default function ExitIntentModal() {
 
   useEffect(() => {
     if (!open) return;
+    // Tell StickyBar + LiveChat to hide so only ONE overlay shows at a time.
+    window.dispatchEvent(new CustomEvent("skynet:modal", { detail: true }));
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
     };
     document.addEventListener("keydown", onKey);
-    closeBtnRef.current?.focus();
+    // preventScroll: modal lives at end of <body>; focusing it without this
+    // scrolls the page to the bottom on open. 2026-05-29.
+    closeBtnRef.current?.focus({ preventScroll: true });
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
+      window.dispatchEvent(new CustomEvent("skynet:modal", { detail: false }));
     };
   }, [open]);
 

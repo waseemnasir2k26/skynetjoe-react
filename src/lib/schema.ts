@@ -29,8 +29,18 @@ const organization = {
   "@id": `${SITE.url}/#organization`,
   name: SITE.brand,
   url: SITE.url,
-  logo: `${SITE.url}/favicon.ico`,
+  // Google rejects .ico for logo rich results; use a PNG ImageObject.
+  logo: {
+    "@type": "ImageObject",
+    url: `${SITE.url}/icon-512.png`,
+    width: 512,
+    height: 512,
+  },
   description: SITE.description,
+  // TODO(reviews): wire aggregateRating/review here using ONLY real,
+  // attributable testimonial data. Current testimonials in
+  // src/components/sections/Testimonials.tsx are named text quotes with NO
+  // numeric ratings — adding ratingValue/reviewCount would be fabricated.
   founder: { "@id": `${SITE.url}/#person` },
   email: SITE.email,
   sameAs: [
@@ -140,9 +150,12 @@ export function serviceSchema(opts: {
     serviceType: opts.name,
     offers: opts.priceRange
       ? {
+          // priceRange is a free-form range string (e.g. "$2k–$8k") with no
+          // single parseable number, so `price` (which expects a number) is
+          // invalid. Use the valid `priceRange` field on the Offer instead.
           "@type": "Offer",
           priceCurrency: "USD",
-          priceSpecification: { "@type": "PriceSpecification", price: opts.priceRange },
+          priceRange: opts.priceRange,
         }
       : undefined,
   };
