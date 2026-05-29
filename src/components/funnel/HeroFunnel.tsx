@@ -224,7 +224,7 @@ export default function HeroFunnel() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="relative hidden md:block"
+          className="relative block"
         >
           <figure
             style={{
@@ -237,6 +237,7 @@ export default function HeroFunnel() {
               width: "100%",
               maxWidth: 420,
               marginLeft: "auto",
+              marginRight: "auto",
             }}
           >
             <div
@@ -252,7 +253,7 @@ export default function HeroFunnel() {
                 alt="Waseem Nasir, founder of SkynetLabs"
                 fill
                 priority
-                sizes="(min-width: 1024px) 420px, (min-width: 768px) 380px, 0"
+                sizes="(min-width: 1024px) 420px, (min-width: 768px) 380px, 90vw"
                 style={{
                   objectFit: "cover",
                   objectPosition: "center top",
