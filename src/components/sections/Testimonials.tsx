@@ -218,6 +218,7 @@ export default function Testimonials() {
                     color: "var(--ink)",
                     lineHeight: 1.55,
                     marginBottom: 18,
+                    paddingRight: 44,
                   }}
                 >
                   &ldquo;Working with Waseem is fine. He doesn&apos;t make me

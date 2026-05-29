@@ -247,7 +247,7 @@ export default function ServicesMegaMenu({ onClose }: Props) {
       </div>
 
       {/* RIGHT — active category content */}
-      <div className="flex-1 p-6 w-[780px]" style={{ background: "var(--cream-3)" }}>
+      <div className="flex-1 min-w-0 p-6" style={{ background: "var(--cream-3)" }}>
         {/* Pain banner */}
         <div
           className="flex items-center justify-between gap-4 mb-5"

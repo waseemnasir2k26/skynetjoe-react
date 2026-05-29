@@ -30,6 +30,7 @@ export default function HeroFunnel() {
         paddingBottom: "clamp(56px, 12vw, 112px)",
       }}
     >
+      <style>{`@media (max-width: 400px){.trust-sep{display:none}}`}</style>
       <div
         className="container-x relative z-10 grid md:grid-cols-[1.3fr_1fr] items-end"
         style={{
@@ -136,7 +137,7 @@ export default function HeroFunnel() {
               />
               Top Rated Plus · Upwork
             </span>
-            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span className="trust-sep" style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}>·</span>
             <span style={{ color: "var(--terracotta)" }}>
               <Star
                 style={{
@@ -151,11 +152,11 @@ export default function HeroFunnel() {
               />
               Top Rated · Fiverr
             </span>
-            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span className="trust-sep" style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}>·</span>
             <span>
               <span style={{ color: "var(--ink)" }}>180+</span> automations
             </span>
-            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span className="trust-sep" style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}>·</span>
             <span>
               <span style={{ color: "var(--ink)" }}>9</span> countries
             </span>

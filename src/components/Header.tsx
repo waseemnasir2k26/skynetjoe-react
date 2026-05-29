@@ -183,7 +183,7 @@ export default function Header() {
                 {item.hasMega && openDropdown === item.href && (
                   <div
                     role="menu"
-                    className="absolute top-full left-1/2 -translate-x-1/2 w-[1040px] pt-3"
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-[min(1040px,calc(100vw-2rem))] pt-3"
                     onMouseEnter={() => openDrop(item.href)}
                     onMouseLeave={scheduleClose}
                   >
@@ -196,7 +196,9 @@ export default function Header() {
                   <div
                     role="menu"
                     className={`absolute top-full left-1/2 -translate-x-1/2 ${
-                      item.subItems.length > 6 ? "w-[420px]" : "w-[340px]"
+                      item.subItems.length > 6
+                        ? "w-[min(420px,calc(100vw-2rem))]"
+                        : "w-[min(340px,calc(100vw-2rem))]"
                     } pt-3`}
                     onMouseEnter={() => openDrop(item.href)}
                     onMouseLeave={scheduleClose}

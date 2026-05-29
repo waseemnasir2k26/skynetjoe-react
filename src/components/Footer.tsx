@@ -71,7 +71,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener"
                   aria-label={s.label}
-                  className="w-9 h-9 flex items-center justify-center transition-colors"
+                  className="w-11 h-11 flex items-center justify-center transition-colors"
                   style={{
                     border: "1px solid var(--border)",
                     color: "var(--ink-2)",
