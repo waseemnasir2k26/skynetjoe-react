@@ -187,7 +187,7 @@ export default async function ServicePage({
           borderTop: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <div className="container-x">
+        <div className="container-x px-6">
           <div className="max-w-4xl mb-8">
             <div
               className="inline-flex items-center gap-3 mb-3"

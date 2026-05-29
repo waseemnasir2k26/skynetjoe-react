@@ -141,6 +141,7 @@ export default function Testimonials() {
                     lineHeight: 1.55,
                     marginBottom: 18,
                     paddingTop: 6,
+                    paddingRight: 40,
                     maxWidth: "44ch",
                   }}
                 >
