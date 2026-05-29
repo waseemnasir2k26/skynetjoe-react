@@ -16,65 +16,104 @@ const INITIAL: Msg = {
   id: 0,
   from: "bot",
   text:
-    "Hey, I'm Waseem's assistant. How can I help? Try: 'tell me about you' or 'how do I book a call'",
+    "Hey 👋 I'm Waseem's assistant. Ask me about services, pricing, n8n automation, AEO/SEO, chatbots — or how to book a call.",
 };
 
 function botReply(input: string, nextId: number): Msg {
-  const q = input.toLowerCase();
+  const q = input.toLowerCase().trim();
   const has = (...keys: string[]) => keys.some((k) => q.includes(k));
+  const reply = (text: string, cta?: Msg["cta"]): Msg => ({ id: nextId, from: "bot", text, cta });
 
-  if (has("about", "you", "waseem", "who")) {
-    return {
-      id: nextId,
-      from: "bot",
-      text:
-        "SkynetLabs is run by Waseem Nasir, solo from Bali. We build n8n + AI automation, AEO sites, GHL CRM systems for service businesses. 4 client builds/month max, 14-day ship window.",
-      cta: { label: "Apply for a call", href: "/discovery-call" },
-    };
-  }
-  if (has("book", "call", "audit", "consult", "meeting")) {
-    return {
-      id: nextId,
-      from: "bot",
-      text:
-        "Best way: apply at /discovery-call. 3-min brief, reply within 8 hours.",
-      cta: { label: "Apply for a call", href: "/discovery-call" },
-    };
-  }
-  if (has("price", "cost", "how much", "budget", "pricing", "rate")) {
-    return {
-      id: nextId,
-      from: "bot",
-      text:
-        "Public pricing at /pricing. Starts $1,497 (Starter) up to $9,500 (Flagship). No mystery quotes.",
-      cta: { label: "See pricing", href: "/pricing" },
-    };
-  }
-  if (has("service", "what do you do", "offer", "build")) {
-    return {
-      id: nextId,
-      from: "bot",
-      text:
-        "16 productized services across Automation, AI Content, Development, Consulting. See /services for the full list.",
-      cta: { label: "Browse services", href: "/services" },
-    };
-  }
-  if (has("where", "location", "bali", "based", "country")) {
-    return {
-      id: nextId,
-      from: "bot",
-      text:
-        "I'm based in Canggu, Bali (GMT+8) and Lahore, Pakistan. Clients worldwide.",
-      cta: { label: "Apply for a call", href: "/discovery-call" },
-    };
-  }
-  return {
-    id: nextId,
-    from: "bot",
-    text:
-      "Best to apply for a discovery call — Waseem reads every brief personally and replies in 8 hours.",
-    cta: { label: "Apply for a call", href: "/discovery-call" },
-  };
+  // ── Specific topics first (most → least specific) ──
+  if (has("book", "call", "audit", "consult", "meeting", "schedule", "discovery"))
+    return reply(
+      "Easiest path: apply for a free discovery call. 3-min brief, Waseem reads every one personally and replies within 8 hours.",
+      { label: "Apply for a call", href: "/discovery-call" }
+    );
+
+  if (has("price", "cost", "how much", "budget", "rate", "pricing", "quote", "$"))
+    return reply(
+      "Pricing is public — no mystery quotes. Starter from $1,497 up to $9,500 for a flagship build. Fixed scope, returned within 48h of your brief.",
+      { label: "See pricing", href: "/pricing" }
+    );
+
+  if (has("n8n", "automat", "workflow", "zapier", "make.com", "integrat", "no-code", "nocode"))
+    return reply(
+      "Automation is our core: n8n/Make/Zapier workflows that run while you sleep — lead capture, CRM sync, reminders, billing. n8n self-hosted for the heavy stuff. Want the n8n vs Zapier breakdown?",
+      { label: "n8n vs Zapier", href: "/n8n-vs-zapier" }
+    );
+
+  if (has("aeo", "geo", "seo", "rank", "google", "chatgpt", "perplexity", "citation", "answer engine", "llm"))
+    return reply(
+      "AEO/GEO = getting your business cited by ChatGPT, Perplexity & Google AI Overviews, not just ranked. We build answer-first content + schema so AI engines quote you. Full playbook in the guide.",
+      { label: "Read the AEO guide", href: "/aeo-guide" }
+    );
+
+  if (has("chatbot", "chat bot", "whatsapp", "ai agent", "agent", "support bot", "receptionist"))
+    return reply(
+      "We build AI chatbots & agents — web chat, WhatsApp, voice receptionists — wired into your CRM so they book calls and answer FAQs 24/7.",
+      { label: "AI Chatbots", href: "/services/ai-chatbots" }
+    );
+
+  if (has("content", "video", "reel", "youtube", "tiktok", "social media", "post"))
+    return reply(
+      "AI content at volume: reels, shorts, talking-head video, and faceless channel pipelines — voice-locked to your brand.",
+      { label: "Browse services", href: "/services" }
+    );
+
+  if (has("website", "site", "web ", "develop", "next.js", "nextjs", "wordpress", "shopify", "ecommerce", "landing"))
+    return reply(
+      "We ship custom Next.js sites, WordPress SEO blogs, and Shopify/e-commerce builds — AEO-tuned, 7–14 day ship window.",
+      { label: "Browse services", href: "/services" }
+    );
+
+  if (has("service", "offer", "what do you do", "what can you", "help with", "do you do"))
+    return reply(
+      "16 productized services across Automation, AI Content, Development & Consulting — n8n, GoHighLevel, chatbots, AEO sites, AI video and more.",
+      { label: "Browse services", href: "/services" }
+    );
+
+  if (has("about", "who are", "who is", "who's", "your story", "yourself", "waseem", "founder"))
+    return reply(
+      "SkynetLabs is run solo by Waseem Nasir from Bali — n8n + AI automation, AEO sites and GHL CRM systems for service businesses. 4 builds/month max, 14-day ship.",
+      { label: "About Waseem", href: "/author/waseem-nasir" }
+    );
+
+  if (has("where", "located", "location", "bali", "based", "country", "timezone", "remote"))
+    return reply(
+      "Based in Canggu, Bali (GMT+8) with roots in Lahore, Pakistan. Fully remote — clients across 9 countries.",
+      { label: "Apply for a call", href: "/discovery-call" }
+    );
+
+  if (has("contact", "email", "reach", "get in touch", "phone", "number"))
+    return reply(
+      "Fastest is the discovery form (8-hour reply). Or reach us via the contact page.",
+      { label: "Contact", href: "/contact" }
+    );
+
+  // ── Greetings / smalltalk ──
+  if (has("how are you", "how r u", "how are u", "how's it", "hows it"))
+    return reply(
+      "Running smooth, thanks for asking 🙂 I can help with services, pricing, n8n automation, AEO or booking a call — what are you after?",
+      { label: "Browse services", href: "/services" }
+    );
+
+  if (has("hi", "hello", "hey", "yo", "sup", "good morning", "good evening", "salam", "assalam"))
+    return reply(
+      "Hey! 👋 Ask me about services, pricing, n8n automation, AEO/SEO, chatbots — or say 'book a call'.",
+    );
+
+  if (has("thank", "thanks", "great", "awesome", "cool", "nice", "perfect", "ok", "okay", "got it"))
+    return reply(
+      "Anytime! Want me to point you to services, pricing, or set up a quick call?",
+      { label: "Apply for a call", href: "/discovery-call" }
+    );
+
+  // ── Helpful fallback (not a dead-end) ──
+  return reply(
+    "Not sure I caught that — I can help with: services, pricing, n8n/automation, AEO/SEO, chatbots, or booking a call. Which one?",
+    { label: "Browse services", href: "/services" }
+  );
 }
 
 export default function LiveChat() {

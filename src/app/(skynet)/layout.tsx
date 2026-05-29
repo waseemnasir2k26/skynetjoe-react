@@ -5,13 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Analytics, { GtmNoscript } from "@/components/Analytics";
 import AISignals from "@/components/aeo/AISignals";
-// 2026-05-29 — ALL popups/overlays disabled per request ("kill all popups for now").
-// Components kept in repo; re-add the imports + JSX below to restore any of them:
-//   LiveChat            @/components/LiveChat            (chat bubble)
-//   DiscoveryPopup      @/components/DiscoveryPopup      (75s modal)
-//   StickyBookCallBar   @/components/cta/StickyBookCallBar (scroll bar)
-//   ExitIntentModal     @/components/cta/ExitIntentModal (exit-intent modal)
-// Already-removed earlier: IncomingCallPopup (fake-call dark pattern), SocialProofPopup (fake trust).
+import LiveChat from "@/components/LiveChat";
+// 2026-05-29 — Interrupting popups disabled (kept in repo, re-add JSX to restore):
+//   DiscoveryPopup @/components/DiscoveryPopup · StickyBookCallBar @/components/cta/StickyBookCallBar
+//   ExitIntentModal @/components/cta/ExitIntentModal · (earlier: IncomingCallPopup, SocialProofPopup)
+// LiveChat (passive chat bubble, click-to-open) kept on — smart intent bot rebuilt 2026-05-29.
 import "../globals.css";
 
 // Cream editorial pivot 2026-05-25 — distinctive non-generic font stack.
@@ -131,8 +129,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main-content" className="flex-1">{children}</main>
         <Footer />
-        {/* All popups/overlays disabled 2026-05-29 — clean page, zero interruptions.
-            Restore by re-adding the components here (see import block up top). */}
+        {/* Passive chat bubble only — opens on click, never auto-pops. Interrupting
+            popups (Discovery/ExitIntent/StickyBar) stay disabled per 2026-05-29 request. */}
+        <LiveChat />
       </body>
     </html>
   );
