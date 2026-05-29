@@ -15,7 +15,7 @@
   --cream-3:      #FAF7F0;
   --ink:          #1A1A1A;
   --ink-2:        #3A3A36;
-  --ink-faint:    #6B6B65;
+  --ink-faint:    #56564F; /* WCAG AA: ~5:1 on cream (#FAF7F0); was #6B6B65 (~4.0:1, failed AA) */
   --terracotta:   #C66B3F;
   --terracotta-2: #B85A30;
   --sage:         #8A9A7B;

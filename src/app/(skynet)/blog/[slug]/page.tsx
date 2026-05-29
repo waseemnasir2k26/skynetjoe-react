@@ -1,4 +1,4 @@
-﻿import fs from "fs";
+import fs from "fs";
 import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      creator: "@skynetlabs",
+      creator: "@Skynetjoe1",
     },
   };
 }

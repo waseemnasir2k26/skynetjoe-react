@@ -25,13 +25,21 @@ import { SLOTS_LEFT_THIS_WEEK } from "@/data/availability";
 
 const STORAGE_KEY = "skynet:sticky-cta:dismissed";
 const DISMISS_TTL_MS = 24 * 60 * 60 * 1000; // 24h
-const SCROLL_THRESHOLD_PX = 600;
+const SCROLL_THRESHOLD_PX = 1200; // 2026-05-29: 600 → 1200, appears later/less pushy
 
 export default function StickyBookCallBar() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // Hide while a modal popup is open so only ONE overlay shows at a time.
+  useEffect(() => {
+    const h = (e: Event) => setModalOpen(Boolean((e as CustomEvent).detail));
+    window.addEventListener("skynet:modal", h);
+    return () => window.removeEventListener("skynet:modal", h);
+  }, []);
 
   const disabled =
     pathname === "/discovery-call" ||
@@ -82,7 +90,7 @@ export default function StickyBookCallBar() {
     } catch {}
   };
 
-  if (!mounted || disabled) return null;
+  if (!mounted || disabled || modalOpen) return null;
 
   const baseTransition = reduceMotion
     ? "opacity 200ms ease"

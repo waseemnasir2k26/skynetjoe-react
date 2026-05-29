@@ -30,6 +30,19 @@ const TIMELINE_LABELS: Record<string, string> = {
   exploring: "Just exploring",
 };
 
+/**
+ * Escape user-supplied values before interpolating into the HTML email body.
+ * Prevents HTML/markup injection from form fields landing in the inbox.
+ */
+function esc(value?: string): string {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function score(budget?: string, timeline?: string): "HOT" | "WARM" | "COLD" {
   if (budget === "5000-plus" || (budget === "2000-5000" && timeline === "this-week")) return "HOT";
   if (budget === "2000-5000" || (budget === "500-2000" && timeline !== "exploring")) return "WARM";
@@ -95,7 +108,7 @@ async function sendEmailFallback(payload: Payload, lead: "HOT" | "WARM" | "COLD"
       </table>
       <div style="margin-top:20px;padding:16px;background:rgba(255,255,255,0.06);border-radius:8px;border-left:3px solid #00D4FF;">
         <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7ee4ff;margin-bottom:8px;">Main pain</div>
-        <div style="white-space:pre-wrap;line-height:1.5;">${(payload.pain || "—").replace(/</g, "&lt;")}</div>
+        <div style="white-space:pre-wrap;line-height:1.5;">${payload.pain ? esc(payload.pain) : "—"}</div>
       </div>
     </div>
   `;
@@ -120,7 +133,7 @@ async function sendEmailFallback(payload: Payload, lead: "HOT" | "WARM" | "COLD"
 function row(label: string, value?: string) {
   return `<tr>
     <td style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7ee4ff;width:120px;">${label}</td>
-    <td style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);">${(value || "—").replace(/</g, "&lt;")}</td>
+    <td style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);">${value ? esc(value) : "—"}</td>
   </tr>`;
 }
 

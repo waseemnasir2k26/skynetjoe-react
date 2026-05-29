@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
@@ -31,7 +31,7 @@ const SERVICES: (ServiceItem & { category: CategoryName })[] =
     }))
   );
 
-// Category -> ribbon-top accent (CREAM editorial â€” muted warm semantic colors)
+// Category -> ribbon-top accent (CREAM editorial — muted warm semantic colors)
 const CATEGORY_RIBBON: Record<CategoryName, string> = {
   Automation: "var(--terracotta)",
   "AI Content": "var(--ochre)",
@@ -116,7 +116,7 @@ const SERVICE_STAT: Record<string, { value: string; label: string }> = {
   "ai-content-creation": { value: "30/mo", label: "voice-locked posts" },
 };
 
-// Industry-tuned phrasing (light variants â€” keeps copy fresh per industry)
+// Industry-tuned phrasing (light variants — keeps copy fresh per industry)
 function tuneForIndustry(svcLabel: string, industry: string): string {
   const lc = industry.toLowerCase();
   if (lc === "tech" || lc === "fintech" || lc === "biotech" || lc === "cybersecurity") {
@@ -161,28 +161,28 @@ function tuneForIndustry(svcLabel: string, industry: string): string {
   return `${svcLabel} tuned for ${industry} operators who want automation without ripping out the existing stack`;
 }
 
-// Per-city paragraph seed â€” 5 unique blurbs per page anchored to city slot
+// Per-city paragraph seed — 5 unique blurbs per page anchored to city slot
 const CITY_HOOKS: string[] = [
-  "Founders here usually start with one painful manual workflow â€” invoicing, lead routing, or scheduling. We start there and expand the system once the first win is visible.",
-  "Engagements with operators in this market typically begin with a CRM audit â€” most lose 20â€“30% of leads before the first follow-up touch. Plugging that hole alone covers the build cost.",
-  "Teams in this city tend to be lean â€” three to twelve people doing the work of twenty. Automation is the only way to scale without hiring, and we build for that exact ceiling.",
-  "Most clients in this area run on a patchwork of Google Sheets, free Zapier zaps and a CRM nobody fully trusts. We consolidate the stack into one source of truth in 5â€“14 days.",
+  "Founders here usually start with one painful manual workflow — invoicing, lead routing, or scheduling. We start there and expand the system once the first win is visible.",
+  "Engagements with operators in this market typically begin with a CRM audit — most lose 20–30% of leads before the first follow-up touch. Plugging that hole alone covers the build cost.",
+  "Teams in this city tend to be lean — three to twelve people doing the work of twenty. Automation is the only way to scale without hiring, and we build for that exact ceiling.",
+  "Most clients in this area run on a patchwork of Google Sheets, free Zapier zaps and a CRM nobody fully trusts. We consolidate the stack into one source of truth in 5–14 days.",
   "Operators based here often ask for one workflow and discover four others worth automating during scoping. Fixed-price means scope creep gets handled, not billed.",
 ];
 
 export const dynamicParams = false;
 
 /**
- * Option A â€” kill the 640 thin pages (2026-05-26).
+ * Option A — kill the 640 thin pages (2026-05-26).
  *
- * Previously this returned the full 16 Ã— 48 = 768 (svc Ã— state) matrix,
+ * Previously this returned the full 16 × 48 = 768 (svc × state) matrix,
  * relying on per-page `<meta robots="noindex,follow">` to hide the 640
  * non-priority cells. Problem: Googlebot still crawled them, burning ~68%
  * of crawl budget on pages we told it to ignore, and 48-state internal
  * link farms diluted PageRank flow into the 128 indexable cells.
  *
- * Now `generateStaticParams` only returns the (svc Ã— state) pairs that
- * pass `isServiceStateIndexable` â€” i.e. the same 128 cells already in
+ * Now `generateStaticParams` only returns the (svc × state) pairs that
+ * pass `isServiceStateIndexable` — i.e. the same 128 cells already in
  * sitemap.xml. With `dynamicParams = false`, the other 640 URLs return
  * HTTP 404 (a clean signal Googlebot deindexes faster than noindex).
  *
@@ -190,10 +190,10 @@ export const dynamicParams = false;
  *   - Build output: 768 -> 128 prerendered state pages
  *   - Sitemap: unchanged (was already filtered to 128)
  *   - Crawl budget: 3.2x concentration on indexed pages
- *   - No content lost â€” every URL that was indexable still works
+ *   - No content lost — every URL that was indexable still works
  *   - The 640 noindex pages now 404 instead of noindex+follow
  *
- * Re-enabling a (svc Ã— state) cell later only requires adding an
+ * Re-enabling a (svc × state) cell later only requires adding an
  * enrichment entry in src/data/service-state-enrichment.ts. The page
  * will then auto-appear in both generateStaticParams AND sitemap.
  */
@@ -218,10 +218,10 @@ export async function generateMetadata({
   const svc = SERVICES.find((s) => s.slug === slug);
   const st = STATES.find((s) => s.slug === state);
   if (!svc || !st) return {};
-  const title = `${svc.label} in ${st.name} â€” Hire an Expert | ${SITE.brand}`;
+  const title = `${svc.label} in ${st.name} — Hire an Expert | ${SITE.brand}`;
   const description = `${svc.label} for ${st.name} businesses across ${st.cities
     .slice(0, 3)
-    .join(", ")} and ${st.abbr}. ${svc.desc}. Fixed scope, 5â€“14 day ship, no on-site.`;
+    .join(", ")} and ${st.abbr}. ${svc.desc}. Fixed scope, 5–14 day ship, no on-site.`;
 
   // Thin-content protection: pages below the quality threshold ship with
   // robots: { index: false, follow: true } so Google crawls links but won't
@@ -246,12 +246,12 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      creator: "@skynetlabs",
+      creator: "@Skynetjoe1",
     },
   };
 }
 
-// Deterministic small "nearby" pill cluster per state â€” slug-hash slice so every
+// Deterministic small "nearby" pill cluster per state — slug-hash slice so every
 // page shows a different sibling set (kills duplicate-content footprint).
 function nearbyStates(s: StateEntry): StateEntry[] {
   const others = STATES.filter((x) => x.slug !== s.slug);
@@ -274,10 +274,10 @@ export default async function ServiceStatePage({
   const st = STATES.find((s) => s.slug === state);
   if (!svc || !st) notFound();
 
-  const stat = SERVICE_STAT[svc.slug] ?? { value: "5â€“14d", label: "ship window" };
+  const stat = SERVICE_STAT[svc.slug] ?? { value: "5–14d", label: "ship window" };
   const ribbon = CATEGORY_RIBBON[svc.category];
   const hourly = agencyRate(st.slug);
-  const annualSavings = Math.round(hourly * 1.4 * 10) * 100; // ~1.4h/wk Ã— 52 Ã— hourly, rounded to $100
+  const annualSavings = Math.round(hourly * 1.4 * 10) * 100; // ~1.4h/wk × 52 × hourly, rounded to $100
   const nearby = nearbyStates(st);
   const enrichment = getEnrichment(svc.slug, st.slug);
   const qualityScore = serviceStateQualityScore(svc.slug, st.slug);
@@ -382,9 +382,9 @@ export default async function ServiceStatePage({
             name: `Do you offer ${svc.label} in ${st.name}?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Yes â€” we serve all of ${st.name} including ${st.cities.join(
+              text: `Yes — we serve all of ${st.name} including ${st.cities.join(
                 ", "
-              )}. Standard ship window is 5â€“14 days. Remote-first, no on-site travel required.`,
+              )}. Standard ship window is 5–14 days. Remote-first, no on-site travel required.`,
             },
           },
           {
@@ -392,7 +392,7 @@ export default async function ServiceStatePage({
             name: `How much does ${svc.label} cost in ${st.name} vs hiring a local agency?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Mid-market ${st.name} agency rates average $${hourly}/hr â€” a typical ${svc.label} engagement runs 30â€“60 hours, or roughly $${hourly * 30}â€“$${hourly * 60}. Our fixed-scope range is $500â€“$8,000 depending on complexity, often 30â€“50% lower than ${st.abbr} agency hourly totals.`,
+              text: `Mid-market ${st.name} agency rates average $${hourly}/hr — a typical ${svc.label} engagement runs 30–60 hours, or roughly $${hourly * 30}–$${hourly * 60}. Our fixed-scope range is $500–$8,000 depending on complexity, often 30–50% lower than ${st.abbr} agency hourly totals.`,
             },
           },
           {
@@ -400,7 +400,7 @@ export default async function ServiceStatePage({
             name: `Which ${st.name} industries do you typically build for?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Most ${st.name} engagements come from ${st.industries[0]}, ${st.industries[1]} and ${st.industries[2]} operators â€” verticals with high admin overhead that respond well to ${svc.label.toLowerCase()}.`,
+              text: `Most ${st.name} engagements come from ${st.industries[0]}, ${st.industries[1]} and ${st.industries[2]} operators — verticals with high admin overhead that respond well to ${svc.label.toLowerCase()}.`,
             },
           },
           {
@@ -408,7 +408,7 @@ export default async function ServiceStatePage({
             name: `How fast can you ship ${svc.label} for a ${st.name} business?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Typical 5â€“14 day window from kickoff. Urgent ${st.name} projects ship faster with premium rate. We're based in Bali (GMT+8) â€” your morning happens during our afternoon, which keeps async tight.`,
+              text: `Typical 5–14 day window from kickoff. Urgent ${st.name} projects ship faster with premium rate. We're based in Bali (GMT+8) — your morning happens during our afternoon, which keeps async tight.`,
             },
           },
         ],
@@ -423,10 +423,10 @@ export default async function ServiceStatePage({
         .cream-state-pill:hover { border-color: var(--terracotta) !important; color: var(--terracotta) !important; }
       `}</style>
 
-      {/* Ribbon-top category strip â€” flat semantic accent */}
+      {/* Ribbon-top category strip — flat semantic accent */}
       <div className="h-1.5 w-full" style={{ background: ribbon }} aria-hidden />
 
-      {/* Hero â€” cream editorial */}
+      {/* Hero — cream editorial */}
       <section
         className="relative pt-20 md:pt-28 pb-14"
         style={{
@@ -487,7 +487,7 @@ export default async function ServiceStatePage({
                 }}
               />
               <MapPin className="w-3.5 h-3.5" />
-              {svc.category} Â· Serving {st.name} ({st.abbr})
+              {svc.category} · Serving {st.name} ({st.abbr})
             </div>
 
             <h1
@@ -521,7 +521,7 @@ export default async function ServiceStatePage({
                   color: "var(--ink-2)",
                 }}
               >
-                {st.cities[0]} to {st.cities[st.cities.length - 1]} â€” one
+                {st.cities[0]} to {st.cities[st.cities.length - 1]} — one
                 operator, fixed scope.
               </span>
             </h1>
@@ -535,8 +535,8 @@ export default async function ServiceStatePage({
               }}
             >
               {svc.desc}. Built for {st.name} businesses across{" "}
-              {st.cities.slice(0, 4).join(", ")} and beyond â€” fixed-price,
-              ship-ready in 5â€“14 days, remote-first from Bali.
+              {st.cities.slice(0, 4).join(", ")} and beyond — fixed-price,
+              ship-ready in 5–14 days, remote-first from Bali.
             </p>
 
             {/* State-anchored stat strip */}
@@ -561,7 +561,7 @@ export default async function ServiceStatePage({
                 }}
               >
                 <strong style={{ color: "var(--ink)" }}>{stat.value}</strong>{" "}
-                {stat.label} â€” including operators across {st.abbr}
+                {stat.label} — including operators across {st.abbr}
               </span>
             </div>
 
@@ -664,7 +664,7 @@ export default async function ServiceStatePage({
             >
               {st.name} has a distinct operator profile. Our{" "}
               {svc.label.toLowerCase()} engagements in the state cluster around
-              three verticals â€” and we&apos;ve standardized playbooks for each.
+              three verticals — and we&apos;ve standardized playbooks for each.
             </p>
 
             {enrichment && (
@@ -753,7 +753,7 @@ export default async function ServiceStatePage({
                   display: "inline-block",
                 }}
               />
-              City-by-city Â· {st.name}
+              City-by-city · {st.name}
             </div>
             <h2
               style={{
@@ -845,7 +845,7 @@ export default async function ServiceStatePage({
                   display: "inline-block",
                 }}
               />
-              Cost comparison Â· {st.name}
+              Cost comparison · {st.name}
             </div>
             <h2
               style={{
@@ -881,23 +881,23 @@ export default async function ServiceStatePage({
                   <span key="1">
                     Mid-market {st.name} agency rates average{" "}
                     <strong style={{ color: "var(--ink)" }}>${hourly}/hr</strong>.
-                    A typical {svc.label.toLowerCase()} build runs 30â€“60 hours
-                    locally â€” that&apos;s{" "}
+                    A typical {svc.label.toLowerCase()} build runs 30–60 hours
+                    locally — that&apos;s{" "}
                     <strong style={{ color: "var(--ink)" }}>
-                      ${(hourly * 30).toLocaleString()}â€“$
+                      ${(hourly * 30).toLocaleString()}–$
                       {(hourly * 60).toLocaleString()}
                     </strong>{" "}
                     before retainer.
                   </span>,
                   <span key="2">
                     Our fixed-scope {svc.label.toLowerCase()} engagement lands{" "}
-                    <strong style={{ color: "var(--ink)" }}>$500â€“$8,000</strong>{" "}
-                    depending on complexity â€” typically 30â€“50% under {st.abbr}{" "}
+                    <strong style={{ color: "var(--ink)" }}>$500–$8,000</strong>{" "}
+                    depending on complexity — typically 30–50% under {st.abbr}{" "}
                     agency hourly totals, with no scope-creep billing.
                   </span>,
                   <span key="3">
                     Even after build, automated workflows save the average{" "}
-                    {st.name} operator ~1.4 hours of admin/week â€” about{" "}
+                    {st.name} operator ~1.4 hours of admin/week — about{" "}
                     <strong style={{ color: "var(--ink)" }}>
                       ${annualSavings.toLocaleString()}/yr
                     </strong>{" "}
@@ -968,7 +968,7 @@ export default async function ServiceStatePage({
                   marginBottom: 24,
                 }}
               >
-                {svc.label} FAQ Â·{" "}
+                {svc.label} FAQ ·{" "}
                 <em
                   style={{
                     fontStyle: "italic",
@@ -983,22 +983,22 @@ export default async function ServiceStatePage({
                 {[
                   {
                     q: `Do you offer ${svc.label} in ${st.name}?`,
-                    a: `Yes â€” we serve all of ${st.name} including ${st.cities.join(
+                    a: `Yes — we serve all of ${st.name} including ${st.cities.join(
                       ", "
-                    )}. Remote-first, no on-site travel required. Standard ship window is 5â€“14 days from kickoff.`,
+                    )}. Remote-first, no on-site travel required. Standard ship window is 5–14 days from kickoff.`,
                     open: true,
                   },
                   {
                     q: `How much does ${svc.label} cost in ${st.name} vs hiring a local agency?`,
-                    a: `Mid-market ${st.name} agency rates average $${hourly}/hr â€” a 30â€“60 hour ${svc.label.toLowerCase()} build runs $${(hourly * 30).toLocaleString()}â€“$${(hourly * 60).toLocaleString()} locally. Our fixed-scope range is $500â€“$8,000, often 30â€“50% lower than ${st.abbr} agency hourly totals.`,
+                    a: `Mid-market ${st.name} agency rates average $${hourly}/hr — a 30–60 hour ${svc.label.toLowerCase()} build runs $${(hourly * 30).toLocaleString()}–$${(hourly * 60).toLocaleString()} locally. Our fixed-scope range is $500–$8,000, often 30–50% lower than ${st.abbr} agency hourly totals.`,
                   },
                   {
                     q: `Which ${st.name} industries do you typically build for?`,
-                    a: `Most ${st.name} engagements come from ${st.industries[0]}, ${st.industries[1]} and ${st.industries[2]} operators â€” verticals with high admin overhead that respond well to ${svc.label.toLowerCase()}.`,
+                    a: `Most ${st.name} engagements come from ${st.industries[0]}, ${st.industries[1]} and ${st.industries[2]} operators — verticals with high admin overhead that respond well to ${svc.label.toLowerCase()}.`,
                   },
                   {
                     q: `How fast can you ship for a ${st.name} business?`,
-                    a: `Typical 5â€“14 day window. Urgent ${st.name} projects ship faster with premium rate. We're based in Bali (GMT+8) â€” your morning email gets answered during our afternoon, which keeps async tight.`,
+                    a: `Typical 5–14 day window. Urgent ${st.name} projects ship faster with premium rate. We're based in Bali (GMT+8) — your morning email gets answered during our afternoon, which keeps async tight.`,
                   },
                 ].map((f) => (
                   <details
@@ -1075,7 +1075,7 @@ export default async function ServiceStatePage({
                     marginBottom: 14,
                   }}
                 >
-                  {svc.label} Â· {st.name}
+                  {svc.label} · {st.name}
                 </h3>
                 <ul
                   className="space-y-2"
@@ -1086,7 +1086,7 @@ export default async function ServiceStatePage({
                       className="w-4 h-4 flex-shrink-0 mt-0.5"
                       style={{ color: "var(--sage)" }}
                     />{" "}
-                    5â€“14 day ship into {st.abbr}
+                    5–14 day ship into {st.abbr}
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2
@@ -1152,7 +1152,7 @@ export default async function ServiceStatePage({
                     marginBottom: 12,
                   }}
                 >
-                  â€” Related services in {st.name}
+                  — Related services in {st.name}
                 </h4>
                 <ul className="space-y-2">
                   {SERVICES.filter((s) => s.slug !== svc.slug)
@@ -1193,7 +1193,7 @@ export default async function ServiceStatePage({
                     marginBottom: 12,
                   }}
                 >
-                  â€” {svc.label} in other states
+                  — {svc.label} in other states
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {nearby.map((other) => (
@@ -1225,7 +1225,7 @@ export default async function ServiceStatePage({
                       color: "var(--cream-3)",
                     }}
                   >
-                    All 48 â†’
+                    All 48 →
                   </Link>
                 </div>
               </div>
@@ -1234,7 +1234,7 @@ export default async function ServiceStatePage({
         </div>
       </section>
 
-      {/* Closing CTA â€” full terracotta event */}
+      {/* Closing CTA — full terracotta event */}
       <section className="section" style={{ background: "var(--terracotta)" }}>
         <div className="container-x">
           <div className="text-center max-w-3xl mx-auto px-4">
@@ -1249,7 +1249,7 @@ export default async function ServiceStatePage({
                 marginBottom: 18,
               }}
             >
-              â€” Ready when you are
+              — Ready when you are
             </div>
             <h2
               style={{

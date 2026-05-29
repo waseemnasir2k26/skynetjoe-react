@@ -1,5 +1,5 @@
-﻿/**
- * /industries/[slug] â€” dynamic vertical landing page.
+/**
+ * /industries/[slug] — dynamic vertical landing page.
  *
  * Routing decision: dynamic [slug] with generateStaticParams + generateMetadata.
  * Rationale: 3 verticals today, more later (med-spa, real-estate, fitness studios).
@@ -10,7 +10,7 @@
  *   - Service (vertical-specific service offering)
  *   - FAQPage (5-6 industry Qs)
  *   - BreadcrumbList (Home > Industries > <vertical>)
- *   - ItemList (the named integrations / tools the system speaks to â€”
+ *   - ItemList (the named integrations / tools the system speaks to —
  *     LocalBusiness-context-aware via @audience targeting the vertical)
  */
 
@@ -62,7 +62,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      creator: "@skynetlabs",
+      creator: "@Skynetjoe1",
       images: [i.bioPhoto],
     },
   };
@@ -102,7 +102,7 @@ export default async function IndustryPage({
         },
         offers: i.pricingTiers.map((tier) => ({
           "@type": "Offer",
-          name: `${tier.tierName} â€” ${i.flagshipProductName}`,
+          name: `${tier.tierName} — ${i.flagshipProductName}`,
           price: tier.price.replace(/[^0-9]/g, ""),
           priceCurrency: "USD",
           description: tier.positioning,

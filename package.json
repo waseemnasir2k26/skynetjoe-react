@@ -9,24 +9,18 @@
   "scripts": {
     "predev": "node scripts/sync-wp-templates.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/sync-wp-templates.mjs && payload generate:types",
+    "prebuild": "node scripts/sync-wp-templates.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync-wp": "node scripts/sync-wp-templates.mjs",
-    "payload": "payload",
-    "generate:importmap": "payload generate:importmap",
-    "generate:types": "payload generate:types"
+    "seo:check": "node scripts/seo-guard.mjs",
+    "sync-wp": "node scripts/sync-wp-templates.mjs"
   },
   "dependencies": {
-    "@payloadcms/db-sqlite": "^3.84.1",
-    "@payloadcms/next": "^3.84.1",
-    "@payloadcms/richtext-lexical": "^3.84.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.39.0",
     "lucide-react": "^1.16.0",
     "next": "16.2.6",
-    "payload": "^3.84.1",
     "react": "19.2.4",
     "react-calendly": "^4.4.0",
     "react-dom": "19.2.4",

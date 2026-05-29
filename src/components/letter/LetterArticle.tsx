@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 export const LETTER_CSS = `
@@ -155,7 +156,21 @@ export default function LetterArticle({
             <h1>{title}</h1>
             <p className="hero-sub">{deck}</p>
             <figure className="hero-photo-wrap">
-              <img src={heroImage} alt={heroCaption} className="hero-photo" loading="eager" />
+              {/* next/image: heroImage is a local /public path (e.g. /news/foo.jpg) so it
+                  optimizes without remote patterns. width/height match the 16:10 frame
+                  (620 max-width); .hero-photo CSS (width:100%; aspect-ratio:16/10;
+                  object-fit:cover) still governs the rendered size. `priority` eager-loads
+                  this above-the-fold hero. Note: Next 16 marks `priority` deprecated in
+                  favor of `preload`, but `priority` is retained here per task spec and
+                  remains functional. */}
+              <Image
+                src={heroImage}
+                alt={heroCaption}
+                className="hero-photo"
+                width={620}
+                height={388}
+                priority
+              />
               <figcaption className="hero-photo-cap">— {heroCaption}</figcaption>
             </figure>
             <div className="meta-line">

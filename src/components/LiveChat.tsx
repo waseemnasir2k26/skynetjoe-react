@@ -82,6 +82,14 @@ export default function LiveChat() {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
   const [msgs, setMsgs] = useState<Msg[]>([INITIAL]);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // Hide the chat bubble while a modal popup is open (one overlay at a time).
+  useEffect(() => {
+    const h = (e: Event) => setModalOpen(Boolean((e as CustomEvent).detail));
+    window.addEventListener("skynet:modal", h);
+    return () => window.removeEventListener("skynet:modal", h);
+  }, []);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -114,6 +122,7 @@ export default function LiveChat() {
 
   if (pathname?.startsWith("/lp/freight-")) return null;
   if (pathname === "/discovery-call") return null;
+  if (modalOpen && !open) return null;
 
   function send() {
     const text = draft.trim();
@@ -214,9 +223,13 @@ export default function LiveChat() {
             </button>
           </div>
 
-          {/* Messages */}
+          {/* Messages — a11y: live region so SR users hear bot replies as they arrive */}
           <div
             ref={scrollRef}
+            role="log"
+            aria-live="polite"
+            aria-atomic="false"
+            aria-label="Chat messages"
             className="flex-1 overflow-y-auto px-3 py-3 space-y-2.5"
             style={{ background: "var(--cream-3)" }}
           >

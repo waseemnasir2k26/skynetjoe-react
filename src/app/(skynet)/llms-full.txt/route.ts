@@ -22,10 +22,14 @@ function stripHtml(html: string): string {
 }
 
 function readContent(file: string): string {
+  const p = path.join(process.cwd(), "content", file);
   try {
-    const p = path.join(process.cwd(), "content", file);
     return stripHtml(fs.readFileSync(p, "utf8"));
-  } catch {
+  } catch (err) {
+    // Surface renamed/missing content files in build logs instead of silently
+    // emitting an empty section. Still return "" so the route keeps working.
+    const reason = err instanceof Error ? err.message : String(err);
+    console.warn(`[llms-full.txt] content file missing or unreadable: ${p} — ${reason}`);
     return "";
   }
 }

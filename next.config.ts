@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import { withPayload } from "@payloadcms/next/withPayload";
 import { STATES } from "./src/lib/states";
 import { SERVICE_CATEGORIES } from "./src/lib/site";
 import { PRIORITY_STATE_SLUGS } from "./src/data/state-priority";
@@ -31,6 +30,51 @@ function isIndexableHere(_serviceSlug: string, stateSlug: string): boolean {
  * Moved here from vercel.json (2026-05-20) so they're picked up consistently
  * across `next dev`, `next start`, and Vercel/standalone deploys.
  */
+/**
+ * Content-Security-Policy — shipped as REPORT-ONLY (2026-05-29).
+ *
+ * Why report-only: the site loads inline GTM/GA4/Meta-Pixel bootstrap scripts
+ * plus third-party widgets (Calendly, Payload admin, YouTube embeds). A strict
+ * blocking CSP with nonces is high-risk to ship blind — one missed origin and
+ * analytics or the Calendly booking widget silently breaks. `*-Report-Only`
+ * does NOT block anything; it only emits violation reports, so we can observe
+ * what the policy WOULD break in prod before enforcing.
+ *
+ * Path to enforcement (do NOT skip the report-only soak):
+ *   1. Watch browser console / report-uri for violations for a few days.
+ *   2. Replace 'unsafe-inline' in script-src with per-request nonces:
+ *      generate a nonce in middleware, thread it through <Script nonce=...>
+ *      and the GTM/GA/Pixel inline bootstraps, add `'strict-dynamic'`.
+ *   3. Once violations are clean, rename this header from
+ *      `Content-Security-Policy-Report-Only` → `Content-Security-Policy`.
+ *
+ * Allowed dependencies baked in below:
+ *   - self
+ *   - Google Tag Manager / GA4: www.googletagmanager.com,
+ *     www.google-analytics.com, *.google-analytics.com
+ *   - Meta Pixel: connect.facebook.net, www.facebook.com
+ *   - Calendly: assets.calendly.com, calendly.com (script + frame + connect)
+ *   - Payload admin: same-origin (covered by 'self')
+ *   - Fonts: fonts.gstatic.com (+ fonts.googleapis.com stylesheet)
+ *   - Images: data:, https: (broad on purpose for CDN/analytics pixels)
+ *   - Frames: Calendly + YouTube (youtube.com, youtube-nocookie.com)
+ */
+const cspReportOnly = [
+  "default-src 'self'",
+  // 'unsafe-inline' kept for now because GTM/GA4/Pixel bootstraps are inline.
+  // Report-only, so acceptable until nonces land (see header comment above).
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://assets.calendly.com",
+  "style-src 'self' 'unsafe-inline' https://assets.calendly.com https://fonts.googleapis.com",
+  "img-src 'self' data: https:",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://www.facebook.com https://calendly.com https://*.calendly.com",
+  "frame-src 'self' https://calendly.com https://*.calendly.com https://www.youtube.com https://www.youtube-nocookie.com",
+  "frame-ancestors 'self'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+].join("; ");
+
 const securityHeaders = [
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -45,6 +89,9 @@ const securityHeaders = [
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
   },
+  // Report-only CSP — observes violations without blocking. See cspReportOnly
+  // comment above for the enforcement path (nonces → rename to enforcing).
+  { key: "Content-Security-Policy-Report-Only", value: cspReportOnly },
 ];
 
 /**
@@ -191,4 +238,5 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPayload(nextConfig);
+// Payload CMS removed 2026-05-29 — site is fully data-file/MDX driven, no DB.
+export default nextConfig;

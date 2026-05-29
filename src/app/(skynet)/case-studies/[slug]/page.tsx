@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
@@ -22,7 +22,7 @@ export async function generateMetadata({
   const c = getCaseStudy(slug);
   if (!c) return { title: "Case study not found" };
 
-  const title = `${c.clientName} â€” ${c.industryTag} case study | SkynetLabs`;
+  const title = `${c.clientName} — ${c.industryTag} case study | SkynetLabs`;
   const description = c.oneLineOutcome;
 
   return {
@@ -42,7 +42,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      creator: "@skynetlabs",
+      creator: "@Skynetjoe1",
     },
   };
 }
@@ -59,7 +59,7 @@ export default async function CaseStudyDetail({
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: `${c.clientName} â€” ${c.oneLineOutcome}`,
+    headline: `${c.clientName} — ${c.oneLineOutcome}`,
     description: c.oneLineOutcome,
     url: `${SITE.url}/case-studies/${c.slug}`,
     datePublished: c.publishDate,
@@ -184,12 +184,12 @@ export default async function CaseStudyDetail({
                 lineHeight: 1.7,
               }}
             >
-              <span style={{ color: "var(--terracotta)" }}>â€” {c.industryTag}</span>
-              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>Â·</span>
+              <span style={{ color: "var(--terracotta)" }}>— {c.industryTag}</span>
+              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>·</span>
               {c.location}
-              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>Â·</span>
+              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>·</span>
               {dateFmt}
-              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>Â·</span>
+              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>·</span>
               {c.implementationPeriod}
             </div>
 
@@ -223,7 +223,7 @@ export default async function CaseStudyDetail({
         </div>
       </section>
 
-      {/* HERO IMAGE â€” polaroid frame */}
+      {/* HERO IMAGE — polaroid frame */}
       <section style={{ padding: "clamp(24px, 6vw, 40px) 0 24px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <figure
@@ -252,7 +252,7 @@ export default async function CaseStudyDetail({
             >
               <ZoomableImage
                 src={c.coverImage}
-                alt={`${c.clientName} â€” ${c.industry}`}
+                alt={`${c.clientName} — ${c.industry}`}
                 fill
                 priority
                 sizes="(min-width: 1024px) 1000px, 100vw"
@@ -303,7 +303,7 @@ export default async function CaseStudyDetail({
                     marginBottom: 12,
                   }}
                 >
-                  â€” {m.label}
+                  — {m.label}
                 </div>
                 <div style={{ fontSize: 12, color: "var(--ink-faint)", marginBottom: 4 }}>
                   Before: <span style={{ color: "var(--ink-2)" }}>{m.before}</span>
@@ -350,7 +350,7 @@ export default async function CaseStudyDetail({
               marginBottom: 14,
             }}
           >
-            â€” The problem
+            — The problem
           </div>
           <h2
             style={{
@@ -397,7 +397,7 @@ export default async function CaseStudyDetail({
               marginBottom: 14,
             }}
           >
-            â€” What we built
+            — What we built
           </div>
           <h2
             style={{
@@ -425,7 +425,7 @@ export default async function CaseStudyDetail({
                 marginBottom: 10,
               }}
             >
-              â€” Tools
+              — Tools
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {c.solutionStack.map((tool) => (
@@ -457,7 +457,7 @@ export default async function CaseStudyDetail({
               marginBottom: 10,
             }}
           >
-            â€” Implementation ({c.implementationPeriod})
+            — Implementation ({c.implementationPeriod})
           </div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {c.implementationBreakdown.map((b, i) => (
@@ -474,7 +474,7 @@ export default async function CaseStudyDetail({
                   lineHeight: 1.6,
                 }}
               >
-                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>â†’</span>
+                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>→</span>
                 <span>{b}</span>
               </li>
             ))}
@@ -502,7 +502,7 @@ export default async function CaseStudyDetail({
               marginBottom: 14,
             }}
           >
-            â€” Results
+            — Results
           </div>
           <h2
             style={{
@@ -577,7 +577,7 @@ export default async function CaseStudyDetail({
                 color: "var(--ink-faint)",
               }}
             >
-              â€” {c.testimonialAuthor}
+              — {c.testimonialAuthor}
             </footer>
           </blockquote>
         </div>
@@ -662,7 +662,7 @@ export default async function CaseStudyDetail({
               marginBottom: 18,
             }}
           >
-            â€” Same builder Â· same playbook
+            — Same builder · same playbook
           </div>
           <h2
             style={{
