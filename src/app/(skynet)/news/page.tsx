@@ -174,7 +174,7 @@ export default function NewsIndex() {
                 style={{
                   objectFit: "cover",
                   objectPosition: featured.heroPosition ?? "center top",
-                  filter: "sepia(0.06) saturate(0.95)",
+                  filter: "none",
                 }}
               />
               <span
@@ -348,7 +348,7 @@ export default function NewsIndex() {
                       style={{
                         objectFit: "cover",
                         objectPosition: n.heroPosition ?? "center top",
-                        filter: "sepia(0.06) saturate(0.95)",
+                        filter: "none",
                       }}
                     />
                     <span

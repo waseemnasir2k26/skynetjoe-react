@@ -6,11 +6,11 @@ import { NEWS } from "@/lib/news";
 import { INDUSTRIES } from "@/data/industries";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import {
-  isServiceStateIndexable,
   isCaseStudyIndexable,
   isIndustryIndexable,
   isPostIndexable,
   isNewsIndexable,
+  isLocationIndexable,
 } from "@/lib/sitemap-quality";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -48,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy-policy",
     "/terms-of-service",
     "/locations",
+    "/industries/freight-logistics/texas",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,
@@ -64,12 +65,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  const stateRoutes = STATES.map((s) => ({
-    url: `${base}/locations/${s.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
+  // Location pages — quality-gated by isLocationIndexable (state-enrichment.ts).
+  // States without an enrichment paragraph stay SSG'd but emit noindex, follow.
+  const stateRoutes = STATES.filter((s) => isLocationIndexable(s.slug)).map(
+    (s) => ({
+      url: `${base}/locations/${s.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }),
+  );
 
   const blogRoutes = POSTS.filter((p) => isPostIndexable(p.slug)).map((p) => ({
     url: `${base}/blog/${p.slug}`,
@@ -85,23 +90,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  // Full 16 services × 48 states programmatic matrix = 768 long-tail URLs.
-  // Filtered by quality score >= 60 (see lib/sitemap-quality.ts). Pages outside
-  // the published set are still SSG'd and reachable but emit `noindex, follow`
-  // in metadata to avoid Google Helpful Content Update penalties on thin/
-  // template-identical cells.
-  const serviceStateRoutes = SERVICE_CATEGORIES.flatMap((cat) =>
-    cat.services.flatMap((svc) =>
-      STATES.filter((s) => isServiceStateIndexable(svc.slug, s.slug)).map(
-        (s) => ({
-          url: `${base}/services/${svc.slug}/in/${s.slug}`,
-          lastModified: now,
-          changeFrequency: "monthly" as const,
-          priority: 0.6,
-        }),
-      ),
-    ),
-  );
+  // svc×state matrix consolidated into hub accordion sections (2026-05-28).
+  // Old /services/[slug]/in/[state] URLs now 308-redirect to
+  // /services/[slug]#state-[state]. Sitemap no longer emits those URLs.
+  // See src/app/(skynet)/services/[slug]/in/[state]/page.tsx for redirect.
 
   // Case study detail pages — drives /case-studies/[slug] dynamic route.
   const caseStudyRoutes = CASE_STUDIES.filter((c) =>
@@ -129,7 +121,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...stateRoutes,
     ...blogRoutes,
     ...newsRoutes,
-    ...serviceStateRoutes,
     ...caseStudyRoutes,
     ...industryRoutes,
   ];

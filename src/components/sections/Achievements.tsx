@@ -300,7 +300,7 @@ export default function Achievements() {
                 sizes="220px"
                 style={{
                   objectFit: "cover",
-                  filter: "sepia(0.08) saturate(0.95)",
+                  filter: "none",
                 }}
               />
             </div>

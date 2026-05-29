@@ -258,7 +258,7 @@ export default async function CaseStudyDetail({
                 sizes="(min-width: 1024px) 1000px, 100vw"
                 style={{
                   objectFit: "cover",
-                  filter: "sepia(0.06) saturate(0.95)",
+                  filter: "none",
                 }}
               />
             </div>

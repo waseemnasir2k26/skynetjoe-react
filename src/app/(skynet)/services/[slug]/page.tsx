@@ -7,6 +7,8 @@ import type { FC } from "react";
 import { MapPin, ArrowRight } from "lucide-react";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { STATES } from "@/lib/states";
+import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
+import { getEnrichment } from "@/data/service-state-enrichment";
 import JsonLd from "@/components/JsonLd";
 import N8nAutomationLP from "@/components/services/lp/N8nAutomationLP";
 import GoHighLevelLP from "@/components/services/lp/GoHighLevelLP";
@@ -110,7 +112,17 @@ export default async function ServicePage({
         url: `${SITE.url}/services/${svc.slug}`,
         serviceType: svc.label,
         provider: { "@id": `${SITE.url}/#organization` },
-        areaServed: "Worldwide",
+        areaServed: [
+          { "@type": "Country", name: "United States" },
+          ...PRIORITY_STATE_SLUGS.map((stateSlug) => {
+            const st = STATES.find((s) => s.slug === stateSlug);
+            return {
+              "@type": "AdministrativeArea",
+              name: st?.name ?? stateSlug,
+              containedInPlace: { "@type": "Country", name: "United States" },
+            };
+          }),
+        ],
         offers: {
           "@type": "Offer",
           priceCurrency: "USD",
@@ -160,7 +172,14 @@ export default async function ServicePage({
         />
       )}
 
-      {/* Available in 48 states — feeds the /services/[slug]/in/[state] matrix */}
+      {/* ──────────────────────────────────────────────────────────────────
+          Available in: 8 priority states with deep enrichment + 40 other state pills
+          Doorway-page risk killed — all state-keyword content consolidated
+          into this single hub. Each accordion card has anchor id so old
+          /services/[slug]/in/[state] URLs 301 to #state-[slug].
+          <details> renders all content in DOM (SEO-readable) but collapses
+          visually by default — best of both worlds, no JS hydration needed.
+      ──────────────────────────────────────────────────────────────────── */}
       <section
         className="section"
         style={{
@@ -201,7 +220,7 @@ export default async function ServicePage({
                 marginBottom: 12,
               }}
             >
-              {svc.label} in all{" "}
+              {svc.label} across{" "}
               <em
                 style={{
                   fontStyle: "italic",
@@ -213,16 +232,137 @@ export default async function ServicePage({
               </em>
             </h2>
             <p style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.55 }}>
-              Same fixed-scope build, delivered remotely to any US state.
-              Tap your state to see {svc.label.toLowerCase()} tuned for local
-              verticals, agency cost benchmarks and city-level intent.
+              Same fixed-scope build, delivered remotely to any US state. Click
+              your state for the local-vertical breakdown — agency rate
+              benchmarks, dominant industries, state-specific compliance hooks
+              and city-level intent we tune for.
+            </p>
+          </div>
+
+          {/* 8 priority states with deep enrichment as collapsible accordion */}
+          <div className="space-y-3 mb-8">
+            {PRIORITY_STATE_SLUGS.map((stateSlug) => {
+              const state = STATES.find((s) => s.slug === stateSlug);
+              if (!state) return null;
+              const enrichment = getEnrichment(svc.slug, stateSlug);
+              if (!enrichment) return null;
+              return (
+                <details
+                  key={stateSlug}
+                  id={`state-${stateSlug}`}
+                  style={{
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.10)",
+                    borderRadius: 2,
+                  }}
+                >
+                  <summary
+                    style={{
+                      padding: "14px 18px",
+                      cursor: "pointer",
+                      listStyle: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 12,
+                    }}
+                  >
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 500,
+                        fontSize: 18,
+                        color: "var(--ink)",
+                        margin: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 10,
+                      }}
+                    >
+                      <MapPin
+                        className="w-4 h-4"
+                        style={{ color: "var(--terracotta)" }}
+                      />
+                      {svc.label} in {state.name}
+                    </h3>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 11,
+                        color: "var(--ink-faint)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                      }}
+                    >
+                      {state.abbr} ▾
+                    </span>
+                  </summary>
+                  <div
+                    style={{
+                      padding: "0 18px 18px 18px",
+                      fontSize: 14,
+                      color: "var(--ink-2)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    <p style={{ margin: "0 0 14px" }}>{enrichment}</p>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 14,
+                        fontSize: 12,
+                        color: "var(--ink-faint)",
+                      }}
+                    >
+                      <span>
+                        <strong style={{ color: "var(--ink)" }}>Cities:</strong>{" "}
+                        {state.cities.slice(0, 5).join(", ")}
+                      </span>
+                      <span>
+                        <strong style={{ color: "var(--ink)" }}>
+                          Verticals:
+                        </strong>{" "}
+                        {state.industries.join(", ")}
+                      </span>
+                      <Link
+                        href={`/locations/${stateSlug}`}
+                        style={{
+                          color: "var(--terracotta)",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        Full {state.name} guide →
+                      </Link>
+                    </div>
+                  </div>
+                </details>
+              );
+            })}
+          </div>
+
+          {/* 40 non-priority state pills → /locations/[state] */}
+          <div className="max-w-4xl mb-4">
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--ink-faint)",
+                margin: 0,
+              }}
+            >
+              Also serving — all 48 states
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
-            {STATES.map((s) => (
+            {STATES.filter(
+              (s) => !(PRIORITY_STATE_SLUGS as readonly string[]).includes(s.slug),
+            ).map((s) => (
               <Link
                 key={s.slug}
-                href={`/services/${svc.slug}/in/${s.slug}`}
+                href={`/locations/${s.slug}`}
                 className="group cream-state-pill flex items-center justify-between gap-2"
                 style={{
                   padding: "10px 14px",

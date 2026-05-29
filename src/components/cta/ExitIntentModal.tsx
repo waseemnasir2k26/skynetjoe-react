@@ -500,7 +500,7 @@ export default function ExitIntentModal() {
             sizes="80px"
             style={{
               objectFit: "cover",
-              filter: "sepia(0.10) saturate(0.95)",
+              filter: "none",
             }}
           />
         </div>

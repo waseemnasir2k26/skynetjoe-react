@@ -246,7 +246,7 @@ export default function Process() {
               fill
               loading="lazy"
               sizes="(min-width: 768px) 180px, 50vw"
-              style={{ objectFit: "cover", filter: "sepia(0.12) saturate(0.94)" }}
+              style={{ objectFit: "cover", filter: "none" }}
             />
           </div>
           <div>

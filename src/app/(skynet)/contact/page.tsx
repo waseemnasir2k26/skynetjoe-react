@@ -300,7 +300,7 @@ export default function ContactPage() {
                   sizes="(min-width: 900px) 400px, 90vw"
                   style={{
                     objectFit: "cover",
-                    filter: "sepia(0.10) saturate(0.95)",
+                    filter: "none",
                   }}
                 />
               </div>

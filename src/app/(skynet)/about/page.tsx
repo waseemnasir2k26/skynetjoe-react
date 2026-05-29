@@ -248,7 +248,7 @@ export default function AboutPage() {
                   style={{
                     objectFit: "cover",
                     objectPosition: "center top",
-                    filter: "sepia(0.10) saturate(0.95) contrast(1.02)",
+                    filter: "contrast(1.02)",
                   }}
                 />
               </div>
@@ -546,7 +546,7 @@ export default function AboutPage() {
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 90vw"
                     style={{
                       objectFit: "cover",
-                      filter: "sepia(0.08) saturate(0.92)",
+                      filter: "none",
                     }}
                   />
                 </div>

@@ -139,14 +139,15 @@ html, body {
   min-height: 100%;
 }
 
-/* Paper grain — site-wide texture, anti-AI-slop signal */
+/* Paper grain — site-wide texture, anti-AI-slop signal.
+   Reduced opacity + soft-light blend so photos stay vivid (multiply was greying them). */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/></svg>");
-  opacity: 0.08;
-  mix-blend-mode: multiply;
+  opacity: 0.025;
+  mix-blend-mode: soft-light;
   pointer-events: none;
   z-index: 1;
 }
@@ -155,6 +156,12 @@ html.theme-dark body::before {
   opacity: 0.06;
 }
 body > * { position: relative; z-index: 2; }
+
+/* Force images out of any inherited blend/filter stacking context so cream pivot
+   grain + parent filters never desaturate photos. */
+img, picture, video, canvas {
+  isolation: isolate;
+}
 
 /* Editorial typography defaults */
 h1, h2, h3, .display, .serif {

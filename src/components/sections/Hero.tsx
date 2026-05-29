@@ -267,7 +267,7 @@ export default function Hero() {
                 style={{
                   objectFit: "cover",
                   objectPosition: "center top",
-                  filter: "sepia(0.10) saturate(0.95) contrast(1.02)",
+                  filter: "contrast(1.02)",
                 }}
               />
             </div>
@@ -303,7 +303,7 @@ export default function Hero() {
                 alt="Waseem grinning in a Canggu cafe — the day Claude Code started feeling like a co-founder"
                 fill
                 sizes="180px"
-                style={{ objectFit: "cover", filter: "sepia(0.12) saturate(0.94)" }}
+                style={{ objectFit: "cover", filter: "none" }}
               />
             </div>
             <p
