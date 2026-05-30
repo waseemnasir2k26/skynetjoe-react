@@ -27,7 +27,7 @@ export const metadata: Metadata = {
       "We answer and text back every missed call 24/7 for Texas HVAC & plumbing. Free missed-call audit.",
     images: ["/og-default.png"],
   },
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 };
 
 const css = `
@@ -49,7 +49,7 @@ const css = `
   .hs-ticket:nth-child(3) { animation-delay: 1.0s; }
   .hs-ticket .meta { display: flex; flex-direction: column; gap: 2px; }
   .hs-ticket .label { font-size: 0.92rem; color: var(--ink); font-weight: 600; }
-  .hs-ticket .time { font-family: var(--font-mono-plex), monospace; font-size: 0.78rem; color: #555; }
+  .hs-ticket .time { font-family: var(--font-mono-plex), monospace; font-size: 0.78rem; color: #4a4a4a; }
   .hs-ticket .lost { font-family: var(--font-mono-plex), monospace; font-size: 1.15rem; font-weight: 700; color: #A8501F; white-space: nowrap; }
   @keyframes hs-rise { to { opacity: 1; transform: translateY(0); } }
 

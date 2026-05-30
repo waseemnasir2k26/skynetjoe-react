@@ -27,7 +27,7 @@ export const metadata: Metadata = {
       "An AI voice agent answers every call and load offer 24/7 for carriers and owner-operators. Free missed-load audit.",
     images: ["/og-default.png"],
   },
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
 };
 
 const css = `
@@ -68,7 +68,7 @@ const css = `
   .lp-frt-load:nth-child(3) { animation-delay: 0.9s; }
   .lp-frt-load .lane { display: flex; flex-direction: column; gap: 2px; }
   .lp-frt-load .route { font-size: 0.94rem; color: var(--ink); font-weight: 600; }
-  .lp-frt-load .when { font-family: var(--font-mono-plex), monospace; font-size: 0.77rem; color: #555; }
+  .lp-frt-load .when { font-family: var(--font-mono-plex), monospace; font-size: 0.77rem; color: #4a4a4a; }
   .lp-frt-load .gone { font-family: var(--font-mono-plex), monospace; font-size: 1.1rem; font-weight: 700; color: var(--oxblood); white-space: nowrap; }
   @keyframes lp-frt-slide { to { opacity: 1; transform: translateX(0); } }
 

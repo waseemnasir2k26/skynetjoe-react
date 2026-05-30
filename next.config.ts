@@ -194,6 +194,10 @@ const wpRedirects = [
   // ── Author + category (Yoast WP) ─────────────────────────────────────────
   { source: "/author", destination: "/author/waseem-nasir", permanent: true },
   { source: "/category/ai", destination: "/blog", permanent: true },
+
+  // ── Legacy/typed paths that 404 → closest live route ─────────────────────
+  { source: "/work", destination: "/portfolio", permanent: true },
+  { source: "/community", destination: "/", permanent: true },
 ];
 
 /**

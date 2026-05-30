@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Stop running freight ops from six browser tabs and a personal cell. SkynetLabs ships the dispatch canvas — AI voice agent, factoring widget, lane economics — in 14 days. Public pricing. For US small-fleet carriers (5–25 trucks).",
   alternates: { canonical: "/lp/logistics" },
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
   openGraph: {
     title: "Dispatch canvas for small-fleet carriers — SkynetLabs",
     description:
@@ -281,7 +281,7 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .section.dark h2 { color:var(--cream); }
 .lp-log-v3 .section.dark .section-sub { color:rgba(242,239,230,0.72); }
 .lp-log-v3 .section-head { max-width:820px; margin-bottom:56px; }
-.lp-log-v3 .section-kicker { font-size:11px; letter-spacing:0.20em; text-transform:uppercase; color:var(--terracotta); font-weight:700; margin-bottom:14px; display:inline-flex; align-items:center; gap:10px; }
+.lp-log-v3 .section-kicker { font-size:11px; letter-spacing:0.20em; text-transform:uppercase; color:#A8451F; font-weight:700; margin-bottom:14px; display:inline-flex; align-items:center; gap:10px; }
 .lp-log-v3 .section-kicker::before { content:''; width:24px; height:1px; background:var(--terracotta); }
 .lp-log-v3 h2 { font-family:var(--font-display),var(--font-serif-fraunces),Georgia,serif; font-size:clamp(30px,4.4vw,52px); font-weight:500; letter-spacing:-0.028em; line-height:1.06; margin:0 0 18px; max-width:22ch; }
 .lp-log-v3 h2 em { font-style:italic; color:var(--terracotta); font-weight:500; }
@@ -322,7 +322,7 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .feat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--terracotta),var(--ochre)); opacity:0; transition:opacity 0.2s; }
 .lp-log-v3 .feat-card:hover { transform:translateY(-4px); border-color:var(--terracotta); box-shadow:0 22px 44px rgba(198,107,63,0.14); }
 .lp-log-v3 .feat-card:hover::before { opacity:1; }
-.lp-log-v3 .feat-tag { display:inline-block; font-family:var(--font-mono-plex),monospace; font-size:11px; font-weight:600; padding:4px 10px; background:var(--terracotta-soft); color:var(--terracotta); border-radius:6px; margin-bottom:16px; letter-spacing:0.06em; }
+.lp-log-v3 .feat-tag { display:inline-block; font-family:var(--font-mono-plex),monospace; font-size:11px; font-weight:600; padding:4px 10px; background:var(--terracotta-soft); color:#A8451F; border-radius:6px; margin-bottom:16px; letter-spacing:0.06em; }
 .lp-log-v3 .feat-title { font-family:var(--font-serif-fraunces),serif; font-size:24px; font-weight:500; letter-spacing:-0.02em; margin-bottom:10px; color:var(--ink); }
 .lp-log-v3 .feat-body { font-size:15px; line-height:1.6; color:var(--ink-2); }
 .lp-log-v3 .feat-list { list-style:none; padding:0; margin:14px 0 0; }
@@ -380,7 +380,7 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .price-tier { font-family:var(--font-serif-fraunces),serif; font-size:24px; font-weight:500; letter-spacing:-0.02em; margin-bottom:2px; color:var(--ink); }
 .lp-log-v3 .price-window { font-size:12px; color:var(--ink-faint); margin-bottom:20px; letter-spacing:0.02em; }
 .lp-log-v3 .price-amount { font-family:var(--font-serif-fraunces),serif; font-size:42px; font-weight:500; letter-spacing:-0.028em; line-height:1; color:var(--ink); }
-.lp-log-v3 .price-recur { font-size:12px; color:var(--terracotta); margin:8px 0 22px; font-weight:600; letter-spacing:0.02em; }
+.lp-log-v3 .price-recur { font-size:12px; color:#A8451F; margin:8px 0 22px; font-weight:600; letter-spacing:0.02em; }
 .lp-log-v3 .price-list { list-style:none; padding:0; margin:0 0 24px; font-size:13.5px; color:var(--ink-2); flex:1; }
 .lp-log-v3 .price-list li { padding:7px 0 7px 20px; position:relative; line-height:1.5; border-bottom:1px solid var(--rule); }
 .lp-log-v3 .price-list li:last-child { border-bottom:0; }
