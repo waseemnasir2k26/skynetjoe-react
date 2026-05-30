@@ -112,6 +112,14 @@ const securityHeaders = [
  * to the closest topical landing (e.g. AEO-variant pages → /aeo-guide).
  */
 const wpRedirects = [
+  // ── External: AI portfolio → Google Drive folder ─────────────────────────
+  {
+    source: "/aiportfolio",
+    destination:
+      "https://drive.google.com/drive/folders/1g2JV0LktfCHdEK0BFdQsUKpN0K7llIJQ?usp=sharing",
+    permanent: false,
+  },
+
   // ── Service slugs (WP single-page → Next /services/[slug]) ───────────────
   { source: "/n8n-automation", destination: "/services/n8n-automation", permanent: true },
   { source: "/gohighlevel", destination: "/services/gohighlevel", permanent: true },
