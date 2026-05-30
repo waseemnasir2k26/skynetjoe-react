@@ -125,6 +125,15 @@ export const NAV_PRIMARY: NavItem[] = [
       { label: "Locations", href: "/locations", desc: "Service coverage map" },
     ],
   },
+  {
+    label: "Solutions",
+    href: "/services",
+    subItems: [
+      { label: "Freight & Logistics", href: "/lp/freight", desc: "AI voice agent — never miss a load" },
+      { label: "Home Services", href: "/lp/home-services", desc: "Never miss a call — HVAC / plumbing" },
+      { label: "FreightOps Dispatch", href: "/lp/logistics", desc: "Dispatch dashboard for small fleets" },
+    ],
+  },
   { label: "Latest News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
