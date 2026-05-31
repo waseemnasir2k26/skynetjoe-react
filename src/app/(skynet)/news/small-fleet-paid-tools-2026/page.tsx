@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import LetterArticle from "@/components/letter/LetterArticle";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { articleSchema } from "@/lib/schema";
 import { getArticle, relatedFor } from "@/lib/news";
 import { SITE } from "@/lib/site";
@@ -44,6 +45,14 @@ export default function Page() {
   return (
     <>
       <JsonLd data={schema} />
+      <Breadcrumbs
+        offsetTop
+        items={[
+          { label: "Home", href: "/" },
+          { label: "News", href: "/news" },
+          { label: article.title },
+        ]}
+      />
       <LetterArticle
         eyebrow={article.eyebrow}
         title={article.title}

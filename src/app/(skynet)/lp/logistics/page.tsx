@@ -1119,7 +1119,7 @@ export default function LogisticsLP() {
 
         {/* SCARCITY BAND */}
         <div className="scarcity-band">
-          <p>Four operator slots a month · <strong>June: 2 of 4 remaining</strong> · July books mid-June</p>
+          <p>Four operator builds a month · <strong>limited June availability</strong> · July books mid-June</p>
         </div>
 
         {/* CLOSER */}
