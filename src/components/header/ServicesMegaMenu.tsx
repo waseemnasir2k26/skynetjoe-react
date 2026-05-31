@@ -474,15 +474,37 @@ export default function ServicesMegaMenu({ onClose }: Props) {
             <b style={{ color: "var(--ink)" }}>16</b> services ·{" "}
             <b style={{ color: "var(--ink)" }}>4</b> categories · public pricing
           </span>
-          <Link
-            href="/services"
-            onClick={onClose}
-            className="inline-flex items-center gap-1.5 group transition-colors"
-            style={{ color: accent.color, fontWeight: 700 }}
-          >
-            See all 16
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/services"
+              onClick={onClose}
+              className="inline-flex items-center gap-1.5 group transition-colors"
+              style={{ color: accent.color, fontWeight: 700 }}
+            >
+              See all 16
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+            {/* Conversion path — mega-menu no longer dead-ends. */}
+            <Link
+              href="/discovery-call"
+              onClick={onClose}
+              className="inline-flex items-center gap-1.5 transition-all hover:-translate-y-0.5"
+              style={{
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                padding: "8px 14px",
+                borderRadius: 2,
+              }}
+            >
+              Book free audit
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>

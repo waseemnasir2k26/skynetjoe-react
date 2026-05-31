@@ -36,8 +36,8 @@ const faqs = [
     a: "It scores how much of your repeatable work runs without a human pressing a button. 100 means lead intake, follow-up, reporting and hand-offs are wired end-to-end. 0 means everything is copy-paste, Slack threads and memory. The four-axis breakdown shows which axis is the biggest leak.",
   },
   {
-    q: "Is this anonymous?",
-    a: "Yes. Nothing leaves your browser. No email, no name, no company. Answers live in localStorage. Your score lives in the URL only if you choose to share it.",
+    q: "What do you collect?",
+    a: "Your answers stay in your browser's localStorage and never leave it. To unlock your full score and the axis breakdown you enter an email — that one email is sent to my CRM so I can follow up. No name, no company required. Your score lives in the URL only if you choose to share it.",
   },
   {
     q: "Why 4 axes specifically?",
@@ -53,8 +53,8 @@ const heroStats = [
   { icon: Timer, label: "90 seconds", body: "12 questions, one tap each." },
   {
     icon: ShieldCheck,
-    label: "Anonymous",
-    body: "No email gate. Nothing leaves your browser.",
+    label: "Email to unlock",
+    body: "Answers stay local. Email unlocks your result.",
   },
   {
     icon: Target,
@@ -140,7 +140,7 @@ export default function AutomationGapPage() {
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span className="text-xs font-medium tracking-wider uppercase">
-                Free diagnostic · No email gate
+                Free diagnostic · Email to unlock
               </span>
             </div>
 

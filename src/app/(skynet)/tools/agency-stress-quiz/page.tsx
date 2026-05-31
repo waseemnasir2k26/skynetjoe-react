@@ -132,7 +132,7 @@ export default function StressQuizPage() {
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--oxblood)",
+                color: "var(--terracotta)",
                 fontWeight: 600,
                 marginBottom: 22,
                 display: "inline-flex",
@@ -156,7 +156,7 @@ export default function StressQuizPage() {
               }}
             >
               60 seconds.{" "}
-              <em style={{ fontStyle: "italic", color: "var(--oxblood)" }}>
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
                 7 questions.
               </em>{" "}
               One brutally honest score.
@@ -275,7 +275,7 @@ export default function StressQuizPage() {
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">
-                Waseem, building from Bali · waseem@skynetjoe.com
+                Waseem, building from Bali · info@skynetjoe.com
               </p>
             </div>
           </div>

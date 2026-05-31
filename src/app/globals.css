@@ -18,6 +18,10 @@
   --ink-faint:    #56564F; /* WCAG AA: ~5:1 on cream (#FAF7F0); was #6B6B65 (~4.0:1, failed AA) */
   --terracotta:   #C66B3F;
   --terracotta-2: #B85A30;
+  /* AA-safe terracotta for SMALL text (eyebrows/labels ≤12px). #C66B3F is ~3.4:1
+     on cream (fine for large display per WCAG, fails AA small-text 4.5:1). #A8451F
+     hits ≥4.5:1 on cream — use var(--terracotta-aa) or .terracotta-aa for micro-copy. */
+  --terracotta-aa: #A8451F;
   --sage:         #8A9A7B;
   --oxblood:      #6B2C2C;
   --ochre:        #C9A96E;
@@ -120,8 +124,9 @@ html.theme-dark {
 
   --font-sans: var(--font-sans-onest, system-ui, -apple-system, "Segoe UI", sans-serif);
   --font-display: var(--font-serif-fraunces, Georgia, "Times New Roman", serif);
-  --font-mono: var(--font-mono-plex, ui-monospace), SFMono-Regular, Menlo, monospace;
+  --font-mono: var(--font-mono-plex, ui-monospace, SFMono-Regular, Menlo, monospace);
   --color-terracotta: var(--terracotta);
+  --color-terracotta-aa: var(--terracotta-aa);
   --color-ink: var(--ink);
   --color-cream: var(--cream);
   --color-sage: var(--sage);
@@ -174,6 +179,12 @@ em.accent, .serif-italic {
   font-style: italic;
   color: var(--terracotta);
 }
+
+/* A11Y — AA-safe terracotta for SMALL micro-copy (eyebrows/labels ≤12px).
+   Use this instead of var(--terracotta) on small colored text so it clears
+   WCAG AA 4.5:1 on cream. Large display terracotta is unaffected. */
+.terracotta-aa { color: var(--terracotta-aa); }
+html.theme-dark .terracotta-aa { color: var(--terracotta); }
 
 /* ============================================
    A11Y — Global :focus-visible outline (WCAG 2.4.7 + 2.4.11)
@@ -1018,8 +1029,10 @@ html:not(.theme-dark) main.bg-gradient-to-br[class*="061827"] {
 *, *::before, *::after { box-sizing: border-box; }
 
 /* 2. Prevent horizontal overflow at root (extends existing body overflow-x) */
+/* max-width:100% (NOT 100vw) — 100vw includes the scrollbar gutter on desktop,
+   causing a 1–17px horizontal-scroll wobble. Matches the correct rule ~line 395. */
 html, body {
-  max-width: 100vw;
+  max-width: 100%;
   overflow-x: hidden;
 }
 

@@ -1083,7 +1083,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           background: #ffffff;
           border: 2px solid var(--terracotta);
           margin-top: -7px;
-          box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
+          box-shadow: 0 4px 14px rgba(198, 107, 63, 0.40),
             0 0 0 4px rgba(26,26,26,0.12);
         }
         .rc-range::-moz-range-thumb {
@@ -1092,7 +1092,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           border-radius: 50%;
           background: #ffffff;
           border: 2px solid var(--terracotta);
-          box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
+          box-shadow: 0 4px 14px rgba(198, 107, 63, 0.40),
             0 0 0 4px rgba(26,26,26,0.12);
         }
         @media (prefers-reduced-motion: reduce) {

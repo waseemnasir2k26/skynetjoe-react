@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { NEWS } from "@/lib/news";
 import { POSTS } from "@/lib/posts";
 import { CASE_STUDIES } from "@/lib/case-studies";
@@ -71,6 +72,7 @@ function walkApi(root: string): string[] {
 }
 
 export default function SiteStats() {
+  if (process.env.NODE_ENV === "production") notFound();
   const services: { slug: string }[] = SERVICE_CATEGORIES.flatMap(
     (c) => c.services as readonly { slug: string }[],
   );

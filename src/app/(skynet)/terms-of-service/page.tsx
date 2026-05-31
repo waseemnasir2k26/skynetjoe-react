@@ -3,6 +3,7 @@ import path from "path";
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "terms-of-service.html"),
@@ -47,7 +48,7 @@ export default function TermsOfServicePage() {
   return (
     <>
       <JsonLd data={schema} />
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <HtmlCreamWrap html={html} />
     </>
   );
 }

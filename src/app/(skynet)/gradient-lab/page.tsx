@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "gradient-lab.html"),
@@ -14,5 +15,6 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  if (process.env.NODE_ENV === "production") notFound();
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }

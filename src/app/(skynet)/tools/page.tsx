@@ -5,14 +5,14 @@ import JsonLd from "@/components/JsonLd";
 import { Calculator, Activity, Compass, ArrowLeftRight, Mic, FileText, CalendarDays, Target, Library, Film, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Free Tools — Revenue Calculator + Agency Stress Quiz | SkynetLabs",
+  title: "Free Tools — 10-tool suite for service businesses | SkynetLabs",
   description:
-    "Two free utilities from SkynetLabs: a revenue-recovery calculator that shows what your missed leads are costing, and a 60-second agency stress quiz that diagnoses your operational chaos.",
+    "Ten free utilities from SkynetLabs: revenue calculator, AI readiness score, automation gap analyzer, brand voice builder, executive summary generator, 30-day content calendar, prompt library, video prompt generator, before/after slider and agency stress quiz.",
   alternates: { canonical: `${SITE.url}/tools` },
   openGraph: {
-    title: "SkynetLabs Free Tools — calculator + diagnostic quiz",
+    title: "SkynetLabs Free Tools — 10 calculators, diagnostics and generators",
     description:
-      "Find out what your business is leaking. Two free tools, no email gate.",
+      "Find out what your business is leaking. Ten free tools: calculators, diagnostics and generators for service businesses.",
     url: `${SITE.url}/tools`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -59,7 +59,7 @@ const TOOLS = [
     slug: "executive-summary-generator",
     name: "Executive Summary Generator",
     blurb:
-      "Paste raw notes, get five ready-to-send formats: TL;DR, email, Slack post, deck slide and investor 1-pager. Local-only, instant, uses your own words.",
+      "Paste raw notes, get five ready-to-send formats: TL;DR, email, Slack post, deck slide and investor 1-pager. Built in your browser, instant, uses your own words.",
     Icon: FileText,
   },
   {
@@ -97,7 +97,7 @@ const schema = {
   "@type": "CollectionPage",
   name: "SkynetLabs Free Tools",
   description:
-    "Free utilities from SkynetLabs: revenue-recovery calculator and agency stress quiz.",
+    "Ten free utilities from SkynetLabs: revenue calculator, AI readiness score, automation gap analyzer, brand voice persona builder, executive summary generator, 30-day content calendar, prompt library, video prompt generator, before/after slider and agency stress quiz.",
   url: `${SITE.url}/tools`,
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },
@@ -142,7 +142,7 @@ export default function ToolsIndexPage() {
               }}
             >
               <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-              Free · no email gate
+              Ten free tools
             </div>
             <h1
               style={{
@@ -161,8 +161,9 @@ export default function ToolsIndexPage() {
               </em>
             </h1>
             <p style={{ fontSize: 18, color: "var(--ink-2)", maxWidth: "52ch", lineHeight: 1.6 }}>
-              Two utilities I built for myself before I built them for clients.
-              No signup, no funnel, no follow-up email sequence. Just numbers.
+              Ten utilities I built for myself before I built them for clients.
+              All free. Some hand you the result instantly; a few ask for an
+              email to unlock it. Just numbers, either way.
             </p>
           </div>
         </section>

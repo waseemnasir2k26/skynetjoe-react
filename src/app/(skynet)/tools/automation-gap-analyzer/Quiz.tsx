@@ -521,7 +521,7 @@ function RadarChart({
               cy={CENTER}
               r={r}
               fill="none"
-              stroke="rgba(255,255,255,0.08)"
+              stroke="rgba(26,26,26,0.10)"
               strokeWidth={1}
             />
           );
@@ -533,7 +533,7 @@ function RadarChart({
             y1={CENTER}
             x2={a.x}
             y2={a.y}
-            stroke="rgba(255,255,255,0.10)"
+            stroke="rgba(26,26,26,0.10)"
             strokeWidth={1}
           />
         ))}
@@ -573,7 +573,7 @@ function RadarChart({
               dy={dy}
               fontSize={10}
               fontWeight={700}
-              fill="rgba(255,255,255,0.78)"
+              fill="rgba(26,26,26,0.78)"
               style={{ letterSpacing: "0.04em", textTransform: "uppercase" }}
             >
               {a.ax.label}

@@ -51,10 +51,11 @@ export default function HeroFunnel() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "#A8451F",
               marginBottom: 22,
               display: "inline-flex",
               alignItems: "center",
+              flexWrap: "wrap",
               gap: 12,
             }}
           >
@@ -62,10 +63,12 @@ export default function HeroFunnel() {
               style={{
                 width: 28,
                 height: 1,
-                background: "var(--terracotta)",
+                background: "#A8451F",
                 display: "inline-block",
               }}
             />
+            AI automation studio · built solo from Bali
+            <span style={{ color: "rgba(26,26,26,0.30)" }}>·</span>
             For founders losing leads to slow follow-up
           </div>
 
@@ -123,7 +126,7 @@ export default function HeroFunnel() {
               rowGap: 8,
             }}
           >
-            <span style={{ color: "var(--terracotta)" }}>
+            <span style={{ color: "#A8451F" }}>
               <Star
                 style={{
                   display: "inline-block",
@@ -131,14 +134,14 @@ export default function HeroFunnel() {
                   height: 12,
                   verticalAlign: "-2px",
                   marginRight: 4,
-                  fill: "var(--terracotta)",
+                  fill: "#A8451F",
                   stroke: "none",
                 }}
               />
               Top Rated Plus · Upwork
             </span>
             <span className="trust-sep" style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}>·</span>
-            <span style={{ color: "var(--terracotta)" }}>
+            <span style={{ color: "#A8451F" }}>
               <Star
                 style={{
                   display: "inline-block",
@@ -146,7 +149,7 @@ export default function HeroFunnel() {
                   height: 12,
                   verticalAlign: "-2px",
                   marginRight: 4,
-                  fill: "var(--terracotta)",
+                  fill: "#A8451F",
                   stroke: "none",
                 }}
               />
@@ -154,7 +157,7 @@ export default function HeroFunnel() {
             </span>
             <span className="trust-sep" style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}>·</span>
             <span>
-              <span style={{ color: "var(--ink)" }}>180+</span> automations
+              <span style={{ color: "var(--ink)" }}>180+</span> workflows
             </span>
             <span className="trust-sep" style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}>·</span>
             <span>
@@ -162,7 +165,7 @@ export default function HeroFunnel() {
             </span>
           </div>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 24 }}>
             <Link
               href="/discovery-call"
               style={{
@@ -188,20 +191,20 @@ export default function HeroFunnel() {
               href="/case-studies"
               style={{
                 background: "transparent",
-                color: "var(--ink)",
-                border: "1px solid var(--ink)",
-                padding: "13px 22px",
+                color: "var(--ink-2)",
                 fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
+                fontWeight: 500,
+                fontSize: 14,
                 textDecoration: "none",
                 display: "inline-flex",
                 alignItems: "center",
-                minHeight: 48,
+                gap: 5,
+                borderBottom: "1px solid rgba(26,26,26,0.25)",
+                paddingBottom: 1,
               }}
             >
               See real results
+              <ArrowRight style={{ width: 13, height: 13 }} />
             </Link>
           </div>
 

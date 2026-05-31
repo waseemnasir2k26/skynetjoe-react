@@ -118,7 +118,9 @@ function botReply(input: string, nextId: number): Msg {
 
 export default function LiveChat() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(true);
+  // Default CLOSED so the panel never covers content on first load (small phones).
+  // The floating bubble shows first; user opens on intent. #livechat-open still auto-opens.
+  const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
   const [msgs, setMsgs] = useState<Msg[]>([INITIAL]);
   const [modalOpen, setModalOpen] = useState(false);

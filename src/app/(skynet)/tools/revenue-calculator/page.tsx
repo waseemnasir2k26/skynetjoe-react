@@ -231,7 +231,7 @@ export default function RevenueCalculatorPage() {
                       key={m.label}
                       className="rounded-lg p-2"
                       style={{
-                        background: "rgba(6, 24, 39, 0.45)",
+                        background: "var(--cream-3)",
                         border: "1px solid rgba(26,26,26,0.12)",
                       }}
                     >

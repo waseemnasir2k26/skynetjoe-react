@@ -9,15 +9,15 @@ const OUTCOMES = [
     proof: "Show-rate jumped 23% → 71% — Grand Mercer Dental, NY",
   },
   {
-    title: "One dashboard. Every deal. Zero screenshots.",
+    title: "An AI voice agent that works the phones for you",
     promise:
-      "GoHighLevel CRM wired into your stack. Every quote, call, and reply in one pipeline you can actually see.",
+      "ElevenLabs + n8n call agents dial, qualify, and follow up in your language — so no conversation slips through the cracks.",
     proof: "200+ debtor calls/week handled in French — KODIASIMMO",
   },
   {
-    title: "Content that ships itself, in your voice",
+    title: "Hours of inbox work, gone by lunch",
     promise:
-      "AI content engine generates 30 voice-locked posts/month across LinkedIn, IG, FB. You approve, it posts.",
+      "GPT-powered triage drafts and sorts your inbox the moment mail lands. You skim, approve, and move on with your day.",
     proof: "3 hr/day → 20 min email triage — Takycorp",
   },
 ];
@@ -141,13 +141,13 @@ export default function Outcomes() {
                   fontFamily: "var(--font-mono)",
                   fontSize: 11,
                   letterSpacing: "0.04em",
-                  color: "var(--sage)",
+                  color: "var(--ink)",
                   display: "flex",
                   alignItems: "flex-start",
                   gap: 6,
                 }}
               >
-                <Check style={{ width: 13, height: 13, marginTop: 2, flexShrink: 0 }} />
+                <Check style={{ width: 13, height: 13, marginTop: 2, flexShrink: 0, color: "var(--sage)" }} />
                 <span>{o.proof}</span>
               </div>
             </div>

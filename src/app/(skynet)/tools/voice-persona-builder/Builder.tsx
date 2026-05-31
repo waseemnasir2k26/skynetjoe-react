@@ -904,7 +904,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
 
           <p className="mt-4 text-[11px] text-[var(--ink-faint)] inline-flex items-center gap-1.5">
             <Sparkles className="w-3 h-3" />
-            Generated locally. Nothing was sent to a server.
+            Built in your browser from the answers above.
           </p>
         </div>
       )}
@@ -1024,7 +1024,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           background: #ffffff;
           border: 2px solid var(--terracotta);
           margin-top: -8px;
-          box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
+          box-shadow: 0 4px 14px rgba(198, 107, 63, 0.40),
             0 0 0 4px rgba(26,26,26,0.12);
           transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
@@ -1034,7 +1034,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           border-radius: 50%;
           background: #ffffff;
           border: 2px solid var(--terracotta);
-          box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
+          box-shadow: 0 4px 14px rgba(198, 107, 63, 0.40),
             0 0 0 4px rgba(26,26,26,0.12);
           transition: transform 0.15s ease, box-shadow 0.15s ease;
         }

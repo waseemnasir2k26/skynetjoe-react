@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   title:
     "Brand Voice Persona Builder — paste-ready system prompt for Claude + ChatGPT · SkynetLabs",
   description:
-    "Free 4-step brand voice builder. Identity, tone sliders, vocabulary, examples. Outputs a paste-ready Brand Voice Profile + AI system prompt. No email gate.",
+    "Free 4-step brand voice builder. Identity, tone sliders, vocabulary, examples. Outputs a paste-ready Brand Voice Profile + AI system prompt. Enter your email to unlock the result.",
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title:
       "Brand Voice Persona Builder · paste-ready system prompt for AI assistants",
     description:
-      "4 steps. 8 tone sliders. One downloadable Brand Voice Profile + system prompt. Free, no signup.",
+      "4 steps. 8 tone sliders. One downloadable Brand Voice Profile + system prompt. Free. Email to unlock.",
     url: `${SITE.url}${PATH}`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Brand Voice Persona Builder · SkynetLabs",
     description:
-      "Build a paste-ready Brand Voice Profile in 4 steps. Free. No email gate.",
+      "Build a paste-ready Brand Voice Profile in 4 steps. Free. Email to unlock.",
   },
 };
 
@@ -37,7 +37,7 @@ const faqs = [
   },
   {
     q: "Is anything sent to a server?",
-    a: "No. Everything runs in your browser. Your inputs are kept in localStorage so you can come back to a half-finished session, but nothing leaves the page. No tracking, no email gate, no API call.",
+    a: "Your inputs and the generated profile are built entirely in your browser and saved to localStorage so you can return to a half-finished session — none of that leaves the page. The only thing sent to my CRM is the email you enter to unlock the finished profile.",
   },
   {
     q: "How do I actually use the output?",
@@ -81,8 +81,8 @@ const heroStats = [
   { icon: Timer, label: "4 steps", body: "About 5 minutes end-to-end." },
   {
     icon: ShieldCheck,
-    label: "Local-only",
-    body: "Nothing leaves your browser. localStorage save.",
+    label: "Email to unlock",
+    body: "Inputs stay local. Email unlocks the profile.",
   },
   {
     icon: FileText,
@@ -113,7 +113,7 @@ export default function VoicePersonaBuilderPage() {
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span className="text-xs font-medium tracking-wider uppercase">
-                Free builder · No email gate
+                Free builder · Email to unlock
               </span>
             </div>
 
@@ -203,7 +203,7 @@ export default function VoicePersonaBuilderPage() {
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">
-                Waseem, building from Bali · waseem@skynetjoe.com
+                Waseem, building from Bali · info@skynetjoe.com
               </p>
             </div>
           </div>

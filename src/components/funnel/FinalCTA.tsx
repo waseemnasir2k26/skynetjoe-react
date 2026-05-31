@@ -30,7 +30,7 @@ export default function FinalCTA() {
               opacity: 0.85,
             }}
           >
-            — 4 audit slots left this month
+— Limited audits each month
           </div>
           <h2
             style={{
@@ -102,7 +102,7 @@ export default function FinalCTA() {
               marginTop: 22,
             }}
           >
-            — Replies within 6 hours · Bali (GMT+8) · 9 countries served
+— Reply in 8h · scope in 48h · Bali (GMT+8) · 9 countries served
           </div>
         </div>
       </div>

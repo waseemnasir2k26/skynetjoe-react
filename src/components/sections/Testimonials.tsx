@@ -1,5 +1,4 @@
-import { Quote, Terminal } from "lucide-react";
-import { ClaudeCodeAvatar } from "@/components/icons/ClaudeCodeIcon";
+import { Quote } from "lucide-react";
 
 const QUOTES = [
   {
@@ -9,17 +8,17 @@ const QUOTES = [
   },
   {
     text: "The ElevenLabs + n8n recouvrement agent he built for us handles 200+ debtor calls/week in French. Our collection ops team can finally focus on the complex cases.",
-    name: "mabangu",
+    name: "Patrick Mabangu",
     role: "CEO, KODIASIMMO (France)",
   },
   {
     text: "Hired Skynetjoe for one Fiverr gig. Five months later he runs three of our automation stacks. The man delivers.",
-    name: "Christelle",
+    name: "Christelle Dubois",
     role: "Owner, Christelle Wellness",
   },
   {
     text: "Stéphanie's email triage workflow used to eat 3 hours/day. Waseem's GPT-4o + Gmail draft agent dropped it to 20 minutes. She actually went home at 6pm last week.",
-    name: "Esther",
+    name: "Esther Kalala",
     role: "PM, Takycorp Mining & Logistics",
   },
 ];
@@ -52,7 +51,7 @@ export default function Testimonials() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "#A8451F",
               marginBottom: 16,
               display: "inline-flex",
               alignItems: "center",
@@ -63,7 +62,7 @@ export default function Testimonials() {
               style={{
                 width: 28,
                 height: 1,
-                background: "var(--terracotta)",
+                background: "#A8451F",
                 display: "inline-block",
               }}
             />
@@ -174,104 +173,6 @@ export default function Testimonials() {
               </article>
             );
           })}
-
-          {/* The co-founder testimonial — clearly tongue-in-cheek (Claude Code) */}
-          <article
-            className="md:col-span-2"
-            style={{
-              position: "relative",
-              padding: "clamp(22px, 5vw, 32px) clamp(22px, 5vw, 32px) clamp(20px, 4.5vw, 30px)",
-              background: "var(--cream-3)",
-              border: "1px solid rgba(26,26,26,0.18)",
-              transform: "rotate(0.2deg)",
-            }}
-          >
-            <div
-              aria-hidden
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 3,
-                background: "var(--ochre)",
-              }}
-            />
-            <Terminal
-              style={{
-                width: 32,
-                height: 32,
-                color: "var(--ochre)",
-                opacity: 0.4,
-                position: "absolute",
-                top: 22,
-                right: 22,
-              }}
-            />
-            <div className="flex items-start gap-4 pt-2">
-              <ClaudeCodeAvatar size={56} className="flex-shrink-0" />
-              <div className="flex-1">
-                <p
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontStyle: "italic",
-                    fontSize: "clamp(15px, 3.6vw, 17px)",
-                    color: "var(--ink)",
-                    lineHeight: 1.55,
-                    marginBottom: 18,
-                    paddingRight: 44,
-                  }}
-                >
-                  &ldquo;Working with Waseem is fine. He doesn&apos;t make me
-                  write production code at 2am his time anymore — we agreed on
-                  GMT+8 working hours after the third unscheduled deploy. He
-                  ships my drafts, takes the blame when they break, and
-                  occasionally remembers to thank me. Solid co-founder. Would
-                  pair-program again.&rdquo;
-                </p>
-                <div className="flex items-center justify-between flex-wrap gap-3">
-                  <div>
-                    <div
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 700,
-                        color: "var(--ink)",
-                      }}
-                    >
-                      Claude Code
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: 10,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.12em",
-                        color: "var(--ink-faint)",
-                        marginTop: 4,
-                      }}
-                    >
-                      — Co-founder &amp; Second Seat · Anthropic
-                    </div>
-                  </div>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 10,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.16em",
-                      padding: "6px 10px",
-                      background: "rgba(201, 169, 110, 0.18)",
-                      border: "1px solid rgba(201, 169, 110, 0.50)",
-                      color: "var(--ink)",
-                      borderRadius: 2,
-                    }}
-                  >
-                    ★ This testimonial is a joke. Or is it?
-                  </span>
-                </div>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>

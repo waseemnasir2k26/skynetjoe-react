@@ -856,7 +856,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         {bundle && (
           <p className="mt-4 text-[11px] text-[var(--ink-faint)] inline-flex items-center gap-1.5">
             <Sparkles className="w-3 h-3" />
-            Generated locally. Nothing was sent to a server.
+            Built in your browser from the text you pasted.
           </p>
         )}
 

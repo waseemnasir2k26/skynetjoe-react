@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import HeroVariant, { type HeroVariantProps } from "@/components/heroes/HeroVariant";
 import { SITE } from "@/lib/site";
 
@@ -434,6 +435,7 @@ const VARIANTS: HeroVariantProps[] = [
 ];
 
 export default function HeroLab() {
+  if (process.env.NODE_ENV === "production") notFound();
   return (
     <div className="pt-24">
       <div className="container-x px-6 py-16 border-b border-[var(--border)]">

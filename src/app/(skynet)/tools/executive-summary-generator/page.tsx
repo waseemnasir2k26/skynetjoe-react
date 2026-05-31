@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   title:
     "Executive Summary Generator — paste raw notes, get 5 ready-to-send formats · SkynetLabs",
   description:
-    "Free tool. Paste meeting notes, project docs or call transcripts. Out comes a TL;DR, email, Slack post, deck slide and investor 1-pager. No API key, no email gate.",
+    "Free tool. Paste meeting notes, project docs or call transcripts. Out comes a TL;DR, email, Slack post, deck slide and investor 1-pager. No API key — enter your email to unlock the formats.",
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title:
       "Executive Summary Generator · 5 formats from one block of notes",
     description:
-      "TL;DR, email, Slack, deck and investor 1-pager from any raw text. Free, local-only, no email gate.",
+      "TL;DR, email, Slack, deck and investor 1-pager from any raw text. Free. Enter your email to unlock the formats.",
     url: `${SITE.url}${PATH}`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Executive Summary Generator · SkynetLabs",
     description:
-      "Paste raw notes, get 5 ready-to-send formats. Free, local-only.",
+      "Paste raw notes, get 5 ready-to-send formats. Free. Email to unlock.",
   },
 };
 
@@ -40,8 +40,8 @@ const faqs = [
     a: "Best on prose with sentences and paragraphs — meeting transcripts, project briefs, sales call notes, design docs, internal memos. It'll cope with bullet lists too, but it's at its strongest when there are full sentences to rank and pull from. 1,000 to 8,000 characters is the sweet spot.",
   },
   {
-    q: "Is anything sent to a server?",
-    a: "Nothing. Everything happens in your browser. No tracking, no API calls, no email gate. You can paste sensitive client notes here without it leaving the page.",
+    q: "Is my pasted text sent to a server?",
+    a: "No. Your notes are parsed and the five formats are built entirely in your browser — your text never leaves the page, so you can paste sensitive client notes safely. The only thing sent to my CRM is the email you enter to unlock the formats.",
   },
   {
     q: "Why five formats?",
@@ -81,8 +81,8 @@ const heroStats = [
   { icon: Timer, label: "Under 2 sec", body: "Click generate, see five tabs." },
   {
     icon: ShieldCheck,
-    label: "Local-only",
-    body: "Your notes never leave the browser.",
+    label: "Notes stay private",
+    body: "Your notes never leave the browser. Email unlocks the result.",
   },
   {
     icon: Wand2,
@@ -113,7 +113,7 @@ export default function ExecutiveSummaryGeneratorPage() {
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span className="text-xs font-medium tracking-wider uppercase">
-                Free tool · No email gate
+                Free tool · Email to unlock
               </span>
             </div>
 
@@ -140,7 +140,7 @@ export default function ExecutiveSummaryGeneratorPage() {
               AI&apos;s.
             </p>
             <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
-              Local-only. Nothing sent to a server. Free and instant.
+              Your notes stay in your browser. Enter your email to unlock the formats. Free and instant.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">

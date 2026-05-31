@@ -106,18 +106,28 @@ export const TOOL_LINKS: NavSubItem[] = [
   { label: "Voice Persona Builder", href: "/tools/voice-persona-builder", desc: "AI system prompt in your brand voice" },
 ];
 
+// Restructured from 10 flat items → 6 top-level axes (+ Book-audit CTA in Header).
+// Two clean axes: WHAT we do (Services mega) × WHO it's for (By Industry).
+// Displaced links (News, Contact, Locations, Case Studies) folded into dropdowns
+// so every destination stays reachable. "Home" dropped — logo links home.
 export const NAV_PRIMARY: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Pricing", href: "/pricing" },
   { label: "Services", href: "/services", hasMega: true },
   {
-    label: "Tools",
-    href: "/tools",
-    subItems: TOOL_LINKS,
+    // WHO-it's-for axis. Parent is the (previously orphaned) /industries hub.
+    label: "By Industry",
+    href: "/industries",
+    subItems: [
+      { label: "All industries", href: "/industries", desc: "Vertical-tuned automation playbooks" },
+      { label: "Dental Clinics", href: "/industries/dental-clinics", desc: "New-patient capture + recall engine" },
+      { label: "Wellness & Medspas", href: "/industries/wellness-spas", desc: "Booking AI + reputation engine" },
+      { label: "Freight & Logistics", href: "/industries/freight-logistics", desc: "Voice dispatch + EDI triage" },
+      { label: "Freight LP — quick demo", href: "/lp/freight", desc: "AI voice agent — never miss a load" },
+      { label: "Home Services LP", href: "/lp/home-services", desc: "Never miss a call — HVAC / plumbing" },
+      { label: "FreightOps Dispatch", href: "/lp/logistics", desc: "Dispatch dashboard for small fleets" },
+    ],
   },
   {
-    label: "Portfolio",
+    label: "Work",
     href: "/portfolio",
     subItems: [
       { label: "Recent Projects", href: "/portfolio", desc: "Live screenshots of every shipped build" },
@@ -126,16 +136,20 @@ export const NAV_PRIMARY: NavItem[] = [
     ],
   },
   {
-    label: "Solutions",
-    href: "/services",
+    label: "Tools",
+    href: "/tools",
+    subItems: TOOL_LINKS,
+  },
+  { label: "Pricing", href: "/pricing" },
+  {
+    label: "Company",
+    href: "/about",
     subItems: [
-      { label: "Freight & Logistics", href: "/lp/freight", desc: "AI voice agent — never miss a load" },
-      { label: "Home Services", href: "/lp/home-services", desc: "Never miss a call — HVAC / plumbing" },
-      { label: "FreightOps Dispatch", href: "/lp/logistics", desc: "Dispatch dashboard for small fleets" },
+      { label: "About", href: "/about", desc: "Solo studio, Bali-built, 14-day ship" },
+      { label: "Latest News", href: "/news", desc: "Field notes + playbooks" },
+      { label: "Contact", href: "/contact", desc: "Reach us — 8-hour reply" },
     ],
   },
-  { label: "Latest News", href: "/news" },
-  { label: "Contact", href: "/contact" },
 ];
 
 // 16 services across 4 categories (from THEME-SUMMARY.md)
@@ -225,16 +239,19 @@ export const FOOTER_COLUMNS = [
       { label: "Author", href: "/author/waseem-nasir" },
       { label: "Pricing", href: "/pricing" },
       { label: "Portfolio", href: "/portfolio" },
+      { label: "Latest News", href: "/news" },
       { label: "Blog", href: "/blog" },
     ],
   },
   {
-    title: "Legal",
+    // Conversion + product links, split out of the old Legal column.
+    title: "Get Started",
     links: [
+      { label: "Apply for a call", href: "/discovery-call" },
+      { label: "Contact", href: "/contact" },
+      { label: "Free Tools", href: "/tools" },
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms of Service", href: "/terms-of-service" },
-      { label: "Contact", href: "/contact" },
-      { label: "Apply for a call", href: "/discovery-call" },
     ],
   },
 ] as const;

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title:
       "30-Day Content Calendar Generator · CSV + ICS + markdown export",
     description:
-      "Niche + cadence + goal → 30 days of cross-platform post ideas. Free, no email gate.",
+      "Niche + cadence + goal → 30 days of cross-platform post ideas. Free. Email to unlock.",
     url: `${SITE.url}${PATH}`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -113,7 +113,7 @@ export default function ContentCalendarPage() {
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span className="text-xs font-medium tracking-wider uppercase">
-                Free generator · No email gate
+                Free generator · Email to unlock
               </span>
             </div>
 
@@ -139,7 +139,7 @@ export default function ContentCalendarPage() {
               with hooks, body angles, CTAs, tags and asset recommendations.
             </p>
             <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
-              Export to CSV, ICS or markdown. Nothing leaves your browser.
+              Export to CSV, ICS or markdown. Enter your email to unlock the calendar.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">

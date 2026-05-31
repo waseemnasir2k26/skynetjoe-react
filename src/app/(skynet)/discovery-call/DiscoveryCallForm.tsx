@@ -214,7 +214,7 @@ export default function DiscoveryCallForm() {
       }
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Submission failed. Email waseem@skynetjoe.com instead.");
+      setErrorMsg(err instanceof Error ? err.message : "Submission failed. Email info@skynetjoe.com instead.");
     }
   }
 
@@ -302,10 +302,10 @@ export default function DiscoveryCallForm() {
           <p style={{ fontSize: 14, color: C.inkFaint, marginTop: 24 }}>
             Urgent? Email{" "}
             <a
-              href="mailto:waseem@skynetjoe.com"
+              href="mailto:info@skynetjoe.com"
               style={{ color: C.terra, textDecoration: "underline", fontWeight: 600 }}
             >
-              waseem@skynetjoe.com
+              info@skynetjoe.com
             </a>{" "}
             — typical reply window 8 hours.
           </p>
@@ -742,7 +742,7 @@ export default function DiscoveryCallForm() {
                   <p style={{ color: C.inkFaint, marginTop: 8 }}>
                     Fallback:{" "}
                     <a
-                      href="mailto:waseem@skynetjoe.com"
+                      href="mailto:info@skynetjoe.com"
                       style={{ textDecoration: "underline", color: C.terra }}
                     >
                       email Waseem

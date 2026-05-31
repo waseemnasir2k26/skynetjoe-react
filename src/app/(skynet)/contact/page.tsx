@@ -204,9 +204,11 @@ export default function ContactPage() {
             >
               The fastest way to work with me: skip the discovery dance. Email a
               one-pager, ping me on LinkedIn, or open live chat bottom-right —
-              I&apos;ll send a fixed-price scope back within{" "}
-              <strong style={{ color: "var(--terracotta)" }}>48 hours</strong>. If
-              I&apos;m not the right fit, I&apos;ll tell you who is.
+              I&apos;ll{" "}
+              <strong style={{ color: "var(--terracotta)" }}>
+                reply in 8h · scope in 48h
+              </strong>
+              . If I&apos;m not the right fit, I&apos;ll tell you who is.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
               <Link
@@ -226,7 +228,7 @@ export default function ContactPage() {
                 }}
               >
                 <Calendar style={{ width: 14, height: 14 }} />
-                Apply for a call
+                Send a 3-sentence brief
               </Link>
               <a
                 href="mailto:info@skynetjoe.com"
@@ -629,7 +631,7 @@ export default function ContactPage() {
               }}
             >
               <Calendar style={{ width: 14, height: 14 }} />
-              Apply for a call
+              Send a 3-sentence brief
             </Link>
             <Link
               href="/pricing"

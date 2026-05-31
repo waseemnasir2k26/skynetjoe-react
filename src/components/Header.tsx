@@ -70,9 +70,28 @@ export default function Header() {
     setMobileSubOpen(null);
   }, [pathname]);
 
+  // Lock body scroll while the mobile menu is open → kills iOS scroll-bleed.
+  // Restores the prior overflow value on close / unmount.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
   // Guard AFTER all hooks — preserves Rules-of-Hooks invariants when
   // navigating between /lp/* (returns null) and regular routes.
   if (pathname?.startsWith("/lp/")) return null;
+
+  // Active-state: exact match for "/", else section-root match (startsWith)
+  // so e.g. /services/n8n-automation still lights the "Services" parent.
+  const isActive = (href: string) => {
+    if (!pathname) return false;
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href + "/");
+  };
 
   const openDrop = (key: string) => {
     if (closeTimer.current) {
@@ -143,6 +162,8 @@ export default function Header() {
         <nav className="hidden lg:flex items-center">
           {NAV_PRIMARY.map((item) => {
             const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
+            const active = isActive(item.href);
+            const restColor = active ? "var(--terracotta)" : "var(--ink-2)";
             return (
               <div
                 key={item.href}
@@ -155,19 +176,15 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 px-3.5 py-2 text-[13px] font-medium transition-colors"
-                  style={{ color: "var(--ink-2)" }}
+                  className="relative flex items-center gap-1 px-3.5 py-2 text-[13px] transition-colors"
+                  style={{ color: restColor, fontWeight: active ? 600 : 500 }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-2)")}
-                  onClick={(e) => {
-                    if (hasDrop) {
-                      e.preventDefault();
-                      setOpenDropdown(openDropdown === item.href ? null : item.href);
-                    }
-                  }}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = restColor)}
+                  // Parent label now NAVIGATES to its index page on click; hover/focus
+                  // (wrapper handlers) is what opens the menu. No preventDefault.
                   aria-expanded={hasDrop ? openDropdown === item.href : undefined}
                   aria-haspopup={hasDrop ? "menu" : undefined}
-                  aria-current={pathname === item.href ? "page" : undefined}
+                  aria-current={active ? "page" : undefined}
                 >
                   {item.label}
                   {hasDrop && (
@@ -175,6 +192,14 @@ export default function Header() {
                       className={`w-3 h-3 opacity-50 transition-transform ${
                         openDropdown === item.href ? "rotate-180" : ""
                       }`}
+                    />
+                  )}
+                  {/* Active-state: terracotta underline (Fix 4) */}
+                  {active && (
+                    <span
+                      aria-hidden
+                      className="absolute left-3.5 right-3.5 -bottom-0.5 h-[2px]"
+                      style={{ background: "var(--terracotta)" }}
                     />
                   )}
                 </Link>
@@ -302,14 +327,20 @@ export default function Header() {
             {NAV_PRIMARY.map((item) => {
               const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
               const open = mobileSubOpen === item.href;
+              const active = isActive(item.href);
               if (!hasDrop) {
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className="py-3 text-base font-medium text-fg hover:text-skynet-primary-light border-b border-white/[0.06]"
-                    aria-current={pathname === item.href ? "page" : undefined}
+                    className="py-3 text-base font-medium border-b border-white/[0.06]"
+                    style={{
+                      color: active ? "var(--terracotta)" : "var(--ink)",
+                      borderLeft: active ? "3px solid var(--terracotta)" : "3px solid transparent",
+                      paddingLeft: active ? 10 : 0,
+                    }}
+                    aria-current={active ? "page" : undefined}
                   >
                     {item.label}
                   </Link>
@@ -317,16 +348,33 @@ export default function Header() {
               }
               return (
                 <div key={item.href} className="border-b border-white/[0.06]">
-                  <button
-                    onClick={() => setMobileSubOpen(open ? null : item.href)}
-                    className="w-full flex items-center justify-between py-3 text-base font-medium text-fg"
-                    aria-expanded={open}
-                  >
-                    <span>{item.label}</span>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`}
-                    />
-                  </button>
+                  {/* Label NAVIGATES to index; chevron-only button toggles submenu (Fix 5). */}
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="flex-1 py-3 text-base font-medium"
+                      style={{
+                        color: active ? "var(--terracotta)" : "var(--ink)",
+                        borderLeft: active ? "3px solid var(--terracotta)" : "3px solid transparent",
+                        paddingLeft: active ? 10 : 0,
+                      }}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {item.label}
+                    </Link>
+                    <button
+                      onClick={() => setMobileSubOpen(open ? null : item.href)}
+                      className="p-3 -mr-1"
+                      style={{ color: "var(--ink)" }}
+                      aria-expanded={open}
+                      aria-label={`Toggle ${item.label} submenu`}
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                  </div>
                   {open && item.hasMega && (
                     <div className="pb-4 pl-1 space-y-4">
                       {SERVICE_CATEGORIES.map((cat) => (

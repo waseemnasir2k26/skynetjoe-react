@@ -139,6 +139,21 @@ export default function PainPoints() {
             </div>
           ))}
         </div>
+
+        <p
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 13,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            color: "var(--ink)",
+            marginTop: 32,
+            marginBottom: 0,
+          }}
+        >
+          Each of these has a 14-day fix.{" "}
+          <span aria-hidden style={{ color: "#A8451F" }}>↓</span>
+        </p>
       </div>
     </section>
   );

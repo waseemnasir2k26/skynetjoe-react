@@ -311,11 +311,11 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 <div
                   className="rounded-2xl p-4"
                   style={{
-                    background: "rgba(6, 24, 39, 0.55)",
-                    border: "1px solid rgba(248, 113, 113, 0.25)",
+                    background: "var(--cream-3)",
+                    border: "1px solid rgba(198, 107, 63, 0.35)",
                   }}
                 >
-                  <p className="text-[11px] uppercase tracking-wider text-red-300 font-semibold mb-1">
+                  <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)] font-semibold mb-1">
                     Missed revenue / mo
                   </p>
                   <CountUp
@@ -327,8 +327,8 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 <div
                   className="rounded-2xl p-4"
                   style={{
-                    background: "rgba(6, 24, 39, 0.55)",
-                    border: "1px solid rgba(251, 191, 36, 0.25)",
+                    background: "var(--cream-3)",
+                    border: "1px solid rgba(26,26,26,0.12)",
                   }}
                 >
                   <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)] font-semibold mb-1">
@@ -691,7 +691,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
           background: #ffffff;
           border: 2px solid var(--terracotta);
           margin-top: -8px;
-          box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
+          box-shadow: 0 4px 14px rgba(198, 107, 63, 0.40),
             0 0 0 4px rgba(26,26,26,0.12);
           transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
@@ -701,7 +701,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
           border-radius: 50%;
           background: #ffffff;
           border: 2px solid var(--terracotta);
-          box-shadow: 0 4px 14px rgba(20, 184, 166, 0.45),
+          box-shadow: 0 4px 14px rgba(198, 107, 63, 0.40),
             0 0 0 4px rgba(26,26,26,0.12);
           transition: transform 0.15s ease, box-shadow 0.15s ease;
         }

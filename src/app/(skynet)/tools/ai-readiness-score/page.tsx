@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   title:
     "AI Readiness Score — 90-second diagnostic for service businesses · SkynetLabs",
   description:
-    "Score your service business 0 to 100 on AI automation readiness in 90 seconds. 10 questions across foundation, process, demand and buy-in. No email gate.",
+    "Score your service business 0 to 100 on AI automation readiness in 90 seconds. 10 questions across foundation, process, demand and buy-in. Enter your email to unlock the full breakdown.",
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "AI Readiness Score · 90-second diagnostic for service businesses",
     description:
-      "10 questions, one 0 to 100 score, four-axis breakdown of where you're strong and where you'll stall. No email gate.",
+      "10 questions, one 0 to 100 score, four-axis breakdown of where you're strong and where you'll stall. Enter your email to unlock the result.",
     url: `${SITE.url}${PATH}`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AI Readiness Score · score your business 0 to 100 in 90 seconds",
     description:
-      "10 questions across foundation, process, demand and buy-in. Free, anonymous, brutally honest.",
+      "10 questions across foundation, process, demand and buy-in. Free and brutally honest.",
   },
 };
 
@@ -40,8 +40,8 @@ const faqs = [
     a: "Four things: your current automation foundation, how documented your processes are, how much real demand you're handling, and how ready you are to actually approve a build. Each is weighted differently because they fail differently. A 95 on Demand with a 10 on Buy-in still puts you in 'not ready yet' for a reason.",
   },
   {
-    q: "Is this anonymous?",
-    a: "Yes. Nothing leaves your browser. No email, no name, no company. Your answers live in localStorage. Your score lives in the URL only if you choose to share it.",
+    q: "What do you collect?",
+    a: "Your quiz answers stay in your browser's localStorage and never leave it. To unlock your full score and roadmap you enter an email — that one email is sent to my CRM so I can follow up. No name, no company required. Your score lives in the URL only if you choose to share it.",
   },
   {
     q: "What if my score is below 30?",
@@ -57,8 +57,8 @@ const heroStats = [
   { icon: Timer, label: "90 seconds", body: "10 questions, one tap each." },
   {
     icon: ShieldCheck,
-    label: "Anonymous",
-    body: "No email gate. Nothing leaves your browser.",
+    label: "Email to unlock",
+    body: "Answers stay local. Email unlocks your result.",
   },
   {
     icon: Compass,
@@ -142,7 +142,7 @@ export default function AIReadinessPage() {
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span className="text-xs font-medium tracking-wider uppercase">
-                Free diagnostic · No email gate
+                Free diagnostic · Email to unlock
               </span>
             </div>
 
@@ -309,7 +309,7 @@ export default function AIReadinessPage() {
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">
-                Waseem, building from Bali · waseem@skynetjoe.com
+                Waseem, building from Bali · info@skynetjoe.com
               </p>
             </div>
           </div>
