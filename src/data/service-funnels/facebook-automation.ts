@@ -15,7 +15,7 @@ const content: ServiceFunnelContent = {
   hero: {
     eyebrow: "AI Content · Facebook Automation · 2026",
     h1: "Every lead that DMs your page gets answered in 4 minutes, not next Tuesday.",
-    sub: "Buyers comment on your post, message your page, ask for the price — and then sit unanswered until they buy from someone faster. I wire a keyword DM funnel, comment auto-reply, and a posting schedule into one system so the page books calls while you're asleep. Built on the official Graph API and ManyChat, the approved Meta automation partner.",
+    sub: "Buyers comment on your post, message your page, ask the price — then sit unanswered until they buy from whoever replies first. I wire a keyword DM funnel, comment auto-reply, and a posting schedule into one system so the page books calls while you sleep. Built on the official Graph API and ManyChat, Meta's approved automation partner — not a browser bot that gets pages banned.",
     primary: { label: "Book the page audit", href: "/discovery-call" },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
@@ -68,6 +68,43 @@ const content: ServiceFunnelContent = {
     },
   ],
 
+  comparison: {
+    heading: "Me vs the social-media agency you almost hired.",
+    cols: ["", "With me", "Typical social agency / Meta freelancer"],
+    rows: [
+      {
+        dimension: "Who builds it",
+        us: "I do — the founder who'll run your screen-share, not a junior under a logo.",
+        them: "A junior or an offshore VA you never meet, working off a template brief.",
+      },
+      {
+        dimension: "What you actually get",
+        us: "A DM + comment + posting system wired into your CRM that you keep.",
+        them: "A monthly 'we'll manage your page' retainer with nothing you own.",
+      },
+      {
+        dimension: "Pricing",
+        us: "Public, fixed tiers on this page. Fixed scope back in 48 hours.",
+        them: "'Book a strategy call for a custom quote' — then a number that moves.",
+      },
+      {
+        dimension: "Ban risk",
+        us: "Official Graph API + ManyChat, 24-hour window respected, audit-safe.",
+        them: "Sometimes browser-emulation 'auto-DM' tools that can get a page flagged.",
+      },
+      {
+        dimension: "Lock-in",
+        us: "You get ManyChat builder access, the GHL pipeline, and a runbook on day 10.",
+        them: "Everything lives in their account — leave and the funnel leaves with them.",
+      },
+      {
+        dimension: "Always-on coverage",
+        us: "Solo. If a DM needs a human at 3am, the bot holds it; I'm not staffing a desk.",
+        them: "A bigger team can put a real person on live chat across more hours.",
+      },
+    ],
+  },
+
   process: [
     {
       title: "Audit",
@@ -83,11 +120,32 @@ const content: ServiceFunnelContent = {
     },
   ],
 
+  fitCheck: {
+    forYou: [
+      "You already have a page with traffic — comments, DMs, ad replies — that nobody is answering fast enough.",
+      "You've got budget ready and want a system you own, not another monthly 'we'll handle it' invoice.",
+      "You run a local service, coaching, or community brand where a DM-to-call is the real sale.",
+      "You want the funnel wired into your CRM so follow-up fires without you scrolling Messenger.",
+    ],
+    notForYou: [
+      "You want the cheapest quote — a Fiverr gig will undercut me and you'll get a Fiverr funnel.",
+      "You want me to run your page forever; I build it, hand it over, and you keep the keys.",
+      "You're starting from zero audience — fix that with ads first, then automate the inbox.",
+    ],
+  },
+
   proof: {
     metric: "Comment → DM → booked call",
     client: "Representative SkynetLabs build",
     detail:
       "The repeatable play: a ManyChat keyword funnel that answers \"price\" and \"info\" on the first touch, comment auto-reply that turns a hand-raise into a DM thread while the buyer is still on the post, and a 9-card weekly mix that keeps the page from going dark — all inside Meta's official Graph API, audit-safe.",
+  },
+
+  secondaryProof: {
+    metric: "1 source → 9-card month",
+    client: "Representative / internal SkynetLabs build",
+    detail:
+      "Internal build, not a client metric: one content source fans out into a 9-card weekly mix — educational, story, sell — scheduled a month ahead in a Notion calendar, each card ending in a comment prompt that feeds the same keyword funnel. The point isn't volume; it's a page that never goes dark and never depends on me remembering to post.",
   },
 
   faqs: [

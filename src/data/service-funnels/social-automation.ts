@@ -40,7 +40,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "The 'automation' tools that get you banned",
-      body: "Half the cheap tools selling this run session-hijack scripts that scrape DMs and auto-follow at scale. They work until Meta wakes you up to a disabled account and a lost audience. Fast to set up, fast to torch your reach.",
+      body: "Half the cheap tools selling this run session-hijack scripts that scrape DMs and auto-follow at scale. They work right up until Meta disables the account and the audience you spent a year building is gone. Fast to set up, fast to torch your reach.",
     },
   ],
 
@@ -82,11 +82,44 @@ const content: ServiceFunnelContent = {
     },
   ],
 
+  toolStack: {
+    label: "Real stack, official APIs, you own every login",
+    items: [
+      "n8n",
+      "GoHighLevel / Buffer scheduler",
+      "ManyChat",
+      "WhatsApp Cloud API",
+      "html2canvas",
+      "Looker Studio",
+    ],
+  },
+
+  fitCheck: {
+    forYou: [
+      "You already post and answer DMs by hand — there's a real workflow here, you just can't keep up with it.",
+      "You have buyers messaging on channels you check too late, and a fast first reply would close some of them.",
+      "You want to own the queue and the responder at the end — accounts, logins, runbook — not rent them from me forever.",
+      "You're fine with official-API limits because you'd rather grow slow than wake up to a disabled account.",
+    ],
+    notForYou: [
+      "You want the cheapest tool on the marketplace — the $20 follow-bots are faster to set up and they'll torch your reach.",
+      "You want grey-hat scraping or mass auto-follow — I won't wire it, and I'll tell you why on the audit call.",
+      "You want a person running your inbox 24/7 — this is a system you operate, not a managed-service team.",
+    ],
+  },
+
   proof: {
     metric: "1 script → 5 channels",
     client: "Multi-channel SaaS launch (anonymized)",
     detail:
       "A SaaS founder ships a daily voice-locked pack across LinkedIn, Facebook, Instagram, YouTube and TikTok from a single script — and now signs off on roughly 9 of every 10 packs without rewriting anything. Same official-API engine, format-correct per channel.",
+  },
+
+  secondaryProof: {
+    metric: "9 AI-tell phrases/day → 0",
+    client: "Multi-channel SaaS launch (anonymized)",
+    detail:
+      "Same build, different angle: a linter runs before render and hard-fails any AI-tell phrase, so roughly 9 slop lines a day stopped shipping and the founder's daily content QA dropped from 3 hours to zero. That's why approval jumped 30% → 92% — the system earned the right to post under his face.",
   },
 
   faqs: [

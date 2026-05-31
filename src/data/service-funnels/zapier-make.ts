@@ -13,7 +13,7 @@ const content: ServiceFunnelContent = {
   hero: {
     eyebrow: "Connectivity · Zapier & Make · 2026",
     h1: "You have 47 Zaps. Six of them earn their keep.",
-    sub: "Your Zapier bill creeps past $99/mo while half the Zaps fire on dead triggers, three have been paused since last September, and the one that matters silently ate a refund yesterday. I audit, prune, and rebuild your connectivity layer so you stop paying per-task for noise — and you can read the whole stack on one page.",
+    sub: "Your Zapier bill creeps past $99/mo while half the Zaps fire on dead triggers, three have been paused since last September, and the one that actually mattered silently ate a refund yesterday. I audit, prune, and rebuild your connectivity layer so you stop paying per-task for noise. My first client stack had 41 Zaps and we kept 11 — that prune is the whole job, and it's why you can read the stack on one page after.",
     primary: { label: "Book the audit", href: "/discovery-call" },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
@@ -35,7 +35,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "Failures are silent",
-      body: "A Zap dies at 2am and the first you hear of it is a refund request three weeks later. No retry, no fallback, no alert — just leads quietly hitting /dev/null.",
+      body: "A Zap dies at 2am and the first you hear of it is a refund request three weeks later. No retry, no fallback, no alert. Just leads quietly hitting /dev/null while the dashboard stays green.",
     },
     {
       title: "Wrong tool, wrong job",
@@ -88,6 +88,60 @@ const content: ServiceFunnelContent = {
       "Typical audit outcome: dead and duplicate triggers killed, the surviving scenarios documented, and bulk nightly jobs moved off per-task Zapier into Make — same outputs, a lighter bill, and a stack you can read on one page.",
   },
 
+  comparison: {
+    heading: "Me vs the Zapier freelancer you almost hired.",
+    cols: ["", "With me", "Typical Zapier freelancer / SaaS-DIY"],
+    rows: [
+      {
+        dimension: "Who builds it",
+        us: "Me, start to finish. The person who scopes the audit is the person wiring the webhooks.",
+        them: "A junior on a marketplace, or you, stitching it together at 11pm between client calls.",
+      },
+      {
+        dimension: "Pricing",
+        us: "Public fixed tiers on this page. You know the number before the call.",
+        them: "Hourly with no ceiling, or a SaaS seat that quietly bills per-task as you scale.",
+      },
+      {
+        dimension: "Tool choice",
+        us: "Zapier vs Make vs n8n picked by team size and load. I'll tell you to drop a tool if it saves you money.",
+        them: "Built in whatever the freelancer already knows, even when it's the wrong fit for the job.",
+      },
+      {
+        dimension: "When it breaks",
+        us: "Retry policies, fallback routes, and a Slack dead-letter alert. My phone knows before your customer does.",
+        them: "It fails silently and you find out from a refund request three weeks later.",
+      },
+      {
+        dimension: "Documentation",
+        us: "One-page runbook per live scenario plus a Loom — your VA can act on it at 2am.",
+        them: "Zero docs. When the builder leaves, editing one flow is surgery in the dark.",
+      },
+      {
+        dimension: "Ongoing support team",
+        us: "It's me. If I'm asleep in Bali, the fix waits till morning.",
+        them: "A SaaS vendor with 24/7 chat support — genuinely faster for a 3am platform outage.",
+      },
+    ],
+  },
+
+  toolStack: {
+    label: "The connectivity stack I actually build on",
+    items: [
+      "Zapier",
+      "Make",
+      "n8n (self-hosted)",
+      "Webhooks + custom endpoints",
+      "Google Sheets / Apps Script",
+      "OpenAI & Claude (in-flow AI steps)",
+    ],
+  },
+
+  guarantee: {
+    title: "Fixed scope in 48 hours. 14-day fix window after ship.",
+    body: "Before you pay, you get the scope locked in writing within 48 hours of the brief — exact scenarios, tools, and what 'done' means, no moving target. Every shipped flow comes with a 14-day window where I fix anything that misbehaves in your environment, no extra invoice.",
+  },
+
   faqs: [
     {
       q: "Why not just move everything to n8n and skip Zapier?",
@@ -107,7 +161,7 @@ const content: ServiceFunnelContent = {
     },
     {
       q: "How long until we're self-sufficient and you're out?",
-      a: "Most teams feel confident editing scenarios in 30-45 days. You get a Loom per scenario and a one-page runbook. After that the retainer is optional — about a third of clients keep it because they'd rather outsource the monthly review than own it.",
+      a: "Most teams feel confident editing scenarios in 30-45 days. You get a Loom per scenario and a one-page runbook, so the goal is you owning the stack, not renting me forever. After that the retainer is optional. About a third of clients keep it because they'd rather outsource the monthly review than own it.",
     },
     {
       q: "What does it cost?",

@@ -82,11 +82,41 @@ const content: ServiceFunnelContent = {
     },
   ],
 
+  toolStack: {
+    label: "Runs on the same render stack I use for every client reel",
+    items: [
+      "FFmpeg + ASS kinetic captions",
+      "Whisper transcription",
+      "CapCut / Premiere export handoff",
+      "TikTok Business API scheduler",
+      "ElevenLabs voiceover (faceless modes)",
+      "Looker Studio retention dashboard",
+    ],
+  },
+
+  fitCheck: {
+    forYou: [
+      "You, if you've got a real offer and the budget ready, and you're tired of the channel going quiet every time client work lands.",
+      "You, if you'll record one batch a week and let the pipeline handle the cutting, captions, scoring, and posting.",
+      "You, if you want to own the engine — runbook, hook-bank doc, retention dashboard — so a VA can run it in 30 minutes a day.",
+    ],
+    notForYou: [
+      "Not us, if you want the cheapest quote. I publish fixed pricing and I'm not the floor.",
+      "Not us, if you want me to manage your TikTok forever. I build the engine and hand it over; the retainer is optional, not a leash.",
+      "Not us, if you want guaranteed follower counts. I move first-frame retention and median views — the inputs you control — not vanity numbers I can't promise.",
+    ],
+  },
+
   proof: {
     metric: "Hook bank + frame-one card",
     client: "Representative SkynetLabs build",
     detail:
       "The repeatable lever: a weekday-rotated hook bank, frame-one stoppable title cards, and a weekly retention review that retires dying formats early — daily posting from one batch, no new gear, the same camera and face throughout. Built to move first-frame retention and median views, the inputs you actually control.",
+  },
+
+  guarantee: {
+    title: "Fixed scope in 48 hours, then a 14-day fix window.",
+    body: "After the hook audit I lock the full scope in writing within 48 hours, before you pay a cent — you know exactly what ships. Once the engine is live you get 14 days to surface anything that misfires and I fix it. I won't promise follower counts or revenue; those live in your offer and your market, not my pipeline.",
   },
 
   faqs: [

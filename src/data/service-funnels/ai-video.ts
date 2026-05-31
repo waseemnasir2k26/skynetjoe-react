@@ -89,6 +89,37 @@ const content: ServiceFunnelContent = {
       "The same pipeline runs on the SkynetLabs reference reel — shot on a DJI Pocket 3 from a Pererenan rooftop, no mic, full sun — silence-cut, captioned, B-rolled, voice-EQ'd and end-carded in one pass. Built to turn a one-person creator's raw footage into a weekly cadence instead of a one-reel-a-week scramble.",
   },
 
+  toolStack: {
+    label: "// the actual stack your reels run through",
+    items: [
+      "Whisper (word-level transcription + caption timing)",
+      "FFmpeg (silence-cut, 9:16 reframe, voice EQ chain, BGM duck)",
+      "NVENC / CPU fallback (render — ~5 min for a 60s clip on a laptop)",
+      "ElevenLabs (synthetic narrator, faceless channels only)",
+      "Premiere XML + CapCut JSON (hand-off so your editor can re-cut)",
+      "Mixkit + your licensed Epidemic Sound (music, never trending TikTok audio)",
+    ],
+  },
+
+  fitCheck: {
+    forYou: [
+      "You're a founder-led brand and the raw footage is already piling up — you just can't get it edited fast enough.",
+      "You'd rather own a pipeline that runs on your laptop than rent another SaaS subscription forever.",
+      "You shoot real face-to-camera or B-roll on a phone or DJI Pocket and want it to look like a channel, not an app export.",
+      "You've got the budget ready and want it built once, properly, in 5-14 days.",
+    ],
+    notForYou: [
+      "You want the cheapest reel on the marketplace — a $5 editor will underbid me and you should take it.",
+      "You want a faceless avatar farm pumping out cloned talking heads. I'll build a clean voiceover flow for a real faceless channel, but I won't fake a founder.",
+      "You want me to run the channel for you forever — I hand you the engine and a runbook, I'm not a managed editing service.",
+    ],
+  },
+
+  guarantee: {
+    title: "Send one clip before you commit.",
+    body: "Send a 60-second clip and I'll send back a finished reel built with this exact pipeline, so you judge the look before paying. Once you're in, scope is locked in writing within 48 hours and every shipped build carries a 14-day fix window for anything that breaks in your environment.",
+  },
+
   faqs: [
     {
       q: "Do I need to be on camera?",

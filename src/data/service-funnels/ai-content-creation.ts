@@ -89,6 +89,30 @@ const content: ServiceFunnelContent = {
       "The same engine runs the SkynetLabs internal content pipeline — one topic brief turned into a 200-slide carousel batch, every slide passed through a 60+ phrase AI-tell linter and an image-rotation log before it renders. The voice holds because the documented profile and the linter, not the writer, are the source of truth. It's the exact engine I run my own content on.",
   },
 
+  toolStack: {
+    label: "The engine under the hood",
+    items: [
+      "Claude Code",
+      "Custom 60+ AI-tell linter",
+      "n8n",
+      "html2canvas",
+      "GPT-4o",
+      "Sharp",
+    ],
+  },
+
+  guarantee: {
+    title: "The first batch proves it, or you walk.",
+    body: "Scope and price locked in writing within 48 hours, before you pay a cent. Every asset runs through the AI-tell linter before it renders — nothing ships that trips a tell. If the first batch doesn't read like you, we tune the profile inside a 14-day fix window until it does.",
+  },
+
+  secondaryProof: {
+    metric: "30% → 92%",
+    client: "Multi-channel SaaS launch (anonymized)",
+    detail:
+      "A founder who refused to ship AI content under his own face went from approving 30% of drafts to 92% — one script feeding five channels, every post linted to zero AI tells before render. The only metric that mattered: he'd actually hit publish.",
+  },
+
   faqs: [
     {
       q: "Will this actually stop sounding like ChatGPT?",

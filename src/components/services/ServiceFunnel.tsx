@@ -415,6 +415,101 @@ export default function ServiceFunnel({
         </div>
       </section>
 
+      {/* 4b. COMPARISON (optional) */}
+      {content.comparison && (
+        <section
+          style={{
+            padding: "clamp(48px, 10vw, 72px) 0",
+            borderBottom: "1px solid rgba(26,26,26,0.12)",
+            background: "var(--cream)",
+          }}
+        >
+          <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+            <div style={eyebrow("var(--terracotta-aa)")}>
+              <span style={rule("var(--terracotta-aa)")} />
+              The honest comparison
+            </div>
+            <h2 style={h2style}>{content.comparison.heading}</h2>
+            <div style={{ overflowX: "auto" }}>
+              <table
+                style={{
+                  width: "100%",
+                  borderCollapse: "collapse",
+                  fontSize: 14,
+                  minWidth: 520,
+                }}
+              >
+                <thead>
+                  <tr>
+                    {content.comparison.cols.map((c, i) => (
+                      <th
+                        key={i}
+                        style={{
+                          textAlign: "left",
+                          padding: "12px 16px",
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 11,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.12em",
+                          color: i === 1 ? "var(--terracotta)" : "var(--ink-faint)",
+                          borderBottom: "1px solid rgba(26,26,26,0.16)",
+                          background: i === 1 ? "var(--cream-2)" : "transparent",
+                        }}
+                      >
+                        {c}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {content.comparison.rows.map((r) => (
+                    <tr key={r.dimension}>
+                      <td
+                        style={{
+                          padding: "14px 16px",
+                          color: "var(--ink)",
+                          fontWeight: 600,
+                          borderBottom: "1px solid rgba(26,26,26,0.08)",
+                          verticalAlign: "top",
+                        }}
+                      >
+                        {r.dimension}
+                      </td>
+                      <td
+                        style={{
+                          padding: "14px 16px",
+                          color: "var(--ink)",
+                          borderBottom: "1px solid rgba(26,26,26,0.08)",
+                          background: "var(--cream-2)",
+                          verticalAlign: "top",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        <span aria-hidden style={{ color: "var(--sage)", marginRight: 8 }}>
+                          ✓
+                        </span>
+                        {r.us}
+                      </td>
+                      <td
+                        style={{
+                          padding: "14px 16px",
+                          color: "var(--ink-2)",
+                          borderBottom: "1px solid rgba(26,26,26,0.08)",
+                          verticalAlign: "top",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        {r.them}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* 5. PROCESS */}
       <section
         style={{
@@ -502,6 +597,175 @@ export default function ServiceFunnel({
         </div>
       </section>
 
+      {/* 5b. TOOL STACK (optional) */}
+      {content.toolStack && (
+        <section
+          style={{
+            padding: "clamp(32px, 7vw, 48px) 0",
+            borderBottom: "1px solid rgba(26,26,26,0.12)",
+            background: "var(--cream-3)",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 1000,
+              margin: "0 auto",
+              padding: "0 clamp(16px, 5vw, 32px)",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: 16,
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.14em",
+                color: "var(--ink-faint)",
+              }}
+            >
+              {content.toolStack.label}
+            </span>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {content.toolStack.items.map((t) => (
+                <span
+                  key={t}
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 12,
+                    color: "var(--ink)",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
+                    padding: "6px 12px",
+                    borderRadius: 4,
+                  }}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 5c. FIT CHECK (optional) */}
+      {content.fitCheck && (
+        <section
+          style={{
+            padding: "clamp(48px, 10vw, 72px) 0",
+            borderBottom: "1px solid rgba(26,26,26,0.12)",
+            background: "var(--cream-2)",
+          }}
+        >
+          <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+            <div style={eyebrow("var(--terracotta-aa)")}>
+              <span style={rule("var(--terracotta-aa)")} />
+              Honest fit check
+            </div>
+            <h2 style={{ ...h2style, marginBottom: 28 }}>
+              The right fit,{" "}
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+                or an honest no.
+              </em>
+            </h2>
+            <div
+              style={{
+                display: "grid",
+                gap: 20,
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              }}
+            >
+              <div
+                style={{
+                  background: "var(--cream-3)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  borderLeft: "3px solid var(--sage)",
+                  padding: 24,
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    color: "var(--sage)",
+                    marginBottom: 14,
+                  }}
+                >
+                  This is for you if
+                </div>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  {content.fitCheck.forYou.map((f) => (
+                    <li
+                      key={f}
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "16px 1fr",
+                        gap: 10,
+                        padding: "7px 0",
+                        fontSize: 14,
+                        color: "var(--ink)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      <span aria-hidden style={{ color: "var(--sage)" }}>
+                        ✓
+                      </span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div
+                style={{
+                  background: "var(--cream-3)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  borderLeft: "3px solid var(--oxblood)",
+                  padding: 24,
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    color: "var(--oxblood)",
+                    marginBottom: 14,
+                  }}
+                >
+                  We&apos;re not a fit if
+                </div>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  {content.fitCheck.notForYou.map((f) => (
+                    <li
+                      key={f}
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "16px 1fr",
+                        gap: 10,
+                        padding: "7px 0",
+                        fontSize: 14,
+                        color: "var(--ink-2)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      <span aria-hidden style={{ color: "var(--oxblood)" }}>
+                        ✕
+                      </span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* 6. PROOF */}
       <section
         style={{
@@ -569,6 +833,76 @@ export default function ServiceFunnel({
           </div>
         </div>
       </section>
+
+      {/* 6b. SECONDARY PROOF (optional) */}
+      {content.secondaryProof && (
+        <section
+          style={{
+            padding: "clamp(40px, 9vw, 64px) 0",
+            borderBottom: "1px solid rgba(26,26,26,0.12)",
+            background: "var(--cream-2)",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 900,
+              margin: "0 auto",
+              padding: "0 clamp(16px, 5vw, 32px)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "baseline",
+                gap: "0 22px",
+                borderLeft: "3px solid var(--terracotta)",
+                paddingLeft: 22,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 500,
+                  fontSize: "clamp(30px, 6vw, 52px)",
+                  color: "var(--terracotta)",
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1,
+                }}
+              >
+                {content.secondaryProof.metric}
+              </div>
+              <p
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontStyle: "italic",
+                  fontSize: "clamp(15px, 2.5vw, 19px)",
+                  color: "var(--ink-2)",
+                  lineHeight: 1.4,
+                  margin: 0,
+                  flex: 1,
+                  minWidth: 240,
+                }}
+              >
+                {content.secondaryProof.detail}
+              </p>
+            </div>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.14em",
+                color: "var(--ink-faint)",
+                paddingLeft: 22,
+                marginTop: 12,
+              }}
+            >
+              — {content.secondaryProof.client}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 7. PRICING */}
       {tiers.length > 0 && (
@@ -748,6 +1082,63 @@ export default function ServiceFunnel({
                 );
               })}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* 7b. GUARANTEE / RISK-REVERSAL (optional) */}
+      {content.guarantee && (
+        <section
+          style={{
+            padding: "clamp(40px, 9vw, 64px) 0",
+            borderBottom: "1px solid rgba(26,26,26,0.12)",
+            background: "color-mix(in srgb, var(--sage) 10%, var(--cream-3))",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 760,
+              margin: "0 auto",
+              padding: "0 clamp(16px, 5vw, 32px)",
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--sage)",
+                marginBottom: 14,
+              }}
+            >
+              — The risk is on me
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(24px, 4vw, 36px)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.1,
+                color: "var(--ink)",
+                marginBottom: 14,
+              }}
+            >
+              {content.guarantee.title}
+            </h2>
+            <p
+              style={{
+                fontSize: "clamp(15px, 2.5vw, 17px)",
+                color: "var(--ink-2)",
+                maxWidth: "52ch",
+                margin: "0 auto",
+                lineHeight: 1.6,
+              }}
+            >
+              {content.guarantee.body}
+            </p>
           </div>
         </section>
       )}

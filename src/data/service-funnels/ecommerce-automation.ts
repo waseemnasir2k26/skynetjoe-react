@@ -45,6 +45,43 @@ const content: ServiceFunnelContent = {
     },
   ],
 
+  comparison: {
+    heading: "Me vs the Shopify agency you almost hired.",
+    cols: ["", "With me", "Typical Shopify agency / app-stack DIY"],
+    rows: [
+      {
+        dimension: "Who builds it",
+        us: "I build and wire every flow myself — same person on the audit, the build, and the hand-off call.",
+        them: "A salesperson scopes it, a junior or an offshore team builds it, and you never speak to whoever actually touched your store.",
+      },
+      {
+        dimension: "Pricing",
+        us: "Public, fixed tiers on the page. Scope locked in writing within 48 hours of your brief.",
+        them: "\"Book a call for a quote.\" Stacked monthly app fees that creep as order volume grows.",
+      },
+      {
+        dimension: "What you own",
+        us: "n8n flows in Git, on your account or VPS — fork it, extend it, self-host it. No per-order fee, nothing behind my login.",
+        them: "Logic trapped inside Shopify apps you rent forever; cancel the app and the automation dies with it.",
+      },
+      {
+        dimension: "Storefront speed",
+        us: "Cart, inventory, and lifecycle logic moves to background workflows — less script weight on the page.",
+        them: "Five apps each loading their own scripts on every storefront visit, dragging LCP down.",
+      },
+      {
+        dimension: "When it breaks",
+        us: "A one-page runbook per flow plus a 14-day fix window, so a launch-week edge case doesn't catch you alone.",
+        them: "A support ticket queue and a chatbot that doesn't know your store.",
+      },
+      {
+        dimension: "Team size",
+        us: "One founder in Bali. If I'm asleep when it breaks at 3am, you wait for my morning.",
+        them: "A bigger bench and a support rota that can answer around the clock.",
+      },
+    ],
+  },
+
   outcomes: [
     {
       title: "Order to fulfilment, no human in the middle",
@@ -88,6 +125,18 @@ const content: ServiceFunnelContent = {
     client: "KSA fashion retailer (anonymized)",
     detail:
       "A bilingual RTL-native Shopify shoe store shipped null-to-launch in 14 days, with the Aramex courier rate surfaced on the cart page — cutting cart-stage shipping surprise from roughly 38% to under 3% and pulling the size-return rate from 22% to 9%. Showroom appointments roughly doubled, from about 12 a month to 25.",
+  },
+
+  secondaryProof: {
+    metric: "Size returns 22% → 9%",
+    client: "KSA fashion retailer (anonymized)",
+    detail:
+      "Same bilingual Arabic-English Shopify build: a 'wrong size?' shortcut on the order page swapped the punishing returns form for a same-size, different-fit exchange, dropping the size-return rate by 13 points. Showroom appointments climbed from about 12 a month to roughly 25 — buyers walked in saying they'd already seen the shoe online.",
+  },
+
+  guarantee: {
+    title: "Fixed scope before you pay. Fixed for 14 days after.",
+    body: "After the audit I lock the build scope in writing within 48 hours, so you know exactly what ships and what it costs before any money moves. Every workflow then carries a 14-day post-launch fix window — if an edge case breaks in your store, I fix it. I don't promise revenue numbers I can't control, and there are no refunds; what I guarantee is the build and the fix window.",
   },
 
   faqs: [

@@ -48,7 +48,7 @@ const content: ServiceFunnelContent = {
     {
       title: "A real upload cadence the channel can't break",
       body: "Long-form and Shorts ship on a fixed schedule from a pipeline, not your willpower. The channel keeps publishing the week you're sick, travelling, or buried in client work.",
-      proof: "Fixed cadence, not willpower",
+      proof: "Ships the week you don't feel like it",
     },
     {
       title: "One long-form becomes a week of Shorts",
@@ -66,6 +66,43 @@ const content: ServiceFunnelContent = {
       proof: "1 weekly analytics digest",
     },
   ],
+
+  comparison: {
+    heading: "Me vs the YouTube agency you almost retained.",
+    cols: ["", "With me", "Typical YouTube agency / VA editor"],
+    rows: [
+      {
+        dimension: "Who builds it",
+        us: "I do — founder on the screen-share for the first three batches, no account-manager layer.",
+        them: "A pod of junior editors and a sales-trained AM who relays your notes to them.",
+      },
+      {
+        dimension: "Pricing",
+        us: "Public, fixed tiers on this page. Scope locked before you pay.",
+        them: "Quote-on-call, per-video creep, and a retainer that ratchets up as you grow.",
+      },
+      {
+        dimension: "Who owns the pipeline",
+        us: "You do. Runs on your accounts; a VA can take it over for ~$150–200/mo in tool costs.",
+        them: "They own the process. Leave and the uploads stop the same week.",
+      },
+      {
+        dimension: "Long-form → Shorts",
+        us: "Each long-form auto-cut into 4–6 Shorts from the same shoot, built into the pipeline.",
+        them: "Billed as separate deliverables, so most channels skip them to save the line item.",
+      },
+      {
+        dimension: "Thumbnails",
+        us: "Three variants tested per video against your own CTR baseline via the experiment API.",
+        them: "One thumbnail, designer's taste, no A/B — whatever clears the deadline.",
+      },
+      {
+        dimension: "Turnaround at volume",
+        us: "Solo, so a re-style or pivot lands same-week without a change-request queue.",
+        them: "A bigger bench, so they can genuinely absorb a 30-video-a-month spike I'd have to schedule.",
+      },
+    ],
+  },
 
   process: [
     {
@@ -87,6 +124,13 @@ const content: ServiceFunnelContent = {
     client: "Representative SkynetLabs build",
     detail:
       "A typical hybrid channel build: founder on camera for the main long-form, a clean voiceover for the B-segments, one editor reviewing each batch, and three-variant thumbnail testing run through the YouTube experiment API against the channel's own CTR baseline. The pipeline ships on a fixed weekly cadence instead of the channel's willpower.",
+  },
+
+  secondaryProof: {
+    metric: "Batch produced in hours, not days",
+    client: "Representative SkynetLabs build",
+    detail:
+      "The Shorts-cutting stage is the same ffmpeg + Whisper engine behind the SkynetLabs reference reel — it pulls a week of 9:16 Shorts out of one long-form in a single pass, so the bottleneck is no longer the edit bay. Honest limit: the per-video research and the founder's on-camera long-form still take real time; only the cut-down, caption, and render are automated.",
   },
 
   faqs: [
@@ -115,6 +159,11 @@ const content: ServiceFunnelContent = {
       a: "Claude and GPT-4o for scripts, ElevenLabs or PlayHT for voice, Pexels and Flux for visuals, an ffmpeg render pipeline, the YouTube Data API for publishing and thumbnail experiments, and Looker Studio for the dashboard. Pricing is public and fixed — see the tiers above. Fixed scope back within 48 hours of your brief.",
     },
   ],
+
+  guarantee: {
+    title: "Fixed scope in 48 hours, then a 14-day fix window.",
+    body: "Before you pay anything, you get the exact deliverables, cadence, and tier locked in writing within 48 hours of your brief — no scope creep mid-build. For 14 days after the first three videos ship, anything in that scope that breaks or misses gets fixed at no charge. I don't promise subscriber counts or AdSense numbers — that depends on your niche and consistency, not me — only that the pipeline I agreed to build is the pipeline you get.",
+  },
 
   finalCta: {
     h2: "Stop being channel number 412 in your niche.",

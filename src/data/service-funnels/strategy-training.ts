@@ -83,11 +83,42 @@ const content: ServiceFunnelContent = {
     },
   ],
 
+  toolStack: {
+    label: "// what you actually walk away holding",
+    items: [
+      "Notion runbook (the ranked roadmap + role playbooks + AI policy, yours to edit)",
+      "Loom SOP library (each workflow recorded the way your team will run it)",
+      "Claude + ChatGPT (trained on your real data, second model for comparison)",
+      "Curated prompt library + company voice profiles (reused, not reinvented)",
+      "n8n (when a workflow earns automation — flagged, scoped separately, not padded in here)",
+      "Live screen-share workshops + 30 days of office hours (the part webinars skip)",
+    ],
+  },
+
+  fitCheck: {
+    forYou: [
+      "You've got a real workflow that's bleeding hours — inbox, ops triage, CRM drafting — and you want it mapped, not theorised about.",
+      "You want your own team to own the system after I leave, not rent another advisor forever.",
+      "The budget's ready and you'd rather pay once for clarity than keep buying tools on a hunch.",
+      "Someone on the team is already pasting customer data into a free chatbot and you'd like that governed before it's a breach.",
+    ],
+    notForYou: [
+      "You want the cheapest hour on the marketplace — a generic webinar vendor will underbid me and you should take it.",
+      "You want me to run your AI for you forever. I hand over the roadmap and the trained team; I'm not a managed service.",
+      "You want it decided by committee with no one accountable for adoption — without a leader holding the line, the training fades by week three and we both waste the spend.",
+    ],
+  },
+
   proof: {
     metric: "Team runs it solo",
     client: "Representative SkynetLabs build",
     detail:
       "After role-specific training, a team runs its own AI workflows internally — sales drafting, ops triage, founder review — without me in the loop. Adoption tends to hold past day 30 because the program is real work plus accountability, where generic vendor webinars stall out in the first few weeks.",
+  },
+
+  guarantee: {
+    title: "Fixed scope before you pay. Recorded handover when it ships.",
+    body: "I send fixed scope back within 48 hours of your brief, so you know exactly what the audit, roadmap, and workshops cover before any money moves. Every engagement ships with a recorded Loom handover and a 14-day window where I fix anything in the playbooks or policy that doesn't match how your team actually works.",
   },
 
   faqs: [

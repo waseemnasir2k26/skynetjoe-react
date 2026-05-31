@@ -84,11 +84,67 @@ const content: ServiceFunnelContent = {
     },
   ],
 
+  comparison: {
+    heading: "Me vs the AI consultancy you almost hired.",
+    cols: ["", "With me", "Typical AI consultancy / SaaS point-tool"],
+    rows: [
+      {
+        dimension: "Who builds it",
+        us: "I build it. The person who scopes the system is the person wiring the nodes against your data.",
+        them: "A partner sells it, a junior or an offshore team builds it, and the strategy deck rarely survives contact with your real inbox.",
+      },
+      {
+        dimension: "Pricing",
+        us: "Public and fixed — $4,997 / $12,500 on the page above. Scope locked in writing before you pay.",
+        them: "Quote on request, billed by the hour or per seat, and the number climbs every time scope shifts.",
+      },
+      {
+        dimension: "What you get",
+        us: "A working system running your real workflow on your data — plus the dashboard, runbook and Loom handover.",
+        them: "A point tool that owns one narrow step, or a slide deck of what someone could build next quarter.",
+      },
+      {
+        dimension: "Who owns it after",
+        us: "You do. It lives in your accounts, your team can edit it, and the retainer is optional, not a leash.",
+        them: "The SaaS owns the logic and your data sits on their server; cancel and the workflow stops.",
+      },
+      {
+        dimension: "When it breaks",
+        us: "30 days of post-launch support, then a fix window — you have the runbook and the source, so you're never stuck.",
+        them: "A support ticket in a queue, or a renewal conversation before anyone looks at it.",
+      },
+      {
+        dimension: "Team size",
+        us: "One founder. I take one serious build at a time, so there's a real ceiling on how much I can run in parallel.",
+        them: "A bigger bench and round-the-clock support — if you need five workstreams at once, that's a genuine edge.",
+      },
+    ],
+  },
+
   proof: {
     metric: "6 hours → 6 minutes",
     client: "EU logistics group (anonymized)",
     detail:
       "A 17-node n8n + GPT-4o pipeline reads a shared logistics inbox, classifies each thread on five variables, drafts accent-safe replies, and never auto-sends to a CC'd executive — collapsing routine response time from six hours to six minutes and dispatcher load from four hours a day to forty-five minutes. The same audit-then-build discipline runs across every system engagement.",
+  },
+
+  toolStack: {
+    label: "// the actual stack a business system runs on",
+    items: [
+      "n8n (self-hosted orchestration — the spine every node hangs off)",
+      "GPT-4o / Claude (classification, summarisation, voice-locked drafting)",
+      "PostgreSQL (state, logs, and the audit trail of every decision)",
+      "Gmail / Google API (read the real inbox, draft into Drafts, never blind auto-send)",
+      "Slack (human-in-the-loop escalation when the gate refuses to act)",
+      "Notion (the run log your team reads without touching the build)",
+    ],
+  },
+
+  secondaryProof: {
+    metric: "~11% → 0.4%",
+    client: "EU logistics group (anonymized)",
+    detail:
+      "Same build, the part nobody screenshots: the CC-field misroute rate — replies firing at the wrong stakeholder — dropped from roughly 11% under the old Zapier setup to 0.4%. Three contractors before me had eroded their trust in automation; the fix was modelling the inbox as a five-variable gate before a single node, not a smarter prompt. Speed sells the demo, but it's the reliability that let them actually cut over.",
   },
 
   faqs: [

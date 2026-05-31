@@ -37,4 +37,41 @@ export type ServiceFunnelContent = {
   faqs: { q: string; a: string }[];
   /** Closing terracotta CTA section. */
   finalCta: { h2: string; body: string; ctaLabel: string };
+
+  // ── OPTIONAL MODULAR SECTIONS ────────────────────────────────────────────
+  // Each funnel opts into a TASTEFUL SUBSET (≈2-3) so the 11 funnels feel
+  // bespoke instead of templated. Every field is optional — the template
+  // renders a section only when its data is present, in a fixed slot order:
+  //   outcomes → [comparison] → process → [toolStack] → [fitCheck]
+  //   → proof → [secondaryProof] → pricing → [guarantee] → faqs → finalCta
+  // PROOF RULE: any metric/client in `secondaryProof` (and `comparison` claims)
+  // must ground to a real entry in src/lib/case-studies.ts, OR be clearly
+  // labelled a representative/internal SkynetLabs build. Never fabricate.
+
+  /** "Us vs typical {agency|DIY SaaS|freelancer}" — 3-5 honest rows. */
+  comparison?: {
+    /** Section H2, e.g. "Me vs the agency you almost hired." */
+    heading: string;
+    /** Column headers: [dimension-col (usually ""), us, them]. */
+    cols: [string, string, string];
+    rows: { dimension: string; us: string; them: string }[];
+  };
+
+  /** Lead-qualification block — disqualifying honestly raises close rate. */
+  fitCheck?: {
+    /** 3-4 "you, if…" lines. */
+    forYou: string[];
+    /** 2-3 "not us, if…" lines — real disqualifiers, not humble-brags. */
+    notForYou: string[];
+  };
+
+  /** Tool/stack credibility strip — the actual tools the build runs on. */
+  toolStack?: { label: string; items: string[] };
+
+  /** Risk-reversal block — solo-safe guarantees (fixed-scope-48h, fix window). */
+  guarantee?: { title: string; body: string };
+
+  /** A SECOND mini proof receipt for proof variety. MUST ground to a real
+   *  case study or be labelled representative (see PROOF RULE above). */
+  secondaryProof?: { metric: string; client: string; detail: string };
 };

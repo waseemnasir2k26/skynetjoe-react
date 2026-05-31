@@ -68,6 +68,43 @@ const content: ServiceFunnelContent = {
     },
   ],
 
+  comparison: {
+    heading: "Me vs the branding agency you almost hired.",
+    cols: ["", "With me", "Typical agency / Fiverr logo mill"],
+    rows: [
+      {
+        dimension: "Who actually does the work",
+        us: "The person you brief is the person designing. One accountable name, start to finish.",
+        them: "A senior name closes you, then it's handed to a junior or a stranger you never meet.",
+      },
+      {
+        dimension: "Pricing",
+        us: "Public, fixed tiers on this page. Fixed scope back in 48 hours, no surprise invoices.",
+        them: "Quote-on-call, then change orders. The Fiverr gig is $50 but the usable version is the $400 upsell.",
+      },
+      {
+        dimension: "What you walk away with",
+        us: "Editable Figma source with variables and components — your team extends it without me.",
+        them: "Flat JPGs and PDFs, or locked files you re-license. Every new asset is a fresh order.",
+      },
+      {
+        dimension: "Turnaround",
+        us: "5-7 days for a starter kit, 10-14 for the full system. I can restore an off-spec asset in a day when it's triage.",
+        them: "Logo mills are fast and cheap; full agencies run 6-12 weeks of decks and meetings.",
+      },
+      {
+        dimension: "When it breaks after handoff",
+        us: "14-day fix window, plus a brand book and two trainings so it doesn't break in the first place.",
+        them: "Out of scope. You're back in the queue, or buying a new gig.",
+      },
+      {
+        dimension: "Headcount",
+        us: "Solo studio. For a 12-market simultaneous global launch I'm honestly the wrong call.",
+        them: "A big agency has the bench to staff parallel teams across time zones.",
+      },
+    ],
+  },
+
   process: [
     {
       title: "Audit & position",
@@ -88,6 +125,27 @@ const content: ServiceFunnelContent = {
     client: "Northeast US clinical recovery network (KODIASIMMO)",
     detail:
       "Inherited a half-built brand kit from a previous agency — off-spec palette, a wordmark that didn't match the asset file. We reconciled it in a single working day, restoring the founder's actual logo asset and a Pantone-aligned palette in time for a major referral-partnership announcement. As the Clinical Director put it: \"He had it fixed before lunch.\"",
+  },
+
+  fitCheck: {
+    forYou: [
+      "You've outgrown the 2021 Fiverr logo and every new asset is a fresh guess.",
+      "You want a Figma system your team extends — not flat JPGs you re-order forever.",
+      "Budget's ready now and you'd rather have fixed scope in 48 hours than a quote dance.",
+      "You'll sit for a 90-minute audit and pick from three directions instead of waiting for one big reveal.",
+    ],
+    notForYou: [
+      "You want the cheapest mark you can find and nothing built behind it.",
+      "You need a 12-market simultaneous global launch staffed across time zones — that's an agency bench, not a solo studio.",
+      "You want someone to be your full-time design department forever, not hand you a system you own.",
+    ],
+  },
+
+  secondaryProof: {
+    metric: "2.1 → 4.4 / 5",
+    client: "Manhattan cosmetic dental atelier (anonymized)",
+    detail:
+      "A bespoke 14-section identity and site — built to look nothing like the template clinic sites in midtown — lifted rated inquiry quality from 2.1 to 4.4 out of 5. The founding clinician's line: \"Our last site cost five times more and looked like every other clinic. This one looks like us.\"",
   },
 
   faqs: [
