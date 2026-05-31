@@ -16,6 +16,9 @@ import GoHighLevelLP from "@/components/services/lp/GoHighLevelLP";
 import AiChatbotsLP from "@/components/services/lp/AiChatbotsLP";
 import WordpressSeoLP from "@/components/services/lp/WordpressSeoLP";
 import VibeCodedSitesLP from "@/components/services/lp/VibeCodedSitesLP";
+import ServiceFunnel from "@/components/services/ServiceFunnel";
+import { SERVICE_FUNNELS } from "@/data/service-funnels";
+import { findServicePricing } from "@/lib/service-pricing";
 
 /**
  * Top-5 service slugs that render a bespoke funnel LP component
@@ -90,16 +93,22 @@ export default async function ServicePage({
   const { slug } = await params;
   if (!SLUGS.includes(slug)) notFound();
 
-  // Content source: bespoke LP component for the top-5 funnels, else the
-  // static HTML payload from content/services/{slug}.html. (Git is the CMS —
-  // Payload was removed 2026-05-29; public pages are fully data-file driven.)
+  // Content source, in priority order:
+  //   1. bespoke LP component (top-5 funnels)
+  //   2. data-driven <ServiceFunnel/> (the other 11 funnel services)
+  //   3. static HTML payload from content/services/{slug}.html (fallback)
+  // Git is the CMS — Payload was removed 2026-05-29. Only read the HTML when
+  // neither an LP nor funnel content exists, so an unused/deleted payload can
+  // never crash a page that no longer renders it.
   const LPComponent = TOP_5_LP[slug];
-  const html = LPComponent
-    ? null
-    : fs.readFileSync(
-        path.join(process.cwd(), "content", "services", `${slug}.html`),
-        "utf8"
-      );
+  const funnel = LPComponent ? undefined : SERVICE_FUNNELS[slug];
+  const html =
+    LPComponent || funnel
+      ? null
+      : fs.readFileSync(
+          path.join(process.cwd(), "content", "services", `${slug}.html`),
+          "utf8"
+        );
   const svc = SERVICES.find((s) => s.slug === slug)!;
 
   const schema = {
@@ -156,6 +165,8 @@ export default async function ServicePage({
       `}</style>
       {LPComponent ? (
         <LPComponent />
+      ) : funnel ? (
+        <ServiceFunnel content={funnel} pricing={findServicePricing(slug)} />
       ) : (
         <div
           className="wn-service-shell"
