@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { NEWS, getArticle, relatedFor } from "@/lib/news";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import ZoomableImage from "@/components/ZoomableImage";
 
 /**
@@ -126,30 +127,9 @@ export default async function NewsArticlePage({
     keywords: a.tags.join(", "),
   };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "News",
-        item: `${SITE.url}/news`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: a.title,
-        item: `${SITE.url}/news/${a.slug}`,
-      },
-    ],
-  };
-
   return (
     <>
       <JsonLd data={articleSchema} />
-      <JsonLd data={breadcrumbSchema} />
 
       {/* HERO */}
       <section
@@ -162,29 +142,14 @@ export default async function NewsArticlePage({
         }}
       >
         <div style={{ maxWidth: 820, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <nav
-            aria-label="Breadcrumb"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.10em",
-              color: "var(--ink-faint)",
-              marginBottom: 18,
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 8,
-              alignItems: "center",
-            }}
-          >
-            <Link href="/" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>Home</Link>
-            <span aria-hidden>/</span>
-            <Link href="/news" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>News</Link>
-            <span aria-hidden>/</span>
-            <span style={{ color: "var(--ink)", maxWidth: "40ch", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-              {a.title}
-            </span>
-          </nav>
+          <Breadcrumbs
+            bare
+            items={[
+              { label: "Home", href: "/" },
+              { label: "News", href: "/news" },
+              { label: a.title },
+            ]}
+          />
 
           <Link
             href="/news"

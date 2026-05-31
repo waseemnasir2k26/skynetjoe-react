@@ -10,6 +10,7 @@ import { STATES } from "@/lib/states";
 import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
 import { getEnrichment } from "@/data/service-state-enrichment";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import N8nAutomationLP from "@/components/services/lp/N8nAutomationLP";
 import GoHighLevelLP from "@/components/services/lp/GoHighLevelLP";
 import AiChatbotsLP from "@/components/services/lp/AiChatbotsLP";
@@ -136,30 +137,20 @@ export default async function ServicePage({
           url: `${SITE.url}/services/${svc.slug}`,
         },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Services",
-            item: `${SITE.url}/services`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: svc.label,
-            item: `${SITE.url}/services/${svc.slug}`,
-          },
-        ],
-      },
     ],
   };
 
   return (
     <>
       <JsonLd data={schema} />
+      <Breadcrumbs
+        offsetTop
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: svc.label },
+        ]}
+      />
       <style>{`
         .cream-state-pill:hover { border-color: var(--terracotta) !important; }
       `}</style>

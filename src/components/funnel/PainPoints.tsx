@@ -82,14 +82,16 @@ export default function PainPoints() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {PAINS.map((p, i) => (
+          {PAINS.map((p) => (
             <div
               key={p.pain}
               style={{
                 background: "var(--cream-2)",
                 border: "1px solid rgba(26,26,26,0.12)",
                 padding: "clamp(20px, 5vw, 28px)",
-                transform: i === 1 ? "rotate(0.3deg)" : "rotate(-0.3deg)",
+                // Tilt removed — same ±0.3deg card rotation repeated across
+                // PainPoints → Outcomes → Testimonials read as a template tic.
+                // Tilt now lives only on Testimonials. (P3 motif variety)
               }}
             >
               <div

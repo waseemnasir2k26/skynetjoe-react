@@ -134,7 +134,9 @@ export default function Testimonials() {
                 <p
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontStyle: "italic",
+                    // Roman (non-italic) for mobile legibility — long serif
+                    // italic quote bodies tax readability. (P2 legibility)
+                    fontStyle: "normal",
                     fontSize: "clamp(15px, 3.6vw, 17px)",
                     color: "var(--ink)",
                     lineHeight: 1.55,

@@ -35,7 +35,7 @@ const css = `
   .hs-hero { padding: 64px 0 40px; }
   .hs-eyebrow { font-family: var(--font-mono-plex), monospace; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oxblood); margin: 0 0 16px; font-weight: 600; }
   .hs-hero h1 { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: clamp(2.2rem, 6.5vw, 3.7rem); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 20px; }
-  .hs-hero h1 em { font-style: italic; color: #A8501F; }
+  .hs-hero h1 em { font-style: italic; color: var(--terracotta); }
   .hs-hero .sub { font-size: clamp(1.05rem, 2.4vw, 1.28rem); color: #2a2a2a; max-width: 620px; margin: 0 0 30px; line-height: 1.5; }
 
   /* Ghost-calls motif */
@@ -50,7 +50,7 @@ const css = `
   .hs-ticket .meta { display: flex; flex-direction: column; gap: 2px; }
   .hs-ticket .label { font-size: 0.92rem; color: var(--ink); font-weight: 600; }
   .hs-ticket .time { font-family: var(--font-mono-plex), monospace; font-size: 0.78rem; color: #4a4a4a; }
-  .hs-ticket .lost { font-family: var(--font-mono-plex), monospace; font-size: 1.15rem; font-weight: 700; color: #A8501F; white-space: nowrap; }
+  .hs-ticket .lost { font-family: var(--font-mono-plex), monospace; font-size: 1.15rem; font-weight: 700; color: var(--terracotta); white-space: nowrap; }
   @keyframes hs-rise { to { opacity: 1; transform: translateY(0); } }
 
   .hs-btn { display: inline-block; background: #A8501F; color: #fff; padding: 15px 30px; border-radius: 11px;
@@ -65,7 +65,7 @@ const css = `
 
   .hs-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .hs-stat { background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 22px 18px; }
-  .hs-stat .num { font-family: var(--font-mono-plex), monospace; font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 700; color: #A8501F; display: block; line-height: 1; margin: 0 0 8px; }
+  .hs-stat .num { font-family: var(--font-mono-plex), monospace; font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 700; color: var(--terracotta); display: block; line-height: 1; margin: 0 0 8px; }
   .hs-stat p { color: #333; font-size: 0.92rem; line-height: 1.45; margin: 0; }
 
   .hs-bundle { display: flex; flex-direction: column; gap: 14px; }
@@ -91,7 +91,7 @@ const css = `
   .hs-faq details { background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08); border-radius: 10px; padding: 4px 18px; }
   .hs-faq summary { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: 1.05rem; color: var(--ink); cursor: pointer; padding: 14px 0; list-style: none; }
   .hs-faq summary::-webkit-details-marker { display: none; }
-  .hs-faq summary::after { content: "+"; float: right; font-family: var(--font-mono-plex), monospace; color: #A8501F; }
+  .hs-faq summary::after { content: "+"; float: right; font-family: var(--font-mono-plex), monospace; color: var(--terracotta); }
   .hs-faq details[open] summary::after { content: "−"; }
   .hs-faq details p { color: #333; line-height: 1.55; margin: 0 0 16px; font-size: 0.96rem; }
 

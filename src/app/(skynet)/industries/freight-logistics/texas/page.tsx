@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES, CAL_URL } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const PAGE_TITLE =
   "Freight + Logistics Automation in Texas — n8n, GoHighLevel & Dispatch AI | SkynetLabs";
@@ -181,30 +182,6 @@ export default function TexasFreightGuide() {
           },
         })),
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Industries",
-            item: `${SITE.url}/industries`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: "Freight + Logistics",
-            item: `${SITE.url}/industries/freight-logistics`,
-          },
-          {
-            "@type": "ListItem",
-            position: 4,
-            name: "Texas",
-            item: PAGE_URL,
-          },
-        ],
-      },
     ],
   };
 
@@ -221,33 +198,16 @@ export default function TexasFreightGuide() {
         }}
       >
         <div className="container-x px-6">
-          <nav
-            className="mb-6 flex items-center gap-2"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              color: "var(--ink-faint)",
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-            }}
-          >
-            <Link href="/" style={{ color: "var(--ink-faint)" }}>
-              Home
-            </Link>
-            <span>/</span>
-            <Link href="/industries" style={{ color: "var(--ink-faint)" }}>
-              Industries
-            </Link>
-            <span>/</span>
-            <Link
-              href="/industries/freight-logistics"
-              style={{ color: "var(--ink-faint)" }}
-            >
-              Freight + Logistics
-            </Link>
-            <span>/</span>
-            <span style={{ color: "var(--terracotta)" }}>Texas</span>
-          </nav>
+          <Breadcrumbs
+            bare
+            marginBottom={24}
+            items={[
+              { label: "Home", href: "/" },
+              { label: "By Industry", href: "/industries" },
+              { label: "Freight + Logistics", href: "/industries/freight-logistics" },
+              { label: "Texas" },
+            ]}
+          />
 
           <div className="max-w-4xl">
             <div className="mb-6" style={eyebrow}>

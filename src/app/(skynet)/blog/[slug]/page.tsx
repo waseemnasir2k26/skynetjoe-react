@@ -7,6 +7,7 @@ import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { POSTS, getPost } from "@/lib/posts";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const dynamicParams = false;
 
@@ -91,6 +92,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         }}
       >
         <div className="container-x px-6 relative">
+          <Breadcrumbs
+            bare
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Journal", href: "/blog" },
+              { label: post.title },
+            ]}
+          />
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-sm mb-6"

@@ -123,9 +123,31 @@ export default function BlogPage() {
               marginBottom: 0,
             }}
           >
-            Posts when we have something worth saying — not on a schedule.
-            Real client builds, real cost math, real failure modes.
+            In-depth guides and essays — the long reads on n8n, AEO, and
+            shipping software. Posts when we have something worth saying, not on
+            a schedule.
           </p>
+
+          {/* Cross-link to the short-form hub — keeps News + Journal distinct. */}
+          <Link
+            href="/news"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              marginTop: 22,
+              fontFamily: "var(--font-mono)",
+              fontSize: 12,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              fontWeight: 600,
+              color: "var(--terracotta-aa)",
+              textDecoration: "none",
+            }}
+          >
+            Looking for short field notes &amp; updates? → Latest News
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
       </section>
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { organization, person } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Community from "@/components/sections/Community";
 import ZoomableImage from "@/components/ZoomableImage";
@@ -92,23 +93,17 @@ const schema = {
       mainEntity: { "@id": `${SITE.url}/#organization` },
     },
     {
-      "@type": "Organization",
-      "@id": `${SITE.url}/#organization`,
-      name: SITE.brand,
-      url: SITE.url,
+      // Spread the canonical Organization (logo ImageObject, founder→#person
+      // ref, address, full sameAs) from @/lib/schema instead of redefining a
+      // thinner duplicate. Layer only the about-page-relevant founding facts.
+      ...organization,
       foundingDate: "2019",
-      description: SITE.description,
-      founder: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
       foundingLocation: { "@type": "Place", name: "Lahore, Pakistan" },
       location: { "@type": "Place", name: "Bali, Indonesia" },
-      sameAs: [
-        SITE.social.linkedin,
-        SITE.social.twitter,
-        SITE.social.github,
-        SITE.social.youtube,
-        SITE.social.fiverr,
-      ],
     },
+    // Include the canonical Person node so the Organization.founder #person
+    // reference resolves on this page (same pattern the homepage uses).
+    { ...person },
   ],
 };
 

@@ -308,7 +308,7 @@ export default function WorkShowcase() {
             className="inline-flex items-center gap-3 mb-5"
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: 11,
+              fontSize: "0.6875rem",
               textTransform: "uppercase",
               letterSpacing: "0.16em",
               color: "var(--terracotta)",
@@ -348,7 +348,7 @@ export default function WorkShowcase() {
           </h1>
           <p
             style={{
-              fontSize: 17,
+              fontSize: "1.0625rem",
               color: "var(--ink-2)",
               lineHeight: 1.6,
               maxWidth: "62ch",
@@ -408,7 +408,7 @@ export default function WorkShowcase() {
                   className="absolute top-3 left-3"
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 10,
+                    fontSize: "0.625rem",
                     fontWeight: 600,
                     textTransform: "uppercase",
                     letterSpacing: "0.14em",
@@ -425,7 +425,7 @@ export default function WorkShowcase() {
                   className="absolute top-3 right-3"
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 10,
+                    fontSize: "0.625rem",
                     fontWeight: 600,
                     textTransform: "uppercase",
                     letterSpacing: "0.14em",
@@ -440,7 +440,7 @@ export default function WorkShowcase() {
                   className="absolute bottom-3 right-3 inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 10,
+                    fontSize: "0.625rem",
                     fontWeight: 600,
                     textTransform: "uppercase",
                     letterSpacing: "0.14em",
@@ -471,7 +471,7 @@ export default function WorkShowcase() {
                 <p
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 11,
+                    fontSize: "0.6875rem",
                     color: "var(--terracotta)",
                     marginBottom: 12,
                     whiteSpace: "nowrap",
@@ -483,7 +483,7 @@ export default function WorkShowcase() {
                 </p>
                 <p
                   style={{
-                    fontSize: 13,
+                    fontSize: "0.8125rem",
                     color: "var(--ink-2)",
                     lineHeight: 1.55,
                     marginBottom: 16,
@@ -497,7 +497,7 @@ export default function WorkShowcase() {
                       key={s}
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: 10,
+                        fontSize: "0.625rem",
                         padding: "3px 8px",
                         borderRadius: 9999,
                         background: "var(--cream-3)",
@@ -545,7 +545,7 @@ export default function WorkShowcase() {
               <div
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: 10,
+                  fontSize: "0.625rem",
                   textTransform: "uppercase",
                   letterSpacing: "0.16em",
                   color: "var(--terracotta)",
@@ -568,7 +568,7 @@ export default function WorkShowcase() {
               </div>
               <div
                 style={{
-                  fontSize: 14,
+                  fontSize: "0.875rem",
                   color: "var(--ink-2)",
                   lineHeight: 1.55,
                 }}
@@ -590,7 +590,7 @@ export default function WorkShowcase() {
                 padding: "13px 21px",
                 fontFamily: "var(--font-sans)",
                 fontWeight: 600,
-                fontSize: 14,
+                fontSize: "0.875rem",
                 borderRadius: 2,
                 textDecoration: "none",
               }}
@@ -606,7 +606,7 @@ export default function WorkShowcase() {
                 padding: "14px 22px",
                 fontFamily: "var(--font-sans)",
                 fontWeight: 600,
-                fontSize: 14,
+                fontSize: "0.875rem",
                 borderRadius: 2,
                 border: "none",
                 textDecoration: "none",

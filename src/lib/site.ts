@@ -240,7 +240,7 @@ export const FOOTER_COLUMNS = [
       { label: "Pricing", href: "/pricing" },
       { label: "Portfolio", href: "/portfolio" },
       { label: "Latest News", href: "/news" },
-      { label: "Blog", href: "/blog" },
+      { label: "Journal", href: "/blog" },
     ],
   },
   {

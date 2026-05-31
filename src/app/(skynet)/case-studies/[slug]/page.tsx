@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import ZoomableImage from "@/components/ZoomableImage";
 
 export const dynamicParams = false;
@@ -85,26 +86,6 @@ export default async function CaseStudyDetail({
     keywords: [c.industryTag, c.industry, c.location, ...c.solutionStack].join(", "),
   };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Case Studies",
-        item: `${SITE.url}/case-studies`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: c.clientName,
-        item: `${SITE.url}/case-studies/${c.slug}`,
-      },
-    ],
-  };
-
   const dateFmt = new Date(c.publishDate).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -114,7 +95,6 @@ export default async function CaseStudyDetail({
   return (
     <>
       <JsonLd data={articleSchema} />
-      <JsonLd data={breadcrumbSchema} />
 
       {/* HERO */}
       <section
@@ -127,31 +107,15 @@ export default async function CaseStudyDetail({
         }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <nav
-            aria-label="Breadcrumb"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.10em",
-              color: "var(--ink-faint)",
-              marginBottom: 20,
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 8,
-              alignItems: "center",
-            }}
-          >
-            <Link href="/" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>
-              Home
-            </Link>
-            <span aria-hidden>/</span>
-            <Link href="/case-studies" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>
-              Case Studies
-            </Link>
-            <span aria-hidden>/</span>
-            <span style={{ color: "var(--ink)" }}>{c.clientName}</span>
-          </nav>
+          <Breadcrumbs
+            bare
+            marginBottom={20}
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Case Studies", href: "/case-studies" },
+              { label: c.clientName },
+            ]}
+          />
 
           <Link
             href="/case-studies"

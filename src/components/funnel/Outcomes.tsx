@@ -92,7 +92,9 @@ export default function Outcomes() {
                 background: "var(--cream-2)",
                 border: "1px solid rgba(26,26,26,0.12)",
                 padding: "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4vw, 24px)",
-                transform: i === 1 ? "rotate(0.3deg)" : "rotate(-0.3deg)",
+                // Tilt removed — same ±0.3deg card rotation repeated across
+                // PainPoints → Outcomes → Testimonials read as a template tic.
+                // Tilt now lives only on Testimonials. (P3 motif variety)
                 display: "flex",
                 flexDirection: "column",
               }}

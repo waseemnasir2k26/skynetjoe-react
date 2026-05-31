@@ -2,9 +2,32 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SERVICE_PRICING } from "@/lib/service-pricing";
 import JsonLd from "@/components/JsonLd";
 import ServicePricingTabs from "@/components/pricing/ServicePricingTabs";
 import PricingCalculator from "@/components/pricing/PricingCalculator";
+
+// Derive the true price floor/ceiling straight from the per-service tier data
+// so the schema can never drift from what the page actually publishes. Every
+// tier (one-time or monthly) is a real USD entry point, so all are eligible.
+const ALL_TIER_PRICES = SERVICE_PRICING.flatMap((s) => s.tiers.map((t) => t.price));
+const MIN_PRICE = Math.min(...ALL_TIER_PRICES);
+const MAX_PRICE = Math.max(...ALL_TIER_PRICES);
+
+// Lowest one-time tier across all services = the honest "starting from" Offer.
+const ONE_TIME_PRICES = SERVICE_PRICING.flatMap((s) =>
+  s.tiers.filter((t) => t.cadence !== "monthly").map((t) => t.price)
+);
+const MIN_ONE_TIME = Math.min(...ONE_TIME_PRICES);
+const MAX_ONE_TIME = Math.max(...ONE_TIME_PRICES);
+
+// Lowest real monthly retainer across all services (some Custom tiers ARE
+// monthly products — the FAQ says we don't run subscriptions *on a one-time
+// fee*, retainers are a separate, explicitly-monthly product).
+const MONTHLY_PRICES = SERVICE_PRICING.flatMap((s) =>
+  s.tiers.filter((t) => t.cadence === "monthly").map((t) => t.price)
+);
+const MIN_MONTHLY = Math.min(...MONTHLY_PRICES);
 
 export const metadata: Metadata = {
   title: "Pricing — Public, honest, no 'request a quote'",
@@ -29,8 +52,9 @@ const priceSchema = {
   description:
     "Per-service pricing across 16 services, 3 tiers each (Starter / Pro / Custom), plus optional add-ons. Live calculator on page.",
   priceCurrency: "USD",
-  minPrice: 997,
-  maxPrice: 14500,
+  // Derived from SERVICE_PRICING tiers — never hand-keyed.
+  minPrice: MIN_PRICE,
+  maxPrice: MAX_PRICE,
   provider: { "@id": `${SITE.url}/#organization` },
 };
 
@@ -41,34 +65,35 @@ const offerCatalog = {
   url: `${SITE.url}/pricing`,
   itemListElement: [
     {
+      // One-time project work — the honest floor/ceiling of the one-off tiers.
+      // No unitText/cadence: these are one-time Offers, matching the FAQ
+      // ("we don't run subscriptions on a one-time fee").
       "@type": "Offer",
-      name: "Starter (per service)",
-      price: 997,
+      name: "Project build (one-time, per service)",
       priceCurrency: "USD",
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        priceCurrency: "USD",
+        minPrice: MIN_ONE_TIME,
+        maxPrice: MAX_ONE_TIME,
+      },
       description:
-        "Smallest tier across any of 16 services. Single deliverable, 3-7 day ship.",
+        "Fixed-scope one-time build across any of 16 services — Starter, Pro and one-time Custom tiers. Single payment, 3-21 day ship.",
     },
     {
+      // Monthly retainers ARE a real, separately-priced product — so this
+      // (and only this) Offer carries a MONTH UnitPriceSpecification.
       "@type": "Offer",
-      name: "Pro (per service)",
-      price: 4500,
-      priceCurrency: "USD",
-      description:
-        "Mid tier. Full build or multi-system pipeline, 10-14 day ship.",
-    },
-    {
-      "@type": "Offer",
-      name: "Custom (per service)",
-      price: 1997,
+      name: "Monthly retainer (per service)",
       priceCurrency: "USD",
       priceSpecification: {
         "@type": "UnitPriceSpecification",
-        price: 1997,
+        price: MIN_MONTHLY,
         priceCurrency: "USD",
         unitText: "MONTH",
       },
       description:
-        "Monthly retainer or enterprise one-time scope, depending on service.",
+        "Ongoing live-ops retainer for services that offer one — billed monthly, separate from one-time project fees.",
     },
   ],
 };

@@ -392,6 +392,20 @@ export default function PainSolverGrid() {
             );
           })}
         </motion.div>
+
+        <p
+          style={{
+            marginTop: "clamp(20px, 4vw, 28px)",
+            fontFamily: "var(--font-mono)",
+            fontSize: "0.75rem",
+            lineHeight: 1.5,
+            letterSpacing: "0.04em",
+            color: "var(--ink-faint)",
+          }}
+        >
+          — Representative outcomes from shipped client builds. Your numbers
+          depend on scope, starting point, and inputs.
+        </p>
       </div>
     </section>
   );

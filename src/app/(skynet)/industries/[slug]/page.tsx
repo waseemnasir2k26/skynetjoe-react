@@ -19,6 +19,7 @@ import type { Metadata } from "next";
 import { INDUSTRIES, getIndustry } from "@/data/industries";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import IndustryLanding from "@/components/sections/IndustryLanding";
 
 export const dynamicParams = false;
@@ -123,25 +124,6 @@ export default async function IndustryPage({
         })),
       },
       {
-        "@type": "BreadcrumbList",
-        "@id": `${pageUrl}#breadcrumbs`,
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Industries",
-            item: `${SITE.url}/industries`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: i.name,
-            item: pageUrl,
-          },
-        ],
-      },
-      {
         "@type": "ItemList",
         "@id": `${pageUrl}#integrations`,
         name: `${i.name} integrations supported by ${i.flagshipProductName}`,
@@ -158,6 +140,14 @@ export default async function IndustryPage({
   return (
     <>
       <JsonLd data={schema} />
+      <Breadcrumbs
+        offsetTop
+        items={[
+          { label: "Home", href: "/" },
+          { label: "By Industry", href: "/industries" },
+          { label: i.name },
+        ]}
+      />
       <IndustryLanding industry={i} />
     </>
   );

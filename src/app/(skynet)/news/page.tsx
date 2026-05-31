@@ -98,7 +98,7 @@ export default function NewsIndex() {
             }}
           >
             <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-            The journal · Volume II
+            News · short field notes
           </div>
           <h1
             style={{
@@ -127,9 +127,31 @@ export default function NewsIndex() {
               margin: 0,
             }}
           >
-            Real client builds. Real cost math. Real failure modes. Written
-            from cafes in Canggu and rooftops in Pererenan.
+            Short, dated updates from the build — real client wins, real cost
+            math, real failure modes. Written from cafes in Canggu and rooftops
+            in Pererenan.
           </p>
+
+          {/* Cross-link to the long-form hub — keeps News + Journal distinct. */}
+          <Link
+            href="/blog"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              marginTop: 22,
+              fontFamily: "var(--font-mono)",
+              fontSize: 12,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              fontWeight: 600,
+              color: "var(--terracotta-aa)",
+              textDecoration: "none",
+            }}
+          >
+            Want long-form guides? → Read the Journal
+            <ArrowRight style={{ width: 14, height: 14 }} />
+          </Link>
         </div>
       </section>
 

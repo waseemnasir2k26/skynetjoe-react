@@ -475,7 +475,7 @@ export default function LogisticsLP() {
 
       <div className="scroll-progress" aria-hidden="true"></div>
 
-      <div className="ribbon"><span className="ribbon-pulse"></span>June dispatch cohort · <strong>2 of 4 slots left</strong> · close 2026-06-15</div>
+      <div className="ribbon"><span className="ribbon-pulse"></span>June dispatch cohort · <strong>limited builds</strong> · 8-hour reply window</div>
 
       <header className="nav">
         <div className="nav-inner">
@@ -496,7 +496,7 @@ export default function LogisticsLP() {
                 <a href="/discovery-call" className="btn-primary" data-meta-event="Schedule" data-meta-name="hero-book-audit">Book a 15-min discovery call →</a>
                 <a href="#pricing" className="btn-line">See public pricing</a>
               </div>
-              <div className="hero-scarcity"><strong>2 slots left</strong>&nbsp;· June 2026 · 8-hour reply window</div>
+              <div className="hero-scarcity"><strong>Limited June builds</strong>&nbsp;· 8-hour reply window</div>
               <div className="featured-in">
                 <span className="featured-lbl">Featured</span>
                 <span>Claude Code Partner</span>
@@ -1124,7 +1124,7 @@ export default function LogisticsLP() {
 
         {/* CLOSER */}
         <section className="closer">
-          <div className="closer-scarcity">● 2 slots left · June 2026</div>
+          <div className="closer-scarcity">● Limited June builds</div>
           <h2>Fifteen minutes. <em>Yes, no, or referral.</em></h2>
           <p>Eight-hour reply on weekday Bali time. No funnel, no quote theater, no commitment. You walk with the audit findings either way.</p>
           <div className="cta-row">
@@ -1146,7 +1146,7 @@ export default function LogisticsLP() {
         </footer>
 
         {/* MOBILE STICKY CTA */}
-        <a href="/discovery-call" className="mobile-cta" data-meta-event="Schedule" data-meta-name="mobile-sticky"><span><strong>2 slots left</strong> · Book audit</span></a>
+        <a href="/discovery-call" className="mobile-cta" data-meta-event="Schedule" data-meta-name="mobile-sticky"><span><strong>Limited June builds</strong> · Book audit</span></a>
       </main>
     </div>
   );

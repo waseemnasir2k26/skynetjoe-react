@@ -19,7 +19,10 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
   variable: "--font-serif-fraunces",
   display: "swap",
-  axes: ["opsz", "SOFT", "WONK"],
+  // opsz only — SOFT/WONK axes were never driven by any CSS (no
+  // font-variation-settings references them), so they were dead payload.
+  // opsz stays: optical sizing tracks font-size automatically. (P3 perf)
+  axes: ["opsz"],
 });
 
 const onest = Onest({
@@ -34,6 +37,10 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
   variable: "--font-mono-plex",
   display: "swap",
+  // Mono is only used for small eyebrow labels / captions — never the
+  // LCP element (that's Fraunces). Drop it from the preload set to cut
+  // critical font payload on mobile. (P3 perf)
+  preload: false,
 });
 
 export const metadata: Metadata = {

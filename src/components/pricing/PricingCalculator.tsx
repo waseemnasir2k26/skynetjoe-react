@@ -30,7 +30,7 @@ const FIELD_STYLE: React.CSSProperties = {
   border: "1px solid rgba(26,26,26,0.20)",
   color: "var(--ink)",
   fontFamily: "var(--font-sans)",
-  fontSize: 14,
+  fontSize: "0.875rem",
   borderRadius: 2,
   outline: "none",
 };
@@ -92,7 +92,7 @@ export default function PricingCalculator() {
             className="inline-flex items-center gap-3 mb-3"
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: 11,
+              fontSize: "0.6875rem",
               textTransform: "uppercase",
               letterSpacing: "0.16em",
               color: "var(--terracotta)",
@@ -125,7 +125,7 @@ export default function PricingCalculator() {
           </h2>
           <p
             style={{
-              fontSize: 17,
+              fontSize: "1.0625rem",
               color: "var(--ink-2)",
               maxWidth: "44rem",
               lineHeight: 1.55,
@@ -154,7 +154,7 @@ export default function PricingCalculator() {
                   <span
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: 11,
+                      fontSize: "0.6875rem",
                       textTransform: "uppercase",
                       letterSpacing: "0.16em",
                       color: "var(--terracotta)",
@@ -169,7 +169,7 @@ export default function PricingCalculator() {
                       className="inline-flex items-center gap-1"
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: 11,
+                        fontSize: "0.6875rem",
                         textTransform: "uppercase",
                         letterSpacing: "0.12em",
                         color: "var(--oxblood)",
@@ -190,7 +190,7 @@ export default function PricingCalculator() {
                     <span
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: 10.5,
+                        fontSize: "0.65625rem",
                         textTransform: "uppercase",
                         letterSpacing: "0.14em",
                         color: "var(--ink-faint)",
@@ -218,7 +218,7 @@ export default function PricingCalculator() {
                     <span
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: 10.5,
+                        fontSize: "0.65625rem",
                         textTransform: "uppercase",
                         letterSpacing: "0.14em",
                         color: "var(--ink-faint)",
@@ -249,7 +249,7 @@ export default function PricingCalculator() {
                     <span
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: 10.5,
+                        fontSize: "0.65625rem",
                         textTransform: "uppercase",
                         letterSpacing: "0.14em",
                         color: "var(--ink-faint)",
@@ -281,7 +281,7 @@ export default function PricingCalculator() {
                     <div
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: 10.5,
+                        fontSize: "0.65625rem",
                         textTransform: "uppercase",
                         letterSpacing: "0.14em",
                         color: "var(--ink-faint)",
@@ -308,7 +308,7 @@ export default function PricingCalculator() {
                             style={{
                               padding: "7px 12px",
                               fontFamily: "var(--font-sans)",
-                              fontSize: 12.5,
+                              fontSize: "0.78125rem",
                               fontWeight: 500,
                               color: checked ? "var(--ink)" : "var(--ink-2)",
                               background: checked
@@ -350,7 +350,7 @@ export default function PricingCalculator() {
           style={{
             padding: "11px 18px",
             fontFamily: "var(--font-sans)",
-            fontSize: 13.5,
+            fontSize: "0.84375rem",
             fontWeight: 600,
             color: "var(--ink)",
             background: "transparent",
@@ -376,7 +376,7 @@ export default function PricingCalculator() {
               <div
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: 11,
+                  fontSize: "0.6875rem",
                   textTransform: "uppercase",
                   letterSpacing: "0.16em",
                   color: "rgba(250,247,240,0.85)",
@@ -401,7 +401,7 @@ export default function PricingCalculator() {
                   <span
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: 12,
+                      fontSize: "0.75rem",
                       color: "rgba(250,247,240,0.8)",
                       marginLeft: 10,
                       textTransform: "uppercase",
@@ -427,7 +427,7 @@ export default function PricingCalculator() {
                     <span
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: 12,
+                        fontSize: "0.75rem",
                         color: "rgba(250,247,240,0.8)",
                         marginLeft: 10,
                         textTransform: "uppercase",
@@ -441,7 +441,7 @@ export default function PricingCalculator() {
               </div>
               <p
                 style={{
-                  fontSize: 14,
+                  fontSize: "0.875rem",
                   color: "rgba(250,247,240,0.88)",
                   maxWidth: "44ch",
                   lineHeight: 1.55,
@@ -459,7 +459,7 @@ export default function PricingCalculator() {
                 whiteSpace: "nowrap",
                 padding: "18px 26px",
                 fontFamily: "var(--font-sans)",
-                fontSize: 15,
+                fontSize: "0.9375rem",
                 fontWeight: 700,
                 background: "var(--cream-3)",
                 color: "var(--terracotta)",

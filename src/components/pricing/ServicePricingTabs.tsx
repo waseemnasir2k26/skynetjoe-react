@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import {
   Bot,
@@ -110,7 +110,7 @@ function TierCard({ tier, idx }: { tier: ServiceTier; idx: number }) {
       </div>
       <p
         style={{
-          fontSize: 13.5,
+          fontSize: "0.84375rem",
           color: "var(--ink-2)",
           marginBottom: 18,
           lineHeight: 1.5,
@@ -132,7 +132,7 @@ function TierCard({ tier, idx }: { tier: ServiceTier; idx: number }) {
           {formatPrice(tier.price)}
         </span>
         {tier.cadence === "monthly" && (
-          <span style={{ fontSize: 13, color: "var(--ink-faint)" }}>/mo</span>
+          <span style={{ fontSize: "0.8125rem", color: "var(--ink-faint)" }}>/mo</span>
         )}
       </div>
       <div
@@ -157,7 +157,7 @@ function TierCard({ tier, idx }: { tier: ServiceTier; idx: number }) {
             key={f}
             className="flex gap-2"
             style={{
-              fontSize: 13.5,
+              fontSize: "0.84375rem",
               color: "var(--ink-2)",
               lineHeight: 1.5,
             }}
@@ -179,7 +179,7 @@ function TierCard({ tier, idx }: { tier: ServiceTier; idx: number }) {
             ? {
                 padding: "12px 18px",
                 fontFamily: "var(--font-sans)",
-                fontSize: 14,
+                fontSize: "0.875rem",
                 fontWeight: 700,
                 background: "var(--terracotta)",
                 color: "var(--cream-3)",
@@ -189,7 +189,7 @@ function TierCard({ tier, idx }: { tier: ServiceTier; idx: number }) {
             : {
                 padding: "11px 17px",
                 fontFamily: "var(--font-sans)",
-                fontSize: 14,
+                fontSize: "0.875rem",
                 fontWeight: 600,
                 background: "transparent",
                 color: "var(--ink)",
@@ -205,10 +205,23 @@ function TierCard({ tier, idx }: { tier: ServiceTier; idx: number }) {
   );
 }
 
-function ServicePanel({ service }: { service: ServicePricing }) {
+function ServicePanel({
+  service,
+  panelId,
+  labelledBy,
+}: {
+  service: ServicePricing;
+  panelId: string;
+  labelledBy: string;
+}) {
   const Icon = ICONS[service.icon];
   return (
-    <div className="space-y-6">
+    <div
+      role="tabpanel"
+      id={panelId}
+      aria-labelledby={labelledBy}
+      tabIndex={0}
+      className="space-y-6">
       <div className="flex items-center gap-3">
         {Icon && (
           <span
@@ -234,7 +247,7 @@ function ServicePanel({ service }: { service: ServicePricing }) {
           >
             {service.label}
           </h3>
-          <p style={{ fontSize: 13.5, color: "var(--ink-2)" }}>
+          <p style={{ fontSize: "0.84375rem", color: "var(--ink-2)" }}>
             {service.tagline}
           </p>
         </div>
@@ -276,7 +289,7 @@ function ServicePanel({ service }: { service: ServicePricing }) {
                   padding: "10px 14px",
                   background: "var(--cream-3)",
                   border: "1px solid rgba(26,26,26,0.10)",
-                  fontSize: 13,
+                  fontSize: "0.8125rem",
                 }}
               >
                 <span style={{ color: "var(--ink-2)" }}>{a.label}</span>
@@ -311,7 +324,7 @@ function ServicePanel({ service }: { service: ServicePricing }) {
           href={`/services/${service.slug}`}
           className="inline-flex items-center gap-1.5"
           style={{
-            fontSize: 13.5,
+            fontSize: "0.84375rem",
             color: "var(--terracotta)",
             fontWeight: 600,
             textUnderlineOffset: 4,
@@ -333,6 +346,45 @@ export default function ServicePricingTabs() {
   const [activeSlug, setActiveSlug] = useState<string>(services[0]?.slug ?? "");
   const active =
     services.find((s) => s.slug === activeSlug) ?? services[0] ?? SERVICE_PRICING[0];
+
+  const catRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const svcRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Roving-tabindex keyboard nav for a WAI-ARIA tablist.
+  // Left/Right wrap, Home/End jump; selection follows focus.
+  function handleTablistKey(
+    e: React.KeyboardEvent,
+    index: number,
+    count: number,
+    refs: React.RefObject<(HTMLButtonElement | null)[]>,
+    select: (i: number) => void
+  ) {
+    let next = index;
+    switch (e.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        next = (index + 1) % count;
+        break;
+      case "ArrowLeft":
+      case "ArrowUp":
+        next = (index - 1 + count) % count;
+        break;
+      case "Home":
+        next = 0;
+        break;
+      case "End":
+        next = count - 1;
+        break;
+      default:
+        return; // Enter/Space activate natively via onClick
+    }
+    e.preventDefault();
+    select(next);
+    refs.current[next]?.focus();
+  }
+
+  const PANEL_ID = "service-pricing-panel";
+  const activeTabId = `service-tab-${active.slug}`;
 
   return (
     <section
@@ -388,7 +440,7 @@ export default function ServicePricingTabs() {
           </h2>
           <p
             style={{
-              fontSize: 17,
+              fontSize: "1.0625rem",
               color: "var(--ink-2)",
               maxWidth: "44rem",
               lineHeight: 1.55,
@@ -406,22 +458,38 @@ export default function ServicePricingTabs() {
           aria-label="Service categories"
           className="flex flex-wrap gap-2 mb-6 pb-2"
         >
-          {CATEGORIES.map((cat) => {
+          {CATEGORIES.map((cat, catIdx) => {
             const isActive = cat === activeCat;
+            const selectCat = (c: (typeof CATEGORIES)[number]) => {
+              setActiveCat(c);
+              const first = servicesByCategory(c)[0]?.slug;
+              if (first) setActiveSlug(first);
+            };
             return (
               <button
                 key={cat}
                 role="tab"
+                id={`service-cat-tab-${cat}`}
                 aria-selected={isActive}
-                onClick={() => {
-                  setActiveCat(cat);
-                  const first = servicesByCategory(cat)[0]?.slug;
-                  if (first) setActiveSlug(first);
+                aria-controls="service-subtablist"
+                tabIndex={isActive ? 0 : -1}
+                ref={(el) => {
+                  catRefs.current[catIdx] = el;
                 }}
+                onKeyDown={(e) =>
+                  handleTablistKey(
+                    e,
+                    catIdx,
+                    CATEGORIES.length,
+                    catRefs,
+                    (i) => selectCat(CATEGORIES[i])
+                  )
+                }
+                onClick={() => selectCat(cat)}
                 style={{
                   padding: "10px 18px",
                   fontFamily: "var(--font-sans)",
-                  fontSize: 14,
+                  fontSize: "0.875rem",
                   fontWeight: 600,
                   color: isActive ? "var(--cream-3)" : "var(--ink)",
                   background: isActive ? "var(--terracotta)" : "var(--cream-2)",
@@ -447,23 +515,39 @@ export default function ServicePricingTabs() {
         {/* Service sub-tabs */}
         <div
           role="tablist"
+          id="service-subtablist"
           aria-label="Services"
           className="flex flex-wrap gap-2 mb-10 pb-1"
         >
-          {services.map((s) => {
+          {services.map((s, svcIdx) => {
             const Icon = ICONS[s.icon];
             const isActive = s.slug === active.slug;
             return (
               <button
                 key={s.slug}
                 role="tab"
+                id={`service-tab-${s.slug}`}
                 aria-selected={isActive}
+                aria-controls={PANEL_ID}
+                tabIndex={isActive ? 0 : -1}
+                ref={(el) => {
+                  svcRefs.current[svcIdx] = el;
+                }}
+                onKeyDown={(e) =>
+                  handleTablistKey(
+                    e,
+                    svcIdx,
+                    services.length,
+                    svcRefs,
+                    (i) => setActiveSlug(services[i].slug)
+                  )
+                }
                 onClick={() => setActiveSlug(s.slug)}
                 className="inline-flex items-center gap-2"
                 style={{
                   padding: "8px 14px",
                   fontFamily: "var(--font-sans)",
-                  fontSize: 13,
+                  fontSize: "0.8125rem",
                   fontWeight: 500,
                   color: isActive ? "var(--ink)" : "var(--ink-2)",
                   background: isActive ? "var(--cream-3)" : "transparent",
@@ -494,7 +578,11 @@ export default function ServicePricingTabs() {
           })}
         </div>
 
-        <ServicePanel service={active} />
+        <ServicePanel
+          service={active}
+          panelId={PANEL_ID}
+          labelledBy={activeTabId}
+        />
       </div>
     </section>
   );

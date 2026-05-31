@@ -20,6 +20,7 @@ import { ArrowRight, MessageCircle, Calendar, MapPin, CheckCircle2 } from "lucid
 import { STATES, getStateBySlug, type StateEntry } from "@/lib/states";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { getStateEnrichment } from "@/data/state-enrichment";
 import { isLocationIndexable } from "@/lib/sitemap-quality";
 
@@ -168,14 +169,6 @@ export default async function StatePage({
           })),
         },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
-          { "@type": "ListItem", position: 2, name: "Locations", item: `${SITE.url}/locations` },
-          { "@type": "ListItem", position: 3, name: s.name, item: `${SITE.url}/locations/${s.slug}` },
-        ],
-      },
     ],
   };
 
@@ -192,22 +185,15 @@ export default async function StatePage({
         }}
       >
         <div className="container-x px-6">
-          <nav
-            className="mb-6 flex items-center gap-2"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              color: "var(--ink-faint)",
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-            }}
-          >
-            <Link href="/" style={{ color: "var(--ink-faint)" }}>Home</Link>
-            <span>/</span>
-            <Link href="/locations" style={{ color: "var(--ink-faint)" }}>Locations</Link>
-            <span>/</span>
-            <span style={{ color: "var(--terracotta)" }}>{s.name}</span>
-          </nav>
+          <Breadcrumbs
+            bare
+            marginBottom={24}
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Locations", href: "/locations" },
+              { label: s.name },
+            ]}
+          />
 
           <div className="max-w-4xl">
             <div className="mb-6" style={eyebrow}>
