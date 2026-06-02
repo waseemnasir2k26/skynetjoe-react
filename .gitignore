@@ -54,3 +54,4 @@ next-env.d.ts
 
 # build/run logs
 *.log
+.env*.local
