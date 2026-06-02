@@ -38,8 +38,9 @@ const C = {
   cream3: "#FAF7F0",
   ink: "#1A1A1A",
   ink2: "#3A3A36",
-  inkFaint: "#6B6B65",
-  terra: "#C66B3F",
+  inkFaint: "#56564F", // AA: ~5:1 on cream (was #6B6B65, ~4.0:1, failed)
+  terra: "#C66B3F", // backgrounds / borders / icons only
+  terraAA: "#A8451F", // accent TEXT — clears 4.5:1 on cream
   terra2: "#B85A30",
   sage: "#8A9A7B",
   oxblood: "#6B2C2C",
@@ -58,7 +59,7 @@ const TRUST_CARDS = [
   {
     icon: Compass,
     title: "Your 60-day roadmap",
-    body: "Top 3 leaks ranked by recovered revenue. Sequenced so you ship the biggest first.",
+    body: "Your top 3 fixes, ranked by money recovered, biggest first. Sequenced so you ship the highest-impact one first.",
   },
   {
     icon: Hammer,
@@ -245,6 +246,8 @@ export default function DiscoveryFunnel() {
     }
   }, [scrollTo]);
 
+  // `color` drives the decorative rule (large/non-text); accent TEXT always
+  // uses the AA-safe terracotta so micro-copy clears 4.5:1 on cream.
   const eyebrow = (color: string, label: string) => (
     <div
       style={{
@@ -252,7 +255,7 @@ export default function DiscoveryFunnel() {
         fontSize: 11,
         textTransform: "uppercase",
         letterSpacing: "0.16em",
-        color,
+        color: color === C.terra ? C.terraAA : color,
         marginBottom: 16,
         display: "inline-flex",
         alignItems: "center",
@@ -300,16 +303,16 @@ export default function DiscoveryFunnel() {
                   margin: "0 0 24px",
                 }}
               >
-                Find the leak.{" "}
-                <em
+                Find what&apos;s costing you.{" "}
+                <span
                   style={{
                     fontStyle: "normal",
-                    color: C.terra,
+                    color: C.terraAA,
                     fontWeight: 700,
                   }}
                 >
-                  Plug it in 14 days.
-                </em>
+                  Fixed in 14 days.
+                </span>
               </h1>
 
               <p
@@ -337,7 +340,7 @@ export default function DiscoveryFunnel() {
                   marginBottom: 28,
                 }}
               >
-                <span style={{ color: C.terra }}>
+                <span style={{ color: C.terraAA }}>
                   <Star
                     style={{
                       display: "inline-block",
@@ -431,7 +434,7 @@ export default function DiscoveryFunnel() {
                       }}
                     >
                       23% show-rate to{" "}
-                      <span style={{ color: C.terra, fontWeight: 600 }}>
+                      <span style={{ color: C.terraAA, fontWeight: 600 }}>
                         71% in 6 weeks.
                       </span>
                     </p>
@@ -602,9 +605,9 @@ export default function DiscoveryFunnel() {
               }}
             >
               Seven quick questions.{" "}
-              <em style={{ fontStyle: "normal", color: C.terra }}>
+              <span style={{ color: C.terraAA, fontWeight: 700 }}>
                 Ninety seconds.
-              </em>
+              </span>
             </h2>
             <p
               style={{
@@ -615,8 +618,11 @@ export default function DiscoveryFunnel() {
               }}
             >
               I read these before our call so we don&apos;t burn 20 minutes on
-              context. Rather skip? Hit <em>Skip to calendar</em> on any
-              question.
+              context. Rather skip? Hit{" "}
+              <strong style={{ fontWeight: 700, color: C.ink }}>
+                Skip to calendar
+              </strong>{" "}
+              on any question.
             </p>
           </motion.div>
 
@@ -745,9 +751,9 @@ export default function DiscoveryFunnel() {
               }}
             >
               Thirty minutes.{" "}
-              <em style={{ fontStyle: "normal", color: C.terra }}>
+              <span style={{ color: C.terraAA, fontWeight: 700 }}>
                 One real audit.
-              </em>
+              </span>
             </h2>
             <p style={{ fontSize: 16, color: C.ink2, lineHeight: 1.6, margin: 0 }}>
               No deck. No SDR. Just me, your funnel, and a shared screen. Show
@@ -770,7 +776,7 @@ export default function DiscoveryFunnel() {
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.22em",
-                color: C.terra,
+                color: C.terraAA,
                 marginBottom: 28,
                 textAlign: "center",
               }}
@@ -868,7 +874,7 @@ export default function DiscoveryFunnel() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 4vw, 44px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 lineHeight: 1.08,
                 color: C.ink,
@@ -876,9 +882,9 @@ export default function DiscoveryFunnel() {
               }}
             >
               The six questions{" "}
-              <em style={{ fontStyle: "normal", color: C.terra }}>
+              <span style={{ color: C.terraAA, fontWeight: 700 }}>
                 I get most.
-              </em>
+              </span>
             </h2>
           </motion.div>
 
@@ -1012,7 +1018,7 @@ function Stat({ value, label }: { value: string; label: string }) {
           fontStyle: "normal",
           fontSize: 18,
           fontWeight: 600,
-          color: "#C66B3F",
+          color: "#A8451F",
           letterSpacing: "-0.01em",
         }}
       >
@@ -1024,7 +1030,7 @@ function Stat({ value, label }: { value: string; label: string }) {
           fontSize: 9,
           textTransform: "uppercase",
           letterSpacing: "0.16em",
-          color: "#6B6B65",
+          color: "#56564F",
           marginTop: 2,
         }}
       >

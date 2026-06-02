@@ -134,7 +134,7 @@ function StatCard({ card, start, i }: { card: Card; start: boolean; i: number })
           fontStyle: "normal",
           fontSize: 56,
           fontWeight: 700,
-          color: "var(--terracotta)",
+          color: "var(--terracotta-aa)",
           lineHeight: 1,
           marginBottom: 10,
           letterSpacing: "-0.02em",
@@ -205,7 +205,7 @@ export default function Achievements() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
               marginBottom: 14,
               display: "inline-flex",
               alignItems: "center",
@@ -228,7 +228,7 @@ export default function Achievements() {
             }}
           >
             1,000+ shipped.{" "}
-            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
+            <span style={{ fontStyle: "normal", color: "var(--terracotta-aa)", fontWeight: 700 }}>
               Most under one keyboard.
             </span>
           </h2>
@@ -334,7 +334,7 @@ export default function Achievements() {
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.18em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 marginBottom: 10,
               }}
             >
@@ -352,7 +352,7 @@ export default function Achievements() {
               }}
             >
               Waseem Nasir — founder, builder, the one who{" "}
-              <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
+              <span style={{ fontStyle: "normal", color: "var(--terracotta-aa)", fontWeight: 700 }}>
                 actually ships.
               </span>
             </p>

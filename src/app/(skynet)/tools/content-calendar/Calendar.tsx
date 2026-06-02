@@ -466,10 +466,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
     <div>
       {/* HOOK / HERO */}
       <div className="mb-6 px-1">
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-3">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-3">
           — Content calendar generator · free forever
         </p>
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4 font-serif italic">
+        <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4">
           Stop staring at the empty week.
         </h1>
         <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed max-w-3xl">
@@ -488,7 +488,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           backdropFilter: "blur(14px)",
         }}
       >
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-5">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-5">
           — Step 1 · who are we writing for?
         </p>
 
@@ -559,10 +559,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           </Field>
         </div>
 
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-1">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-1">
           — Posting cadence
         </p>
-        <p className="text-xs italic text-[var(--ink-faint)] mb-3">
+        <p className="text-xs text-[var(--ink-faint)] mb-3">
           0 means we skip the channel. Cap each at what you&apos;ll actually ship.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -582,7 +582,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                     </span>
                     {meta.label}
                   </label>
-                  <span className="text-sm font-extrabold text-[var(--terracotta)] tabular-nums">
+                  <span className="text-sm font-extrabold text-[var(--terracotta-aa)] tabular-nums">
                     {v}/wk
                   </span>
                 </div>
@@ -626,7 +626,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           backdropFilter: "blur(14px)",
         }}
       >
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)]">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)]">
           — {posts.length} posts ready · 30 days · regenerate till you love it
         </p>
         <div className="flex flex-wrap gap-2">
@@ -678,7 +678,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           {DAY_LABELS.map((d) => (
             <div
               key={d}
-              className="text-[10px] sm:text-xs uppercase tracking-wider text-[var(--terracotta)]/70 font-semibold text-center"
+              className="text-[10px] sm:text-xs uppercase tracking-wider text-[var(--terracotta-aa)]/70 font-semibold text-center"
             >
               {d}
             </div>
@@ -714,7 +714,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                 <p className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[var(--ink-faint)] mb-1 flex items-center justify-between">
                   <span>{cell.date.slice(8, 10)}</span>
                   {isToday && (
-                    <span className="text-[var(--terracotta)] font-bold">Today</span>
+                    <span className="text-[var(--terracotta-aa)] font-bold">Today</span>
                   )}
                 </p>
                 <div className="flex flex-col gap-1 overflow-hidden">
@@ -742,7 +742,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                     <button
                       type="button"
                       onClick={() => setOpenPost(cellPosts[3])}
-                      className="text-[10px] sm:text-[11px] text-[var(--terracotta)] hover:text-[var(--terracotta)] text-left"
+                      className="text-[10px] sm:text-[11px] text-[var(--terracotta-aa)] hover:text-[var(--terracotta-aa)] text-left"
                     >
                       +{cellPosts.length - 3} more
                     </button>
@@ -801,10 +801,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             className="rounded-2xl p-4 border border-[rgba(26,26,26,0.12)] bg-[var(--cream-3)]"
             style={{ boxShadow: "inset 0 1px 2px rgba(26,26,26,0.04)" }}
           >
-            <p className="text-sm leading-relaxed text-[var(--ink-2)] italic mb-2">
+            <p className="text-sm leading-relaxed text-[var(--ink-2)] mb-2">
               &ldquo;{t.quote}&rdquo;
             </p>
-            <p className="text-[11px] uppercase tracking-wider font-semibold text-[var(--terracotta)]">
+            <p className="text-[11px] uppercase tracking-wider font-semibold text-[var(--terracotta-aa)]">
               — {t.who}
             </p>
           </div>
@@ -820,10 +820,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         }}
       >
         <div className="max-w-xl">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-2">
+          <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-2">
             — Skip the copy-paste
           </p>
-          <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-2 font-serif italic">
+          <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-2">
             Want the calendar to post itself?
           </h3>
           <p className="text-sm text-[var(--ink-2)] leading-relaxed">
@@ -905,7 +905,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                       className="text-[11px] px-2 py-0.5 rounded-full"
                       style={{
                         background: "rgba(198,107,63,0.10)",
-                        color: "var(--terracotta)",
+                        color: "var(--terracotta-aa)",
                         border: "1px solid rgba(198,107,63,0.30)",
                       }}
                     >
@@ -927,7 +927,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                   </span>
                 </summary>
                 <div className="mt-3 space-y-1.5">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--terracotta)]">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--terracotta-aa)]">
                     Lever — {KIND_PSYCH[openPost.kind].lever}
                   </p>
                   <p className="text-sm leading-relaxed text-[var(--ink-2)]">
@@ -967,10 +967,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
 
       {/* FEEDBACK */}
       <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-2">
           — Feedback · 30-second form
         </p>
-        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2">
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
@@ -1018,7 +1018,6 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         }
         .cc-input::placeholder {
           color: var(--ink-faint);
-          font-style: italic;
           font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
           font-size: 0.85rem;
         }
@@ -1115,12 +1114,12 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-1.5">
+      <label className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-1.5">
         {label}
       </label>
       {children}
       {hint ? (
-        <p className="text-xs italic text-[var(--ink-faint)] mt-1.5">{hint}</p>
+        <p className="text-xs text-[var(--ink-faint)] mt-1.5">{hint}</p>
       ) : null}
     </div>
   );
@@ -1129,7 +1128,7 @@ function Field({
 function ModalRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1">
+      <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1">
         {label}
       </p>
       <div className="text-sm text-[var(--ink)]">{children}</div>

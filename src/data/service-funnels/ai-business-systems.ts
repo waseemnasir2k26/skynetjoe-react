@@ -30,11 +30,11 @@ const content: ServiceFunnelContent = {
   pains: [
     {
       title: "The work lives in 14 tools and nobody's hands",
-      body: "Orders land in email, get re-typed into the CRM, copied to a spreadsheet, pinged to Slack. Every step is a human moving data between apps that don't talk. That swivel-chair tax is your whole ops cost, and it doesn't show up on any invoice.",
+      body: "Orders land in email, get re-typed into your contact list, copied to a spreadsheet, pinged to Slack. Every step is a human moving data between apps that don't talk. That swivel-chair tax is your whole ops cost, and it doesn't show up on any invoice.",
     },
     {
       title: "AI pilots that never shipped",
-      body: "Somebody on the team built a clever GPT prompt. It impressed everyone in the demo and then died in a Notion doc. The gap was never the idea — it was wiring it into a real workflow with real data, error handling, and an owner. Experiments aren't systems.",
+      body: "Somebody on the team built a clever AI prompt. It impressed everyone in the demo and then died in a Notion doc. The gap was never the idea — it was wiring it into a real workflow with real data, error handling, and an owner. Experiments aren't systems.",
     },
     {
       title: "One head holds the whole machine",
@@ -59,7 +59,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "Multi-tool orchestration that ends the re-typing",
-      body: "Email, CRM, spreadsheet, billing, and Slack wired into one pipeline so data is entered once and flows everywhere. No more copy-paste between apps, no more two versions of the truth.",
+      body: "Email, your contact list, spreadsheets, billing, and Slack wired into one pipeline so data is entered once and flows everywhere. No more copy-paste between apps, no more two versions of the truth.",
       proof: "KODIASIMMO: 17 stuck intakes recovered, auto-routed",
     },
     {
@@ -125,7 +125,7 @@ const content: ServiceFunnelContent = {
     metric: "6 hours → 6 minutes",
     client: "EU logistics group (anonymized)",
     detail:
-      "A 17-node n8n + GPT-4o pipeline reads a shared logistics inbox, classifies each thread on five variables, drafts accent-safe replies, and never auto-sends to a CC'd executive — collapsing routine response time from six hours to six minutes and dispatcher load from four hours a day to forty-five minutes. The same audit-then-build discipline runs across every system engagement.",
+      "An automated pipeline reads a shared logistics inbox, classifies each thread on five variables, drafts accent-safe replies, and never auto-sends to a CC'd executive — collapsing routine response time from six hours to six minutes and dispatcher load from four hours a day to forty-five minutes. The same audit-then-build discipline runs across every system engagement.",
   },
 
   toolStack: {
@@ -170,7 +170,7 @@ const content: ServiceFunnelContent = {
     },
     {
       q: "Can you build on the tools and data we already have?",
-      a: "Yes, and I'll consolidate before I add. Most stacks have the right tools wired wrong, not too few tools. I connect what you own — email, CRM, spreadsheets, billing, your docs — and only recommend something new when there's a real gap. Fewer tools doing more, not another subscription.",
+      a: "Yes, and I'll consolidate before I add. Most stacks have the right tools wired wrong, not too few tools. I connect what you own — email, your contact list, spreadsheets, billing, your docs — and only recommend something new when there's a real gap. Fewer tools doing more, not another subscription.",
     },
   ],
 

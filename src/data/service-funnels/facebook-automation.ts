@@ -62,8 +62,8 @@ const content: ServiceFunnelContent = {
       proof: "9-card mix, a month scheduled ahead",
     },
     {
-      title: "Leads flow straight into your CRM",
-      body: "Page DMs, comment captures, and Lead Form submissions land in GoHighLevel tagged by source, so follow-up cadences fire automatically and nothing depends on you remembering to scroll back through Messenger.",
+      title: "Every lead lands in one place, ready to follow up",
+      body: "Page DMs, comment captures, and Lead Form submissions land in one follow-up tool tagged by source, so follow-up messages fire automatically and nothing depends on you remembering to scroll back through Messenger.",
       proof: "0 leads lost to the inbox",
     },
   ],
@@ -79,7 +79,7 @@ const content: ServiceFunnelContent = {
       },
       {
         dimension: "What you actually get",
-        us: "A DM + comment + posting system wired into your CRM that you keep.",
+        us: "A DM + comment + posting system wired into your follow-up tool that you keep.",
         them: "A monthly 'we'll manage your page' retainer with nothing you own.",
       },
       {
@@ -125,7 +125,7 @@ const content: ServiceFunnelContent = {
       "You already have a page with traffic — comments, DMs, ad replies — that nobody is answering fast enough.",
       "You've got budget ready and want a system you own, not another monthly 'we'll handle it' invoice.",
       "You run a local service, coaching, or community brand where a DM-to-call is the real sale.",
-      "You want the funnel wired into your CRM so follow-up fires without you scrolling Messenger.",
+      "You want the funnel wired into your follow-up tool so follow-up fires without you scrolling Messenger.",
     ],
     notForYou: [
       "You want the cheapest quote — a Fiverr gig will undercut me and you'll get a Fiverr funnel.",
@@ -177,7 +177,7 @@ const content: ServiceFunnelContent = {
 
   finalCta: {
     h2: "Stop letting buyers DM your page into the void.",
-    body: "30-min discovery call. I'll audit your page and inbox, rank the leaks by missed-lead value, and have a fixed-scope build plan back in 48 hours.",
+    body: "30-min discovery call. I'll audit your page and inbox, rank the gaps by how many leads they cost you, and have a fixed-scope build plan back in 48 hours.",
     ctaLabel: "Start the brief",
   },
 };

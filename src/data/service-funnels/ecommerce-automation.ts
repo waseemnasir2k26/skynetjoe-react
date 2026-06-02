@@ -15,7 +15,7 @@ const content: ServiceFunnelContent = {
   hero: {
     eyebrow: "Development · E-commerce Automation · 2026",
     h1: "One order trigger handles fulfilment, the cart, and the review request — while you sleep.",
-    sub: "Your store earns despite the stack, not because of it: an inventory sheet, a label tool, a Klaviyo flow that won't fire on the right tag, and a support inbox three days behind. I wire Shopify or Woo, Stripe, n8n, and Klaviyo into one event-driven system so a single order trigger runs everything downstream. Same discipline behind the bilingual KSA fashion Shopify store we shipped null-to-launch in 14 days.",
+    sub: "Your store earns despite the stack, not because of it: an inventory sheet, a label tool, a Klaviyo flow that won't fire on the right tag, and a support inbox three days behind. I wire Shopify or Woo, Stripe, and Klaviyo into one event-driven system so a single order trigger runs everything downstream. Same discipline behind the bilingual KSA fashion Shopify store we shipped null-to-launch in 14 days.",
     primary: { label: "Book the stack audit", href: "/discovery-call" },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
@@ -33,7 +33,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "Carts walk away and never come back",
-      body: "Most checkouts get abandoned, and the recovery email either doesn't exist or fires on the wrong tag two days too late. That's revenue leaking out of the store every single day with no system catching it.",
+      body: "Most checkouts get abandoned, and the recovery email either doesn't exist or fires on the wrong tag two days too late. That's money walking out of the store every single day with no system catching it.",
     },
     {
       title: "Buyers vanish after the first order",
@@ -158,7 +158,7 @@ const content: ServiceFunnelContent = {
     },
     {
       q: "Does this connect to my 3PL, courier, and supplier feeds?",
-      a: "Yes. ShipStation, Easyship, and most courier APIs plug straight into the routing layer; supplier reorder POs go out by email or API; subscriptions run through Recharge or Stripe Billing. The whole point is one hub everything feeds into, instead of five apps that each know a different slice of the order.",
+      a: "Yes. ShipStation, Easyship, and most courier APIs connect straight into the routing layer; supplier reorder POs go out by email or API; subscriptions run through Recharge or Stripe Billing. The whole point is one hub everything feeds into, instead of five apps that each know a different slice of the order.",
     },
     {
       q: "What does it cost?",
@@ -168,7 +168,7 @@ const content: ServiceFunnelContent = {
 
   finalCta: {
     h2: "Stop running fulfilment on three tabs and a sticky note.",
-    body: "30-min discovery call. I'll audit the stack, rank the leaks — abandoned carts, manual ops hours, dead post-purchase — by dollar value, and have a fixed-scope build plan back in 48 hours.",
+    body: "30-min discovery call. I'll audit the stack, rank where you're losing money — abandoned carts, manual ops hours, dead post-purchase — by dollar value, and have a fixed-scope build plan back in 48 hours.",
     ctaLabel: "Start the brief",
   },
 };

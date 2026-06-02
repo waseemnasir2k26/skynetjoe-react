@@ -520,7 +520,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         }}
       >
         <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold">
+          <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold">
             1. Paste your raw notes
           </p>
           <span className="text-xs text-[var(--ink-faint)] tabular-nums">
@@ -539,7 +539,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         {/* Controls */}
         <div className="grid sm:grid-cols-3 gap-4 mt-5">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
+            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
               Audience
             </label>
             <select
@@ -559,7 +559,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             </select>
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
+            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
               Desired length · {inputs.length} words
             </label>
             <input
@@ -581,7 +581,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             />
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
+            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
               Tone
             </label>
             <select
@@ -624,7 +624,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             <button
               type="button"
               onClick={generate}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-[rgba(26,26,26,0.18)] bg-[var(--cream-3)] text-[var(--ink)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta)] transition"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold border border-[rgba(26,26,26,0.18)] bg-[var(--cream-3)] text-[var(--ink)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)] transition"
             >
               Regenerate
             </button>
@@ -632,7 +632,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         </div>
 
         {inputs.text.trim().length < 40 && (
-          <p className="mt-3 text-xs text-[var(--terracotta)]/90">
+          <p className="mt-3 text-xs text-[var(--terracotta-aa)]/90">
             Paste at least 40 characters of text to enable generation.
           </p>
         )}
@@ -657,7 +657,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               backdropFilter: "blur(14px)",
             }}
           >
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-2">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-2">
               2. Pick the format you need
             </p>
             <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-5">
@@ -710,7 +710,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
                   <ul className="space-y-2 text-base text-[var(--ink)] leading-relaxed list-none">
                     {bundle.tldr.bullets.map((b, i) => (
                       <li key={i} className="flex gap-2">
-                        <span className="text-[var(--terracotta)]">•</span>
+                        <span className="text-[var(--terracotta-aa)]">•</span>
                         <span>{b}</span>
                       </li>
                     ))}
@@ -720,13 +720,13 @@ export default function Generator({ calUrl }: { calUrl: string }) {
 
               {activeTab === "email" && (
                 <div className="space-y-3">
-                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold">
                     Subject
                   </p>
                   <p className="text-base text-[var(--ink)] font-semibold">
                     {bundle.email.subject}
                   </p>
-                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mt-3">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mt-3">
                     Body
                   </p>
                   <pre className="text-sm text-[var(--ink)] leading-relaxed whitespace-pre-wrap font-sans">
@@ -743,7 +743,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
 
               {activeTab === "deck" && (
                 <div>
-                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-2">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-2">
                     Slide title
                   </p>
                   <h4 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-4">
@@ -752,7 +752,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
                   <ul className="space-y-2.5 text-base text-[var(--ink)] leading-relaxed">
                     {bundle.deck.bullets.map((b, i) => (
                       <li key={i} className="flex gap-2">
-                        <span className="text-[var(--terracotta)] font-bold">{i + 1}.</span>
+                        <span className="text-[var(--terracotta-aa)] font-bold">{i + 1}.</span>
                         <span>{b}</span>
                       </li>
                     ))}
@@ -767,13 +767,13 @@ export default function Generator({ calUrl }: { calUrl: string }) {
                   <Section label="Traction">{bundle.investor.traction}</Section>
                   <Section label="Ask">{bundle.investor.ask}</Section>
                   <div>
-                    <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1.5">
+                    <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
                       Next steps
                     </p>
                     <ul className="space-y-1.5">
                       {bundle.investor.next.map((b, i) => (
                         <li key={i} className="flex gap-2">
-                          <span className="text-[var(--terracotta)]">→</span>
+                          <span className="text-[var(--terracotta-aa)]">→</span>
                           <span>{b}</span>
                         </li>
                       ))}
@@ -825,7 +825,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             }}
           >
             <div className="max-w-xl">
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-2">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-2">
                 Want a REAL AI-powered summary?
               </p>
               <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-2">
@@ -862,10 +862,10 @@ export default function Generator({ calUrl }: { calUrl: string }) {
 
         {/* FEEDBACK FORM */}
         <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
-          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-2">
             — Feedback · 30-second form
           </p>
-          <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+          <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2">
             What should this tool do next?
           </h3>
           <p className="text-sm text-[var(--ink-2)] mb-4">
@@ -922,7 +922,6 @@ export default function Generator({ calUrl }: { calUrl: string }) {
           padding: 1rem 1.25rem;
         }
         .esg-textarea::placeholder {
-          font-style: italic;
           font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
           font-size: 0.85rem;
           color: var(--ink-faint);
@@ -994,7 +993,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)]/80 font-semibold mb-1">
+      <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1">
         {label}
       </p>
       <p>{children}</p>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { Calculator, Activity, Compass, ArrowLeftRight, Mic, FileText, CalendarDays, Target, Library, Film, ArrowRight } from "lucide-react";
+import Reveal from "./Reveal";
 
 export const metadata: Metadata = {
   title: "Free Tools — 10-tool suite for service businesses | SkynetLabs",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SkynetLabs Free Tools — 10 calculators, diagnostics and generators",
     description:
-      "Find out what your business is leaking. Ten free tools: calculators, diagnostics and generators for service businesses.",
+      "Find out where your business is losing time and money. Ten free tools: calculators, diagnostics and generators for service businesses.",
     url: `${SITE.url}/tools`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -73,7 +74,7 @@ const TOOLS = [
     slug: "automation-gap-analyzer",
     name: "Automation Gap Analyzer",
     blurb:
-      "90 seconds. 12 questions across lead capture, follow-up, reporting, team productivity. One automation gap %, four-axis radar, and the one biggest leak to fix first.",
+      "90 seconds. 12 questions across lead capture, follow-up, reporting, team productivity. One automation gap %, four-axis radar, and the one biggest time-sink to fix first.",
     Icon: Target,
   },
   {
@@ -126,14 +127,14 @@ export default function ToolsIndexPage() {
           className="container-x px-6 pt-32 pb-16 md:pt-40"
           style={{ background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
         >
-          <div className="max-w-3xl">
+          <Reveal className="max-w-3xl">
             <div
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 fontWeight: 600,
                 marginBottom: 22,
                 display: "inline-flex",
@@ -148,30 +149,30 @@ export default function ToolsIndexPage() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(40px, 6vw, 64px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.05,
                 color: "var(--ink)",
                 marginBottom: 18,
               }}
             >
-              Find out what your business is{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
-                leaking.
-              </em>
+              Find out where your business is{" "}
+              <span style={{ color: "var(--terracotta-aa)" }}>
+                losing money.
+              </span>
             </h1>
             <p style={{ fontSize: 18, color: "var(--ink-2)", maxWidth: "52ch", lineHeight: 1.6 }}>
               Ten utilities I built for myself before I built them for clients.
               All free. Some hand you the result instantly; a few ask for an
               email to unlock it. Just numbers, either way.
             </p>
-          </div>
+          </Reveal>
         </section>
         <section className="container-x px-6 py-20">
           <div className="grid md:grid-cols-2 gap-6">
             {TOOLS.map(({ slug, name, blurb, Icon }, i) => (
+              <Reveal key={slug} delay={(i % 2) * 0.06}>
               <Link
-                key={slug}
                 href={`/tools/${slug}`}
                 className="group relative"
                 style={{
@@ -196,7 +197,7 @@ export default function ToolsIndexPage() {
                       justifyContent: "center",
                     }}
                   >
-                    <Icon className="w-6 h-6" style={{ color: "var(--terracotta)" }} />
+                    <Icon className="w-6 h-6" style={{ color: "var(--terracotta-aa)" }} />
                   </div>
                   <ArrowRight
                     className="w-5 h-5 group-hover:translate-x-1 transition-all"
@@ -217,6 +218,7 @@ export default function ToolsIndexPage() {
                 </h2>
                 <p style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6 }}>{blurb}</p>
               </Link>
+              </Reveal>
             ))}
           </div>
         </section>

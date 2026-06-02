@@ -162,7 +162,7 @@ export default function Quiz() {
         ref={cardRef}
         className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-10 md:p-16 text-center backdrop-blur-md"
       >
-        <Loader2 className="mx-auto mb-6 h-12 w-12 animate-spin text-[var(--terracotta)]" />
+        <Loader2 className="mx-auto mb-6 h-12 w-12 animate-spin text-[var(--terracotta-aa)]" />
         <p className="text-xl md:text-2xl font-semibold text-[var(--ink)]">
           Calculating your chaos level…
         </p>
@@ -195,7 +195,7 @@ export default function Quiz() {
     <div ref={cardRef} className="relative">
       {/* progress bar */}
       <div className="mb-6 flex items-center justify-between gap-4">
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--terracotta)]">
+        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--terracotta-aa)]">
           Question {step + 1} of {QUIZ.length}
         </div>
         <div className="text-xs text-[var(--ink-faint)]">
@@ -220,7 +220,7 @@ export default function Quiz() {
             <span className="text-xl leading-none" aria-hidden>
               {current.icon}
             </span>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--terracotta)]">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--terracotta-aa)]">
               Step {current.step}
             </span>
           </div>
@@ -254,8 +254,8 @@ export default function Quiz() {
                   <ArrowRight
                     className={
                       selected
-                        ? "h-4 w-4 text-[var(--terracotta)]"
-                        : "h-4 w-4 text-[var(--ink-faint)] transition group-hover:translate-x-0.5 group-hover:text-[var(--terracotta)]"
+                        ? "h-4 w-4 text-[var(--terracotta-aa)]"
+                        : "h-4 w-4 text-[var(--ink-faint)] transition group-hover:translate-x-0.5 group-hover:text-[var(--terracotta-aa)]"
                     }
                   />
                 </button>
@@ -268,14 +268,14 @@ export default function Quiz() {
               type="button"
               onClick={back}
               disabled={step === 0}
-              className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)] disabled:cursor-not-allowed disabled:opacity-30"
+              className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta-aa)] disabled:cursor-not-allowed disabled:opacity-30"
             >
               ← Back
             </button>
             <button
               type="button"
               onClick={restart}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)]"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta-aa)]"
             >
               <RotateCcw className="h-3 w-3" />
               Start over
@@ -374,7 +374,7 @@ function ResultCard({
         {/* body */}
         <div className="grid grid-cols-1 gap-8 px-7 py-8 md:grid-cols-2 md:px-12 md:py-10">
           <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta)]">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
               What this means
             </p>
             <ul className="space-y-3">
@@ -393,7 +393,7 @@ function ResultCard({
             </ul>
           </div>
           <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta)]">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
               What we&apos;d fix first
             </p>
             <ul className="space-y-3">
@@ -402,7 +402,7 @@ function ResultCard({
                   key={line}
                   className="flex gap-3 text-sm leading-relaxed text-[var(--ink-2)] md:text-base"
                 >
-                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta)]">
+                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
                     {idx + 1}
                   </span>
                   {line}
@@ -437,11 +437,11 @@ function ResultCard({
             <button
               type="button"
               onClick={onCopy}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 text-sm font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta)]"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 text-sm font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
             >
               {copyState === "copied" ? (
                 <>
-                  <Check className="h-4 w-4 text-[var(--terracotta)]" />
+                  <Check className="h-4 w-4 text-[var(--terracotta-aa)]" />
                   Link copied
                 </>
               ) : (
@@ -456,7 +456,7 @@ function ResultCard({
           <button
             type="button"
             onClick={onRestart}
-            className="mt-5 inline-flex items-center gap-1.5 rounded-lg border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta)]"
+            className="mt-5 inline-flex items-center gap-1.5 rounded-lg border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
           >
             <RotateCcw className="h-3 w-3" />
             Retake the quiz
@@ -471,10 +471,10 @@ function ResultCard({
 function FeedbackForm() {
   return (
     <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
-      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-2">
         — Feedback · 30-second form
       </p>
-      <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+      <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2">
         What should this tool do next?
       </h3>
       <p className="text-sm text-[var(--ink-2)] mb-4">

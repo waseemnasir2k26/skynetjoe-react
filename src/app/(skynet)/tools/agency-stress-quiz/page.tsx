@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Agency Stress Quiz · find your chaos score in 60 seconds",
     description:
-      "7 questions, one honest score (0 to 70). Tells you exactly where your service business is leaking leads, cash, and sleep.",
+      "7 questions, one honest score (0 to 70). Tells you exactly where your service business is losing leads, cash, and sleep.",
     url: `${SITE.url}${PATH}`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -40,11 +40,11 @@ const faqs = [
   },
   {
     q: "How accurate is the score?",
-    a: "Accurate enough to tell you which of four buckets you're in: clean, manageable, leaking, or chaos. It's not a financial audit. It's a 60-second pattern match against the 200+ service businesses I've worked inside.",
+    a: "Accurate enough to tell you which of four buckets you're in: clean, manageable, strained, or chaos. It's not a financial audit. It's a 60-second pattern match against the 200+ service businesses I've worked inside.",
   },
   {
     q: "What if my score is 70?",
-    a: "Then you're in the bucket I like building for. Bleeding businesses fix faster than chill ones because the leak is easier to find. Book a 30-min audit and we'll map the first three fixes before the call ends.",
+    a: "Then you're in the bucket I like building for. Strained businesses fix faster than chill ones because the problem is easier to find. Book a 30-min audit and we'll map the first three fixes before the call ends.",
   },
 ];
 
@@ -132,7 +132,7 @@ export default function StressQuizPage() {
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 fontWeight: 600,
                 marginBottom: 22,
                 display: "inline-flex",
@@ -148,7 +148,7 @@ export default function StressQuizPage() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(42px, 6.5vw, 72px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.04,
                 color: "var(--ink)",
@@ -156,9 +156,9 @@ export default function StressQuizPage() {
               }}
             >
               60 seconds.{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+              <span style={{ color: "var(--terracotta-aa)" }}>
                 7 questions.
-              </em>{" "}
+              </span>{" "}
               One brutally honest score.
             </h1>
 
@@ -184,7 +184,7 @@ export default function StressQuizPage() {
                   }}
                 >
                   <div className="flex items-center gap-2" style={{ color: "var(--ink)" }}>
-                    <Icon className="w-4 h-4" style={{ color: "var(--terracotta)" }} />
+                    <Icon className="w-4 h-4" style={{ color: "var(--terracotta-aa)" }} />
                     <span style={{ fontSize: 13, fontWeight: 600, fontFamily: "var(--font-sans)" }}>{label}</span>
                   </div>
                   <p style={{ marginTop: 6, fontSize: 12, color: "var(--ink-faint)", lineHeight: 1.5 }}>
@@ -210,7 +210,7 @@ export default function StressQuizPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3 text-center">
               The four buckets
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
@@ -251,7 +251,7 @@ export default function StressQuizPage() {
         <div className="container-x">
           <div className="max-w-3xl mx-auto">
             <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-8 md:p-12 backdrop-blur-md">
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
                 Why this quiz exists
               </p>
               <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-6 text-[var(--ink)]">
@@ -262,7 +262,7 @@ export default function StressQuizPage() {
                   Every cold-call I take starts the same way. Founder pulls up
                   their numbers and says revenue is fine. Then I ask about
                   response time, after-hours, manual hours, and tool sprawl.
-                  Five minutes in we&apos;ve usually found a five-figure leak
+                  Five minutes in we&apos;ve usually found a five-figure hole
                   they didn&apos;t know existed.
                 </p>
                 <p>
@@ -270,7 +270,7 @@ export default function StressQuizPage() {
                   questions are the ones I actually ask. The buckets are the
                   same four I sort callers into. If you land in &quot;bleeding
                   cash and sleep&quot; you&apos;re in good company. That&apos;s
-                  the bucket I rebuild from most, because the leak is obvious
+                  the bucket I rebuild from most, because the problem is obvious
                   once you stop running on adrenaline long enough to see it.
                 </p>
               </div>
@@ -286,7 +286,7 @@ export default function StressQuizPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3 text-center">
               Quick answers
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
@@ -300,7 +300,7 @@ export default function StressQuizPage() {
                 >
                   <summary className="flex cursor-pointer items-center justify-between gap-4 text-[var(--ink)] font-semibold list-none">
                     <span>{f.q}</span>
-                    <span className="text-[var(--terracotta)] transition group-open:rotate-45 text-xl leading-none">
+                    <span className="text-[var(--terracotta-aa)] transition group-open:rotate-45 text-xl leading-none">
                       +
                     </span>
                   </summary>

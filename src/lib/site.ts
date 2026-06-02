@@ -96,7 +96,7 @@ export type NavItem = {
 export const TOOL_LINKS: NavSubItem[] = [
   { label: "AI Readiness Score", href: "/tools/ai-readiness-score", desc: "10 questions, 0-100 score + 4-axis breakdown" },
   { label: "Agency Stress Quiz", href: "/tools/agency-stress-quiz", desc: "60-second diagnostic — chill to chaos" },
-  { label: "Automation Gap Analyzer", href: "/tools/automation-gap-analyzer", desc: "Find the biggest leak in your ops" },
+  { label: "Automation Gap Analyzer", href: "/tools/automation-gap-analyzer", desc: "Find where your ops lose time and money" },
   { label: "Before/After Slider", href: "/tools/before-after-slider", desc: "Drag to compare manual vs automated" },
   { label: "Content Calendar", href: "/tools/content-calendar", desc: "30-day cross-platform post engine" },
   { label: "Executive Summary Generator", href: "/tools/executive-summary-generator", desc: "Raw notes → TL;DR, email, deck slide" },

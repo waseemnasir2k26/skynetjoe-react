@@ -5,7 +5,7 @@
  * Total raw score sums to 0-120, normalized to 0-100 = "Automation Gap %"
  * (100 = fully automated, 0 = full manual chaos).
  *
- * Per-axis subscores drive a 4-axis radar + the "biggest leak" callout.
+ * Per-axis subscores drive a 4-axis radar + the "biggest gap" callout.
  * Implied manual hours (computed from axis weakness) → Revenue Calculator prefill.
  */
 
@@ -41,7 +41,7 @@ export const QUESTIONS: GapQuestion[] = [
       { label: "Phone or walk-in only", value: "phone", score: 0 },
       { label: "Email or social DMs", value: "email", score: 3 },
       { label: "Web form to inbox", value: "form", score: 6 },
-      { label: "Form → CRM auto-created", value: "crm", score: 10 },
+      { label: "Form saves the lead automatically", value: "crm", score: 10 },
     ],
   },
   {
@@ -186,7 +186,7 @@ export const QUESTIONS: GapQuestion[] = [
     step: 12,
     axis: "teamProductivity",
     icon: "🧾",
-    prompt: "How does data move between your tools (CRM, accounting, calendar, billing)?",
+    prompt: "How does data move between your tools (contacts, accounting, calendar, billing)?",
     options: [
       { label: "Copy-paste manually", value: "copy", score: 0 },
       { label: "CSV exports occasionally", value: "csv", score: 3 },
@@ -210,7 +210,7 @@ export type AxisMeta = {
   maxScore: number;
   /** Specific recommendations (2-3) when this axis is weakest */
   recommendations: string[];
-  /** Implied manual hours/week leaking when this axis is weak */
+  /** Implied manual hours/week lost when this axis is weak */
   impliedManualHoursWhenWeak: number;
 };
 
@@ -222,7 +222,7 @@ export const AXES: AxisMeta[] = [
     questionCount: 3,
     maxScore: 30,
     recommendations: [
-      "Wire a web form straight into your CRM. Stop letting email inboxes act as a database.",
+      "Send every web form straight to your contact list. Stop using your inbox as a database.",
       "Add an instant auto-reply with a calendar link. Five-minute response wins over thirty-minute.",
       "Stand up an AI receptionist for off-hours. Every weekend lead that hits voicemail is a lost client.",
     ],
@@ -261,7 +261,7 @@ export const AXES: AxisMeta[] = [
     questionCount: 3,
     maxScore: 30,
     recommendations: [
-      "Kill copy-paste between CRM, calendar, and billing. Wire them with n8n or Make.",
+      "Stop copy-pasting between your contacts, calendar, and billing. Connect them so they update each other.",
       "Add AI meeting transcription with auto-extracted action items into your task tool.",
       "Trigger downstream tasks the moment a deal closes — no more manual handoff Slack messages.",
     ],

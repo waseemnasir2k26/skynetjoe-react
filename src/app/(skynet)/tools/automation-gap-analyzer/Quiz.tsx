@@ -242,7 +242,7 @@ export default function Quiz() {
         ref={cardRef}
         className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-10 md:p-16 text-center backdrop-blur-md"
       >
-        <Loader2 className="mx-auto mb-6 h-12 w-12 animate-spin text-[var(--terracotta)]" />
+        <Loader2 className="mx-auto mb-6 h-12 w-12 animate-spin text-[var(--terracotta-aa)]" />
         <p className="text-xl md:text-2xl font-semibold text-[var(--ink)]">
           Mapping your automation gap…
         </p>
@@ -286,7 +286,7 @@ export default function Quiz() {
   return (
     <div ref={cardRef} className="relative">
       <div className="mb-6 flex items-center justify-between gap-4">
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--terracotta)]">
+        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--terracotta-aa)]">
           Question {step + 1} of {QUESTIONS.length}
         </div>
         <div className="text-xs text-[var(--ink-faint)]">
@@ -311,7 +311,7 @@ export default function Quiz() {
               <span className="text-xl leading-none" aria-hidden>
                 {current.icon}
               </span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--terracotta)]">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--terracotta-aa)]">
                 Step {current.step}
               </span>
             </div>
@@ -349,8 +349,8 @@ export default function Quiz() {
                   <ArrowRight
                     className={
                       selected
-                        ? "h-4 w-4 text-[var(--terracotta)]"
-                        : "h-4 w-4 text-[var(--ink-faint)] transition group-hover:translate-x-0.5 group-hover:text-[var(--terracotta)]"
+                        ? "h-4 w-4 text-[var(--terracotta-aa)]"
+                        : "h-4 w-4 text-[var(--ink-faint)] transition group-hover:translate-x-0.5 group-hover:text-[var(--terracotta-aa)]"
                     }
                   />
                 </button>
@@ -363,7 +363,7 @@ export default function Quiz() {
               type="button"
               onClick={back}
               disabled={step === 0}
-              className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)] disabled:cursor-not-allowed disabled:opacity-30"
+              className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta-aa)] disabled:cursor-not-allowed disabled:opacity-30"
             >
               ← Back
             </button>
@@ -371,7 +371,7 @@ export default function Quiz() {
               <button
                 type="button"
                 onClick={saveForLater}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)]"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta-aa)]"
               >
                 <Save className="h-3 w-3" />
                 {savedToast ? "Saved" : "Save & resume later"}
@@ -379,7 +379,7 @@ export default function Quiz() {
               <button
                 type="button"
                 onClick={restart}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)]"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta-aa)]"
               >
                 <RotateCcw className="h-3 w-3" />
                 Start over
@@ -679,7 +679,7 @@ function ResultCard({
 
       <div className="grid grid-cols-1 gap-8 px-7 py-8 md:grid-cols-[1fr_1.2fr] md:px-12 md:py-10">
         <div>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta)]">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
             Four-axis breakdown
           </p>
           <RadarChart subscores={subs} color={bucket.color} />
@@ -706,16 +706,16 @@ function ResultCard({
         </div>
 
         <div>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta)]">
-            Biggest leak: {weakest.label}
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
+            Biggest gap: {weakest.label}
           </p>
           <p className="mb-5 text-base leading-relaxed text-[var(--ink-2)] md:text-lg">
             {bucket.recommendation}
           </p>
           <ul className="space-y-3">
-            <li className="flex gap-3 rounded-xl border border-[rgba(198,107,63,0.30)] bg-[var(--terracotta)]/[0.06] px-4 py-3 text-sm leading-relaxed text-[var(--terracotta)] md:text-base">
-              <Sparkles className="mt-0.5 h-4 w-4 flex-shrink-0 text-[var(--terracotta)]" />
-              You&apos;re leaking roughly <b>{hours} manual hours/week</b>{" "}
+            <li className="flex gap-3 rounded-xl border border-[rgba(198,107,63,0.30)] bg-[var(--terracotta)]/[0.06] px-4 py-3 text-sm leading-relaxed text-[var(--terracotta-aa)] md:text-base">
+              <Sparkles className="mt-0.5 h-4 w-4 flex-shrink-0 text-[var(--terracotta-aa)]" />
+              You&apos;re losing roughly <b>{hours} manual hours/week</b>{" "}
               from the {weakest.label.toLowerCase()} axis alone.
             </li>
             {weakest.recommendations.map((line, idx) => (
@@ -723,7 +723,7 @@ function ResultCard({
                 key={line}
                 className="flex gap-3 text-sm leading-relaxed text-[var(--ink-2)] md:text-base"
               >
-                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta)]">
+                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
                   {idx + 1}
                 </span>
                 {line}
@@ -760,11 +760,11 @@ function ResultCard({
           <button
             type="button"
             onClick={onCopy}
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 text-sm font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta)]"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 text-sm font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
           >
             {copyState === "copied" ? (
               <>
-                <Check className="h-4 w-4 text-[var(--terracotta)]" />
+                <Check className="h-4 w-4 text-[var(--terracotta-aa)]" />
                 Link copied
               </>
             ) : (
@@ -779,7 +779,7 @@ function ResultCard({
         <button
           type="button"
           onClick={onRestart}
-          className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta)]"
+          className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] transition hover:text-[var(--terracotta-aa)]"
         >
           <RotateCcw className="h-3 w-3" />
           Retake the analyzer

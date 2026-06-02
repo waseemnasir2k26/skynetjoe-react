@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title:
     "Revenue Recovery Calculator — see what your missed leads + manual work are costing you · SkynetLabs",
   description:
-    "Free interactive ROI calculator. Move 6 sliders, see in real time how much revenue your business is leaking from missed leads, low close rate, and manual follow-ups.",
+    "Free interactive ROI calculator. Move 6 sliders, see in real time how much revenue your business is losing from missed leads, low close rate, and manual follow-ups.",
   alternates: { canonical: `${SITE.url}/tools/revenue-calculator` },
   openGraph: {
     title:
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Revenue Recovery Calculator · SkynetLabs",
     description:
-      "Move 6 sliders. See the leak. See the recovery. Real math, no email gate.",
+      "Move 6 sliders. See the loss. See the recovery. Real math, no email gate.",
   },
 };
 
@@ -39,7 +39,7 @@ const faqs = [
   },
   {
     q: "What if I'm under 50 leads a month?",
-    a: "Slide the leads input down — the math still works at 5, 10, 20 leads. Smaller operators usually have a bigger percentage gain because they have less time to chase follow-ups and miss the most calls. A solo practitioner with 18 leads a month and a 4-hour-a-week follow-up habit is usually leaking enough to pay for the system 3 to 6 times over.",
+    a: "Slide the leads input down — the math still works at 5, 10, 20 leads. Smaller operators usually have a bigger percentage gain because they have less time to chase follow-ups and miss the most calls. A solo practitioner with 18 leads a month and a 4-hour-a-week follow-up habit is usually losing enough to pay for the system 3 to 6 times over.",
   },
   {
     q: "Do you guarantee these numbers?",
@@ -74,7 +74,7 @@ const schema = {
       operatingSystem: "Web",
       url: `${SITE.url}/tools/revenue-calculator`,
       description:
-        "Interactive 6-slider calculator that estimates monthly revenue leakage from missed leads and wasted manual hours, plus projected annual recovery with automation.",
+        "Interactive 6-slider calculator that estimates monthly revenue lost from missed leads and wasted manual hours, plus projected annual recovery with automation.",
       offers: {
         "@type": "Offer",
         price: 0,
@@ -122,7 +122,7 @@ export default function RevenueCalculatorPage() {
               style={{
                 background: "rgba(198,107,63,0.10)",
                 border: "1px solid rgba(198,107,63,0.40)",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
               }}
             >
               <CalcIcon className="w-3.5 h-3.5" />
@@ -131,19 +131,10 @@ export default function RevenueCalculatorPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 700, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
               How much money is your business{" "}
-              <span
-                style={{
-                  background:
-                    "linear-gradient(120deg, var(--terracotta) 0%, var(--ink) 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                actually leaking?
+              <span style={{ color: "var(--terracotta-aa)" }}>
+                actually losing?
               </span>
             </h1>
 
@@ -182,7 +173,7 @@ export default function RevenueCalculatorPage() {
       <section className="section pt-0">
         <div className="container-x px-6">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
               Real recoveries
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
@@ -213,13 +204,13 @@ export default function RevenueCalculatorPage() {
                   className="text-[11px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full inline-block mb-4"
                   style={{
                     background: "rgba(198,107,63,0.10)",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     border: "1px solid rgba(198,107,63,0.30)",
                   }}
                 >
                   {c.industryTag}
                 </span>
-                <h3 className="text-xl font-bold text-[var(--ink)] mb-3 group-hover:text-[var(--terracotta)] transition-colors">
+                <h3 className="text-xl font-bold text-[var(--ink)] mb-3 group-hover:text-[var(--terracotta-aa)] transition-colors">
                   {c.clientName}
                 </h3>
                 <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-4">
@@ -235,14 +226,14 @@ export default function RevenueCalculatorPage() {
                         border: "1px solid rgba(26,26,26,0.12)",
                       }}
                     >
-                      <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]/80 mb-1">
+                      <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 mb-1">
                         {m.label}
                       </p>
                       <p className="text-sm font-bold text-[var(--ink)]">{m.delta}</p>
                     </div>
                   ))}
                 </div>
-                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--terracotta)]">
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--terracotta-aa)]">
                   Read the full case
                   <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -256,7 +247,7 @@ export default function RevenueCalculatorPage() {
       <section className="section pt-0">
         <div className="container-x px-6">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3 text-center">
               FAQ
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
@@ -279,7 +270,7 @@ export default function RevenueCalculatorPage() {
                 >
                   <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-lg font-semibold text-[var(--ink)]">
                     <span>{f.q}</span>
-                    <ChevronRight className="w-5 h-5 text-[var(--terracotta)] transition-transform group-open:rotate-90 shrink-0" />
+                    <ChevronRight className="w-5 h-5 text-[var(--terracotta-aa)] transition-transform group-open:rotate-90 shrink-0" />
                   </summary>
                   <p className="text-base text-[var(--ink-2)] leading-relaxed mt-4">
                     {f.a}
@@ -306,7 +297,7 @@ export default function RevenueCalculatorPage() {
                 style={{
                   background: "rgba(198,107,63,0.10)",
                   border: "1px solid rgba(198,107,63,0.30)",
-                  color: "var(--terracotta)",
+                  color: "var(--terracotta-aa)",
                 }}
               >
                 <Sparkles className="w-3.5 h-3.5" />

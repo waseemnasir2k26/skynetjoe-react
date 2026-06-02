@@ -83,10 +83,10 @@ export default function Library() {
     <div className="space-y-8">
       {/* HOOK / HERO */}
       <div className="px-1">
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-3">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-3">
           — Prompt library · {PROMPTS.length} working prompts
         </p>
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4 font-serif italic">
+        <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4">
           The prompts I actually use.
         </h1>
         <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed max-w-3xl">
@@ -98,11 +98,11 @@ export default function Library() {
 
       {/* Search + filters */}
       <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md p-5 md:p-7">
-        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-3">
+        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-3">
           — Search the library
         </p>
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--terracotta)] pointer-events-none" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--terracotta-aa)] pointer-events-none" />
           <input
             type="text"
             value={query}
@@ -120,7 +120,7 @@ export default function Library() {
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--ink-faint)] hover:text-[var(--terracotta)]"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--ink-faint)] hover:text-[var(--terracotta-aa)]"
               aria-label="Clear search"
             >
               <X className="h-4 w-4" />
@@ -139,8 +139,8 @@ export default function Library() {
                 onClick={() => toggleCat(c.key)}
                 className={
                   isActive
-                    ? "inline-flex items-center gap-1.5 rounded-full border border-[var(--terracotta)] bg-[var(--terracotta)]/15 px-3 py-1.5 text-xs font-semibold text-[var(--terracotta)] transition"
-                    : "inline-flex items-center gap-1.5 rounded-full border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-1.5 text-xs font-semibold text-[var(--ink-2)] transition hover:border-[rgba(198,107,63,0.40)] hover:text-[var(--terracotta)]"
+                    ? "inline-flex items-center gap-1.5 rounded-full border border-[var(--terracotta)] bg-[var(--terracotta)]/15 px-3 py-1.5 text-xs font-semibold text-[var(--terracotta-aa)] transition"
+                    : "inline-flex items-center gap-1.5 rounded-full border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-1.5 text-xs font-semibold text-[var(--ink-2)] transition hover:border-[rgba(198,107,63,0.40)] hover:text-[var(--terracotta-aa)]"
                 }
                 aria-pressed={isActive}
               >
@@ -154,7 +154,7 @@ export default function Library() {
             <button
               type="button"
               onClick={clearFilters}
-              className="ml-auto inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] hover:text-[var(--terracotta)] transition"
+              className="ml-auto inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-faint)] hover:text-[var(--terracotta-aa)] transition"
             >
               <X className="h-3 w-3" />
               Clear
@@ -163,7 +163,7 @@ export default function Library() {
         </div>
 
         <div className="mt-4 text-xs text-[var(--ink-faint)]">
-          Showing <span className="text-[var(--terracotta)] font-bold">{filtered.length}</span>{" "}
+          Showing <span className="text-[var(--terracotta-aa)] font-bold">{filtered.length}</span>{" "}
           of {PROMPTS.length} prompts
           {activeCats.length > 0 && (
             <>
@@ -187,7 +187,7 @@ export default function Library() {
           <button
             type="button"
             onClick={clearFilters}
-            className="mt-5 inline-flex items-center gap-2 rounded-xl border border-[var(--terracotta)]/50 bg-[var(--terracotta)]/10 px-4 py-2 text-sm font-semibold text-[var(--terracotta)] hover:bg-[var(--terracotta)]/20 transition"
+            className="mt-5 inline-flex items-center gap-2 rounded-xl border border-[var(--terracotta)]/50 bg-[var(--terracotta)]/10 px-4 py-2 text-sm font-semibold text-[var(--terracotta-aa)] hover:bg-[var(--terracotta)]/20 transition"
           >
             Reset
           </button>
@@ -205,7 +205,7 @@ export default function Library() {
                 className="group text-left rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5 transition hover:border-[var(--terracotta)]/50 hover:bg-[var(--cream-2)]"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-[rgba(198,107,63,0.10)] text-[var(--terracotta)] border border-[rgba(198,107,63,0.30)]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-[rgba(198,107,63,0.10)] text-[var(--terracotta-aa)] border border-[rgba(198,107,63,0.30)]">
                     <span aria-hidden>{cat?.icon}</span>
                     {cat?.label}
                   </span>
@@ -213,7 +213,7 @@ export default function Library() {
                     {p.model}
                   </span>
                 </div>
-                <h3 className="text-[var(--ink)] text-base md:text-lg font-extrabold leading-tight mb-2 group-hover:text-[var(--terracotta)] transition">
+                <h3 className="text-[var(--ink)] text-base md:text-lg font-extrabold leading-tight mb-2 group-hover:text-[var(--terracotta-aa)] transition">
                   {p.title}
                 </h3>
                 <p className="text-sm text-[var(--ink-faint)] leading-relaxed mb-4">
@@ -237,12 +237,12 @@ export default function Library() {
                         copyPrompt(p);
                       }
                     }}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-[rgba(26,26,26,0.12)] px-2.5 py-1 text-[11px] font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta)] transition cursor-pointer"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-[rgba(26,26,26,0.12)] px-2.5 py-1 text-[11px] font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)] transition cursor-pointer"
                     aria-label="Copy prompt"
                   >
                     {copied ? (
                       <>
-                        <Check className="h-3 w-3 text-[var(--terracotta)]" />
+                        <Check className="h-3 w-3 text-[var(--terracotta-aa)]" />
                         Copied
                       </>
                     ) : (
@@ -271,24 +271,24 @@ export default function Library() {
         <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--sage)] mb-2">
           — What you should do next
         </p>
-        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-4 font-serif italic">
+        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-4">
           Stop collecting prompts. Start shipping outputs.
         </h3>
         <ul className="space-y-2.5 mb-6 text-[var(--ink-2)] text-sm md:text-base leading-relaxed">
           <li className="flex gap-3">
-            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta)]">
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               1
             </span>
             Pick the one prompt your business loses the most time on right now (sales, ops, content). Run it three times this week.
           </li>
           <li className="flex gap-3">
-            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta)]">
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               2
             </span>
             Notice what it gets wrong. Edit the prompt, lock the wins, save it inside your CRM or helpdesk.
           </li>
           <li className="flex gap-3">
-            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta)]">
+            <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               3
             </span>
             When it&apos;s earning its keep, book a call and we&apos;ll wire it into the rest of your stack.
@@ -307,10 +307,10 @@ export default function Library() {
 
       {/* Submit-prompt CTA */}
       <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8 text-center">
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-3">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-3">
           — Missing a prompt?
         </p>
-        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-3 font-serif italic">
+        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-3">
           Send me yours. I&apos;ll add the good ones.
         </h3>
         <p className="text-sm text-[var(--ink-2)] max-w-xl mx-auto mb-5 leading-relaxed">
@@ -329,10 +329,10 @@ export default function Library() {
 
       {/* FEEDBACK */}
       <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-2">
           — Feedback · 30-second form
         </p>
-        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2">
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
@@ -385,7 +385,6 @@ export default function Library() {
         }
         .pl-prompt-search::placeholder {
           color: var(--ink-faint);
-          font-style: italic;
         }
       `}</style>
     </div>
@@ -435,7 +434,7 @@ function PromptModal({
 
         <div className="px-6 md:px-8 pt-7 pb-5 border-b border-[rgba(26,26,26,0.12)]">
           <div className="flex flex-wrap items-center gap-2 mb-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-[rgba(198,107,63,0.10)] text-[var(--terracotta)] border border-[rgba(198,107,63,0.30)]">
+            <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-[rgba(198,107,63,0.10)] text-[var(--terracotta-aa)] border border-[rgba(198,107,63,0.30)]">
               <span aria-hidden>{cat?.icon}</span>
               {cat?.label}
             </span>

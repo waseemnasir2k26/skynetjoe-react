@@ -57,7 +57,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "Attribution, not vanity metrics",
-      body: "Every keyword DM gets a source tag, passes through to your CRM, and joins back to closed-deal value in one Looker Studio view. The weekly digest reads DMs → booked calls → closed work — not 'impressions up 14%.'",
+      body: "Every keyword DM gets a source tag, passes through to your follow-up tool, and joins back to closed-deal value in one Looker Studio view. The weekly digest reads DMs → booked calls → closed work — not 'impressions up 14%.'",
       proof: "1 weekly digest tied to revenue",
     },
     {

@@ -44,7 +44,7 @@ export default function FinalCTA() {
               wordBreak: "break-word",
             }}
           >
-            Find your biggest leak in{" "}
+            Find the gaps in{" "}
             <span
               style={{
                 fontStyle: "normal",
@@ -67,14 +67,14 @@ export default function FinalCTA() {
               lineHeight: 1.6,
             }}
           >
-            Free audit. We screen-share, find the one automation that pays for
-            itself fastest, and Loom you a build plan. No pitch deck.
+            A free 30-min check-up. We share screens, spot the one fix that pays
+            off fastest, and send you a short build plan. No pitch deck.
           </p>
           <Link
             href="/discovery-call"
             style={{
               background: "var(--cream-3)",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
               padding: "16px 28px",
               fontFamily: "var(--font-sans)",
               fontWeight: 700,

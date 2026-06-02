@@ -1,10 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { organization, person } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Community from "@/components/sections/Community";
+import { Reveal, RevealGroup, RevealItem, ParallaxFigure, StatCounter } from "@/components/motion/Reveal";
 
 const TIMELINE = [
   {
@@ -147,14 +149,14 @@ export default function AboutPage() {
             }
           `}</style>
 
-          <div>
+          <Reveal>
             <div
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 marginBottom: 24,
                 display: "inline-flex",
                 alignItems: "center",
@@ -176,9 +178,9 @@ export default function AboutPage() {
               }}
             >
               From a{" "}
-              <em style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
                 $10 Fiverr gig
-              </em>{" "}
+              </span>{" "}
               to 180+ workflows.
             </h1>
             <p
@@ -211,10 +213,10 @@ export default function AboutPage() {
               <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>·</span>
               <span style={{ color: "var(--ink)" }}>9</span> countries served
             </div>
-          </div>
+          </Reveal>
 
           <div>
-            <figure
+            <ParallaxFigure
               className="about-hero-portrait"
               style={{
                 margin: 0,
@@ -234,30 +236,16 @@ export default function AboutPage() {
                   aspectRatio: "4 / 5",
                   overflow: "hidden",
                   background: "var(--cream-2)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
                 }}
               >
-                <div
-                  aria-hidden
-                  style={{
-                    width: 120,
-                    height: 120,
-                    borderRadius: "50%",
-                    background: "#A8451F",
-                    color: "var(--cream-3)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: "var(--font-mono)",
-                    fontWeight: 700,
-                    fontSize: 44,
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  SL
-                </div>
+                <Image
+                  src="/portraits/waseem-builder-portrait.jpg"
+                  alt="Waseem Nasir, founder of SkynetLabs"
+                  fill
+                  priority
+                  sizes="(min-width: 900px) 400px, 90vw"
+                  style={{ objectFit: "cover", objectPosition: "center top" }}
+                />
               </div>
               <figcaption
                 style={{
@@ -272,7 +260,7 @@ export default function AboutPage() {
               >
                 Waseem · founder · Bali · GMT+8
               </figcaption>
-            </figure>
+            </ParallaxFigure>
           </div>
         </div>
       </section>
@@ -287,48 +275,98 @@ export default function AboutPage() {
         }}
       >
         <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <div
+          {/* FOUNDER TRUST STRIP — small round photo, "you talk to the builder" */}
+          <Reveal
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-              marginBottom: 14,
-              display: "inline-flex",
+              display: "flex",
               alignItems: "center",
-              gap: 12,
+              gap: 18,
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.10)",
+              borderRadius: 999,
+              padding: "12px 22px 12px 12px",
+              marginBottom: 36,
+              maxWidth: 440,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-            The arc
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4vw, 44px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "var(--ink)",
-              marginBottom: 12,
-            }}
-          >
-            Seven years of{" "}
-            <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>
-              failing in public.
-            </em>
-          </h2>
-          <p style={{ fontSize: 16, color: "var(--ink-2)", maxWidth: "56ch", marginBottom: 36, lineHeight: 1.6 }}>
-            Every pivot below was a real bet. Most of them lost. The wins taught
-            me what to stop doing.
-          </p>
+            <span
+              style={{
+                position: "relative",
+                width: 56,
+                height: 56,
+                borderRadius: "50%",
+                overflow: "hidden",
+                flexShrink: 0,
+                border: "2px solid var(--cream-3)",
+                boxShadow: "0 4px 14px rgba(26,26,26,0.18)",
+              }}
+            >
+              <Image
+                src="/portraits/waseem-builder-portrait.jpg"
+                alt="Waseem Nasir"
+                fill
+                sizes="56px"
+                style={{ objectFit: "cover", objectPosition: "center top" }}
+              />
+            </span>
+            <span
+              style={{
+                fontSize: 15,
+                color: "var(--ink)",
+                lineHeight: 1.4,
+                fontWeight: 600,
+              }}
+            >
+              No account managers. You talk to the builder —{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>Waseem</span>, directly.
+            </span>
+          </Reveal>
 
-          <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          <Reveal>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta-aa)",
+                marginBottom: 14,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+              The arc
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(28px, 4vw, 44px)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.1,
+                color: "var(--ink)",
+                marginBottom: 12,
+              }}
+            >
+              Seven years of{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                failing in public.
+              </span>
+            </h2>
+            <p style={{ fontSize: 16, color: "var(--ink-2)", maxWidth: "56ch", marginBottom: 36, lineHeight: 1.6 }}>
+              Every pivot below was a real bet. Most of them lost. The wins taught
+              me what to stop doing.
+            </p>
+          </Reveal>
+
+          <RevealGroup as="ol" style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {TIMELINE.map((t, i) => {
               const rotate = i % 2 === 0 ? "-0.2deg" : "0.2deg";
               return (
-                <li
+                <RevealItem
+                  as="li"
                   key={`${t.year}-${t.title}`}
                   className="about-timeline-card"
                   style={{
@@ -368,7 +406,7 @@ export default function AboutPage() {
                           fontSize: 11,
                           textTransform: "uppercase",
                           letterSpacing: "0.16em",
-                          color: "var(--terracotta)",
+                          color: "var(--terracotta-aa)",
                           fontWeight: 600,
                         }}
                       >
@@ -398,10 +436,10 @@ export default function AboutPage() {
                       {t.note}
                     </p>
                   </div>
-                </li>
+                </RevealItem>
               );
             })}
-          </ol>
+          </RevealGroup>
         </div>
       </section>
 
@@ -422,6 +460,7 @@ export default function AboutPage() {
             textAlign: "center",
           }}
         >
+          <Reveal>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -464,6 +503,7 @@ export default function AboutPage() {
           >
             — Waseem · 2026
           </footer>
+          </Reveal>
         </div>
       </section>
 
@@ -477,14 +517,14 @@ export default function AboutPage() {
         }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <div style={{ maxWidth: 720, marginBottom: 40 }}>
+          <Reveal style={{ maxWidth: 720, marginBottom: 40 }}>
             <div
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 marginBottom: 14,
                 display: "inline-flex",
                 alignItems: "center",
@@ -506,18 +546,18 @@ export default function AboutPage() {
               }}
             >
               Cafes. Terminals.{" "}
-              <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
                 Deploys.
-              </em>
+              </span>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
               Same builder you&apos;d hire — actually here, actually shipping.
               No agency layer, no Zoom mask. Just a fixed rhythm that ends with
               your thing live.
             </p>
-          </div>
+          </Reveal>
 
-          <div
+          <RevealGroup
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
@@ -525,7 +565,7 @@ export default function AboutPage() {
             }}
           >
             {BUILDER_LIFE.map((b, i) => (
-              <div
+              <RevealItem
                 key={b.label}
                 className="about-bali-figure"
                 style={{
@@ -541,7 +581,7 @@ export default function AboutPage() {
                     fontSize: 11,
                     textTransform: "uppercase",
                     letterSpacing: "0.16em",
-                    color: "#A8451F",
+                    color: "var(--terracotta-aa)",
                     marginBottom: 10,
                   }}
                 >
@@ -557,9 +597,9 @@ export default function AboutPage() {
                 >
                   {b.line}
                 </p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -574,7 +614,7 @@ export default function AboutPage() {
         }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <div
+          <RevealGroup
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
@@ -587,7 +627,7 @@ export default function AboutPage() {
               { num: "40+", label: "Websites" },
               { num: "9", label: "Countries" },
             ].map((s, i) => (
-              <div
+              <RevealItem
                 key={s.label}
                 className="about-stat-card"
                 style={{
@@ -598,20 +638,19 @@ export default function AboutPage() {
                   transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
-                <div
+                <StatCounter
+                  value={s.num}
                   style={{
                     fontFamily: "var(--font-display)",
                     fontStyle: "normal",
                     fontSize: 52,
                     fontWeight: 700,
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     lineHeight: 1,
                     marginBottom: 8,
                     letterSpacing: "-0.02em",
                   }}
-                >
-                  {s.num}
-                </div>
+                />
                 <div
                   style={{
                     fontFamily: "var(--font-mono)",
@@ -623,9 +662,9 @@ export default function AboutPage() {
                 >
                   — {s.label}
                 </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -641,7 +680,7 @@ export default function AboutPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
+        <Reveal style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
           <h2
             style={{
               fontFamily: "var(--font-display)",
@@ -654,9 +693,9 @@ export default function AboutPage() {
             }}
           >
             Want to ship{" "}
-            <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
               something real?
-            </em>
+            </span>
           </h2>
           <p
             style={{
@@ -710,7 +749,7 @@ export default function AboutPage() {
               See case studies
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   );

@@ -85,7 +85,7 @@ export default function Testimonials() {
             <span
               style={{
                 fontStyle: "normal",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 fontWeight: 700,
               }}
             >

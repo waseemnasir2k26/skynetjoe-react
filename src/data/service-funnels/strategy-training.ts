@@ -53,7 +53,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "A team that runs it without you",
-      body: "Hands-on sessions tied to your people's real work — their inbox, their CRM, their actual Tuesday — until each person ships a workflow they'll use tomorrow. Enablement, not entertainment. The skill stays after I leave.",
+      body: "Hands-on sessions tied to your people's real work — their inbox, their contact list, their actual Tuesday — until each person ships a workflow they'll use tomorrow. Enablement, not entertainment. The skill stays after I leave.",
       proof: "Representative: adoption holds past day 30",
     },
     {

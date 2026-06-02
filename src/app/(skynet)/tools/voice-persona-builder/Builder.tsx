@@ -506,13 +506,13 @@ export default function Builder({ calUrl }: { calUrl: string }) {
         }}
       >
         <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold">
+          <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold">
             {phase === "result" ? "Profile generated" : `Step ${state.step + 1} of 4`}
           </p>
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-1.5 text-xs text-[var(--ink-faint)] hover:text-[var(--terracotta)] transition"
+            className="inline-flex items-center gap-1.5 text-xs text-[var(--ink-faint)] hover:text-[var(--terracotta-aa)] transition"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             Reset
@@ -560,7 +560,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                   <p
                     className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider truncate ${
                       active
-                        ? "text-[var(--terracotta)]"
+                        ? "text-[var(--terracotta-aa)]"
                         : done
                           ? "text-[var(--sage)]"
                           : "text-[var(--ink-faint)]"
@@ -667,7 +667,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                           <span className="text-[var(--ink-faint)]">↔</span>{" "}
                           {s.right}
                         </div>
-                        <span className="text-sm font-extrabold text-[var(--terracotta)] tabular-nums whitespace-nowrap">
+                        <span className="text-sm font-extrabold text-[var(--terracotta-aa)] tabular-nums whitespace-nowrap">
                           {v}/10
                         </span>
                       </div>
@@ -683,7 +683,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                         style={{ ["--rc-fill" as never]: `${pct}%` } as React.CSSProperties}
                       />
                       <p className="text-xs text-[var(--ink-faint)] mt-1.5 leading-snug">
-                        {s.caption} <span className="text-[var(--terracotta)]/80">— {describeTone(s, v)}</span>
+                        {s.caption} <span className="text-[var(--terracotta-aa)]/80">— {describeTone(s, v)}</span>
                       </p>
                     </div>
                   );
@@ -797,7 +797,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
             </button>
           </div>
           {state.step === 0 && !stepValid && (
-            <p className="mt-3 text-xs text-[var(--terracotta)]/90">
+            <p className="mt-3 text-xs text-[var(--terracotta-aa)]/90">
               Brand name and target audience are required. Everything else is optional but improves output.
             </p>
           )}
@@ -825,7 +825,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
         >
           <div className="flex items-start justify-between flex-wrap gap-3 mb-5">
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-2">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-2">
                 Your Brand Voice Profile
               </p>
               <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)]">
@@ -880,7 +880,7 @@ export default function Builder({ calUrl }: { calUrl: string }) {
             }}
           >
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-1">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-1">
                 Want a voice audit?
               </p>
               <p className="text-[var(--ink)] text-base md:text-lg font-semibold">
@@ -911,10 +911,10 @@ export default function Builder({ calUrl }: { calUrl: string }) {
 
       {/* FEEDBACK */}
       <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-2">
           — Feedback · 30-second form
         </p>
-        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2">
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
@@ -963,7 +963,6 @@ export default function Builder({ calUrl }: { calUrl: string }) {
         }
         .vpb-input::placeholder {
           color: var(--ink-faint);
-          font-style: italic;
           font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
           font-size: 0.85rem;
         }
@@ -1064,12 +1063,12 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-1.5">
+      <label className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-1.5">
         {label}
-        {required ? <span className="text-[var(--terracotta)] ml-1">*</span> : null}
+        {required ? <span className="text-[var(--terracotta-aa)] ml-1">*</span> : null}
       </label>
       {children}
-      {hint ? <p className="text-xs italic text-[var(--ink-faint)] mt-1.5">{hint}</p> : null}
+      {hint ? <p className="text-xs text-[var(--ink-faint)] mt-1.5">{hint}</p> : null}
     </div>
   );
 }

@@ -1,24 +1,28 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
+import { WhatsAppCRM, AIDispatcher, ContentPipeline } from "@/components/illustrations";
 
 const OUTCOMES = [
   {
     title: "60-second follow-up, every lead, 24/7",
     promise:
-      "Auto-DM + WhatsApp + email triggers fire the moment a lead lands. No app to open. No reminder to set.",
+      "Automatic messages fire the moment a lead lands. No app to open. No reminder to set.",
     proof: "Show-rate jumped 23% → 71% — Grand Mercer Dental, NY",
+    Art: WhatsAppCRM,
   },
   {
     title: "An AI voice that answers your calls",
     promise:
       "It picks up, asks the right questions, and follows up in your language — so no conversation slips through the cracks.",
     proof: "200+ debtor calls/week handled in French — KODIASIMMO",
+    Art: AIDispatcher,
   },
   {
     title: "Hours of inbox work, gone by lunch",
     promise:
-      "GPT-powered triage drafts and sorts your inbox the moment mail lands. You skim, approve, and move on with your day.",
+      "Your inbox gets sorted and pre-drafted the moment mail lands. You skim, approve, and move on with your day.",
     proof: "3 hr/day → 20 min email triage — Takycorp",
+    Art: ContentPipeline,
   },
 ];
 
@@ -41,7 +45,7 @@ export default function Outcomes() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--sage)",
+              color: "var(--terracotta-aa)",
               marginBottom: 16,
               display: "inline-flex",
               alignItems: "center",
@@ -52,7 +56,7 @@ export default function Outcomes() {
               style={{
                 width: 28,
                 height: 1,
-                background: "var(--sage)",
+                background: "var(--terracotta-aa)",
                 display: "inline-block",
               }}
             />
@@ -75,7 +79,7 @@ export default function Outcomes() {
             <span
               style={{
                 fontStyle: "normal",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 fontWeight: 700,
               }}
             >
@@ -85,7 +89,9 @@ export default function Outcomes() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {OUTCOMES.map((o, i) => (
+          {OUTCOMES.map((o, i) => {
+            const Art = o.Art;
+            return (
             <div
               key={o.title}
               style={{
@@ -99,13 +105,26 @@ export default function Outcomes() {
                 flexDirection: "column",
               }}
             >
+              {/* Bespoke decorative SVG (no photo) */}
+              <div
+                aria-hidden
+                style={{
+                  marginBottom: 18,
+                  borderRadius: 2,
+                  overflow: "hidden",
+                  border: "1px solid rgba(26,26,26,0.10)",
+                  aspectRatio: "320 / 180",
+                }}
+              >
+                <Art className="w-full h-full block" />
+              </div>
               <div
                 style={{
                   fontFamily: "var(--font-display)",
                   fontStyle: "normal",
                   fontSize: 36,
                   fontWeight: 700,
-                  color: "var(--terracotta)",
+                  color: "var(--terracotta-aa)",
                   lineHeight: 1,
                   marginBottom: 12,
                 }}
@@ -153,7 +172,8 @@ export default function Outcomes() {
                 <span>{o.proof}</span>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-10">
@@ -164,7 +184,7 @@ export default function Outcomes() {
               fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: "0.14em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
               textDecoration: "none",
               display: "inline-flex",
               alignItems: "center",
@@ -172,7 +192,7 @@ export default function Outcomes() {
               fontWeight: 600,
             }}
           >
-            — See all 16 services
+            See all 16 services
             <ArrowRight style={{ width: 13, height: 13 }} />
           </Link>
         </div>

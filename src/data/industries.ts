@@ -97,7 +97,7 @@ export const INDUSTRIES: Industry[] = [
     heroCtaSecondary: { label: "See dental case study", href: "/case-studies/manhattan-dental-atelier-flagship" },
     painPoints: [
       {
-        title: "Front-desk burnout & missed-call leakage",
+        title: "Front-desk burnout & the calls nobody answers",
         body:
           "Average solo or 2-op practice misses 27 to 41% of inbound calls between 11am and 2pm. Every missed call from a new patient is roughly $700 in lifetime value walking to the next clinic on the Google result. Your front desk is not the problem. The volume is the problem.",
       },
@@ -257,7 +257,7 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         q: "Who owns the data and the workflows?",
-        a: "You do. All workflows are deployed to your n8n instance or your Vercel project. Voice agent transcripts go to your PMS. If you ever stop working with us, the system keeps running on the credentials you control. No vendor lock.",
+        a: "You do. Everything we build runs on your own accounts. Voice agent transcripts go to your PMS. If you ever stop working with us, the system keeps running on the logins you control. No vendor lock.",
       },
       {
         q: "Can you also rebuild my website?",
@@ -496,7 +496,7 @@ export const INDUSTRIES: Industry[] = [
       {
         title: "Dispatch lag on broker calls and load offers",
         body:
-          "Average mid-size broker loses 22 to 35% of attractive loads because the carrier-side dispatch is too slow to confirm. A 14-minute lag on a hot lane is a $180 to $310 margin hit per load. Multiply across 40 loads a week and you have a $400k annual margin leak nobody is tracking line-by-line.",
+          "Average mid-size broker loses 22 to 35% of attractive loads because the carrier-side dispatch is too slow to confirm. A 14-minute lag on a hot lane is a $180 to $310 margin hit per load. Multiply across 40 loads a week and that is roughly $400k a year in margin slipping away, and nobody is tracking it line-by-line.",
       },
       {
         title: "Email triage on 4-party threads (carrier, broker, shipper, receiver)",
@@ -557,7 +557,7 @@ export const INDUSTRIES: Industry[] = [
         clientName: "EU logistics group (mining + freight)",
         location: "Lyon, France",
         oneLineOutcome:
-          "17-node n8n + GPT-4o email triage pipeline. Routine response time collapsed from 6 hours to 6 minutes, dispatcher hours dropped 81%.",
+          "Built an automated email triage system. Routine response time collapsed from 6 hours to 6 minutes, dispatcher hours dropped 81%.",
         metricLabel: "Routine response time",
         metricBefore: "6 hours",
         metricAfter: "6 minutes",

@@ -1,153 +1,134 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
-import { ArrowRight, X, Check } from "lucide-react";
+import { ArrowRight, X, Check, Wallet, KeyRound, AlertTriangle } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { N8nWorkflow } from "@/components/illustrations";
 
 /**
  * N8nAutomationLP — bespoke landing page for /services/n8n-automation
  *
- * Cream editorial pivot. Server component (no client hooks).
- * CTAs are plain <Link> to /discovery-call.
- *
- * Hero credential card replaces the founder photo (no face) — terracotta "SL"
- * monogram tile + headline metric + plain credential lines.
- *
- * Asset paths confirmed against /public glob 2026-05-26:
- *  - /case-studies/eu-logistics-email-triage-n8n.jpg (work visual — kept)
+ * Redesign 2026-06-02. Client component for cinematic Framer Motion.
+ *  - NO photos / NO founder face — Lucide icons + bespoke N8nWorkflow SVG.
+ *  - Plain-language, outcome-first hero. Tool name kept to a quiet sub-line.
+ *  - AA: accent TEXT = var(--terracotta-aa); raw var(--terracotta) only for
+ *    backgrounds and the large display metric.
+ *  - "Leak"/"plug" metaphor removed everywhere.
  */
 
-function SkynetCredentialCard({
-  metric,
-  metricLabel,
-  lines,
+const ease = [0.22, 1, 0.36, 1] as const;
+
+function Reveal({
+  children,
+  delay = 0,
+  style,
+  className,
 }: {
-  metric: string;
-  metricLabel: string;
-  lines: string[];
+  children: React.ReactNode;
+  delay?: number;
+  style?: React.CSSProperties;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      initial={reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }}
+      whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, delay, ease }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function Stagger({
+  children,
+  className,
+  style,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
-    <div
-      style={{
-        background: "var(--cream-3)",
-        border: "1px solid rgba(26,26,26,0.12)",
-        boxShadow: "0 18px 48px rgba(26,37,64,0.10)",
-        maxWidth: 400,
-        width: "100%",
-        marginLeft: "auto",
-        padding: 28,
+    <motion.div
+      className={className}
+      style={style}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function Item({
+  children,
+  style,
+  className,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      variants={{
+        hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 24 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-        <span
-          aria-hidden
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 48,
-            height: 48,
-            borderRadius: "50%",
-            background: "var(--terracotta)",
-            color: "var(--cream-3)",
-            fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            fontSize: 18,
-            letterSpacing: "0.02em",
-            flexShrink: 0,
-          }}
-        >
-          SL
-        </span>
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 11,
-            textTransform: "uppercase",
-            letterSpacing: "0.14em",
-            color: "#A8451F",
-          }}
-        >
-          SkynetLabs · since 2022
-        </span>
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--font-display)",
-          fontWeight: 700,
-          fontSize: 56,
-          lineHeight: 1,
-          color: "var(--terracotta)",
-          letterSpacing: "-0.03em",
-        }}
-      >
-        {metric}
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--font-mono)",
-          fontSize: 11,
-          textTransform: "uppercase",
-          letterSpacing: "0.12em",
-          color: "var(--ink-faint)",
-          margin: "8px 0 18px",
-        }}
-      >
-        {metricLabel}
-      </div>
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-        {lines.map((l) => (
-          <li
-            key={l}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "16px 1fr",
-              gap: 10,
-              padding: "7px 0",
-              fontSize: 14,
-              color: "var(--ink)",
-              lineHeight: 1.5,
-            }}
-          >
-            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 3 }} />
-            <span>{l}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {children}
+    </motion.div>
   );
 }
 
 const PAINS = [
   {
-    n: "01",
-    title: "$400/mo Zapier bleed",
-    body: "Six flows on Zapier, bill creeping past $400. Half the tasks fail silently.",
+    icon: Wallet,
+    title: "The monthly bill keeps climbing",
+    body: "Six flows running, the bill creeping past $400. Half the tasks fail without a word.",
   },
   {
-    n: "02",
-    title: "Tribal knowledge walked out",
-    body: "Engineer left. Nobody knows how the flows wire together. Edits feel like surgery in the dark.",
+    icon: KeyRound,
+    title: "Only one person knew how it worked",
+    body: "They left. Nobody knows how the flows wire together. Every edit feels like surgery in the dark.",
   },
   {
-    n: "03",
-    title: "Form silently broke",
-    body: "Contact form pushed leads to /dev/null for 3 weeks. Found out from a refund request.",
+    icon: AlertTriangle,
+    title: "A form quietly stopped sending",
+    body: "Your contact form dropped leads for three weeks. You found out from a refund request.",
   },
 ];
 
 const BEFORE = [
-  "6 Zapier zaps, $400/mo, no version control",
+  "Six rented flows, $400/mo, no version history",
   "Manual CSV exports every Monday morning",
-  "Slack pings whenever a webhook 500s",
-  "Engineer-only edits, week-long turnarounds",
-  "No retry logic — failures are silent",
+  "A ping every time a webhook fails",
+  "Edits need a developer — week-long waits",
+  "No retry — failures pass in silence",
 ];
 
 const AFTER = [
-  "n8n on $7/mo Hostinger VPS, git-versioned",
-  "Scheduled flows + auto-retry + Slack alerts",
-  "JSON exports of every workflow, readable",
-  "I edit Mon-Wed, you sign off Thu, ship Fri",
-  "Sub-flows reused across 12 jobs, DRY",
+  "Your own server, a few dollars a month, fully versioned",
+  "Scheduled runs, auto-retry, alerts when something needs you",
+  "A readable copy of every workflow you own",
+  "We edit Mon-Wed, you sign off Thu, live Fri",
+  "Shared building blocks reused across jobs",
+];
+
+const FACTS = [
+  "Runs on your own server — a few dollars a month",
+  "Version-controlled and retry-safe",
+  "9 countries · no monthly retainer",
 ];
 
 export default function N8nAutomationLP() {
@@ -160,6 +141,15 @@ export default function N8nAutomationLP() {
         position: "relative",
       }}
     >
+      <style>{`
+        .lp-hero-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 6vw, 44px); align-items: center; }
+        @media (min-width: 900px) { .lp-hero-grid { grid-template-columns: 7fr 5fr; align-items: center; } }
+        .lp-illo { width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 12px; display: block; box-shadow: 0 22px 60px rgba(26,37,64,0.18); border: 1px solid rgba(26,26,26,0.10); }
+        .lp-ba-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        @media (min-width: 760px) { .lp-ba-grid { grid-template-columns: 1fr 1fr; } }
+        .lp-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+      `}</style>
+
       {/* Top utility strip */}
       <div
         style={{
@@ -173,7 +163,7 @@ export default function N8nAutomationLP() {
           padding: "10px 16px",
         }}
       >
-        — n8n workflows · $7/mo VPS · ship in 11 days · 4 builds left
+        — Workflow automation · own it outright · ship in 11 days
       </div>
 
       {/* HERO */}
@@ -182,129 +172,86 @@ export default function N8nAutomationLP() {
           padding: "clamp(48px, 10vw, 72px) 0 clamp(56px, 12vw, 80px)",
           borderBottom: "1px solid rgba(26,26,26,0.12)",
           background: "var(--cream-3)",
+          overflow: "hidden",
         }}
       >
         <div
           className="lp-hero-grid"
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 32px)",
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "clamp(28px, 6vw, 40px)",
-          }}
+          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
         >
-          <style>{`
-            @media (min-width: 900px) {
-              .lp-hero-grid { grid-template-columns: 7fr 5fr !important; align-items: end !important; }
-            }
-          `}</style>
-
-          <div>
+          <Reveal>
             <div
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 marginBottom: 24,
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 12,
               }}
             >
-              <span
-                style={{
-                  width: 28,
-                  height: 1,
-                  background: "var(--terracotta)",
-                  display: "inline-block",
-                }}
-              />
-              n8n · workflow automation · 2026
+              <span style={{ width: 28, height: 1, background: "var(--terracotta-aa)", display: "inline-block" }} />
+              Workflow automation · 2026
             </div>
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(32px, 8vw, 76px)",
+                fontSize: "clamp(32px, 8vw, 72px)",
                 fontWeight: 700,
                 letterSpacing: "-0.025em",
-                lineHeight: 1.02,
+                lineHeight: 1.04,
                 color: "var(--ink)",
                 margin: "0 0 24px",
+                maxWidth: "16ch",
               }}
             >
-              Stop renting Zapier.{" "}
-              <span
-                style={{
-                  fontStyle: "normal",
-                  color: "var(--terracotta)",
-                  fontWeight: 700,
-                }}
-              >
-                Own your automation.
-              </span>
+              Stop renting your automation.{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>Own it.</span>
             </h1>
             <p
               style={{
-                fontSize: "clamp(16px, 2.5vw, 19px)",
+                fontSize: "clamp(17px, 2.5vw, 19px)",
                 color: "var(--ink-2)",
                 maxWidth: "52ch",
-                lineHeight: 1.55,
+                lineHeight: 1.6,
                 marginBottom: 28,
               }}
             >
-              Keep the automations you rely on — without the rising monthly
-              bill. The same flows you pay $400/mo for, rebuilt to run for a few
-              dollars, with auto-retry so they stop failing in silence.
+              Keep the automations your business runs on — without the rising
+              monthly bill. The same flows you pay hundreds for, rebuilt to run
+              for a few dollars, with auto-retry so they stop failing in silence.
             </p>
-            <Link
-              href="/discovery-call"
-              style={{
-                background: "var(--terracotta)",
-                color: "var(--cream-3)",
-                padding: "16px 28px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                textDecoration: "none",
-                minHeight: 44,
-              }}
-            >
-              Book a 30-min call
+            <Link href="/discovery-call" style={primaryBtn}>
+              Book a free 30-min check-up
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
+            <div style={subline}>— Bali hours GMT+8 · 8-hour weekday reply</div>
             <div
               style={{
+                marginTop: 16,
                 fontFamily: "var(--font-mono)",
                 fontSize: 10,
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
                 color: "var(--ink-faint)",
-                marginTop: 18,
               }}
             >
-              — Bali hours GMT+8 · 8-hour weekday reply
+              Tools we use: n8n · self-hosted VPS
             </div>
-          </div>
+          </Reveal>
 
-          <div>
-            <SkynetCredentialCard
-              metric="180+"
-              metricLabel="n8n workflows shipped"
-              lines={[
-                "Self-hosted on a $7/mo VPS",
-                "Git-versioned · retry-safe",
-                "9 countries · zero retainers",
-              ]}
-            />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 36, rotate: -1.2 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease, delay: 0.1 }}
+            aria-hidden
+          >
+            <N8nWorkflow className="lp-illo" />
+          </motion.div>
         </div>
       </section>
 
@@ -317,98 +264,30 @@ export default function N8nAutomationLP() {
         }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--oxblood)",
-              marginBottom: 16,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 12,
-            }}
-          >
-            <span style={{ width: 28, height: 1, background: "var(--oxblood)" }} />
-            What I keep seeing
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4vw, 40px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "var(--ink)",
-              marginBottom: 40,
-              maxWidth: "26ch",
-            }}
-          >
-            Three pains that show up{" "}
-            <span style={{ fontStyle: "normal", color: "var(--oxblood)", fontWeight: 700 }}>
-              in every audit call.
-            </span>
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: 24,
-            }}
-          >
+          <Reveal>
+            <Eyebrow color="var(--oxblood)">What we keep seeing</Eyebrow>
+            <H2>
+              Three problems that show up{" "}
+              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>in every check-up.</span>
+            </H2>
+          </Reveal>
+          <Stagger className="lp-card-grid">
             {PAINS.map((p, i) => (
-              <div
-                key={p.n}
+              <Item
+                key={p.title}
                 style={{
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
-                  padding: "28px",
-                  transform:
-                    i === 0
-                      ? "rotate(-0.3deg)"
-                      : i === 1
-                      ? "rotate(0.3deg)"
-                      : "rotate(-0.2deg)",
+                  padding: 28,
+                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
-                <div
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 11,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.16em",
-                    color: "var(--oxblood)",
-                    marginBottom: 10,
-                  }}
-                >
-                  Pain {p.n}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 22,
-                    fontWeight: 600,
-                    color: "var(--ink)",
-                    marginBottom: 10,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {p.title}
-                </h3>
-                <p
-                  style={{
-                    color: "var(--ink-2)",
-                    fontSize: 14,
-                    lineHeight: 1.6,
-                    margin: 0,
-                  }}
-                >
-                  {p.body}
-                </p>
-              </div>
+                <p.icon style={{ width: 26, height: 26, color: "var(--oxblood)", marginBottom: 14 }} />
+                <h3 style={cardH3}>{p.title}</h3>
+                <p style={cardBody}>{p.body}</p>
+              </Item>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -421,19 +300,8 @@ export default function N8nAutomationLP() {
           textAlign: "center",
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--ink-faint)",
-              marginBottom: 14,
-            }}
-          >
-            — Receipts, not promises
-          </div>
+        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+          <div style={proofEyebrow}>— Receipts, not promises</div>
           <div
             style={{
               fontFamily: "var(--font-display)",
@@ -447,24 +315,14 @@ export default function N8nAutomationLP() {
           >
             180+
           </div>
-          <p
-            style={{
-              fontFamily: "var(--font-display)",
-              fontStyle: "normal",
-              fontSize: "clamp(17px, 3vw, 22px)",
-              color: "var(--ink-2)",
-              lineHeight: 1.4,
-              maxWidth: "32ch",
-              margin: "0 auto",
-            }}
-          >
-            workflows shipped from a Canggu cafe since 2022. 9 countries.
-            Zero retainers.
+          <p style={proofDetail}>
+            workflows shipped from a Canggu cafe since 2022. 9 countries. No
+            monthly retainers.
           </p>
-        </div>
+        </Reveal>
       </section>
 
-      {/* TESTIMONIAL / CASE WITH FACE */}
+      {/* WHAT YOU GET — illustration + facts (replaces photo case panel) */}
       <section
         style={{
           padding: "clamp(48px, 11vw, 80px) 0",
@@ -473,95 +331,40 @@ export default function N8nAutomationLP() {
         }}
       >
         <div
-          className="lp-case-grid"
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 32px)",
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "clamp(28px, 6vw, 48px)",
-            alignItems: "center",
-          }}
+          className="lp-hero-grid"
+          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
         >
-          <style>{`
-            @media (min-width: 900px) {
-              .lp-case-grid { grid-template-columns: 5fr 7fr !important; }
-            }
-          `}</style>
-          <figure
-            style={{
-              margin: 0,
-              transform: "rotate(1deg)",
-              background: "var(--cream-3)",
-              padding: 10,
-              border: "1px solid rgba(26,26,26,0.12)",
-              boxShadow: "0 18px 48px rgba(26,37,64,0.18)",
-              maxWidth: 380,
-              width: "100%",
-            }}
-          >
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                aspectRatio: "4 / 3",
-                overflow: "hidden",
-              }}
-            >
-              <Image
-                src="/case-studies/eu-logistics-email-triage-n8n.jpg"
-                alt="EU logistics email triage n8n build"
-                fill
-                sizes="(min-width: 900px) 380px, 90vw"
-                style={{
-                  objectFit: "cover",
-                  filter: "none",
-                }}
-              />
-            </div>
-            <figcaption
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 10,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                color: "var(--ink-faint)",
-                textAlign: "center",
-                paddingTop: 10,
-              }}
-            >
-              EU logistics · email triage · n8n
-            </figcaption>
-          </figure>
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontStyle: "normal",
-                fontSize: "clamp(18px, 3.2vw, 24px)",
-                lineHeight: 1.4,
-                color: "var(--ink)",
-                margin: "0 0 20px",
-              }}
-            >
-              &ldquo;Three contractors before Waseem. He&apos;s the first who
-              asked us to print our inbox and walk through 100 threads before
-              writing a single node. Response time went from 6 hours to 6
+          <Reveal>
+            <Eyebrow color="var(--terracotta-aa)">What we hand over</Eyebrow>
+            <H2>
+              A system you understand,{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>not a black box.</span>
+            </H2>
+            <p style={{ ...cardBody, fontSize: 16, maxWidth: "44ch", marginBottom: 20 }}>
+              &ldquo;Three contractors before this one. He&apos;s the first who
+              asked us to print our inbox and walk through 100 messages before
+              writing a single step. Response time went from 6 hours to 6
               minutes.&rdquo;
             </p>
-            <div
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.14em",
-                color: "var(--ink-faint)",
-              }}
-            >
-              — Operations Director · EU Logistics · 11-day ship
-            </div>
-          </div>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {FACTS.map((f) => (
+                <li key={f} style={factLi}>
+                  <Check style={{ width: 16, height: 16, color: "var(--sage)", marginTop: 2 }} />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <div style={{ ...subline, marginTop: 18 }}>— Operations Director · EU logistics · 11-day ship</div>
+          </Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 30, rotate: 1 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease }}
+            aria-hidden
+          >
+            <N8nWorkflow className="lp-illo" />
+          </motion.div>
         </div>
       </section>
 
@@ -574,254 +377,265 @@ export default function N8nAutomationLP() {
         }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-              marginBottom: 16,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 12,
-            }}
-          >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-            Manual vs shipped
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4vw, 40px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "var(--ink)",
-              marginBottom: 40,
-              maxWidth: "24ch",
-            }}
-          >
-            What changes the day{" "}
-            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
-              we cut the Zapier cord.
-            </span>
-          </h2>
-
-          <div
-            className="lp-ba-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: 24,
-            }}
-          >
-            <style>{`
-              @media (min-width: 760px) {
-                .lp-ba-grid { grid-template-columns: 1fr 1fr !important; }
-              }
-            `}</style>
-            <div
-              style={{
-                background: "var(--cream-2)",
-                borderLeft: "3px solid var(--oxblood)",
-                padding: "28px 28px",
-                border: "1px solid rgba(26,26,26,0.12)",
-                borderLeftWidth: 3,
-                borderLeftColor: "var(--oxblood)",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: "var(--oxblood)",
-                  marginBottom: 12,
-                }}
-              >
-                — Manual · before
-              </div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: "var(--ink)",
-                  marginBottom: 14,
-                }}
-              >
-                The way it works today
-              </h3>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {BEFORE.map((b) => (
-                  <li
-                    key={b}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "18px 1fr",
-                      gap: 12,
-                      padding: "10px 0",
-                      borderBottom: "1px solid rgba(26,26,26,0.06)",
-                      fontSize: 14,
-                      color: "var(--ink-2)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div
-              style={{
-                background: "var(--cream-3)",
-                padding: "28px 28px",
-                border: "1px solid rgba(26,26,26,0.12)",
-                borderLeftWidth: 3,
-                borderLeftColor: "var(--sage)",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: "var(--sage)",
-                  marginBottom: 12,
-                }}
-              >
-                — Shipped · after
-              </div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: "var(--ink)",
-                  marginBottom: 14,
-                }}
-              >
-                The way it works in 11 days
-              </h3>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {AFTER.map((a) => (
-                  <li
-                    key={a}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "18px 1fr",
-                      gap: 12,
-                      padding: "10px 0",
-                      borderBottom: "1px solid rgba(26,26,26,0.06)",
-                      fontSize: 14,
-                      color: "var(--ink)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
-                    <span>{a}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <Reveal>
+            <Eyebrow color="var(--terracotta-aa)">Before vs after</Eyebrow>
+            <H2>
+              What changes the day{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>you stop renting.</span>
+            </H2>
+          </Reveal>
+          <Stagger className="lp-ba-grid">
+            <BeforeCard label="The way it works today" items={BEFORE} />
+            <AfterCard label="The way it works in 11 days" items={AFTER} />
+          </Stagger>
         </div>
       </section>
 
       {/* FINAL CTA */}
-      <section
-        style={{
-          padding: "clamp(56px, 12vw, 88px) 0 clamp(64px, 14vw, 100px)",
-          background: "var(--cream)",
-        }}
-      >
+      <FinalCta
+        h2={
+          <>
+            Tell us what&apos;s breaking.{" "}
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>We&apos;ll build the fix.</span>
+          </>
+        }
+        body="A free 30-minute check-up. We name the three fixes that recover the most, sequenced biggest-first. Fixed scope back in 48 hours."
+      />
+    </div>
+  );
+}
+
+// ── shared local presentational helpers ────────────────────────────────────
+const primaryBtn: React.CSSProperties = {
+  background: "var(--terracotta)",
+  color: "var(--cream-3)",
+  padding: "16px 28px",
+  fontFamily: "var(--font-sans)",
+  fontWeight: 600,
+  fontSize: 15,
+  borderRadius: 2,
+  display: "inline-flex",
+  alignItems: "center",
+  gap: 8,
+  textDecoration: "none",
+  minHeight: 44,
+};
+const subline: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 10,
+  textTransform: "uppercase",
+  letterSpacing: "0.12em",
+  color: "var(--ink-faint)",
+  marginTop: 18,
+};
+const cardH3: React.CSSProperties = {
+  fontFamily: "var(--font-display)",
+  fontSize: 22,
+  fontWeight: 600,
+  color: "var(--ink)",
+  marginBottom: 10,
+  letterSpacing: "-0.01em",
+};
+const cardBody: React.CSSProperties = {
+  color: "var(--ink-2)",
+  fontSize: 15,
+  lineHeight: 1.6,
+  margin: 0,
+};
+const factLi: React.CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "16px 1fr",
+  gap: 10,
+  padding: "7px 0",
+  fontSize: 15,
+  color: "var(--ink)",
+  lineHeight: 1.55,
+};
+const proofEyebrow: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11,
+  textTransform: "uppercase",
+  letterSpacing: "0.16em",
+  color: "var(--ink-faint)",
+  marginBottom: 14,
+};
+const proofDetail: React.CSSProperties = {
+  fontFamily: "var(--font-display)",
+  fontSize: "clamp(17px, 3vw, 22px)",
+  color: "var(--ink-2)",
+  lineHeight: 1.45,
+  maxWidth: "34ch",
+  margin: "0 auto",
+};
+
+function Eyebrow({ children, color }: { children: React.ReactNode; color: string }) {
+  return (
+    <div
+      style={{
+        fontFamily: "var(--font-mono)",
+        fontSize: 11,
+        textTransform: "uppercase",
+        letterSpacing: "0.16em",
+        color,
+        marginBottom: 16,
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 12,
+      }}
+    >
+      <span style={{ width: 28, height: 1, background: color, display: "inline-block" }} />
+      {children}
+    </div>
+  );
+}
+
+function H2({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      style={{
+        fontFamily: "var(--font-display)",
+        fontSize: "clamp(28px, 4vw, 40px)",
+        fontWeight: 700,
+        letterSpacing: "-0.02em",
+        lineHeight: 1.12,
+        color: "var(--ink)",
+        marginBottom: 40,
+        maxWidth: "26ch",
+      }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function BeforeCard({ label, items }: { label: string; items: string[] }) {
+  return (
+    <Item
+      style={{
+        background: "var(--cream-2)",
+        padding: 28,
+        border: "1px solid rgba(26,26,26,0.12)",
+        borderLeft: "3px solid var(--oxblood)",
+      }}
+    >
+      <div style={{ ...cardMeta, color: "var(--oxblood)" }}>— Before</div>
+      <h3 style={{ ...cardH3, fontSize: 20 }}>{label}</h3>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {items.map((b) => (
+          <li key={b} style={{ ...listLi, color: "var(--ink-2)" }}>
+            <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+    </Item>
+  );
+}
+
+function AfterCard({ label, items }: { label: string; items: string[] }) {
+  return (
+    <Item
+      style={{
+        background: "var(--cream-3)",
+        padding: 28,
+        border: "1px solid rgba(26,26,26,0.12)",
+        borderLeft: "3px solid var(--sage)",
+      }}
+    >
+      <div style={{ ...cardMeta, color: "var(--oxblood)" }}>— After</div>
+      <h3 style={{ ...cardH3, fontSize: 20 }}>{label}</h3>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {items.map((a) => (
+          <li key={a} style={{ ...listLi, color: "var(--ink)" }}>
+            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+            <span>{a}</span>
+          </li>
+        ))}
+      </ul>
+    </Item>
+  );
+}
+
+const cardMeta: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11,
+  textTransform: "uppercase",
+  letterSpacing: "0.16em",
+  marginBottom: 12,
+};
+const listLi: React.CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "18px 1fr",
+  gap: 12,
+  padding: "10px 0",
+  borderBottom: "1px solid rgba(26,26,26,0.06)",
+  fontSize: 15,
+  lineHeight: 1.55,
+};
+
+function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
+  return (
+    <section
+      style={{
+        padding: "clamp(56px, 12vw, 88px) 0 clamp(64px, 14vw, 100px)",
+        background:
+          "linear-gradient(180deg, var(--cream) 0%, color-mix(in srgb, var(--terracotta) 8%, var(--cream)) 100%)",
+      }}
+    >
+      <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)", textAlign: "center" }}>
         <div
           style={{
-            maxWidth: 760,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 32px)",
-            textAlign: "center",
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            textTransform: "uppercase",
+            letterSpacing: "0.16em",
+            color: "var(--terracotta-aa)",
+            marginBottom: 20,
           }}
         >
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-              marginBottom: 20,
-            }}
-          >
-            — Start the brief
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(30px, 5vw, 52px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.08,
-              color: "var(--ink)",
-              marginBottom: 20,
-            }}
-          >
-            Tell me what&apos;s breaking.{" "}
-            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
-              I&apos;ll wire the fix.
-            </span>
-          </h2>
-          <p
-            style={{
-              fontSize: "clamp(15px, 2.5vw, 17px)",
-              color: "var(--ink-2)",
-              maxWidth: "44ch",
-              margin: "0 auto 32px",
-              lineHeight: 1.6,
-            }}
-          >
-            30-min discovery call. Top 3 leaks ranked by dollar value. Fixed
-            scope back in 48 hours.
-          </p>
-          <Link
-            href="/discovery-call"
-            style={{
-              background: "var(--terracotta)",
-              color: "var(--cream-3)",
-              padding: "18px 32px",
-              fontFamily: "var(--font-sans)",
-              fontWeight: 700,
-              fontSize: 16,
-              borderRadius: 2,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              textDecoration: "none",
-              minHeight: 44,
-            }}
-          >
-            Book a 30-min call
-            <ArrowRight style={{ width: 16, height: 16 }} />
-          </Link>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 10,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-              color: "var(--ink-faint)",
-              marginTop: 22,
-            }}
-          >
-            — 4 builds per month · next slot opens June
-          </div>
+          — Start the brief
         </div>
-      </section>
-    </div>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(30px, 5vw, 52px)",
+            fontWeight: 700,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
+            color: "var(--ink)",
+            marginBottom: 20,
+          }}
+        >
+          {h2}
+        </h2>
+        <p
+          style={{
+            fontSize: "clamp(15px, 2.5vw, 17px)",
+            color: "var(--ink-2)",
+            maxWidth: "46ch",
+            margin: "0 auto 32px",
+            lineHeight: 1.6,
+          }}
+        >
+          {body}
+        </p>
+        <Link href="/discovery-call" style={{ ...primaryBtn, padding: "18px 32px", fontWeight: 700, fontSize: 16 }}>
+          Book a free 30-min check-up
+          <ArrowRight style={{ width: 16, height: 16 }} />
+        </Link>
+        <div
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            color: "var(--ink-faint)",
+            marginTop: 22,
+          }}
+        >
+          — 4 builds per month · 8-hour weekday reply
+        </div>
+      </Reveal>
+    </section>
   );
 }

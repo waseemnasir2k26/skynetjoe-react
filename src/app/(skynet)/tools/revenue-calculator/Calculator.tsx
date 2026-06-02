@@ -295,7 +295,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 backdropFilter: "blur(14px)",
               }}
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
                 Money leaking right now
               </p>
               <CountUp
@@ -315,7 +315,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                     border: "1px solid rgba(198, 107, 63, 0.35)",
                   }}
                 >
-                  <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)] font-semibold mb-1">
+                  <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)] font-semibold mb-1">
                     Missed revenue / mo
                   </p>
                   <CountUp
@@ -331,7 +331,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                     border: "1px solid rgba(26,26,26,0.12)",
                   }}
                 >
-                  <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta)] font-semibold mb-1">
+                  <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)] font-semibold mb-1">
                     Wasted labor / mo
                   </p>
                   <CountUp
@@ -352,7 +352,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 backdropFilter: "blur(14px)",
               }}
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-6">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-6">
                 Your inputs · move the sliders
               </p>
 
@@ -369,7 +369,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                         >
                           {s.label}
                         </label>
-                        <span className="text-base md:text-lg font-extrabold text-[var(--terracotta)] tabular-nums whitespace-nowrap">
+                        <span className="text-base md:text-lg font-extrabold text-[var(--terracotta-aa)] tabular-nums whitespace-nowrap">
                           {formatBySliderUnit(s.unit, v)}
                         </span>
                       </div>
@@ -409,13 +409,13 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 backdropFilter: "blur(14px)",
               }}
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
                 With SkynetLabs · net recovery
               </p>
 
               <div className="grid sm:grid-cols-2 gap-5 mb-6">
                 <div>
-                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)] font-semibold mb-1">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta-aa)] font-semibold mb-1">
                     Recovered / mo
                   </p>
                   <CountUp
@@ -429,7 +429,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                   </p>
                 </div>
                 <div className="sm:text-right">
-                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta)] font-semibold mb-1">
+                  <p className="text-xs uppercase tracking-wider text-[var(--terracotta-aa)] font-semibold mb-1">
                     Net annual gain
                   </p>
                   <CountUp
@@ -511,7 +511,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
             >
               <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-base font-semibold text-[var(--ink)]">
                 <span>How we calculated this</span>
-                <ChevronDown className="w-5 h-5 text-[var(--terracotta)] transition-transform group-open:rotate-180 shrink-0" />
+                <ChevronDown className="w-5 h-5 text-[var(--terracotta-aa)] transition-transform group-open:rotate-180 shrink-0" />
               </summary>
               <div className="mt-4 space-y-3 text-sm text-[var(--ink-2)] leading-relaxed">
                 <p>
@@ -558,7 +558,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 backdropFilter: "blur(14px)",
               }}
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
                 Live · your annual gain
               </p>
               <CountUp
@@ -590,7 +590,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 style={{ borderTop: "1px dashed rgba(26,26,26,0.18)" }}
               >
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]/80">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta-aa)]/80">
                     Leak / mo
                   </p>
                   <p className="text-base font-bold text-[var(--ink)] tabular-nums">
@@ -598,7 +598,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]/80">
+                  <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta-aa)]/80">
                     Gain / mo
                   </p>
                   <p className="text-base font-bold text-[var(--ink)] tabular-nums">
@@ -628,7 +628,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
           }}
         >
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta-aa)]">
               Annual gain
             </p>
             <p className="text-lg font-extrabold text-[var(--ink)] truncate tabular-nums">

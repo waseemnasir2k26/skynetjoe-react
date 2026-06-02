@@ -171,7 +171,7 @@ export default function Header() {
             }}
           >
             Skynet
-            <em style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
+            <em style={{ fontStyle: "normal", color: "var(--terracotta-aa)", fontWeight: 700 }}>
               Labs
             </em>
           </span>
@@ -181,7 +181,7 @@ export default function Header() {
           {NAV_PRIMARY.map((item) => {
             const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
             const active = isActive(item.href);
-            const restColor = active ? "var(--terracotta)" : "var(--ink-2)";
+            const restColor = active ? "var(--terracotta-aa)" : "var(--ink-2)";
             return (
               <div
                 key={item.href}
@@ -354,7 +354,7 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     className="py-3 text-base font-medium border-b border-white/[0.06]"
                     style={{
-                      color: active ? "var(--terracotta)" : "var(--ink)",
+                      color: active ? "var(--terracotta-aa)" : "var(--ink)",
                       borderLeft: active ? "3px solid var(--terracotta)" : "3px solid transparent",
                       paddingLeft: active ? 10 : 0,
                     }}

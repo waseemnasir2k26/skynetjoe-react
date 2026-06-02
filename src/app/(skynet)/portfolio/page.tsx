@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import WorkShowcase from "@/components/sections/WorkShowcase";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Portfolio — Recent Projects | SkynetLabs",
@@ -48,14 +49,14 @@ export default function PortfolioPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <Reveal style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
               marginBottom: 18,
               display: "inline-flex",
               alignItems: "center",
@@ -69,7 +70,7 @@ export default function PortfolioPage() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(38px, 6vw, 68px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.04,
               color: "var(--ink)",
@@ -78,9 +79,9 @@ export default function PortfolioPage() {
             }}
           >
             20+ shipped builds.{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
               Real receipts.
-            </em>
+            </span>
           </h1>
           <p
             style={{
@@ -95,7 +96,7 @@ export default function PortfolioPage() {
             estate, wellness, HVAC, logistics, legal, healthcare. Click any
             tile to open the deployed site. Built solo from Bali.
           </p>
-        </div>
+        </Reveal>
       </section>
 
       <div
@@ -137,7 +138,7 @@ export default function PortfolioPage() {
           zIndex: 2,
         }}
       >
-        <div
+        <Reveal
           style={{
             maxWidth: 720,
             margin: "0 auto",
@@ -162,7 +163,7 @@ export default function PortfolioPage() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4.4vw, 44px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--cream-3)",
@@ -170,16 +171,16 @@ export default function PortfolioPage() {
             }}
           >
             Want your build on this{" "}
-            <em
+            <span
               style={{
-                fontStyle: "italic",
+                fontWeight: 700,
                 textDecoration: "underline",
                 textDecorationThickness: "1px",
                 textUnderlineOffset: "8px",
               }}
             >
               wall next quarter?
-            </em>
+            </span>
           </h2>
           <p
             style={{
@@ -234,7 +235,7 @@ export default function PortfolioPage() {
               See pricing
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   );

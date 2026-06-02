@@ -155,7 +155,7 @@ const content: ServiceFunnelContent = {
     },
     {
       q: "Will you change our logo?",
-      a: "Only if it earns its keep. A fair share of engagements end with the same logo, refined type, a new palette, and a system that makes the mark look more expensive than it did. Re-drawing the logo while the rest of the brand is broken is fresh paint on a leaking roof.",
+      a: "Only if it earns its keep. A fair share of engagements end with the same logo, refined type, a new palette, and a system that makes the mark look more expensive than it did. Re-drawing the logo while the rest of the brand is broken is fresh paint on a cracked wall.",
     },
     {
       q: "Do we own the files, or are we renting them?",
@@ -177,7 +177,7 @@ const content: ServiceFunnelContent = {
 
   finalCta: {
     h2: "Stop looking like three different companies.",
-    body: "30-minute discovery call. I'll audit where your brand drifts, show you the three biggest leaks, and have fixed scope back in 48 hours.",
+    body: "30-minute discovery call. I'll audit where your brand drifts, show you the three biggest gaps, and have fixed scope back in 48 hours.",
     ctaLabel: "Start the brief",
   },
 };

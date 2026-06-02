@@ -198,12 +198,12 @@ const FORMAT_META: Record<
   runway: {
     label: "Runway Gen-3",
     description: "Verbose w/ technical params",
-    color: "var(--terracotta)",
+    color: "var(--terracotta-aa)",
   },
   pika: {
     label: "Pika",
     description: "Shorter, motion-focused",
-    color: "var(--terracotta)",
+    color: "var(--terracotta-aa)",
   },
   sora: {
     label: "Sora",
@@ -357,13 +357,13 @@ export default function Generator() {
       {/* INPUTS */}
       <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md p-5 md:p-7 h-fit lg:sticky lg:top-24">
         <div className="flex items-center gap-2 mb-5">
-          <Film className="h-5 w-5 text-[var(--terracotta)]" />
+          <Film className="h-5 w-5 text-[var(--terracotta-aa)]" />
           <h2 className="text-lg font-extrabold text-[var(--ink)]">Inputs</h2>
         </div>
 
         {/* Subject */}
         <label className="block mb-5">
-          <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-2">
+          <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-2">
             Subject / scene
           </span>
           <textarea
@@ -432,7 +432,7 @@ export default function Generator() {
 
         {/* Negative */}
         <label className="block mb-5">
-          <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-2">
+          <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-2">
             Negative prompts <span className="text-[var(--ink-faint)]">(optional)</span>
           </span>
           <input
@@ -460,7 +460,7 @@ export default function Generator() {
             <button
               type="button"
               onClick={saveToHistory}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-2.5 text-xs font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta)] transition"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-2.5 text-xs font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)] transition"
             >
               <Save className="h-3.5 w-3.5" />
               {savedToast ? "Saved" : "Save"}
@@ -468,7 +468,7 @@ export default function Generator() {
             <button
               type="button"
               onClick={reset}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-2.5 text-xs font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta)] transition"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-3 py-2.5 text-xs font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)] transition"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
@@ -520,7 +520,7 @@ export default function Generator() {
                 >
                   {copied ? (
                     <>
-                      <Check className="h-3.5 w-3.5 text-[var(--terracotta)]" />
+                      <Check className="h-3.5 w-3.5 text-[var(--terracotta-aa)]" />
                       Copied
                     </>
                   ) : (
@@ -540,7 +540,7 @@ export default function Generator() {
           <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md p-5 md:p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-0.5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-0.5">
                   Saved history
                 </p>
                 <p className="text-xs text-[var(--ink-faint)]">
@@ -566,7 +566,7 @@ export default function Generator() {
                     onClick={() => loadFromHistory(h)}
                     className="flex-1 text-left"
                   >
-                    <div className="text-sm font-semibold text-[var(--ink)] truncate group-hover:text-[var(--terracotta)] transition">
+                    <div className="text-sm font-semibold text-[var(--ink)] truncate group-hover:text-[var(--terracotta-aa)] transition">
                       {h.inputs.subject || "(no subject)"}
                     </div>
                     <div className="text-[10px] text-[var(--ink-faint)] uppercase tracking-wider">
@@ -603,7 +603,7 @@ function Field({
 }) {
   return (
     <div className="mb-5">
-      <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)] mb-2">
+      <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-2">
         {label}
       </div>
       {children}
@@ -668,7 +668,7 @@ function RadioRow<T extends string>({
             onClick={() => onChange(o.value)}
             className={
               selected
-                ? "rounded-lg border-2 border-[var(--terracotta)] bg-[rgba(198,107,63,0.10)] px-2.5 py-1.5 text-xs font-semibold text-[var(--terracotta)] transition"
+                ? "rounded-lg border-2 border-[var(--terracotta)] bg-[rgba(198,107,63,0.10)] px-2.5 py-1.5 text-xs font-semibold text-[var(--terracotta-aa)] transition"
                 : "rounded-lg border-2 border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-2.5 py-1.5 text-xs font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)]/50 hover:bg-[var(--cream-2)]"
             }
             aria-pressed={selected}

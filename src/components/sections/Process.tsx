@@ -12,6 +12,7 @@ const C = {
   ink2: "#3A3A36",
   inkFaint: "#6B6B65",
   terra: "#C66B3F",
+  terraAA: "#A8451F", // AA-safe terracotta for small/accent TEXT
   ochre: "#C9A96E",
   sage: "#8A9A7B",
   rule: "rgba(26,26,26,0.12)",
@@ -23,7 +24,7 @@ const STEPS = [
     n: "01",
     title: "Audit",
     when: "Mon",
-    desc: "Free 20-min Loom audit. We map your funnel, find the leak, name the leverage.",
+    desc: "Free 20-min Loom check-up. We map your funnel, find the gaps, name the quickest win.",
     deliverable: "20-min Loom + 1-pager",
     color: C.terra,
   },
@@ -67,7 +68,7 @@ export default function Process() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: C.terra,
+              color: C.terraAA,
               fontWeight: 600,
               marginBottom: 14,
               display: "inline-flex",
@@ -90,7 +91,7 @@ export default function Process() {
             }}
           >
             Four steps.{" "}
-            <span style={{ fontStyle: "normal", color: C.terra, fontWeight: 700 }}>No drawn-out proposals.</span>
+            <span style={{ fontStyle: "normal", color: C.terraAA, fontWeight: 700 }}>No drawn-out proposals.</span>
           </h2>
           <p style={{ fontSize: 17, color: C.ink2, lineHeight: 1.6 }}>
             No 14-slide proposal deck. No 6-week discovery phase. Audit Monday,
@@ -155,7 +156,7 @@ export default function Process() {
                       fontWeight: 700,
                       textTransform: "uppercase",
                       letterSpacing: "0.16em",
-                      color: C.terra,
+                      color: C.terraAA,
                       background: C.cream3,
                       border: `1px solid ${C.rule}`,
                       padding: "6px 12px",
@@ -282,7 +283,7 @@ export default function Process() {
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: C.terra,
+                color: C.terraAA,
                 fontWeight: 600,
                 marginBottom: 10,
                 display: "inline-flex",
@@ -304,7 +305,7 @@ export default function Process() {
               }}
             >
               You brief Waseem. Claude drafts.{" "}
-              <span style={{ fontStyle: "normal", color: C.terra, fontWeight: 700 }}>Waseem ships.</span>
+              <span style={{ fontStyle: "normal", color: C.terraAA, fontWeight: 700 }}>Waseem ships.</span>
             </h3>
             <p style={{ fontSize: 15, color: C.ink2, lineHeight: 1.6, marginBottom: 10 }}>
               You send a brief in 3 sentences. I read it, scope it, and pair

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SITE, FOOTER_COLUMNS } from "@/lib/site";
 import ToolsStrip from "@/components/cta/ToolsStrip";
@@ -53,7 +54,7 @@ export default function Footer() {
                 borderBottom: "none",
               }}
             >
-              Skynet<em style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>Labs</em>
+              Skynet<em style={{ fontStyle: "normal", color: "var(--terracotta-aa)", fontWeight: 700 }}>Labs</em>
             </Link>
             <p className="text-sm leading-relaxed max-w-sm" style={{ color: "var(--ink-2)" }}>
               {SITE.description}
@@ -92,25 +93,24 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Founder credit — SL monogram (no face photo), allowed founder icon presence */}
+            {/* Founder credit — small round founder photo (you talk to the builder) */}
             <div className="flex items-center gap-3 mt-6">
               <span
-                aria-hidden="true"
-                className="flex items-center justify-center flex-shrink-0"
+                className="flex-shrink-0 overflow-hidden"
                 style={{
                   width: 34,
                   height: 34,
                   borderRadius: 999,
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
-                  fontFamily: "var(--font-display)",
-                  fontSize: 13,
-                  fontWeight: 700,
-                  letterSpacing: "0.02em",
-                  lineHeight: 1,
+                  border: "2px solid var(--terracotta)",
                 }}
               >
-                SL
+                <Image
+                  src="/portraits/waseem-builder-portrait.jpg"
+                  alt="Waseem Nasir, founder of SkynetLabs"
+                  width={34}
+                  height={34}
+                  className="w-full h-full object-cover"
+                />
               </span>
               <span className="text-sm" style={{ color: "var(--ink-2)" }}>
                 Built by Waseem, SkynetLabs · Bali

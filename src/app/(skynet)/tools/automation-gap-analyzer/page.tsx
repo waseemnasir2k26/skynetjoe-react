@@ -9,15 +9,15 @@ const PATH = "/tools/automation-gap-analyzer";
 
 export const metadata: Metadata = {
   title:
-    "Automation Gap Analyzer — find your biggest manual leak in 90 seconds · SkynetLabs",
+    "Automation Gap Analyzer — find your biggest manual time-sink in 90 seconds · SkynetLabs",
   description:
     "Free 12-question diagnostic across lead capture, follow-up, reporting, team productivity. Get an automation gap % score plus the one axis to fix first.",
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title:
-      "Automation Gap Analyzer — score your manual leaks 0 to 100 · SkynetLabs",
+      "Automation Gap Analyzer — score your manual work 0 to 100 · SkynetLabs",
     description:
-      "12 questions, 4 axes, one honest automation gap score. Find the biggest leak and the moves to plug it.",
+      "12 questions, 4 axes, one honest automation gap score. Find the biggest gap and the moves to close it.",
     url: `${SITE.url}${PATH}`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "What does the automation gap score measure?",
-    a: "It scores how much of your repeatable work runs without a human pressing a button. 100 means lead intake, follow-up, reporting and hand-offs are wired end-to-end. 0 means everything is copy-paste, Slack threads and memory. The four-axis breakdown shows which axis is the biggest leak.",
+    a: "It scores how much of your repeatable work runs without a human pressing a button. 100 means lead intake, follow-up, reporting and hand-offs are wired end-to-end. 0 means everything is copy-paste, Slack threads and memory. The four-axis breakdown shows which axis is the biggest gap.",
   },
   {
     q: "What do you collect?",
@@ -41,11 +41,11 @@ const faqs = [
   },
   {
     q: "Why 4 axes specifically?",
-    a: "Lead Capture, Follow-Up, Reporting and Team Productivity are the four places service businesses leak hours. Lead capture is the inbox-to-CRM gap. Follow-up is the 5-7 touch curve nobody runs. Reporting is the Monday-morning-CSV tax. Team productivity is the copy-paste-between-tools tax. Fix one axis and the others get easier.",
+    a: "Lead Capture, Follow-Up, Reporting and Team Productivity are the four places service businesses lose hours. Lead capture is the inbox-to-CRM gap. Follow-up is the 5-7 touch curve nobody runs. Reporting is the Monday-morning-CSV tax. Team productivity is the copy-paste-between-tools tax. Fix one axis and the others get easier.",
   },
   {
     q: "What happens after I get my score?",
-    a: "Two paths. Either you book a 30-minute call where I look at the lowest-scoring axis and tell you exactly what to wire first, or you bounce to the revenue calculator with your implied manual hours prefilled to see the dollar number behind the leak. Both are free.",
+    a: "Two paths. Either you book a 30-minute call where I look at the lowest-scoring axis and tell you exactly what to wire first, or you bounce to the revenue calculator with your implied manual hours prefilled to see the dollar number behind the gap. Both are free.",
   },
 ];
 
@@ -58,7 +58,7 @@ const heroStats = [
   },
   {
     icon: Target,
-    label: "Biggest leak",
+    label: "Biggest gap",
     body: "Pinpoints the axis costing you most.",
   },
 ];
@@ -135,7 +135,7 @@ export default function AutomationGapPage() {
               style={{
                 background: "rgba(198,107,63,0.10)",
                 border: "1px solid rgba(198,107,63,0.40)",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
               }}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -163,7 +163,7 @@ export default function AutomationGapPage() {
             <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
               12 questions across the four axes that bleed hours in every
               service business: lead capture, follow-up, reporting, and team
-              productivity. 90 seconds to score, one biggest leak to fix first.
+              productivity. 90 seconds to score, one biggest gap to fix first.
             </p>
             <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
               You get a 0 to 100 automation gap %, a four-axis radar, and a
@@ -179,7 +179,7 @@ export default function AutomationGapPage() {
                   className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-4 py-3"
                 >
                   <div className="flex items-center gap-2 text-[var(--ink)]">
-                    <Icon className="w-4 h-4 text-[var(--terracotta)]" />
+                    <Icon className="w-4 h-4 text-[var(--terracotta-aa)]" />
                     <span className="text-sm font-semibold">{label}</span>
                   </div>
                   <p className="mt-1 text-xs text-[var(--ink-faint)] leading-relaxed">
@@ -205,11 +205,11 @@ export default function AutomationGapPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3 text-center">
               The four axes
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
-              Where the hours actually leak.
+              Where the hours actually go.
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {AXES.map((a) => (
@@ -217,7 +217,7 @@ export default function AutomationGapPage() {
                   key={a.key}
                   className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5"
                 >
-                  <div className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] mb-3 bg-[rgba(198,107,63,0.10)] text-[var(--terracotta)] border border-[rgba(198,107,63,0.30)]">
+                  <div className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] mb-3 bg-[rgba(198,107,63,0.10)] text-[var(--terracotta-aa)] border border-[rgba(198,107,63,0.30)]">
                     {a.questionCount} Qs · max {a.maxScore}
                   </div>
                   <h3 className="text-[var(--ink)] text-lg font-extrabold mb-1">
@@ -237,7 +237,7 @@ export default function AutomationGapPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3 text-center">
               Quick answers
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
@@ -251,7 +251,7 @@ export default function AutomationGapPage() {
                 >
                   <summary className="flex cursor-pointer items-center justify-between gap-4 text-[var(--ink)] font-semibold list-none">
                     <span>{f.q}</span>
-                    <span className="text-[var(--terracotta)] transition group-open:rotate-45 text-xl leading-none">
+                    <span className="text-[var(--terracotta-aa)] transition group-open:rotate-45 text-xl leading-none">
                       +
                     </span>
                   </summary>

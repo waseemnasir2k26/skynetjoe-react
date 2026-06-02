@@ -22,8 +22,9 @@ const C = {
   cream3: "#FAF7F0",
   ink: "#1A1A1A",
   ink2: "#3A3A36",
-  inkFaint: "#6B6B65",
-  terra: "#C66B3F",
+  inkFaint: "#56564F", // AA: ~5:1 on cream (was #6B6B65)
+  terra: "#C66B3F", // backgrounds / borders / icons only
+  terraAA: "#A8451F", // accent TEXT — clears 4.5:1 on cream
   terra2: "#B85A30",
   rule: "rgba(26,26,26,0.12)",
   ruleSoft: "rgba(26,26,26,0.06)",
@@ -127,7 +128,7 @@ const QUESTIONS: Question[] = [
   { id: "teamSize", title: "How big is your team right now?" },
   {
     id: "biggestLeak",
-    title: "What's the #1 thing leaking money or time right now?",
+    title: "What's costing you the most right now — money or time?",
     helper: "Pick whichever hurts most. Other is fine — write it in.",
   },
   {
@@ -303,7 +304,7 @@ export default function Qualifier({
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: C.terra,
+              color: C.terraAA,
               fontWeight: 600,
               margin: 0,
             }}
@@ -716,10 +717,10 @@ function LeadSlider({
         <span
           style={{
             fontFamily: "var(--font-display)",
-            fontStyle: "italic",
+            fontStyle: "normal",
             fontSize: 32,
-            fontWeight: 600,
-            color: C.terra,
+            fontWeight: 700,
+            color: C.terraAA,
           }}
         >
           {LEAD_LABELS[value] || LEAD_LABELS["200"]}
@@ -748,7 +749,7 @@ function LeadSlider({
       />
       <div className="flex justify-between mt-2" style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}>
         {LEAD_RANGES.map((r) => (
-          <span key={r} style={{ color: r === value ? C.terra : C.inkFaint }}>
+          <span key={r} style={{ color: r === value ? C.terraAA : C.inkFaint }}>
             {LEAD_LABELS[r].replace(" / mo", "").replace("~", "")}
           </span>
         ))}

@@ -14,7 +14,7 @@ const content: ServiceFunnelContent = {
   hero: {
     eyebrow: "Consulting · AI Content Creation · 2026",
     h1: "Post every day, in your voice, without it eating your week.",
-    sub: "Most AI content fails the same way: it's fast, it's on time, and it sounds like nobody. I do the opposite. We lock your actual voice into a documented profile — your hooks, your tics, the phrases you'd never say — then build an engine that turns one voice memo into a week of posts, carousels, and AEO copy that read like you wrote them at 6am with a coffee, not like a model on a deadline.",
+    sub: "Most AI content fails the same way: it's fast, it's on time, and it sounds like nobody. I do the opposite. We lock your actual voice into a documented profile — your hooks, your tics, the phrases you'd never say — then build an engine that turns one voice memo into a week of posts, carousels, and copy that read like you wrote them at 6am with a coffee, not like a model on a deadline.",
     primary: { label: "Lock the voice", href: "/discovery-call" },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
@@ -57,12 +57,12 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "An engine that turns one input into a week",
-      body: "Record a five-minute voice memo, drop a rough draft, or paste an interview transcript. The pipeline spins it into LinkedIn posts, carousels, blog and AEO copy, and short captions — each pre-named to a slot on a 30-day calendar, each linted. The channel stops going dark.",
+      body: "Record a five-minute voice memo, drop a rough draft, or paste an interview transcript. The pipeline spins it into LinkedIn posts, carousels, blog and answer-ready copy, and short captions — each pre-named to a slot on a 30-day calendar, each linted. The channel stops going dark.",
       proof: "1 input → a week of cross-channel content",
     },
     {
-      title: "AEO copy that gets your brand quoted by the models",
-      body: "The same content engine that writes your posts writes answer-first copy structured to get cited when someone asks Claude or ChatGPT about your space. Built on the AEO/content-engine work behind SkynetLabs' own pipeline — not theory, the thing I run on myself.",
+      title: "Copy that gets your brand quoted by AI answers",
+      body: "The same content engine that writes your posts writes answer-first copy built to get your brand cited when someone asks an AI assistant about your space. Built on the same content engine behind SkynetLabs' own pipeline — not theory, the thing I run on myself.",
       proof: "Answer-first structure, schema-ready",
     },
   ],
@@ -136,7 +136,7 @@ const content: ServiceFunnelContent = {
     },
     {
       q: "What does it cost and how fast is the first batch?",
-      a: "Public, fixed pricing — see the tiers above. Starter (voice lock-in plus a 15-post batch) lands in about 5 days; the full engine with carousels, AEO copy, and an auto-publish pipeline runs 10-14. Fixed scope back in your inbox within 48 hours of the brief.",
+      a: "Public, fixed pricing — see the tiers above. Starter (voice lock-in plus a 15-post batch) lands in about 5 days; the full engine with carousels, answer-ready copy, and an auto-publish pipeline runs 10-14. Fixed scope back in your inbox within 48 hours of the brief.",
     },
   ],
 

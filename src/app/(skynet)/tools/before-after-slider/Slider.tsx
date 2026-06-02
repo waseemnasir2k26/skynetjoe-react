@@ -121,7 +121,7 @@ export default function Slider() {
     <div className="space-y-12">
       {/* PICKER */}
       <div>
-        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
           Pick a scenario
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -144,7 +144,7 @@ export default function Slider() {
                     {s.icon}
                   </span>
                   <div>
-                    <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)]/80 mb-1">
+                    <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)]/80 mb-1">
                       {s.category}
                     </div>
                     <div
@@ -166,7 +166,7 @@ export default function Slider() {
       <div>
         <div className="flex items-end justify-between mb-3 gap-3">
           <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-1">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-1">
               {active.category}
             </p>
             <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--ink)] tracking-tight">
@@ -176,7 +176,7 @@ export default function Slider() {
           <button
             type="button"
             onClick={() => setPosition(50)}
-            className="inline-flex items-center gap-1.5 text-xs text-[var(--terracotta)] hover:text-[var(--ink)] px-2 py-1 rounded-md border border-[rgba(198,107,63,0.30)] hover:border-[rgba(198,107,63,0.50)]"
+            className="inline-flex items-center gap-1.5 text-xs text-[var(--terracotta-aa)] hover:text-[var(--ink)] px-2 py-1 rounded-md border border-[rgba(198,107,63,0.30)] hover:border-[rgba(198,107,63,0.50)]"
             aria-label="Reset slider to center"
           >
             <RotateCcw className="w-3 h-3" />
@@ -313,7 +313,7 @@ export default function Slider() {
 
       {/* KPI TILES */}
       <div>
-        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
           The delta
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -322,7 +322,7 @@ export default function Slider() {
               key={k.label}
               className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-3)] p-4"
             >
-              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta)]/80 mb-2">
+              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)]/80 mb-2">
                 {k.label}
               </div>
               <div className="flex items-baseline gap-2 mb-1 flex-wrap">
@@ -338,7 +338,7 @@ export default function Slider() {
                 <span className="text-[var(--ink-faint)] text-xs">→</span>
                 <span
                   className="text-2xl font-extrabold text-[var(--ink)]"
-                  style={{ fontFamily: "var(--font-fraunces, serif)" }}
+                  style={{ fontFamily: "var(--font-sans)" }}
                 >
                   {k.after}
                 </span>
@@ -347,7 +347,7 @@ export default function Slider() {
                 className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.14em] rounded-full px-2 py-0.5"
                 style={{
                   background: "rgba(198,107,63,0.12)",
-                  color: "var(--terracotta)",
+                  color: "var(--terracotta-aa)",
                   border: "1px solid rgba(198,107,63,0.30)",
                 }}
               >
@@ -386,10 +386,10 @@ export default function Slider() {
 
       {/* FEEDBACK FORM */}
       <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta)] mb-2">
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-2">
           — Feedback · 30-second form
         </p>
-        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2 font-serif">
+        <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2">
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">

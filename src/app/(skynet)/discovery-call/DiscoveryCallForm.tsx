@@ -29,8 +29,9 @@ const C = {
   cream3: "#FAF7F0",
   ink: "#1A1A1A",
   ink2: "#3A3A36",
-  inkFaint: "#6B6B65",
-  terra: "#C66B3F",
+  inkFaint: "#56564F", // AA: ~5:1 on cream (was #6B6B65)
+  terra: "#C66B3F", // backgrounds / borders / icons only
+  terraAA: "#A8451F", // accent TEXT — clears 4.5:1 on cream
   terra2: "#B85A30",
   rule: "rgba(26,26,26,0.12)",
   ruleSoft: "rgba(26,26,26,0.06)",
@@ -265,7 +266,7 @@ export default function DiscoveryCallForm() {
           </h3>
           <p style={{ color: C.ink2, marginBottom: 12, fontSize: 17 }}>
             We&apos;ll reply within{" "}
-            <strong style={{ color: C.terra }}>8 hours</strong> on weekday Bali
+            <strong style={{ color: C.terraAA }}>8 hours</strong> on weekday Bali
             time (GMT+8).
           </p>
           <div
@@ -284,7 +285,7 @@ export default function DiscoveryCallForm() {
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 textTransform: "uppercase",
-                color: C.terra,
+                color: C.terraAA,
                 fontWeight: 600,
                 letterSpacing: "0.16em",
                 marginBottom: 8,
@@ -302,7 +303,7 @@ export default function DiscoveryCallForm() {
             Urgent? Email{" "}
             <a
               href="mailto:info@skynetjoe.com"
-              style={{ color: C.terra, textDecoration: "underline", fontWeight: 600 }}
+              style={{ color: C.terraAA, textDecoration: "underline", fontWeight: 600 }}
             >
               info@skynetjoe.com
             </a>{" "}
@@ -359,7 +360,7 @@ export default function DiscoveryCallForm() {
                       textTransform: "uppercase",
                       letterSpacing: "0.10em",
                       fontWeight: 600,
-                      color: active || done ? C.terra : C.inkFaint,
+                      color: active || done ? C.terraAA : C.inkFaint,
                     }}
                   >
                     {s.title}
@@ -550,7 +551,7 @@ export default function DiscoveryCallForm() {
                         fontSize: 11,
                         textTransform: "uppercase",
                         letterSpacing: "0.16em",
-                        color: C.terra,
+                        color: C.terraAA,
                         fontWeight: 600,
                         display: "flex",
                         alignItems: "center",
@@ -661,7 +662,7 @@ export default function DiscoveryCallForm() {
                 }}
               >
                 <span>{form.pain.length} chars</span>
-                <span style={{ color: form.pain.length > 80 ? C.terra : C.inkFaint }}>
+                <span style={{ color: form.pain.length > 80 ? C.terraAA : C.inkFaint }}>
                   {form.pain.length > 80 ? "✓ Detailed enough" : "Aim for 80+ chars"}
                 </span>
               </div>
@@ -679,7 +680,7 @@ export default function DiscoveryCallForm() {
                       style={{
                         padding: "8px 12px",
                         background: active ? C.cream2 : C.cream3,
-                        color: active ? C.terra : C.ink2,
+                        color: active ? C.terraAA : C.ink2,
                         border: active ? `1px solid ${C.terra}` : `1px solid ${C.rule}`,
                         fontFamily: "var(--font-sans)",
                         fontWeight: 600,
@@ -742,7 +743,7 @@ export default function DiscoveryCallForm() {
                     Fallback:{" "}
                     <a
                       href="mailto:info@skynetjoe.com"
-                      style={{ textDecoration: "underline", color: C.terra }}
+                      style={{ textDecoration: "underline", color: C.terraAA }}
                     >
                       email Waseem
                     </a>{" "}
@@ -852,7 +853,7 @@ export default function DiscoveryCallForm() {
 
       <p style={{ fontSize: 11, color: C.inkFaint }}>
         By submitting you agree to our{" "}
-        <a href="/privacy-policy" style={{ textDecoration: "underline", color: C.terra }}>
+        <a href="/privacy-policy" style={{ textDecoration: "underline", color: C.terraAA }}>
           Privacy Policy
         </a>
         . No spam, no sequences.

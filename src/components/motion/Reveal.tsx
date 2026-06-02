@@ -1,0 +1,152 @@
+"use client";
+
+/**
+ * Reveal — cinematic scroll-reveal primitives for interior content pages.
+ *
+ * Server pages (which export `metadata`) can't be `"use client"`, so the
+ * Framer Motion is isolated here and dropped into those pages as wrappers.
+ * Honors prefers-reduced-motion via Framer's `MotionConfig reducedMotion`
+ * default (transform/opacity only) and a viewport `once` guard so reveals
+ * fire a single time. Used by: about, portfolio, blog, news, author,
+ * case-studies interior pages (redesign/full-site).
+ */
+
+import { motion, type Variants } from "framer-motion";
+import type { CSSProperties, ReactNode } from "react";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/** Masked slide-up: content rises into a clip window as it enters view. */
+export function Reveal({
+  children,
+  delay = 0,
+  y = 28,
+  className,
+  style,
+  as = "div",
+}: {
+  children: ReactNode;
+  delay?: number;
+  y?: number;
+  className?: string;
+  style?: CSSProperties;
+  as?: "div" | "section" | "li" | "figure";
+}) {
+  const MotionTag = motion[as];
+  return (
+    <MotionTag
+      className={className}
+      style={style}
+      initial={{ opacity: 0, y, clipPath: "inset(0 0 100% 0)" }}
+      whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.7, ease: EASE, delay }}
+    >
+      {children}
+    </MotionTag>
+  );
+}
+
+const STAGGER_PARENT: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.04 } },
+};
+
+const STAGGER_CHILD: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
+
+/** Parent that staggers its <RevealItem> children as the group enters view. */
+export function RevealGroup({
+  children,
+  className,
+  style,
+  as = "div",
+}: {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+  as?: "div" | "ol" | "ul" | "section";
+}) {
+  const MotionTag = motion[as];
+  return (
+    <MotionTag
+      className={className}
+      style={style}
+      variants={STAGGER_PARENT}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+    >
+      {children}
+    </MotionTag>
+  );
+}
+
+export function RevealItem({
+  children,
+  className,
+  style,
+  as = "div",
+}: {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+  as?: "div" | "li" | "article" | "figure";
+}) {
+  const MotionTag = motion[as];
+  return (
+    <MotionTag variants={STAGGER_CHILD} className={className} style={style}>
+      {children}
+    </MotionTag>
+  );
+}
+
+/** Subtle parallax drift for hero figures / images. */
+export function ParallaxFigure({
+  children,
+  className,
+  style,
+}: {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+}) {
+  return (
+    <motion.figure
+      className={className}
+      style={style}
+      initial={{ opacity: 0, y: 40, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.85, ease: EASE }}
+    >
+      {children}
+    </motion.figure>
+  );
+}
+
+/** Count-up number for stat strips. Animates 0 → target on first view. */
+export function StatCounter({
+  value,
+  className,
+  style,
+}: {
+  value: string;
+  className?: string;
+  style?: CSSProperties;
+}) {
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.6 }}
+      transition={{ duration: 0.55, ease: EASE }}
+    >
+      {value}
+    </motion.div>
+  );
+}

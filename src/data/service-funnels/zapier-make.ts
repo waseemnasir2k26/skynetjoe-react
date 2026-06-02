@@ -171,7 +171,7 @@ const content: ServiceFunnelContent = {
 
   finalCta: {
     h2: "Cut the noise. Keep the six that earn.",
-    body: "30-min discovery call. I'll rank your top leaks by dollar value and have the audit kill-list in your hands by Friday. Fixed scope back in 48 hours.",
+    body: "30-min discovery call. I'll rank where you're losing the most money and have the audit kill-list in your hands by Friday. Fixed scope back in 48 hours.",
     ctaLabel: "Start the brief",
   },
 };

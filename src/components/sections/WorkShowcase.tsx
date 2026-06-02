@@ -310,7 +310,7 @@ export default function WorkShowcase() {
               fontSize: "0.6875rem",
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
             }}
           >
             <span
@@ -326,7 +326,7 @@ export default function WorkShowcase() {
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.04,
               color: "var(--ink)",
@@ -335,15 +335,15 @@ export default function WorkShowcase() {
             }}
           >
             23 builds shipped.{" "}
-            <em
+            <span
               style={{
                 fontStyle: "normal",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 fontWeight: 700,
               }}
             >
               Click any tile.
-            </em>
+            </span>
           </h1>
           <p
             style={{
@@ -457,7 +457,7 @@ export default function WorkShowcase() {
                 <h2
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     fontSize: 17,
                     lineHeight: 1.2,
                     color: "var(--ink)",
@@ -471,7 +471,7 @@ export default function WorkShowcase() {
                   style={{
                     fontFamily: "var(--font-mono)",
                     fontSize: "0.6875rem",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     marginBottom: 12,
                     whiteSpace: "nowrap",
                     overflow: "hidden",
@@ -546,7 +546,7 @@ export default function WorkShowcase() {
                   fontSize: "0.625rem",
                   textTransform: "uppercase",
                   letterSpacing: "0.16em",
-                  color: "var(--terracotta)",
+                  color: "var(--terracotta-aa)",
                   marginBottom: 6,
                 }}
               >
@@ -555,7 +555,7 @@ export default function WorkShowcase() {
               <div
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                   fontSize: 22,
                   color: "var(--ink)",
                   letterSpacing: "-0.015em",

@@ -108,7 +108,7 @@ export default function ExecutiveSummaryGeneratorPage() {
               style={{
                 background: "rgba(198,107,63,0.10)",
                 border: "1px solid rgba(198,107,63,0.40)",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
               }}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -150,7 +150,7 @@ export default function ExecutiveSummaryGeneratorPage() {
                   className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-4 py-3"
                 >
                   <div className="flex items-center gap-2 text-[var(--ink)]">
-                    <Icon className="w-4 h-4 text-[var(--terracotta)]" />
+                    <Icon className="w-4 h-4 text-[var(--terracotta-aa)]" />
                     <span className="text-sm font-semibold">{label}</span>
                   </div>
                   <p className="mt-1 text-xs text-[var(--ink-faint)] leading-relaxed">
@@ -176,7 +176,7 @@ export default function ExecutiveSummaryGeneratorPage() {
       <section className="section pt-0">
         <div className="container-x px-6">
           <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3 text-center">
               Quick answers
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
@@ -190,7 +190,7 @@ export default function ExecutiveSummaryGeneratorPage() {
                 >
                   <summary className="flex cursor-pointer items-center justify-between gap-4 text-[var(--ink)] font-semibold list-none">
                     <span>{f.q}</span>
-                    <span className="text-[var(--terracotta)] transition group-open:rotate-45 text-xl leading-none">
+                    <span className="text-[var(--terracotta-aa)] transition group-open:rotate-45 text-xl leading-none">
                       +
                     </span>
                   </summary>
