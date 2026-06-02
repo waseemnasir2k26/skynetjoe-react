@@ -471,7 +471,7 @@ export default function VibeCodingPage() {
             >
               <div
                 aria-hidden
-                className="absolute -top-4 left-8 text-6xl font-serif text-[var(--terracotta)]/40 select-none"
+                className="absolute -top-4 left-8 text-6xl text-[var(--terracotta-aa)]/40 select-none"
               >
                 &ldquo;
               </div>

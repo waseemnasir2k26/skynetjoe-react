@@ -23,6 +23,7 @@ import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getStateEnrichment } from "@/data/state-enrichment";
 import { isLocationIndexable } from "@/lib/sitemap-quality";
+import { Reveal } from "@/components/motion/Reveal";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
 type SvcItem = { slug: string; label: string; icon: string; desc: string };
@@ -84,7 +85,7 @@ const eyebrow = {
   fontSize: 11 as const,
   textTransform: "uppercase" as const,
   letterSpacing: "0.16em",
-  color: "var(--terracotta)",
+  color: "var(--terracotta-aa)",
   display: "inline-flex" as const,
   alignItems: "center" as const,
   gap: 12,
@@ -97,7 +98,7 @@ const eyebrowRule = {
 };
 const h2Style = {
   fontFamily: "var(--font-display)",
-  fontWeight: 500,
+  fontWeight: 600,
   letterSpacing: "-0.02em",
   lineHeight: 1.08,
   color: "var(--ink)",
@@ -105,9 +106,9 @@ const h2Style = {
   marginBottom: 14,
 };
 const emTerra = {
-  fontStyle: "italic" as const,
-  color: "var(--terracotta)",
-  fontWeight: 500,
+  fontStyle: "normal" as const,
+  color: "var(--terracotta-aa)",
+  fontWeight: 700,
 };
 const cardCream = {
   background: "var(--cream-2)",
@@ -195,7 +196,7 @@ export default async function StatePage({
             ]}
           />
 
-          <div className="max-w-4xl">
+          <Reveal className="max-w-4xl">
             <div className="mb-6" style={eyebrow}>
               <span style={eyebrowRule} />
               <span
@@ -207,7 +208,7 @@ export default async function StatePage({
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontWeight: 500,
+                fontWeight: 600,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.04,
                 color: "var(--ink)",
@@ -227,11 +228,12 @@ export default async function StatePage({
                 marginBottom: 28,
               }}
             >
-              {s.name} founders waste 14+ hours a week on tasks software should
-              already be doing. SkynetLabs builds n8n workflows, GoHighLevel CRM
-              systems, AI chatbots and AEO-tuned websites for operators across{" "}
-              {s.cities.slice(0, 3).join(", ")} and beyond. Fixed scope, public
-              pricing, 5–14 day ship window — delivered remotely from Bali.
+              {s.name} founders waste 14+ hours a week on work software should
+              already be doing. SkynetLabs builds the automations, smart
+              websites, and chat agents that take it off your plate — for
+              operators across {s.cities.slice(0, 3).join(", ")} and beyond.
+              Fixed scope, public pricing, 5–14 day ship window — delivered
+              remotely from Bali.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -285,7 +287,7 @@ export default async function StatePage({
                 See pricing first
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -366,14 +368,14 @@ export default async function StatePage({
           }}
         >
           <div className="container-x px-6">
-            <div className="max-w-3xl">
+            <Reveal className="max-w-3xl">
               <div className="mb-6" style={eyebrow}>
                 <span style={eyebrowRule} />
                 What we ship in {s.name}
               </div>
               <p
                 style={{
-                  fontFamily: "var(--font-serif, var(--font-display))",
+                  fontFamily: "var(--font-sans)",
                   fontSize: 18,
                   lineHeight: 1.72,
                   color: "var(--ink)",
@@ -382,7 +384,7 @@ export default async function StatePage({
               >
                 {enrichment}
               </p>
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
@@ -400,9 +402,9 @@ export default async function StatePage({
                 <div
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     fontSize: 32,
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     letterSpacing: "-0.025em",
                     marginBottom: 4,
                   }}
@@ -454,7 +456,7 @@ export default async function StatePage({
                     fontSize: 11,
                     textTransform: "uppercase",
                     letterSpacing: "0.16em",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     fontWeight: 500,
                   }}
                 >
@@ -512,7 +514,7 @@ export default async function StatePage({
                           style={{
                             fontFamily: "var(--font-mono)",
                             fontSize: 11,
-                            color: "var(--terracotta)",
+                            color: "var(--terracotta-aa)",
                             marginBottom: 8,
                           }}
                         >
@@ -701,7 +703,7 @@ export default async function StatePage({
                         fontFamily: "var(--font-sans)",
                         fontSize: 13,
                         fontWeight: 600,
-                        color: "var(--terracotta)",
+                        color: "var(--terracotta-aa)",
                         textDecoration: "none",
                       }}
                     >
@@ -802,15 +804,15 @@ export default async function StatePage({
                   }}
                 >
                   Most {s.name} engagements come from{" "}
-                  <strong style={{ color: "var(--terracotta)", fontWeight: 600 }}>
+                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
                     {s.industries[0]}
                   </strong>
                   ,{" "}
-                  <strong style={{ color: "var(--terracotta)", fontWeight: 600 }}>
+                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
                     {s.industries[1]}
                   </strong>
                   , and{" "}
-                  <strong style={{ color: "var(--terracotta)", fontWeight: 600 }}>
+                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
                     {s.industries[2]}
                   </strong>{" "}
                   operators looking to cut admin time and ship lead capture that
@@ -823,7 +825,7 @@ export default async function StatePage({
                     fontFamily: "var(--font-sans)",
                     fontSize: 14,
                     fontWeight: 600,
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     textDecoration: "none",
                   }}
                 >

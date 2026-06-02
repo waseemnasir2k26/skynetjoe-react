@@ -115,9 +115,9 @@ export default function PricingCalculator() {
             Stack services.{" "}
             <em
               style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
+                fontStyle: "normal",
+                color: "var(--terracotta-aa)",
+                fontWeight: 700,
               }}
             >
               See your real number.
@@ -417,8 +417,8 @@ export default function PricingCalculator() {
                       style={{
                         fontFamily: "var(--font-display)",
                         fontSize: 28,
-                        fontWeight: 500,
-                        fontStyle: "italic",
+                        fontWeight: 700,
+                        fontStyle: "normal",
                         color: "var(--cream-3)",
                       }}
                     >

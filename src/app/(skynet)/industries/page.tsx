@@ -21,6 +21,7 @@ import { ArrowRight } from "lucide-react";
 import { INDUSTRIES } from "@/data/industries";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Industries — Vertical-Built AI Systems",
@@ -89,7 +90,7 @@ export default function IndustriesIndexPage() {
           borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <div className="container-x px-6 relative z-10 max-w-4xl">
+        <Reveal className="container-x px-6 relative z-10 max-w-4xl">
           <div
             className="inline-flex items-center gap-3 mb-6"
             style={{
@@ -97,7 +98,7 @@ export default function IndustriesIndexPage() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
             }}
           >
             <span
@@ -114,7 +115,7 @@ export default function IndustriesIndexPage() {
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 600,
               letterSpacing: "-0.025em",
               lineHeight: 1.04,
               color: "var(--ink)",
@@ -122,16 +123,10 @@ export default function IndustriesIndexPage() {
               margin: "0 0 24px",
             }}
           >
-            Generic automations break in your vertical.{" "}
-            <em
-              style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
-              }}
-            >
+            Generic automations break in your industry.{" "}
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
               I build ones that speak the dialect.
-            </em>
+            </span>
           </h1>
 
           <p
@@ -139,7 +134,7 @@ export default function IndustriesIndexPage() {
               fontSize: 19,
               color: "var(--ink-2)",
               maxWidth: "54ch",
-              lineHeight: 1.55,
+              lineHeight: 1.6,
               marginBottom: 28,
             }}
           >
@@ -198,18 +193,18 @@ export default function IndustriesIndexPage() {
           >
             — Bali hours · GMT+8 · usually books within 48-72 hours
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* 3 INDUSTRY CARDS */}
       <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
         <div className="container-x px-6">
-          <div className="grid gap-6 md:gap-8 md:grid-cols-3 max-w-6xl mx-auto">
+          <RevealGroup className="grid gap-6 md:gap-8 md:grid-cols-3 max-w-6xl mx-auto">
             {INDUSTRIES.map((i) => (
+              <RevealItem key={i.slug} as="div" className="flex">
               <Link
-                key={i.slug}
                 href={`/industries/${i.slug}`}
-                className="group flex flex-col h-full"
+                className="group flex flex-col h-full w-full"
                 style={{
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
@@ -225,17 +220,17 @@ export default function IndustriesIndexPage() {
                     fontSize: 10,
                     textTransform: "uppercase",
                     letterSpacing: "0.14em",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     marginBottom: 14,
                   }}
                 >
-                  {i.shortName} · vertical
+                  {i.shortName} · industry
                 </div>
 
                 <h2
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     fontSize: 26,
                     lineHeight: 1.15,
                     color: "var(--ink)",
@@ -289,7 +284,7 @@ export default function IndustriesIndexPage() {
                     fontFamily: "var(--font-sans)",
                     fontSize: 13,
                     fontWeight: 600,
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     marginTop: "auto",
                   }}
                 >
@@ -297,8 +292,9 @@ export default function IndustriesIndexPage() {
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -310,7 +306,7 @@ export default function IndustriesIndexPage() {
           borderTop: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <div className="container-x px-6 max-w-3xl mx-auto text-center">
+        <Reveal className="container-x px-6 max-w-3xl mx-auto text-center">
           <div
             className="inline-flex items-center gap-3 mb-5"
             style={{
@@ -318,7 +314,7 @@ export default function IndustriesIndexPage() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
             }}
           >
             <span
@@ -329,12 +325,12 @@ export default function IndustriesIndexPage() {
                 display: "inline-block",
               }}
             />
-            Not your vertical yet?
+            Not your industry yet?
           </div>
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 600,
               letterSpacing: "-0.02em",
               lineHeight: 1.08,
               color: "var(--ink)",
@@ -342,16 +338,10 @@ export default function IndustriesIndexPage() {
               marginBottom: 14,
             }}
           >
-            New verticals ship every quarter.{" "}
-            <em
-              style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
-              }}
-            >
+            New industries ship every quarter.{" "}
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
               Tell me yours.
-            </em>
+            </span>
           </h2>
           <p
             style={{
@@ -401,7 +391,7 @@ export default function IndustriesIndexPage() {
               Browse all services
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   );

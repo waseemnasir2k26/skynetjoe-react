@@ -104,8 +104,8 @@ export default function ToolsStrip({
             <h2
               style={{
                 fontFamily: "var(--font-display)",
-                fontStyle: "italic",
-                fontWeight: 500,
+                fontStyle: "normal",
+                fontWeight: 700,
                 fontSize: "clamp(28px, 3.5vw, 32px)",
                 letterSpacing: "-0.02em",
                 lineHeight: 1.1,

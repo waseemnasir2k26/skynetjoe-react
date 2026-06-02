@@ -7,14 +7,14 @@ import PainSolverGrid from "@/components/services/PainSolverGrid";
 import ServiceMenuCollapsed from "@/components/services/ServiceMenuCollapsed";
 
 export const metadata: Metadata = {
-  title: "Services — I don't sell services. I close pain points.",
+  title: "Services — We don't sell services. We fix what's costing you.",
   description:
-    "Eight founder pains, eight closed-loop fixes. Behind them: 16 production-grade services across automation, AI content, websites and consulting. Fixed scope, public pricing, 5-14 day ship.",
+    "Eight founder problems, eight done-for-you fixes. Behind them: 16 production-grade services across automation, AI content, websites and consulting. Fixed scope, public pricing, 5-14 day ship.",
   alternates: { canonical: `${SITE.url}/services` },
   openGraph: {
-    title: "SkynetLabs — Pain-solver, not service-seller",
+    title: "SkynetLabs — We fix the problem, not sell you a service",
     description:
-      "Pick the bleed. We close it. Eight founder pains mapped to 16 production services. Fixed scope, public pricing.",
+      "Pick the problem. We fix it. Eight founder problems mapped to 16 production services. Fixed scope, public pricing.",
     url: `${SITE.url}/services`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -34,7 +34,7 @@ const schema = {
       "@id": `${SITE.url}/services#collection`,
       name: `${SITE.brand} Services`,
       description:
-        "Eight founder pains, eight closed-loop fixes. Sixteen production-grade services across n8n automation, AI content, Next.js development and operator consulting.",
+        "Eight founder problems, eight done-for-you fixes. Sixteen production-grade services across workflow automation, AI content, modern websites and operator consulting.",
       url: `${SITE.url}/services`,
       inLanguage: "en",
       isPartOf: { "@id": `${SITE.url}/#website` },
@@ -94,24 +94,24 @@ export default function ServicesIndexPage() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
             }}
           >
             <span
               style={{
                 width: 28,
                 height: 1,
-                background: "var(--terracotta)",
+                background: "var(--terracotta-aa)",
                 display: "inline-block",
               }}
             />
-            Pain-solver · not service-seller
+            We fix the problem · not sell a service
           </div>
 
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.04,
               color: "var(--ink)",
@@ -119,16 +119,15 @@ export default function ServicesIndexPage() {
               margin: "0 0 24px",
             }}
           >
-            I don&apos;t sell services.{" "}
-            <em
+            We don&apos;t sell services.{" "}
+            <span
               style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
+                color: "var(--terracotta-aa)",
+                fontWeight: 700,
               }}
             >
-              I close pain points.
-            </em>
+              We fix what&apos;s costing you.
+            </span>
           </h1>
 
           <p
@@ -136,13 +135,13 @@ export default function ServicesIndexPage() {
               fontSize: 19,
               color: "var(--ink-2)",
               maxWidth: "52ch",
-              lineHeight: 1.55,
+              lineHeight: 1.6,
               marginBottom: 28,
             }}
           >
-            Every founder brief lands in one of eight pains. Pick the one
-            bleeding you this week — see the fix, see the metric, see the
-            tools. The service menu is just the toolkit.
+            Every founder brief lands in one of eight problems. Pick the one
+            hurting you this week — see the fix, see the outcome, see the
+            approach. The service menu is just the toolkit.
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -219,14 +218,14 @@ export default function ServicesIndexPage() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
             }}
           >
             <span
               style={{
                 width: 28,
                 height: 1,
-                background: "var(--terracotta)",
+                background: "var(--terracotta-aa)",
                 display: "inline-block",
               }}
             />
@@ -235,7 +234,7 @@ export default function ServicesIndexPage() {
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.08,
               color: "var(--ink)",
@@ -244,15 +243,14 @@ export default function ServicesIndexPage() {
             }}
           >
             Every week you wait,{" "}
-            <em
+            <span
               style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
+                color: "var(--terracotta-aa)",
+                fontWeight: 700,
               }}
             >
-              the bleed gets bigger.
-            </em>
+              it costs you more.
+            </span>
           </h2>
           <p
             style={{
@@ -263,8 +261,8 @@ export default function ServicesIndexPage() {
               lineHeight: 1.6,
             }}
           >
-            One 30-min call. Honest scope. Fixed price. No discovery dance.
-            Yes/no in 8 hours.
+            One 30-min call. Honest scope. Fixed price. No back-and-forth.
+            Yes or no in 8 hours.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link

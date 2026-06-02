@@ -1,152 +1,134 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
-import { ArrowRight, X, Check } from "lucide-react";
+import { ArrowRight, X, Check, MessageSquareDashed, MoonStar, GitBranch } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { WhatsAppCRM, AIDispatcher } from "@/components/illustrations";
 
 /**
  * AiChatbotsLP — bespoke landing page for /services/ai-chatbots
  *
- * Cream editorial pivot. Server component.
- *
- * Hero credential card replaces the founder photo (no face) — terracotta "SL"
- * monogram tile + headline metric + plain credential lines.
- *
- * Asset paths confirmed against /public glob 2026-05-26:
- *  - /case-studies/manhattan-dental-atelier-flagship.jpg (work visual — kept)
+ * Redesign 2026-06-02. Client component for cinematic Framer Motion.
+ *  - NO photos / NO founder face — Lucide icons + bespoke WhatsAppCRM / AIDispatcher SVGs.
+ *  - Plain-language, outcome-first hero. Tool names kept to a quiet sub-line.
+ *  - AA: accent TEXT = var(--terracotta-aa); raw var(--terracotta) only for
+ *    backgrounds and the large display metric.
+ *  - "Leak"/"plug" metaphor removed everywhere.
  */
 
-function SkynetCredentialCard({
-  metric,
-  metricLabel,
-  lines,
+const ease = [0.22, 1, 0.36, 1] as const;
+
+function Reveal({
+  children,
+  delay = 0,
+  style,
+  className,
 }: {
-  metric: string;
-  metricLabel: string;
-  lines: string[];
+  children: React.ReactNode;
+  delay?: number;
+  style?: React.CSSProperties;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      initial={reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }}
+      whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, delay, ease }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function Stagger({
+  children,
+  className,
+  style,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
-    <div
-      style={{
-        background: "var(--cream-3)",
-        border: "1px solid rgba(26,26,26,0.12)",
-        boxShadow: "0 18px 48px rgba(26,37,64,0.10)",
-        maxWidth: 400,
-        width: "100%",
-        marginLeft: "auto",
-        padding: 28,
+    <motion.div
+      className={className}
+      style={style}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function Item({
+  children,
+  style,
+  className,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      variants={{
+        hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 24 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-        <span
-          aria-hidden
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 48,
-            height: 48,
-            borderRadius: "50%",
-            background: "var(--terracotta)",
-            color: "var(--cream-3)",
-            fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            fontSize: 18,
-            letterSpacing: "0.02em",
-            flexShrink: 0,
-          }}
-        >
-          SL
-        </span>
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 11,
-            textTransform: "uppercase",
-            letterSpacing: "0.14em",
-            color: "#A8451F",
-          }}
-        >
-          SkynetLabs · since 2022
-        </span>
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--font-display)",
-          fontWeight: 700,
-          fontSize: 56,
-          lineHeight: 1,
-          color: "var(--terracotta)",
-          letterSpacing: "-0.03em",
-        }}
-      >
-        {metric}
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--font-mono)",
-          fontSize: 11,
-          textTransform: "uppercase",
-          letterSpacing: "0.12em",
-          color: "var(--ink-faint)",
-          margin: "8px 0 18px",
-        }}
-      >
-        {metricLabel}
-      </div>
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-        {lines.map((l) => (
-          <li
-            key={l}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "16px 1fr",
-              gap: 10,
-              padding: "7px 0",
-              fontSize: 14,
-              color: "var(--ink)",
-              lineHeight: 1.5,
-            }}
-          >
-            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 3 }} />
-            <span>{l}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {children}
+    </motion.div>
   );
 }
 
 const PAINS = [
   {
-    n: "01",
-    title: "Bot answers the wrong question 6x",
-    body: "ManyChat flow gets stuck on the same branch. Customer rage-types BYE before a human picks up.",
+    icon: MessageSquareDashed,
+    title: "It answers the wrong thing, six times",
+    body: "The flow gets stuck on one branch. The customer rage-types BYE before a human picks up.",
   },
   {
-    n: "02",
-    title: "WhatsApp lead at 11pm",
-    body: "They DM Wednesday night. You reply Tuesday morning. They already booked your competitor.",
+    icon: MoonStar,
+    title: "A lead at 11pm, a reply on Tuesday",
+    body: "They message Wednesday night. You answer days later. By then they have booked someone else.",
   },
   {
-    n: "03",
-    title: "Handoff never tags the source",
-    body: "Chat lifts to GHL with no source, no UTM, no campaign. Sales blames marketing every Monday.",
+    icon: GitBranch,
+    title: "The handoff drops the whole story",
+    body: "Chat lifts to your CRM with no source, no campaign. Sales blames marketing every Monday.",
   },
 ];
 
 const BEFORE = [
-  "Bot loops customer through 4 wrong branches",
-  "After-hours WhatsApps wait 11-14 hours",
-  "Handoff dumps chat into GHL with no tag",
-  "Same FAQ answered manually 40x a week",
-  "ManyChat + GHL + WhatsApp = 3 separate worlds",
+  "The bot loops people through wrong answers",
+  "After-hours messages wait half a day",
+  "Handoff dumps the chat with no detail attached",
+  "The same question answered by hand forty times a week",
+  "Chat, CRM and messaging live in three separate places",
 ];
 
 const AFTER = [
-  "Intent-routed flow — wrong branches dropped",
-  "8-hour weekday reply baked in, even after-hours",
-  "Every handoff carries source, UTM, conversation ID",
-  "FAQ trained from your real DMs, in your voice",
-  "ManyChat → GHL → WhatsApp in one threaded view",
+  "It reads what people mean and routes them right",
+  "A reply by lunch, even on the messages that land overnight",
+  "Every handoff carries the source and the full thread",
+  "Common questions answered in your own words",
+  "One threaded view across chat, CRM and messaging",
+];
+
+const FACTS = [
+  "Reads what people mean, not just keywords",
+  "Sounds like you, not a script",
+  "Every handoff lands in your CRM, tagged",
 ];
 
 export default function AiChatbotsLP() {
@@ -156,8 +138,19 @@ export default function AiChatbotsLP() {
         background: "var(--cream)",
         color: "var(--ink)",
         fontFamily: "var(--font-sans)",
+        position: "relative",
       }}
     >
+      <style>{`
+        .lp-hero-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 6vw, 44px); align-items: center; }
+        @media (min-width: 900px) { .lp-hero-grid { grid-template-columns: 7fr 5fr; align-items: center; } }
+        .lp-illo { width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 12px; display: block; box-shadow: 0 22px 60px rgba(26,37,64,0.18); border: 1px solid rgba(26,26,26,0.10); }
+        .lp-ba-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        @media (min-width: 760px) { .lp-ba-grid { grid-template-columns: 1fr 1fr; } }
+        .lp-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+      `}</style>
+
+      {/* Top utility strip */}
       <div
         style={{
           background: "var(--terracotta)",
@@ -170,7 +163,7 @@ export default function AiChatbotsLP() {
           padding: "10px 16px",
         }}
       >
-        — chat flows · ManyChat + GHL + WhatsApp · 8-hour reply
+        — Chat that answers like you · never sleeps · 8-hour weekday reply
       </div>
 
       {/* HERO */}
@@ -179,76 +172,51 @@ export default function AiChatbotsLP() {
           padding: "clamp(48px, 10vw, 72px) 0 clamp(56px, 12vw, 80px)",
           borderBottom: "1px solid rgba(26,26,26,0.12)",
           background: "var(--cream-3)",
+          overflow: "hidden",
         }}
       >
         <div
           className="lp-hero-grid"
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 32px)",
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 40,
-          }}
+          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
         >
-          <style>{`
-            @media (min-width: 900px) {
-              .lp-hero-grid { grid-template-columns: 7fr 5fr !important; align-items: end !important; }
-            }
-          `}</style>
-          <div>
+          <Reveal>
             <div
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 marginBottom: 24,
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 12,
               }}
             >
-              <span
-                style={{
-                  width: 28,
-                  height: 1,
-                  background: "var(--terracotta)",
-                  display: "inline-block",
-                }}
-              />
-              AI chat · WhatsApp + ManyChat · 2026
+              <span style={{ width: 28, height: 1, background: "var(--terracotta-aa)", display: "inline-block" }} />
+              Always-on chat · 2026
             </div>
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(32px, 8vw, 76px)",
+                fontSize: "clamp(32px, 8vw, 72px)",
                 fontWeight: 700,
                 letterSpacing: "-0.025em",
-                lineHeight: 1.02,
+                lineHeight: 1.04,
                 color: "var(--ink)",
                 margin: "0 0 24px",
+                maxWidth: "16ch",
               }}
             >
-              The DM came in at 11pm.{" "}
-              <span
-                style={{
-                  fontStyle: "normal",
-                  color: "var(--terracotta)",
-                  fontWeight: 700,
-                }}
-              >
-                Reply by 7am.
-              </span>
+              The message came in at 11pm.{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>Answer it now.</span>
             </h1>
             <p
               style={{
-                fontSize: "clamp(16px, 2.5vw, 19px)",
+                fontSize: "clamp(17px, 2.5vw, 19px)",
                 color: "var(--ink-2)",
                 maxWidth: "52ch",
-                lineHeight: 1.55,
+                lineHeight: 1.6,
                 marginBottom: 28,
               }}
             >
@@ -256,50 +224,34 @@ export default function AiChatbotsLP() {
               voice, and never drops a lead at midnight. When a human needs to
               step in, the full conversation is right there.
             </p>
-            <Link
-              href="/discovery-call"
-              style={{
-                background: "var(--terracotta)",
-                color: "var(--cream-3)",
-                padding: "16px 28px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                textDecoration: "none",
-                minHeight: 44,
-              }}
-            >
-              Book a 30-min call
+            <Link href="/discovery-call" style={primaryBtn}>
+              Book a free 30-min check-up
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
+            <div style={subline}>— Bali hours GMT+8 · covers EU mornings + US evenings</div>
             <div
               style={{
+                marginTop: 16,
                 fontFamily: "var(--font-mono)",
                 fontSize: 10,
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
                 color: "var(--ink-faint)",
-                marginTop: 18,
               }}
             >
-              — Bali hours GMT+8 · covers EU mornings + US evenings
+              Tools we use: WhatsApp · chat flows · your CRM
             </div>
-          </div>
-          <div>
-            <SkynetCredentialCard
-              metric="8h"
-              metricLabel="weekday reply window"
-              lines={[
-                "Chats routed by what people mean, not keywords",
-                "Bots that sound like you, not a script",
-                "Every handoff lands in your CRM, tagged",
-              ]}
-            />
-          </div>
+          </Reveal>
+
+          <motion.div
+            initial={{ opacity: 0, y: 36, rotate: -1.2 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease, delay: 0.1 }}
+            aria-hidden
+          >
+            <AIDispatcher className="lp-illo" />
+          </motion.div>
         </div>
       </section>
 
@@ -312,98 +264,30 @@ export default function AiChatbotsLP() {
         }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--oxblood)",
-              marginBottom: 16,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 12,
-            }}
-          >
-            <span style={{ width: 28, height: 1, background: "var(--oxblood)" }} />
-            Real DMs, real damage
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4vw, 40px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "var(--ink)",
-              marginBottom: 40,
-              maxWidth: "26ch",
-            }}
-          >
-            Three places chatbots{" "}
-            <span style={{ fontStyle: "normal", color: "var(--oxblood)", fontWeight: 700 }}>
-              quietly cost you leads.
-            </span>
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: 24,
-            }}
-          >
+          <Reveal>
+            <Eyebrow color="var(--oxblood)">Real messages, real damage</Eyebrow>
+            <H2>
+              Three places chat{" "}
+              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>quietly costs you customers.</span>
+            </H2>
+          </Reveal>
+          <Stagger className="lp-card-grid">
             {PAINS.map((p, i) => (
-              <div
-                key={p.n}
+              <Item
+                key={p.title}
                 style={{
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
-                  padding: "28px",
-                  transform:
-                    i === 0
-                      ? "rotate(-0.3deg)"
-                      : i === 1
-                      ? "rotate(0.3deg)"
-                      : "rotate(-0.2deg)",
+                  padding: 28,
+                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
-                <div
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 11,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.16em",
-                    color: "var(--oxblood)",
-                    marginBottom: 10,
-                  }}
-                >
-                  Pain {p.n}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 22,
-                    fontWeight: 600,
-                    color: "var(--ink)",
-                    marginBottom: 10,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {p.title}
-                </h3>
-                <p
-                  style={{
-                    color: "var(--ink-2)",
-                    fontSize: 14,
-                    lineHeight: 1.6,
-                    margin: 0,
-                  }}
-                >
-                  {p.body}
-                </p>
-              </div>
+                <p.icon style={{ width: 26, height: 26, color: "var(--oxblood)", marginBottom: 14 }} />
+                <h3 style={cardH3}>{p.title}</h3>
+                <p style={cardBody}>{p.body}</p>
+              </Item>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -416,19 +300,8 @@ export default function AiChatbotsLP() {
           textAlign: "center",
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--ink-faint)",
-              marginBottom: 14,
-            }}
-          >
-            — Promise, not a marketing claim
-          </div>
+        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+          <div style={proofEyebrow}>— A promise, not a marketing claim</div>
           <div
             style={{
               fontFamily: "var(--font-display)",
@@ -442,24 +315,14 @@ export default function AiChatbotsLP() {
           >
             8h
           </div>
-          <p
-            style={{
-              fontFamily: "var(--font-display)",
-              fontStyle: "normal",
-              fontSize: "clamp(17px, 3vw, 22px)",
-              color: "var(--ink-2)",
-              lineHeight: 1.4,
-              maxWidth: "34ch",
-              margin: "0 auto",
-            }}
-          >
-            weekday reply window. Every chat that lands in your inbox gets a
+          <p style={proofDetail}>
+            weekday reply window. Every message that lands in your inbox gets a
             human-sounding answer by lunch.
           </p>
-        </div>
+        </Reveal>
       </section>
 
-      {/* TESTIMONIAL / CASE WITH FACE */}
+      {/* WHAT YOU GET — illustration + facts (replaces photo case panel) */}
       <section
         style={{
           padding: "clamp(48px, 11vw, 80px) 0",
@@ -468,93 +331,39 @@ export default function AiChatbotsLP() {
         }}
       >
         <div
-          className="lp-case-grid"
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 32px)",
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 48,
-            alignItems: "center",
-          }}
+          className="lp-hero-grid"
+          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
         >
-          <style>{`
-            @media (min-width: 900px) {
-              .lp-case-grid { grid-template-columns: 5fr 7fr !important; }
-            }
-          `}</style>
-          <figure
-            style={{
-              margin: 0,
-              transform: "rotate(1deg)",
-              background: "var(--cream-3)",
-              padding: 10,
-              border: "1px solid rgba(26,26,26,0.12)",
-              boxShadow: "0 18px 48px rgba(26,37,64,0.18)",
-              maxWidth: 380,
-            }}
-          >
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                aspectRatio: "4 / 3",
-                overflow: "hidden",
-              }}
-            >
-              <Image
-                src="/case-studies/manhattan-dental-atelier-flagship.jpg"
-                alt="Karachi dental flagship — WhatsApp + Signal recovery flow"
-                fill
-                sizes="(min-width: 900px) 380px, 90vw"
-                style={{
-                  objectFit: "cover",
-                  filter: "none",
-                }}
-              />
-            </div>
-            <figcaption
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 10,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                color: "var(--ink-faint)",
-                textAlign: "center",
-                paddingTop: 10,
-              }}
-            >
-              Karachi dental · WhatsApp recovery flow
-            </figcaption>
-          </figure>
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontStyle: "normal",
-                fontSize: "clamp(18px, 3.2vw, 24px)",
-                lineHeight: 1.4,
-                color: "var(--ink)",
-                margin: "0 0 20px",
-              }}
-            >
-              &ldquo;The bot reads exactly like our front-desk girl. Patients
-              don&apos;t even ping the human until they&apos;ve got a date and
-              time confirmed. No-shows dropped 70% inside two weeks.&rdquo;
+          <Reveal>
+            <Eyebrow color="var(--terracotta-aa)">What we hand over</Eyebrow>
+            <H2>
+              Chat that sounds like you,{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>not a robot.</span>
+            </H2>
+            <p style={{ ...cardBody, fontSize: 16, maxWidth: "44ch", marginBottom: 20 }}>
+              &ldquo;It reads exactly like our front-desk team. People barely
+              notice they started with a bot — they have a date and time
+              confirmed before a human ever steps in.&rdquo;
             </p>
-            <div
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.14em",
-                color: "var(--ink-faint)",
-              }}
-            >
-              — Karachi dental flagship · WhatsApp + GHL · 11-day ship
-            </div>
-          </div>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {FACTS.map((f) => (
+                <li key={f} style={factLi}>
+                  <Check style={{ width: 16, height: 16, color: "var(--sage)", marginTop: 2 }} />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <div style={{ ...subline, marginTop: 18 }}>— Practice owner · dental flagship · 11-day ship</div>
+          </Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 30, rotate: 1 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease }}
+            aria-hidden
+          >
+            <WhatsAppCRM className="lp-illo" />
+          </motion.div>
         </div>
       </section>
 
@@ -567,251 +376,265 @@ export default function AiChatbotsLP() {
         }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-              marginBottom: 16,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 12,
-            }}
-          >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-            Macro vs human
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4vw, 40px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "var(--ink)",
-              marginBottom: 40,
-              maxWidth: "24ch",
-            }}
-          >
-            What changes the day{" "}
-            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
-              the bot ships.
-            </span>
-          </h2>
-          <div
-            className="lp-ba-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: 24,
-            }}
-          >
-            <style>{`
-              @media (min-width: 760px) {
-                .lp-ba-grid { grid-template-columns: 1fr 1fr !important; }
-              }
-            `}</style>
-            <div
-              style={{
-                background: "var(--cream-2)",
-                padding: "28px",
-                border: "1px solid rgba(26,26,26,0.12)",
-                borderLeftWidth: 3,
-                borderLeftColor: "var(--oxblood)",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: "var(--oxblood)",
-                  marginBottom: 12,
-                }}
-              >
-                — Manual · before
-              </div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: "var(--ink)",
-                  marginBottom: 14,
-                }}
-              >
-                How chat works today
-              </h3>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {BEFORE.map((b) => (
-                  <li
-                    key={b}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "18px 1fr",
-                      gap: 12,
-                      padding: "10px 0",
-                      borderBottom: "1px solid rgba(26,26,26,0.06)",
-                      fontSize: 14,
-                      color: "var(--ink-2)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div
-              style={{
-                background: "var(--cream-3)",
-                padding: "28px",
-                border: "1px solid rgba(26,26,26,0.12)",
-                borderLeftWidth: 3,
-                borderLeftColor: "var(--sage)",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: "var(--sage)",
-                  marginBottom: 12,
-                }}
-              >
-                — Shipped · after
-              </div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: "var(--ink)",
-                  marginBottom: 14,
-                }}
-              >
-                How chat works after the build
-              </h3>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {AFTER.map((a) => (
-                  <li
-                    key={a}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "18px 1fr",
-                      gap: 12,
-                      padding: "10px 0",
-                      borderBottom: "1px solid rgba(26,26,26,0.06)",
-                      fontSize: 14,
-                      color: "var(--ink)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
-                    <span>{a}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <Reveal>
+            <Eyebrow color="var(--terracotta-aa)">Before vs after</Eyebrow>
+            <H2>
+              What changes the day{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>the chat goes live.</span>
+            </H2>
+          </Reveal>
+          <Stagger className="lp-ba-grid">
+            <BeforeCard label="The way chat works today" items={BEFORE} />
+            <AfterCard label="The way it works in 11 days" items={AFTER} />
+          </Stagger>
         </div>
       </section>
 
       {/* FINAL CTA */}
-      <section
-        style={{
-          padding: "clamp(56px, 12vw, 88px) 0 clamp(64px, 14vw, 100px)",
-          background: "var(--cream)",
-        }}
-      >
+      <FinalCta
+        h2={
+          <>
+            Hand us your messages.{" "}
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>We&apos;ll train the chat.</span>
+          </>
+        }
+        body="A free 30-minute check-up. Walk us through your 20 most-asked messages. Fixed scope back in 48 hours, live in 11 days."
+      />
+    </div>
+  );
+}
+
+// ── shared local presentational helpers ────────────────────────────────────
+const primaryBtn: React.CSSProperties = {
+  background: "var(--terracotta)",
+  color: "var(--cream-3)",
+  padding: "16px 28px",
+  fontFamily: "var(--font-sans)",
+  fontWeight: 600,
+  fontSize: 15,
+  borderRadius: 2,
+  display: "inline-flex",
+  alignItems: "center",
+  gap: 8,
+  textDecoration: "none",
+  minHeight: 44,
+};
+const subline: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 10,
+  textTransform: "uppercase",
+  letterSpacing: "0.12em",
+  color: "var(--ink-faint)",
+  marginTop: 18,
+};
+const cardH3: React.CSSProperties = {
+  fontFamily: "var(--font-display)",
+  fontSize: 22,
+  fontWeight: 600,
+  color: "var(--ink)",
+  marginBottom: 10,
+  letterSpacing: "-0.01em",
+};
+const cardBody: React.CSSProperties = {
+  color: "var(--ink-2)",
+  fontSize: 15,
+  lineHeight: 1.6,
+  margin: 0,
+};
+const factLi: React.CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "16px 1fr",
+  gap: 10,
+  padding: "7px 0",
+  fontSize: 15,
+  color: "var(--ink)",
+  lineHeight: 1.55,
+};
+const proofEyebrow: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11,
+  textTransform: "uppercase",
+  letterSpacing: "0.16em",
+  color: "var(--ink-faint)",
+  marginBottom: 14,
+};
+const proofDetail: React.CSSProperties = {
+  fontFamily: "var(--font-display)",
+  fontSize: "clamp(17px, 3vw, 22px)",
+  color: "var(--ink-2)",
+  lineHeight: 1.45,
+  maxWidth: "34ch",
+  margin: "0 auto",
+};
+
+function Eyebrow({ children, color }: { children: React.ReactNode; color: string }) {
+  return (
+    <div
+      style={{
+        fontFamily: "var(--font-mono)",
+        fontSize: 11,
+        textTransform: "uppercase",
+        letterSpacing: "0.16em",
+        color,
+        marginBottom: 16,
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 12,
+      }}
+    >
+      <span style={{ width: 28, height: 1, background: color, display: "inline-block" }} />
+      {children}
+    </div>
+  );
+}
+
+function H2({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      style={{
+        fontFamily: "var(--font-display)",
+        fontSize: "clamp(28px, 4vw, 40px)",
+        fontWeight: 700,
+        letterSpacing: "-0.02em",
+        lineHeight: 1.12,
+        color: "var(--ink)",
+        marginBottom: 40,
+        maxWidth: "26ch",
+      }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function BeforeCard({ label, items }: { label: string; items: string[] }) {
+  return (
+    <Item
+      style={{
+        background: "var(--cream-2)",
+        padding: 28,
+        border: "1px solid rgba(26,26,26,0.12)",
+        borderLeft: "3px solid var(--oxblood)",
+      }}
+    >
+      <div style={{ ...cardMeta, color: "var(--oxblood)" }}>— Before</div>
+      <h3 style={{ ...cardH3, fontSize: 20 }}>{label}</h3>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {items.map((b) => (
+          <li key={b} style={{ ...listLi, color: "var(--ink-2)" }}>
+            <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+    </Item>
+  );
+}
+
+function AfterCard({ label, items }: { label: string; items: string[] }) {
+  return (
+    <Item
+      style={{
+        background: "var(--cream-3)",
+        padding: 28,
+        border: "1px solid rgba(26,26,26,0.12)",
+        borderLeft: "3px solid var(--sage)",
+      }}
+    >
+      <div style={{ ...cardMeta, color: "var(--oxblood)" }}>— After</div>
+      <h3 style={{ ...cardH3, fontSize: 20 }}>{label}</h3>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {items.map((a) => (
+          <li key={a} style={{ ...listLi, color: "var(--ink)" }}>
+            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+            <span>{a}</span>
+          </li>
+        ))}
+      </ul>
+    </Item>
+  );
+}
+
+const cardMeta: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11,
+  textTransform: "uppercase",
+  letterSpacing: "0.16em",
+  marginBottom: 12,
+};
+const listLi: React.CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "18px 1fr",
+  gap: 12,
+  padding: "10px 0",
+  borderBottom: "1px solid rgba(26,26,26,0.06)",
+  fontSize: 15,
+  lineHeight: 1.55,
+};
+
+function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
+  return (
+    <section
+      style={{
+        padding: "clamp(56px, 12vw, 88px) 0 clamp(64px, 14vw, 100px)",
+        background:
+          "linear-gradient(180deg, var(--cream) 0%, color-mix(in srgb, var(--terracotta) 8%, var(--cream)) 100%)",
+      }}
+    >
+      <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)", textAlign: "center" }}>
         <div
           style={{
-            maxWidth: 760,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 32px)",
-            textAlign: "center",
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            textTransform: "uppercase",
+            letterSpacing: "0.16em",
+            color: "var(--terracotta-aa)",
+            marginBottom: 20,
           }}
         >
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-              marginBottom: 20,
-            }}
-          >
-            — Start the brief
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(30px, 5vw, 52px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.08,
-              color: "var(--ink)",
-              marginBottom: 20,
-            }}
-          >
-            Hand me your DMs.{" "}
-            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
-              I&apos;ll train the bot.
-            </span>
-          </h2>
-          <p
-            style={{
-              fontSize: "clamp(15px, 2.5vw, 17px)",
-              color: "var(--ink-2)",
-              maxWidth: "44ch",
-              margin: "0 auto 32px",
-              lineHeight: 1.6,
-            }}
-          >
-            30-min call. Walk me through your 20 most-asked DMs. Scope back in
-            48 hours, bot live in 11 days.
-          </p>
-          <Link
-            href="/discovery-call"
-            style={{
-              background: "var(--terracotta)",
-              color: "var(--cream-3)",
-              padding: "18px 32px",
-              fontFamily: "var(--font-sans)",
-              fontWeight: 700,
-              fontSize: 16,
-              borderRadius: 2,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              textDecoration: "none",
-              minHeight: 44,
-            }}
-          >
-            Book a 30-min call
-            <ArrowRight style={{ width: 16, height: 16 }} />
-          </Link>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 10,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-              color: "var(--ink-faint)",
-              marginTop: 22,
-            }}
-          >
-            — 4 builds per month · next slot opens June
-          </div>
+          — Start the brief
         </div>
-      </section>
-    </div>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(30px, 5vw, 52px)",
+            fontWeight: 700,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
+            color: "var(--ink)",
+            marginBottom: 20,
+          }}
+        >
+          {h2}
+        </h2>
+        <p
+          style={{
+            fontSize: "clamp(15px, 2.5vw, 17px)",
+            color: "var(--ink-2)",
+            maxWidth: "46ch",
+            margin: "0 auto 32px",
+            lineHeight: 1.6,
+          }}
+        >
+          {body}
+        </p>
+        <Link href="/discovery-call" style={{ ...primaryBtn, padding: "18px 32px", fontWeight: 700, fontSize: 16 }}>
+          Book a free 30-min check-up
+          <ArrowRight style={{ width: 16, height: 16 }} />
+        </Link>
+        <div
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            color: "var(--ink-faint)",
+            marginTop: 22,
+          }}
+        >
+          — 4 builds per month · 8-hour weekday reply
+        </div>
+      </Reveal>
+    </section>
   );
 }

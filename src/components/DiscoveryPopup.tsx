@@ -178,9 +178,9 @@ export default function DiscoveryPopup() {
             Fill out the form —{" "}
             <em
               style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
+                fontStyle: "normal",
+                color: "var(--terracotta-aa)",
+                fontWeight: 700,
               }}
             >
               get a free audit.

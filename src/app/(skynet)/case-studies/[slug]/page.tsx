@@ -7,6 +7,7 @@ import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ZoomableImage from "@/components/ZoomableImage";
+import { Reveal, RevealGroup, RevealItem, ParallaxFigure } from "@/components/motion/Reveal";
 
 export const dynamicParams = false;
 
@@ -123,7 +124,7 @@ export default async function CaseStudyDetail({
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
               fontFamily: "var(--font-mono)",
               fontSize: 12,
               textTransform: "uppercase",
@@ -136,7 +137,7 @@ export default async function CaseStudyDetail({
             Back to all case studies
           </Link>
 
-          <div style={{ maxWidth: 820 }}>
+          <Reveal style={{ maxWidth: 820 }}>
             <div
               style={{
                 fontFamily: "var(--font-mono)",
@@ -148,7 +149,7 @@ export default async function CaseStudyDetail({
                 lineHeight: 1.7,
               }}
             >
-              <span style={{ color: "var(--terracotta)" }}>— {c.industryTag}</span>
+              <span style={{ color: "var(--terracotta-aa)" }}>— {c.industryTag}</span>
               <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>·</span>
               {c.location}
               <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>·</span>
@@ -183,18 +184,17 @@ export default async function CaseStudyDetail({
             >
               {c.oneLineOutcome}
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* HERO IMAGE — polaroid frame */}
       <section style={{ padding: "clamp(24px, 6vw, 40px) 0 24px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <figure
+          <ParallaxFigure
             className="cs-hero-polaroid"
             style={{
               margin: 0,
-              transform: "rotate(-0.6deg)",
               background: "var(--cream-3)",
               padding: 12,
               border: "1px solid rgba(26,26,26,0.14)",
@@ -203,7 +203,7 @@ export default async function CaseStudyDetail({
           >
             <style>{`
               @media (max-width: 640px) {
-                .cs-hero-polaroid { transform: rotate(0) !important; padding: 8px !important; }
+                .cs-hero-polaroid { padding: 8px !important; }
               }
             `}</style>
             <div
@@ -226,14 +226,14 @@ export default async function CaseStudyDetail({
                 }}
               />
             </div>
-          </figure>
+          </ParallaxFigure>
         </div>
       </section>
 
       {/* KPI STRIP */}
       <section style={{ padding: "clamp(20px, 6vw, 32px) 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <div
+          <RevealGroup
             className="cs-kpi-grid"
             style={{
               display: "grid",
@@ -241,19 +241,13 @@ export default async function CaseStudyDetail({
               gap: 16,
             }}
           >
-            <style>{`
-              @media (max-width: 640px) {
-                .cs-kpi-grid > div { transform: none !important; }
-              }
-            `}</style>
-            {c.keyMetrics.map((m, i) => (
-              <div
+            {c.keyMetrics.map((m) => (
+              <RevealItem
                 key={m.label}
                 style={{
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.10)",
                   padding: "20px 22px",
-                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
                 <div
@@ -281,16 +275,16 @@ export default async function CaseStudyDetail({
                     fontStyle: "normal",
                     fontSize: 28,
                     fontWeight: 700,
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     lineHeight: 1,
                     letterSpacing: "-0.01em",
                   }}
                 >
                   {m.delta}
                 </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -303,7 +297,7 @@ export default async function CaseStudyDetail({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -337,7 +331,7 @@ export default async function CaseStudyDetail({
               </p>
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* WHAT WE BUILT */}
@@ -350,14 +344,14 @@ export default async function CaseStudyDetail({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
               marginBottom: 14,
             }}
           >
@@ -375,7 +369,7 @@ export default async function CaseStudyDetail({
             }}
           >
             The{" "}
-            <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>solution stack.</em>
+            <span style={{ fontWeight: 700, color: "var(--terracotta-aa)" }}>solution stack.</span>
           </h2>
 
           <div style={{ marginBottom: 28 }}>
@@ -438,12 +432,12 @@ export default async function CaseStudyDetail({
                   lineHeight: 1.6,
                 }}
               >
-                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>→</span>
+                <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>→</span>
                 <span>{b}</span>
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
       </section>
 
       {/* RESULTS */}
@@ -455,7 +449,7 @@ export default async function CaseStudyDetail({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -489,12 +483,12 @@ export default async function CaseStudyDetail({
               </p>
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* PULL QUOTE */}
       <section style={{ padding: "clamp(20px, 6vw, 32px) 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <blockquote
             className="cs-pull-quote"
             style={{
@@ -514,7 +508,7 @@ export default async function CaseStudyDetail({
               style={{
                 width: 18,
                 height: 18,
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 marginBottom: 12,
               }}
             />
@@ -544,7 +538,7 @@ export default async function CaseStudyDetail({
               — {c.testimonialAuthor}
             </footer>
           </blockquote>
-        </div>
+        </Reveal>
       </section>
 
       {/* TOOLS / RELATED SERVICES */}
@@ -558,7 +552,7 @@ export default async function CaseStudyDetail({
             zIndex: 2,
           }}
         >
-          <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+          <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
             <h2
               style={{
                 fontFamily: "var(--font-display)",
@@ -571,20 +565,20 @@ export default async function CaseStudyDetail({
             >
               Tools &amp; services used
             </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12 }}>
-              {c.relatedServices.map((s, i) => (
+            <RevealGroup style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12 }}>
+              {c.relatedServices.map((s) => (
+                <RevealItem as="div" key={s.slug} style={{ display: "flex" }}>
                 <Link
-                  key={s.slug}
                   href={`/services/${s.slug}`}
                   style={{
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.10)",
                     padding: "16px 18px",
                     display: "flex",
+                    flex: 1,
                     alignItems: "center",
                     justifyContent: "space-between",
                     textDecoration: "none",
-                    transform: i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
                   }}
                 >
                   <span
@@ -597,11 +591,12 @@ export default async function CaseStudyDetail({
                   >
                     {s.label}
                   </span>
-                  <ArrowRight style={{ width: 14, height: 14, color: "var(--terracotta)" }} />
+                  <ArrowRight style={{ width: 14, height: 14, color: "var(--terracotta-aa)" }} />
                 </Link>
+                </RevealItem>
               ))}
-            </div>
-          </div>
+            </RevealGroup>
+          </Reveal>
         </section>
       )}
 
@@ -614,7 +609,7 @@ export default async function CaseStudyDetail({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
+        <Reveal style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -683,7 +678,7 @@ export default async function CaseStudyDetail({
             Apply for a discovery call
             <ArrowRight style={{ width: 16, height: 16 }} />
           </Link>
-        </div>
+        </Reveal>
       </section>
     </>
   );

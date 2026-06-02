@@ -205,7 +205,8 @@ export default function HeroVariant({
               fontFamily: "var(--font-mono)",
               fontSize: 11,
               color: "var(--ink-faint)",
-              fontStyle: "italic",
+              fontStyle: "normal",
+              fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.10em",
             }}

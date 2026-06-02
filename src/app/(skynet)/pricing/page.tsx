@@ -6,6 +6,7 @@ import { SERVICE_PRICING } from "@/lib/service-pricing";
 import JsonLd from "@/components/JsonLd";
 import ServicePricingTabs from "@/components/pricing/ServicePricingTabs";
 import PricingCalculator from "@/components/pricing/PricingCalculator";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 // Derive the true price floor/ceiling straight from the per-service tier data
 // so the schema can never drift from what the page actually publishes. Every
@@ -162,7 +163,7 @@ export default function PricingPage() {
           borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <div className="container-x px-6 relative z-10 max-w-4xl">
+        <Reveal className="container-x px-6 relative z-10 max-w-4xl">
           <div
             className="inline-flex items-center gap-3 mb-5"
             style={{
@@ -170,7 +171,7 @@ export default function PricingPage() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
             }}
           >
             <span
@@ -186,7 +187,7 @@ export default function PricingPage() {
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 600,
               letterSpacing: "-0.025em",
               lineHeight: 1.04,
               color: "var(--ink)",
@@ -194,28 +195,22 @@ export default function PricingPage() {
               margin: "0 0 20px",
             }}
           >
-            Public pricing for people who hate{" "}
-            <em
-              style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
-              }}
-            >
-              &ldquo;request a quote&rdquo;.
-            </em>
+            See the price before we ever{" "}
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+              touch your calendar.
+            </span>
           </h1>
           <p
             style={{
               fontSize: 19,
               color: "var(--ink-2)",
               maxWidth: "52ch",
-              lineHeight: 1.55,
+              lineHeight: 1.6,
               marginBottom: 24,
             }}
           >
-            16 services. 3 tiers each. Optional add-ons. Live calculator below.
-            You see the price before we see your calendar.
+            16 services. 3 tiers each. Optional add-ons and a live calculator
+            below. No quote form, no &ldquo;request pricing&rdquo; wall.
           </p>
           <div
             className="flex flex-wrap items-center gap-x-5 gap-y-2"
@@ -243,7 +238,7 @@ export default function PricingPage() {
               <b style={{ color: "var(--ink)" }}>5-14d</b> ship
             </span>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* SINGLE PRICING SECTION (tabs) */}
@@ -260,21 +255,20 @@ export default function PricingPage() {
           borderTop: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <div className="container-x px-6 max-w-3xl mx-auto">
+        <Reveal className="container-x px-6 max-w-3xl mx-auto">
           <blockquote
             style={{
               padding: "26px 32px",
               background: "var(--cream-2)",
               borderLeft: "3px solid var(--terracotta)",
-              fontFamily: "var(--font-display)",
-              fontStyle: "italic",
+              fontFamily: "var(--font-sans)",
               color: "var(--ink-2)",
             }}
           >
             <p
               style={{
                 fontSize: 18,
-                lineHeight: 1.55,
+                lineHeight: 1.6,
               }}
             >
               Most agencies hide the price because the price doesn&apos;t match
@@ -285,18 +279,17 @@ export default function PricingPage() {
             <footer
               style={{
                 marginTop: 14,
-                fontStyle: "normal",
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
               }}
             >
               — Waseem Nasir
             </footer>
           </blockquote>
-        </div>
+        </Reveal>
       </section>
 
       {/* MICROS */}
@@ -308,7 +301,7 @@ export default function PricingPage() {
         }}
       >
         <div className="container-x px-6 max-w-5xl mx-auto">
-          <div className="mb-8">
+          <Reveal className="mb-8">
             <div
               className="inline-flex items-center gap-3 mb-3"
               style={{
@@ -316,7 +309,7 @@ export default function PricingPage() {
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
               }}
             >
               <span
@@ -332,7 +325,7 @@ export default function PricingPage() {
             <h2
               style={{
                 fontFamily: "var(--font-display)",
-                fontWeight: 500,
+                fontWeight: 600,
                 letterSpacing: "-0.02em",
                 color: "var(--ink)",
                 fontSize: "clamp(28px, 4vw, 40px)",
@@ -341,34 +334,28 @@ export default function PricingPage() {
               }}
             >
               Need just one thing?{" "}
-              <em
-                style={{
-                  fontStyle: "italic",
-                  color: "var(--terracotta)",
-                  fontWeight: 500,
-                }}
-              >
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
                 Pick a micro.
-              </em>
+              </span>
             </h2>
             <p
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 color: "var(--ink-2)",
                 maxWidth: "44rem",
-                lineHeight: 1.55,
+                lineHeight: 1.6,
               }}
             >
               Six fixed-scope wedges. Each is a single deliverable, 1-2 weeks,
-              no retainer commitment. Use to test the working relationship
+              no retainer commitment. Use one to test the working relationship
               before scaling.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          </Reveal>
+          <RevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {MICROS.map((m, i) => {
               const rotate = i % 2 === 0 ? "-0.2deg" : "0.2deg";
               return (
-                <div
+                <RevealItem
                   key={m.name}
                   className="cream-micro-card flex items-center justify-between gap-3"
                   style={{
@@ -393,16 +380,16 @@ export default function PricingPage() {
                       fontFamily: "var(--font-mono)",
                       fontSize: 14,
                       fontWeight: 700,
-                      color: "var(--terracotta)",
+                      color: "var(--terracotta-aa)",
                       whiteSpace: "nowrap",
                     }}
                   >
                     ${m.price.toLocaleString("en-US")}
                   </span>
-                </div>
+                </RevealItem>
               );
             })}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -415,7 +402,7 @@ export default function PricingPage() {
         }}
       >
         <div className="container-x px-6 max-w-3xl mx-auto">
-          <div className="mb-8">
+          <Reveal className="mb-8">
             <div
               className="inline-flex items-center gap-3 mb-3"
               style={{
@@ -423,7 +410,7 @@ export default function PricingPage() {
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
               }}
             >
               <span
@@ -439,7 +426,7 @@ export default function PricingPage() {
             <h2
               style={{
                 fontFamily: "var(--font-display)",
-                fontWeight: 500,
+                fontWeight: 600,
                 letterSpacing: "-0.02em",
                 color: "var(--ink)",
                 fontSize: "clamp(28px, 4vw, 40px)",
@@ -447,17 +434,11 @@ export default function PricingPage() {
               }}
             >
               Pricing questions{" "}
-              <em
-                style={{
-                  fontStyle: "italic",
-                  color: "var(--terracotta)",
-                  fontWeight: 500,
-                }}
-              >
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
                 we get often.
-              </em>
+              </span>
             </h2>
-          </div>
+          </Reveal>
           <div>
             {FAQS.map((f) => (
               <details
@@ -483,7 +464,7 @@ export default function PricingPage() {
                   <span
                     className="group-open:rotate-45 transition-transform"
                     style={{
-                      color: "var(--terracotta)",
+                      color: "var(--terracotta-aa)",
                       fontSize: 22,
                       lineHeight: 1,
                     }}
@@ -494,7 +475,7 @@ export default function PricingPage() {
                 <div
                   style={{
                     paddingTop: 12,
-                    fontSize: 14.5,
+                    fontSize: 17,
                     color: "var(--ink-2)",
                     lineHeight: 1.65,
                   }}
@@ -509,7 +490,7 @@ export default function PricingPage() {
 
       {/* CLOSER — flat terracotta event */}
       <section className="py-20 md:py-24" style={{ background: "var(--terracotta)" }}>
-        <div className="container-x px-6 max-w-3xl mx-auto text-center">
+        <Reveal className="container-x px-6 max-w-3xl mx-auto text-center">
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -535,18 +516,17 @@ export default function PricingPage() {
             }}
           >
             Send a brief.{" "}
-            <em
+            <span
               style={{
-                fontStyle: "italic",
                 color: "var(--cream-3)",
-                fontWeight: 500,
+                fontWeight: 700,
                 textDecoration: "underline",
-                textDecorationThickness: "1px",
+                textDecorationThickness: "2px",
                 textUnderlineOffset: "8px",
               }}
             >
               Get scope + price in 8 hours.
-            </em>
+            </span>
           </h2>
           <p
             style={{
@@ -594,7 +574,7 @@ export default function PricingPage() {
               See case studies
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   );

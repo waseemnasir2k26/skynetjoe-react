@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-label="LinkedIn" className={className}>
@@ -123,7 +124,7 @@ const expect = [
   { step: "04", title: "You say yes/no", body: "If yes: 50% deposit, work starts in 24h. If no: file stays useful — yours." },
 ];
 
-const eyebrow = (text: string, color = "var(--terracotta)") => (
+const eyebrow = (text: string, color = "var(--terracotta-aa)") => (
   <div
     style={{
       fontFamily: "var(--font-mono)",
@@ -174,7 +175,7 @@ export default function ContactPage() {
               .contact-hero { grid-template-columns: 1.3fr 1fr !important; }
             }
           `}</style>
-          <div>
+          <Reveal>
             {eyebrow("Open for 2 builds — June 2026")}
             <h1
               style={{
@@ -188,9 +189,9 @@ export default function ContactPage() {
               }}
             >
               Don&apos;t book a call.{" "}
-              <em style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
                 Send a brief.
-              </em>
+              </span>
             </h1>
             <p
               style={{
@@ -204,7 +205,7 @@ export default function ContactPage() {
               The fastest way to work with me: skip the discovery dance. Email a
               one-pager, ping me on LinkedIn, or open live chat bottom-right —
               I&apos;ll{" "}
-              <strong style={{ color: "var(--terracotta)" }}>
+              <strong style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
                 reply in 8h · scope in 48h
               </strong>
               . If I&apos;m not the right fit, I&apos;ll tell you who is.
@@ -269,7 +270,7 @@ export default function ContactPage() {
                 Or open live chat
               </a>
             </div>
-          </div>
+          </Reveal>
 
           <div>
             <figure
@@ -353,16 +354,16 @@ export default function ContactPage() {
               }}
             >
               Four ways to start.{" "}
-              <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
                 One reply guarantee.
-              </em>
+              </span>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
               All four hit the same inbox. Use whichever feels least like homework.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+          <Reveal style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
             {channels.map((c, i) => {
               const Icon = c.icon;
               const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
@@ -416,7 +417,7 @@ export default function ContactPage() {
                         letterSpacing: "0.16em",
                         padding: "3px 7px",
                         background: "var(--cream-3)",
-                        color: "var(--terracotta)",
+                        color: "var(--terracotta-aa)",
                         border: "1px solid rgba(198,107,63,0.30)",
                         fontWeight: 600,
                       }}
@@ -433,7 +434,7 @@ export default function ContactPage() {
                       fontSize: 11,
                       textTransform: "uppercase",
                       letterSpacing: "0.12em",
-                      color: "var(--terracotta)",
+                      color: "var(--terracotta-aa)",
                       fontWeight: 600,
                       display: "inline-flex",
                       alignItems: "center",
@@ -446,7 +447,7 @@ export default function ContactPage() {
                 </a>
               );
             })}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -475,16 +476,16 @@ export default function ContactPage() {
               }}
             >
               Four steps,{" "}
-              <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>zero funnel.</em>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>zero funnel.</span>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
               No CRM auto-replies. No discovery-call upsell. No 14-day follow-up
               sequence. Just one human writing back.
             </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+          <RevealGroup style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
             {expect.map((e, i) => (
-              <div
+              <RevealItem
                 key={e.step}
                 style={{
                   background: "var(--cream-2)",
@@ -496,10 +497,9 @@ export default function ContactPage() {
                 <div
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontStyle: "normal",
                     fontSize: 36,
                     fontWeight: 700,
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     lineHeight: 1,
                     marginBottom: 10,
                   }}
@@ -520,9 +520,9 @@ export default function ContactPage() {
                 <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
                   {e.body}
                 </p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -531,11 +531,11 @@ export default function ContactPage() {
         style={{ padding: "72px 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+          <RevealGroup style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
             {guarantees.map((g, i) => {
               const Icon = g.icon;
               return (
-                <div
+                <RevealItem
                   key={g.title}
                   style={{
                     background: "var(--cream-2)",
@@ -572,10 +572,10 @@ export default function ContactPage() {
                   <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
                     {g.body}
                   </p>
-                </div>
+                </RevealItem>
               );
             })}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -583,7 +583,7 @@ export default function ContactPage() {
       <section
         style={{ padding: "88px 0", background: "var(--terracotta)", position: "relative", zIndex: 2 }}
       >
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+        <Reveal style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
           <CheckCircle2 style={{ width: 36, height: 36, color: "var(--cream-3)", margin: "0 auto 16px" }} />
           <h2
             style={{
@@ -685,7 +685,7 @@ export default function ContactPage() {
               Browse my code
             </a>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   );

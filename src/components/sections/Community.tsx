@@ -56,7 +56,7 @@ export default function Community() {
             }}
           >
             Solo operator.{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+            <em style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
               Not a hermit.
             </em>
           </h2>

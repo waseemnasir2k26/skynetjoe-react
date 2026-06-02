@@ -296,7 +296,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
               }}
             >
               <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
-                Money leaking right now
+                Money lost right now
               </p>
               <CountUp
                 value={math.totalMonthlyLeak}
@@ -591,7 +591,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
               >
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta-aa)]/80">
-                    Leak / mo
+                    Lost / mo
                   </p>
                   <p className="text-base font-bold text-[var(--ink)] tabular-nums">
                     {fmtUSD(math.totalMonthlyLeak)}

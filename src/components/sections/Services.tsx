@@ -54,7 +54,7 @@ export default function Services() {
             }}
           >
             16 services. One operator.{" "}
-            <em style={{ fontStyle: "italic", color: C.terra }}>Zero excuses.</em>
+            <em style={{ fontStyle: "normal", fontWeight: 700, color: C.terra }}>Zero excuses.</em>
           </h2>
           <p style={{ fontSize: 17, color: C.ink2, lineHeight: 1.6 }}>
             Built and run by Waseem Nasir — no agency layers, no offshored juniors,

@@ -74,9 +74,9 @@ export default function NotFound() {
         <div
           style={{
             fontFamily: "var(--font-display)",
-            fontStyle: "italic",
+            fontStyle: "normal",
             fontSize: "clamp(96px, 22vw, 200px)",
-            fontWeight: 500,
+            fontWeight: 700,
             color: C.terra,
             lineHeight: 1,
             marginBottom: 24,
@@ -104,7 +104,7 @@ export default function NotFound() {
           }}
         >
           This page{" "}
-          <em style={{ fontStyle: "italic", color: C.terra }}>
+          <em style={{ fontStyle: "normal", fontWeight: 700, color: C.terra }}>
             doesn&apos;t exist yet.
           </em>
         </h1>

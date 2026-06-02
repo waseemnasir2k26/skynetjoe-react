@@ -188,9 +188,9 @@ function buildRewrites(tones: Tones, vocab: Vocab): { generic: string; voice: st
     {
       generic: "We provide industry-leading solutions for your business needs.",
       voice: bold
-        ? `We fix the one thing in your business that's leaking the most.${sigTag}`
+        ? `We fix the one thing in your business that's costing you the most.${sigTag}`
         : casual
-          ? `We help you tighten the parts of your business that quietly leak revenue.${sigTag}`
+          ? `We help you tighten the parts of your business that quietly lose revenue.${sigTag}`
           : `We work with operators to identify and resolve their highest-leverage growth bottleneck.${sigTag}`,
     },
     {

@@ -233,7 +233,7 @@ export default function ExitIntentModal() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
               marginBottom: 16,
               display: "inline-flex",
               alignItems: "center",
@@ -265,15 +265,14 @@ export default function ExitIntentModal() {
             }}
           >
             Leaving without{" "}
-            <em
+            <span
               style={{
-                fontStyle: "normal",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 fontWeight: 700,
               }}
             >
               a plan?
-            </em>
+            </span>
           </h2>
 
           <p
@@ -286,10 +285,11 @@ export default function ExitIntentModal() {
             }}
           >
             Drop your URL —{" "}
-            <span style={{ color: "var(--terracotta)", fontWeight: 600 }}>
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
               I&apos;ll Loom-audit your funnel free
             </span>
-            . Honest 8-min teardown of where leads leak. No call. No pitch.
+            . Honest 8-min teardown of where deals slip away. No call. No
+            pitch.
           </p>
 
           {status === "success" ? (
@@ -362,7 +362,7 @@ export default function ExitIntentModal() {
                     fontFamily: "var(--font-mono)",
                     fontSize: 12,
                     fontWeight: 700,
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     textTransform: "uppercase",
                     letterSpacing: "0.10em",
                     textDecoration: "underline",

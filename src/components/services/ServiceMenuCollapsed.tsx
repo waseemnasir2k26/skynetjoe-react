@@ -102,9 +102,9 @@ export default function ServiceMenuCollapsed() {
               Or browse the{" "}
               <em
                 style={{
-                  fontStyle: "italic",
-                  color: "var(--terracotta)",
-                  fontWeight: 500,
+                  fontStyle: "normal",
+                  color: "var(--terracotta-aa)",
+                  fontWeight: 700,
                 }}
               >
                 full 16-service menu.

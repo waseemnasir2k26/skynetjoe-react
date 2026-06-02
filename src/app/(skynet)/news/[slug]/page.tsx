@@ -8,6 +8,7 @@ import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ZoomableImage from "@/components/ZoomableImage";
+import { Reveal, RevealGroup, RevealItem, ParallaxFigure } from "@/components/motion/Reveal";
 
 /**
  * Dynamic /news/[slug] — cream editorial pivot. Renders cream pages for entries
@@ -157,7 +158,7 @@ export default async function NewsArticlePage({
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
               fontFamily: "var(--font-mono)",
               fontSize: 12,
               textTransform: "uppercase",
@@ -170,6 +171,7 @@ export default async function NewsArticlePage({
             Back to all field notes
           </Link>
 
+          <Reveal>
           <div
             style={{
               display: "flex",
@@ -211,7 +213,7 @@ export default async function NewsArticlePage({
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(32px, 5.2vw, 60px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.04,
               color: "var(--ink)",
@@ -224,23 +226,23 @@ export default async function NewsArticlePage({
             style={{
               fontSize: 19,
               color: "var(--ink-2)",
-              lineHeight: 1.55,
+              lineHeight: 1.6,
               margin: 0,
             }}
           >
             {a.deck}
           </p>
+          </Reveal>
         </div>
       </section>
 
       {/* HERO IMAGE — polaroid */}
       <section style={{ padding: "clamp(20px, 5vw, 32px) 0 16px", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <figure
+          <ParallaxFigure
             className="news-hero-polaroid"
             style={{
               margin: 0,
-              transform: "rotate(-0.5deg)",
               background: "var(--cream-3)",
               padding: 12,
               border: "1px solid rgba(26,26,26,0.14)",
@@ -249,7 +251,7 @@ export default async function NewsArticlePage({
           >
             <style>{`
               @media (max-width: 640px) {
-                .news-hero-polaroid { transform: rotate(0) !important; padding: 8px !important; }
+                .news-hero-polaroid { padding: 8px !important; }
               }
             `}</style>
             <div
@@ -286,14 +288,14 @@ export default async function NewsArticlePage({
             >
               — {a.heroCaption}
             </figcaption>
-          </figure>
+          </ParallaxFigure>
         </div>
       </section>
 
       {/* BODY */}
       <article style={{ padding: "clamp(32px, 8vw, 48px) 0", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <div
+          <Reveal
             style={{
               color: "var(--ink-2)",
               fontSize: 17,
@@ -303,7 +305,7 @@ export default async function NewsArticlePage({
             {a.body!.map((p, i) => (
               <p key={i} style={{ marginBottom: 18 }}>{p}</p>
             ))}
-          </div>
+          </Reveal>
 
           {a.tags.length > 0 && (
             <div
@@ -319,7 +321,7 @@ export default async function NewsArticlePage({
                   fontSize: 11,
                   textTransform: "uppercase",
                   letterSpacing: "0.16em",
-                  color: "var(--terracotta)",
+                  color: "var(--terracotta-aa)",
                   marginBottom: 12,
                 }}
               >
@@ -350,12 +352,11 @@ export default async function NewsArticlePage({
       {/* INLINE CTA */}
       <section style={{ padding: "16px 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <div
+          <Reveal
             style={{
               background: "var(--cream-2)",
               border: "1px solid rgba(26,26,26,0.12)",
               padding: "clamp(24px, 6vw, 36px) clamp(20px, 5vw, 32px)",
-              transform: "rotate(-0.2deg)",
             }}
           >
             {a.cta ? (
@@ -366,7 +367,7 @@ export default async function NewsArticlePage({
                     fontSize: 11,
                     textTransform: "uppercase",
                     letterSpacing: "0.18em",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     fontWeight: 600,
                     marginBottom: 12,
                   }}
@@ -440,7 +441,7 @@ export default async function NewsArticlePage({
                   }}
                 >
                   Want this kind of build for{" "}
-                  <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>your business?</em>
+                  <span style={{ fontWeight: 700, color: "var(--terracotta-aa)" }}>your business?</span>
                 </h2>
                 <p
                   style={{
@@ -474,7 +475,7 @@ export default async function NewsArticlePage({
                 </Link>
               </div>
             )}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -496,7 +497,7 @@ export default async function NewsArticlePage({
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 marginBottom: 10,
               }}
             >
@@ -506,36 +507,35 @@ export default async function NewsArticlePage({
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(24px, 3.4vw, 34px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 color: "var(--ink)",
                 margin: "0 0 24px",
               }}
             >
               Keep{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>reading.</em>
+              <span style={{ fontWeight: 700, color: "var(--terracotta-aa)" }}>reading.</span>
             </h2>
-            <div
+            <RevealGroup
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
                 gap: 20,
               }}
             >
-              {related.map((r, i) => {
+              {related.map((r) => {
                 const a2 = CATEGORY_COLORS[r.category] ?? "var(--terracotta)";
-                const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
                 return (
+                  <RevealItem as="article" key={r.slug} style={{ display: "flex" }}>
                   <Link
-                    key={r.slug}
                     href={`/news/${r.slug}`}
                     style={{
                       display: "flex",
                       flexDirection: "column",
+                      flex: 1,
                       background: "var(--cream-2)",
                       border: "1px solid rgba(26,26,26,0.12)",
                       textDecoration: "none",
-                      transform: `rotate(${rotate})`,
                     }}
                   >
                     <div
@@ -598,9 +598,10 @@ export default async function NewsArticlePage({
                       </span>
                     </div>
                   </Link>
+                  </RevealItem>
                 );
               })}
-            </div>
+            </RevealGroup>
           </div>
         </section>
       )}

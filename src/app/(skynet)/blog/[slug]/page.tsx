@@ -8,6 +8,7 @@ import { POSTS, getPost } from "@/lib/posts";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const dynamicParams = false;
 
@@ -103,13 +104,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-sm mb-6"
-            style={{ color: "var(--terracotta)" }}
+            style={{ color: "var(--terracotta-aa)" }}
           >
             <ArrowLeft className="w-4 h-4" />
             Back to journal
           </Link>
 
-          <div className="max-w-3xl">
+          <Reveal className="max-w-3xl">
             <div
               className="flex flex-wrap items-center gap-3 mb-5 text-xs"
               style={{ color: "var(--ink-2)" }}
@@ -119,7 +120,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 style={{
                   background: "rgba(198, 107, 63, 0.10)",
                   border: "1px solid rgba(198, 107, 63, 0.30)",
-                  color: "var(--terracotta)",
+                  color: "var(--terracotta-aa)",
                   borderRadius: 2,
                   fontFamily: "var(--font-mono)",
                   letterSpacing: "0.14em",
@@ -153,13 +154,15 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             >
               {post.description}
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <article className="section">
         <div className="container-x px-6">
-          <div className={`prose-wn wn-${post.slug} max-w-3xl mx-auto`} dangerouslySetInnerHTML={{ __html: html }} />
+          <Reveal className={`prose-wn wn-${post.slug} max-w-3xl mx-auto`}>
+            <div dangerouslySetInnerHTML={{ __html: html }} />
+          </Reveal>
         </div>
       </article>
 
@@ -179,7 +182,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 <div
                   className="text-xs uppercase tracking-wider mb-2 inline-flex items-center gap-1.5"
                   style={{
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     fontFamily: "var(--font-mono)",
                     letterSpacing: "0.14em",
                   }}
@@ -204,7 +207,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 <div
                   className="text-xs uppercase tracking-wider mb-2 inline-flex items-center gap-1.5 justify-end w-full"
                   style={{
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     fontFamily: "var(--font-mono)",
                     letterSpacing: "0.14em",
                   }}
@@ -221,7 +224,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             )}
           </div>
 
-          <div
+          <Reveal
             className="mt-10 p-8 text-center"
             style={{
               background: "var(--cream-3)",
@@ -255,7 +258,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               Apply for a discovery call
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

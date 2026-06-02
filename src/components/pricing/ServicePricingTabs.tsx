@@ -430,9 +430,9 @@ export default function ServicePricingTabs() {
             Pick a service.{" "}
             <em
               style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
+                fontStyle: "normal",
+                color: "var(--terracotta-aa)",
+                fontWeight: 700,
               }}
             >
               See real numbers.

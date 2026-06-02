@@ -119,7 +119,7 @@ export const QUIZ: QuizQuestion[] = [
     step: 7,
     icon: "💰",
     prompt: "What's your current monthly revenue?",
-    hint: "Used to scope the leak. Stays on your device.",
+    hint: "Used to scope the problem. Stays on your device.",
     options: [
       { label: "Under $10k", value: "lt10k", score: 7 },
       { label: "$10k to $30k", value: "10-30k", score: 5 },
@@ -191,7 +191,7 @@ export const BUCKETS: Bucket[] = [
     label: "Bleeding cash + sleep",
     color: "#f97316",
     range: [31, 50],
-    headline: "Your business is leaking money on multiple fronts. It's fixable.",
+    headline: "Your business is losing money on multiple fronts. It's fixable.",
     snapshot: [
       "You're losing leads to slow response, sleep to after-hours, and cash to manual work.",
       "Your stack is bloated and your patches are temporary. Every fix opens a new bug.",
@@ -208,7 +208,7 @@ export const BUCKETS: Bucket[] = [
     label: "Full chaos mode",
     color: "#ef4444",
     range: [51, 70],
-    headline: "You're at the edge. The good news: the leak is huge, so the fix is fast.",
+    headline: "You're at the edge. The good news: the problem is huge, so the fix is fast.",
     snapshot: [
       "Most inbound goes unanswered. Most tools are disconnected. Most issues just persist.",
       "You're running on adrenaline and prayer. The revenue is real but so is the burnout.",

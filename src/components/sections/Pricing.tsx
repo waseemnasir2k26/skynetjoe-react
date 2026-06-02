@@ -100,7 +100,7 @@ export default function Pricing() {
             }}
           >
             Three ways to start.{" "}
-            <em style={{ fontStyle: "italic", color: C.terra }}>
+            <em style={{ fontStyle: "normal", fontWeight: 700, color: C.terra }}>
               No hidden invoice.
             </em>
           </h2>
@@ -162,9 +162,9 @@ export default function Pricing() {
                 <span
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontStyle: "italic",
+                    fontStyle: "normal",
                     fontSize: 40,
-                    fontWeight: 600,
+                    fontWeight: 700,
                     color: C.terra,
                     letterSpacing: "-0.02em",
                   }}

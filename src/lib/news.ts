@@ -531,7 +531,7 @@ export const NEWS: NewsArticle[] = [
       label: "See the bespoke site service",
       href: "/services/vibe-coded-sites",
       tagline:
-        "Your form is leaking patients (or leads). I rebuild intake flows inside a bespoke Next.js site — usually 5-14 day ship, HIPAA-aware when it needs to be.",
+        "Your form is losing patients (or leads). I rebuild intake flows inside a bespoke Next.js site — usually 5-14 day ship, HIPAA-aware when it needs to be.",
     },
   },
   {

@@ -75,7 +75,7 @@ const faqs = [
   },
   {
     q: "Will my workflow really save this much?",
-    a: "Depends on volume, team size and how badly the current workflow leaks. The slider scenarios assume a service business at $20k-$200k MRR. Below that, savings shrink. Above that, they compound faster than shown.",
+    a: "Depends on volume, team size and how much the current workflow wastes. The slider scenarios assume a service business at $20k-$200k MRR. Below that, savings shrink. Above that, they compound faster than shown.",
   },
   {
     q: "Can you build this for me?",

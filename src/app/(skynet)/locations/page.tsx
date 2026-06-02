@@ -19,6 +19,7 @@ import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
 import JsonLd from "@/components/JsonLd";
 import USStatesMap from "@/components/locations/USStatesMap";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
 
@@ -43,7 +44,7 @@ const eyebrow = {
   fontSize: 11 as const,
   textTransform: "uppercase" as const,
   letterSpacing: "0.16em",
-  color: "var(--terracotta)",
+  color: "var(--terracotta-aa)",
   display: "inline-flex" as const,
   alignItems: "center" as const,
   gap: 12,
@@ -56,7 +57,7 @@ const eyebrowRule = {
 };
 const h2Style = {
   fontFamily: "var(--font-display)",
-  fontWeight: 500,
+  fontWeight: 600,
   letterSpacing: "-0.02em",
   lineHeight: 1.08,
   color: "var(--ink)",
@@ -64,9 +65,9 @@ const h2Style = {
   marginBottom: 14,
 };
 const emTerra = {
-  fontStyle: "italic" as const,
-  color: "var(--terracotta)",
-  fontWeight: 500,
+  fontStyle: "normal" as const,
+  color: "var(--terracotta-aa)",
+  fontWeight: 700,
 };
 
 export default function LocationsIndexPage() {
@@ -116,7 +117,7 @@ export default function LocationsIndexPage() {
           borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <div className="container-x px-6 max-w-4xl">
+        <Reveal className="container-x px-6 max-w-4xl">
           <div className="mb-6" style={eyebrow}>
             <span style={eyebrowRule} />
             <span
@@ -128,7 +129,7 @@ export default function LocationsIndexPage() {
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 600,
               letterSpacing: "-0.025em",
               lineHeight: 1.04,
               color: "var(--ink)",
@@ -154,7 +155,7 @@ export default function LocationsIndexPage() {
             <Link
               href="/locations/california"
               style={{
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 textDecoration: "underline",
                 textDecorationColor: "rgba(198,107,63,0.4)",
                 textUnderlineOffset: 4,
@@ -166,7 +167,7 @@ export default function LocationsIndexPage() {
             <Link
               href="/locations/texas"
               style={{
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 textDecoration: "underline",
                 textDecorationColor: "rgba(198,107,63,0.4)",
                 textUnderlineOffset: 4,
@@ -178,7 +179,7 @@ export default function LocationsIndexPage() {
             <Link
               href="/locations/new-york"
               style={{
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 textDecoration: "underline",
                 textDecorationColor: "rgba(198,107,63,0.4)",
                 textUnderlineOffset: 4,
@@ -190,7 +191,7 @@ export default function LocationsIndexPage() {
             <Link
               href="/locations/minnesota"
               style={{
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 textDecoration: "underline",
                 textDecorationColor: "rgba(198,107,63,0.4)",
                 textUnderlineOffset: 4,
@@ -237,7 +238,7 @@ export default function LocationsIndexPage() {
               Live chat
             </a>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* Coverage MAP — interactive 48-state SVG */}
@@ -281,26 +282,26 @@ export default function LocationsIndexPage() {
               margin: "0 auto 48px",
             }}
           >
-            One operator, every state. Click any state for local-intent
-            keywords + a 5-city map of where we&apos;ve already shipped.
-            The 8 terracotta states are our priority programmatic landing
-            pages — enriched first, indexed first.
+            One operator, every state. Click any state to see the work we
+            do there and a 5-city map of where we&apos;ve already shipped.
+            The 8 highlighted states are our priority markets — covered in
+            the most detail.
           </p>
 
           <USStatesMap />
 
           {/* Stats grid */}
-          <div
+          <RevealGroup
             className="grid grid-cols-2 md:grid-cols-4 gap-4"
             style={{ marginTop: 64 }}
           >
             {[
               { value: "48", label: "Contiguous states served" },
-              { value: String(PRIORITY_STATE_SLUGS.length), label: "Priority programmatic landing pages" },
+              { value: String(PRIORITY_STATE_SLUGS.length), label: "Priority markets, covered in depth" },
               { value: "180+", label: "Workflows shipped" },
               { value: "9", label: "Countries (US is one)" },
             ].map((stat) => (
-              <div
+              <RevealItem
                 key={stat.label}
                 style={{
                   background: "var(--cream-2)",
@@ -314,10 +315,10 @@ export default function LocationsIndexPage() {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: "clamp(36px, 5vw, 52px)",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     letterSpacing: "-0.02em",
                     lineHeight: 1,
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     marginBottom: 10,
                   }}
                 >
@@ -335,9 +336,9 @@ export default function LocationsIndexPage() {
                 >
                   {stat.label}
                 </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
 
           {/* CTA */}
           <div style={{ marginTop: 48 }}>
@@ -367,10 +368,10 @@ export default function LocationsIndexPage() {
       {/* All Services Hub + Book a Call */}
       <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
         <div className="container-x px-6">
-          <div className="max-w-3xl mb-12">
+          <Reveal className="max-w-3xl mb-12">
             <div className="mb-5" style={eyebrow}>
               <span style={eyebrowRule} />
-              16 services · 50 states · one operator
+              16 services · 48 states · one operator
             </div>
             <h2 style={h2Style}>
               Every service ships{" "}
@@ -378,15 +379,15 @@ export default function LocationsIndexPage() {
             </h2>
             <p
               style={{
-                fontSize: 16,
+                fontSize: 17,
                 color: "var(--ink-2)",
                 lineHeight: 1.6,
               }}
             >
-              Pick a service to scope it, or pick a state below to see local
-              intent keywords + city coverage.
+              Pick a service to scope it, or pick a state below to see how we
+              describe it there plus the cities we cover.
             </p>
-          </div>
+          </Reveal>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 40, marginBottom: 40 }}>
             {SERVICE_CATEGORIES.map((cat) => (
@@ -398,7 +399,7 @@ export default function LocationsIndexPage() {
                     fontSize: 11,
                     textTransform: "uppercase",
                     letterSpacing: "0.16em",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     fontWeight: 500,
                   }}
                 >
@@ -575,27 +576,26 @@ export default function LocationsIndexPage() {
       {/* 48-state grid */}
       <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
         <div className="container-x px-6">
-          <div className="max-w-3xl mb-10">
+          <Reveal className="max-w-3xl mb-10">
             <div className="mb-5" style={eyebrow}>
               <span style={eyebrowRule} />
               Pick your state
             </div>
             <h2 style={h2Style}>
               Every contiguous US state,{" "}
-              <em style={emTerra}>local-intent ready.</em>
+              <em style={emTerra}>ready when you are.</em>
             </h2>
             <p
               style={{
-                fontSize: 16,
+                fontSize: 17,
                 color: "var(--ink-2)",
                 lineHeight: 1.6,
               }}
             >
-              Each state page lists every service expressed with local keywords,
-              5 major-city callouts, and the industries we&apos;ve already
-              served there.
+              Each state page lists every service in local terms, 5 major-city
+              callouts, and the industries we&apos;ve already served there.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {STATES.map((s) => (
@@ -621,7 +621,7 @@ export default function LocationsIndexPage() {
                     style={{
                       fontFamily: "var(--font-mono)",
                       fontSize: 11,
-                      color: "var(--terracotta)",
+                      color: "var(--terracotta-aa)",
                       fontWeight: 600,
                       letterSpacing: "0.14em",
                     }}

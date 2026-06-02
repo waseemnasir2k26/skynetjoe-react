@@ -76,7 +76,7 @@ export default function ErrorBoundary({
             }}
           >
             Our{" "}
-            <em style={{ fontStyle: "italic", color: C.oxblood }}>bad.</em>
+            <em style={{ fontStyle: "normal", fontWeight: 700, color: C.oxblood }}>bad.</em>
           </h1>
           <p style={{ fontSize: 17, color: C.ink2, lineHeight: 1.6, marginBottom: 8 }}>
             Something on this page crashed. We&apos;ve been notified automatically.

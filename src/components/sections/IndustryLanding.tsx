@@ -121,9 +121,9 @@ export default function IndustryLanding({ industry: i }: Props) {
                 <em
                   key={idx}
                   style={{
-                    fontStyle: "italic",
+                    fontStyle: "normal",
                     color: "var(--terracotta)",
-                    fontWeight: 500,
+                    fontWeight: 700,
                   }}
                 >
                   {sentence}
@@ -170,15 +170,15 @@ export default function IndustryLanding({ industry: i }: Props) {
           <div className="max-w-3xl mb-12">
             <div className="mb-5" style={eyebrow}>
               <span style={eyebrowRule} />
-              Where the leakage is
+              Where you&apos;re losing customers
             </div>
             <h2 style={h2Style}>
               Three problems every {i.shortName} operator is{" "}
               <em
                 style={{
-                  fontStyle: "italic",
+                  fontStyle: "normal",
                   color: "var(--terracotta)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                 }}
               >
                 paying for, whether they know it or not.
@@ -307,9 +307,9 @@ export default function IndustryLanding({ industry: i }: Props) {
               Built in three layers.{" "}
               <em
                 style={{
-                  fontStyle: "italic",
+                  fontStyle: "normal",
                   color: "var(--terracotta)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                 }}
               >
                 Buy them together, or ship one at a time.
@@ -387,9 +387,9 @@ export default function IndustryLanding({ industry: i }: Props) {
               Proof,{" "}
               <em
                 style={{
-                  fontStyle: "italic",
+                  fontStyle: "normal",
                   color: "var(--terracotta)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                 }}
               >
                 not pitch decks.
@@ -579,9 +579,9 @@ export default function IndustryLanding({ industry: i }: Props) {
               Three tiers,{" "}
               <em
                 style={{
-                  fontStyle: "italic",
+                  fontStyle: "normal",
                   color: "var(--terracotta)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                 }}
               >
                 tuned to your {i.shortName} stage.
@@ -747,9 +747,9 @@ export default function IndustryLanding({ industry: i }: Props) {
               Questions {i.shortName} owners ask{" "}
               <em
                 style={{
-                  fontStyle: "italic",
+                  fontStyle: "normal",
                   color: "var(--terracotta)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                 }}
               >
                 before booking.

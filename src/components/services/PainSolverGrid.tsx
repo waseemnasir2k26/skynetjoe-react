@@ -27,7 +27,7 @@ const ACCENTS = [
 // Text-only accents — WCAG AA on cream. Ochre/sage fail body-text contrast
 // (1.83-2.09:1), so for any text-color use rotate only terracotta ↔ oxblood.
 const TEXT_ACCENTS = [
-  "var(--terracotta)", // #C66B3F
+  "var(--terracotta-aa)", // #A8451F — AA-safe for small text
   "var(--oxblood)", // #6B2C2C
 ] as const;
 
@@ -165,7 +165,7 @@ export default function PainSolverGrid() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
             }}
           >
             <span
@@ -176,7 +176,7 @@ export default function PainSolverGrid() {
                 display: "inline-block",
               }}
             />
-            Pick the bleed
+            Pick what to fix first
           </div>
           <h2
             style={{
@@ -192,9 +192,9 @@ export default function PainSolverGrid() {
             Which one is{" "}
             <em
               style={{
-                fontStyle: "italic",
+                fontStyle: "normal",
                 color: "var(--terracotta)",
-                fontWeight: 500,
+                fontWeight: 700,
               }}
             >
               costing you

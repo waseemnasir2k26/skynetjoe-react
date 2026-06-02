@@ -28,6 +28,7 @@ import {
 import { SITE, DEFAULT_OG_IMAGES, CAL_URL } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 const PAGE_TITLE =
   "Freight + Logistics Automation in Texas — n8n, GoHighLevel & Dispatch AI | SkynetLabs";
@@ -60,7 +61,7 @@ const eyebrow = {
   fontSize: 11 as const,
   textTransform: "uppercase" as const,
   letterSpacing: "0.16em",
-  color: "var(--terracotta)",
+  color: "var(--terracotta-aa)",
   display: "inline-flex" as const,
   alignItems: "center" as const,
   gap: 12,
@@ -73,7 +74,7 @@ const eyebrowRule = {
 };
 const h2Style = {
   fontFamily: "var(--font-display)",
-  fontWeight: 500,
+  fontWeight: 600,
   letterSpacing: "-0.02em",
   lineHeight: 1.08,
   color: "var(--ink)",
@@ -81,9 +82,9 @@ const h2Style = {
   marginBottom: 14,
 };
 const emTerra = {
-  fontStyle: "italic" as const,
-  color: "var(--terracotta)",
-  fontWeight: 500,
+  fontStyle: "normal" as const,
+  color: "var(--terracotta-aa)",
+  fontWeight: 700,
 };
 const proseP = {
   fontSize: 17,
@@ -209,7 +210,7 @@ export default function TexasFreightGuide() {
             ]}
           />
 
-          <div className="max-w-4xl">
+          <Reveal className="max-w-4xl">
             <div className="mb-6" style={eyebrow}>
               <span style={eyebrowRule} />
               <Truck
@@ -221,7 +222,7 @@ export default function TexasFreightGuide() {
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontWeight: 500,
+                fontWeight: 600,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.04,
                 color: "var(--ink)",
@@ -303,7 +304,7 @@ export default function TexasFreightGuide() {
                 See FreightOps demo
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -316,25 +317,25 @@ export default function TexasFreightGuide() {
         }}
       >
         <div className="container-x px-6">
-          <div className="max-w-4xl mb-12">
+          <Reveal className="max-w-4xl mb-12">
             <div className="mb-4" style={eyebrow}>
               <span style={eyebrowRule} />
               The Texas freight problem stack
             </div>
             <h2 style={h2Style}>
               Every Texas metro runs <em style={emTerra}>different freight</em>.
-              We've built for all five.
+              We&apos;ve built for all five.
             </h2>
             <p style={proseP}>
-              Texas isn't one freight market — it's five overlapping markets,
-              each with its own ops pain stack. The same dispatch automation
-              that wins a Houston midstream shop will get laughed out of a
-              Laredo crossing brokerage. Here's what the inbound looks like
-              from each metro and what we actually ship.
+              Texas isn&apos;t one freight market — it&apos;s five overlapping
+              markets, each with its own ops pain stack. The same dispatch
+              automation that wins a Houston midstream shop will get laughed out
+              of a Laredo crossing brokerage. Here&apos;s what the inbound looks
+              like from each metro and what we actually ship.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <RevealGroup className="grid md:grid-cols-2 gap-6">
             {[
               {
                 metro: "Houston",
@@ -367,7 +368,7 @@ export default function TexasFreightGuide() {
                 body: "Beaumont and Galveston run petrochem logistics — tank truck, ISO container, bulk liquid. Every dispatch decision touches HAZMAT placarding, USDOT-PHMSA reporting, and a 24/7 emergency-response phone tree that has to actually answer at 3am. We've shipped automation for a 28-truck Beaumont chemical hauler that cut spill-response response-time from 14 minutes to under 3 minutes via a Twilio + GoHighLevel + Slack escalation cascade. Average HAZMAT build: $3.1K and 10-day ship because the compliance scoping alone runs 4 hours.",
               },
             ].map((m) => (
-              <div key={m.metro} style={card}>
+              <RevealItem key={m.metro} style={card}>
                 <div
                   className="mb-3 inline-flex items-center gap-2"
                   style={{
@@ -375,7 +376,7 @@ export default function TexasFreightGuide() {
                     fontSize: 10,
                     textTransform: "uppercase",
                     letterSpacing: "0.14em",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                   }}
                 >
                   <MapPin className="w-3 h-3" />
@@ -385,7 +386,7 @@ export default function TexasFreightGuide() {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: 22,
-                    fontWeight: 500,
+                    fontWeight: 600,
                     color: "var(--ink)",
                     margin: "0 0 12px",
                   }}
@@ -402,9 +403,9 @@ export default function TexasFreightGuide() {
                 >
                   {m.body}
                 </p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -414,7 +415,7 @@ export default function TexasFreightGuide() {
         style={{ background: "var(--cream-3)" }}
       >
         <div className="container-x px-6">
-          <div className="max-w-4xl mb-12">
+          <Reveal className="max-w-4xl mb-12">
             <div className="mb-4" style={eyebrow}>
               <span style={eyebrowRule} />
               What we ship — 5 modules
@@ -424,15 +425,15 @@ export default function TexasFreightGuide() {
               <em style={emTerra}>5 modules, 1 fixed scope.</em>
             </h2>
             <p style={proseP}>
-              Most carriers don't need everything. We scope the first build to
-              the 2-3 modules that recover the most ops hours fastest. The
+              Most carriers don&apos;t need everything. We scope the first build
+              to the 2-3 modules that recover the most ops hours fastest. The
               rest land on a 90-day expansion plan. Every module is built on
               n8n (self-hosted in your tenant) with GoHighLevel as the SMS
               and inbound-lead layer.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="space-y-4">
+          <RevealGroup className="space-y-4">
             {[
               {
                 num: "01",
@@ -467,7 +468,7 @@ export default function TexasFreightGuide() {
                 body: "An AEO-optimized website that ranks for the long-tail buyer-intent searches your shippers actually type — \"reefer carrier Houston Brownsville lane\", \"hazmat trucking Galveston Beaumont\", \"expedited Dallas to Laredo\". GoHighLevel captures inbound leads with TCPA-safe consent flows. Schema.org markup (Service + AdministrativeArea + Offer) so Google's AI Overviews and Claude both surface your company when a shipper asks ChatGPT for a carrier recommendation.",
               },
             ].map((mod) => (
-              <div
+              <RevealItem
                 key={mod.num}
                 style={{
                   ...card,
@@ -480,8 +481,8 @@ export default function TexasFreightGuide() {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: 36,
-                    color: "var(--terracotta)",
-                    fontWeight: 500,
+                    color: "var(--terracotta-aa)",
+                    fontWeight: 600,
                     minWidth: 64,
                   }}
                 >
@@ -503,7 +504,7 @@ export default function TexasFreightGuide() {
                     style={{
                       fontFamily: "var(--font-mono)",
                       fontSize: 11,
-                      color: "var(--terracotta)",
+                      color: "var(--terracotta-aa)",
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
                       margin: "0 0 10px",
@@ -522,9 +523,9 @@ export default function TexasFreightGuide() {
                     {mod.body}
                   </p>
                 </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -644,7 +645,7 @@ export default function TexasFreightGuide() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <RevealGroup className="grid md:grid-cols-3 gap-6">
             {[
               {
                 metro: "Houston midstream",
@@ -665,7 +666,7 @@ export default function TexasFreightGuide() {
                 body: "API-first brokerage founded by ex-Coyote alumni. Built a Plaid-fired QuickPay flow that pays carriers within 24 hours of POD verification. DSO collapsed from 38 days to 9 days, freed up $1.2M in working capital. Stack: n8n + Plaid + Project44 + custom Python core.",
               },
             ].map((c) => (
-              <div key={c.metro} style={card}>
+              <RevealItem key={c.metro} style={card}>
                 <div
                   className="mb-3 inline-flex items-center gap-2"
                   style={{
@@ -673,7 +674,7 @@ export default function TexasFreightGuide() {
                     fontSize: 10,
                     textTransform: "uppercase",
                     letterSpacing: "0.14em",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                   }}
                 >
                   <TrendingUp className="w-3 h-3" />
@@ -713,9 +714,9 @@ export default function TexasFreightGuide() {
                 >
                   {c.body}
                 </p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
 
           <div className="mt-10 text-center">
             <Link
@@ -723,7 +724,7 @@ export default function TexasFreightGuide() {
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 12,
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 textDecoration: "underline",
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
@@ -782,7 +783,7 @@ export default function TexasFreightGuide() {
                   >
                     <span
                       style={{
-                        color: "var(--terracotta)",
+                        color: "var(--terracotta-aa)",
                         fontFamily: "var(--font-mono)",
                         fontSize: 12,
                         marginRight: 4,
@@ -843,7 +844,7 @@ export default function TexasFreightGuide() {
             <h2
               style={{
                 fontFamily: "var(--font-display)",
-                fontWeight: 500,
+                fontWeight: 600,
                 fontSize: "clamp(32px, 5vw, 52px)",
                 lineHeight: 1.06,
                 color: "var(--cream-3)",
@@ -851,15 +852,14 @@ export default function TexasFreightGuide() {
               }}
             >
               Ready to stop paying dispatchers to{" "}
-              <em
+              <span
                 style={{
-                  fontStyle: "italic",
                   color: "var(--terracotta)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                 }}
               >
                 copy-paste BOLs?
-              </em>
+              </span>
             </h2>
             <p
               style={{

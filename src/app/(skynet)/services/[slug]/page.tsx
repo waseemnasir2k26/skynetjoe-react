@@ -198,14 +198,14 @@ export default async function ServicePage({
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
               }}
             >
               <span
                 style={{
                   width: 28,
                   height: 1,
-                  background: "var(--terracotta)",
+                  background: "var(--terracotta-aa)",
                   display: "inline-block",
                 }}
               />
@@ -214,7 +214,7 @@ export default async function ServicePage({
             <h2
               style={{
                 fontFamily: "var(--font-display)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 color: "var(--ink)",
                 fontSize: "clamp(28px, 4vw, 40px)",
@@ -223,17 +223,16 @@ export default async function ServicePage({
               }}
             >
               {svc.label} across{" "}
-              <em
+              <span
                 style={{
-                  fontStyle: "italic",
-                  color: "var(--terracotta)",
-                  fontWeight: 500,
+                  color: "var(--terracotta-aa)",
+                  fontWeight: 700,
                 }}
               >
                 48 states.
-              </em>
+              </span>
             </h2>
-            <p style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.55 }}>
+            <p style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.6 }}>
               Same fixed-scope build, delivered remotely to any US state. Click
               your state for the local-vertical breakdown — agency rate
               benchmarks, dominant industries, state-specific compliance hooks
@@ -272,7 +271,7 @@ export default async function ServicePage({
                     <h3
                       style={{
                         fontFamily: "var(--font-display)",
-                        fontWeight: 500,
+                        fontWeight: 700,
                         fontSize: 18,
                         color: "var(--ink)",
                         margin: 0,
@@ -330,7 +329,7 @@ export default async function ServicePage({
                       <Link
                         href={`/locations/${stateSlug}`}
                         style={{
-                          color: "var(--terracotta)",
+                          color: "var(--terracotta-aa)",
                           textDecoration: "underline",
                         }}
                       >

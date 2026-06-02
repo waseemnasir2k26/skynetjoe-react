@@ -53,7 +53,8 @@ export default function CTA() {
               Start trading{" "}
               <em
                 style={{
-                  fontStyle: "italic",
+                  fontStyle: "normal",
+                  fontWeight: 700,
                   textDecoration: "underline",
                   textDecorationThickness: "1px",
                   textUnderlineOffset: "8px",
@@ -71,7 +72,7 @@ export default function CTA() {
                 lineHeight: 1.6,
               }}
             >
-              Free 20-min audit. We&apos;ll Loom you the leak in your funnel and the 1 automation that closes it.
+              Free 20-min audit. We&apos;ll Loom you where you&apos;re losing customers and the 1 automation that fixes it.
               No deck. No pitch. Pure signal.
             </p>
             <Link

@@ -206,7 +206,7 @@ export default function CaseStudiesPage() {
             }}
           >
             Nine shipped builds.{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+            <em style={{ fontStyle: "normal", fontWeight: 700, color: "var(--terracotta-aa)" }}>
               Real receipts.
             </em>
           </h1>
@@ -480,7 +480,7 @@ export default function CaseStudiesPage() {
             Want your name on this{" "}
             <em
               style={{
-                fontStyle: "italic",
+                fontStyle: "normal", fontWeight: 700,
                 textDecoration: "underline",
                 textDecorationThickness: "1px",
                 textUnderlineOffset: "8px",

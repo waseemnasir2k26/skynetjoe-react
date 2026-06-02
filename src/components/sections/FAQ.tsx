@@ -80,7 +80,7 @@ export default function FAQ() {
             }}
           >
             Things founders ask{" "}
-            <em style={{ fontStyle: "italic", color: C.terra }}>
+            <em style={{ fontStyle: "normal", fontWeight: 700, color: C.terra }}>
               before booking.
             </em>
           </h2>

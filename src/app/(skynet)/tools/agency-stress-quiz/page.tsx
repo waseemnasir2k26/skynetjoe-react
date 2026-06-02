@@ -94,7 +94,7 @@ const softwareSchema = {
   operatingSystem: "Web",
   url: `${SITE.url}${PATH}`,
   description:
-    "Free 60-second diagnostic that scores service-business operational stress from 0 to 70 and routes the result into a revenue-leak calculator.",
+    "Free 60-second diagnostic that scores service-business operational stress from 0 to 70 and routes the result into a revenue-loss calculator.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
 };
 

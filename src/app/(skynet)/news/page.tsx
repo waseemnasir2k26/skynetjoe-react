@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { NEWS } from "@/lib/news";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { Reveal, RevealGroup, RevealItem, ParallaxFigure } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Latest news & field notes — SkynetLabs",
@@ -83,14 +84,14 @@ export default function NewsIndex() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <Reveal style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--terracotta)",
+              color: "var(--terracotta-aa)",
               marginBottom: 18,
               display: "inline-flex",
               alignItems: "center",
@@ -104,7 +105,7 @@ export default function NewsIndex() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(40px, 6.5vw, 76px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.02,
               color: "var(--ink)",
@@ -113,9 +114,9 @@ export default function NewsIndex() {
             }}
           >
             Field notes from{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
               one operator,
-            </em>{" "}
+            </span>{" "}
             shipping.
           </h1>
           <p
@@ -123,7 +124,7 @@ export default function NewsIndex() {
               fontSize: 18,
               color: "var(--ink-2)",
               maxWidth: "60ch",
-              lineHeight: 1.55,
+              lineHeight: 1.6,
               margin: 0,
             }}
           >
@@ -152,12 +153,12 @@ export default function NewsIndex() {
             Want long-form guides? → Read the Journal
             <ArrowRight style={{ width: 14, height: 14 }} />
           </Link>
-        </div>
+        </Reveal>
       </section>
 
       {/* FEATURED */}
       <section style={{ padding: "clamp(40px, 9vw, 56px) 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <ParallaxFigure style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <Link
             href={`/news/${featured.slug}`}
             style={{
@@ -284,7 +285,7 @@ export default function NewsIndex() {
               </span>
             </div>
           </Link>
-        </div>
+        </ParallaxFigure>
       </section>
 
       {/* GRID */}
@@ -323,34 +324,37 @@ export default function NewsIndex() {
               — {posts.length} articles · newest first
             </span>
           </div>
-          <div
+          <RevealGroup
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
               gap: 24,
             }}
           >
-            {rest.map((n, i) => {
+            {rest.map((n) => {
               const accent = CATEGORY_COLORS[n.category] ?? "var(--terracotta)";
               // Light accents (ochre/sage) need ink text for AA contrast on chip bg.
               const chipTextColor =
                 accent === "var(--ochre)" || accent === "var(--sage)"
                   ? "var(--ink)"
                   : "var(--cream-3)";
-              const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
               return (
-                <Link
+                <RevealItem
+                  as="article"
                   key={n.slug}
+                  style={{ display: "flex" }}
+                >
+                <Link
                   href={`/news/${n.slug}`}
                   className="news-card"
                   style={{
                     display: "flex",
                     flexDirection: "column",
+                    flex: 1,
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.12)",
                     textDecoration: "none",
-                    transform: `rotate(${rotate})`,
-                    transition: "border-color 0.2s ease, transform 0.2s ease",
+                    transition: "border-color 0.2s ease",
                   }}
                 >
                   <div
@@ -435,7 +439,7 @@ export default function NewsIndex() {
                         fontSize: 11,
                         textTransform: "uppercase",
                         letterSpacing: "0.14em",
-                        color: "var(--terracotta)",
+                        color: "var(--terracotta-aa)",
                         fontWeight: 600,
                         display: "inline-flex",
                         alignItems: "center",
@@ -448,9 +452,10 @@ export default function NewsIndex() {
                     </span>
                   </div>
                 </Link>
+                </RevealItem>
               );
             })}
-          </div>
+          </RevealGroup>
           <style>{`
             .news-card:hover { border-color: var(--terracotta) !important; }
           `}</style>
@@ -466,7 +471,7 @@ export default function NewsIndex() {
           zIndex: 2,
         }}
       >
-        <div
+        <Reveal
           style={{
             maxWidth: 720,
             margin: "0 auto",
@@ -478,7 +483,7 @@ export default function NewsIndex() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4.4vw, 44px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--cream-3)",
@@ -486,16 +491,16 @@ export default function NewsIndex() {
             }}
           >
             The audit takes{" "}
-            <em
+            <span
               style={{
-                fontStyle: "italic",
+                fontWeight: 700,
                 textDecoration: "underline",
                 textDecorationThickness: "1px",
                 textUnderlineOffset: "8px",
               }}
             >
               fifteen minutes.
-            </em>
+            </span>
           </h2>
           <p
             style={{
@@ -550,7 +555,7 @@ export default function NewsIndex() {
               See case studies
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   );

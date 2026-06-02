@@ -42,9 +42,9 @@ export default function Stats() {
                 <div
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontStyle: "italic",
+                    fontStyle: "normal",
                     fontSize: "clamp(36px, 5vw, 56px)",
-                    fontWeight: 600,
+                    fontWeight: 700,
                     color,
                     marginBottom: 8,
                     letterSpacing: "-0.02em",
@@ -85,10 +85,10 @@ export default function Stats() {
             <span
               style={{
                 fontFamily: "var(--font-display)",
-                fontStyle: "italic",
+                fontStyle: "normal",
                 fontSize: 17,
-                fontWeight: 600,
-                color: C.terra,
+                fontWeight: 700,
+                color: "var(--terracotta-aa)",
                 letterSpacing: "-0.01em",
               }}
             >

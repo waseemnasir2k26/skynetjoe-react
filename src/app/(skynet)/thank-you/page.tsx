@@ -101,7 +101,7 @@ function leakBulletsFor(bucket: string | undefined): string[] {
   if (bucketKey === "leaking") {
     return [
       "Lead response time is north of 6 hours — every hour past 5 minutes drops conversion roughly 8%.",
-      "Email sequences cap at 2 messages. The deals close on touch 5-7. You're leaking that delta on every campaign.",
+      "Email sequences cap at 2 messages. The deals close on touch 5-7. That delta walks out the door on every campaign.",
       "No CRM segmentation, so re-engagement emails go to closed-won customers (who unsubscribe) and dead leads (who don't).",
       "You're inside Zapier/Make hitting task limits monthly. n8n self-hosted would cut that bill 80% and give you flow logic Zapier physically can't do.",
     ];
@@ -109,7 +109,7 @@ function leakBulletsFor(bucket: string | undefined): string[] {
   if (bucketKey === "manageable") {
     return [
       "Your funnel works — but only because YOU are the funnel. Step away for 7 days and watch what stops.",
-      "Your top of funnel is leaking on the form submit page: no instant confirmation, no priming, no calendar drop. You convert maybe 40% of MQLs to SQLs when the ceiling is 70%+.",
+      "Your top of funnel stalls on the form submit page: no instant confirmation, no priming, no calendar drop. You convert maybe 40% of MQLs to SQLs when the ceiling is 70%+.",
       "Reporting lives in your head. When a client asks 'how's the campaign doing' you tab through 4 dashboards instead of sending one screenshot.",
       "Onboarding is bespoke per client — you re-invent the welcome sequence every time. A 3-template library would cut delivery time by a third.",
     ];
@@ -150,7 +150,7 @@ const eyebrow = {
   fontSize: 11 as const,
   textTransform: "uppercase" as const,
   letterSpacing: "0.16em",
-  color: "var(--terracotta)",
+  color: "var(--terracotta-aa)",
   display: "inline-flex" as const,
   alignItems: "center" as const,
   gap: 12,
@@ -172,7 +172,7 @@ const h2Style = {
 };
 const emTerra = {
   fontStyle: "normal" as const,
-  color: "var(--terracotta)",
+  color: "var(--terracotta-aa)",
   fontWeight: 700,
 };
 const cardCream = {
@@ -318,7 +318,7 @@ export default async function ThankYouPage({
                   style={{
                     background: "rgba(198, 107, 63, 0.10)",
                     border: "1px solid rgba(198, 107, 63, 0.40)",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     borderRadius: 9999,
                     fontFamily: "var(--font-mono)",
                   }}
@@ -477,7 +477,7 @@ export default async function ThankYouPage({
                       fontSize: 10,
                       textTransform: "uppercase",
                       letterSpacing: "0.16em",
-                      color: "var(--terracotta)",
+                      color: "var(--terracotta-aa)",
                       fontWeight: 600,
                       marginBottom: 6,
                     }}
@@ -522,13 +522,13 @@ export default async function ThankYouPage({
                   <em style={emTerra}>likely find.</em>
                 </h2>
                 <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6 }}>
-                  After 200+ service businesses, the leak patterns rhyme. I&apos;m
+                  After 200+ service businesses, the patterns rhyme. I&apos;m
                   not bluffing — these are the 4 we find inside roughly 8 out
                   of every 10 funnels we audit.
                   {bucket ? (
                     <>
                       {" "}
-                      <span style={{ color: "var(--terracotta)", fontWeight: 600 }}>
+                      <span style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
                         Tuned for your &quot;{bucket}&quot; bucket from the stress
                         quiz.
                       </span>
@@ -557,7 +557,7 @@ export default async function ThankYouPage({
                         height: 28,
                         background: "rgba(198,107,63,0.10)",
                         border: "1px solid rgba(198,107,63,0.30)",
-                        color: "var(--terracotta)",
+                        color: "var(--terracotta-aa)",
                         fontFamily: "var(--font-mono)",
                         fontSize: 11,
                         fontWeight: 700,
@@ -617,8 +617,8 @@ export default async function ThankYouPage({
                 <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
                   2 minutes max. Just screen-record and walk me through how a
                   lead enters, what tools touch them, and where you think
-                  it&apos;s leaking. I prep against your real funnel — not a
-                  generic deck.
+                  it&apos;s breaking down. I prep against your real funnel — not
+                  a generic deck.
                 </p>
               </div>
               <div className="flex flex-col gap-3 mx-auto md:mx-0 md:items-end">
@@ -671,7 +671,7 @@ export default async function ThankYouPage({
                   fontFamily: "var(--font-mono)",
                 }}
               >
-                Email pre-filled to send from <strong style={{ color: "var(--terracotta)" }}>{inviteeEmail}</strong>.
+                Email pre-filled to send from <strong style={{ color: "var(--terracotta-aa)" }}>{inviteeEmail}</strong>.
                 If you&apos;d rather drop the Loom in Slack or LinkedIn DM, that
                 works too.
               </p>
@@ -708,7 +708,7 @@ export default async function ThankYouPage({
                     fontSize: 10,
                     textTransform: "uppercase",
                     letterSpacing: "0.16em",
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                     fontWeight: 600,
                     marginBottom: 12,
                   }}
@@ -744,7 +744,7 @@ export default async function ThankYouPage({
                     fontFamily: "var(--font-sans)",
                     fontSize: 14,
                     fontWeight: 600,
-                    color: "var(--terracotta)",
+                    color: "var(--terracotta-aa)",
                   }}
                 >
                   Read the breakdown <ArrowRight className="w-4 h-4" />
@@ -778,7 +778,7 @@ export default async function ThankYouPage({
                 </h2>
                 <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
                   Send the intro. If they sign for a build, I&apos;ll drop{" "}
-                  <strong style={{ color: "var(--terracotta)", fontWeight: 600 }}>
+                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
                     $200 credit
                   </strong>{" "}
                   on your next invoice. No expiry, no fine print, no MLM nonsense.

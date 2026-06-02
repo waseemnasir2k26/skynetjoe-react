@@ -1,152 +1,134 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
-import { ArrowRight, X, Check } from "lucide-react";
+import { ArrowRight, X, Check, FileX2, Quote, Wrench } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { WordPressSite, AEOEngine } from "@/components/illustrations";
 
 /**
  * WordpressSeoLP — bespoke landing page for /services/wordpress-seo
  *
- * Cream editorial pivot. Server component.
- *
- * Hero credential card replaces the founder photo (no face) — terracotta "SL"
- * monogram tile + headline metric + plain credential lines.
- *
- * Asset paths confirmed against /public glob 2026-05-26:
- *  - /case-studies/saas-multi-channel-aeo-content-engine.jpg (work visual — kept)
+ * Redesign 2026-06-02. Client component for cinematic Framer Motion.
+ *  - NO photos / NO founder face — Lucide icons + bespoke WordPressSite / AEOEngine SVGs.
+ *  - Plain-language, outcome-first hero. Tool/method names kept to a quiet sub-line.
+ *  - AA: accent TEXT = var(--terracotta-aa); raw var(--terracotta) only for
+ *    backgrounds and the large display metric.
+ *  - "Leak"/"plug" metaphor removed everywhere.
  */
 
-function SkynetCredentialCard({
-  metric,
-  metricLabel,
-  lines,
+const ease = [0.22, 1, 0.36, 1] as const;
+
+function Reveal({
+  children,
+  delay = 0,
+  style,
+  className,
 }: {
-  metric: string;
-  metricLabel: string;
-  lines: string[];
+  children: React.ReactNode;
+  delay?: number;
+  style?: React.CSSProperties;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      initial={reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }}
+      whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, delay, ease }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function Stagger({
+  children,
+  className,
+  style,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
-    <div
-      style={{
-        background: "var(--cream-3)",
-        border: "1px solid rgba(26,26,26,0.12)",
-        boxShadow: "0 18px 48px rgba(26,37,64,0.10)",
-        maxWidth: 400,
-        width: "100%",
-        marginLeft: "auto",
-        padding: 28,
+    <motion.div
+      className={className}
+      style={style}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function Item({
+  children,
+  style,
+  className,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      variants={{
+        hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 24 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-        <span
-          aria-hidden
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 48,
-            height: 48,
-            borderRadius: "50%",
-            background: "var(--terracotta)",
-            color: "var(--cream-3)",
-            fontFamily: "var(--font-display)",
-            fontWeight: 700,
-            fontSize: 18,
-            letterSpacing: "0.02em",
-            flexShrink: 0,
-          }}
-        >
-          SL
-        </span>
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 11,
-            textTransform: "uppercase",
-            letterSpacing: "0.14em",
-            color: "#A8451F",
-          }}
-        >
-          SkynetLabs · since 2022
-        </span>
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--font-display)",
-          fontWeight: 700,
-          fontSize: 56,
-          lineHeight: 1,
-          color: "var(--terracotta)",
-          letterSpacing: "-0.03em",
-        }}
-      >
-        {metric}
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--font-mono)",
-          fontSize: 11,
-          textTransform: "uppercase",
-          letterSpacing: "0.12em",
-          color: "var(--ink-faint)",
-          margin: "8px 0 18px",
-        }}
-      >
-        {metricLabel}
-      </div>
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-        {lines.map((l) => (
-          <li
-            key={l}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "16px 1fr",
-              gap: 10,
-              padding: "7px 0",
-              fontSize: 14,
-              color: "var(--ink)",
-              lineHeight: 1.5,
-            }}
-          >
-            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 3 }} />
-            <span>{l}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {children}
+    </motion.div>
   );
 }
 
 const PAINS = [
   {
-    n: "01",
-    title: "640 thin doorway pages",
-    body: "Old SEO playbook left you with 640 1-paragraph pages tanking your domain authority for two years.",
+    icon: FileX2,
+    title: "Hundreds of thin pages dragging you down",
+    body: "An old playbook left you with a pile of one-paragraph pages that have weighed on your site for years.",
   },
   {
-    n: "02",
-    title: "AI Overview cites a competitor",
-    body: "Google AI Overview answers your branded query — and the citation goes to the agency next door.",
+    icon: Quote,
+    title: "The answer names a competitor",
+    body: "Search now answers your question on the page — and the credit goes to the business next door.",
   },
   {
-    n: "03",
-    title: "Schema broken since Yoast",
-    body: "No rich results in 8 months. FAQ, Service, Article schema all silently invalid since the migration.",
+    icon: Wrench,
+    title: "Your markup quietly broke",
+    body: "No rich results in months. The behind-the-scenes data has been silently invalid since a past migration.",
   },
 ];
 
 const BEFORE = [
-  "640 thin doorway pages eating crawl budget",
-  "Yoast schema broken, no rich results",
-  "AI Overview cites competitors for your brand",
-  "Title tags duplicated across 80 pages",
-  "Internal links random, no topic clusters",
+  "Hundreds of thin pages weighing on your site",
+  "Behind-the-scenes data broken, no rich results",
+  "Search answers name competitors for your own brand",
+  "The same page title repeated across dozens of pages",
+  "Internal links scattered with no clear structure",
 ];
 
 const AFTER = [
-  "308 parent pages, 410-redirected the rest",
-  "Schema valid: Article, FAQ, Service, Breadcrumb",
-  "Branded query owns its AI Overview citation",
-  "Each title carries the right intent + brand",
-  "Hub-and-spoke clusters around real money pages",
+  "Hundreds of weak pages merged or redirected to strong ones",
+  "Clean, valid data so rich results show again",
+  "Your brand named when search answers questions about it",
+  "Each title written for the right search and your name",
+  "Pages grouped around the ones that actually earn money",
+];
+
+const FACTS = [
+  "Tuned so AI answers name your business",
+  "Clean, valid data across the whole site",
+  "Your brand owns its own answer",
 ];
 
 export default function WordpressSeoLP() {
@@ -156,8 +138,19 @@ export default function WordpressSeoLP() {
         background: "var(--cream)",
         color: "var(--ink)",
         fontFamily: "var(--font-sans)",
+        position: "relative",
       }}
     >
+      <style>{`
+        .lp-hero-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 6vw, 44px); align-items: center; }
+        @media (min-width: 900px) { .lp-hero-grid { grid-template-columns: 7fr 5fr; align-items: center; } }
+        .lp-illo { width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 12px; display: block; box-shadow: 0 22px 60px rgba(26,37,64,0.18); border: 1px solid rgba(26,26,26,0.10); }
+        .lp-ba-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        @media (min-width: 760px) { .lp-ba-grid { grid-template-columns: 1fr 1fr; } }
+        .lp-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+      `}</style>
+
+      {/* Top utility strip */}
       <div
         style={{
           background: "var(--terracotta)",
@@ -170,7 +163,7 @@ export default function WordpressSeoLP() {
           padding: "10px 16px",
         }}
       >
-        — WordPress SEO + AEO · schema-clean · AI Overview-ready
+        — Get named in the answers people read · clean data · ready for AI search
       </div>
 
       {/* HERO */}
@@ -179,127 +172,86 @@ export default function WordpressSeoLP() {
           padding: "clamp(48px, 10vw, 72px) 0 clamp(56px, 12vw, 80px)",
           borderBottom: "1px solid rgba(26,26,26,0.12)",
           background: "var(--cream-3)",
+          overflow: "hidden",
         }}
       >
         <div
           className="lp-hero-grid"
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 32px)",
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 40,
-          }}
+          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
         >
-          <style>{`
-            @media (min-width: 900px) {
-              .lp-hero-grid { grid-template-columns: 7fr 5fr !important; align-items: end !important; }
-            }
-          `}</style>
-          <div>
+          <Reveal>
             <div
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-aa)",
                 marginBottom: 24,
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 12,
               }}
             >
-              <span
-                style={{
-                  width: 28,
-                  height: 1,
-                  background: "var(--terracotta)",
-                  display: "inline-block",
-                }}
-              />
-              WP SEO + AEO · 2026
+              <span style={{ width: 28, height: 1, background: "var(--terracotta-aa)", display: "inline-block" }} />
+              Get found in 2026
             </div>
             <h1
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(32px, 8vw, 76px)",
+                fontSize: "clamp(32px, 8vw, 72px)",
                 fontWeight: 700,
                 letterSpacing: "-0.025em",
-                lineHeight: 1.02,
+                lineHeight: 1.04,
                 color: "var(--ink)",
                 margin: "0 0 24px",
+                maxWidth: "16ch",
               }}
             >
-              SEO won&apos;t save you.{" "}
-              <span
-                style={{
-                  fontStyle: "normal",
-                  color: "var(--terracotta)",
-                  fontWeight: 700,
-                }}
-              >
-                Get cited by the AI.
-              </span>
+              Get named in the answers,{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>not buried below them.</span>
             </h1>
             <p
               style={{
-                fontSize: "clamp(16px, 2.5vw, 19px)",
+                fontSize: "clamp(17px, 2.5vw, 19px)",
                 color: "var(--ink-2)",
                 maxWidth: "52ch",
-                lineHeight: 1.55,
+                lineHeight: 1.6,
                 marginBottom: 28,
               }}
             >
-              Get your business named in the answers people now read instead of
-              clicking. We clean up your WordPress site so Google AI Overview and
-              ChatGPT cite you — not the competitor next door.
+              People now read the answer instead of clicking through. We clean up
+              your site so those answers name your business — not the competitor
+              next door. Pages that earn their place, data search can trust.
             </p>
-            <Link
-              href="/discovery-call"
-              style={{
-                background: "var(--terracotta)",
-                color: "var(--cream-3)",
-                padding: "16px 28px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                textDecoration: "none",
-                minHeight: 44,
-              }}
-            >
-              Book a 30-min call
+            <Link href="/discovery-call" style={primaryBtn}>
+              Book a free 30-min check-up
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
+            <div style={subline}>— Bali hours GMT+8 · 8-hour weekday reply</div>
             <div
               style={{
+                marginTop: 16,
                 fontFamily: "var(--font-mono)",
                 fontSize: 10,
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
                 color: "var(--ink-faint)",
-                marginTop: 18,
               }}
             >
-              — Bali hours GMT+8 · 8-hour weekday reply
+              Tools we use: WordPress · structured data · AI-search tuning
             </div>
-          </div>
-          <div>
-            <SkynetCredentialCard
-              metric="640"
-              metricLabel="thin pages killed · 308 kept"
-              lines={[
-                "Tuned for Google AI Overview & ChatGPT",
-                "Clean, valid schema across the site",
-                "Your brand owns its own answer box",
-              ]}
-            />
-          </div>
+          </Reveal>
+
+          <motion.div
+            initial={{ opacity: 0, y: 36, rotate: -1.2 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease, delay: 0.1 }}
+            aria-hidden
+          >
+            <AEOEngine className="lp-illo" />
+          </motion.div>
         </div>
       </section>
 
@@ -312,98 +264,30 @@ export default function WordpressSeoLP() {
         }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--oxblood)",
-              marginBottom: 16,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 12,
-            }}
-          >
-            <span style={{ width: 28, height: 1, background: "var(--oxblood)" }} />
-            What the audit finds
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4vw, 40px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "var(--ink)",
-              marginBottom: 40,
-              maxWidth: "26ch",
-            }}
-          >
-            Three reasons WP sites{" "}
-            <span style={{ fontStyle: "normal", color: "var(--oxblood)", fontWeight: 700 }}>
-              vanish in the AI era.
-            </span>
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: 24,
-            }}
-          >
+          <Reveal>
+            <Eyebrow color="var(--oxblood)">What the check-up finds</Eyebrow>
+            <H2>
+              Three reasons sites{" "}
+              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>vanish in the AI era.</span>
+            </H2>
+          </Reveal>
+          <Stagger className="lp-card-grid">
             {PAINS.map((p, i) => (
-              <div
-                key={p.n}
+              <Item
+                key={p.title}
                 style={{
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
-                  padding: "28px",
-                  transform:
-                    i === 0
-                      ? "rotate(-0.3deg)"
-                      : i === 1
-                      ? "rotate(0.3deg)"
-                      : "rotate(-0.2deg)",
+                  padding: 28,
+                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
-                <div
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 11,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.16em",
-                    color: "var(--oxblood)",
-                    marginBottom: 10,
-                  }}
-                >
-                  Pain {p.n}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 22,
-                    fontWeight: 600,
-                    color: "var(--ink)",
-                    marginBottom: 10,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {p.title}
-                </h3>
-                <p
-                  style={{
-                    color: "var(--ink-2)",
-                    fontSize: 14,
-                    lineHeight: 1.6,
-                    margin: 0,
-                  }}
-                >
-                  {p.body}
-                </p>
-              </div>
+                <p.icon style={{ width: 26, height: 26, color: "var(--oxblood)", marginBottom: 14 }} />
+                <h3 style={cardH3}>{p.title}</h3>
+                <p style={cardBody}>{p.body}</p>
+              </Item>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -416,19 +300,8 @@ export default function WordpressSeoLP() {
           textAlign: "center",
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--ink-faint)",
-              marginBottom: 14,
-            }}
-          >
-            — Cirrosis360 · Spanish LMS · sitewide rebuild
-          </div>
+        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+          <div style={proofEyebrow}>— A Spanish learning platform · sitewide rebuild</div>
           <div
             style={{
               fontFamily: "var(--font-display)",
@@ -442,24 +315,14 @@ export default function WordpressSeoLP() {
           >
             640
           </div>
-          <p
-            style={{
-              fontFamily: "var(--font-display)",
-              fontStyle: "normal",
-              fontSize: "clamp(17px, 3vw, 22px)",
-              color: "var(--ink-2)",
-              lineHeight: 1.4,
-              maxWidth: "34ch",
-              margin: "0 auto",
-            }}
-          >
-            thin SEO pages killed, 308-redirected to parent hubs. Crawl budget
-            back. Citations following.
+          <p style={proofDetail}>
+            thin pages merged or redirected to stronger hubs. Crawl budget back,
+            answers starting to name the brand.
           </p>
-        </div>
+        </Reveal>
       </section>
 
-      {/* TESTIMONIAL / CASE WITH FACE */}
+      {/* WHAT YOU GET — illustration + facts (replaces photo case panel) */}
       <section
         style={{
           padding: "clamp(48px, 11vw, 80px) 0",
@@ -468,94 +331,40 @@ export default function WordpressSeoLP() {
         }}
       >
         <div
-          className="lp-case-grid"
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 32px)",
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 48,
-            alignItems: "center",
-          }}
+          className="lp-hero-grid"
+          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
         >
-          <style>{`
-            @media (min-width: 900px) {
-              .lp-case-grid { grid-template-columns: 5fr 7fr !important; }
-            }
-          `}</style>
-          <figure
-            style={{
-              margin: 0,
-              transform: "rotate(1deg)",
-              background: "var(--cream-3)",
-              padding: 10,
-              border: "1px solid rgba(26,26,26,0.12)",
-              boxShadow: "0 18px 48px rgba(26,37,64,0.18)",
-              maxWidth: 380,
-            }}
-          >
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                aspectRatio: "4 / 3",
-                overflow: "hidden",
-              }}
-            >
-              <Image
-                src="/case-studies/saas-multi-channel-aeo-content-engine.jpg"
-                alt="Cirrosis360 SEO + AEO content engine rebuild"
-                fill
-                sizes="(min-width: 900px) 380px, 90vw"
-                style={{
-                  objectFit: "cover",
-                  filter: "none",
-                }}
-              />
-            </div>
-            <figcaption
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 10,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                color: "var(--ink-faint)",
-                textAlign: "center",
-                paddingTop: 10,
-              }}
-            >
-              Cirrosis360 · Spanish LMS · sitewide SEO
-            </figcaption>
-          </figure>
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontStyle: "normal",
-                fontSize: "clamp(18px, 3.2vw, 24px)",
-                lineHeight: 1.4,
-                color: "var(--ink)",
-                margin: "0 0 20px",
-              }}
-            >
-              &ldquo;We had 948 pages and most of them were doing nothing.
-              Waseem walked us through the kill list, redirected 640, kept the
-              308 that earned their slot. AI Overviews started picking us up
-              within the month.&rdquo;
+          <Reveal>
+            <Eyebrow color="var(--terracotta-aa)">What we hand over</Eyebrow>
+            <H2>
+              Fewer pages, doing{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>far more work.</span>
+            </H2>
+            <p style={{ ...cardBody, fontSize: 16, maxWidth: "44ch", marginBottom: 20 }}>
+              &ldquo;We had close to a thousand pages and most of them were doing
+              nothing. He walked us through the cut list, kept the ones that
+              earned their slot, and the AI answers started picking us up within
+              the month.&rdquo;
             </p>
-            <div
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.14em",
-                color: "var(--ink-faint)",
-              }}
-            >
-              — Cirrosis360 · Spanish LMS · 5-week rebuild
-            </div>
-          </div>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {FACTS.map((f) => (
+                <li key={f} style={factLi}>
+                  <Check style={{ width: 16, height: 16, color: "var(--sage)", marginTop: 2 }} />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <div style={{ ...subline, marginTop: 18 }}>— Founder · Spanish learning platform · 5-week rebuild</div>
+          </Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 30, rotate: 1 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease }}
+            aria-hidden
+          >
+            <WordPressSite className="lp-illo" />
+          </motion.div>
         </div>
       </section>
 
@@ -568,251 +377,265 @@ export default function WordpressSeoLP() {
         }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-              marginBottom: 16,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 12,
-            }}
-          >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-            Thin vs cited
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4vw, 40px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "var(--ink)",
-              marginBottom: 40,
-              maxWidth: "24ch",
-            }}
-          >
-            What changes when the{" "}
-            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
-              kill list ships.
-            </span>
-          </h2>
-          <div
-            className="lp-ba-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: 24,
-            }}
-          >
-            <style>{`
-              @media (min-width: 760px) {
-                .lp-ba-grid { grid-template-columns: 1fr 1fr !important; }
-              }
-            `}</style>
-            <div
-              style={{
-                background: "var(--cream-2)",
-                padding: "28px",
-                border: "1px solid rgba(26,26,26,0.12)",
-                borderLeftWidth: 3,
-                borderLeftColor: "var(--oxblood)",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: "var(--oxblood)",
-                  marginBottom: 12,
-                }}
-              >
-                — Thin · before
-              </div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: "var(--ink)",
-                  marginBottom: 14,
-                }}
-              >
-                The SEO playbook that died in 2024
-              </h3>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {BEFORE.map((b) => (
-                  <li
-                    key={b}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "18px 1fr",
-                      gap: 12,
-                      padding: "10px 0",
-                      borderBottom: "1px solid rgba(26,26,26,0.06)",
-                      fontSize: 14,
-                      color: "var(--ink-2)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div
-              style={{
-                background: "var(--cream-3)",
-                padding: "28px",
-                border: "1px solid rgba(26,26,26,0.12)",
-                borderLeftWidth: 3,
-                borderLeftColor: "var(--sage)",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: "var(--sage)",
-                  marginBottom: 12,
-                }}
-              >
-                — Cited · after
-              </div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: "var(--ink)",
-                  marginBottom: 14,
-                }}
-              >
-                The 2026 AEO-first playbook
-              </h3>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {AFTER.map((a) => (
-                  <li
-                    key={a}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "18px 1fr",
-                      gap: 12,
-                      padding: "10px 0",
-                      borderBottom: "1px solid rgba(26,26,26,0.06)",
-                      fontSize: 14,
-                      color: "var(--ink)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
-                    <span>{a}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <Reveal>
+            <Eyebrow color="var(--terracotta-aa)">Before vs after</Eyebrow>
+            <H2>
+              What changes when the{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>cleanup ships.</span>
+            </H2>
+          </Reveal>
+          <Stagger className="lp-ba-grid">
+            <BeforeCard label="The playbook that stopped working" items={BEFORE} />
+            <AfterCard label="The way it works in 2026" items={AFTER} />
+          </Stagger>
         </div>
       </section>
 
       {/* FINAL CTA */}
-      <section
-        style={{
-          padding: "clamp(56px, 12vw, 88px) 0 clamp(64px, 14vw, 100px)",
-          background: "var(--cream)",
-        }}
-      >
+      <FinalCta
+        h2={
+          <>
+            Send us the page list.{" "}
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>We&apos;ll mark the cut.</span>
+          </>
+        }
+        body="A free 30-minute check-up. We find the weak pages, the broken data, the answers naming someone else. Fixed scope back in 48 hours."
+      />
+    </div>
+  );
+}
+
+// ── shared local presentational helpers ────────────────────────────────────
+const primaryBtn: React.CSSProperties = {
+  background: "var(--terracotta)",
+  color: "var(--cream-3)",
+  padding: "16px 28px",
+  fontFamily: "var(--font-sans)",
+  fontWeight: 600,
+  fontSize: 15,
+  borderRadius: 2,
+  display: "inline-flex",
+  alignItems: "center",
+  gap: 8,
+  textDecoration: "none",
+  minHeight: 44,
+};
+const subline: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 10,
+  textTransform: "uppercase",
+  letterSpacing: "0.12em",
+  color: "var(--ink-faint)",
+  marginTop: 18,
+};
+const cardH3: React.CSSProperties = {
+  fontFamily: "var(--font-display)",
+  fontSize: 22,
+  fontWeight: 600,
+  color: "var(--ink)",
+  marginBottom: 10,
+  letterSpacing: "-0.01em",
+};
+const cardBody: React.CSSProperties = {
+  color: "var(--ink-2)",
+  fontSize: 15,
+  lineHeight: 1.6,
+  margin: 0,
+};
+const factLi: React.CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "16px 1fr",
+  gap: 10,
+  padding: "7px 0",
+  fontSize: 15,
+  color: "var(--ink)",
+  lineHeight: 1.55,
+};
+const proofEyebrow: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11,
+  textTransform: "uppercase",
+  letterSpacing: "0.16em",
+  color: "var(--ink-faint)",
+  marginBottom: 14,
+};
+const proofDetail: React.CSSProperties = {
+  fontFamily: "var(--font-display)",
+  fontSize: "clamp(17px, 3vw, 22px)",
+  color: "var(--ink-2)",
+  lineHeight: 1.45,
+  maxWidth: "34ch",
+  margin: "0 auto",
+};
+
+function Eyebrow({ children, color }: { children: React.ReactNode; color: string }) {
+  return (
+    <div
+      style={{
+        fontFamily: "var(--font-mono)",
+        fontSize: 11,
+        textTransform: "uppercase",
+        letterSpacing: "0.16em",
+        color,
+        marginBottom: 16,
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 12,
+      }}
+    >
+      <span style={{ width: 28, height: 1, background: color, display: "inline-block" }} />
+      {children}
+    </div>
+  );
+}
+
+function H2({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      style={{
+        fontFamily: "var(--font-display)",
+        fontSize: "clamp(28px, 4vw, 40px)",
+        fontWeight: 700,
+        letterSpacing: "-0.02em",
+        lineHeight: 1.12,
+        color: "var(--ink)",
+        marginBottom: 40,
+        maxWidth: "26ch",
+      }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function BeforeCard({ label, items }: { label: string; items: string[] }) {
+  return (
+    <Item
+      style={{
+        background: "var(--cream-2)",
+        padding: 28,
+        border: "1px solid rgba(26,26,26,0.12)",
+        borderLeft: "3px solid var(--oxblood)",
+      }}
+    >
+      <div style={{ ...cardMeta, color: "var(--oxblood)" }}>— Before</div>
+      <h3 style={{ ...cardH3, fontSize: 20 }}>{label}</h3>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {items.map((b) => (
+          <li key={b} style={{ ...listLi, color: "var(--ink-2)" }}>
+            <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+    </Item>
+  );
+}
+
+function AfterCard({ label, items }: { label: string; items: string[] }) {
+  return (
+    <Item
+      style={{
+        background: "var(--cream-3)",
+        padding: 28,
+        border: "1px solid rgba(26,26,26,0.12)",
+        borderLeft: "3px solid var(--sage)",
+      }}
+    >
+      <div style={{ ...cardMeta, color: "var(--oxblood)" }}>— After</div>
+      <h3 style={{ ...cardH3, fontSize: 20 }}>{label}</h3>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {items.map((a) => (
+          <li key={a} style={{ ...listLi, color: "var(--ink)" }}>
+            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+            <span>{a}</span>
+          </li>
+        ))}
+      </ul>
+    </Item>
+  );
+}
+
+const cardMeta: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11,
+  textTransform: "uppercase",
+  letterSpacing: "0.16em",
+  marginBottom: 12,
+};
+const listLi: React.CSSProperties = {
+  display: "grid",
+  gridTemplateColumns: "18px 1fr",
+  gap: 12,
+  padding: "10px 0",
+  borderBottom: "1px solid rgba(26,26,26,0.06)",
+  fontSize: 15,
+  lineHeight: 1.55,
+};
+
+function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
+  return (
+    <section
+      style={{
+        padding: "clamp(56px, 12vw, 88px) 0 clamp(64px, 14vw, 100px)",
+        background:
+          "linear-gradient(180deg, var(--cream) 0%, color-mix(in srgb, var(--terracotta) 8%, var(--cream)) 100%)",
+      }}
+    >
+      <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)", textAlign: "center" }}>
         <div
           style={{
-            maxWidth: 760,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 32px)",
-            textAlign: "center",
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            textTransform: "uppercase",
+            letterSpacing: "0.16em",
+            color: "var(--terracotta-aa)",
+            marginBottom: 20,
           }}
         >
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-              marginBottom: 20,
-            }}
-          >
-            — Start the brief
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(30px, 5vw, 52px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.08,
-              color: "var(--ink)",
-              marginBottom: 20,
-            }}
-          >
-            Send me the sitemap.{" "}
-            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
-              I&apos;ll mark the kill list.
-            </span>
-          </h2>
-          <p
-            style={{
-              fontSize: "clamp(15px, 2.5vw, 17px)",
-              color: "var(--ink-2)",
-              maxWidth: "44ch",
-              margin: "0 auto 32px",
-              lineHeight: 1.6,
-            }}
-          >
-            30-min audit. Find the thin pages, the broken schema, the citation
-            gaps. Fixed scope in 48 hours.
-          </p>
-          <Link
-            href="/discovery-call"
-            style={{
-              background: "var(--terracotta)",
-              color: "var(--cream-3)",
-              padding: "18px 32px",
-              fontFamily: "var(--font-sans)",
-              fontWeight: 700,
-              fontSize: 16,
-              borderRadius: 2,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              textDecoration: "none",
-              minHeight: 44,
-            }}
-          >
-            Book a 30-min call
-            <ArrowRight style={{ width: 16, height: 16 }} />
-          </Link>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 10,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-              color: "var(--ink-faint)",
-              marginTop: 22,
-            }}
-          >
-            — 4 builds per month · next slot opens June
-          </div>
+          — Start the brief
         </div>
-      </section>
-    </div>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(30px, 5vw, 52px)",
+            fontWeight: 700,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
+            color: "var(--ink)",
+            marginBottom: 20,
+          }}
+        >
+          {h2}
+        </h2>
+        <p
+          style={{
+            fontSize: "clamp(15px, 2.5vw, 17px)",
+            color: "var(--ink-2)",
+            maxWidth: "46ch",
+            margin: "0 auto 32px",
+            lineHeight: 1.6,
+          }}
+        >
+          {body}
+        </p>
+        <Link href="/discovery-call" style={{ ...primaryBtn, padding: "18px 32px", fontWeight: 700, fontSize: 16 }}>
+          Book a free 30-min check-up
+          <ArrowRight style={{ width: 16, height: 16 }} />
+        </Link>
+        <div
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            color: "var(--ink-faint)",
+            marginTop: 22,
+          }}
+        >
+          — 4 builds per month · 8-hour weekday reply
+        </div>
+      </Reveal>
+    </section>
   );
 }

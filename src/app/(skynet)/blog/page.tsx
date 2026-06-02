@@ -1,13 +1,11 @@
 /**
- * /blog — Journal index, ported to cream pivot 2026-05-25.
+ * /blog — Journal index (redesign/full-site, rebuilt clean 2026-06-02).
  *
- * Matches sitewide cream system:
- *   - Background: var(--cream-3) hero, var(--cream) grid section
- *   - Hero H1: Fraunces 500 with terracotta <em> accent
- *   - Cards: var(--cream-2) bg, 1px ink border, ink-2 body copy
- *   - Category chip: mono, terracotta on cream-3
- *   - CTA: flat terracotta block (no gradient)
- *   - Zero text-white / cyan / dark-gradient classes.
+ * Cream editorial system, one clean sans (no italic / no serif). Accent text
+ * uses upright weight-700 var(--terracotta-aa) for AA contrast. Cinematic
+ * scroll motion via the shared @/components/motion/Reveal helper (this server
+ * page exports `metadata`, so the client motion primitives are imported in as
+ * wrappers). Data wiring (POSTS, schema) left intact.
  */
 
 import Link from "next/link";
@@ -16,11 +14,12 @@ import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { POSTS } from "@/lib/posts";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Journal — Long-form on AI Automation, AEO & Shipping | SkynetLabs",
   description:
-    "Honest writing on n8n, GoHighLevel, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying.",
+    "Honest writing on automation, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying.",
   alternates: { canonical: `${SITE.url}/blog` },
   openGraph: {
     title: "SkynetLabs Journal",
@@ -70,181 +69,179 @@ export default function BlogPage() {
         }}
       >
         <div className="container-x px-6 relative z-10 max-w-4xl">
-          <div
-            className="inline-flex items-center gap-3 mb-6"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-            }}
-          >
-            <span
+          <Reveal>
+            <div
+              className="inline-flex items-center gap-3 mb-6"
               style={{
-                width: 28,
-                height: 1,
-                background: "var(--terracotta)",
-                display: "inline-block",
-              }}
-            />
-            Journal · long-form
-          </div>
-
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 500,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.04,
-              color: "var(--ink)",
-              fontSize: "clamp(40px, 6vw, 68px)",
-              margin: "0 0 24px",
-            }}
-          >
-            Long-form on{" "}
-            <em
-              style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta-aa)",
               }}
             >
-              what actually ships.
-            </em>
-          </h1>
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
+              Journal · long-form
+            </div>
 
-          <p
-            style={{
-              fontSize: 19,
-              color: "var(--ink-2)",
-              maxWidth: "54ch",
-              lineHeight: 1.55,
-              marginBottom: 0,
-            }}
-          >
-            In-depth guides and essays — the long reads on n8n, AEO, and
-            shipping software. Posts when we have something worth saying, not on
-            a schedule.
-          </p>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 700,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                fontSize: "clamp(40px, 6vw, 68px)",
+                margin: "0 0 24px",
+              }}
+            >
+              Long-form on{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                what actually ships.
+              </span>
+            </h1>
 
-          {/* Cross-link to the short-form hub — keeps News + Journal distinct. */}
-          <Link
-            href="/news"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              marginTop: 22,
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-              fontWeight: 600,
-              color: "var(--terracotta-aa)",
-              textDecoration: "none",
-            }}
-          >
-            Looking for short field notes &amp; updates? → Latest News
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+            <p
+              style={{
+                fontSize: 19,
+                color: "var(--ink-2)",
+                maxWidth: "54ch",
+                lineHeight: 1.6,
+                marginBottom: 0,
+              }}
+            >
+              In-depth guides and essays — the long reads on automation,
+              answer-engine optimization, and shipping software. Posts when
+              there&apos;s something worth saying, not on a schedule.
+            </p>
+
+            {/* Cross-link to the short-form hub — keeps News + Journal distinct. */}
+            <Link
+              href="/news"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                marginTop: 22,
+                fontFamily: "var(--font-mono)",
+                fontSize: 12,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                fontWeight: 600,
+                color: "var(--terracotta-aa)",
+                textDecoration: "none",
+              }}
+            >
+              Looking for short field notes &amp; updates? → Latest News
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </Reveal>
         </div>
       </section>
 
       {/* POST GRID */}
       <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
         <div className="container-x px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <RevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {POSTS.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/blog/${p.slug}`}
-                className="group flex flex-col h-full"
-                style={{
-                  background: "var(--cream-2)",
-                  border: "1px solid rgba(26,26,26,0.12)",
-                  padding: 24,
-                  borderRadius: 2,
-                  textDecoration: "none",
-                  transition: "border-color 0.18s",
-                }}
-              >
-                <div
+              <RevealItem key={p.slug} as="article" className="flex flex-col h-full">
+                <Link
+                  href={`/blog/${p.slug}`}
+                  className="group flex flex-col h-full"
                   style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 10,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.14em",
-                    color: "var(--terracotta)",
-                    marginBottom: 14,
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
+                    padding: 24,
+                    borderRadius: 2,
+                    textDecoration: "none",
+                    transition: "border-color 0.18s",
+                    height: "100%",
                   }}
                 >
-                  {categoryLabel(p.category)}
-                </div>
-
-                <h2
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontWeight: 500,
-                    fontSize: 22,
-                    lineHeight: 1.18,
-                    color: "var(--ink)",
-                    marginBottom: 12,
-                    letterSpacing: "-0.015em",
-                  }}
-                >
-                  {p.title}
-                </h2>
-
-                <p
-                  style={{
-                    fontSize: 14,
-                    color: "var(--ink-2)",
-                    lineHeight: 1.55,
-                    marginBottom: 20,
-                    flexGrow: 1,
-                    display: "-webkit-box",
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                  }}
-                >
-                  {p.description}
-                </p>
-
-                <div
-                  className="flex items-center justify-between"
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 11,
-                    color: "var(--ink-faint)",
-                    marginTop: "auto",
-                    paddingTop: 14,
-                    borderTop: "1px solid rgba(26,26,26,0.08)",
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Calendar className="w-3 h-3" />
-                      {new Date(p.publishedAt).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <Clock className="w-3 h-3" />
-                      {p.readingTime} min
-                    </span>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.14em",
+                      color: "var(--terracotta-aa)",
+                      marginBottom: 14,
+                    }}
+                  >
+                    {categoryLabel(p.category)}
                   </div>
-                  <ArrowRight
-                    className="w-4 h-4 transition"
-                    style={{ color: "var(--terracotta)" }}
-                  />
-                </div>
-              </Link>
+
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 700,
+                      fontSize: 22,
+                      lineHeight: 1.18,
+                      color: "var(--ink)",
+                      marginBottom: 12,
+                      letterSpacing: "-0.015em",
+                    }}
+                  >
+                    {p.title}
+                  </h2>
+
+                  <p
+                    style={{
+                      fontSize: 15,
+                      color: "var(--ink-2)",
+                      lineHeight: 1.6,
+                      marginBottom: 20,
+                      flexGrow: 1,
+                      display: "-webkit-box",
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {p.description}
+                  </p>
+
+                  <div
+                    className="flex items-center justify-between"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      color: "var(--ink-faint)",
+                      marginTop: "auto",
+                      paddingTop: 14,
+                      borderTop: "1px solid rgba(26,26,26,0.08)",
+                    }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex items-center gap-1.5">
+                        <Calendar className="w-3 h-3" />
+                        {new Date(p.publishedAt).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5">
+                        <Clock className="w-3 h-3" />
+                        {p.readingTime} min
+                      </span>
+                    </div>
+                    <ArrowRight
+                      className="w-4 h-4 transition"
+                      style={{ color: "var(--terracotta-aa)" }}
+                    />
+                  </div>
+                </Link>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -257,77 +254,73 @@ export default function BlogPage() {
         }}
       >
         <div className="container-x px-6 max-w-3xl mx-auto text-center">
-          <div
-            className="inline-flex items-center gap-3 mb-5"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-            }}
-          >
-            <span
+          <Reveal>
+            <div
+              className="inline-flex items-center gap-3 mb-5"
               style={{
-                width: 28,
-                height: 1,
-                background: "var(--terracotta)",
-                display: "inline-block",
-              }}
-            />
-            One last thing
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 500,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.08,
-              color: "var(--ink)",
-              fontSize: "clamp(28px, 4vw, 44px)",
-              marginBottom: 14,
-            }}
-          >
-            Reading isn&apos;t{" "}
-            <em
-              style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta-aa)",
               }}
             >
-              shipping.
-            </em>
-          </h2>
-          <p
-            style={{
-              fontSize: 17,
-              color: "var(--ink-2)",
-              maxWidth: "46ch",
-              margin: "0 auto 28px",
-              lineHeight: 1.6,
-            }}
-          >
-            If anything here matches your problem, send a brief. We&apos;ll
-            send back a fixed scope in 48 hours.
-          </p>
-          <Link
-            href="/discovery-call"
-            className="inline-flex items-center gap-2"
-            style={{
-              background: "var(--terracotta)",
-              color: "var(--cream-3)",
-              padding: "16px 28px",
-              fontFamily: "var(--font-sans)",
-              fontWeight: 600,
-              fontSize: 15,
-              borderRadius: 2,
-              border: "none",
-            }}
-          >
-            Apply for a discovery call
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
+              One last thing
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.08,
+                color: "var(--ink)",
+                fontSize: "clamp(28px, 4vw, 44px)",
+                marginBottom: 14,
+              }}
+            >
+              Reading isn&apos;t{" "}
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                shipping.
+              </span>
+            </h2>
+            <p
+              style={{
+                fontSize: 17,
+                color: "var(--ink-2)",
+                maxWidth: "46ch",
+                margin: "0 auto 28px",
+                lineHeight: 1.6,
+              }}
+            >
+              If anything here matches your problem, send a brief. We&apos;ll
+              send back a fixed scope in 48 hours.
+            </p>
+            <Link
+              href="/discovery-call"
+              className="inline-flex items-center gap-2"
+              style={{
+                background: "var(--terracotta)",
+                color: "var(--cream-3)",
+                padding: "16px 28px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 2,
+                border: "none",
+              }}
+            >
+              Apply for a discovery call
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </>
