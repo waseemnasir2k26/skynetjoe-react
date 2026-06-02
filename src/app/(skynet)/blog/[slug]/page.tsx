@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      creator: "@Skynetjoe1",
+      creator: "@skynetlabs",
     },
   };
 }
