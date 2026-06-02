@@ -51,8 +51,14 @@ Next.js 16.2.6 · React 19.2.4 · Tailwind v4 (theme in `src/app/globals.css` `@
 - Salvaged 18 SVG illustrations from worktree ab02782. Discarded 3 LP-variant + 1 cleanup worktree branch. Co-founder persona NOT adopted (founder-only per #5).
 - Owner decisions this session: /lp/* LEFT UNTOUCHED (live ad) · founder-only · long-tail INCLUDED.
 - Review doc (bright HTML): `C:\Users\info\GITHUB\skynetjoe-redesign-review-2026-06-02.html`
-- ⛔ NEXT (owner): review → approve/tweak → pick founder round photo → deploy (Hostinger MCP or Vercel preview). Lighthouse/A5 + browser pixel-QA still pending (needs served instance).
-- Worktrees still locked/present (not removed) — `git worktree remove` after illustrations confirmed wired.
+- 🔗 VERCEL PREVIEW LIVE: https://skynetjoe-react-2tt0id5sz-waseems-projects-35f8bca4.vercel.app (branch pushed to origin; cwd linked to project `skynetjoe-react`; prod skynetjoe-react.vercel.app + Hostinger skynetjoe.com UNTOUCHED). Re-deploy preview: `vercel deploy --yes`. If login wall → project Deployment Protection is on.
+- ⏳ PENDING — resume here:
+  1. Owner reviews preview/review-doc → gives approve OR tweak list.
+  2. On tweaks: edit on `redesign/full-site`, `vercel deploy --yes` for fresh preview.
+  3. Pick founder round photo (now `/portraits/waseem-builder-portrait.jpg`).
+  4. Run `/qa` or Lighthouse vs preview URL (A5 baseline still not run — needs served instance) → fix findings.
+  5. On approval → SHIP: real prod is Hostinger → `git archive HEAD | hostinger MCP` pipeline (NOT vercel --prod). Set hPanel env vars (pixel/CAPI/GHL) if those features must be live.
+  6. Cleanup: `git worktree remove` the 6 locked worktree-agent-* (illustrations already salvaged + wired).
 
 ## ▶️ RESUME HERE (paused 2026-06-02, owner back in 1-2h)
 Owner said **"go"** (perfect). Build approved. On resume:
