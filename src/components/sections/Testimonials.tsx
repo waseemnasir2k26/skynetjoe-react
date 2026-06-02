@@ -71,7 +71,7 @@ export default function Testimonials() {
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--ink)",
@@ -82,15 +82,15 @@ export default function Testimonials() {
             }}
           >
             What founders{" "}
-            <em
+            <span
               style={{
-                fontStyle: "italic",
+                fontStyle: "normal",
                 color: "var(--terracotta)",
-                fontWeight: 500,
+                fontWeight: 700,
               }}
             >
               actually say
-            </em>{" "}
+            </span>{" "}
             after we ship.
           </h2>
         </div>

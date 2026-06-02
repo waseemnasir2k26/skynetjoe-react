@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
@@ -42,10 +41,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${SITE.assetsUrl}/portraits/waseem-cafe-builder.jpg`,
+        url: `${SITE.assetsUrl}/og-default.png`,
         width: 1200,
-        height: 1200,
-        alt: "Waseem Nasir vibe coding at a Bali cafe with Claude Code",
+        height: 630,
+        alt: "Vibe Coding by SkynetLabs — human-led, AI-paired builds in 5–14 days",
       },
     ],
   },
@@ -54,7 +53,7 @@ export const metadata: Metadata = {
     title: "Vibe Coding — SkynetLabs",
     description:
       "Human-led, AI-paired builds from Bali. Ship real apps in 5–14 days.",
-    images: [`${SITE.assetsUrl}/portraits/waseem-cafe-builder.jpg`],
+    images: [`${SITE.assetsUrl}/og-default.png`],
   },
 };
 
@@ -151,10 +150,6 @@ const pipeSteps = [
     label: "Pair with the agents",
     icon: Users,
     body: "I sit at the cafe, Claude Code sits next to me, we ship the first working version. Multi-hour build sessions. Live screenshare if you want it.",
-    photo: {
-      src: "/portraits/waseem-cafe-side.jpg",
-      alt: "Waseem at a Bali cafe pairing with Claude Code on a multi-hour build session",
-    },
   },
   {
     num: "04",
@@ -268,7 +263,7 @@ const schema = {
         url: SITE.founderUrl,
         jobTitle: "Founder and lead builder",
         worksFor: { "@id": `${SITE.url}/#organization` },
-        image: `${SITE.assetsUrl}/portraits/waseem-cafe-builder.jpg`,
+        image: `${SITE.assetsUrl}/og-default.png`,
         homeLocation: { "@type": "Place", name: "Bali, Indonesia" },
         knowsAbout: [
           "Claude Code",
@@ -334,7 +329,7 @@ export default function VibeCodingPage() {
               <h1
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                   letterSpacing: "-0.025em",
                   lineHeight: 1.04,
                   color: "var(--ink)",
@@ -345,9 +340,9 @@ export default function VibeCodingPage() {
                 Real human at a real keyboard.{" "}
                 <em
                   style={{
-                    fontStyle: "italic",
+                    fontStyle: "normal",
                     color: "var(--terracotta)",
-                    fontWeight: 500,
+                    fontWeight: 700,
                   }}
                 >
                   Just one that types 12x faster now.
@@ -385,21 +380,33 @@ export default function VibeCodingPage() {
 
             <div className="relative">
               <div
-                className="relative aspect-[4/5] rounded-3xl overflow-hidden border"
+                className="relative aspect-[4/5] rounded-3xl overflow-hidden border flex items-center justify-center"
                 style={{
                   borderColor: "rgba(26,26,26,0.12)",
+                  background: "var(--cream-2)",
                   boxShadow:
                     "0 20px 60px rgba(26,26,26,0.10), 0 0 0 1px rgba(198,107,63,0.15) inset",
                 }}
               >
-                <Image
-                  src="/portraits/waseem-cafe-builder.jpg"
-                  alt="Waseem Nasir vibe coding at a Bali cafe with Claude Code open on the laptop"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 90vw, 540px"
-                  className="object-cover"
-                />
+                <div
+                  aria-hidden
+                  style={{
+                    width: 128,
+                    height: 128,
+                    borderRadius: "50%",
+                    background: "#A8451F",
+                    color: "var(--cream-3)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "var(--font-mono)",
+                    fontWeight: 700,
+                    fontSize: 48,
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  SL
+                </div>
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
@@ -488,36 +495,57 @@ export default function VibeCodingPage() {
       <section className="section pt-0">
         <div className="container-x">
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16 items-center">
-            <div className="grid grid-cols-3 gap-3">
-              <div className="col-span-2 aspect-[4/5] relative rounded-2xl overflow-hidden border border-[rgba(26,26,26,0.18)]">
-                <Image
-                  src="/portraits/waseem-cafe-arch.jpg"
-                  alt="Waseem working under the cafe arch in Bali, blue polo, laptop open"
-                  fill
-                  sizes="(max-width: 1024px) 60vw, 360px"
-                  className="object-cover"
-                />
-              </div>
-              <div className="grid grid-rows-2 gap-3">
-                <div className="relative rounded-2xl overflow-hidden border border-[rgba(26,26,26,0.18)]">
-                  <Image
-                    src="/portraits/waseem-veranda-gaze.jpg"
-                    alt="Waseem on the veranda, direct gaze, thinking through a build"
-                    fill
-                    sizes="(max-width: 1024px) 30vw, 180px"
-                    className="object-cover"
-                  />
+            <div
+              className="rounded-2xl p-8 md:p-10 flex flex-col gap-6"
+              style={{
+                background: "var(--cream-2)",
+                border: "1px solid rgba(26,26,26,0.18)",
+              }}
+            >
+              <div className="flex items-center gap-4">
+                <div
+                  aria-hidden
+                  className="flex-shrink-0 flex items-center justify-center"
+                  style={{
+                    width: 64,
+                    height: 64,
+                    borderRadius: "50%",
+                    background: "#A8451F",
+                    color: "var(--cream-3)",
+                    fontFamily: "var(--font-mono)",
+                    fontWeight: 700,
+                    fontSize: 22,
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  SL
                 </div>
-                <div className="relative rounded-2xl overflow-hidden border border-[rgba(26,26,26,0.18)]">
-                  <Image
-                    src="/portraits/waseem-poolside-laptop.jpg"
-                    alt="Waseem poolside in Bali with the laptop, nomad work setup"
-                    fill
-                    sizes="(max-width: 1024px) 30vw, 180px"
-                    className="object-cover"
-                  />
+                <div>
+                  <p className="font-bold text-[var(--ink)]">One builder. One inbox.</p>
+                  <p className="text-xs font-mono uppercase tracking-[0.12em] text-[#A8451F] mt-1">
+                    Bali · GMT+8 · solo founder
+                  </p>
                 </div>
               </div>
+              <ul className="space-y-3 m-0 p-0 list-none">
+                {[
+                  "Email me, you get me — no account-manager relay.",
+                  "Hop on a call, it's the founder on the other end.",
+                  "Production breaks at 2am Bali time, the reply comes from me, not a queue.",
+                ].map((line) => (
+                  <li
+                    key={line}
+                    className="flex items-start gap-3 text-[var(--ink-2)] leading-relaxed"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-2 flex-shrink-0 w-2 h-2 rounded-full"
+                      style={{ background: "#A8451F" }}
+                    />
+                    {line}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <div>
@@ -649,15 +677,10 @@ export default function VibeCodingPage() {
           <div className="space-y-5">
             {pipeSteps.map((s) => {
               const Icon = s.icon;
-              const hasPhoto = !!s.photo;
               return (
                 <div
                   key={s.num}
-                  className={`rounded-2xl p-6 md:p-8 grid ${
-                    hasPhoto
-                      ? "md:grid-cols-[1fr_2fr_1fr]"
-                      : "md:grid-cols-[1fr_3fr]"
-                  } gap-6 items-center`}
+                  className="rounded-2xl p-6 md:p-8 grid md:grid-cols-[1fr_3fr] gap-6 items-center"
                   style={{
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.12)",
@@ -689,17 +712,6 @@ export default function VibeCodingPage() {
                       {s.body}
                     </p>
                   </div>
-                  {hasPhoto && s.photo && (
-                    <div className="relative aspect-square rounded-2xl overflow-hidden border border-[rgba(26,26,26,0.18)]">
-                      <Image
-                        src={s.photo.src}
-                        alt={s.photo.alt}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 280px"
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
                 </div>
               );
             })}
@@ -869,14 +881,29 @@ export default function VibeCodingPage() {
                 Waseem Nasir, founder, SkynetLabs
               </div>
             </div>
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-[rgba(198,107,63,0.30)]">
-              <Image
-                src="/portraits/waseem-rooftop-smile.jpg"
-                alt="Waseem Nasir, founder of SkynetLabs, on a Bali rooftop"
-                fill
-                sizes="(max-width: 768px) 90vw, 400px"
-                className="object-cover"
-              />
+            <div
+              className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-[rgba(198,107,63,0.30)] flex items-center justify-center"
+              style={{ background: "var(--cream-3)" }}
+            >
+              <div
+                aria-hidden
+                style={{
+                  width: 120,
+                  height: 120,
+                  borderRadius: "50%",
+                  background: "#A8451F",
+                  color: "var(--cream-3)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-mono)",
+                  fontWeight: 700,
+                  fontSize: 44,
+                  letterSpacing: "0.04em",
+                }}
+              >
+                SL
+              </div>
             </div>
           </div>
         </div>
@@ -956,7 +983,7 @@ export default function VibeCodingPage() {
               <h2
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                   fontSize: "clamp(32px, 5vw, 56px)",
                   letterSpacing: "-0.025em",
                   lineHeight: 1.05,
@@ -967,9 +994,9 @@ export default function VibeCodingPage() {
                 Book a{" "}
                 <em
                   style={{
-                    fontStyle: "italic",
+                    fontStyle: "normal",
                     color: "var(--terracotta)",
-                    fontWeight: 500,
+                    fontWeight: 700,
                   }}
                 >
                   vibe check.

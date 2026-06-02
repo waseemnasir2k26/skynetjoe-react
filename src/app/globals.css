@@ -122,8 +122,11 @@ html.theme-dark {
   --color-neon-cyan: var(--ai-neon-cyan);
   --color-neon-purple: var(--ai-neon-purple);
 
-  --font-sans: var(--font-sans-onest, system-ui, -apple-system, "Segoe UI", sans-serif);
-  --font-display: var(--font-serif-fraunces, Georgia, "Times New Roman", serif);
+  /* Readability overhaul 2026-06-01 — ONE clean sans (Inter) for body AND
+     headings. No serif display face. Legacy --font-sans-onest fallback kept
+     so any cached/SSR frame before Inter loads still resolves to a sans. */
+  --font-sans: var(--font-sans-inter, var(--font-sans-onest), system-ui, -apple-system, "Segoe UI", sans-serif);
+  --font-display: var(--font-sans-inter, var(--font-sans-onest), system-ui, -apple-system, "Segoe UI", sans-serif);
   --font-mono: var(--font-mono-plex, ui-monospace, SFMono-Regular, Menlo, monospace);
   --color-terracotta: var(--terracotta);
   --color-terracotta-aa: var(--terracotta-aa);
@@ -138,7 +141,13 @@ html, body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
+  /* Readability baseline (2026-06-01): legible body for non-technical readers
+     on mobile in bright light. ≥17px / 1.6 line-height / normal weight. */
+  font-size: 17px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /* Inter ss01 = single-story 'a'/'g' alt; cv11 = open digits. Keeps glyphs
+     friendly + unambiguous (legibility). */
   font-feature-settings: 'cv11', 'ss01';
   transition: color 0.2s ease;
   min-height: 100%;
@@ -168,16 +177,23 @@ img, picture, video, canvas {
   isolation: isolate;
 }
 
-/* Editorial typography defaults */
+/* Typography defaults (2026-06-01 readability overhaul).
+   Headings now Inter (via --font-display). Bumped to 700 — Inter at the old
+   Fraunces weight 500 reads too light at display sizes. Heading line-heights
+   are set per-component (hero clamps etc.); we set a safe default here. */
 h1, h2, h3, .display, .serif {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.15;
 }
+/* Emphasis: NO italic, NO serif anywhere (was italic Fraunces — the core
+   readability complaint). Emphasis now reads as AA-safe terracotta + weight. */
 em.accent, .serif-italic {
   font-family: var(--font-display);
-  font-style: italic;
-  color: var(--terracotta);
+  font-style: normal;
+  font-weight: 700;
+  color: var(--terracotta-aa);
 }
 
 /* A11Y — AA-safe terracotta for SMALL micro-copy (eyebrows/labels ≤12px).
@@ -883,6 +899,19 @@ html:not(.theme-dark) .gradient-primary-text {
   color: var(--terracotta) !important;
 }
 
+/* ============================================================
+   READABILITY OVERHAUL (2026-06-01) — kill serif + serif-italic site-wide.
+   Many components use Tailwind `font-serif` / `font-serif italic` which
+   resolve to Tailwind's DEFAULT Georgia serif stack — independent of our
+   --font-display swap. On the main site (not /lp/* theme-dark) we remap every
+   such usage to upright Inter so headings/quotes/eyebrows read cleanly. This
+   is the cascade that fixes the "not readable" italic-serif everywhere at once.
+   ============================================================ */
+html:not(.theme-dark) .font-serif {
+  font-family: var(--font-sans) !important;
+  font-style: normal !important;
+}
+
 /* Cyan/teal accent fill on stars/icons → ochre */
 html:not(.theme-dark) .fill-amber-300,
 html:not(.theme-dark) .text-amber-300,
@@ -925,7 +954,7 @@ html:not(.theme-dark) span[style*="linear-gradient(120deg,#7ee4ff"] {
   background-clip: initial !important;
   -webkit-text-fill-color: var(--terracotta) !important;
   color: var(--terracotta) !important;
-  font-style: italic !important;
+  /* italic removed 2026-06-01 — no italic anywhere */
 }
 
 /* Tailwind text-gradient utility (from-cyan-300 to-teal-300 + bg-clip-text) — flatten */
@@ -935,7 +964,7 @@ html:not(.theme-dark) .bg-clip-text.text-transparent {
   background-clip: initial !important;
   -webkit-text-fill-color: var(--terracotta) !important;
   color: var(--terracotta) !important;
-  font-style: italic !important;
+  /* italic removed 2026-06-01 — no italic anywhere */
 }
 
 /* Auto-flip the main body container of tool pages from gradient navy to cream */

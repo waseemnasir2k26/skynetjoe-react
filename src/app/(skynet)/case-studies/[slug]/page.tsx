@@ -76,7 +76,7 @@ export default async function CaseStudyDetail({
       "@type": "Organization",
       name: SITE.brand,
       url: SITE.url,
-      logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/waseem-portrait.jpg`, width: 1200, height: 1200 },
+      logo: { "@type": "ImageObject", url: `${SITE.url}/og-default.png`, width: 1200, height: 1200 },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -161,7 +161,7 @@ export default async function CaseStudyDetail({
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(30px, 5.5vw, 64px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.05,
                 color: "var(--ink)",
@@ -278,9 +278,9 @@ export default async function CaseStudyDetail({
                 <div
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontStyle: "italic",
+                    fontStyle: "normal",
                     fontSize: 28,
-                    fontWeight: 500,
+                    fontWeight: 700,
                     color: "var(--terracotta)",
                     lineHeight: 1,
                     letterSpacing: "-0.01em",
@@ -320,7 +320,7 @@ export default async function CaseStudyDetail({
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(26px, 3.6vw, 36px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               color: "var(--ink)",
               marginBottom: 20,
@@ -328,7 +328,7 @@ export default async function CaseStudyDetail({
             }}
           >
             What was{" "}
-            <em style={{ fontStyle: "italic", color: "var(--oxblood)" }}>actually broken.</em>
+            <em style={{ fontStyle: "normal", color: "var(--oxblood)" }}>actually broken.</em>
           </h2>
           <div style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.75 }}>
             {c.problemStatement.map((p, i) => (
@@ -367,7 +367,7 @@ export default async function CaseStudyDetail({
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(26px, 3.6vw, 36px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               color: "var(--ink)",
               marginBottom: 24,
@@ -375,7 +375,7 @@ export default async function CaseStudyDetail({
             }}
           >
             The{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>solution stack.</em>
+            <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>solution stack.</em>
           </h2>
 
           <div style={{ marginBottom: 28 }}>
@@ -472,7 +472,7 @@ export default async function CaseStudyDetail({
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(26px, 3.6vw, 36px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               color: "var(--ink)",
               marginBottom: 20,
@@ -480,7 +480,7 @@ export default async function CaseStudyDetail({
             }}
           >
             What{" "}
-            <em style={{ fontStyle: "italic", color: "var(--sage)" }}>changed.</em>
+            <em style={{ fontStyle: "normal", color: "var(--sage)" }}>changed.</em>
           </h2>
           <div style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.75 }}>
             {c.longFormStory.map((p, i) => (
@@ -521,7 +521,7 @@ export default async function CaseStudyDetail({
             <p
               style={{
                 fontFamily: "var(--font-display)",
-                fontStyle: "italic",
+                fontStyle: "normal",
                 fontSize: 22,
                 fontWeight: 400,
                 color: "var(--ink)",
@@ -563,7 +563,7 @@ export default async function CaseStudyDetail({
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(24px, 3.2vw, 32px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 color: "var(--ink)",
                 marginBottom: 18,
@@ -632,7 +632,7 @@ export default async function CaseStudyDetail({
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4.4vw, 44px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--cream-3)",
@@ -642,7 +642,7 @@ export default async function CaseStudyDetail({
             Want a result{" "}
             <em
               style={{
-                fontStyle: "italic",
+                fontStyle: "normal",
                 textDecoration: "underline",
                 textDecorationThickness: "1px",
                 textUnderlineOffset: "8px",

@@ -36,7 +36,7 @@ export default function FinalCTA() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 7vw, 52px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.08,
               color: "var(--cream-3)",
@@ -45,18 +45,18 @@ export default function FinalCTA() {
             }}
           >
             Find your biggest leak in{" "}
-            <em
+            <span
               style={{
-                fontStyle: "italic",
+                fontStyle: "normal",
                 color: "var(--cream-3)",
-                fontWeight: 500,
+                fontWeight: 700,
                 textDecoration: "underline",
                 textDecorationThickness: "1px",
                 textUnderlineOffset: "8px",
               }}
             >
               30 minutes.
-            </em>
+            </span>
           </h2>
           <p
             style={{

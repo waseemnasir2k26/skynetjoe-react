@@ -68,7 +68,7 @@ export type Industry = {
   flagshipProductBullets: string[]; // 4-5 outcomes
   modules: IndustryModule[]; // exactly 3
   caseTeasers: IndustryCaseTeaser[]; // 2-3
-  bioPhoto: string; // /portraits/<file>.jpg
+  bioPhoto: string; // public asset path, e.g. /og-default.png
   bioPhotoAlt: string;
   bioHeadline: string; // "Why I'm the right person to fix this for [niche]"
   bioCopy: string; // 2 sentences, first-person
@@ -186,8 +186,8 @@ export const INDUSTRIES: Industry[] = [
         metricAfter: "$340",
       },
     ],
-    bioPhoto: "/portraits/waseem-rooftop.jpg",
-    bioPhotoAlt: "Waseem Nasir, founder of SkynetLabs, on a rooftop in Bali.",
+    bioPhoto: "/og-default.png",
+    bioPhotoAlt: "SkynetLabs — AI automation studio, Bali.",
     bioHeadline: "Why I'm the right person to fix this for your dental practice",
     bioCopy:
       "I shipped the Manhattan dental atelier flagship in 12 days and built a HIPAA-aware intake flow that triples completion rates. I know Dentrix, Open Dental and Eaglesoft well enough to integrate against their HL7 bridges without breaking your PMS.",
@@ -384,8 +384,8 @@ export const INDUSTRIES: Industry[] = [
         metricAfter: "41",
       },
     ],
-    bioPhoto: "/portraits/waseem-cafe-arch.jpg",
-    bioPhotoAlt: "Waseem Nasir, founder of SkynetLabs, at a cafe in Canggu.",
+    bioPhoto: "/og-default.png",
+    bioPhotoAlt: "SkynetLabs — AI automation studio, Bali.",
     bioHeadline: "Why I'm the right person to fix this for your spa",
     bioCopy:
       "Christelle's wellness funnel in Ubud doubled her bookings in 30 days because we wrote the site against her actual DMs, not retreat-brochure language. The same voice-lock pattern is what makes a Concierge AI sound like your spa instead of a chatbot.",
@@ -583,8 +583,8 @@ export const INDUSTRIES: Industry[] = [
         metricAfter: "$404",
       },
     ],
-    bioPhoto: "/portraits/waseem-veranda-gaze.jpg",
-    bioPhotoAlt: "Waseem Nasir, founder of SkynetLabs, on a Bali veranda.",
+    bioPhoto: "/og-default.png",
+    bioPhotoAlt: "SkynetLabs — AI automation studio, Bali.",
     bioHeadline: "Why I'm the right person to fix this for your dispatch desk",
     bioCopy:
       "The Lyon mining-logistics engagement is the proof point. We modeled freight email as a 5-variable problem (intent, sender role, thread depth, attachment posture, CC topology) instead of a one-step classify-and-reply, and the same approach is what makes the Dispatch Agent actually book loads instead of just transcribing calls.",

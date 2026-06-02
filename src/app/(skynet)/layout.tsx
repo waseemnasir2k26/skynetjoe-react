@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Onest, IBM_Plex_Mono } from "next/font/google";
+import { Inter, Fraunces, IBM_Plex_Mono } from "next/font/google";
 import { SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -12,24 +12,28 @@ import LiveChat from "@/components/LiveChat";
 // LiveChat (passive chat bubble, click-to-open) kept on — smart intent bot rebuilt 2026-05-29.
 import "../globals.css";
 
-// Cream editorial pivot 2026-05-25 — distinctive non-generic font stack.
+// Readability overhaul 2026-06-01 — ONE clean, highly-legible sans site-wide.
+// Inter drives BOTH body and headings (maps to --font-sans AND --font-display
+// in globals.css). No serif, no italic body/heading copy — the prior Fraunces
+// italic-serif at body/small sizes was the "not readable" complaint.
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans-inter",
+  display: "swap",
+});
+
+// Fraunces kept ONLY for the isolated /lp/* ad funnels (theme-dark), which
+// reference --font-serif-fraunces directly in scoped CSS. Not used by the
+// main site anymore. Drop from preload to cut critical font payload.
 const fraunces = Fraunces({
   subsets: ["latin"],
   weight: "variable",
   style: ["normal", "italic"],
   variable: "--font-serif-fraunces",
   display: "swap",
-  // opsz only — SOFT/WONK axes were never driven by any CSS (no
-  // font-variation-settings references them), so they were dead payload.
-  // opsz stays: optical sizing tracks font-size automatically. (P3 perf)
   axes: ["opsz"],
-});
-
-const onest = Onest({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sans-onest",
-  display: "swap",
+  preload: false,
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -77,8 +81,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.brand} — ${SITE.tagline}`,
     description: SITE.description,
-    creator: "@Skynetjoe1",
-    site: "@Skynetjoe1",
+    creator: "@skynetlabs",
+    site: "@skynetlabs",
     images: ["/og-default.png"],
   },
   robots: {
@@ -100,7 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`light ${fraunces.variable} ${onest.variable} ${plexMono.variable} h-full antialiased`}
+      className={`light ${inter.variable} ${fraunces.variable} ${plexMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Search, Wrench, Rocket, TrendingUp, ArrowRight, Calendar, Terminal } from "lucide-react";
 
 /**
@@ -83,7 +82,7 @@ export default function Process() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(32px, 5vw, 56px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.08,
               color: C.ink,
@@ -91,7 +90,7 @@ export default function Process() {
             }}
           >
             Four steps.{" "}
-            <em style={{ fontStyle: "italic", color: C.terra }}>No SOW theater.</em>
+            <span style={{ fontStyle: "normal", color: C.terra, fontWeight: 700 }}>No drawn-out proposals.</span>
           </h2>
           <p style={{ fontSize: 17, color: C.ink2, lineHeight: 1.6 }}>
             No 14-slide proposal deck. No 6-week discovery phase. Audit Monday,
@@ -231,23 +230,50 @@ export default function Process() {
         >
           <div
             style={{
-              position: "relative",
               width: "100%",
               maxWidth: 180,
               aspectRatio: "1/1",
-              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 12,
               border: `1px solid ${C.rule}`,
+              background: C.cream2,
               margin: "0 auto",
             }}
           >
-            <Image
-              src="/portraits/waseem-cafe-working-side.jpg"
-              alt="Waseem at a cafe laptop — the human half of the 2-person team"
-              fill
-              loading="lazy"
-              sizes="(min-width: 768px) 180px, 50vw"
-              style={{ objectFit: "cover", filter: "none" }}
-            />
+            <span
+              aria-hidden
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 64,
+                height: 64,
+                borderRadius: "50%",
+                background: C.terra,
+                color: C.cream3,
+                fontFamily: "var(--font-display)",
+                fontWeight: 700,
+                fontSize: 24,
+                letterSpacing: "0.02em",
+              }}
+            >
+              SL
+            </span>
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "#A8451F",
+                fontWeight: 700,
+              }}
+            >
+              1 human + 1 API key
+            </span>
           </div>
           <div>
             <div
@@ -278,7 +304,7 @@ export default function Process() {
               }}
             >
               You brief Waseem. Claude drafts.{" "}
-              <em style={{ fontStyle: "italic", color: C.terra }}>Waseem ships.</em>
+              <span style={{ fontStyle: "normal", color: C.terra, fontWeight: 700 }}>Waseem ships.</span>
             </h3>
             <p style={{ fontSize: 15, color: C.ink2, lineHeight: 1.6, marginBottom: 10 }}>
               You send a brief in 3 sentences. I read it, scope it, and pair
@@ -292,7 +318,7 @@ export default function Process() {
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 color: C.inkFaint,
-                fontStyle: "italic",
+                fontStyle: "normal",
                 textTransform: "uppercase",
                 letterSpacing: "0.10em",
               }}

@@ -142,18 +142,36 @@ export default function Header() {
       }`}
     >
       <div className="container-x flex items-center justify-between px-4 sm:px-6 py-3.5 gap-2">
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <span
+            aria-hidden="true"
+            className="flex items-center justify-center flex-shrink-0"
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: 6,
+              background: "var(--terracotta)",
+              color: "var(--cream-3)",
+              fontFamily: "var(--font-display)",
+              fontSize: "0.78rem",
+              fontWeight: 700,
+              letterSpacing: "0.02em",
+              lineHeight: 1,
+            }}
+          >
+            SL
+          </span>
           <span
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "1.5rem",
-              fontWeight: 600,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               color: "var(--ink)",
             }}
           >
             Skynet
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+            <em style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
               Labs
             </em>
           </span>

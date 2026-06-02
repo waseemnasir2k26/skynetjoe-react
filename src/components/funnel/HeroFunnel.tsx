@@ -1,20 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Star, Zap, Repeat, ListChecks } from "lucide-react";
 
 /**
- * Cream editorial hero — converted from dark navy + R3F orbs.
+ * Cream editorial hero (2026-06-01 readability + plain-language overhaul).
  *
- *  - Cream paper ground, ink type, terracotta accent (mirrors /lp/audit)
- *  - Fraunces serif h1 with italic terracotta accent on key phrase
- *  - Mono em-dash eyebrow (drops chip/pill)
- *  - Flat terracotta primary CTA + ghost ink-border secondary, 2px radius, no glow
- *  - Polaroid portrait, rotated, sepia filter, 1px ink border
- *  - Trust strip in mono with bullet separators
- *  - R3F orbs removed (no decorative noise on cream)
+ *  - Plain-language headline + sub: leads with the OUTCOME, no jargon, no
+ *    "automate" above the fold. A non-technical shop owner gets it in 5s.
+ *  - Inter h1 (no serif, no italic) — one accent phrase in AA-safe terracotta.
+ *  - Founder photo REMOVED. Right column is an icon-driven "what we set up"
+ *    card (Lucide icons) per the Webex pattern — diagrams not personal photos.
+ *  - Mono em-dash eyebrow + trust strip (real proof) kept.
  */
 
 export default function HeroFunnel() {
@@ -75,40 +73,39 @@ export default function HeroFunnel() {
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
-              lineHeight: 1.05,
+              lineHeight: 1.08,
               color: "var(--ink)",
-              fontSize: "clamp(32px, 8vw, 72px)",
+              fontSize: "clamp(32px, 8vw, 68px)",
               margin: "0 0 24px",
               wordBreak: "break-word",
             }}
           >
-            Your business{" "}
+            Stop losing customers{" "}
             <em
               style={{
-                fontStyle: "italic",
-                color: "var(--terracotta)",
-                fontWeight: 500,
+                fontStyle: "normal",
+                color: "#A8451F",
+                fontWeight: 700,
               }}
             >
-              leaks money
+              while you&apos;re busy.
             </em>
-            <br />
-            every hour you don&apos;t automate.
           </h1>
 
           <p
             style={{
-              fontSize: "clamp(16px, 4vw, 19px)",
+              fontSize: "clamp(17px, 4vw, 20px)",
               color: "var(--ink-2)",
-              maxWidth: "52ch",
-              lineHeight: 1.55,
+              maxWidth: "54ch",
+              lineHeight: 1.6,
               marginBottom: 28,
             }}
           >
-            Leads ghost. Follow-ups slip. Content rots in drafts. We plug the
-            leaks in 14 days with AI automation that pays for itself.
+            We set up smart tools that reply to every new customer in seconds,
+            follow up for you automatically, and handle the boring repeat
+            work&nbsp;— so you win more jobs without working more hours.
           </p>
 
           {/* Trust strip — mono, minimal */}
@@ -184,7 +181,7 @@ export default function HeroFunnel() {
                 minHeight: 48,
               }}
             >
-              Book free 30-min leak audit
+              Book a free 30-min check-up
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <Link
@@ -222,62 +219,91 @@ export default function HeroFunnel() {
           </div>
         </motion.div>
 
-        {/* Polaroid portrait — rotated, sepia, 1px ink border */}
+        {/* Icon-driven "what we set up" card — replaces founder photo.
+            Diagrams/icons, not personal photography (Webex pattern). */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15 }}
           className="relative block"
+          style={{ width: "100%", maxWidth: 420, marginLeft: "auto", marginRight: "auto" }}
         >
-          <figure
+          <div
             style={{
-              margin: 0,
-              transform: "rotate(-1.2deg)",
               background: "var(--cream-3)",
-              padding: 10,
-              border: "1px solid rgba(26,26,26,0.18)",
-              boxShadow: "0 18px 48px rgba(26,26,26,0.18)",
-              width: "100%",
-              maxWidth: 420,
-              marginLeft: "auto",
-              marginRight: "auto",
+              border: "1px solid rgba(26,26,26,0.14)",
+              borderRadius: 4,
+              boxShadow: "0 18px 48px rgba(26,26,26,0.10)",
+              padding: "clamp(20px, 5vw, 28px)",
             }}
           >
             <div
               style={{
-                position: "relative",
-                width: "100%",
-                aspectRatio: "4 / 5",
-                overflow: "hidden",
-              }}
-            >
-              <Image
-                src="/portraits/waseem-builder-hero.jpg"
-                alt="Waseem Nasir, founder of SkynetLabs"
-                fill
-                priority
-                sizes="(min-width: 1024px) 420px, (min-width: 768px) 380px, 90vw"
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                  filter: "contrast(1.02)",
-                }}
-              />
-            </div>
-            <figcaption
-              style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
                 textTransform: "uppercase",
-                letterSpacing: "0.10em",
-                color: "var(--ink-faint)",
-                textAlign: "center",
-                paddingTop: 12,
+                letterSpacing: "0.14em",
+                color: "#A8451F",
+                marginBottom: 18,
               }}
             >
-              Waseem · founder · Bali · GMT+8
-            </figcaption>
-          </figure>
+              What we set up for you
+            </div>
+            {[
+              { Icon: Zap, title: "Instant replies", body: "Every new lead gets a friendly answer within a minute — day or night." },
+              { Icon: Repeat, title: "Automatic follow-up", body: "Polite reminders go out for you until they book or buy. Nothing slips." },
+              { Icon: ListChecks, title: "Repeat work, handled", body: "The boring admin runs itself, so your team works on what actually pays." },
+            ].map(({ Icon, title, body }, i) => (
+              <div
+                key={title}
+                style={{
+                  display: "flex",
+                  gap: 14,
+                  alignItems: "flex-start",
+                  paddingTop: i === 0 ? 0 : 16,
+                  paddingBottom: 16,
+                  borderTop: i === 0 ? "none" : "1px solid rgba(26,26,26,0.08)",
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{
+                    flex: "none",
+                    width: 40,
+                    height: 40,
+                    borderRadius: 4,
+                    background: "rgba(168,69,31,0.08)",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Icon style={{ width: 20, height: 20, color: "#A8451F" }} strokeWidth={2} />
+                </span>
+                <span>
+                  <span style={{ display: "block", fontWeight: 700, fontSize: 16, color: "var(--ink)", marginBottom: 2 }}>
+                    {title}
+                  </span>
+                  <span style={{ display: "block", fontSize: 14, lineHeight: 1.5, color: "var(--ink-2)" }}>
+                    {body}
+                  </span>
+                </span>
+              </div>
+            ))}
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: "var(--ink-faint)",
+                paddingTop: 14,
+                borderTop: "1px solid rgba(26,26,26,0.08)",
+              }}
+            >
+              Live in about 14 days
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

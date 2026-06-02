@@ -13,7 +13,6 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { X, Loader2, CheckCircle2 } from "lucide-react";
 
@@ -268,9 +267,9 @@ export default function ExitIntentModal() {
             Leaving without{" "}
             <em
               style={{
-                fontStyle: "italic",
+                fontStyle: "normal",
                 color: "var(--terracotta)",
-                fontWeight: 500,
+                fontWeight: 700,
               }}
             >
               a plan?
@@ -480,29 +479,6 @@ export default function ExitIntentModal() {
               </p>
             </form>
           )}
-        </div>
-
-        {/* Waseem polaroid bottom-right */}
-        <div
-          aria-hidden
-          className="hidden sm:block absolute bottom-3 right-3 w-20 h-20 overflow-hidden pointer-events-none"
-          style={{
-            borderRadius: 2,
-            border: "1px solid rgba(26,26,26,0.25)",
-            transform: "rotate(6deg)",
-            boxShadow: "0 10px 24px rgba(26,26,26,0.18)",
-          }}
-        >
-          <Image
-            src="/portraits/waseem-cafe-smile.jpg"
-            alt=""
-            fill
-            sizes="80px"
-            style={{
-              objectFit: "cover",
-              filter: "none",
-            }}
-          />
         </div>
       </div>
 

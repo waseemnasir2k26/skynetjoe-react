@@ -7,11 +7,113 @@ import { ArrowRight, X, Check } from "lucide-react";
  *
  * Cream editorial pivot. Server component.
  *
+ * Hero credential card replaces the founder photo (no face) — terracotta "SL"
+ * monogram tile + headline metric + plain credential lines.
+ *
  * Asset paths confirmed against /public glob 2026-05-26:
- *  - /portraits/waseem-veranda-thinking.jpg
- *  - /news/8-hour-reply-rule.jpg
- *  - /case-studies/manhattan-dental-atelier-flagship.jpg
+ *  - /case-studies/manhattan-dental-atelier-flagship.jpg (work visual — kept)
  */
+
+function SkynetCredentialCard({
+  metric,
+  metricLabel,
+  lines,
+}: {
+  metric: string;
+  metricLabel: string;
+  lines: string[];
+}) {
+  return (
+    <div
+      style={{
+        background: "var(--cream-3)",
+        border: "1px solid rgba(26,26,26,0.12)",
+        boxShadow: "0 18px 48px rgba(26,37,64,0.10)",
+        maxWidth: 400,
+        width: "100%",
+        marginLeft: "auto",
+        padding: 28,
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
+        <span
+          aria-hidden
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 48,
+            height: 48,
+            borderRadius: "50%",
+            background: "var(--terracotta)",
+            color: "var(--cream-3)",
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            fontSize: 18,
+            letterSpacing: "0.02em",
+            flexShrink: 0,
+          }}
+        >
+          SL
+        </span>
+        <span
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            textTransform: "uppercase",
+            letterSpacing: "0.14em",
+            color: "#A8451F",
+          }}
+        >
+          SkynetLabs · since 2022
+        </span>
+      </div>
+      <div
+        style={{
+          fontFamily: "var(--font-display)",
+          fontWeight: 700,
+          fontSize: 56,
+          lineHeight: 1,
+          color: "var(--terracotta)",
+          letterSpacing: "-0.03em",
+        }}
+      >
+        {metric}
+      </div>
+      <div
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: 11,
+          textTransform: "uppercase",
+          letterSpacing: "0.12em",
+          color: "var(--ink-faint)",
+          margin: "8px 0 18px",
+        }}
+      >
+        {metricLabel}
+      </div>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {lines.map((l) => (
+          <li
+            key={l}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "16px 1fr",
+              gap: 10,
+              padding: "7px 0",
+              fontSize: 14,
+              color: "var(--ink)",
+              lineHeight: 1.5,
+            }}
+          >
+            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 3 }} />
+            <span>{l}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 const PAINS = [
   {
@@ -123,7 +225,7 @@ export default function AiChatbotsLP() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(32px, 8vw, 76px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.02,
                 color: "var(--ink)",
@@ -131,15 +233,15 @@ export default function AiChatbotsLP() {
               }}
             >
               The DM came in at 11pm.{" "}
-              <em
+              <span
                 style={{
-                  fontStyle: "italic",
+                  fontStyle: "normal",
                   color: "var(--terracotta)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                 }}
               >
                 Reply by 7am.
-              </em>
+              </span>
             </h1>
             <p
               style={{
@@ -150,9 +252,9 @@ export default function AiChatbotsLP() {
                 marginBottom: 28,
               }}
             >
-              WhatsApp + ManyChat + GHL chat flows that route intent, not
-              keywords. Handoffs that carry source. Bots that sound like you, not
-              a Zendesk macro.
+              Chat that understands what people actually want, answers in your
+              voice, and never drops a lead at midnight. When a human needs to
+              step in, the full conversation is right there.
             </p>
             <Link
               href="/discovery-call"
@@ -188,53 +290,15 @@ export default function AiChatbotsLP() {
             </div>
           </div>
           <div>
-            <figure
-              style={{
-                margin: 0,
-                transform: "rotate(-1.2deg)",
-                background: "var(--cream-3)",
-                padding: 10,
-                border: "1px solid rgba(26,26,26,0.12)",
-                boxShadow: "0 18px 48px rgba(26,37,64,0.18)",
-                maxWidth: 400,
-                width: "100%",
-                marginLeft: "auto",
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "4 / 5",
-                  overflow: "hidden",
-                }}
-              >
-                <Image
-                  src="/portraits/waseem-veranda-thinking.jpg"
-                  alt="Waseem mapping a chat flow on the veranda"
-                  fill
-                  priority
-                  sizes="(min-width: 900px) 400px, 90vw"
-                  style={{
-                    objectFit: "cover",
-                    filter: "contrast(1.02)",
-                  }}
-                />
-              </div>
-              <figcaption
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.10em",
-                  color: "var(--ink-faint)",
-                  textAlign: "center",
-                  paddingTop: 12,
-                }}
-              >
-                Pererenan veranda · mapping intent tree
-              </figcaption>
-            </figure>
+            <SkynetCredentialCard
+              metric="8h"
+              metricLabel="weekday reply window"
+              lines={[
+                "Chats routed by what people mean, not keywords",
+                "Bots that sound like you, not a script",
+                "Every handoff lands in your CRM, tagged",
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -268,7 +332,7 @@ export default function AiChatbotsLP() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4vw, 40px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--ink)",
@@ -277,9 +341,9 @@ export default function AiChatbotsLP() {
             }}
           >
             Three places chatbots{" "}
-            <em style={{ fontStyle: "italic", color: "var(--oxblood)" }}>
+            <span style={{ fontStyle: "normal", color: "var(--oxblood)", fontWeight: 700 }}>
               quietly cost you leads.
-            </em>
+            </span>
           </h2>
           <div
             style={{
@@ -368,7 +432,7 @@ export default function AiChatbotsLP() {
           <div
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 700,
               fontSize: "clamp(96px, 18vw, 180px)",
               lineHeight: 0.9,
               color: "var(--terracotta)",
@@ -381,7 +445,7 @@ export default function AiChatbotsLP() {
           <p
             style={{
               fontFamily: "var(--font-display)",
-              fontStyle: "italic",
+              fontStyle: "normal",
               fontSize: "clamp(17px, 3vw, 22px)",
               color: "var(--ink-2)",
               lineHeight: 1.4,
@@ -468,7 +532,7 @@ export default function AiChatbotsLP() {
             <p
               style={{
                 fontFamily: "var(--font-display)",
-                fontStyle: "italic",
+                fontStyle: "normal",
                 fontSize: "clamp(18px, 3.2vw, 24px)",
                 lineHeight: 1.4,
                 color: "var(--ink)",
@@ -523,7 +587,7 @@ export default function AiChatbotsLP() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4vw, 40px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--ink)",
@@ -532,9 +596,9 @@ export default function AiChatbotsLP() {
             }}
           >
             What changes the day{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
               the bot ships.
-            </em>
+            </span>
           </h2>
           <div
             className="lp-ba-grid"
@@ -690,7 +754,7 @@ export default function AiChatbotsLP() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(30px, 5vw, 52px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.08,
               color: "var(--ink)",
@@ -698,9 +762,9 @@ export default function AiChatbotsLP() {
             }}
           >
             Hand me your DMs.{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
               I&apos;ll train the bot.
-            </em>
+            </span>
           </h2>
           <p
             style={{

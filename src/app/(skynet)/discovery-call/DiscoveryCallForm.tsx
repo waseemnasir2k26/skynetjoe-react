@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Loader2,
@@ -984,7 +983,7 @@ function Stat({
       <div
         style={{
           fontFamily: "var(--font-display)",
-          fontStyle: "italic",
+          fontStyle: "normal",
           fontSize: 18,
           fontWeight: 600,
           color: C.ink,
@@ -1020,23 +1019,24 @@ export function DiscoveryProofSidebar() {
       >
         <div className="flex items-center gap-3 mb-3">
           <div
+            aria-hidden
             style={{
-              position: "relative",
               width: 48,
               height: 48,
               borderRadius: "50%",
-              overflow: "hidden",
               border: `2px solid ${C.terra}`,
+              background: "#A8451F",
+              color: C.cream3,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "var(--font-mono)",
+              fontWeight: 700,
+              fontSize: 14,
               flexShrink: 0,
             }}
           >
-            <Image
-              src="/portraits/waseem-cafe-arch.jpg"
-              alt="Waseem"
-              fill
-              sizes="48px"
-              style={{ objectFit: "cover" }}
-            />
+            SL
           </div>
           <div>
             <p style={{ color: C.ink, fontWeight: 600, fontSize: 14 }}>Waseem reads every brief</p>
@@ -1056,7 +1056,7 @@ export function DiscoveryProofSidebar() {
         <p
           style={{
             fontFamily: "var(--font-display)",
-            fontStyle: "italic",
+            fontStyle: "normal",
             fontSize: 14,
             color: C.ink2,
             lineHeight: 1.6,
@@ -1078,23 +1078,24 @@ export function DiscoveryProofSidebar() {
       >
         <div className="flex items-center gap-3 mb-3">
           <div
+            aria-hidden
             style={{
-              position: "relative",
               width: 48,
               height: 48,
               borderRadius: "50%",
-              overflow: "hidden",
               border: `2px solid ${C.terra}`,
+              background: "#A8451F",
+              color: C.cream3,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "var(--font-mono)",
+              fontWeight: 700,
+              fontSize: 14,
               flexShrink: 0,
             }}
           >
-            <Image
-              src="/portraits/waseem-veranda-thinking.jpg"
-              alt="Waseem"
-              fill
-              sizes="48px"
-              style={{ objectFit: "cover" }}
-            />
+            SL
           </div>
           <div
             style={{
@@ -1137,7 +1138,7 @@ export function DiscoveryProofSidebar() {
         <p
           style={{
             fontFamily: "var(--font-display)",
-            fontStyle: "italic",
+            fontStyle: "normal",
             fontSize: 14,
             color: C.ink2,
             lineHeight: 1.6,

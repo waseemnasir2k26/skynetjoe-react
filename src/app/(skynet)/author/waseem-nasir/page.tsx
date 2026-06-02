@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     type: "profile",
     images: [
       {
-        url: "/waseem-portrait.jpg",
+        url: "/og-default.png",
         width: 1200,
-        height: 1200,
-        alt: "Waseem Nasir, founder of SkynetLabs",
+        height: 630,
+        alt: "SkynetLabs — AI automation, chatbots and conversion-tuned websites",
       },
     ],
   },
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "I build automation that doesn't need me to babysit it. 180+ workflows, 40+ websites, 9 countries.",
     creator: "@Skynetjoe1",
-    images: ["/waseem-portrait.jpg"],
+    images: ["/og-default.png"],
   },
 };
 
@@ -58,7 +58,7 @@ const schema = {
       givenName: "Waseem",
       familyName: "Nasir",
       url: SITE.founderUrl,
-      image: `${SITE.assetsUrl}/waseem-portrait.jpg`,
+      image: `${SITE.assetsUrl}/og-default.png`,
       jobTitle: "Founder",
       worksFor: { "@id": `${SITE.url}/#organization` },
       nationality: { "@type": "Country", name: "Pakistan" },

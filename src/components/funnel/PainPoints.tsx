@@ -4,7 +4,7 @@ const PAINS = [
   {
     pain: "Leads ghost you after 1 hour.",
     detail:
-      "78% of buyers go with the first vendor who replies. If your follow-up is manual, you're losing them while you sleep.",
+      "Up to half of B2B sales go to whoever replies first. If your follow-up is manual, you're losing them while you sleep.",
   },
   {
     pain: "Your pipeline lives in WhatsApp screenshots.",
@@ -57,7 +57,7 @@ export default function PainPoints() {
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--ink)",
@@ -67,17 +67,17 @@ export default function PainPoints() {
               wordBreak: "break-word",
             }}
           >
-            Three reasons your revenue is{" "}
-            <em
+            Three ways you&rsquo;re{" "}
+            <span
               style={{
-                fontStyle: "italic",
+                fontStyle: "normal",
                 color: "var(--oxblood)",
-                fontWeight: 500,
+                fontWeight: 700,
               }}
             >
-              already gone
-            </em>{" "}
-            before you notice.
+              losing customers
+            </span>{" "}
+            without even noticing.
           </h2>
         </div>
 

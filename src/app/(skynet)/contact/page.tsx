@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import {
@@ -181,7 +180,7 @@ export default function ContactPage() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(40px, 6.5vw, 76px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.02,
                 color: "var(--ink)",
@@ -189,7 +188,7 @@ export default function ContactPage() {
               }}
             >
               Don&apos;t book a call.{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+              <em style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
                 Send a brief.
               </em>
             </h1>
@@ -292,19 +291,30 @@ export default function ContactPage() {
                   aspectRatio: "4 / 5",
                   overflow: "hidden",
                   background: "var(--cream-2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                <Image
-                  src="/portraits/waseem-bluepolo.jpg"
-                  alt="Waseem Nasir, founder of SkynetLabs, available for new builds"
-                  fill
-                  priority
-                  sizes="(min-width: 900px) 400px, 90vw"
+                <div
+                  aria-hidden
                   style={{
-                    objectFit: "cover",
-                    filter: "none",
+                    width: 112,
+                    height: 112,
+                    borderRadius: "50%",
+                    background: "#A8451F",
+                    color: "var(--cream-3)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "var(--font-mono)",
+                    fontWeight: 700,
+                    fontSize: 40,
+                    letterSpacing: "0.04em",
                   }}
-                />
+                >
+                  SL
+                </div>
               </div>
               <figcaption
                 style={{
@@ -335,7 +345,7 @@ export default function ContactPage() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 4vw, 42px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 color: "var(--ink)",
                 margin: "0 0 12px",
@@ -343,7 +353,7 @@ export default function ContactPage() {
               }}
             >
               Four ways to start.{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+              <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>
                 One reply guarantee.
               </em>
             </h2>
@@ -457,7 +467,7 @@ export default function ContactPage() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 4vw, 42px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 color: "var(--ink)",
                 margin: "0 0 12px",
@@ -465,7 +475,7 @@ export default function ContactPage() {
               }}
             >
               Four steps,{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>zero funnel.</em>
+              <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>zero funnel.</em>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
               No CRM auto-replies. No discovery-call upsell. No 14-day follow-up
@@ -486,9 +496,9 @@ export default function ContactPage() {
                 <div
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontStyle: "italic",
+                    fontStyle: "normal",
                     fontSize: 36,
-                    fontWeight: 500,
+                    fontWeight: 700,
                     color: "var(--terracotta)",
                     lineHeight: 1,
                     marginBottom: 10,
@@ -579,7 +589,7 @@ export default function ContactPage() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4.4vw, 44px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--cream-3)",
@@ -594,7 +604,7 @@ export default function ContactPage() {
                 textDecoration: "underline",
                 textDecorationThickness: "1px",
                 textUnderlineOffset: "8px",
-                fontStyle: "italic",
+                fontStyle: "normal",
               }}
             >
               send the brief

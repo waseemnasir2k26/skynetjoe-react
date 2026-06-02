@@ -9,9 +9,9 @@ const OUTCOMES = [
     proof: "Show-rate jumped 23% → 71% — Grand Mercer Dental, NY",
   },
   {
-    title: "An AI voice agent that works the phones for you",
+    title: "An AI voice that answers your calls",
     promise:
-      "ElevenLabs + n8n call agents dial, qualify, and follow up in your language — so no conversation slips through the cracks.",
+      "It picks up, asks the right questions, and follows up in your language — so no conversation slips through the cracks.",
     proof: "200+ debtor calls/week handled in French — KODIASIMMO",
   },
   {
@@ -61,7 +61,7 @@ export default function Outcomes() {
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--ink)",
@@ -71,16 +71,16 @@ export default function Outcomes() {
               wordBreak: "break-word",
             }}
           >
-            Plug every leak.{" "}
-            <em
+            Win back lost customers.{" "}
+            <span
               style={{
-                fontStyle: "italic",
+                fontStyle: "normal",
                 color: "var(--terracotta)",
-                fontWeight: 500,
+                fontWeight: 700,
               }}
             >
               Shipped in 14 days.
-            </em>
+            </span>
           </h2>
         </div>
 
@@ -102,9 +102,9 @@ export default function Outcomes() {
               <div
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontStyle: "italic",
+                  fontStyle: "normal",
                   fontSize: 36,
-                  fontWeight: 500,
+                  fontWeight: 700,
                   color: "var(--terracotta)",
                   lineHeight: 1,
                   marginBottom: 12,

@@ -14,7 +14,6 @@
  *   - Gigs data shape + URLs unchanged.
  */
 
-import Image from "next/image";
 import { ExternalLink, Play, Star } from "lucide-react";
 import PortfolioScreenshot from "@/components/PortfolioScreenshot";
 
@@ -338,9 +337,9 @@ export default function WorkShowcase() {
             23 builds shipped.{" "}
             <em
               style={{
-                fontStyle: "italic",
+                fontStyle: "normal",
                 color: "var(--terracotta)",
-                fontWeight: 500,
+                fontWeight: 700,
               }}
             >
               Click any tile.
@@ -526,20 +525,19 @@ export default function WorkShowcase() {
         >
           <div className="flex items-center gap-5">
             <div
-              className="relative w-20 h-20 flex-shrink-0"
+              aria-hidden
+              className="relative w-20 h-20 flex-shrink-0 flex items-center justify-center"
               style={{
-                borderRadius: 2,
-                overflow: "hidden",
-                border: "1px solid rgba(26,26,26,0.18)",
+                borderRadius: "50%",
+                background: "#A8451F",
+                color: "var(--cream-3)",
+                fontFamily: "var(--font-mono)",
+                fontWeight: 700,
+                fontSize: 24,
+                letterSpacing: "0.04em",
               }}
             >
-              <Image
-                src="/portraits/waseem-poolside.jpg"
-                alt="Waseem Nasir — founder, available for new builds"
-                fill
-                sizes="80px"
-                className="object-cover"
-              />
+              SL
             </div>
             <div>
               <div

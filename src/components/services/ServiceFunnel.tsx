@@ -68,7 +68,7 @@ export default function ServiceFunnel({
   const h2style: React.CSSProperties = {
     fontFamily: "var(--font-display)",
     fontSize: "clamp(28px, 4vw, 40px)",
-    fontWeight: 500,
+    fontWeight: 700,
     letterSpacing: "-0.02em",
     lineHeight: 1.1,
     color: "var(--ink)",
@@ -165,7 +165,7 @@ export default function ServiceFunnel({
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(32px, 8vw, 72px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.03,
               color: "var(--ink)",
@@ -255,9 +255,9 @@ export default function ServiceFunnel({
           </div>
           <h2 style={h2style}>
             What it&apos;s{" "}
-            <em style={{ fontStyle: "italic", color: "var(--oxblood)" }}>
+            <span style={{ fontStyle: "normal", color: "var(--oxblood)", fontWeight: 700 }}>
               costing you right now.
-            </em>
+            </span>
           </h2>
           <div className="sf-grid">
             {content.pains.map((p, i) => (
@@ -332,9 +332,9 @@ export default function ServiceFunnel({
           </div>
           <h2 style={h2style}>
             What you walk away{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
               owning.
-            </em>
+            </span>
           </h2>
           <div className="sf-grid">
             {content.outcomes.map((o) => (
@@ -531,9 +531,9 @@ export default function ServiceFunnel({
           </div>
           <h2 style={h2style}>
             Three steps,{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
               no mystery.
-            </em>
+            </span>
           </h2>
           <div
             style={{
@@ -666,9 +666,9 @@ export default function ServiceFunnel({
             </div>
             <h2 style={{ ...h2style, marginBottom: 28 }}>
               The right fit,{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+              <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
                 or an honest no.
-              </em>
+              </span>
             </h2>
             <div
               style={{
@@ -797,7 +797,7 @@ export default function ServiceFunnel({
           <div
             style={{
               fontFamily: "var(--font-display)",
-              fontWeight: 500,
+              fontWeight: 700,
               fontSize: "clamp(48px, 11vw, 110px)",
               lineHeight: 0.95,
               color: "var(--terracotta)",
@@ -810,7 +810,7 @@ export default function ServiceFunnel({
           <p
             style={{
               fontFamily: "var(--font-display)",
-              fontStyle: "italic",
+              fontStyle: "normal",
               fontSize: "clamp(17px, 3vw, 22px)",
               color: "var(--ink-2)",
               lineHeight: 1.4,
@@ -863,7 +863,7 @@ export default function ServiceFunnel({
               <div
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                   fontSize: "clamp(30px, 6vw, 52px)",
                   color: "var(--terracotta)",
                   letterSpacing: "-0.02em",
@@ -875,7 +875,7 @@ export default function ServiceFunnel({
               <p
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontStyle: "italic",
+                  fontStyle: "normal",
                   fontSize: "clamp(15px, 2.5vw, 19px)",
                   color: "var(--ink-2)",
                   lineHeight: 1.4,
@@ -926,9 +926,9 @@ export default function ServiceFunnel({
             </div>
             <h2 style={h2style}>
               Public pricing.{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+              <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
                 No quote dance.
-              </em>
+              </span>
             </h2>
             <div className="sf-tiers">
               {tiers.map((tier) => {
@@ -985,7 +985,7 @@ export default function ServiceFunnel({
                     <div
                       style={{
                         fontFamily: "var(--font-display)",
-                        fontWeight: 500,
+                        fontWeight: 700,
                         fontSize: 38,
                         color: "var(--ink)",
                         letterSpacing: "-0.02em",
@@ -1119,7 +1119,7 @@ export default function ServiceFunnel({
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(24px, 4vw, 36px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 lineHeight: 1.1,
                 color: "var(--ink)",
@@ -1164,9 +1164,9 @@ export default function ServiceFunnel({
           </div>
           <h2 style={{ ...h2style, marginBottom: 28 }}>
             Before you{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
               book the call.
-            </em>
+            </span>
           </h2>
           {content.faqs.map((f) => (
             <details
@@ -1239,7 +1239,7 @@ export default function ServiceFunnel({
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(30px, 5vw, 52px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.08,
               color: "var(--ink)",

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   Megaphone,
@@ -9,6 +8,7 @@ import {
   Code2,
   Puzzle,
   Wrench,
+  Terminal,
 } from "lucide-react";
 
 type Card = {
@@ -131,9 +131,9 @@ function StatCard({ card, start, i }: { card: Card; start: boolean; i: number })
       <div
         style={{
           fontFamily: "var(--font-display)",
-          fontStyle: "italic",
+          fontStyle: "normal",
           fontSize: 56,
-          fontWeight: 500,
+          fontWeight: 700,
           color: "var(--terracotta)",
           lineHeight: 1,
           marginBottom: 10,
@@ -220,7 +220,7 @@ export default function Achievements() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(32px, 5vw, 56px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.06,
               color: "var(--ink)",
@@ -228,9 +228,9 @@ export default function Achievements() {
             }}
           >
             1,000+ shipped.{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+            <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
               Most under one keyboard.
-            </em>
+            </span>
           </h2>
           <p
             style={{
@@ -277,32 +277,42 @@ export default function Achievements() {
           <figure
             style={{
               margin: 0,
-              transform: "rotate(-1.2deg)",
-              background: "var(--cream-3)",
-              padding: 10,
+              background: "var(--cream-2)",
+              padding: 24,
               border: "1px solid rgba(26,26,26,0.12)",
               boxShadow: "0 18px 48px rgba(26,26,26,0.12)",
               width: 220,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
             }}
           >
             <div
               style={{
-                position: "relative",
-                width: "100%",
-                aspectRatio: "4 / 5",
-                overflow: "hidden",
+                width: 56,
+                height: 56,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "var(--terracotta)",
+                borderRadius: 2,
+                marginBottom: 16,
               }}
             >
-              <Image
-                src="/portraits/waseem-builder-portrait.jpg"
-                alt="Waseem Nasir, founder of SkynetLabs, at a Bali cafe — the one who actually ships"
-                fill
-                sizes="220px"
-                style={{
-                  objectFit: "cover",
-                  filter: "none",
-                }}
-              />
+              <Terminal className="w-7 h-7" />
+            </div>
+            <div
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: 28,
+                fontWeight: 700,
+                color: "var(--ink)",
+                lineHeight: 1,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              1 operator
             </div>
             <figcaption
               style={{
@@ -311,8 +321,7 @@ export default function Achievements() {
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
                 color: "var(--ink-faint)",
-                textAlign: "center",
-                paddingTop: 10,
+                paddingTop: 12,
               }}
             >
               Waseem · Bali · GMT+8
@@ -335,7 +344,7 @@ export default function Achievements() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(20px, 2.4vw, 26px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 color: "var(--ink)",
                 lineHeight: 1.25,
                 margin: "0 0 10px",
@@ -343,9 +352,9 @@ export default function Achievements() {
               }}
             >
               Waseem Nasir — founder, builder, the one who{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+              <span style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
                 actually ships.
-              </em>
+              </span>
             </p>
             <p
               style={{

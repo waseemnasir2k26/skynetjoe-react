@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CalendarClock,
@@ -294,7 +293,7 @@ export default function DiscoveryFunnel() {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(40px, 6.5vw, 72px)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                   letterSpacing: "-0.025em",
                   lineHeight: 1.04,
                   color: C.ink,
@@ -304,9 +303,9 @@ export default function DiscoveryFunnel() {
                 Find the leak.{" "}
                 <em
                   style={{
-                    fontStyle: "italic",
+                    fontStyle: "normal",
                     color: C.terra,
-                    fontWeight: 500,
+                    fontWeight: 700,
                   }}
                 >
                   Plug it in 14 days.
@@ -424,7 +423,7 @@ export default function DiscoveryFunnel() {
                     <p
                       style={{
                         fontFamily: "var(--font-display)",
-                        fontStyle: "italic",
+                        fontStyle: "normal",
                         fontSize: 17,
                         lineHeight: 1.45,
                         color: C.ink,
@@ -478,20 +477,31 @@ export default function DiscoveryFunnel() {
                     width: "100%",
                     aspectRatio: "4 / 5",
                     overflow: "hidden",
+                    background: C.cream2,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <Image
-                    src="/portraits/waseem-builder-hero.jpg"
-                    alt="Waseem Nasir — Founder, SkynetLabs"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 420px, 100vw"
+                  <div
+                    aria-hidden
                     style={{
-                      objectFit: "cover",
-                      objectPosition: "center top",
-                      filter: "contrast(1.02)",
+                      width: 116,
+                      height: 116,
+                      borderRadius: "50%",
+                      background: "#A8451F",
+                      color: C.cream3,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: "var(--font-mono)",
+                      fontWeight: 700,
+                      fontSize: 42,
+                      letterSpacing: "0.04em",
                     }}
-                  />
+                  >
+                    SL
+                  </div>
                 </div>
                 <figcaption
                   style={{
@@ -510,7 +520,7 @@ export default function DiscoveryFunnel() {
                   <p
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontStyle: "italic",
+                      fontStyle: "normal",
                       fontSize: 14,
                       lineHeight: 1.5,
                       color: C.ink2,
@@ -584,7 +594,7 @@ export default function DiscoveryFunnel() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 4vw, 44px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 lineHeight: 1.08,
                 color: C.ink,
@@ -592,7 +602,7 @@ export default function DiscoveryFunnel() {
               }}
             >
               Seven quick questions.{" "}
-              <em style={{ fontStyle: "italic", color: C.terra }}>
+              <em style={{ fontStyle: "normal", color: C.terra }}>
                 Ninety seconds.
               </em>
             </h2>
@@ -727,7 +737,7 @@ export default function DiscoveryFunnel() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 4vw, 44px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 lineHeight: 1.08,
                 color: C.ink,
@@ -735,7 +745,7 @@ export default function DiscoveryFunnel() {
               }}
             >
               Thirty minutes.{" "}
-              <em style={{ fontStyle: "italic", color: C.terra }}>
+              <em style={{ fontStyle: "normal", color: C.terra }}>
                 One real audit.
               </em>
             </h2>
@@ -866,7 +876,7 @@ export default function DiscoveryFunnel() {
               }}
             >
               The six questions{" "}
-              <em style={{ fontStyle: "italic", color: C.terra }}>
+              <em style={{ fontStyle: "normal", color: C.terra }}>
                 I get most.
               </em>
             </h2>
@@ -999,7 +1009,7 @@ function Stat({ value, label }: { value: string; label: string }) {
       <div
         style={{
           fontFamily: "var(--font-display)",
-          fontStyle: "italic",
+          fontStyle: "normal",
           fontSize: 18,
           fontWeight: 600,
           color: "#C66B3F",

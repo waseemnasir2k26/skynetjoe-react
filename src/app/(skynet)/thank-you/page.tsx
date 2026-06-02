@@ -14,7 +14,6 @@
  */
 
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { CASE_STUDIES } from "@/lib/case-studies";
@@ -164,7 +163,7 @@ const eyebrowRule = {
 };
 const h2Style = {
   fontFamily: "var(--font-display)",
-  fontWeight: 500,
+  fontWeight: 700,
   letterSpacing: "-0.02em",
   lineHeight: 1.08,
   color: "var(--ink)",
@@ -172,9 +171,9 @@ const h2Style = {
   marginBottom: 14,
 };
 const emTerra = {
-  fontStyle: "italic" as const,
+  fontStyle: "normal" as const,
   color: "var(--terracotta)",
-  fontWeight: 500,
+  fontWeight: 700,
 };
 const cardCream = {
   background: "var(--cream-2)",
@@ -341,7 +340,7 @@ export default async function ThankYouPage({
               <h1
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                   letterSpacing: "-0.025em",
                   lineHeight: 1.06,
                   color: "var(--ink)",
@@ -381,20 +380,32 @@ export default async function ThankYouPage({
             </div>
 
             <div
-              className="relative aspect-[4/5] max-w-sm mx-auto md:mx-0 md:justify-self-end w-full overflow-hidden"
+              className="relative aspect-[4/5] max-w-sm mx-auto md:mx-0 md:justify-self-end w-full overflow-hidden flex items-center justify-center"
               style={{
                 border: "1px solid rgba(26,26,26,0.18)",
                 borderRadius: 2,
+                background: "var(--cream-2)",
               }}
             >
-              <Image
-                src="/portraits/waseem-rooftop-smile.jpg"
-                alt="Waseem Nasir, founder of SkynetLabs"
-                fill
-                priority
-                sizes="(max-width: 768px) 80vw, 360px"
-                className="object-cover"
-              />
+              <div
+                aria-hidden
+                style={{
+                  width: 112,
+                  height: 112,
+                  borderRadius: "50%",
+                  background: "#A8451F",
+                  color: "var(--cream-3)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-mono)",
+                  fontWeight: 700,
+                  fontSize: 40,
+                  letterSpacing: "0.04em",
+                }}
+              >
+                SL
+              </div>
               <div
                 className="absolute inset-x-0 bottom-0 p-4"
                 style={{
@@ -476,7 +487,7 @@ export default async function ThankYouPage({
                   <h3
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontWeight: 500,
+                      fontWeight: 700,
                       fontSize: 17,
                       color: "var(--ink)",
                       marginBottom: 10,
@@ -707,7 +718,7 @@ export default async function ThankYouPage({
                 <h3
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     fontSize: 18,
                     color: "var(--ink)",
                     marginBottom: 12,

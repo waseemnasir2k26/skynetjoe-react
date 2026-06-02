@@ -47,13 +47,13 @@ export default function Footer() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "1.75rem",
-                fontWeight: 600,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 color: "var(--ink)",
                 borderBottom: "none",
               }}
             >
-              Skynet<em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>Labs</em>
+              Skynet<em style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>Labs</em>
             </Link>
             <p className="text-sm leading-relaxed max-w-sm" style={{ color: "var(--ink-2)" }}>
               {SITE.description}
@@ -91,6 +91,31 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+
+            {/* Founder credit — SL monogram (no face photo), allowed founder icon presence */}
+            <div className="flex items-center gap-3 mt-6">
+              <span
+                aria-hidden="true"
+                className="flex items-center justify-center flex-shrink-0"
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: 999,
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  fontFamily: "var(--font-display)",
+                  fontSize: 13,
+                  fontWeight: 700,
+                  letterSpacing: "0.02em",
+                  lineHeight: 1,
+                }}
+              >
+                SL
+              </span>
+              <span className="text-sm" style={{ color: "var(--ink-2)" }}>
+                Built by Waseem, SkynetLabs · Bali
+              </span>
+            </div>
           </div>
 
           {FOOTER_COLUMNS.map((col) => (
@@ -102,7 +127,7 @@ export default function Footer() {
                   fontSize: 11,
                   textTransform: "uppercase",
                   letterSpacing: "0.16em",
-                  color: "var(--terracotta)",
+                  color: "#A8451F",
                   fontWeight: 600,
                 }}
               >
@@ -144,7 +169,7 @@ export default function Footer() {
             © {new Date().getFullYear()} {SITE.brand} · Built in Bali by{" "}
             <a
               href={SITE.founderUrl}
-              style={{ color: "var(--terracotta)", borderBottom: "1px solid var(--terracotta)" }}
+              style={{ color: "#A8451F", borderBottom: "1px solid #A8451F" }}
             >
               {SITE.founder}
             </a>

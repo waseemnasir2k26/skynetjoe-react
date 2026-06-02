@@ -5,7 +5,6 @@ import { SITE } from "@/lib/site";
 import { organization, person } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Community from "@/components/sections/Community";
-import ZoomableImage from "@/components/ZoomableImage";
 
 const TIMELINE = [
   {
@@ -50,18 +49,20 @@ const TIMELINE = [
   },
 ];
 
-const BALI_GRID = [
-  { src: "/bali-trek/mountain-vista.jpg", alt: "Mountain vista from the May 2026 Bali trek" },
-  { src: "/bali-trek/trek-path-palms.jpg", alt: "Trek path through Balinese palms" },
-  { src: "/bali-trek/jungle-stairs.jpg", alt: "Jungle stairs near the waterfall" },
-  { src: "/bali-trek/river-rocks.jpg", alt: "River rocks rest stop, mid-trek" },
-  { src: "/portraits/waseem-cafe-arch.jpg", alt: "Canggu cafe — first deploy of the day" },
-  { src: "/portraits/waseem-poolside-laptop.jpg", alt: "Poolside push after a green migration" },
-  { src: "/bali-trek/villa-arrival.jpg", alt: "Morning at the Bali villa before the trek" },
-  { src: "/portraits/waseem-rooftop-smile.jpg", alt: "Friday ship, phone on DND" },
+const BUILDER_LIFE = [
+  {
+    label: "Mornings",
+    line: "Coffee, terminal open, Claude Code humming. The first deploy goes out before most inboxes wake up.",
+  },
+  {
+    label: "Build days",
+    line: "Multi-hour sessions, every diff read by hand. AI types fast; the taste and judgment stay human.",
+  },
+  {
+    label: "Ship rhythm",
+    line: "Staging link in your inbox, you scream-test it, I iterate. Live within the week, repo handed over.",
+  },
 ];
-
-const ROT = ["-1.0deg", "0.7deg", "-0.6deg", "1.1deg", "-0.9deg", "0.5deg", "-1.2deg", "0.8deg"];
 
 export const metadata: Metadata = {
   title: "About — From a $10 Fiverr gig (2019) to 180+ workflows (2026)",
@@ -74,7 +75,7 @@ export const metadata: Metadata = {
       "Solo founder. Bali base. 7 years of failing in public and building in public. Public pricing, AI as second seat.",
     url: `${SITE.url}/about`,
     type: "website",
-    images: [`${SITE.assetsUrl}/portraits/waseem-builder-hero.jpg`],
+    images: [`${SITE.assetsUrl}/og-default.png`],
   },
 };
 
@@ -167,7 +168,7 @@ export default function AboutPage() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(40px, 6.5vw, 76px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.02,
                 color: "var(--ink)",
@@ -175,7 +176,7 @@ export default function AboutPage() {
               }}
             >
               From a{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+              <em style={{ fontStyle: "normal", color: "var(--terracotta)", fontWeight: 700 }}>
                 $10 Fiverr gig
               </em>{" "}
               to 180+ workflows.
@@ -232,20 +233,31 @@ export default function AboutPage() {
                   width: "100%",
                   aspectRatio: "4 / 5",
                   overflow: "hidden",
+                  background: "var(--cream-2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                <ZoomableImage
-                  src="/portraits/waseem-builder-hero.jpg"
-                  alt="Waseem Nasir, founder of SkynetLabs"
-                  fill
-                  priority
-                  sizes="(min-width: 900px) 400px, 90vw"
+                <div
+                  aria-hidden
                   style={{
-                    objectFit: "cover",
-                    objectPosition: "center top",
-                    filter: "contrast(1.02)",
+                    width: 120,
+                    height: 120,
+                    borderRadius: "50%",
+                    background: "#A8451F",
+                    color: "var(--cream-3)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "var(--font-mono)",
+                    fontWeight: 700,
+                    fontSize: 44,
+                    letterSpacing: "0.04em",
                   }}
-                />
+                >
+                  SL
+                </div>
               </div>
               <figcaption
                 style={{
@@ -295,7 +307,7 @@ export default function AboutPage() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4vw, 44px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--ink)",
@@ -303,7 +315,7 @@ export default function AboutPage() {
             }}
           >
             Seven years of{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+            <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>
               failing in public.
             </em>
           </h2>
@@ -426,7 +438,7 @@ export default function AboutPage() {
           <blockquote
             style={{
               fontFamily: "var(--font-display)",
-              fontStyle: "italic",
+              fontStyle: "normal",
               fontSize: "clamp(24px, 4.4vw, 44px)",
               fontWeight: 400,
               lineHeight: 1.25,
@@ -486,22 +498,22 @@ export default function AboutPage() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 4vw, 44px)",
-                fontWeight: 500,
+                fontWeight: 700,
                 letterSpacing: "-0.02em",
                 lineHeight: 1.1,
                 color: "var(--ink)",
                 marginBottom: 12,
               }}
             >
-              Bali treks. Cafes.{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+              Cafes. Terminals.{" "}
+              <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>
                 Deploys.
               </em>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
-              Same Waseem you&apos;d hire — actually here, actually shipping.
-              Latest batch: a 24-May 2026 jungle trek with the Bali builder
-              crew. No stock photos. No agency Zoom mask.
+              Same builder you&apos;d hire — actually here, actually shipping.
+              No agency layer, no Zoom mask. Just a fixed rhythm that ends with
+              your thing live.
             </p>
           </div>
 
@@ -509,56 +521,43 @@ export default function AboutPage() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-              gap: 28,
+              gap: 20,
             }}
           >
-            {BALI_GRID.map((p, i) => (
-              <figure
-                key={p.src}
+            {BUILDER_LIFE.map((b, i) => (
+              <div
+                key={b.label}
                 className="about-bali-figure"
                 style={{
-                  margin: 0,
-                  transform: `rotate(${ROT[i] ?? "0deg"})`,
-                  background: "var(--cream-3)",
-                  padding: 10,
-                  border: "1px solid rgba(26,26,26,0.14)",
-                  boxShadow: "0 14px 36px rgba(26,26,26,0.10)",
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  padding: "24px 22px",
+                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
                 <div
                   style={{
-                    position: "relative",
-                    width: "100%",
-                    aspectRatio: "4 / 3",
-                    overflow: "hidden",
-                    background: "var(--cream-2)",
-                  }}
-                >
-                  <ZoomableImage
-                    src={p.src}
-                    alt={p.alt}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 90vw"
-                    style={{
-                      objectFit: "cover",
-                      filter: "none",
-                    }}
-                  />
-                </div>
-                <figcaption
-                  style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 10,
+                    fontSize: 11,
                     textTransform: "uppercase",
-                    letterSpacing: "0.10em",
-                    color: "var(--ink-faint)",
-                    paddingTop: 10,
-                    lineHeight: 1.5,
+                    letterSpacing: "0.16em",
+                    color: "#A8451F",
+                    marginBottom: 10,
                   }}
                 >
-                  — {p.alt}
-                </figcaption>
-              </figure>
+                  {b.label}
+                </div>
+                <p
+                  style={{
+                    fontSize: 15,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  {b.line}
+                </p>
+              </div>
             ))}
           </div>
         </div>
@@ -602,9 +601,9 @@ export default function AboutPage() {
                 <div
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontStyle: "italic",
+                    fontStyle: "normal",
                     fontSize: 52,
-                    fontWeight: 500,
+                    fontWeight: 700,
                     color: "var(--terracotta)",
                     lineHeight: 1,
                     marginBottom: 8,
@@ -647,7 +646,7 @@ export default function AboutPage() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4vw, 44px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
               color: "var(--ink)",
@@ -655,7 +654,7 @@ export default function AboutPage() {
             }}
           >
             Want to ship{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+            <em style={{ fontStyle: "normal", color: "var(--terracotta)" }}>
               something real?
             </em>
           </h2>
