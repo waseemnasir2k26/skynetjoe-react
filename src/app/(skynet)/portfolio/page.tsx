@@ -7,7 +7,7 @@ import WorkShowcase from "@/components/sections/WorkShowcase";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "Portfolio — Recent Projects | SkynetLabs",
+  title: "Portfolio — Recent Projects",
   description:
     "Live screenshots of every shipped SkynetLabs build: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. 20+ deployed sites. Built solo from Bali by Waseem Nasir.",
   alternates: { canonical: `${SITE.url}/portfolio` },
@@ -49,7 +49,7 @@ export default function PortfolioPage() {
           zIndex: 2,
         }}
       >
-        <Reveal style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <Reveal initialVisible style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",

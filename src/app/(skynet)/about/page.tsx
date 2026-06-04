@@ -149,7 +149,7 @@ export default function AboutPage() {
             }
           `}</style>
 
-          <Reveal>
+          <Reveal initialVisible>
             <div
               style={{
                 fontFamily: "var(--font-mono)",

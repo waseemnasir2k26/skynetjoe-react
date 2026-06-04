@@ -28,7 +28,7 @@ const GithubIcon = ({ className }: { className?: string }) => (
 );
 
 export const metadata: Metadata = {
-  title: "Contact — 8-hour reply guarantee from Bali | SkynetLabs",
+  title: "Contact — 8-hour reply guarantee from Bali",
   description:
     "Skip the discovery-call dance. Send a brief, get a fixed-price scope back in 48 hours. Email, LinkedIn, live chat, or formal application — pick your channel. Reply within 8h on weekdays.",
   alternates: { canonical: `${SITE.url}/contact` },
@@ -175,7 +175,7 @@ export default function ContactPage() {
               .contact-hero { grid-template-columns: 1.3fr 1fr !important; }
             }
           `}</style>
-          <Reveal>
+          <Reveal initialVisible>
             {eyebrow("Open for 2 builds — June 2026")}
             <h1
               style={{

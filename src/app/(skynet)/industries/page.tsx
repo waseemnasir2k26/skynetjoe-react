@@ -90,7 +90,7 @@ export default function IndustriesIndexPage() {
           borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <Reveal className="container-x px-6 relative z-10 max-w-4xl">
+        <Reveal initialVisible className="container-x px-6 relative z-10 max-w-4xl">
           <div
             className="inline-flex items-center gap-3 mb-6"
             style={{

@@ -24,7 +24,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 type IconCmp = React.ComponentType<{ className?: string }>;
 
 export const metadata: Metadata = {
-  title: "AI Automation Services Across All 48 US States | SkynetLabs",
+  title: "AI Automation Services Across All 48 US States",
   description:
     "SkynetLabs delivers AI automation, n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents to founders in all 48 contiguous US states. Pick your state — fixed scope, public pricing, 5–14 day ship.",
   alternates: { canonical: `${SITE.url}/locations` },
@@ -117,7 +117,7 @@ export default function LocationsIndexPage() {
           borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <Reveal className="container-x px-6 max-w-4xl">
+        <Reveal initialVisible className="container-x px-6 max-w-4xl">
           <div className="mb-6" style={eyebrow}>
             <span style={eyebrowRule} />
             <span
