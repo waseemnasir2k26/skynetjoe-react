@@ -618,7 +618,8 @@ function OptionGrid({
             color: C.ink,
             fontFamily: "var(--font-sans)",
             fontSize: 15,
-            outline: "none",
+            // No inline outline:none — it beats the global :focus-visible ring.
+            // globals.css handles mouse (no outline) + keyboard (terracotta ring).
             borderRadius: 2,
           }}
           autoFocus
@@ -687,7 +688,8 @@ function MultiSelectGrid({
             color: C.ink,
             fontFamily: "var(--font-sans)",
             fontSize: 15,
-            outline: "none",
+            // No inline outline:none — it beats the global :focus-visible ring.
+            // globals.css handles mouse (no outline) + keyboard (terracotta ring).
             borderRadius: 2,
           }}
           autoFocus

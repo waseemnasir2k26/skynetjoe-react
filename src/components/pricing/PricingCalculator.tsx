@@ -32,7 +32,9 @@ const FIELD_STYLE: React.CSSProperties = {
   fontFamily: "var(--font-sans)",
   fontSize: "0.875rem",
   borderRadius: 2,
-  outline: "none",
+  // No inline `outline:none` — inline wins the cascade and would kill the global
+  // :focus-visible ring. globals.css `*:focus{outline:none}` removes the mouse
+  // outline; keyboard users keep the terracotta ring (WCAG 2.4.7).
 };
 
 export default function PricingCalculator() {
