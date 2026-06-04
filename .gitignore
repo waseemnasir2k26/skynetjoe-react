@@ -55,3 +55,6 @@ next-env.d.ts
 # build/run logs
 *.log
 .env*.local
+
+# Hostinger deploy source-archive (produced by scripts/deploy-archive.*)
+/skynetjoe-deploy.zip

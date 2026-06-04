@@ -1,3 +1,14 @@
+> # >>> OUTDATED / INACCURATE — DO NOT USE FOR DEPLOYS <<<
+> This document claims skynetjoe.com auto-deploys from a GitHub repo on push.
+> **That is NOT wired.** The real deploy is a manual ZIP source-archive upload
+> triggered via the Hostinger MCP (`hosting_deployJsApplication`). It also
+> references Payload CMS / `DATABASE_URI` / `waseemnasir.com`, none of which
+> apply anymore (Payload was removed 2026-05-29; the live domain is
+> `skynetjoe.com`).
+>
+> **Use [`DEPLOY-REAL.md`](./DEPLOY-REAL.md) and `scripts/deploy-archive.*` instead.**
+> The content below is kept for historical reference only.
+
 # Hostinger Node.js Web App — Deploy guide
 
 ## Hostinger plan
