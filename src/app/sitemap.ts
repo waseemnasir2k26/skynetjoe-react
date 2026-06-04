@@ -13,8 +13,15 @@ import {
   isLocationIndexable,
 } from "@/lib/sitemap-quality";
 
+// Stable lastModified for routes with no per-page content date (static pages,
+// service/location/case-study/industry landers). Previously these used
+// `new Date()`, so every regeneration stamped unchanged pages as freshly
+// modified — a weak/noisy freshness signal to crawlers. Bump this constant only
+// when these routes' content actually changes. Dynamic blog/news routes below
+// keep their real p.updatedAt || p.publishedAt dates.
+const STATIC_LASTMOD = new Date("2026-06-01");
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
   const base = SITE.url;
 
   const staticRoutes = [
@@ -51,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/industries/freight-logistics/texas",
   ].map((path) => ({
     url: `${base}${path}`,
-    lastModified: now,
+    lastModified: STATIC_LASTMOD,
     changeFrequency: "weekly" as const,
     priority: path === "" ? 1 : 0.8,
   }));
@@ -59,7 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const serviceRoutes = SERVICE_CATEGORIES.flatMap((cat) =>
     cat.services.map((svc) => ({
       url: `${base}/services/${svc.slug}`,
-      lastModified: now,
+      lastModified: STATIC_LASTMOD,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }))
@@ -70,7 +77,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const stateRoutes = STATES.filter((s) => isLocationIndexable(s.slug)).map(
     (s) => ({
       url: `${base}/locations/${s.slug}`,
-      lastModified: now,
+      lastModified: STATIC_LASTMOD,
       changeFrequency: "monthly" as const,
       priority: 0.6,
     }),
@@ -100,7 +107,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     isCaseStudyIndexable(c.slug),
   ).map((c) => ({
     url: `${base}/case-studies/${c.slug}`,
-    lastModified: now,
+    lastModified: STATIC_LASTMOD,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
@@ -110,7 +117,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     isIndustryIndexable(i.slug),
   ).map((i) => ({
     url: `${base}/industries/${i.slug}`,
-    lastModified: now,
+    lastModified: STATIC_LASTMOD,
     changeFrequency: "monthly" as const,
     priority: 0.75,
   }));

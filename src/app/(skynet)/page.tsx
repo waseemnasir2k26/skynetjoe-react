@@ -44,11 +44,6 @@ export default function Home() {
         url: SITE.url,
         name: SITE.brand,
         publisher: { "@id": `${SITE.url}/#organization` },
-        potentialAction: {
-          "@type": "SearchAction",
-          target: `${SITE.url}/?s={search_term_string}`,
-          "query-input": "required name=search_term_string",
-        },
       },
       {
         "@type": "ProfessionalService",
