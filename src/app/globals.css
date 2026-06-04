@@ -264,6 +264,17 @@ select:focus-visible,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  /* Zeroing durations alone leaves Framer's `initial` hidden state (opacity:0,
+     transform, clip-path) painted — a blank hero for reduced-motion users on
+     no-JS / pre-hydration. Force every reveal-wrapped container visible. The
+     `.reveal-root` hook is added by <Reveal> in Reveal.tsx (the motion.div has
+     no other stable class). */
+  .reveal-root {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
 }
 
 /* CREAM BODY — default. Ocean kept as opt-in via html.theme-dark */

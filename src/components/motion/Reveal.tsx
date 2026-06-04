@@ -24,6 +24,7 @@ export function Reveal({
   className,
   style,
   as = "div",
+  initialVisible = false,
 }: {
   children: ReactNode;
   delay?: number;
@@ -31,13 +32,23 @@ export function Reveal({
   className?: string;
   style?: CSSProperties;
   as?: "div" | "section" | "li" | "figure";
+  /**
+   * Paint children visible on first frame (no hidden initial state) so
+   * above-the-fold / hero content is never blank on no-JS or slow hydration,
+   * while still animating to its final state. P0 conversion + LLM-crawler fix.
+   * Defaults to false to preserve the masked-reveal behavior for existing callers.
+   */
+  initialVisible?: boolean;
 }) {
   const MotionTag = motion[as];
+  // `reveal-root` is a stable hook so the prefers-reduced-motion override in
+  // globals.css can force this (otherwise class-less) motion.div visible.
+  const rootClass = className ? `reveal-root ${className}` : "reveal-root";
   return (
     <MotionTag
-      className={className}
+      className={rootClass}
       style={style}
-      initial={{ opacity: 0, y, clipPath: "inset(0 0 100% 0)" }}
+      initial={initialVisible ? false : { opacity: 0, y, clipPath: "inset(0 0 100% 0)" }}
       whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.7, ease: EASE, delay }}
