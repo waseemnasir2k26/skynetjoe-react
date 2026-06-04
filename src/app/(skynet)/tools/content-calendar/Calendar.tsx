@@ -469,9 +469,9 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-3">
           — Content calendar generator · free forever
         </p>
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4">
+        <h2 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4">
           Stop staring at the empty week.
-        </h1>
+        </h2>
         <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed max-w-3xl">
           Plug in your niche, your tone, your platform mix. You walk away with
           a 30-day calendar — hooks, formats, hashtags, and a cadence that

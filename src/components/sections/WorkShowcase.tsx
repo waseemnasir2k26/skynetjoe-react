@@ -323,7 +323,7 @@ export default function WorkShowcase() {
             />
             Recent projects · real screenshots
           </div>
-          <h1
+          <h2
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 700,
@@ -344,7 +344,7 @@ export default function WorkShowcase() {
             >
               Click any tile.
             </span>
-          </h1>
+          </h2>
           <p
             style={{
               fontSize: "1.0625rem",
