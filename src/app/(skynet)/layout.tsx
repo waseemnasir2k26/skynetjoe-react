@@ -48,9 +48,10 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  // Use assetsUrl (vercel host) for og:image resolution while apex doesn't
-  // host the /public assets yet. Canonicals below still use SITE.url.
-  metadataBase: new URL(SITE.assetsUrl),
+  // Canonical production URL drives metadataBase so canonical + OG URL
+  // resolution is stable (assetsUrl can be a Vercel preview host). assetsUrl
+  // is still exported for any code that references it intentionally.
+  metadataBase: new URL(SITE.url),
   title: {
     default: `${SITE.brand} — ${SITE.tagline}`,
     template: `%s | ${SITE.brand}`,

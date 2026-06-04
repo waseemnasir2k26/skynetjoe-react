@@ -52,8 +52,6 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       `${SITE.url}/sitemap.xml`,
-      `${SITE.url}/llms.txt`,
-      `${SITE.url}/llms-full.txt`,
     ],
     host: SITE.url,
   };

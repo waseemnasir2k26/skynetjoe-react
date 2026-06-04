@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
+import { SITE } from "@/lib/site";
+
+// Canonical/OG host resolves via SITE.url (env-overridable, defaults to the
+// production domain) — same source the rest of the app uses for canonicals.
+const PAGE_URL = `${SITE.url.replace(/\/+$/, "")}/lp/logistics`;
 
 export const metadata: Metadata = {
-  title: "Dispatch canvas for small-fleet carriers — SkynetLabs",
+  title: "Dispatch canvas for small-fleet carriers",
   description:
     "Stop running freight ops from six browser tabs and a personal cell. SkynetLabs ships the dispatch canvas — AI voice agent, factoring widget, lane economics — in 14 days. Public pricing. For US small-fleet carriers (5–25 trucks).",
-  alternates: { canonical: "/lp/logistics" },
+  alternates: { canonical: PAGE_URL },
   robots: { index: false, follow: false },
   openGraph: {
     title: "Dispatch canvas for small-fleet carriers — SkynetLabs",
     description:
       "Six tabs. $847/mo. Voicemail after 8pm. We rebuild the lot in 14 days. Public pricing. Source-controlled.",
-    url: "/lp/logistics",
+    url: PAGE_URL,
     type: "website",
   },
 };
@@ -78,7 +83,7 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .hero-eyebrow { display:inline-flex; align-items:center; gap:10px; font-size:12px; font-weight:600; color:var(--ink-2); padding:7px 14px; border:1px solid var(--rule-strong); border-radius:999px; margin-bottom:26px; background:rgba(242,239,230,0.6); backdrop-filter:blur(6px); animation:fade-up 0.7s ease-out both; }
 .lp-log-v3 .hero-eyebrow .pulse { width:7px; height:7px; background:var(--terracotta); border-radius:50%; box-shadow:0 0 0 4px rgba(198,107,63,0.18); animation:pulse-terracotta 1.6s ease-in-out infinite; }
 .lp-log-v3 .hero-eyebrow strong { color:var(--terracotta); font-weight:700; letter-spacing:0.04em; }
-.lp-log-v3 .hero h1 { font-family:var(--font-display),var(--font-serif-fraunces),Georgia,serif; font-weight:500; font-size:clamp(40px,6vw,76px); line-height:1.02; letter-spacing:-0.035em; margin:0 auto 22px; max-width:18ch; animation:fade-up 0.8s ease-out 0.1s both; }
+.lp-log-v3 .hero h1 { font-family:var(--font-display), system-ui, sans-serif; font-weight:500; font-size:clamp(40px,6vw,76px); line-height:1.02; letter-spacing:-0.035em; margin:0 auto 22px; max-width:18ch; animation:fade-up 0.8s ease-out 0.1s both; }
 .lp-log-v3 .hero h1 em { font-style:italic; color:var(--terracotta); font-weight:500; background:linear-gradient(120deg,transparent 0%,transparent 45%,rgba(198,107,63,0.18) 45%,rgba(198,107,63,0.18) 100%); padding:0 4px; }
 .lp-log-v3 .hero-sub { font-size:20px; line-height:1.5; color:var(--ink-2); max-width:58ch; margin:0 auto 32px; font-weight:400; animation:fade-up 0.8s ease-out 0.2s both; }
 .lp-log-v3 .hero-sub strong { color:var(--ink); font-weight:600; }

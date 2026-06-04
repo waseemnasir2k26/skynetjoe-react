@@ -8,7 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal, RevealGroup, RevealItem, ParallaxFigure } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "Latest news & field notes — SkynetLabs",
+  title: "Latest news & field notes",
   description:
     "Honest field notes from one operator shipping AI automation, n8n, AEO, and bespoke websites from Bali. Real client builds, real cost math, real failure modes.",
   alternates: { canonical: `${SITE.url}/news` },

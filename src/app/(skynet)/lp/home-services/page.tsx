@@ -8,7 +8,7 @@ import { SITE } from "@/lib/site";
 const PAGE_URL = `${SITE.url.replace(/\/+$/, "")}/lp/home-services`;
 
 export const metadata: Metadata = {
-  title: "Never Miss a Service Call Again | SkynetLabs",
+  title: "Never Miss a Service Call Again",
   description:
     "Texas HVAC & plumbing owners: when crews are on jobs, missed calls go to your competitor. We answer and text back every missed call 24/7. Free missed-call audit.",
   alternates: { canonical: PAGE_URL },

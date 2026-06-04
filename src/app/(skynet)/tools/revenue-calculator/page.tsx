@@ -11,7 +11,7 @@ const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 export const metadata: Metadata = {
   title:
-    "Revenue Recovery Calculator — see what your missed leads + manual work are costing you · SkynetLabs",
+    "Revenue Recovery Calculator — see what your missed leads + manual work are costing you",
   description:
     "Free interactive ROI calculator. Move 6 sliders, see in real time how much revenue your business is losing from missed leads, low close rate, and manual follow-ups.",
   alternates: { canonical: `${SITE.url}/tools/revenue-calculator` },
