@@ -114,6 +114,8 @@ export default function Outcomes() {
                   overflow: "hidden",
                   border: "1px solid rgba(26,26,26,0.10)",
                   aspectRatio: "320 / 180",
+                  width: "100%",
+                  height: "auto",
                 }}
               >
                 <Art className="w-full h-full block" />

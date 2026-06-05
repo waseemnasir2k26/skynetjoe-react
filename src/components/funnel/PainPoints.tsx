@@ -37,7 +37,7 @@ export default function PainPoints() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "var(--oxblood)",
+              color: "var(--terracotta-aa)",
               marginBottom: 16,
               display: "inline-flex",
               alignItems: "center",
@@ -48,7 +48,7 @@ export default function PainPoints() {
               style={{
                 width: 28,
                 height: 1,
-                background: "var(--oxblood)",
+                background: "var(--terracotta-aa)",
                 display: "inline-block",
               }}
             />

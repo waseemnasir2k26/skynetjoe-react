@@ -33,16 +33,16 @@ export const metadata: Metadata = {
 const css = `
   .hs-wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
   .hs-hero { padding: 64px 0 40px; }
-  .hs-eyebrow { font-family: var(--font-mono-plex), monospace; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oxblood); margin: 0 0 16px; font-weight: 600; }
-  .hs-hero h1 { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: clamp(2.2rem, 6.5vw, 3.7rem); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 20px; }
-  .hs-hero h1 em { font-style: italic; color: var(--terracotta); }
+  .hs-eyebrow { font-family: var(--font-mono-plex), monospace; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terracotta-aa); margin: 0 0 16px; font-weight: 600; }
+  .hs-hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 6.5vw, 3.7rem); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 20px; }
+  .hs-hero h1 em { font-style: normal; font-weight: 700; color: var(--terracotta); }
   .hs-hero .sub { font-size: clamp(1.05rem, 2.4vw, 1.28rem); color: #2a2a2a; max-width: 620px; margin: 0 0 30px; line-height: 1.5; }
 
   /* Ghost-calls motif */
   .hs-ghost { display: flex; flex-direction: column; gap: 10px; margin: 0 0 34px; }
   .hs-ticket { display: flex; align-items: center; justify-content: space-between; gap: 14px;
-    background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.10); border-left: 4px solid var(--oxblood);
-    border-radius: 10px; padding: 12px 16px; opacity: 0; transform: translateY(8px);
+    background: var(--cream-2); border: 1px solid rgba(26,26,26,0.12); border-left: 4px solid var(--oxblood);
+    border-radius: 4px; padding: 12px 16px; opacity: 0; transform: translateY(8px);
     animation: hs-rise 0.5s ease forwards; }
   .hs-ticket:nth-child(1) { animation-delay: 0.1s; }
   .hs-ticket:nth-child(2) { animation-delay: 0.55s; }
@@ -53,29 +53,29 @@ const css = `
   .hs-ticket .lost { font-family: var(--font-mono-plex), monospace; font-size: 1.15rem; font-weight: 700; color: var(--terracotta); white-space: nowrap; }
   @keyframes hs-rise { to { opacity: 1; transform: translateY(0); } }
 
-  .hs-btn { display: inline-block; background: #A8501F; color: #fff; padding: 15px 30px; border-radius: 11px;
+  .hs-btn { display: inline-block; background: #A8501F; color: #fff; padding: 15px 30px; border-radius: 2px;
     font-weight: 700; text-decoration: none; border: none; cursor: pointer; font-size: 1.02rem; font-family: inherit; line-height: 1.1; }
   .hs-btn:hover { background: #8f4318; }
   .hs-btn:focus-visible, .hs-form input:focus-visible, .hs-faq summary:focus-visible {
     outline: 3px solid var(--sage); outline-offset: 2px; }
 
   .hs-section { padding: 46px 0; border-top: 1px solid rgba(0,0,0,0.09); }
-  .hs-section h2 { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: clamp(1.7rem, 4vw, 2.3rem); color: var(--ink); margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.1; }
+  .hs-section h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.3rem); color: var(--ink); margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.1; }
   .hs-section .lead { color: #333; font-size: 1.05rem; line-height: 1.55; margin: 0 0 26px; max-width: 600px; }
 
   .hs-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .hs-stat { background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 22px 18px; }
+  .hs-stat { background: var(--cream-2); border: 1px solid rgba(26,26,26,0.12); border-radius: 4px; padding: 22px 18px; }
   .hs-stat .num { font-family: var(--font-mono-plex), monospace; font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 700; color: var(--terracotta); display: block; line-height: 1; margin: 0 0 8px; }
   .hs-stat p { color: #333; font-size: 0.92rem; line-height: 1.45; margin: 0; }
 
   .hs-bundle { display: flex; flex-direction: column; gap: 14px; }
-  .hs-step { display: flex; gap: 16px; background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 20px; }
+  .hs-step { display: flex; gap: 16px; background: var(--cream-2); border: 1px solid rgba(26,26,26,0.12); border-radius: 4px; padding: 20px; }
   .hs-step .badge { font-family: var(--font-mono-plex), monospace; font-weight: 700; font-size: 1.05rem; color: #fff;
     background: var(--sage); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .hs-step h3 { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: 1.2rem; margin: 0 0 6px; color: var(--ink); }
+  .hs-step h3 { font-family: var(--font-display); font-size: 1.2rem; margin: 0 0 6px; color: var(--ink); }
   .hs-step p { color: #333; line-height: 1.5; margin: 0; font-size: 0.97rem; }
 
-  .hs-proof { background: var(--ink); color: var(--cream); border-radius: 16px; padding: 34px 28px; text-align: center; }
+  .hs-proof { background: var(--ink); color: var(--cream); border-radius: 4px; padding: 34px 28px; text-align: center; }
   .hs-proof h2 { color: var(--cream); }
   .hs-proof p { color: rgba(242,239,230,0.9); font-size: 1.05rem; line-height: 1.55; margin: 0 auto 6px; max-width: 540px; }
   .hs-proof .big { font-family: var(--font-mono-plex), monospace; font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 700; color: var(--ochre); }
@@ -83,13 +83,13 @@ const css = `
   .hs-capture { text-align: center; }
   .hs-form { display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto; text-align: left; }
   .hs-form label { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
-  .hs-form input { padding: 14px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.2); font-size: 1rem; font-family: inherit; background: #fff; }
+  .hs-form input { padding: 14px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.2); font-size: 1rem; font-family: inherit; background: #fff; }
   .hs-note { font-size: 0.85rem; color: #444; margin: 14px auto 0; max-width: 440px; }
   .hs-secondary { display: inline-block; margin-top: 18px; color: var(--ink); font-size: 0.92rem; font-weight: 600; text-decoration: underline; }
 
   .hs-faq { display: flex; flex-direction: column; gap: 10px; }
-  .hs-faq details { background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08); border-radius: 10px; padding: 4px 18px; }
-  .hs-faq summary { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: 1.05rem; color: var(--ink); cursor: pointer; padding: 14px 0; list-style: none; }
+  .hs-faq details { background: var(--cream-2); border: 1px solid rgba(26,26,26,0.12); border-radius: 4px; padding: 4px 18px; }
+  .hs-faq summary { font-family: var(--font-display); font-size: 1.05rem; color: var(--ink); cursor: pointer; padding: 14px 0; list-style: none; }
   .hs-faq summary::-webkit-details-marker { display: none; }
   .hs-faq summary::after { content: "+"; float: right; font-family: var(--font-mono-plex), monospace; color: var(--terracotta); }
   .hs-faq details[open] summary::after { content: "−"; }

@@ -72,6 +72,7 @@ export default function FinalCTA() {
           </p>
           <Link
             href="/discovery-call"
+            className="finalcta-btn"
             style={{
               background: "var(--cream-3)",
               color: "var(--terracotta-aa)",
@@ -82,16 +83,20 @@ export default function FinalCTA() {
               borderRadius: 2,
               display: "inline-flex",
               alignItems: "center",
+              justifyContent: "center",
               gap: 8,
               textDecoration: "none",
               transition: "transform 0.18s",
               boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
               minHeight: 48,
+              width: "100%",
+              maxWidth: 360,
             }}
           >
             Book free 30-min audit
             <ArrowRight style={{ width: 16, height: 16 }} />
           </Link>
+          <style>{`@media(min-width:480px){.finalcta-btn{width:auto !important}}`}</style>
           <div
             style={{
               fontFamily: "var(--font-mono)",

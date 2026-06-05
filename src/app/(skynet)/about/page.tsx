@@ -119,7 +119,7 @@ export default function AboutPage() {
       <section
         style={{
           background: "var(--cream-3)",
-          padding: "clamp(88px, 18vw, 112px) 0 clamp(48px, 12vw, 80px)",
+          padding: "clamp(96px, 18vw, 144px) 0 clamp(56px, 12vw, 112px)",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,

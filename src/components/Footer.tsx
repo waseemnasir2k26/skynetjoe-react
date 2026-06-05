@@ -39,7 +39,7 @@ export default function Footer() {
         borderColor: "var(--border)",
       }}
     >
-      <div className="container-x px-5 sm:px-6 py-12 sm:py-16">
+      <div className="container-x py-12 sm:py-16" style={{ paddingLeft: "clamp(16px, 5vw, 24px)", paddingRight: "clamp(16px, 5vw, 24px)" }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-10">
           <div className="lg:col-span-2">
             <Link
@@ -96,7 +96,7 @@ export default function Footer() {
             {/* Founder credit — small round founder photo (you talk to the builder) */}
             <div className="flex items-center gap-3 mt-6">
               <span
-                className="flex-shrink-0 overflow-hidden"
+                className="hidden min-[400px]:block flex-shrink-0 overflow-hidden"
                 style={{
                   width: 34,
                   height: 34,
@@ -109,6 +109,7 @@ export default function Footer() {
                   alt="Waseem Nasir, founder of SkynetLabs"
                   width={34}
                   height={34}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </span>

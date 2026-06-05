@@ -255,9 +255,9 @@ export default function CaseStudiesPage() {
             gap: 1.25rem;
           }
           .cs-grid-wrap .wn-x-card {
-            background: var(--cream-2);
-            border: 1px solid rgba(26,26,26,0.12);
-            border-radius: 14px;
+            background: var(--cream-3);
+            border: 1px solid rgba(26,26,26,0.14);
+            border-radius: 4px;
             overflow: hidden;
             display: flex;
             flex-direction: column;

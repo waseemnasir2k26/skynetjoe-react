@@ -152,7 +152,7 @@ export default function ContactPage() {
       <section
         style={{
           background: "var(--cream-3)",
-          padding: "112px 0 80px",
+          padding: "clamp(96px, 18vw, 144px) 0 clamp(56px, 12vw, 112px)",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
@@ -162,7 +162,7 @@ export default function ContactPage() {
           style={{
             maxWidth: 1100,
             margin: "0 auto",
-            padding: "0 24px",
+            padding: "0 clamp(16px, 5vw, 24px)",
             display: "grid",
             gridTemplateColumns: "1fr",
             gap: 40,
@@ -337,9 +337,9 @@ export default function ContactPage() {
 
       {/* CHANNELS */}
       <section
-        style={{ padding: "72px 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
+        style={{ padding: "clamp(48px, 10vw, 80px) 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div style={{ maxWidth: 700, marginBottom: 32 }}>
             {eyebrow("Pick your channel")}
             <h2
@@ -454,14 +454,14 @@ export default function ContactPage() {
       {/* WHAT TO EXPECT */}
       <section
         style={{
-          padding: "72px 0",
+          padding: "clamp(48px, 10vw, 80px) 0",
           background: "var(--cream-3)",
           borderBottom: "1px solid rgba(26,26,26,0.10)",
           position: "relative",
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <div style={{ maxWidth: 640, marginBottom: 36 }}>
             {eyebrow("What to expect")}
             <h2
@@ -528,9 +528,9 @@ export default function ContactPage() {
 
       {/* GUARANTEES */}
       <section
-        style={{ padding: "72px 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
+        style={{ padding: "clamp(48px, 10vw, 80px) 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
           <RevealGroup style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
             {guarantees.map((g, i) => {
               const Icon = g.icon;
@@ -583,7 +583,7 @@ export default function ContactPage() {
       <section
         style={{ padding: "88px 0", background: "var(--terracotta)", position: "relative", zIndex: 2 }}
       >
-        <Reveal style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+        <Reveal style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
           <CheckCircle2 style={{ width: 36, height: 36, color: "var(--cream-3)", margin: "0 auto 16px" }} />
           <h2
             style={{

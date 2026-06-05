@@ -122,7 +122,7 @@ export default function ServicesMegaMenu({ onClose }: Props) {
             fontSize: 10,
             textTransform: "uppercase",
             letterSpacing: "0.18em",
-            color: "var(--terracotta)",
+            color: "var(--terracotta-aa)",
             fontWeight: 700,
           }}
         >

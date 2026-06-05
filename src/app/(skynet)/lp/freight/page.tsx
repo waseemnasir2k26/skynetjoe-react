@@ -35,14 +35,14 @@ const css = `
 
   /* HERO — phone-ringing-in-the-cab motif, distinct from both other LPs */
   .lp-frt-hero { padding: 60px 0 38px; }
-  .lp-frt-eyebrow { font-family: var(--font-mono-plex), monospace; font-size: 0.76rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oxblood); margin: 0 0 18px; font-weight: 600; }
-  .lp-frt-hero h1 { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: clamp(2.2rem, 6.6vw, 3.8rem); line-height: 1.0; letter-spacing: -0.022em; color: var(--ink); margin: 0 0 18px; }
-  .lp-frt-hero h1 em { font-style: italic; color: var(--terracotta); }
+  .lp-frt-eyebrow { font-family: var(--font-mono-plex), monospace; font-size: 0.76rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--terracotta-aa); margin: 0 0 18px; font-weight: 600; }
+  .lp-frt-hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 6.6vw, 3.8rem); line-height: 1.0; letter-spacing: -0.022em; color: var(--ink); margin: 0 0 18px; }
+  .lp-frt-hero h1 em { font-style: normal; font-weight: 700; color: var(--terracotta); }
   .lp-frt-hero .sub { font-size: clamp(1.06rem, 2.4vw, 1.3rem); color: #2a2a2a; max-width: 640px; margin: 0 0 28px; line-height: 1.5; }
 
   /* Ringing phone-in-cab card — pure CSS, the unique hero device */
   .lp-frt-cab { display: flex; align-items: center; gap: 18px; background: var(--ink); color: var(--cream);
-    border-radius: 16px; padding: 22px 24px; margin: 0 0 22px; border: 1px solid rgba(0,0,0,0.2); }
+    border-radius: 4px; padding: 22px 24px; margin: 0 0 22px; border: 1px solid rgba(0,0,0,0.2); }
   .lp-frt-phone { position: relative; flex-shrink: 0; width: 54px; height: 54px; border-radius: 50%;
     background: var(--terracotta); display: flex; align-items: center; justify-content: center; }
   .lp-frt-phone span { display: block; width: 22px; height: 22px; border-radius: 5px;
@@ -60,8 +60,8 @@ const css = `
   /* Missed-load ticket stack */
   .lp-frt-loads { display: flex; flex-direction: column; gap: 9px; margin: 0 0 32px; }
   .lp-frt-load { display: flex; align-items: center; justify-content: space-between; gap: 14px;
-    background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.10); border-left: 4px solid var(--oxblood);
-    border-radius: 10px; padding: 12px 16px; opacity: 0; transform: translateX(-10px);
+    background: var(--cream-2); border: 1px solid rgba(26,26,26,0.12); border-left: 4px solid var(--oxblood);
+    border-radius: 4px; padding: 12px 16px; opacity: 0; transform: translateX(-10px);
     animation: lp-frt-slide 0.5s ease forwards; }
   .lp-frt-load:nth-child(1) { animation-delay: 0.1s; }
   .lp-frt-load:nth-child(2) { animation-delay: 0.5s; }
@@ -72,7 +72,7 @@ const css = `
   .lp-frt-load .gone { font-family: var(--font-mono-plex), monospace; font-size: 1.1rem; font-weight: 700; color: var(--oxblood); white-space: nowrap; }
   @keyframes lp-frt-slide { to { opacity: 1; transform: translateX(0); } }
 
-  .lp-frt-btn { display: inline-block; background: var(--terracotta); color: #fff; padding: 15px 30px; border-radius: 11px;
+  .lp-frt-btn { display: inline-block; background: var(--terracotta); color: #fff; padding: 15px 30px; border-radius: 2px;
     font-weight: 700; text-decoration: none; border: none; cursor: pointer; font-size: 1.02rem; font-family: inherit; line-height: 1.1; }
   .lp-frt-btn:hover { background: #a8541f; }
   .lp-frt-btn:focus-visible, .lp-frt-form input:focus-visible, .lp-frt-faq summary:focus-visible {
@@ -80,39 +80,39 @@ const css = `
 
   /* Sections — boxed/banded rhythm (different from home-services' rule-line rhythm) */
   .lp-frt-section { padding: 44px 0; border-top: 1px solid rgba(0,0,0,0.09); }
-  .lp-frt-section h2 { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: clamp(1.7rem, 4vw, 2.35rem); color: var(--ink); margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.08; }
+  .lp-frt-section h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.35rem); color: var(--ink); margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.08; }
   .lp-frt-section .lead { color: #333; font-size: 1.05rem; line-height: 1.55; margin: 0 0 26px; max-width: 620px; }
 
   .lp-frt-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .lp-frt-stat { background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 22px 18px; }
+  .lp-frt-stat { background: var(--cream-2); border: 1px solid rgba(26,26,26,0.12); border-radius: 4px; padding: 22px 18px; }
   .lp-frt-stat .num { font-family: var(--font-mono-plex), monospace; font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 700; color: var(--terracotta); display: block; line-height: 1; margin: 0 0 8px; }
   .lp-frt-stat p { color: #333; font-size: 0.92rem; line-height: 1.45; margin: 0; }
 
   /* "What you get" — voice agent featured first, add-ons in a row of chips */
-  .lp-frt-hero-card { background: var(--ink); color: var(--cream); border-radius: 16px; padding: 28px 26px; margin: 0 0 16px; }
+  .lp-frt-hero-card { background: var(--ink); color: var(--cream); border-radius: 4px; padding: 28px 26px; margin: 0 0 16px; }
   .lp-frt-hero-card .tag { font-family: var(--font-mono-plex), monospace; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ochre); font-weight: 700; margin: 0 0 10px; }
-  .lp-frt-hero-card h3 { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: 1.5rem; color: var(--cream); margin: 0 0 10px; line-height: 1.12; }
+  .lp-frt-hero-card h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--cream); margin: 0 0 10px; line-height: 1.12; }
   .lp-frt-hero-card p { color: rgba(242,239,230,0.9); line-height: 1.55; margin: 0 0 14px; font-size: 1rem; }
   .lp-frt-hero-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
   .lp-frt-hero-card li { display: flex; gap: 10px; align-items: flex-start; color: rgba(242,239,230,0.92); font-size: 0.96rem; line-height: 1.45; }
   .lp-frt-hero-card li::before { content: "›"; color: var(--ochre); font-family: var(--font-mono-plex), monospace; font-weight: 700; flex-shrink: 0; }
 
   .lp-frt-addons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .lp-frt-addon { background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 18px; }
+  .lp-frt-addon { background: var(--cream-2); border: 1px solid rgba(26,26,26,0.12); border-radius: 4px; padding: 18px; }
   .lp-frt-addon .pill { font-family: var(--font-mono-plex), monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); font-weight: 700; }
-  .lp-frt-addon h4 { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: 1.08rem; margin: 6px 0 6px; color: var(--ink); }
+  .lp-frt-addon h4 { font-family: var(--font-display); font-size: 1.08rem; margin: 6px 0 6px; color: var(--ink); }
   .lp-frt-addon p { color: #333; font-size: 0.9rem; line-height: 1.45; margin: 0; }
 
   /* Steps */
   .lp-frt-steps { display: flex; flex-direction: column; gap: 14px; }
-  .lp-frt-step { display: flex; gap: 16px; background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 20px; }
+  .lp-frt-step { display: flex; gap: 16px; background: var(--cream-2); border: 1px solid rgba(26,26,26,0.12); border-radius: 4px; padding: 20px; }
   .lp-frt-step .badge { font-family: var(--font-mono-plex), monospace; font-weight: 700; font-size: 1.05rem; color: #fff;
     background: var(--sage); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .lp-frt-step h3 { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: 1.2rem; margin: 0 0 6px; color: var(--ink); }
+  .lp-frt-step h3 { font-family: var(--font-display); font-size: 1.2rem; margin: 0 0 6px; color: var(--ink); }
   .lp-frt-step p { color: #333; line-height: 1.5; margin: 0; font-size: 0.97rem; }
 
   /* Do-the-math panel */
-  .lp-frt-math { background: var(--oxblood); color: var(--cream); border-radius: 16px; padding: 34px 28px; text-align: center; }
+  .lp-frt-math { background: var(--oxblood); color: var(--cream); border-radius: 4px; padding: 34px 28px; text-align: center; }
   .lp-frt-math h2 { color: var(--cream); }
   .lp-frt-math p { color: rgba(242,239,230,0.92); font-size: 1.05rem; line-height: 1.55; margin: 0 auto 6px; max-width: 560px; }
   .lp-frt-math .big { font-family: var(--font-mono-plex), monospace; font-size: clamp(1.6rem, 5vw, 2.25rem); font-weight: 700; color: var(--ochre); }
@@ -121,14 +121,14 @@ const css = `
   .lp-frt-capture { text-align: center; }
   .lp-frt-form { display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto; text-align: left; }
   .lp-frt-form label { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
-  .lp-frt-form input { padding: 14px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.2); font-size: 1rem; font-family: inherit; background: #fff; }
+  .lp-frt-form input { padding: 14px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.2); font-size: 1rem; font-family: inherit; background: #fff; }
   .lp-frt-note { font-size: 0.85rem; color: #444; margin: 14px auto 0; max-width: 440px; }
   .lp-frt-secondary { display: inline-block; margin-top: 18px; color: var(--ink); font-size: 0.92rem; font-weight: 600; text-decoration: underline; }
 
   /* FAQ */
   .lp-frt-faq { display: flex; flex-direction: column; gap: 10px; }
-  .lp-frt-faq details { background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08); border-radius: 10px; padding: 4px 18px; }
-  .lp-frt-faq summary { font-family: var(--font-serif-fraunces), Georgia, serif; font-size: 1.05rem; color: var(--ink); cursor: pointer; padding: 14px 0; list-style: none; }
+  .lp-frt-faq details { background: var(--cream-2); border: 1px solid rgba(26,26,26,0.12); border-radius: 4px; padding: 4px 18px; }
+  .lp-frt-faq summary { font-family: var(--font-display); font-size: 1.05rem; color: var(--ink); cursor: pointer; padding: 14px 0; list-style: none; }
   .lp-frt-faq summary::-webkit-details-marker { display: none; }
   .lp-frt-faq summary::after { content: "+"; float: right; font-family: var(--font-mono-plex), monospace; color: var(--terracotta); }
   .lp-frt-faq details[open] summary::after { content: "−"; }

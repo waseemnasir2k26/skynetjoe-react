@@ -51,7 +51,7 @@ export default function Testimonials() {
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: "#A8451F",
+              color: "var(--terracotta-aa)",
               marginBottom: 16,
               display: "inline-flex",
               alignItems: "center",
@@ -62,7 +62,7 @@ export default function Testimonials() {
               style={{
                 width: 28,
                 height: 1,
-                background: "#A8451F",
+                background: "var(--terracotta-aa)",
                 display: "inline-block",
               }}
             />

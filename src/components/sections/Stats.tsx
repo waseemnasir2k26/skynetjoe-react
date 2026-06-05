@@ -33,7 +33,7 @@ export default function Stats() {
                 style={{
                   position: "relative",
                   textAlign: "center",
-                  padding: 24,
+                  padding: "clamp(14px, 4vw, 24px)",
                   background: C.cream2,
                   border: `1px solid ${C.rule}`,
                   transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",

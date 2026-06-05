@@ -283,7 +283,7 @@ export default async function ThankYouPage({
           borderBottom: "1px solid rgba(26,26,26,0.10)",
         }}
       >
-        <div className="container-x px-6 relative z-10">
+        <div className="container-x relative z-10" style={{ paddingLeft: "clamp(16px, 5vw, 24px)", paddingRight: "clamp(16px, 5vw, 24px)" }}>
           <div className="grid md:grid-cols-[1.3fr_1fr] gap-10 items-center">
             <div>
               <div className="flex items-center gap-3 mb-6">
@@ -442,7 +442,7 @@ export default async function ThankYouPage({
 
       {/* TIMELINE */}
       <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
-        <div className="container-x px-6">
+        <div className="container-x" style={{ paddingLeft: "clamp(16px, 5vw, 24px)", paddingRight: "clamp(16px, 5vw, 24px)" }}>
           <div className="max-w-2xl mb-12">
             <div className="mb-5" style={eyebrow}>
               <span style={eyebrowRule} />
@@ -509,7 +509,7 @@ export default async function ThankYouPage({
 
       {/* AI AUDIT PREVIEW */}
       <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
-        <div className="container-x px-6">
+        <div className="container-x" style={{ paddingLeft: "clamp(16px, 5vw, 24px)", paddingRight: "clamp(16px, 5vw, 24px)" }}>
           <div style={{ ...cardCream, padding: "40px 32px", border: "1px solid rgba(26,26,26,0.18)" }}>
             <div className="grid md:grid-cols-[1fr_1.4fr] gap-8 md:gap-12">
               <div>
@@ -583,7 +583,7 @@ export default async function ThankYouPage({
 
       {/* PRE-CALL HOMEWORK */}
       <section className="py-16 md:py-20 pt-0" style={{ background: "var(--cream-3)" }}>
-        <div className="container-x px-6">
+        <div className="container-x" style={{ paddingLeft: "clamp(16px, 5vw, 24px)", paddingRight: "clamp(16px, 5vw, 24px)" }}>
           <div
             style={{
               ...cardCream,
@@ -682,7 +682,7 @@ export default async function ThankYouPage({
 
       {/* 3 CASE STUDIES */}
       <section className="py-16 md:py-20 pt-0" style={{ background: "var(--cream-3)" }}>
-        <div className="container-x px-6">
+        <div className="container-x" style={{ paddingLeft: "clamp(16px, 5vw, 24px)", paddingRight: "clamp(16px, 5vw, 24px)" }}>
           <div className="max-w-2xl mb-10">
             <div className="mb-5" style={eyebrow}>
               <span style={eyebrowRule} />
@@ -757,7 +757,7 @@ export default async function ThankYouPage({
 
       {/* REFERRAL NUDGE */}
       <section className="py-16 md:py-20 pt-0" style={{ background: "var(--cream-3)" }}>
-        <div className="container-x px-6">
+        <div className="container-x" style={{ paddingLeft: "clamp(16px, 5vw, 24px)", paddingRight: "clamp(16px, 5vw, 24px)" }}>
           <div style={{ ...cardCream, padding: "40px 32px" }}>
             <div className="grid md:grid-cols-[auto_1fr] gap-5 items-start mb-6">
               <div

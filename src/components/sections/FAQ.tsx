@@ -73,7 +73,7 @@ export default function FAQ() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(32px, 5vw, 56px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.08,
               color: C.ink,

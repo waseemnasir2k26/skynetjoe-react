@@ -92,7 +92,7 @@ export default function Pricing() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(32px, 5vw, 56px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.08,
               color: C.ink,
@@ -115,7 +115,7 @@ export default function Pricing() {
               key={t.name}
               style={{
                 position: "relative",
-                padding: 28,
+                padding: "clamp(20px, 4vw, 28px)",
                 background: t.featured ? C.cream3 : C.cream2,
                 border: t.featured ? `2px solid ${C.terra}` : `1px solid ${C.rule}`,
                 transform: t.featured

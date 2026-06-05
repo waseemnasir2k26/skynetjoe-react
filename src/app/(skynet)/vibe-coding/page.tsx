@@ -380,12 +380,13 @@ export default function VibeCodingPage() {
 
             <div className="relative">
               <div
-                className="relative aspect-[4/5] rounded-3xl overflow-hidden border flex items-center justify-center"
+                className="relative aspect-[4/5] overflow-hidden border flex items-center justify-center"
                 style={{
                   borderColor: "rgba(26,26,26,0.12)",
                   background: "var(--cream-2)",
                   boxShadow:
                     "0 20px 60px rgba(26,26,26,0.10), 0 0 0 1px rgba(198,107,63,0.15) inset",
+                  borderRadius: 2,
                 }}
               >
                 <div
@@ -456,17 +457,18 @@ export default function VibeCodingPage() {
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
               What is{" "}
-              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
+              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
                 vibe coding
               </span>
               ?
             </h2>
             <div
-              className="rounded-3xl p-8 md:p-10 relative"
+              className="p-8 md:p-10 relative"
               style={{
                 background: "var(--cream-2)",
                 border: "1px solid rgba(26,26,26,0.12)",
                 backdropFilter: "blur(14px)",
+                borderRadius: 2,
               }}
             >
               <div
@@ -496,10 +498,11 @@ export default function VibeCodingPage() {
         <div className="container-x">
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16 items-center">
             <div
-              className="rounded-2xl p-8 md:p-10 flex flex-col gap-6"
+              className="p-8 md:p-10 flex flex-col gap-6"
               style={{
                 background: "var(--cream-2)",
                 border: "1px solid rgba(26,26,26,0.18)",
+                borderRadius: 2,
               }}
             >
               <div className="flex items-center gap-4">
@@ -554,7 +557,7 @@ export default function VibeCodingPage() {
               </p>
               <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-[var(--ink)]">
                 You talk to me.{" "}
-                <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
+                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
                   Not a chatbot.
                 </span>
               </h2>
@@ -589,7 +592,7 @@ export default function VibeCodingPage() {
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
               5 models on the bench.{" "}
-              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
+              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
                 One picks the lineup.
               </span>
             </h2>
@@ -605,18 +608,20 @@ export default function VibeCodingPage() {
               return (
                 <div
                   key={t.name}
-                  className="rounded-2xl p-6 relative overflow-hidden transition-transform hover:-translate-y-1"
+                  className="p-6 relative overflow-hidden transition-transform hover:-translate-y-1"
                   style={{
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.12)",
                     backdropFilter: "blur(14px)",
+                    borderRadius: 2,
                   }}
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${t.accent}`}
+                      className="w-12 h-12 flex items-center justify-center"
+                      style={{ background: "rgba(168,69,31,0.08)", borderRadius: 4 }}
                     >
-                      <Icon className="w-6 h-6 text-slate-900" />
+                      <Icon className="w-6 h-6" style={{ color: "var(--ink)" }} />
                     </div>
                     <span
                       className="text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full"
@@ -664,7 +669,7 @@ export default function VibeCodingPage() {
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
               From vibe check to live,{" "}
-              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
+              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
                 in 5 moves.
               </span>
             </h2>
@@ -680,7 +685,7 @@ export default function VibeCodingPage() {
               return (
                 <div
                   key={s.num}
-                  className="rounded-2xl p-6 md:p-8 grid md:grid-cols-[1fr_3fr] gap-6 items-center"
+                  className="p-6 md:p-8 grid md:grid-cols-[1fr_3fr] gap-6 items-center"
                   style={{
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.12)",
@@ -700,7 +705,10 @@ export default function VibeCodingPage() {
                     >
                       {s.num}
                     </div>
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--terracotta)]/20 to-[var(--ink)]/20 flex items-center justify-center border border-[rgba(198,107,63,0.30)]">
+                    <div
+                      className="w-12 h-12 flex items-center justify-center border border-[rgba(198,107,63,0.30)]"
+                      style={{ background: "rgba(168,69,31,0.08)", borderRadius: 4 }}
+                    >
                       <Icon className="w-6 h-6 text-[var(--terracotta)]" />
                     </div>
                   </div>
@@ -728,7 +736,7 @@ export default function VibeCodingPage() {
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
               Six lanes,{" "}
-              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
+              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
                 all fixed-price.
               </span>
             </h2>
@@ -744,15 +752,19 @@ export default function VibeCodingPage() {
               return (
                 <div
                   key={b.title}
-                  className="rounded-2xl p-6 relative"
+                  className="p-6 relative"
                   style={{
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.12)",
                     backdropFilter: "blur(14px)",
+                    borderRadius: 2,
                   }}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[var(--terracotta)]/20 to-[var(--ink)]/20 flex items-center justify-center border border-[rgba(198,107,63,0.30)]">
+                    <div
+                      className="w-11 h-11 flex items-center justify-center border border-[rgba(198,107,63,0.30)]"
+                      style={{ background: "rgba(168,69,31,0.08)", borderRadius: 4 }}
+                    >
                       <Icon className="w-5 h-5 text-[var(--terracotta)]" />
                     </div>
                     <span
@@ -797,7 +809,7 @@ export default function VibeCodingPage() {
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
               Real builds,{" "}
-              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
+              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
                 real domains.
               </span>
             </h2>
@@ -811,11 +823,12 @@ export default function VibeCodingPage() {
               <Link
                 key={c.slug}
                 href={`/case-studies/${c.slug}`}
-                className="group rounded-2xl p-6 block transition-transform hover:-translate-y-1"
+                className="group p-6 block transition-transform hover:-translate-y-1"
                 style={{
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
                   backdropFilter: "blur(14px)",
+                  borderRadius: 2,
                 }}
               >
                 <span
@@ -863,7 +876,7 @@ export default function VibeCodingPage() {
                 &ldquo;AI doesn&apos;t replace the builder. It replaces the
                 typing. The judgment, the taste, the &lsquo;no, that button
                 needs to live on the right&rsquo;{" "}
-                <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
+                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
                   that&apos;s still me.
                 </span>
                 &rdquo;
@@ -882,8 +895,8 @@ export default function VibeCodingPage() {
               </div>
             </div>
             <div
-              className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-[rgba(198,107,63,0.30)] flex items-center justify-center"
-              style={{ background: "var(--cream-3)" }}
+              className="relative aspect-[4/5] overflow-hidden border border-[rgba(198,107,63,0.30)] flex items-center justify-center"
+              style={{ background: "var(--cream-3)", borderRadius: 2 }}
             >
               <div
                 aria-hidden
@@ -918,7 +931,7 @@ export default function VibeCodingPage() {
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
               The{" "}
-              <span className="bg-gradient-to-r from-[var(--terracotta)] to-[var(--ink)] bg-clip-text text-transparent">
+              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
                 honest answers.
               </span>
             </h2>
@@ -927,11 +940,12 @@ export default function VibeCodingPage() {
               {faqs.map((f) => (
                 <details
                   key={f.q}
-                  className="group rounded-2xl p-5 md:p-6"
+                  className="group p-5 md:p-6"
                   style={{
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.12)",
                     backdropFilter: "blur(14px)",
+                    borderRadius: 2,
                   }}
                 >
                   <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-lg font-semibold text-[var(--ink)]">

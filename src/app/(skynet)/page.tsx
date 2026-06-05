@@ -67,9 +67,13 @@ export default function Home() {
     <>
       <JsonLd data={orgSchema} />
       <HeroFunnel />
-      <PainPoints />
+      <div className="hidden md:block">
+        <PainPoints />
+      </div>
       <Outcomes />
-      <Testimonials />
+      <div className="hidden md:block">
+        <Testimonials />
+      </div>
       <FinalCTA />
     </>
   );

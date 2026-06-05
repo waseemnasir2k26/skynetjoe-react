@@ -46,7 +46,7 @@ export default function Services() {
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(32px, 5vw, 56px)",
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: "-0.025em",
               lineHeight: 1.08,
               color: C.ink,
@@ -83,7 +83,7 @@ export default function Services() {
                 {cat.name}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {cat.services.map((svc, idx) => {
+                {cat.services.map((svc) => {
                   const Icon = ((Icons as unknown) as Record<string, IconCmp>)[svc.icon] ?? ((Icons as unknown) as Record<string, IconCmp>).Bot;
                   return (
                     <Link
@@ -92,11 +92,10 @@ export default function Services() {
                       className="group relative"
                       style={{
                         display: "block",
-                        padding: 24,
+                        padding: "clamp(16px, 4vw, 24px)",
                         background: C.cream2,
                         border: `1px solid ${C.rule}`,
                         transition: "border-color 0.18s, transform 0.18s",
-                        transform: idx % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                       }}
                     >
                       <div
