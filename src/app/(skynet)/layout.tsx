@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces, IBM_Plex_Mono } from "next/font/google";
+import {
+  Inter,
+  Fraunces,
+  IBM_Plex_Mono,
+  Bricolage_Grotesque,
+} from "next/font/google";
 import { SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -21,6 +26,24 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans-inter",
   display: "swap",
+});
+
+// Display/heading face site-wide (2026-06-07) — Bricolage Grotesque, the
+// characterful grotesque used on yasirbashir.com. Drives --font-display for
+// all headings (h1–h6/.display) + buttons. Body stays Inter (no readability
+// regression — body/serif/italic untouched from the 2026-06-01 overhaul).
+// Variable font w/ optical sizing (opsz) so large headings get the display cut.
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: "variable",
+  axes: ["opsz"],
+  variable: "--font-bricolage",
+  display: "swap",
+  // preload:false — mirror Fraunces/Plex. Only Inter (body, critical) preloads.
+  // Hero H1 paints immediately in the Inter fallback (fast mobile LCP) then
+  // swaps to Bricolage; preloading would compete with Inter for critical
+  // bandwidth on mobile. adjustFontFallback (default) damps the swap CLS.
+  preload: false,
 });
 
 // Fraunces kept ONLY for the isolated /lp/* ad funnels (theme-dark), which
@@ -89,7 +112,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: "/favicon.ico",
@@ -101,11 +130,15 @@ export const metadata: Metadata = {
 
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
-      className={`light ${inter.variable} ${fraunces.variable} ${plexMono.variable} h-full antialiased`}
+      className={`light ${inter.variable} ${bricolage.variable} ${fraunces.variable} ${plexMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -139,7 +172,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </noscript>
         )}
         <Header />
-        <main id="main-content" className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
         {/* Passive chat bubble only — opens on click, never auto-pops. Interrupting
             popups (Discovery/ExitIntent/StickyBar) stay disabled per 2026-05-29 request. */}
