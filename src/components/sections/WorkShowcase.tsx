@@ -18,7 +18,9 @@ import { ExternalLink, Play, Star } from "lucide-react";
 import PortfolioScreenshot from "@/components/PortfolioScreenshot";
 
 const Github = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" {...props}><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6a3.1 3.1 0 0 0-1.3-1.7c-1.1-.7.1-.7.1-.7a2.5 2.5 0 0 1 1.8 1.2 2.5 2.5 0 0 0 3.4 1 2.5 2.5 0 0 1 .8-1.6c-2.7-.3-5.5-1.3-5.5-6a4.7 4.7 0 0 1 1.3-3.3 4.3 4.3 0 0 1 .1-3.2s1-.3 3.3 1.3a11.5 11.5 0 0 1 6 0c2.3-1.6 3.3-1.3 3.3-1.3a4.3 4.3 0 0 1 .1 3.2 4.7 4.7 0 0 1 1.3 3.3c0 4.7-2.9 5.7-5.6 6a2.8 2.8 0 0 1 .8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6a3.1 3.1 0 0 0-1.3-1.7c-1.1-.7.1-.7.1-.7a2.5 2.5 0 0 1 1.8 1.2 2.5 2.5 0 0 0 3.4 1 2.5 2.5 0 0 1 .8-1.6c-2.7-.3-5.5-1.3-5.5-6a4.7 4.7 0 0 1 1.3-3.3 4.3 4.3 0 0 1 .1-3.2s1-.3 3.3 1.3a11.5 11.5 0 0 1 6 0c2.3-1.6 3.3-1.3 3.3-1.3a4.3 4.3 0 0 1 .1 3.2 4.7 4.7 0 0 1 1.3 3.3c0 4.7-2.9 5.7-5.6 6a2.8 2.8 0 0 1 .8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z" />
+  </svg>
 );
 
 type Gig = {
@@ -40,7 +42,8 @@ const GIGS: Gig[] = [
     client: "Majesta Kitts · EdD MPH CPRS · Rhode Island",
     niche: "Wellness / Peer Recovery",
     stack: ["Custom HTML", "Tailwind", "HeyPeers"],
-    outcome: "Live peer-led recovery practice. Booking + brand kit shipped in 4 days.",
+    outcome:
+      "Live peer-led recovery practice. Booking + brand kit shipped in 4 days.",
     liveUrl: "https://www.kittsrecoveryservices.com",
     category: "client",
   },
@@ -71,7 +74,8 @@ const GIGS: Gig[] = [
     client: "Bespoke flagship · SoHo, New York",
     niche: "Luxury Healthcare",
     stack: ["Next.js 16", "Tailwind", "Vercel"],
-    outcome: "$50K-tier flagship. Distilled from niche audit — zero template DNA.",
+    outcome:
+      "$50K-tier flagship. Distilled from niche audit — zero template DNA.",
     liveUrl: "https://skynetlabs-dental-flagship.vercel.app",
     category: "flagship",
   },
@@ -141,7 +145,8 @@ const GIGS: Gig[] = [
     client: "Boutique cinema/villa concept",
     niche: "Hospitality / Cinema",
     stack: ["Next.js", "Tailwind", "Vercel"],
-    outcome: "Concept demo for villa-cinema hybrid. Immersive editorial layout.",
+    outcome:
+      "Concept demo for villa-cinema hybrid. Immersive editorial layout.",
     liveUrl: "https://skynetlabs-ariapura-cinema.vercel.app",
     category: "flagship",
   },
@@ -182,7 +187,8 @@ const GIGS: Gig[] = [
     client: "German automotive · variant pitch",
     niche: "Automotive / Configurator",
     stack: ["Next.js", "Tailwind", "Vercel"],
-    outcome: "Editorial / Cinematic / Brutalist Swiss — 3 directions on one deploy.",
+    outcome:
+      "Editorial / Cinematic / Brutalist Swiss — 3 directions on one deploy.",
     liveUrl: "https://skynetlabs-coolcar-demo.vercel.app",
     category: "demo",
   },
@@ -610,7 +616,7 @@ export default function WorkShowcase() {
                 textDecoration: "none",
               }}
             >
-              <Play className="w-4 h-4" /> Book free audit
+              <Play className="w-4 h-4" /> Book a free 30-min audit
             </a>
           </div>
         </div>

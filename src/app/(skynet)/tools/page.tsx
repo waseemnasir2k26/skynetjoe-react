@@ -2,8 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import { Calculator, Activity, Compass, ArrowLeftRight, Mic, FileText, CalendarDays, Target, Library, Film, ArrowRight } from "lucide-react";
-import Reveal from "./Reveal";
+import {
+  Calculator,
+  Activity,
+  Compass,
+  ArrowLeftRight,
+  Mic,
+  FileText,
+  CalendarDays,
+  Target,
+  Library,
+  Film,
+  ArrowRight,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Free Tools — 10-tool suite for service businesses | SkynetLabs",
@@ -24,6 +35,7 @@ const TOOLS = [
   {
     slug: "revenue-calculator",
     name: "Revenue Recovery Calculator",
+    tag: "Calculator",
     blurb:
       "Six sliders. Live math. See exactly what your missed-call queue and manual follow-ups are costing per month — and what we'd recover.",
     Icon: Calculator,
@@ -31,6 +43,7 @@ const TOOLS = [
   {
     slug: "agency-stress-quiz",
     name: "Agency Stress Quiz",
+    tag: "Diagnostic",
     blurb:
       "60 seconds. 7 questions. One brutally honest score. Diagnoses whether you're at chill operator or full chaos mode — pipes straight into the calculator.",
     Icon: Activity,
@@ -38,6 +51,7 @@ const TOOLS = [
   {
     slug: "ai-readiness-score",
     name: "AI Readiness Score",
+    tag: "Diagnostic",
     blurb:
       "90 seconds. 10 questions. A 0 to 100 score plus a four-axis breakdown of foundation, process, demand and buy-in — and exactly what to fix first.",
     Icon: Compass,
@@ -45,6 +59,7 @@ const TOOLS = [
   {
     slug: "before-after-slider",
     name: "Before/After Slider",
+    tag: "Visualiser",
     blurb:
       "Drag-to-compare 6 real workflows: lead response, content production, customer service, CRM data entry, reporting, lead qualification. Visualise the gap manual vs automated.",
     Icon: ArrowLeftRight,
@@ -52,6 +67,7 @@ const TOOLS = [
   {
     slug: "voice-persona-builder",
     name: "Brand Voice Persona Builder",
+    tag: "Generator",
     blurb:
       "Four steps, eight tone sliders, three example fields. Outputs a paste-ready Brand Voice Profile and AI system prompt that makes Claude and ChatGPT sound like your brand instead of themselves.",
     Icon: Mic,
@@ -59,6 +75,7 @@ const TOOLS = [
   {
     slug: "executive-summary-generator",
     name: "Executive Summary Generator",
+    tag: "Generator",
     blurb:
       "Paste raw notes, get five ready-to-send formats: TL;DR, email, Slack post, deck slide and investor 1-pager. Built in your browser, instant, uses your own words.",
     Icon: FileText,
@@ -66,6 +83,7 @@ const TOOLS = [
   {
     slug: "content-calendar",
     name: "30-Day Content Calendar",
+    tag: "Generator",
     blurb:
       "Niche, cadence and goal in. Thirty days of cross-platform post ideas out, across LinkedIn, X, IG, Shorts and email — with CSV, ICS and markdown export.",
     Icon: CalendarDays,
@@ -73,6 +91,7 @@ const TOOLS = [
   {
     slug: "automation-gap-analyzer",
     name: "Automation Gap Analyzer",
+    tag: "Diagnostic",
     blurb:
       "90 seconds. 12 questions across lead capture, follow-up, reporting, team productivity. One automation gap %, four-axis radar, and the one biggest time-sink to fix first.",
     Icon: Target,
@@ -80,6 +99,7 @@ const TOOLS = [
   {
     slug: "prompt-library",
     name: "Prompt Library",
+    tag: "Library",
     blurb:
       "Fifty production-tested AI prompts across sales, marketing, ops, content, data, recruitment, customer service and founder brain. Search, copy, open in Claude or ChatGPT.",
     Icon: Library,
@@ -87,6 +107,7 @@ const TOOLS = [
   {
     slug: "video-prompt-generator",
     name: "Video Prompt Generator",
+    tag: "Generator",
     blurb:
       "One scene, four formats. Build Runway, Pika, Sora and Veo prompts side-by-side from one set of inputs. Save the good ones to local history. Zero backend.",
     Icon: Film,
@@ -114,115 +135,135 @@ const schema = {
 
 export default function ToolsIndexPage() {
   return (
-    <>
+    <div className="sky">
       <JsonLd data={schema} />
-      <main
-        style={{
-          minHeight: "100vh",
-          background: "var(--cream)",
-          color: "var(--ink)",
-        }}
-      >
-        <section
-          className="container-x px-6 pt-32 pb-16 md:pt-40"
-          style={{ background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
-        >
-          <Reveal className="max-w-3xl">
-            <div
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.16em",
-                color: "var(--terracotta-aa)",
-                fontWeight: 600,
-                marginBottom: 22,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 12,
-              }}
-            >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-              Ten free tools
+
+      {/* HERO — skyv3 (lp/logistics) design language */}
+      <section className="hero">
+        <div className="wrap">
+          <div className="hero-inner">
+            <div className="hero-eyebrow">
+              <span className="pulse"></span>
+              Ten free tools&nbsp;· <strong>no signup for most</strong>
             </div>
-            <h1
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(40px, 6vw, 64px)",
-                fontWeight: 700,
-                letterSpacing: "-0.025em",
-                lineHeight: 1.05,
-                color: "var(--ink)",
-                marginBottom: 18,
-              }}
-            >
-              Find out where your business is{" "}
-              <span style={{ color: "var(--terracotta-aa)" }}>
-                losing money.
-              </span>
+
+            <h1>
+              Find out where your business is <em>losing money.</em>
             </h1>
-            <p style={{ fontSize: 18, color: "var(--ink-2)", maxWidth: "52ch", lineHeight: 1.6 }}>
-              Ten utilities I built for myself before I built them for clients.
-              All free. Some hand you the result instantly; a few ask for an
-              email to unlock it. Just numbers, either way.
+
+            <p className="hero-sub">
+              Ten utilities I built for myself before I built them for clients.{" "}
+              <strong>All free.</strong> Some hand you the result instantly; a
+              few ask for an email to unlock it. Just numbers, either way.
             </p>
-          </Reveal>
-        </section>
-        <section className="container-x px-6 py-20">
-          <div className="grid md:grid-cols-2 gap-6">
-            {TOOLS.map(({ slug, name, blurb, Icon }, i) => (
-              <Reveal key={slug} delay={(i % 2) * 0.06}>
+
+            <div className="cta-row">
               <Link
-                href={`/tools/${slug}`}
-                className="group relative"
-                style={{
-                  display: "block",
-                  padding: 28,
-                  background: "var(--cream-2)",
-                  border: "1px solid var(--border)",
-                  textDecoration: "none",
-                  color: "var(--ink)",
-                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
-                }}
+                href={SITE.cta.href}
+                className="btn-primary"
+                data-meta-event="Schedule"
+                data-meta-name="tools-book-audit"
               >
-                <div className="flex items-start justify-between mb-5">
-                  <div
+                {SITE.cta.label} →
+              </Link>
+              <Link href="#tools" className="btn-line">
+                Browse the tools
+              </Link>
+            </div>
+
+            <div className="featured-in">
+              <span className="featured-lbl">Featured</span>
+              <span>Upwork Top Rated Plus</span>
+              <span>Fiverr Top Rated</span>
+              <span>180+ workflows</span>
+              <span>Claude Code Partner</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TOOLS DIRECTORY — feature-row of feat-cards */}
+      <section id="tools" className="section tinted">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">The toolbox</span>
+            <h2>
+              Ten free tools, <em>one tab away.</em>
+            </h2>
+            <p className="section-sub">
+              Calculators, diagnostics and generators for service businesses.
+              Pick the one that matches the thing that&apos;s nagging you — most
+              take under two minutes.
+            </p>
+          </div>
+
+          <div className="feature-row">
+            {TOOLS.map(({ slug, name, tag, blurb, Icon }) => (
+              <Link
+                key={slug}
+                href={`/tools/${slug}`}
+                className="feat-card"
+                style={{ display: "block" }}
+              >
+                <span className="feat-tag">
+                  <Icon
+                    aria-hidden
                     style={{
-                      width: 48,
-                      height: 48,
-                      background: "var(--cream-3)",
-                      border: "1px solid var(--border)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      width: 13,
+                      height: 13,
+                      verticalAlign: "-2px",
+                      marginRight: 6,
                     }}
-                  >
-                    <Icon className="w-6 h-6" style={{ color: "var(--terracotta-aa)" }} />
-                  </div>
-                  <ArrowRight
-                    className="w-5 h-5 group-hover:translate-x-1 transition-all"
-                    style={{ color: "var(--ink-faint)" }}
                   />
-                </div>
-                <h2
+                  {tag}
+                </span>
+                <div className="feat-title">{name}</div>
+                <p className="feat-body">{blurb}</p>
+                <span
                   style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 22,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    marginTop: 16,
+                    fontSize: 13,
                     fontWeight: 600,
-                    marginBottom: 12,
-                    color: "var(--ink)",
-                    letterSpacing: "-0.01em",
+                    color: "var(--terracotta-aa)",
                   }}
                 >
-                  {name}
-                </h2>
-                <p style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6 }}>{blurb}</p>
+                  Open the tool
+                  <ArrowRight style={{ width: 15, height: 15 }} />
+                </span>
               </Link>
-              </Reveal>
             ))}
           </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </section>
+
+      {/* CLOSER — skyv3 pattern */}
+      <section className="closer">
+        <div className="closer-scarcity">Free tools only get you so far</div>
+        <h2>
+          Seen your number? <em>Let&apos;s fix it.</em>
+        </h2>
+        <p>
+          The tools tell you where the money leaks. A 30-min audit tells you the
+          three fastest ways to plug it — with a fixed-price scope back in 48
+          hours.
+        </p>
+        <div className="cta-row">
+          <Link
+            href={SITE.cta.href}
+            className="btn-primary"
+            data-meta-event="Schedule"
+            data-meta-name="tools-closer-book-audit"
+          >
+            {SITE.cta.label} →
+          </Link>
+          <Link href="/services" className="btn-line">
+            See what we fix
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }

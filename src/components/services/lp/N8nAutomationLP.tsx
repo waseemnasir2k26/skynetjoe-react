@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, X, Check, Wallet, KeyRound, AlertTriangle } from "lucide-react";
+import {
+  ArrowRight,
+  X,
+  Check,
+  Wallet,
+  KeyRound,
+  AlertTriangle,
+} from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { N8nWorkflow } from "@/components/illustrations";
 
@@ -34,7 +41,9 @@ function Reveal({
     <motion.div
       className={className}
       style={style}
-      initial={reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }}
+      initial={
+        reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }
+      }
       whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, delay, ease }}
@@ -177,7 +186,11 @@ export default function N8nAutomationLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <div
@@ -193,7 +206,14 @@ export default function N8nAutomationLP() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta-aa)", display: "inline-block" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta-aa)",
+                  display: "inline-block",
+                }}
+              />
               Workflow automation · 2026
             </div>
             <h1
@@ -209,7 +229,9 @@ export default function N8nAutomationLP() {
               }}
             >
               Stop renting your automation.{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>Own it.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                Own it.
+              </span>
             </h1>
             <p
               style={{
@@ -222,10 +244,11 @@ export default function N8nAutomationLP() {
             >
               Keep the automations your business runs on — without the rising
               monthly bill. The same flows you pay hundreds for, rebuilt to run
-              for a few dollars, with auto-retry so they stop failing in silence.
+              for a few dollars, with auto-retry so they stop failing in
+              silence.
             </p>
             <Link href="/discovery-call" style={primaryBtn}>
-              Book a free 30-min check-up
+              Book a free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <div style={subline}>— Bali hours GMT+8 · 8-hour weekday reply</div>
@@ -263,12 +286,20 @@ export default function N8nAutomationLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--oxblood)">What we keep seeing</Eyebrow>
             <H2>
               Three problems that show up{" "}
-              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>in every check-up.</span>
+              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>
+                in every check-up.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-card-grid">
@@ -282,7 +313,14 @@ export default function N8nAutomationLP() {
                   transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
-                <p.icon style={{ width: 26, height: 26, color: "var(--oxblood)", marginBottom: 14 }} />
+                <p.icon
+                  style={{
+                    width: 26,
+                    height: 26,
+                    color: "var(--oxblood)",
+                    marginBottom: 14,
+                  }}
+                />
                 <h3 style={cardH3}>{p.title}</h3>
                 <p style={cardBody}>{p.body}</p>
               </Item>
@@ -300,7 +338,13 @@ export default function N8nAutomationLP() {
           textAlign: "center",
         }}
       >
-        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <Reveal
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div style={proofEyebrow}>— Receipts, not promises</div>
           <div
             style={{
@@ -332,15 +376,28 @@ export default function N8nAutomationLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">What we hand over</Eyebrow>
             <H2>
               A system you understand,{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>not a black box.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                not a black box.
+              </span>
             </H2>
-            <p style={{ ...cardBody, fontSize: 16, maxWidth: "44ch", marginBottom: 20 }}>
+            <p
+              style={{
+                ...cardBody,
+                fontSize: 16,
+                maxWidth: "44ch",
+                marginBottom: 20,
+              }}
+            >
               &ldquo;Three contractors before this one. He&apos;s the first who
               asked us to print our inbox and walk through 100 messages before
               writing a single step. Response time went from 6 hours to 6
@@ -349,12 +406,21 @@ export default function N8nAutomationLP() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {FACTS.map((f) => (
                 <li key={f} style={factLi}>
-                  <Check style={{ width: 16, height: 16, color: "var(--sage)", marginTop: 2 }} />
+                  <Check
+                    style={{
+                      width: 16,
+                      height: 16,
+                      color: "var(--sage)",
+                      marginTop: 2,
+                    }}
+                  />
                   <span>{f}</span>
                 </li>
               ))}
             </ul>
-            <div style={{ ...subline, marginTop: 18 }}>— Operations Director · EU logistics · 11-day ship</div>
+            <div style={{ ...subline, marginTop: 18 }}>
+              — Operations Director · EU logistics · 11-day ship
+            </div>
           </Reveal>
           <motion.div
             initial={{ opacity: 0, y: 30, rotate: 1 }}
@@ -376,12 +442,20 @@ export default function N8nAutomationLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">Before vs after</Eyebrow>
             <H2>
               What changes the day{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>you stop renting.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                you stop renting.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-ba-grid">
@@ -396,7 +470,9 @@ export default function N8nAutomationLP() {
         h2={
           <>
             Tell us what&apos;s breaking.{" "}
-            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>We&apos;ll build the fix.</span>
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+              We&apos;ll build the fix.
+            </span>
           </>
         }
         body="A free 30-minute check-up. We name the three fixes that recover the most, sequenced biggest-first. Fixed scope back in 48 hours."
@@ -468,7 +544,13 @@ const proofDetail: React.CSSProperties = {
   margin: "0 auto",
 };
 
-function Eyebrow({ children, color }: { children: React.ReactNode; color: string }) {
+function Eyebrow({
+  children,
+  color,
+}: {
+  children: React.ReactNode;
+  color: string;
+}) {
   return (
     <div
       style={{
@@ -483,7 +565,14 @@ function Eyebrow({ children, color }: { children: React.ReactNode; color: string
         gap: 12,
       }}
     >
-      <span style={{ width: 28, height: 1, background: color, display: "inline-block" }} />
+      <span
+        style={{
+          width: 28,
+          height: 1,
+          background: color,
+          display: "inline-block",
+        }}
+      />
       {children}
     </div>
   );
@@ -523,7 +612,14 @@ function BeforeCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((b) => (
           <li key={b} style={{ ...listLi, color: "var(--ink-2)" }}>
-            <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+            <X
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--oxblood)",
+                marginTop: 4,
+              }}
+            />
             <span>{b}</span>
           </li>
         ))}
@@ -547,7 +643,14 @@ function AfterCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((a) => (
           <li key={a} style={{ ...listLi, color: "var(--ink)" }}>
-            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+            <Check
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--sage)",
+                marginTop: 4,
+              }}
+            />
             <span>{a}</span>
           </li>
         ))}
@@ -582,7 +685,14 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
           "linear-gradient(180deg, var(--cream) 0%, color-mix(in srgb, var(--terracotta) 8%, var(--cream)) 100%)",
       }}
     >
-      <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)", textAlign: "center" }}>
+      <Reveal
+        style={{
+          maxWidth: 760,
+          margin: "0 auto",
+          padding: "0 clamp(16px, 5vw, 32px)",
+          textAlign: "center",
+        }}
+      >
         <div
           style={{
             fontFamily: "var(--font-mono)",
@@ -619,8 +729,16 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
         >
           {body}
         </p>
-        <Link href="/discovery-call" style={{ ...primaryBtn, padding: "18px 32px", fontWeight: 700, fontSize: 16 }}>
-          Book a free 30-min check-up
+        <Link
+          href="/discovery-call"
+          style={{
+            ...primaryBtn,
+            padding: "18px 32px",
+            fontWeight: 700,
+            fontSize: 16,
+          }}
+        >
+          Book a free 30-min audit
           <ArrowRight style={{ width: 16, height: 16 }} />
         </Link>
         <div

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight } from "lucide-react";
 import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import PainSolverGrid from "@/components/services/PainSolverGrid";
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
 
 type ServiceItem = { slug: string; label: string; icon: string; desc: string };
 const allServices: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
-  (c) => c.services as readonly ServiceItem[]
+  (c) => c.services as readonly ServiceItem[],
 );
 
 const schema = {
@@ -75,232 +74,94 @@ const schema = {
 
 export default function ServicesIndexPage() {
   return (
-    <>
+    <div className="sky">
       <JsonLd data={schema} />
 
-      {/* HERO — cream editorial · pain-first reframe */}
-      <section
-        className="relative pt-28 md:pt-36 pb-16"
-        style={{
-          background: "var(--cream-3)",
-          borderBottom: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <div className="container-x px-6 relative z-10 max-w-4xl">
-          <div
-            className="inline-flex items-center gap-3 mb-6"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta-aa)",
-            }}
-          >
-            <span
-              style={{
-                width: 28,
-                height: 1,
-                background: "var(--terracotta-aa)",
-                display: "inline-block",
-              }}
-            />
-            We fix the problem · not sell a service
-          </div>
+      {/* HERO — skyv3 (lp/logistics) design language */}
+      <section className="hero">
+        <div className="wrap">
+          <div className="hero-inner">
+            <div className="hero-eyebrow">
+              <span className="pulse"></span>
+              We fix the problem&nbsp;· not sell you a service
+            </div>
 
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.04,
-              color: "var(--ink)",
-              fontSize: "clamp(40px, 6vw, 68px)",
-              margin: "0 0 24px",
-            }}
-          >
-            We don&apos;t sell services.{" "}
-            <span
-              style={{
-                color: "var(--terracotta-aa)",
-                fontWeight: 700,
-              }}
-            >
-              We fix what&apos;s costing you.
-            </span>
-          </h1>
+            <h1>
+              16 production services. <em>One done-for-you fix</em> for whatever
+              is costing you.
+            </h1>
 
-          <p
-            style={{
-              fontSize: 19,
-              color: "var(--ink-2)",
-              maxWidth: "52ch",
-              lineHeight: 1.6,
-              marginBottom: 28,
-            }}
-          >
-            Every founder brief lands in one of eight problems. Pick the one
-            hurting you this week — see the fix, see the outcome, see the
-            approach. The service menu is just the toolkit.
-          </p>
+            <p className="hero-sub">
+              n8n automation, AI voice + chat agents, AEO-tuned websites,
+              GoHighLevel CRM, and AI content at volume.{" "}
+              <strong>180+ workflows shipped, 40+ sites delivered</strong>{" "}
+              across 9 countries — fixed scope, public pricing, and your{" "}
+              <strong>repo in your GitHub on launch day</strong>. We ship in
+              5–14 days, not 14 weeks.
+            </p>
 
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/discovery-call"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "var(--terracotta)",
-                color: "var(--cream-3)",
-                padding: "16px 28px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-                border: "none",
-                transition: "background 0.18s",
-              }}
-            >
-              Send a 3-sentence brief
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "transparent",
-                color: "var(--ink)",
-                border: "1px solid var(--ink)",
-                padding: "15px 26px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-              }}
-            >
-              See real fixes
-            </Link>
-          </div>
+            <div className="cta-row">
+              <Link
+                href={SITE.cta.href}
+                className="btn-primary"
+                data-meta-event="Schedule"
+                data-meta-name="services-book-audit"
+              >
+                {SITE.cta.label} →
+              </Link>
+              <Link href="/case-studies" className="btn-line">
+                See real fixes
+              </Link>
+            </div>
 
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 10,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-              color: "var(--ink-faint)",
-              marginTop: 20,
-            }}
-          >
-            — Bali hours · GMT+8 · usually books within 48-72 hours
+            <div className="hero-scarcity">
+              <strong>Limited monthly builds</strong>&nbsp;· 8-hour reply window
+            </div>
+
+            <div className="featured-in">
+              <span className="featured-lbl">Featured</span>
+              <span>Upwork Top Rated Plus</span>
+              <span>Fiverr Top Rated</span>
+              <span>180+ workflows</span>
+              <span>9 countries</span>
+              <span>Claude Code Partner</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 8 PAIN CARDS */}
+      {/* 8 PAIN CARDS — self-contained cream-editorial section, inherits .sky tokens */}
       <PainSolverGrid />
 
-      {/* COLLAPSED FULL MENU (SEO + power browsers) */}
+      {/* COLLAPSED FULL MENU (SEO + power browsers) — inherits .sky tokens */}
       <ServiceMenuCollapsed />
 
-      {/* CLOSER — cream editorial */}
-      <section
-        className="py-16 md:py-20"
-        style={{
-          background: "var(--cream-3)",
-          borderTop: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <div className="container-x px-6 max-w-3xl mx-auto text-center">
-          <div
-            className="inline-flex items-center gap-3 mb-5"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta-aa)",
-            }}
+      {/* CLOSER — skyv3 pattern */}
+      <section className="closer">
+        <div className="closer-scarcity">
+          Every week you wait, it costs you more
+        </div>
+        <h2>
+          Pick the problem. <em>We fix it.</em>
+        </h2>
+        <p>
+          One 30-min call. Honest scope. Fixed price. No back-and-forth — a
+          clear yes or no within 8 hours.
+        </p>
+        <div className="cta-row">
+          <Link
+            href={SITE.cta.href}
+            className="btn-primary"
+            data-meta-event="Schedule"
+            data-meta-name="services-closer-book-audit"
           >
-            <span
-              style={{
-                width: 28,
-                height: 1,
-                background: "var(--terracotta-aa)",
-                display: "inline-block",
-              }}
-            />
-            One last thing
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.08,
-              color: "var(--ink)",
-              fontSize: "clamp(28px, 4vw, 44px)",
-              marginBottom: 14,
-            }}
-          >
-            Every week you wait,{" "}
-            <span
-              style={{
-                color: "var(--terracotta-aa)",
-                fontWeight: 700,
-              }}
-            >
-              it costs you more.
-            </span>
-          </h2>
-          <p
-            style={{
-              fontSize: 17,
-              color: "var(--ink-2)",
-              maxWidth: "44ch",
-              margin: "0 auto 28px",
-              lineHeight: 1.6,
-            }}
-          >
-            One 30-min call. Honest scope. Fixed price. No back-and-forth.
-            Yes or no in 8 hours.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/discovery-call"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "var(--terracotta)",
-                color: "var(--cream-3)",
-                padding: "16px 28px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-                border: "none",
-              }}
-            >
-              Book my strategy call
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/pricing"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "transparent",
-                color: "var(--ink)",
-                border: "1px solid var(--ink)",
-                padding: "15px 26px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-              }}
-            >
-              See pricing
-            </Link>
-          </div>
+            {SITE.cta.label} →
+          </Link>
+          <Link href="/pricing" className="btn-line">
+            See pricing
+          </Link>
         </div>
       </section>
-    </>
+    </div>
   );
 }

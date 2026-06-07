@@ -68,10 +68,30 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Week 6: Cutover to auto-send for the 3 safest intents only; the other 7 still draft-only to this day.",
     ],
     keyMetrics: [
-      { label: "Routine response time", before: "6 hours", after: "6 minutes", delta: "-98%" },
-      { label: "Dispatcher hours / day", before: "4 hrs", after: "45 min", delta: "-81%" },
-      { label: "Tools in stack", before: "4 paid", after: "1 stack", delta: "-75%" },
-      { label: "Misroute rate (CC field)", before: "~11%", after: "0.4%", delta: "-96%" },
+      {
+        label: "Routine response time",
+        before: "6 hours",
+        after: "6 minutes",
+        delta: "-98%",
+      },
+      {
+        label: "Dispatcher hours / day",
+        before: "4 hrs",
+        after: "45 min",
+        delta: "-81%",
+      },
+      {
+        label: "Tools in stack",
+        before: "4 paid",
+        after: "1 stack",
+        delta: "-75%",
+      },
+      {
+        label: "Misroute rate (CC field)",
+        before: "~11%",
+        after: "0.4%",
+        delta: "-96%",
+      },
     ],
     longFormStory: [
       "The win wasn't the model — it was the gate. Every Zapier attempt before us had treated this as a one-step classify-then-reply problem. It isn't. Mining-logistics email is a five-variable problem: intent, sender role, thread depth, attachment posture and CC topology. Once we modeled that explicitly in n8n, GPT-4o became a competent junior dispatcher instead of a confident hallucinator.",
@@ -119,9 +139,19 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     keyMetrics: [
       { label: "Monthly bookings", before: "~8", after: "~17", delta: "+112%" },
-      { label: "DM-to-book conversion", before: "9%", after: "31%", delta: "+22pts" },
+      {
+        label: "DM-to-book conversion",
+        before: "9%",
+        after: "31%",
+        delta: "+22pts",
+      },
       { label: "Site pages", before: "5", after: "1", delta: "-80%" },
-      { label: "Time to ship", before: "n/a", after: "9 days", delta: "brief to live" },
+      {
+        label: "Time to ship",
+        before: "n/a",
+        after: "9 days",
+        delta: "brief to live",
+      },
     ],
     longFormStory: [
       "Wellness sites are usually written for the practitioner, not the customer. They open with the founder's origin story and bury pricing somewhere on a 'work with me' page that requires three clicks. Christelle's old site did exactly that.",
@@ -170,10 +200,30 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Day 12: DNS cutover, 301 map, live.",
     ],
     keyMetrics: [
-      { label: "Time to ship", before: "n/a", after: "12 days", delta: "end-to-end" },
-      { label: "Stack tools", before: "4 paid", after: "1 stack", delta: "-75%" },
-      { label: "Intake completion rate", before: "34%", after: "71%", delta: "+109%" },
-      { label: "Inquiry quality (rated)", before: "2.1/5", after: "4.4/5", delta: "+110%" },
+      {
+        label: "Time to ship",
+        before: "n/a",
+        after: "12 days",
+        delta: "end-to-end",
+      },
+      {
+        label: "Stack tools",
+        before: "4 paid",
+        after: "1 stack",
+        delta: "-75%",
+      },
+      {
+        label: "Intake completion rate",
+        before: "34%",
+        after: "71%",
+        delta: "+109%",
+      },
+      {
+        label: "Inquiry quality (rated)",
+        before: "2.1/5",
+        after: "4.4/5",
+        delta: "+110%",
+      },
     ],
     longFormStory: [
       "The mistake most dental sites make is leading with the practice. We led with the named clinicians, their fellowship credentials, and the specific publications they'd been quoted in. Concierge referrers don't refer to 'a practice' — they refer to a person.",
@@ -220,10 +270,30 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Hour 8: Tested with 3 dummy submissions across all 3 pods; all routed correctly.",
     ],
     keyMetrics: [
-      { label: "New-patient response time", before: "6 hours+", after: "6 minutes", delta: "-98%" },
-      { label: "Stuck submissions recovered", before: "17", after: "0", delta: "all routed" },
-      { label: "Revisions to ship", before: "n/a", after: "3", delta: "in 1 day" },
-      { label: "Brand asset accuracy", before: "off-spec", after: "founder-spec", delta: "restored" },
+      {
+        label: "New-patient response time",
+        before: "6 hours+",
+        after: "6 minutes",
+        delta: "-98%",
+      },
+      {
+        label: "Stuck submissions recovered",
+        before: "17",
+        after: "0",
+        delta: "all routed",
+      },
+      {
+        label: "Revisions to ship",
+        before: "n/a",
+        after: "3",
+        delta: "in 1 day",
+      },
+      {
+        label: "Brand asset accuracy",
+        before: "off-spec",
+        after: "founder-spec",
+        delta: "restored",
+      },
     ],
     longFormStory: [
       "This wasn't a build — it was a rescue. The previous vendor had charged for a brand kit and an intake setup and delivered neither in working condition. The founder caught it 18 hours before a partnership announcement that was going to drive a spike of new-patient inquiries through that broken form.",
@@ -270,10 +340,25 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Week 5: Phased cutover by lead source; spreadsheet retirement.",
     ],
     keyMetrics: [
-      { label: "Manual triage time / day", before: "3 hrs", after: "0", delta: "-100%" },
+      {
+        label: "Manual triage time / day",
+        before: "3 hrs",
+        after: "0",
+        delta: "-100%",
+      },
       { label: "Pipeline stages", before: "11", after: "5", delta: "-55%" },
-      { label: "SaaS tools retired", before: "4", after: "0", delta: "consolidated" },
-      { label: "Lead → discovery rate", before: "12%", after: "27%", delta: "+15pts" },
+      {
+        label: "SaaS tools retired",
+        before: "4",
+        after: "0",
+        delta: "consolidated",
+      },
+      {
+        label: "Lead → discovery rate",
+        before: "12%",
+        after: "27%",
+        delta: "+15pts",
+      },
     ],
     longFormStory: [
       "This was our seventh GHL engagement with the same operator. We weren't selling them on automation — they were already sold. We were selling them on the discipline of pipeline simplification.",
@@ -314,16 +399,36 @@ export const CASE_STUDIES: CaseStudy[] = [
     implementationBreakdown: [
       "Day 1-2: Wrote the 60-phrase AI-tell linter against 500 hand-rated slides.",
       "Day 3-4: Built the n8n orchestrator: brief → outline → slide copy → layout JSON.",
-      "Day 5-6: html2canvas headless render with brand-token CSS injection.",
+      "Day 5-6: automated headless image render with brand-token CSS injection.",
       "Day 7: Image rotation log so the same stock asset never re-renders within a 30-day window.",
       "Day 8: End-to-end dry run on a 200-slide batch.",
       "Day 9: Production cutover, retired the manual Figma flow.",
     ],
     keyMetrics: [
-      { label: "Manual content QA / day", before: "3 hrs", after: "0", delta: "-100%" },
-      { label: "Time per 200-slide batch", before: "~14 hrs", after: "~45 min", delta: "-95%" },
-      { label: "AI-tell phrases shipping", before: "~9/batch", after: "0", delta: "linted out" },
-      { label: "Time to first batch", before: "n/a", after: "9 days", delta: "null to ship" },
+      {
+        label: "Manual content QA / day",
+        before: "3 hrs",
+        after: "0",
+        delta: "-100%",
+      },
+      {
+        label: "Time per 200-slide batch",
+        before: "~14 hrs",
+        after: "~45 min",
+        delta: "-95%",
+      },
+      {
+        label: "AI-tell phrases shipping",
+        before: "~9/batch",
+        after: "0",
+        delta: "linted out",
+      },
+      {
+        label: "Time to first batch",
+        before: "n/a",
+        after: "9 days",
+        delta: "null to ship",
+      },
     ],
     longFormStory: [
       "Most 'AI content engines' you see on Twitter are a single GPT call dumped into Buffer. Ours is the opposite — most of the value is in the linter and the image-rotation log, not the LLM call. The LLM is the cheapest part of the system.",
@@ -369,10 +474,30 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Day 7: Pitch Loom walkthrough recorded, deployed to Vercel preview URL.",
     ],
     keyMetrics: [
-      { label: "Time to pitch demo", before: "n/a", after: "7 days", delta: "vs 6-week proposals" },
-      { label: "Countries scaled to", before: "n/a", after: "9", delta: "with 1 founder" },
-      { label: "Account-walled flows", before: "3", after: "0", delta: "all open" },
-      { label: "Meeting close rate (qualitative)", before: "follow-up", after: "in-meeting yes", delta: "decision in room" },
+      {
+        label: "Time to pitch demo",
+        before: "n/a",
+        after: "7 days",
+        delta: "vs 6-week proposals",
+      },
+      {
+        label: "Countries scaled to",
+        before: "n/a",
+        after: "9",
+        delta: "with 1 founder",
+      },
+      {
+        label: "Account-walled flows",
+        before: "3",
+        after: "0",
+        delta: "all open",
+      },
+      {
+        label: "Meeting close rate (qualitative)",
+        before: "follow-up",
+        after: "in-meeting yes",
+        delta: "decision in room",
+      },
     ],
     longFormStory: [
       "Enterprise web agencies sell certainty by being slow. We sold certainty by being fast. The committee had three competing agency proposals on the table when we delivered a clickable demo and a 6-minute Loom inside a week.",
@@ -419,10 +544,30 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Days 13-14: Klaviyo post-purchase sequence, launch, courier rate live testing.",
     ],
     keyMetrics: [
-      { label: "Showroom appointments", before: "~12/mo", after: "~25/mo", delta: "+108%" },
-      { label: "Time to launch", before: "n/a", after: "14 days", delta: "store-to-live" },
-      { label: "Cart-stage surprise (courier)", before: "~38%", after: "<3%", delta: "rates visible" },
-      { label: "Size-return rate", before: "22%", after: "9%", delta: "-13pts" },
+      {
+        label: "Showroom appointments",
+        before: "~12/mo",
+        after: "~25/mo",
+        delta: "+108%",
+      },
+      {
+        label: "Time to launch",
+        before: "n/a",
+        after: "14 days",
+        delta: "store-to-live",
+      },
+      {
+        label: "Cart-stage surprise (courier)",
+        before: "~38%",
+        after: "<3%",
+        delta: "rates visible",
+      },
+      {
+        label: "Size-return rate",
+        before: "22%",
+        after: "9%",
+        delta: "-13pts",
+      },
     ],
     longFormStory: [
       "Most Arabic Shopify stores in the region are English stores with a translation toggle bolted on. The Arabic surface is an afterthought — fonts wrong, line height wrong, product names in English embedded in Arabic copy. We rebuilt it as a proper bilingual surface, RTL-native, with brand-locked Arabic typography that matched the English design weight.",
@@ -469,10 +614,30 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Day 11: Founder dry-run, ship.",
     ],
     keyMetrics: [
-      { label: "Manual content QA / day", before: "3 hrs", after: "0", delta: "-100%" },
-      { label: "Channels covered by 1 script", before: "1", after: "5", delta: "5x reach" },
-      { label: "AI-tell phrases shipped", before: "~9/day", after: "0", delta: "linted out" },
-      { label: "Founder approval rate", before: "30%", after: "92%", delta: "+62pts" },
+      {
+        label: "Manual content QA / day",
+        before: "3 hrs",
+        after: "0",
+        delta: "-100%",
+      },
+      {
+        label: "Channels covered by 1 script",
+        before: "1",
+        after: "5",
+        delta: "5x reach",
+      },
+      {
+        label: "AI-tell phrases shipped",
+        before: "~9/day",
+        after: "0",
+        delta: "linted out",
+      },
+      {
+        label: "Founder approval rate",
+        before: "30%",
+        after: "92%",
+        delta: "+62pts",
+      },
     ],
     longFormStory: [
       "The reason founders refuse to ship AI-generated content under their face isn't capability — it's pattern recognition. They've read enough LinkedIn slop to spot 'fast-paced world' and 'unlock potential' at 30 paces, and they assume their audience can too. The linter is the trust mechanism that lets them sign off.",

@@ -34,7 +34,9 @@ function Reveal({
     <motion.div
       className={className}
       style={style}
-      initial={reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }}
+      initial={
+        reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }
+      }
       whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, delay, ease }}
@@ -177,7 +179,11 @@ export default function VibeCodedSitesLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <div
@@ -193,7 +199,14 @@ export default function VibeCodedSitesLP() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta-aa)", display: "inline-block" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta-aa)",
+                  display: "inline-block",
+                }}
+              />
               Custom-built sites · 2026
             </div>
             <h1
@@ -209,7 +222,9 @@ export default function VibeCodedSitesLP() {
               }}
             >
               A site that loads fast and{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>belongs to you.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                belongs to you.
+              </span>
             </h1>
             <p
               style={{
@@ -225,7 +240,7 @@ export default function VibeCodedSitesLP() {
               invoice, and nobody can lock you out of your own work.
             </p>
             <Link href="/discovery-call" style={primaryBtn}>
-              Book a free 30-min check-up
+              Book a free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <div style={subline}>— Bali hours GMT+8 · 8-hour weekday reply</div>
@@ -263,12 +278,20 @@ export default function VibeCodedSitesLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--oxblood)">Why sites stall</Eyebrow>
             <H2>
               Three reasons your site{" "}
-              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>never gets the rebuild.</span>
+              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>
+                never gets the rebuild.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-card-grid">
@@ -282,7 +305,14 @@ export default function VibeCodedSitesLP() {
                   transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
-                <p.icon style={{ width: 26, height: 26, color: "var(--oxblood)", marginBottom: 14 }} />
+                <p.icon
+                  style={{
+                    width: 26,
+                    height: 26,
+                    color: "var(--oxblood)",
+                    marginBottom: 14,
+                  }}
+                />
                 <h3 style={cardH3}>{p.title}</h3>
                 <p style={cardBody}>{p.body}</p>
               </Item>
@@ -300,8 +330,16 @@ export default function VibeCodedSitesLP() {
           textAlign: "center",
         }}
       >
-        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div style={proofEyebrow}>— Our own platform move · old site to new</div>
+        <Reveal
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
+          <div style={proofEyebrow}>
+            — Our own platform move · old site to new
+          </div>
           <div
             style={{
               fontFamily: "var(--font-display)",
@@ -332,28 +370,50 @@ export default function VibeCodedSitesLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">What we hand over</Eyebrow>
             <H2>
               A premium site,{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>shipped in days.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                shipped in days.
+              </span>
             </H2>
-            <p style={{ ...cardBody, fontSize: 16, maxWidth: "44ch", marginBottom: 20 }}>
+            <p
+              style={{
+                ...cardBody,
+                fontSize: 16,
+                maxWidth: "44ch",
+                marginBottom: 20,
+              }}
+            >
               &ldquo;The demo looked like a top-tier custom build. He shipped it
-              in a weekend from a Canggu villa. We hired him before the follow-up
-              call.&rdquo;
+              in a weekend from a Canggu villa. We hired him before the
+              follow-up call.&rdquo;
             </p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {FACTS.map((f) => (
                 <li key={f} style={factLi}>
-                  <Check style={{ width: 16, height: 16, color: "var(--sage)", marginTop: 2 }} />
+                  <Check
+                    style={{
+                      width: 16,
+                      height: 16,
+                      color: "var(--sage)",
+                      marginTop: 2,
+                    }}
+                  />
                   <span>{f}</span>
                 </li>
               ))}
             </ul>
-            <div style={{ ...subline, marginTop: 18 }}>— Niche-demo round · 20+ sites shipped 2025-26</div>
+            <div style={{ ...subline, marginTop: 18 }}>
+              — Niche-demo round · 20+ sites shipped 2025-26
+            </div>
           </Reveal>
           <motion.div
             initial={{ opacity: 0, y: 30, rotate: 1 }}
@@ -375,12 +435,20 @@ export default function VibeCodedSitesLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">Before vs after</Eyebrow>
             <H2>
               What changes the day{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>you own the code.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                you own the code.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-ba-grid">
@@ -395,7 +463,9 @@ export default function VibeCodedSitesLP() {
         h2={
           <>
             Drop the old template.{" "}
-            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>Get a site that's yours.</span>
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+              Get a site that's yours.
+            </span>
           </>
         }
         body="A free 30-minute check-up. Tell us the niche, the funnel, the deadline. Fixed scope back in 48 hours, repo handed over on day 11."
@@ -467,7 +537,13 @@ const proofDetail: React.CSSProperties = {
   margin: "0 auto",
 };
 
-function Eyebrow({ children, color }: { children: React.ReactNode; color: string }) {
+function Eyebrow({
+  children,
+  color,
+}: {
+  children: React.ReactNode;
+  color: string;
+}) {
   return (
     <div
       style={{
@@ -482,7 +558,14 @@ function Eyebrow({ children, color }: { children: React.ReactNode; color: string
         gap: 12,
       }}
     >
-      <span style={{ width: 28, height: 1, background: color, display: "inline-block" }} />
+      <span
+        style={{
+          width: 28,
+          height: 1,
+          background: color,
+          display: "inline-block",
+        }}
+      />
       {children}
     </div>
   );
@@ -522,7 +605,14 @@ function BeforeCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((b) => (
           <li key={b} style={{ ...listLi, color: "var(--ink-2)" }}>
-            <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+            <X
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--oxblood)",
+                marginTop: 4,
+              }}
+            />
             <span>{b}</span>
           </li>
         ))}
@@ -546,7 +636,14 @@ function AfterCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((a) => (
           <li key={a} style={{ ...listLi, color: "var(--ink)" }}>
-            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+            <Check
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--sage)",
+                marginTop: 4,
+              }}
+            />
             <span>{a}</span>
           </li>
         ))}
@@ -581,7 +678,14 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
           "linear-gradient(180deg, var(--cream) 0%, color-mix(in srgb, var(--terracotta) 8%, var(--cream)) 100%)",
       }}
     >
-      <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)", textAlign: "center" }}>
+      <Reveal
+        style={{
+          maxWidth: 760,
+          margin: "0 auto",
+          padding: "0 clamp(16px, 5vw, 32px)",
+          textAlign: "center",
+        }}
+      >
         <div
           style={{
             fontFamily: "var(--font-mono)",
@@ -618,8 +722,16 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
         >
           {body}
         </p>
-        <Link href="/discovery-call" style={{ ...primaryBtn, padding: "18px 32px", fontWeight: 700, fontSize: 16 }}>
-          Book a free 30-min check-up
+        <Link
+          href="/discovery-call"
+          style={{
+            ...primaryBtn,
+            padding: "18px 32px",
+            fontWeight: 700,
+            fontSize: 16,
+          }}
+        >
+          Book a free 30-min audit
           <ArrowRight style={{ width: 16, height: 16 }} />
         </Link>
         <div

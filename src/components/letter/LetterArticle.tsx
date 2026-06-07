@@ -143,7 +143,11 @@ export type LetterArticleProps = {
 
 function formatDate(iso: string) {
   const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  return d.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 }
 
 export function LetterShell({ children }: { children: ReactNode }) {
@@ -194,7 +198,9 @@ export default function LetterArticle({
                 height={388}
                 priority
               />
-              <figcaption className="hero-photo-cap">— {heroCaption}</figcaption>
+              <figcaption className="hero-photo-cap">
+                — {heroCaption}
+              </figcaption>
             </figure>
             <div className="meta-line">
               <span>{formatDate(datePublished)}</span>
@@ -212,7 +218,8 @@ export default function LetterArticle({
             <div className="signature">
               <div className="signature-text">{signature}</div>
               <div className="signature-meta">
-                {signatureMeta || `— Canggu, Bali · ${formatDate(datePublished)}`}
+                {signatureMeta ||
+                  `— Canggu, Bali · ${formatDate(datePublished)}`}
               </div>
             </div>
           </div>
@@ -225,7 +232,11 @@ export default function LetterArticle({
               <h2 className="related-h">More from the journal</h2>
               <div className="related-grid">
                 {related.map((r) => (
-                  <Link key={r.slug} href={`/news/${r.slug}`} className="related-card">
+                  <Link
+                    key={r.slug}
+                    href={`/news/${r.slug}`}
+                    className="related-card"
+                  >
                     <div className="related-card-meta">{r.category}</div>
                     <div className="related-card-title">{r.title}</div>
                     <p className="related-card-deck">{r.deck}</p>
@@ -241,12 +252,12 @@ export default function LetterArticle({
             Reading isn&apos;t shipping. <em>Send the brief.</em>
           </h2>
           <p>
-            Eight-hour reply on weekday Bali time. Yes, no, or referral. Audit&apos;s free.
-            Either way you walk with findings.
+            Eight-hour reply on weekday Bali time. Yes, no, or referral.
+            Audit&apos;s free. Either way you walk with findings.
           </p>
           <div className="closer-cta-row">
             <a href="/discovery-call" className="btn btn-gold">
-              Apply for a call →
+              Book a free 30-min audit →
             </a>
           </div>
         </section>

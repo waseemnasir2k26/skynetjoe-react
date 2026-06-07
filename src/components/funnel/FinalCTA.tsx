@@ -30,7 +30,7 @@ export default function FinalCTA() {
               opacity: 0.85,
             }}
           >
-— Limited audits each month
+            — Limited audits each month
           </div>
           <h2
             style={{
@@ -67,7 +67,7 @@ export default function FinalCTA() {
               lineHeight: 1.6,
             }}
           >
-            A free 30-min check-up. We share screens, spot the one fix that pays
+            A free 30-min audit. We share screens, spot the one fix that pays
             off fastest, and send you a short build plan. No pitch deck.
           </p>
           <Link
@@ -107,7 +107,7 @@ export default function FinalCTA() {
               marginTop: 22,
             }}
           >
-— Reply in 8h · scope in 48h · Bali (GMT+8) · 9 countries served
+            — Reply in 8h · scope in 48h · Bali (GMT+8) · 9 countries served
           </div>
         </div>
       </div>

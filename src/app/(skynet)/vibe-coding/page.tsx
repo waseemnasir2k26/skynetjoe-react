@@ -13,9 +13,7 @@ import {
   Users,
   Eye,
   Globe,
-  ArrowRight,
   Mail,
-  Calendar,
   Zap,
   Wrench,
   Layers,
@@ -89,46 +87,36 @@ const toolchain = [
     name: "Claude Code",
     badge: "Primary",
     role: "The brain. Long-context refactors, multi-file edits, agent loops.",
-    when:
-      "Every build. From the first scaffold to the final deploy. It reads the whole repo and plans the work.",
+    when: "Every build. From the first scaffold to the final deploy. It reads the whole repo and plans the work.",
     icon: Brain,
-    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
   {
     name: "Replit",
     badge: "Speed",
     role: "When the deploy needs to be live in 8 minutes.",
-    when:
-      "Throwaway demos, client pitch sandboxes, the 'can you just show me' builds that don't deserve a full repo.",
+    when: "Throwaway demos, client pitch sandboxes, the 'can you just show me' builds that don't deserve a full repo.",
     icon: Rocket,
-    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
   {
     name: "Cursor",
     badge: "IDE",
     role: "When you want IDE-grade inline edits.",
-    when:
-      "Mid-build, when I'm touching specific files and want tab-complete + a small chat that sees only the open buffer.",
+    when: "Mid-build, when I'm touching specific files and want tab-complete + a small chat that sees only the open buffer.",
     icon: Code2,
-    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
   {
     name: "Codex",
     badge: "Volume",
     role: "Heavy code-gen, batch boilerplate, throwaway scripts.",
-    when:
-      "When I need 40 similar API route handlers, or a CSV-to-TS-types pipeline. It's the boring-bulk specialist.",
+    when: "When I need 40 similar API route handlers, or a CSV-to-TS-types pipeline. It's the boring-bulk specialist.",
     icon: FileCode,
-    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
   {
     name: "Gemini",
     badge: "Context",
     role: "Long-doc analysis, big-context image grounding.",
-    when:
-      "When the client sends a 90-page PDF spec, or 30 screenshots of their old site. Million-token window earns its keep.",
+    when: "When the client sends a 90-page PDF spec, or 30 screenshots of their old site. Million-token window earns its keep.",
     icon: Sparkles,
-    accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
 ];
 
@@ -290,369 +278,174 @@ const schema = {
 
 export default function VibeCodingPage() {
   return (
-    <>
+    <div className="sky">
       <JsonLd data={schema} />
 
-      {/* HERO ============================================ */}
-      <section
-        className="relative pt-28 md:pt-36 pb-20"
-        style={{
-          background: "var(--cream-3)",
-          borderBottom: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <div className="container-x px-6 relative z-10">
-          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
-            <div>
-              <div
-                className="inline-flex items-center gap-3 mb-6"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: "var(--terracotta)",
-                }}
-              >
-                <span
-                  style={{
-                    width: 28,
-                    height: 1,
-                    background: "var(--terracotta)",
-                    display: "inline-block",
-                  }}
-                />
-                <Sparkles className="w-3.5 h-3.5" />
-                Vibe Coding by SkynetLabs
-              </div>
-
-              <h1
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 700,
-                  letterSpacing: "-0.025em",
-                  lineHeight: 1.04,
-                  color: "var(--ink)",
-                  fontSize: "clamp(40px, 6vw, 72px)",
-                  margin: "0 0 24px",
-                }}
-              >
-                Real human at a real keyboard.{" "}
-                <em
-                  style={{
-                    fontStyle: "normal",
-                    color: "var(--terracotta)",
-                    fontWeight: 700,
-                  }}
-                >
-                  Just one that types 12x faster now.
-                </em>
-              </h1>
-
-              <p className="text-lg md:text-xl text-[var(--ink-2)] leading-relaxed mb-4">
-                Vibe coding is how I (Waseem, the actual person you&apos;ll be
-                talking to) ship real apps, sites, and tools from a cafe in
-                Bali, with Claude Code as my pair partner and the rest of the
-                AI toolchain on the bench.
-              </p>
-              <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed mb-8">
-                5 to 14 days from brief to live. No agency layer, no PM email
-                chain, no SDR funnel. You talk to me. I talk to the keyboard.
-                The keyboard talks to the models. The thing ships.
-              </p>
-
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href={CAL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary"
-                >
-                  <Calendar className="w-4 h-4" />
-                  Book a 30-min vibe check
-                </a>
-                <a href="#toolchain" className="btn-ghost">
-                  See the toolchain
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
+      {/* HERO — skyv3 (lp/logistics) design language */}
+      <section className="hero">
+        <div className="wrap">
+          <div className="hero-inner">
+            <div className="hero-eyebrow">
+              <span className="pulse"></span>
+              Vibe coding&nbsp;· <strong>5–14 day ship</strong>
             </div>
 
-            <div className="relative">
-              <div
-                className="relative aspect-[4/5] overflow-hidden border flex items-center justify-center"
-                style={{
-                  borderColor: "rgba(26,26,26,0.12)",
-                  background: "var(--cream-2)",
-                  boxShadow:
-                    "0 20px 60px rgba(26,26,26,0.10), 0 0 0 1px rgba(198,107,63,0.15) inset",
-                  borderRadius: 2,
-                }}
-              >
-                <div
-                  aria-hidden
-                  style={{
-                    width: 128,
-                    height: 128,
-                    borderRadius: "50%",
-                    background: "#A8451F",
-                    color: "var(--cream-3)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: "var(--font-mono)",
-                    fontWeight: 700,
-                    fontSize: 48,
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  SL
-                </div>
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, transparent 55%, rgba(26,26,26,0.75) 100%)",
-                  }}
-                />
-                <div className="absolute bottom-5 left-5 right-5">
-                  <div
-                    className="inline-flex items-center gap-2 px-3 py-1.5"
-                    style={{
-                      background: "var(--cream-3)",
-                      border: "1px solid rgba(26,26,26,0.18)",
-                      borderRadius: 2,
-                    }}
-                  >
-                    <span
-                      className="w-2 h-2 rounded-full animate-pulse"
-                      style={{ background: "var(--terracotta)" }}
-                    />
-                    <span
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: 11,
-                        fontWeight: 600,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.14em",
-                        color: "var(--ink)",
-                      }}
-                    >
-                      Live from Canggu, Bali
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            <h1>
+              Real human at a real keyboard.{" "}
+              <em>Just one that types 12x faster now.</em>
+            </h1>
 
-      {/* WHAT IS VIBE CODING ============================================ */}
-      <section className="section">
-        <div className="container-x">
-          <div className="max-w-4xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
-              Direct answer
+            <p className="hero-sub">
+              Vibe coding is how I (Waseem, the actual person you&apos;ll be
+              talking to) ship real apps, sites, and tools from a cafe in Bali,
+              with <strong>Claude Code as my pair partner</strong> and the rest
+              of the AI toolchain on the bench. 5 to 14 days from brief to live
+              — no agency layer, no PM email chain, no SDR funnel.
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
-              What is{" "}
-              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
-                vibe coding
-              </span>
-              ?
-            </h2>
-            <div
-              className="p-8 md:p-10 relative"
-              style={{
-                background: "var(--cream-2)",
-                border: "1px solid rgba(26,26,26,0.12)",
-                backdropFilter: "blur(14px)",
-                borderRadius: 2,
-              }}
-            >
-              <div
-                aria-hidden
-                className="absolute -top-4 left-8 text-6xl text-[var(--terracotta-aa)]/40 select-none"
+
+            <div className="cta-row">
+              <a
+                href={CAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+                data-meta-event="Schedule"
+                data-meta-name="vibe-hero-book-vibe-check"
               >
-                &ldquo;
-              </div>
-              <p className="text-lg md:text-xl text-[var(--ink)] leading-[1.7]">
-                Vibe coding is a human-led, AI-paired build workflow in which
-                an experienced developer drives the design and judgment calls
-                while large language models like Claude Code, Cursor, and
-                Codex handle the typing, the scaffolding, and the
-                multi-file refactors. At SkynetLabs, Waseem Nasir runs the
-                workflow from Bali and ships production websites, Chrome
-                extensions, n8n nodes, and AI micro-products in a fixed 5 to
-                14 day window. The vibe is not the laptop. The vibe is the
-                builder.
-              </p>
+                Book a 30-min vibe check →
+              </a>
+              <a href="#toolchain" className="btn-line">
+                See the toolchain
+              </a>
+            </div>
+
+            <div className="featured-in">
+              <span className="featured-lbl">Featured</span>
+              <span>Claude Code primary</span>
+              <span>Repo in your GitHub</span>
+              <span>14-day free bug fixes</span>
+              <span>Live from Canggu, Bali</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* HUMAN IN THE LOOP ============================================ */}
-      <section className="section pt-0">
-        <div className="container-x">
-          <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16 items-center">
-            <div
-              className="p-8 md:p-10 flex flex-col gap-6"
-              style={{
-                background: "var(--cream-2)",
-                border: "1px solid rgba(26,26,26,0.18)",
-                borderRadius: 2,
-              }}
+      {/* WHAT IS VIBE CODING — direct answer */}
+      <section className="section tinted">
+        <div className="wrap">
+          <div
+            className="section-head"
+            style={{ marginInline: "auto", textAlign: "center" }}
+          >
+            <span className="section-kicker">Direct answer</span>
+            <h2 style={{ margin: "0 auto 18px" }}>
+              What is <em>vibe coding</em>?
+            </h2>
+          </div>
+          <div className="value-stack" style={{ maxWidth: 860 }}>
+            <p
+              className="feat-body"
+              style={{ fontSize: 18, lineHeight: 1.7, color: "var(--ink)" }}
             >
-              <div className="flex items-center gap-4">
-                <div
-                  aria-hidden
-                  className="flex-shrink-0 flex items-center justify-center"
-                  style={{
-                    width: 64,
-                    height: 64,
-                    borderRadius: "50%",
-                    background: "#A8451F",
-                    color: "var(--cream-3)",
-                    fontFamily: "var(--font-mono)",
-                    fontWeight: 700,
-                    fontSize: 22,
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  SL
-                </div>
-                <div>
-                  <p className="font-bold text-[var(--ink)]">One builder. One inbox.</p>
-                  <p className="text-xs font-mono uppercase tracking-[0.12em] text-[#A8451F] mt-1">
-                    Bali · GMT+8 · solo founder
-                  </p>
-                </div>
-              </div>
-              <ul className="space-y-3 m-0 p-0 list-none">
-                {[
-                  "Email me, you get me — no account-manager relay.",
-                  "Hop on a call, it's the founder on the other end.",
-                  "Production breaks at 2am Bali time, the reply comes from me, not a queue.",
-                ].map((line) => (
-                  <li
-                    key={line}
-                    className="flex items-start gap-3 text-[var(--ink-2)] leading-relaxed"
-                  >
-                    <span
-                      aria-hidden
-                      className="mt-2 flex-shrink-0 w-2 h-2 rounded-full"
-                      style={{ background: "#A8451F" }}
-                    />
-                    {line}
-                  </li>
-                ))}
+              Vibe coding is a human-led, AI-paired build workflow in which an
+              experienced developer drives the design and judgment calls while
+              large language models like Claude Code, Cursor, and Codex handle
+              the typing, the scaffolding, and the multi-file refactors. At
+              SkynetLabs, Waseem Nasir runs the workflow from Bali and ships
+              production websites, Chrome extensions, n8n nodes, and AI
+              micro-products in a fixed 5 to 14 day window.{" "}
+              <strong>
+                The vibe is not the laptop. The vibe is the builder.
+              </strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* HUMAN IN THE LOOP */}
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">The human in the loop</span>
+            <h2>
+              You talk to me. <em>Not a chatbot.</em>
+            </h2>
+            <p className="section-sub">
+              I sit at the cafe under the brick arch in Canggu most mornings.
+              Blue polo, oat-milk americano, a 14-inch laptop, and Claude Code
+              humming in the terminal. That&apos;s where your build happens.
+            </p>
+          </div>
+
+          <div className="feature-row">
+            <div className="feat-card">
+              <span className="feat-tag">One builder · one inbox</span>
+              <div className="feat-title">No account-manager relay</div>
+              <p className="feat-body">
+                No offshored ticketing system, no &quot;your account manager
+                will be in touch&quot;, no AI-only agency. When you ping me on
+                email, you get me.
+              </p>
+              <ul className="feat-list">
+                <li>Email me, you get me — no relay.</li>
+                <li>Hop on a call, it&apos;s the founder on the other end.</li>
+                <li>
+                  Production breaks at 2am Bali time, the reply comes from me,
+                  not a queue.
+                </li>
               </ul>
             </div>
-
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
-                The human in the loop
-              </p>
-              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-[var(--ink)]">
-                You talk to me.{" "}
-                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
-                  Not a chatbot.
-                </span>
-              </h2>
-              <p className="text-lg text-[var(--ink-2)] leading-relaxed mb-4">
-                I sit at the cafe under the brick arch in Canggu most
-                mornings. Blue polo, oat-milk americano, a 14-inch laptop, and
-                Claude Code humming in the terminal. That&apos;s where your
-                build happens. No offshored ticketing system, no &quot;your
-                account manager will be in touch&quot;, no AI-only agency.
-              </p>
-              <p className="text-lg text-[var(--ink-2)] leading-relaxed mb-4">
-                When you ping me on email, you get me. When we hop on a call,
-                you see my face. When something breaks on production at 2am
-                Bali time, you get a reply from me, not from a queue.
-              </p>
-              <p className="text-base text-[var(--ink-2)] leading-relaxed">
-                The AI part of the stack is loud and impressive and it
-                deserves a page like this. The human part is the part that
-                actually decides if your thing is any good.
+            <div className="feat-card">
+              <span className="feat-tag">The judgment layer</span>
+              <div className="feat-title">Taste is the part you pay for</div>
+              <p className="feat-body">
+                The AI part of the stack is loud and impressive and it deserves
+                a page like this. The human part is the part that actually
+                decides if your thing is any good. When we hop on a call, you
+                see my face — and when something breaks, you get a reply from
+                me.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* TOOLCHAIN ============================================ */}
-      <section id="toolchain" className="section">
-        <div className="container-x">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
-              The toolchain
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
-              5 models on the bench.{" "}
-              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
-                One picks the lineup.
-              </span>
+      {/* TOOLCHAIN */}
+      <section id="toolchain" className="section tinted">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">The toolchain</span>
+            <h2>
+              5 models on the bench. <em>One picks the lineup.</em>
             </h2>
-            <p className="text-lg text-[var(--ink-2)]">
-              No single model is best at everything. Here&apos;s the lineup
-              and when each one comes in.
+            <p className="section-sub">
+              No single model is best at everything. Here&apos;s the lineup and
+              when each one comes in.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="feature-row">
             {toolchain.map((t) => {
               const Icon = t.icon;
               return (
-                <div
-                  key={t.name}
-                  className="p-6 relative overflow-hidden transition-transform hover:-translate-y-1"
-                  style={{
-                    background: "var(--cream-2)",
-                    border: "1px solid rgba(26,26,26,0.12)",
-                    backdropFilter: "blur(14px)",
-                    borderRadius: 2,
-                  }}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div
-                      className="w-12 h-12 flex items-center justify-center"
-                      style={{ background: "rgba(168,69,31,0.08)", borderRadius: 4 }}
-                    >
-                      <Icon className="w-6 h-6" style={{ color: "var(--ink)" }} />
-                    </div>
-                    <span
-                      className="text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full"
+                <div key={t.name} className="feat-card">
+                  <span className="feat-tag">
+                    <Icon
+                      aria-hidden
                       style={{
-                        background: "rgba(198,107,63,0.30)",
-                        color: "var(--terracotta)",
-                        border: "1px solid rgba(198,107,63,0.30)",
+                        width: 13,
+                        height: 13,
+                        verticalAlign: "-2px",
+                        marginRight: 6,
                       }}
-                    >
-                      {t.badge}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-[var(--ink)] mb-2">
-                    {t.name}
-                  </h3>
-                  <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-3">
-                    {t.role}
-                  </p>
-                  <div
-                    className="pt-3 mt-2"
-                    style={{
-                      borderTop: "1px dashed rgba(26,26,26,0.18)",
-                    }}
-                  >
-                    <p className="text-xs uppercase tracking-widest text-[var(--terracotta)]/80 mb-1">
-                      When we reach for it
-                    </p>
-                    <p className="text-sm text-[var(--ink-2)] leading-relaxed">
-                      {t.when}
-                    </p>
-                  </div>
+                    />
+                    {t.badge}
+                  </span>
+                  <div className="feat-title">{t.name}</div>
+                  <p className="feat-body">{t.role}</p>
+                  <ul className="feat-list">
+                    <li>{t.when}</li>
+                  </ul>
                 </div>
               );
             })}
@@ -660,66 +453,39 @@ export default function VibeCodingPage() {
         </div>
       </section>
 
-      {/* PIPE CODING FLOW ============================================ */}
-      <section className="section pt-0">
-        <div className="container-x">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
-              The pipe coding flow
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
-              From vibe check to live,{" "}
-              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
-                in 5 moves.
-              </span>
+      {/* PIPE CODING FLOW */}
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">The pipe coding flow</span>
+            <h2>
+              From vibe check to live, <em>in 5 moves.</em>
             </h2>
-            <p className="text-lg text-[var(--ink-2)]">
+            <p className="section-sub">
               Same flow for every build. Same fixed window. No surprise
               invoices, no &quot;phase 2 of 6&quot; deck.
             </p>
           </div>
 
-          <div className="space-y-5">
+          <div className="feature-row">
             {pipeSteps.map((s) => {
               const Icon = s.icon;
               return (
-                <div
-                  key={s.num}
-                  className="p-6 md:p-8 grid md:grid-cols-[1fr_3fr] gap-6 items-center"
-                  style={{
-                    background: "var(--cream-2)",
-                    border: "1px solid rgba(26,26,26,0.12)",
-                    borderRadius: 2,
-                  }}
-                >
-                  <div className="flex items-center gap-4">
-                    <div
+                <div key={s.num} className="feat-card">
+                  <span className="feat-tag">
+                    <Icon
+                      aria-hidden
                       style={{
-                        fontFamily: "var(--font-display)",
-                        fontWeight: 500,
-                        fontSize: "clamp(36px, 5vw, 56px)",
-                        color: "var(--terracotta)",
-                        letterSpacing: "-0.025em",
-                        lineHeight: 1,
+                        width: 13,
+                        height: 13,
+                        verticalAlign: "-2px",
+                        marginRight: 6,
                       }}
-                    >
-                      {s.num}
-                    </div>
-                    <div
-                      className="w-12 h-12 flex items-center justify-center border border-[rgba(198,107,63,0.30)]"
-                      style={{ background: "rgba(168,69,31,0.08)", borderRadius: 4 }}
-                    >
-                      <Icon className="w-6 h-6 text-[var(--terracotta)]" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-[var(--ink)] mb-2">
-                      {s.label}
-                    </h3>
-                    <p className="text-base text-[var(--ink-2)] leading-relaxed">
-                      {s.body}
-                    </p>
-                  </div>
+                    />
+                    Step {s.num}
+                  </span>
+                  <div className="feat-title">{s.label}</div>
+                  <p className="feat-body">{s.body}</p>
                 </div>
               );
             })}
@@ -727,72 +493,51 @@ export default function VibeCodingPage() {
         </div>
       </section>
 
-      {/* WHAT WE VIBE-CODE ============================================ */}
-      <section className="section pt-0">
-        <div className="container-x">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
-              What we vibe-code
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
-              Six lanes,{" "}
-              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
-                all fixed-price.
-              </span>
+      {/* WHAT WE VIBE-CODE */}
+      <section className="section tinted">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">What we vibe-code</span>
+            <h2>
+              Six lanes, <em>all fixed-price.</em>
             </h2>
-            <p className="text-lg text-[var(--ink-2)]">
-              If it&apos;s code that ships in under two weeks, it probably
-              fits in one of these.
+            <p className="section-sub">
+              If it&apos;s code that ships in under two weeks, it probably fits
+              in one of these.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="feature-row">
             {buildTypes.map((b) => {
               const Icon = b.icon;
               return (
-                <div
-                  key={b.title}
-                  className="p-6 relative"
-                  style={{
-                    background: "var(--cream-2)",
-                    border: "1px solid rgba(26,26,26,0.12)",
-                    backdropFilter: "blur(14px)",
-                    borderRadius: 2,
-                  }}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div
-                      className="w-11 h-11 flex items-center justify-center border border-[rgba(198,107,63,0.30)]"
-                      style={{ background: "rgba(168,69,31,0.08)", borderRadius: 4 }}
-                    >
-                      <Icon className="w-5 h-5 text-[var(--terracotta)]" />
-                    </div>
-                    <span
-                      className="text-[11px] font-semibold px-2.5 py-1 rounded-full"
+                <div key={b.title} className="feat-card">
+                  <span className="feat-tag">
+                    <Icon
+                      aria-hidden
                       style={{
-                        background: "rgba(198,107,63,0.30)",
-                        color: "var(--terracotta)",
-                        border: "1px solid rgba(198,107,63,0.30)",
+                        width: 13,
+                        height: 13,
+                        verticalAlign: "-2px",
+                        marginRight: 6,
                       }}
-                    >
-                      {b.ship} ship
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[var(--ink)] mb-1.5">
-                    {b.title}
-                  </h3>
-                  <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-4">
-                    {b.body}
-                  </p>
-                  <div
-                    className="text-sm font-semibold text-[var(--terracotta)]"
+                    />
+                    {b.ship} ship
+                  </span>
+                  <div className="feat-title">{b.title}</div>
+                  <p className="feat-body">{b.body}</p>
+                  <p
                     style={{
-                      borderTop: "1px dashed rgba(26,26,26,0.18)",
-                      paddingTop: "0.75rem",
+                      marginTop: 14,
+                      paddingTop: 14,
+                      borderTop: "1px dashed var(--rule)",
+                      fontFamily: "var(--font-mono-plex), monospace",
+                      fontWeight: 700,
+                      color: "var(--terracotta-aa)",
                     }}
                   >
                     {b.price}
-                  </div>
+                  </p>
                 </div>
               );
             })}
@@ -800,56 +545,43 @@ export default function VibeCodingPage() {
         </div>
       </section>
 
-      {/* A FEW WE'VE SHIPPED ============================================ */}
-      <section className="section pt-0">
-        <div className="container-x">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3">
-              A few we&apos;ve shipped
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-[var(--ink)]">
-              Real builds,{" "}
-              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
-                real domains.
-              </span>
+      {/* A FEW WE'VE SHIPPED */}
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">A few we&apos;ve shipped</span>
+            <h2>
+              Real builds, <em>real domains.</em>
             </h2>
-            <p className="text-lg text-[var(--ink-2)]">
+            <p className="section-sub">
               Three vibe-coded case studies you can read in full.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="feature-row">
             {shippedCases.map((c) => (
               <Link
                 key={c.slug}
                 href={`/case-studies/${c.slug}`}
-                className="group p-6 block transition-transform hover:-translate-y-1"
-                style={{
-                  background: "var(--cream-2)",
-                  border: "1px solid rgba(26,26,26,0.12)",
-                  backdropFilter: "blur(14px)",
-                  borderRadius: 2,
-                }}
+                className="feat-card"
+                style={{ display: "block" }}
               >
+                <span className="feat-tag">{c.tag}</span>
+                <div className="feat-title">{c.title}</div>
+                <p className="feat-body">{c.outcome}</p>
                 <span
-                  className="text-[11px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full inline-block mb-4"
                   style={{
-                    background: "rgba(198,107,63,0.30)",
-                    color: "var(--terracotta)",
-                    border: "1px solid rgba(198,107,63,0.30)",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    marginTop: 16,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "var(--terracotta-aa)",
                   }}
                 >
-                  {c.tag}
-                </span>
-                <h3 className="text-xl font-bold text-[var(--ink)] mb-3 group-hover:text-[var(--terracotta)] transition-colors">
-                  {c.title}
-                </h3>
-                <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-4">
-                  {c.outcome}
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--terracotta)]">
                   Read the build story
-                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  <ChevronRight style={{ width: 15, height: 15 }} />
                 </span>
               </Link>
             ))}
@@ -857,238 +589,171 @@ export default function VibeCodingPage() {
         </div>
       </section>
 
-      {/* REAL TALK / WHY HUMAN ============================================ */}
-      <section className="section pt-0">
-        <div className="container-x">
-          <div
-            className="p-8 md:p-14 grid md:grid-cols-[1.4fr_1fr] gap-10 items-center"
-            style={{
-              background: "var(--cream-2)",
-              border: "1px solid rgba(26,26,26,0.18)",
-              borderRadius: 2,
-            }}
-          >
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-4">
-                Real talk
-              </p>
-              <p className="text-2xl md:text-3xl font-bold text-[var(--ink)] leading-[1.35] mb-6">
-                &ldquo;AI doesn&apos;t replace the builder. It replaces the
-                typing. The judgment, the taste, the &lsquo;no, that button
-                needs to live on the right&rsquo;{" "}
-                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
-                  that&apos;s still me.
-                </span>
-                &rdquo;
-              </p>
-              <p className="text-base text-[var(--ink-2)] leading-relaxed">
-                A team of agents can scaffold a Next.js app in 90 seconds.
-                None of them know your client base. None of them know that
-                the dental atelier in Manhattan won&apos;t trust a site that
-                hides pricing. None of them know that a Bali wellness funnel
-                needs to address the &quot;is this only for people who
-                already meditate&quot; objection in the hero. That&apos;s the
-                judgment layer. That&apos;s what you&apos;re paying for.
-              </p>
-              <div className="mt-6 text-sm text-[var(--ink-2)]">
-                Waseem Nasir, founder, SkynetLabs
+      {/* REAL TALK / WHY HUMAN */}
+      <section className="section tinted">
+        <div className="wrap">
+          <div className="risk">
+            <div className="risk-inner">
+              <div>
+                <div
+                  className="section-kicker"
+                  style={{ color: "var(--ochre)" }}
+                >
+                  Real talk
+                </div>
+                <p className="risk-h">
+                  &ldquo;AI doesn&apos;t replace the builder. It replaces the
+                  typing. The judgment, the taste, the &lsquo;no, that button
+                  needs to live on the right&rsquo; —{" "}
+                  <em>that&apos;s still me.</em>&rdquo;
+                </p>
+                <p className="risk-p">
+                  A team of agents can scaffold a Next.js app in 90 seconds.
+                  None of them know your client base. None of them know that the
+                  dental atelier in Manhattan won&apos;t trust a site that hides
+                  pricing. None of them know that a Bali wellness funnel needs
+                  to address the &quot;is this only for people who already
+                  meditate&quot; objection in the hero. That&apos;s the judgment
+                  layer. That&apos;s what you&apos;re paying for.
+                </p>
+                <p
+                  className="risk-p"
+                  style={{ marginTop: 12, fontWeight: 600 }}
+                >
+                  Waseem Nasir, founder, SkynetLabs
+                </p>
               </div>
-            </div>
-            <div
-              className="relative aspect-[4/5] overflow-hidden border border-[rgba(198,107,63,0.30)] flex items-center justify-center"
-              style={{ background: "var(--cream-3)", borderRadius: 2 }}
-            >
-              <div
-                aria-hidden
-                style={{
-                  width: 120,
-                  height: 120,
-                  borderRadius: "50%",
-                  background: "#A8451F",
-                  color: "var(--cream-3)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: "var(--font-mono)",
-                  fontWeight: 700,
-                  fontSize: 44,
-                  letterSpacing: "0.04em",
-                }}
-              >
-                SL
-              </div>
+              <ul className="risk-list">
+                <li>
+                  <strong>Every line read.</strong> Claude Code drafts, I review
+                  every diff.
+                </li>
+                <li>
+                  <strong>Repo in your GitHub.</strong> No lock-in, the code is
+                  yours.
+                </li>
+                <li>
+                  <strong>14 days free bug fixes.</strong> Plus an optional flat
+                  retainer.
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ ============================================ */}
-      <section className="section pt-0">
-        <div className="container-x">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta)] font-semibold mb-3 text-center">
-              FAQ
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-10 text-center text-[var(--ink)]">
-              The{" "}
-              <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
-                honest answers.
-              </span>
+      {/* FAQ */}
+      <section className="section">
+        <div className="wrap">
+          <div
+            className="section-head"
+            style={{ marginInline: "auto", textAlign: "center" }}
+          >
+            <span className="section-kicker">FAQ</span>
+            <h2 style={{ margin: "0 auto" }}>
+              The <em>honest answers.</em>
             </h2>
-
-            <div className="space-y-3">
-              {faqs.map((f) => (
-                <details
-                  key={f.q}
-                  className="group p-5 md:p-6"
-                  style={{
-                    background: "var(--cream-2)",
-                    border: "1px solid rgba(26,26,26,0.12)",
-                    backdropFilter: "blur(14px)",
-                    borderRadius: 2,
-                  }}
-                >
-                  <summary className="cursor-pointer list-none flex items-center justify-between gap-4 text-lg font-semibold text-[var(--ink)]">
-                    <span>{f.q}</span>
-                    <ChevronRight className="w-5 h-5 text-[var(--terracotta)] transition-transform group-open:rotate-90 shrink-0" />
-                  </summary>
-                  <p className="text-base text-[var(--ink-2)] leading-relaxed mt-4">
-                    {f.a}
-                  </p>
-                </details>
-              ))}
-            </div>
           </div>
-        </div>
-      </section>
 
-      {/* FINAL CTA ============================================ */}
-      <section className="section pt-0">
-        <div className="container-x">
           <div
-            className="p-10 md:p-14 text-center relative"
             style={{
-              background: "var(--ink)",
-              borderRadius: 2,
+              maxWidth: 820,
+              margin: "0 auto",
+              display: "grid",
+              gap: 12,
             }}
           >
-            <div className="relative z-10 max-w-2xl mx-auto">
-              <div
-                className="inline-flex items-center gap-3 mb-6"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: "var(--terracotta)",
-                }}
+            {faqs.map((f) => (
+              <details
+                key={f.q}
+                className="feat-card"
+                style={{ padding: "20px 24px" }}
               >
-                <span
+                <summary
                   style={{
-                    width: 28,
-                    height: 1,
-                    background: "var(--terracotta)",
-                    display: "inline-block",
-                  }}
-                />
-                <Calendar className="w-3.5 h-3.5" />
-                30-min call, free
-              </div>
-              <h2
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 700,
-                  fontSize: "clamp(32px, 5vw, 56px)",
-                  letterSpacing: "-0.025em",
-                  lineHeight: 1.05,
-                  color: "var(--cream-3)",
-                  margin: "0 0 18px",
-                }}
-              >
-                Book a{" "}
-                <em
-                  style={{
-                    fontStyle: "normal",
-                    color: "var(--terracotta)",
-                    fontWeight: 700,
-                  }}
-                >
-                  vibe check.
-                </em>
-              </h2>
-              <p
-                style={{
-                  fontSize: 17,
-                  color: "rgba(242,239,230,0.85)",
-                  lineHeight: 1.6,
-                  marginBottom: 28,
-                  maxWidth: "52ch",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                }}
-              >
-                A real call with me. Not a salesperson, not a bot, not a
-                discovery funnel. You describe what you want built, I tell you
-                if I can ship it in the window, we either book it or we
-                don&apos;t.
-              </p>
-              <div className="flex flex-wrap gap-3 justify-center">
-                <a
-                  href={CAL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                  style={{
-                    background: "var(--terracotta)",
-                    color: "var(--cream-3)",
-                    padding: "16px 28px",
-                    fontFamily: "var(--font-sans)",
+                    cursor: "pointer",
+                    listStyle: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 16,
+                    fontFamily: "var(--font-display)",
+                    fontSize: 18,
                     fontWeight: 600,
-                    fontSize: 15,
-                    borderRadius: 2,
-                    border: "none",
-                    textDecoration: "none",
+                    color: "var(--ink)",
                   }}
                 >
-                  <Calendar className="w-4 h-4" />
-                  Grab a 30-min slot
-                </a>
-                <a
-                  href={`mailto:${SITE.emailFounder}?subject=Vibe%20coding%20brief`}
-                  className="inline-flex items-center gap-2"
-                  style={{
-                    background: "transparent",
-                    color: "var(--cream-3)",
-                    border: "1px solid rgba(242,239,230,0.4)",
-                    padding: "15px 26px",
-                    fontFamily: "var(--font-sans)",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    borderRadius: 2,
-                    textDecoration: "none",
-                  }}
-                >
-                  <Mail className="w-4 h-4" />
-                  Email me the brief
-                </a>
-              </div>
-              <p
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  color: "rgba(242,239,230,0.6)",
-                  marginTop: 24,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.14em",
-                }}
-              >
-                {SITE.emailFounder} · Bali timezone (GMT+8) · Replies within 8
-                working hours
-              </p>
-            </div>
+                  <span>{f.q}</span>
+                  <ChevronRight
+                    style={{
+                      width: 18,
+                      height: 18,
+                      color: "var(--terracotta)",
+                      flexShrink: 0,
+                    }}
+                  />
+                </summary>
+                <p className="feat-body" style={{ marginTop: 14 }}>
+                  {f.a}
+                </p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
-    </>
+
+      {/* CLOSER — skyv3 pattern */}
+      <section className="closer">
+        <div className="closer-scarcity">30-min call, free</div>
+        <h2>
+          Book a <em>vibe check.</em>
+        </h2>
+        <p>
+          A real call with me. Not a salesperson, not a bot, not a discovery
+          funnel. You describe what you want built, I tell you if I can ship it
+          in the window, we either book it or we don&apos;t.
+        </p>
+        <div className="cta-row">
+          <a
+            href={CAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+            data-meta-event="Schedule"
+            data-meta-name="vibe-closer-book-vibe-check"
+          >
+            Grab a 30-min slot →
+          </a>
+          <a
+            href={`mailto:${SITE.emailFounder}?subject=Vibe%20coding%20brief`}
+            className="btn-line"
+          >
+            <Mail
+              aria-hidden
+              style={{
+                width: 14,
+                height: 14,
+                verticalAlign: "-2px",
+                marginRight: 6,
+              }}
+            />
+            Email me the brief
+          </a>
+        </div>
+        <p
+          style={{
+            fontFamily: "var(--font-mono-plex), monospace",
+            fontSize: 11,
+            color: "var(--ink-faint)",
+            marginTop: 24,
+            textTransform: "uppercase",
+            letterSpacing: "0.14em",
+          }}
+        >
+          {SITE.emailFounder} · Bali timezone (GMT+8) · Replies within 8 working
+          hours
+        </p>
+      </section>
+    </div>
   );
 }

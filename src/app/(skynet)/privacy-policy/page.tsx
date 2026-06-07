@@ -7,7 +7,7 @@ import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "privacy-policy.html"),
-  "utf8"
+  "utf8",
 );
 
 export const metadata: Metadata = {
@@ -46,9 +46,29 @@ const schema = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <>
+    <div className="sky">
       <JsonLd data={schema} />
+
+      <section className="hero">
+        <div className="wrap">
+          <div className="hero-inner">
+            <div className="hero-eyebrow">
+              <span className="pulse"></span>
+              Legal&nbsp;· Last updated 2026-05-20
+            </div>
+            <h1>
+              How we handle <em>your data.</em>
+            </h1>
+            <p className="hero-sub">
+              Plain-language privacy policy for skynetjoe.com and any consulting
+              engagement. Minimum collection, no tracking cookies, deletion on
+              request.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <HtmlCreamWrap html={html} />
-    </>
+    </div>
   );
 }

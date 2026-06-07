@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, X, Check, MessageSquareDashed, MoonStar, GitBranch } from "lucide-react";
+import {
+  ArrowRight,
+  X,
+  Check,
+  MessageSquareDashed,
+  MoonStar,
+  GitBranch,
+} from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { WhatsAppCRM, AIDispatcher } from "@/components/illustrations";
 
@@ -34,7 +41,9 @@ function Reveal({
     <motion.div
       className={className}
       style={style}
-      initial={reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }}
+      initial={
+        reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }
+      }
       whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, delay, ease }}
@@ -177,7 +186,11 @@ export default function AiChatbotsLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <div
@@ -193,7 +206,14 @@ export default function AiChatbotsLP() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta-aa)", display: "inline-block" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta-aa)",
+                  display: "inline-block",
+                }}
+              />
               Always-on chat · 2026
             </div>
             <h1
@@ -209,7 +229,9 @@ export default function AiChatbotsLP() {
               }}
             >
               The message came in at 11pm.{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>Answer it now.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                Answer it now.
+              </span>
             </h1>
             <p
               style={{
@@ -225,10 +247,12 @@ export default function AiChatbotsLP() {
               step in, the full conversation is right there.
             </p>
             <Link href="/discovery-call" style={primaryBtn}>
-              Book a free 30-min check-up
+              Book a free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
-            <div style={subline}>— Bali hours GMT+8 · covers EU mornings + US evenings</div>
+            <div style={subline}>
+              — Bali hours GMT+8 · covers EU mornings + US evenings
+            </div>
             <div
               style={{
                 marginTop: 16,
@@ -263,12 +287,20 @@ export default function AiChatbotsLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--oxblood)">Real messages, real damage</Eyebrow>
             <H2>
               Three places chat{" "}
-              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>quietly costs you customers.</span>
+              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>
+                quietly costs you customers.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-card-grid">
@@ -282,7 +314,14 @@ export default function AiChatbotsLP() {
                   transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
-                <p.icon style={{ width: 26, height: 26, color: "var(--oxblood)", marginBottom: 14 }} />
+                <p.icon
+                  style={{
+                    width: 26,
+                    height: 26,
+                    color: "var(--oxblood)",
+                    marginBottom: 14,
+                  }}
+                />
                 <h3 style={cardH3}>{p.title}</h3>
                 <p style={cardBody}>{p.body}</p>
               </Item>
@@ -300,7 +339,13 @@ export default function AiChatbotsLP() {
           textAlign: "center",
         }}
       >
-        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <Reveal
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div style={proofEyebrow}>— A promise, not a marketing claim</div>
           <div
             style={{
@@ -332,15 +377,28 @@ export default function AiChatbotsLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">What we hand over</Eyebrow>
             <H2>
               Chat that sounds like you,{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>not a robot.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                not a robot.
+              </span>
             </H2>
-            <p style={{ ...cardBody, fontSize: 16, maxWidth: "44ch", marginBottom: 20 }}>
+            <p
+              style={{
+                ...cardBody,
+                fontSize: 16,
+                maxWidth: "44ch",
+                marginBottom: 20,
+              }}
+            >
               &ldquo;It reads exactly like our front-desk team. People barely
               notice they started with a bot — they have a date and time
               confirmed before a human ever steps in.&rdquo;
@@ -348,12 +406,21 @@ export default function AiChatbotsLP() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {FACTS.map((f) => (
                 <li key={f} style={factLi}>
-                  <Check style={{ width: 16, height: 16, color: "var(--sage)", marginTop: 2 }} />
+                  <Check
+                    style={{
+                      width: 16,
+                      height: 16,
+                      color: "var(--sage)",
+                      marginTop: 2,
+                    }}
+                  />
                   <span>{f}</span>
                 </li>
               ))}
             </ul>
-            <div style={{ ...subline, marginTop: 18 }}>— Practice owner · dental flagship · 11-day ship</div>
+            <div style={{ ...subline, marginTop: 18 }}>
+              — Practice owner · dental flagship · 11-day ship
+            </div>
           </Reveal>
           <motion.div
             initial={{ opacity: 0, y: 30, rotate: 1 }}
@@ -375,12 +442,20 @@ export default function AiChatbotsLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">Before vs after</Eyebrow>
             <H2>
               What changes the day{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>the chat goes live.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                the chat goes live.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-ba-grid">
@@ -395,7 +470,9 @@ export default function AiChatbotsLP() {
         h2={
           <>
             Hand us your messages.{" "}
-            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>We&apos;ll train the chat.</span>
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+              We&apos;ll train the chat.
+            </span>
           </>
         }
         body="A free 30-minute check-up. Walk us through your 20 most-asked messages. Fixed scope back in 48 hours, live in 11 days."
@@ -467,7 +544,13 @@ const proofDetail: React.CSSProperties = {
   margin: "0 auto",
 };
 
-function Eyebrow({ children, color }: { children: React.ReactNode; color: string }) {
+function Eyebrow({
+  children,
+  color,
+}: {
+  children: React.ReactNode;
+  color: string;
+}) {
   return (
     <div
       style={{
@@ -482,7 +565,14 @@ function Eyebrow({ children, color }: { children: React.ReactNode; color: string
         gap: 12,
       }}
     >
-      <span style={{ width: 28, height: 1, background: color, display: "inline-block" }} />
+      <span
+        style={{
+          width: 28,
+          height: 1,
+          background: color,
+          display: "inline-block",
+        }}
+      />
       {children}
     </div>
   );
@@ -522,7 +612,14 @@ function BeforeCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((b) => (
           <li key={b} style={{ ...listLi, color: "var(--ink-2)" }}>
-            <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+            <X
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--oxblood)",
+                marginTop: 4,
+              }}
+            />
             <span>{b}</span>
           </li>
         ))}
@@ -546,7 +643,14 @@ function AfterCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((a) => (
           <li key={a} style={{ ...listLi, color: "var(--ink)" }}>
-            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+            <Check
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--sage)",
+                marginTop: 4,
+              }}
+            />
             <span>{a}</span>
           </li>
         ))}
@@ -581,7 +685,14 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
           "linear-gradient(180deg, var(--cream) 0%, color-mix(in srgb, var(--terracotta) 8%, var(--cream)) 100%)",
       }}
     >
-      <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)", textAlign: "center" }}>
+      <Reveal
+        style={{
+          maxWidth: 760,
+          margin: "0 auto",
+          padding: "0 clamp(16px, 5vw, 32px)",
+          textAlign: "center",
+        }}
+      >
         <div
           style={{
             fontFamily: "var(--font-mono)",
@@ -618,8 +729,16 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
         >
           {body}
         </p>
-        <Link href="/discovery-call" style={{ ...primaryBtn, padding: "18px 32px", fontWeight: 700, fontSize: 16 }}>
-          Book a free 30-min check-up
+        <Link
+          href="/discovery-call"
+          style={{
+            ...primaryBtn,
+            padding: "18px 32px",
+            fontWeight: 700,
+            fontSize: 16,
+          }}
+        >
+          Book a free 30-min audit
           <ArrowRight style={{ width: 16, height: 16 }} />
         </Link>
         <div

@@ -26,7 +26,7 @@ import {
   Truck,
   ArrowRight,
 } from "lucide-react";
-import { NAV_PRIMARY, SERVICE_CATEGORIES } from "@/lib/site";
+import { NAV_PRIMARY, SERVICE_CATEGORIES, SITE } from "@/lib/site";
 import ServicesMegaMenu from "@/components/header/ServicesMegaMenu";
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -171,7 +171,13 @@ export default function Header() {
             }}
           >
             Skynet
-            <em style={{ fontStyle: "normal", color: "var(--terracotta-aa)", fontWeight: 700 }}>
+            <em
+              style={{
+                fontStyle: "normal",
+                color: "var(--terracotta-aa)",
+                fontWeight: 700,
+              }}
+            >
               Labs
             </em>
           </span>
@@ -179,7 +185,8 @@ export default function Header() {
 
         <nav className="hidden lg:flex items-center">
           {NAV_PRIMARY.map((item) => {
-            const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
+            const hasDrop =
+              item.hasMega || (item.subItems && item.subItems.length > 0);
             const active = isActive(item.href);
             const restColor = active ? "var(--terracotta-aa)" : "var(--ink-2)";
             return (
@@ -196,11 +203,17 @@ export default function Header() {
                   href={item.href}
                   className="relative flex items-center gap-1 px-3.5 py-2 text-[13px] transition-colors"
                   style={{ color: restColor, fontWeight: active ? 600 : 500 }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = restColor)}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "var(--terracotta)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = restColor)
+                  }
                   // Parent label now NAVIGATES to its index page on click; hover/focus
                   // (wrapper handlers) is what opens the menu. No preventDefault.
-                  aria-expanded={hasDrop ? openDropdown === item.href : undefined}
+                  aria-expanded={
+                    hasDrop ? openDropdown === item.href : undefined
+                  }
                   aria-haspopup={hasDrop ? "menu" : undefined}
                   aria-current={active ? "page" : undefined}
                 >
@@ -260,18 +273,23 @@ export default function Header() {
                         <Link
                           key={sub.href}
                           href={sub.href}
-                          aria-current={pathname === sub.href ? "page" : undefined}
+                          aria-current={
+                            pathname === sub.href ? "page" : undefined
+                          }
                           className="group flex items-start gap-3 p-3 transition-colors"
                           style={{
                             borderLeft: "3px solid transparent",
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.background = "rgba(198, 107, 63, 0.06)";
-                            e.currentTarget.style.borderLeftColor = "var(--terracotta)";
+                            e.currentTarget.style.background =
+                              "rgba(198, 107, 63, 0.06)";
+                            e.currentTarget.style.borderLeftColor =
+                              "var(--terracotta)";
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.background = "transparent";
-                            e.currentTarget.style.borderLeftColor = "transparent";
+                            e.currentTarget.style.borderLeftColor =
+                              "transparent";
                           }}
                         >
                           <span
@@ -281,7 +299,10 @@ export default function Header() {
                           <span className="min-w-0">
                             <span
                               className="block text-[13px] font-semibold leading-tight"
-                              style={{ color: "var(--ink)", fontFamily: "var(--font-display)" }}
+                              style={{
+                                color: "var(--ink)",
+                                fontFamily: "var(--font-display)",
+                              }}
                             >
                               {sub.label}
                             </span>
@@ -305,19 +326,27 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <span className="h-5 w-px" style={{ background: "var(--border)" }} aria-hidden="true" />
+          <span
+            className="h-5 w-px"
+            style={{ background: "var(--border)" }}
+            aria-hidden="true"
+          />
           <Link
-            href="/discovery-call"
+            href={SITE.cta.href}
             className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold transition-all hover:-translate-y-0.5"
             style={{
               background: "var(--terracotta)",
               color: "var(--cream-3)",
               borderRadius: 2,
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--terracotta-2)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--terracotta)")}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.background = "var(--terracotta-2)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.background = "var(--terracotta)")
+            }
           >
-            Book free audit
+            {SITE.cta.label}
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -329,7 +358,11 @@ export default function Header() {
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <Menu className="w-6 h-6" />
+          )}
         </button>
       </div>
 
@@ -343,7 +376,8 @@ export default function Header() {
         >
           <nav className="container-x px-4 sm:px-6 py-6 flex flex-col gap-1">
             {NAV_PRIMARY.map((item) => {
-              const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
+              const hasDrop =
+                item.hasMega || (item.subItems && item.subItems.length > 0);
               const open = mobileSubOpen === item.href;
               const active = isActive(item.href);
               if (!hasDrop) {
@@ -355,7 +389,9 @@ export default function Header() {
                     className="py-3 text-base font-medium border-b border-white/[0.06]"
                     style={{
                       color: active ? "var(--terracotta-aa)" : "var(--ink)",
-                      borderLeft: active ? "3px solid var(--terracotta)" : "3px solid transparent",
+                      borderLeft: active
+                        ? "3px solid var(--terracotta)"
+                        : "3px solid transparent",
                       paddingLeft: active ? 10 : 0,
                     }}
                     aria-current={active ? "page" : undefined}
@@ -374,7 +410,9 @@ export default function Header() {
                       className="flex-1 py-3 text-base font-medium"
                       style={{
                         color: active ? "var(--terracotta)" : "var(--ink)",
-                        borderLeft: active ? "3px solid var(--terracotta)" : "3px solid transparent",
+                        borderLeft: active
+                          ? "3px solid var(--terracotta)"
+                          : "3px solid transparent",
                         paddingLeft: active ? 10 : 0,
                       }}
                       aria-current={active ? "page" : undefined}
@@ -403,9 +441,11 @@ export default function Header() {
                           <ul className="space-y-1">
                             {cat.services.map((svc) => {
                               const Icon = ICONS[svc.icon];
-                              const href = ("href" in svc && typeof svc.href === "string"
-                                ? svc.href
-                                : `/services/${svc.slug}`) as string;
+                              const href = (
+                                "href" in svc && typeof svc.href === "string"
+                                  ? svc.href
+                                  : `/services/${svc.slug}`
+                              ) as string;
                               return (
                                 <li key={svc.slug}>
                                   <Link
@@ -417,23 +457,24 @@ export default function Header() {
                                       <Icon className="w-3.5 h-3.5 text-skynet-primary-light/70 flex-shrink-0" />
                                     )}
                                     {svc.label}
-                                    {"badge" in svc && typeof svc.badge === "string" && (
-                                      <span
-                                        style={{
-                                          fontFamily: "var(--font-mono)",
-                                          fontSize: 9,
-                                          fontWeight: 700,
-                                          letterSpacing: "0.12em",
-                                          padding: "2px 7px",
-                                          background: "var(--terracotta)",
-                                          color: "var(--cream)",
-                                          borderRadius: 999,
-                                          marginLeft: 6,
-                                        }}
-                                      >
-                                        {svc.badge}
-                                      </span>
-                                    )}
+                                    {"badge" in svc &&
+                                      typeof svc.badge === "string" && (
+                                        <span
+                                          style={{
+                                            fontFamily: "var(--font-mono)",
+                                            fontSize: 9,
+                                            fontWeight: 700,
+                                            letterSpacing: "0.12em",
+                                            padding: "2px 7px",
+                                            background: "var(--terracotta)",
+                                            color: "var(--cream)",
+                                            borderRadius: 999,
+                                            marginLeft: 6,
+                                          }}
+                                        >
+                                          {svc.badge}
+                                        </span>
+                                      )}
                                   </Link>
                                 </li>
                               );
@@ -458,17 +499,29 @@ export default function Header() {
                           key={sub.href}
                           href={sub.href}
                           onClick={() => setMobileOpen(false)}
-                          aria-current={pathname === sub.href ? "page" : undefined}
+                          aria-current={
+                            pathname === sub.href ? "page" : undefined
+                          }
                           className="block py-2 text-sm transition-colors"
-                          style={{ color: "var(--ink-2)", wordBreak: "break-word" }}
-                          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
-                          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-2)")}
+                          style={{
+                            color: "var(--ink-2)",
+                            wordBreak: "break-word",
+                          }}
+                          onMouseEnter={(e) =>
+                            (e.currentTarget.style.color = "var(--terracotta)")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.currentTarget.style.color = "var(--ink-2)")
+                          }
                         >
                           {sub.label}
                           {sub.desc && (
                             <span
                               className="block text-[11px] mt-0.5"
-                              style={{ color: "var(--ink-faint)", wordBreak: "break-word" }}
+                              style={{
+                                color: "var(--ink-faint)",
+                                wordBreak: "break-word",
+                              }}
                             >
                               {sub.desc}
                             </span>
@@ -482,7 +535,7 @@ export default function Header() {
             })}
             <div className="mt-5">
               <Link
-                href="/discovery-call"
+                href={SITE.cta.href}
                 onClick={() => setMobileOpen(false)}
                 className="inline-flex items-center justify-center gap-1.5 w-full"
                 style={{
@@ -495,7 +548,7 @@ export default function Header() {
                   fontSize: 15,
                 }}
               >
-                Book free audit
+                {SITE.cta.label}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

@@ -212,9 +212,9 @@ canvas {
   isolation: isolate;
 }
 
-/* Typography defaults (2026-06-01 readability overhaul).
-   Headings now Inter (via --font-display). Bumped to 700 — Inter at the old
-   Fraunces weight 500 reads too light at display sizes. Heading line-heights
+/* Typography defaults (2026-06-01 readability overhaul; 06-07 type swap).
+   Headings now Bricolage Grotesque (via --font-display). Weight 700 — the old
+   Fraunces weight 500 read too light at display sizes. Heading line-heights
    are set per-component (hero clamps etc.); we set a safe default here. */
 h1,
 h2,

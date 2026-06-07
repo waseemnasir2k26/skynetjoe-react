@@ -1,0 +1,50 @@
+ M public/wp-templates/about.html
+ M public/wp-templates/services-index.html
+ M public/wp-templates/services/branding-design.html
+ M src/app/(skynet)/about/page.tsx
+ M src/app/(skynet)/aeo-guide/page.tsx
+ M src/app/(skynet)/author/waseem-nasir/page.tsx
+ M src/app/(skynet)/blog/page.tsx
+ M src/app/(skynet)/case-studies/page.tsx
+ M src/app/(skynet)/contact/page.tsx
+ M src/app/(skynet)/discovery-call/DiscoveryFunnel.tsx
+ M src/app/(skynet)/discovery-call/page.tsx
+ M src/app/(skynet)/faqs/page.tsx
+ M src/app/(skynet)/glossary/page.tsx
+ M src/app/(skynet)/industries/page.tsx
+ M src/app/(skynet)/layout.tsx
+ M src/app/(skynet)/locations/[state]/page.tsx
+ M src/app/(skynet)/locations/page.tsx
+ M src/app/(skynet)/lp/logistics/page.tsx
+ M src/app/(skynet)/n8n-vs-zapier/page.tsx
+ M src/app/(skynet)/news/page.tsx
+ M src/app/(skynet)/page.tsx
+ M src/app/(skynet)/portfolio/page.tsx
+ M src/app/(skynet)/pricing/page.tsx
+ M src/app/(skynet)/privacy-policy/page.tsx
+ M src/app/(skynet)/services/page.tsx
+ M src/app/(skynet)/site-stats/page.tsx
+ M src/app/(skynet)/terms-of-service/page.tsx
+ M src/app/(skynet)/thank-you/page.tsx
+ M src/app/(skynet)/tools/page.tsx
+ M src/app/(skynet)/vibe-coding/page.tsx
+ M src/components/Header.tsx
+ M src/components/LiveChat.tsx
+ M src/components/funnel/FinalCTA.tsx
+ M src/components/header/ServicesMegaMenu.tsx
+ M src/components/illustrations/ContentPipeline.tsx
+ M src/components/letter/LetterArticle.tsx
+ M src/components/sections/IndustryLanding.tsx
+ M src/components/sections/WorkShowcase.tsx
+ M src/components/services/ServiceFunnel.tsx
+ M src/components/services/lp/AiChatbotsLP.tsx
+ M src/components/services/lp/GoHighLevelLP.tsx
+ M src/components/services/lp/N8nAutomationLP.tsx
+ M src/components/services/lp/VibeCodedSitesLP.tsx
+ M src/components/services/lp/WordpressSeoLP.tsx
+ M src/lib/case-studies.ts
+ M src/lib/site.ts
+?? .critic/
+?? src/app/(skynet)/lp/logistics/FreightOpsInteractive.tsx
+?? src/components/sky/
+?? src/styles/

@@ -7,7 +7,7 @@ import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "author-waseem-nasir.html"),
-  "utf8"
+  "utf8",
 );
 
 export const metadata: Metadata = {
@@ -120,9 +120,29 @@ const schema = {
 
 export default function AuthorPage() {
   return (
-    <>
+    <div className="sky">
       <JsonLd data={schema} />
+
+      <section className="hero">
+        <div className="wrap">
+          <div className="hero-inner">
+            <div className="hero-eyebrow">
+              <span className="pulse"></span>
+              Author
+            </div>
+            <h1>
+              Waseem Nasir builds automation that <em>runs itself.</em>
+            </h1>
+            <p className="hero-sub">
+              Founder of SkynetLabs. n8n automation, AI chatbots and
+              conversion-tuned websites — built from Bali.{" "}
+              <strong>180+ workflows, 40+ websites, 9 countries served.</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
       <HtmlCreamWrap html={html} />
-    </>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { CASE_STUDIES, type CaseStudy } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
@@ -32,7 +31,8 @@ const CARD_META: Record<string, CardMeta> = {
     gradient: "g1",
     tagClass: "t-auto",
     num: "01 / 09",
-    title: "EU logistics group — email triage that doesn't read your CC field wrong",
+    title:
+      "EU logistics group — email triage that doesn't read your CC field wrong",
     blurb:
       "17-node n8n + GPT-4o pipeline drafting Gmail replies for a French mining-logistics operator. Five-condition gate, accent-safe parsing, thread-scoped context.",
     outcomes: [
@@ -44,10 +44,14 @@ const CARD_META: Record<string, CardMeta> = {
     gradient: "g2",
     tagClass: "t-web",
     num: "02 / 09",
-    title: 'Bali wellness practitioner — a funnel that books instead of "informs"',
+    title:
+      'Bali wellness practitioner — a funnel that books instead of "informs"',
     blurb:
       "Single-page conversion build with embedded scheduling, voice-locked copy, and an objection block that runs the conversation she gets in her DMs daily.",
-    outcomes: ["Doubled appointments without ads", "Shipped in 9 days from brief to live"],
+    outcomes: [
+      "Doubled appointments without ads",
+      "Shipped in 9 days from brief to live",
+    ],
   },
   "manhattan-dental-atelier-flagship": {
     gradient: "g3",
@@ -80,7 +84,10 @@ const CARD_META: Record<string, CardMeta> = {
     title: "US insurance retainer client — GHL pipeline rebuilt end-to-end",
     blurb:
       "Seventh GoHighLevel batch for the same operator: funnels, drip cadences, pipeline stages, calendar links, SMS templates — all rebuilt from a stagnant prior install.",
-    outcomes: ["Removed 3hrs/day of manual triage", "Replaced 4 paid tools with one stack"],
+    outcomes: [
+      "Removed 3hrs/day of manual triage",
+      "Replaced 4 paid tools with one stack",
+    ],
   },
   "internal-carousel-content-engine-200-asset": {
     gradient: "g6",
@@ -88,7 +95,7 @@ const CARD_META: Record<string, CardMeta> = {
     num: "06 / 09",
     title: "Internal content engine — 200-asset carousel pipeline",
     blurb:
-      "n8n-orchestrated pipeline turning a single topic brief into 200 PNG-ready carousel slides, with html2canvas render, image rotation log, and zero AI-tell phrasing.",
+      "n8n-orchestrated pipeline turning a single topic brief into 200 PNG-ready carousel slides, with an automated image-render pipeline, image rotation log, and zero AI-tell phrasing.",
     outcomes: [
       "Removed 3hrs/day of manual triage on content batching",
       "Shipped in 9 days from null to first batch",
@@ -101,7 +108,10 @@ const CARD_META: Record<string, CardMeta> = {
     title: "Premium auto dealership network — demo that closes in the meeting",
     blurb:
       "Multi-location dealer site demo with finance-application gate, inventory tile grid, and a trade-in flow that doesn't make you log in to see a price range.",
-    outcomes: ["Shipped pitch demo in 7 days", "Scaled to 9 countries with 1 founder"],
+    outcomes: [
+      "Shipped pitch demo in 7 days",
+      "Scaled to 9 countries with 1 founder",
+    ],
   },
   "ksa-fashion-retailer-shopify-ecommerce": {
     gradient: "g8",
@@ -130,7 +140,7 @@ const CARD_META: Record<string, CardMeta> = {
 };
 
 const ORDERED_STUDIES: CaseStudy[] = [...CASE_STUDIES].sort(
-  (a, b) => a.position - b.position
+  (a, b) => a.position - b.position,
 );
 
 export const metadata: Metadata = {
@@ -166,79 +176,69 @@ export default function CaseStudiesPage() {
     <>
       <JsonLd data={schema} />
 
-      {/* HERO */}
-      <section
-        style={{
-          background: "var(--cream-3)",
-          padding: "clamp(88px, 18vw, 112px) 0 clamp(44px, 12vw, 64px)",
-          borderBottom: "1px solid rgba(26,26,26,0.10)",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta)",
-              marginBottom: 18,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 12,
-            }}
-          >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-            Case studies · 2024–2026
-          </div>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(38px, 6vw, 68px)",
-              fontWeight: 500,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.04,
-              color: "var(--ink)",
-              margin: "0 0 18px",
-              maxWidth: "20ch",
-            }}
-          >
-            Nine shipped builds.{" "}
-            <em style={{ fontStyle: "normal", fontWeight: 700, color: "var(--terracotta-aa)" }}>
-              Real receipts.
-            </em>
-          </h1>
-          <p
-            style={{
-              fontSize: 18,
-              color: "var(--ink-2)",
-              maxWidth: "60ch",
-              lineHeight: 1.6,
-              margin: 0,
-            }}
-          >
-            EU logistics. Manhattan dental. Bali wellness. KSA retail. Each
-            one anonymized where the contract requires it — outcomes, stack,
-            and timelines stay honest.
-          </p>
-        </div>
-      </section>
+      <div className="sky">
+        {/* HERO — skyv3 design language */}
+        <section className="hero">
+          <div className="wrap">
+            <div className="hero-inner">
+              <div className="hero-eyebrow">
+                <span className="pulse"></span>
+                Case studies&nbsp;· <strong>9 shipped builds</strong>&nbsp;·
+                2024–2026
+              </div>
 
-      {/* Cream-tinted card grid — rendered directly from CASE_STUDIES so every
-          card→detail link derives from `study.slug` (cannot misalign). */}
-      <div
-        style={{
-          background: "var(--cream)",
-          color: "var(--ink)",
-          padding: "40px 0 64px",
-          position: "relative",
-          zIndex: 2,
-        }}
-        className="cs-grid-wrap"
-      >
-        <style>{`
+              <h1>
+                Real numbers. <em>Real builds.</em> No vanity metrics.
+              </h1>
+
+              <p className="hero-sub">
+                Dental show-rate <strong>23% → 71%</strong>. A French AI voice
+                agent fielding <strong>200+ calls a week</strong>. Email triage
+                cut from <strong>3 hours a day to 20 minutes</strong>. Each one
+                anonymized where the contract requires it — the outcomes stay
+                honest.
+              </p>
+
+              <div className="cta-row">
+                <Link href="/discovery-call" className="btn-primary">
+                  Book a free 30-min audit →
+                </Link>
+                <Link href="/pricing" className="btn-line">
+                  See pricing
+                </Link>
+              </div>
+
+              <div className="featured-in">
+                <span className="featured-lbl">Proof</span>
+                <span>Grand Mercer Dental</span>
+                <span>KODIASIMMO</span>
+                <span>Takycorp</span>
+                <span>9 countries served</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CASE-STUDY GRID — rendered directly from CASE_STUDIES so every
+            card→detail link derives from `study.slug` (cannot misalign).
+            The wn-x-* card styles are scoped here and already map to the sky
+            terracotta / sage / ochre tokens; kept intact to avoid breaking
+            slug-derived links. */}
+        <section className="section tinted cs-grid-wrap">
+          <div className="wrap">
+            <div className="section-head">
+              <span className="section-kicker">Selected work</span>
+              <h2>
+                Nine builds. <em>Honest outcomes.</em>
+              </h2>
+              <p className="section-sub">
+                EU logistics. Manhattan dental. Bali wellness. KSA retail.
+                Automation, flagship websites, AEO content engines and CRM
+                rebuilds — the stack, the timeline and the result on every one.
+              </p>
+            </div>
+          </div>
+          <style>{`
           .cs-grid-wrap {
             --x-green: #C66B3F;
             --x-green-light: #C66B3F;
@@ -395,155 +395,69 @@ export default function CaseStudiesPage() {
           }
         `}</style>
 
-        <section className="wn-x-grid" aria-label="Case studies">
-          {ORDERED_STUDIES.map((study) => {
-            const meta = CARD_META[study.slug];
-            if (!meta) return null;
-            const href = `/case-studies/${study.slug}`;
-            return (
-              <article className="wn-x-card" key={study.slug}>
-                <Link
-                  href={href}
-                  className={`wn-x-thumb ${meta.gradient}`}
-                  aria-label={`${study.clientName} — read full case study`}
-                >
-                  <img
-                    src={study.coverImage}
-                    alt={`${study.clientName} — ${study.industry}`}
-                    loading="lazy"
-                  />
-                  <span className="wn-x-thumb-scrim" aria-hidden="true" />
-                  <span className="wn-x-thumb-num">{meta.num}</span>
-                </Link>
-                <div className="wn-x-card-body">
-                  <span className={`wn-x-tag ${meta.tagClass}`}>{study.industryTag}</span>
-                  <h3 className="wn-x-card-h">
-                    <Link href={href}>{meta.title}</Link>
-                  </h3>
-                  <p className="wn-x-card-p">{meta.blurb}</p>
-                  <ul className="wn-x-outcomes">
-                    {meta.outcomes.map((o) => (
-                      <li key={o}>{o}</li>
-                    ))}
-                  </ul>
-                  <Link href={href} className="wn-x-readmore">
-                    Read full case study →
+          <section className="wn-x-grid" aria-label="Case studies">
+            {ORDERED_STUDIES.map((study) => {
+              const meta = CARD_META[study.slug];
+              if (!meta) return null;
+              const href = `/case-studies/${study.slug}`;
+              return (
+                <article className="wn-x-card" key={study.slug}>
+                  <Link
+                    href={href}
+                    className={`wn-x-thumb ${meta.gradient}`}
+                    aria-label={`${study.clientName} — read full case study`}
+                  >
+                    <img
+                      src={study.coverImage}
+                      alt={`${study.clientName} — ${study.industry}`}
+                      loading="lazy"
+                    />
+                    <span className="wn-x-thumb-scrim" aria-hidden="true" />
+                    <span className="wn-x-thumb-num">{meta.num}</span>
                   </Link>
-                </div>
-              </article>
-            );
-          })}
+                  <div className="wn-x-card-body">
+                    <span className={`wn-x-tag ${meta.tagClass}`}>
+                      {study.industryTag}
+                    </span>
+                    <h3 className="wn-x-card-h">
+                      <Link href={href}>{meta.title}</Link>
+                    </h3>
+                    <p className="wn-x-card-p">{meta.blurb}</p>
+                    <ul className="wn-x-outcomes">
+                      {meta.outcomes.map((o) => (
+                        <li key={o}>{o}</li>
+                      ))}
+                    </ul>
+                    <Link href={href} className="wn-x-readmore">
+                      Read full case study →
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
+          </section>
         </section>
-      </div>
 
-      {/* CLOSER */}
-      <section
-        style={{
-          padding: "clamp(56px, 14vw, 88px) 0",
-          background: "var(--terracotta)",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 720,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 24px)",
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.18em",
-              color: "var(--cream-3)",
-              opacity: 0.85,
-              marginBottom: 18,
-            }}
-          >
-            — 4 build slots open this month
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4.4vw, 44px)",
-              fontWeight: 500,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "var(--cream-3)",
-              marginBottom: 14,
-            }}
-          >
-            Want your name on this{" "}
-            <em
-              style={{
-                fontStyle: "normal", fontWeight: 700,
-                textDecoration: "underline",
-                textDecorationThickness: "1px",
-                textUnderlineOffset: "8px",
-              }}
-            >
-              page next quarter?
-            </em>
+        {/* CLOSER — skyv3 design language */}
+        <section className="closer">
+          <span className="closer-scarcity">4 build slots open this month</span>
+          <h2>
+            Want your name on this <em>page next quarter?</em>
           </h2>
-          <p
-            style={{
-              fontSize: 16,
-              color: "rgba(250, 247, 240, 0.92)",
-              maxWidth: "50ch",
-              margin: "0 auto 28px",
-              lineHeight: 1.6,
-            }}
-          >
-            9 builds shipped. 4 slots open per month. 30-min call decides if
-            we&apos;re the right fit — yes/no in 8 hours.
+          <p>
+            9 builds shipped. 4 slots open per month. A 30-min call decides if
+            we&apos;re the right fit — yes or no in 8 hours.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
-            <Link
-              href="/discovery-call"
-              style={{
-                background: "var(--cream-3)",
-                color: "var(--terracotta)",
-                padding: "16px 28px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 700,
-                fontSize: 15,
-                borderRadius: 2,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                textDecoration: "none",
-                boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
-              }}
-            >
-              Apply for a discovery call
-              <ArrowRight style={{ width: 16, height: 16 }} />
+          <div className="cta-row">
+            <Link href="/discovery-call" className="btn-primary">
+              Book a free 30-min audit →
             </Link>
-            <Link
-              href="/pricing"
-              style={{
-                background: "transparent",
-                color: "var(--cream-3)",
-                padding: "15px 26px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                border: "1px solid var(--cream-3)",
-                borderRadius: 2,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                textDecoration: "none",
-              }}
-            >
+            <Link href="/pricing" className="btn-line">
               See pricing
             </Link>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 }

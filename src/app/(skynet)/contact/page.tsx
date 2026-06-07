@@ -6,7 +6,6 @@ import {
   Calendar,
   ArrowRight,
   Clock,
-  CheckCircle2,
   Zap,
   Globe,
   ShieldCheck,
@@ -16,13 +15,23 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-label="LinkedIn" className={className}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-label="LinkedIn"
+    className={className}
+  >
     <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.78C.8 0 0 .77 0 1.73v20.54C0 23.23.8 24 1.78 24h20.44C23.2 24 24 23.23 24 22.27V1.73C24 .77 23.2 0 22.22 0z" />
   </svg>
 );
 
 const GithubIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub" className={className}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-label="GitHub"
+    className={className}
+  >
     <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
   </svg>
 );
@@ -111,415 +120,191 @@ const channels = [
 ];
 
 const guarantees = [
-  { icon: Clock, title: "8-hour reply", body: "On weekdays. Bali is GMT+8 — your morning is my afternoon." },
-  { icon: Zap, title: "48-hour fixed scope", body: "Send a brief, get back a one-pager with price and timeline." },
-  { icon: ShieldCheck, title: "No NDA dance", body: "I sign yours, you don't sign mine. Or skip it entirely." },
-  { icon: Globe, title: "9 countries served", body: "Bali, Pakistan, US, UK, France, Australia, UAE, Singapore, Italy." },
+  {
+    icon: Clock,
+    title: "8-hour reply",
+    body: "On weekdays. Bali is GMT+8 — your morning is my afternoon.",
+  },
+  {
+    icon: Zap,
+    title: "48-hour fixed scope",
+    body: "Send a brief, get back a one-pager with price and timeline.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "No NDA dance",
+    body: "I sign yours, you don't sign mine. Or skip it entirely.",
+  },
+  {
+    icon: Globe,
+    title: "9 countries served",
+    body: "Bali, Pakistan, US, UK, France, Australia, UAE, Singapore, Italy.",
+  },
 ];
 
 const expect = [
-  { step: "01", title: "You send a brief", body: "Bullet points are fine. Loom video is great. Don't pre-design — that's my job." },
-  { step: "02", title: "I reply within 8 hours", body: "Either a clarifying question or 'this is doable — scope in 48h'." },
-  { step: "03", title: "Fixed scope arrives", body: "One pager: deliverables, price, timeline, stack. No surprises." },
-  { step: "04", title: "You say yes/no", body: "If yes: 50% deposit, work starts in 24h. If no: file stays useful — yours." },
+  {
+    step: "01",
+    title: "You send a brief",
+    body: "Bullet points are fine. Loom video is great. Don't pre-design — that's my job.",
+  },
+  {
+    step: "02",
+    title: "I reply within 8 hours",
+    body: "Either a clarifying question or 'this is doable — scope in 48h'.",
+  },
+  {
+    step: "03",
+    title: "Fixed scope arrives",
+    body: "One pager: deliverables, price, timeline, stack. No surprises.",
+  },
+  {
+    step: "04",
+    title: "You say yes/no",
+    body: "If yes: 50% deposit, work starts in 24h. If no: file stays useful — yours.",
+  },
 ];
-
-const eyebrow = (text: string, color = "var(--terracotta-aa)") => (
-  <div
-    style={{
-      fontFamily: "var(--font-mono)",
-      fontSize: 11,
-      textTransform: "uppercase",
-      letterSpacing: "0.16em",
-      color,
-      marginBottom: 14,
-      display: "inline-flex",
-      alignItems: "center",
-      gap: 12,
-    }}
-  >
-    <span style={{ width: 28, height: 1, background: color }} />
-    {text}
-  </div>
-);
 
 export default function ContactPage() {
   return (
-    <>
+    <div className="sky">
       <JsonLd data={schema} />
 
       {/* HERO */}
-      <section
-        style={{
-          background: "var(--cream-3)",
-          padding: "clamp(96px, 18vw, 144px) 0 clamp(56px, 12vw, 112px)",
-          borderBottom: "1px solid rgba(26,26,26,0.10)",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: "0 clamp(16px, 5vw, 24px)",
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 40,
-            alignItems: "center",
-          }}
-          className="contact-hero"
-        >
-          <style>{`
-            @media (min-width: 900px) {
-              .contact-hero { grid-template-columns: 1.3fr 1fr !important; }
-            }
-          `}</style>
+      <section className="hero">
+        <div className="wrap">
           <Reveal initialVisible>
-            {eyebrow("Open for 2 builds — June 2026")}
-            <h1
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(40px, 6.5vw, 76px)",
-                fontWeight: 700,
-                letterSpacing: "-0.025em",
-                lineHeight: 1.02,
-                color: "var(--ink)",
-                margin: "0 0 22px",
-              }}
-            >
-              Don&apos;t book a call.{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-                Send a brief.
-              </span>
-            </h1>
-            <p
-              style={{
-                fontSize: 18,
-                color: "var(--ink-2)",
-                lineHeight: 1.6,
-                maxWidth: "58ch",
-                marginBottom: 26,
-              }}
-            >
-              The fastest way to work with me: skip the discovery dance. Email a
-              one-pager, ping me on LinkedIn, or open live chat bottom-right —
-              I&apos;ll{" "}
-              <strong style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-                reply in 8h · scope in 48h
-              </strong>
-              . If I&apos;m not the right fit, I&apos;ll tell you who is.
-            </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-              <Link
-                href="/discovery-call"
-                style={{
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
-                  padding: "14px 24px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  borderRadius: 2,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  textDecoration: "none",
-                }}
-              >
-                <Calendar style={{ width: 14, height: 14 }} />
-                Send a 3-sentence brief
-              </Link>
-              <a
-                href="mailto:info@skynetjoe.com"
-                style={{
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
-                  padding: "14px 24px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  borderRadius: 2,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  textDecoration: "none",
-                }}
-              >
-                <Mail style={{ width: 14, height: 14 }} />
-                Email me
-              </a>
-              <a
-                href="#livechat-open"
-                style={{
-                  background: "transparent",
-                  color: "var(--ink)",
-                  padding: "13px 22px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  border: "1px solid var(--ink)",
-                  borderRadius: 2,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  textDecoration: "none",
-                }}
-              >
-                <MessageCircle style={{ width: 14, height: 14 }} />
-                Or open live chat
-              </a>
+            <div className="hero-inner">
+              <div className="hero-eyebrow">
+                <span className="pulse"></span>
+                8-hour reply window&nbsp;· <strong>Bali hours GMT+8</strong>
+              </div>
+
+              <h1>
+                Don&apos;t book a call. <em>Send a brief.</em>
+              </h1>
+
+              <p className="hero-sub">
+                The fastest way to work with me: skip the discovery dance. Email
+                a one-pager, ping me on LinkedIn, or open live chat
+                bottom-right. <strong>Reply in 8h · scope in 48h.</strong> If
+                I&apos;m not the right fit, I&apos;ll tell you who is.
+              </p>
+
+              <div className="cta-row">
+                <Link href="/discovery-call" className="btn-primary">
+                  {SITE.cta.label} →
+                </Link>
+                <a href="mailto:info@skynetjoe.com" className="btn-line">
+                  Or email info@skynetjoe.com
+                </a>
+              </div>
+
+              <div className="hero-scarcity">
+                <strong>Open for 2 builds</strong>&nbsp;· June 2026 cohort
+              </div>
+
+              <div className="featured-in">
+                <span className="featured-lbl">Reach</span>
+                <span>Email</span>
+                <span>LinkedIn</span>
+                <span>Live chat</span>
+                <span>Apply for a call</span>
+              </div>
             </div>
           </Reveal>
-
-          <div>
-            <figure
-              style={{
-                margin: 0,
-                transform: "rotate(-1.2deg)",
-                background: "var(--cream-3)",
-                padding: 10,
-                border: "1px solid rgba(26,26,26,0.14)",
-                boxShadow: "0 18px 48px rgba(26,26,26,0.15)",
-                maxWidth: 400,
-                marginLeft: "auto",
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "4 / 5",
-                  overflow: "hidden",
-                  background: "var(--cream-2)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <div
-                  aria-hidden
-                  style={{
-                    width: 112,
-                    height: 112,
-                    borderRadius: "50%",
-                    background: "#A8451F",
-                    color: "var(--cream-3)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: "var(--font-mono)",
-                    fontWeight: 700,
-                    fontSize: 40,
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  SL
-                </div>
-              </div>
-              <figcaption
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.10em",
-                  color: "var(--ink-faint)",
-                  textAlign: "center",
-                  paddingTop: 12,
-                }}
-              >
-                — Waseem · Bali · GMT+8 · open
-              </figcaption>
-            </figure>
-          </div>
         </div>
       </section>
 
       {/* CHANNELS */}
-      <section
-        style={{ padding: "clamp(48px, 10vw, 80px) 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <div style={{ maxWidth: 700, marginBottom: 32 }}>
-            {eyebrow("Pick your channel")}
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(28px, 4vw, 42px)",
-                fontWeight: 700,
-                letterSpacing: "-0.02em",
-                color: "var(--ink)",
-                margin: "0 0 12px",
-                lineHeight: 1.1,
-              }}
-            >
-              Four ways to start.{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-                One reply guarantee.
-              </span>
+      <section className="section tinted">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">Pick your channel</span>
+            <h2>
+              Four ways to start. <em>One reply guarantee.</em>
             </h2>
-            <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
-              All four hit the same inbox. Use whichever feels least like homework.
+            <p className="section-sub">
+              All four hit the same inbox. Use whichever feels least like
+              homework.
             </p>
           </div>
 
-          <Reveal style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-            {channels.map((c, i) => {
+          <RevealGroup className="feature-row">
+            {channels.map((c) => {
               const Icon = c.icon;
-              const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
               return (
-                <a
-                  key={c.name}
-                  href={c.href}
-                  target={c.href.startsWith("http") ? "_blank" : undefined}
-                  rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  style={{
-                    background: "var(--cream-2)",
-                    border: "1px solid rgba(26,26,26,0.12)",
-                    padding: "22px",
-                    textDecoration: "none",
-                    color: "var(--ink)",
-                    transform: `rotate(${rotate})`,
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 40,
-                      height: 40,
-                      background: "var(--terracotta)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: 2,
-                      marginBottom: 14,
-                    }}
+                <RevealItem key={c.name} as="article">
+                  <a
+                    href={c.href}
+                    target={c.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      c.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    className="feat-card"
+                    style={{ display: "block" }}
                   >
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                    <h3
-                      style={{
-                        fontFamily: "var(--font-display)",
-                        fontSize: 18,
-                        fontWeight: 600,
-                        margin: 0,
-                        color: "var(--ink)",
-                        letterSpacing: "-0.01em",
-                      }}
-                    >
-                      {c.name}
-                    </h3>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: 9,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.16em",
-                        padding: "3px 7px",
-                        background: "var(--cream-3)",
-                        color: "var(--terracotta-aa)",
-                        border: "1px solid rgba(198,107,63,0.30)",
-                        fontWeight: 600,
-                      }}
-                    >
+                    <span className="feat-tag">
+                      <Icon
+                        className="w-4 h-4"
+                        style={{
+                          display: "inline",
+                          verticalAlign: "-2px",
+                          marginRight: 6,
+                        }}
+                      />
                       {c.badge}
                     </span>
-                  </div>
-                  <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.55, margin: "0 0 12px" }}>
-                    {c.desc}
-                  </p>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 11,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.12em",
-                      color: "var(--terracotta-aa)",
-                      fontWeight: 600,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 6,
-                    }}
-                  >
-                    {c.cta}
-                    <ArrowRight style={{ width: 12, height: 12 }} />
-                  </div>
-                </a>
+                    <div className="feat-title">{c.name}</div>
+                    <p className="feat-body">{c.desc}</p>
+                    <div
+                      className="mono"
+                      style={{
+                        marginTop: 16,
+                        fontSize: 12,
+                        fontWeight: 700,
+                        letterSpacing: "0.06em",
+                        color: "var(--terracotta)",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                      }}
+                    >
+                      {c.cta}
+                      <ArrowRight style={{ width: 13, height: 13 }} />
+                    </div>
+                  </a>
+                </RevealItem>
               );
             })}
-          </Reveal>
+          </RevealGroup>
         </div>
       </section>
 
       {/* WHAT TO EXPECT */}
-      <section
-        style={{
-          padding: "clamp(48px, 10vw, 80px) 0",
-          background: "var(--cream-3)",
-          borderBottom: "1px solid rgba(26,26,26,0.10)",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <div style={{ maxWidth: 640, marginBottom: 36 }}>
-            {eyebrow("What to expect")}
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(28px, 4vw, 42px)",
-                fontWeight: 700,
-                letterSpacing: "-0.02em",
-                color: "var(--ink)",
-                margin: "0 0 12px",
-                lineHeight: 1.1,
-              }}
-            >
-              Four steps,{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>zero funnel.</span>
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">What to expect</span>
+            <h2>
+              Four steps, <em>zero funnel.</em>
             </h2>
-            <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
+            <p className="section-sub">
               No CRM auto-replies. No discovery-call upsell. No 14-day follow-up
               sequence. Just one human writing back.
             </p>
           </div>
-          <RevealGroup style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-            {expect.map((e, i) => (
-              <RevealItem
-                key={e.step}
-                style={{
-                  background: "var(--cream-2)",
-                  border: "1px solid rgba(26,26,26,0.12)",
-                  padding: "22px",
-                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 36,
-                    fontWeight: 700,
-                    color: "var(--terracotta-aa)",
-                    lineHeight: 1,
-                    marginBottom: 10,
-                  }}
-                >
-                  {e.step}
+
+          <RevealGroup className="feature-row">
+            {expect.map((e) => (
+              <RevealItem key={e.step} as="article">
+                <div className="feat-card">
+                  <span className="feat-tag">Step {e.step}</span>
+                  <div className="feat-title">{e.title}</div>
+                  <p className="feat-body">{e.body}</p>
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 17,
-                    fontWeight: 600,
-                    color: "var(--ink)",
-                    margin: "0 0 6px",
-                  }}
-                >
-                  {e.title}
-                </h3>
-                <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
-                  {e.body}
-                </p>
               </RevealItem>
             ))}
           </RevealGroup>
@@ -527,51 +312,30 @@ export default function ContactPage() {
       </section>
 
       {/* GUARANTEES */}
-      <section
-        style={{ padding: "clamp(48px, 10vw, 80px) 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
-          <RevealGroup style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
-            {guarantees.map((g, i) => {
+      <section className="section tinted">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">The promise</span>
+            <h2>
+              What you get <em>every time.</em>
+            </h2>
+          </div>
+
+          <RevealGroup className="feature-row">
+            {guarantees.map((g) => {
               const Icon = g.icon;
               return (
-                <RevealItem
-                  key={g.title}
-                  style={{
-                    background: "var(--cream-2)",
-                    border: "1px solid rgba(26,26,26,0.12)",
-                    padding: "22px",
-                    transform: i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 38,
-                      height: 38,
-                      background: "var(--terracotta)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: 2,
-                      marginBottom: 12,
-                    }}
-                  >
-                    <Icon className="w-5 h-5" />
+                <RevealItem key={g.title} as="article">
+                  <div className="feat-card">
+                    <span className="feat-tag">
+                      <Icon
+                        className="w-4 h-4"
+                        style={{ display: "inline", verticalAlign: "-2px" }}
+                      />
+                    </span>
+                    <div className="feat-title">{g.title}</div>
+                    <p className="feat-body">{g.body}</p>
                   </div>
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: 16,
-                      fontWeight: 600,
-                      color: "var(--ink)",
-                      margin: "0 0 6px",
-                    }}
-                  >
-                    {g.title}
-                  </h3>
-                  <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
-                    {g.body}
-                  </p>
                 </RevealItem>
               );
             })}
@@ -580,113 +344,36 @@ export default function ContactPage() {
       </section>
 
       {/* CLOSER */}
-      <section
-        style={{ padding: "88px 0", background: "var(--terracotta)", position: "relative", zIndex: 2 }}
-      >
-        <Reveal style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
-          <CheckCircle2 style={{ width: 36, height: 36, color: "var(--cream-3)", margin: "0 auto 16px" }} />
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4.4vw, 44px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "var(--cream-3)",
-              marginBottom: 16,
-            }}
-          >
-            Still scrolling? Just{" "}
-            <Link
-              href="/discovery-call"
-              style={{
-                color: "var(--cream-3)",
-                textDecoration: "underline",
-                textDecorationThickness: "1px",
-                textUnderlineOffset: "8px",
-                fontStyle: "normal",
-              }}
-            >
-              send the brief
-            </Link>
-            .
+      <section className="closer">
+        <div className="wrap">
+          <span className="closer-scarcity">Still scrolling?</span>
+          <h2>
+            Just <em>send the brief.</em>
           </h2>
-          <p
-            style={{
-              fontSize: 16,
-              color: "rgba(250, 247, 240, 0.92)",
-              maxWidth: "50ch",
-              margin: "0 auto 28px",
-              lineHeight: 1.6,
-            }}
-          >
+          <p>
             Worst case: you waste 2 minutes. Best case: your CRM, calendar and
             inbox stop fighting each other in 14 days.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
-            <Link
-              href="/discovery-call"
-              style={{
-                background: "var(--cream-3)",
-                color: "var(--terracotta)",
-                padding: "14px 24px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 700,
-                fontSize: 14,
-                borderRadius: 2,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                textDecoration: "none",
-              }}
-            >
-              <Calendar style={{ width: 14, height: 14 }} />
-              Send a 3-sentence brief
+          <div className="cta-row">
+            <Link href="/discovery-call" className="btn-primary">
+              {SITE.cta.label} →
             </Link>
-            <Link
-              href="/pricing"
-              style={{
-                background: "transparent",
-                color: "var(--cream-3)",
-                padding: "13px 22px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 14,
-                border: "1px solid var(--cream-3)",
-                borderRadius: 2,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                textDecoration: "none",
-              }}
-            >
+            <Link href="/pricing" className="btn-line">
               See public pricing first
             </Link>
             <a
               href={SITE.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                background: "transparent",
-                color: "var(--cream-3)",
-                padding: "13px 22px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 14,
-                border: "1px solid var(--cream-3)",
-                borderRadius: 2,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                textDecoration: "none",
-              }}
+              className="btn-line"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
             >
               <GithubIcon className="w-4 h-4" />
               Browse my code
             </a>
           </div>
-        </Reveal>
+        </div>
       </section>
-    </>
+    </div>
   );
 }

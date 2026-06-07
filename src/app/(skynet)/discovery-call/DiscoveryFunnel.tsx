@@ -4,16 +4,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CalendarClock,
-  Star,
   Hammer,
-  Quote,
   ShieldCheck,
   Compass,
   ChevronDown,
   Check,
   ArrowRight,
-  MapPin,
-  Clock,
 } from "lucide-react";
 import Qualifier, { type QualifierState } from "./Qualifier";
 import CalendlyEmbed, { CALENDLY_SECTION_ID } from "./CalendlyEmbed";
@@ -173,16 +169,19 @@ export default function DiscoveryFunnel() {
   const qualRef = useRef<HTMLDivElement>(null);
   const calRef = useRef<HTMLDivElement>(null);
 
-  const scrollTo = useCallback((ref: React.RefObject<HTMLDivElement | null>) => {
-    if (!ref.current) return;
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    ref.current.scrollIntoView({
-      behavior: reduce ? "auto" : "smooth",
-      block: "start",
-    });
-  }, []);
+  const scrollTo = useCallback(
+    (ref: React.RefObject<HTMLDivElement | null>) => {
+      if (!ref.current) return;
+      const reduce =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      ref.current.scrollIntoView({
+        behavior: reduce ? "auto" : "smooth",
+        block: "start",
+      });
+    },
+    [],
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -268,302 +267,68 @@ export default function DiscoveryFunnel() {
   );
 
   return (
-    <div style={{ background: C.cream, color: C.ink, fontFamily: "var(--font-sans)" }}>
+    <div
+      style={{
+        background: C.cream,
+        color: C.ink,
+        fontFamily: "var(--font-sans)",
+      }}
+    >
       <StickyProgress activeStep={activeStep} />
 
       {/* ============================================================
-          HERO — cream paper, polaroid portrait
+          HERO — skyv3 (lp/logistics) design language. Light hero;
+          the Calendly embed lives below in STEP 2.
           ============================================================ */}
-      <section
-        style={{
-          padding: "72px 0 80px",
-          borderBottom: `1px solid ${C.rule}`,
-          background: C.cream3,
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <div className="container-x px-6">
-          <div className="grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-16 items-end">
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {eyebrow(C.terra, "Field notes · discovery · 2026")}
+      <section className="hero">
+        <div className="wrap">
+          <div className="hero-inner">
+            <div className="hero-eyebrow">
+              <span className="pulse"></span>
+              30-min audit&nbsp;· <strong>fixed scope in 48 hours</strong>
+            </div>
 
-              <h1
+            <h1>
+              Find what&apos;s costing you. <em>Fixed in 14 days.</em>
+            </h1>
+
+            <p className="hero-sub">
+              30-minute audit. <strong>3 concrete plays</strong> you can ship
+              this quarter. A fixed-price scope back in your inbox 48 hours
+              later. No deck. No SDR. No fake urgency.
+            </p>
+
+            <div className="cta-row">
+              <button
+                type="button"
+                onClick={() => scrollTo(qualRef)}
+                className="btn-primary"
+                data-meta-event="Schedule"
+                data-meta-name="discovery-hero-start-brief"
+              >
+                Start the brief →
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTo(calRef)}
+                className="btn-line"
                 style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(40px, 6.5vw, 72px)",
-                  fontWeight: 700,
-                  letterSpacing: "-0.025em",
-                  lineHeight: 1.04,
-                  color: C.ink,
-                  margin: "0 0 24px",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
                 }}
               >
-                Find what&apos;s costing you.{" "}
-                <span
-                  style={{
-                    fontStyle: "normal",
-                    color: C.terraAA,
-                    fontWeight: 700,
-                  }}
-                >
-                  Fixed in 14 days.
-                </span>
-              </h1>
+                Skip to calendar
+              </button>
+            </div>
 
-              <p
-                style={{
-                  fontSize: 19,
-                  color: C.ink2,
-                  maxWidth: "52ch",
-                  lineHeight: 1.55,
-                  marginBottom: 28,
-                }}
-              >
-                30-minute audit. 3 concrete plays you can ship this quarter. A
-                fixed-price scope back in your inbox 48 hours later. No deck.
-                No SDR. No fake urgency.
-              </p>
-
-              {/* Trust strip */}
-              <div
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.10em",
-                  color: C.inkFaint,
-                  marginBottom: 28,
-                }}
-              >
-                <span style={{ color: C.terraAA }}>
-                  <Star
-                    style={{
-                      display: "inline-block",
-                      width: 12,
-                      height: 12,
-                      verticalAlign: "-2px",
-                      marginRight: 4,
-                      fill: C.terra,
-                      stroke: "none",
-                    }}
-                  />
-                  4.9 / 5
-                </span>
-                <span style={{ margin: "0 12px", color: C.rule }}>·</span>
-                <span><span style={{ color: C.ink }}>180+</span> workflows</span>
-                <span style={{ margin: "0 12px", color: C.rule }}>·</span>
-                <span><span style={{ color: C.ink }}>9</span> countries</span>
-              </div>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-3 mb-7">
-                <motion.button
-                  type="button"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => scrollTo(qualRef)}
-                  style={{
-                    background: C.terra,
-                    color: C.cream3,
-                    border: "none",
-                    padding: "16px 28px",
-                    fontFamily: "var(--font-sans)",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    cursor: "pointer",
-                    borderRadius: 2,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                  }}
-                >
-                  Start the brief
-                  <ArrowRight className="w-4 h-4" />
-                </motion.button>
-                <button
-                  type="button"
-                  onClick={() => scrollTo(calRef)}
-                  style={{
-                    background: "transparent",
-                    color: C.ink,
-                    border: `1px solid ${C.ink}`,
-                    padding: "15px 26px",
-                    fontFamily: "var(--font-sans)",
-                    fontWeight: 600,
-                    fontSize: 15,
-                    cursor: "pointer",
-                    borderRadius: 2,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                  }}
-                >
-                  <CalendarClock className="w-4 h-4" />
-                  Skip to calendar
-                </button>
-              </div>
-
-              {/* Pull quote — cream-2 paper */}
-              <blockquote
-                style={{
-                  background: C.cream2,
-                  border: `1px solid ${C.rule}`,
-                  padding: 20,
-                  maxWidth: 560,
-                  margin: 0,
-                  borderRadius: 2,
-                  transform: "rotate(-0.4deg)",
-                }}
-              >
-                <div className="flex items-start gap-3">
-                  <Quote style={{ width: 18, height: 18, color: C.terra, flexShrink: 0, marginTop: 4 }} />
-                  <div>
-                    <p
-                      style={{
-                        fontFamily: "var(--font-display)",
-                        fontStyle: "normal",
-                        fontSize: 17,
-                        lineHeight: 1.45,
-                        color: C.ink,
-                        margin: 0,
-                      }}
-                    >
-                      23% show-rate to{" "}
-                      <span style={{ color: C.terraAA, fontWeight: 600 }}>
-                        71% in 6 weeks.
-                      </span>
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: 10,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.12em",
-                        color: C.inkFaint,
-                        marginTop: 8,
-                      }}
-                    >
-                      — Dr. Elena Marchetti · Grand Mercer Dental
-                    </p>
-                  </div>
-                </div>
-              </blockquote>
-            </motion.div>
-
-            {/* Polaroid portrait */}
-            <motion.aside
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:sticky lg:top-[140px]"
-            >
-              <figure
-                style={{
-                  margin: 0,
-                  transform: "rotate(-1.2deg)",
-                  background: C.cream3,
-                  padding: 10,
-                  border: `1px solid ${C.rule}`,
-                  boxShadow: "0 18px 48px rgba(26,26,26,0.14)",
-                  maxWidth: 420,
-                  marginLeft: "auto",
-                }}
-              >
-                <div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    aspectRatio: "4 / 5",
-                    overflow: "hidden",
-                    background: C.cream2,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    aria-hidden
-                    style={{
-                      width: 116,
-                      height: 116,
-                      borderRadius: "50%",
-                      background: "#A8451F",
-                      color: C.cream3,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "var(--font-mono)",
-                      fontWeight: 700,
-                      fontSize: 42,
-                      letterSpacing: "0.04em",
-                    }}
-                  >
-                    SL
-                  </div>
-                </div>
-                <figcaption
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 11,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.10em",
-                    color: C.inkFaint,
-                    textAlign: "center",
-                    paddingTop: 12,
-                  }}
-                >
-                  Waseem · founder · Bali · GMT+8
-                </figcaption>
-                <div style={{ padding: "12px 6px 6px" }}>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontStyle: "normal",
-                      fontSize: 14,
-                      lineHeight: 1.5,
-                      color: C.ink2,
-                      margin: "0 0 14px",
-                    }}
-                  >
-                    &ldquo;You don&apos;t get an SDR. You get me on Zoom with
-                    your funnel pulled up on my second monitor.&rdquo;
-                  </p>
-                  <div className="grid grid-cols-3 gap-2" style={{ borderTop: `1px solid ${C.ruleSoft}`, paddingTop: 12 }}>
-                    <Stat value="180+" label="Workflows" />
-                    <Stat value="40+" label="Sites" />
-                    <Stat value="9" label="Countries" />
-                  </div>
-                  <div
-                    style={{
-                      marginTop: 12,
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 10,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.12em",
-                      color: C.inkFaint,
-                      display: "flex",
-                      gap: 12,
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    <span className="inline-flex items-center gap-1">
-                      <MapPin style={{ width: 11, height: 11 }} />
-                      Bali · GMT+8
-                    </span>
-                    <span style={{ color: C.rule }}>·</span>
-                    <span className="inline-flex items-center gap-1">
-                      <Clock style={{ width: 11, height: 11 }} />
-                      Solo since 2019
-                    </span>
-                  </div>
-                </div>
-              </figure>
-            </motion.aside>
+            <div className="featured-in">
+              <span className="featured-lbl">Featured</span>
+              <span>4.9 / 5</span>
+              <span>180+ workflows</span>
+              <span>9 countries</span>
+              <span>Bali · GMT+8</span>
+            </div>
           </div>
         </div>
       </section>
@@ -656,7 +421,9 @@ export default function DiscoveryFunnel() {
                       marginBottom: 16,
                     }}
                   >
-                    <ShieldCheck style={{ width: 24, height: 24, color: C.terra }} />
+                    <ShieldCheck
+                      style={{ width: 24, height: 24, color: C.terra }}
+                    />
                   </div>
                   <h3
                     style={{
@@ -755,17 +522,21 @@ export default function DiscoveryFunnel() {
                 One real audit.
               </span>
             </h2>
-            <p style={{ fontSize: 16, color: C.ink2, lineHeight: 1.6, margin: 0 }}>
+            <p
+              style={{
+                fontSize: 16,
+                color: C.ink2,
+                lineHeight: 1.6,
+                margin: 0,
+              }}
+            >
               No deck. No SDR. Just me, your funnel, and a shared screen. Show
               up with your numbers — you leave with a roadmap.
             </p>
           </motion.div>
 
           <div className="max-w-4xl mx-auto">
-            <CalendlyEmbed
-              qualification={qualification}
-              leadId={leadId}
-            />
+            <CalendlyEmbed qualification={qualification} leadId={leadId} />
           </div>
 
           {/* Trust cards — cream-2 with rotation */}
@@ -803,14 +574,18 @@ export default function DiscoveryFunnel() {
                       visible: {
                         opacity: 1,
                         y: 0,
-                        transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+                        transition: {
+                          duration: 0.5,
+                          ease: [0.16, 1, 0.3, 1] as const,
+                        },
                       },
                     }}
                     style={{
                       background: C.cream3,
                       border: `1px solid ${C.rule}`,
                       padding: 24,
-                      transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                      transform:
+                        i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                     }}
                   >
                     <div
@@ -839,7 +614,14 @@ export default function DiscoveryFunnel() {
                     >
                       {c.title}
                     </h3>
-                    <p style={{ fontSize: 14, color: C.ink2, lineHeight: 1.6, margin: 0 }}>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        color: C.ink2,
+                        lineHeight: 1.6,
+                        margin: 0,
+                      }}
+                    >
                       {c.body}
                     </p>
                   </motion.div>
@@ -1005,37 +787,6 @@ export default function DiscoveryFunnel() {
           </div>
         </div>
       </section>
-    </div>
-  );
-}
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div style={{ textAlign: "center" }}>
-      <div
-        style={{
-          fontFamily: "var(--font-display)",
-          fontStyle: "normal",
-          fontSize: 18,
-          fontWeight: 600,
-          color: "#A8451F",
-          letterSpacing: "-0.01em",
-        }}
-      >
-        {value}
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--font-mono)",
-          fontSize: 9,
-          textTransform: "uppercase",
-          letterSpacing: "0.16em",
-          color: "#56564F",
-          marginTop: 2,
-        }}
-      >
-        {label}
-      </div>
     </div>
   );
 }

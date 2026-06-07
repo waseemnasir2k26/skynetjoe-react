@@ -1,4 +1,4 @@
-import HeroFunnel from "@/components/funnel/HeroFunnel";
+import SkyHero from "@/components/sky/SkyHero";
 import PainPoints from "@/components/funnel/PainPoints";
 import Outcomes from "@/components/funnel/Outcomes";
 import Testimonials from "@/components/sections/Testimonials";
@@ -66,15 +66,17 @@ export default function Home() {
   return (
     <>
       <JsonLd data={orgSchema} />
-      <HeroFunnel />
-      <div className="hidden md:block">
-        <PainPoints />
+      <div className="sky">
+        <SkyHero />
+        <div className="hidden md:block">
+          <PainPoints />
+        </div>
+        <Outcomes />
+        <div className="hidden md:block">
+          <Testimonials />
+        </div>
+        <FinalCTA />
       </div>
-      <Outcomes />
-      <div className="hidden md:block">
-        <Testimonials />
-      </div>
-      <FinalCTA />
     </>
   );
 }

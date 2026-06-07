@@ -34,7 +34,9 @@ function Reveal({
     <motion.div
       className={className}
       style={style}
-      initial={reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }}
+      initial={
+        reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }
+      }
       whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, delay, ease }}
@@ -163,7 +165,8 @@ export default function GoHighLevelLP() {
           padding: "10px 16px",
         }}
       >
-        — Booking + follow-up that works · 11-day ship · 4 builds left this month
+        — Booking + follow-up that works · 11-day ship · 4 builds left this
+        month
       </div>
 
       {/* HERO */}
@@ -177,7 +180,11 @@ export default function GoHighLevelLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <div
@@ -193,7 +200,14 @@ export default function GoHighLevelLP() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta-aa)", display: "inline-block" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta-aa)",
+                  display: "inline-block",
+                }}
+              />
               Booking + follow-up · 2026
             </div>
             <h1
@@ -209,7 +223,9 @@ export default function GoHighLevelLP() {
               }}
             >
               Stop losing booked customers.{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>Bring them back.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                Bring them back.
+              </span>
             </h1>
             <p
               style={{
@@ -225,7 +241,7 @@ export default function GoHighLevelLP() {
               with reminders that bring people back to the calendar.
             </p>
             <Link href="/discovery-call" style={primaryBtn}>
-              Book a free 30-min check-up
+              Book a free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <div style={subline}>— Bali hours GMT+8 · 8-hour weekday reply</div>
@@ -263,12 +279,20 @@ export default function GoHighLevelLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--oxblood)">What we see on call #1</Eyebrow>
             <H2>
               Three reasons it isn&apos;t{" "}
-              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>paying for itself yet.</span>
+              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>
+                paying for itself yet.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-card-grid">
@@ -282,7 +306,14 @@ export default function GoHighLevelLP() {
                   transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
-                <p.icon style={{ width: 26, height: 26, color: "var(--oxblood)", marginBottom: 14 }} />
+                <p.icon
+                  style={{
+                    width: 26,
+                    height: 26,
+                    color: "var(--oxblood)",
+                    marginBottom: 14,
+                  }}
+                />
                 <h3 style={cardH3}>{p.title}</h3>
                 <p style={cardBody}>{p.body}</p>
               </Item>
@@ -300,7 +331,13 @@ export default function GoHighLevelLP() {
           textAlign: "center",
         }}
       >
-        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <Reveal
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div style={proofEyebrow}>— A dental flagship · 11-day ship</div>
           <div
             style={{
@@ -332,15 +369,28 @@ export default function GoHighLevelLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">What we hand over</Eyebrow>
             <H2>
               Set up around your team,{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>not a template.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                not a template.
+              </span>
             </H2>
-            <p style={{ ...cardBody, fontSize: 16, maxWidth: "44ch", marginBottom: 20 }}>
+            <p
+              style={{
+                ...cardBody,
+                fontSize: 16,
+                maxWidth: "44ch",
+                marginBottom: 20,
+              }}
+            >
               &ldquo;We were losing a serious chunk of revenue every month to
               no-shows. A few weeks after the reminder flow went live, it was a
               non-issue.&rdquo;
@@ -348,12 +398,21 @@ export default function GoHighLevelLP() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {FACTS.map((f) => (
                 <li key={f} style={factLi}>
-                  <Check style={{ width: 16, height: 16, color: "var(--sage)", marginTop: 2 }} />
+                  <Check
+                    style={{
+                      width: 16,
+                      height: 16,
+                      color: "var(--sage)",
+                      marginTop: 2,
+                    }}
+                  />
                   <span>{f}</span>
                 </li>
               ))}
             </ul>
-            <div style={{ ...subline, marginTop: 18 }}>— Practice owner · dental flagship · 11-day ship</div>
+            <div style={{ ...subline, marginTop: 18 }}>
+              — Practice owner · dental flagship · 11-day ship
+            </div>
           </Reveal>
           <motion.div
             initial={{ opacity: 0, y: 30, rotate: 1 }}
@@ -375,12 +434,20 @@ export default function GoHighLevelLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">Before vs after</Eyebrow>
             <H2>
               What changes the day{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>we wire it to you.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                we wire it to you.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-ba-grid">
@@ -395,7 +462,9 @@ export default function GoHighLevelLP() {
         h2={
           <>
             Stop fighting the template.{" "}
-            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>Wire it to your motion.</span>
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+              Wire it to your motion.
+            </span>
           </>
         }
         body="A free 30-minute check-up. We name the three fixes that recover the most, sequenced biggest-first. Fixed scope back in 48 hours."
@@ -467,7 +536,13 @@ const proofDetail: React.CSSProperties = {
   margin: "0 auto",
 };
 
-function Eyebrow({ children, color }: { children: React.ReactNode; color: string }) {
+function Eyebrow({
+  children,
+  color,
+}: {
+  children: React.ReactNode;
+  color: string;
+}) {
   return (
     <div
       style={{
@@ -482,7 +557,14 @@ function Eyebrow({ children, color }: { children: React.ReactNode; color: string
         gap: 12,
       }}
     >
-      <span style={{ width: 28, height: 1, background: color, display: "inline-block" }} />
+      <span
+        style={{
+          width: 28,
+          height: 1,
+          background: color,
+          display: "inline-block",
+        }}
+      />
       {children}
     </div>
   );
@@ -522,7 +604,14 @@ function BeforeCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((b) => (
           <li key={b} style={{ ...listLi, color: "var(--ink-2)" }}>
-            <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+            <X
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--oxblood)",
+                marginTop: 4,
+              }}
+            />
             <span>{b}</span>
           </li>
         ))}
@@ -546,7 +635,14 @@ function AfterCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((a) => (
           <li key={a} style={{ ...listLi, color: "var(--ink)" }}>
-            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+            <Check
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--sage)",
+                marginTop: 4,
+              }}
+            />
             <span>{a}</span>
           </li>
         ))}
@@ -581,7 +677,14 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
           "linear-gradient(180deg, var(--cream) 0%, color-mix(in srgb, var(--terracotta) 8%, var(--cream)) 100%)",
       }}
     >
-      <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)", textAlign: "center" }}>
+      <Reveal
+        style={{
+          maxWidth: 760,
+          margin: "0 auto",
+          padding: "0 clamp(16px, 5vw, 32px)",
+          textAlign: "center",
+        }}
+      >
         <div
           style={{
             fontFamily: "var(--font-mono)",
@@ -618,8 +721,16 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
         >
           {body}
         </p>
-        <Link href="/discovery-call" style={{ ...primaryBtn, padding: "18px 32px", fontWeight: 700, fontSize: 16 }}>
-          Book a free 30-min check-up
+        <Link
+          href="/discovery-call"
+          style={{
+            ...primaryBtn,
+            padding: "18px 32px",
+            fontWeight: 700,
+            fontSize: 16,
+          }}
+        >
+          Book a free 30-min audit
           <ArrowRight style={{ width: 16, height: 16 }} />
         </Link>
         <div

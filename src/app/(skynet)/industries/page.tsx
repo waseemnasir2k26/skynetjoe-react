@@ -7,21 +7,19 @@
  *   404s — breaking the breadcrumb chain for SEO and any SERP that
  *   surfaces the parent crumb.
  *
- * Cream-pivot styled (2026-05-25):
- *   - Background var(--cream) / var(--cream-3)
- *   - Hero H1 in Fraunces with terracotta <em> accent
- *   - Cards have 1px ink border on cream-2 surface
- *   - CTAs flat terracotta (primary) + ink-outline (secondary)
- *   - No dark gradient, no oxblood — locked to the pivot tokens.
+ * Styled in the site `.sky` / skyv3 design language (the /lp/logistics look):
+ *   - All content wrapped in <div className="sky">; classes defined in
+ *     src/styles/skyv3.css, reference impl src/components/sky/SkyHero.tsx.
+ *   - Hero pattern (.hero / eyebrow+pulse / h1 <em> / .hero-sub / .cta-row /
+ *     .featured-in), feature cards (.feature-row / .feat-card), .closer.
+ *   - Server component — animations are pure CSS, no client JS.
  */
 
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight } from "lucide-react";
 import { INDUSTRIES } from "@/data/industries";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Industries — Vertical-Built AI Systems",
@@ -82,317 +80,126 @@ export default function IndustriesIndexPage() {
     <>
       <JsonLd data={schema} />
 
-      {/* HERO — cream editorial */}
-      <section
-        className="relative pt-28 md:pt-36 pb-16"
-        style={{
-          background: "var(--cream-3)",
-          borderBottom: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <Reveal initialVisible className="container-x px-6 relative z-10 max-w-4xl">
-          <div
-            className="inline-flex items-center gap-3 mb-6"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta-aa)",
-            }}
-          >
-            <span
-              style={{
-                width: 28,
-                height: 1,
-                background: "var(--terracotta)",
-                display: "inline-block",
-              }}
-            />
-            Vertical-built · not horizontal-glued
+      <div className="sky">
+        {/* HERO ──────────────────────────────────────────────────────────── */}
+        <section className="hero">
+          <div className="wrap">
+            <div className="hero-inner">
+              <div className="hero-eyebrow">
+                <span className="pulse"></span>
+                Vertical-built&nbsp;· <strong>not horizontal-glued</strong>
+              </div>
+
+              <h1>
+                Generic automations break in your industry.{" "}
+                <em>We build ones that speak the dialect.</em>
+              </h1>
+
+              <p className="hero-sub">
+                Three verticals, three flagship products. Each one trained on
+                the vocabulary, the PMS, the dispatch software, the insurance
+                plans, the no-show pattern —{" "}
+                <strong>
+                  every detail the off-the-shelf builder doesn&apos;t know
+                  exists.
+                </strong>
+              </p>
+
+              <div className="cta-row">
+                <Link
+                  href={SITE.cta.href}
+                  className="btn-primary"
+                  data-meta-event="Schedule"
+                  data-meta-name="industries-book-audit"
+                >
+                  {SITE.cta.label} →
+                </Link>
+                <Link href="/case-studies" className="btn-line">
+                  See real wins
+                </Link>
+              </div>
+
+              <div className="hero-scarcity">
+                <strong>Custom verticals quoted in 8 hours</strong>&nbsp;· books
+                within 48-72 hours
+              </div>
+
+              <div className="featured-in">
+                <span className="featured-lbl">Featured</span>
+                <span>Upwork Top Rated Plus</span>
+                <span>Fiverr Top Rated</span>
+                <span>180+ workflows</span>
+                <span>9 countries</span>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 600,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.04,
-              color: "var(--ink)",
-              fontSize: "clamp(40px, 6vw, 68px)",
-              margin: "0 0 24px",
-            }}
-          >
-            Generic automations break in your industry.{" "}
-            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-              I build ones that speak the dialect.
-            </span>
-          </h1>
+        {/* 3 INDUSTRY CARDS ──────────────────────────────────────────────── */}
+        <section className="section tinted">
+          <div className="wrap">
+            <div className="section-head">
+              <span className="section-kicker">The verticals</span>
+              <h2>
+                A flagship product <em>for each industry</em>, not a service
+                line.
+              </h2>
+              <p className="section-sub">
+                Vertical tools, vertical voice, vertical scope. Pick the one
+                that runs your front desk.
+              </p>
+            </div>
 
-          <p
-            style={{
-              fontSize: 19,
-              color: "var(--ink-2)",
-              maxWidth: "54ch",
-              lineHeight: 1.6,
-              marginBottom: 28,
-            }}
-          >
-            Three verticals, three flagship products. Each one trained on the
-            vocabulary, the PMS, the dispatch software, the insurance plans,
-            the no-show pattern — every detail the off-the-shelf builder
-            doesn&apos;t know exists.
-          </p>
-
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/discovery-call"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "var(--terracotta)",
-                color: "var(--cream-3)",
-                padding: "16px 28px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-                border: "none",
-                transition: "background 0.18s",
-              }}
-            >
-              Book a vertical-specific audit
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "transparent",
-                color: "var(--ink)",
-                border: "1px solid var(--ink)",
-                padding: "15px 26px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-              }}
-            >
-              See real wins
-            </Link>
+            <div className="feature-row">
+              {INDUSTRIES.map((i) => (
+                <Link
+                  key={i.slug}
+                  href={`/industries/${i.slug}`}
+                  className="feat-card"
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  <span className="feat-tag">{i.shortName} · industry</span>
+                  <h3 className="feat-title">{i.name}</h3>
+                  <p className="feat-body">{i.eyebrowChip}</p>
+                  <ul className="feat-list">
+                    <li>Flagship: {i.flagshipProductName}</li>
+                    <li>{i.flagshipProductLede.split(". ")[0]}.</li>
+                  </ul>
+                  <span
+                    className="btn-line"
+                    style={{ marginTop: "auto", alignSelf: "flex-start" }}
+                  >
+                    See the {i.shortName} system →
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
+        </section>
 
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 10,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-              color: "var(--ink-faint)",
-              marginTop: 20,
-            }}
-          >
-            — Bali hours · GMT+8 · usually books within 48-72 hours
-          </div>
-        </Reveal>
-      </section>
-
-      {/* 3 INDUSTRY CARDS */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
-        <div className="container-x px-6">
-          <RevealGroup className="grid gap-6 md:gap-8 md:grid-cols-3 max-w-6xl mx-auto">
-            {INDUSTRIES.map((i) => (
-              <RevealItem key={i.slug} as="div" className="flex">
-              <Link
-                href={`/industries/${i.slug}`}
-                className="group flex flex-col h-full w-full"
-                style={{
-                  background: "var(--cream-2)",
-                  border: "1px solid rgba(26,26,26,0.12)",
-                  padding: 28,
-                  borderRadius: 2,
-                  textDecoration: "none",
-                  transition: "transform 0.18s, border-color 0.18s",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 10,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.14em",
-                    color: "var(--terracotta-aa)",
-                    marginBottom: 14,
-                  }}
-                >
-                  {i.shortName} · industry
-                </div>
-
-                <h2
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontWeight: 600,
-                    fontSize: 26,
-                    lineHeight: 1.15,
-                    color: "var(--ink)",
-                    marginBottom: 12,
-                    letterSpacing: "-0.015em",
-                  }}
-                >
-                  {i.name}
-                </h2>
-
-                <p
-                  style={{
-                    fontSize: 14,
-                    color: "var(--ink-2)",
-                    lineHeight: 1.55,
-                    marginBottom: 18,
-                    flexGrow: 0,
-                  }}
-                >
-                  {i.eyebrowChip}
-                </p>
-
-                <div
-                  style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: "var(--ink)",
-                    marginBottom: 6,
-                    letterSpacing: "-0.005em",
-                  }}
-                >
-                  Flagship: {i.flagshipProductName}
-                </div>
-
-                <p
-                  style={{
-                    fontSize: 13,
-                    color: "var(--ink-2)",
-                    lineHeight: 1.55,
-                    marginBottom: 20,
-                    flexGrow: 1,
-                  }}
-                >
-                  {i.flagshipProductLede.split(". ")[0]}.
-                </p>
-
-                <div
-                  className="inline-flex items-center gap-2"
-                  style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: "var(--terracotta-aa)",
-                    marginTop: "auto",
-                  }}
-                >
-                  See the {i.shortName} system
-                  <ArrowRight className="w-4 h-4" />
-                </div>
+        {/* CLOSER ─────────────────────────────────────────────────────────── */}
+        <section className="closer">
+          <div className="wrap">
+            <span className="closer-scarcity">Not your industry yet?</span>
+            <h2>
+              New industries ship every quarter. <em>Tell me yours.</em>
+            </h2>
+            <p>
+              If you run a med-spa, real-estate brokerage, fitness studio, law
+              firm, or anything else with a repeatable front-desk workflow, send
+              me the brief. Custom vertical builds quoted within 8 hours.
+            </p>
+            <div className="cta-row">
+              <Link href={SITE.cta.href} className="btn-primary">
+                {SITE.cta.label} →
               </Link>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* CLOSER — cream editorial */}
-      <section
-        className="py-16 md:py-20"
-        style={{
-          background: "var(--cream-3)",
-          borderTop: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <Reveal className="container-x px-6 max-w-3xl mx-auto text-center">
-          <div
-            className="inline-flex items-center gap-3 mb-5"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta-aa)",
-            }}
-          >
-            <span
-              style={{
-                width: 28,
-                height: 1,
-                background: "var(--terracotta)",
-                display: "inline-block",
-              }}
-            />
-            Not your industry yet?
+              <Link href="/services" className="btn-line">
+                Browse all services
+              </Link>
+            </div>
           </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 600,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.08,
-              color: "var(--ink)",
-              fontSize: "clamp(28px, 4vw, 44px)",
-              marginBottom: 14,
-            }}
-          >
-            New industries ship every quarter.{" "}
-            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-              Tell me yours.
-            </span>
-          </h2>
-          <p
-            style={{
-              fontSize: 17,
-              color: "var(--ink-2)",
-              maxWidth: "46ch",
-              margin: "0 auto 28px",
-              lineHeight: 1.6,
-            }}
-          >
-            If you run a med-spa, real-estate brokerage, fitness studio, law
-            firm, or anything else with a repeatable front-desk workflow, send
-            me the brief. Custom vertical builds quoted within 8 hours.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/discovery-call"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "var(--terracotta)",
-                color: "var(--cream-3)",
-                padding: "16px 28px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-                border: "none",
-              }}
-            >
-              Pitch my vertical
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "transparent",
-                color: "var(--ink)",
-                border: "1px solid var(--ink)",
-                padding: "15px 26px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-              }}
-            >
-              Browse all services
-            </Link>
-          </div>
-        </Reveal>
-      </section>
+        </section>
+      </div>
     </>
   );
 }

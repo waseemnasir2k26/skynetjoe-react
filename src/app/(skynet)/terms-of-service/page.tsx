@@ -7,7 +7,7 @@ import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "terms-of-service.html"),
-  "utf8"
+  "utf8",
 );
 
 export const metadata: Metadata = {
@@ -39,16 +39,42 @@ const schema = {
     "@type": "Organization",
     name: SITE.brand,
     url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/waseem-portrait.jpg` },
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE.assetsUrl}/waseem-portrait.jpg`,
+    },
   },
-  mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/terms-of-service` },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `${SITE.url}/terms-of-service`,
+  },
 };
 
 export default function TermsOfServicePage() {
   return (
-    <>
+    <div className="sky">
       <JsonLd data={schema} />
+
+      <section className="hero">
+        <div className="wrap">
+          <div className="hero-inner">
+            <div className="hero-eyebrow">
+              <span className="pulse"></span>
+              Legal&nbsp;· Last updated 2026-05-20
+            </div>
+            <h1>
+              Where we both <em>stand.</em>
+            </h1>
+            <p className="hero-sub">
+              Terms governing engagements with SkynetLabs and use of
+              skynetjoe.com. 50% deposit, IP transfer on payment, Indonesian
+              jurisdiction — written plainly.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <HtmlCreamWrap html={html} />
-    </>
+    </div>
   );
 }

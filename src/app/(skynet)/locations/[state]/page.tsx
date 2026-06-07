@@ -1,29 +1,28 @@
 /**
  * /locations/[state] — programmatic SEO landing for each of 48 US states.
  *
- * Cream-pivot port 2026-05-25:
- *   - Hero: cream-3 bg, Fraunces H1 with terracotta <em>, mono eyebrow
- *   - Stats cards: cream-2 with 1px ink border, Fraunces large numbers
- *   - Service hub: cream cards, terracotta icon wash, no cyan glow
- *   - CTA strip: ink panel with terracotta button (was cyan→teal gradient)
- *   - Keyword chips: cream-2 with terracotta hover (was cyan-50/200)
- *   - Cities + industries panel: cream-2 with 1px ink border (was dark gradient)
- *   - Nearby states: cream chips with terracotta hover.
- * Schema, copy, generateStaticParams, generateMetadata all unchanged.
+ * skyv3 restyle 2026-06-07:
+ *   - Wrapped in <div className="sky"> — adopts the /lp/logistics design language.
+ *   - Hero → .hero pattern, copy DRIVEN by per-state data (s.name / s.abbr / s.cities).
+ *   - Sections converted to .sky rhythm (.section / .section-head / .section-kicker
+ *     / h2 + <em> / .section-sub); service + keyword cards use .feat-card.
+ *   - Closer uses .closer pattern.
+ *   - Schema, copy, generateStaticParams, generateMetadata, enrichment, Texas
+ *     callout, keyword expansion, cities/industries panel, nearby states preserved.
+ *   - CTA label kept as the unified "Book a free 30-min audit" (= SITE.cta.label).
  */
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import * as Icons from "lucide-react";
-import { ArrowRight, MessageCircle, Calendar, MapPin, CheckCircle2 } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { STATES, getStateBySlug, type StateEntry } from "@/lib/states";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getStateEnrichment } from "@/data/state-enrichment";
 import { isLocationIndexable } from "@/lib/sitemap-quality";
-import { Reveal } from "@/components/motion/Reveal";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
 type SvcItem = { slug: string; label: string; icon: string; desc: string };
@@ -79,42 +78,11 @@ function buildKeywordPhrases(svc: SvcItem, s: StateEntry): string[] {
   ];
 }
 
-// Shared cream-pivot inline styles
-const eyebrow = {
-  fontFamily: "var(--font-mono)",
-  fontSize: 11 as const,
-  textTransform: "uppercase" as const,
-  letterSpacing: "0.16em",
-  color: "var(--terracotta-aa)",
-  display: "inline-flex" as const,
-  alignItems: "center" as const,
-  gap: 12,
-};
-const eyebrowRule = {
-  width: 28,
-  height: 1,
-  background: "var(--terracotta)",
-  display: "inline-block" as const,
-};
-const h2Style = {
-  fontFamily: "var(--font-display)",
-  fontWeight: 600,
-  letterSpacing: "-0.02em",
-  lineHeight: 1.08,
-  color: "var(--ink)",
-  fontSize: "clamp(28px, 4vw, 44px)",
-  marginBottom: 14,
-};
-const emTerra = {
-  fontStyle: "normal" as const,
-  color: "var(--terracotta-aa)",
-  fontWeight: 700,
-};
 const cardCream = {
-  background: "var(--cream-2)",
-  border: "1px solid rgba(26,26,26,0.12)",
+  background: "var(--cream-3)",
+  border: "1px solid var(--rule)",
   padding: 24,
-  borderRadius: 2,
+  borderRadius: 4,
 };
 
 export default async function StatePage({
@@ -127,7 +95,7 @@ export default async function StatePage({
   if (!s) notFound();
 
   const allServices: SvcItem[] = SERVICE_CATEGORIES.flatMap(
-    (c) => c.services as readonly SvcItem[]
+    (c) => c.services as readonly SvcItem[],
   );
 
   const enrichment = getStateEnrichment(s.slug);
@@ -174,155 +142,81 @@ export default async function StatePage({
   };
 
   return (
-    <>
+    <div className="sky">
       <JsonLd data={schema} />
 
-      {/* HERO */}
-      <section
-        className="relative pt-28 md:pt-36 pb-16"
-        style={{
-          background: "var(--cream-3)",
-          borderBottom: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <div className="container-x px-6">
-          <Breadcrumbs
-            bare
-            marginBottom={24}
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Locations", href: "/locations" },
-              { label: s.name },
-            ]}
-          />
+      {/* HERO — skyv3 pattern, copy driven by per-state data */}
+      <section className="hero">
+        <div className="wrap">
+          <div className="hero-inner" style={{ textAlign: "left" }}>
+            <Breadcrumbs
+              bare
+              marginBottom={24}
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Locations", href: "/locations" },
+                { label: s.name },
+              ]}
+            />
 
-          <Reveal className="max-w-4xl">
-            <div className="mb-6" style={eyebrow}>
-              <span style={eyebrowRule} />
-              <span
-                className="w-2 h-2 rounded-full animate-pulse"
-                style={{ background: "var(--terracotta)", display: "inline-block" }}
-              />
-              Serving {s.name} · {s.abbr}
+            <div className="hero-eyebrow">
+              <span className="pulse"></span>
+              Serving <strong>{s.name}</strong>&nbsp;· {s.abbr}
             </div>
-            <h1
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 600,
-                letterSpacing: "-0.025em",
-                lineHeight: 1.04,
-                color: "var(--ink)",
-                fontSize: "clamp(40px, 6vw, 68px)",
-                margin: "0 0 24px",
-              }}
-            >
-              AI Automation Expert in{" "}
-              <em style={emTerra}>{s.name}</em>
+
+            <h1 style={{ marginLeft: 0, marginRight: 0, maxWidth: "16ch" }}>
+              AI automation expert in <em>{s.name}.</em>
             </h1>
-            <p
-              style={{
-                fontSize: 18,
-                color: "var(--ink-2)",
-                lineHeight: 1.6,
-                maxWidth: "62ch",
-                marginBottom: 28,
-              }}
-            >
+
+            <p className="hero-sub" style={{ marginLeft: 0, marginRight: 0 }}>
               {s.name} founders waste 14+ hours a week on work software should
               already be doing. SkynetLabs builds the automations, smart
               websites, and chat agents that take it off your plate — for
-              operators across {s.cities.slice(0, 3).join(", ")} and beyond.
+              operators across{" "}
+              <strong>{s.cities.slice(0, 3).join(", ")}</strong> and beyond.
               Fixed scope, public pricing, 5–14 day ship window — delivered
               remotely from Bali.
             </p>
-            <div className="flex flex-wrap gap-3">
+
+            <div className="cta-row" style={{ justifyContent: "flex-start" }}>
               <Link
-                href="/discovery-call"
-                className="inline-flex items-center gap-2"
-                style={{
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
-                  padding: "16px 28px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 15,
-                  borderRadius: 2,
-                  border: "none",
-                }}
+                href={SITE.cta.href}
+                className="btn-primary"
+                data-meta-event="Schedule"
+                data-meta-name="state-hero-book-audit"
               >
-                <Calendar className="w-4 h-4" />
-                Apply from {s.abbr}
+                {SITE.cta.label} →
               </Link>
-              <a
-                href="#livechat-open"
-                className="inline-flex items-center gap-2"
-                style={{
-                  background: "transparent",
-                  color: "var(--ink)",
-                  border: "1px solid var(--ink)",
-                  padding: "15px 26px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 15,
-                  borderRadius: 2,
-                }}
-              >
-                <MessageCircle className="w-4 h-4" />
+              <a href="#livechat-open" className="btn-line">
                 Live chat
               </a>
-              <Link
-                href="/pricing"
-                className="inline-flex items-center gap-2"
-                style={{
-                  background: "transparent",
-                  color: "var(--ink-faint)",
-                  border: "1px solid rgba(26,26,26,0.25)",
-                  padding: "15px 26px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 15,
-                  borderRadius: 2,
-                }}
-              >
+              <Link href="/pricing" className="btn-line">
                 See pricing first
               </Link>
             </div>
-          </Reveal>
+
+            <div className="hero-scarcity">
+              <strong>Limited monthly builds</strong>&nbsp;· 8-hour reply window
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Texas-specific industry deep-guide callout */}
       {s.slug === "texas" && (
-        <section
-          className="py-10"
-          style={{
-            background: "var(--ink)",
-            color: "var(--cream-3)",
-            borderBottom: "1px solid rgba(26,26,26,0.10)",
-          }}
-        >
-          <div className="container-x px-6">
+        <section className="section dark" style={{ padding: "40px 0" }}>
+          <div className="wrap">
             <div className="max-w-4xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
-                <div
-                  className="mb-2"
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 11,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.16em",
-                    color: "var(--terracotta)",
-                  }}
-                >
-                  Industry deep guide
-                </div>
+                <span className="section-kicker">Industry deep guide</span>
                 <h3
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     fontSize: "clamp(22px, 3vw, 30px)",
-                    color: "var(--cream-3)",
-                    margin: 0,
+                    color: "var(--cream)",
+                    margin: "8px 0 0",
+                    letterSpacing: "-0.02em",
                   }}
                 >
                   Building for Texas freight or logistics?
@@ -330,7 +224,7 @@ export default async function StatePage({
                 <p
                   style={{
                     fontSize: 14,
-                    color: "rgba(245, 240, 230, 0.78)",
+                    color: "rgba(242, 239, 230, 0.72)",
                     margin: "6px 0 0",
                   }}
                 >
@@ -340,16 +234,8 @@ export default async function StatePage({
               </div>
               <Link
                 href="/industries/freight-logistics/texas"
-                className="inline-flex items-center gap-2 flex-shrink-0"
-                style={{
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
-                  padding: "14px 24px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  borderRadius: 2,
-                }}
+                className="btn-primary flex-shrink-0"
+                style={{ background: "var(--terracotta)" }}
               >
                 Open the TX freight guide →
               </Link>
@@ -360,19 +246,10 @@ export default async function StatePage({
 
       {/* ENRICHMENT — state-specific 220-280 word block, indexability-gated */}
       {enrichment && (
-        <section
-          className="py-16 md:py-20"
-          style={{
-            background: "var(--cream-2)",
-            borderBottom: "1px solid rgba(26,26,26,0.10)",
-          }}
-        >
-          <div className="container-x px-6">
-            <Reveal className="max-w-3xl">
-              <div className="mb-6" style={eyebrow}>
-                <span style={eyebrowRule} />
-                What we ship in {s.name}
-              </div>
+        <section className="section tinted">
+          <div className="wrap">
+            <div className="section-head" style={{ marginBottom: 0 }}>
+              <span className="section-kicker">What we ship in {s.name}</span>
               <p
                 style={{
                   fontFamily: "var(--font-sans)",
@@ -380,18 +257,19 @@ export default async function StatePage({
                   lineHeight: 1.72,
                   color: "var(--ink)",
                   margin: 0,
+                  maxWidth: "62ch",
                 }}
               >
                 {enrichment}
               </p>
-            </Reveal>
+            </div>
           </div>
         </section>
       )}
 
       {/* Stats */}
-      <section className="py-12" style={{ background: "var(--cream)" }}>
-        <div className="container-x px-6">
+      <section className="section" style={{ padding: "48px 0" }}>
+        <div className="wrap">
           <div className="grid md:grid-cols-3 gap-4">
             {[
               { k: "180+", v: "workflows shipped" },
@@ -402,9 +280,9 @@ export default async function StatePage({
                 <div
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontWeight: 600,
+                    fontWeight: 700,
                     fontSize: 32,
-                    color: "var(--terracotta-aa)",
+                    color: "var(--terracotta)",
                     letterSpacing: "-0.025em",
                     marginBottom: 4,
                   }}
@@ -427,22 +305,20 @@ export default async function StatePage({
       </section>
 
       {/* Services Hub */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
-        <div className="container-x px-6">
-          <div className="max-w-3xl mb-12">
-            <div className="mb-5" style={eyebrow}>
-              <span style={eyebrowRule} />
+      <section className="section">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">
               Every service, available in {s.name}
-            </div>
-            <h2 style={h2Style}>
-              16 builds for {s.name}{" "}
-              <em style={emTerra}>operators.</em>
+            </span>
+            <h2>
+              16 builds for {s.name} <em>operators.</em>
             </h2>
-            <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
+            <p className="section-sub">
               From {s.industries[0]} practices in {s.cities[0]} to{" "}
-              {s.industries[1]} firms in {s.cities[1]} and{" "}
-              {s.industries[2]} operations in {s.cities[2]} — these 16 services
-              are ready to ship into your stack.
+              {s.industries[1]} firms in {s.cities[1]} and {s.industries[2]}{" "}
+              operations in {s.cities[2]} — these 16 services are ready to ship
+              into your stack.
             </p>
           </div>
 
@@ -452,12 +328,12 @@ export default async function StatePage({
                 <h3
                   className="flex items-center gap-3 mb-5"
                   style={{
-                    fontFamily: "var(--font-mono)",
+                    fontFamily: "var(--font-mono-plex), monospace",
                     fontSize: 11,
                     textTransform: "uppercase",
                     letterSpacing: "0.16em",
-                    color: "var(--terracotta-aa)",
-                    fontWeight: 500,
+                    color: "var(--terracotta)",
+                    fontWeight: 600,
                   }}
                 >
                   <span
@@ -473,27 +349,24 @@ export default async function StatePage({
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {cat.services.map((svc) => {
                     const Icon =
-                      ((Icons as unknown) as Record<string, IconCmp>)[svc.icon] ??
-                      ((Icons as unknown) as Record<string, IconCmp>).Bot;
+                      (Icons as unknown as Record<string, IconCmp>)[svc.icon] ??
+                      (Icons as unknown as Record<string, IconCmp>).Bot;
                     return (
                       <Link
                         key={svc.slug}
                         href={`/services/${svc.slug}`}
-                        className="group relative"
-                        style={{
-                          ...cardCream,
-                          textDecoration: "none",
-                          transition: "border-color 0.18s",
-                        }}
+                        className="feat-card group relative"
+                        style={{ display: "block", padding: 24 }}
                       >
                         <div
                           className="flex items-center justify-center mb-3"
                           style={{
                             width: 44,
                             height: 44,
-                            background: "rgba(198,107,63,0.10)",
+                            background: "var(--terracotta-soft)",
                             border: "1px solid rgba(198,107,63,0.30)",
-                            borderRadius: 2,
+                            borderRadius: 4,
+                            color: "var(--terracotta)",
                           }}
                         >
                           <Icon className="w-5 h-5" />
@@ -501,7 +374,7 @@ export default async function StatePage({
                         <h4
                           style={{
                             fontFamily: "var(--font-display)",
-                            fontWeight: 500,
+                            fontWeight: 600,
                             fontSize: 16,
                             color: "var(--ink)",
                             marginBottom: 4,
@@ -512,9 +385,9 @@ export default async function StatePage({
                         </h4>
                         <p
                           style={{
-                            fontFamily: "var(--font-mono)",
+                            fontFamily: "var(--font-mono-plex), monospace",
                             fontSize: 11,
-                            color: "var(--terracotta-aa)",
+                            color: "var(--terracotta)",
                             marginBottom: 8,
                           }}
                         >
@@ -540,141 +413,44 @@ export default async function StatePage({
               </div>
             ))}
           </div>
-
-          {/* Ink CTA strip */}
-          <div
-            style={{
-              marginTop: 48,
-              background: "var(--ink)",
-              color: "var(--cream-3)",
-              padding: "40px 32px",
-              borderRadius: 2,
-              textAlign: "center",
-            }}
-          >
-            <CheckCircle2
-              className="mx-auto mb-3"
-              style={{ color: "var(--terracotta)", width: 36, height: 36 }}
-            />
-            <h3
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 500,
-                fontSize: "clamp(22px, 3vw, 30px)",
-                letterSpacing: "-0.02em",
-                lineHeight: 1.15,
-                marginBottom: 14,
-              }}
-            >
-              Building in {s.name}? Let&apos;s scope it.
-            </h3>
-            <p
-              style={{
-                fontSize: 16,
-                color: "rgba(242,239,230,0.85)",
-                maxWidth: "52ch",
-                margin: "0 auto 24px",
-                lineHeight: 1.55,
-              }}
-            >
-              Send a brief. If we&apos;re a fit for {s.name}, you&apos;ll get a
-              Cal.com link back within 8 hours. Fixed-price scope in 48h.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Link
-                href="/discovery-call"
-                className="inline-flex items-center gap-2"
-                style={{
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
-                  padding: "14px 22px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  borderRadius: 2,
-                  border: "none",
-                }}
-              >
-                <Calendar className="w-4 h-4" />
-                Apply from {s.abbr}
-              </Link>
-              <a
-                href="#livechat-open"
-                className="inline-flex items-center gap-2"
-                style={{
-                  background: "transparent",
-                  color: "var(--cream-3)",
-                  border: "1px solid rgba(242,239,230,0.4)",
-                  padding: "13px 21px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  borderRadius: 2,
-                }}
-              >
-                <MessageCircle className="w-4 h-4" />
-                Live chat instead
-              </a>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2"
-                style={{
-                  background: "transparent",
-                  color: "var(--cream-3)",
-                  border: "1px solid rgba(242,239,230,0.4)",
-                  padding: "13px 21px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  borderRadius: 2,
-                }}
-              >
-                All contact options
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Local SEO keyword expansion */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
-        <div className="container-x px-6">
-          <div className="max-w-3xl mb-12">
-            <div className="mb-5" style={eyebrow}>
-              <span style={eyebrowRule} />
-              Local intent · {s.name}
-            </div>
-            <h2 style={h2Style}>
-              Searching in {s.abbr}?{" "}
-              <em style={emTerra}>You&apos;re in the right place.</em>
+      <section className="section tinted">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="section-kicker">Local intent · {s.name}</span>
+            <h2>
+              Searching in {s.abbr}? <em>You&apos;re in the right place.</em>
             </h2>
-            <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
+            <p className="section-sub">
               Whatever exact phrase brought you here — &ldquo;n8n expert near{" "}
-              {s.cities[0]}&rdquo;, &ldquo;GoHighLevel agency in {s.abbr}&rdquo;,
-              &ldquo;AI chatbot consultant for {s.industries[0]}&rdquo; — these
-              are all the same one operator. Click any phrase to scope that
-              service for {s.name}.
+              {s.cities[0]}&rdquo;, &ldquo;GoHighLevel agency in {s.abbr}
+              &rdquo;, &ldquo;AI chatbot consultant for {s.industries[0]}&rdquo;
+              — these are all the same one operator. Click any phrase to scope
+              that service for {s.name}.
             </p>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {allServices.map((svc) => {
               const Icon =
-                ((Icons as unknown) as Record<string, IconCmp>)[svc.icon] ??
-                ((Icons as unknown) as Record<string, IconCmp>).Bot;
+                (Icons as unknown as Record<string, IconCmp>)[svc.icon] ??
+                (Icons as unknown as Record<string, IconCmp>).Bot;
               const phrases = buildKeywordPhrases(svc, s);
               return (
-                <div key={svc.slug} style={{ ...cardCream, padding: 24 }}>
+                <div key={svc.slug} style={cardCream}>
                   <div className="flex items-start gap-4 mb-4">
                     <div
                       className="flex items-center justify-center flex-shrink-0"
                       style={{
                         width: 44,
                         height: 44,
-                        background: "rgba(198,107,63,0.10)",
+                        background: "var(--terracotta-soft)",
                         border: "1px solid rgba(198,107,63,0.30)",
-                        borderRadius: 2,
+                        borderRadius: 4,
+                        color: "var(--terracotta)",
                       }}
                     >
                       <Icon className="w-5 h-5" />
@@ -683,7 +459,7 @@ export default async function StatePage({
                       <h3
                         style={{
                           fontFamily: "var(--font-display)",
-                          fontWeight: 500,
+                          fontWeight: 600,
                           fontSize: 18,
                           color: "var(--ink)",
                           marginBottom: 4,
@@ -692,7 +468,13 @@ export default async function StatePage({
                       >
                         {svc.label} — {s.name}
                       </h3>
-                      <p style={{ fontSize: 13, color: "var(--ink-faint)", lineHeight: 1.5 }}>
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: "var(--ink-faint)",
+                          lineHeight: 1.5,
+                        }}
+                      >
                         {svc.desc}
                       </p>
                     </div>
@@ -703,7 +485,7 @@ export default async function StatePage({
                         fontFamily: "var(--font-sans)",
                         fontSize: 13,
                         fontWeight: 600,
-                        color: "var(--terracotta-aa)",
+                        color: "var(--terracotta)",
                         textDecoration: "none",
                       }}
                     >
@@ -719,14 +501,13 @@ export default async function StatePage({
                         style={{
                           padding: "6px 12px",
                           borderRadius: 9999,
-                          background: "var(--cream-3)",
-                          border: "1px solid rgba(26,26,26,0.12)",
+                          background: "var(--cream-2)",
+                          border: "1px solid var(--rule)",
                           color: "var(--ink-2)",
                           fontSize: 12,
-                          fontFamily: "var(--font-mono)",
+                          fontFamily: "var(--font-mono-plex), monospace",
                           fontWeight: 500,
                           textDecoration: "none",
-                          transition: "border-color 0.18s",
                         }}
                       >
                         {p}
@@ -741,56 +522,73 @@ export default async function StatePage({
       </section>
 
       {/* Cities + Industries panel */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
-        <div className="container-x px-6">
-          <div style={{ ...cardCream, padding: "40px 32px", maxWidth: "920px", margin: "0 auto" }}>
+      <section className="section">
+        <div className="wrap">
+          <div
+            style={{
+              ...cardCream,
+              padding: "40px 32px",
+              maxWidth: 920,
+              margin: "0 auto",
+            }}
+          >
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
-                <div className="mb-3" style={eyebrow}>
-                  <span style={eyebrowRule} />
+                <span className="section-kicker">
                   Cities served in {s.name}
-                </div>
+                </span>
                 <h3
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     fontSize: 24,
                     color: "var(--ink)",
                     letterSpacing: "-0.015em",
-                    marginBottom: 16,
+                    margin: "8px 0 16px",
                   }}
                 >
                   AI automation across {s.abbr}
                 </h3>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 8 }}>
+                <ul
+                  style={{
+                    listStyle: "none",
+                    padding: 0,
+                    margin: 0,
+                    display: "grid",
+                    gap: 8,
+                  }}
+                >
                   {s.cities.map((city) => (
                     <li
                       key={city}
                       className="flex items-center gap-2"
-                      style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.5 }}
+                      style={{
+                        fontSize: 14,
+                        color: "var(--ink-2)",
+                        lineHeight: 1.5,
+                      }}
                     >
                       <MapPin
                         className="w-4 h-4 flex-shrink-0"
                         style={{ color: "var(--terracotta)" }}
                       />
-                      <span>AI automation services in {city}, {s.abbr}</span>
+                      <span>
+                        AI automation services in {city}, {s.abbr}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </div>
               <div>
-                <div className="mb-3" style={eyebrow}>
-                  <span style={eyebrowRule} />
-                  Industries served
-                </div>
+                <span className="section-kicker">Industries served</span>
                 <h3
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     fontSize: 24,
                     color: "var(--ink)",
                     letterSpacing: "-0.015em",
-                    marginBottom: 16,
+                    margin: "8px 0 16px",
                   }}
                 >
                   Built for {s.name} verticals
@@ -804,15 +602,21 @@ export default async function StatePage({
                   }}
                 >
                   Most {s.name} engagements come from{" "}
-                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
+                  <strong
+                    style={{ color: "var(--terracotta)", fontWeight: 700 }}
+                  >
                     {s.industries[0]}
                   </strong>
                   ,{" "}
-                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
+                  <strong
+                    style={{ color: "var(--terracotta)", fontWeight: 700 }}
+                  >
                     {s.industries[1]}
                   </strong>
                   , and{" "}
-                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
+                  <strong
+                    style={{ color: "var(--terracotta)", fontWeight: 700 }}
+                  >
                     {s.industries[2]}
                   </strong>{" "}
                   operators looking to cut admin time and ship lead capture that
@@ -825,7 +629,7 @@ export default async function StatePage({
                     fontFamily: "var(--font-sans)",
                     fontSize: 14,
                     fontWeight: 600,
-                    color: "var(--terracotta-aa)",
+                    color: "var(--terracotta)",
                     textDecoration: "none",
                   }}
                 >
@@ -839,27 +643,26 @@ export default async function StatePage({
       </section>
 
       {/* Nearby states */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
-        <div className="container-x px-6">
+      <section className="section tinted">
+        <div className="wrap">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <div className="mb-3" style={eyebrow}>
-                <span style={eyebrowRule} />
-                Nearby states
-              </div>
+              <span className="section-kicker">Nearby states</span>
               <h3
                 style={{
                   fontFamily: "var(--font-display)",
-                  fontWeight: 500,
+                  fontWeight: 700,
                   fontSize: 26,
                   color: "var(--ink)",
                   letterSpacing: "-0.02em",
-                  marginBottom: 14,
+                  margin: "8px 0 14px",
                 }}
               >
                 Also active in
               </h3>
-              <p style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6 }}>
+              <p
+                style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6 }}
+              >
                 SkynetLabs delivers AI automation across all 48 contiguous US
                 states. {s.name} engagements run alongside builds for operators
                 in every other state.
@@ -875,11 +678,11 @@ export default async function StatePage({
                     style={{
                       padding: "6px 12px",
                       borderRadius: 9999,
-                      background: "var(--cream-2)",
-                      border: "1px solid rgba(26,26,26,0.12)",
+                      background: "var(--cream-3)",
+                      border: "1px solid var(--rule)",
                       color: "var(--ink-2)",
                       fontSize: 12,
-                      fontFamily: "var(--font-mono)",
+                      fontFamily: "var(--font-mono-plex), monospace",
                       fontWeight: 500,
                       textDecoration: "none",
                     }}
@@ -893,10 +696,10 @@ export default async function StatePage({
                   padding: "6px 12px",
                   borderRadius: 9999,
                   background: "var(--terracotta)",
-                  color: "var(--cream-3)",
+                  color: "var(--cream)",
                   fontSize: 12,
-                  fontFamily: "var(--font-mono)",
-                  fontWeight: 600,
+                  fontFamily: "var(--font-mono-plex), monospace",
+                  fontWeight: 700,
                   textDecoration: "none",
                   border: "1px solid var(--terracotta)",
                 }}
@@ -907,6 +710,31 @@ export default async function StatePage({
           </div>
         </div>
       </section>
-    </>
+
+      {/* CLOSER — skyv3 pattern */}
+      <section className="closer">
+        <div className="closer-scarcity">Building in {s.name}?</div>
+        <h2>
+          Let&apos;s <em>scope it.</em>
+        </h2>
+        <p>
+          Send a brief. If we&apos;re a fit for {s.name}, you&apos;ll get a
+          Cal.com link back within 8 hours. Fixed-price scope in 48h.
+        </p>
+        <div className="cta-row">
+          <Link
+            href={SITE.cta.href}
+            className="btn-primary"
+            data-meta-event="Schedule"
+            data-meta-name="state-closer-book-audit"
+          >
+            {SITE.cta.label} →
+          </Link>
+          <Link href="/contact" className="btn-line">
+            All contact options
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }

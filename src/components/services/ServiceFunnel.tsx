@@ -140,7 +140,13 @@ function StaggerItem({
 }
 
 /** Counts up the numeric part of the proof metric (e.g. "-70%", "180+", "8h"). */
-function StatMetric({ value, style }: { value: string; style: React.CSSProperties }) {
+function StatMetric({
+  value,
+  style,
+}: {
+  value: string;
+  style: React.CSSProperties;
+}) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
   const numRef = useRef<HTMLSpanElement>(null);
@@ -182,7 +188,8 @@ function Counter({
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / dur);
       const eased = 1 - Math.pow(1 - p, 3);
-      if (numRef.current) numRef.current.textContent = String(Math.round(target * eased));
+      if (numRef.current)
+        numRef.current.textContent = String(Math.round(target * eased));
       if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -521,8 +528,7 @@ export default function ServiceFunnel({
               The after-state
             </div>
             <h2 style={h2style}>
-              What you walk away{" "}
-              <span style={accentText}>owning.</span>
+              What you walk away <span style={accentText}>owning.</span>
             </h2>
           </Reveal>
           <StaggerGrid className="sf-grid">
@@ -587,7 +593,7 @@ export default function ServiceFunnel({
               }}
             >
               <Link href="/discovery-call" style={primaryBtn}>
-                Book a free 30-min check-up
+                Book a free 30-min audit
                 <ArrowRight style={{ width: 16, height: 16 }} />
               </Link>
               <span
@@ -615,7 +621,13 @@ export default function ServiceFunnel({
             background: "var(--cream)",
           }}
         >
-          <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+          <div
+            style={{
+              maxWidth: 1000,
+              margin: "0 auto",
+              padding: "0 clamp(16px, 5vw, 32px)",
+            }}
+          >
             <Reveal>
               <div style={eyebrow("var(--terracotta-aa)")}>
                 <span style={rule("var(--terracotta-aa)")} />
@@ -645,9 +657,13 @@ export default function ServiceFunnel({
                             fontSize: 11,
                             textTransform: "uppercase",
                             letterSpacing: "0.12em",
-                            color: i === 1 ? "var(--terracotta-aa)" : "var(--ink-faint)",
+                            color:
+                              i === 1
+                                ? "var(--terracotta-aa)"
+                                : "var(--ink-faint)",
                             borderBottom: "1px solid rgba(26,26,26,0.16)",
-                            background: i === 1 ? "var(--cream-2)" : "transparent",
+                            background:
+                              i === 1 ? "var(--cream-2)" : "transparent",
                           }}
                         >
                           {c}
@@ -679,7 +695,10 @@ export default function ServiceFunnel({
                             lineHeight: 1.5,
                           }}
                         >
-                          <span aria-hidden style={{ color: "var(--sage)", marginRight: 8 }}>
+                          <span
+                            aria-hidden
+                            style={{ color: "var(--sage)", marginRight: 8 }}
+                          >
                             ✓
                           </span>
                           {r.us}
@@ -726,8 +745,7 @@ export default function ServiceFunnel({
               How it works
             </div>
             <h2 style={h2style}>
-              Three steps,{" "}
-              <span style={accentText}>no mystery.</span>
+              Three steps, <span style={accentText}>no mystery.</span>
             </h2>
           </Reveal>
           <StaggerGrid
@@ -859,15 +877,20 @@ export default function ServiceFunnel({
             background: "var(--cream-2)",
           }}
         >
-          <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+          <div
+            style={{
+              maxWidth: 1000,
+              margin: "0 auto",
+              padding: "0 clamp(16px, 5vw, 32px)",
+            }}
+          >
             <Reveal>
               <div style={eyebrow("var(--terracotta-aa)")}>
                 <span style={rule("var(--terracotta-aa)")} />
                 Honest fit check
               </div>
               <h2 style={{ ...h2style, marginBottom: 28 }}>
-                The right fit,{" "}
-                <span style={accentText}>or an honest no.</span>
+                The right fit, <span style={accentText}>or an honest no.</span>
               </h2>
             </Reveal>
             <StaggerGrid
@@ -1124,8 +1147,7 @@ export default function ServiceFunnel({
                 Investment
               </div>
               <h2 style={h2style}>
-                Clear pricing.{" "}
-                <span style={accentText}>No quote dance.</span>
+                Clear pricing. <span style={accentText}>No quote dance.</span>
               </h2>
             </Reveal>
             <StaggerGrid className="sf-tiers">
@@ -1137,7 +1159,9 @@ export default function ServiceFunnel({
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      background: featured ? "var(--cream-2)" : "var(--cream-3)",
+                      background: featured
+                        ? "var(--cream-2)"
+                        : "var(--cream-3)",
                       border: featured
                         ? "1px solid var(--terracotta)"
                         : "1px solid rgba(26,26,26,0.12)",
@@ -1268,7 +1292,9 @@ export default function ServiceFunnel({
                         background: featured
                           ? "var(--terracotta)"
                           : "transparent",
-                        color: featured ? "var(--cream-3)" : "var(--terracotta-aa)",
+                        color: featured
+                          ? "var(--cream-3)"
+                          : "var(--terracotta-aa)",
                         border: featured
                           ? "1px solid var(--terracotta)"
                           : "1px solid var(--terracotta-aa)",
@@ -1363,8 +1389,7 @@ export default function ServiceFunnel({
               Questions
             </div>
             <h2 style={{ ...h2style, marginBottom: 28 }}>
-              Before you{" "}
-              <span style={accentText}>book the call.</span>
+              Before you <span style={accentText}>book the call.</span>
             </h2>
           </Reveal>
           {content.faqs.map((f) => (
@@ -1460,7 +1485,12 @@ export default function ServiceFunnel({
           </p>
           <Link
             href="/discovery-call"
-            style={{ ...primaryBtn, padding: "18px 32px", fontWeight: 700, fontSize: 16 }}
+            style={{
+              ...primaryBtn,
+              padding: "18px 32px",
+              fontWeight: 700,
+              fontSize: 16,
+            }}
           >
             {content.finalCta.ctaLabel}
             <ArrowRight style={{ width: 16, height: 16 }} />

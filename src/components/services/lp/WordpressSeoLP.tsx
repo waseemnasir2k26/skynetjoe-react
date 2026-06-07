@@ -34,7 +34,9 @@ function Reveal({
     <motion.div
       className={className}
       style={style}
-      initial={reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }}
+      initial={
+        reduce ? false : { opacity: 0, y: 28, clipPath: "inset(0 0 12% 0)" }
+      }
       whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, delay, ease }}
@@ -163,7 +165,8 @@ export default function WordpressSeoLP() {
           padding: "10px 16px",
         }}
       >
-        — Get named in the answers people read · clean data · ready for AI search
+        — Get named in the answers people read · clean data · ready for AI
+        search
       </div>
 
       {/* HERO */}
@@ -177,7 +180,11 @@ export default function WordpressSeoLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <div
@@ -193,7 +200,14 @@ export default function WordpressSeoLP() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta-aa)", display: "inline-block" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta-aa)",
+                  display: "inline-block",
+                }}
+              />
               Get found in 2026
             </div>
             <h1
@@ -209,7 +223,9 @@ export default function WordpressSeoLP() {
               }}
             >
               Get named in the answers,{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>not buried below them.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                not buried below them.
+              </span>
             </h1>
             <p
               style={{
@@ -220,12 +236,13 @@ export default function WordpressSeoLP() {
                 marginBottom: 28,
               }}
             >
-              People now read the answer instead of clicking through. We clean up
-              your site so those answers name your business — not the competitor
-              next door. Pages that earn their place, data search can trust.
+              People now read the answer instead of clicking through. We clean
+              up your site so those answers name your business — not the
+              competitor next door. Pages that earn their place, data search can
+              trust.
             </p>
             <Link href="/discovery-call" style={primaryBtn}>
-              Book a free 30-min check-up
+              Book a free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <div style={subline}>— Bali hours GMT+8 · 8-hour weekday reply</div>
@@ -263,12 +280,20 @@ export default function WordpressSeoLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--oxblood)">What the check-up finds</Eyebrow>
             <H2>
               Three reasons sites{" "}
-              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>vanish in the AI era.</span>
+              <span style={{ color: "var(--oxblood)", fontWeight: 700 }}>
+                vanish in the AI era.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-card-grid">
@@ -282,7 +307,14 @@ export default function WordpressSeoLP() {
                   transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                 }}
               >
-                <p.icon style={{ width: 26, height: 26, color: "var(--oxblood)", marginBottom: 14 }} />
+                <p.icon
+                  style={{
+                    width: 26,
+                    height: 26,
+                    color: "var(--oxblood)",
+                    marginBottom: 14,
+                  }}
+                />
                 <h3 style={cardH3}>{p.title}</h3>
                 <p style={cardBody}>{p.body}</p>
               </Item>
@@ -300,8 +332,16 @@ export default function WordpressSeoLP() {
           textAlign: "center",
         }}
       >
-        <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
-          <div style={proofEyebrow}>— A Spanish learning platform · sitewide rebuild</div>
+        <Reveal
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
+          <div style={proofEyebrow}>
+            — A Spanish learning platform · sitewide rebuild
+          </div>
           <div
             style={{
               fontFamily: "var(--font-display)",
@@ -332,29 +372,51 @@ export default function WordpressSeoLP() {
       >
         <div
           className="lp-hero-grid"
-          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
         >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">What we hand over</Eyebrow>
             <H2>
               Fewer pages, doing{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>far more work.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                far more work.
+              </span>
             </H2>
-            <p style={{ ...cardBody, fontSize: 16, maxWidth: "44ch", marginBottom: 20 }}>
-              &ldquo;We had close to a thousand pages and most of them were doing
-              nothing. He walked us through the cut list, kept the ones that
-              earned their slot, and the AI answers started picking us up within
-              the month.&rdquo;
+            <p
+              style={{
+                ...cardBody,
+                fontSize: 16,
+                maxWidth: "44ch",
+                marginBottom: 20,
+              }}
+            >
+              &ldquo;We had close to a thousand pages and most of them were
+              doing nothing. He walked us through the cut list, kept the ones
+              that earned their slot, and the AI answers started picking us up
+              within the month.&rdquo;
             </p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {FACTS.map((f) => (
                 <li key={f} style={factLi}>
-                  <Check style={{ width: 16, height: 16, color: "var(--sage)", marginTop: 2 }} />
+                  <Check
+                    style={{
+                      width: 16,
+                      height: 16,
+                      color: "var(--sage)",
+                      marginTop: 2,
+                    }}
+                  />
                   <span>{f}</span>
                 </li>
               ))}
             </ul>
-            <div style={{ ...subline, marginTop: 18 }}>— Founder · Spanish learning platform · 5-week rebuild</div>
+            <div style={{ ...subline, marginTop: 18 }}>
+              — Founder · Spanish learning platform · 5-week rebuild
+            </div>
           </Reveal>
           <motion.div
             initial={{ opacity: 0, y: 30, rotate: 1 }}
@@ -376,16 +438,27 @@ export default function WordpressSeoLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <Reveal>
             <Eyebrow color="var(--terracotta-aa)">Before vs after</Eyebrow>
             <H2>
               What changes when the{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>cleanup ships.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                cleanup ships.
+              </span>
             </H2>
           </Reveal>
           <Stagger className="lp-ba-grid">
-            <BeforeCard label="The playbook that stopped working" items={BEFORE} />
+            <BeforeCard
+              label="The playbook that stopped working"
+              items={BEFORE}
+            />
             <AfterCard label="The way it works in 2026" items={AFTER} />
           </Stagger>
         </div>
@@ -396,7 +469,9 @@ export default function WordpressSeoLP() {
         h2={
           <>
             Send us the page list.{" "}
-            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>We&apos;ll mark the cut.</span>
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+              We&apos;ll mark the cut.
+            </span>
           </>
         }
         body="A free 30-minute check-up. We find the weak pages, the broken data, the answers naming someone else. Fixed scope back in 48 hours."
@@ -468,7 +543,13 @@ const proofDetail: React.CSSProperties = {
   margin: "0 auto",
 };
 
-function Eyebrow({ children, color }: { children: React.ReactNode; color: string }) {
+function Eyebrow({
+  children,
+  color,
+}: {
+  children: React.ReactNode;
+  color: string;
+}) {
   return (
     <div
       style={{
@@ -483,7 +564,14 @@ function Eyebrow({ children, color }: { children: React.ReactNode; color: string
         gap: 12,
       }}
     >
-      <span style={{ width: 28, height: 1, background: color, display: "inline-block" }} />
+      <span
+        style={{
+          width: 28,
+          height: 1,
+          background: color,
+          display: "inline-block",
+        }}
+      />
       {children}
     </div>
   );
@@ -523,7 +611,14 @@ function BeforeCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((b) => (
           <li key={b} style={{ ...listLi, color: "var(--ink-2)" }}>
-            <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+            <X
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--oxblood)",
+                marginTop: 4,
+              }}
+            />
             <span>{b}</span>
           </li>
         ))}
@@ -547,7 +642,14 @@ function AfterCard({ label, items }: { label: string; items: string[] }) {
       <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {items.map((a) => (
           <li key={a} style={{ ...listLi, color: "var(--ink)" }}>
-            <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+            <Check
+              style={{
+                width: 14,
+                height: 14,
+                color: "var(--sage)",
+                marginTop: 4,
+              }}
+            />
             <span>{a}</span>
           </li>
         ))}
@@ -582,7 +684,14 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
           "linear-gradient(180deg, var(--cream) 0%, color-mix(in srgb, var(--terracotta) 8%, var(--cream)) 100%)",
       }}
     >
-      <Reveal style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)", textAlign: "center" }}>
+      <Reveal
+        style={{
+          maxWidth: 760,
+          margin: "0 auto",
+          padding: "0 clamp(16px, 5vw, 32px)",
+          textAlign: "center",
+        }}
+      >
         <div
           style={{
             fontFamily: "var(--font-mono)",
@@ -619,8 +728,16 @@ function FinalCta({ h2, body }: { h2: React.ReactNode; body: string }) {
         >
           {body}
         </p>
-        <Link href="/discovery-call" style={{ ...primaryBtn, padding: "18px 32px", fontWeight: 700, fontSize: 16 }}>
-          Book a free 30-min check-up
+        <Link
+          href="/discovery-call"
+          style={{
+            ...primaryBtn,
+            padding: "18px 32px",
+            fontWeight: 700,
+            fontSize: 16,
+          }}
+        >
+          Book a free 30-min audit
           <ArrowRight style={{ width: 16, height: 16 }} />
         </Link>
         <div

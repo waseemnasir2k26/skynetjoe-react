@@ -16,6 +16,9 @@ import LiveChat from "@/components/LiveChat";
 //   ExitIntentModal @/components/cta/ExitIntentModal · (earlier: IncomingCallPopup, SocialProofPopup)
 // LiveChat (passive chat bubble, click-to-open) kept on — smart intent bot rebuilt 2026-05-29.
 import "../globals.css";
+// skyv3 design system — site-wide LP look (lp/logistics). Imported AFTER globals
+// so .sky-scoped rules win the cascade. Scope: wrap page content in <div className="sky">.
+import "../../styles/skyv3.css";
 
 // Readability overhaul 2026-06-01 — ONE clean, highly-legible sans site-wide.
 // Inter drives BOTH body and headings (maps to --font-sans AND --font-display

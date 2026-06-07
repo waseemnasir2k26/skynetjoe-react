@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { SERVICE_PRICING } from "@/lib/service-pricing";
 import JsonLd from "@/components/JsonLd";
 import ServicePricingTabs from "@/components/pricing/ServicePricingTabs";
 import PricingCalculator from "@/components/pricing/PricingCalculator";
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 // Derive the true price floor/ceiling straight from the per-service tier data
 // so the schema can never drift from what the page actually publishes. Every
 // tier (one-time or monthly) is a real USD entry point, so all are eligible.
-const ALL_TIER_PRICES = SERVICE_PRICING.flatMap((s) => s.tiers.map((t) => t.price));
+const ALL_TIER_PRICES = SERVICE_PRICING.flatMap((s) =>
+  s.tiers.map((t) => t.price),
+);
 const MIN_PRICE = Math.min(...ALL_TIER_PRICES);
 const MAX_PRICE = Math.max(...ALL_TIER_PRICES);
 
 // Lowest one-time tier across all services = the honest "starting from" Offer.
 const ONE_TIME_PRICES = SERVICE_PRICING.flatMap((s) =>
-  s.tiers.filter((t) => t.cadence !== "monthly").map((t) => t.price)
+  s.tiers.filter((t) => t.cadence !== "monthly").map((t) => t.price),
 );
 const MIN_ONE_TIME = Math.min(...ONE_TIME_PRICES);
 const MAX_ONE_TIME = Math.max(...ONE_TIME_PRICES);
@@ -26,7 +26,7 @@ const MAX_ONE_TIME = Math.max(...ONE_TIME_PRICES);
 // monthly products — the FAQ says we don't run subscriptions *on a one-time
 // fee*, retainers are a separate, explicitly-monthly product).
 const MONTHLY_PRICES = SERVICE_PRICING.flatMap((s) =>
-  s.tiers.filter((t) => t.cadence === "monthly").map((t) => t.price)
+  s.tiers.filter((t) => t.cadence === "monthly").map((t) => t.price),
 );
 const MIN_MONTHLY = Math.min(...MONTHLY_PRICES);
 
@@ -99,19 +99,78 @@ const offerCatalog = {
   ],
 };
 
+// Smaller fixed-scope wedges. Each is a single deliverable, 1-2 weeks, no
+// retainer. The Audit is the recommended low-friction entry point.
 const MICROS = [
-  { name: "Audit (site + stack + AEO)", price: 497 },
-  { name: "Voice profile (locked tone)", price: 997 },
-  { name: "n8n smoke-test build", price: 750 },
-  { name: "AEO content sprint (10 posts)", price: 1200 },
-  { name: "GoHighLevel setup", price: 1500 },
-  { name: "Content engine v1", price: 2500 },
+  {
+    name: "Audit",
+    detail: "Site + stack + AEO",
+    price: 497,
+    window: "Ships in 3 days",
+    features: [
+      "Full site + stack teardown",
+      "AEO/SEO gap report",
+      "Prioritised fix list",
+    ],
+    featured: true,
+  },
+  {
+    name: "Voice profile",
+    detail: "Locked tone",
+    price: 997,
+    window: "Ships in 3-5 days",
+    features: [
+      "Brand voice workshop",
+      "Reusable prompt pack",
+      "AI-tell linter run",
+    ],
+  },
+  {
+    name: "n8n smoke-test build",
+    detail: "One proof workflow",
+    price: 750,
+    window: "Ships in 3-5 days",
+    features: [
+      "1 production workflow",
+      "Error handling wired",
+      "Loom walkthrough",
+    ],
+  },
+  {
+    name: "AEO content sprint",
+    detail: "10 posts",
+    price: 1200,
+    window: "Ships in 5-7 days",
+    features: [
+      "10 AEO-tuned posts",
+      "Keyword + entity research",
+      "Schema blocks",
+    ],
+  },
+  {
+    name: "GoHighLevel setup",
+    detail: "Account + 1 funnel",
+    price: 1500,
+    window: "Ships in 5-7 days",
+    features: [
+      "GHL onboarding",
+      "1 funnel + pipeline",
+      "Starter template pack",
+    ],
+  },
+  {
+    name: "Content engine v1",
+    detail: "Pipeline build",
+    price: 2500,
+    window: "Ships in 7-10 days",
+    features: ["Auto-publish pipeline", "Voice-locked drafts", "Team SOP"],
+  },
 ];
 
 const FAQS = [
   {
     q: "Why isn't there an enterprise tier?",
-    a: "Because every \"enterprise tier\" we've ever been quoted was a generic Flagship with a different number on it. If your scope genuinely needs more than the Pro can hold, we quote the delta on top — line by line, in writing, before kickoff. No mystery tier.",
+    a: 'Because every "enterprise tier" we\'ve ever been quoted was a generic Flagship with a different number on it. If your scope genuinely needs more than the Pro can hold, we quote the delta on top — line by line, in writing, before kickoff. No mystery tier.',
   },
   {
     q: "Can I split the Pro into two payments?",
@@ -131,7 +190,7 @@ const FAQS = [
   },
   {
     q: "What payment methods do you accept?",
-    a: "Wise, Payoneer, PayPal, Stripe invoice, direct USD wire, or bank transfer in IDR / GBP / EUR / SAR / AED. Crypto on request. We invoice from a registered entity — no PayPal \"friends and family\" hacks.",
+    a: 'Wise, Payoneer, PayPal, Stripe invoice, direct USD wire, or bank transfer in IDR / GBP / EUR / SAR / AED. Crypto on request. We invoice from a registered entity — no PayPal "friends and family" hacks.',
   },
 ];
 
@@ -151,431 +210,195 @@ export default function PricingPage() {
       <JsonLd data={priceSchema} />
       <JsonLd data={offerCatalog} />
       <JsonLd data={faqSchema} />
-      <style>{`
-        .cream-micro-card:hover { border-color: var(--terracotta) !important; }
-      `}</style>
 
-      {/* HERO — cream editorial */}
-      <section
-        className="relative pt-32 md:pt-40 pb-16"
-        style={{
-          background: "var(--cream-3)",
-          borderBottom: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <Reveal initialVisible className="container-x px-6 relative z-10 max-w-4xl">
-          <div
-            className="inline-flex items-center gap-3 mb-5"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta-aa)",
-            }}
-          >
-            <span
-              style={{
-                width: 28,
-                height: 1,
-                background: "var(--terracotta)",
-                display: "inline-block",
-              }}
-            />
-            Pricing · SkynetLabs
-          </div>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 600,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.04,
-              color: "var(--ink)",
-              fontSize: "clamp(40px, 6vw, 68px)",
-              margin: "0 0 20px",
-            }}
-          >
-            See the price before we ever{" "}
-            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-              touch your calendar.
-            </span>
-          </h1>
-          <p
-            style={{
-              fontSize: 19,
-              color: "var(--ink-2)",
-              maxWidth: "52ch",
-              lineHeight: 1.6,
-              marginBottom: 24,
-            }}
-          >
-            16 services. 3 tiers each. Optional add-ons and a live calculator
-            below. No quote form, no &ldquo;request pricing&rdquo; wall.
-          </p>
-          <div
-            className="flex flex-wrap items-center gap-x-5 gap-y-2"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              color: "var(--ink-faint)",
-            }}
-          >
-            <span>
-              <b style={{ color: "var(--ink)" }}>180+</b> workflows
-            </span>
-            <span style={{ color: "rgba(26,26,26,0.20)" }}>·</span>
-            <span>
-              <b style={{ color: "var(--ink)" }}>40+</b> websites
-            </span>
-            <span style={{ color: "rgba(26,26,26,0.20)" }}>·</span>
-            <span>
-              <b style={{ color: "var(--ink)" }}>9</b> countries
-            </span>
-            <span style={{ color: "rgba(26,26,26,0.20)" }}>·</span>
-            <span>
-              <b style={{ color: "var(--ink)" }}>5-14d</b> ship
-            </span>
-          </div>
-        </Reveal>
-      </section>
+      <div className="sky">
+        {/* HERO — skyv3 */}
+        <section className="hero">
+          <div className="wrap">
+            <div className="hero-inner">
+              <div className="hero-eyebrow">
+                <span className="pulse"></span>
+                Public pricing&nbsp;·{" "}
+                <strong>no sales call to see a number</strong>
+              </div>
 
-      {/* SINGLE PRICING SECTION (tabs) */}
-      <ServicePricingTabs />
+              <h1>
+                See the price before we ever <em>touch your calendar.</em>
+              </h1>
 
-      {/* CALCULATOR */}
-      <PricingCalculator />
+              <p className="hero-sub">
+                16 services. 3 tiers each. Optional add-ons and a live
+                calculator below.{" "}
+                <strong>Public, source-controlled pricing</strong> — and the
+                repo lands in your GitHub on launch day. No quote form, no
+                &ldquo;request pricing&rdquo; wall.
+              </p>
 
-      {/* VULNERABILITY QUOTE */}
-      <section
-        className="py-12"
-        style={{
-          background: "var(--cream)",
-          borderTop: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <Reveal className="container-x px-6 max-w-3xl mx-auto">
-          <blockquote
-            style={{
-              padding: "26px 32px",
-              background: "var(--cream-2)",
-              borderLeft: "3px solid var(--terracotta)",
-              fontFamily: "var(--font-sans)",
-              color: "var(--ink-2)",
-            }}
-          >
-            <p
-              style={{
-                fontSize: 18,
-                lineHeight: 1.6,
-              }}
-            >
-              Most agencies hide the price because the price doesn&apos;t match
-              the work. I&apos;ve been on the other side of three of those
-              proposals. Every one ended in renegotiation. I&apos;d rather quote
-              you out of a deal than nickel you through one.
-            </p>
-            <footer
-              style={{
-                marginTop: 14,
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                color: "var(--terracotta-aa)",
-              }}
-            >
-              — Waseem Nasir
-            </footer>
-          </blockquote>
-        </Reveal>
-      </section>
-
-      {/* MICROS */}
-      <section
-        className="py-16 md:py-20"
-        style={{
-          background: "var(--cream-3)",
-          borderTop: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <div className="container-x px-6 max-w-5xl mx-auto">
-          <Reveal className="mb-8">
-            <div
-              className="inline-flex items-center gap-3 mb-3"
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.16em",
-                color: "var(--terracotta-aa)",
-              }}
-            >
-              <span
-                style={{
-                  width: 28,
-                  height: 1,
-                  background: "var(--terracotta)",
-                  display: "inline-block",
-                }}
-              />
-              Smaller engagements
-            </div>
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 600,
-                letterSpacing: "-0.02em",
-                color: "var(--ink)",
-                fontSize: "clamp(28px, 4vw, 40px)",
-                lineHeight: 1.1,
-                marginBottom: 12,
-              }}
-            >
-              Need just one thing?{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-                Pick a micro.
-              </span>
-            </h2>
-            <p
-              style={{
-                fontSize: 17,
-                color: "var(--ink-2)",
-                maxWidth: "44rem",
-                lineHeight: 1.6,
-              }}
-            >
-              Six fixed-scope wedges. Each is a single deliverable, 1-2 weeks,
-              no retainer commitment. Use one to test the working relationship
-              before scaling.
-            </p>
-          </Reveal>
-          <RevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {MICROS.map((m, i) => {
-              const rotate = i % 2 === 0 ? "-0.2deg" : "0.2deg";
-              return (
-                <RevealItem
-                  key={m.name}
-                  className="cream-micro-card flex items-center justify-between gap-3"
-                  style={{
-                    padding: "16px 20px",
-                    background: "var(--cream-2)",
-                    border: "1px solid rgba(26,26,26,0.10)",
-                    transform: `rotate(${rotate})`,
-                    transition: "border-color 0.18s",
-                  }}
+              <div className="cta-row">
+                <Link
+                  href="/discovery-call"
+                  className="btn-primary"
+                  data-meta-event="Schedule"
+                  data-meta-name="pricing-book-audit"
                 >
-                  <span
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 600,
-                      color: "var(--ink)",
-                    }}
-                  >
-                    {m.name}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 14,
-                      fontWeight: 700,
-                      color: "var(--terracotta-aa)",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    ${m.price.toLocaleString("en-US")}
-                  </span>
-                </RevealItem>
-              );
-            })}
-          </RevealGroup>
-        </div>
-      </section>
+                  Book a free 30-min audit →
+                </Link>
+                <Link href="/case-studies" className="btn-line">
+                  See real results
+                </Link>
+              </div>
 
-      {/* FAQ */}
-      <section
-        className="py-16 md:py-20"
-        style={{
-          background: "var(--cream)",
-          borderTop: "1px solid rgba(26,26,26,0.10)",
-        }}
-      >
-        <div className="container-x px-6 max-w-3xl mx-auto">
-          <Reveal className="mb-8">
-            <div
-              className="inline-flex items-center gap-3 mb-3"
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.16em",
-                color: "var(--terracotta-aa)",
-              }}
-            >
-              <span
-                style={{
-                  width: 28,
-                  height: 1,
-                  background: "var(--terracotta)",
-                  display: "inline-block",
-                }}
-              />
-              FAQ
+              <div className="featured-in">
+                <span className="featured-lbl">Featured</span>
+                <span>180+ workflows</span>
+                <span>40+ websites</span>
+                <span>9 countries</span>
+                <span>5-14d ship</span>
+              </div>
             </div>
-            <h2
+          </div>
+        </section>
+
+        {/* SINGLE PRICING SECTION (interactive per-service tabs) */}
+        <ServicePricingTabs />
+
+        {/* CALCULATOR */}
+        <PricingCalculator />
+
+        {/* VULNERABILITY QUOTE */}
+        <section className="section tinted">
+          <div className="wrap">
+            <blockquote
               style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 600,
-                letterSpacing: "-0.02em",
-                color: "var(--ink)",
-                fontSize: "clamp(28px, 4vw, 40px)",
-                lineHeight: 1.1,
+                maxWidth: 760,
+                margin: "0 auto",
+                padding: "32px 36px",
+                background: "var(--cream-3)",
+                borderLeft: "3px solid var(--terracotta)",
+                borderRadius: 4,
+                boxShadow: "0 12px 32px rgba(26, 26, 26, 0.04)",
               }}
             >
-              Pricing questions{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-                we get often.
-              </span>
-            </h2>
-          </Reveal>
-          <div>
-            {FAQS.map((f) => (
-              <details
-                key={f.q}
-                className="group"
+              <p
                 style={{
-                  borderBottom: "1px solid rgba(26,26,26,0.12)",
-                  padding: "20px 0",
+                  fontFamily: "var(--font-display)",
+                  fontSize: 20,
+                  lineHeight: 1.5,
+                  color: "var(--ink)",
+                  fontWeight: 500,
                 }}
               >
-                <summary
-                  className="cursor-pointer flex items-center justify-between gap-4"
-                  style={{
-                    listStyle: "none",
-                    fontFamily: "var(--font-display)",
-                    fontSize: 18,
-                    fontWeight: 600,
-                    color: "var(--ink)",
-                    letterSpacing: "-0.005em",
-                  }}
-                >
-                  <span>{f.q}</span>
-                  <span
-                    className="group-open:rotate-45 transition-transform"
-                    style={{
-                      color: "var(--terracotta-aa)",
-                      fontSize: 22,
-                      lineHeight: 1,
-                    }}
-                  >
-                    +
-                  </span>
-                </summary>
-                <div
-                  style={{
-                    paddingTop: 12,
-                    fontSize: 17,
-                    color: "var(--ink-2)",
-                    lineHeight: 1.65,
-                  }}
-                >
-                  {f.a}
-                </div>
-              </details>
-            ))}
+                Most agencies hide the price because the price doesn&apos;t
+                match the work. I&apos;ve been on the other side of three of
+                those proposals. Every one ended in renegotiation. I&apos;d
+                rather quote you out of a deal than nickel you through one.
+              </p>
+              <footer
+                style={{
+                  marginTop: 16,
+                  fontFamily: "var(--font-mono-plex), monospace",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "var(--terracotta-aa)",
+                  fontWeight: 700,
+                }}
+              >
+                — Waseem Nasir
+              </footer>
+            </blockquote>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CLOSER — flat terracotta event */}
-      <section className="py-20 md:py-24" style={{ background: "var(--terracotta)" }}>
-        <Reveal className="container-x px-6 max-w-3xl mx-auto text-center">
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--cream-3)",
-              opacity: 0.85,
-              marginBottom: 18,
-            }}
-          >
-            — 180 workflows · 40 websites · 9 countries
+        {/* MICROS — skyv3 pricing-row / price-cell */}
+        <section className="section">
+          <div className="wrap">
+            <div className="section-head">
+              <span className="section-kicker">Smaller engagements</span>
+              <h2>
+                Need just one thing? <em>Pick a micro.</em>
+              </h2>
+              <p className="section-sub">
+                Six fixed-scope wedges. Each is a single deliverable, 1-2 weeks,
+                no retainer commitment. Use one to test the working relationship
+                before scaling.
+              </p>
+            </div>
+
+            <div className="pricing-row">
+              {MICROS.map((m) => (
+                <div
+                  key={m.name}
+                  className={`price-cell${m.featured ? " featured" : ""}`}
+                >
+                  {m.featured && (
+                    <span className="price-badge">Best value</span>
+                  )}
+                  <div className="price-tier">{m.name}</div>
+                  <div className="price-window">{m.detail}</div>
+                  <div className="price-amount">
+                    ${m.price.toLocaleString("en-US")}
+                  </div>
+                  <div className="price-recur">{m.window}</div>
+                  <ul className="price-list">
+                    {m.features.map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
+                  <Link href="/discovery-call" className="price-cta">
+                    Start this →
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 500,
-              letterSpacing: "-0.02em",
-              color: "var(--cream-3)",
-              fontSize: "clamp(28px, 4.5vw, 48px)",
-              lineHeight: 1.08,
-              marginBottom: 16,
-            }}
-          >
-            Send a brief.{" "}
-            <span
-              style={{
-                color: "var(--cream-3)",
-                fontWeight: 700,
-                textDecoration: "underline",
-                textDecorationThickness: "2px",
-                textUnderlineOffset: "8px",
-              }}
+        </section>
+
+        {/* FAQ — skyv3 faq-wrap */}
+        <section className="section tinted">
+          <div className="wrap">
+            <div
+              className="section-head"
+              style={{ marginInline: "auto", textAlign: "center" }}
             >
-              Get scope + price in 8 hours.
-            </span>
+              <span className="section-kicker">FAQ</span>
+              <h2 style={{ marginInline: "auto" }}>
+                Pricing questions <em>we get often.</em>
+              </h2>
+            </div>
+            <div className="faq-wrap">
+              {FAQS.map((f) => (
+                <details key={f.q}>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CLOSER — skyv3 */}
+        <section className="closer">
+          <span className="closer-scarcity">
+            180 workflows · 40 websites · 9 countries
+          </span>
+          <h2>
+            Send a brief. <em>Get scope + price in 8 hours.</em>
           </h2>
-          <p
-            style={{
-              fontSize: 17,
-              color: "rgba(250, 247, 240, 0.92)",
-              maxWidth: "44ch",
-              margin: "0 auto 28px",
-              lineHeight: 1.55,
-            }}
-          >
+          <p>
             No quote form. No 30-min discovery dance. Just a written reply with
             scope, price and ship window.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/discovery-call"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "var(--cream-3)",
-                color: "var(--terracotta)",
-                padding: "16px 28px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 700,
-                fontSize: 15,
-                borderRadius: 2,
-              }}
-            >
-              Start a brief
-              <ArrowRight className="w-4 h-4" />
+          <div className="cta-row">
+            <Link href="/discovery-call" className="btn-primary">
+              Start a brief →
             </Link>
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2"
-              style={{
-                background: "transparent",
-                color: "var(--cream-3)",
-                border: "1px solid var(--cream-3)",
-                padding: "15px 26px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-              }}
-            >
+            <Link href="/case-studies" className="btn-line">
               See case studies
             </Link>
           </div>
-        </Reveal>
-      </section>
+        </section>
+      </div>
     </>
   );
 }
