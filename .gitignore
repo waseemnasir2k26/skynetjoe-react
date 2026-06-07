@@ -58,3 +58,4 @@ next-env.d.ts
 
 # Hostinger deploy source-archive (produced by scripts/deploy-archive.*)
 /skynetjoe-deploy.zip
+.critic/
