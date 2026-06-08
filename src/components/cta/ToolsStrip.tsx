@@ -73,8 +73,12 @@ export default function ToolsStrip({
   heading = "Open the toolbox",
   eyebrow = "— Free tools · Build something today",
 }: ToolsStripProps) {
-  const tools = currentSlug ? TOOLS.filter((t) => t.slug !== currentSlug) : TOOLS;
-  const visible = tools.slice(0, 8);
+  const tools = currentSlug
+    ? TOOLS.filter((t) => t.slug !== currentSlug)
+    : TOOLS;
+  // 6, not 8 — fills the sm:2-col and lg:3-col grids perfectly (3×2 / 2×3) with
+  // no orphaned empty cell on any page. The "See all tools →" link covers the rest.
+  const visible = tools.slice(0, 6);
 
   return (
     <section
@@ -114,7 +118,9 @@ export default function ToolsStrip({
               }}
             >
               {heading}{" "}
-              <span style={{ color: "var(--terracotta)", fontStyle: "normal" }}>→</span>
+              <span style={{ color: "var(--terracotta)", fontStyle: "normal" }}>
+                →
+              </span>
             </h2>
           </div>
           <Link

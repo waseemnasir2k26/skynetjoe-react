@@ -253,7 +253,7 @@ html {
 
 /* HERO */
 .sky .hero {
-  padding: 72px 0 48px;
+  padding: 72px 0 38px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1189,6 +1189,54 @@ html {
 .sky .compare-tbl tbody tr:hover {
   background: rgba(198, 107, 63, 0.03);
 }
+/* Mobile: the 760px-min table clipped the Zapier column off-screen behind a
+   silent overflow-x scroll. Below 640px, stack each criterion as a card —
+   Criterion heading, then labelled n8n / Zapier values — so nothing clips and
+   no horizontal swipe is needed. 2026-06-08 responsive pass. */
+@media (max-width: 640px) {
+  .sky .compare-wrap {
+    overflow-x: visible;
+  }
+  .sky .compare-tbl {
+    min-width: 0;
+    width: 100%;
+    font-size: 14px;
+  }
+  .sky .compare-tbl thead {
+    display: none;
+  }
+  .sky .compare-tbl tbody,
+  .sky .compare-tbl tbody tr,
+  .sky .compare-tbl tbody td {
+    display: block;
+    width: 100%;
+  }
+  .sky .compare-tbl tbody tr {
+    border-bottom: 2px solid var(--ink);
+    padding: 4px 0 10px;
+  }
+  .sky .compare-tbl tbody td {
+    border-bottom: 1px solid var(--rule);
+    padding: 9px 14px;
+  }
+  .sky .compare-tbl tbody td:first-child {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    padding-top: 13px;
+    border-bottom: none;
+  }
+  .sky .compare-tbl tbody td.us::before {
+    content: "n8n — ";
+    color: var(--terracotta);
+    font-weight: 700;
+  }
+  .sky .compare-tbl tbody td.bad::before {
+    content: "Zapier — ";
+    color: var(--ink-faint);
+    font-weight: 700;
+  }
+}
 .sky .check {
   color: var(--sage);
   font-weight: 700;
@@ -1373,7 +1421,23 @@ html {
 
 /* SECTIONS */
 .sky .section {
-  padding: 96px 0;
+  padding: 84px 0;
+}
+/* Blank-space pass 2026-06-08 — kill stacked-padding voids.
+   A `.section` directly after `.hero` was stacking hero pad-bottom (48) +
+   section pad-top (96) = 144px+ of dead cream on blog/news/faqs/services/
+   glossary/about/locations. And `.section` had NO mobile scale — a flat 96px
+   top+bottom at 390px wide read as big empty bands. Both fixed here. */
+.sky .hero + .section {
+  padding-top: 44px;
+}
+@media (max-width: 768px) {
+  .sky .section {
+    padding: 52px 0;
+  }
+  .sky .hero + .section {
+    padding-top: 30px;
+  }
 }
 .sky .section.tinted {
   background: var(--cream-2);
@@ -1393,7 +1457,12 @@ html {
 }
 .sky .section-head {
   max-width: 820px;
-  margin-bottom: 56px;
+  margin-bottom: 44px;
+}
+@media (max-width: 768px) {
+  .sky .section-head {
+    margin-bottom: 30px;
+  }
 }
 .sky .section-kicker {
   font-size: 11px;
@@ -1570,6 +1639,11 @@ html {
 @media (min-width: 768px) {
   .sky .feature-row {
     grid-template-columns: repeat(2, 1fr);
+  }
+  /* 3-up variant — for exactly 3 cards (e.g. /industries verticals) so they
+     fill one row instead of orphaning the 3rd card in a 2-col grid. */
+  .sky .feature-row-3 {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 .sky .feat-card {
@@ -2513,6 +2587,7 @@ html {
 @media (max-width: 560px) {
   .sky .hero {
     padding-top: 48px;
+    padding-bottom: 28px;
   }
   .sky.sky .hero h1 {
     font-size: clamp(28px, 8vw, 38px) !important;

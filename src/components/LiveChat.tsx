@@ -330,7 +330,15 @@ export default function LiveChat() {
       {!open && (
         <div
           className="fixed right-5 z-[60] flex items-center gap-2"
-          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 88px)" }}
+          style={{
+            // globals.css `body > * { position: relative }` is unlayered and
+            // beats Tailwind v4's layered `.fixed` utility on direct body
+            // children — without this inline override the bubble flows to
+            // bottom-LEFT in document flow. The open panel already inlines this.
+            position: "fixed",
+            right: "1.25rem",
+            bottom: "calc(env(safe-area-inset-bottom, 0px) + 88px)",
+          }}
         >
           <span
             aria-hidden

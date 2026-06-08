@@ -150,7 +150,7 @@ export default function IndustriesIndexPage() {
               </p>
             </div>
 
-            <div className="feature-row">
+            <div className="feature-row feature-row-3">
               {INDUSTRIES.map((i) => (
                 <Link
                   key={i.slug}

@@ -18,7 +18,10 @@ export default function HtmlCreamWrap({ html }: { html: string }) {
         color: "var(--ink)",
         position: "relative",
         zIndex: 2,
-        paddingTop: 88,
+        // 30px (was 88) — this wrap always sits directly below a `.hero`
+        // section, so 88px stacked on the hero's own pad-bottom produced a
+        // ~256px dead band (author/privacy/terms). 2026-06-08 blank-space pass.
+        paddingTop: 30,
       }}
     >
       <style>{`
@@ -308,7 +311,7 @@ export default function HtmlCreamWrap({ html }: { html: string }) {
 
         @media (max-width: 768px) {
           .cream-html-wrap {
-            padding-top: 64px !important;
+            padding-top: 22px !important;
           }
           .cream-html-wrap article[class*="wn-"] {
             padding: clamp(28px, 7vw, 48px) clamp(14px, 4vw, 20px) !important;
