@@ -28,7 +28,7 @@ const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 export const metadata: Metadata = {
   title:
-    "Vibe Coding by SkynetLabs — Ship Real Apps in 5–14 Days with Claude Code + the AI Toolchain",
+    "Vibe Coding — Ship Real Apps in 5–14 Days with Claude Code + the AI Toolchain",
   description:
     "Vibe coding is Waseem Nasir's human-led, AI-paired build workflow from Bali. Claude Code as primary, Cursor + Replit + Codex + Gemini as backup. Ship in 5–14 days.",
   alternates: { canonical: `${SITE.url}/vibe-coding` },
