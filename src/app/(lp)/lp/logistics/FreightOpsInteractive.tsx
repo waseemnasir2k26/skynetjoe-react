@@ -189,6 +189,11 @@ const css = `
     linear-gradient(180deg,#fbf8f0 0%, var(--bg) 48%, #ebe2d4 100%);
   color:var(--ink);
   font-family:var(--font-sans), Inter, system-ui, sans-serif;
+  /* M14 readability: 17px body baseline (was inheriting ~14px). Children that
+     set their own font-size still override; sub-13px body copy bumped to >=15px
+     below. Uppercase micro-labels/badges keep their size (UI chrome, not body). */
+  font-size:17px;
+  line-height:1.55;
   min-height:100vh;
   overflow-x:hidden;
 }
@@ -346,8 +351,8 @@ const css = `
 .fo .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px 0; }
 .fo .metric { background:#f6efe2; border:1px solid var(--line); border-radius:14px; padding:15px; }
 .fo .metric strong { display:block; font:950 28px var(--font-mono-plex),monospace; letter-spacing:-.04em; }
-.fo .metric span { display:block; color:var(--muted); font-size:12px; font-weight:850; }
-.fo .metric small { color:var(--green); font-size:11px; font-weight:900; }
+.fo .metric span { display:block; color:var(--muted); font-size:15px; font-weight:850; }
+.fo .metric small { color:var(--green); font-size:15px; font-weight:900; }
 .fo .rows { display:grid; gap:8px; }
 .fo .row { display:grid; grid-template-columns:1fr 1.2fr auto; gap:10px; align-items:center; border:1px solid var(--line); border-radius:12px; padding:12px; background:var(--panel); }
 .fo .row b { font-size:13px; }
@@ -357,8 +362,8 @@ const css = `
 .fo .simLine { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
 .fo .simStep { border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:12px; color:rgba(255,248,237,.68); }
 .fo .simStepActive { background:rgba(199,102,61,.18); border-color:rgba(199,102,61,.5); color:#fff8ed; }
-.fo .simStep b { display:block; font-size:12px; }
-.fo .simStep small { font-size:11px; color:inherit; }
+.fo .simStep b { display:block; font-size:15px; }
+.fo .simStep small { font-size:15px; color:inherit; }
 .fo .section { padding:86px 0; }
 .fo .sectionAlt { background:rgba(238,231,217,.66); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
 .fo .head { display:grid; grid-template-columns:.95fr .75fr; gap:40px; align-items:end; margin-bottom:36px; }
@@ -476,7 +481,11 @@ export default function FreightOpsInteractive() {
             <a href="#demo">Demo</a>
             <a href="#calculator">Calculator</a>
             <a href="#pricing">Pricing</a>
-            <Link className="navbtn" href="/discovery-call">
+            <Link
+              className="navbtn"
+              href="/discovery-call"
+              data-meta-event="InitiateCheckout"
+            >
               Book audit <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </nav>
@@ -497,7 +506,11 @@ export default function FreightOpsInteractive() {
                 Meta-ready lead flow in 14 days.
               </p>
               <div className="actions">
-                <Link className="btn btnPrimary" href="/discovery-call">
+                <Link
+                  className="btn btnPrimary"
+                  href="/discovery-call"
+                  data-meta-event="InitiateCheckout"
+                >
                   <CalendarDays size={18} aria-hidden="true" /> Book a 15-min
                   audit
                 </Link>
@@ -672,7 +685,11 @@ export default function FreightOpsInteractive() {
                   slow follow-up for a {trucks}-truck fleet. The audit maps
                   exactly where the leak is coming from.
                 </p>
-                <Link className="btn btnDark" href="/discovery-call">
+                <Link
+                  className="btn btnDark"
+                  href="/discovery-call"
+                  data-meta-event="InitiateCheckout"
+                >
                   Book the audit <ArrowRight size={18} />
                 </Link>
               </div>
@@ -730,6 +747,7 @@ export default function FreightOpsInteractive() {
                   <Link
                     className={index === 2 ? "btn btnPrimary" : "btn btnGhost"}
                     href="/discovery-call"
+                    data-meta-event="InitiateCheckout"
                   >
                     Book discovery <ArrowRight size={16} />
                   </Link>
@@ -795,7 +813,11 @@ export default function FreightOpsInteractive() {
               the dispatch-stack findings either way.
             </p>
             <div className="actions" style={{ justifyContent: "center" }}>
-              <Link className="btn btnPrimary" href="/discovery-call">
+              <Link
+                className="btn btnPrimary"
+                href="/discovery-call"
+                data-meta-event="InitiateCheckout"
+              >
                 <CalendarDays size={18} /> Book the discovery call
               </Link>
               <a className="btn btnGhost" href="#demo">
@@ -822,7 +844,9 @@ export default function FreightOpsInteractive() {
           </div>
           <div>
             <h3>Convert</h3>
-            <Link href="/discovery-call">Book audit</Link>
+            <Link href="/discovery-call" data-meta-event="InitiateCheckout">
+              Book audit
+            </Link>
             <a href="#calculator">Calculator</a>
           </div>
           <div>

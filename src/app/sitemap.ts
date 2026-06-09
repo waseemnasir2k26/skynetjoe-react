@@ -63,13 +63,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "" ? 1 : 0.8,
   }));
 
+  // Only services WITHOUT an `href` are real /services/[slug] detail pages.
+  // Items WITH an `href` (e.g. freightops-logistics → /lp/logistics) are
+  // excluded from generateStaticParams in /services/[slug], so emitting
+  // /services/<slug> for them 404s. Mirror the same guard the /services
+  // index page uses (.filter((svc) => !svc.href)) so no 404 URL ships in
+  // sitemap.xml.
   const serviceRoutes = SERVICE_CATEGORIES.flatMap((cat) =>
-    cat.services.map((svc) => ({
-      url: `${base}/services/${svc.slug}`,
-      lastModified: STATIC_LASTMOD,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    }))
+    cat.services
+      .filter((svc) => !(svc as { href?: string }).href)
+      .map((svc) => ({
+        url: `${base}/services/${svc.slug}`,
+        lastModified: STATIC_LASTMOD,
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      })),
   );
 
   // Location pages — quality-gated by isLocationIndexable (state-enrichment.ts).

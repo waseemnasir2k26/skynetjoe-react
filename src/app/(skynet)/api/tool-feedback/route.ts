@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { checkRateLimit, rateLimitedResponse } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -71,7 +72,9 @@ async function parseBody(req: Request): Promise<{
       const form = await req.formData();
       return {
         data: {
-          tool: isStr(form.get("tool")) ? (form.get("tool") as string) : undefined,
+          tool: isStr(form.get("tool"))
+            ? (form.get("tool") as string)
+            : undefined,
           message: isStr(form.get("message"))
             ? (form.get("message") as string)
             : undefined,
@@ -149,6 +152,13 @@ async function appendLog(args: {
 }
 
 export async function POST(req: Request) {
+  const rl = checkRateLimit(req, {
+    key: "tool-feedback",
+    limit: 8,
+    windowMs: 60_000,
+  });
+  if (rl.rateLimited) return rateLimitedResponse(rl);
+
   const { data, isForm } = await parseBody(req);
 
   const tool = data.tool ? sanitize(data.tool, 80) : "";

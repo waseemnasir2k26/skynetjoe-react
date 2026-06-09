@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { upsertGhlContact } from "@/lib/ghl";
+import { checkRateLimit, rateLimitedResponse } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -35,6 +36,13 @@ function isValidEmail(s: string | undefined): s is string {
 }
 
 export async function POST(req: Request) {
+  const rl = checkRateLimit(req, {
+    key: "lead-capture",
+    limit: 8,
+    windowMs: 60_000,
+  });
+  if (rl.rateLimited) return rateLimitedResponse(rl);
+
   let payload: Payload;
   try {
     payload = await req.json();

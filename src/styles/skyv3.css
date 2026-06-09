@@ -98,6 +98,11 @@ html {
   --terracotta: #c66b3f;
   --terracotta-2: #b85a30;
   --terracotta-soft: rgba(198, 107, 63, 0.1);
+  /* AA-safe text variants (>=4.5:1 on --cream #f2efe6). Reserve the bright
+     tokens above for >=24px display, borders, and fills only. */
+  --terracotta-aa: #a8451f; /* 5.17:1 on cream (bright #c66b3f = 3.28:1) */
+  --ochre-aa: #6f5a2e; /* 5.75:1 on cream (bright #c9a96e = 1.95:1) */
+  --sage-aa: #566049; /* 5.77:1 on cream (bright #8a9a7b = 2.61:1) */
   --ochre: #c9a96e;
   --sage: #8a9a7b;
   --sage-soft: rgba(138, 154, 123, 0.16);
@@ -232,7 +237,7 @@ html {
   color: var(--ink-faint);
   font-style: normal;
   font-weight: 700;
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   font-size: 18px;
 }
 .sky .nav-cta {
@@ -305,7 +310,7 @@ html {
   animation: pulse-terracotta 1.6s ease-in-out infinite;
 }
 .sky .hero-eyebrow strong {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -398,7 +403,7 @@ html {
     border-color 0.18s;
 }
 .sky .btn-line:hover {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   border-color: var(--terracotta);
 }
 .sky .hero-scarcity {
@@ -418,12 +423,12 @@ html {
     scarcity-flash 3s infinite;
 }
 .sky .hero-scarcity strong {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   font-weight: 700;
 }
 .sky .hero-scarcity::before {
   content: "●";
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   animation: pulse-terracotta 1.6s ease-in-out infinite;
 }
 .sky .featured-in {
@@ -454,7 +459,7 @@ html {
   border-radius: 50%;
 }
 .sky .featured-lbl {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   font-weight: 700;
 }
 .sky .scroll-indicator {
@@ -478,7 +483,7 @@ html {
 }
 .sky .scroll-indicator:hover {
   border-color: var(--terracotta);
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
 }
 @keyframes bounce-down {
   0%,
@@ -683,7 +688,7 @@ html {
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   font-weight: 700;
   padding: 5px 10px;
   background: var(--terracotta-soft);
@@ -728,10 +733,10 @@ html {
   color: var(--ink);
 }
 .sky .panel .num.up {
-  color: var(--sage);
+  color: var(--sage-aa);
 }
 .sky .panel .num.warm {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
 }
 .sky .panel tr:hover {
   background: rgba(198, 107, 63, 0.04);
@@ -760,13 +765,13 @@ html {
   margin-top: 2px;
 }
 .sky .driver-card .st.route {
-  color: var(--sage);
+  color: var(--sage-aa);
 }
 .sky .driver-card .st.idle {
   color: var(--ink-mute);
 }
 .sky .driver-card .st.off {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
 }
 .sky .driver-card .meta {
   font-size: 11px;
@@ -827,7 +832,7 @@ html {
   white-space: nowrap;
 }
 .sky .mobile-tabs label:hover {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   border-color: var(--terracotta);
 }
 .sky
@@ -966,10 +971,10 @@ html {
   color: var(--ink-faint);
 }
 .sky .mock-tile.up .mock-tile-delta {
-  color: var(--sage);
+  color: var(--sage-aa);
 }
 .sky .mock-tile.warm .mock-tile-delta {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
 }
 .sky .mock-lanes-h {
   font-size: 10px;
@@ -983,7 +988,7 @@ html {
   align-items: center;
 }
 .sky .mock-lanes-h .live {
-  color: var(--sage);
+  color: var(--sage-aa);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -1027,7 +1032,7 @@ html {
   font-family: var(--font-mono-plex), monospace;
   font-size: 13px;
   font-weight: 700;
-  color: var(--sage);
+  color: var(--sage-aa);
 }
 .sky .mock-lane-status {
   font-size: 10px;
@@ -1038,15 +1043,15 @@ html {
 }
 .sky .status-booked {
   background: var(--sage-soft);
-  color: var(--sage);
+  color: var(--sage-aa);
 }
 .sky .status-pending {
   background: rgba(201, 169, 110, 0.18);
-  color: #7a6435;
+  color: var(--ochre-aa);
 }
 .sky .status-routing {
   background: var(--terracotta-soft);
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   animation: pulse-terracotta 2s infinite;
 }
 .sky .mock-right {
@@ -1072,7 +1077,7 @@ html {
   font-weight: 700;
   padding: 2px 8px;
   background: var(--sage-soft);
-  color: var(--sage);
+  color: var(--sage-aa);
   border-radius: 8px;
   letter-spacing: 0.04em;
 }
@@ -1100,7 +1105,7 @@ html {
   padding: 1px 5px;
   border-radius: 3px;
   font-size: 11px;
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
 }
 .sky .factor-card {
   padding: 14px;
@@ -1161,7 +1166,7 @@ html {
 }
 .sky .compare-tbl thead th.us {
   background: linear-gradient(180deg, var(--terracotta-soft), transparent);
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   border-bottom-color: var(--terracotta);
 }
 .sky .compare-tbl tbody td {
@@ -1180,7 +1185,7 @@ html {
   font-weight: 500;
 }
 .sky .compare-tbl tbody td.us strong {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   font-weight: 700;
 }
 .sky .compare-tbl tbody td.bad {
@@ -1228,7 +1233,7 @@ html {
   }
   .sky .compare-tbl tbody td.us::before {
     content: "n8n — ";
-    color: var(--terracotta);
+    color: var(--terracotta-aa);
     font-weight: 700;
   }
   .sky .compare-tbl tbody td.bad::before {
@@ -1238,7 +1243,7 @@ html {
   }
 }
 .sky .check {
-  color: var(--sage);
+  color: var(--sage-aa);
   font-weight: 700;
   font-family: var(--font-mono-plex), monospace;
 }
@@ -1330,7 +1335,7 @@ html {
 }
 .sky .process-step:nth-child(3) .process-marker {
   border-color: var(--sage);
-  color: var(--sage);
+  color: var(--sage-aa);
 }
 .sky .process-step:nth-child(3) .process-marker small {
   background: var(--sage);
@@ -1685,7 +1690,7 @@ html {
   font-weight: 600;
   padding: 4px 10px;
   background: var(--terracotta-soft);
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   border-radius: 6px;
   margin-bottom: 16px;
   letter-spacing: 0.06em;
@@ -1797,7 +1802,7 @@ html {
   font-family: var(--font-mono-plex), monospace;
   font-size: 12px;
   font-weight: 600;
-  color: var(--sage);
+  color: var(--sage-aa);
   background: var(--sage-soft);
   padding: 5px 12px;
   border-radius: 999px;
@@ -1832,7 +1837,7 @@ html {
   box-shadow: 0 18px 36px rgba(26, 26, 26, 0.06);
 }
 .sky .testi-stars {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   font-size: 14px;
   letter-spacing: 3px;
   margin-bottom: 14px;
@@ -1848,7 +1853,7 @@ html {
   font-style: normal;
 }
 .sky .testi-quote em {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   font-weight: 600;
 }
 .sky .testi-meta {
@@ -2070,7 +2075,7 @@ html {
   position: absolute;
   left: 0;
   top: 7px;
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   font-weight: 700;
   font-family: var(--font-mono-plex), monospace;
 }
@@ -2399,7 +2404,7 @@ html {
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
   margin-bottom: 26px;
   padding: 8px 16px;
   border: 1px solid var(--terracotta);
@@ -2507,7 +2512,7 @@ html {
   transition: color 0.18s;
 }
 .sky .lp-footer a:hover {
-  color: var(--terracotta);
+  color: var(--terracotta-aa);
 }
 .sky .disclaimer {
   margin-top: 0;

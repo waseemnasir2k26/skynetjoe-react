@@ -18,7 +18,9 @@ export const metadata: Metadata = {
       "An AI voice agent answers every call and load offer 24/7 so you stop losing freight to voicemail. Free missed-load audit for small-fleet carriers and owner-operators.",
     url: PAGE_URL,
     type: "website",
-    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "SkynetLabs" }],
+    images: [
+      { url: "/og-default.png", width: 1200, height: 630, alt: "SkynetLabs" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -28,6 +30,76 @@ export const metadata: Metadata = {
     images: ["/og-default.png"],
   },
   robots: { index: false, follow: false },
+};
+
+// Service JSON-LD — the AI voice-agent build offered on this lander. Factual:
+// provider, what it is, who it serves. No fabricated ratings/reviews/prices.
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AI voice agent for small-fleet carriers",
+  serviceType: "24/7 call answering and load-offer capture for carriers",
+  description:
+    "SkynetLabs puts an AI voice agent on a carrier's existing number that answers every call and load offer 24/7, captures the lane, rate, pickup, and callback, and texts or emails the load details right away — so owner-operators and small fleets stop losing freight to voicemail.",
+  provider: {
+    "@type": "Organization",
+    name: SITE.brand,
+    url: SITE.url,
+  },
+  areaServed: { "@type": "Country", name: "United States" },
+  audience: {
+    "@type": "Audience",
+    audienceType: "Owner-operators and small fleets (5-25 trucks)",
+  },
+  url: PAGE_URL,
+};
+
+// FAQPage JSON-LD — mirrors the on-page <details> FAQ verbatim.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Do I need a new phone or number?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. The agent works with the number brokers already call. Nothing changes on your end except that the phone finally gets answered when you can't.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Will it sound like a robot and scare brokers off?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. It answers in a natural voice, greets the caller, and takes the load details like a competent dispatcher would. Brokers get a real response instead of a full voicemail box.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How fast do I see a load offer?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Right away. The agent captures the lane, rate, and callback and sends it to you by text or email the moment the call ends, so you can lock it in when you pull over.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What does the free audit actually show me?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "How many calls and load offers you missed last month, when they came in, and a dollar estimate of the freight that likely went to another truck. No strings.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "I run 8 trucks — is this overkill or not enough?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "It fits 1 truck or 25. Every driver who can't answer mid-haul is a line the agent covers. The audit shows you exactly where your loads are leaking first.",
+      },
+    },
+  ],
 };
 
 const css = `
@@ -181,48 +253,83 @@ export default function FreightVoiceLandingPage() {
   return (
     <main className="lp-frt-wrap">
       <style dangerouslySetInnerHTML={{ __html: css }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <MetaPixel />
       <MetaPixelEvents />
 
       <section className="lp-frt-hero">
-        <p className="lp-frt-eyebrow">For Owner-Operators &amp; Small Fleets (5&ndash;25 Trucks)</p>
+        <p className="lp-frt-eyebrow">
+          For Owner-Operators &amp; Small Fleets (5&ndash;25 Trucks)
+        </p>
         <h1>
-          The broker calls. You&apos;re driving. <em>The load goes to the next truck.</em>
+          The broker calls. You&apos;re driving.{" "}
+          <em>The load goes to the next truck.</em>
         </h1>
         <p className="sub">
-          You can&apos;t answer the phone with your hands on the wheel. So the broker
-          hangs up and books the next carrier in minutes. We put an AI voice agent
-          on your line that answers every call and load offer 24/7 &mdash; so you
-          stop losing freight to voicemail.
+          You can&apos;t answer the phone with your hands on the wheel. So the
+          broker hangs up and books the next carrier in minutes. We put an AI
+          voice agent on your line that answers every call and load offer 24/7
+          &mdash; so you stop losing freight to voicemail.
         </p>
 
-        <div className="lp-frt-cab" aria-label="A load offer ringing in while you are driving">
-          <div className="lp-frt-phone" aria-hidden="true"><span /></div>
+        <div
+          className="lp-frt-cab"
+          aria-label="A load offer ringing in while you are driving"
+        >
+          <div className="lp-frt-phone" aria-hidden="true">
+            <span />
+          </div>
           <div className="caller">
             <span className="who">Broker calling &mdash; load offer</span>
-            <span className="what">Dallas &rarr; Houston &middot; reefer &middot; today</span>
+            <span className="what">
+              Dallas &rarr; Houston &middot; reefer &middot; today
+            </span>
           </div>
-          <div className="status">YOU&apos;RE DRIVING<br />goes to voicemail</div>
+          <div className="status">
+            YOU&apos;RE DRIVING
+            <br />
+            goes to voicemail
+          </div>
         </div>
 
-        <div className="lp-frt-loads" aria-label="Examples of missed load offers and the revenue lost">
+        <div
+          className="lp-frt-loads"
+          aria-label="Examples of missed load offers and the revenue lost"
+        >
           <div className="lp-frt-load">
             <span className="lane">
-              <span className="route">Load missed &mdash; Dallas &rarr; Houston</span>
-              <span className="when">Tue 1:12 PM &middot; you were under a load</span>
+              <span className="route">
+                Load missed &mdash; Dallas &rarr; Houston
+              </span>
+              <span className="when">
+                Tue 1:12 PM &middot; you were under a load
+              </span>
             </span>
             <span className="gone">&minus;$1,850</span>
           </div>
           <div className="lp-frt-load">
             <span className="lane">
-              <span className="route">Broker callback &mdash; OKC &rarr; Memphis</span>
-              <span className="when">11:48 PM &middot; went to the next truck</span>
+              <span className="route">
+                Broker callback &mdash; OKC &rarr; Memphis
+              </span>
+              <span className="when">
+                11:48 PM &middot; went to the next truck
+              </span>
             </span>
             <span className="gone">&minus;$2,400</span>
           </div>
           <div className="lp-frt-load">
             <span className="lane">
-              <span className="route">Backhaul offer &mdash; Laredo &rarr; San Antonio</span>
+              <span className="route">
+                Backhaul offer &mdash; Laredo &rarr; San Antonio
+              </span>
               <span className="when">Sat 6:30 AM &middot; voicemail full</span>
             </span>
             <span className="gone">&minus;$900</span>
@@ -237,22 +344,31 @@ export default function FreightVoiceLandingPage() {
       <section className="lp-frt-section" id="leak">
         <h2>Voicemail is a leak in your revenue</h2>
         <p className="lead">
-          You run a tight truck. But the loads you never hear about don&apos;t show up
-          in your settlements &mdash; they just quietly go to someone else. Here is
-          what the phone is doing while you drive.
+          You run a tight truck. But the loads you never hear about don&apos;t
+          show up in your settlements &mdash; they just quietly go to someone
+          else. Here is what the phone is doing while you drive.
         </p>
         <div className="lp-frt-stats">
           <div className="lp-frt-stat">
             <span className="num">60%+</span>
-            <p>of calls to a busy operator go unanswered. You can&apos;t pick up and drive.</p>
+            <p>
+              of calls to a busy operator go unanswered. You can&apos;t pick up
+              and drive.
+            </p>
           </div>
           <div className="lp-frt-stat">
             <span className="num">80%</span>
-            <p>of callers who hit voicemail never call back. They just dial the next carrier.</p>
+            <p>
+              of callers who hit voicemail never call back. They just dial the
+              next carrier.
+            </p>
           </div>
           <div className="lp-frt-stat">
             <span className="num">5 min</span>
-            <p>is all it takes for a broker to cover a load with the truck that answered.</p>
+            <p>
+              is all it takes for a broker to cover a load with the truck that
+              answered.
+            </p>
           </div>
         </div>
       </section>
@@ -260,22 +376,25 @@ export default function FreightVoiceLandingPage() {
       <section className="lp-frt-section" id="get">
         <h2>What you get</h2>
         <p className="lead">
-          One simple setup on the number you already use. No new app, no new phone,
-          nothing for you to babysit on the road.
+          One simple setup on the number you already use. No new app, no new
+          phone, nothing for you to babysit on the road.
         </p>
 
         <div className="lp-frt-hero-card">
           <p className="tag">The core &mdash; AI voice agent</p>
           <h3>It answers every call and load offer 24/7</h3>
           <p>
-            When you can&apos;t pick up, the agent does &mdash; in a real voice, day or
-            night. It greets the broker, takes the load details, and hands you a clean
-            note the second you&apos;re parked. The load stays in play instead of going
-            to the next truck.
+            When you can&apos;t pick up, the agent does &mdash; in a real voice,
+            day or night. It greets the broker, takes the load details, and
+            hands you a clean note the second you&apos;re parked. The load stays
+            in play instead of going to the next truck.
           </p>
           <ul>
             <li>Answers in seconds, even at 2 AM or mid-haul</li>
-            <li>Captures the lane, rate, pickup, and callback &mdash; no scribbling</li>
+            <li>
+              Captures the lane, rate, pickup, and callback &mdash; no
+              scribbling
+            </li>
             <li>Texts or emails you the load details right away</li>
             <li>Sounds like a person, not a robocall menu</li>
           </ul>
@@ -285,17 +404,26 @@ export default function FreightVoiceLandingPage() {
           <div className="lp-frt-addon">
             <span className="pill">Also included</span>
             <h4>Text-back on missed calls</h4>
-            <p>A quick reply goes out so the broker knows you&apos;re on it. (SMS rolling out as carrier numbers clear A2P registration.)</p>
+            <p>
+              A quick reply goes out so the broker knows you&apos;re on it. (SMS
+              rolling out as carrier numbers clear A2P registration.)
+            </p>
           </div>
           <div className="lp-frt-addon">
             <span className="pill">Also included</span>
             <h4>A simple 1-page site</h4>
-            <p>One clean page with your authority, lanes, and equipment &mdash; so brokers and shippers can check you out and call.</p>
+            <p>
+              One clean page with your authority, lanes, and equipment &mdash;
+              so brokers and shippers can check you out and call.
+            </p>
           </div>
           <div className="lp-frt-addon">
             <span className="pill">Coming</span>
             <h4>Get found on Google</h4>
-            <p>We set up your business listing so shippers searching for a carrier in your area actually find you.</p>
+            <p>
+              We set up your business listing so shippers searching for a
+              carrier in your area actually find you.
+            </p>
           </div>
         </div>
       </section>
@@ -304,24 +432,40 @@ export default function FreightVoiceLandingPage() {
         <h2>Live in days, not months</h2>
         <div className="lp-frt-steps">
           <div className="lp-frt-step">
-            <span className="badge" aria-hidden="true">1</span>
+            <span className="badge" aria-hidden="true">
+              1
+            </span>
             <div>
               <h3>Day 1 &mdash; the audit</h3>
-              <p>We show you how many calls and load offers slipped to voicemail last month &mdash; and roughly what they were worth.</p>
+              <p>
+                We show you how many calls and load offers slipped to voicemail
+                last month &mdash; and roughly what they were worth.
+              </p>
             </div>
           </div>
           <div className="lp-frt-step">
-            <span className="badge" aria-hidden="true">2</span>
+            <span className="badge" aria-hidden="true">
+              2
+            </span>
             <div>
               <h3>Days 2&ndash;4 &mdash; we set it up</h3>
-              <p>We put the voice agent on your existing number, tune it to how you take loads, and wire up the text/email handoff. You keep rolling.</p>
+              <p>
+                We put the voice agent on your existing number, tune it to how
+                you take loads, and wire up the text/email handoff. You keep
+                rolling.
+              </p>
             </div>
           </div>
           <div className="lp-frt-step">
-            <span className="badge" aria-hidden="true">3</span>
+            <span className="badge" aria-hidden="true">
+              3
+            </span>
             <div>
               <h3>Day 5 &mdash; you go live</h3>
-              <p>Every call now gets answered. You see each load offer the moment it lands, even when you were behind the wheel.</p>
+              <p>
+                Every call now gets answered. You see each load offer the moment
+                it lands, even when you were behind the wheel.
+              </p>
             </div>
           </div>
         </div>
@@ -330,11 +474,14 @@ export default function FreightVoiceLandingPage() {
       <section className="lp-frt-section">
         <div className="lp-frt-math">
           <h2>Do the math</h2>
-          <p>One load a week you never heard about, at $900 to $2,400 each, adds up to</p>
+          <p>
+            One load a week you never heard about, at $900 to $2,400 each, adds
+            up to
+          </p>
           <p className="big">$47,000&ndash;$125,000 a year</p>
           <p>
-            rolling away to the carrier who answered. Plugging that leak costs less
-            than one missed load a month.
+            rolling away to the carrier who answered. Plugging that leak costs
+            less than one missed load a month.
           </p>
         </div>
       </section>
@@ -343,12 +490,13 @@ export default function FreightVoiceLandingPage() {
         <h2>See what slipped last month</h2>
         <p className="lead" style={{ margin: "0 auto 24px" }}>
           Free missed-load audit. No call required. We show you exactly how many
-          calls and load offers went to voicemail &mdash; and what they were likely
-          worth &mdash; before you decide anything.
+          calls and load offers went to voicemail &mdash; and what they were
+          likely worth &mdash; before you decide anything.
         </p>
         <AuditForm id="audit-form" />
         <p className="lp-frt-note">
-          One email. No sales call to get the report. We don&apos;t share your info.
+          One email. No sales call to get the report. We don&apos;t share your
+          info.
         </p>
         <a
           href="https://calendly.com/skynetlabs/schedule-a-free-consultation"
@@ -364,23 +512,45 @@ export default function FreightVoiceLandingPage() {
         <div className="lp-frt-faq">
           <details>
             <summary>Do I need a new phone or number?</summary>
-            <p>No. The agent works with the number brokers already call. Nothing changes on your end except that the phone finally gets answered when you can&apos;t.</p>
+            <p>
+              No. The agent works with the number brokers already call. Nothing
+              changes on your end except that the phone finally gets answered
+              when you can&apos;t.
+            </p>
           </details>
           <details>
             <summary>Will it sound like a robot and scare brokers off?</summary>
-            <p>No. It answers in a natural voice, greets the caller, and takes the load details like a competent dispatcher would. Brokers get a real response instead of a full voicemail box.</p>
+            <p>
+              No. It answers in a natural voice, greets the caller, and takes
+              the load details like a competent dispatcher would. Brokers get a
+              real response instead of a full voicemail box.
+            </p>
           </details>
           <details>
             <summary>How fast do I see a load offer?</summary>
-            <p>Right away. The agent captures the lane, rate, and callback and sends it to you by text or email the moment the call ends, so you can lock it in when you pull over.</p>
+            <p>
+              Right away. The agent captures the lane, rate, and callback and
+              sends it to you by text or email the moment the call ends, so you
+              can lock it in when you pull over.
+            </p>
           </details>
           <details>
             <summary>What does the free audit actually show me?</summary>
-            <p>How many calls and load offers you missed last month, when they came in, and a dollar estimate of the freight that likely went to another truck. No strings.</p>
+            <p>
+              How many calls and load offers you missed last month, when they
+              came in, and a dollar estimate of the freight that likely went to
+              another truck. No strings.
+            </p>
           </details>
           <details>
-            <summary>I run 8 trucks &mdash; is this overkill or not enough?</summary>
-            <p>It fits 1 truck or 25. Every driver who can&apos;t answer mid-haul is a line the agent covers. The audit shows you exactly where your loads are leaking first.</p>
+            <summary>
+              I run 8 trucks &mdash; is this overkill or not enough?
+            </summary>
+            <p>
+              It fits 1 truck or 25. Every driver who can&apos;t answer mid-haul
+              is a line the agent covers. The audit shows you exactly where your
+              loads are leaking first.
+            </p>
           </details>
         </div>
       </section>

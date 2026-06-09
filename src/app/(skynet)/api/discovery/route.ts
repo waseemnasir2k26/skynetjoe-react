@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { checkRateLimit, rateLimitedResponse } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -44,8 +45,16 @@ function esc(value?: string): string {
 }
 
 function score(budget?: string, timeline?: string): "HOT" | "WARM" | "COLD" {
-  if (budget === "5000-plus" || (budget === "2000-5000" && timeline === "this-week")) return "HOT";
-  if (budget === "2000-5000" || (budget === "500-2000" && timeline !== "exploring")) return "WARM";
+  if (
+    budget === "5000-plus" ||
+    (budget === "2000-5000" && timeline === "this-week")
+  )
+    return "HOT";
+  if (
+    budget === "2000-5000" ||
+    (budget === "500-2000" && timeline !== "exploring")
+  )
+    return "WARM";
   return "COLD";
 }
 
@@ -68,7 +77,12 @@ async function sendToGhl(payload: Payload, lead: "HOT" | "WARM" | "COLD") {
     stack: (payload.stack || []).join(", "),
     pain_description: payload.pain,
     heard_from: payload.heard,
-    tags: ["discovery-apply", `budget:${payload.budget}`, `timeline:${payload.timeline}`, `score:${lead}`],
+    tags: [
+      "discovery-apply",
+      `budget:${payload.budget}`,
+      `timeline:${payload.timeline}`,
+      `score:${lead}`,
+    ],
     submitted_at: new Date().toISOString(),
   };
 
@@ -80,7 +94,10 @@ async function sendToGhl(payload: Payload, lead: "HOT" | "WARM" | "COLD") {
   return { ok: res.ok, status: res.status };
 }
 
-async function sendEmailFallback(payload: Payload, lead: "HOT" | "WARM" | "COLD") {
+async function sendEmailFallback(
+  payload: Payload,
+  lead: "HOT" | "WARM" | "COLD",
+) {
   const apiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.LEAD_NOTIFY_EMAIL || "info@skynetjoe.com";
   const fromEmail = process.env.RESEND_FROM || "leads@skynetjoe.com";
@@ -138,6 +155,13 @@ function row(label: string, value?: string) {
 }
 
 export async function POST(req: Request) {
+  const rl = checkRateLimit(req, {
+    key: "discovery",
+    limit: 5,
+    windowMs: 60_000,
+  });
+  if (rl.rateLimited) return rateLimitedResponse(rl);
+
   let payload: Payload;
   try {
     payload = await req.json();
@@ -145,7 +169,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  if (!payload.name || !payload.email || !payload.budget || !payload.timeline || !payload.pain || !payload.consent) {
+  if (
+    !payload.name ||
+    !payload.email ||
+    !payload.budget ||
+    !payload.timeline ||
+    !payload.pain ||
+    !payload.consent
+  ) {
     return NextResponse.json(
       { error: "Missing required fields" },
       { status: 400 },
@@ -163,8 +194,11 @@ export async function POST(req: Request) {
     sendEmailFallback(payload, lead),
   ]);
 
-  const ghlOk = ghlRes.status === "fulfilled" && (ghlRes.value.ok || ghlRes.value.skipped);
-  const emailOk = emailRes.status === "fulfilled" && (emailRes.value.ok || emailRes.value.skipped);
+  const ghlOk =
+    ghlRes.status === "fulfilled" && (ghlRes.value.ok || ghlRes.value.skipped);
+  const emailOk =
+    emailRes.status === "fulfilled" &&
+    (emailRes.value.ok || emailRes.value.skipped);
 
   if (!ghlOk && !emailOk) {
     console.error("[discovery] both GHL + email failed", { ghlRes, emailRes });
