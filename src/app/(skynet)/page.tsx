@@ -68,13 +68,9 @@ export default function Home() {
       <JsonLd data={orgSchema} />
       <div className="sky">
         <SkyHero />
-        <div className="hidden md:block">
-          <PainPoints />
-        </div>
+        <PainPoints />
         <Outcomes />
-        <div className="hidden md:block">
-          <Testimonials />
-        </div>
+        <Testimonials />
         <FinalCTA />
       </div>
     </>

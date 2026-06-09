@@ -19,7 +19,6 @@ import {
   AXES,
   bucketForScore,
   buildCalculatorParams,
-  buildBookingParams,
   computeSubscores,
   normalizedScore,
   weakestAxis,
@@ -32,7 +31,6 @@ import EmailGate from "@/components/cta/EmailGate";
 
 const STORAGE_KEY = "skynet:automation-gap:v1";
 const RESULT_TTL_MS = 14 * 24 * 60 * 60 * 1000;
-const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 type Phase = "quiz" | "loading" | "result";
 
@@ -82,7 +80,10 @@ export default function Quiz() {
         const stored = window.localStorage.getItem(STORAGE_KEY);
         if (stored) {
           const saved = JSON.parse(stored) as SavedState;
-          if (saved.scores && Object.keys(saved.scores).length === TOTAL_QUESTIONS) {
+          if (
+            saved.scores &&
+            Object.keys(saved.scores).length === TOTAL_QUESTIONS
+          ) {
             setScores(saved.scores);
             setAnswers(saved.answers ?? {});
             setPhase("result");
@@ -149,11 +150,14 @@ export default function Quiz() {
 
   const rawTotal = useMemo(
     () => Object.values(scores).reduce((a, b) => a + b, 0),
-    [scores]
+    [scores],
   );
   const totalScore = useMemo(() => normalizedScore(rawTotal), [rawTotal]);
   const subscores = useMemo(() => computeSubscores(scores), [scores]);
-  const bucket: Bucket = useMemo(() => bucketForScore(totalScore), [totalScore]);
+  const bucket: Bucket = useMemo(
+    () => bucketForScore(totalScore),
+    [totalScore],
+  );
   const weakest = useMemo(() => weakestAxis(subscores), [subscores]);
 
   const current = QUESTIONS[step];
@@ -561,8 +565,8 @@ function RadarChart({
             Math.abs(a.lx - CENTER) < 1
               ? "middle"
               : a.lx > CENTER
-              ? "start"
-              : "end";
+                ? "start"
+                : "end";
           const dy = a.ly > CENTER ? "1em" : "-0.25em";
           return (
             <text
@@ -625,12 +629,6 @@ function ResultCard({
   copyState,
 }: ResultProps) {
   const calcQuery = buildCalculatorParams(subs);
-  const bookingQuery = buildBookingParams({
-    score,
-    bucket: bucket.key,
-    weakestAxis: weakest.key,
-    subs,
-  });
   const hours = impliedManualHours(subs);
 
   return (
@@ -715,8 +713,8 @@ function ResultCard({
           <ul className="space-y-3">
             <li className="flex gap-3 rounded-xl border border-[rgba(198,107,63,0.30)] bg-[var(--terracotta)]/[0.06] px-4 py-3 text-sm leading-relaxed text-[var(--terracotta-aa)] md:text-base">
               <Sparkles className="mt-0.5 h-4 w-4 flex-shrink-0 text-[var(--terracotta-aa)]" />
-              You&apos;re losing roughly <b>{hours} manual hours/week</b>{" "}
-              from the {weakest.label.toLowerCase()} axis alone.
+              You&apos;re losing roughly <b>{hours} manual hours/week</b> from
+              the {weakest.label.toLowerCase()} axis alone.
             </li>
             {weakest.recommendations.map((line, idx) => (
               <li
@@ -736,9 +734,7 @@ function ResultCard({
       <div className="border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-7 py-7 md:px-12 md:py-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a
-            href={`${CAL_URL}?${bookingQuery}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/discovery-call"
             className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
             style={{
               background: "var(--terracotta)",

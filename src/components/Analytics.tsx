@@ -6,6 +6,40 @@ const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 export default function Analytics() {
   return (
     <>
+      {/* Consent Mode v2 — set BEFORE GTM/GA4 bootstrap. Defaults to denied;
+          the ConsentBanner (rendered in layout) flips analytics to 'granted' on
+          accept and persists the choice. A returning visitor who already accepted
+          is re-granted here (before GTM loads) so analytics resumes immediately.
+          gtag is exposed on window so the banner can call consent 'update'. */}
+      {(GTM_ID || GA4_ID) && (
+        <Script
+          id="consent-default"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              window.gtag = window.gtag || function(){dataLayer.push(arguments);};
+              gtag('consent','default',{
+                ad_storage:'denied',
+                ad_user_data:'denied',
+                ad_personalization:'denied',
+                analytics_storage:'denied',
+                wait_for_update:500
+              });
+              try {
+                if (localStorage.getItem('sl-consent') === 'granted') {
+                  gtag('consent','update',{
+                    ad_storage:'granted',
+                    ad_user_data:'granted',
+                    ad_personalization:'granted',
+                    analytics_storage:'granted'
+                  });
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      )}
       {GTM_ID && (
         <>
           <Script

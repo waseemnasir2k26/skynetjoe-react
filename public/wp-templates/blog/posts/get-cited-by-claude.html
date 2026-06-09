@@ -1,25 +1,6 @@
-<style>
-  .wn-get-cited-by-claude { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
-  .wn-get-cited-by-claude h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
-  .wn-get-cited-by-claude h3 { color: #7ee4ff; font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; }
-  .wn-get-cited-by-claude p { margin-bottom: 1.1rem; color: #d1d5db; }
-  .wn-get-cited-by-claude ul, .wn-get-cited-by-claude ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
-  .wn-get-cited-by-claude li { margin-bottom: 0.6rem; }
-  .wn-get-cited-by-claude strong { color: #fff; }
-  .wn-get-cited-by-claude a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
-  .wn-get-cited-by-claude a:hover { color: #7ee4ff; }
-  .wn-get-cited-by-claude .callout { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(20,184,166,0.08)); border-left: 3px solid #00D4FF; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
-  .wn-get-cited-by-claude .callout strong { color: #7ee4ff; }
-  .wn-get-cited-by-claude .verdict { background: linear-gradient(135deg, #1E88E5, #14B8A6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
-  .wn-get-cited-by-claude table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
-  .wn-get-cited-by-claude th { background: rgba(0,212,255,0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
-  .wn-get-cited-by-claude td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .wn-get-cited-by-claude code { background: rgba(0,212,255,0.12); color: #7ee4ff; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.9em; }
-</style>
-
 <p>Claude is a stricter citation engine than ChatGPT. Marketing copy that gets pulled by ChatGPT gets filtered out by Claude. Source-backed conservative claims get cited. This post is what I actually do to lift Claude citation rate, separate from the general AEO playbook.</p>
 
-<p>I use Claude every day — both as a working assistant and as the model behind a lot of the n8n automation we ship to clients. The citation behaviour described below comes from running our 20-prompt audit against Claude.ai, the Anthropic API, and Claude inside Cursor across 14 client engagements.</p>
+<p>I use Claude every day â€” both as a working assistant and as the model behind a lot of the n8n automation we ship to clients. The citation behaviour described below comes from running our 20-prompt audit against Claude.ai, the Anthropic API, and Claude inside Cursor across 14 client engagements.</p>
 
 <h2>The 30-second answer</h2>
 
@@ -36,7 +17,7 @@
 <ul>
   <li>Adjective-heavy marketing copy underperforms versus specific factual statements.</li>
   <li>Sources that disagree with each other across the web get cited less; sources that align across Wikidata, Crunchbase, LinkedIn get cited more.</li>
-  <li>Claude tends to verify a claim before citing — if it can't find a second source confirming you make the claim, it leaves you out.</li>
+  <li>Claude tends to verify a claim before citing â€” if it can't find a second source confirming you make the claim, it leaves you out.</li>
   <li>Brand new domains lift slower on Claude than on ChatGPT because the verification web takes longer to build.</li>
 </ul>
 
@@ -45,10 +26,10 @@
 <p>Claude resolves brand entities by triangulating across sources. Your Organization schema needs sameAs links to:</p>
 
 <ol>
-  <li><strong>Wikidata</strong> — the strongest signal by far. If you don't have a Wikidata entry, get one. Free, takes an afternoon to draft.</li>
-  <li><strong>Crunchbase</strong> — second strongest. Even a basic free profile counts.</li>
-  <li><strong>LinkedIn company page</strong> — required.</li>
-  <li><strong>Product Twitter/X</strong> — moderate signal.</li>
+  <li><strong>Wikidata</strong> â€” the strongest signal by far. If you don't have a Wikidata entry, get one. Free, takes an afternoon to draft.</li>
+  <li><strong>Crunchbase</strong> â€” second strongest. Even a basic free profile counts.</li>
+  <li><strong>LinkedIn company page</strong> â€” required.</li>
+  <li><strong>Product Twitter/X</strong> â€” moderate signal.</li>
   <li><strong>G2 or Capterra profile</strong> if you're SaaS.</li>
 </ol>
 
@@ -94,7 +75,7 @@
 
 <p>Good llms.txt description:</p>
 
-<p><em>"n8n automation service — workflow design, deployment, and ongoing maintenance for service businesses with 5+ existing tools to integrate."</em></p>
+<p><em>"n8n automation service â€” workflow design, deployment, and ongoing maintenance for service businesses with 5+ existing tools to integrate."</em></p>
 
 <p>Functional. Specific. No adjectives. Claude prefers this.</p>
 
@@ -158,7 +139,7 @@
 
 <h3>How often should I update content to keep Claude citations stable?</h3>
 
-<p>Quarterly is enough for most pages. Fast-moving topics (pricing, integrations, product features) deserve monthly updates. Set dateModified accurately. Don't fake freshness with a cron — Claude flags it.</p>
+<p>Quarterly is enough for most pages. Fast-moving topics (pricing, integrations, product features) deserve monthly updates. Set dateModified accurately. Don't fake freshness with a cron â€” Claude flags it.</p>
 
 <h3>Is there a Claude version of Google Search Console?</h3>
 
@@ -166,4 +147,4 @@
 
 <h2>Bottom line</h2>
 
-<p>Claude is the conservative engine of the four. Reward it with conservative content. Wikidata + Crunchbase + LinkedIn sameAs. Claim-plus-source pattern. Step-by-step FAQ. Tone-neutral llms.txt. Track weekly. The work that makes Claude cite you is the work that makes a careful human source you — which is the whole point.</p>
+<p>Claude is the conservative engine of the four. Reward it with conservative content. Wikidata + Crunchbase + LinkedIn sameAs. Claim-plus-source pattern. Step-by-step FAQ. Tone-neutral llms.txt. Track weekly. The work that makes Claude cite you is the work that makes a careful human source you â€” which is the whole point.</p>

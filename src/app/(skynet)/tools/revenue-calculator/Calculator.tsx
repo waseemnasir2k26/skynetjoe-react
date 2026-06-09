@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronDown, ChevronRight, Sparkles } from "lucide-react";
@@ -74,7 +68,8 @@ const SLIDERS: SliderConfig[] = [
     max: 60,
     step: 1,
     defaultValue: 12,
-    description: "Time you or staff spend chasing leads, drafting replies, updating the CRM.",
+    description:
+      "Time you or staff spend chasing leads, drafting replies, updating the CRM.",
   },
   {
     key: "rate",
@@ -84,7 +79,8 @@ const SLIDERS: SliderConfig[] = [
     max: 500,
     step: 5,
     defaultValue: 75,
-    description: "What an hour of your time is actually worth, not minimum wage.",
+    description:
+      "What an hour of your time is actually worth, not minimum wage.",
   },
 ];
 
@@ -101,7 +97,7 @@ const fmtUSD = (v: number) =>
 
 const fmtNum = (v: number) =>
   new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(
-    Math.round(v)
+    Math.round(v),
   );
 
 function formatBySliderUnit(unit: SliderConfig["unit"], v: number): string {
@@ -116,9 +112,7 @@ function clampNum(v: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, v));
 }
 
-function parseFromParams(
-  params: URLSearchParams
-): Record<SliderKey, number> {
+function parseFromParams(params: URLSearchParams): Record<SliderKey, number> {
   const out = {} as Record<SliderKey, number>;
   for (const s of SLIDERS) {
     const raw = params.get(s.key);
@@ -200,7 +194,7 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
   const searchParams = useSearchParams();
   const initialRef = useRef(parseFromParams(searchParams));
   const [values, setValues] = useState<Record<SliderKey, number>>(
-    initialRef.current
+    initialRef.current,
   );
 
   // Debounced URL sync — replace state, no scroll jump, no history pollution.
@@ -484,15 +478,10 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-3 mt-6">
-                <a
-                  href={calUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary"
-                >
+                <Link href="/discovery-call" className="btn-primary">
                   <Sparkles className="w-4 h-4" />
                   Get my custom recovery plan
-                </a>
+                </Link>
                 <Link href="/case-studies" className="btn-ghost">
                   See real case studies
                   <ChevronRight className="w-4 h-4" />
@@ -515,33 +504,39 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
               </summary>
               <div className="mt-4 space-y-3 text-sm text-[var(--ink-2)] leading-relaxed">
                 <p>
-                  <strong className="text-[var(--ink)]">Missed revenue per month</strong> ={" "}
-                  leads × missed_rate × close_rate × deal_size. If you get 50
+                  <strong className="text-[var(--ink)]">
+                    Missed revenue per month
+                  </strong>{" "}
+                  = leads × missed_rate × close_rate × deal_size. If you get 50
                   leads, miss 35% of them, would close 12%, at $500 a deal —
                   that&apos;s 50 × 0.35 × 0.12 × $500 = $1,050 a month walking
                   out the door.
                 </p>
                 <p>
-                  <strong className="text-[var(--ink)]">Wasted labor per month</strong> ={" "}
-                  manual_hours × 4.33 weeks × hourly_value. 12 hrs/wk × 4.33 ×
+                  <strong className="text-[var(--ink)]">
+                    Wasted labor per month
+                  </strong>{" "}
+                  = manual_hours × 4.33 weeks × hourly_value. 12 hrs/wk × 4.33 ×
                   $75/hr = $3,897/month on follow-ups you should not be doing.
                 </p>
                 <p>
-                  <strong className="text-[var(--ink)]">Recovered revenue</strong> = 80%
-                  of missed_revenue. After-hours auto-reply, AI voice-pickup
-                  and inbox triage reliably recapture 4 out of 5 leads that
-                  went silent.
+                  <strong className="text-[var(--ink)]">
+                    Recovered revenue
+                  </strong>{" "}
+                  = 80% of missed_revenue. After-hours auto-reply, AI
+                  voice-pickup and inbox triage reliably recapture 4 out of 5
+                  leads that went silent.
                 </p>
                 <p>
-                  <strong className="text-[var(--ink)]">Saved labor</strong> = 70% of
-                  wasted_hours × hourly_value. Automation handles the routine
-                  follow-up sequences, CRM data entry and email triage. The
-                  remaining 30% is the human-judgment work that should never be
-                  automated.
+                  <strong className="text-[var(--ink)]">Saved labor</strong> =
+                  70% of wasted_hours × hourly_value. Automation handles the
+                  routine follow-up sequences, CRM data entry and email triage.
+                  The remaining 30% is the human-judgment work that should never
+                  be automated.
                 </p>
                 <p>
-                  <strong className="text-[var(--ink)]">Net annual gain</strong> =
-                  (recovered + saved) × 12. Calibrated against 240+ live
+                  <strong className="text-[var(--ink)]">Net annual gain</strong>{" "}
+                  = (recovered + saved) × 12. Calibrated against 240+ live
                   automations shipped from Bali since 2019.
                 </p>
               </div>
@@ -571,14 +566,12 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                 Updates as you move the sliders. Bookmark or share the URL to
                 save these inputs.
               </p>
-              <a
-                href={calUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/discovery-call"
                 className="btn-primary w-full justify-center"
               >
                 Book the call
-              </a>
+              </Link>
               <Link
                 href="/case-studies"
                 className="btn-ghost w-full justify-center mt-3"
@@ -635,17 +628,15 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
               {fmtUSD(math.annualGain)}
             </p>
           </div>
-          <a
-            href={calUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/discovery-call"
             className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold text-sm text-[var(--cream-3)] shrink-0 hover:opacity-90 transition"
             style={{
               background: "var(--terracotta)",
             }}
           >
             Book call
-          </a>
+          </Link>
         </div>
       </div>
 

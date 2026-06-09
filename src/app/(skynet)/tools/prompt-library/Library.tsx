@@ -23,7 +23,7 @@ export default function Library() {
   const [activeCats, setActiveCats] = useState<PromptCategory[]>([]);
   const [openPrompt, setOpenPrompt] = useState<Prompt | null>(null);
   const [copyStateById, setCopyStateById] = useState<Record<string, boolean>>(
-    {}
+    {},
   );
 
   /* close modal on Escape */
@@ -42,7 +42,7 @@ export default function Library() {
 
   function toggleCat(key: PromptCategory) {
     setActiveCats((curr) =>
-      curr.includes(key) ? curr.filter((k) => k !== key) : [...curr, key]
+      curr.includes(key) ? curr.filter((k) => k !== key) : [...curr, key],
     );
   }
 
@@ -58,7 +58,8 @@ export default function Library() {
         return false;
       }
       if (!q) return true;
-      const hay = `${p.title} ${p.useCase} ${p.body} ${p.category}`.toLowerCase();
+      const hay =
+        `${p.title} ${p.useCase} ${p.body} ${p.category}`.toLowerCase();
       return hay.includes(q);
     });
   }, [query, activeCats]);
@@ -86,13 +87,13 @@ export default function Library() {
         <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-3">
           — Prompt library · {PROMPTS.length} working prompts
         </p>
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4">
+        <h2 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4">
           The prompts I actually use.
-        </h1>
+        </h2>
         <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed max-w-3xl">
-          Pulled from 18 months of shipped client work — automations, copy,
-          ops, audits. Copy, paste, ship. No course, no Notion template, no
-          upsell. Just the prompts that earned me six figures.
+          Pulled from 18 months of shipped client work — automations, copy, ops,
+          audits. Copy, paste, ship. No course, no Notion template, no upsell.
+          Just the prompts that earned me six figures.
         </p>
       </div>
 
@@ -146,7 +147,9 @@ export default function Library() {
               >
                 <span aria-hidden>{c.icon}</span>
                 {c.label}
-                <span className="text-[10px] text-[var(--ink-faint)]">· {count}</span>
+                <span className="text-[10px] text-[var(--ink-faint)]">
+                  · {count}
+                </span>
               </button>
             );
           })}
@@ -163,7 +166,10 @@ export default function Library() {
         </div>
 
         <div className="mt-4 text-xs text-[var(--ink-faint)]">
-          Showing <span className="text-[var(--terracotta-aa)] font-bold">{filtered.length}</span>{" "}
+          Showing{" "}
+          <span className="text-[var(--terracotta-aa)] font-bold">
+            {filtered.length}
+          </span>{" "}
           of {PROMPTS.length} prompts
           {activeCats.length > 0 && (
             <>
@@ -180,7 +186,9 @@ export default function Library() {
       {/* Grid */}
       {filtered.length === 0 ? (
         <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-10 text-center">
-          <p className="text-lg font-semibold text-[var(--ink)]">No prompts match.</p>
+          <p className="text-lg font-semibold text-[var(--ink)]">
+            No prompts match.
+          </p>
           <p className="mt-2 text-sm text-[var(--ink-faint)]">
             Try clearing the filters or searching for a broader keyword.
           </p>
@@ -279,25 +287,26 @@ export default function Library() {
             <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               1
             </span>
-            Pick the one prompt your business loses the most time on right now (sales, ops, content). Run it three times this week.
+            Pick the one prompt your business loses the most time on right now
+            (sales, ops, content). Run it three times this week.
           </li>
           <li className="flex gap-3">
             <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               2
             </span>
-            Notice what it gets wrong. Edit the prompt, lock the wins, save it inside your CRM or helpdesk.
+            Notice what it gets wrong. Edit the prompt, lock the wins, save it
+            inside your CRM or helpdesk.
           </li>
           <li className="flex gap-3">
             <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               3
             </span>
-            When it&apos;s earning its keep, book a call and we&apos;ll wire it into the rest of your stack.
+            When it&apos;s earning its keep, book a call and we&apos;ll wire it
+            into the rest of your stack.
           </li>
         </ul>
         <a
-          href="https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=prompt-library-closing"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/discovery-call"
           className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
           style={{ background: "var(--terracotta)" }}
         >
@@ -315,7 +324,8 @@ export default function Library() {
         </h3>
         <p className="text-sm text-[var(--ink-2)] max-w-xl mx-auto mb-5 leading-relaxed">
           The library grows from real working prompts, not theoretical ones.
-          Send the prompt plus the result it produced — I&apos;ll add it with credit.
+          Send the prompt plus the result it produced — I&apos;ll add it with
+          credit.
         </p>
         <a
           href="mailto:info@skynetjoe.com?subject=Prompt%20Library%20submission&body=Category%3A%20%0AUse-case%3A%20%0APrompt%20body%3A%20%0AResult%20it%20produced%3A%20"
@@ -336,7 +346,8 @@ export default function Library() {
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
-          One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+          One missing field, one weird output, one tool you wish existed — tell
+          me. I read every reply.
         </p>
         <form action="/api/tool-feedback" method="POST" className="space-y-3">
           <input type="hidden" name="tool" value="prompt-library" />
@@ -350,7 +361,8 @@ export default function Library() {
               background: "var(--cream-3)",
               border: "1px solid rgba(26,26,26,0.18)",
               boxShadow: "inset 0 1px 2px rgba(26,26,26,0.04)",
-              fontFamily: "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
+              fontFamily:
+                "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
               fontSize: "0.875rem",
             }}
           />
@@ -376,12 +388,16 @@ export default function Library() {
       </div>
 
       {/* Modal */}
-      {openPrompt && <PromptModal prompt={openPrompt} onClose={() => setOpenPrompt(null)} />}
+      {openPrompt && (
+        <PromptModal prompt={openPrompt} onClose={() => setOpenPrompt(null)} />
+      )}
 
       <style jsx>{`
         .pl-prompt-search:focus {
           border-color: var(--terracotta) !important;
-          box-shadow: 0 0 0 3px rgba(198,107,63,0.10), inset 0 1px 2px rgba(26,26,26,0.04) !important;
+          box-shadow:
+            0 0 0 3px rgba(198, 107, 63, 0.1),
+            inset 0 1px 2px rgba(26, 26, 26, 0.04) !important;
         }
         .pl-prompt-search::placeholder {
           color: var(--ink-faint);
@@ -468,9 +484,7 @@ function PromptModal({
               onClick={copy}
               className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-[var(--cream-3)] transition hover:opacity-90"
               style={{
-                background: copied
-                  ? "var(--sage)"
-                  : "var(--terracotta)",
+                background: copied ? "var(--sage)" : "var(--terracotta)",
               }}
             >
               {copied ? (

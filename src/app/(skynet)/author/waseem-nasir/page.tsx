@@ -58,7 +58,7 @@ const schema = {
       givenName: "Waseem",
       familyName: "Nasir",
       url: SITE.founderUrl,
-      image: `${SITE.assetsUrl}/og-default.png`,
+      image: `${SITE.assetsUrl}/waseem-portrait.jpg`,
       jobTitle: "Founder",
       worksFor: { "@id": `${SITE.url}/#organization` },
       nationality: { "@type": "Country", name: "Pakistan" },
@@ -92,10 +92,6 @@ const schema = {
         skills:
           "n8n, OpenAI, Anthropic Claude, Next.js, WordPress, AEO, schema markup, RAG, chatbot development",
       },
-      alumniOf: {
-        "@type": "EducationalOrganization",
-        name: "Self-taught — 180+ shipped automation workflows and 40+ websites since 2022",
-      },
       award: [
         "180+ n8n workflows shipped (2022–2026)",
         "40+ websites delivered across 9 countries",
@@ -105,6 +101,7 @@ const schema = {
       sameAs: [
         "https://www.linkedin.com/in/waseemnasir",
         SITE.social.linkedin,
+        "https://x.com/waseemnasir",
         "https://x.com/skynetlabs",
         SITE.social.twitter,
         SITE.social.github,

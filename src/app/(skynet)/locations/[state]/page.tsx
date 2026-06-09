@@ -17,7 +17,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import * as Icons from "lucide-react";
 import { ArrowRight, MapPin } from "lucide-react";
-import { STATES, getStateBySlug, type StateEntry } from "@/lib/states";
+import { STATES, getStateBySlug } from "@/lib/states";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -63,19 +63,6 @@ export async function generateMetadata({
       creator: "@skynetlabs",
     },
   };
-}
-
-// Local SEO keyword variants per service × state
-function buildKeywordPhrases(svc: SvcItem, s: StateEntry): string[] {
-  const label = svc.label;
-  return [
-    `${label} expert in ${s.name}`,
-    `${label} services for ${s.name} founders`,
-    `${label} consultant near ${s.cities[0]}`,
-    `${label} agency in ${s.abbr}`,
-    `Hire ${label} freelancer in ${s.name}`,
-    `Best ${label} provider near ${s.cities[1]}`,
-  ];
 }
 
 const cardCream = {
@@ -416,105 +403,74 @@ export default async function StatePage({
         </div>
       </section>
 
-      {/* Local SEO keyword expansion */}
+      {/* Popular services in {state} */}
       <section className="section tinted">
         <div className="wrap">
           <div className="section-head">
-            <span className="section-kicker">Local intent · {s.name}</span>
+            <span className="section-kicker">Services · {s.name}</span>
             <h2>
-              Searching in {s.abbr}? <em>You&apos;re in the right place.</em>
+              Popular services in <em>{s.name}</em>.
             </h2>
             <p className="section-sub">
-              Whatever exact phrase brought you here — &ldquo;n8n expert near{" "}
-              {s.cities[0]}&rdquo;, &ldquo;GoHighLevel agency in {s.abbr}
-              &rdquo;, &ldquo;AI chatbot consultant for {s.industries[0]}&rdquo;
-              — these are all the same one operator. Click any phrase to scope
-              that service for {s.name}.
+              Every build below is delivered remotely to {s.name} founders —
+              fixed scope, public pricing. Pick a service to see what it
+              includes and scope it for your business.
             </p>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {allServices.map((svc) => {
               const Icon =
                 (Icons as unknown as Record<string, IconCmp>)[svc.icon] ??
                 (Icons as unknown as Record<string, IconCmp>).Bot;
-              const phrases = buildKeywordPhrases(svc, s);
               return (
-                <div key={svc.slug} style={cardCream}>
-                  <div className="flex items-start gap-4 mb-4">
-                    <div
-                      className="flex items-center justify-center flex-shrink-0"
+                <Link
+                  key={svc.slug}
+                  href={`/services/${svc.slug}`}
+                  style={{ ...cardCream, textDecoration: "none" }}
+                  className="flex items-start gap-3"
+                >
+                  <div
+                    className="flex items-center justify-center flex-shrink-0"
+                    style={{
+                      width: 40,
+                      height: 40,
+                      background: "var(--terracotta-soft)",
+                      border: "1px solid rgba(198,107,63,0.30)",
+                      borderRadius: 4,
+                      color: "var(--terracotta)",
+                    }}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1">
+                    <h3
                       style={{
-                        width: 44,
-                        height: 44,
-                        background: "var(--terracotta-soft)",
-                        border: "1px solid rgba(198,107,63,0.30)",
-                        borderRadius: 4,
-                        color: "var(--terracotta)",
-                      }}
-                    >
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div className="flex-1">
-                      <h3
-                        style={{
-                          fontFamily: "var(--font-display)",
-                          fontWeight: 600,
-                          fontSize: 18,
-                          color: "var(--ink)",
-                          marginBottom: 4,
-                          letterSpacing: "-0.01em",
-                        }}
-                      >
-                        {svc.label} — {s.name}
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: 13,
-                          color: "var(--ink-faint)",
-                          lineHeight: 1.5,
-                        }}
-                      >
-                        {svc.desc}
-                      </p>
-                    </div>
-                    <Link
-                      href={`/services/${svc.slug}`}
-                      className="hidden sm:inline-flex items-center gap-1.5"
-                      style={{
-                        fontFamily: "var(--font-sans)",
-                        fontSize: 13,
+                        fontFamily: "var(--font-display)",
                         fontWeight: 600,
-                        color: "var(--terracotta)",
-                        textDecoration: "none",
+                        fontSize: 16,
+                        color: "var(--ink)",
+                        marginBottom: 4,
+                        letterSpacing: "-0.01em",
                       }}
                     >
-                      Scope it
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                      {svc.label}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: 13,
+                        color: "var(--ink-faint)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {svc.desc}
+                    </p>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {phrases.map((p) => (
-                      <Link
-                        key={p}
-                        href={`/services/${svc.slug}`}
-                        style={{
-                          padding: "6px 12px",
-                          borderRadius: 9999,
-                          background: "var(--cream-2)",
-                          border: "1px solid var(--rule)",
-                          color: "var(--ink-2)",
-                          fontSize: 12,
-                          fontFamily: "var(--font-mono-plex), monospace",
-                          fontWeight: 500,
-                          textDecoration: "none",
-                        }}
-                      >
-                        {p}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                  <ArrowRight
+                    className="w-4 h-4 flex-shrink-0 mt-1"
+                    style={{ color: "var(--terracotta)" }}
+                  />
+                </Link>
               );
             })}
           </div>

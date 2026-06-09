@@ -246,9 +246,8 @@ export default function ToolsIndexPage() {
           Seen your number? <em>Let&apos;s fix it.</em>
         </h2>
         <p>
-          The tools tell you where the money leaks. A 30-min audit tells you the
-          three fastest ways to plug it — with a fixed-price scope back in 48
-          hours.
+          The tools tell you where revenue slips. A 30-min audit tells you the
+          three fastest fixes — with a fixed-price scope back in 48 hours.
         </p>
         <div className="cta-row">
           <Link

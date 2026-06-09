@@ -18,51 +18,14 @@ export const metadata: Metadata = {
   },
 };
 
-// Top-level FAQs surfaced for FAQPage schema. The full 30 live in SECTIONS
-// below; these 6 are the most common and act as the citation surface.
-const TOP_FAQS = [
-  {
-    q: "What's the difference between n8n and Zapier?",
-    a: "n8n is open-source, self-hostable, and unmetered (you pay for the server). Zapier is SaaS-only with per-task pricing. For >10k runs/month or self-hosting requirements, n8n wins on cost; for <1k runs/month with non-technical owners, Zapier is faster to deploy.",
-  },
-  {
-    q: "How long does a typical build take?",
-    a: "Most SkynetLabs builds ship in 5 to 14 days from kickoff. Starter scopes ($1,497) ship in 5 days; flagship sites and full automation systems ($9,500) ship in 10 to 14 days.",
-  },
-  {
-    q: "Do you sign NDAs?",
-    a: "Yes, we sign yours. We don't ask you to sign ours. NDA review takes 24 to 48 hours; we recommend skipping NDAs for sub-$5k engagements to keep velocity up.",
-  },
-  {
-    q: "What does AEO mean?",
-    a: "AEO stands for Answer Engine Optimization. It's the practice of structuring content so LLM-powered answer engines (Claude, ChatGPT, Perplexity, Gemini) cite your site as a source when users ask questions in your domain.",
-  },
-  {
-    q: "Do you work with US clients from Bali?",
-    a: "Yes. We work async-first with all US time zones. Bali is GMT+8, so US morning meetings land in our afternoon — async handoffs keep velocity high. We've shipped to clients in 9 countries.",
-  },
-  {
-    q: "How much does a WhatsApp chatbot cost?",
-    a: "WhatsApp chatbot builds start at $1,497 for a single-flow bot (booking, FAQ, lead capture) and scale to $9,500 for multi-agent voice + WhatsApp systems with CRM integration. WhatsApp Business API hosting is separate (~$5–50/month).",
-  },
-];
-
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  url: `${SITE.url}/faqs`,
-  inLanguage: "en",
-  mainEntity: TOP_FAQS.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-  publisher: { "@id": `${SITE.url}/#organization` },
-};
-
 // The full 30 questions, grouped by section. Anchors (id) preserved from the
 // previous HTML content so existing deep links keep working.
-type Faq = { q: string; a: React.ReactNode };
+//
+// `a` is the visible answer (may be JSX). `aText` is the plain-text equivalent
+// used for the FAQPage schema `acceptedAnswer.text`. When the answer is a plain
+// string, `aText` is omitted and the string is reused directly. When the answer
+// is JSX, `aText` carries the clean plain-text version matching the visible copy.
+type Faq = { q: string; a: React.ReactNode; aText?: string };
 type Section = { id: string; title: string; faqs: Faq[] };
 
 const SECTIONS: Section[] = [
@@ -87,6 +50,8 @@ const SECTIONS: Section[] = [
             than 45 minutes.
           </>
         ),
+        aText:
+          "Day 0 you fill the brief. Day 1 we send a Loom walking through scope, edge cases, and what we're not doing. Day 2-3 you approve, send credentials, and we kick off. Day 4-10 we build in a shared Notion with daily 60-second progress videos. Day 11-14 you run live with real data while we sit on standby. Total: 14 days for one workflow, 21-28 for a bundle of three. No discovery calls longer than 45 minutes.",
       },
       {
         q: "Do you do fixed-price or hourly?",
@@ -111,6 +76,8 @@ const SECTIONS: Section[] = [
             own. We do not share client production URLs without their consent.
           </>
         ),
+        aText:
+          "Yes. /case-studies has anonymized writeups of shipped projects with screenshots, n8n graph exports, and outcome metrics. For specific stacks (HIPAA, Shopify, healthcare scheduling) we send a 5-minute Loom walking through a live build we own. We do not share client production URLs without their consent.",
       },
     ],
   },
@@ -151,6 +118,8 @@ const SECTIONS: Section[] = [
             verification.
           </>
         ),
+        aText:
+          "Yes — there are first-party LLM nodes plus generic HTTP request nodes for anything not yet wrapped. The real reliability question is: what do you do when the LLM returns malformed JSON? We always parse with a try/catch in a Code node, fall back to a smaller model on first failure, and log the bad output to Postgres for prompt iteration. Don't trust LLM output to be schema-valid without verification.",
       },
     ],
   },
@@ -201,6 +170,8 @@ const SECTIONS: Section[] = [
             minutes.
           </>
         ),
+        aText:
+          "Use the model that wins on your specific evals, not the one with the loudest marketing. For tool-use heavy bots (booking, CRM updates) Claude tends to lead on instruction following. For long-context document Q&A, Gemini's 2M context is hard to beat. For raw price-per-token on simple replies, Haiku and Gemini Flash are both cheap. Build with the SDK that lets you swap providers in 10 minutes.",
       },
       {
         q: "How do I keep a chatbot from hallucinating about my pricing?",
@@ -255,6 +226,28 @@ const SECTIONS: Section[] = [
     ],
   },
 ];
+
+// FAQPage schema built from ALL 30 visible Q&As across every section. Each
+// question verbatim-matches a rendered <summary>; each acceptedAnswer.text uses
+// the plain-text answer (aText for JSX answers, the string itself otherwise) so
+// the structured data matches the visible answer copy exactly.
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  url: `${SITE.url}/faqs`,
+  inLanguage: "en",
+  mainEntity: SECTIONS.flatMap((section) =>
+    section.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.aText ?? (f.a as string),
+      },
+    })),
+  ),
+  publisher: { "@id": `${SITE.url}/#organization` },
+};
 
 export default function FaqsPage() {
   return (

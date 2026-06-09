@@ -98,7 +98,7 @@ function leakBulletsFor(bucket: string | undefined): string[] {
   }
   if (bucketKey === "leaking") {
     return [
-      "Lead response time is north of 6 hours — every hour past 5 minutes drops conversion roughly 8%.",
+      "Lead response time is north of 6 hours — every extra minute past 5 minutes cuts your odds of reaching the lead.",
       "Email sequences cap at 2 messages. The deals close on touch 5-7. That delta walks out the door on every campaign.",
       "No CRM segmentation, so re-engagement emails go to closed-won customers (who unsubscribe) and dead leads (who don't).",
       "You're inside Zapier/Make hitting task limits monthly. n8n self-hosted would cut that bill 80% and give you flow logic Zapier physically can't do.",
@@ -567,9 +567,9 @@ export default async function ThankYouPage({
                     lineHeight: 1.6,
                   }}
                 >
-                  After 200+ service businesses, the patterns rhyme. I&apos;m
-                  not bluffing — these are the 4 we find inside roughly 8 out of
-                  every 10 funnels we audit.
+                  After building funnels for service businesses across 9
+                  countries, the patterns rhyme. I&apos;m not bluffing — most
+                  funnels we audit lose leads the same way.
                   {bucket ? (
                     <>
                       {" "}
@@ -941,7 +941,7 @@ export default async function ThankYouPage({
         </h2>
         <p>
           Real builds for real founders, plus the free tools that show you
-          exactly where your stack is leaking.
+          exactly where you&apos;re losing leads.
         </p>
         <div className="cta-row">
           <Link href="/case-studies" className="btn-primary">

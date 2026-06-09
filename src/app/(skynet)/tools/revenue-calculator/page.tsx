@@ -60,7 +60,7 @@ const calcCases = CASE_STUDIES.filter((c) =>
     "us-insurance-gohighlevel-rebuild",
     "eu-logistics-email-triage-n8n",
     "bali-wellness-conversion-funnel",
-  ].includes(c.slug)
+  ].includes(c.slug),
 );
 
 const schema = {
@@ -79,13 +79,6 @@ const schema = {
         "@type": "Offer",
         price: 0,
         priceCurrency: "USD",
-      },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "5.0",
-        reviewCount: "42",
-        bestRating: "5",
-        worstRating: "1",
       },
       provider: {
         "@type": "Organization",
@@ -113,7 +106,12 @@ export default function RevenueCalculatorPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-4xl">
@@ -131,7 +129,17 @@ export default function RevenueCalculatorPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 700, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 700,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               How much money is your business{" "}
               <span style={{ color: "var(--terracotta-aa)" }}>
                 actually losing?
@@ -229,7 +237,9 @@ export default function RevenueCalculatorPage() {
                       <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 mb-1">
                         {m.label}
                       </p>
-                      <p className="text-sm font-bold text-[var(--ink)]">{m.delta}</p>
+                      <p className="text-sm font-bold text-[var(--ink)]">
+                        {m.delta}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -315,15 +325,16 @@ export default function RevenueCalculatorPage() {
                 worth doing. If it isn&apos;t, I&apos;ll say so.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
-                <a
-                  href={CAL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/discovery-call"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition"
-                  style={{ background: "var(--terracotta)", color: "var(--cream-3)" }}
+                  style={{
+                    background: "var(--terracotta)",
+                    color: "var(--cream-3)",
+                  }}
                 >
                   Get my custom recovery plan
-                </a>
+                </Link>
                 <Link
                   href="/case-studies"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--cream-2)] text-[var(--ink)] font-semibold border border-[rgba(26,26,26,0.18)] hover:bg-[var(--cream-2)] transition-colors"

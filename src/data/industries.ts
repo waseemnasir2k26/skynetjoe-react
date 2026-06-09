@@ -90,26 +90,30 @@ export const INDUSTRIES: Industry[] = [
     name: "Dental Clinics",
     shortName: "dental",
     eyebrowChip: "Front-desk hangs up on $4,200/mo in new patients",
-    heroH1: "Your front desk hangs up on $4,200/month. We pick up the phone for you.",
+    heroH1:
+      "Your front desk hangs up on $4,200/month. We pick up the phone for you.",
     heroSubhead:
       "An AI receptionist trained on your practice, your insurance list, and your hygiene cadence. It books, confirms, and recalls patients while your team treats the ones already in the chair.",
-    heroCtaPrimary: { label: "Book a dental-specific audit", href: "/discovery-call" },
-    heroCtaSecondary: { label: "See dental case study", href: "/case-studies/manhattan-dental-atelier-flagship" },
+    heroCtaPrimary: {
+      label: "Book a dental-specific audit",
+      href: "/discovery-call",
+    },
+    heroCtaSecondary: {
+      label: "See dental case study",
+      href: "/case-studies/manhattan-dental-atelier-flagship",
+    },
     painPoints: [
       {
         title: "Front-desk burnout & the calls nobody answers",
-        body:
-          "Average solo or 2-op practice misses 27 to 41% of inbound calls between 11am and 2pm. Every missed call from a new patient is roughly $700 in lifetime value walking to the next clinic on the Google result. Your front desk is not the problem. The volume is the problem.",
+        body: "Average solo or 2-op practice misses 27 to 41% of inbound calls between 11am and 2pm. Every missed call from a new patient is roughly $700 in lifetime value walking to the next clinic on the Google result. Your front desk is not the problem. The volume is the problem.",
       },
       {
         title: "Same-day cancel chaos & hygiene chair gaps",
-        body:
-          "A single same-day cancellation on a hygiene block costs $190 to $280 in lost chair time. Multiply by the 3-4 cancels a week the average practice eats and you're looking at $36k to $58k of revenue evaporating per chair per year.",
+        body: "A single same-day cancellation on a hygiene block costs $190 to $280 in lost chair time. Multiply by the 3-4 cancels a week the average practice eats and you're looking at $36k to $58k of revenue evaporating per chair per year.",
       },
       {
         title: "Recall lists rotting in Dentrix or Open Dental",
-        body:
-          "Most practices have 800 to 2,400 patients sitting on 6-month recall lists nobody has touched in a year. The PMS knows. Nobody has time to work the list. That list, worked correctly, is a 6-figure annual revenue line item ignored by 90% of clinics under 4 ops.",
+        body: "Most practices have 800 to 2,400 patients sitting on 6-month recall lists nobody has touched in a year. The PMS knows. Nobody has time to work the list. That list, worked correctly, is a 6-figure annual revenue line item ignored by 90% of clinics under 4 ops.",
       },
     ],
     flagshipProductName: "AI Receptionist for Dental",
@@ -125,7 +129,8 @@ export const INDUSTRIES: Industry[] = [
     modules: [
       {
         name: "New-Patient Capture",
-        oneLine: "Answer, qualify, book, route insurance questions to the right person.",
+        oneLine:
+          "Answer, qualify, book, route insurance questions to the right person.",
         bullets: [
           "Voice agent on your main number plus a parallel SMS line",
           "Insurance plan verification against your accepted-list (PPO, FSA, HSA, Medicaid where applicable)",
@@ -135,7 +140,8 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         name: "Hygiene Confirmation & Cancel Fill",
-        oneLine: "72/24/2-hour SMS confirms, automatic waitlist outreach when a slot opens.",
+        oneLine:
+          "72/24/2-hour SMS confirms, automatic waitlist outreach when a slot opens.",
         bullets: [
           "Confirms via SMS in patient's preferred language (EN, ES default)",
           "Detects cancellation language and triggers waitlist outreach inside 90 seconds",
@@ -145,7 +151,8 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         name: "Recall & Reactivation Engine",
-        oneLine: "Works your dormant 6-month list daily without your team lifting a finger.",
+        oneLine:
+          "Works your dormant 6-month list daily without your team lifting a finger.",
         bullets: [
           "Pulls overdue recall, ortho-retainer, and post-treatment follow-up lists nightly from PMS",
           "SMS + email cadence with practice-specific language",
@@ -186,9 +193,10 @@ export const INDUSTRIES: Industry[] = [
         metricAfter: "$340",
       },
     ],
-    bioPhoto: "/og-default.png",
-    bioPhotoAlt: "SkynetLabs — AI automation studio, Bali.",
-    bioHeadline: "Why I'm the right person to fix this for your dental practice",
+    bioPhoto: "/waseem-portrait.jpg",
+    bioPhotoAlt: "Waseem Nasir, founder of SkynetLabs",
+    bioHeadline:
+      "Why I'm the right person to fix this for your dental practice",
     bioCopy:
       "I shipped the Manhattan dental atelier flagship in 12 days and built a HIPAA-aware intake flow that triples completion rates. I know Dentrix, Open Dental and Eaglesoft well enough to integrate against their HL7 bridges without breaking your PMS.",
     pricingTiers: [
@@ -288,26 +296,30 @@ export const INDUSTRIES: Industry[] = [
     name: "Wellness Spas & Medspas",
     shortName: "spa",
     eyebrowChip: "Same-day no-shows + ghosted DMs cost 30% of your week",
-    heroH1: "Same-day no-shows and ghosted DM leads cost you 30% of your week. Let's reclaim it.",
+    heroH1:
+      "Same-day no-shows and ghosted DM leads cost you 30% of your week. Let's reclaim it.",
     heroSubhead:
       "A concierge AI that lives in MindBody, Vagaro or Boulevard, answers Instagram DMs in your spa's tone, confirms in three taps, and recovers no-shows the same hour they happen.",
-    heroCtaPrimary: { label: "Book a spa-specific audit", href: "/discovery-call" },
-    heroCtaSecondary: { label: "See wellness case study", href: "/case-studies/bali-wellness-conversion-funnel" },
+    heroCtaPrimary: {
+      label: "Book a spa-specific audit",
+      href: "/discovery-call",
+    },
+    heroCtaSecondary: {
+      label: "See wellness case study",
+      href: "/case-studies/bali-wellness-conversion-funnel",
+    },
     painPoints: [
       {
         title: "Same-day no-shows you can't refill fast enough",
-        body:
-          "Median medspa loses 12 to 18% of bookings to same-day no-shows or last-minute cancellations. Most spas pay a card-on-file fee or eat the cost outright. Almost nobody runs a real-time waitlist with auto-outreach inside 90 seconds, which is the only thing that actually refills the chair.",
+        body: "Median medspa loses 12 to 18% of bookings to same-day no-shows or last-minute cancellations. Most spas pay a card-on-file fee or eat the cost outright. Almost nobody runs a real-time waitlist with auto-outreach inside 90 seconds, which is the only thing that actually refills the chair.",
       },
       {
         title: "Ghosted Instagram DMs and Facebook lead-ad replies",
-        body:
-          "Your IG DMs are full of '?', 'price?', and 'how much for botox?'. Half get answered 8 hours later when the front desk has time. By then the prospect has booked at the spa down the street that replied in 4 minutes. Speed-to-lead in aesthetics is brutal and most spas lose this race daily.",
+        body: "Your IG DMs are full of '?', 'price?', and 'how much for botox?'. Half get answered 8 hours later when the front desk has time. By then the prospect has booked at the spa down the street that replied in 4 minutes. Speed-to-lead in aesthetics is brutal and most spas lose this race daily.",
       },
       {
         title: "Reactivation lists never worked, packages never resold",
-        body:
-          "Your 6-month dormant client list has more revenue in it than your next 30 days of marketing spend, and almost no spa works it systematically. Same for package resells. A client who finished a 6-session laser package 90 days ago is the warmest lead you will ever see, and most spas wait for them to come back on their own.",
+        body: "Your 6-month dormant client list has more revenue in it than your next 30 days of marketing spend, and almost no spa works it systematically. Same for package resells. A client who finished a 6-session laser package 90 days ago is the warmest lead you will ever see, and most spas wait for them to come back on their own.",
       },
     ],
     flagshipProductName: "Concierge AI for Wellness & Medspas",
@@ -323,7 +335,8 @@ export const INDUSTRIES: Industry[] = [
     modules: [
       {
         name: "Booking AI",
-        oneLine: "DM-to-book inside 90 seconds, across every channel a client uses.",
+        oneLine:
+          "DM-to-book inside 90 seconds, across every channel a client uses.",
         bullets: [
           "Instagram DM, Facebook Messenger, SMS and web chat handled by one agent",
           "Direct booking into MindBody, Vagaro, Boulevard, Square Appointments or Fresha",
@@ -333,7 +346,8 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         name: "Review & Reputation Engine",
-        oneLine: "Post-visit review requests timed to the moment clients are happiest.",
+        oneLine:
+          "Post-visit review requests timed to the moment clients are happiest.",
         bullets: [
           "Routes happy clients (NPS 9-10) to Google + Yelp public reviews",
           "Routes unhappy clients (NPS 0-6) to a private feedback loop with the owner",
@@ -343,7 +357,8 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         name: "Reactivation & Package-Resell Campaigns",
-        oneLine: "Work your dormant list and your post-treatment list monthly, automatically.",
+        oneLine:
+          "Work your dormant list and your post-treatment list monthly, automatically.",
         bullets: [
           "Segments by treatment type, days since last visit, package status",
           "Voice-locked SMS + email cadences (no template-spam smell)",
@@ -384,8 +399,8 @@ export const INDUSTRIES: Industry[] = [
         metricAfter: "41",
       },
     ],
-    bioPhoto: "/og-default.png",
-    bioPhotoAlt: "SkynetLabs — AI automation studio, Bali.",
+    bioPhoto: "/waseem-portrait.jpg",
+    bioPhotoAlt: "Waseem Nasir, founder of SkynetLabs",
     bioHeadline: "Why I'm the right person to fix this for your spa",
     bioCopy:
       "Christelle's wellness funnel in Ubud doubled her bookings in 30 days because we wrote the site against her actual DMs, not retreat-brochure language. The same voice-lock pattern is what makes a Concierge AI sound like your spa instead of a chatbot.",
@@ -424,7 +439,8 @@ export const INDUSTRIES: Industry[] = [
         tierName: "Multi-location",
         price: "$1,997/mo",
         cadence: "retainer",
-        positioning: "3+ locations, per-location reporting + cross-spa waitlist.",
+        positioning:
+          "3+ locations, per-location reporting + cross-spa waitlist.",
         includes: [
           "Everything in Spa Pro across all locations",
           "Per-location dashboard + provider scorecards",
@@ -462,7 +478,8 @@ export const INDUSTRIES: Industry[] = [
         a: "Yes. The Review Engine drafts voice-locked replies inside 24 hours of every public review across Google, Yelp and Facebook. You approve from a daily 2-minute digest. We do not auto-publish without owner approval (review replies are too high-stakes for full automation).",
       },
     ],
-    finalCtaHeadline: "Reclaim the 30% of your week you are losing to no-shows and ghosted DMs.",
+    finalCtaHeadline:
+      "Reclaim the 30% of your week you are losing to no-shows and ghosted DMs.",
     finalCtaSubhead:
       "Book a spa-specific audit. We pull a week of your IG DMs, your no-show rate from MindBody or Vagaro, and tell you honestly what the Concierge AI is worth to your spa in month one.",
     finalCtaButtonLabel: "Book the spa audit",
@@ -487,26 +504,31 @@ export const INDUSTRIES: Industry[] = [
     name: "Freight & Logistics",
     shortName: "freight",
     eyebrowChip: "Dispatch lag of 14 minutes costs ~$180 per load",
-    heroH1: "Dispatch lag of 14 minutes costs you $180 per load. Our agents answer in 23 seconds.",
+    heroH1:
+      "Dispatch lag of 14 minutes costs you $180 per load. Our agents answer in 23 seconds.",
     heroSubhead:
       "A dispatch agent that triages broker calls, parses rate sheets, quotes back inside 30 seconds, and logs everything to McLeod, AscendTMS or Truckstop while your dispatchers sleep.",
-    heroCtaPrimary: { label: "Book a freight-specific audit", href: "/discovery-call" },
-    heroCtaSecondary: { label: "See freight case study", href: "/case-studies/eu-logistics-email-triage-n8n" },
+    heroCtaPrimary: {
+      label: "Book a freight-specific audit",
+      href: "/discovery-call",
+    },
+    heroCtaSecondary: {
+      label: "See freight case study",
+      href: "/case-studies/eu-logistics-email-triage-n8n",
+    },
     painPoints: [
       {
         title: "Dispatch lag on broker calls and load offers",
-        body:
-          "Average mid-size broker loses 22 to 35% of attractive loads because the carrier-side dispatch is too slow to confirm. A 14-minute lag on a hot lane is a $180 to $310 margin hit per load. Multiply across 40 loads a week and that is roughly $400k a year in margin slipping away, and nobody is tracking it line-by-line.",
+        body: "Average mid-size broker loses 22 to 35% of attractive loads because the carrier-side dispatch is too slow to confirm. A 14-minute lag on a hot lane is a $180 to $310 margin hit per load. Multiply across 40 loads a week and that is roughly $400k a year in margin slipping away, and nobody is tracking it line-by-line.",
       },
       {
-        title: "Email triage on 4-party threads (carrier, broker, shipper, receiver)",
-        body:
-          "Your dispatchers spend 3 to 5 hours a day reading and replying to 4-party email chains. Half are status-update boilerplate. The other half buries one real decision in a wall of CC'd reply-all. Zapier-built classifiers misread the CC field and route to the wrong party at least once a week.",
+        title:
+          "Email triage on 4-party threads (carrier, broker, shipper, receiver)",
+        body: "Your dispatchers spend 3 to 5 hours a day reading and replying to 4-party email chains. Half are status-update boilerplate. The other half buries one real decision in a wall of CC'd reply-all. Zapier-built classifiers misread the CC field and route to the wrong party at least once a week.",
       },
       {
         title: "Rate-sheet chaos, no historical lane intelligence",
-        body:
-          "Every broker has a folder of 80 to 300 rate sheets in 12 different formats (PDF, XLSX, copied into email body). Quoting a new load means a dispatcher manually checking 3 to 5 sheets, then guessing on lane history. No real-time historical lane benchmark surfaces inside your TMS at the point of the quote.",
+        body: "Every broker has a folder of 80 to 300 rate sheets in 12 different formats (PDF, XLSX, copied into email body). Quoting a new load means a dispatcher manually checking 3 to 5 sheets, then guessing on lane history. No real-time historical lane benchmark surfaces inside your TMS at the point of the quote.",
       },
     ],
     flagshipProductName: "Dispatch Agent for Freight & Logistics",
@@ -522,7 +544,8 @@ export const INDUSTRIES: Industry[] = [
     modules: [
       {
         name: "Voice Dispatch Agent",
-        oneLine: "Live broker call handling, sub-30-second response on every load offer.",
+        oneLine:
+          "Live broker call handling, sub-30-second response on every load offer.",
         bullets: [
           "Inbound voice agent on your dispatch line, 24/7 coverage including overnights",
           "Real-time rate-sheet and historical lane lookup during the call",
@@ -532,7 +555,8 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         name: "Email & EDI Triage",
-        oneLine: "4-party thread parsing, CC-aware routing, voice-locked auto-replies.",
+        oneLine:
+          "4-party thread parsing, CC-aware routing, voice-locked auto-replies.",
         bullets: [
           "Reads multi-party email threads, identifies the actual decision-maker",
           "CC-field gate (the missing piece that broke every prior Zapier attempt)",
@@ -583,8 +607,8 @@ export const INDUSTRIES: Industry[] = [
         metricAfter: "$404",
       },
     ],
-    bioPhoto: "/og-default.png",
-    bioPhotoAlt: "SkynetLabs — AI automation studio, Bali.",
+    bioPhoto: "/waseem-portrait.jpg",
+    bioPhotoAlt: "Waseem Nasir, founder of SkynetLabs",
     bioHeadline: "Why I'm the right person to fix this for your dispatch desk",
     bioCopy:
       "The Lyon mining-logistics engagement is the proof point. We modeled freight email as a 5-variable problem (intent, sender role, thread depth, attachment posture, CC topology) instead of a one-step classify-and-reply, and the same approach is what makes the Dispatch Agent actually book loads instead of just transcribing calls.",
@@ -607,7 +631,8 @@ export const INDUSTRIES: Industry[] = [
         tierName: "Freight Pro",
         price: "$7,497",
         cadence: "one-time",
-        positioning: "Mid-size broker or carrier (10-50 trucks), full dispatch stack.",
+        positioning:
+          "Mid-size broker or carrier (10-50 trucks), full dispatch stack.",
         includes: [
           "Everything in Starter",
           "Rate-sheet OCR + unified lane database",

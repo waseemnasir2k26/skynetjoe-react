@@ -324,7 +324,6 @@ export default function DiscoveryFunnel() {
 
             <div className="featured-in">
               <span className="featured-lbl">Featured</span>
-              <span>4.9 / 5</span>
               <span>180+ workflows</span>
               <span>9 countries</span>
               <span>Bali · GMT+8</span>

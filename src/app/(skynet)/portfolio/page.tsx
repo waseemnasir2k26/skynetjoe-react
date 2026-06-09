@@ -7,12 +7,12 @@ import WorkShowcase from "@/components/sections/WorkShowcase";
 export const metadata: Metadata = {
   title: "Portfolio — Recent Projects",
   description:
-    "Live screenshots of every shipped SkynetLabs build: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. 40+ deployed sites. Built solo from Bali by Waseem Nasir.",
+    "A selection of recent SkynetLabs builds: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. Live screenshots from 40+ deployed sites. Built solo from Bali by Waseem Nasir.",
   alternates: { canonical: `${SITE.url}/portfolio` },
   openGraph: {
     title: "SkynetLabs Portfolio — Recent Projects",
     description:
-      "Live screenshots of 40+ shipped builds. Click any tile for the deployed site.",
+      "A selection of recent builds — live screenshots from 40+ deployed sites. Click any tile for the live site.",
     url: `${SITE.url}/portfolio`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -23,7 +23,8 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: "SkynetLabs Portfolio — Recent Projects",
-  description: "Live screenshots of every shipped build across nine countries.",
+  description:
+    "A selection of recent builds — live screenshots from 40+ deployed sites across nine countries.",
   url: `${SITE.url}/portfolio`,
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },
@@ -52,8 +53,9 @@ export default function PortfolioPage() {
               </h1>
 
               <p className="hero-sub">
-                Every tile below is a site I actually deployed — dental, real
-                estate, wellness, HVAC, logistics, legal, healthcare.{" "}
+                A selection of recent builds — every tile is a site I actually
+                deployed: dental, real estate, wellness, HVAC, logistics, legal,
+                healthcare.{" "}
                 <strong>Click any tile to open the live site.</strong> Built
                 solo from Bali, source-controlled, public-priced.
               </p>

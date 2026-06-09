@@ -1,24 +1,3 @@
-<style>
-  .wn-ghl-no-show-automation-case-study { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
-  .wn-ghl-no-show-automation-case-study h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
-  .wn-ghl-no-show-automation-case-study h3 { color: #7ee4ff; font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; }
-  .wn-ghl-no-show-automation-case-study p { margin-bottom: 1.1rem; color: #d1d5db; }
-  .wn-ghl-no-show-automation-case-study ul, .wn-ghl-no-show-automation-case-study ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
-  .wn-ghl-no-show-automation-case-study li { margin-bottom: 0.6rem; }
-  .wn-ghl-no-show-automation-case-study strong { color: #fff; }
-  .wn-ghl-no-show-automation-case-study a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
-  .wn-ghl-no-show-automation-case-study .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem; }
-  .wn-ghl-no-show-automation-case-study .stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(0,212,255,0.2); padding: 1.25rem; border-radius: 14px; }
-  .wn-ghl-no-show-automation-case-study .stat-value { font-size: 1.8rem; font-weight: 800; background: linear-gradient(120deg, #7ee4ff, #5eead4); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.1; margin-bottom: 0.25rem; }
-  .wn-ghl-no-show-automation-case-study .stat-label { font-size: 0.8rem; color: #9ca3af; }
-  .wn-ghl-no-show-automation-case-study .timeline { background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(20,184,166,0.06)); border: 1px solid rgba(0,212,255,0.2); border-radius: 14px; padding: 1.5rem; margin: 2rem 0; }
-  .wn-ghl-no-show-automation-case-study .timeline-item { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .wn-ghl-no-show-automation-case-study .timeline-item:last-child { border-bottom: 0; }
-  .wn-ghl-no-show-automation-case-study .timeline-day { color: #7ee4ff; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 0.75rem; }
-  .wn-ghl-no-show-automation-case-study .verdict { background: linear-gradient(135deg, #1E88E5, #14B8A6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
-  .wn-ghl-no-show-automation-case-study code { background: rgba(0,212,255,0.12); color: #7ee4ff; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.9em; }
-</style>
-
 <p>Names changed, numbers real. We worked with a five-chair dental practice in the US Midwest from March to April 2026. They came to us through a LinkedIn DM with one sentence: <em>"We're hemorrhaging money on no-shows and our front-desk staff is drowning in reminder calls."</em></p>
 
 <p>Fourteen days later, their no-show rate had dropped from 32% to 7%. Front-desk hours spent on reminder calls dropped from ~18/week to under 3. Net recovered revenue: $11,400/month based on their average procedure value.</p>
@@ -32,7 +11,7 @@
   <div class="stat"><div class="stat-value">0</div><div class="stat-label">Recovery flow</div></div>
 </div>
 
-<p>The practice ran a hodgepodge of tools: a legacy practice management system (PMS) for scheduling, a separate SMS service that fired once 24 hours before, and a Gmail inbox where appointment confirmations went to die. Patients confirmed via phone — when they remembered.</p>
+<p>The practice ran a hodgepodge of tools: a legacy practice management system (PMS) for scheduling, a separate SMS service that fired once 24 hours before, and a Gmail inbox where appointment confirmations went to die. Patients confirmed via phone â€” when they remembered.</p>
 
 <p>The owner had tried GoHighLevel six months prior but couldn't get the calendar to sync with the PMS, gave up, and was paying $97/month for an unused account when we got the brief.</p>
 
@@ -40,7 +19,7 @@
 
 <p>The architecture was deliberately boring. No AI agents, no fancy ML scoring. Just disciplined messaging at the right moments through the right channels.</p>
 
-<h3>1. Calendar bridge: PMS → GoHighLevel</h3>
+<h3>1. Calendar bridge: PMS â†’ GoHighLevel</h3>
 <p>The PMS exposed an iCal feed (most do). We pointed an n8n workflow at the feed every 15 minutes, diffed against the previous fetch, and pushed new/changed/canceled appointments into GHL via its API. Took two days of testing to handle edge cases (appointment moved to a different provider, double-booked slot, last-minute reschedules).</p>
 
 <h3>2. Multi-channel reminder cascade</h3>
@@ -53,7 +32,7 @@
   <li><strong>T-30 minutes:</strong> SMS only. "On your way? Reply HERE when you arrive."</li>
 </ul>
 
-<p>Critical decision: <strong>Signal was the primary channel</strong>, SMS the fallback. Signal templates were pre-approved through GHL's Signal integration. The read rate on Signal messages was 94% vs 81% for SMS — patients actually saw them.</p>
+<p>Critical decision: <strong>Signal was the primary channel</strong>, SMS the fallback. Signal templates were pre-approved through GHL's Signal integration. The read rate on Signal messages was 94% vs 81% for SMS â€” patients actually saw them.</p>
 
 <h3>3. The recovery flow</h3>
 
@@ -73,7 +52,7 @@
 
 <h3>4. Soft escalation for chronic no-shows</h3>
 
-<p>Patients with 3+ no-shows in 12 months were flagged in GHL. Future appointments required a $50 deposit, communicated via Signal at booking. This was the only "harsh" rule — and it cut chronic no-shows by 80% (most of those patients just stopped booking, which the owner was fine with).</p>
+<p>Patients with 3+ no-shows in 12 months were flagged in GHL. Future appointments required a $50 deposit, communicated via Signal at booking. This was the only "harsh" rule â€” and it cut chronic no-shows by 80% (most of those patients just stopped booking, which the owner was fine with).</p>
 
 <h2>The numbers, two weeks after launch</h2>
 
@@ -84,18 +63,18 @@
   <div class="stat"><div class="stat-value">11 min</div><div class="stat-label">Avg cancel-to-fill</div></div>
 </div>
 
-<p>The 7% residual no-show rate is essentially unsolvable — those are emergencies, family crises, true forgetfulness. Pushing below 7% would require punitive deposits and would chase good patients away.</p>
+<p>The 7% residual no-show rate is essentially unsolvable â€” those are emergencies, family crises, true forgetfulness. Pushing below 7% would require punitive deposits and would chase good patients away.</p>
 
 <h2>The build timeline</h2>
 
 <div class="timeline">
   <div class="timeline-item"><span class="timeline-day">Day 1</span>Brief reviewed, scope written, deposit invoiced.</div>
-  <div class="timeline-item"><span class="timeline-day">Day 2–3</span>GHL audit, PMS API access, Signal approval kicked off.</div>
-  <div class="timeline-item"><span class="timeline-day">Day 4–6</span>iCal bridge built, tested with sandboxed appointments.</div>
-  <div class="timeline-item"><span class="timeline-day">Day 7–9</span>Reminder cascade built, message templates A/B tested with 30 test patients.</div>
-  <div class="timeline-item"><span class="timeline-day">Day 10–11</span>Recovery flow built and stress-tested.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 2â€“3</span>GHL audit, PMS API access, Signal approval kicked off.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 4â€“6</span>iCal bridge built, tested with sandboxed appointments.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 7â€“9</span>Reminder cascade built, message templates A/B tested with 30 test patients.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 10â€“11</span>Recovery flow built and stress-tested.</div>
   <div class="timeline-item"><span class="timeline-day">Day 12</span>Front-desk training (45 min Loom + 15 min live Q&A).</div>
-  <div class="timeline-item"><span class="timeline-day">Day 13</span>Soft launch — new appointments only, old ones stay manual.</div>
+  <div class="timeline-item"><span class="timeline-day">Day 13</span>Soft launch â€” new appointments only, old ones stay manual.</div>
   <div class="timeline-item"><span class="timeline-day">Day 14</span>Full cutover.</div>
 </div>
 

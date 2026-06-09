@@ -16,14 +16,25 @@ export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return { title: "Post not found" };
+  // The n8n-vs-zapier-2026 blog post duplicates the dedicated comparison hub at
+  // /n8n-vs-zapier. Canonical it to the hub to avoid keyword cannibalization;
+  // all other posts self-canonical to their /blog/ URL.
+  const canonical =
+    post.slug === "n8n-vs-zapier-2026"
+      ? `${SITE.url}/n8n-vs-zapier`
+      : `${SITE.url}/blog/${post.slug}`;
   return {
     title: `${post.title} | SkynetLabs Journal`,
     description: post.description,
-    alternates: { canonical: `${SITE.url}/blog/${post.slug}` },
+    alternates: { canonical },
     openGraph: {
       title: post.title,
       description: post.description,
@@ -44,12 +55,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
 
-  const htmlPath = path.join(process.cwd(), "content", "blog", "posts", `${post.slug}.html`);
+  const htmlPath = path.join(
+    process.cwd(),
+    "content",
+    "blog",
+    "posts",
+    `${post.slug}.html`,
+  );
   let html: string;
   try {
     html = fs.readFileSync(htmlPath, "utf8");
@@ -74,9 +95,17 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       "@type": "Organization",
       name: SITE.brand,
       url: SITE.url,
-      logo: { "@type": "ImageObject", url: `${SITE.url}/og-default.png`, width: 1200, height: 1200 },
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE.url}/og-default.png`,
+        width: 1200,
+        height: 1200,
+      },
     },
-    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/blog/${post.slug}` },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE.url}/blog/${post.slug}`,
+    },
     keywords: post.tags.join(", "),
   };
 
@@ -130,7 +159,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5" />
-                {new Date(post.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5" />

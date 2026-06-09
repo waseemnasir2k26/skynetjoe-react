@@ -192,9 +192,10 @@ export default function CaseStudiesPage() {
               </h1>
 
               <p className="hero-sub">
-                Dental show-rate <strong>23% → 71%</strong>. A French AI voice
-                agent fielding <strong>200+ calls a week</strong>. Email triage
-                cut from <strong>3 hours a day to 20 minutes</strong>. Each one
+                Dental intake completion <strong>34% → 71%</strong>. A French
+                logistics inbox triaged from{" "}
+                <strong>6 hours to 6 minutes</strong>. Dispatcher load cut from{" "}
+                <strong>4 hours a day to 45 minutes</strong>. Each one
                 anonymized where the contract requires it — the outcomes stay
                 honest.
               </p>

@@ -26,15 +26,13 @@ export default function SkyHero() {
           </div>
 
           <h1>
-            Your business is <em>leaking leads after 5pm.</em> We rebuild the
-            stack in 14 days.
+            Stop losing customers <em>while you&apos;re busy.</em>
           </h1>
 
           <p className="hero-sub">
-            Missed calls. Dead follow-ups. Six SaaS tabs nobody opens.{" "}
-            <strong>SkynetLabs ships ONE AI-run system</strong> — voice agent,
-            instant reply, auto follow-up. Public pricing. Source-controlled.{" "}
-            <strong>Repo in your GitHub on launch day.</strong>
+            Missed calls and dead follow-ups cost you booked jobs. We build one
+            system that answers, replies, and follows up automatically&nbsp;— so
+            no lead slips after hours.
           </p>
 
           <div className="cta-row">
@@ -46,7 +44,18 @@ export default function SkyHero() {
             >
               {SITE.cta.label} →
             </Link>
-            <Link href="/case-studies" className="btn-line">
+            <Link
+              href="/case-studies"
+              className="hero-secondary-link"
+              style={{
+                color: "var(--ink-2, #6b6b6b)",
+                fontSize: 14,
+                fontWeight: 500,
+                textDecoration: "underline",
+                textUnderlineOffset: 3,
+                opacity: 0.85,
+              }}
+            >
               See real results
             </Link>
           </div>

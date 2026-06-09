@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * WorkShowcase — /portfolio gallery of 23 shipped builds.
+ * WorkShowcase — /portfolio gallery: 40+ lifetime builds, 23 shown here.
  *
  * Cream-pivot port 2026-05-25:
  *   - bg cream-3 (was dark gradient #061827 → #073846)
@@ -327,7 +327,7 @@ export default function WorkShowcase() {
                 display: "inline-block",
               }}
             />
-            Recent projects · real screenshots
+            Recent builds · real screenshots
           </div>
           <h2
             style={{
@@ -340,7 +340,7 @@ export default function WorkShowcase() {
               margin: "0 0 18px",
             }}
           >
-            23 builds shipped.{" "}
+            40+ builds delivered.{" "}
             <span
               style={{
                 fontStyle: "normal",
@@ -359,9 +359,10 @@ export default function WorkShowcase() {
               maxWidth: "62ch",
             }}
           >
-            Live screenshots, not mockups. Every tile links to the deployed
-            site. Built solo from Bali + Lahore. Video below walks through one
-            being built end-to-end in Claude Code.
+            A selection of 23 recent builds — live screenshots, not mockups.
+            Every tile links to the deployed site. Built solo from Bali +
+            Lahore. Video below walks through one being built end-to-end in
+            Claude Code.
           </p>
         </div>
 
@@ -460,7 +461,7 @@ export default function WorkShowcase() {
                 </span>
               </div>
               <div className="p-5 flex-1 flex flex-col">
-                <h2
+                <h3
                   style={{
                     fontFamily: "var(--font-display)",
                     fontWeight: 700,
@@ -472,7 +473,7 @@ export default function WorkShowcase() {
                   }}
                 >
                   {g.title}
-                </h2>
+                </h3>
                 <p
                   style={{
                     fontFamily: "var(--font-mono)",

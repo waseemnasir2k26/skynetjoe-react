@@ -159,7 +159,12 @@ function extractNounPhrases(text: string): string[] {
   for (const raw of matches) {
     const cleaned = raw.trim().replace(/[.,;:]$/, "");
     if (cleaned.length < 3) continue;
-    if (/^(The|And|But|For|This|That|We|I|You|They|It|He|She|If|When|While|However|After|Before|With)\b/.test(cleaned)) continue;
+    if (
+      /^(The|And|But|For|This|That|We|I|You|They|It|He|She|If|When|While|However|After|Before|With)\b/.test(
+        cleaned,
+      )
+    )
+      continue;
     counts.set(cleaned, (counts.get(cleaned) || 0) + 1);
   }
   return [...counts.entries()]
@@ -222,29 +227,44 @@ function trimWords(text: string, max: number): string {
 }
 
 function joinSentences(sentences: string[]): string {
-  return sentences
-    .map((s) => (/[.!?]$/.test(s) ? s : `${s}.`))
-    .join(" ");
+  return sentences.map((s) => (/[.!?]$/.test(s) ? s : `${s}.`)).join(" ");
 }
 
-function audienceGreeting(a: Audience, tone: Tone): { greeting: string; signoff: string } {
+function audienceGreeting(
+  a: Audience,
+  tone: Tone,
+): { greeting: string; signoff: string } {
   if (tone === "formal") {
     return {
       greeting:
-        a === "investor" || a === "board" ? "Dear team," : a === "client" ? "Dear partner," : "Hello team,",
+        a === "investor" || a === "board"
+          ? "Dear team,"
+          : a === "client"
+            ? "Dear partner,"
+            : "Hello team,",
       signoff: "Regards,",
     };
   }
   if (tone === "storytelling") {
     return {
       greeting:
-        a === "investor" ? "Hi all," : a === "client" ? "Hey there," : "Hi team,",
+        a === "investor"
+          ? "Hi all,"
+          : a === "client"
+            ? "Hey there,"
+            : "Hi team,",
       signoff: "More soon,",
     };
   }
   return {
     greeting:
-      a === "investor" ? "Hi investors," : a === "client" ? "Hi there," : a === "board" ? "Hi board," : "Hi team,",
+      a === "investor"
+        ? "Hi investors,"
+        : a === "client"
+          ? "Hi there,"
+          : a === "board"
+            ? "Hi board,"
+            : "Hi team,",
     signoff: "Best,",
   };
 }
@@ -272,13 +292,18 @@ function buildBundle(inputs: Inputs): Bundle {
   const subject = phrases[0] || title;
   const mood = sentiment(text);
 
-  const lengthSentenceCount = Math.max(3, Math.min(12, Math.round(length / 22)));
+  const lengthSentenceCount = Math.max(
+    3,
+    Math.min(12, Math.round(length / 22)),
+  );
   const top = getTopSentences(text, lengthSentenceCount);
   const ranked = rank(text);
   const paragraphs = splitParagraphs(text);
 
   // TL;DR — 3 bullets, < 100 words
-  const tldrBullets = bulletify(ranked.slice(0, 3)).map((b) => trimWords(b, 24));
+  const tldrBullets = bulletify(ranked.slice(0, 3)).map((b) =>
+    trimWords(b, 24),
+  );
   const tldr = {
     bullets: tldrBullets,
     words: wordsCount(tldrBullets.join(" ")),
@@ -286,10 +311,13 @@ function buildBundle(inputs: Inputs): Bundle {
 
   // Email — 3 paragraphs
   const greet = audienceGreeting(audience, tone);
-  const para1 = trimWords(joinSentences(top.slice(0, 2)), Math.round(length * 0.3));
+  const para1 = trimWords(
+    joinSentences(top.slice(0, 2)),
+    Math.round(length * 0.3),
+  );
   const para2 = trimWords(
     joinSentences(top.slice(2, Math.min(top.length, 5))),
-    Math.round(length * 0.4)
+    Math.round(length * 0.4),
   );
   const para3Bullets = ranked.slice(top.length, top.length + 3);
   const callToAction =
@@ -349,7 +377,9 @@ function buildBundle(inputs: Inputs): Bundle {
   const slack = { body: slackBody, words: wordsCount(slackBody) };
 
   // Deck slide
-  const deckBullets = ranked.slice(0, 5).map((b) => trimWords(b.replace(/[.!?]$/, ""), 14));
+  const deckBullets = ranked
+    .slice(0, 5)
+    .map((b) => trimWords(b.replace(/[.!?]$/, ""), 14));
   const deck = {
     title: trimWords(title, 10),
     bullets: deckBullets,
@@ -364,10 +394,14 @@ function buildBundle(inputs: Inputs): Bundle {
   const tractionSrc =
     ranked.find((s) => /\d/.test(s)) || ranked[2] || top[2] || "";
   const askSrc =
-    ranked.find((s) => /\b(need|ask|funding|raise|invest|hire|budget|approve)\b/i.test(s)) ||
+    ranked.find((s) =>
+      /\b(need|ask|funding|raise|invest|hire|budget|approve)\b/i.test(s),
+    ) ||
     "We are seeking strategic introductions and follow-on support to accelerate the next milestone.";
   const nextSteps = ranked
-    .filter((s) => /\b(will|plan|next|then|by|launch|ship|hire|close|deliver)\b/i.test(s))
+    .filter((s) =>
+      /\b(will|plan|next|then|by|launch|ship|hire|close|deliver)\b/i.test(s),
+    )
     .slice(0, 3)
     .map((s) => trimWords(s.replace(/[.!?]$/, ""), 16));
   const fallbackNext =
@@ -375,7 +409,9 @@ function buildBundle(inputs: Inputs): Bundle {
       ? nextSteps
       : [
           ...nextSteps,
-          ...ranked.slice(0, 3 - nextSteps.length).map((s) => trimWords(s.replace(/[.!?]$/, ""), 16)),
+          ...ranked
+            .slice(0, 3 - nextSteps.length)
+            .map((s) => trimWords(s.replace(/[.!?]$/, ""), 16)),
         ].slice(0, 3);
 
   const investor = {
@@ -385,7 +421,13 @@ function buildBundle(inputs: Inputs): Bundle {
     ask: trimWords(askSrc, 50),
     next: fallbackNext,
     words: wordsCount(
-      [problemSrc, solutionSrc, tractionSrc, askSrc, fallbackNext.join(" ")].join(" ")
+      [
+        problemSrc,
+        solutionSrc,
+        tractionSrc,
+        askSrc,
+        fallbackNext.join(" "),
+      ].join(" "),
     ),
   };
 
@@ -411,7 +453,9 @@ function bundleToText(b: Bundle, tab: TabKey): string {
   }
   if (tab === "slack") return b.slack.body;
   if (tab === "deck") {
-    return `${b.deck.title}\n\n` + b.deck.bullets.map((x) => `• ${x}`).join("\n");
+    return (
+      `${b.deck.title}\n\n` + b.deck.bullets.map((x) => `• ${x}`).join("\n")
+    );
   }
   // investor
   return [
@@ -450,7 +494,8 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         setInputs({
           text: saved.text ?? "",
           audience: (saved.audience as Audience) ?? DEFAULTS.audience,
-          length: typeof saved.length === "number" ? saved.length : DEFAULTS.length,
+          length:
+            typeof saved.length === "number" ? saved.length : DEFAULTS.length,
           tone: (saved.tone as Tone) ?? DEFAULTS.tone,
         });
       }
@@ -472,7 +517,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
 
   const setText = useCallback(
     (v: string) => setInputs((s) => ({ ...s, text: v.slice(0, 8000) })),
-    []
+    [],
   );
 
   const generate = useCallback(() => {
@@ -485,7 +530,10 @@ export default function Generator({ calUrl }: { calUrl: string }) {
       setBundle(b);
       setGenerating(false);
       requestAnimationFrame(() => {
-        resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        resultRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       });
     }, 900);
   }, [inputs]);
@@ -501,7 +549,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         // ignore
       }
     },
-    [bundle]
+    [bundle],
   );
 
   const charCount = inputs.text.length;
@@ -545,17 +593,20 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             <select
               value={inputs.audience}
               onChange={(e) =>
-                setInputs((s) => ({ ...s, audience: e.target.value as Audience }))
+                setInputs((s) => ({
+                  ...s,
+                  audience: e.target.value as Audience,
+                }))
               }
               className="esg-input"
             >
-              {(["ceo", "investor", "board", "client", "team"] as Audience[]).map(
-                (a) => (
-                  <option key={a} value={a}>
-                    {AUDIENCE_LABEL[a]}
-                  </option>
-                )
-              )}
+              {(
+                ["ceo", "investor", "board", "client", "team"] as Audience[]
+              ).map((a) => (
+                <option key={a} value={a}>
+                  {AUDIENCE_LABEL[a]}
+                </option>
+              ))}
             </select>
           </div>
           <div>
@@ -574,8 +625,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               className="rc-range w-full"
               style={
                 {
-                  ["--rc-fill" as never]:
-                    `${((inputs.length - 100) / 400) * 100}%`,
+                  ["--rc-fill" as never]: `${((inputs.length - 100) / 400) * 100}%`,
                 } as React.CSSProperties
               }
             />
@@ -612,7 +662,8 @@ export default function Generator({ calUrl }: { calUrl: string }) {
           >
             {generating ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" /> Generating five formats…
+                <Loader2 className="w-4 h-4 animate-spin" /> Generating five
+                formats…
               </>
             ) : (
               <>
@@ -752,7 +803,9 @@ export default function Generator({ calUrl }: { calUrl: string }) {
                   <ul className="space-y-2.5 text-base text-[var(--ink)] leading-relaxed">
                     {bundle.deck.bullets.map((b, i) => (
                       <li key={i} className="flex gap-2">
-                        <span className="text-[var(--terracotta-aa)] font-bold">{i + 1}.</span>
+                        <span className="text-[var(--terracotta-aa)] font-bold">
+                          {i + 1}.
+                        </span>
                         <span>{b}</span>
                       </li>
                     ))}
@@ -838,9 +891,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               </p>
             </div>
             <a
-              href={calUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/discovery-call"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] whitespace-nowrap hover:opacity-90 transition"
               style={{
                 background: "var(--terracotta)",
@@ -869,10 +920,15 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             What should this tool do next?
           </h3>
           <p className="text-sm text-[var(--ink-2)] mb-4">
-            One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+            One missing field, one weird output, one tool you wish existed —
+            tell me. I read every reply.
           </p>
           <form action="/api/tool-feedback" method="POST" className="space-y-3">
-            <input type="hidden" name="tool" value="executive-summary-generator" />
+            <input
+              type="hidden"
+              name="tool"
+              value="executive-summary-generator"
+            />
             <textarea
               name="message"
               required
@@ -886,7 +942,11 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               placeholder="Email (optional — only if you want a reply)"
               className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm focus:outline-none transition"
             />
-            <button type="submit" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition" style={{ background: "var(--terracotta)" }}>
+            <button
+              type="submit"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+              style={{ background: "var(--terracotta)" }}
+            >
               Send feedback →
             </button>
           </form>
@@ -990,7 +1050,13 @@ export default function Generator({ calUrl }: { calUrl: string }) {
   );
 }
 
-function Section({ label, children }: { label: string; children: React.ReactNode }) {
+function Section({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1">

@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Library from "./Library";
-import {
-  PROMPT_COUNT,
-  CATEGORIES,
-} from "@/data/prompts-library";
+import { PROMPT_COUNT, CATEGORIES } from "@/data/prompts-library";
 import { Sparkles, Search, Copy, Library as LibraryIcon } from "lucide-react";
 
 const PATH = "/tools/prompt-library";
@@ -113,7 +110,12 @@ export default function PromptLibraryPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -131,7 +133,17 @@ export default function PromptLibraryPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               {PROMPT_COUNT} AI prompts that{" "}
               <span
                 style={{
@@ -147,14 +159,28 @@ export default function PromptLibraryPage() {
               </span>
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
               Eight categories — sales, marketing, ops, content, data,
               recruitment, customer service, founder brain. Every prompt is
-              structured with constraints, banned phrases, and an output
-              format. Not 'write me a cold email' — 'write me a cold email
-              that ships'.
+              structured with constraints, banned phrases, and an output format.
+              Not 'write me a cold email' — 'write me a cold email that ships'.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
               Search, filter, copy. Or open any prompt directly in Claude or
               ChatGPT with one click. Anonymous, no signup.
             </p>
@@ -234,21 +260,17 @@ export default function PromptLibraryPage() {
               <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-3">
                 — Stop collecting prompts
               </p>
-              <h2
-                className="text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--ink)] mb-4"
-              >
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--ink)] mb-4">
                 Start shipping outputs.
               </h2>
               <p className="text-base md:text-lg text-[var(--ink-2)] mb-6 max-w-2xl mx-auto leading-relaxed">
-                Standalone, the prompts work. Wired into your CRM, helpdesk,
-                or n8n flow they earn back their rent every week. Book a
-                strategy call and we&apos;ll map the integration on a
-                whiteboard with you.
+                Standalone, the prompts work. Wired into your CRM, helpdesk, or
+                n8n flow they earn back their rent every week. Book a strategy
+                call and we&apos;ll map the integration on a whiteboard with
+                you.
               </p>
               <a
-                href="https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=prompt-library"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/discovery-call"
                 className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
                 style={{ background: "var(--terracotta)" }}
               >

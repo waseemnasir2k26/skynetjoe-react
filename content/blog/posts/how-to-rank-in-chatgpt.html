@@ -1,22 +1,3 @@
-<style>
-  .wn-how-to-rank-in-chatgpt { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
-  .wn-how-to-rank-in-chatgpt h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
-  .wn-how-to-rank-in-chatgpt h3 { color: #7ee4ff; font-size: 1.3rem; font-weight: 700; margin: 2rem 0 0.75rem; }
-  .wn-how-to-rank-in-chatgpt p { margin-bottom: 1.1rem; color: #d1d5db; }
-  .wn-how-to-rank-in-chatgpt ul, .wn-how-to-rank-in-chatgpt ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
-  .wn-how-to-rank-in-chatgpt li { margin-bottom: 0.6rem; }
-  .wn-how-to-rank-in-chatgpt strong { color: #fff; }
-  .wn-how-to-rank-in-chatgpt a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
-  .wn-how-to-rank-in-chatgpt a:hover { color: #7ee4ff; }
-  .wn-how-to-rank-in-chatgpt .callout { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(20,184,166,0.08)); border-left: 3px solid #00D4FF; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
-  .wn-how-to-rank-in-chatgpt .callout strong { color: #7ee4ff; }
-  .wn-how-to-rank-in-chatgpt .verdict { background: linear-gradient(135deg, #1E88E5, #14B8A6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
-  .wn-how-to-rank-in-chatgpt table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
-  .wn-how-to-rank-in-chatgpt th { background: rgba(0,212,255,0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
-  .wn-how-to-rank-in-chatgpt td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .wn-how-to-rank-in-chatgpt code { background: rgba(0,212,255,0.12); color: #7ee4ff; padding: 0.15rem 0.45rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.9em; }
-</style>
-
 <p>"Ranking in ChatGPT" isn't the same job as ranking on Google, and people who treat it as the same job ship work that doesn't move citation rate. ChatGPT picks 3-5 sources by name. Google ranks 10 blue links. The signals overlap, the weights differ. This is the playbook I use.</p>
 
 <p>Below is the work that actually moves the needle, the work that doesn't, and the rough order I ship it in for clients between 2024 and 2026.</p>
@@ -29,7 +10,7 @@
 
 <h2>Why ChatGPT citation works differently from Google ranking</h2>
 
-<p>Google ranks 10 blue links based on hundreds of signals — authority, freshness, relevance, click-through-rate, dwell time, the whole circus. ChatGPT synthesises one answer and picks 3-5 sources by name. The signals overlap (authority, freshness, relevance) but the weights are different.</p>
+<p>Google ranks 10 blue links based on hundreds of signals â€” authority, freshness, relevance, click-through-rate, dwell time, the whole circus. ChatGPT synthesises one answer and picks 3-5 sources by name. The signals overlap (authority, freshness, relevance) but the weights are different.</p>
 
 <p>What I've seen across the audits we've run:</p>
 
@@ -52,11 +33,11 @@
   <li><strong>BreadcrumbList</strong> for navigation context. Helps the engine understand the page's position in the site.</li>
 </ol>
 
-<p>Most sites in 2026 still ship partial schema by default. The gaps are where the easy citation wins live. Audit your current schema with Google's Rich Results Test or the Schema.org validator — count what's missing.</p>
+<p>Most sites in 2026 still ship partial schema by default. The gaps are where the easy citation wins live. Audit your current schema with Google's Rich Results Test or the Schema.org validator â€” count what's missing.</p>
 
 <h2>Step two: deploy llms.txt at your root</h2>
 
-<p>The llms.txt file is the AI-engine equivalent of a curated sitemap. It tells engines which pages you want crawled and cited. The format is simple — markdown with a heading per priority page plus a one-line description.</p>
+<p>The llms.txt file is the AI-engine equivalent of a curated sitemap. It tells engines which pages you want crawled and cited. The format is simple â€” markdown with a heading per priority page plus a one-line description.</p>
 
 <p>Twenty to thirty lines is enough for most sites. Mine on skynetjoe.com lists:</p>
 
@@ -88,7 +69,7 @@
 
 <h2>Step four: signal freshness with explicit dateModified</h2>
 
-<p>ChatGPT and the other AI engines weight freshness heavily for queries that move quickly — pricing, integrations, product features, news. Articles and service pages with explicit dateModified get cited more than equivalent stale pages.</p>
+<p>ChatGPT and the other AI engines weight freshness heavily for queries that move quickly â€” pricing, integrations, product features, news. Articles and service pages with explicit dateModified get cited more than equivalent stale pages.</p>
 
 <p>Two rules:</p>
 
@@ -101,7 +82,7 @@
 
 <p>Pick 20 buyer queries you want to win. Run them against ChatGPT once a week. Log whether your brand was named. Citation rate is the percent of prompts that name you.</p>
 
-<p>The first time most brands run this test they score 0 out of 20. That's the baseline you measure progress against. After 4-6 weeks of ship-and-measure the typical movement is 0 → 3 → 5 → 7 out of 20. The week-to-week movement teaches you which fixes worked.</p>
+<p>The first time most brands run this test they score 0 out of 20. That's the baseline you measure progress against. After 4-6 weeks of ship-and-measure the typical movement is 0 â†’ 3 â†’ 5 â†’ 7 out of 20. The week-to-week movement teaches you which fixes worked.</p>
 
 <p>I cover the manual tracking method in <a href="/blog/track-ai-citations">how to track AI citations</a>. The short version: 20 prompts, weekly cadence, spreadsheet, four engines.</p>
 
@@ -115,7 +96,7 @@
   <li>Excessive internal linking with keyword-rich anchors</li>
 </ul>
 
-<p>None of these move ChatGPT citation rate. Schema, llms.txt, FAQ pattern alignment, freshness, entity clarity — those are the levers that matter, in roughly that order of impact.</p>
+<p>None of these move ChatGPT citation rate. Schema, llms.txt, FAQ pattern alignment, freshness, entity clarity â€” those are the levers that matter, in roughly that order of impact.</p>
 
 <h2>The honest order I ship in for clients</h2>
 
@@ -155,7 +136,7 @@
 
 <h3>What if my site is built on Webflow or Wix where schema is hard to customise?</h3>
 
-<p>Webflow allows custom schema via the embed-code feature — doable but tedious at scale. Wix limits schema customisation. For serious AEO work I usually recommend migration to Webflow or WordPress, or rebuild on Next.js with per-page metadata exports.</p>
+<p>Webflow allows custom schema via the embed-code feature â€” doable but tedious at scale. Wix limits schema customisation. For serious AEO work I usually recommend migration to Webflow or WordPress, or rebuild on Next.js with per-page metadata exports.</p>
 
 <h3>Is there a free tool to check my ChatGPT citation rate?</h3>
 

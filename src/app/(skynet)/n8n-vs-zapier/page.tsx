@@ -19,32 +19,11 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline:
-    "n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)",
-  description:
-    "Side-by-side comparison of n8n and Zapier from 180+ shipped workflows. Pricing, self-hosting, branching, compliance, AI nodes, 5 scenarios with picks.",
-  url: `${SITE.url}/n8n-vs-zapier`,
-  inLanguage: "en",
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-  publisher: {
-    "@type": "Organization",
-    name: SITE.brand,
-    url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.url}/og-default.png` },
-  },
-  mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/n8n-vs-zapier` },
-  about: [
-    { "@type": "SoftwareApplication", name: "n8n" },
-    { "@type": "SoftwareApplication", name: "Zapier" },
-  ],
-};
-
 // Full @graph schema preserved from the original HTML payload (Article + Table
 // + FAQPage). vercel-preview hostnames swapped for SITE.url so structured data
-// points at the production domain. Rendered alongside the Article schema above.
+// points at the production domain. This is the single Article node for the URL —
+// a previous flat Article duplicate was removed to avoid two conflicting Article
+// nodes (different author URLs) for one page.
 const graphSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -315,7 +294,6 @@ const TREE: { q: string; arrow: string; leaf: string; tone: string }[] = [
 export default function N8nVsZapierPage() {
   return (
     <>
-      <JsonLd data={schema} />
       <JsonLd data={graphSchema} />
 
       <div className="sky">

@@ -674,6 +674,94 @@ html.light article[class*="wn-"] .wn-section {
 }
 
 /* ============================================
+   PROSE-WN — cream long-form blog body (src/app/(skynet)/blog/[slug])
+   The blog detail page wraps post HTML in `.prose-wn`. The per-file inline
+   <style> dark theme has been removed; this is the single source of truth.
+   !important on text props beats any residual inline body <style>.
+   ============================================ */
+.prose-wn {
+  color: var(--ink) !important;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.prose-wn p,
+.prose-wn li {
+  color: var(--ink) !important;
+  font-size: 17px !important;
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+}
+.prose-wn h2 {
+  color: var(--ink) !important;
+  font-size: 1.75rem !important;
+  font-weight: 800;
+  margin: 2.5rem 0 1rem;
+  letter-spacing: -0.02em;
+}
+.prose-wn h3 {
+  color: #a8451f !important;
+  font-size: 1.3rem !important;
+  font-weight: 700;
+  margin: 2rem 0 0.75rem;
+}
+.prose-wn strong {
+  color: var(--ink) !important;
+  font-weight: 700;
+}
+.prose-wn a {
+  color: #a8451f;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-wn ul,
+.prose-wn ol {
+  margin: 1rem 0 1.4rem 1.5rem;
+}
+.prose-wn table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 16px;
+}
+.prose-wn th {
+  background: rgba(198, 107, 63, 0.12);
+  color: #1a1a1a;
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+}
+.prose-wn td {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.12);
+}
+.prose-wn code {
+  background: rgba(198, 107, 63, 0.12);
+  color: #a8451f;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+}
+.prose-wn .callout {
+  background: rgba(198, 107, 63, 0.08);
+  border-left: 3px solid #c66b3f;
+  padding: 1.25rem 1.5rem;
+  border-radius: 10px;
+  margin: 2rem 0;
+}
+.prose-wn .verdict {
+  background: linear-gradient(135deg, #c66b3f, #a8451f);
+  color: #fff;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+  font-weight: 600;
+}
+
+/* ============================================
    THEME BRIDGE v2 — flip hardcoded dark utilities in light mode
    Many components were written for dark-default and use literal
    text-gray-200/300/400, bg-white/5/10, border-white/5/10/15/20.

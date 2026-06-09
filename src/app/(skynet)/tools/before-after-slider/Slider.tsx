@@ -15,8 +15,6 @@ import Link from "next/link";
 import { ArrowRight, RotateCcw, Hand } from "lucide-react";
 import { SCENARIOS, type Scenario } from "@/data/before-after-scenarios";
 
-const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
-
 export default function Slider() {
   const [activeSlug, setActiveSlug] = useState<string>(SCENARIOS[0].slug);
   const [position, setPosition] = useState<number>(50); // 0 = all manual, 100 = all automated
@@ -200,8 +198,7 @@ export default function Slider() {
           style={{
             // Use CSS height for consistent ratio; mobile uses smaller pad
             minHeight: "520px",
-            background:
-              "var(--cream-3)",
+            background: "var(--cream-3)",
             cursor: dragging ? "grabbing" : isTouch ? "pointer" : "grab",
           }}
         >
@@ -220,7 +217,11 @@ export default function Slider() {
             className="absolute inset-0 p-6 md:p-10"
             style={{
               clipPath: `inset(0 0 0 ${position}%)`,
-              transition: reduceMotion ? "none" : dragging ? "none" : "clip-path 120ms ease-out",
+              transition: reduceMotion
+                ? "none"
+                : dragging
+                  ? "none"
+                  : "clip-path 120ms ease-out",
               background: "var(--cream-3)",
             }}
           >
@@ -235,7 +236,8 @@ export default function Slider() {
               background: "var(--terracotta)",
               boxShadow: "0 0 12px rgba(198,107,63,0.35)",
               transform: "translateX(-0.5px)",
-              transition: reduceMotion || dragging ? "none" : "left 120ms ease-out",
+              transition:
+                reduceMotion || dragging ? "none" : "left 120ms ease-out",
               display: reduceMotion ? "none" : "block",
             }}
           />
@@ -281,7 +283,10 @@ export default function Slider() {
                   className="text-[var(--cream-3)]"
                 >
                   <polyline points="15 18 9 12 15 6" />
-                  <polyline points="9 18 15 12 9 6" transform="translate(0,0)" />
+                  <polyline
+                    points="9 18 15 12 9 6"
+                    transform="translate(0,0)"
+                  />
                 </svg>
               </div>
             </div>
@@ -373,9 +378,7 @@ export default function Slider() {
           your week — I&apos;ll sketch the automation on the call.
         </p>
         <Link
-          href={CAL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/discovery-call"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition hover:opacity-90"
           style={{ background: "var(--terracotta)", color: "var(--cream-3)" }}
         >
@@ -393,7 +396,8 @@ export default function Slider() {
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
-          One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+          One missing field, one weird output, one tool you wish existed — tell
+          me. I read every reply.
         </p>
         <form action="/api/tool-feedback" method="POST" className="space-y-3">
           <input type="hidden" name="tool" value="before-after-slider" />
@@ -410,7 +414,11 @@ export default function Slider() {
             placeholder="Email (optional — only if you want a reply)"
             className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm focus:outline-none transition"
           />
-          <button type="submit" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition" style={{ background: "var(--terracotta)" }}>
+          <button
+            type="submit"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+            style={{ background: "var(--terracotta)" }}
+          >
             Send feedback →
           </button>
         </form>

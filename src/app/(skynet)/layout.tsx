@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import Analytics, { GtmNoscript } from "@/components/Analytics";
 import AISignals from "@/components/aeo/AISignals";
 import LiveChat from "@/components/LiveChat";
+import ConsentBanner from "@/components/ConsentBanner";
 // 2026-05-29 — Interrupting popups disabled (kept in repo, re-add JSX to restore):
 //   DiscoveryPopup @/components/DiscoveryPopup · StickyBookCallBar @/components/cta/StickyBookCallBar
 //   ExitIntentModal @/components/cta/ExitIntentModal · (earlier: IncomingCallPopup, SocialProofPopup)
@@ -182,6 +183,7 @@ export default function RootLayout({
         {/* Passive chat bubble only — opens on click, never auto-pops. Interrupting
             popups (Discovery/ExitIntent/StickyBar) stay disabled per 2026-05-29 request. */}
         <LiveChat />
+        <ConsentBanner />
       </body>
     </html>
   );

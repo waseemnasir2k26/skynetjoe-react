@@ -1505,7 +1505,7 @@ export default function ServiceFunnel({
               marginTop: 22,
             }}
           >
-            — 4 builds per month · 8-hour weekday reply
+            — 4 builds a month · 8-hour weekday reply
           </div>
         </Reveal>
       </section>

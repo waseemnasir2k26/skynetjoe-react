@@ -168,7 +168,10 @@ function describeTone(slider: ToneSlider, value: number): string {
   return `very ${slider.right.toLowerCase()}`;
 }
 
-function buildRewrites(tones: Tones, vocab: Vocab): { generic: string; voice: string }[] {
+function buildRewrites(
+  tones: Tones,
+  vocab: Vocab,
+): { generic: string; voice: string }[] {
   const concise = tones.concision >= 6;
   const bold = tones.boldness >= 7;
   const casual = tones.formality >= 6;
@@ -202,7 +205,8 @@ function buildRewrites(tones: Tones, vocab: Vocab): { generic: string; voice: st
           : "If you'd like further detail on any of the above, reply to this message and we will respond promptly.",
     },
     {
-      generic: "Our innovative platform leverages cutting-edge AI to deliver value.",
+      generic:
+        "Our innovative platform leverages cutting-edge AI to deliver value.",
       voice: innovative
         ? niche
           ? "We wire AI agents into the boring parts of your stack so the rest of your team can do the work only humans can."
@@ -247,7 +251,9 @@ function buildPersonaSummary(state: State): string {
   const tone2 = describeTone(TONE_SLIDERS[2], tones.boldness);
   const tone3 = describeTone(TONE_SLIDERS[5], tones.authority);
   return `${bn} speaks to ${audience} in ${industry}. The voice is ${tone1}, ${tone2} and ${tone3}, with a preference for ${
-    tones.concision >= 6 ? "short, punchy phrasing" : "fuller, more textured prose"
+    tones.concision >= 6
+      ? "short, punchy phrasing"
+      : "fuller, more textured prose"
   } and ${
     tones.innovation >= 7
       ? "frontier-leaning framing"
@@ -255,7 +261,10 @@ function buildPersonaSummary(state: State): string {
   }. The brand never sounds generic, never sounds desperate, and never sounds like default LLM output.`;
 }
 
-function buildSystemPrompt(state: State, rewrites: { generic: string; voice: string }[]): string {
+function buildSystemPrompt(
+  state: State,
+  rewrites: { generic: string; voice: string }[],
+): string {
   const { identity, vocab, examples } = state;
   const bn = identity.brandName.trim() || "[BRAND]";
   const wordsUse = (vocab.use || "").trim() || "—";
@@ -283,7 +292,9 @@ function buildSystemPrompt(state: State, rewrites: { generic: string; voice: str
   lines.push("This is an example of writing that sounds correct:");
   lines.push(example);
   lines.push("");
-  lines.push("This is an example of writing that DOES NOT sound correct — never write like this:");
+  lines.push(
+    "This is an example of writing that DOES NOT sound correct — never write like this:",
+  );
   lines.push(antiExample);
   if (quote) {
     lines.push("");
@@ -298,7 +309,7 @@ function buildSystemPrompt(state: State, rewrites: { generic: string; voice: str
   });
   lines.push("");
   lines.push(
-    "Before sending any draft, re-read it and ask: does this sound like the brand above, or does it sound like a default AI? If it sounds like default AI, rewrite."
+    "Before sending any draft, re-read it and ask: does this sound like the brand above, or does it sound like a default AI? If it sounds like default AI, rewrite.",
   );
   return lines.join("\n");
 }
@@ -311,7 +322,9 @@ function buildProfileDoc(state: State): string {
   const lines: string[] = [];
   lines.push(`# Brand Voice Profile — ${bn}`);
   lines.push("");
-  lines.push("> Paste this entire document into Claude, ChatGPT or any LLM as a system prompt before you ask for copy. Update it any time positioning shifts.");
+  lines.push(
+    "> Paste this entire document into Claude, ChatGPT or any LLM as a system prompt before you ask for copy. Update it any time positioning shifts.",
+  );
   lines.push("");
   lines.push("## 1. Persona summary");
   lines.push("");
@@ -373,7 +386,10 @@ function buildProfileDoc(state: State): string {
 
 function isStepValid(state: State): boolean {
   if (state.step === 0) {
-    return state.identity.brandName.trim().length > 0 && state.identity.audience.trim().length > 0;
+    return (
+      state.identity.brandName.trim().length > 0 &&
+      state.identity.audience.trim().length > 0
+    );
   }
   if (state.step === 1) return true;
   if (state.step === 2) return true;
@@ -423,22 +439,25 @@ export default function Builder({ calUrl }: { calUrl: string }) {
   const updateIdentity = useCallback(
     (key: keyof Identity, val: string) =>
       setState((s) => ({ ...s, identity: { ...s.identity, [key]: val } })),
-    []
+    [],
   );
   const updateTone = useCallback(
     (key: ToneKey, val: number) =>
-      setState((s) => ({ ...s, tones: { ...s.tones, [key]: clamp(val, 1, 10) } })),
-    []
+      setState((s) => ({
+        ...s,
+        tones: { ...s.tones, [key]: clamp(val, 1, 10) },
+      })),
+    [],
   );
   const updateVocab = useCallback(
     (key: keyof Vocab, val: string) =>
       setState((s) => ({ ...s, vocab: { ...s.vocab, [key]: val } })),
-    []
+    [],
   );
   const updateExamples = useCallback(
     (key: keyof Examples, val: string) =>
       setState((s) => ({ ...s, examples: { ...s.examples, [key]: val } })),
-    []
+    [],
   );
 
   const doc = useMemo(() => buildProfileDoc(state), [state]);
@@ -483,7 +502,11 @@ export default function Builder({ calUrl }: { calUrl: string }) {
     const blob = new Blob([doc], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    const safe = (state.identity.brandName || "brand-voice").trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    const safe = (state.identity.brandName || "brand-voice")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
     a.href = url;
     a.download = `${safe || "brand-voice"}-voice-profile.md`;
     document.body.appendChild(a);
@@ -507,7 +530,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
       >
         <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
           <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold">
-            {phase === "result" ? "Profile generated" : `Step ${state.step + 1} of 4`}
+            {phase === "result"
+              ? "Profile generated"
+              : `Step ${state.step + 1} of 4`}
           </p>
           <button
             type="button"
@@ -527,7 +552,8 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               : active
                 ? "var(--terracotta)"
                 : "var(--cream-3)";
-            const textColor = done || active ? "var(--cream-3)" : "var(--ink-faint)";
+            const textColor =
+              done || active ? "var(--cream-3)" : "var(--ink-faint)";
             const borderCol = done
               ? "var(--sage)"
               : active
@@ -632,7 +658,10 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                   className="vpb-input"
                 />
               </Field>
-              <Field label="Origin story" hint="2–3 sentences. Why does this brand exist?">
+              <Field
+                label="Origin story"
+                hint="2–3 sentences. Why does this brand exist?"
+              >
                 <textarea
                   value={state.identity.origin}
                   onChange={(e) => updateIdentity("origin", e.target.value)}
@@ -651,7 +680,8 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                   Step 2 — Tone sliders
                 </h2>
                 <p className="text-sm text-[var(--ink-faint)]">
-                  Drag each axis toward the side that feels true. Mid is a fine answer.
+                  Drag each axis toward the side that feels true. Mid is a fine
+                  answer.
                 </p>
               </div>
 
@@ -677,13 +707,22 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                         max={10}
                         step={1}
                         value={v}
-                        onChange={(e) => updateTone(s.key, Number(e.target.value))}
+                        onChange={(e) =>
+                          updateTone(s.key, Number(e.target.value))
+                        }
                         className="rc-range w-full"
                         aria-label={`${s.left} to ${s.right}`}
-                        style={{ ["--rc-fill" as never]: `${pct}%` } as React.CSSProperties}
+                        style={
+                          {
+                            ["--rc-fill" as never]: `${pct}%`,
+                          } as React.CSSProperties
+                        }
                       />
                       <p className="text-xs text-[var(--ink-faint)] mt-1.5 leading-snug">
-                        {s.caption} <span className="text-[var(--terracotta-aa)]/80">— {describeTone(s, v)}</span>
+                        {s.caption}{" "}
+                        <span className="text-[var(--terracotta-aa)]/80">
+                          — {describeTone(s, v)}
+                        </span>
                       </p>
                     </div>
                   );
@@ -699,10 +738,14 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                   Step 3 — Vocabulary
                 </h2>
                 <p className="text-sm text-[var(--ink-faint)]">
-                  Comma- or newline-separated. The model treats these as hard rules.
+                  Comma- or newline-separated. The model treats these as hard
+                  rules.
                 </p>
               </div>
-              <Field label="Words we USE" hint="Operator language, plain English, specific verbs.">
+              <Field
+                label="Words we USE"
+                hint="Operator language, plain English, specific verbs."
+              >
                 <textarea
                   value={state.vocab.use}
                   onChange={(e) => updateVocab("use", e.target.value)}
@@ -720,7 +763,10 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                   className="vpb-input vpb-textarea"
                 />
               </Field>
-              <Field label="Signature phrases" hint="Phrases the brand says like a chorus.">
+              <Field
+                label="Signature phrases"
+                hint="Phrases the brand says like a chorus."
+              >
                 <textarea
                   value={state.vocab.signature}
                   onChange={(e) => updateVocab("signature", e.target.value)}
@@ -739,7 +785,8 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                   Step 4 — Examples
                 </h2>
                 <p className="text-sm text-[var(--ink-faint)]">
-                  Show the model what good looks like. And what to never sound like.
+                  Show the model what good looks like. And what to never sound
+                  like.
                 </p>
               </div>
               <Field label="Best email, post or landing page you have written">
@@ -754,7 +801,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               <Field label="Best customer quote about you">
                 <textarea
                   value={state.examples.customerQuote}
-                  onChange={(e) => updateExamples("customerQuote", e.target.value)}
+                  onChange={(e) =>
+                    updateExamples("customerQuote", e.target.value)
+                  }
                   rows={3}
                   placeholder='"They saved us 18 hours a week the same month they shipped." — Marcus, US insurance broker'
                   className="vpb-input vpb-textarea"
@@ -763,7 +812,9 @@ export default function Builder({ calUrl }: { calUrl: string }) {
               <Field label={'Anti-example — "DON’T sound like this"'}>
                 <textarea
                   value={state.examples.antiExample}
-                  onChange={(e) => updateExamples("antiExample", e.target.value)}
+                  onChange={(e) =>
+                    updateExamples("antiExample", e.target.value)
+                  }
                   rows={4}
                   placeholder="Paste a piece of writing — a competitor, a generic LLM draft, an email template — that sounds the opposite of you."
                   className="vpb-input vpb-textarea"
@@ -798,7 +849,8 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           </div>
           {state.step === 0 && !stepValid && (
             <p className="mt-3 text-xs text-[var(--terracotta-aa)]/90">
-              Brand name and target audience are required. Everything else is optional but improves output.
+              Brand name and target audience are required. Everything else is
+              optional but improves output.
             </p>
           )}
         </div>
@@ -838,7 +890,11 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                 onClick={onCopy}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition"
               >
-                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                {copied ? (
+                  <Check className="w-4 h-4" />
+                ) : (
+                  <Copy className="w-4 h-4" />
+                )}
                 {copied ? "Copied" : "Copy doc"}
               </button>
               <button
@@ -873,7 +929,8 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           </pre>
 
           {/* CTA */}
-          <div className="mt-6 rounded-2xl p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+          <div
+            className="mt-6 rounded-2xl p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
             style={{
               background: "var(--cream-3)",
               border: "1px solid rgba(26,26,26,0.14)",
@@ -884,13 +941,12 @@ export default function Builder({ calUrl }: { calUrl: string }) {
                 Want a voice audit?
               </p>
               <p className="text-[var(--ink)] text-base md:text-lg font-semibold">
-                I&apos;ll review your profile + 3 pieces of live copy on a 30-minute call. Free.
+                I&apos;ll review your profile + 3 pieces of live copy on a
+                30-minute call. Free.
               </p>
             </div>
             <a
-              href={calUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/discovery-call"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] whitespace-nowrap hover:opacity-90 transition"
               style={{
                 background: "var(--terracotta)",
@@ -918,7 +974,8 @@ export default function Builder({ calUrl }: { calUrl: string }) {
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
-          One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+          One missing field, one weird output, one tool you wish existed — tell
+          me. I read every reply.
         </p>
         <form action="/api/tool-feedback" method="POST" className="space-y-3">
           <input type="hidden" name="tool" value="voice-persona-builder" />
@@ -928,7 +985,10 @@ export default function Builder({ calUrl }: { calUrl: string }) {
             rows={3}
             placeholder="What should we improve, fix, or build?"
             className="vpb-input vpb-textarea"
-            style={{ fontFamily: "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)" }}
+            style={{
+              fontFamily:
+                "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
+            }}
           />
           <input
             type="email"
@@ -1065,10 +1125,14 @@ function Field({
     <div>
       <label className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-1.5">
         {label}
-        {required ? <span className="text-[var(--terracotta-aa)] ml-1">*</span> : null}
+        {required ? (
+          <span className="text-[var(--terracotta-aa)] ml-1">*</span>
+        ) : null}
       </label>
       {children}
-      {hint ? <p className="text-xs text-[var(--ink-faint)] mt-1.5">{hint}</p> : null}
+      {hint ? (
+        <p className="text-xs text-[var(--ink-faint)] mt-1.5">{hint}</p>
+      ) : null}
     </div>
   );
 }

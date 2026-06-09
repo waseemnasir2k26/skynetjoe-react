@@ -93,8 +93,8 @@ html {
   --cream-3: #faf7f0;
   --ink: #1a1a1a;
   --ink-2: #3a3a36;
-  --ink-faint: #56564f;
-  --ink-mute: #9a988f;
+  --ink-faint: #4a4a45;
+  --ink-mute: #646058;
   --terracotta: #c66b3f;
   --terracotta-2: #b85a30;
   --terracotta-soft: rgba(198, 107, 63, 0.1);
@@ -112,8 +112,8 @@ html {
     -apple-system,
     system-ui,
     sans-serif;
-  font-size: 16px;
-  line-height: 1.55;
+  font-size: 17px;
+  line-height: 1.6;
   letter-spacing: -0.005em;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -330,7 +330,7 @@ html {
 }
 .sky .hero-sub {
   font-size: 20px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--ink-2);
   max-width: 58ch;
   margin: 0 auto 32px;
@@ -1359,10 +1359,10 @@ html {
   letter-spacing: -0.015em;
 }
 .sky .process-step p {
-  font-size: 13.5px;
+  font-size: 17px;
   color: var(--ink-2);
   text-align: center;
-  line-height: 1.55;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -1498,7 +1498,7 @@ html {
 .sky .section-sub {
   font-size: 18px;
   color: var(--ink-2);
-  line-height: 1.55;
+  line-height: 1.6;
   max-width: 60ch;
 }
 
@@ -1558,10 +1558,10 @@ html {
   font-weight: 700;
 }
 .sky .pain-line {
-  font-size: 15px;
+  font-size: 17px;
   color: var(--ink);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 .sky .pain-line strong {
   color: var(--oxblood);
@@ -1619,7 +1619,8 @@ html {
 .sky .mid-cta p {
   color: rgba(242, 239, 230, 0.75);
   margin-bottom: 24px;
-  font-size: 16px;
+  font-size: 17px;
+  line-height: 1.6;
 }
 .sky .mid-cta .btn-primary {
   background: var(--terracotta);
@@ -1698,7 +1699,7 @@ html {
   color: var(--ink);
 }
 .sky .feat-body {
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.6;
   color: var(--ink-2);
 }
@@ -1708,11 +1709,11 @@ html {
   margin: 14px 0 0;
 }
 .sky .feat-list li {
-  font-size: 13.5px;
+  font-size: 17px;
   color: var(--ink-2);
   padding: 6px 0 6px 22px;
   position: relative;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 .sky .feat-list li::before {
   content: "";
@@ -1744,7 +1745,7 @@ html {
   letter-spacing: -0.015em;
 }
 .sky .value-stack-sub {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--ink-faint);
   margin-bottom: 24px;
 }
@@ -1754,7 +1755,8 @@ html {
   align-items: baseline;
   padding: 12px 0;
   border-bottom: 1px dashed var(--rule);
-  font-size: 14.5px;
+  font-size: 17px;
+  line-height: 1.6;
 }
 .sky .value-row span {
   color: var(--ink-2);
@@ -1838,7 +1840,7 @@ html {
 .sky .testi-quote {
   font-family: var(--font-display);
   font-size: 19px;
-  line-height: 1.45;
+  line-height: 1.6;
   color: var(--ink);
   margin-bottom: 24px;
   font-weight: 500;
@@ -1931,8 +1933,8 @@ html {
 }
 .sky .risk-p {
   color: rgba(242, 239, 230, 0.78);
-  font-size: 16px;
-  line-height: 1.55;
+  font-size: 17px;
+  line-height: 1.6;
   margin-bottom: 6px;
 }
 .sky .risk-list {
@@ -1944,9 +1946,9 @@ html {
   padding: 14px 0 14px 36px;
   position: relative;
   border-top: 1px solid rgba(242, 239, 230, 0.12);
-  font-size: 14.5px;
+  font-size: 17px;
   color: rgba(242, 239, 230, 0.92);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 .sky .risk-list li:first-child {
   border-top: 0;
@@ -2050,14 +2052,14 @@ html {
   list-style: none;
   padding: 0;
   margin: 0 0 24px;
-  font-size: 13.5px;
+  font-size: 17px;
   color: var(--ink-2);
   flex: 1;
 }
 .sky .price-list li {
   padding: 7px 0 7px 20px;
   position: relative;
-  line-height: 1.5;
+  line-height: 1.6;
   border-bottom: 1px solid var(--rule);
 }
 .sky .price-list li:last-child {
@@ -2160,9 +2162,9 @@ html {
   color: var(--ochre);
 }
 .sky .ec-p {
-  font-size: 14.5px;
+  font-size: 17px;
   color: rgba(242, 239, 230, 0.72);
-  line-height: 1.55;
+  line-height: 1.6;
   margin: 0;
 }
 .sky .ec-form {
@@ -2268,9 +2270,9 @@ html {
   margin-right: 4px;
 }
 .sky .obj-a {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--ink-2);
-  line-height: 1.55;
+  line-height: 1.6;
   margin: 0;
 }
 .sky .obj-a strong {
@@ -2328,7 +2330,7 @@ html {
 .sky .faq-wrap details p {
   margin: 14px 0 0;
   color: var(--ink-2);
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.65;
   max-width: 62ch;
 }
@@ -2357,7 +2359,8 @@ html {
 }
 .sky .scarcity-band p {
   margin: 0;
-  font-size: 15px;
+  font-size: 17px;
+  line-height: 1.6;
   font-weight: 500;
   letter-spacing: 0.01em;
   position: relative;
@@ -2510,7 +2513,7 @@ html {
   margin-top: 0;
   padding-top: 24px;
   border-top: 1px solid var(--rule);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.7;
   color: var(--ink-faint);
   max-width: 92ch;
@@ -2597,7 +2600,7 @@ html {
     word-break: normal;
   }
   .sky .hero-sub {
-    font-size: 16px;
+    font-size: 17px;
   }
   .sky .hero .wrap,
   .sky .hero-inner {

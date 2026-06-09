@@ -201,7 +201,8 @@ export default function ContactPage() {
               </div>
 
               <div className="hero-scarcity">
-                <strong>Open for 2 builds</strong>&nbsp;· June 2026 cohort
+                <strong>Limited spots this month</strong>&nbsp;· June 2026
+                cohort
               </div>
 
               <div className="featured-in">

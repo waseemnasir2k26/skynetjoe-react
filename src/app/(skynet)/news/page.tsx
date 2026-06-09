@@ -36,7 +36,7 @@ const schema = {
   author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
   publisher: { "@type": "Organization", name: SITE.brand, url: SITE.url },
   blogPost: NEWS.map((p) => ({
-    "@type": "BlogPosting",
+    "@type": "NewsArticle",
     headline: p.title,
     description: p.description,
     url: `${SITE.url}/news/${p.slug}`,

@@ -297,8 +297,8 @@ export default function IndustryLanding({ industry: i }: Props) {
               }}
             >
               <Image
-                src={i.bioPhoto}
-                alt={i.bioPhotoAlt}
+                src="/waseem-portrait.jpg"
+                alt="Waseem Nasir, founder of SkynetLabs"
                 fill
                 sizes="240px"
                 className="object-cover"

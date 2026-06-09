@@ -20,10 +20,19 @@ export const metadata: Metadata = {
   },
 };
 
-type ServiceItem = { slug: string; label: string; icon: string; desc: string };
+type ServiceItem = {
+  slug: string;
+  label: string;
+  icon: string;
+  desc: string;
+  href?: string;
+};
+// Only items WITHOUT an `href` are real /services/[slug] detail pages.
+// Items with an `href` (e.g. freightops-logistics → /lp/logistics) are
+// excluded from generateStaticParams, so emitting /services/<slug> 404s.
 const allServices: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
   (c) => c.services as readonly ServiceItem[],
-);
+).filter((svc) => !svc.href);
 
 const schema = {
   "@context": "https://schema.org",
@@ -92,10 +101,10 @@ export default function ServicesIndexPage() {
             </h1>
 
             <p className="hero-sub">
-              n8n automation, AI voice + chat agents, AEO-tuned websites,
-              GoHighLevel CRM, and AI content at volume.{" "}
-              <strong>180+ workflows shipped, 40+ sites delivered</strong>{" "}
-              across 9 countries — fixed scope, public pricing, and your{" "}
+              Workflow automation, AI chat + voice agents, fast SEO-ready
+              websites, and CRM setup — built and handed over with the code.{" "}
+              <strong>180+ workflows · 40+ websites · 9 countries</strong> —
+              fixed scope, public pricing, and your{" "}
               <strong>repo in your GitHub on launch day</strong>. We ship in
               5–14 days, not 14 weeks.
             </p>

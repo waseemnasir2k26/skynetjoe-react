@@ -66,19 +66,29 @@ export function articleSchema(opts: {
   dateModified?: string;
   image?: string;
   keywords?: string[];
+  /** URL path prefix the article lives under. Defaults to "/blog" so existing
+   *  BlogPosting callers are unchanged; pass "/news" for NewsArticle pages. */
+  basePath?: string;
+  /** schema.org article subtype. Defaults to "BlogPosting"; pass
+   *  "NewsArticle" for dated /news pages. */
+  type?: string;
 }) {
+  const basePath = opts.basePath ?? "/blog";
+  const type = opts.type ?? "BlogPosting";
+  const url = `${SITE.url}${basePath}/${opts.slug}`;
   return {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": `${SITE.url}/blog/${opts.slug}#article`,
+    "@type": type,
+    "@id": `${url}#article`,
     headline: opts.title,
     description: opts.description,
     image: opts.image || `${SITE.url}/og-default.png`,
+    url,
     datePublished: opts.datePublished,
     dateModified: opts.dateModified || opts.datePublished,
     author: person,
     publisher: organization,
-    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/blog/${opts.slug}` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
     keywords: opts.keywords?.join(", "),
     inLanguage: "en",
   };

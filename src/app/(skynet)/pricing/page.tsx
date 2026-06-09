@@ -380,7 +380,7 @@ export default function PricingPage() {
         {/* CLOSER — skyv3 */}
         <section className="closer">
           <span className="closer-scarcity">
-            180 workflows · 40 websites · 9 countries
+            180+ workflows · 40+ websites · 9 countries
           </span>
           <h2>
             Send a brief. <em>Get scope + price in 8 hours.</em>
