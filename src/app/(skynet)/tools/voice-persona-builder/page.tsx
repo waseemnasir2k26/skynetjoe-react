@@ -5,11 +5,12 @@ import Builder from "./Builder";
 import { Sparkles, Timer, ShieldCheck, FileText } from "lucide-react";
 
 const PATH = "/tools/voice-persona-builder";
-const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=voice-persona-builder";
+const CAL_URL =
+  "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=voice-persona-builder";
 
 export const metadata: Metadata = {
   title:
-    "Brand Voice Persona Builder — paste-ready system prompt for Claude + ChatGPT · SkynetLabs",
+    "Brand Voice Persona Builder — paste-ready system prompt for Claude + ChatGPT",
   description:
     "Free 4-step brand voice builder. Identity, tone sliders, vocabulary, examples. Outputs a paste-ready Brand Voice Profile + AI system prompt. Enter your email to unlock the result.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -99,7 +100,12 @@ export default function VoicePersonaBuilderPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -117,7 +123,17 @@ export default function VoicePersonaBuilderPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               Your brand voice,{" "}
               <span
                 style={{
@@ -133,12 +149,27 @@ export default function VoicePersonaBuilderPage() {
               </span>
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
-              Four steps. Identity, eight tone sliders, vocabulary,
-              examples. Spits out a paste-ready Brand Voice Profile and
-              system prompt your AI of choice will actually obey.
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
+              Four steps. Identity, eight tone sliders, vocabulary, examples.
+              Spits out a paste-ready Brand Voice Profile and system prompt your
+              AI of choice will actually obey.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
               Stop re-explaining your voice in every prompt. Build it once,
               paste it forever.
             </p>
@@ -191,15 +222,14 @@ export default function VoicePersonaBuilderPage() {
                   default voice.
                 </p>
                 <p>
-                  After the 40th time of rebuilding a voice doc from scratch,
-                  I made this. Four steps, eight axes, three example fields.
-                  The model behaves because the profile leaves it no wiggle
-                  room — what to say, what to avoid, and what good actually
-                  looks like.
+                  After the 40th time of rebuilding a voice doc from scratch, I
+                  made this. Four steps, eight axes, three example fields. The
+                  model behaves because the profile leaves it no wiggle room —
+                  what to say, what to avoid, and what good actually looks like.
                 </p>
                 <p>
-                  Build yours, paste it once, and watch every email, page
-                  and post sound like the same brand wrote it.
+                  Build yours, paste it once, and watch every email, page and
+                  post sound like the same brand wrote it.
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">

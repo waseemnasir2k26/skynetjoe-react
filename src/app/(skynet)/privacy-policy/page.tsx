@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
+import { person, personRef, organization } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -11,7 +12,7 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — SkynetLabs",
+  title: "Privacy Policy",
   description:
     "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement. Last updated 2026-05-20.",
   alternates: { canonical: `${SITE.url}/privacy-policy` },
@@ -23,25 +24,36 @@ export const metadata: Metadata = {
     type: "article",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs Privacy Policy",
+    description:
+      "How we handle your data. Minimum collection, no tracking cookies, deletion on request.",
+  }),
 };
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "Privacy Policy — SkynetLabs",
-  description:
-    "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement.",
-  url: `${SITE.url}/privacy-policy`,
-  inLanguage: "en",
-  dateModified: "2026-05-20",
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-  publisher: {
-    "@type": "Organization",
-    name: SITE.brand,
-    url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.url}/og-default.png` },
-  },
-  mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/privacy-policy` },
+  "@graph": [
+    {
+      "@type": "Article",
+      headline: "Privacy Policy — SkynetLabs",
+      description:
+        "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement.",
+      url: `${SITE.url}/privacy-policy`,
+      inLanguage: "en",
+      dateModified: "2026-05-20",
+      // image + canonical author/publisher refs (M15).
+      image: `${SITE.url}/og-default.png`,
+      author: personRef,
+      publisher: { "@id": `${SITE.url}/#organization` },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": `${SITE.url}/privacy-policy`,
+      },
+    },
+    person,
+    organization,
+  ],
 };
 
 export default function PrivacyPolicyPage() {

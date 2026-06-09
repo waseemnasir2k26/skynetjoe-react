@@ -1,6 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES } from "@/lib/site";
+import {
+  SITE,
+  SERVICE_CATEGORIES,
+  DEFAULT_OG_IMAGES,
+  twitterFromOpenGraph,
+} from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import PainSolverGrid from "@/components/services/PainSolverGrid";
 import ServiceMenuCollapsed from "@/components/services/ServiceMenuCollapsed";
@@ -18,6 +23,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs — We fix the problem, not sell you a service",
+    description:
+      "Pick the problem. We fix it. Eight founder problems mapped to 16 production services. Fixed scope, public pricing.",
+  }),
 };
 
 type ServiceItem = {

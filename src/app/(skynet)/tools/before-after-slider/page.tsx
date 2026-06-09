@@ -8,8 +8,7 @@ import { Sparkles, Hand, ShieldCheck } from "lucide-react";
 const PATH = "/tools/before-after-slider";
 
 export const metadata: Metadata = {
-  title:
-    "Before/After Slider — see what AI automation actually does | SkynetLabs",
+  title: "Before/After Slider — see what AI automation actually does",
   description:
     "Drag-to-compare slider across 6 real workflows: lead response, content production, customer service, CRM data entry, reporting, lead qualification. Manual vs automated side by side.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -30,7 +29,11 @@ export const metadata: Metadata = {
 };
 
 const heroStats = [
-  { icon: Hand, label: "Drag to compare", body: "Six preset workflow scenarios." },
+  {
+    icon: Hand,
+    label: "Drag to compare",
+    body: "Six preset workflow scenarios.",
+  },
   {
     icon: Sparkles,
     label: "Real deltas",
@@ -106,7 +109,12 @@ export default function BeforeAfterSliderPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -124,7 +132,17 @@ export default function BeforeAfterSliderPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               See what AI automation{" "}
               <span
                 style={{
@@ -140,7 +158,15 @@ export default function BeforeAfterSliderPage() {
               </span>
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
               Drag the handle. Six real workflows, side by side — manual on the
               left, automated on the right. No projections, no marketing math.
               The deltas are what we&apos;ve shipped.

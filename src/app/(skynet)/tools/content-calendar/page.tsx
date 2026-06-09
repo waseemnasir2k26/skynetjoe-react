@@ -5,7 +5,8 @@ import Calendar from "./Calendar";
 import { Sparkles, CalendarDays, Layers, Download } from "lucide-react";
 
 const PATH = "/tools/content-calendar";
-const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=content-calendar";
+const CAL_URL =
+  "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=content-calendar";
 
 export const metadata: Metadata = {
   title:
@@ -14,8 +15,7 @@ export const metadata: Metadata = {
     "Free 30-day cross-platform content calendar. Set niche, cadence and goal. Get LinkedIn, X, IG, Shorts and email ideas — with CSV, ICS and markdown export.",
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
-    title:
-      "30-Day Content Calendar Generator · CSV + ICS + markdown export",
+    title: "30-Day Content Calendar Generator · CSV + ICS + markdown export",
     description:
       "Niche + cadence + goal → 30 days of cross-platform post ideas. Free. Email to unlock.",
     url: `${SITE.url}${PATH}`,
@@ -99,7 +99,12 @@ export default function ContentCalendarPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -117,7 +122,17 @@ export default function ContentCalendarPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               30 days of content,{" "}
               <span
                 style={{
@@ -133,13 +148,29 @@ export default function ContentCalendarPage() {
               </span>
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
               Tell us your niche, your audience, your weekly cadence and the
               goal of the month. Get back a 30-day, 5-platform calendar grid
               with hooks, body angles, CTAs, tags and asset recommendations.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
-              Export to CSV, ICS or markdown. Enter your email to unlock the calendar.
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
+              Export to CSV, ICS or markdown. Enter your email to unlock the
+              calendar.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">

@@ -1,14 +1,49 @@
 import { SITE } from "./site";
 
+/**
+ * Canonical Person node — Waseem Nasir (M15).
+ *
+ * This is the SINGLE source of truth for the `#person` entity. Every page that
+ * needs Waseem as an author/founder/performer must REFERENCE this by
+ * `{ "@id": `${SITE.url}/#person` }` (see `personRef`) rather than re-declaring
+ * a divergent Person inline. Previously author/discovery-call/vibe-coding/
+ * n8n-vs-zapier each emitted conflicting jobTitle/image/sameAs (and a second
+ * `/about#waseem` id), fragmenting the entity graph and duplicating
+ * x.com/skynetlabs across two different X handles.
+ *
+ * sameAs contains ONLY real, verified profiles, sourced from SITE.social so
+ * there is one place to edit them. Unverified/duplicate handles
+ * (linkedin.com/in/waseemnasir, x.com/waseemnasir, an unconfirmed Upwork URL)
+ * were intentionally dropped — do not re-add without verification.
+ */
 const person = {
   "@type": "Person",
   "@id": `${SITE.url}/#person`,
   name: SITE.founder,
+  givenName: "Waseem",
+  familyName: "Nasir",
   url: SITE.founderUrl,
   jobTitle: "Founder, SkynetLabs",
   image: `${SITE.url}/og-default.png`,
   email: SITE.emailFounder,
+  description:
+    "Founder of SkynetLabs. Builds n8n automation, AI chatbots and conversion-tuned websites for service businesses across 9 countries.",
   worksFor: { "@id": `${SITE.url}/#organization` },
+  homeLocation: { "@type": "Place", name: "Bali, Indonesia" },
+  knowsAbout: [
+    "n8n workflow automation",
+    "Zapier and Make integrations",
+    "AI chatbot development",
+    "Anthropic Claude API",
+    "OpenAI GPT API",
+    "Next.js development",
+    "WordPress development",
+    "Answer Engine Optimization (AEO)",
+    "Schema.org structured data",
+    "GoHighLevel CRM",
+    "Shopify e-commerce automation",
+    "Retrieval-Augmented Generation (RAG)",
+  ],
   sameAs: [
     SITE.social.linkedin,
     SITE.social.twitter,
@@ -23,6 +58,14 @@ const person = {
     addressCountry: "ID",
   },
 };
+
+/**
+ * Reference to the canonical #person. Use this in author/founder/performer
+ * slots so the page links to the single Person entity instead of re-declaring
+ * it. The full `person` node must be emitted somewhere in the same page's
+ * JSON-LD (or site-wide) for the @id to resolve.
+ */
+const personRef = { "@id": `${SITE.url}/#person` } as const;
 
 const organization = {
   "@type": "Organization",
@@ -232,4 +275,4 @@ export const SPEAKABLE_TLDR = {
   cssSelector: [".tldr", "h1", "h2", '[data-speakable="true"]'],
 };
 
-export { person, organization };
+export { person, personRef, organization };

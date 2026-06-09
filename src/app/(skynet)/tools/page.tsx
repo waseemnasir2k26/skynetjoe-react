@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import {
   Calculator,
@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Free Tools — 10-tool suite for service businesses | SkynetLabs",
+  title: "Free Tools — 10-tool suite for service businesses",
   description:
     "Ten free utilities from SkynetLabs: revenue calculator, AI readiness score, automation gap analyzer, brand voice builder, executive summary generator, 30-day content calendar, prompt library, video prompt generator, before/after slider and agency stress quiz.",
   alternates: { canonical: `${SITE.url}/tools` },
@@ -29,6 +29,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs Free Tools — 10 calculators, diagnostics and generators",
+    description:
+      "Find out where your business is losing time and money. Ten free tools: calculators, diagnostics and generators for service businesses.",
+  }),
 };
 
 const TOOLS = [

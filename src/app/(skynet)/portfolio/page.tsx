@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
+import { person, personRef, organization } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import WorkShowcase from "@/components/sections/WorkShowcase";
 
@@ -17,19 +18,31 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs Portfolio — Recent Projects",
+    description:
+      "A selection of 23 recent builds — live screenshots from deployed sites. Click any tile for the live site.",
+  }),
 };
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  name: "SkynetLabs Portfolio — Recent Projects",
-  description:
-    "A selection of 23 recent builds — live screenshots from deployed sites across nine countries.",
-  url: `${SITE.url}/portfolio`,
-  inLanguage: "en",
-  isPartOf: { "@id": `${SITE.url}/#website` },
-  publisher: { "@id": `${SITE.url}/#organization` },
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      name: "SkynetLabs Portfolio — Recent Projects",
+      description:
+        "A selection of 23 recent builds — live screenshots from deployed sites across nine countries.",
+      url: `${SITE.url}/portfolio`,
+      inLanguage: "en",
+      isPartOf: { "@id": `${SITE.url}/#website` },
+      publisher: { "@id": `${SITE.url}/#organization` },
+      // Canonical #person ref (M15) — was a bare un-@id'd author.
+      author: personRef,
+    },
+    person,
+    organization,
+  ],
 };
 
 export default function PortfolioPage() {

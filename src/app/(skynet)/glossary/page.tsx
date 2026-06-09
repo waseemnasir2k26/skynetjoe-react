@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
+import { person, personRef, organization } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -16,10 +17,14 @@ export const metadata: Metadata = {
     type: "article",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "AI Automation & AEO Glossary — 50+ Terms Defined",
+    description:
+      "50 definitions covering AEO, SEO, n8n, automation, LLMs, RAG, agents, schema markup. By Waseem Nasir, SkynetLabs.",
+  }),
 };
 
-const schema = {
-  "@context": "https://schema.org",
+const termSetSchema = {
   "@type": "DefinedTermSet",
   "@id": `${SITE.url}/glossary#termset`,
   name: "AI Automation & AEO Glossary",
@@ -28,7 +33,8 @@ const schema = {
   url: `${SITE.url}/glossary`,
   inLanguage: "en",
   inDefinedTermSet: `${SITE.url}/glossary`,
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
+  // Canonical author/publisher refs (M15).
+  author: personRef,
   publisher: { "@id": `${SITE.url}/#organization` },
   hasDefinedTerm: [
     {
@@ -295,6 +301,13 @@ const schema = {
         "A defined sequence of trigger, actions, and conditions that automates a process.",
     },
   ].map((t) => ({ "@type": "DefinedTerm", ...t })),
+};
+
+// Emit the term set alongside the canonical #person / #organization so the
+// author/publisher @id references resolve (M15).
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [termSetSchema, person, organization],
 };
 
 // Glossary terms grouped by letter. `id` values preserved from the previous

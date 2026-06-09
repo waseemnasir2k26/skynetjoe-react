@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
+import { person, personRef } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -17,6 +18,12 @@ export const metadata: Metadata = {
     type: "article",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title:
+      "n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)",
+    description:
+      "180+ workflows shipped across both. Pricing, self-hosting, branching, compliance, AI nodes — and 5 scenarios with explicit picks.",
+  }),
 };
 
 // Full @graph schema preserved from the original HTML payload (Article + Table
@@ -34,11 +41,10 @@ const graphSchema = {
         "n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)",
       description:
         "Side-by-side comparison of n8n and Zapier covering pricing, self-hosting, branching, error handling, AI integrations, compliance, and five real-world scenarios with explicit recommendations.",
-      author: {
-        "@type": "Person",
-        name: SITE.founder,
-        url: `${SITE.url}/author/waseem-nasir`,
-      },
+      image: `${SITE.url}/og-default.png`,
+      // Reference the canonical #person (emitted as a node in this @graph below)
+      // instead of a bare un-@id'd author (M15).
+      author: personRef,
       publisher: {
         "@type": "Organization",
         name: SITE.brand,
@@ -122,6 +128,8 @@ const graphSchema = {
         },
       ],
     },
+    // Canonical #person node so the Article.author @id reference resolves.
+    person,
   ],
 };
 

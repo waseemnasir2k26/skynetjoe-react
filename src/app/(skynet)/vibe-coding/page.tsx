@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { person, personRef } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import {
   Brain,
@@ -244,25 +245,9 @@ const schema = {
         highPrice: "12000",
         offerCount: "6",
       },
-      performer: {
-        "@type": "Person",
-        "@id": `${SITE.url}/about#waseem`,
-        name: SITE.founder,
-        url: SITE.founderUrl,
-        jobTitle: "Founder and lead builder",
-        worksFor: { "@id": `${SITE.url}/#organization` },
-        image: `${SITE.assetsUrl}/og-default.png`,
-        homeLocation: { "@type": "Place", name: "Bali, Indonesia" },
-        knowsAbout: [
-          "Claude Code",
-          "Next.js",
-          "TypeScript",
-          "n8n",
-          "AI agents",
-          "Tailwind",
-          "Vercel",
-        ],
-      },
+      // Reference the canonical #person (emitted as a node in this @graph
+      // below) — was a divergent Person under a second `/about#waseem` id (M15).
+      performer: personRef,
     },
     {
       "@type": "FAQPage",
@@ -273,6 +258,8 @@ const schema = {
         acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     },
+    // Canonical #person node so the Service.performer @id reference resolves.
+    person,
   ],
 };
 

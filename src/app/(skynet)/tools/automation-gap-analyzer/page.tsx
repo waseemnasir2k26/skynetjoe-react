@@ -9,7 +9,7 @@ const PATH = "/tools/automation-gap-analyzer";
 
 export const metadata: Metadata = {
   title:
-    "Automation Gap Analyzer — find your biggest manual time-sink in 90 seconds · SkynetLabs",
+    "Automation Gap Analyzer — find your biggest manual time-sink in 90 seconds",
   description:
     "Free 12-question diagnostic across lead capture, follow-up, reporting, team productivity. Get an automation gap % score plus the one axis to fix first.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -126,7 +126,12 @@ export default function AutomationGapPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -144,7 +149,17 @@ export default function AutomationGapPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               Where is your business{" "}
               <span
                 style={{
@@ -160,12 +175,27 @@ export default function AutomationGapPage() {
               </span>
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
               12 questions across the four axes that bleed hours in every
               service business: lead capture, follow-up, reporting, and team
               productivity. 90 seconds to score, one biggest gap to fix first.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
               You get a 0 to 100 automation gap %, a four-axis radar, and a
               tailored callout for the weakest axis. Then choose: book a call,
               run the revenue calculator on your implied manual hours, or share

@@ -8,11 +8,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { POSTS } from "@/lib/posts";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
+import { person, personRef, organization } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Journal — Long-form on AI Automation, AEO & Shipping | SkynetLabs",
+  title: "Journal — Long-form on AI Automation, AEO & Shipping",
   description:
     "Honest writing on automation, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying.",
   alternates: { canonical: `${SITE.url}/blog` },
@@ -24,26 +25,43 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs Journal",
+    description:
+      "Long-form writing on AI automation, AEO, and shipping software for service businesses.",
+  }),
 };
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "Blog",
-  name: "SkynetLabs Journal",
-  url: `${SITE.url}/blog`,
-  description:
-    "Long-form writing on AI automation, AEO, and shipping software.",
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-  publisher: { "@type": "Organization", name: SITE.brand, url: SITE.url },
-  blogPost: POSTS.map((p) => ({
-    "@type": "BlogPosting",
-    headline: p.title,
-    description: p.description,
-    url: `${SITE.url}/blog/${p.slug}`,
-    datePublished: p.publishedAt,
-    dateModified: p.updatedAt || p.publishedAt,
-    author: { "@type": "Person", name: SITE.founder },
-  })),
+  "@graph": [
+    {
+      "@type": "Blog",
+      name: "SkynetLabs Journal",
+      url: `${SITE.url}/blog`,
+      description:
+        "Long-form writing on AI automation, AEO, and shipping software.",
+      // Link author/publisher to the canonical entities (M15) instead of bare,
+      // un-@id'd inline copies.
+      author: personRef,
+      publisher: { "@id": `${SITE.url}/#organization` },
+      blogPost: POSTS.map((p) => ({
+        "@type": "BlogPosting",
+        headline: p.title,
+        description: p.description,
+        url: `${SITE.url}/blog/${p.slug}`,
+        datePublished: p.publishedAt,
+        dateModified: p.updatedAt || p.publishedAt,
+        // image added so each BlogPosting is rich-result eligible (M15).
+        image: p.coverImage
+          ? `${SITE.assetsUrl}${p.coverImage}`
+          : `${SITE.url}/og-default.png`,
+        author: personRef,
+      })),
+    },
+    person,
+    organization,
+  ],
 };
 
 function categoryLabel(c: string): string {

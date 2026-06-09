@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies";
 import { isCaseStudyIndexable } from "@/lib/sitemap-quality";
 import { SITE } from "@/lib/site";
+import { person, personRef, organization } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ZoomableImage from "@/components/ZoomableImage";
@@ -30,7 +31,7 @@ export async function generateMetadata({
   const c = getCaseStudy(slug);
   if (!c) return { title: "Case study not found" };
 
-  const title = `${c.clientName} — ${c.industryTag} case study | SkynetLabs`;
+  const title = `${c.clientName} — ${c.industryTag} case study`;
   const description = c.oneLineOutcome;
 
   return {
@@ -76,23 +77,11 @@ export default async function CaseStudyDetail({
     datePublished: c.publishDate,
     dateModified: c.publishDate,
     inLanguage: "en",
-    author: {
-      "@type": "Person",
-      name: SITE.founder,
-      url: `${SITE.url}/author/waseem-nasir`,
-    },
+    // Reference the canonical #person / #organization (emitted via a separate
+    // <JsonLd> below) instead of bare inline copies (M15).
+    author: personRef,
     image: `${SITE.assetsUrl}${c.coverImage}`,
-    publisher: {
-      "@type": "Organization",
-      name: SITE.brand,
-      url: SITE.url,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE.url}/og-default.png`,
-        width: 1200,
-        height: 1200,
-      },
-    },
+    publisher: { "@id": `${SITE.url}/#organization` },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE.url}/case-studies/${c.slug}`,
@@ -135,6 +124,13 @@ export default async function CaseStudyDetail({
   return (
     <>
       <JsonLd data={articleSchema} />
+      {/* Canonical #person + #organization so the Article @id references resolve. */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [person, organization],
+        }}
+      />
 
       {/* HERO */}
       <section

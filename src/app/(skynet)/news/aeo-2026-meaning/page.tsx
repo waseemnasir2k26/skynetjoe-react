@@ -4,13 +4,13 @@ import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { articleSchema } from "@/lib/schema";
 import { getArticle, relatedFor } from "@/lib/news";
-import { SITE } from "@/lib/site";
+import { SITE, twitterFromOpenGraph } from "@/lib/site";
 
 const SLUG = "aeo-2026-meaning";
 const article = getArticle(SLUG)!;
 
 export const metadata: Metadata = {
-  title: `${article.title} | SkynetLabs`,
+  title: article.title,
   description: article.description,
   alternates: { canonical: `${SITE.url}/news/${SLUG}` },
   openGraph: {
@@ -23,6 +23,11 @@ export const metadata: Metadata = {
     tags: article.tags,
     images: [{ url: article.heroImage }],
   },
+  twitter: twitterFromOpenGraph({
+    title: article.title,
+    description: article.description,
+    images: [article.heroImage],
+  }),
 };
 
 export default function Page() {

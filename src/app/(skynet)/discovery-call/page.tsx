@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { person, personRef } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import DiscoveryFunnel from "./DiscoveryFunnel";
 
@@ -54,13 +55,9 @@ const serviceSchema = {
     availability: "https://schema.org/InStock",
     validFrom: new Date().toISOString().slice(0, 10),
   },
-  performer: {
-    "@type": "Person",
-    name: SITE.founder,
-    url: SITE.founderUrl,
-    jobTitle: "Founder & Lead Engineer",
-    worksFor: { "@type": "Organization", name: SITE.brand },
-  },
+  // Reference the canonical #person (emitted via <JsonLd data={person}/> below)
+  // instead of re-declaring a divergent Person here (M15).
+  performer: personRef,
 };
 
 const faqSchema = {
@@ -118,24 +115,9 @@ const faqSchema = {
   ],
 };
 
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: SITE.founder,
-  url: SITE.founderUrl,
-  jobTitle: "Founder & Lead Engineer",
-  worksFor: {
-    "@type": "Organization",
-    name: SITE.brand,
-    url: SITE.url,
-  },
-  sameAs: [
-    SITE.social.linkedin,
-    SITE.social.twitter,
-    SITE.social.github,
-    SITE.social.youtube,
-  ],
-};
+// Canonical #person node (single source of truth in @/lib/schema). Emitted so
+// the serviceSchema.performer @id reference above resolves.
+const personSchema = { "@context": "https://schema.org", ...person };
 
 export default function DiscoveryCallPage() {
   return (

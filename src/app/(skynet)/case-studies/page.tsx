@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
 import { CASE_STUDIES, type CaseStudy } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
 
@@ -156,6 +156,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs Case Studies — 9 shipped builds",
+    description:
+      "EU logistics, Manhattan dental, Bali wellness, KSA retail and more — anonymized where contracts require it.",
+  }),
 };
 
 const schema = {

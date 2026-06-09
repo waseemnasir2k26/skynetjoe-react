@@ -31,7 +31,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 const PAGE_TITLE =
-  "Freight + Logistics Automation in Texas — n8n, GoHighLevel & Dispatch AI | SkynetLabs";
+  "Freight + Logistics Automation in Texas — n8n, GoHighLevel & Dispatch AI";
 const PAGE_DESCRIPTION =
   "Houston midstream, Dallas wholesale, Austin tech-trucking, San Antonio drayage, Laredo crossing — Texas freight ops automation built by SkynetLabs. n8n + GoHighLevel + AI dispatch on McLeod, MercuryGate, Samsara, Geotab. Fixed scope, 8-day ship.";
 const PAGE_URL = `${SITE.url}/industries/freight-logistics/texas`;

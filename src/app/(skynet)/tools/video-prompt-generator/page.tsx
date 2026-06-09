@@ -8,7 +8,7 @@ const PATH = "/tools/video-prompt-generator";
 
 export const metadata: Metadata = {
   title:
-    "Video Prompt Generator — Runway, Pika, Sora & Veo prompts in one click · SkynetLabs",
+    "Video Prompt Generator — Runway, Pika, Sora & Veo prompts in one click",
   description:
     "Free AI video prompt builder. Pick a subject, camera, mood, lighting, duration. Get production-ready prompts in 4 formats — Runway, Pika, Sora, Veo. Copy + ship.",
   alternates: { canonical: `${SITE.url}${PATH}` },

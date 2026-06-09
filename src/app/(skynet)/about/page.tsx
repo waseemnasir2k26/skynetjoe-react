@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, twitterFromOpenGraph } from "@/lib/site";
 import { organization, person } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Community from "@/components/sections/Community";
@@ -91,6 +91,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [`${SITE.assetsUrl}/og-default.png`],
   },
+  twitter: twitterFromOpenGraph({
+    title: "About SkynetLabs — From $10 Fiverr gig to 180+ workflows",
+    description:
+      "Solo founder. Bali base. 7 years of failing in public and building in public. Public pricing, AI as second seat.",
+    images: [`${SITE.assetsUrl}/og-default.png`],
+  }),
 };
 
 const schema = {

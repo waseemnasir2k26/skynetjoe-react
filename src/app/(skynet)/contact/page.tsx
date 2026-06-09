@@ -10,7 +10,7 @@ import {
   Globe,
   ShieldCheck,
 } from "lucide-react";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
@@ -49,6 +49,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "Talk to Waseem — SkynetLabs",
+    description:
+      "8-hour reply guarantee. No discovery funnels. Fixed scope back in 48 hours.",
+  }),
 };
 
 const schema = {

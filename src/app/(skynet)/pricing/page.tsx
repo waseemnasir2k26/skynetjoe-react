@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
 import { SERVICE_PRICING } from "@/lib/service-pricing";
 import JsonLd from "@/components/JsonLd";
 import ServicePricingTabs from "@/components/pricing/ServicePricingTabs";
@@ -43,6 +43,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs Pricing — public, per-service, calculator-backed",
+    description:
+      "16 services × 3 tiers each. Live calculator. Public prices. No quote form.",
+  }),
 };
 
 const priceSchema = {

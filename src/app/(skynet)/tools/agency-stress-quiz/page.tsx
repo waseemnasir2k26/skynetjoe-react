@@ -8,8 +8,7 @@ import { Sparkles, Timer, ShieldCheck, Flame } from "lucide-react";
 const PATH = "/tools/agency-stress-quiz";
 
 export const metadata: Metadata = {
-  title:
-    "Agency Stress Quiz — 60s diagnostic for service-business owners · SkynetLabs",
+  title: "Agency Stress Quiz — 60s diagnostic for service-business owners",
   description:
     "60 seconds. 7 questions. One honest score on how chaotic your agency really is. Built by SkynetLabs for service founders who want the brutal truth.",
   alternates: { canonical: `${SITE.url}${PATH}` },

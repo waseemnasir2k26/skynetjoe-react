@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
+import { person, personRef, organization } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -11,7 +12,7 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "Terms of Service — SkynetLabs",
+  title: "Terms of Service",
   description:
     "Terms governing engagements with SkynetLabs and use of skynetjoe.com. Plain-language contract: 50% deposit, IP transfer on payment, Indonesian jurisdiction. Last updated 2026-05-20.",
   alternates: { canonical: `${SITE.url}/terms-of-service` },
@@ -23,31 +24,38 @@ export const metadata: Metadata = {
     type: "article",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs Terms of Service",
+    description:
+      "Engagement terms, payment, IP ownership, dispute resolution. Written plainly so both sides know where they stand.",
+  }),
 };
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "Terms of Service — SkynetLabs",
-  description:
-    "Terms governing engagements with SkynetLabs and use of skynetjoe.com. 50% deposit, IP transfer on payment, Indonesian jurisdiction.",
-  url: `${SITE.url}/terms-of-service`,
-  inLanguage: "en",
-  dateModified: "2026-05-20",
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-  publisher: {
-    "@type": "Organization",
-    name: SITE.brand,
-    url: SITE.url,
-    logo: {
-      "@type": "ImageObject",
-      url: `${SITE.assetsUrl}/waseem-portrait.jpg`,
+  "@graph": [
+    {
+      "@type": "Article",
+      headline: "Terms of Service — SkynetLabs",
+      description:
+        "Terms governing engagements with SkynetLabs and use of skynetjoe.com. 50% deposit, IP transfer on payment, Indonesian jurisdiction.",
+      url: `${SITE.url}/terms-of-service`,
+      inLanguage: "en",
+      dateModified: "2026-05-20",
+      // image + canonical author/publisher refs (M15). The old publisher.logo
+      // wrongly used a personal portrait — the canonical Organization carries
+      // the correct icon-512.png logo.
+      image: `${SITE.url}/og-default.png`,
+      author: personRef,
+      publisher: { "@id": `${SITE.url}/#organization` },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": `${SITE.url}/terms-of-service`,
+      },
     },
-  },
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": `${SITE.url}/terms-of-service`,
-  },
+    person,
+    organization,
+  ],
 };
 
 export default function TermsOfServicePage() {

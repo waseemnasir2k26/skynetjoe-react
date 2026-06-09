@@ -18,7 +18,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { INDUSTRIES } from "@/data/industries";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -34,6 +34,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs Industries — Vertical-built AI systems",
+    description:
+      "AI systems built for the vertical, not glued on top of it. Dental, wellness, freight. Each one ships fixed-scope, 5-14 days.",
+  }),
 };
 
 const schema = {

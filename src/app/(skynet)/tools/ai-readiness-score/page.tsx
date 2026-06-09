@@ -13,8 +13,7 @@ import { Sparkles, Timer, ShieldCheck, Compass } from "lucide-react";
 const PATH = "/tools/ai-readiness-score";
 
 export const metadata: Metadata = {
-  title:
-    "AI Readiness Score — 90-second diagnostic for service businesses · SkynetLabs",
+  title: "AI Readiness Score — 90-second diagnostic for service businesses",
   description:
     "Score your service business 0 to 100 on AI automation readiness in 90 seconds. 10 questions across foundation, process, demand and buy-in. Enter your email to unlock the full breakdown.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -78,7 +77,8 @@ const quizSchema = {
   educationalAlignment: {
     "@type": "AlignmentObject",
     alignmentType: "assesses",
-    targetName: "AI automation readiness across foundation, process, demand and buy-in",
+    targetName:
+      "AI automation readiness across foundation, process, demand and buy-in",
   },
   url: `${SITE.url}${PATH}`,
   inLanguage: "en",
@@ -128,7 +128,12 @@ export default function AIReadinessPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -146,7 +151,17 @@ export default function AIReadinessPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               90 seconds.{" "}
               <span
                 style={{
@@ -163,13 +178,28 @@ export default function AIReadinessPage() {
               One AI readiness score.
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
-              I&apos;ve scoped 240+ automation builds since 2019. Half of them
-              I should have turned down because the business wasn&apos;t ready.
-              This diagnostic catches that mismatch in 90 seconds, before
-              anyone wastes a call.
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
+              I&apos;ve scoped 240+ automation builds since 2019. Half of them I
+              should have turned down because the business wasn&apos;t ready.
+              This diagnostic catches that mismatch in 90 seconds, before anyone
+              wastes a call.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
               You get a 0 to 100 score, a four-axis breakdown of where
               you&apos;re strong and where you&apos;ll stall, and three moves
               tailored to whichever dimension scored lowest.
@@ -291,10 +321,10 @@ export default function AIReadinessPage() {
               <div className="space-y-5 text-[var(--ink-2)] leading-relaxed text-base md:text-lg">
                 <p>
                   I&apos;ve killed more automation projects than I&apos;ve
-                  shipped. Not because the tech failed, but because the
-                  business wasn&apos;t ready. No documented workflow, no clean
-                  data, no decision authority. We&apos;d build something
-                  beautiful and it would sit idle.
+                  shipped. Not because the tech failed, but because the business
+                  wasn&apos;t ready. No documented workflow, no clean data, no
+                  decision authority. We&apos;d build something beautiful and it
+                  would sit idle.
                 </p>
                 <p>
                   So I made a 90-second check. Same four dimensions I scan in
@@ -303,9 +333,9 @@ export default function AIReadinessPage() {
                   matters when a build hits week 6 and reality shows up.
                 </p>
                 <p>
-                  If you score under 30, I&apos;m telling you not to hire
-                  anyone yet. If you score over 80, I&apos;m telling you to
-                  book me this week. Both answers save us both money.
+                  If you score under 30, I&apos;m telling you not to hire anyone
+                  yet. If you score over 80, I&apos;m telling you to book me
+                  this week. Both answers save us both money.
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">

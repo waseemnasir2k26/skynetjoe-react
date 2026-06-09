@@ -17,7 +17,12 @@ import type { Metadata } from "next";
 import * as Icons from "lucide-react";
 import { MapPin, ArrowUpRight } from "lucide-react";
 import { STATES } from "@/lib/states";
-import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES } from "@/lib/site";
+import {
+  SITE,
+  SERVICE_CATEGORIES,
+  DEFAULT_OG_IMAGES,
+  twitterFromOpenGraph,
+} from "@/lib/site";
 import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
 import JsonLd from "@/components/JsonLd";
 import USStatesMap from "@/components/locations/USStatesMap";
@@ -37,6 +42,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs — Active in all 48 US states",
+    description:
+      "AI automation services delivered to founders across the lower 48. Local intent, global stack.",
+  }),
 };
 
 export default function LocationsIndexPage() {

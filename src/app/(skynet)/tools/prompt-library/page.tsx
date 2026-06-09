@@ -8,7 +8,7 @@ import { Sparkles, Search, Copy, Library as LibraryIcon } from "lucide-react";
 const PATH = "/tools/prompt-library";
 
 export const metadata: Metadata = {
-  title: `Prompt Library — ${PROMPT_COUNT} reusable AI prompts for service businesses · SkynetLabs`,
+  title: `Prompt Library — ${PROMPT_COUNT} reusable AI prompts for service businesses`,
   description:
     "Free library of 50 production-tested AI prompts across sales, marketing, ops, content, data, recruitment, customer service and founder brain. Copy + run in Claude or ChatGPT.",
   alternates: { canonical: `${SITE.url}${PATH}` },

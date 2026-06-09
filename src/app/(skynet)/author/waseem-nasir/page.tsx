@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
+import { person } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -11,7 +12,7 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "Waseem Nasir — Founder, SkynetLabs",
+  title: "Waseem Nasir — Founder",
   description:
     "I build automation that doesn't need me to babysit it. Lahore → Singapore → Bangkok → KL → Bali. 180+ workflows, 40+ websites, 9 countries served.",
   alternates: { canonical: `${SITE.url}/author/waseem-nasir` },
@@ -51,67 +52,12 @@ const schema = {
       mainEntity: { "@id": `${SITE.url}/#person` },
       inLanguage: "en",
     },
-    {
-      "@type": "Person",
-      "@id": `${SITE.url}/#person`,
-      name: SITE.founder,
-      givenName: "Waseem",
-      familyName: "Nasir",
-      url: SITE.founderUrl,
-      image: `${SITE.assetsUrl}/waseem-portrait.jpg`,
-      jobTitle: "Founder",
-      worksFor: { "@id": `${SITE.url}/#organization` },
-      nationality: { "@type": "Country", name: "Pakistan" },
-      birthPlace: { "@type": "Place", name: "Lahore, Pakistan" },
-      homeLocation: { "@type": "Place", name: "Bali, Indonesia" },
-      description:
-        "Founder of SkynetLabs. Builds n8n automation, AI chatbots and conversion-tuned websites for service businesses across 9 countries.",
-      knowsAbout: [
-        "n8n workflow automation",
-        "Zapier and Make integrations",
-        "AI chatbot development",
-        "Anthropic Claude API",
-        "OpenAI GPT API",
-        "Google Gemini API",
-        "WordPress development",
-        "Next.js development",
-        "Answer Engine Optimization (AEO)",
-        "Generative Engine Optimization (GEO)",
-        "Schema.org structured data",
-        "Conversational APIs (WhatsApp Cloud, Telegram)",
-        "GoHighLevel CRM",
-        "Shopify e-commerce automation",
-        "Retrieval-Augmented Generation (RAG)",
-        "Vector databases (Qdrant, pgvector)",
-        "Headless CMS (Sanity, Contentful)",
-      ],
-      hasOccupation: {
-        "@type": "Occupation",
-        name: "AI Automation Agency Founder",
-        occupationLocation: { "@type": "City", name: "Bali, Indonesia" },
-        skills:
-          "n8n, OpenAI, Anthropic Claude, Next.js, WordPress, AEO, schema markup, RAG, chatbot development",
-      },
-      award: [
-        "180+ n8n workflows shipped (2022–2026)",
-        "40+ websites delivered across 9 countries",
-        "Top Rated Plus on Upwork",
-        "Top Rated on Fiverr",
-      ],
-      sameAs: [
-        "https://www.linkedin.com/in/waseemnasir",
-        SITE.social.linkedin,
-        "https://x.com/waseemnasir",
-        "https://x.com/skynetlabs",
-        SITE.social.twitter,
-        SITE.social.github,
-        SITE.social.fiverr,
-        "https://www.upwork.com/freelancers/waseemnasir",
-        SITE.social.youtube,
-        SITE.url,
-        SITE.founderUrl,
-      ],
-    },
+    // Canonical #person node (single source of truth in @/lib/schema). The
+    // ProfilePage above is mainEntity → this. Occupation/award richness that
+    // previously lived here inline is dropped in favour of ONE byte-identical
+    // Person entity reused across the site (M15 — was conflicting jobTitle/
+    // image/sameAs vs every other page).
+    person,
   ],
 };
 

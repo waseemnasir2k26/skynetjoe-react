@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -16,6 +16,11 @@ export const metadata: Metadata = {
     type: "article",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "AI Automation FAQs — 30 Questions Answered",
+    description:
+      "30 real founder questions on n8n, AEO, chatbots, and working with SkynetLabs. Concrete answers, no hedging.",
+  }),
 };
 
 // The full 30 questions, grouped by section. Anchors (id) preserved from the

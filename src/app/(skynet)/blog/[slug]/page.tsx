@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { POSTS, getPost } from "@/lib/posts";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { person, personRef, organization } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
@@ -32,7 +33,7 @@ export async function generateMetadata({
       ? `${SITE.url}/n8n-vs-zapier`
       : `${SITE.url}/blog/${post.slug}`;
   return {
-    title: `${post.title} | SkynetLabs Journal`,
+    title: post.title,
     description: post.description,
     alternates: { canonical },
     openGraph: {
@@ -84,29 +85,30 @@ export default async function BlogPost({
 
   const schema = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    url: `${SITE.url}/blog/${post.slug}`,
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt || post.publishedAt,
-    author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-    publisher: {
-      "@type": "Organization",
-      name: SITE.brand,
-      url: SITE.url,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE.url}/og-default.png`,
-        width: 1200,
-        height: 1200,
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.description,
+        url: `${SITE.url}/blog/${post.slug}`,
+        datePublished: post.publishedAt,
+        dateModified: post.updatedAt || post.publishedAt,
+        // image added (rich-result eligibility) + canonical author/publisher
+        // refs instead of bare inline copies (M15).
+        image: post.coverImage
+          ? `${SITE.assetsUrl}${post.coverImage}`
+          : `${SITE.url}/og-default.png`,
+        author: personRef,
+        publisher: { "@id": `${SITE.url}/#organization` },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `${SITE.url}/blog/${post.slug}`,
+        },
+        keywords: post.tags.join(", "),
       },
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${SITE.url}/blog/${post.slug}`,
-    },
-    keywords: post.tags.join(", "),
+      person,
+      organization,
+    ],
   };
 
   return (

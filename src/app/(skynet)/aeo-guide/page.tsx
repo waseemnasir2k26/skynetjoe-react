@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
+import { person, personRef, organization } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -18,6 +19,12 @@ export const metadata: Metadata = {
     type: "article",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title:
+      "The AEO Field Guide — Get Cited by Claude, ChatGPT, Perplexity & Gemini",
+    description:
+      "How to structure content so LLM answer engines cite you. Schema, content, authority, distribution, freshness. 90-day rollout.",
+  }),
 };
 
 const schema = {
@@ -29,16 +36,13 @@ const schema = {
     "8-chapter guide to Answer Engine Optimization: 5-layer stack, llms.txt, citation patterns, measurement, 90-day rollout.",
   url: `${SITE.url}/aeo-guide`,
   inLanguage: "en",
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-  publisher: {
-    "@type": "Organization",
-    name: SITE.brand,
-    url: SITE.url,
-    logo: {
-      "@type": "ImageObject",
-      url: `${SITE.assetsUrl}/waseem-portrait.jpg`,
-    },
-  },
+  // image added (rich-result eligibility) + author/publisher linked to the
+  // canonical #person / #organization (M15). The old publisher.logo wrongly
+  // pointed at a personal portrait — the canonical Organization carries the
+  // correct icon-512.png logo.
+  image: `${SITE.url}/og-default.png`,
+  author: personRef,
+  publisher: { "@id": `${SITE.url}/#organization` },
   mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/aeo-guide` },
   about: [
     { "@type": "Thing", name: "Answer Engine Optimization" },
@@ -60,16 +64,9 @@ const graphSchema = {
         "The AEO Field Guide — How to Get Cited by Claude, ChatGPT, Perplexity & Gemini in 2026",
       description:
         "Eight chapters covering what Answer Engine Optimization actually is, the five-layer stack to ship, the new robots ecosystem, citation-worthy content patterns, measurement, and a 90-day rollout for service businesses.",
-      author: {
-        "@type": "Person",
-        name: SITE.founder,
-        url: `${SITE.url}/author/waseem-nasir`,
-      },
-      publisher: {
-        "@type": "Organization",
-        name: SITE.brand,
-        url: SITE.url,
-      },
+      image: `${SITE.url}/og-default.png`,
+      author: personRef,
+      publisher: { "@id": `${SITE.url}/#organization` },
       datePublished: "2026-05-20",
       dateModified: "2026-05-22",
       mainEntityOfPage: `${SITE.url}/aeo-guide`,
@@ -189,6 +186,9 @@ const graphSchema = {
         },
       ],
     },
+    // Canonical #person + #organization so the Article @id references resolve.
+    person,
+    organization,
   ],
 };
 

@@ -8,7 +8,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { NEWS } from "@/lib/news";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, twitterFromOpenGraph } from "@/lib/site";
+import { person, personRef, organization } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
@@ -24,27 +25,39 @@ export const metadata: Metadata = {
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
+  twitter: twitterFromOpenGraph({
+    title: "SkynetLabs — Latest news & field notes",
+    description:
+      "Field notes on AI automation, n8n, AEO, and shipping software from Bali.",
+  }),
 };
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "Blog",
-  name: "SkynetLabs News",
-  url: `${SITE.url}/news`,
-  description:
-    "Latest field notes on AI automation, n8n, AEO, and shipping software.",
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-  publisher: { "@type": "Organization", name: SITE.brand, url: SITE.url },
-  blogPost: NEWS.map((p) => ({
-    "@type": "NewsArticle",
-    headline: p.title,
-    description: p.description,
-    url: `${SITE.url}/news/${p.slug}`,
-    datePublished: p.publishedAt,
-    dateModified: p.updatedAt || p.publishedAt,
-    image: `${SITE.assetsUrl}${p.heroImage}`,
-    author: { "@type": "Person", name: SITE.founder },
-  })),
+  "@graph": [
+    {
+      "@type": "Blog",
+      name: "SkynetLabs News",
+      url: `${SITE.url}/news`,
+      description:
+        "Latest field notes on AI automation, n8n, AEO, and shipping software.",
+      // Link author/publisher to the canonical entities (M15).
+      author: personRef,
+      publisher: { "@id": `${SITE.url}/#organization` },
+      blogPost: NEWS.map((p) => ({
+        "@type": "NewsArticle",
+        headline: p.title,
+        description: p.description,
+        url: `${SITE.url}/news/${p.slug}`,
+        datePublished: p.publishedAt,
+        dateModified: p.updatedAt || p.publishedAt,
+        image: `${SITE.assetsUrl}${p.heroImage}`,
+        author: personRef,
+      })),
+    },
+    person,
+    organization,
+  ],
 };
 
 function formatDate(iso: string) {

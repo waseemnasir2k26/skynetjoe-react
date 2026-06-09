@@ -56,6 +56,36 @@ export const DEFAULT_OG_IMAGES = [
   },
 ] as const;
 
+/**
+ * Build a Twitter Card block that mirrors a page's Open Graph values.
+ *
+ * Why this exists (M2): page-level `openGraph` blocks SHALLOWLY OVERWRITE the
+ * root layout's metadata, but `twitter` is a SEPARATE field. A page that sets
+ * `openGraph` but omits `twitter` inherits the root layout's homepage twitter
+ * tags — so every subpage shared to X/LinkedIn rendered as the agency homepage.
+ * Pass each page's own og title/description (and images) so the X card matches
+ * the page. Always `summary_large_image`; images default to DEFAULT_OG_IMAGES
+ * so the card always resolves a thumbnail.
+ */
+export function twitterFromOpenGraph(opts: {
+  title: string;
+  description: string;
+  images?: readonly (string | { url: string })[];
+}) {
+  const images =
+    opts.images && opts.images.length > 0
+      ? opts.images.map((img) => (typeof img === "string" ? img : img.url))
+      : [DEFAULT_OG_IMAGE_URL];
+  return {
+    card: "summary_large_image" as const,
+    title: opts.title,
+    description: opts.description,
+    site: "@skynetlabs",
+    creator: "@skynetlabs",
+    images,
+  };
+}
+
 export const SITE = {
   name: "SkynetLabs",
   brand: "SkynetLabs",
