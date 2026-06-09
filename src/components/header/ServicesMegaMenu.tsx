@@ -363,7 +363,10 @@ export default function ServicesMegaMenu({ onClose }: Props) {
             )}
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <h3
+                {/* a11y M4: chrome label inside the global header mega-menu —
+                    rendered before the page <h1>, so it is a styled <div>,
+                    not a heading, to avoid heading-level skips. */}
+                <div
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: 17,
@@ -373,7 +376,7 @@ export default function ServicesMegaMenu({ onClose }: Props) {
                   }}
                 >
                   {featured.label}
-                </h3>
+                </div>
                 {"badge" in featured && typeof featured.badge === "string" && (
                   <span
                     style={{

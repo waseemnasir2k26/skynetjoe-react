@@ -149,7 +149,9 @@ export default function Footer() {
 
             {FOOTER_COLUMNS.map((col) => (
               <div key={col.title}>
-                <h4
+                {/* a11y M4: chrome label — demoted from <h4> to a styled <p> so
+                    it does not skip heading levels before the page <h1>. */}
+                <p
                   className="mb-4"
                   style={{
                     fontFamily: "var(--font-mono)",
@@ -161,7 +163,7 @@ export default function Footer() {
                   }}
                 >
                   — {col.title}
-                </h4>
+                </p>
                 <ul className="space-y-2.5">
                   {col.links.map((link) => (
                     <li key={link.href}>

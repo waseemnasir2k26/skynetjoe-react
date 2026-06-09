@@ -626,13 +626,13 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         </div>
       </div>
 
-      {/* GATE — captures email before showing 12-month calendar */}
+      {/* GATE — captures email before showing 30-day calendar */}
       {!unlocked && (
         <div className="mb-6">
           <EmailGate
             toolSlug="content-calendar"
             toolName="Content Calendar"
-            promise="your 12-month content calendar"
+            promise="your 30-day content calendar"
             onUnlock={() => setUnlocked(true)}
           />
         </div>
@@ -816,17 +816,17 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           {
             quote:
               "Stopped writing posts at midnight. The calendar runs three weeks ahead of me now.",
-            who: "Maya R., dental SaaS founder",
+            who: "How founders use it",
           },
           {
             quote:
               "Used the regenerate button until I had 30 posts I'd actually publish. That was the whole job.",
-            who: "Daniel O., agency owner ($28k MRR)",
+            who: "How agency owners use it",
           },
           {
             quote:
-              "We hit our first 1k LinkedIn followers month two. The hooks do the heavy lifting.",
-            who: "Aisha K., ops consultant",
+              "The hooks do the heavy lifting — I just pick the ones that sound like me and schedule.",
+            who: "How consultants use it",
           },
         ].map((t, i) => (
           <div

@@ -32,6 +32,21 @@ import EmailGate from "@/components/cta/EmailGate";
 const STORAGE_KEY = "skynet:automation-gap:v1";
 const RESULT_TTL_MS = 14 * 24 * 60 * 60 * 1000;
 
+/**
+ * a11y B6: saturated bucket.color hexes fail AA as TEXT on cream. Map each to
+ * an AA-safe darkened token for the big score number + label/pill text, while
+ * the bright color stays on the dot / ring / radar fill. Falls back to --ink.
+ */
+const AA_TEXT_COLOR: Record<string, string> = {
+  "#f97316": "#9a3d12", // orange
+  "#eab308": "#7a6000", // amber/yellow
+  "#06b6d4": "#0e6b80", // cyan
+  "#10b981": "#0b6e50", // emerald
+  "#22c55e": "#0b6e50", // green
+  "#ef4444": "#b3261e", // red
+};
+const aaTextColor = (c: string): string => AA_TEXT_COLOR[c] ?? "var(--ink)";
+
 type Phase = "quiz" | "loading" | "result";
 
 type SavedState = {
@@ -333,13 +348,19 @@ export default function Quiz() {
             </p>
           )}
 
-          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+          <div
+            role="radiogroup"
+            aria-label={current.prompt}
+            className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"
+          >
             {current.options.map((opt) => {
               const selected = answers[current.id] === opt.value;
               return (
                 <button
                   key={opt.value}
                   type="button"
+                  role="radio"
+                  aria-checked={selected}
                   onClick={() => pick(opt.value, opt.score)}
                   className={
                     selected
@@ -646,7 +667,7 @@ function ResultCard({
               className="mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em]"
               style={{
                 background: `${bucket.color}22`,
-                color: bucket.color,
+                color: aaTextColor(bucket.color),
                 boxShadow: `0 0 22px ${bucket.color}33`,
               }}
             >
@@ -666,11 +687,11 @@ function ResultCard({
               {bucket.headline}
             </p>
           </div>
-          <div className="text-right">
+          <div className="text-right" aria-live="polite">
             <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--ink-faint)] mb-1">
               Automation %
             </div>
-            <ScoreCountUp value={score} color={bucket.color} />
+            <ScoreCountUp value={score} color={aaTextColor(bucket.color)} />
           </div>
         </div>
       </div>

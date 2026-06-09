@@ -412,7 +412,7 @@ const PATTERNS: { h: string; body: string }[] = [
   },
   {
     h: "Named case study with metrics",
-    body: "\"How we cut Grand Mercer Dental's no-show rate from 18% to 6% in 90 days.\" Concrete name, concrete metric, concrete time window. Case studies without names read like fiction to a model and don't get cited.",
+    body: '"How we took a cosmetic dental practice\'s intake completion from 34% to 71% in 90 days." Concrete role, concrete metric, concrete time window. A specific, defensible outcome reads as real to a model and gets cited even when the client is anonymized.',
   },
   {
     h: "Data table with sources",

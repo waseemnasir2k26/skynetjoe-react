@@ -56,6 +56,9 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
   const closeTimer = useRef<number | null>(null);
+  // a11y: refs for the mobile menu focus trap + restore-to-trigger on close.
+  const mobileBtnRef = useRef<HTMLButtonElement | null>(null);
+  const mobilePanelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -78,6 +81,65 @@ export default function Header() {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
+  // a11y B4: while the mobile menu is open, trap Tab focus inside the panel,
+  // close on Escape, and restore focus to the hamburger trigger on close.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const trigger = mobileBtnRef.current;
+
+    // Move focus into the panel so keyboard users start inside the overlay.
+    const focusFirst = () => {
+      const panel = mobilePanelRef.current;
+      const first = panel?.querySelector<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      first?.focus();
+    };
+    const raf = window.requestAnimationFrame(focusFirst);
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setMobileOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const panel = mobilePanelRef.current;
+      // Trap covers the panel + the hamburger trigger (it stays visible/focusable).
+      const focusables = [
+        ...(trigger ? [trigger] : []),
+        ...Array.from(
+          panel?.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ) ?? [],
+        ),
+      ].filter((el) => el.offsetParent !== null || el === trigger);
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const activeEl = document.activeElement as HTMLElement | null;
+      if (e.shiftKey) {
+        if (activeEl === first || !panel?.contains(activeEl)) {
+          if (activeEl !== trigger) {
+            e.preventDefault();
+            last.focus();
+          }
+        }
+      } else if (activeEl === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.cancelAnimationFrame(raf);
+      document.removeEventListener("keydown", onKeyDown);
+      // Restore focus to the hamburger trigger on close / unmount.
+      trigger?.focus();
     };
   }, [mobileOpen]);
 
@@ -352,11 +414,13 @@ export default function Header() {
         </div>
 
         <button
+          ref={mobileBtnRef}
           onClick={() => setMobileOpen(!mobileOpen)}
           className="lg:hidden p-3 -mr-1"
           style={{ color: "var(--ink)" }}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
+          aria-controls="mobile-nav-panel"
         >
           {mobileOpen ? (
             <X className="w-6 h-6" />
@@ -368,6 +432,11 @@ export default function Header() {
 
       {mobileOpen && (
         <div
+          id="mobile-nav-panel"
+          ref={mobilePanelRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
           className="lg:hidden backdrop-blur-md max-h-[calc(100vh-64px)] overflow-y-auto"
           style={{
             background: "rgba(242, 239, 230, 0.97)",

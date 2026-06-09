@@ -6,8 +6,8 @@ import type { ServiceFunnelContent } from "./types";
  * multi-tool orchestration, dashboards. Outcome-anchored, premium.
  * Proof = canonical case "eu-logistics-email-triage-n8n" (EU logistics group,
  * anonymized) — a 17-node n8n + GPT-4o triage pipeline, 6hr → 6min routine
- * response. NOTE: Takycorp is the US insurance retainer client, NOT French
- * logistics — do not mislabel it. KODIASIMMO is the Northeast recovery network.
+ * response. NOTE: the US insurance retainer client is NOT the EU logistics
+ * group — do not mislabel it. The Northeast recovery network is a third case.
  */
 const content: ServiceFunnelContent = {
   slug: "ai-business-systems",
@@ -54,13 +54,13 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "A knowledge bot that answers from your own data",
-      body: "A RAG bot grounded in your SOPs, contracts, and product docs — answering in your voice, citing the source doc, and saying \"I don't know\" instead of inventing. New hires and customers get the right answer in seconds, not a queue.",
+      body: 'A RAG bot grounded in your SOPs, contracts, and product docs — answering in your voice, citing the source doc, and saying "I don\'t know" instead of inventing. New hires and customers get the right answer in seconds, not a queue.',
       proof: "Grounded answers, source-cited",
     },
     {
       title: "Multi-tool orchestration that ends the re-typing",
       body: "Email, your contact list, spreadsheets, billing, and Slack wired into one pipeline so data is entered once and flows everywhere. No more copy-paste between apps, no more two versions of the truth.",
-      proof: "KODIASIMMO: 17 stuck intakes recovered, auto-routed",
+      proof: "Recovery network: 17 stuck intakes recovered, auto-routed",
     },
     {
       title: "A dashboard and SOPs so the system is yours",
@@ -150,7 +150,7 @@ const content: ServiceFunnelContent = {
   faqs: [
     {
       q: "Is this strategy or do you actually build the system?",
-      a: "Both, and the build is the point. The audit exists to pick the right system; the engagement exists to ship it. You walk away with a working system running a real workflow on your real data — not a 30-page deck of what someone could build. Most \"AI consultants\" stop at the slide. I stop when it's live.",
+      a: 'Both, and the build is the point. The audit exists to pick the right system; the engagement exists to ship it. You walk away with a working system running a real workflow on your real data — not a 30-page deck of what someone could build. Most "AI consultants" stop at the slide. I stop when it\'s live.',
     },
     {
       q: "Why is this priced higher than your automation services?",

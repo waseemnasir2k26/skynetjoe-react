@@ -7,12 +7,12 @@ import WorkShowcase from "@/components/sections/WorkShowcase";
 export const metadata: Metadata = {
   title: "Portfolio — Recent Projects",
   description:
-    "A selection of recent SkynetLabs builds: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. Live screenshots from 40+ deployed sites. Built solo from Bali by Waseem Nasir.",
+    "A selection of recent SkynetLabs builds: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. 23 live screenshots from deployed sites. Built solo from Bali by Waseem Nasir.",
   alternates: { canonical: `${SITE.url}/portfolio` },
   openGraph: {
     title: "SkynetLabs Portfolio — Recent Projects",
     description:
-      "A selection of recent builds — live screenshots from 40+ deployed sites. Click any tile for the live site.",
+      "A selection of 23 recent builds — live screenshots from deployed sites. Click any tile for the live site.",
     url: `${SITE.url}/portfolio`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -24,7 +24,7 @@ const schema = {
   "@type": "CollectionPage",
   name: "SkynetLabs Portfolio — Recent Projects",
   description:
-    "A selection of recent builds — live screenshots from 40+ deployed sites across nine countries.",
+    "A selection of 23 recent builds — live screenshots from deployed sites across nine countries.",
   url: `${SITE.url}/portfolio`,
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },
@@ -44,7 +44,7 @@ export default function PortfolioPage() {
             <div className="hero-inner">
               <div className="hero-eyebrow">
                 <span className="pulse"></span>
-                <strong>40+ sites shipped</strong>&nbsp;· 180+ workflows · 9
+                <strong>23 builds shown</strong>&nbsp;· 180+ workflows · 9
                 countries
               </div>
 
@@ -76,7 +76,7 @@ export default function PortfolioPage() {
 
               <div className="featured-in">
                 <span className="featured-lbl">Proof</span>
-                <span>40+ websites delivered</span>
+                <span>23 builds shown</span>
                 <span>180+ workflows shipped</span>
                 <span>9 countries served</span>
               </div>

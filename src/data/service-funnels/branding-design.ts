@@ -4,7 +4,7 @@ import type { ServiceFunnelContent } from "./types";
  * Branding & Design — full funnel copy.
  * Pain: inconsistent brand, DIY-looking assets, no system to stay consistent.
  * Outcome: a cohesive brand kit + reusable templates so everything looks intentional.
- * Proof = canonical case "northeast-recovery-brand-intake-rescue" (KODIASIMMO),
+ * Proof = canonical case "northeast-recovery-brand-intake-rescue" (anonymized),
  * which lists branding-design as a related service. Illustration line is
  * representative (no unpublished client pairings).
  */
@@ -122,7 +122,7 @@ const content: ServiceFunnelContent = {
 
   proof: {
     metric: "Brand restored to founder-spec",
-    client: "Northeast US clinical recovery network (KODIASIMMO)",
+    client: "Northeast US clinical recovery network (anon)",
     detail:
       "Inherited a half-built brand kit from a previous agency — off-spec palette, a wordmark that didn't match the asset file. We reconciled it in a single working day, restoring the founder's actual logo asset and a Pantone-aligned palette in time for a major referral-partnership announcement. As the Clinical Director put it: \"He had it fixed before lunch.\"",
   },
@@ -145,7 +145,7 @@ const content: ServiceFunnelContent = {
     metric: "2.1 → 4.4 / 5",
     client: "Manhattan cosmetic dental atelier (anonymized)",
     detail:
-      "A bespoke 14-section identity and site — built to look nothing like the template clinic sites in midtown — lifted rated inquiry quality from 2.1 to 4.4 out of 5. The founding clinician's line: \"Our last site cost five times more and looked like every other clinic. This one looks like us.\"",
+      'A bespoke 14-section identity and site — built to look nothing like the template clinic sites in midtown — lifted rated inquiry quality from 2.1 to 4.4 out of 5. The founding clinician\'s line: "Our last site cost five times more and looked like every other clinic. This one looks like us."',
   },
 
   faqs: [

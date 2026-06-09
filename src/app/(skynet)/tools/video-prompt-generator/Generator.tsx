@@ -117,10 +117,12 @@ const CAMERA_DESC: Record<CameraMove, string> = {
 };
 
 const STYLE_DESC: Record<Style, string> = {
-  realistic: "photoreal cinematography, 35mm film grain, shallow depth of field",
+  realistic:
+    "photoreal cinematography, 35mm film grain, shallow depth of field",
   anime: "stylized 2D anime, hand-drawn key frames, cel-shaded color palette",
   "3d-render": "polished 3D render, soft global illumination, octane-style",
-  claymation: "stop-motion claymation aesthetic, tactile, slight texture jitter",
+  claymation:
+    "stop-motion claymation aesthetic, tactile, slight texture jitter",
   "film-noir":
     "black-and-white noir, hard chiaroscuro lighting, venetian blind shadows",
   watercolor:
@@ -138,15 +140,14 @@ type Format = "runway" | "pika" | "sora" | "veo";
 
 function composeRunway(i: Inputs, salt: number): string {
   const adj = MOOD_ADJ[i.mood][salt % MOOD_ADJ[i.mood].length];
-  const neg = i.negative.trim()
-    ? `\nNegative: ${i.negative.trim()}.`
-    : "";
+  const neg = i.negative.trim() ? `\nNegative: ${i.negative.trim()}.` : "";
   return `${adj.charAt(0).toUpperCase() + adj.slice(1)}, ${i.mood} shot of ${i.subject}. ${CAMERA_DESC[i.camera].charAt(0).toUpperCase() + CAMERA_DESC[i.camera].slice(1)}. ${LIGHTING_DESC[i.lighting].charAt(0).toUpperCase() + LIGHTING_DESC[i.lighting].slice(1)}. ${STYLE_DESC[i.style]}. Aspect ratio ${i.aspect}, ${i.duration} duration, 24fps, motion bracket 4, upscale enabled.${neg}`;
 }
 
 function composePika(i: Inputs, salt: number): string {
   const adj = MOOD_ADJ[i.mood][(salt + 1) % MOOD_ADJ[i.mood].length];
-  const move = CAMERA_MOVES.find((c) => c.value === i.camera)?.label ?? i.camera;
+  const move =
+    CAMERA_MOVES.find((c) => c.value === i.camera)?.label ?? i.camera;
   const lightLabel =
     LIGHTING.find((l) => l.value === i.lighting)?.label ?? i.lighting;
   const styleLabel = STYLES.find((s) => s.value === i.style)?.label ?? i.style;
@@ -157,9 +158,7 @@ function composePika(i: Inputs, salt: number): string {
 function composeSora(i: Inputs, salt: number): string {
   const adj = moodAdj(i.mood);
   void salt;
-  const neg = i.negative.trim()
-    ? ` Avoid: ${i.negative.trim()}.`
-    : "";
+  const neg = i.negative.trim() ? ` Avoid: ${i.negative.trim()}.` : "";
   return `A ${i.duration} ${adj} ${i.mood} scene. We see ${i.subject}. ${CAMERA_DESC[i.camera].charAt(0).toUpperCase() + CAMERA_DESC[i.camera].slice(1)}, holding ${i.aspect} framing throughout. ${LIGHTING_DESC[i.lighting].charAt(0).toUpperCase() + LIGHTING_DESC[i.lighting].slice(1)}, lending a ${i.mood} atmosphere. The visual treatment is ${STYLE_DESC[i.style]}, with continuity preserved from first to last frame.${neg}`;
 }
 
@@ -283,7 +282,7 @@ export default function Generator() {
         sora: composeSora(inputs, salt),
         veo: composeVeo(inputs, salt),
       }) satisfies Record<Format, string>,
-    [inputs, salt]
+    [inputs, salt],
   );
 
   function update<K extends keyof Inputs>(key: K, value: Inputs[K]) {
@@ -405,6 +404,7 @@ export default function Generator() {
         {/* Duration */}
         <Field label="Duration">
           <RadioRow
+            label="Duration"
             value={inputs.duration}
             onChange={(v) => update("duration", v as Duration)}
             options={DURATIONS.map((d) => ({ value: d, label: d }))}
@@ -414,6 +414,7 @@ export default function Generator() {
         {/* Style */}
         <Field label="Style preset">
           <RadioRow
+            label="Style preset"
             value={inputs.style}
             onChange={(v) => update("style", v as Style)}
             options={STYLES}
@@ -424,6 +425,7 @@ export default function Generator() {
         {/* Aspect */}
         <Field label="Aspect ratio">
           <RadioRow
+            label="Aspect ratio"
             value={inputs.aspect}
             onChange={(v) => update("aspect", v as Aspect)}
             options={ASPECTS.map((a) => ({ value: a, label: a }))}
@@ -433,7 +435,8 @@ export default function Generator() {
         {/* Negative */}
         <label className="block mb-5">
           <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-2">
-            Negative prompts <span className="text-[var(--ink-faint)]">(optional)</span>
+            Negative prompts{" "}
+            <span className="text-[var(--ink-faint)]">(optional)</span>
           </span>
           <input
             type="text"
@@ -570,8 +573,8 @@ export default function Generator() {
                       {h.inputs.subject || "(no subject)"}
                     </div>
                     <div className="text-[10px] text-[var(--ink-faint)] uppercase tracking-wider">
-                      {h.inputs.style} · {h.inputs.mood} ·{" "}
-                      {h.inputs.duration} · {h.inputs.aspect}
+                      {h.inputs.style} · {h.inputs.mood} · {h.inputs.duration} ·{" "}
+                      {h.inputs.aspect}
                     </div>
                   </button>
                   <button
@@ -651,27 +654,35 @@ function RadioRow<T extends string>({
   onChange,
   options,
   wrap = false,
+  label,
 }: {
   value: T;
   onChange: (v: T) => void;
   options: readonly { value: T; label: string }[];
   wrap?: boolean;
+  /** a11y M5: accessible name for the radiogroup. */
+  label?: string;
 }) {
   return (
-    <div className={wrap ? "flex flex-wrap gap-1.5" : "grid grid-cols-4 gap-1.5"}>
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className={wrap ? "flex flex-wrap gap-1.5" : "grid grid-cols-4 gap-1.5"}
+    >
       {options.map((o) => {
         const selected = o.value === value;
         return (
           <button
             key={o.value}
             type="button"
+            role="radio"
+            aria-checked={selected}
             onClick={() => onChange(o.value)}
             className={
               selected
                 ? "rounded-lg border-2 border-[var(--terracotta)] bg-[rgba(198,107,63,0.10)] px-2.5 py-1.5 text-xs font-semibold text-[var(--terracotta-aa)] transition"
                 : "rounded-lg border-2 border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-2.5 py-1.5 text-xs font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)]/50 hover:bg-[var(--cream-2)]"
             }
-            aria-pressed={selected}
           >
             {o.label}
           </button>

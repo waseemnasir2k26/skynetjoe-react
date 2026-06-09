@@ -192,7 +192,7 @@ export default function CaseStudiesPage() {
               </h1>
 
               <p className="hero-sub">
-                Dental intake completion <strong>34% → 71%</strong>. A French
+                Dental intake completion <strong>34% → 71%</strong>. An EU
                 logistics inbox triaged from{" "}
                 <strong>6 hours to 6 minutes</strong>. Dispatcher load cut from{" "}
                 <strong>4 hours a day to 45 minutes</strong>. Each one
@@ -211,9 +211,9 @@ export default function CaseStudiesPage() {
 
               <div className="featured-in">
                 <span className="featured-lbl">Proof</span>
-                <span>Grand Mercer Dental</span>
-                <span>KODIASIMMO</span>
-                <span>Takycorp</span>
+                <span>Cosmetic dental practice</span>
+                <span>Clinical recovery network</span>
+                <span>US insurance client</span>
                 <span>9 countries served</span>
               </div>
             </div>

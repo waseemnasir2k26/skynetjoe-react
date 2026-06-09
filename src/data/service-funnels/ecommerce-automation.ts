@@ -5,7 +5,7 @@ import type { ServiceFunnelContent } from "./types";
  * Mined from content/services/ecommerce-automation.html + SkynetLabs brand voice:
  * founder-first, public pricing, specific, anti-fluff. Proof = canonical case
  * "ksa-fashion-retailer-shopify-ecommerce" (KSA fashion retailer, anonymized) —
- * NOT KODIASIMMO, which is the Northeast US recovery network, a different case.
+ * NOT the Northeast US recovery network, which is a different case.
  * Tiers from service-pricing.ts: Starter $2,997 / Pro $8,500 / Custom $2,497/mo.
  */
 const content: ServiceFunnelContent = {
@@ -57,7 +57,7 @@ const content: ServiceFunnelContent = {
       {
         dimension: "Pricing",
         us: "Public, fixed tiers on the page. Scope locked in writing within 48 hours of your brief.",
-        them: "\"Book a call for a quote.\" Stacked monthly app fees that creep as order volume grows.",
+        them: '"Book a call for a quote." Stacked monthly app fees that creep as order volume grows.',
       },
       {
         dimension: "What you own",
@@ -90,7 +90,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "Carts recovered while you do nothing",
-      body: "A two-hour email nudge, a 24-hour SMS with an offer, a 72-hour \"what went wrong\" survey — all source-tagged so recovery attribution joins back to ad spend instead of guessing.",
+      body: 'A two-hour email nudge, a 24-hour SMS with an offer, a 72-hour "what went wrong" survey — all source-tagged so recovery attribution joins back to ad spend instead of guessing.',
       proof: "Recovery flow runs unattended",
     },
     {
@@ -100,7 +100,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "Supplier and stock that stay in sync",
-      body: "Low-stock threshold trips a Slack alert and a draft reorder PO to the supplier; inbound restocks write back to Shopify. No more \"we sold out yesterday\" surprises or oversold orders to refund.",
+      body: 'Low-stock threshold trips a Slack alert and a draft reorder PO to the supplier; inbound restocks write back to Shopify. No more "we sold out yesterday" surprises or oversold orders to refund.',
       proof: "0 manual stock reconciliations",
     },
   ],

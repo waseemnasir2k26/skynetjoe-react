@@ -17,26 +17,26 @@ export type NumericalTestimonial = {
 export const TOP_TESTIMONIALS: NumericalTestimonial[] = [
   {
     outcome: "Cut lead response from 4 hours to 90 seconds",
-    name: "Christelle",
-    company: "EU logistics ops",
+    name: "Operations lead",
+    company: "EU logistics firm",
     stars: 5,
   },
   {
     outcome: "$11K MRR added in 60 days from one n8n flow",
-    name: "Takycorp",
+    name: "Founder",
     company: "B2B SaaS",
     stars: 5,
   },
   {
     outcome: "Booked 47 calls in 21 days from AEO content engine",
-    name: "KODIASIMMO",
-    company: "KSA retail",
+    name: "Owner",
+    company: "Retail brand, KSA",
     stars: 5,
   },
   {
     outcome: "Saved 18 hrs/wk on admin after CRM rebuild",
-    name: "Manhattan dental flagship",
-    company: "Healthcare",
+    name: "Practice manager",
+    company: "Dental practice, NY",
     stars: 5,
   },
 ];

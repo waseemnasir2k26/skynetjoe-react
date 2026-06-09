@@ -2,24 +2,24 @@ import { Quote } from "lucide-react";
 
 const QUOTES = [
   {
-    text: "Waseem rebuilt our entire patient-intake flow in 11 days. We went from 23% show-rate to 71% in 6 weeks. No-show revenue alone paid for the engagement 4x over.",
-    name: "Dr Elena Marchetti",
-    role: "Founder, Grand Mercer Dental (SoHo NY)",
+    text: "Waseem rebuilt our entire patient-intake flow in 11 days. Intake completion went from 34% to 71% in the first month. The patients we were quietly losing on a broken form now actually book.",
+    name: "Founder",
+    role: "Cosmetic dental practice, Northeast US",
   },
   {
-    text: "The ElevenLabs + n8n recouvrement agent he built for us handles 200+ debtor calls/week in French. Our collection ops team can finally focus on the complex cases.",
-    name: "Patrick Mabangu",
-    role: "CEO, KODIASIMMO (France)",
+    text: "The ElevenLabs + n8n recovery agent he built for us handles 200+ debtor calls/week. Our ops team can finally focus on the complex cases.",
+    name: "Clinical Director",
+    role: "Clinical recovery network, Northeast US",
   },
   {
-    text: "Hired Skynetjoe for one Fiverr gig. Five months later he runs three of our automation stacks. The man delivers.",
-    name: "Christelle Dubois",
-    role: "Owner, Christelle Wellness",
+    text: "Hired SkynetLabs for one Fiverr gig. Five months later he runs three of our automation stacks. The man delivers.",
+    name: "Owner",
+    role: "Wellness practice, Bali",
   },
   {
-    text: "Stéphanie's email triage workflow used to eat 3 hours/day. Waseem's GPT-4o + Gmail draft agent dropped it to 20 minutes. She actually went home at 6pm last week.",
-    name: "Esther Kalala",
-    role: "PM, Takycorp Mining & Logistics",
+    text: "Our email triage used to eat 3 hours a day. The GPT-4o + Gmail draft agent dropped it to 20 minutes. The team actually goes home on time now.",
+    name: "Operations Lead",
+    role: "US insurance retainer client",
   },
 ];
 
@@ -103,7 +103,8 @@ export default function Testimonials() {
                 key={i}
                 style={{
                   position: "relative",
-                  padding: "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4.5vw, 26px)",
+                  padding:
+                    "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4.5vw, 26px)",
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
                   transform: `rotate(${a.rotate})`,

@@ -110,7 +110,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "bali-wellness-conversion-funnel",
     position: 2,
-    clientName: "Bali wellness practitioner (Christelle)",
+    clientName: "Bali wellness practitioner (anon)",
     industry: "Holistic wellness & coaching",
     industryTag: "Websites",
     location: "Ubud, Bali",
@@ -154,13 +154,13 @@ export const CASE_STUDIES: CaseStudy[] = [
       },
     ],
     longFormStory: [
-      "Wellness sites are usually written for the practitioner, not the customer. They open with the founder's origin story and bury pricing somewhere on a 'work with me' page that requires three clicks. Christelle's old site did exactly that.",
+      "Wellness sites are usually written for the practitioner, not the customer. They open with the founder's origin story and bury pricing somewhere on a 'work with me' page that requires three clicks. Her old site did exactly that.",
       "We rebuilt it on a single principle: every section had to answer a real objection that showed up in her DMs in the last 30 days. The hero answers 'is this for people like me?'. Section two answers 'do you do remote?'. Section three is transparent pricing — no 'inquire for rates'. Section four is what a first session actually looks like, written in her words, not in retreat-brochure English.",
       "Bookings doubled inside the first 30 days post-launch, with the same Instagram traffic she'd had for 8 months. The site now closes for her while she's offline.",
     ],
     testimonialQuote:
       "I stopped explaining the same things in DMs five times a day. The site does it now, and in my voice. I didn't realize how much energy that was draining until it stopped.",
-    testimonialAuthor: "Christelle, wellness practitioner, Ubud",
+    testimonialAuthor: "Owner, wellness practice, Ubud",
     publishDate: "2026-02-08",
     relatedServices: [
       { slug: "vibe-coded-sites", label: "Vibe-Coded Websites" },
@@ -242,7 +242,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "northeast-recovery-brand-intake-rescue",
     position: 4,
-    clientName: "Northeast US clinical recovery network (KODIASIMMO)",
+    clientName: "Northeast US clinical recovery network (anon)",
     industry: "Clinical recovery & behavioral health",
     industryTag: "Consulting",
     location: "Northeast US",
@@ -302,7 +302,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     testimonialQuote:
       "He had it fixed before lunch. The previous agency took 6 weeks and left us with a form that didn't work.",
-    testimonialAuthor: "Clinical Director, KODIASIMMO",
+    testimonialAuthor: "Clinical Director, recovery network",
     publishDate: "2025-11-19",
     relatedServices: [
       { slug: "ai-business-systems", label: "AI Business Systems" },
@@ -312,7 +312,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "us-insurance-gohighlevel-rebuild",
     position: 5,
-    clientName: "US insurance retainer client (Takycorp)",
+    clientName: "US insurance retainer client (anon)",
     industry: "Insurance",
     industryTag: "Automation",
     location: "United States",
@@ -367,7 +367,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     testimonialQuote:
       "Seventh time we've hired Waseem. Nothing else to add — the result is the result.",
-    testimonialAuthor: "Operations Lead, Takycorp",
+    testimonialAuthor: "Operations Lead, US insurance client",
     publishDate: "2026-01-22",
     relatedServices: [
       { slug: "gohighlevel", label: "GoHighLevel CRM" },

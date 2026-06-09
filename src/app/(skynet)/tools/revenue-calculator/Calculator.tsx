@@ -292,11 +292,14 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
               <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
                 Money lost right now
               </p>
-              <CountUp
-                value={math.totalMonthlyLeak}
-                format={(v) => fmtUSD(v)}
-                className={`${leakMagnitude} font-extrabold tracking-tight block leading-none mb-2`}
-              />
+              {/* a11y M5: total updates live as the sliders move. */}
+              <div aria-live="polite">
+                <CountUp
+                  value={math.totalMonthlyLeak}
+                  format={(v) => fmtUSD(v)}
+                  className={`${leakMagnitude} font-extrabold tracking-tight block leading-none mb-2 text-[var(--ink)]`}
+                />
+              </div>
               <p className="text-sm md:text-base text-[var(--ink-2)] mt-3">
                 per month — across missed revenue and wasted labor
               </p>
@@ -448,10 +451,10 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
                             : "rgba(198,107,63,0.15)",
                       color:
                         tier === "gold"
-                          ? "#fbbf24"
+                          ? "#7a6000"
                           : tier === "green"
-                            ? "#34d399"
-                            : "var(--terracotta)",
+                            ? "#0b6e50"
+                            : "var(--terracotta-aa)",
                       border: `1px solid ${
                         tier === "gold"
                           ? "rgba(251, 191, 36, 0.40)"

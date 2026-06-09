@@ -97,9 +97,9 @@ export default function Slider() {
     setPosition(x / rect.width < 0.5 ? 100 : 0); // tap LEFT → show all automated, tap RIGHT → show all manual
   };
 
-  // Keyboard a11y
+  // Keyboard a11y — the role="slider" handle is always keyboard-operable,
+  // for every user (reduced-motion / touch included). Only the drag visual is gated.
   const onHandleKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (reduceMotion) return;
     if (e.key === "ArrowLeft") {
       e.preventDefault();
       setPosition((p) => Math.max(0, p - 5));
@@ -242,55 +242,71 @@ export default function Slider() {
             }}
           />
 
-          {/* DRAG HANDLE */}
-          {!reduceMotion && !isTouch && (
-            <div
-              role="slider"
-              tabIndex={0}
-              aria-label="Compare manual versus automated"
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={Math.round(position)}
-              onMouseDown={(e) => {
-                e.preventDefault();
-                setDragging(true);
-              }}
-              onTouchStart={() => setDragging(true)}
-              onKeyDown={onHandleKey}
-              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-10"
-              style={{
-                left: `${position}%`,
-                transition: dragging ? "none" : "left 120ms ease-out",
-              }}
-            >
+          {/* SLIDER HANDLE — the accessible role="slider" control ALWAYS renders
+              and is keyboard-operable for every user (a11y B4). Only the
+              mouse/touch DRAG behaviour + the visible knob graphic are gated
+              under !reduceMotion && !isTouch (drag is unreliable / undesired
+              there); keyboard arrow control still works in those modes. */}
+          {(() => {
+            const dragEnabled = !reduceMotion && !isTouch;
+            return (
               <div
-                className="w-12 h-12 rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing shadow-lg"
+                role="slider"
+                tabIndex={0}
+                aria-label="Compare manual versus automated"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={Math.round(position)}
+                onMouseDown={
+                  dragEnabled
+                    ? (e) => {
+                        e.preventDefault();
+                        setDragging(true);
+                      }
+                    : undefined
+                }
+                onTouchStart={dragEnabled ? () => setDragging(true) : undefined}
+                onKeyDown={onHandleKey}
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-10"
                 style={{
-                  background: "var(--terracotta)",
-                  border: "1px solid var(--ink)",
+                  left: `${position}%`,
+                  transition: dragging ? "none" : "left 120ms ease-out",
                 }}
-                aria-hidden
               >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-[var(--cream-3)]"
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${
+                    dragEnabled ? "cursor-grab active:cursor-grabbing" : ""
+                  }`}
+                  style={{
+                    background: "var(--terracotta)",
+                    border: "1px solid var(--ink)",
+                    // Hide the drag-knob graphic where dragging is disabled, but keep
+                    // the focusable role="slider" node mounted for keyboard users.
+                    opacity: dragEnabled ? 1 : 0,
+                  }}
+                  aria-hidden
                 >
-                  <polyline points="15 18 9 12 15 6" />
-                  <polyline
-                    points="9 18 15 12 9 6"
-                    transform="translate(0,0)"
-                  />
-                </svg>
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-[var(--cream-3)]"
+                  >
+                    <polyline points="15 18 9 12 15 6" />
+                    <polyline
+                      points="9 18 15 12 9 6"
+                      transform="translate(0,0)"
+                    />
+                  </svg>
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* CORNER LABELS */}
           <div

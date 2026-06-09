@@ -32,6 +32,21 @@ const STORAGE_KEY = "skynet:ai-readiness:v1";
 const RESULT_TTL_MS = 14 * 24 * 60 * 60 * 1000; // 14 days
 const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
+/**
+ * a11y B6: saturated bucket.color hexes fail AA as TEXT on cream. Map each to
+ * an AA-safe darkened token for the big score number + label/pill text, while
+ * the bright color stays on the dot / ring / radar fill. Falls back to --ink.
+ */
+const AA_TEXT_COLOR: Record<string, string> = {
+  "#f97316": "#9a3d12", // orange
+  "#eab308": "#7a6000", // amber/yellow
+  "#06b6d4": "#0e6b80", // cyan
+  "#10b981": "#0b6e50", // emerald
+  "#22c55e": "#0b6e50", // green
+  "#ef4444": "#b3261e", // red
+};
+const aaTextColor = (c: string): string => AA_TEXT_COLOR[c] ?? "var(--ink)";
+
 type Phase = "quiz" | "loading" | "result";
 
 type SavedState = {
@@ -78,15 +93,15 @@ export default function Quiz() {
     const urlBucket = params.get("bucket");
     if (urlResult) {
       // shared-link path → jump to result, but rebuild dim breakdown from saved scores if same browser
-      const numeric = Math.max(
-        0,
-        Math.min(MAX_SCORE, Number(urlResult) || 0)
-      );
+      const numeric = Math.max(0, Math.min(MAX_SCORE, Number(urlResult) || 0));
       try {
         const raw = window.localStorage.getItem(STORAGE_KEY);
         if (raw) {
           const saved = JSON.parse(raw) as SavedState;
-          if (saved.scores && Object.keys(saved.scores).length === TOTAL_QUESTIONS) {
+          if (
+            saved.scores &&
+            Object.keys(saved.scores).length === TOTAL_QUESTIONS
+          ) {
             setScores(saved.scores);
             setAnswers(saved.answers ?? {});
             setPhase("result");
@@ -156,12 +171,12 @@ export default function Quiz() {
 
   const totalScore = useMemo(
     () => Object.values(scores).reduce((a, b) => a + b, 0),
-    [scores]
+    [scores],
   );
   const subscores = useMemo(() => computeSubscores(scores), [scores]);
   const bucket: Bucket = useMemo(
     () => bucketForScore(totalScore),
-    [totalScore]
+    [totalScore],
   );
   const weakest = useMemo(() => weakestDimension(subscores), [subscores]);
 
@@ -341,13 +356,19 @@ export default function Quiz() {
             </p>
           )}
 
-          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+          <div
+            role="radiogroup"
+            aria-label={current.prompt}
+            className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"
+          >
             {current.options.map((opt) => {
               const selected = answers[current.id] === opt.value;
               return (
                 <button
                   key={opt.value}
                   type="button"
+                  role="radio"
+                  aria-checked={selected}
                   onClick={() => pick(opt.value, opt.score)}
                   className={
                     selected
@@ -473,7 +494,9 @@ function ScoreCountUp({
       style={{ color }}
     >
       {display}
-      <span className="text-2xl text-[var(--ink-faint)] md:text-3xl">/{MAX_SCORE}</span>
+      <span className="text-2xl text-[var(--ink-faint)] md:text-3xl">
+        /{MAX_SCORE}
+      </span>
     </span>
   );
 }
@@ -578,8 +601,8 @@ function RadarChart({
             Math.abs(a.lx - CENTER) < 1
               ? "middle"
               : a.lx > CENTER
-              ? "start"
-              : "end";
+                ? "start"
+                : "end";
           const dy = a.ly > CENTER ? "1em" : "-0.25em";
           return (
             <text
@@ -672,7 +695,7 @@ function ResultCard({
               className="mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em]"
               style={{
                 background: `${bucket.color}22`,
-                color: bucket.color,
+                color: aaTextColor(bucket.color),
                 boxShadow: `0 0 22px ${bucket.color}33`,
               }}
             >
@@ -692,11 +715,11 @@ function ResultCard({
               {bucket.headline}
             </p>
           </div>
-          <div className="text-right">
+          <div className="text-right" aria-live="polite">
             <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--ink-faint)] mb-1">
               AI Readiness Score
             </div>
-            <ScoreCountUp value={score} color={bucket.color} />
+            <ScoreCountUp value={score} color={aaTextColor(bucket.color)} />
           </div>
         </div>
       </div>
@@ -767,8 +790,7 @@ function ResultCard({
             rel="noopener noreferrer"
             className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
             style={{
-              background:
-                "var(--terracotta)",
+              background: "var(--terracotta)",
               boxShadow: "0 10px 32px rgba(198,107,63,0.25)",
             }}
           >
@@ -812,7 +834,6 @@ function ResultCard({
           Retake the quiz
         </button>
       </div>
-
     </div>
   );
 }

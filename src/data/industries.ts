@@ -174,8 +174,8 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         caseStudySlug: null,
-        clientName: "Dr Elena Marchetti DDS (NY)",
-        location: "Upper East Side, NY",
+        clientName: "Cosmetic dental practice (anon)",
+        location: "Northeast US",
         oneLineOutcome:
           "Voice + SMS receptionist deployed against Dentrix. Recovered 38 net-new patients in the first 90 days from previously-missed calls.",
         metricLabel: "Missed-call recovery",
@@ -370,7 +370,7 @@ export const INDUSTRIES: Industry[] = [
     caseTeasers: [
       {
         caseStudySlug: "bali-wellness-conversion-funnel",
-        clientName: "Christelle, wellness practitioner",
+        clientName: "Solo wellness practitioner (anon)",
         location: "Ubud, Bali",
         oneLineOutcome:
           "Single-page conversion funnel that doubled monthly bookings with no paid ads in 30 days post-launch.",
@@ -403,7 +403,7 @@ export const INDUSTRIES: Industry[] = [
     bioPhotoAlt: "Waseem Nasir, founder of SkynetLabs",
     bioHeadline: "Why I'm the right person to fix this for your spa",
     bioCopy:
-      "Christelle's wellness funnel in Ubud doubled her bookings in 30 days because we wrote the site against her actual DMs, not retreat-brochure language. The same voice-lock pattern is what makes a Concierge AI sound like your spa instead of a chatbot.",
+      "A solo wellness practitioner's funnel in Ubud doubled her bookings in 30 days because we wrote the site against her actual DMs, not retreat-brochure language. The same voice-lock pattern is what makes a Concierge AI sound like your spa instead of a chatbot.",
     pricingTiers: [
       {
         tierName: "Starter",

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * WorkShowcase — /portfolio gallery: 40+ lifetime builds, 23 shown here.
+ * WorkShowcase — /portfolio gallery: 23 builds shown here.
  *
  * Cream-pivot port 2026-05-25:
  *   - bg cream-3 (was dark gradient #061827 → #073846)
@@ -70,8 +70,8 @@ const GIGS: Gig[] = [
   // Flagships
   {
     slug: "skynetlabs-dental-flagship",
-    title: "Grand Mercer Dental · Atelier No. 1",
-    client: "Bespoke flagship · SoHo, New York",
+    title: "Cosmetic Dental Atelier · Flagship No. 1",
+    client: "Bespoke flagship · Northeast US",
     niche: "Luxury Healthcare",
     stack: ["Next.js 16", "Tailwind", "Vercel"],
     outcome:
@@ -340,7 +340,7 @@ export default function WorkShowcase() {
               margin: "0 0 18px",
             }}
           >
-            40+ builds delivered.{" "}
+            23 builds delivered.{" "}
             <span
               style={{
                 fontStyle: "normal",
@@ -359,10 +359,9 @@ export default function WorkShowcase() {
               maxWidth: "62ch",
             }}
           >
-            A selection of 23 recent builds — live screenshots, not mockups.
-            Every tile links to the deployed site. Built solo from Bali +
-            Lahore. Video below walks through one being built end-to-end in
-            Claude Code.
+            23 recent builds — live screenshots, not mockups. Every tile links
+            to the deployed site. Built solo from Bali + Lahore. Video below
+            walks through one being built end-to-end in Claude Code.
           </p>
         </div>
 

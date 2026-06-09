@@ -5,8 +5,8 @@ import type { ServiceFunnelContent } from "./types";
  * Audits, roadmaps, team enablement, prompt/tool training, fractional AI advisor.
  * Framed around CLARITY + LEVERAGE, not delivery. Process = audit → roadmap → enablement.
  * No canonical case maps to strategy-training → proof is representative (no
- * client metrics, no de-anonymized names). NOTE: Takycorp is the US insurance
- * retainer client, NOT French logistics — do not mislabel it.
+ * client metrics, no de-anonymized names). NOTE: the US insurance retainer
+ * client is NOT the EU logistics group — do not mislabel it.
  */
 const content: ServiceFunnelContent = {
   slug: "strategy-training",
@@ -37,7 +37,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "Training that died on Monday",
-      body: "A generic vendor ran a four-hour webinar on \"intro to prompting,\" everyone nodded, and three weeks later the team is back to the old way. Courses teach the tool. They don't teach your ops manager how to clear her inbox faster on Tuesday.",
+      body: 'A generic vendor ran a four-hour webinar on "intro to prompting," everyone nodded, and three weeks later the team is back to the old way. Courses teach the tool. They don\'t teach your ops manager how to clear her inbox faster on Tuesday.',
     },
     {
       title: "Shadow AI nobody's watching",

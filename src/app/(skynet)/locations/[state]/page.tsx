@@ -156,8 +156,8 @@ export default async function StatePage({
             </h1>
 
             <p className="hero-sub" style={{ marginLeft: 0, marginRight: 0 }}>
-              {s.name} founders waste 14+ hours a week on work software should
-              already be doing. SkynetLabs builds the automations, smart
+              {s.name} founders waste 14+ hours a week on work that software
+              should already be doing. SkynetLabs builds the automations, smart
               websites, and chat agents that take it off your plate — for
               operators across{" "}
               <strong>{s.cities.slice(0, 3).join(", ")}</strong> and beyond.
