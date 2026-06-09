@@ -54,7 +54,7 @@ const TOOLS: Tool[] = [
   {
     slug: "content-calendar",
     name: "Content Calendar",
-    blurb: "12-month posting plan in 60 sec",
+    blurb: "30-day posting plan in 60 sec",
   },
   {
     slug: "voice-persona-builder",

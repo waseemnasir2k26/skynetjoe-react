@@ -35,7 +35,7 @@ const TOP_5_LP: Partial<Record<string, FC>> = {
 
 type ServiceItem = { slug: string; label: string; icon: string; desc: string };
 const SERVICES: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
-  (c) => c.services as readonly (ServiceItem & { href?: string })[]
+  (c) => c.services as readonly (ServiceItem & { href?: string })[],
 ).filter((s): s is ServiceItem => !("href" in s) || !s.href);
 const SLUGS = SERVICES.map((s) => s.slug);
 
@@ -66,7 +66,7 @@ export async function generateMetadata({
   if (!svc) return {};
   const longDesc = buildLongDescription(svc);
   return {
-    title: `${svc.label} — ${SITE.brand}`,
+    title: svc.label,
     description: longDesc,
     alternates: { canonical: `${SITE.url}/services/${svc.slug}` },
     openGraph: {
@@ -107,7 +107,7 @@ export default async function ServicePage({
       ? null
       : fs.readFileSync(
           path.join(process.cwd(), "content", "services", `${slug}.html`),
-          "utf8"
+          "utf8",
         );
   const svc = SERVICES.find((s) => s.slug === slug)!;
 
@@ -359,7 +359,8 @@ export default async function ServicePage({
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
             {STATES.filter(
-              (s) => !(PRIORITY_STATE_SLUGS as readonly string[]).includes(s.slug),
+              (s) =>
+                !(PRIORITY_STATE_SLUGS as readonly string[]).includes(s.slug),
             ).map((s) => (
               <Link
                 key={s.slug}

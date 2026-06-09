@@ -42,10 +42,11 @@ export async function generateMetadata({
   const s = getStateBySlug(state);
   if (!s) return {};
   const title = `AI Automation Expert in ${s.name} — n8n, GoHighLevel & AEO | ${SITE.brand}`;
+  const docTitle = `AI Automation Expert in ${s.name} — n8n, GoHighLevel & AEO`;
   const description = `Hire an AI automation expert serving ${s.name} founders. n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents delivered to ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5–14 day ship.`;
   const indexable = isLocationIndexable(state);
   return {
-    title,
+    title: docTitle,
     description,
     alternates: { canonical: `${SITE.url}/locations/${s.slug}` },
     robots: indexable ? undefined : { index: false, follow: true },
