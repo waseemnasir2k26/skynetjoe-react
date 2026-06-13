@@ -39,7 +39,7 @@ export async function GET() {
 
 Founder: ${SITE.founder}
 Domain: ${SITE.domain}
-Contact: ${SITE.emailFounder} | Apply for a call: ${SITE.url}/discovery-call
+Contact: ${SITE.emailFounder} | Book your free 30-min audit: ${SITE.url}/discovery-call
 Base: Canggu, Bali (GMT+8) + Lahore, Pakistan
 Operating since: 2014 (WordPress) | AI automation since 2023
 
@@ -61,8 +61,8 @@ ${SERVICE_CATEGORIES.flatMap((cat) =>
       `### ${svc.label} (${cat.name})
 URL: ${SITE.url}/services/${svc.slug}
 ${svc.desc}
-`
-  )
+`,
+  ),
 ).join("\n")}
 
 ---
@@ -117,7 +117,7 @@ ${POSTS.map(
 URL: ${SITE.url}/blog/${p.slug}
 Published: ${p.publishedAt}
 ${p.description}
-`
+`,
 ).join("\n")}
 
 ---

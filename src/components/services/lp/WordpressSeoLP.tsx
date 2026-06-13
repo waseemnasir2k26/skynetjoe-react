@@ -171,7 +171,7 @@ export default function WordpressSeoLP() {
                 minHeight: 44,
               }}
             >
-              Book a 30-min call
+              Book your free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <div
@@ -247,7 +247,13 @@ export default function WordpressSeoLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -261,7 +267,9 @@ export default function WordpressSeoLP() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--oxblood)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--oxblood)" }}
+            />
             What the audit finds
           </div>
           <h2
@@ -299,8 +307,8 @@ export default function WordpressSeoLP() {
                     i === 0
                       ? "rotate(-0.3deg)"
                       : i === 1
-                      ? "rotate(0.3deg)"
-                      : "rotate(-0.2deg)",
+                        ? "rotate(0.3deg)"
+                        : "rotate(-0.2deg)",
                 }}
               >
                 <div
@@ -352,7 +360,13 @@ export default function WordpressSeoLP() {
           textAlign: "center",
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -503,7 +517,13 @@ export default function WordpressSeoLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -517,7 +537,9 @@ export default function WordpressSeoLP() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--terracotta)" }}
+            />
             Thin vs cited
           </div>
           <h2
@@ -597,7 +619,14 @@ export default function WordpressSeoLP() {
                       lineHeight: 1.5,
                     }}
                   >
-                    <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+                    <X
+                      style={{
+                        width: 14,
+                        height: 14,
+                        color: "var(--oxblood)",
+                        marginTop: 4,
+                      }}
+                    />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -650,7 +679,14 @@ export default function WordpressSeoLP() {
                       lineHeight: 1.5,
                     }}
                   >
-                    <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+                    <Check
+                      style={{
+                        width: 14,
+                        height: 14,
+                        color: "var(--sage)",
+                        marginTop: 4,
+                      }}
+                    />
                     <span>{a}</span>
                   </li>
                 ))}
@@ -732,7 +768,7 @@ export default function WordpressSeoLP() {
               minHeight: 44,
             }}
           >
-            Book a 30-min call
+            Book your free 30-min audit
             <ArrowRight style={{ width: 16, height: 16 }} />
           </Link>
           <div
@@ -745,7 +781,7 @@ export default function WordpressSeoLP() {
               marginTop: 22,
             }}
           >
-            — 4 builds per month · next slot opens June
+            — 4 builds per month
           </div>
         </div>
       </section>

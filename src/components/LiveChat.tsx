@@ -15,8 +15,7 @@ type Msg = {
 const INITIAL: Msg = {
   id: 0,
   from: "bot",
-  text:
-    "Hey, I'm Waseem's assistant. How can I help? Try: 'tell me about you' or 'how do I book a call'",
+  text: "Hey, I'm Waseem's assistant. How can I help? Try: 'tell me about you' or 'how do I book a call'",
 };
 
 function botReply(input: string, nextId: number): Msg {
@@ -27,26 +26,23 @@ function botReply(input: string, nextId: number): Msg {
     return {
       id: nextId,
       from: "bot",
-      text:
-        "SkynetLabs is run by Waseem Nasir, solo from Bali. We build n8n + AI automation, AEO sites, GHL CRM systems for service businesses. 4 client builds/month max, 14-day ship window.",
-      cta: { label: "Apply for a call", href: "/discovery-call" },
+      text: "SkynetLabs is run by Waseem Nasir, solo from Bali. We build n8n + AI automation, AEO sites, GHL CRM systems for service businesses. 4 client builds/month max, 14-day ship window.",
+      cta: { label: "Book your free 30-min audit", href: "/discovery-call" },
     };
   }
   if (has("book", "call", "audit", "consult", "meeting")) {
     return {
       id: nextId,
       from: "bot",
-      text:
-        "Best way: apply at /discovery-call. 3-min brief, reply within 8 hours.",
-      cta: { label: "Apply for a call", href: "/discovery-call" },
+      text: "Best way: book your free 30-min audit at /discovery-call. 3-min brief, reply within 8 hours.",
+      cta: { label: "Book your free 30-min audit", href: "/discovery-call" },
     };
   }
   if (has("price", "cost", "how much", "budget", "pricing", "rate")) {
     return {
       id: nextId,
       from: "bot",
-      text:
-        "Public pricing at /pricing. Starts $1,497 (Starter) up to $9,500 (Flagship). No mystery quotes.",
+      text: "Public pricing at /pricing. Starts $1,497 (Starter) up to $9,500 (Flagship). No mystery quotes.",
       cta: { label: "See pricing", href: "/pricing" },
     };
   }
@@ -54,8 +50,7 @@ function botReply(input: string, nextId: number): Msg {
     return {
       id: nextId,
       from: "bot",
-      text:
-        "16 productized services across Automation, AI Content, Development, Consulting. See /services for the full list.",
+      text: "16 productized services across Automation, AI Content, Development, Consulting. See /services for the full list.",
       cta: { label: "Browse services", href: "/services" },
     };
   }
@@ -63,17 +58,15 @@ function botReply(input: string, nextId: number): Msg {
     return {
       id: nextId,
       from: "bot",
-      text:
-        "I'm based in Canggu, Bali (GMT+8) and Lahore, Pakistan. Clients worldwide.",
-      cta: { label: "Apply for a call", href: "/discovery-call" },
+      text: "I'm based in Canggu, Bali (GMT+8) and Lahore, Pakistan. Clients worldwide.",
+      cta: { label: "Book your free 30-min audit", href: "/discovery-call" },
     };
   }
   return {
     id: nextId,
     from: "bot",
-    text:
-      "Best to apply for a discovery call — Waseem reads every brief personally and replies in 8 hours.",
-    cta: { label: "Apply for a call", href: "/discovery-call" },
+    text: "Best to book your free 30-min audit — Waseem reads every brief personally and replies in 8 hours.",
+    cta: { label: "Book your free 30-min audit", href: "/discovery-call" },
   };
 }
 
@@ -99,20 +92,26 @@ export default function LiveChat() {
       if (a) {
         e.preventDefault();
         setOpen(true);
-        try { sessionStorage.removeItem("livechat-closed"); } catch {}
+        try {
+          sessionStorage.removeItem("livechat-closed");
+        } catch {}
       }
     }
     function onHashChange() {
       if (window.location.hash === "#livechat-open") {
         setOpen(true);
-        try { sessionStorage.removeItem("livechat-closed"); } catch {}
+        try {
+          sessionStorage.removeItem("livechat-closed");
+        } catch {}
       }
     }
     document.addEventListener("click", onAnchor);
     window.addEventListener("hashchange", onHashChange);
     if (window.location.hash === "#livechat-open") {
       setOpen(true);
-      try { sessionStorage.removeItem("livechat-closed"); } catch {}
+      try {
+        sessionStorage.removeItem("livechat-closed");
+      } catch {}
     }
     return () => {
       document.removeEventListener("click", onAnchor);
@@ -196,7 +195,9 @@ export default function LiveChat() {
             <button
               onClick={() => {
                 setOpen(true);
-                try { sessionStorage.removeItem("livechat-closed"); } catch {}
+                try {
+                  sessionStorage.removeItem("livechat-closed");
+                } catch {}
               }}
               aria-label="Open live chat"
               className="w-16 h-16 flex items-center justify-center transition"
@@ -257,7 +258,10 @@ export default function LiveChat() {
             }}
           >
             <div className="flex items-center gap-2">
-              <MessageCircle className="w-4 h-4" style={{ color: "var(--terracotta)" }} />
+              <MessageCircle
+                className="w-4 h-4"
+                style={{ color: "var(--terracotta)" }}
+              />
               <span
                 style={{
                   fontFamily: "var(--font-mono)",
@@ -288,7 +292,9 @@ export default function LiveChat() {
             <button
               onClick={() => {
                 setOpen(false);
-                try { sessionStorage.setItem("livechat-closed", "1"); } catch {}
+                try {
+                  sessionStorage.setItem("livechat-closed", "1");
+                } catch {}
               }}
               aria-label="Close chat"
               style={{
@@ -336,7 +342,9 @@ export default function LiveChat() {
                       href={m.cta.href}
                       onClick={() => {
                         setOpen(false);
-                        try { sessionStorage.setItem("livechat-closed", "1"); } catch {}
+                        try {
+                          sessionStorage.setItem("livechat-closed", "1");
+                        } catch {}
                       }}
                       className="mt-2 inline-flex items-center gap-1"
                       style={{

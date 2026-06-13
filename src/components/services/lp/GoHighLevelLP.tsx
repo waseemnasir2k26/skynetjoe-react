@@ -68,7 +68,7 @@ export default function GoHighLevelLP() {
           padding: "10px 16px",
         }}
       >
-        — gohighlevel rebuilds · 11-day ship · 4 builds left this month
+        — gohighlevel rebuilds · 11-day ship · 4 builds per month
       </div>
 
       {/* HERO */}
@@ -171,7 +171,7 @@ export default function GoHighLevelLP() {
                 minHeight: 44,
               }}
             >
-              Book a 30-min call
+              Book your free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <div
@@ -247,7 +247,13 @@ export default function GoHighLevelLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -261,7 +267,9 @@ export default function GoHighLevelLP() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--oxblood)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--oxblood)" }}
+            />
             What I see on call #1
           </div>
           <h2
@@ -299,8 +307,8 @@ export default function GoHighLevelLP() {
                     i === 0
                       ? "rotate(-0.3deg)"
                       : i === 1
-                      ? "rotate(0.3deg)"
-                      : "rotate(-0.2deg)",
+                        ? "rotate(0.3deg)"
+                        : "rotate(-0.2deg)",
                 }}
               >
                 <div
@@ -352,7 +360,13 @@ export default function GoHighLevelLP() {
           textAlign: "center",
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -502,7 +516,13 @@ export default function GoHighLevelLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -516,7 +536,9 @@ export default function GoHighLevelLP() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--terracotta)" }}
+            />
             Template vs your motion
           </div>
           <h2
@@ -596,7 +618,14 @@ export default function GoHighLevelLP() {
                       lineHeight: 1.5,
                     }}
                   >
-                    <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+                    <X
+                      style={{
+                        width: 14,
+                        height: 14,
+                        color: "var(--oxblood)",
+                        marginTop: 4,
+                      }}
+                    />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -649,7 +678,14 @@ export default function GoHighLevelLP() {
                       lineHeight: 1.5,
                     }}
                   >
-                    <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+                    <Check
+                      style={{
+                        width: 14,
+                        height: 14,
+                        color: "var(--sage)",
+                        marginTop: 4,
+                      }}
+                    />
                     <span>{a}</span>
                   </li>
                 ))}
@@ -731,7 +767,7 @@ export default function GoHighLevelLP() {
               minHeight: 44,
             }}
           >
-            Book a 30-min call
+            Book your free 30-min audit
             <ArrowRight style={{ width: 16, height: 16 }} />
           </Link>
           <div
@@ -744,7 +780,7 @@ export default function GoHighLevelLP() {
               marginTop: 22,
             }}
           >
-            — 4 builds per month · next slot opens June
+            — 4 builds per month
           </div>
         </div>
       </section>

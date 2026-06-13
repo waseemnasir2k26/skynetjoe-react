@@ -123,9 +123,9 @@ export default function Hero() {
               marginBottom: 20,
             }}
           >
-            Operator-grade n8n workflows, AEO-ready websites, and
-            WhatsApp/CRM stacks — shipped solo in 5–14 days. No SDR, no bot,
-            no agency middlemen. Just me at the keyboard.
+            Operator-grade n8n workflows, AEO-ready websites, and WhatsApp/CRM
+            stacks — shipped solo in 5–14 days. No SDR, no bot, no agency
+            middlemen. Just me at the keyboard.
           </p>
 
           <p
@@ -139,8 +139,7 @@ export default function Hero() {
             }}
           >
             Solo founder + AI co-founder. The smallest agency that ships
-            flagship work — 1 human, 1 Anthropic API key, zero account
-            managers.
+            flagship work — 1 human, 1 Anthropic API key, zero account managers.
           </p>
 
           {/* CTA pair */}
@@ -164,7 +163,7 @@ export default function Hero() {
               }}
             >
               <Calendar className="w-4 h-4" />
-              Book a 30-min strategy call
+              Book your free 30-min audit
             </Link>
             <Link
               href="/case-studies"
@@ -219,13 +218,18 @@ export default function Hero() {
                 ))}
               </span>
               <span>
-                <span style={{ color: C.ink, fontWeight: 600 }}>Top Rated Plus</span> on Upwork ·{" "}
-                <span style={{ color: C.ink, fontWeight: 600 }}>Top Rated</span> on Fiverr
+                <span style={{ color: C.ink, fontWeight: 600 }}>
+                  Top Rated Plus
+                </span>{" "}
+                on Upwork ·{" "}
+                <span style={{ color: C.ink, fontWeight: 600 }}>Top Rated</span>{" "}
+                on Fiverr
               </span>
             </div>
             <span style={{ color: C.rule }}>·</span>
             <span>
-              <span style={{ color: C.ink, fontWeight: 600 }}>180+</span> workflows ·{" "}
+              <span style={{ color: C.ink, fontWeight: 600 }}>180+</span>{" "}
+              workflows ·{" "}
               <span style={{ color: C.ink, fontWeight: 600 }}>9</span> countries
             </span>
           </div>
@@ -297,7 +301,14 @@ export default function Hero() {
               border: `1px solid ${C.rule}`,
             }}
           >
-            <div style={{ position: "relative", width: "100%", aspectRatio: "1/1", overflow: "hidden" }}>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                aspectRatio: "1/1",
+                overflow: "hidden",
+              }}
+            >
               <Image
                 src="/portraits/waseem-cafe-smile.jpg"
                 alt="Waseem grinning in a Canggu cafe — the day Claude Code started feeling like a co-founder"

@@ -1,5 +1,13 @@
 import Image from "next/image";
-import { Search, Wrench, Rocket, TrendingUp, ArrowRight, Calendar, Terminal } from "lucide-react";
+import {
+  Search,
+  Wrench,
+  Rocket,
+  TrendingUp,
+  ArrowRight,
+  Calendar,
+  Terminal,
+} from "lucide-react";
 
 /**
  * Cream editorial pivot 2026-05-25 — process section.
@@ -91,7 +99,9 @@ export default function Process() {
             }}
           >
             Four steps.{" "}
-            <em style={{ fontStyle: "italic", color: C.terra }}>No SOW theater.</em>
+            <em style={{ fontStyle: "italic", color: C.terra }}>
+              No SOW theater.
+            </em>
           </h2>
           <p style={{ fontSize: 17, color: C.ink2, lineHeight: 1.6 }}>
             No 14-slide proposal deck. No 6-week discovery phase. Audit Monday,
@@ -102,10 +112,7 @@ export default function Process() {
         <div className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {STEPS.map((s, i) => (
-              <div
-                key={s.n}
-                style={{ position: "relative" }}
-              >
+              <div key={s.n} style={{ position: "relative" }}>
                 <div
                   style={{
                     display: "flex",
@@ -126,7 +133,9 @@ export default function Process() {
                       borderRadius: 2,
                     }}
                   >
-                    <s.icon style={{ width: 26, height: 26, color: C.cream3 }} />
+                    <s.icon
+                      style={{ width: 26, height: 26, color: C.cream3 }}
+                    />
                     <span
                       style={{
                         position: "absolute",
@@ -172,7 +181,8 @@ export default function Process() {
                     padding: 24,
                     background: C.cream2,
                     border: `1px solid ${C.rule}`,
-                    transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                    transform:
+                      i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                   }}
                 >
                   <h3
@@ -190,13 +200,24 @@ export default function Process() {
                   >
                     {s.title}
                     {i < STEPS.length - 1 && (
-                      <ArrowRight style={{ width: 16, height: 16, color: C.inkFaint }} />
+                      <ArrowRight
+                        style={{ width: 16, height: 16, color: C.inkFaint }}
+                      />
                     )}
                   </h3>
-                  <p style={{ fontSize: 14, color: C.ink2, lineHeight: 1.6, marginBottom: 16 }}>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: C.ink2,
+                      lineHeight: 1.6,
+                      marginBottom: 16,
+                    }}
+                  >
                     {s.desc}
                   </p>
-                  <div style={{ paddingTop: 12, borderTop: `1px solid ${C.rule}` }}>
+                  <div
+                    style={{ paddingTop: 12, borderTop: `1px solid ${C.rule}` }}
+                  >
                     <p
                       style={{
                         fontFamily: "var(--font-mono)",
@@ -278,9 +299,18 @@ export default function Process() {
               }}
             >
               You brief Waseem. Claude drafts.{" "}
-              <em style={{ fontStyle: "italic", color: C.terra }}>Waseem ships.</em>
+              <em style={{ fontStyle: "italic", color: C.terra }}>
+                Waseem ships.
+              </em>
             </h3>
-            <p style={{ fontSize: 15, color: C.ink2, lineHeight: 1.6, marginBottom: 10 }}>
+            <p
+              style={{
+                fontSize: 15,
+                color: C.ink2,
+                lineHeight: 1.6,
+                marginBottom: 10,
+              }}
+            >
               You send a brief in 3 sentences. I read it, scope it, and pair
               with Claude Code in a terminal next to my coffee. Claude drafts
               architecture, writes the first 70% of the code, audits diffs, and
@@ -352,7 +382,7 @@ export default function Process() {
             }}
           >
             <Calendar style={{ width: 14, height: 14 }} />
-            Apply for a discovery call
+            Book your free 30-min audit
           </a>
         </div>
       </div>

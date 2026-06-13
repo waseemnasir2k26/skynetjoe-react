@@ -37,7 +37,8 @@ const schema = {
   "@type": "Blog",
   name: "SkynetLabs Journal",
   url: `${SITE.url}/blog`,
-  description: "Long-form writing on AI automation, AEO, and shipping software.",
+  description:
+    "Long-form writing on AI automation, AEO, and shipping software.",
   author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
   publisher: { "@type": "Organization", name: SITE.brand, url: SITE.url },
   blogPost: POSTS.map((p) => ({
@@ -123,14 +124,17 @@ export default function BlogPage() {
               marginBottom: 0,
             }}
           >
-            Posts when we have something worth saying — not on a schedule.
-            Real client builds, real cost math, real failure modes.
+            Posts when we have something worth saying — not on a schedule. Real
+            client builds, real cost math, real failure modes.
           </p>
         </div>
       </section>
 
       {/* POST GRID */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream)" }}
+      >
         <div className="container-x px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {POSTS.map((p) => (
@@ -286,8 +290,8 @@ export default function BlogPage() {
               lineHeight: 1.6,
             }}
           >
-            If anything here matches your problem, send a brief. We&apos;ll
-            send back a fixed scope in 48 hours.
+            If anything here matches your problem, send a brief. We&apos;ll send
+            back a fixed scope in 48 hours.
           </p>
           <Link
             href="/discovery-call"
@@ -303,7 +307,7 @@ export default function BlogPage() {
               border: "none",
             }}
           >
-            Apply for a discovery call
+            Book your free 30-min audit
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

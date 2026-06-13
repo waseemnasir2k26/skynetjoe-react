@@ -136,7 +136,9 @@ export default function HeroFunnel() {
               />
               Top Rated Plus · Upwork
             </span>
-            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>
+              ·
+            </span>
             <span style={{ color: "var(--terracotta)" }}>
               <Star
                 style={{
@@ -151,11 +153,15 @@ export default function HeroFunnel() {
               />
               Top Rated · Fiverr
             </span>
-            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>
+              ·
+            </span>
             <span>
               <span style={{ color: "var(--ink)" }}>180+</span> automations
             </span>
-            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>
+              ·
+            </span>
             <span>
               <span style={{ color: "var(--ink)" }}>9</span> countries
             </span>
@@ -180,7 +186,7 @@ export default function HeroFunnel() {
                 minHeight: 48,
               }}
             >
-              Book free 30-min leak audit
+              Book your free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <Link

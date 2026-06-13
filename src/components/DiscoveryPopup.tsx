@@ -154,7 +154,7 @@ export default function DiscoveryPopup() {
                 display: "inline-block",
               }}
             />
-            2 slots left this cycle
+            4 builds per month
           </div>
 
           <h2
@@ -189,8 +189,7 @@ export default function DiscoveryPopup() {
               marginBottom: 24,
             }}
           >
-            Let SkynetLabs save you time via AI automation. 4 builds/month max
-            — currently 2 slots left for next cycle.
+            Let SkynetLabs save you time via AI automation. 4 builds per month.
           </p>
 
           <div className="flex flex-col gap-3">
@@ -236,8 +235,12 @@ export default function DiscoveryPopup() {
 
       <style jsx>{`
         @keyframes discovery-popup-fade {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
         @keyframes discovery-popup-scale {
           from {

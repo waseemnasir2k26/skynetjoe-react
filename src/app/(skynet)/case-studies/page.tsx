@@ -9,7 +9,7 @@ import JsonLd from "@/components/JsonLd";
 
 const rawHtml = fs.readFileSync(
   path.join(process.cwd(), "content", "case-studies.html"),
-  "utf8"
+  "utf8",
 );
 
 // Wrap each `<article class="wn-x-card">…</article>` block in an anchor that
@@ -22,28 +22,30 @@ function injectCardLinks(html: string): string {
   const ordered = [...CASE_STUDIES].sort((a, b) => a.position - b.position);
   let i = 0;
   let j = 0;
-  return html
-    .replace(/<article class="wn-x-card">/g, () => {
-      const c = ordered[i++];
-      if (!c) return '<article class="wn-x-card">';
-      return `<article class="wn-x-card" data-slug="${c.slug}" style="position:relative;">`;
-    })
-    // Insert real image inside .wn-x-thumb (keep the number badge, drop the glyph)
-    .replace(
-      /<div class="wn-x-thumb (g\d+)" aria-hidden="true">\s*<span class="wn-x-thumb-num">([^<]+)<\/span>\s*<span class="wn-x-thumb-glyph">[^<]+<\/span>\s*<\/div>/g,
-      (_match, gClass, num) => {
-        const c = ordered[j++];
-        if (!c)
-          return `<div class="wn-x-thumb ${gClass}" aria-hidden="true"><span class="wn-x-thumb-num">${num}</span></div>`;
-        return `<a href="/case-studies/${c.slug}" class="wn-x-thumb ${gClass}" style="display:block;position:relative;text-decoration:none;"><img src="${c.coverImage}" alt="${c.clientName} — ${c.industry}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" /><span class="wn-x-thumb-num" style="z-index:3;">${num}</span><span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(26,26,26,0) 55%, rgba(26,26,26,0.45) 100%);z-index:2;"></span></a>`;
-      }
-    )
-    .replace(/<\/ul>\s*<\/div>\s*<\/article>/g, (match) => {
-      const c = ordered.shift();
-      if (!c) return match;
-      const link = `</ul><a href="/case-studies/${c.slug}" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.85rem;color:#C66B3F;font-size:.85rem;font-weight:600;text-decoration:none;">Read full case study →</a></div></article>`;
-      return link;
-    });
+  return (
+    html
+      .replace(/<article class="wn-x-card">/g, () => {
+        const c = ordered[i++];
+        if (!c) return '<article class="wn-x-card">';
+        return `<article class="wn-x-card" data-slug="${c.slug}" style="position:relative;">`;
+      })
+      // Insert real image inside .wn-x-thumb (keep the number badge, drop the glyph)
+      .replace(
+        /<div class="wn-x-thumb (g\d+)" aria-hidden="true">\s*<span class="wn-x-thumb-num">([^<]+)<\/span>\s*<span class="wn-x-thumb-glyph">[^<]+<\/span>\s*<\/div>/g,
+        (_match, gClass, num) => {
+          const c = ordered[j++];
+          if (!c)
+            return `<div class="wn-x-thumb ${gClass}" aria-hidden="true"><span class="wn-x-thumb-num">${num}</span></div>`;
+          return `<a href="/case-studies/${c.slug}" class="wn-x-thumb ${gClass}" style="display:block;position:relative;text-decoration:none;"><img src="${c.coverImage}" alt="${c.clientName} — ${c.industry}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" /><span class="wn-x-thumb-num" style="z-index:3;">${num}</span><span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(26,26,26,0) 55%, rgba(26,26,26,0.45) 100%);z-index:2;"></span></a>`;
+        },
+      )
+      .replace(/<\/ul>\s*<\/div>\s*<\/article>/g, (match) => {
+        const c = ordered.shift();
+        if (!c) return match;
+        const link = `</ul><a href="/case-studies/${c.slug}" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.85rem;color:#C66B3F;font-size:.85rem;font-weight:600;text-decoration:none;">Read full case study →</a></div></article>`;
+        return link;
+      })
+  );
 }
 
 const html = injectCardLinks(rawHtml);
@@ -91,7 +93,13 @@ export default function CaseStudiesPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -105,7 +113,9 @@ export default function CaseStudiesPage() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--terracotta)" }}
+            />
             Case studies · 2024–2026
           </div>
           <h1
@@ -134,9 +144,9 @@ export default function CaseStudiesPage() {
               margin: 0,
             }}
           >
-            EU logistics. Manhattan dental. Bali wellness. KSA retail. Each
-            one anonymized where the contract requires it — outcomes, stack,
-            and timelines stay honest.
+            EU logistics. Manhattan dental. Bali wellness. KSA retail. Each one
+            anonymized where the contract requires it — outcomes, stack, and
+            timelines stay honest.
           </p>
         </div>
       </section>
@@ -207,7 +217,7 @@ export default function CaseStudiesPage() {
               marginBottom: 18,
             }}
           >
-            — 4 build slots open this month
+            — 4 builds per month
           </div>
           <h2
             style={{
@@ -241,10 +251,17 @@ export default function CaseStudiesPage() {
               lineHeight: 1.6,
             }}
           >
-            9 builds shipped. 4 slots open per month. 30-min call decides if
+            9 builds shipped. 4 builds per month. A free 30-min audit decides if
             we&apos;re the right fit — yes/no in 8 hours.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 12,
+            }}
+          >
             <Link
               href="/discovery-call"
               style={{
@@ -262,7 +279,7 @@ export default function CaseStudiesPage() {
                 boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
               }}
             >
-              Apply for a discovery call
+              Book your free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <Link

@@ -85,7 +85,7 @@ const MICROS = [
 const FAQS = [
   {
     q: "Why isn't there an enterprise tier?",
-    a: "Because every \"enterprise tier\" we've ever been quoted was a generic Flagship with a different number on it. If your scope genuinely needs more than the Pro can hold, we quote the delta on top — line by line, in writing, before kickoff. No mystery tier.",
+    a: 'Because every "enterprise tier" we\'ve ever been quoted was a generic Flagship with a different number on it. If your scope genuinely needs more than the Pro can hold, we quote the delta on top — line by line, in writing, before kickoff. No mystery tier.',
   },
   {
     q: "Can I split the Pro into two payments?",
@@ -105,7 +105,7 @@ const FAQS = [
   },
   {
     q: "What payment methods do you accept?",
-    a: "Wise, Payoneer, PayPal, Stripe invoice, direct USD wire, or bank transfer in IDR / GBP / EUR / SAR / AED. Crypto on request. We invoice from a registered entity — no PayPal \"friends and family\" hacks.",
+    a: 'Wise, Payoneer, PayPal, Stripe invoice, direct USD wire, or bank transfer in IDR / GBP / EUR / SAR / AED. Crypto on request. We invoice from a registered entity — no PayPal "friends and family" hacks.',
   },
 ];
 
@@ -226,6 +226,150 @@ export default function PricingPage() {
 
       {/* CALCULATOR */}
       <PricingCalculator />
+
+      {/* RISK-REVERSAL — why it's safe to send the brief */}
+      <section
+        className="py-16 md:py-20"
+        style={{
+          background: "var(--cream-3)",
+          borderTop: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
+        <div className="container-x px-6 max-w-5xl mx-auto">
+          <div className="mb-8">
+            <div
+              className="inline-flex items-center gap-3 mb-3"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "var(--terracotta)",
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
+              />
+              Why it&apos;s safe to send the brief
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                lineHeight: 1.1,
+                marginBottom: 12,
+              }}
+            >
+              The number you&apos;re quoted is the{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
+                number you pay.
+              </em>
+            </h2>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                maxWidth: "44rem",
+                lineHeight: 1.55,
+              }}
+            >
+              No discovery dance, no scope creep, no mystery line items. The
+              risk of getting it wrong sits on us, in writing, before kickoff.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {[
+              {
+                tag: "Fixed price",
+                title: "Scoped in 48 hours",
+                body: "We scope your brief and lock the price within 48 hours. The number you're quoted is the number you pay — no surprise overage on the original scope.",
+              },
+              {
+                tag: "Ship-window guarantee",
+                title: "We miss it, it's on us",
+                body: "If we miss the agreed ship date and the delay is on us, your next retainer month — or the overage on a one-time build — is on us. The window in your contract is the one we hit.",
+              },
+              {
+                tag: "30-day cover",
+                title: "Post-ship bug-fix window",
+                body: "Every build ships with a 30-day post-ship bug-fix window included. If something we shipped breaks in that window, we fix it — no new invoice.",
+              },
+            ].map((card, i) => {
+              const rotate = i % 2 === 0 ? "-0.2deg" : "0.2deg";
+              return (
+                <div
+                  key={card.tag}
+                  className="cream-micro-card"
+                  style={{
+                    padding: "22px 24px",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.10)",
+                    transform: `rotate(${rotate})`,
+                    transition: "border-color 0.18s",
+                  }}
+                >
+                  <div
+                    className="inline-flex items-center gap-2 mb-3"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10.5,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.14em",
+                      color: "var(--terracotta)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 18,
+                        height: 1,
+                        background: "var(--terracotta)",
+                        display: "inline-block",
+                      }}
+                    />
+                    {card.tag}
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 600,
+                      fontSize: 18,
+                      letterSpacing: "-0.01em",
+                      color: "var(--ink)",
+                      lineHeight: 1.15,
+                      marginBottom: 8,
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: "var(--ink-2)",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {card.body}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* VULNERABILITY QUOTE */}
       <section
@@ -483,7 +627,10 @@ export default function PricingPage() {
       </section>
 
       {/* CLOSER — flat terracotta event */}
-      <section className="py-20 md:py-24" style={{ background: "var(--terracotta)" }}>
+      <section
+        className="py-20 md:py-24"
+        style={{ background: "var(--terracotta)" }}
+      >
         <div className="container-x px-6 max-w-3xl mx-auto text-center">
           <div
             style={{

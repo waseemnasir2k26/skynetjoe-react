@@ -75,14 +75,21 @@ export default async function CaseStudyDetail({
       "@type": "Organization",
       name: SITE.brand,
       url: SITE.url,
-      logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/waseem-portrait.jpg`, width: 1200, height: 1200 },
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE.assetsUrl}/waseem-portrait.jpg`,
+        width: 1200,
+        height: 1200,
+      },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE.url}/case-studies/${c.slug}`,
     },
     about: c.industry,
-    keywords: [c.industryTag, c.industry, c.location, ...c.solutionStack].join(", "),
+    keywords: [c.industryTag, c.industry, c.location, ...c.solutionStack].join(
+      ", ",
+    ),
   };
 
   const breadcrumbSchema = {
@@ -126,7 +133,13 @@ export default async function CaseStudyDetail({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <nav
             aria-label="Breadcrumb"
             style={{
@@ -142,11 +155,17 @@ export default async function CaseStudyDetail({
               alignItems: "center",
             }}
           >
-            <Link href="/" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>
+            <Link
+              href="/"
+              style={{ color: "var(--ink-faint)", textDecoration: "none" }}
+            >
               Home
             </Link>
             <span aria-hidden>/</span>
-            <Link href="/case-studies" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>
+            <Link
+              href="/case-studies"
+              style={{ color: "var(--ink-faint)", textDecoration: "none" }}
+            >
               Case Studies
             </Link>
             <span aria-hidden>/</span>
@@ -184,12 +203,20 @@ export default async function CaseStudyDetail({
                 lineHeight: 1.7,
               }}
             >
-              <span style={{ color: "var(--terracotta)" }}>â€” {c.industryTag}</span>
-              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>Â·</span>
+              <span style={{ color: "var(--terracotta)" }}>
+                â€” {c.industryTag}
+              </span>
+              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>
+                Â·
+              </span>
               {c.location}
-              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>Â·</span>
+              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>
+                Â·
+              </span>
               {dateFmt}
-              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>Â·</span>
+              <span style={{ margin: "0 10px", color: "rgba(26,26,26,0.20)" }}>
+                Â·
+              </span>
               {c.implementationPeriod}
             </div>
 
@@ -224,8 +251,20 @@ export default async function CaseStudyDetail({
       </section>
 
       {/* HERO IMAGE â€” polaroid frame */}
-      <section style={{ padding: "clamp(24px, 6vw, 40px) 0 24px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <section
+        style={{
+          padding: "clamp(24px, 6vw, 40px) 0 24px",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1000,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <figure
             className="cs-hero-polaroid"
             style={{
@@ -267,8 +306,20 @@ export default async function CaseStudyDetail({
       </section>
 
       {/* KPI STRIP */}
-      <section style={{ padding: "clamp(20px, 6vw, 32px) 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <section
+        style={{
+          padding: "clamp(20px, 6vw, 32px) 0 clamp(40px, 10vw, 56px)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1000,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             className="cs-kpi-grid"
             style={{
@@ -305,11 +356,27 @@ export default async function CaseStudyDetail({
                 >
                   â€” {m.label}
                 </div>
-                <div style={{ fontSize: 12, color: "var(--ink-faint)", marginBottom: 4 }}>
-                  Before: <span style={{ color: "var(--ink-2)" }}>{m.before}</span>
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: "var(--ink-faint)",
+                    marginBottom: 4,
+                  }}
+                >
+                  Before:{" "}
+                  <span style={{ color: "var(--ink-2)" }}>{m.before}</span>
                 </div>
-                <div style={{ fontSize: 12, color: "var(--ink-faint)", marginBottom: 10 }}>
-                  After: <span style={{ color: "var(--ink)", fontWeight: 600 }}>{m.after}</span>
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: "var(--ink-faint)",
+                    marginBottom: 10,
+                  }}
+                >
+                  After:{" "}
+                  <span style={{ color: "var(--ink)", fontWeight: 600 }}>
+                    {m.after}
+                  </span>
                 </div>
                 <div
                   style={{
@@ -339,7 +406,13 @@ export default async function CaseStudyDetail({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -364,9 +437,13 @@ export default async function CaseStudyDetail({
             }}
           >
             What was{" "}
-            <em style={{ fontStyle: "italic", color: "var(--oxblood)" }}>actually broken.</em>
+            <em style={{ fontStyle: "italic", color: "var(--oxblood)" }}>
+              actually broken.
+            </em>
           </h2>
-          <div style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.75 }}>
+          <div
+            style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.75 }}
+          >
             {c.problemStatement.map((p, i) => (
               <p key={i} style={{ marginBottom: 14 }}>
                 {p}
@@ -386,7 +463,13 @@ export default async function CaseStudyDetail({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -411,7 +494,9 @@ export default async function CaseStudyDetail({
             }}
           >
             The{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>solution stack.</em>
+            <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+              solution stack.
+            </em>
           </h2>
 
           <div style={{ marginBottom: 28 }}>
@@ -474,7 +559,9 @@ export default async function CaseStudyDetail({
                   lineHeight: 1.6,
                 }}
               >
-                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>â†’</span>
+                <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
+                  â†’
+                </span>
                 <span>{b}</span>
               </li>
             ))}
@@ -491,7 +578,13 @@ export default async function CaseStudyDetail({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -516,9 +609,13 @@ export default async function CaseStudyDetail({
             }}
           >
             What{" "}
-            <em style={{ fontStyle: "italic", color: "var(--sage)" }}>changed.</em>
+            <em style={{ fontStyle: "italic", color: "var(--sage)" }}>
+              changed.
+            </em>
           </h2>
-          <div style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.75 }}>
+          <div
+            style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.75 }}
+          >
             {c.longFormStory.map((p, i) => (
               <p key={i} style={{ marginBottom: 14 }}>
                 {p}
@@ -529,8 +626,20 @@ export default async function CaseStudyDetail({
       </section>
 
       {/* PULL QUOTE */}
-      <section style={{ padding: "clamp(20px, 6vw, 32px) 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <section
+        style={{
+          padding: "clamp(20px, 6vw, 32px) 0 clamp(40px, 10vw, 56px)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <blockquote
             className="cs-pull-quote"
             style={{
@@ -594,7 +703,13 @@ export default async function CaseStudyDetail({
             zIndex: 2,
           }}
         >
-          <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+          <div
+            style={{
+              maxWidth: 760,
+              margin: "0 auto",
+              padding: "0 clamp(16px, 5vw, 24px)",
+            }}
+          >
             <h2
               style={{
                 fontFamily: "var(--font-display)",
@@ -607,7 +722,13 @@ export default async function CaseStudyDetail({
             >
               Tools &amp; services used
             </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12 }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                gap: 12,
+              }}
+            >
               {c.relatedServices.map((s, i) => (
                 <Link
                   key={s.slug}
@@ -620,7 +741,8 @@ export default async function CaseStudyDetail({
                     alignItems: "center",
                     justifyContent: "space-between",
                     textDecoration: "none",
-                    transform: i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
+                    transform:
+                      i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
                   }}
                 >
                   <span
@@ -633,7 +755,13 @@ export default async function CaseStudyDetail({
                   >
                     {s.label}
                   </span>
-                  <ArrowRight style={{ width: 14, height: 14, color: "var(--terracotta)" }} />
+                  <ArrowRight
+                    style={{
+                      width: 14,
+                      height: 14,
+                      color: "var(--terracotta)",
+                    }}
+                  />
                 </Link>
               ))}
             </div>
@@ -650,7 +778,14 @@ export default async function CaseStudyDetail({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
+        <div
+          style={{
+            maxWidth: 720,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+            textAlign: "center",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -716,7 +851,7 @@ export default async function CaseStudyDetail({
               boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
             }}
           >
-            Apply for a discovery call
+            Book your free 30-min audit
             <ArrowRight style={{ width: 16, height: 16 }} />
           </Link>
         </div>

@@ -14,7 +14,11 @@ export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return { title: "Post not found" };
@@ -42,12 +46,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
 
-  const htmlPath = path.join(process.cwd(), "content", "blog", "posts", `${post.slug}.html`);
+  const htmlPath = path.join(
+    process.cwd(),
+    "content",
+    "blog",
+    "posts",
+    `${post.slug}.html`,
+  );
   let html: string;
   try {
     html = fs.readFileSync(htmlPath, "utf8");
@@ -72,9 +86,17 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       "@type": "Organization",
       name: SITE.brand,
       url: SITE.url,
-      logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/waseem-portrait.jpg`, width: 1200, height: 1200 },
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE.assetsUrl}/waseem-portrait.jpg`,
+        width: 1200,
+        height: 1200,
+      },
     },
-    mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/blog/${post.slug}` },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE.url}/blog/${post.slug}`,
+    },
     keywords: post.tags.join(", "),
   };
 
@@ -120,7 +142,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5" />
-                {new Date(post.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5" />
@@ -150,7 +176,10 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
       <article className="section">
         <div className="container-x px-6">
-          <div className={`prose-wn wn-${post.slug} max-w-3xl mx-auto`} dangerouslySetInnerHTML={{ __html: html }} />
+          <div
+            className={`prose-wn wn-${post.slug} max-w-3xl mx-auto`}
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
         </div>
       </article>
 
@@ -243,7 +272,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 fontFamily: "var(--font-sans)",
               }}
             >
-              Apply for a discovery call
+              Book your free 30-min audit
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

@@ -30,7 +30,7 @@ export default function FinalCTA() {
               opacity: 0.85,
             }}
           >
-            — 4 audit slots left this month
+            — 4 builds per month
           </div>
           <h2
             style={{
@@ -89,7 +89,7 @@ export default function FinalCTA() {
               minHeight: 48,
             }}
           >
-            Book free 30-min audit
+            Book your free 30-min audit
             <ArrowRight style={{ width: 16, height: 16 }} />
           </Link>
           <div

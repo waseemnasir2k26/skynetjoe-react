@@ -21,7 +21,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
-import { SLOTS_LEFT_THIS_WEEK } from "@/data/availability";
 
 const STORAGE_KEY = "skynet:sticky-cta:dismissed";
 const DISMISS_TTL_MS = 24 * 60 * 60 * 1000; // 24h
@@ -134,12 +133,13 @@ export default function StickyBookCallBar() {
             }}
           >
             <span>
-              Book a 30-min strategy call ·{" "}
-              <span style={{ fontWeight: 700 }}>
-                {SLOTS_LEFT_THIS_WEEK} slots left this week
-              </span>
+              Book your free 30-min audit ·{" "}
+              <span style={{ fontWeight: 700 }}>4 builds per month</span>
             </span>
-            <ArrowRight className="w-3.5 h-3.5" style={{ color: "var(--cream-3)" }} />
+            <ArrowRight
+              className="w-3.5 h-3.5"
+              style={{ color: "var(--cream-3)" }}
+            />
           </Link>
           <button
             type="button"
@@ -201,9 +201,9 @@ export default function StickyBookCallBar() {
             textDecoration: "none",
           }}
         >
-          Book a 30-min call ·{" "}
+          Book your free 30-min audit ·{" "}
           <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
-            {SLOTS_LEFT_THIS_WEEK} slots left
+            4 builds per month
           </span>
         </Link>
         <Link
@@ -243,7 +243,8 @@ export default function StickyBookCallBar() {
 
       <style jsx global>{`
         @keyframes skynet-cta-pulse {
-          0%, 100% {
+          0%,
+          100% {
             opacity: 0.55;
             transform: scale(1);
           }

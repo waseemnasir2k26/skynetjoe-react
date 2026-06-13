@@ -71,7 +71,7 @@ export default function N8nAutomationLP() {
           padding: "10px 16px",
         }}
       >
-        — n8n workflows · $7/mo VPS · ship in 11 days · 4 builds left
+        — n8n workflows · $7/mo VPS · ship in 11 days · 4 builds per month
       </div>
 
       {/* HERO */}
@@ -175,7 +175,7 @@ export default function N8nAutomationLP() {
                 minHeight: 44,
               }}
             >
-              Book a 30-min call
+              Book your free 30-min audit
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <div
@@ -252,7 +252,13 @@ export default function N8nAutomationLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -266,7 +272,9 @@ export default function N8nAutomationLP() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--oxblood)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--oxblood)" }}
+            />
             What I keep seeing
           </div>
           <h2
@@ -304,8 +312,8 @@ export default function N8nAutomationLP() {
                     i === 0
                       ? "rotate(-0.3deg)"
                       : i === 1
-                      ? "rotate(0.3deg)"
-                      : "rotate(-0.2deg)",
+                        ? "rotate(0.3deg)"
+                        : "rotate(-0.2deg)",
                 }}
               >
                 <div
@@ -357,7 +365,13 @@ export default function N8nAutomationLP() {
           textAlign: "center",
         }}
       >
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -394,8 +408,8 @@ export default function N8nAutomationLP() {
               margin: "0 auto",
             }}
           >
-            workflows shipped from a Canggu cafe since 2022. 9 countries.
-            Zero retainers.
+            workflows shipped from a Canggu cafe since 2022. 9 countries. Zero
+            retainers.
           </p>
         </div>
       </section>
@@ -509,7 +523,13 @@ export default function N8nAutomationLP() {
           background: "var(--cream-2)",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 32px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 32px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -523,7 +543,9 @@ export default function N8nAutomationLP() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--terracotta)" }}
+            />
             Manual vs shipped
           </div>
           <h2
@@ -605,7 +627,14 @@ export default function N8nAutomationLP() {
                       lineHeight: 1.5,
                     }}
                   >
-                    <X style={{ width: 14, height: 14, color: "var(--oxblood)", marginTop: 4 }} />
+                    <X
+                      style={{
+                        width: 14,
+                        height: 14,
+                        color: "var(--oxblood)",
+                        marginTop: 4,
+                      }}
+                    />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -659,7 +688,14 @@ export default function N8nAutomationLP() {
                       lineHeight: 1.5,
                     }}
                   >
-                    <Check style={{ width: 14, height: 14, color: "var(--sage)", marginTop: 4 }} />
+                    <Check
+                      style={{
+                        width: 14,
+                        height: 14,
+                        color: "var(--sage)",
+                        marginTop: 4,
+                      }}
+                    />
                     <span>{a}</span>
                   </li>
                 ))}
@@ -741,7 +777,7 @@ export default function N8nAutomationLP() {
               minHeight: 44,
             }}
           >
-            Book a 30-min call
+            Book your free 30-min audit
             <ArrowRight style={{ width: 16, height: 16 }} />
           </Link>
           <div
@@ -754,7 +790,7 @@ export default function N8nAutomationLP() {
               marginTop: 22,
             }}
           >
-            — 4 builds per month · next slot opens June
+            — 4 builds per month
           </div>
         </div>
       </section>

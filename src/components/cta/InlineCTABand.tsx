@@ -80,7 +80,10 @@ const VARIANT_STYLES: Record<InlineCTAVariant, VariantStyle> = {
 export default function InlineCTABand({
   headline,
   subhead,
-  primaryCTA = { label: "Book a 30-min strategy call", href: "/discovery-call" },
+  primaryCTA = {
+    label: "Book your free 30-min audit",
+    href: "/discovery-call",
+  },
   secondaryCTA = { label: "See case studies", href: "/case-studies" },
   variant = "default",
   id,
@@ -114,7 +117,9 @@ export default function InlineCTABand({
                 letterSpacing: "-0.02em",
                 color: v.textOn,
                 lineHeight: 1.1,
-                fontSize: isDense ? "clamp(20px, 5vw, 30px)" : "clamp(24px, 6vw, 42px)",
+                fontSize: isDense
+                  ? "clamp(20px, 5vw, 30px)"
+                  : "clamp(24px, 6vw, 42px)",
                 marginBottom: subhead ? 12 : 0,
                 wordBreak: "break-word",
               }}
