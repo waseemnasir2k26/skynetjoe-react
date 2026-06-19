@@ -149,7 +149,20 @@ export default function EditVideosClient() {
             promise={`all ${VIDEO_SKILL_COUNT} master prompts now`}
             subnote="Plus every new prompt as we ship it. Unsubscribe anytime."
             buttonLabel="Unlock the prompts →"
-            finePrint="Added to the SkynetLabs prompt list. New prompts only — no spam, leave whenever."
+            finePrint={
+              <>
+                By unlocking you agree I can store your email and send the
+                prompts plus new ones. No spam, unsubscribe from any email. See
+                our{" "}
+                <Link
+                  href="/privacy-policy"
+                  style={{ textDecoration: "underline", color: "inherit" }}
+                >
+                  privacy policy
+                </Link>
+                .
+              </>
+            }
             onUnlock={() => setSessionUnlocked(true)}
           />
         ) : (

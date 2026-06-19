@@ -15,11 +15,13 @@ export const metadata: Metadata = {
     description: `Our editing workflows, each as a prompt. ${VIDEO_SKILL_COUNT} Claude Code video-editing master prompts — cinematic reels, kinetic captions, branded proof reels, faceless explainers.`,
     url: "/edit-videos-with-claude",
     type: "website",
+    images: ["/og-default.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
+    images: ["/og-default.png"],
   },
 };
 
