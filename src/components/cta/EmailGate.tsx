@@ -35,6 +35,12 @@ export type EmailGateProps = {
   onUnlock: (email: string) => void;
   /** Override localStorage key. Default `skynet-tool-${toolSlug}-email`. */
   storageKey?: string;
+  /** Sentence after the promise. Default "No spam, no drip. One result, one inbox." */
+  subnote?: ReactNode;
+  /** Fine print under the button. Default "Stored locally + sent to my CRM…". */
+  finePrint?: ReactNode;
+  /** Submit button label. Default "Show my result →". */
+  buttonLabel?: string;
 };
 
 function isValidEmail(s: string): boolean {
@@ -49,6 +55,9 @@ export default function EmailGate({
   payloadPreview,
   onUnlock,
   storageKey,
+  subnote,
+  finePrint,
+  buttonLabel,
 }: EmailGateProps) {
   const key = storageKey || `skynet-tool-${toolSlug}-email`;
   const [email, setEmail] = useState("");
@@ -201,7 +210,7 @@ export default function EmailGate({
           <span style={{ color: "var(--terracotta)", fontWeight: 600 }}>
             {promise}
           </span>
-          . No spam, no drip. One result, one inbox.
+          . {subnote ?? "No spam, no drip. One result, one inbox."}
         </p>
 
         <form onSubmit={handleSubmit} noValidate>
@@ -285,7 +294,7 @@ export default function EmailGate({
                 Unlocking…
               </>
             ) : (
-              <>Show my result →</>
+              <>{buttonLabel ?? "Show my result →"}</>
             )}
           </button>
 
@@ -299,8 +308,8 @@ export default function EmailGate({
               fontFamily: "var(--font-sans)",
             }}
           >
-            Stored locally + sent to my CRM. I&apos;ll be the only person who
-            sees it.
+            {finePrint ??
+              "Stored locally + sent to my CRM. I'll be the only person who sees it."}
           </p>
         </form>
       </div>

@@ -89,7 +89,8 @@ export default function EditVideosClient() {
           The reels, vlogs, and promos we make start as one prompt. Here&apos;s
           the whole library — {VIDEO_SKILL_COUNT} editing skills, each with the
           full master prompt you can paste into Claude Code and run. Drop your
-          email once, unlock all of them.
+          email once — unlock all of them now, and get every new prompt as we
+          ship it.
         </p>
         <a href="#unlock" className="evc-cta">
           Unlock the {VIDEO_SKILL_COUNT} prompts <ArrowRight size={16} />
@@ -145,13 +146,17 @@ export default function EditVideosClient() {
           <EmailGate
             toolSlug="video-editing-playbook"
             toolName="Claude Code Video Prompts"
-            promise={`all ${VIDEO_SKILL_COUNT} master prompts behind this page`}
+            promise={`all ${VIDEO_SKILL_COUNT} master prompts now`}
+            subnote="Plus every new prompt as we ship it. Unsubscribe anytime."
+            buttonLabel="Unlock the prompts →"
+            finePrint="Added to the SkynetLabs prompt list. New prompts only — no spam, leave whenever."
             onUnlock={() => setSessionUnlocked(true)}
           />
         ) : (
           <div className="evc-unlocked-banner">
-            <Check size={16} /> Unlocked — every master prompt is below. Copy,
-            fill the brackets, run it in Claude Code.
+            <Check size={16} /> Unlocked — every master prompt is below, and
+            you&apos;re on the list for new ones. Copy, fill the brackets, run
+            it in Claude Code.
           </div>
         )}
       </section>
