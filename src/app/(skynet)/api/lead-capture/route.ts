@@ -113,6 +113,69 @@ async function notifyEmail(args: {
   }
 }
 
+/**
+ * Newsletter welcome — send the "Build Log" welcome email straight to the
+ * SUBSCRIBER via Resend. This replaces a GHL Workflow (GHL has no API to create
+ * workflows) so the whole newsletter funnel runs from code with no UI setup.
+ * Fire-and-forget: a welcome-send failure must never fail the capture response.
+ */
+async function sendNewsletterWelcome(email: string): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn("[lead-capture] RESEND_API_KEY unset — welcome email skipped");
+    return;
+  }
+  const fromEmail =
+    process.env.NEWSLETTER_FROM || "Waseem <waseem@skynetjoe.com>";
+  const subject = "You're on the build log.";
+  const html =
+    `<div style="margin:0;padding:0;background:#FAF7F0;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;">` +
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF7F0;"><tr><td align="center" style="padding:32px 16px;">` +
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#FFFDF7;border:1px solid rgba(26,26,26,0.14);">` +
+    `<tr><td style="height:4px;background:#D97757;font-size:0;line-height:0;">&nbsp;</td></tr>` +
+    `<tr><td style="padding:36px 32px 8px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D97757;">— The build log</div></td></tr>` +
+    `<tr><td style="padding:4px 32px 0;">` +
+    `<h1 style="margin:0 0 16px;font-family:Georgia,serif;font-size:28px;line-height:1.15;font-weight:500;letter-spacing:-0.02em;color:#1A1A1A;">You&rsquo;re on the list.</h1>` +
+    `<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3a3a3a;">Quick one, then I&rsquo;ll leave your inbox alone.</p>` +
+    `<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3a3a3a;">I build AI systems for solo operators and small teams &mdash; mostly with Claude Code, n8n, and GoHighLevel, mostly from a cafe in Bali. When a build actually works &mdash; a prompt, an automation, a funnel piece &mdash; I write up exactly how I did it and send it here.</p>` +
+    `<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3a3a3a;"><strong style="color:#1A1A1A;">No schedule. No filler.</strong> You only hear from me when there&rsquo;s something worth stealing. Hit reply any time &mdash; I read every one.</p>` +
+    `<p style="margin:0 0 28px;font-size:15px;line-height:1.6;color:#3a3a3a;">Got a bottleneck you want gone? Tell me what it is. I might just build it next and put your name on the writeup.</p>` +
+    `</td></tr>` +
+    `<tr><td style="padding:0 32px 32px;"><a href="https://skynetjoe.com/discovery-call" style="display:inline-block;background:#D97757;color:#FFFDF7;text-decoration:none;font-weight:700;font-size:15px;padding:14px 24px;border-radius:2px;">Book a free strategy call &rarr;</a></td></tr>` +
+    `<tr><td style="border-top:1px solid rgba(26,26,26,0.10);padding:20px 32px;"><p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.6;letter-spacing:0.06em;color:#8a8378;text-transform:uppercase;">Waseem Nasir &middot; SkynetLabs &middot; Built in Bali<br/><a href="mailto:waseem@skynetjoe.com" style="color:#D97757;text-decoration:none;">waseem@skynetjoe.com</a></p></td></tr>` +
+    `</table></td></tr></table></div>`;
+  const text =
+    `You're on the list.\n\n` +
+    `Quick one, then I'll leave your inbox alone.\n\n` +
+    `I build AI systems for solo operators and small teams — mostly with Claude Code, n8n, and GoHighLevel, mostly from a cafe in Bali. When a build actually works — a prompt, an automation, a funnel piece — I write up exactly how I did it and send it here.\n\n` +
+    `No schedule. No filler. You only hear from me when there's something worth stealing. Hit reply any time — I read every one.\n\n` +
+    `Got a bottleneck you want gone? Tell me what it is. I might just build it next and put your name on the writeup.\n\n` +
+    `Book a free strategy call: https://skynetjoe.com/discovery-call\n\n` +
+    `— Waseem Nasir · SkynetLabs · Built in Bali · waseem@skynetjoe.com`;
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        from: fromEmail,
+        to: [email],
+        subject,
+        html,
+        text,
+      }),
+    });
+    if (!res.ok) {
+      console.error("[lead-capture] welcome email non-OK", res.status);
+    }
+  } catch (err) {
+    console.error("[lead-capture] welcome email failed", String(err));
+  }
+}
+
 /** Run both durable sinks; succeed if EITHER one captured the lead. */
 async function captureDurably(args: {
   email: string;
@@ -146,17 +209,26 @@ export async function POST(req: Request) {
 
   const lead = { email, source, capturedAt };
 
+  // Newsletter signups get an extra `build-log` tag (= the subscriber list to
+  // segment/broadcast on) and an immediate welcome email — no GHL Workflow
+  // needed (GHL exposes no workflow-create API).
+  const isNewsletter = source === "newsletter-popup";
+  const extraTags = isNewsletter
+    ? [source, "tool-lead", "build-log"]
+    : [source, "tool-lead"];
+
   // Happy path: try the real GHL write first.
   if (process.env.GHL_API_TOKEN) {
     try {
       const result = await upsertGhlContact(
         { email, source: `tool-gate:${source}` },
         null,
-        [source, "tool-lead"],
+        extraTags,
       );
 
       // A real contact id (not the dev-skip sentinel) = lead is captured.
       if (!result.skipped && result.contactId !== "dev-skip") {
+        if (isNewsletter) await sendNewsletterWelcome(email);
         return NextResponse.json({
           ok: true,
           contactId: result.contactId,
@@ -176,6 +248,7 @@ export async function POST(req: Request) {
   // Durable fallback — Slack and/or Resend email.
   const captured = await captureDurably(lead);
   if (captured) {
+    if (isNewsletter) await sendNewsletterWelcome(email);
     return NextResponse.json({ ok: true, fallback: true });
   }
 
