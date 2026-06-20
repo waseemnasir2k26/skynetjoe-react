@@ -12,6 +12,7 @@ import IncomingCallPopup from "@/components/IncomingCallPopup";
 import StickyBookCallBar from "@/components/cta/StickyBookCallBar";
 import ExitIntentModal from "@/components/cta/ExitIntentModal";
 import SocialProofPopup from "@/components/cta/SocialProofPopup";
+import NewsletterPopup from "@/components/cta/NewsletterPopup";
 import "../globals.css";
 
 // Cream editorial pivot 2026-05-25 — distinctive non-generic font stack.
@@ -79,7 +80,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: "/favicon.ico",
@@ -91,7 +98,11 @@ export const metadata: Metadata = {
 
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
@@ -129,7 +140,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </noscript>
         )}
         <Header />
-        <main id="main-content" className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
         <LiveChat />
         <Suspense fallback={null}>
@@ -142,6 +155,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Suspense>
         <Suspense fallback={null}>
           <SocialProofPopup />
+        </Suspense>
+        <Suspense fallback={null}>
+          <NewsletterPopup />
         </Suspense>
       </body>
     </html>
