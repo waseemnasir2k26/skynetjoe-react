@@ -22,9 +22,9 @@
  *     title="SkynetLabs by the numbers"
  *     subtitle="Verifiable, dated, sourced. Pull what you need."
  *     stats={[
- *       { stat: "180+", claim: "n8n workflows shipped since 2022.",
+ *       { stat: "Dozens", claim: "n8n workflows shipped since 2022.",
  *         source: "SkynetLabs internal ledger", date: "2026-05-22" },
- *       { stat: "40+",  claim: "Websites delivered across 9 countries.",
+ *       { stat: "Dozens",  claim: "Websites delivered across several countries.",
  *         source: "SkynetLabs portfolio", date: "2026-05-22" },
  *       { stat: "5–14d", claim: "Median ship window per engagement.",
  *         source: "SkynetLabs case-study database", date: "2026-05-22" },
@@ -35,11 +35,11 @@
  */
 
 export type QuotableStat = {
-  stat: string;       // "180+", "2–12 weeks", "≤80 words"
-  claim: string;      // one sentence, ≤140 chars, ends with period
-  source?: string;    // "SkynetLabs, 2026" or specific named source
-  date?: string;      // ISO date (YYYY-MM-DD)
-  href?: string;      // optional link to source page
+  stat: string; // "180+", "2–12 weeks", "≤80 words"
+  claim: string; // one sentence, ≤140 chars, ends with period
+  source?: string; // "SkynetLabs, 2026" or specific named source
+  date?: string; // ISO date (YYYY-MM-DD)
+  href?: string; // optional link to source page
 };
 
 type Props = {

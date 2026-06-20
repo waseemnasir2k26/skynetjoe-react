@@ -4,8 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import DiscoveryFunnel from "./DiscoveryFunnel";
 
 export const metadata: Metadata = {
-  title:
-    "Free 30-Min Strategy Call — Stop Bleeding Money on Bad Automation | SkynetLabs",
+  title: "Free 30-Min Strategy Call — Stop Bleeding Money on Bad Automation",
   description:
     "Book a free 30-minute audit with Waseem Nasir. Get 3 concrete plays to plug revenue leaks plus a fixed-price scope in 48 hours. No SDR, no pitch deck — just a working roadmap.",
   alternates: { canonical: `${SITE.url}/discovery-call` },

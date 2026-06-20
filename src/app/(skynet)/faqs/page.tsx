@@ -7,7 +7,7 @@ import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "faqs.html"),
-  "utf8"
+  "utf8",
 );
 
 export const metadata: Metadata = {
@@ -46,7 +46,7 @@ const TOP_FAQS = [
   },
   {
     q: "Do you work with US clients from Bali?",
-    a: "Yes. We work async-first with all US time zones. Bali is GMT+8, so US morning meetings land in our afternoon — async handoffs keep velocity high. We've shipped to clients in 9 countries.",
+    a: "Yes. We work async-first with all US time zones. Bali is GMT+8, so US morning meetings land in our afternoon — async handoffs keep velocity high. We've shipped to clients in several countries.",
   },
   {
     q: "How much does a WhatsApp chatbot cost?",

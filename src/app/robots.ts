@@ -50,11 +50,6 @@ export default function robots(): MetadataRoute.Robots {
       // You.com
       { userAgent: "YouBot", allow: ALLOW, disallow: DISALLOW },
     ],
-    sitemap: [
-      `${SITE.url}/sitemap.xml`,
-      `${SITE.url}/llms.txt`,
-      `${SITE.url}/llms-full.txt`,
-    ],
-    host: SITE.url,
+    sitemap: [`${SITE.url}/sitemap.xml`],
   };
 }

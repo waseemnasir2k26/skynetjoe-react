@@ -102,7 +102,7 @@ export default function FinalCTA() {
               marginTop: 22,
             }}
           >
-            — Replies within 6 hours · Bali (GMT+8) · 9 countries served
+            — Replies within 6 hours · Bali (GMT+8) · several countries served
           </div>
         </div>
       </div>

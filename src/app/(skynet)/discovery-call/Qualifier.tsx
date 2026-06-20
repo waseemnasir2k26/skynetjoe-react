@@ -25,6 +25,9 @@ const C = {
   inkFaint: "#6B6B65",
   terra: "#C66B3F",
   terra2: "#B85A30",
+  // AA accent for SMALL accent text on cream (~4.6:1). Use instead of terra
+  // wherever terra is a text color (eyebrows, slider ticks, active labels).
+  terraText: "#A8481F",
   rule: "rgba(26,26,26,0.12)",
   ruleSoft: "rgba(26,26,26,0.06)",
 };
@@ -57,11 +60,23 @@ const STORAGE_KEY = "skynet:discovery-call:v1";
 type Option = { value: string; label: string; sub?: string };
 
 const BUSINESS_OPTIONS: Option[] = [
-  { value: "service", label: "Service business", sub: "Dental, legal, clinic, agency clients" },
-  { value: "agency", label: "Agency", sub: "Marketing, dev, creative, recruiting" },
+  {
+    value: "service",
+    label: "Service business",
+    sub: "Dental, legal, clinic, agency clients",
+  },
+  {
+    value: "agency",
+    label: "Agency",
+    sub: "Marketing, dev, creative, recruiting",
+  },
   { value: "ecommerce", label: "E-commerce", sub: "Shopify, WooCommerce, DTC" },
   { value: "saas", label: "SaaS", sub: "Product-led or sales-led" },
-  { value: "consultancy", label: "Consultancy / coach", sub: "1:1 or group programs" },
+  {
+    value: "consultancy",
+    label: "Consultancy / coach",
+    sub: "1:1 or group programs",
+  },
   { value: "other", label: "Other", sub: "Tell me below" },
 ];
 
@@ -74,11 +89,31 @@ const TEAM_OPTIONS: Option[] = [
 ];
 
 const LEAK_OPTIONS: Option[] = [
-  { value: "missed-leads", label: "Missed leads", sub: "Inquiries falling through cracks" },
-  { value: "manual-followups", label: "Manual follow-ups", sub: "Reps re-typing the same emails" },
-  { value: "tool-sprawl", label: "Tool sprawl", sub: "12 tabs, none talking to each other" },
-  { value: "no-content", label: "No content engine", sub: "Posting feels like a side job" },
-  { value: "no-reporting", label: "No reporting", sub: "Can't tell what's actually working" },
+  {
+    value: "missed-leads",
+    label: "Missed leads",
+    sub: "Inquiries falling through cracks",
+  },
+  {
+    value: "manual-followups",
+    label: "Manual follow-ups",
+    sub: "Reps re-typing the same emails",
+  },
+  {
+    value: "tool-sprawl",
+    label: "Tool sprawl",
+    sub: "12 tabs, none talking to each other",
+  },
+  {
+    value: "no-content",
+    label: "No content engine",
+    sub: "Posting feels like a side job",
+  },
+  {
+    value: "no-reporting",
+    label: "No reporting",
+    sub: "Can't tell what's actually working",
+  },
   { value: "other", label: "Other", sub: "Tell me below" },
 ];
 
@@ -110,10 +145,18 @@ const REVENUE_OPTIONS: Option[] = [
 ];
 
 const URGENCY_OPTIONS: Option[] = [
-  { value: "this-month", label: "This month", sub: "Ship this month — premium queue" },
+  {
+    value: "this-month",
+    label: "This month",
+    sub: "Ship this month — premium queue",
+  },
   { value: "30-60d", label: "Next 30 – 60 days", sub: "Standard scope window" },
   { value: "q3", label: "Q3 / later", sub: "Planning phase — keep me posted" },
-  { value: "exploring", label: "Just exploring", sub: "No timeline yet, kicking tires" },
+  {
+    value: "exploring",
+    label: "Just exploring",
+    sub: "No timeline yet, kicking tires",
+  },
 ];
 
 type Question = {
@@ -206,13 +249,17 @@ export default function Qualifier({
   const canAdvance = useMemo(() => {
     const q = QUESTIONS[step];
     if (q.id === "businessType") {
-      return state.businessType !== "" &&
-        (state.businessType !== "other" || !!state.businessTypeOther);
+      return (
+        state.businessType !== "" &&
+        (state.businessType !== "other" || !!state.businessTypeOther)
+      );
     }
     if (q.id === "teamSize") return !!state.teamSize;
     if (q.id === "biggestLeak") {
-      return state.biggestLeak !== "" &&
-        (state.biggestLeak !== "other" || !!state.biggestLeakOther);
+      return (
+        state.biggestLeak !== "" &&
+        (state.biggestLeak !== "other" || !!state.biggestLeakOther)
+      );
     }
     if (q.id === "monthlyLeads") return true;
     if (q.id === "automateTargets") {
@@ -303,7 +350,7 @@ export default function Qualifier({
               fontSize: 11,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
-              color: C.terra,
+              color: C.terraText,
               fontWeight: 600,
               margin: 0,
             }}
@@ -326,7 +373,7 @@ export default function Qualifier({
               textTransform: "uppercase",
               letterSpacing: "0.10em",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = C.terra)}
+            onMouseEnter={(e) => (e.currentTarget.style.color = C.terraText)}
             onMouseLeave={(e) => (e.currentTarget.style.color = C.inkFaint)}
           >
             <SkipForward style={{ width: 12, height: 12 }} />
@@ -360,88 +407,101 @@ export default function Qualifier({
             exit={{ opacity: 0, x: -24 }}
             transition={{ duration: 0.22 }}
           >
-            <h3
+            <fieldset
               style={{
-                fontFamily: "var(--font-display)",
-                fontSize: 24,
-                fontWeight: 600,
-                color: C.ink,
-                letterSpacing: "-0.01em",
-                lineHeight: 1.2,
-                marginBottom: 6,
+                border: "none",
+                margin: 0,
+                padding: 0,
+                minInlineSize: "auto",
               }}
             >
-              {currentQ.title}
-            </h3>
-            {currentQ.helper && (
-              <p style={{ fontSize: 14, color: C.inkFaint, marginBottom: 20 }}>
-                {currentQ.helper}
-              </p>
-            )}
-            {!currentQ.helper && <div style={{ marginBottom: 20 }} />}
+              <legend
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: 24,
+                  fontWeight: 600,
+                  color: C.ink,
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1.2,
+                  marginBottom: 6,
+                  padding: 0,
+                  float: "none",
+                }}
+              >
+                {currentQ.title}
+              </legend>
+              {currentQ.helper && (
+                <p
+                  style={{ fontSize: 14, color: C.inkFaint, marginBottom: 20 }}
+                >
+                  {currentQ.helper}
+                </p>
+              )}
+              {!currentQ.helper && <div style={{ marginBottom: 20 }} />}
 
-            {currentQ.id === "businessType" && (
-              <OptionGrid
-                options={BUSINESS_OPTIONS}
-                value={state.businessType}
-                onChange={(v) => update("businessType", v)}
-                otherValue={state.businessTypeOther}
-                onOtherChange={(v) => update("businessTypeOther", v)}
-              />
-            )}
+              {currentQ.id === "businessType" && (
+                <OptionGrid
+                  options={BUSINESS_OPTIONS}
+                  value={state.businessType}
+                  onChange={(v) => update("businessType", v)}
+                  otherValue={state.businessTypeOther}
+                  onOtherChange={(v) => update("businessTypeOther", v)}
+                />
+              )}
 
-            {currentQ.id === "teamSize" && (
-              <OptionGrid
-                options={TEAM_OPTIONS}
-                value={state.teamSize}
-                onChange={(v) => update("teamSize", v)}
-                columns={5}
-                compact
-              />
-            )}
+              {currentQ.id === "teamSize" && (
+                <OptionGrid
+                  options={TEAM_OPTIONS}
+                  value={state.teamSize}
+                  onChange={(v) => update("teamSize", v)}
+                  columns={5}
+                  compact
+                />
+              )}
 
-            {currentQ.id === "biggestLeak" && (
-              <OptionGrid
-                options={LEAK_OPTIONS}
-                value={state.biggestLeak}
-                onChange={(v) => update("biggestLeak", v)}
-                otherValue={state.biggestLeakOther}
-                onOtherChange={(v) => update("biggestLeakOther", v)}
-              />
-            )}
+              {currentQ.id === "biggestLeak" && (
+                <OptionGrid
+                  options={LEAK_OPTIONS}
+                  value={state.biggestLeak}
+                  onChange={(v) => update("biggestLeak", v)}
+                  otherValue={state.biggestLeakOther}
+                  onOtherChange={(v) => update("biggestLeakOther", v)}
+                />
+              )}
 
-            {currentQ.id === "monthlyLeads" && (
-              <LeadSlider
-                value={state.monthlyLeads}
-                onChange={(v) => update("monthlyLeads", v)}
-              />
-            )}
+              {currentQ.id === "monthlyLeads" && (
+                <LeadSlider
+                  value={state.monthlyLeads}
+                  onChange={(v) => update("monthlyLeads", v)}
+                />
+              )}
 
-            {currentQ.id === "automateTargets" && (
-              <MultiSelectGrid
-                options={AUTOMATE_OPTIONS}
-                values={state.automateTargets}
-                onToggle={toggleAutomate}
-                otherValue={state.automateTargetsOther}
-                onOtherChange={(v) => update("automateTargetsOther", v)}
-              />
-            )}
+              {currentQ.id === "automateTargets" && (
+                <MultiSelectGrid
+                  options={AUTOMATE_OPTIONS}
+                  values={state.automateTargets}
+                  onToggle={toggleAutomate}
+                  otherValue={state.automateTargetsOther}
+                  onOtherChange={(v) => update("automateTargetsOther", v)}
+                />
+              )}
 
-            {currentQ.id === "revenueRange" && (
-              <OptionGrid
-                options={REVENUE_OPTIONS}
-                value={state.revenueRange}
-                onChange={(v) => update("revenueRange", v)}
-              />
-            )}
+              {currentQ.id === "revenueRange" && (
+                <OptionGrid
+                  options={REVENUE_OPTIONS}
+                  value={state.revenueRange}
+                  onChange={(v) => update("revenueRange", v)}
+                />
+              )}
 
-            {currentQ.id === "urgency" && (
-              <OptionGrid
-                options={URGENCY_OPTIONS}
-                value={state.urgency}
-                onChange={(v) => update("urgency", v)}
-              />
-            )}
+              {currentQ.id === "urgency" && (
+                <OptionGrid
+                  options={URGENCY_OPTIONS}
+                  value={state.urgency}
+                  onChange={(v) => update("urgency", v)}
+                />
+              )}
+            </fieldset>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -492,8 +552,8 @@ export default function Qualifier({
             alignItems: "center",
             gap: 8,
             padding: "12px 22px",
-            background: canAdvance ? C.terra : C.cream2,
-            color: canAdvance ? C.cream3 : C.inkFaint,
+            background: canAdvance ? C.terra2 : C.cream2,
+            color: canAdvance ? "#FFFFFF" : C.inkFaint,
             border: canAdvance ? "none" : `1px solid ${C.rule}`,
             cursor: canAdvance ? "pointer" : "not-allowed",
             opacity: canAdvance ? 1 : 0.6,
@@ -549,13 +609,15 @@ function OptionGrid({
           : "grid-cols-1 sm:grid-cols-2";
   return (
     <>
-      <div className={`grid ${colsClass} gap-2.5`}>
+      <div role="radiogroup" className={`grid ${colsClass} gap-2.5`}>
         {options.map((o) => {
           const active = value === o.value;
           return (
             <motion.button
               key={o.value}
               type="button"
+              role="radio"
+              aria-checked={active}
               whileTap={{ scale: 0.97 }}
               onClick={() => onChange(o.value)}
               style={{
@@ -642,20 +704,27 @@ function MultiSelectGrid({
 }) {
   return (
     <>
-      <div className="flex flex-wrap gap-2">
+      <div
+        role="group"
+        aria-label="Select all that apply"
+        className="flex flex-wrap gap-2"
+      >
         {options.map((o) => {
           const active = values.includes(o.value);
           return (
             <motion.button
               key={o.value}
               type="button"
+              role="checkbox"
+              aria-checked={active}
+              aria-pressed={active}
               whileTap={{ scale: 0.95 }}
               onClick={() => onToggle(o.value)}
               style={{
                 padding: "10px 18px",
-                background: active ? C.terra : C.cream3,
-                color: active ? C.cream3 : C.ink,
-                border: `1px solid ${active ? C.terra : C.rule}`,
+                background: active ? C.terra2 : C.cream3,
+                color: active ? "#FFFFFF" : C.ink,
+                border: `1px solid ${active ? C.terra2 : C.rule}`,
                 fontFamily: "var(--font-sans)",
                 fontWeight: 600,
                 fontSize: 14,
@@ -703,7 +772,10 @@ function LeadSlider({
   value: string;
   onChange: (v: string) => void;
 }) {
-  const idx = Math.max(0, LEAD_RANGES.indexOf(value as (typeof LEAD_RANGES)[number]));
+  const idx = Math.max(
+    0,
+    LEAD_RANGES.indexOf(value as (typeof LEAD_RANGES)[number]),
+  );
   return (
     <div
       style={{
@@ -746,9 +818,15 @@ function LeadSlider({
         style={{ width: "100%", accentColor: C.terra, cursor: "pointer" }}
         aria-label="Monthly leads"
       />
-      <div className="flex justify-between mt-2" style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}>
+      <div
+        className="flex justify-between mt-2"
+        style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}
+      >
         {LEAD_RANGES.map((r) => (
-          <span key={r} style={{ color: r === value ? C.terra : C.inkFaint }}>
+          <span
+            key={r}
+            style={{ color: r === value ? C.terraText : C.inkFaint }}
+          >
             {LEAD_LABELS[r].replace(" / mo", "").replace("~", "")}
           </span>
         ))}

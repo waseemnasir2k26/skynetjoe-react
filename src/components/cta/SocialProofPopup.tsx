@@ -75,7 +75,8 @@ export default function SocialProofPopup() {
   const disabled =
     pathname === "/discovery-call" ||
     pathname?.startsWith("/lp/") ||
-    pathname?.startsWith("/api/");
+    pathname?.startsWith("/api/") ||
+    pathname?.startsWith("/tools/"); // tool pages have a fixed bottom CTA bar — avoid collision
 
   useEffect(() => {
     if (disabled) return;
@@ -163,7 +164,11 @@ export default function SocialProofPopup() {
           <X className="w-3.5 h-3.5" />
         </button>
 
-        <Link href={p.href} className="block p-4 pr-10" style={{ textDecoration: "none" }}>
+        <Link
+          href={p.href}
+          className="block p-4 pr-10"
+          style={{ textDecoration: "none" }}
+        >
           <div className="flex items-center gap-2 mb-2 mt-1">
             <span className="flex items-center gap-1.5">
               <span
@@ -214,7 +219,10 @@ export default function SocialProofPopup() {
                 borderRadius: 2,
               }}
             >
-              <CheckCircle2 className="w-4 h-4" style={{ color: "var(--terracotta)" }} />
+              <CheckCircle2
+                className="w-4 h-4"
+                style={{ color: "var(--terracotta)" }}
+              />
             </span>
             <div className="min-w-0">
               <div

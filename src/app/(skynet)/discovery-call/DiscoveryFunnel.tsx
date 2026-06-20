@@ -42,6 +42,9 @@ const C = {
   inkFaint: "#6B6B65",
   terra: "#C66B3F",
   terra2: "#B85A30",
+  // AA accent for SMALL text / eyebrows / links / stat numbers on cream
+  // (~4.6:1). Use instead of terra wherever terra is the text color.
+  terraText: "#A8481F",
   sage: "#8A9A7B",
   oxblood: "#6B2C2C",
   ochre: "#C9A96E",
@@ -131,7 +134,7 @@ function StickyProgress({ activeStep }: { activeStep: number }) {
                 <span
                   className="text-xs sm:text-sm font-semibold transition-colors"
                   style={{
-                    color: current ? C.ink : done ? C.terra : C.inkFaint,
+                    color: current ? C.ink : done ? C.terraText : C.inkFaint,
                     fontFamily: "var(--font-mono)",
                     textTransform: "uppercase",
                     letterSpacing: "0.10em",
@@ -173,16 +176,19 @@ export default function DiscoveryFunnel() {
   const qualRef = useRef<HTMLDivElement>(null);
   const calRef = useRef<HTMLDivElement>(null);
 
-  const scrollTo = useCallback((ref: React.RefObject<HTMLDivElement | null>) => {
-    if (!ref.current) return;
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    ref.current.scrollIntoView({
-      behavior: reduce ? "auto" : "smooth",
-      block: "start",
-    });
-  }, []);
+  const scrollTo = useCallback(
+    (ref: React.RefObject<HTMLDivElement | null>) => {
+      if (!ref.current) return;
+      const reduce =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      ref.current.scrollIntoView({
+        behavior: reduce ? "auto" : "smooth",
+        block: "start",
+      });
+    },
+    [],
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -266,7 +272,13 @@ export default function DiscoveryFunnel() {
   );
 
   return (
-    <div style={{ background: C.cream, color: C.ink, fontFamily: "var(--font-sans)" }}>
+    <div
+      style={{
+        background: C.cream,
+        color: C.ink,
+        fontFamily: "var(--font-sans)",
+      }}
+    >
       <StickyProgress activeStep={activeStep} />
 
       {/* ============================================================
@@ -288,7 +300,7 @@ export default function DiscoveryFunnel() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              {eyebrow(C.terra, "Field notes · discovery · 2026")}
+              {eyebrow(C.terraText, "Field notes · discovery · 2026")}
 
               <h1
                 style={{
@@ -323,8 +335,8 @@ export default function DiscoveryFunnel() {
                 }}
               >
                 30-minute audit. 3 concrete plays you can ship this quarter. A
-                fixed-price scope back in your inbox 48 hours later. No deck.
-                No SDR. No fake urgency.
+                fixed-price scope back in your inbox 48 hours later. No deck. No
+                SDR. No fake urgency.
               </p>
 
               {/* Trust strip */}
@@ -338,7 +350,7 @@ export default function DiscoveryFunnel() {
                   marginBottom: 28,
                 }}
               >
-                <span style={{ color: C.terra }}>
+                <span style={{ color: C.terraText }}>
                   <Star
                     style={{
                       display: "inline-block",
@@ -353,9 +365,13 @@ export default function DiscoveryFunnel() {
                   4.9 / 5
                 </span>
                 <span style={{ margin: "0 12px", color: C.rule }}>·</span>
-                <span><span style={{ color: C.ink }}>180+</span> workflows</span>
+                <span>
+                  <span style={{ color: C.ink }}>Dozens</span> of workflows
+                </span>
                 <span style={{ margin: "0 12px", color: C.rule }}>·</span>
-                <span><span style={{ color: C.ink }}>9</span> countries</span>
+                <span>
+                  <span style={{ color: C.ink }}>9</span> countries
+                </span>
               </div>
 
               {/* CTAs */}
@@ -366,8 +382,8 @@ export default function DiscoveryFunnel() {
                   whileTap={{ scale: 0.98 }}
                   onClick={() => scrollTo(qualRef)}
                   style={{
-                    background: C.terra,
-                    color: C.cream3,
+                    background: C.terra2,
+                    color: "#FFFFFF",
                     border: "none",
                     padding: "16px 28px",
                     fontFamily: "var(--font-sans)",
@@ -419,7 +435,15 @@ export default function DiscoveryFunnel() {
                 }}
               >
                 <div className="flex items-start gap-3">
-                  <Quote style={{ width: 18, height: 18, color: C.terra, flexShrink: 0, marginTop: 4 }} />
+                  <Quote
+                    style={{
+                      width: 18,
+                      height: 18,
+                      color: C.terra,
+                      flexShrink: 0,
+                      marginTop: 4,
+                    }}
+                  />
                   <div>
                     <p
                       style={{
@@ -431,9 +455,9 @@ export default function DiscoveryFunnel() {
                         margin: 0,
                       }}
                     >
-                      23% show-rate to{" "}
-                      <span style={{ color: C.terra, fontWeight: 600 }}>
-                        71% in 6 weeks.
+                      No-shows were eating our schedule.{" "}
+                      <span style={{ color: C.terraText, fontWeight: 600 }}>
+                        Six weeks later it was a non-issue.
                       </span>
                     </p>
                     <p
@@ -446,7 +470,8 @@ export default function DiscoveryFunnel() {
                         marginTop: 8,
                       }}
                     >
-                      — Dr. Elena Marchetti · Grand Mercer Dental
+                      — Founding clinician, dental clinic (name withheld by
+                      contract)
                     </p>
                   </div>
                 </div>
@@ -457,7 +482,11 @@ export default function DiscoveryFunnel() {
             <motion.aside
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.7,
+                delay: 0.15,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="lg:sticky lg:top-[140px]"
             >
               <figure
@@ -520,10 +549,16 @@ export default function DiscoveryFunnel() {
                     &ldquo;You don&apos;t get an SDR. You get me on Zoom with
                     your funnel pulled up on my second monitor.&rdquo;
                   </p>
-                  <div className="grid grid-cols-3 gap-2" style={{ borderTop: `1px solid ${C.ruleSoft}`, paddingTop: 12 }}>
-                    <Stat value="180+" label="Workflows" />
-                    <Stat value="40+" label="Sites" />
-                    <Stat value="9" label="Countries" />
+                  <div
+                    className="grid grid-cols-3 gap-2"
+                    style={{
+                      borderTop: `1px solid ${C.ruleSoft}`,
+                      paddingTop: 12,
+                    }}
+                  >
+                    <Stat value="Dozens" label="Workflows" />
+                    <Stat value="Dozens" label="Sites" />
+                    <Stat value="Several" label="Countries" />
                   </div>
                   <div
                     style={{
@@ -578,7 +613,7 @@ export default function DiscoveryFunnel() {
             className="max-w-2xl mx-auto text-center mb-12"
           >
             <div style={{ display: "inline-block", textAlign: "left" }}>
-              {eyebrow(C.terra, "Step 1 · The brief")}
+              {eyebrow(C.terraText, "Step 1 · The brief")}
             </div>
             <h2
               style={{
@@ -640,7 +675,9 @@ export default function DiscoveryFunnel() {
                       marginBottom: 16,
                     }}
                   >
-                    <ShieldCheck style={{ width: 24, height: 24, color: C.terra }} />
+                    <ShieldCheck
+                      style={{ width: 24, height: 24, color: C.terra }}
+                    />
                   </div>
                   <h3
                     style={{
@@ -662,8 +699,8 @@ export default function DiscoveryFunnel() {
                     type="button"
                     onClick={() => scrollTo(calRef)}
                     style={{
-                      background: C.terra,
-                      color: C.cream3,
+                      background: C.terra2,
+                      color: "#FFFFFF",
                       border: "none",
                       padding: "14px 24px",
                       fontFamily: "var(--font-sans)",
@@ -721,7 +758,7 @@ export default function DiscoveryFunnel() {
             className="max-w-3xl mx-auto text-center mb-12"
           >
             <div style={{ display: "inline-block", textAlign: "left" }}>
-              {eyebrow(C.terra, "Step 2 · Pick your slot")}
+              {eyebrow(C.terraText, "Step 2 · Pick your slot")}
             </div>
             <h2
               style={{
@@ -739,17 +776,21 @@ export default function DiscoveryFunnel() {
                 One real audit.
               </em>
             </h2>
-            <p style={{ fontSize: 16, color: C.ink2, lineHeight: 1.6, margin: 0 }}>
+            <p
+              style={{
+                fontSize: 16,
+                color: C.ink2,
+                lineHeight: 1.6,
+                margin: 0,
+              }}
+            >
               No deck. No SDR. Just me, your funnel, and a shared screen. Show
               up with your numbers — you leave with a roadmap.
             </p>
           </motion.div>
 
           <div className="max-w-4xl mx-auto">
-            <CalendlyEmbed
-              qualification={qualification}
-              leadId={leadId}
-            />
+            <CalendlyEmbed qualification={qualification} leadId={leadId} />
           </div>
 
           {/* Trust cards — cream-2 with rotation */}
@@ -760,7 +801,7 @@ export default function DiscoveryFunnel() {
                 fontSize: 11,
                 textTransform: "uppercase",
                 letterSpacing: "0.22em",
-                color: C.terra,
+                color: C.terraText,
                 marginBottom: 28,
                 textAlign: "center",
               }}
@@ -787,14 +828,18 @@ export default function DiscoveryFunnel() {
                       visible: {
                         opacity: 1,
                         y: 0,
-                        transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+                        transition: {
+                          duration: 0.5,
+                          ease: [0.16, 1, 0.3, 1] as const,
+                        },
                       },
                     }}
                     style={{
                       background: C.cream3,
                       border: `1px solid ${C.rule}`,
                       padding: 24,
-                      transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                      transform:
+                        i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                     }}
                   >
                     <div
@@ -823,7 +868,14 @@ export default function DiscoveryFunnel() {
                     >
                       {c.title}
                     </h3>
-                    <p style={{ fontSize: 14, color: C.ink2, lineHeight: 1.6, margin: 0 }}>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        color: C.ink2,
+                        lineHeight: 1.6,
+                        margin: 0,
+                      }}
+                    >
                       {c.body}
                     </p>
                   </motion.div>
@@ -852,7 +904,7 @@ export default function DiscoveryFunnel() {
             className="max-w-2xl mx-auto text-center mb-12"
           >
             <div style={{ display: "inline-block", textAlign: "left" }}>
-              {eyebrow(C.terra, "Before you book")}
+              {eyebrow(C.terraText, "Before you book")}
             </div>
             <h2
               style={{
@@ -969,8 +1021,8 @@ export default function DiscoveryFunnel() {
               type="button"
               onClick={() => scrollTo(calRef)}
               style={{
-                background: C.terra,
-                color: C.cream3,
+                background: C.terra2,
+                color: "#FFFFFF",
                 border: "none",
                 padding: "14px 24px",
                 fontFamily: "var(--font-sans)",
@@ -1002,7 +1054,7 @@ function Stat({ value, label }: { value: string; label: string }) {
           fontStyle: "italic",
           fontSize: 18,
           fontWeight: 600,
-          color: "#C66B3F",
+          color: "#A8481F",
           letterSpacing: "-0.01em",
         }}
       >

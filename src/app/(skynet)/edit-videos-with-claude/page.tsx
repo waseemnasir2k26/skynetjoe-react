@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import EditVideosClient from "./EditVideosClient";
 import { VIDEO_SKILLS, VIDEO_SKILL_COUNT } from "@/data/video-skills";
 
-const TITLE = "Edit Your Videos Using Claude Code — SkynetLabs";
+const TITLE = "Edit Your Videos Using Claude Code";
 const DESCRIPTION = `The ${VIDEO_SKILL_COUNT} video-editing skills behind every SkynetLabs reel, vlog, and promo — each with the full master prompt you can paste into Claude Code and run. Free. One email unlocks the lot.`;
 
 export const metadata: Metadata = {

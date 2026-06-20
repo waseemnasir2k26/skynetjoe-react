@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SkynetLabs Case Studies — 9 shipped builds",
     description:
-      "EU logistics, Manhattan dental, Bali wellness, KSA retail and more — anonymized where contracts require it.",
+      "EU logistics, cosmetic dental, Bali wellness, KSA retail and more — anonymized where contracts require it.",
     url: `${SITE.url}/case-studies`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -144,7 +144,7 @@ export default function CaseStudiesPage() {
               margin: 0,
             }}
           >
-            EU logistics. Manhattan dental. Bali wellness. KSA retail. Each one
+            EU logistics. Cosmetic dental. Bali wellness. KSA retail. Each one
             anonymized where the contract requires it — outcomes, stack, and
             timelines stay honest.
           </p>

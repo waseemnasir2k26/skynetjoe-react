@@ -4,7 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import WorkShowcase from "@/components/sections/WorkShowcase";
 
 export const metadata: Metadata = {
-  title: "Portfolio — Recent Projects | SkynetLabs",
+  title: "Portfolio — Recent Projects",
   description:
     "Live screenshots of every shipped SkynetLabs build: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. 20+ deployed sites. Built solo from Bali by Waseem Nasir.",
   alternates: { canonical: `${SITE.url}/portfolio` },
@@ -23,7 +23,7 @@ const schema = {
   "@type": "CollectionPage",
   name: "SkynetLabs Portfolio — Recent Projects",
   description:
-    "Live screenshots of every shipped build across nine countries.",
+    "Live screenshots of every shipped build across several countries.",
   url: `${SITE.url}/portfolio`,
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },

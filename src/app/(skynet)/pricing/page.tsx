@@ -203,15 +203,15 @@ export default function PricingPage() {
             }}
           >
             <span>
-              <b style={{ color: "var(--ink)" }}>180+</b> workflows
+              <b style={{ color: "var(--ink)" }}>Dozens</b> of workflows
             </span>
             <span style={{ color: "rgba(26,26,26,0.20)" }}>·</span>
             <span>
-              <b style={{ color: "var(--ink)" }}>40+</b> websites
+              <b style={{ color: "var(--ink)" }}>Dozens</b> of websites
             </span>
             <span style={{ color: "rgba(26,26,26,0.20)" }}>·</span>
             <span>
-              <b style={{ color: "var(--ink)" }}>9</b> countries
+              <b style={{ color: "var(--ink)" }}>Several</b> countries
             </span>
             <span style={{ color: "rgba(26,26,26,0.20)" }}>·</span>
             <span>
@@ -643,7 +643,7 @@ export default function PricingPage() {
               marginBottom: 18,
             }}
           >
-            — 180 workflows · 40 websites · 9 countries
+            — dozens of workflows · dozens of websites · several countries
           </div>
           <h2
             style={{

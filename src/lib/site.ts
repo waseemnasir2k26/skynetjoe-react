@@ -1,5 +1,5 @@
 ﻿/**
- * Skynetjoe site config â€” single source of truth for nav, services, footer, social.
+ * Skynetjoe site config — single source of truth for nav, services, footer, social.
  * Ported from v5.5 WP theme (front-page.php + header.php + footer.php).
  */
 
@@ -15,7 +15,7 @@
  *
  * Precedence:
  *   1. NEXT_PUBLIC_SITE_ASSETS_URL (explicit override)
- *   2. NEXT_PUBLIC_VERCEL_URL (auto-set by Vercel â€” preview + prod)
+ *   2. NEXT_PUBLIC_VERCEL_URL (auto-set by Vercel — preview + prod)
  *   3. https://skynetjoe.com (final fallback for local dev/build)
  */
 function resolveAssetsUrl(): string {
@@ -29,7 +29,7 @@ function resolveAssetsUrl(): string {
 /**
  * Default Open Graph / Twitter image used by every page that doesn't
  * specify its own. Per Next.js docs, page-level openGraph blocks
- * SHALLOWLY OVERWRITE the root layout's openGraph â€” so without
+ * SHALLOWLY OVERWRITE the root layout's openGraph — so without
  * re-including `images:`, social shares from /pricing, /services,
  * /case-studies, /tools etc. render with no thumbnail. Spread these
  * into the page's openGraph.images (and twitter.images) to inherit.
@@ -38,7 +38,7 @@ function resolveAssetsUrl(): string {
  * SITE.assetsUrl at build time so the final absolute URL is correct.
  */
 /**
- * Canonical booking URL â€” Calendly.
+ * Canonical booking URL — Calendly.
  * Single source of truth. Per-tool UTM appended at call site:
  *   `${CAL_URL}?utm_source=<tool-slug>`
  *   `${CAL_URL}?${bookingQuery}`
@@ -52,7 +52,7 @@ export const DEFAULT_OG_IMAGES = [
     url: DEFAULT_OG_IMAGE_URL,
     width: 1200,
     height: 630,
-    alt: "SkynetLabs â€” AI Automation Agency for Founders Who Refuse to Be Average",
+    alt: "SkynetLabs — AI Automation Agency for Founders Who Refuse to Be Average",
   },
 ] as const;
 
@@ -64,7 +64,7 @@ export const SITE = {
   // so local dev + existing Vercel deploys continue to work unchanged.
   domain: process.env.NEXT_PUBLIC_SITE_DOMAIN ?? "skynetjoe.com",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://skynetjoe.com",
-  // Asset host for og:image / twitter:image â€” see resolveAssetsUrl() above.
+  // Asset host for og:image / twitter:image — see resolveAssetsUrl() above.
   assetsUrl: resolveAssetsUrl(),
   founder: "Waseem Nasir",
   founderUrl: "https://www.waseemnasir.com",
@@ -90,7 +90,7 @@ export type NavItem = {
   subItems?: NavSubItem[];
 };
 /**
- * Free tools â€” canonical list mirroring `src/app/tools/page.tsx`.
+ * Free tools — canonical list mirroring `src/app/tools/page.tsx`.
  * Keep in sync when a tool is added/removed.
  */
 export const TOOL_LINKS: NavSubItem[] = [
@@ -102,7 +102,7 @@ export const TOOL_LINKS: NavSubItem[] = [
   {
     label: "Agency Stress Quiz",
     href: "/tools/agency-stress-quiz",
-    desc: "60-second diagnostic â€” chill to chaos",
+    desc: "60-second diagnostic — chill to chaos",
   },
   {
     label: "Automation Gap Analyzer",
@@ -122,7 +122,7 @@ export const TOOL_LINKS: NavSubItem[] = [
   {
     label: "Executive Summary Generator",
     href: "/tools/executive-summary-generator",
-    desc: "Raw notes â†’ TL;DR, email, deck slide",
+    desc: "Raw notes → TL;DR, email, deck slide",
   },
   {
     label: "Prompt Library",
@@ -137,7 +137,7 @@ export const TOOL_LINKS: NavSubItem[] = [
   {
     label: "Video Prompt Generator",
     href: "/tools/video-prompt-generator",
-    desc: "Runway, Pika, Sora, Veo â€” side-by-side",
+    desc: "Runway, Pika, Sora, Veo — side-by-side",
   },
   {
     label: "Voice Persona Builder",
@@ -168,7 +168,7 @@ export const NAV_PRIMARY: NavItem[] = [
       {
         label: "Case Studies",
         href: "/case-studies",
-        desc: "Deep dives â€” problem, fix, numbers",
+        desc: "Deep dives — problem, fix, numbers",
       },
       { label: "Locations", href: "/locations", desc: "Service coverage map" },
     ],
@@ -306,10 +306,10 @@ export const SERVICE_CATEGORIES = [
 ] as const;
 
 export const STATS = [
-  { value: "180+", label: "Workflows shipped" },
-  { value: "40+", label: "Websites delivered" },
-  { value: "9", label: "Countries served" },
-  { value: "5â€“14d", label: "Ship window" },
+  { value: "Dozens", label: "Automation builds shipped" },
+  { value: "Dozens", label: "Websites delivered" },
+  { value: "Global", label: "Clients across several countries" },
+  { value: "5–14d", label: "Ship window" },
 ] as const;
 
 export const BRANDS_TRUSTED = [

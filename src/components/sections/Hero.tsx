@@ -228,9 +228,10 @@ export default function Hero() {
             </div>
             <span style={{ color: C.rule }}>·</span>
             <span>
-              <span style={{ color: C.ink, fontWeight: 600 }}>180+</span>{" "}
+              <span style={{ color: C.ink, fontWeight: 600 }}>Dozens</span> of
               workflows ·{" "}
-              <span style={{ color: C.ink, fontWeight: 600 }}>9</span> countries
+              <span style={{ color: C.ink, fontWeight: 600 }}>several</span>{" "}
+              countries
             </span>
           </div>
         </motion.div>

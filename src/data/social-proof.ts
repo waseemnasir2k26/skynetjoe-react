@@ -34,8 +34,8 @@ export const TOP_TESTIMONIALS: NumericalTestimonial[] = [
     stars: 5,
   },
   {
-    outcome: "Saved 18 hrs/wk on admin after CRM rebuild",
-    name: "Manhattan dental flagship",
+    outcome: "Front-desk admin cut sharply after the CRM rebuild",
+    name: "Dental clinic (name withheld)",
     company: "Healthcare",
     stars: 5,
   },

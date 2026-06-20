@@ -14,7 +14,7 @@ import ExitIntentModal from "@/components/cta/ExitIntentModal";
 import SocialProofPopup from "@/components/cta/SocialProofPopup";
 import "../globals.css";
 
-// Cream editorial pivot 2026-05-25 â€” distinctive non-generic font stack.
+// Cream editorial pivot 2026-05-25 — distinctive non-generic font stack.
 const fraunces = Fraunces({
   subsets: ["latin"],
   weight: "variable",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   // host the /public assets yet. Canonicals below still use SITE.url.
   metadataBase: new URL(SITE.assetsUrl),
   title: {
-    default: `${SITE.brand} â€” ${SITE.tagline}`,
+    default: `${SITE.brand} — ${SITE.tagline}`,
     template: `%s | ${SITE.brand}`,
   },
   description: SITE.description,
@@ -57,20 +57,20 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE.url,
     siteName: SITE.brand,
-    title: `${SITE.brand} â€” ${SITE.tagline}`,
+    title: `${SITE.brand} — ${SITE.tagline}`,
     description: SITE.description,
     images: [
       {
         url: "/og-default.png",
         width: 1200,
         height: 630,
-        alt: `${SITE.brand} â€” ${SITE.tagline}`,
+        alt: `${SITE.brand} — ${SITE.tagline}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.brand} â€” ${SITE.tagline}`,
+    title: `${SITE.brand} — ${SITE.tagline}`,
     description: SITE.description,
     creator: "@skynetlabs",
     site: "@skynetlabs",
@@ -99,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        {/* Calendly preconnect â€” speeds iframe load on /discovery-call.
+        {/* Calendly preconnect — speeds iframe load on /discovery-call.
             Ported from WP header-enhanced.php (lines 11, dns-prefetch chain). */}
         <link rel="preconnect" href="https://calendly.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
@@ -109,12 +109,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AISignals />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        {/* Skip-link a11y â€” WCAG 2.1 SC 2.4.1. Ported from WP header.php line 49. */}
+        {/* Skip-link a11y — WCAG 2.1 SC 2.4.1. Ported from WP header.php line 49. */}
         <a href="#main-content" className="skip-link sr-only focus:not-sr-only">
           Skip to main content
         </a>
         <GtmNoscript />
-        {/* GA4 noscript fallback â€” only when GA4 env is set AND GTM is not in play
+        {/* GA4 noscript fallback — only when GA4 env is set AND GTM is not in play
             (Analytics.tsx wires GA4 only when GTM_ID is empty). */}
         {GA4_ID && (
           <noscript>

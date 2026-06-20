@@ -8,8 +8,7 @@ import { Sparkles, Timer, ShieldCheck, Flame } from "lucide-react";
 const PATH = "/tools/agency-stress-quiz";
 
 export const metadata: Metadata = {
-  title:
-    "Agency Stress Quiz — 60s diagnostic for service-business owners · SkynetLabs",
+  title: "Agency Stress Quiz — 60s diagnostic for service-business owners",
   description:
     "60 seconds. 7 questions. One honest score on how chaotic your agency really is. Built by SkynetLabs for service founders who want the brutal truth.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -50,8 +49,16 @@ const faqs = [
 
 const heroStats = [
   { icon: Timer, label: "60 seconds", body: "7 questions, one tap each." },
-  { icon: ShieldCheck, label: "Anonymous", body: "Nothing leaves your browser." },
-  { icon: Flame, label: "Brutally honest", body: "Score from 0 (chill) to 70 (chaos)." },
+  {
+    icon: ShieldCheck,
+    label: "Anonymous",
+    body: "Nothing leaves your browser.",
+  },
+  {
+    icon: Flame,
+    label: "Brutally honest",
+    body: "Score from 0 (chill) to 70 (chaos).",
+  },
 ];
 
 /** Quiz schema (https://schema.org/Quiz). Uses Question subtype for each step. */
@@ -162,12 +169,27 @@ export default function StressQuizPage() {
               One brutally honest score.
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
               I&apos;ve sat inside 200+ service businesses. The same five
               patterns blow up every founder I talk to. This quiz scores you
               against those patterns and tells you where to fix first.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
               No email gate. No drip sequence. No data leaves your browser. Just
               a number from 0 to 70 and three priorities.
             </p>
@@ -180,14 +202,36 @@ export default function StressQuizPage() {
                     padding: 16,
                     background: "var(--cream-2)",
                     border: "1px solid var(--border)",
-                    transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                    transform:
+                      i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                   }}
                 >
-                  <div className="flex items-center gap-2" style={{ color: "var(--ink)" }}>
-                    <Icon className="w-4 h-4" style={{ color: "var(--terracotta)" }} />
-                    <span style={{ fontSize: 13, fontWeight: 600, fontFamily: "var(--font-sans)" }}>{label}</span>
+                  <div
+                    className="flex items-center gap-2"
+                    style={{ color: "var(--ink)" }}
+                  >
+                    <Icon
+                      className="w-4 h-4"
+                      style={{ color: "var(--terracotta)" }}
+                    />
+                    <span
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 600,
+                        fontFamily: "var(--font-sans)",
+                      }}
+                    >
+                      {label}
+                    </span>
                   </div>
-                  <p style={{ marginTop: 6, fontSize: 12, color: "var(--ink-faint)", lineHeight: 1.5 }}>
+                  <p
+                    style={{
+                      marginTop: 6,
+                      fontSize: 12,
+                      color: "var(--ink-faint)",
+                      lineHeight: 1.5,
+                    }}
+                  >
                     {body}
                   </p>
                 </div>

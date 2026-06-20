@@ -1,4 +1,6 @@
-import HeroVariant, { type HeroVariantProps } from "@/components/heroes/HeroVariant";
+import HeroVariant, {
+  type HeroVariantProps,
+} from "@/components/heroes/HeroVariant";
 import { SITE } from "@/lib/site";
 
 export const metadata = {
@@ -22,7 +24,8 @@ const VARIANTS: HeroVariantProps[] = [
     sub: "One operator. Claude as engineering cofounder. Live in 5 to 14 days.",
     primaryCta: { label: "Start a project", href: "/contact" },
     secondaryCta: { label: "See what I've shipped", href: SITE.social.github },
-    visualNote: "Black canvas, white serif headline, blinking terminal cursor under the period",
+    visualNote:
+      "Black canvas, white serif headline, blinking terminal cursor under the period",
     style: "default",
   },
   {
@@ -36,7 +39,7 @@ const VARIANTS: HeroVariantProps[] = [
         <span className="gradient-text">That&apos;s the whole team.</span>
       </>
     ),
-    sub: "Solo founder plus a 1M-context AI engineer. n8n, Next.js, live chat, AEO — shipped across nine countries.",
+    sub: "Solo founder plus a 1M-context AI engineer. n8n, Next.js, live chat, AEO — shipped across several countries.",
     primaryCta: { label: "Brief me", href: "/contact" },
     secondaryCta: { label: "Open the GitHub", href: SITE.social.github },
     visualNote: "Split portrait + Claude `/` glyph, gold hairline divider",
@@ -48,12 +51,13 @@ const VARIANTS: HeroVariantProps[] = [
     lever: "Speed + specificity",
     headline: (
       <>
-        Brief to live site in <span className="gradient-text">fourteen days.</span>
+        Brief to live site in{" "}
+        <span className="gradient-text">fourteen days.</span>
         <br />
         Sometimes five.
       </>
     ),
-    sub: "n8n automations, Next.js sites, voice agents. One operator, nine countries, zero account managers.",
+    sub: "n8n automations, Next.js sites, voice agents. One operator, several countries, zero account managers.",
     primaryCta: { label: "See the queue", href: "/contact" },
     secondaryCta: { label: "Recent projects", href: "/case-studies" },
     visualNote: "Calendar strip showing brief → ship dates",
@@ -73,7 +77,8 @@ const VARIANTS: HeroVariantProps[] = [
     sub: "Fixed scope, fixed price, shipped in days. Built by one operator with an AI cofounder.",
     primaryCta: { label: "Send a brief", href: "/contact" },
     secondaryCta: { label: "Portfolio", href: "/portfolio" },
-    visualNote: "Single line of monospace text on cream background, no other elements",
+    visualNote:
+      "Single line of monospace text on cream background, no other elements",
     style: "minimal",
   },
   {
@@ -84,7 +89,7 @@ const VARIANTS: HeroVariantProps[] = [
       <>
         Built in Bali.
         <br />
-        Shipped to <span className="gradient-text">nine countries.</span>
+        Shipped to <span className="gradient-text">several countries.</span>
       </>
     ),
     sub: "Async by default, lean by design. Next.js, n8n, live chat, voice agents — delivered by the person who built them.",
@@ -118,7 +123,8 @@ const VARIANTS: HeroVariantProps[] = [
       <>
         Every week without automation
         <br />
-        <span className="gradient-text">costs you a hire</span> you didn&apos;t need to make.
+        <span className="gradient-text">costs you a hire</span> you didn&apos;t
+        need to make.
       </>
     ),
     sub: "I build the workflow that replaces the hire. n8n, voice agents, CRM, AEO. Live in two weeks.",
@@ -133,7 +139,8 @@ const VARIANTS: HeroVariantProps[] = [
     lever: "Curiosity",
     headline: (
       <>
-        What if your CRM <span className="gradient-text">filled itself in?</span>
+        What if your CRM{" "}
+        <span className="gradient-text">filled itself in?</span>
       </>
     ),
     sub: "That's the kind of automation I build. n8n, live chat, voice — connected to the tools you already pay for.",
@@ -150,10 +157,11 @@ const VARIANTS: HeroVariantProps[] = [
       <>
         No standups. No account managers.
         <br />
-        No deck reviews. <span className="gradient-text">Just shipped work.</span>
+        No deck reviews.{" "}
+        <span className="gradient-text">Just shipped work.</span>
       </>
     ),
-    sub: "One operator. AI cofounder. Nine countries, dozens of projects, two-week median ship.",
+    sub: "One operator. AI cofounder. Several countries, dozens of projects, two-week median ship.",
     primaryCta: { label: "Start a project", href: "/contact" },
     secondaryCta: { label: "What I've built", href: SITE.social.github },
     visualNote: "Bullet list rendered as terminal output",
@@ -224,15 +232,16 @@ const VARIANTS: HeroVariantProps[] = [
       <>
         Not an agency.
         <br />
-        The operator who built <span className="gradient-text">a dental flagship in NY,</span>
-        <br />
-        a voice agent in Paris, a recovery site in Seattle.
+        The operator who built{" "}
+        <span className="gradient-text">a dental flagship in NY,</span>
+        <br />a voice agent in Paris, a recovery site in Seattle.
       </>
     ),
     sub: "One operator. Claude as engineering cofounder. The person you message is the person writing the code.",
     primaryCta: { label: "Start a project", href: "/contact" },
     secondaryCta: { label: "See the work on GitHub", href: SITE.social.github },
-    visualNote: "Three city-flag tiles below headline, each linking to its case study",
+    visualNote:
+      "Three city-flag tiles below headline, each linking to its case study",
     style: "default",
   },
   {
@@ -243,13 +252,16 @@ const VARIANTS: HeroVariantProps[] = [
       <>
         Two cofounders.
         <br />
-        <span className="gradient-text">One human in Bali. One AI in your laptop.</span>
+        <span className="gradient-text">
+          One human in Bali. One AI in your laptop.
+        </span>
       </>
     ),
     sub: "Together we shipped dental flagships in SoHo, French voice agents in Paris, recovery sites in Seattle. Brief on Monday, live by next Friday.",
     primaryCta: { label: "Brief me", href: "/contact" },
     secondaryCta: { label: "Open the GitHub", href: SITE.social.github },
-    visualNote: "Split: Bali workspace photo left, terminal w/ Claude `/` glyph right",
+    visualNote:
+      "Split: Bali workspace photo left, terminal w/ Claude `/` glyph right",
     style: "split",
   },
   {
@@ -263,10 +275,11 @@ const VARIANTS: HeroVariantProps[] = [
         <span className="gradient-text">Every other agency hides it.</span>
       </>
     ),
-    sub: "Solo operator + 1M-context AI engineer = ten times the throughput, none of the agency overhead. Shipped across nine countries.",
+    sub: "Solo operator + 1M-context AI engineer = ten times the throughput, none of the agency overhead. Shipped across several countries.",
     primaryCta: { label: "Send a brief", href: "/contact" },
     secondaryCta: { label: "See the work", href: SITE.social.github },
-    visualNote: "Bold serif headline on cream, subtle Claude `/` watermark bottom-right",
+    visualNote:
+      "Bold serif headline on cream, subtle Claude `/` watermark bottom-right",
     style: "bold",
   },
   {
@@ -283,7 +296,8 @@ const VARIANTS: HeroVariantProps[] = [
     sub: "No account managers. No discovery deck. Claude is my engineering cofounder. Bali is my office. You get the work — direct.",
     primaryCta: { label: "Start a project", href: "/contact" },
     secondaryCta: { label: "What I&apos;ve built", href: SITE.social.github },
-    visualNote: "Minimal centered text, single arrow CTA below, no decorative elements",
+    visualNote:
+      "Minimal centered text, single arrow CTA below, no decorative elements",
     style: "minimal",
   },
   {
@@ -296,13 +310,14 @@ const VARIANTS: HeroVariantProps[] = [
         <br />
         One AI cofounder.
         <br />
-        <span className="gradient-text">Nine countries shipped.</span>
+        <span className="gradient-text">Several countries shipped.</span>
       </>
     ),
     sub: "Built sites and automations for clinics in Seattle, logistics in Paris, dealerships in Lahore, recovery in PNW. Median ship: 14 days. Direct line, always.",
     primaryCta: { label: "Work with me", href: "/contact" },
     secondaryCta: { label: "Case studies", href: "/case-studies" },
-    visualNote: "Three stacked numbered cards as the visual; named-geography proof strip below",
+    visualNote:
+      "Three stacked numbered cards as the visual; named-geography proof strip below",
     style: "cream",
   },
 
@@ -324,7 +339,8 @@ const VARIANTS: HeroVariantProps[] = [
     sub: "I build the automation that catches them — live chat reminders, CRM auto-fill, voice agents that follow up while you sleep. One operator, AI cofounder, 14-day ship.",
     primaryCta: { label: "Get the leak audit", href: "/contact" },
     secondaryCta: { label: "See client wins", href: "/case-studies" },
-    visualNote: "Red downward $-amount counter + green automation graph cross-fading",
+    visualNote:
+      "Red downward $-amount counter + green automation graph cross-fading",
     style: "default",
   },
   {
@@ -338,9 +354,12 @@ const VARIANTS: HeroVariantProps[] = [
         on email triage, follow-ups, and DM replies?
       </>
     ),
-    sub: "Stéphanie did too. Now her n8n + GPT-4o agent drafts every reply in 20 minutes. She goes home at 6pm. I build the same for service businesses across nine countries.",
+    sub: "A wellness operator did too. Now their n8n + GPT-4o agent drafts every reply in minutes instead of hours, and the team leaves on time. I build the same for service businesses across several countries.",
     primaryCta: { label: "Get my workflow audited", href: "/contact" },
-    secondaryCta: { label: "See how Takycorp solved it", href: "/case-studies" },
+    secondaryCta: {
+      label: "See how Takycorp solved it",
+      href: "/case-studies",
+    },
     visualNote: "Clock face left (3h) → calendar w/ family dinner right (6pm)",
     style: "split",
   },
@@ -350,7 +369,8 @@ const VARIANTS: HeroVariantProps[] = [
     lever: "Scale ceiling + identity",
     headline: (
       <>
-        You hit <span className="gradient-text">the solo ceiling</span> at $10K MRR.
+        You hit <span className="gradient-text">the solo ceiling</span> at $10K
+        MRR.
         <br />
         Hiring won&apos;t fix it. Automation will.
       </>
@@ -358,7 +378,8 @@ const VARIANTS: HeroVariantProps[] = [
     sub: "I build the systems that replace the next two hires — n8n, CRM, voice agents, live chat. One operator. AI cofounder. Real receipts in Seattle, Paris, Lahore.",
     primaryCta: { label: "Show me the leak", href: "/contact" },
     secondaryCta: { label: "Stack I build with", href: "/services" },
-    visualNote: "Org chart w/ two empty hire boxes replaced by n8n logo + Claude glyph",
+    visualNote:
+      "Org chart w/ two empty hire boxes replaced by n8n logo + Claude glyph",
     style: "default",
   },
   {
@@ -369,7 +390,9 @@ const VARIANTS: HeroVariantProps[] = [
       <>
         Your CRM, calendar, live chat, Stripe, and inbox
         <br />
-        <span className="gradient-text">still don&apos;t talk to each other?</span>
+        <span className="gradient-text">
+          still don&apos;t talk to each other?
+        </span>
       </>
     ),
     sub: "That&apos;s the leak. I wire them into one workflow in 14 days — n8n + the tools you already pay for. Solo operator + AI cofounder. Shipped to clinics, logistics, dealerships.",
@@ -389,10 +412,11 @@ const VARIANTS: HeroVariantProps[] = [
         <span className="gradient-text">to spend your week answering DMs.</span>
       </>
     ),
-    sub: "I build the automations that take the admin off your plate — so the part of the business you love (the actual work) gets your hours back. Shipped to nine countries. Direct line, always.",
+    sub: "I build the automations that take the admin off your plate — so the part of the business you love (the actual work) gets your hours back. Shipped to several countries. Direct line, always.",
     primaryCta: { label: "Take it off my plate", href: "/contact" },
     secondaryCta: { label: "Case studies", href: "/case-studies" },
-    visualNote: "Cracked screen w/ 47 unread notifications → calm dashboard w/ 1 daily summary",
+    visualNote:
+      "Cracked screen w/ 47 unread notifications → calm dashboard w/ 1 daily summary",
     style: "default",
   },
   {
@@ -403,15 +427,17 @@ const VARIANTS: HeroVariantProps[] = [
       <>
         The lead picked your competitor
         <br />
-        because <span className="gradient-text">they replied in 6 minutes.</span>
+        because{" "}
+        <span className="gradient-text">they replied in 6 minutes.</span>
         <br />
         You replied in 6 hours.
       </>
     ),
-    sub: "I build the live chat + voice + CRM stack that responds in 30 seconds — whether you&apos;re in Bali or asleep. One operator. AI cofounder. Real client wins across nine countries.",
+    sub: "I build the live chat + voice + CRM stack that responds in 30 seconds — whether you&apos;re in Bali or asleep. One operator. AI cofounder. Real client wins across several countries.",
     primaryCta: { label: "Stop losing leads", href: "/contact" },
     secondaryCta: { label: "See the stack", href: "/services" },
-    visualNote: "Stopwatch w/ 6m vs 6h split; subtle live chat + Cal.com + voice-agent badges",
+    visualNote:
+      "Stopwatch w/ 6m vs 6h split; subtle live chat + Cal.com + voice-agent badges",
     style: "default",
   },
   {
@@ -444,11 +470,20 @@ export default function HeroLab() {
           24 hero variants. Pick one.
         </h1>
         <p className="text-fg-muted max-w-2xl">
-          Round 1 (V01–V12): researched against Linear, Vercel, Basecamp, Claude, Cursor.
+          Round 1 (V01–V12): researched against Linear, Vercel, Basecamp,
+          Claude, Cursor.
           <br />
-          Round 2 (V13–V17): hybrids of V01 anti-agency × V02 AI-cofounder × V11 named-geo proof.
+          Round 2 (V13–V17): hybrids of V01 anti-agency × V02 AI-cofounder × V11
+          named-geo proof.
           <br />
-          Round 3 (<span className="text-skynet-primary-light font-semibold">V18–V24</span>): <span className="text-fg font-semibold">PAIN-FIRST</span> — lead with customer leak, operator answers. (No-shows, time-bleed, solo ceiling, tool chaos, drowning founder, slow lead response, SaaS bloat.)
+          Round 3 (
+          <span className="text-skynet-primary-light font-semibold">
+            V18–V24
+          </span>
+          ): <span className="text-fg font-semibold">PAIN-FIRST</span> — lead
+          with customer leak, operator answers. (No-shows, time-bleed, solo
+          ceiling, tool chaos, drowning founder, slow lead response, SaaS
+          bloat.)
           <br />
           Reply with variant number to ship as the homepage hero.
         </p>

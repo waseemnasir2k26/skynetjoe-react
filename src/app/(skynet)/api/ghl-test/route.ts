@@ -8,27 +8,24 @@ export const dynamic = "force-dynamic";
 // ============================================================
 // /api/ghl-test — server-side smoke test for GHL env config.
 //
-// Hit this after deploying to confirm:
-//   - GHL_API_TOKEN is set in the runtime env
-//   - GHL_LOCATION_ID is set (or default is in play)
-//   - The token has contacts.write scope and the contact actually upserts
+// Hit this after deploying to confirm the GHL token has contacts.write
+// scope and a contact actually upserts.
 //
-// Returns: { ok, contactId, env: { tokenSet, locationSet } }
+// GATED: requires header `x-debug-key` to exactly match the DEBUG_KEY env.
+// Without a matching key the route 404s (indistinguishable from "no route"),
+// so it can't be used as an unauthenticated live-write or env-probe surface.
+// If DEBUG_KEY is unset the route is effectively disabled (always 404).
 //
+// Returns: { ok, contactId, isNew }  — no env state is leaked.
 // NOT documented publicly. We send X-Robots-Tag: noindex anyway.
 // ============================================================
 
-export async function GET() {
-  const tokenSet = Boolean(process.env.GHL_API_TOKEN);
-  const locationSet = Boolean(process.env.GHL_LOCATION_ID);
-
-  if (!tokenSet) {
-    console.warn("[ghl-test] GHL_API_TOKEN missing");
-  }
-  if (!locationSet) {
-    console.warn(
-      "[ghl-test] GHL_LOCATION_ID missing — will use hardcoded default",
-    );
+export async function GET(req: Request) {
+  const debugKey = process.env.DEBUG_KEY;
+  const provided = req.headers.get("x-debug-key");
+  // 404 (not 401/403) so the endpoint's existence isn't disclosed.
+  if (!debugKey || provided !== debugKey) {
+    return new NextResponse("Not Found", { status: 404 });
   }
 
   const result = await upsertGhlContact(
@@ -47,7 +44,6 @@ export async function GET() {
       ok: result.contactId !== "dev-skip",
       contactId: result.contactId,
       isNew: result.isNew,
-      env: { tokenSet, locationSet },
     },
     {
       headers: {

@@ -151,8 +151,8 @@ export default function GoHighLevelLP() {
               }}
             >
               Pipelines rebuilt around your sales motion. Two-touch no-show
-              recovery. UTM-clean attribution. Karachi dental flagship cut
-              cancellations 70% in 11 days.
+              recovery. UTM-clean attribution. A dental clinic cut its
+              cancellations sharply after the rebuild.
             </p>
             <Link
               href="/discovery-call"
@@ -377,20 +377,20 @@ export default function GoHighLevelLP() {
               marginBottom: 14,
             }}
           >
-            — Karachi dental flagship · 11-day ship
+            — Dental clinic · 11-day ship
           </div>
           <div
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 500,
-              fontSize: "clamp(96px, 18vw, 180px)",
-              lineHeight: 0.9,
+              fontSize: "clamp(56px, 11vw, 110px)",
+              lineHeight: 0.95,
               color: "var(--terracotta)",
-              letterSpacing: "-0.04em",
+              letterSpacing: "-0.03em",
               marginBottom: 18,
             }}
           >
-            -70%
+            No-shows, cut sharply
           </div>
           <p
             style={{
@@ -403,8 +403,8 @@ export default function GoHighLevelLP() {
               margin: "0 auto",
             }}
           >
-            no-show drop after the GHL + Signal recovery flow. PKR 480k/mo
-            recovered, month two.
+            after the GHL + Signal recovery flow took the confirmation cadence
+            off the front desk.
           </p>
         </div>
       </section>
@@ -455,7 +455,7 @@ export default function GoHighLevelLP() {
             >
               <Image
                 src="/case-studies/manhattan-dental-atelier-flagship.jpg"
-                alt="Karachi dental flagship — GHL + Signal no-show flow"
+                alt="Dental clinic — GHL + Signal no-show recovery flow"
                 fill
                 sizes="(min-width: 900px) 380px, 90vw"
                 style={{
@@ -475,7 +475,7 @@ export default function GoHighLevelLP() {
                 paddingTop: 10,
               }}
             >
-              Karachi dental · GHL · 11-day ship
+              Dental clinic · GHL · 11-day ship
             </figcaption>
           </figure>
           <div>
@@ -489,7 +489,7 @@ export default function GoHighLevelLP() {
                 margin: "0 0 20px",
               }}
             >
-              &ldquo;We were losing PKR 480,000 a month to no-shows. Six weeks
+              &ldquo;We were bleeding revenue to no-shows every month. Six weeks
               after Waseem shipped the n8n + SMS flow inside GHL, it was a
               non-issue.&rdquo;
             </p>
@@ -502,7 +502,7 @@ export default function GoHighLevelLP() {
                 color: "var(--ink-faint)",
               }}
             >
-              — Dr. Elena · Karachi dental flagship · Defence
+              — Founding clinician, dental clinic (name withheld by contract)
             </div>
           </div>
         </div>

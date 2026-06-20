@@ -14,7 +14,14 @@ export type NewsArticle = {
   publishedAt: string;
   updatedAt?: string;
   readingTime: number;
-  category: "Automation" | "AEO" | "Stack" | "Operations" | "Pricing" | "Tools" | "Field notes";
+  category:
+    | "Automation"
+    | "AEO"
+    | "Stack"
+    | "Operations"
+    | "Pricing"
+    | "Tools"
+    | "Field notes";
   tags: string[];
   /** Optional inline body — when present, rendered by /news/[slug] dynamic route.
    *  Legacy hand-written articles (with their own page.tsx) leave this undefined. */
@@ -32,7 +39,7 @@ export const NEWS: NewsArticle[] = [
     slug: "n8n-vs-zapier-2026-switch",
     title: "Why I stopped using Zapier for client builds in 2026",
     eyebrow: "Field notes · Volume II · 2026",
-    deck: "After 180+ shipped automations, the Zapier bill stopped making sense. Here's the unglamorous math behind switching every client over to n8n — and the three workflows where I still pay for Zapier anyway.",
+    deck: "After dozens of shipped automations, the Zapier bill stopped making sense. Here's the unglamorous math behind switching every client over to n8n — and the three workflows where I still pay for Zapier anyway.",
     description:
       "An honest essay on why SkynetLabs replaced Zapier with self-hosted n8n on a $7/mo Hostinger VPS across 9 client accounts in 2026. Cost math, migration pain, and the three Zaps I kept.",
     heroImage: "/news/n8n-vs-zapier-2026-switch.jpg",
@@ -58,13 +65,13 @@ export const NEWS: NewsArticle[] = [
   },
   {
     slug: "dental-no-show-n8n-flow",
-    title: "I built a dental no-show flow that cut cancellations 70%",
+    title: "I built a dental no-show flow that cut cancellations sharply",
     eyebrow: "Build log · Volume II · 2026",
-    deck: "A real Karachi dental flagship was losing PKR 480,000/month to no-shows. The n8n + GoHighLevel + Signal graph I shipped in 11 days — every node, every fallback, every number.",
+    deck: "A dental clinic was losing real money to no-shows. The n8n + GoHighLevel + Signal graph I shipped — every node, every fallback, the reminder timing that actually moved the number.",
     description:
-      "Full breakdown of the dental no-show n8n flow that took a Karachi practice from 32% to under 10% cancellation rate. Architecture, message timing, fallback logic, and the cost math.",
+      "Full breakdown of the dental no-show n8n flow that cut a practice's cancellation rate sharply. Architecture, message timing, fallback logic, and the cost reasoning.",
     heroImage: "/news/dental-no-show-n8n-flow.jpg",
-    heroCaption: "Dental flagship · Defence Karachi · production graph",
+    heroCaption: "Dental clinic · production graph",
     publishedAt: "2026-05-09",
     readingTime: 12,
     category: "Automation",
@@ -72,7 +79,7 @@ export const NEWS: NewsArticle[] = [
   },
   {
     slug: "aeo-2026-meaning",
-    title: "What \"AEO\" actually means in 2026",
+    title: 'What "AEO" actually means in 2026',
     eyebrow: "AEO field guide · Volume II · 2026",
     deck: "Answer-engine optimization is not SEO with a new label. It's the discipline of getting your business cited inside ChatGPT, Claude, and Perplexity answers — and most agencies selling it don't understand the underlying retrieval mechanics.",
     description:
@@ -100,9 +107,10 @@ export const NEWS: NewsArticle[] = [
   },
   {
     slug: "public-pricing-ai-builds",
-    title: "Why I price my AI builds publicly while every agency hides the number",
+    title:
+      "Why I price my AI builds publicly while every agency hides the number",
     eyebrow: "Pricing essay · Volume II · 2026",
-    deck: "Four tiers. No \"custom quote\" theater. Why public pricing kills the worst clients before they reach the call, and the one tier I refused to publish because nobody ever needed it.",
+    deck: 'Four tiers. No "custom quote" theater. Why public pricing kills the worst clients before they reach the call, and the one tier I refused to publish because nobody ever needed it.',
     description:
       "An essay on the strategic case for public pricing in AI services — how SkynetLabs filtered out a year of wrong-fit briefs by publishing four flat-rate tiers, and what we still negotiate.",
     heroImage: "/news/public-pricing-ai-builds.jpg",
@@ -128,7 +136,8 @@ export const NEWS: NewsArticle[] = [
   },
   {
     slug: "bali-canggu-coworking-economics",
-    title: "Bali co-working economics — what shipping from Canggu actually costs",
+    title:
+      "Bali co-working economics — what shipping from Canggu actually costs",
     eyebrow: "Field notes · Volume II · 2026",
     deck: "The honest monthly burn for one operator running client builds out of Canggu — visa, scooter, villa, coffee shops, fiber, gym, food. With Lahore comparison so the numbers feel real.",
     description:
@@ -148,7 +157,7 @@ export const NEWS: NewsArticle[] = [
     eyebrow: "Field notes · 2026",
     deck: "Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon warehousing. Graduated in 2021 and went service-first. Here's what each failed pivot actually taught me.",
     description:
-      "A first-person field note tracing the SkynetLabs arc from a 2019 university Fiverr gig in Lahore to a Bali-based agency shipping across 9 countries. What every failed pivot taught.",
+      "A first-person field note tracing the SkynetLabs arc from a 2019 university Fiverr gig in Lahore to a Bali-based agency shipping for clients across several countries. What every failed pivot taught.",
     heroImage: "/news/fiverr-10-to-9-country-agency.jpg",
     heroCaption: "Bali villa · before a Monday ship · May 2026",
     publishedAt: "2026-05-25",
@@ -162,13 +171,14 @@ export const NEWS: NewsArticle[] = [
       "I pivoted into ecommerce in late 2020. Dropshipping. Two Shopify stores. Lost roughly two months of pocket money on Facebook ads before I admitted I was a builder, not a marketer-of-other-people's-junk. Lesson two: positioning matters more than product.",
       "By 2021 I was looking at Amazon FBA. Inventory, freight, FBA fees, a warehouse stack I didn't understand. Three months in I had zero traction and a small box of unsold inventory. Lesson three: stop chasing what's trending — start chasing what fits.",
       "I graduated in 2021 with a bachelor's degree and exactly one working business muscle: service delivery for paying clients. So I committed to it. Full-time freelancing. Real bills, real ship windows, real money in the bank if I didn't drop the ball.",
-      "From 2022 to 2024 the business compounded quietly. WordPress sites became n8n automations. n8n automations became AI-content engines. By 2024 I had picked the stack — n8n, Claude, Next.js — and the SkynetLabs identity. By 2025 I was in Bali. By today, May 2026, the work has shipped into nine countries.",
+      "From 2022 to 2024 the business compounded quietly. WordPress sites became n8n automations. n8n automations became AI-content engines. By 2024 I had picked the stack — n8n, Claude, Next.js — and the SkynetLabs identity. By 2025 I was in Bali. By today, May 2026, the work has shipped to clients across several countries.",
       "If I could time-travel back to that bright study room in 2019, I'd lean over to that version of me and say one sentence: 2026 Waseem is proud of you. Just don't quit. You did it — with the blessing of God.",
     ],
   },
   {
     slug: "story-beats-grids-portfolio-redesign",
-    title: "Why story beats grids — the case-study redesign that closed 3 deals",
+    title:
+      "Why story beats grids — the case-study redesign that closed 3 deals",
     eyebrow: "Stack notes · 2026",
     deck: "Replaced the standard 9-tile case-study grid with a story-first detail page per build. Conversion to discovery-call click jumped from 4% to 11% in two weeks. Here's what changed.",
     description:
@@ -183,7 +193,7 @@ export const NEWS: NewsArticle[] = [
       "The old case-studies page was a 3x3 grid. Nine tiles, each with a gradient placeholder and three lines of copy. It looked fine. It also closed nothing.",
       "I sat with the analytics for an hour. Heatmap showed people scanning the grid, hovering on one tile, then bouncing without ever clicking through. The tile read as a brochure ad, not as evidence.",
       "So I rebuilt it around the principle that case studies should READ like the inside of a war room, not like a Behance shot. Each case got its own /case-studies/[slug] detail page. Hero image (real, not gradient). KPI strip with before / after / delta. Problem statement in three paragraphs. Solution stack as chips. Implementation breakdown as a week-by-week ordered list. A real founder quote pulled into its own block. Inline service-link chips. One discovery-call CTA at the bottom, no exit-intent pop-up.",
-      "The index page changed too. Same 9 tiles, but every tile now carried a real generated hero image (no more gradient placeholders), and the click target became the whole card, not a tiny \"read more\" link.",
+      'The index page changed too. Same 9 tiles, but every tile now carried a real generated hero image (no more gradient placeholders), and the click target became the whole card, not a tiny "read more" link.',
       "Two weeks of data in: click-through from /case-studies to /discovery-call moved from 4% to 11%. Time-on-page on the detail pages averages 2m 40s. Three of those clicks turned into booked calls. One booked call closed for an $8,500 build — which paid for the redesign and the next three months of n8n hosting.",
       "The lesson isn't \"detail pages convert better than tiles\" — that's obvious. The lesson is: grids reward browsing, stories reward deciding. If your service has a 30-min discovery-call ask attached, you don't want browsers. You want deciders.",
     ],
@@ -224,11 +234,11 @@ export const NEWS: NewsArticle[] = [
     category: "Stack",
     tags: ["portfolio", "playwright", "weekend", "ship"],
     body: [
-      "The old portfolio looked thin. Eleven cards, six of them with gradient placeholders instead of real screenshots. Anyone landing on it could count the gap between the headline (\"180+ builds shipped\") and the visible evidence (eleven tiles) in about three seconds.",
+      "The old portfolio looked thin. Eleven cards, six of them with gradient placeholders instead of real screenshots. Anyone landing on it could count the gap between a headline that claimed dozens of builds and the visible evidence — eleven tiles — in about three seconds.",
       "I had screenshots of twelve niche demos sitting in a Notion page that I'd never gotten around to wiring in. Friday afternoon I decided to ship the whole thing over the weekend.",
       "Saturday morning: pulled the demo URLs into a single JSON file. Wrote a small Playwright script that took a viewport screenshot at 1280x800, JPEG q82. Spawned four parallel agents so the twelve demos captured in roughly ninety seconds instead of twenty minutes.",
       "Saturday afternoon: ran the captures through a sharp Node script that resized to 800x500 and stripped EXIF. Total batch came out to under 4MB across twelve files. Committed them to /public/portfolio/ and updated the portfolio data file with the new entries — slug, label, category badge color, and the screenshot path.",
-      "Sunday: rebuilt the index page to render category badges (Real Client / Flagship / Niche Demo) with three different gradient strips. Killed the old portfolio.html embed entirely. Updated the headline from \"11 builds shipped\" to \"23 builds shipped.\"",
+      'Sunday: rebuilt the index page to render category badges (Real Client / Flagship / Niche Demo) with three different gradient strips. Killed the old portfolio.html embed entirely. Updated the headline from "11 builds shipped" to "23 builds shipped."',
       "Shipped Sunday night. Vercel auto-deploy was flaky as usual, so I ran one manual `npx vercel --prod --yes` and aliased it. Done.",
       "The whole arc — capture, resize, wire in, redesign — took maybe nine hours of actual work spread across two days. The reason it could move that fast: Playwright for parallel scraping, sharp for resize, Claude Code as the IDE with full repo context, and a willingness to NOT over-engineer the data file. JSON in, screenshots out, ship.",
     ],
@@ -273,9 +283,9 @@ export const NEWS: NewsArticle[] = [
       "Six months ago I moved from Cursor to Claude Code as the primary IDE for client builds. Not because Cursor stopped working — it didn't. Because I wanted to test a hypothesis: that a CLI-first agent with full repo context plus real shell access would change the velocity of solo client work more than another autocomplete-in-the-editor would.",
       "Six months later, the hypothesis held. Not in the way I expected.",
       "What got faster: anything that touches multiple files. Refactoring a CTA component across six pages used to be a multi-tab dance. Now it's one prompt and a diff review. Migration scripts — the kind that walk a content folder and rewrite all the frontmatter — went from \"I'll do that this weekend\" to a 90-second job. Greenfield scaffolding (a new Next.js route + page + metadata + schema + test) went from an hour to under ten minutes.",
-      "What got harder: design judgment calls. Claude is a competent engineer but a mediocre art director. Anything that requires \"does this hierarchy feel right\" still goes through my eyes first, and the answer is usually \"close, but no.\" Six months in I've stopped asking it to produce final design — I use it to produce the structural skeleton and then I do the visual pass by hand.",
-      "Three categories where it still doesn't help much: (1) Anything that requires reading a third-party dashboard — GSC, Vercel, GHL — where the truth lives behind a login and outside the repo. (2) Anything that requires negotiating with a stakeholder, including the kind of negotiation where the answer is \"no, we should not build this.\" (3) Anything where the right call is to delete code instead of write it — Claude defaults toward addition, and I have to actively prompt it toward subtraction.",
-      "The cost trajectory has been the surprise. Six months in, my monthly Claude bill is bigger than my Vercel bill and roughly equal to my Hostinger VPS bill across nine client accounts. The math still works because the per-hour leverage is higher than any other tool I pay for — but the days of \"Claude Code is basically free\" are over.",
+      'What got harder: design judgment calls. Claude is a competent engineer but a mediocre art director. Anything that requires "does this hierarchy feel right" still goes through my eyes first, and the answer is usually "close, but no." Six months in I\'ve stopped asking it to produce final design — I use it to produce the structural skeleton and then I do the visual pass by hand.',
+      'Three categories where it still doesn\'t help much: (1) Anything that requires reading a third-party dashboard — GSC, Vercel, GHL — where the truth lives behind a login and outside the repo. (2) Anything that requires negotiating with a stakeholder, including the kind of negotiation where the answer is "no, we should not build this." (3) Anything where the right call is to delete code instead of write it — Claude defaults toward addition, and I have to actively prompt it toward subtraction.',
+      'The cost trajectory has been the surprise. Six months in, my monthly Claude bill is bigger than my Vercel bill and roughly equal to my Hostinger VPS bill across nine client accounts. The math still works because the per-hour leverage is higher than any other tool I pay for — but the days of "Claude Code is basically free" are over.',
       "If you're a solo operator on the fence about switching, the honest answer is: switch, keep your old IDE installed for the three categories above, and accept that the bill is now a real line item. The leverage is real. The cost is real. They're both real because they're both the same thing.",
     ],
   },
@@ -285,9 +295,9 @@ export const NEWS: NewsArticle[] = [
     slug: "dental-clinic-cafe-breakthrough",
     title: "The cafe where I broke the dental clinic loop",
     eyebrow: "Build log · 2026",
-    deck: "A Karachi dental practice was hemorrhaging revenue every Tuesday. I sat in a Canggu cafe for three days with the patient inquiry data open in front of me. By Thursday morning the loop was closed.",
+    deck: "A dental practice was hemorrhaging revenue every Tuesday. I sat in a Canggu cafe for three days with the patient inquiry data open in front of me. By Thursday morning the loop was closed.",
     description:
-      "A storytelling field note on diagnosing a dental clinic's no-show loop from a Bali cafe, and the small n8n + GoHighLevel intervention that recovered six-figures of monthly revenue.",
+      "A storytelling field note on diagnosing a dental clinic's no-show loop from a Bali cafe, and the small n8n + GoHighLevel intervention that recovered the leaking revenue.",
     heroImage: "/news/dental-clinic-cafe-breakthrough.jpg",
     heroPosition: "center top",
     heroCaption: "Crate Cafe · Canggu · day two of the dental dig",
@@ -298,10 +308,10 @@ export const NEWS: NewsArticle[] = [
     body: [
       "The first message came in on a Sunday night. \"We're losing patients on Tuesdays and I cannot figure out why.\" Three sentences. No data. Just the gut feeling of a dentist who'd been watching his own books for nine years and knew when something was wrong.",
       "Monday morning I was at a corner table in Crate Cafe with a cold brew and a fresh terminal window. I asked for read-only access to their patient inquiry log. They sent it within an hour. Eight months of CSV. Every inquiry, every booking, every cancellation, every reschedule.",
-      "By the second coffee I could see it. Tuesday inquiries had a 41% no-show rate. Every other day hovered around 12%. The data wasn't subtle — it was screaming.",
+      "By the second coffee I could see it. Tuesday inquiries no-showed at several times the rate of every other day. The data wasn't subtle — it was screaming.",
       "Tuesday was the day their reception staff was lightest. Two people instead of four. The follow-up call that would normally happen 24 hours before the appointment was getting deprioritized. Patients who'd inquired Tuesday weren't getting the gentle reminder nudge that Wednesday-through-Friday patients got. They were drifting.",
       "Wednesday I built the fix in a single n8n flow. Inquiry comes in → tag with day-of-week → if Tuesday, route through a GoHighLevel SMS sequence that sends a personal-feeling reminder at the 48-hour, 24-hour, and 3-hour marks. The SMS copy was written in the dentist's own voice — I had him record a 90-second Loom describing how he'd talk to a hesitant patient. I transcribed it and used it as the prompt.",
-      "Thursday the first Tuesday-cohort patients started arriving. Show rate moved from 59% to 84% in the first three-week window. By the end of the month the practice was running net positive on Tuesdays for the first time since the previous summer.",
+      "Thursday the first Tuesday-cohort patients started arriving. The Tuesday show rate climbed steadily over the first few weeks until it lined up with the rest of the week. By the end of the month the practice was running net positive on Tuesdays for the first time in a long while.",
       "The thing nobody tells you about automation is that the hardest part isn't the workflow. The hardest part is finding the loop. You have to sit with the data long enough to see what's actually happening — and you can't do that with eleven Slack channels open. You have to close the laptop on everything else and just look.",
     ],
     cta: {
@@ -330,9 +340,9 @@ export const NEWS: NewsArticle[] = [
       "She'd been on a discovery call two weeks earlier. The scope was clean, the budget matched, the timeline was honest. By the end of the call she said the line every founder says when they're 80% sold: \"This sounds great, let me run it past my cofounder.\"",
       "Then nothing. Three follow-up emails into the void. Two GoHighLevel-sent nudges with no opens. I had her down as a Lost-Cold in the pipeline by week three and was about to move on.",
       "On a Friday afternoon I decided to try one more thing. I opened her landing page in a browser, opened Loom on top of it, and walked through exactly what I'd build for her — not as a sales pitch but as a thinking-out-loud audit. \"Here's where your hero copy is asking too much. Here's where your pricing page is hiding the number a buyer needs to see. Here's the n8n flow I'd ship for your demo-request form.\" Four minutes. No pitch, no please-buy.",
-      "I sent the Loom on WhatsApp with one line: \"Saw something in your funnel today, thought you might want it whether or not you hire me.\"",
+      'I sent the Loom on WhatsApp with one line: "Saw something in your funnel today, thought you might want it whether or not you hire me."',
       "Seventeen minutes later she replied. \"This is the most useful sales touch I've gotten in six months. Let's start Monday.\" By Tuesday the contract was signed and the GoHighLevel pipeline was live.",
-      "The lesson I keep relearning: automation is supposed to free up your hands to make the one human gesture that actually matters. If your GHL drips and your n8n nudges are doing 95% of the work, you have to be the one making sure the remaining 5% is genuinely useful to the person on the other end. A Loom that says \"I noticed something\" beats fourteen well-timed emails every single time.",
+      'The lesson I keep relearning: automation is supposed to free up your hands to make the one human gesture that actually matters. If your GHL drips and your n8n nudges are doing 95% of the work, you have to be the one making sure the remaining 5% is genuinely useful to the person on the other end. A Loom that says "I noticed something" beats fourteen well-timed emails every single time.',
     ],
     cta: {
       serviceLabel: "GoHighLevel CRM",
@@ -362,7 +372,7 @@ export const NEWS: NewsArticle[] = [
       "Adoption after week one: zero. Not low. Zero. Nobody had opened it.",
       "The pattern was easy to miss because the playbook itself was good. The problem wasn't quality — it was that we'd shipped a thing for the wrong moment. People learn new tools the way they learn new recipes: by watching someone do it once, not by reading a cookbook. The Notion was a cookbook. Their team was hungry on a Tuesday afternoon, not curious on a Sunday morning.",
       "So on the Tuesday I deleted the entire playbook. I opened Loom. I walked through the same five workflows the playbook had documented — but doing them live, with the real tools, with my real voice and my real mistakes. I cut on the second take if the first one had been too clean. Total runtime: 22 minutes.",
-      "I dropped the Loom in their Slack with three lines: \"Watch this once. Bookmark it. Use it as your reference when you're about to ask me something on Tuesday afternoon.\" Within four days, eight of twelve team members had watched it end-to-end. Tuesday Slack pings dropped to under one per week within three weeks.",
+      'I dropped the Loom in their Slack with three lines: "Watch this once. Bookmark it. Use it as your reference when you\'re about to ask me something on Tuesday afternoon." Within four days, eight of twelve team members had watched it end-to-end. Tuesday Slack pings dropped to under one per week within three weeks.',
       "The playbook wasn't wrong. It was inert. A team SOP for using AI tools should look like a senior teammate doing the work over their shoulder, not a manual sitting on a shelf. Written docs are reference material. Recorded walkthroughs are tutorials. They are not interchangeable, and we keep building the wrong one because writing feels more professional than recording.",
     ],
     cta: {
@@ -388,10 +398,10 @@ export const NEWS: NewsArticle[] = [
     category: "Automation",
     tags: ["shopify", "ecommerce", "ksa", "cart", "courier"],
     body: [
-      "The founder called me the day after launch. \"The traffic is good. The products look right. Why is nobody buying?\" I asked him to send me the cart-abandon funnel from his Shopify backend. The number that came back was 38% bounce on the courier-rate page of checkout.",
+      'The founder called me the day after launch. "The traffic is good. The products look right. Why is nobody buying?" I asked him to send me the cart-abandon funnel from his Shopify backend. The number that came back was 38% bounce on the courier-rate page of checkout.',
       "Riyadh shoppers were not the problem. Aramex was not the problem. The product was not the problem. The problem was that the rate showed up on step three of checkout, which felt — to a shopper who had already entered their phone and address — like a bait-and-switch.",
       "I'd seen this exact pattern in three other KSA Shopify accounts. Five years of regional Shopify abandonment training had taught local shoppers to expect a surprise shipping fee somewhere late in checkout. So they preemptively bounced.",
-      "The fix took half a day. I added a small courier-estimate widget to the cart page itself — before checkout. It read the shopper's location from a simple geo-IP lookup, called the Aramex API for a live rate, and showed a single line: \"Shipping to Riyadh: 25 SAR · arrives Tuesday-Wednesday.\" No surprise, no email gate, no account creation.",
+      'The fix took half a day. I added a small courier-estimate widget to the cart page itself — before checkout. It read the shopper\'s location from a simple geo-IP lookup, called the Aramex API for a live rate, and showed a single line: "Shipping to Riyadh: 25 SAR · arrives Tuesday-Wednesday." No surprise, no email gate, no account creation.',
       "Within a week, cart-stage bounce dropped from 38% to under 3%. The visible-rate widget was not making people pay less — it was making them feel they were not being tricked. Same product, same price, same Aramex backend, totally different conversion.",
       "I think about this build every time a client tells me a UX problem is a marketing problem. Sometimes it is. More often it is a single number that the shopper can't see, and the moment you put it in front of them — even if the number itself isn't great — they relax enough to actually buy.",
     ],
@@ -451,8 +461,8 @@ export const NEWS: NewsArticle[] = [
     body: [
       "The DM came in at 2:14am Bali time. \"Are you up? I think I'm having a breakdown about Instagram.\" I was up — the kind of half-awake where you've stopped working but haven't gone to bed yet. I asked her what was happening.",
       "Three reels had landed in the algorithm that week. Together they'd done 1.4 million views. Her DMs had gone from 30 a day to 600 a day, mixed into one feed with no triage. Leads buried under spam. Real fans buried under partnership pitches. She was scrolling through it on her phone trying to figure out which messages mattered, and she'd been doing it for three nights in a row.",
-      "I asked her one question: \"What do you want the inbox to look like Monday morning?\" Her answer was three sentences. \"Real leads tagged and routed to a calendar. Fans get a warm auto-reply with my podcast and merch link. Spam and partnership pitches go to a separate folder I check once a week.\" That was the entire brief.",
-      "By the time the sun came up I had a ManyChat flow drafted that did exactly that. It used a small Claude prompt to read the message intent and route into one of four buckets. The lead bucket got tagged and dropped into GoHighLevel as a new contact with a follow-up reminder. The fan bucket got a warm response in her voice with two links. The partnership bucket got a polite \"send me your one-pager via this form\" auto-reply. The spam bucket got muted.",
+      'I asked her one question: "What do you want the inbox to look like Monday morning?" Her answer was three sentences. "Real leads tagged and routed to a calendar. Fans get a warm auto-reply with my podcast and merch link. Spam and partnership pitches go to a separate folder I check once a week." That was the entire brief.',
+      'By the time the sun came up I had a ManyChat flow drafted that did exactly that. It used a small Claude prompt to read the message intent and route into one of four buckets. The lead bucket got tagged and dropped into GoHighLevel as a new contact with a follow-up reminder. The fan bucket got a warm response in her voice with two links. The partnership bucket got a polite "send me your one-pager via this form" auto-reply. The spam bucket got muted.',
       "I pushed the live version Saturday afternoon. By Monday her inbox had 47 real leads tagged in GHL, 312 fan auto-replies sent, 19 partnership requests parked in a separate folder, and roughly 220 spam messages quietly muted. She'd slept seven hours Saturday night and Sunday night for the first time in two weeks.",
       "Most social automation is built to amplify — post more, reply faster, hustle harder. The interesting automations reduce noise instead of adding to it. They give the founder fewer things to look at, not more. They give back sleep, not screen time.",
     ],
@@ -479,11 +489,11 @@ export const NEWS: NewsArticle[] = [
     category: "Automation",
     tags: ["chatbot", "ai", "clinical", "honest-ai", "intake"],
     body: [
-      "He called me on a Tuesday morning to talk about a chatbot for his clinical practice. The first thing he said before I could pitch anything was, \"I hate chatbots. The fake-friendly ones especially. I am not paying for software that lies to my patients.\"",
-      "Most chatbot pitches start with \"it'll feel just like talking to a real person.\" That promise is exactly what he was warning me against. So we threw it out and built the opposite.",
-      "The bot opens every conversation with one line: \"Hi — I'm an automated assistant for Dr. R's practice. I can answer scheduling questions and intake forms, but for anything clinical I'll connect you to a human in under 90 seconds.\" No emoji. No \"hey there!\" No pretending.",
+      'He called me on a Tuesday morning to talk about a chatbot for his clinical practice. The first thing he said before I could pitch anything was, "I hate chatbots. The fake-friendly ones especially. I am not paying for software that lies to my patients."',
+      'Most chatbot pitches start with "it\'ll feel just like talking to a real person." That promise is exactly what he was warning me against. So we threw it out and built the opposite.',
+      'The bot opens every conversation with one line: "Hi — I\'m an automated assistant for Dr. R\'s practice. I can answer scheduling questions and intake forms, but for anything clinical I\'ll connect you to a human in under 90 seconds." No emoji. No "hey there!" No pretending.',
       "From there, the bot does three things. It checks insurance acceptance against a small database. It runs the routine intake form. And it watches every message for clinical-sounding keywords — pain, urgent, bleeding, dizzy, anxious — and the second one shows up, it pages the on-call coordinator and hands off the conversation with full context.",
-      "We launched it on a Wednesday afternoon. By Friday the practice had handled 142 conversations, completed 38 intake forms, and routed 11 urgent clinical inquiries to a human within their 90-second target. Patient feedback was the surprise: \"It told me right away it was a bot — that actually made me more comfortable, not less.\"",
+      'We launched it on a Wednesday afternoon. By Friday the practice had handled 142 conversations, completed 38 intake forms, and routed 11 urgent clinical inquiries to a human within their 90-second target. Patient feedback was the surprise: "It told me right away it was a bot — that actually made me more comfortable, not less."',
       "The lesson is the inverse of what the chatbot industry has been selling for five years. The honest, narrow-purpose bot that admits it's a bot consistently outperforms the friendly, broad-purpose bot that pretends to be human. Patients aren't fooled by the pretending. They are, however, deeply relieved by the honesty.",
     ],
     cta: {
@@ -498,9 +508,9 @@ export const NEWS: NewsArticle[] = [
     slug: "dental-atelier-no-contact-form",
     title: "The dental atelier that doesn't have a contact form anymore",
     eyebrow: "Build log · 2026",
-    deck: "We replaced their contact form with a four-step HIPAA-aware intake flow. Inquiry completion rate jumped from 34% to 71% in the first month. The form they thought was \"working fine\" was quietly costing them two patients a week.",
+    deck: 'We replaced their contact form with a four-step HIPAA-aware intake flow. Inquiry completion roughly doubled in the first month. The form they thought was "working fine" was quietly costing them patients every week.',
     description:
-      "A storytelling field note on rebuilding a Manhattan dental clinic's lead intake from a generic contact form into a four-step HIPAA-aware flow — and the conversion lift it produced.",
+      "A storytelling field note on rebuilding a dental clinic's lead intake from a generic contact form into a four-step HIPAA-aware flow — and the conversion lift it produced.",
     heroImage: "/news/dental-atelier-no-contact-form.jpg",
     heroPosition: "center top",
     heroCaption: "Cafe postit notes · intake flow planning · February",
@@ -510,10 +520,10 @@ export const NEWS: NewsArticle[] = [
     tags: ["dental", "intake", "hipaa", "nextjs", "ux"],
     body: [
       "The dental atelier had a contact form. Everyone had a contact form. Five fields: name, email, phone, message, submit. It had been on the site for nine years. Nobody had thought about it once in that entire time.",
-      "When we ran the data, the form was completing at 34%. Meaning two out of three people who started filling it in abandoned before they hit submit. The drop-off was happening at the message field — the open-ended one. People were stalling on what to write, then closing the tab.",
-      "Worse: of the 34% who did submit, a meaningful chunk were writing protected health information into a plain text box that was being emailed unencrypted to the front desk. The clinic didn't know it was a compliance problem yet, but it was going to be one.",
-      "We rebuilt the intake as a four-step flow. Step one collected name and the basic appointment type they were inquiring about — five buttons, no typing. Step two collected scheduling preference — three time-window buttons. Step three asked for contact details — email and phone. Only after explicit consent on step three did step four open up: a single optional field for \"anything else the clinical team should know.\" That field routed to an encrypted intake channel, never to plain email.",
-      "Completion rate went from 34% to 71% in the first month. Inquiry quality, rated by the clinic's intake coordinator on a 1-5 scale, went from 2.1 to 4.4. The encrypted-PHI routing was the kind of unsexy compliance fix that would have eventually become a $40,000 problem if we hadn't caught it.",
+      "When we ran the data, most people who started the form abandoned before they hit submit. The drop-off was happening at the message field — the open-ended one. People were stalling on what to write, then closing the tab.",
+      "Worse: of the ones who did submit, a meaningful chunk were writing protected health information into a plain text box that was being emailed unencrypted to the front desk. The clinic didn't know it was a compliance problem yet, but it was going to be one.",
+      'We rebuilt the intake as a four-step flow. Step one collected name and the basic appointment type they were inquiring about — five buttons, no typing. Step two collected scheduling preference — three time-window buttons. Step three asked for contact details — email and phone. Only after explicit consent on step three did step four open up: a single optional field for "anything else the clinical team should know." That field routed to an encrypted intake channel, never to plain email.',
+      "Completion roughly doubled in the first month, and the intake coordinator rated the inquiries that came through as clearly higher quality. The encrypted-PHI routing was the kind of unsexy compliance fix that would have eventually become an expensive problem if we hadn't caught it.",
       "The bigger lesson is that nobody audits the contact form. It's the most ignored piece of web UX on every clinic, agency, and SaaS site I touch. People obsess over hero copy and pricing pages and ignore the one form that determines whether anyone ever talks to them. If you haven't looked at your contact form's completion rate in the last twelve months, that is the next thing you should look at.",
     ],
     cta: {
@@ -541,8 +551,8 @@ export const NEWS: NewsArticle[] = [
     body: [
       "I started tracking LLM citations in early February. Built a small n8n flow that runs a fixed set of queries against Claude, ChatGPT, and Perplexity every Sunday morning and logs which SkynetLabs pages, if any, end up cited or summarized in the response.",
       "Three months in, I have ninety data points and some honest opinions. The first thing that surprised me: the AEO Guide page, which I'd written specifically to be citation-bait, got fewer citations than I expected — about 30% hit rate. It was getting summarized but not linked. Useful, but not the home run I'd planned.",
-      "The second surprise: the n8n-vs-Zapier comparison page hit roughly 60% of relevant queries with a direct citation. The combination of a clear comparison table, a FAQPage schema, and a numbered-list \"when to use each\" block consistently got pulled into LLM answers verbatim. That page is doing more for our brand presence than any other single asset.",
-      "The third surprise: two pages I almost killed for being \"too thin\" turned into citation magnets. The Person schema page on /author/waseem-nasir gets cited every time someone asks \"who is Waseem Nasir\" or \"who runs SkynetLabs\" — the structured Person schema (nationality, knowsAbout, sameAs, occupation) is doing the heavy lifting. The /pricing page gets cited every time someone asks \"what does SkynetLabs charge\" — the OfferCatalog schema with explicit price points is what makes it pickable.",
+      'The second surprise: the n8n-vs-Zapier comparison page hit roughly 60% of relevant queries with a direct citation. The combination of a clear comparison table, a FAQPage schema, and a numbered-list "when to use each" block consistently got pulled into LLM answers verbatim. That page is doing more for our brand presence than any other single asset.',
+      'The third surprise: two pages I almost killed for being "too thin" turned into citation magnets. The Person schema page on /author/waseem-nasir gets cited every time someone asks "who is Waseem Nasir" or "who runs SkynetLabs" — the structured Person schema (nationality, knowsAbout, sameAs, occupation) is doing the heavy lifting. The /pricing page gets cited every time someone asks "what does SkynetLabs charge" — the OfferCatalog schema with explicit price points is what makes it pickable.',
       "The fourth surprise was a non-event: no traffic. Citations are not clicks. Most LLM answers don't link out, or the user takes the answer and doesn't follow the link. The brand presence is real and the trust signal is real — but if you're measuring AEO success in referral sessions in Google Analytics, you're going to be disappointed for years.",
       "What I've changed because of the data: every flagship page now has a FAQPage schema with 5-7 questions, every page has a single 60-word direct-answer block right under the H1, and every page has Person + Organization + page-type schema layered in. The Person schema in particular is the cheapest, highest-leverage thing most sites are still skipping.",
       "If you're three months into AEO and not seeing citations, audit your schema layer first. Then your llms.txt. Then your robots.txt to make sure the AI crawlers aren't being blocked. Most underperforming AEO is not a content problem — it's a retrieval-plumbing problem.",
@@ -570,7 +580,7 @@ export const NEWS: NewsArticle[] = [
     category: "Stack",
     tags: ["branding", "design", "rescue", "clinical", "story"],
     body: [
-      "The Tuesday afternoon message was short: \"Our partnership announcement is Wednesday at 2pm Eastern. Our brand is broken. Can you help.\" Eighteen hours from message to live announcement. The previous agency had been paid for a brand kit and an intake setup and delivered neither in working condition.",
+      'The Tuesday afternoon message was short: "Our partnership announcement is Wednesday at 2pm Eastern. Our brand is broken. Can you help." Eighteen hours from message to live announcement. The previous agency had been paid for a brand kit and an intake setup and delivered neither in working condition.',
       "When I opened the kit I found the problem in roughly four minutes. The Pantone callouts in the brand-guide PDF didn't match the actual color values used in the website CSS. The wordmark on the site header was a re-rendered approximation, not the founder's original logo asset, which was sitting in a Dropbox folder that nobody had touched in eleven months. The font called for in the guide wasn't licensed for web use, so the site was falling back to Arial.",
       "The order of operations had to be careful. The announcement deck used the founder's real logo asset, so the website had to match the deck — not the other way around. The Dropbox folder had the canonical files. The brand guide had to be rewritten to match what the founder actually owned, not what the previous agency had drifted into.",
       "I spent the first six hours just reconciling. Pulled the canonical logo from Dropbox, regenerated SVG and PNG versions at every size the site and the deck would need. Mapped the actual hex values from the founder's asset back into the website CSS variables. Found a web-licensed alternative to the unlicensed display font that matched the visual weight close enough that nobody outside a typographer would notice.",

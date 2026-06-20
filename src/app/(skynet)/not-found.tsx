@@ -8,7 +8,8 @@ import { SITE } from "@/lib/site";
 import KonamiUnlock from "@/components/easter/KonamiUnlock";
 
 export const metadata = {
-  title: `404 — Page not found · ${SITE.brand}`,
+  // Bare title — the root layout template adds " | SkynetLabs" once.
+  title: "404 — Page not found",
   description: "Page not found. Try the homepage or send Waseem a note.",
   robots: { index: false, follow: false },
 };
@@ -49,7 +50,15 @@ export default function NotFound() {
         color: C.ink,
       }}
     >
-      <div style={{ position: "relative", zIndex: 10, width: "100%", maxWidth: 720, margin: "0 auto" }}>
+      <div
+        style={{
+          position: "relative",
+          zIndex: 10,
+          width: "100%",
+          maxWidth: 720,
+          margin: "0 auto",
+        }}
+      >
         {/* Top status strip */}
         <div
           style={{
@@ -219,7 +228,8 @@ export default function NotFound() {
                     fontFamily: "var(--font-sans)",
                     fontSize: 14,
                     textDecoration: "none",
-                    transform: i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
+                    transform:
+                      i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
                   }}
                 >
                   <span

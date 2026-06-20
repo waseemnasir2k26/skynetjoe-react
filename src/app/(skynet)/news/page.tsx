@@ -7,7 +7,7 @@ import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Latest news & field notes — SkynetLabs",
+  title: "Latest news & field notes",
   description:
     "Honest field notes from one operator shipping AI automation, n8n, AEO, and bespoke websites from Bali. Real client builds, real cost math, real failure modes.",
   alternates: { canonical: `${SITE.url}/news` },
@@ -64,7 +64,7 @@ function formatDate(iso: string) {
 export default function NewsIndex() {
   const posts = [...NEWS].sort(
     (a, b) =>
-      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
   const featured = posts[0];
   const rest = posts.slice(1);
@@ -83,7 +83,13 @@ export default function NewsIndex() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -97,7 +103,9 @@ export default function NewsIndex() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--terracotta)" }}
+            />
             The journal · Volume II
           </div>
           <h1
@@ -113,7 +121,13 @@ export default function NewsIndex() {
             }}
           >
             Field notes from{" "}
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
+              }}
+            >
               one operator,
             </em>{" "}
             shipping.
@@ -127,15 +141,27 @@ export default function NewsIndex() {
               margin: 0,
             }}
           >
-            Real client builds. Real cost math. Real failure modes. Written
-            from cafes in Canggu and rooftops in Pererenan.
+            Real client builds. Real cost math. Real failure modes. Written from
+            cafes in Canggu and rooftops in Pererenan.
           </p>
         </div>
       </section>
 
       {/* FEATURED */}
-      <section style={{ padding: "clamp(40px, 9vw, 56px) 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <section
+        style={{
+          padding: "clamp(40px, 9vw, 56px) 0",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <Link
             href={`/news/${featured.slug}`}
             style={{
@@ -189,11 +215,14 @@ export default function NewsIndex() {
                   fontWeight: 600,
                   padding: "5px 10px",
                   color:
-                    (CATEGORY_COLORS[featured.category] ?? "var(--terracotta)") === "var(--ochre)" ||
-                    (CATEGORY_COLORS[featured.category] ?? "var(--terracotta)") === "var(--sage)"
+                    (CATEGORY_COLORS[featured.category] ??
+                      "var(--terracotta)") === "var(--ochre)" ||
+                    (CATEGORY_COLORS[featured.category] ??
+                      "var(--terracotta)") === "var(--sage)"
                       ? "var(--ink)"
                       : "var(--cream-3)",
-                  background: CATEGORY_COLORS[featured.category] ?? "var(--terracotta)",
+                  background:
+                    CATEGORY_COLORS[featured.category] ?? "var(--terracotta)",
                   borderRadius: 2,
                 }}
               >
@@ -219,7 +248,8 @@ export default function NewsIndex() {
                   marginBottom: 12,
                 }}
               >
-                — {formatDate(featured.publishedAt)} · {featured.readingTime} min
+                — {formatDate(featured.publishedAt)} · {featured.readingTime}{" "}
+                min
               </div>
               <h2
                 style={{
@@ -266,8 +296,20 @@ export default function NewsIndex() {
       </section>
 
       {/* GRID */}
-      <section style={{ padding: "16px 0 clamp(56px, 12vw, 72px)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <section
+        style={{
+          padding: "16px 0 clamp(56px, 12vw, 72px)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               display: "flex",
@@ -370,7 +412,14 @@ export default function NewsIndex() {
                       {n.category}
                     </span>
                   </div>
-                  <div style={{ padding: "20px 22px", display: "flex", flexDirection: "column", flex: 1 }}>
+                  <div
+                    style={{
+                      padding: "20px 22px",
+                      display: "flex",
+                      flexDirection: "column",
+                      flex: 1,
+                    }}
+                  >
                     <div
                       style={{
                         fontFamily: "var(--font-mono)",
@@ -487,7 +536,14 @@ export default function NewsIndex() {
             Eight-hour reply on weekday Bali time. Yes, no, or referral. Either
             way you walk with the findings.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 12,
+            }}
+          >
             <Link
               href="/discovery-call"
               style={{

@@ -44,31 +44,61 @@ const TIMELINE = [
   },
   {
     year: "2026",
-    title: "180+ workflows · 9 countries · Bali base",
+    title: "Dozens of builds · several countries · Bali base",
     note: "Solo operator, AI as second seat. Public pricing. Same builder, different game.",
   },
 ];
 
 const BALI_GRID = [
-  { src: "/bali-trek/mountain-vista.jpg", alt: "Mountain vista from the May 2026 Bali trek" },
-  { src: "/bali-trek/trek-path-palms.jpg", alt: "Trek path through Balinese palms" },
-  { src: "/bali-trek/jungle-stairs.jpg", alt: "Jungle stairs near the waterfall" },
+  {
+    src: "/bali-trek/mountain-vista.jpg",
+    alt: "Mountain vista from the May 2026 Bali trek",
+  },
+  {
+    src: "/bali-trek/trek-path-palms.jpg",
+    alt: "Trek path through Balinese palms",
+  },
+  {
+    src: "/bali-trek/jungle-stairs.jpg",
+    alt: "Jungle stairs near the waterfall",
+  },
   { src: "/bali-trek/river-rocks.jpg", alt: "River rocks rest stop, mid-trek" },
-  { src: "/portraits/waseem-cafe-arch.jpg", alt: "Canggu cafe — first deploy of the day" },
-  { src: "/portraits/waseem-poolside-laptop.jpg", alt: "Poolside push after a green migration" },
-  { src: "/bali-trek/villa-arrival.jpg", alt: "Morning at the Bali villa before the trek" },
-  { src: "/portraits/waseem-rooftop-smile.jpg", alt: "Friday ship, phone on DND" },
+  {
+    src: "/portraits/waseem-cafe-arch.jpg",
+    alt: "Canggu cafe — first deploy of the day",
+  },
+  {
+    src: "/portraits/waseem-poolside-laptop.jpg",
+    alt: "Poolside push after a green migration",
+  },
+  {
+    src: "/bali-trek/villa-arrival.jpg",
+    alt: "Morning at the Bali villa before the trek",
+  },
+  {
+    src: "/portraits/waseem-rooftop-smile.jpg",
+    alt: "Friday ship, phone on DND",
+  },
 ];
 
-const ROT = ["-1.0deg", "0.7deg", "-0.6deg", "1.1deg", "-0.9deg", "0.5deg", "-1.2deg", "0.8deg"];
+const ROT = [
+  "-1.0deg",
+  "0.7deg",
+  "-0.6deg",
+  "1.1deg",
+  "-0.9deg",
+  "0.5deg",
+  "-1.2deg",
+  "0.8deg",
+];
 
 export const metadata: Metadata = {
-  title: "About — From a $10 Fiverr gig (2019) to 180+ workflows (2026)",
+  title: "About — From a $10 Fiverr gig (2019) to dozens of builds (2026)",
   description:
-    "SkynetLabs is run by Waseem Nasir from Bali. Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon — kept building. Today: 180+ automations across 9 countries.",
+    "SkynetLabs is run by Waseem Nasir from Bali. Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon — kept building. Today: dozens of automation builds for clients across several countries.",
   alternates: { canonical: `${SITE.url}/about` },
   openGraph: {
-    title: "About SkynetLabs — From $10 Fiverr gig to 180+ workflows",
+    title: "About SkynetLabs — From $10 Fiverr gig to dozens of builds",
     description:
       "Solo founder. Bali base. 7 years of failing in public and building in public. Public pricing, AI as second seat.",
     url: `${SITE.url}/about`,
@@ -86,7 +116,7 @@ const schema = {
       url: `${SITE.url}/about`,
       name: `About ${SITE.brand}`,
       description:
-        "SkynetLabs is run solo by Waseem Nasir from Bali. Founded 2019 in Lahore as a $10 Fiverr gig, scaled to 180+ workflows across 9 countries by 2026.",
+        "SkynetLabs is run solo by Waseem Nasir from Bali. Founded 2019 in Lahore as a $10 Fiverr gig, scaled to dozens of automation builds for clients across several countries by 2026.",
       inLanguage: "en",
       isPartOf: { "@id": `${SITE.url}/#website` },
       mainEntity: { "@id": `${SITE.url}/#organization` },
@@ -165,7 +195,13 @@ export default function AboutPage() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                }}
+              />
               About · since 2019
             </div>
             <h1
@@ -180,10 +216,16 @@ export default function AboutPage() {
               }}
             >
               From a{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--terracotta)",
+                  fontWeight: 500,
+                }}
+              >
                 $10 Fiverr gig
               </em>{" "}
-              to 180+ workflows.
+              to dozens of builds.
             </h1>
             <p
               style={{
@@ -210,9 +252,13 @@ export default function AboutPage() {
               }}
             >
               <span style={{ color: "var(--ink)" }}>7 years</span> shipping
-              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>·</span>
+              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>
+                ·
+              </span>
               Lahore → <span style={{ color: "var(--ink)" }}>Bali</span>
-              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>·</span>
+              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>
+                ·
+              </span>
               <span style={{ color: "var(--ink)" }}>9</span> countries served
             </div>
           </div>
@@ -279,7 +325,13 @@ export default function AboutPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 800,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -293,7 +345,9 @@ export default function AboutPage() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--terracotta)" }}
+            />
             The arc
           </div>
           <h2
@@ -312,7 +366,15 @@ export default function AboutPage() {
               failing in public.
             </em>
           </h2>
-          <p style={{ fontSize: 16, color: "var(--ink-2)", maxWidth: "56ch", marginBottom: 36, lineHeight: 1.6 }}>
+          <p
+            style={{
+              fontSize: 16,
+              color: "var(--ink-2)",
+              maxWidth: "56ch",
+              marginBottom: 36,
+              lineHeight: 1.6,
+            }}
+          >
             Every pivot below was a real bet. Most of them lost. The wins taught
             me what to stop doing.
           </p>
@@ -440,9 +502,9 @@ export default function AboutPage() {
               margin: 0,
             }}
           >
-            &ldquo;If I could go back to 2019, I&apos;d say: 2026 Waseem is proud
-            of you. Just don&apos;t quit. You did it — with the blessing of
-            God.&rdquo;
+            &ldquo;If I could go back to 2019, I&apos;d say: 2026 Waseem is
+            proud of you. Just don&apos;t quit. You did it — with the blessing
+            of God.&rdquo;
           </blockquote>
           <footer
             style={{
@@ -469,7 +531,13 @@ export default function AboutPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div style={{ maxWidth: 720, marginBottom: 40 }}>
             <div
               style={{
@@ -484,7 +552,13 @@ export default function AboutPage() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                }}
+              />
               The builder life
             </div>
             <h2
@@ -503,7 +577,14 @@ export default function AboutPage() {
                 Deploys.
               </em>
             </h2>
-            <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
+            <p
+              style={{
+                fontSize: 16,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "60ch",
+              }}
+            >
               Same Waseem you&apos;d hire — actually here, actually shipping.
               Latest batch: a 24-May 2026 jungle trek with the Bali builder
               crew. No stock photos. No agency Zoom mask.
@@ -579,7 +660,13 @@ export default function AboutPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               display: "grid",
@@ -589,9 +676,9 @@ export default function AboutPage() {
           >
             {[
               { num: "7", label: "Years shipping" },
-              { num: "180+", label: "Workflows" },
-              { num: "40+", label: "Websites" },
-              { num: "9", label: "Countries" },
+              { num: "Dozens", label: "Workflows" },
+              { num: "Dozens", label: "Websites" },
+              { num: "Several", label: "Countries" },
             ].map((s, i) => (
               <div
                 key={s.label}
@@ -647,7 +734,14 @@ export default function AboutPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
+        <div
+          style={{
+            maxWidth: 720,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+            textAlign: "center",
+          }}
+        >
           <h2
             style={{
               fontFamily: "var(--font-display)",
@@ -676,7 +770,14 @@ export default function AboutPage() {
             Send a 3-sentence brief. Scope + price back in 8 hours. Same
             builder, same hands.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 12,
+            }}
+          >
             <Link
               href="/discovery-call"
               style={{

@@ -38,7 +38,7 @@ const GithubIcon = ({ className }: { className?: string }) => (
 );
 
 export const metadata: Metadata = {
-  title: "Contact — 8-hour reply guarantee from Bali | SkynetLabs",
+  title: "Contact — 8-hour reply guarantee from Bali",
   description:
     "Skip the discovery-call dance. Send a brief, get a fixed-price scope back in 48 hours. Email, LinkedIn, live chat, or formal application — pick your channel. Reply within 8h on weekdays.",
   alternates: { canonical: `${SITE.url}/contact` },
@@ -138,7 +138,7 @@ const guarantees = [
   },
   {
     icon: Globe,
-    title: "9 countries served",
+    title: "Several countries served",
     body: "Bali, Pakistan, US, UK, France, Australia, UAE, Singapore, Italy.",
   },
 ];
@@ -166,7 +166,7 @@ const expect = [
   },
 ];
 
-const eyebrow = (text: string, color = "var(--terracotta)") => (
+const eyebrow = (text: string, color = "var(--terracotta-text)") => (
   <div
     style={{
       fontFamily: "var(--font-mono)",
@@ -253,15 +253,17 @@ export default function ContactPage() {
               The fastest way to work with me: skip the discovery dance. Email a
               one-pager, ping me on LinkedIn, or open live chat bottom-right —
               I&apos;ll send a fixed-price scope back within{" "}
-              <strong style={{ color: "var(--terracotta)" }}>48 hours</strong>.
-              If I&apos;m not the right fit, I&apos;ll tell you who is.
+              <strong style={{ color: "var(--terracotta-text)" }}>
+                48 hours
+              </strong>
+              . If I&apos;m not the right fit, I&apos;ll tell you who is.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
               <Link
                 href="/discovery-call"
                 style={{
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
+                  background: "var(--terracotta-2)",
+                  color: "#FFFFFF",
                   padding: "14px 24px",
                   fontFamily: "var(--font-sans)",
                   fontWeight: 600,
@@ -279,8 +281,8 @@ export default function ContactPage() {
               <a
                 href="mailto:info@skynetjoe.com"
                 style={{
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
+                  background: "var(--terracotta-2)",
+                  color: "#FFFFFF",
                   padding: "14px 24px",
                   fontFamily: "var(--font-sans)",
                   fontWeight: 600,
@@ -475,7 +477,7 @@ export default function ContactPage() {
                         letterSpacing: "0.16em",
                         padding: "3px 7px",
                         background: "var(--cream-3)",
-                        color: "var(--terracotta)",
+                        color: "var(--terracotta-text)",
                         border: "1px solid rgba(198,107,63,0.30)",
                         fontWeight: 600,
                       }}
@@ -499,7 +501,7 @@ export default function ContactPage() {
                       fontSize: 11,
                       textTransform: "uppercase",
                       letterSpacing: "0.12em",
-                      color: "var(--terracotta)",
+                      color: "var(--terracotta-text)",
                       fontWeight: 600,
                       display: "inline-flex",
                       alignItems: "center",
@@ -679,11 +681,13 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* CLOSER */}
+      {/* CLOSER — darkened terracotta ground (#A8481F, the --terracotta-text
+          value) so pure-white heading/body/icon + outline-button labels all
+          clear 4.5:1. Was --terracotta #C66B3F (~3.3:1, axe-failing). */}
       <section
         style={{
           padding: "88px 0",
-          background: "var(--terracotta)",
+          background: "var(--terracotta-text)",
           position: "relative",
           zIndex: 2,
         }}
@@ -733,7 +737,7 @@ export default function ContactPage() {
           <p
             style={{
               fontSize: 16,
-              color: "rgba(250, 247, 240, 0.92)",
+              color: "#FFFFFF",
               maxWidth: "50ch",
               margin: "0 auto 28px",
               lineHeight: 1.6,
@@ -754,7 +758,7 @@ export default function ContactPage() {
               href="/discovery-call"
               style={{
                 background: "var(--cream-3)",
-                color: "var(--terracotta)",
+                color: "var(--terracotta-text)",
                 padding: "14px 24px",
                 fontFamily: "var(--font-sans)",
                 fontWeight: 700,
@@ -773,12 +777,12 @@ export default function ContactPage() {
               href="/pricing"
               style={{
                 background: "transparent",
-                color: "var(--cream-3)",
+                color: "#FFFFFF",
                 padding: "13px 22px",
                 fontFamily: "var(--font-sans)",
                 fontWeight: 600,
                 fontSize: 14,
-                border: "1px solid var(--cream-3)",
+                border: "1px solid #FFFFFF",
                 borderRadius: 2,
                 display: "inline-flex",
                 alignItems: "center",
@@ -794,12 +798,12 @@ export default function ContactPage() {
               rel="noopener noreferrer"
               style={{
                 background: "transparent",
-                color: "var(--cream-3)",
+                color: "#FFFFFF",
                 padding: "13px 22px",
                 fontFamily: "var(--font-sans)",
                 fontWeight: 600,
                 fontSize: 14,
-                border: "1px solid var(--cream-3)",
+                border: "1px solid #FFFFFF",
                 borderRadius: 2,
                 display: "inline-flex",
                 alignItems: "center",

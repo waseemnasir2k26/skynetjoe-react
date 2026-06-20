@@ -155,7 +155,7 @@ export default function N8nAutomationLP() {
               }}
             >
               Self-hosted n8n on a $7/mo VPS. Same flows you pay $400/mo for,
-              git-versioned, retry-safe. 180+ shipped from a Canggu cafe since
+              git-versioned, retry-safe. Dozens shipped from a Canggu cafe since
               2022.
             </p>
             <Link
@@ -395,7 +395,7 @@ export default function N8nAutomationLP() {
               marginBottom: 18,
             }}
           >
-            180+
+            Dozens
           </div>
           <p
             style={{
@@ -408,8 +408,8 @@ export default function N8nAutomationLP() {
               margin: "0 auto",
             }}
           >
-            workflows shipped from a Canggu cafe since 2022. 9 countries. Zero
-            retainers.
+            of workflows shipped from a Canggu cafe since 2022. Several
+            countries. Zero retainers.
           </p>
         </div>
       </section>

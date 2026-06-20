@@ -81,20 +81,21 @@ export type GhlQualification = {
 
 export type GhlLeadScore = "HOT" | "WARM" | "COLD";
 
-type DevSkipResult = { contactId: "dev-skip"; isNew: false };
+type DevSkipResult = { contactId: "dev-skip"; isNew: false; skipped: true };
 
 function getEnv() {
   const token = process.env.GHL_API_TOKEN || "";
-  const locationId =
-    process.env.GHL_LOCATION_ID || GHL_LOCATION_ID_DEFAULT;
-  const pipelineId =
-    process.env.GHL_PIPELINE_ID || GHL_PIPELINE_ID_DEFAULT;
+  const locationId = process.env.GHL_LOCATION_ID || GHL_LOCATION_ID_DEFAULT;
+  const pipelineId = process.env.GHL_PIPELINE_ID || GHL_PIPELINE_ID_DEFAULT;
   return { token, locationId, pipelineId };
 }
 
 function devSkip(reason: string): DevSkipResult {
   console.warn(`[ghl] dev-skip — ${reason}`);
-  return { contactId: "dev-skip", isNew: false };
+  // `skipped: true` is a durable sentinel so route handlers can DISTINGUISH a
+  // no-op (token unset / API failure) from a real contact write and trigger
+  // their own durable fallback instead of falsely reporting success.
+  return { contactId: "dev-skip", isNew: false, skipped: true };
 }
 
 /**
@@ -170,9 +171,17 @@ export function mapRevenueToGhlOption(str: string | undefined): string {
     return "Less than $50k";
   if (s.includes("10-30k") || s.includes("10k-30k")) return "Less than $50k";
   if (s.includes("30-50k") || s.includes("30k-50k")) return "Less than $50k";
-  if (s.includes("50-100k") || s.includes("50k-100k") || s.includes("$50k-$100k"))
+  if (
+    s.includes("50-100k") ||
+    s.includes("50k-100k") ||
+    s.includes("$50k-$100k")
+  )
     return "$50k - $100k";
-  if (s.includes("100-250k") || s.includes("100k-250k") || s.includes("$100k-$250k"))
+  if (
+    s.includes("100-250k") ||
+    s.includes("100k-250k") ||
+    s.includes("$100k-$250k")
+  )
     return "$100k - $250k";
   if (s.includes("100k-500k")) return "$100k - $250k";
   if (s.includes("250k-1m") || s.includes("250-1m") || s.includes("$250k-$1m"))
@@ -246,7 +255,7 @@ export async function upsertGhlContact(
   input: GhlQualification,
   scoreTag: GhlLeadScore | null,
   extraTags: string[] = [],
-): Promise<{ contactId: string; isNew: boolean }> {
+): Promise<{ contactId: string; isNew: boolean; skipped?: boolean }> {
   const { token, locationId } = getEnv();
   if (!token) return devSkip("GHL_API_TOKEN unset");
   if (!input.email) return devSkip("upsert requires email");
@@ -384,10 +393,10 @@ export async function createOrUpdateGhlOpportunity(input: {
     if (existing.status && existing.status !== "won") {
       updateBody.status = "open";
     }
-    const resp = await ghlFetch<UpdateResp>(
-      `/opportunities/${existing.id}`,
-      { method: "PUT", body: updateBody },
-    );
+    const resp = await ghlFetch<UpdateResp>(`/opportunities/${existing.id}`, {
+      method: "PUT",
+      body: updateBody,
+    });
     return { opportunityId: resp?.opportunity?.id || existing.id };
   }
 
@@ -451,15 +460,13 @@ export async function handleGhlLead(input: {
   }
 
   // Build opportunity name from the strongest signal available.
-  const nameParts = [
-    qualification.firstName,
-    qualification.lastName,
-  ].filter(Boolean);
+  const nameParts = [qualification.firstName, qualification.lastName].filter(
+    Boolean,
+  );
   const personName = nameParts.join(" ").trim() || qualification.email;
-  const oppName =
-    qualification.businessName
-      ? `${personName} — ${qualification.businessName}`
-      : `${personName} — ${input.source}`;
+  const oppName = qualification.businessName
+    ? `${personName} — ${qualification.businessName}`
+    : `${personName} — ${input.source}`;
 
   const { opportunityId } = await createOrUpdateGhlOpportunity({
     contactId,
@@ -516,10 +523,6 @@ export async function getOrCreateContactByEmail(
   extra?: Partial<GhlQualification>,
 ): Promise<string | null> {
   if (!email) return null;
-  const { contactId } = await upsertGhlContact(
-    { email, ...extra },
-    null,
-    [],
-  );
+  const { contactId } = await upsertGhlContact({ email, ...extra }, null, []);
   return contactId === "dev-skip" ? null : contactId;
 }

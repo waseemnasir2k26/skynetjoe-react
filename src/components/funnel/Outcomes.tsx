@@ -6,19 +6,20 @@ const OUTCOMES = [
     title: "60-second follow-up, every lead, 24/7",
     promise:
       "Auto-DM + WhatsApp + email triggers fire the moment a lead lands. No app to open. No reminder to set.",
-    proof: "Show-rate jumped 23% → 71% — Grand Mercer Dental, NY",
+    proof:
+      "Built the n8n + GoHighLevel no-show flow a dental clinic runs daily (name withheld)",
   },
   {
     title: "One dashboard. Every deal. Zero screenshots.",
     promise:
       "GoHighLevel CRM wired into your stack. Every quote, call, and reply in one pipeline you can actually see.",
-    proof: "200+ debtor calls/week handled in French — KODIASIMMO",
+    proof: "French debtor calls handled by an AI voice agent — KODIASIMMO",
   },
   {
     title: "Content that ships itself, in your voice",
     promise:
       "AI content engine generates 30 voice-locked posts/month across LinkedIn, IG, FB. You approve, it posts.",
-    proof: "3 hr/day → 20 min email triage — Takycorp",
+    proof: "Shared-inbox email triage cut to one-click approvals — Takycorp",
   },
 ];
 
@@ -91,7 +92,8 @@ export default function Outcomes() {
               style={{
                 background: "var(--cream-2)",
                 border: "1px solid rgba(26,26,26,0.12)",
-                padding: "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4vw, 24px)",
+                padding:
+                  "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4vw, 24px)",
                 transform: i === 1 ? "rotate(0.3deg)" : "rotate(-0.3deg)",
                 display: "flex",
                 flexDirection: "column",
@@ -147,7 +149,9 @@ export default function Outcomes() {
                   gap: 6,
                 }}
               >
-                <Check style={{ width: 13, height: 13, marginTop: 2, flexShrink: 0 }} />
+                <Check
+                  style={{ width: 13, height: 13, marginTop: 2, flexShrink: 0 }}
+                />
                 <span>{o.proof}</span>
               </div>
             </div>

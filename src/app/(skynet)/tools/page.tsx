@@ -2,10 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import { Calculator, Activity, Compass, ArrowLeftRight, Mic, FileText, CalendarDays, Target, Library, Film, ArrowRight } from "lucide-react";
+import {
+  Calculator,
+  Activity,
+  Compass,
+  ArrowLeftRight,
+  Mic,
+  FileText,
+  CalendarDays,
+  Target,
+  Library,
+  Film,
+  ArrowRight,
+} from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Free Tools — Revenue Calculator + Agency Stress Quiz | SkynetLabs",
+  title: "Free Tools — Revenue Calculator + Agency Stress Quiz",
   description:
     "Two free utilities from SkynetLabs: a revenue-recovery calculator that shows what your missed leads are costing, and a 60-second agency stress quiz that diagnoses your operational chaos.",
   alternates: { canonical: `${SITE.url}/tools` },
@@ -124,7 +136,10 @@ export default function ToolsIndexPage() {
       >
         <section
           className="container-x px-6 pt-32 pb-16 md:pt-40"
-          style={{ background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+          style={{
+            background: "var(--cream-3)",
+            borderBottom: "1px solid var(--border)",
+          }}
         >
           <div className="max-w-3xl">
             <div
@@ -141,7 +156,13 @@ export default function ToolsIndexPage() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                }}
+              />
               Free · no email gate
             </div>
             <h1
@@ -160,7 +181,14 @@ export default function ToolsIndexPage() {
                 leaking.
               </em>
             </h1>
-            <p style={{ fontSize: 18, color: "var(--ink-2)", maxWidth: "52ch", lineHeight: 1.6 }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                maxWidth: "52ch",
+                lineHeight: 1.6,
+              }}
+            >
               Two utilities I built for myself before I built them for clients.
               No signup, no funnel, no follow-up email sequence. Just numbers.
             </p>
@@ -195,7 +223,10 @@ export default function ToolsIndexPage() {
                       justifyContent: "center",
                     }}
                   >
-                    <Icon className="w-6 h-6" style={{ color: "var(--terracotta)" }} />
+                    <Icon
+                      className="w-6 h-6"
+                      style={{ color: "var(--terracotta)" }}
+                    />
                   </div>
                   <ArrowRight
                     className="w-5 h-5 group-hover:translate-x-1 transition-all"
@@ -214,7 +245,15 @@ export default function ToolsIndexPage() {
                 >
                   {name}
                 </h2>
-                <p style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6 }}>{blurb}</p>
+                <p
+                  style={{
+                    fontSize: 14,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {blurb}
+                </p>
               </Link>
             ))}
           </div>

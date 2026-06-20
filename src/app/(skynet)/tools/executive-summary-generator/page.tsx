@@ -5,17 +5,17 @@ import Generator from "./Generator";
 import { Sparkles, Timer, ShieldCheck, Wand2 } from "lucide-react";
 
 const PATH = "/tools/executive-summary-generator";
-const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=exec-summary-generator";
+const CAL_URL =
+  "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=exec-summary-generator";
 
 export const metadata: Metadata = {
   title:
-    "Executive Summary Generator — paste raw notes, get 5 ready-to-send formats · SkynetLabs",
+    "Executive Summary Generator — paste raw notes, get 5 ready-to-send formats",
   description:
     "Free tool. Paste meeting notes, project docs or call transcripts. Out comes a TL;DR, email, Slack post, deck slide and investor 1-pager. No API key, no email gate.",
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
-    title:
-      "Executive Summary Generator · 5 formats from one block of notes",
+    title: "Executive Summary Generator · 5 formats from one block of notes",
     description:
       "TL;DR, email, Slack, deck and investor 1-pager from any raw text. Free, local-only, no email gate.",
     url: `${SITE.url}${PATH}`,
@@ -99,7 +99,12 @@ export default function ExecutiveSummaryGeneratorPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -117,7 +122,17 @@ export default function ExecutiveSummaryGeneratorPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               One paste,{" "}
               <span
                 style={{
@@ -133,13 +148,28 @@ export default function ExecutiveSummaryGeneratorPage() {
               </span>
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
               Drop in meeting notes, call transcripts or a half-written brief.
               Out comes a TL;DR, a polished email, a Slack-ready post, a deck
               slide and an investor 1-pager — using your own words, not
               AI&apos;s.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
               Local-only. Nothing sent to a server. Free and instant.
             </p>
 

@@ -18,9 +18,9 @@ import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Journal — Long-form on AI Automation, AEO & Shipping | SkynetLabs",
+  title: "Journal — Long-form on AI Automation, AEO & Shipping",
   description:
-    "Honest writing on n8n, GoHighLevel, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying.",
+    "Honest writing on n8n, GoHighLevel, answer-engine optimization, and shipping software for service businesses across several countries. New posts when there's something worth saying.",
   alternates: { canonical: `${SITE.url}/blog` },
   openGraph: {
     title: "SkynetLabs Journal",

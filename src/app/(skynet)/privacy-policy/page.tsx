@@ -6,11 +6,11 @@ import JsonLd from "@/components/JsonLd";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "privacy-policy.html"),
-  "utf8"
+  "utf8",
 );
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — SkynetLabs",
+  title: "Privacy Policy",
   description:
     "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement. Last updated 2026-05-20.",
   alternates: { canonical: `${SITE.url}/privacy-policy` },
@@ -38,7 +38,10 @@ const schema = {
     "@type": "Organization",
     name: SITE.brand,
     url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/waseem-portrait.jpg` },
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE.assetsUrl}/waseem-portrait.jpg`,
+    },
   },
   mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/privacy-policy` },
 };

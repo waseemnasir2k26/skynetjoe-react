@@ -42,7 +42,7 @@ export async function generateMetadata({
   const a = getArticle(slug);
   if (!a) return { title: "Article not found" };
   return {
-    title: `${a.title} — SkynetLabs`,
+    title: a.title,
     description: a.description,
     alternates: { canonical: `${SITE.url}/news/${a.slug}` },
     openGraph: {
@@ -145,7 +145,13 @@ export default async function NewsArticlePage({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 820, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 820,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <nav
             aria-label="Breadcrumb"
             style={{
@@ -161,11 +167,29 @@ export default async function NewsArticlePage({
               alignItems: "center",
             }}
           >
-            <Link href="/" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>Home</Link>
+            <Link
+              href="/"
+              style={{ color: "var(--ink-faint)", textDecoration: "none" }}
+            >
+              Home
+            </Link>
             <span aria-hidden>/</span>
-            <Link href="/news" style={{ color: "var(--ink-faint)", textDecoration: "none" }}>News</Link>
+            <Link
+              href="/news"
+              style={{ color: "var(--ink-faint)", textDecoration: "none" }}
+            >
+              News
+            </Link>
             <span aria-hidden>/</span>
-            <span style={{ color: "var(--ink)", maxWidth: "40ch", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            <span
+              style={{
+                color: "var(--ink)",
+                maxWidth: "40ch",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
               {a.title}
             </span>
           </nav>
@@ -253,8 +277,20 @@ export default async function NewsArticlePage({
       </section>
 
       {/* HERO IMAGE — polaroid */}
-      <section style={{ padding: "clamp(20px, 5vw, 32px) 0 16px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <section
+        style={{
+          padding: "clamp(20px, 5vw, 32px) 0 16px",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 900,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <figure
             className="news-hero-polaroid"
             style={{
@@ -310,8 +346,20 @@ export default async function NewsArticlePage({
       </section>
 
       {/* BODY */}
-      <article style={{ padding: "clamp(32px, 8vw, 48px) 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <article
+        style={{
+          padding: "clamp(32px, 8vw, 48px) 0",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 720,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               color: "var(--ink-2)",
@@ -320,7 +368,9 @@ export default async function NewsArticlePage({
             }}
           >
             {a.body!.map((p, i) => (
-              <p key={i} style={{ marginBottom: 18 }}>{p}</p>
+              <p key={i} style={{ marginBottom: 18 }}>
+                {p}
+              </p>
             ))}
           </div>
 
@@ -367,8 +417,20 @@ export default async function NewsArticlePage({
       </article>
 
       {/* INLINE CTA */}
-      <section style={{ padding: "16px 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <section
+        style={{
+          padding: "16px 0 clamp(40px, 10vw, 56px)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               background: "var(--cream-2)",
@@ -459,7 +521,11 @@ export default async function NewsArticlePage({
                   }}
                 >
                   Want this kind of build for{" "}
-                  <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>your business?</em>
+                  <em
+                    style={{ fontStyle: "italic", color: "var(--terracotta)" }}
+                  >
+                    your business?
+                  </em>
                 </h2>
                 <p
                   style={{
@@ -508,7 +574,13 @@ export default async function NewsArticlePage({
             zIndex: 2,
           }}
         >
-          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+          <div
+            style={{
+              maxWidth: 1100,
+              margin: "0 auto",
+              padding: "0 clamp(16px, 5vw, 24px)",
+            }}
+          >
             <div
               style={{
                 fontFamily: "var(--font-mono)",
@@ -532,7 +604,9 @@ export default async function NewsArticlePage({
               }}
             >
               Keep{" "}
-              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>reading.</em>
+              <em style={{ fontStyle: "italic", color: "var(--terracotta)" }}>
+                reading.
+              </em>
             </h2>
             <div
               style={{

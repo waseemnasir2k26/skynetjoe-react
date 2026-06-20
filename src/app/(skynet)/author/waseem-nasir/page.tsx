@@ -7,18 +7,18 @@ import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "author-waseem-nasir.html"),
-  "utf8"
+  "utf8",
 );
 
 export const metadata: Metadata = {
-  title: "Waseem Nasir â€” Founder, SkynetLabs",
+  title: { absolute: "Waseem Nasir — Founder, SkynetLabs" },
   description:
-    "I build automation that doesn't need me to babysit it. Lahore â†’ Singapore â†’ Bangkok â†’ KL â†’ Bali. 180+ workflows, 40+ websites, 9 countries served.",
+    "I build automation that doesn't need me to babysit it. Lahore → Singapore → Bangkok → KL → Bali. Dozens of automation builds, dozens of sites, clients across several countries.",
   alternates: { canonical: `${SITE.url}/author/waseem-nasir` },
   openGraph: {
-    title: "Waseem Nasir â€” Founder, SkynetLabs",
+    title: "Waseem Nasir — Founder, SkynetLabs",
     description:
-      "Founder of SkynetLabs. n8n automation, AI chatbots and conversion-tuned websites â€” built from Bali.",
+      "Founder of SkynetLabs. n8n automation, AI chatbots and conversion-tuned websites — built from Bali.",
     url: `${SITE.url}/author/waseem-nasir`,
     type: "profile",
     images: [
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Waseem Nasir â€” Founder, SkynetLabs",
+    title: "Waseem Nasir — Founder, SkynetLabs",
     description:
-      "I build automation that doesn't need me to babysit it. 180+ workflows, 40+ websites, 9 countries.",
+      "I build automation that doesn't need me to babysit it. Dozens of automation builds, dozens of sites, clients across several countries.",
     creator: "@skynetlabs",
     images: ["/waseem-portrait.jpg"],
   },
@@ -47,7 +47,7 @@ const schema = {
       "@type": "ProfilePage",
       "@id": `${SITE.url}/author/waseem-nasir#profilepage`,
       url: `${SITE.url}/author/waseem-nasir`,
-      name: `${SITE.founder} â€” Founder, ${SITE.brand}`,
+      name: `${SITE.founder} — Founder, ${SITE.brand}`,
       mainEntity: { "@id": `${SITE.url}/#person` },
       inLanguage: "en",
     },
@@ -65,7 +65,7 @@ const schema = {
       birthPlace: { "@type": "Place", name: "Lahore, Pakistan" },
       homeLocation: { "@type": "Place", name: "Bali, Indonesia" },
       description:
-        "Founder of SkynetLabs. Builds n8n automation, AI chatbots and conversion-tuned websites for service businesses across 9 countries.",
+        "Founder of SkynetLabs. Builds n8n automation, AI chatbots and conversion-tuned websites for service businesses across several countries.",
       knowsAbout: [
         "n8n workflow automation",
         "Zapier and Make integrations",
@@ -94,11 +94,11 @@ const schema = {
       },
       alumniOf: {
         "@type": "EducationalOrganization",
-        name: "Self-taught â€” 180+ shipped automation workflows and 40+ websites since 2022",
+        name: "Self-taught — dozens of shipped automation builds and dozens of websites since 2022",
       },
       award: [
-        "180+ n8n workflows shipped (2022â€“2026)",
-        "40+ websites delivered across 9 countries",
+        "Dozens of n8n workflows shipped (2022–2026)",
+        "Dozens of websites delivered across several countries",
         "Top Rated Plus on Upwork",
         "Top Rated on Fiverr",
       ],

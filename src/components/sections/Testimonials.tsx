@@ -3,24 +3,24 @@ import { ClaudeCodeAvatar } from "@/components/icons/ClaudeCodeIcon";
 
 const QUOTES = [
   {
-    text: "Waseem rebuilt our entire patient-intake flow in 11 days. We went from 23% show-rate to 71% in 6 weeks. No-show revenue alone paid for the engagement 4x over.",
-    name: "Dr Elena Marchetti",
-    role: "Founder, Grand Mercer Dental (SoHo NY)",
+    text: "Waseem rebuilt our patient-intake as a multi-step HIPAA-aware form and wired the no-show follow-up into n8n + GoHighLevel. It runs itself now instead of waiting on a busy front desk.",
+    name: "Founding clinician",
+    role: "Dental clinic (name withheld by contract)",
   },
   {
-    text: "The ElevenLabs + n8n recouvrement agent he built for us handles 200+ debtor calls/week in French. Our collection ops team can finally focus on the complex cases.",
-    name: "mabangu",
-    role: "CEO, KODIASIMMO (France)",
+    text: "The ElevenLabs + n8n recouvrement agent he built handles our French debtor calls so the collections team can focus on the complex cases instead of the routine ones.",
+    name: "Operations lead",
+    role: "KODIASIMMO (France)",
   },
   {
-    text: "Hired Skynetjoe for one Fiverr gig. Five months later he runs three of our automation stacks. The man delivers.",
-    name: "Christelle",
-    role: "Owner, Christelle Wellness",
+    text: "Hired SkynetLabs for one Fiverr gig. Months later he runs several of our automation stacks. The man delivers.",
+    name: "Owner",
+    role: "Christelle Wellness",
   },
   {
-    text: "Stéphanie's email triage workflow used to eat 3 hours/day. Waseem's GPT-4o + Gmail draft agent dropped it to 20 minutes. She actually went home at 6pm last week.",
-    name: "Esther",
-    role: "PM, Takycorp Mining & Logistics",
+    text: "Our shared-inbox email triage used to eat hours a day. Waseem's GPT-4o + Gmail draft agent turned most of it into one-click approvals. The team actually leaves on time now.",
+    name: "Operations",
+    role: "Takycorp Mining & Logistics",
   },
 ];
 
@@ -104,7 +104,8 @@ export default function Testimonials() {
                 key={i}
                 style={{
                   position: "relative",
-                  padding: "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4.5vw, 26px)",
+                  padding:
+                    "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4.5vw, 26px)",
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
                   transform: `rotate(${a.rotate})`,
@@ -179,7 +180,8 @@ export default function Testimonials() {
             className="md:col-span-2"
             style={{
               position: "relative",
-              padding: "clamp(22px, 5vw, 32px) clamp(22px, 5vw, 32px) clamp(20px, 4.5vw, 30px)",
+              padding:
+                "clamp(22px, 5vw, 32px) clamp(22px, 5vw, 32px) clamp(20px, 4.5vw, 30px)",
               background: "var(--cream-3)",
               border: "1px solid rgba(26,26,26,0.18)",
               transform: "rotate(0.2deg)",

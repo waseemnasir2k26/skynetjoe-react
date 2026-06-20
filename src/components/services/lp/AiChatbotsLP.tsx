@@ -455,7 +455,7 @@ export default function AiChatbotsLP() {
             >
               <Image
                 src="/case-studies/manhattan-dental-atelier-flagship.jpg"
-                alt="Karachi dental flagship — WhatsApp + Signal recovery flow"
+                alt="Dental clinic — WhatsApp + Signal no-show recovery flow"
                 fill
                 sizes="(min-width: 900px) 380px, 90vw"
                 style={{
@@ -475,7 +475,7 @@ export default function AiChatbotsLP() {
                 paddingTop: 10,
               }}
             >
-              Karachi dental · WhatsApp recovery flow
+              Dental clinic · WhatsApp recovery flow
             </figcaption>
           </figure>
           <div>
@@ -489,9 +489,9 @@ export default function AiChatbotsLP() {
                 margin: "0 0 20px",
               }}
             >
-              &ldquo;The bot reads exactly like our front-desk girl. Patients
+              &ldquo;The bot reads exactly like our front desk. Patients
               don&apos;t even ping the human until they&apos;ve got a date and
-              time confirmed. No-shows dropped 70% inside two weeks.&rdquo;
+              time confirmed. No-shows dropped sharply within weeks.&rdquo;
             </p>
             <div
               style={{
@@ -502,7 +502,7 @@ export default function AiChatbotsLP() {
                 color: "var(--ink-faint)",
               }}
             >
-              — Karachi dental flagship · WhatsApp + GHL · 11-day ship
+              — Dental clinic (name withheld) · WhatsApp + GHL · 11-day ship
             </div>
           </div>
         </div>

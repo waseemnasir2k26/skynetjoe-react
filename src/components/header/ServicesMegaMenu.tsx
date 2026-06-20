@@ -49,8 +49,11 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
  * Was cyan/violet/teal/amber; now terracotta/ochre/sage/oxblood.
  */
 type Accent = {
-  /** primary accent color (used for border-left, icon tint, link text) */
+  /** primary accent color — DECORATIVE only (border-left, icon tint, dots, fills) */
   color: string;
+  /** AA-accessible variant for any ACCENT TEXT/link (sage+ochre are not legible
+   *  as text on cream; terracotta needs the darker text token too) */
+  textColor: string;
   /** very soft fill for icon container */
   fill: string;
 };
@@ -63,25 +66,43 @@ const CATEGORY_META: Record<
     pain: "Leads ghost. Tools don't talk.",
     pitch: "n8n + GHL + AI chatbots — replace the copy-paste workflow.",
     icon: "Bot",
-    accent: { color: "var(--terracotta)", fill: "rgba(198,107,63,0.08)" },
+    accent: {
+      color: "var(--terracotta)",
+      textColor: "var(--terracotta-text)",
+      fill: "rgba(198,107,63,0.08)",
+    },
   },
   "AI Content": {
     pain: "Content engine = you, exhausted.",
-    pitch: "Daily voice-locked posts + reels across 5 channels, AI-tell linted.",
+    pitch:
+      "Daily voice-locked posts + reels across 5 channels, AI-tell linted.",
     icon: "Clapperboard",
-    accent: { color: "var(--ochre)", fill: "rgba(201,169,110,0.10)" },
+    accent: {
+      color: "var(--ochre)",
+      textColor: "var(--ochre-text)",
+      fill: "rgba(201,169,110,0.10)",
+    },
   },
   Development: {
     pain: "Website looks like 2019.",
-    pitch: "Bespoke Next.js + SEO/AEO base — flagship in 14 days, not 14 weeks.",
+    pitch:
+      "Bespoke Next.js + SEO/AEO base — flagship in 14 days, not 14 weeks.",
     icon: "Globe",
-    accent: { color: "var(--sage)", fill: "rgba(138,154,123,0.10)" },
+    accent: {
+      color: "var(--sage)",
+      textColor: "var(--sage-text)",
+      fill: "rgba(138,154,123,0.10)",
+    },
   },
   Consulting: {
     pain: "Team doesn't know how to use AI.",
     pitch: "Playbooks, fractional AI lead, ops blueprint — adoption to 92%.",
     icon: "Building2",
-    accent: { color: "var(--oxblood)", fill: "rgba(107,44,44,0.08)" },
+    accent: {
+      color: "var(--oxblood)",
+      textColor: "var(--oxblood)",
+      fill: "rgba(107,44,44,0.08)",
+    },
   },
 };
 
@@ -247,7 +268,10 @@ export default function ServicesMegaMenu({ onClose }: Props) {
       </div>
 
       {/* RIGHT — active category content */}
-      <div className="flex-1 p-6 w-[780px]" style={{ background: "var(--cream-3)" }}>
+      <div
+        className="flex-1 p-6 w-[780px]"
+        style={{ background: "var(--cream-3)" }}
+      >
         {/* Pain banner */}
         <div
           className="flex items-center justify-between gap-4 mb-5"
@@ -312,7 +336,11 @@ export default function ServicesMegaMenu({ onClose }: Props) {
 
         {/* Featured service */}
         <Link
-          href={("href" in featured && typeof featured.href === "string" ? featured.href : `/services/${featured.slug}`) as string}
+          href={
+            ("href" in featured && typeof featured.href === "string"
+              ? featured.href
+              : `/services/${featured.slug}`) as string
+          }
           onClick={onClose}
           className="group block mb-4 transition-transform hover:-translate-y-0.5"
           style={{
@@ -330,7 +358,7 @@ export default function ServicesMegaMenu({ onClose }: Props) {
               textTransform: "uppercase",
               letterSpacing: "0.16em",
               fontWeight: 700,
-              color: accent.color,
+              color: accent.textColor,
             }}
           >
             <span>— Featured</span>
@@ -366,7 +394,19 @@ export default function ServicesMegaMenu({ onClose }: Props) {
                   {featured.label}
                 </h3>
                 {"badge" in featured && typeof featured.badge === "string" && (
-                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", padding: "2px 7px", background: "var(--terracotta)", color: "var(--cream)", borderRadius: 999, marginLeft: 8 }}>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 9,
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      padding: "2px 7px",
+                      background: "var(--terracotta)",
+                      color: "var(--cream)",
+                      borderRadius: 999,
+                      marginLeft: 8,
+                    }}
+                  >
                     {featured.badge}
                   </span>
                 )}
@@ -394,7 +434,11 @@ export default function ServicesMegaMenu({ onClose }: Props) {
             return (
               <Link
                 key={svc.slug}
-                href={("href" in svc && typeof svc.href === "string" ? svc.href : `/services/${svc.slug}`) as string}
+                href={
+                  ("href" in svc && typeof svc.href === "string"
+                    ? svc.href
+                    : `/services/${svc.slug}`) as string
+                }
                 onClick={onClose}
                 className="group"
                 style={{
@@ -435,7 +479,20 @@ export default function ServicesMegaMenu({ onClose }: Props) {
                     {svc.label}
                   </span>
                   {"badge" in svc && typeof svc.badge === "string" && (
-                    <span style={{ fontFamily: "var(--font-mono)", fontSize: 8, fontWeight: 700, letterSpacing: "0.12em", padding: "1px 5px", background: "var(--terracotta)", color: "var(--cream)", borderRadius: 999, marginLeft: 4, verticalAlign: "middle" }}>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 8,
+                        fontWeight: 700,
+                        letterSpacing: "0.12em",
+                        padding: "1px 5px",
+                        background: "var(--terracotta)",
+                        color: "var(--cream)",
+                        borderRadius: 999,
+                        marginLeft: 4,
+                        verticalAlign: "middle",
+                      }}
+                    >
                       {svc.badge}
                     </span>
                   )}
@@ -478,7 +535,7 @@ export default function ServicesMegaMenu({ onClose }: Props) {
             href="/services"
             onClick={onClose}
             className="inline-flex items-center gap-1.5 group transition-colors"
-            style={{ color: accent.color, fontWeight: 700 }}
+            style={{ color: accent.textColor, fontWeight: 700 }}
           >
             See all 16
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />

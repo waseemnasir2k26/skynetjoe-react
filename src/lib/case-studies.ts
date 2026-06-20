@@ -87,9 +87,9 @@ export const CASE_STUDIES: CaseStudy[] = [
       },
       {
         label: "Misroute rate (CC field)",
-        before: "~11%",
-        after: "0.4%",
-        delta: "-96%",
+        before: "frequent",
+        after: "rare",
+        delta: "sharply down",
       },
     ],
     longFormStory: [
@@ -137,12 +137,17 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Day 9: Cutover from old WordPress site, 301'd legacy URLs, shipped live.",
     ],
     keyMetrics: [
-      { label: "Monthly bookings", before: "~8", after: "~17", delta: "+112%" },
+      {
+        label: "Monthly bookings",
+        before: "trickle",
+        after: "roughly double",
+        delta: "up",
+      },
       {
         label: "DM-to-book conversion",
-        before: "9%",
-        after: "31%",
-        delta: "+22pts",
+        before: "low",
+        after: "much higher",
+        delta: "up",
       },
       { label: "Site pages", before: "5", after: "1", delta: "-80%" },
       {
@@ -169,15 +174,15 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "manhattan-dental-atelier-flagship",
     position: 3,
-    clientName: "Manhattan cosmetic dental atelier (anonymized)",
+    clientName: "Cosmetic dental clinic (anonymized)",
     industry: "Cosmetic dentistry",
     industryTag: "Websites",
-    location: "Manhattan, NY",
+    location: "Location withheld by contract",
     coverImage: "/case-studies/manhattan-dental-atelier-flagship.jpg",
     oneLineOutcome:
       "Shipped a 14-section bespoke Next.js flagship site end-to-end in 12 days.",
     problemStatement: [
-      "A high-end Manhattan dental atelier was being pitched template-based clinic sites at $30-50k that all looked like every other concierge dental site in the city. Their referral base — Park Avenue concierge medicine, members-only clubs, financial-services HR — needed signals that the practice was not interchangeable.",
+      "A high-end cosmetic dental atelier was being pitched template-based clinic sites that all looked like every other concierge dental site. Their referral base — concierge medicine, members-only clubs, financial-services HR — needed signals that the practice was not interchangeable.",
       "The previous site was a Squarespace template with stock images, a Calendly link, and a contact form that didn't honor HIPAA-aware intake handling.",
       "The brief was for a flagship build that looked bespoke at first glance, communicated tiered investment levels transparently, and gave new patients an intake flow that didn't ask for PHI in a plain text form field.",
     ],
@@ -212,26 +217,26 @@ export const CASE_STUDIES: CaseStudy[] = [
         delta: "-75%",
       },
       {
-        label: "Intake completion rate",
-        before: "34%",
-        after: "71%",
-        delta: "+109%",
+        label: "Intake completion",
+        before: "1-field form",
+        after: "4-step flow",
+        delta: "higher",
       },
       {
-        label: "Inquiry quality (rated)",
-        before: "2.1/5",
-        after: "4.4/5",
-        delta: "+110%",
+        label: "Inquiry quality",
+        before: "open text",
+        after: "structured",
+        delta: "improved",
       },
     ],
     longFormStory: [
       "The mistake most dental sites make is leading with the practice. We led with the named clinicians, their fellowship credentials, and the specific publications they'd been quoted in. Concierge referrers don't refer to 'a practice' — they refer to a person.",
-      "The tiered investment table was the single most uncomfortable conversation in the project. The owner had been advised by three previous agencies to never put prices on the site. We argued the opposite — that Park Avenue patients are insulted, not reassured, by 'investment ranges available upon consultation'. We won the argument. The table publishes three tiers with starting figures. Inquiry quality jumped immediately.",
+      "The tiered investment table was the single most uncomfortable conversation in the project. The owner had been advised by three previous agencies to never put prices on the site. We argued the opposite — that high-end patients are insulted, not reassured, by 'investment ranges available upon consultation'. We won the argument. The table publishes three tiers with starting figures. Inquiry quality improved noticeably afterward.",
       "The HIPAA-aware intake form is the unglamorous win. It's a 4-step flow that collects identifying info in step 1, scheduling preference in step 2, and only asks for the medical context in step 3 after explicit consent. PHI never lands in a plain email — it routes to an encrypted intake channel.",
     ],
     testimonialQuote:
-      "Our last site cost five times more and looked like every other clinic in midtown. This one looks like us.",
-    testimonialAuthor: "Founding clinician, Manhattan dental atelier",
+      "Our last site cost far more and looked like every other clinic. This one looks like us.",
+    testimonialAuthor: "Founding clinician, dental atelier",
     publishDate: "2026-04-02",
     relatedServices: [
       { slug: "vibe-coded-sites", label: "Vibe-Coded Websites" },
@@ -482,7 +487,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       {
         label: "Countries scaled to",
         before: "n/a",
-        after: "9",
+        after: "Several",
         delta: "with 1 founder",
       },
       {

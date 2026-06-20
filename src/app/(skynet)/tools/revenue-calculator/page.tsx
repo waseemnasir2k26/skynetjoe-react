@@ -11,7 +11,7 @@ const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 export const metadata: Metadata = {
   title:
-    "Revenue Recovery Calculator — see what your missed leads + manual work are costing you · SkynetLabs",
+    "Revenue Recovery Calculator — see what your missed leads + manual work are costing you",
   description:
     "Free interactive ROI calculator. Move 6 sliders, see in real time how much revenue your business is leaking from missed leads, low close rate, and manual follow-ups.",
   alternates: { canonical: `${SITE.url}/tools/revenue-calculator` },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Is this realistic?",
-    a: "It's a directional estimate, not a guarantee. The 80% missed-revenue recovery and 70% manual-hours reduction are the average outcomes from 240+ automations I've shipped since 2019 across n8n, GoHighLevel and custom AI agents. Your number will be higher or lower than the calculator says. The point is to size the opportunity in the right order of magnitude before we get on a call.",
+    a: "It's a directional estimate, not a guarantee. The 80% missed-revenue recovery and 70% manual-hours reduction are the average outcomes from dozens of automations I've shipped since 2019 across n8n, GoHighLevel and custom AI agents. Your number will be higher or lower than the calculator says. The point is to size the opportunity in the right order of magnitude before we get on a call.",
   },
   {
     q: "What if I'm under 50 leads a month?",
@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     q: "What's the catch?",
-    a: "There isn't one. The calculator is free, the discovery call is free, and if I don't see a clean recovery path I'll tell you. I've turned down 40+ projects in the last 18 months because the math didn't justify the build. I'd rather not take your money than take it and disappoint you.",
+    a: "There isn't one. The calculator is free, the discovery call is free, and if I don't see a clean recovery path I'll tell you. I've turned down plenty of projects because the math didn't justify the build. I'd rather not take your money than take it and disappoint you.",
   },
   {
     q: "Why these specific recovery percentages?",
@@ -60,7 +60,7 @@ const calcCases = CASE_STUDIES.filter((c) =>
     "us-insurance-gohighlevel-rebuild",
     "eu-logistics-email-triage-n8n",
     "bali-wellness-conversion-funnel",
-  ].includes(c.slug)
+  ].includes(c.slug),
 );
 
 const schema = {
@@ -113,7 +113,12 @@ export default function RevenueCalculatorPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-4xl">
@@ -131,7 +136,17 @@ export default function RevenueCalculatorPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               How much money is your business{" "}
               <span
                 style={{
@@ -238,7 +253,9 @@ export default function RevenueCalculatorPage() {
                       <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta)]/80 mb-1">
                         {m.label}
                       </p>
-                      <p className="text-sm font-bold text-[var(--ink)]">{m.delta}</p>
+                      <p className="text-sm font-bold text-[var(--ink)]">
+                        {m.delta}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -329,7 +346,10 @@ export default function RevenueCalculatorPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition"
-                  style={{ background: "var(--terracotta)", color: "var(--cream-3)" }}
+                  style={{
+                    background: "var(--terracotta)",
+                    color: "var(--cream-3)",
+                  }}
                 >
                   Get my custom recovery plan
                 </a>

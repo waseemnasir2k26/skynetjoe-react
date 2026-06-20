@@ -71,8 +71,8 @@ export default function CTA() {
                 lineHeight: 1.6,
               }}
             >
-              Free 20-min audit. We&apos;ll Loom you the leak in your funnel and the 1 automation that closes it.
-              No deck. No pitch. Pure signal.
+              Free 20-min audit. We&apos;ll Loom you the leak in your funnel and
+              the 1 automation that closes it. No deck. No pitch. Pure signal.
             </p>
             <Link
               href="/contact"
@@ -102,7 +102,7 @@ export default function CTA() {
                 marginTop: 18,
               }}
             >
-              — Replies in 6 hours · Bali · 9 countries served
+              — Replies in 6 hours · Bali · several countries served
             </div>
           </div>
         </div>

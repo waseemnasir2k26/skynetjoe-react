@@ -157,7 +157,7 @@ export default function HeroFunnel() {
               ·
             </span>
             <span>
-              <span style={{ color: "var(--ink)" }}>180+</span> automations
+              <span style={{ color: "var(--ink)" }}>Dozens</span> of automations
             </span>
             <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.18)" }}>
               ·

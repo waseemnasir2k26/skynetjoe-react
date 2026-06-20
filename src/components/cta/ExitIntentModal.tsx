@@ -120,10 +120,20 @@ export default function ExitIntentModal() {
     setStatus("submitting");
     setErrorMsg(null);
 
+    // /api/leads requires a `qualification` OR `booking` key and resolves
+    // email via payload.email || qualification.email || booking.inviteeEmail.
+    // Wrap the exit-intent email inside `qualification` so the route accepts it
+    // (a bare {email,url,...} body 400s and the hot lead is lost).
+    const source = "exit-intent-loom-audit";
     const payload = {
-      source: "exit-intent-loom-audit",
-      email,
-      url,
+      source,
+      qualification: {
+        email,
+        website: url,
+        bottleneck: "exit-intent loom audit",
+        source,
+      },
+      utm: { source, medium: "exit-intent", campaign: "loom-audit" },
       submitted_at: new Date().toISOString(),
       path: pathname,
     };
@@ -140,9 +150,7 @@ export default function ExitIntentModal() {
           payload,
         });
         setStatus("error");
-        setErrorMsg(
-          "Couldn't reach our inbox. Try email: info@skynetjoe.com"
-        );
+        setErrorMsg("Couldn't reach our inbox. Try email: info@skynetjoe.com");
         return;
       }
     } catch (err) {
@@ -151,9 +159,7 @@ export default function ExitIntentModal() {
         payload,
       });
       setStatus("error");
-      setErrorMsg(
-        "Couldn't reach our inbox. Try email: info@skynetjoe.com"
-      );
+      setErrorMsg("Couldn't reach our inbox. Try email: info@skynetjoe.com");
       return;
     }
     setStatus("success");
@@ -183,7 +189,8 @@ export default function ExitIntentModal() {
           border: "1px solid rgba(26,26,26,0.20)",
           borderRadius: 2,
           boxShadow: "0 32px 80px rgba(26,26,26,0.30)",
-          animation: "skynet-exit-scale 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+          animation:
+            "skynet-exit-scale 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards",
           fontFamily: "var(--font-sans)",
         }}
       >

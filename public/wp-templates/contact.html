@@ -10,24 +10,41 @@
       --c-fg-faint: #98989d;
       --c-border: rgba(255, 255, 255, 0.08);
       --c-border-strong: rgba(255, 255, 255, 0.16);
-      --c-green: #1E88E5;
-      --c-green-dark: #1565C0;
-      --c-green-light: #42A5F5;
-      --c-purple: #14B8A6;
-      --c-cyan: #00D4FF;
+      --c-green: #1e88e5;
+      --c-green-dark: #1565c0;
+      --c-green-light: #42a5f5;
+      --c-purple: #14b8a6;
+      --c-cyan: #00d4ff;
       --c-radius: 14px;
       --c-radius-sm: 10px;
       background: var(--c-bg);
       color: var(--c-fg);
-      font-family: var(--font-lexend, "Lexend", system-ui, -apple-system, "Segoe UI", sans-serif);
+      font-family: var(
+        --font-lexend,
+        "Lexend",
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        sans-serif
+      );
       display: block;
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
       overflow: hidden;
     }
-    .wn-contact *, .wn-contact *::before, .wn-contact *::after { box-sizing: border-box; }
-    .wn-contact a { color: var(--c-green-light); text-decoration: none; transition: color .15s ease; }
-    .wn-contact a:hover { color: var(--c-green); }
+    .wn-contact *,
+    .wn-contact *::before,
+    .wn-contact *::after {
+      box-sizing: border-box;
+    }
+    .wn-contact a {
+      color: var(--c-green-light);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .wn-contact a:hover {
+      color: var(--c-green);
+    }
 
     .wn-contact .wn-c-wrap {
       max-width: 1100px;
@@ -100,7 +117,9 @@
       background: var(--c-surface);
       border: 1px solid var(--c-border);
       border-radius: var(--c-radius);
-      transition: border-color .2s ease, transform .2s ease;
+      transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
       display: block;
       color: var(--c-fg);
     }
@@ -162,7 +181,10 @@
       grid-template-columns: 1fr 1fr;
       gap: 1.1rem;
     }
-    .wn-contact .wn-c-field { display: grid; gap: 0.4rem; }
+    .wn-contact .wn-c-field {
+      display: grid;
+      gap: 0.4rem;
+    }
     .wn-contact .wn-c-field label {
       font-size: 0.82rem;
       font-weight: 500;
@@ -180,7 +202,9 @@
       font: inherit;
       font-size: 0.97rem;
       width: 100%;
-      transition: border-color .15s ease, box-shadow .15s ease;
+      transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
     }
     .wn-contact .wn-c-field textarea {
       min-height: 140px;
@@ -202,7 +226,11 @@
     }
     .wn-contact .wn-c-submit {
       justify-self: start;
-      background: linear-gradient(135deg, var(--c-green) 0%, var(--c-green-dark) 100%);
+      background: linear-gradient(
+        135deg,
+        var(--c-green) 0%,
+        var(--c-green-dark) 100%
+      );
       color: #fff;
       font-weight: 700;
       padding: 0.95rem 1.6rem;
@@ -210,7 +238,9 @@
       border: 0;
       cursor: pointer;
       font-size: 1rem;
-      transition: transform .15s ease, box-shadow .15s ease;
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
       box-shadow: 0 4px 18px rgba(19, 185, 115, 0.25);
     }
     .wn-contact .wn-c-submit:hover {
@@ -251,7 +281,11 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--c-green) 0%, var(--c-green-dark) 100%);
+      background: linear-gradient(
+        135deg,
+        var(--c-green) 0%,
+        var(--c-green-dark) 100%
+      );
       color: #fff;
       font-weight: 700;
       text-align: center;
@@ -292,47 +326,108 @@
 
     /* Responsive */
     @media (max-width: 1024px) {
-      .wn-contact .wn-c-h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
+      .wn-contact .wn-c-h1 {
+        font-size: clamp(1.8rem, 5vw, 2.6rem);
+      }
     }
     @media (max-width: 768px) {
-      .wn-contact .wn-c-wrap { padding: 3.5rem 1.25rem; }
+      .wn-contact .wn-c-wrap {
+        padding: 3.5rem 1.25rem;
+      }
       .wn-contact .wn-c-methods,
-      .wn-contact .wn-c-steps { grid-template-columns: 1fr; }
-      .wn-contact .wn-c-row-2 { grid-template-columns: 1fr; }
-      .wn-contact .wn-c-form-card { padding: 1.75rem; }
+      .wn-contact .wn-c-steps {
+        grid-template-columns: 1fr;
+      }
+      .wn-contact .wn-c-row-2 {
+        grid-template-columns: 1fr;
+      }
+      .wn-contact .wn-c-form-card {
+        padding: 1.75rem;
+      }
     }
     @media (max-width: 480px) {
-      .wn-contact .wn-c-wrap { padding: 2.75rem 1rem; }
-      .wn-contact .wn-c-form-card { padding: 1.4rem; }
-      .wn-contact .wn-c-trust-divider { display: block; height: 0.5rem; }
+      .wn-contact .wn-c-wrap {
+        padding: 2.75rem 1rem;
+      }
+      .wn-contact .wn-c-form-card {
+        padding: 1.4rem;
+      }
+      .wn-contact .wn-c-trust-divider {
+        display: block;
+        height: 0.5rem;
+      }
     }
   </style>
 
   <div class="wn-c-wrap">
     <header class="wn-c-hero">
       <span class="wn-c-eyebrow">Direct line</span>
-      <h1 class="wn-c-h1">No "discovery call" funnel. <em>You write what you need.</em> I reply same business day &mdash; or refund the form.</h1>
-      <p class="wn-c-sub">Bali timezone (GMT+8). Replies land within 8 hours on weekdays. Weekends are for the beach &mdash; expect a Monday answer.</p>
+      <h1 class="wn-c-h1">
+        No "discovery call" funnel. <em>You write what you need.</em> I reply
+        same business day &mdash; or refund the form.
+      </h1>
+      <p class="wn-c-sub">
+        Bali timezone (GMT+8). Replies land within 8 hours on weekdays. Weekends
+        are for the beach &mdash; expect a Monday answer.
+      </p>
     </header>
 
     <section class="wn-c-methods" aria-label="Contact methods">
       <a class="wn-c-method" href="mailto:info@skynetjoe.com">
         <span class="wn-c-method-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="m3 7 9 6 9-6"></path>
+          </svg>
         </span>
         <p class="wn-c-method-label">Email</p>
         <p class="wn-c-method-value">info@skynetjoe.com</p>
       </a>
-      <a class="wn-c-method" href="https://cal.com/waseem-nasir/intro" target="_blank" rel="noopener">
+      <a
+        class="wn-c-method"
+        href="https://cal.com/waseem-nasir/intro"
+        target="_blank"
+        rel="noopener"
+      >
         <span class="wn-c-method-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+            <path d="M16 2v4M8 2v4M3 10h18"></path>
+          </svg>
         </span>
         <p class="wn-c-method-label">Book a 30-min call</p>
         <p class="wn-c-method-value">cal.com/waseem-nasir</p>
       </a>
-      <a class="wn-c-method" href="https://github.com/waseemnasir2k26" target="_blank" rel="noopener">
+      <a
+        class="wn-c-method"
+        href="https://github.com/waseemnasir2k26"
+        target="_blank"
+        rel="noopener"
+      >
         <span class="wn-c-method-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.58.1.79-.25.79-.56v-2c-3.22.7-3.9-1.36-3.9-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.7.08-.7 1.18.08 1.8 1.21 1.8 1.21 1.04 1.79 2.74 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.57-.29-5.27-1.28-5.27-5.72 0-1.27.45-2.3 1.2-3.12-.12-.3-.52-1.48.11-3.08 0 0 .98-.31 3.2 1.2a11.1 11.1 0 0 1 5.83 0c2.22-1.51 3.2-1.2 3.2-1.2.63 1.6.23 2.78.11 3.08.75.82 1.2 1.85 1.2 3.12 0 4.46-2.7 5.43-5.28 5.71.42.36.8 1.07.8 2.17v3.22c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.58.1.79-.25.79-.56v-2c-3.22.7-3.9-1.36-3.9-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.7.08-.7 1.18.08 1.8 1.21 1.8 1.21 1.04 1.79 2.74 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.57-.29-5.27-1.28-5.27-5.72 0-1.27.45-2.3 1.2-3.12-.12-.3-.52-1.48.11-3.08 0 0 .98-.31 3.2 1.2a11.1 11.1 0 0 1 5.83 0c2.22-1.51 3.2-1.2 3.2-1.2.63 1.6.23 2.78.11 3.08.75.82 1.2 1.85 1.2 3.12 0 4.46-2.7 5.43-5.28 5.71.42.36.8 1.07.8 2.17v3.22c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"
+            />
+          </svg>
         </span>
         <p class="wn-c-method-label">Code &amp; receipts</p>
         <p class="wn-c-method-value">github.com/waseemnasir2k26</p>
@@ -341,17 +436,37 @@
 
     <section class="wn-c-form-card" aria-label="Project brief form">
       <h2 class="wn-c-form-title">Tell me what you're trying to build</h2>
-      <p class="wn-c-form-blurb">Skip the warm-up. Drop budget + timeline + the one thing keeping you up. I'll come back with a fixed-price scope or a clean "this isn't my lane &mdash; here's who you should talk to."</p>
+      <p class="wn-c-form-blurb">
+        Skip the warm-up. Drop budget + timeline + the one thing keeping you up.
+        I'll come back with a fixed-price scope or a clean "this isn't my lane
+        &mdash; here's who you should talk to."
+      </p>
 
-      <form class="wn-c-form" action="https://formspree.io/f/REPLACE_FORM_ID" method="POST">
+      <form
+        class="wn-c-form"
+        action="https://formspree.io/f/REPLACE_FORM_ID"
+        method="POST"
+      >
         <div class="wn-c-row-2">
           <div class="wn-c-field">
             <label for="wn-c-name">Your name</label>
-            <input type="text" id="wn-c-name" name="name" required autocomplete="name" />
+            <input
+              type="text"
+              id="wn-c-name"
+              name="name"
+              required
+              autocomplete="name"
+            />
           </div>
           <div class="wn-c-field">
             <label for="wn-c-email">Email</label>
-            <input type="email" id="wn-c-email" name="email" required autocomplete="email" />
+            <input
+              type="email"
+              id="wn-c-email"
+              name="email"
+              required
+              autocomplete="email"
+            />
           </div>
         </div>
 
@@ -371,7 +486,9 @@
             <label for="wn-c-budget">Budget range (USD)</label>
             <select id="wn-c-budget" name="budget" required>
               <option value="">Pick one&hellip;</option>
-              <option value="lt-500">&lt; $500 (small fix or proof-of-concept)</option>
+              <option value="lt-500">
+                &lt; $500 (small fix or proof-of-concept)
+              </option>
               <option value="500-2k">$500 &ndash; $2K (one-off build)</option>
               <option value="2k-5k">$2K &ndash; $5K (multi-week scope)</option>
               <option value="5k-plus">$5K+ (flagship build)</option>
@@ -394,11 +511,19 @@
 
         <div class="wn-c-field">
           <label for="wn-c-brief">One-paragraph brief</label>
-          <textarea id="wn-c-brief" name="brief" placeholder="What's broken / what you're trying to ship / what 'done' looks like. Plain English." required></textarea>
+          <textarea
+            id="wn-c-brief"
+            name="brief"
+            placeholder="What's broken / what you're trying to ship / what 'done' looks like. Plain English."
+            required
+          ></textarea>
         </div>
 
         <button type="submit" class="wn-c-submit">Send brief &rarr;</button>
-        <p class="wn-c-form-note">No newsletter signup. No autoresponder sequence. Just a real reply from a real human in Bali.</p>
+        <p class="wn-c-form-note">
+          No newsletter signup. No autoresponder sequence. Just a real reply
+          from a real human in Bali.
+        </p>
       </form>
     </section>
 
@@ -408,23 +533,32 @@
         <div class="wn-c-step">
           <span class="wn-c-step-num">1</span>
           <h3 class="wn-c-step-h">Reply within 8h</h3>
-          <p class="wn-c-step-p">Weekdays. Real human, not an autoresponder. If I can't take it, I say so on day one.</p>
+          <p class="wn-c-step-p">
+            Weekdays. Real human, not an autoresponder. If I can't take it, I
+            say so on day one.
+          </p>
         </div>
         <div class="wn-c-step">
           <span class="wn-c-step-num">2</span>
           <h3 class="wn-c-step-h">30-min scoping call</h3>
-          <p class="wn-c-step-p">Cal.com link, no slide deck. We talk through the build and the edges where it could break.</p>
+          <p class="wn-c-step-p">
+            Cal.com link, no slide deck. We talk through the build and the edges
+            where it could break.
+          </p>
         </div>
         <div class="wn-c-step">
           <span class="wn-c-step-num">3</span>
           <h3 class="wn-c-step-h">Fixed-price scope in 48h</h3>
-          <p class="wn-c-step-p">One PDF. Deliverables, ship date, payment milestones. You sign or you walk &mdash; no follow-up funnel.</p>
+          <p class="wn-c-step-p">
+            One PDF. Deliverables, ship date, payment milestones. You sign or
+            you walk &mdash; no follow-up funnel.
+          </p>
         </div>
       </div>
     </section>
 
     <footer class="wn-c-trust">
-      <strong>9 countries served</strong>
+      <strong>Several countries served</strong>
       <span class="wn-c-trust-divider">&middot;</span>
       <strong>40+ websites delivered</strong>
       <span class="wn-c-trust-divider">&middot;</span>

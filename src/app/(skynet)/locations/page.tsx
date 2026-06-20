@@ -30,7 +30,7 @@ import USStatesMap from "@/components/locations/USStatesMap";
 type IconCmp = React.ComponentType<{ className?: string }>;
 
 export const metadata: Metadata = {
-  title: "AI Automation Services Across All 48 US States | SkynetLabs",
+  title: "AI Automation Services Across All 48 US States",
   description:
     "SkynetLabs delivers AI automation, n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents to founders in all 48 contiguous US states. Pick your state — fixed scope, public pricing, 5–14 day ship.",
   alternates: { canonical: `${SITE.url}/locations` },
@@ -310,8 +310,8 @@ export default function LocationsIndexPage() {
                 value: String(PRIORITY_STATE_SLUGS.length),
                 label: "Priority programmatic landing pages",
               },
-              { value: "180+", label: "Workflows shipped" },
-              { value: "9", label: "Countries (US is one)" },
+              { value: "Dozens", label: "Workflows shipped" },
+              { value: "Several", label: "Countries (US is one)" },
             ].map((stat) => (
               <div
                 key={stat.label}

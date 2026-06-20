@@ -107,7 +107,13 @@ export default function Header() {
             }}
           >
             Skynet
-            <em style={{ fontStyle: "italic", color: "var(--terracotta)", fontWeight: 500 }}>
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "var(--terracotta)",
+                fontWeight: 500,
+              }}
+            >
               Labs
             </em>
           </span>
@@ -115,7 +121,8 @@ export default function Header() {
 
         <nav className="hidden lg:flex items-center">
           {NAV_PRIMARY.map((item) => {
-            const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
+            const hasDrop =
+              item.hasMega || (item.subItems && item.subItems.length > 0);
             return (
               <div
                 key={item.href}
@@ -129,15 +136,23 @@ export default function Header() {
                   href={item.href}
                   className="flex items-center gap-1 px-3.5 py-2 text-[13px] font-medium transition-colors"
                   style={{ color: "var(--ink-2)" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-2)")}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "var(--terracotta-text)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "var(--ink-2)")
+                  }
                   onClick={(e) => {
                     if (hasDrop) {
                       e.preventDefault();
-                      setOpenDropdown(openDropdown === item.href ? null : item.href);
+                      setOpenDropdown(
+                        openDropdown === item.href ? null : item.href,
+                      );
                     }
                   }}
-                  aria-expanded={hasDrop ? openDropdown === item.href : undefined}
+                  aria-expanded={
+                    hasDrop ? openDropdown === item.href : undefined
+                  }
                   aria-haspopup={hasDrop ? "menu" : undefined}
                   aria-current={pathname === item.href ? "page" : undefined}
                 >
@@ -187,18 +202,23 @@ export default function Header() {
                         <Link
                           key={sub.href}
                           href={sub.href}
-                          aria-current={pathname === sub.href ? "page" : undefined}
+                          aria-current={
+                            pathname === sub.href ? "page" : undefined
+                          }
                           className="group flex items-start gap-3 p-3 transition-colors"
                           style={{
                             borderLeft: "3px solid transparent",
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.background = "rgba(198, 107, 63, 0.06)";
-                            e.currentTarget.style.borderLeftColor = "var(--terracotta)";
+                            e.currentTarget.style.background =
+                              "rgba(198, 107, 63, 0.06)";
+                            e.currentTarget.style.borderLeftColor =
+                              "var(--terracotta)";
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.background = "transparent";
-                            e.currentTarget.style.borderLeftColor = "transparent";
+                            e.currentTarget.style.borderLeftColor =
+                              "transparent";
                           }}
                         >
                           <span
@@ -208,7 +228,10 @@ export default function Header() {
                           <span className="min-w-0">
                             <span
                               className="block text-[13px] font-semibold leading-tight"
-                              style={{ color: "var(--ink)", fontFamily: "var(--font-display)" }}
+                              style={{
+                                color: "var(--ink)",
+                                fontFamily: "var(--font-display)",
+                              }}
                             >
                               {sub.label}
                             </span>
@@ -232,17 +255,25 @@ export default function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <span className="h-5 w-px" style={{ background: "var(--border)" }} aria-hidden="true" />
+          <span
+            className="h-5 w-px"
+            style={{ background: "var(--border)" }}
+            aria-hidden="true"
+          />
           <Link
             href="/discovery-call"
             className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold transition-all hover:-translate-y-0.5"
             style={{
-              background: "var(--terracotta)",
-              color: "var(--cream-3)",
+              background: "var(--terracotta-2)",
+              color: "#FFFFFF",
               borderRadius: 2,
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--terracotta-2)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--terracotta)")}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.background = "var(--oxblood)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.background = "var(--terracotta-2)")
+            }
           >
             Book free audit
             <ArrowRight className="w-3.5 h-3.5" />
@@ -256,7 +287,11 @@ export default function Header() {
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <Menu className="w-6 h-6" />
+          )}
         </button>
       </div>
 
@@ -270,7 +305,8 @@ export default function Header() {
         >
           <nav className="container-x px-4 sm:px-6 py-6 flex flex-col gap-1">
             {NAV_PRIMARY.map((item) => {
-              const hasDrop = item.hasMega || (item.subItems && item.subItems.length > 0);
+              const hasDrop =
+                item.hasMega || (item.subItems && item.subItems.length > 0);
               const open = mobileSubOpen === item.href;
               if (!hasDrop) {
                 return (
@@ -307,9 +343,11 @@ export default function Header() {
                           <ul className="space-y-1">
                             {cat.services.map((svc) => {
                               const Icon = ICONS[svc.icon];
-                              const href = ("href" in svc && typeof svc.href === "string"
-                                ? svc.href
-                                : `/services/${svc.slug}`) as string;
+                              const href = (
+                                "href" in svc && typeof svc.href === "string"
+                                  ? svc.href
+                                  : `/services/${svc.slug}`
+                              ) as string;
                               return (
                                 <li key={svc.slug}>
                                   <Link
@@ -321,23 +359,24 @@ export default function Header() {
                                       <Icon className="w-3.5 h-3.5 text-skynet-primary-light/70 flex-shrink-0" />
                                     )}
                                     {svc.label}
-                                    {"badge" in svc && typeof svc.badge === "string" && (
-                                      <span
-                                        style={{
-                                          fontFamily: "var(--font-mono)",
-                                          fontSize: 9,
-                                          fontWeight: 700,
-                                          letterSpacing: "0.12em",
-                                          padding: "2px 7px",
-                                          background: "var(--terracotta)",
-                                          color: "var(--cream)",
-                                          borderRadius: 999,
-                                          marginLeft: 6,
-                                        }}
-                                      >
-                                        {svc.badge}
-                                      </span>
-                                    )}
+                                    {"badge" in svc &&
+                                      typeof svc.badge === "string" && (
+                                        <span
+                                          style={{
+                                            fontFamily: "var(--font-mono)",
+                                            fontSize: 9,
+                                            fontWeight: 700,
+                                            letterSpacing: "0.12em",
+                                            padding: "2px 7px",
+                                            background: "var(--terracotta)",
+                                            color: "var(--cream)",
+                                            borderRadius: 999,
+                                            marginLeft: 6,
+                                          }}
+                                        >
+                                          {svc.badge}
+                                        </span>
+                                      )}
                                   </Link>
                                 </li>
                               );
@@ -362,17 +401,30 @@ export default function Header() {
                           key={sub.href}
                           href={sub.href}
                           onClick={() => setMobileOpen(false)}
-                          aria-current={pathname === sub.href ? "page" : undefined}
+                          aria-current={
+                            pathname === sub.href ? "page" : undefined
+                          }
                           className="block py-2 text-sm transition-colors"
-                          style={{ color: "var(--ink-2)", wordBreak: "break-word" }}
-                          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--terracotta)")}
-                          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-2)")}
+                          style={{
+                            color: "var(--ink-2)",
+                            wordBreak: "break-word",
+                          }}
+                          onMouseEnter={(e) =>
+                            (e.currentTarget.style.color =
+                              "var(--terracotta-text)")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.currentTarget.style.color = "var(--ink-2)")
+                          }
                         >
                           {sub.label}
                           {sub.desc && (
                             <span
                               className="block text-[11px] mt-0.5"
-                              style={{ color: "var(--ink-faint)", wordBreak: "break-word" }}
+                              style={{
+                                color: "var(--ink-faint)",
+                                wordBreak: "break-word",
+                              }}
                             >
                               {sub.desc}
                             </span>
@@ -390,8 +442,8 @@ export default function Header() {
                 onClick={() => setMobileOpen(false)}
                 className="inline-flex items-center justify-center gap-1.5 w-full"
                 style={{
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
+                  background: "var(--terracotta-2)",
+                  color: "#FFFFFF",
                   borderRadius: 2,
                   padding: "14px 24px",
                   fontFamily: "var(--font-sans)",
