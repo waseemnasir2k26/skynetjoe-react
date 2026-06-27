@@ -8,7 +8,13 @@ import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ZoomableImage from "@/components/ZoomableImage";
-import { Reveal, RevealGroup, RevealItem, ParallaxFigure } from "@/components/motion/Reveal";
+import {
+  Reveal,
+  RevealGroup,
+  RevealItem,
+  ParallaxFigure,
+} from "@/components/motion/Reveal";
+import ArticleViews from "@/components/news/ArticleViews";
 
 /**
  * Dynamic /news/[slug] — cream editorial pivot. Renders cream pages for entries
@@ -142,7 +148,13 @@ export default async function NewsArticlePage({
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 820, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 820,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <Breadcrumbs
             bare
             items={[
@@ -172,73 +184,92 @@ export default async function NewsArticlePage({
           </Link>
 
           <Reveal>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              marginBottom: 18,
-              flexWrap: "wrap",
-            }}
-          >
-            <span
+            <div
               style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 10,
-                textTransform: "uppercase",
-                letterSpacing: "0.16em",
-                fontWeight: 600,
-                padding: "5px 10px",
-                color: "var(--cream-3)",
-                background: accent,
-                borderRadius: 2,
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                marginBottom: 18,
+                flexWrap: "wrap",
               }}
             >
-              {a.category}
-            </span>
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.10em",
-                color: "var(--ink-faint)",
-              }}
-            >
-              — {formatDate(a.publishedAt)} · {a.readingTime} min read
-            </span>
-          </div>
+              <span
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 10,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  fontWeight: 600,
+                  padding: "5px 10px",
+                  color: "var(--cream-3)",
+                  background: accent,
+                  borderRadius: 2,
+                }}
+              >
+                {a.category}
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.10em",
+                  color: "var(--ink-faint)",
+                }}
+              >
+                — {formatDate(a.publishedAt)} · {a.readingTime} min read
+              </span>
+              <span
+                aria-hidden
+                style={{ color: "var(--ink-faint)", opacity: 0.5 }}
+              >
+                ·
+              </span>
+              <ArticleViews slug={a.slug} />
+            </div>
 
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(32px, 5.2vw, 60px)",
-              fontWeight: 700,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.04,
-              color: "var(--ink)",
-              margin: "0 0 18px",
-            }}
-          >
-            {a.title}
-          </h1>
-          <p
-            style={{
-              fontSize: 19,
-              color: "var(--ink-2)",
-              lineHeight: 1.6,
-              margin: 0,
-            }}
-          >
-            {a.deck}
-          </p>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(32px, 5.2vw, 60px)",
+                fontWeight: 700,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                margin: "0 0 18px",
+              }}
+            >
+              {a.title}
+            </h1>
+            <p
+              style={{
+                fontSize: 19,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                margin: 0,
+              }}
+            >
+              {a.deck}
+            </p>
           </Reveal>
         </div>
       </section>
 
       {/* HERO IMAGE — polaroid */}
-      <section style={{ padding: "clamp(20px, 5vw, 32px) 0 16px", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <section
+        style={{
+          padding: "clamp(20px, 5vw, 32px) 0 16px",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 900,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <ParallaxFigure
             className="news-hero-polaroid"
             style={{
@@ -293,8 +324,20 @@ export default async function NewsArticlePage({
       </section>
 
       {/* BODY */}
-      <article style={{ padding: "clamp(32px, 8vw, 48px) 0", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <article
+        style={{
+          padding: "clamp(32px, 8vw, 48px) 0",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 720,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <Reveal
             style={{
               color: "var(--ink-2)",
@@ -303,7 +346,9 @@ export default async function NewsArticlePage({
             }}
           >
             {a.body!.map((p, i) => (
-              <p key={i} style={{ marginBottom: 18 }}>{p}</p>
+              <p key={i} style={{ marginBottom: 18 }}>
+                {p}
+              </p>
             ))}
           </Reveal>
 
@@ -350,8 +395,20 @@ export default async function NewsArticlePage({
       </article>
 
       {/* INLINE CTA */}
-      <section style={{ padding: "16px 0 clamp(40px, 10vw, 56px)", position: "relative", zIndex: 2 }}>
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+      <section
+        style={{
+          padding: "16px 0 clamp(40px, 10vw, 56px)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 760,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <Reveal
             style={{
               background: "var(--cream-2)",
@@ -441,7 +498,11 @@ export default async function NewsArticlePage({
                   }}
                 >
                   Want this kind of build for{" "}
-                  <span style={{ fontWeight: 700, color: "var(--terracotta-aa)" }}>your business?</span>
+                  <span
+                    style={{ fontWeight: 700, color: "var(--terracotta-aa)" }}
+                  >
+                    your business?
+                  </span>
                 </h2>
                 <p
                   style={{
@@ -490,7 +551,13 @@ export default async function NewsArticlePage({
             zIndex: 2,
           }}
         >
-          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+          <div
+            style={{
+              maxWidth: 1100,
+              margin: "0 auto",
+              padding: "0 clamp(16px, 5vw, 24px)",
+            }}
+          >
             <div
               style={{
                 fontFamily: "var(--font-mono)",
@@ -514,7 +581,9 @@ export default async function NewsArticlePage({
               }}
             >
               Keep{" "}
-              <span style={{ fontWeight: 700, color: "var(--terracotta-aa)" }}>reading.</span>
+              <span style={{ fontWeight: 700, color: "var(--terracotta-aa)" }}>
+                reading.
+              </span>
             </h2>
             <RevealGroup
               style={{
@@ -526,78 +595,82 @@ export default async function NewsArticlePage({
               {related.map((r) => {
                 const a2 = CATEGORY_COLORS[r.category] ?? "var(--terracotta)";
                 return (
-                  <RevealItem as="article" key={r.slug} style={{ display: "flex" }}>
-                  <Link
-                    href={`/news/${r.slug}`}
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      flex: 1,
-                      background: "var(--cream-2)",
-                      border: "1px solid rgba(26,26,26,0.12)",
-                      textDecoration: "none",
-                    }}
+                  <RevealItem
+                    as="article"
+                    key={r.slug}
+                    style={{ display: "flex" }}
                   >
-                    <div
+                    <Link
+                      href={`/news/${r.slug}`}
                       style={{
-                        position: "relative",
-                        aspectRatio: "16 / 10",
-                        overflow: "hidden",
-                        background: "var(--cream-3)",
-                        borderBottom: "1px solid rgba(26,26,26,0.10)",
+                        display: "flex",
+                        flexDirection: "column",
+                        flex: 1,
+                        background: "var(--cream-2)",
+                        border: "1px solid rgba(26,26,26,0.12)",
+                        textDecoration: "none",
                       }}
                     >
-                      <Image
-                        src={r.heroImage}
-                        alt={r.heroCaption}
-                        fill
-                        sizes="(min-width: 1024px) 33vw, 50vw"
+                      <div
                         style={{
-                          objectFit: "cover",
-                          objectPosition: r.heroPosition ?? "center top",
-                          filter: "none",
-                        }}
-                      />
-                    </div>
-                    <div style={{ padding: "16px 18px" }}>
-                      <span
-                        style={{
-                          fontFamily: "var(--font-mono)",
-                          fontSize: 10,
-                          textTransform: "uppercase",
-                          letterSpacing: "0.16em",
-                          fontWeight: 600,
-                          color: a2,
+                          position: "relative",
+                          aspectRatio: "16 / 10",
+                          overflow: "hidden",
+                          background: "var(--cream-3)",
+                          borderBottom: "1px solid rgba(26,26,26,0.10)",
                         }}
                       >
-                        {r.category}
-                      </span>
-                      <h3
-                        style={{
-                          fontFamily: "var(--font-display)",
-                          fontSize: 16,
-                          fontWeight: 600,
-                          color: "var(--ink)",
-                          margin: "6px 0 6px",
-                          letterSpacing: "-0.01em",
-                          lineHeight: 1.25,
-                        }}
-                      >
-                        {r.title}
-                      </h3>
-                      <span
-                        style={{
-                          fontFamily: "var(--font-mono)",
-                          fontSize: 11,
-                          textTransform: "uppercase",
-                          letterSpacing: "0.10em",
-                          color: "var(--ink-faint)",
-                        }}
-                      >
-                        — {r.readingTime} min · {formatDate(r.publishedAt)}
-                      </span>
-                    </div>
-                  </Link>
+                        <Image
+                          src={r.heroImage}
+                          alt={r.heroCaption}
+                          fill
+                          sizes="(min-width: 1024px) 33vw, 50vw"
+                          style={{
+                            objectFit: "cover",
+                            objectPosition: r.heroPosition ?? "center top",
+                            filter: "none",
+                          }}
+                        />
+                      </div>
+                      <div style={{ padding: "16px 18px" }}>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: 10,
+                            textTransform: "uppercase",
+                            letterSpacing: "0.16em",
+                            fontWeight: 600,
+                            color: a2,
+                          }}
+                        >
+                          {r.category}
+                        </span>
+                        <h3
+                          style={{
+                            fontFamily: "var(--font-display)",
+                            fontSize: 16,
+                            fontWeight: 600,
+                            color: "var(--ink)",
+                            margin: "6px 0 6px",
+                            letterSpacing: "-0.01em",
+                            lineHeight: 1.25,
+                          }}
+                        >
+                          {r.title}
+                        </h3>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: 11,
+                            textTransform: "uppercase",
+                            letterSpacing: "0.10em",
+                            color: "var(--ink-faint)",
+                          }}
+                        >
+                          — {r.readingTime} min · {formatDate(r.publishedAt)}
+                        </span>
+                      </div>
+                    </Link>
                   </RevealItem>
                 );
               })}

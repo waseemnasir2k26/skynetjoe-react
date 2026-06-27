@@ -10,6 +10,7 @@ import LiveChat from "@/components/LiveChat";
 //   DiscoveryPopup @/components/DiscoveryPopup · StickyBookCallBar @/components/cta/StickyBookCallBar
 //   ExitIntentModal @/components/cta/ExitIntentModal · (earlier: IncomingCallPopup, SocialProofPopup)
 // LiveChat (passive chat bubble, click-to-open) kept on — smart intent bot rebuilt 2026-05-29.
+import LiveVisitors from "@/components/LiveVisitors";
 import "../globals.css";
 
 // Readability overhaul 2026-06-01 — ONE clean, highly-legible sans site-wide.
@@ -89,7 +90,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: "/favicon.ico",
@@ -101,7 +108,11 @@ export const metadata: Metadata = {
 
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
@@ -139,10 +150,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </noscript>
         )}
         <Header />
-        <main id="main-content" className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
         {/* Passive chat bubble only — opens on click, never auto-pops. Interrupting
             popups (Discovery/ExitIntent/StickyBar) stay disabled per 2026-05-29 request. */}
+        <LiveVisitors />
         <LiveChat />
       </body>
     </html>
