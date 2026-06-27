@@ -48,9 +48,12 @@ export function Reveal({
     <MotionTag
       className={rootClass}
       style={style}
-      initial={initialVisible ? false : { opacity: 0, y, clipPath: "inset(0 0 100% 0)" }}
-      whileInView={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
-      viewport={{ once: true, amount: 0.25 }}
+      initial={
+        initialVisible
+          ? false
+          : { opacity: 0, y, clipPath: "inset(0 0 100% 0)" }
+      }
+      animate={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
       transition={{ duration: 0.7, ease: EASE, delay }}
     >
       {children}
@@ -87,8 +90,7 @@ export function RevealGroup({
       style={style}
       variants={STAGGER_PARENT}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+      animate="visible"
     >
       {children}
     </MotionTag>
@@ -129,8 +131,7 @@ export function ParallaxFigure({
       className={className}
       style={style}
       initial={{ opacity: 0, y: 40, scale: 0.97 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.85, ease: EASE }}
     >
       {children}
@@ -153,8 +154,7 @@ export function StatCounter({
       className={className}
       style={style}
       initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, amount: 0.6 }}
+      animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.55, ease: EASE }}
     >
       {value}
