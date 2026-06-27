@@ -596,6 +596,40 @@ export const NEWS: NewsArticle[] = [
         "Brand kit drifted across five vendors? I reconcile it — canonical assets, Figma library, brand guide that actually matches the site. Usually 5-14 day ship.",
     },
   },
+
+  // ── 2026-06-28 — newest field note (auto-featured on /news by date) ──────────
+  {
+    slug: "ai-agents-running-the-shop-2026",
+    title: "The week AI agents started running my shop while I slept",
+    eyebrow: "Stack · 2026",
+    deck: "I stopped thinking of Claude as an autocomplete and started handing it whole jobs — overnight builds, client triage, content drafts. Here's the honest mid-2026 report: what the agents actually own now, what they wrecked once, and the three guardrails that keep it from going sideways.",
+    description:
+      "A mid-2026 field note on running a small AI agency where autonomous agents handle overnight builds, lead triage, and content drafting — what they own, the one mistake that cost a morning, and the guardrails that make it safe.",
+    heroImage: "/news/ai-agents-running-the-shop-2026.jpg",
+    heroPosition: "center top",
+    heroCaption: "Canggu desk · 6am · the overnight agent log",
+    publishedAt: "2026-06-28",
+    readingTime: 8,
+    category: "Stack",
+    tags: ["ai-agents", "claude", "automation", "workflow", "2026"],
+    body: [
+      "Six months ago I treated Claude like a very fast intern that needed me hovering over its shoulder for every line. By this week, I was waking up at 6am in Canggu to a log of work that had already happened while I slept — and that shift is the most important thing that has changed about how this business runs in 2026.",
+      "The honest version, before the hype: agents do not run the whole shop. They run the parts of the shop that are well-defined, repeatable, and reversible. The moment a task needs taste, a hard judgment call, or a conversation with a human who is paying me money, it still comes back to me. What changed is how much falls outside that line.",
+      'Here is what the agents actually own now. First, overnight scaffolding. I leave a written brief at midnight — "build the three service pages, wire the schema, draft the metadata" — and a run executes against the repo in an isolated branch. By morning there is a diff to review, not a blank file. Second, lead triage. Inbound from the contact form and WhatsApp gets read, classified, tagged in GoHighLevel, and given a draft reply in my voice. I approve or rewrite; I never start from zero. Third, first-draft content. The field note you are reading started as a structured outline an agent assembled from my own past notes — then I rewrote every paragraph by hand, because a draft is a starting line, not a finish line.',
+      'Now the part nobody puts in the LinkedIn post. One night an agent "helpfully" refactored a shared CTA component across nine pages and broke the pricing page\'s offer schema in the process. I did not catch it until a client mentioned the pricing page looked off. It cost me a morning and a small dent in pride. The lesson was not "agents are dangerous." The lesson was that I had given it write access to a blast radius bigger than the task required.',
+      "So the guardrails. Guardrail one: agents work on a branch, never on main, and every overnight run opens a diff I read with coffee before anything merges. Reversible by default. Guardrail two: scope the blast radius to the task. If the job is one page, the agent touches one page — I do not hand it the whole repo because it is convenient. Guardrail three: a human gate on anything a client sees or pays for. No agent sends a final reply, publishes a price, or pushes to production without me clicking the button.",
+      "The economics are real and so is the cost. My monthly AI bill is now a genuine line item — bigger than hosting across nine client accounts. But the leverage is the same size as the bill. The overnight runs are the difference between shipping four client builds a month and shipping six, from the same one-person shop, without the burnout that killed three earlier versions of this business.",
+      'If you are a solo operator or a small team standing at this line in 2026, the move is not "automate everything" and it is not "agents are a toy." The move is: find the well-defined, reversible, repeatable parts of your work, hand those to an agent on a branch with a tight blast radius, and keep a human gate on everything a client touches. Do that and you wake up to work already done. Skip the guardrails and you wake up to a morning you have to spend cleaning up.',
+      'The future everyone keeps predicting — agents quietly doing the boring 80% so the human can do the 20% that actually needs a human — is not a 2027 story for me anymore. It is what happened this week. The only thing standing between "powerful" and "reckless" is three guardrails and the discipline to keep them.',
+    ],
+    cta: {
+      serviceLabel: "AI Business Systems",
+      label: "See the AI systems service",
+      href: "/services/ai-business-systems",
+      tagline:
+        "Want agents doing your overnight work — safely? I design AI systems with branch-only runs, scoped blast radius, and a human gate on everything clients touch. Usually a 7-14 day build.",
+    },
+  },
 ];
 
 export function getArticle(slug: string): NewsArticle | undefined {

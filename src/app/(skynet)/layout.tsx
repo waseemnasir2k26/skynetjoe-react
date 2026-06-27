@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Analytics, { GtmNoscript } from "@/components/Analytics";
 import AISignals from "@/components/aeo/AISignals";
 import LiveChat from "@/components/LiveChat";
+import LiveVisitors from "@/components/LiveVisitors";
 import DiscoveryPopup from "@/components/DiscoveryPopup";
 import IncomingCallPopup from "@/components/IncomingCallPopup";
 import StickyBookCallBar from "@/components/cta/StickyBookCallBar";
@@ -144,6 +145,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <LiveVisitors />
         <LiveChat />
         <Suspense fallback={null}>
           <DiscoveryPopup />

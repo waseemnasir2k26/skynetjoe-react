@@ -7,6 +7,7 @@ import { NEWS, getArticle, relatedFor } from "@/lib/news";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import ZoomableImage from "@/components/ZoomableImage";
+import ArticleViews from "@/components/news/ArticleViews";
 
 /**
  * Dynamic /news/[slug] — cream editorial pivot. Renders cream pages for entries
@@ -248,6 +249,13 @@ export default async function NewsArticlePage({
             >
               — {formatDate(a.publishedAt)} · {a.readingTime} min read
             </span>
+            <span
+              aria-hidden
+              style={{ color: "var(--ink-faint)", opacity: 0.5 }}
+            >
+              ·
+            </span>
+            <ArticleViews slug={a.slug} />
           </div>
 
           <h1
