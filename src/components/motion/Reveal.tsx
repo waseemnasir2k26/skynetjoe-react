@@ -24,7 +24,7 @@ export function Reveal({
   className,
   style,
   as = "div",
-  initialVisible = false,
+  initialVisible = true,
 }: {
   children: ReactNode;
   delay?: number;
@@ -89,7 +89,7 @@ export function RevealGroup({
       className={className}
       style={style}
       variants={STAGGER_PARENT}
-      initial="hidden"
+      initial={false}
       animate="visible"
     >
       {children}
@@ -130,7 +130,7 @@ export function ParallaxFigure({
     <motion.figure
       className={className}
       style={style}
-      initial={{ opacity: 0, y: 40, scale: 0.97 }}
+      initial={false}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.85, ease: EASE }}
     >
@@ -153,7 +153,7 @@ export function StatCounter({
     <motion.div
       className={className}
       style={style}
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={false}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.55, ease: EASE }}
     >
