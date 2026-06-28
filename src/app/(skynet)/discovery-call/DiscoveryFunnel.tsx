@@ -80,7 +80,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What if I'm not ready to commit to anything?",
-    a: "Most folks on this call aren't. About 60% take the audit, sit on it for 2–6 weeks, then come back when budget clears. I'd rather you book later than buy something you regret.",
+    a: "Most folks on this call aren't. Plenty take the audit, sit on it for a few weeks, then come back when budget clears. I'd rather you book later than buy something you regret.",
   },
   {
     q: "Can I bring my team?",
@@ -173,16 +173,19 @@ export default function DiscoveryFunnel() {
   const qualRef = useRef<HTMLDivElement>(null);
   const calRef = useRef<HTMLDivElement>(null);
 
-  const scrollTo = useCallback((ref: React.RefObject<HTMLDivElement | null>) => {
-    if (!ref.current) return;
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    ref.current.scrollIntoView({
-      behavior: reduce ? "auto" : "smooth",
-      block: "start",
-    });
-  }, []);
+  const scrollTo = useCallback(
+    (ref: React.RefObject<HTMLDivElement | null>) => {
+      if (!ref.current) return;
+      const reduce =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      ref.current.scrollIntoView({
+        behavior: reduce ? "auto" : "smooth",
+        block: "start",
+      });
+    },
+    [],
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -268,7 +271,13 @@ export default function DiscoveryFunnel() {
   );
 
   return (
-    <div style={{ background: C.cream, color: C.ink, fontFamily: "var(--font-sans)" }}>
+    <div
+      style={{
+        background: C.cream,
+        color: C.ink,
+        fontFamily: "var(--font-sans)",
+      }}
+    >
       <StickyProgress activeStep={activeStep} />
 
       {/* ============================================================
@@ -325,8 +334,8 @@ export default function DiscoveryFunnel() {
                 }}
               >
                 30-minute audit. 3 concrete plays you can ship this quarter. A
-                fixed-price scope back in your inbox 48 hours later. No deck.
-                No SDR. No fake urgency.
+                fixed-price scope back in your inbox 48 hours later. No deck. No
+                SDR. No fake urgency.
               </p>
 
               {/* Trust strip */}
@@ -355,9 +364,13 @@ export default function DiscoveryFunnel() {
                   4.9 / 5
                 </span>
                 <span style={{ margin: "0 12px", color: C.rule }}>·</span>
-                <span><span style={{ color: C.ink }}>180+</span> workflows</span>
+                <span>
+                  <span style={{ color: C.ink }}>180+</span> workflows
+                </span>
                 <span style={{ margin: "0 12px", color: C.rule }}>·</span>
-                <span><span style={{ color: C.ink }}>9</span> countries</span>
+                <span>
+                  <span style={{ color: C.ink }}>9</span> countries
+                </span>
               </div>
 
               {/* CTAs */}
@@ -421,7 +434,15 @@ export default function DiscoveryFunnel() {
                 }}
               >
                 <div className="flex items-start gap-3">
-                  <Quote style={{ width: 18, height: 18, color: C.terra, flexShrink: 0, marginTop: 4 }} />
+                  <Quote
+                    style={{
+                      width: 18,
+                      height: 18,
+                      color: C.terra,
+                      flexShrink: 0,
+                      marginTop: 4,
+                    }}
+                  />
                   <div>
                     <p
                       style={{
@@ -459,7 +480,11 @@ export default function DiscoveryFunnel() {
             <motion.aside
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.7,
+                delay: 0.15,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="lg:sticky lg:top-[140px]"
             >
               <figure
@@ -533,7 +558,13 @@ export default function DiscoveryFunnel() {
                     &ldquo;You don&apos;t get an SDR. You get me on Zoom with
                     your funnel pulled up on my second monitor.&rdquo;
                   </p>
-                  <div className="grid grid-cols-3 gap-2" style={{ borderTop: `1px solid ${C.ruleSoft}`, paddingTop: 12 }}>
+                  <div
+                    className="grid grid-cols-3 gap-2"
+                    style={{
+                      borderTop: `1px solid ${C.ruleSoft}`,
+                      paddingTop: 12,
+                    }}
+                  >
                     <Stat value="180+" label="Workflows" />
                     <Stat value="40+" label="Sites" />
                     <Stat value="9" label="Countries" />
@@ -656,7 +687,9 @@ export default function DiscoveryFunnel() {
                       marginBottom: 16,
                     }}
                   >
-                    <ShieldCheck style={{ width: 24, height: 24, color: C.terra }} />
+                    <ShieldCheck
+                      style={{ width: 24, height: 24, color: C.terra }}
+                    />
                   </div>
                   <h3
                     style={{
@@ -755,17 +788,21 @@ export default function DiscoveryFunnel() {
                 One real audit.
               </span>
             </h2>
-            <p style={{ fontSize: 16, color: C.ink2, lineHeight: 1.6, margin: 0 }}>
+            <p
+              style={{
+                fontSize: 16,
+                color: C.ink2,
+                lineHeight: 1.6,
+                margin: 0,
+              }}
+            >
               No deck. No SDR. Just me, your funnel, and a shared screen. Show
               up with your numbers — you leave with a roadmap.
             </p>
           </motion.div>
 
           <div className="max-w-4xl mx-auto">
-            <CalendlyEmbed
-              qualification={qualification}
-              leadId={leadId}
-            />
+            <CalendlyEmbed qualification={qualification} leadId={leadId} />
           </div>
 
           {/* Trust cards — cream-2 with rotation */}
@@ -803,14 +840,18 @@ export default function DiscoveryFunnel() {
                       visible: {
                         opacity: 1,
                         y: 0,
-                        transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+                        transition: {
+                          duration: 0.5,
+                          ease: [0.16, 1, 0.3, 1] as const,
+                        },
                       },
                     }}
                     style={{
                       background: C.cream3,
                       border: `1px solid ${C.rule}`,
                       padding: 24,
-                      transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                      transform:
+                        i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                     }}
                   >
                     <div
@@ -839,7 +880,14 @@ export default function DiscoveryFunnel() {
                     >
                       {c.title}
                     </h3>
-                    <p style={{ fontSize: 14, color: C.ink2, lineHeight: 1.6, margin: 0 }}>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        color: C.ink2,
+                        lineHeight: 1.6,
+                        margin: 0,
+                      }}
+                    >
                       {c.body}
                     </p>
                   </motion.div>

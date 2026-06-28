@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import LetterArticle from "@/components/letter/LetterArticle";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -64,41 +65,45 @@ export default function Page() {
         category={article.category}
         signatureMeta="— Canggu rooftop · 2026-05-07"
         related={related}
+        cta={article.cta}
       >
         <p>
           When clients sign on, the first thing I tell them is: you&apos;ll hear
           back within eight hours, weekday Bali time. That&apos;s the deal.
           That&apos;s the entire customer-success program. There&apos;s no
           dashboard, no monthly check-in call, no &quot;account executive&quot;
-          who pretends to know your account. Just a Signal thread and an eight-hour
-          reply window.
+          who pretends to know your account. Just a Signal thread and an
+          eight-hour reply window.
         </p>
         <p>
-          Eight hours sounds aggressive — most agencies promise 24–48. But
-          eight is actually the laziest number I could pick, because of how
+          Eight hours sounds aggressive — most agencies promise 24–48. But eight
+          is actually the laziest number I could pick, because of how
           Bali&apos;s timezone works. GMT+8 means I wake up at 6am as US East
-          Coast is going to sleep. By the time New York opens at 9am EST
-          (8pm Bali), I&apos;ve already had a full work day, ridden the scooter
-          home, eaten, and am on the second coffee block. Any Signal from a
-          US client that lands in their morning gets a reply before I sleep.
-          That&apos;s structurally 8 hours. Sometimes 3.
+          Coast is going to sleep. By the time New York opens at 9am EST (8pm
+          Bali), I&apos;ve already had a full work day, ridden the scooter home,
+          eaten, and am on the second coffee block. Any Signal from a US client
+          that lands in their morning gets a reply before I sleep. That&apos;s
+          structurally 8 hours. Sometimes 3.
         </p>
 
         <h2>Why I built the shop around reply time</h2>
         <p>
           Because the single complaint I heard from every client who&apos;d been
-          burned by an agency was the same: <em>&quot;I had to chase them.&quot;</em>
+          burned by an agency was the same:{" "}
+          <em>&quot;I had to chase them.&quot;</em>
         </p>
         <p>
           Not a technical complaint. Not a deliverable complaint. Not a price
           complaint. They had to chase. They&apos;d send a Signal on Tuesday
           asking about a checkout bug, get a reply Friday saying &quot;great
-          question, let me check with the dev team,&quot; and another week
-          would pass before anyone touched it. By the time it was fixed, the
-          client had lost trust in the shop and the bug had cost them four-figure
+          question, let me check with the dev team,&quot; and another week would
+          pass before anyone touched it. By the time it was fixed, the client
+          had lost trust in the shop and the bug had cost them four-figure
           revenue.
         </p>
-        <div className="margin-note">they chased — that&apos;s the whole pain</div>
+        <div className="margin-note">
+          they chased — that&apos;s the whole pain
+        </div>
         <p>
           So I made the eight-hour reply the headline promise. Not the
           deliverable, not the price, not the tech stack — the reply. Because if
@@ -114,9 +119,9 @@ export default function Page() {
         </p>
         <ul>
           <li>
-            <strong>Signal (one number)</strong> — every active client
-            in one app. Pinned threads at the top. Star-emoji on threads that
-            need a reply today.
+            <strong>Signal (one number)</strong> — every active client in one
+            app. Pinned threads at the top. Star-emoji on threads that need a
+            reply today.
           </li>
           <li>
             <strong>Notion board, four columns</strong> — Today, This week,
@@ -141,28 +146,28 @@ export default function Page() {
         <h2>The weekly rhythm</h2>
         <p>
           Mondays in Bali are slow. US clients are still in their weekend, EU
-          clients are in their Monday morning. I use Monday for deep build
-          work — the hard stuff that needs a 4-hour uninterrupted block. No
-          calls, no meetings, no Signal checks until 4pm.
+          clients are in their Monday morning. I use Monday for deep build work
+          — the hard stuff that needs a 4-hour uninterrupted block. No calls, no
+          meetings, no Signal checks until 4pm.
         </p>
         <p>
-          Tuesdays through Thursdays are reactive. I check Signal at 7am
-          (over the first coffee at Crate or Penny Lane), 12pm (lunch break),
-          and 4pm (end of the work block). Three checks. That&apos;s the
-          whole loop. Anything urgent inside that window gets handled in
-          under an hour because it&apos;s already on my phone.
+          Tuesdays through Thursdays are reactive. I check Signal at 7am (over
+          the first coffee at Crate or Penny Lane), 12pm (lunch break), and 4pm
+          (end of the work block). Three checks. That&apos;s the whole loop.
+          Anything urgent inside that window gets handled in under an hour
+          because it&apos;s already on my phone.
         </p>
         <p>
-          Fridays I write — newsletters, this kind of essay, content batches
-          for LinkedIn. The build work is mostly wrapped, the inbox is mostly
-          quiet, and writing requires the kind of attention you can&apos;t
-          fake on a noisy week.
+          Fridays I write — newsletters, this kind of essay, content batches for
+          LinkedIn. The build work is mostly wrapped, the inbox is mostly quiet,
+          and writing requires the kind of attention you can&apos;t fake on a
+          noisy week.
         </p>
         <blockquote>
-          The hard part isn&apos;t answering — it&apos;s the discipline of
-          not answering immediately. If you reply in 90 seconds you train
-          clients to expect 90 seconds. Eight hours is the right number
-          because it&apos;s humane in both directions.
+          The hard part isn&apos;t answering — it&apos;s the discipline of not
+          answering immediately. If you reply in 90 seconds you train clients to
+          expect 90 seconds. Eight hours is the right number because it&apos;s
+          humane in both directions.
           <cite>— operating note, March 2026</cite>
         </blockquote>
 
@@ -183,12 +188,15 @@ export default function Page() {
           4–6 hours of focused work, every day, on the right thing.
         </p>
         <p>
-          The other discipline: <strong>I close every build inside the contracted
-          window or I refund the slot.</strong> I&apos;ve refunded twice in 18
-          months. Both times I let the client pick a future slot at the original
-          price and they did, but I shipped on time after that because the
-          public humiliation of a refund is a stronger forcing function than
-          any project-management tool.
+          The other discipline:{" "}
+          <strong>
+            I close every build inside the contracted window or I refund the
+            slot.
+          </strong>{" "}
+          I&apos;ve refunded twice in 18 months. Both times I let the client
+          pick a future slot at the original price and they did, but I shipped
+          on time after that because the public humiliation of a refund is a
+          stronger forcing function than any project-management tool.
         </p>
 
         <h2>What burns me out — and what doesn&apos;t</h2>
@@ -206,15 +214,16 @@ export default function Page() {
         <p>
           None of those are reply-volume issues. They&apos;re front-of-funnel
           issues. The eight-hour reply window is downstream of a tight audit
-          process, public pricing, fixed scope, and the willingness to say
-          &quot;not a fit, here&apos;s a referral&quot; on the first call.
+          process, <Link href="/pricing">public pricing</Link>, fixed scope, and
+          the willingness to say &quot;not a fit, here&apos;s a referral&quot;
+          on the first call.
         </p>
         <p>
           The week I shipped the GutReno funnel and the Wellness DNA Shopify
           stack — both inside the same 10-day window in February — I worked
-          maybe 35 hours total. Eight-hour replies, focused build blocks,
-          no calls past 5pm Bali time. The week after I took five days off
-          and rode the scooter up to Ubud. Nothing dropped.
+          maybe 35 hours total. Eight-hour replies, focused build blocks, no
+          calls past 5pm Bali time. The week after I took five days off and rode
+          the scooter up to Ubud. Nothing dropped.
         </p>
 
         <h2>The honest version of why this works</h2>
@@ -226,18 +235,18 @@ export default function Page() {
           tweets at 2am.
         </p>
         <p>
-          The growth path isn&apos;t more clients. It&apos;s higher-tier clients.
-          The Flagship tier ($9,500 + $1,997/mo) means one client can pay for
-          three Starter tiers. The math means I&apos;d rather close one Flagship
-          than eight Starters. And the eight-hour rule scales fine at four
-          retainers; it would break at fifteen.
+          The growth path isn&apos;t more clients. It&apos;s higher-tier
+          clients. The Flagship tier ($9,500 + $1,997/mo) means one client can
+          pay for three Starter tiers. The math means I&apos;d rather close one
+          Flagship than eight Starters. And the eight-hour rule scales fine at
+          four retainers; it would break at fifteen.
         </p>
         <p>
           That&apos;s the trade. Public pricing, tight scope, eight-hour reply,
           ceiling on volume. If you want a 40-person agency with a CSM and a
           weekly status call, the answer is to hire one. If you want one
           operator who&apos;ll reply in under eight hours and ship in under
-          three weeks, that&apos;s the menu.
+          three weeks, <Link href="/services">that&apos;s the menu</Link>.
         </p>
       </LetterArticle>
     </>

@@ -4,8 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import DiscoveryFunnel from "./DiscoveryFunnel";
 
 export const metadata: Metadata = {
-  title:
-    "Free 30-Min Strategy Call — Stop Bleeding Money on Bad Automation",
+  title: "Free 30-Min Strategy Call — Stop Bleeding Money on Bad Automation",
   description:
     "Book a free 30-minute audit with Waseem Nasir. Get 3 concrete plays to recover lost revenue plus a fixed-price scope in 48 hours. No SDR, no pitch deck — just a working roadmap.",
   alternates: { canonical: `${SITE.url}/discovery-call` },
@@ -81,7 +80,7 @@ const faqSchema = {
       name: "What if I'm not ready to commit to anything?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Most folks on this call aren't. About 60% take the audit, sit on it for 2–6 weeks, then come back when budget clears. I'd rather you book later than buy something you regret.",
+        text: "Most folks on this call aren't. Plenty take the audit, sit on it for a few weeks, then come back when budget clears. I'd rather you book later than buy something you regret.",
       },
     },
     {
