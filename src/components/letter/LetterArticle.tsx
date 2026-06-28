@@ -70,6 +70,10 @@ export const LETTER_CSS = `
 .lp-v3 .letter pre code { background:transparent; border:0; color:inherit; padding:0; }
 .lp-v3 .margin-note { position:relative; padding:16px 0 16px 24px; font-family:var(--font-letter-caveat),cursive; font-size:22px; color:var(--gold); line-height:1.3; border-left:2px solid var(--gold); margin:28px 0 28px 16px; transform:rotate(-0.4deg); }
 .lp-v3 .margin-note::before { content:'← '; font-size:24px; }
+.lp-v3 .svc-cta { margin:56px 0 8px; padding:32px; background:var(--paper-2); border:1px solid var(--rule); border-left:3px solid var(--gold); }
+.lp-v3 .svc-cta-kicker { font-family:var(--font-sans-inter),Inter,sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:14px; }
+.lp-v3 .svc-cta-tagline { font-family:var(--font-letter-lora),Georgia,serif; font-style:italic; font-size:22px; line-height:1.35; color:var(--navy); margin:0 0 22px; max-width:48ch; }
+.lp-v3 .svc-cta-row { display:flex; gap:14px; flex-wrap:wrap; }
 .lp-v3 .signature { text-align:center; margin:72px 0 32px; }
 .lp-v3 .signature-text { font-family:var(--font-letter-caveat),cursive; font-size:56px; color:var(--navy); line-height:1; }
 .lp-v3 .signature-meta { margin-top:12px; font-family:var(--font-sans-inter),Inter,sans-serif; font-size:13px; color:var(--navy-2); letter-spacing:0.04em; }
@@ -139,11 +143,16 @@ export type LetterArticleProps = {
   signature?: string;
   signatureMeta?: string;
   related?: RelatedItem[];
+  cta?: { serviceLabel: string; label: string; href: string; tagline: string };
 };
 
 function formatDate(iso: string) {
   const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  return d.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 }
 
 export function LetterShell({ children }: { children: ReactNode }) {
@@ -169,6 +178,7 @@ export default function LetterArticle({
   signature = "Waseem",
   signatureMeta,
   related,
+  cta,
 }: LetterArticleProps) {
   return (
     <LetterShell>
@@ -194,7 +204,9 @@ export default function LetterArticle({
                 height={388}
                 priority
               />
-              <figcaption className="hero-photo-cap">— {heroCaption}</figcaption>
+              <figcaption className="hero-photo-cap">
+                — {heroCaption}
+              </figcaption>
             </figure>
             <div className="meta-line">
               <span>{formatDate(datePublished)}</span>
@@ -209,10 +221,27 @@ export default function LetterArticle({
         <section className="letter">
           <div className="wrap">
             {children}
+            {cta && (
+              <aside className="svc-cta">
+                <div className="svc-cta-kicker">
+                  Related service · {cta.serviceLabel}
+                </div>
+                <p className="svc-cta-tagline">{cta.tagline}</p>
+                <div className="svc-cta-row">
+                  <Link href={cta.href} className="btn btn-gold">
+                    {cta.label} →
+                  </Link>
+                  <Link href="/discovery-call" className="btn btn-paper">
+                    Book a strategy call
+                  </Link>
+                </div>
+              </aside>
+            )}
             <div className="signature">
               <div className="signature-text">{signature}</div>
               <div className="signature-meta">
-                {signatureMeta || `— Canggu, Bali · ${formatDate(datePublished)}`}
+                {signatureMeta ||
+                  `— Canggu, Bali · ${formatDate(datePublished)}`}
               </div>
             </div>
           </div>
@@ -225,7 +254,11 @@ export default function LetterArticle({
               <h2 className="related-h">More from the journal</h2>
               <div className="related-grid">
                 {related.map((r) => (
-                  <Link key={r.slug} href={`/news/${r.slug}`} className="related-card">
+                  <Link
+                    key={r.slug}
+                    href={`/news/${r.slug}`}
+                    className="related-card"
+                  >
                     <div className="related-card-meta">{r.category}</div>
                     <div className="related-card-title">{r.title}</div>
                     <p className="related-card-deck">{r.deck}</p>
@@ -241,8 +274,8 @@ export default function LetterArticle({
             Reading isn&apos;t shipping. <em>Send the brief.</em>
           </h2>
           <p>
-            Eight-hour reply on weekday Bali time. Yes, no, or referral. Audit&apos;s free.
-            Either way you walk with findings.
+            Eight-hour reply on weekday Bali time. Yes, no, or referral.
+            Audit&apos;s free. Either way you walk with findings.
           </p>
           <div className="closer-cta-row">
             <a href="/discovery-call" className="btn btn-gold">

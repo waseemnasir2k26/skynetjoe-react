@@ -18,7 +18,9 @@ export const metadata: Metadata = {
       "AI answers and texts back every missed call 24/7, plus Google Business Profile and a 1-page site. Free missed-call audit for Texas home-services pros.",
     url: PAGE_URL,
     type: "website",
-    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "SkynetLabs" }],
+    images: [
+      { url: "/og-default.png", width: 1200, height: 630, alt: "SkynetLabs" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -147,15 +149,20 @@ export default function HomeServicesLandingPage() {
           Every call you miss, <em>your competitor answers.</em>
         </h1>
         <p className="sub">
-          When your crew is on a job, the phone keeps ringing. The caller hangs up
-          and dials the next guy. We answer and text back every missed call 24/7,
-          so the job stays yours.
+          When your crew is on a job, the phone keeps ringing. The caller hangs
+          up and dials the next guy. We answer and text back every missed call
+          24/7, so the job stays yours.
         </p>
 
-        <div className="hs-ghost" aria-label="Examples of missed calls and the revenue lost">
+        <div
+          className="hs-ghost"
+          aria-label="Examples of missed calls and the revenue lost"
+        >
           <div className="hs-ticket">
             <span className="meta">
-              <span className="label">Missed call &mdash; AC out, no cooling</span>
+              <span className="label">
+                Missed call &mdash; AC out, no cooling
+              </span>
               <span className="time">Tue 2:14 PM &middot; crew on a job</span>
             </span>
             <span className="lost">&minus;$1,200</span>
@@ -184,21 +191,28 @@ export default function HomeServicesLandingPage() {
       <section className="hs-section" id="leak">
         <h2>The leak is the phone</h2>
         <p className="lead">
-          You are great at the work. The money walks out the door before you ever
-          pick up. Here is what the numbers say about home-services calls.
+          You are great at the work. The money walks out the door before you
+          ever pick up. Here is what the numbers say about home-services calls.
         </p>
         <div className="hs-stats">
           <div className="hs-stat">
             <span className="num">62%</span>
-            <p>of calls to home-services go unanswered when crews are on jobs.</p>
+            <p>
+              of calls to home-services go unanswered when crews are on jobs.
+            </p>
           </div>
           <div className="hs-stat">
             <span className="num">85%</span>
-            <p>of callers who hit voicemail never call back. They just move on.</p>
+            <p>
+              of callers who hit voicemail never call back. They just move on.
+            </p>
           </div>
           <div className="hs-stat">
-            <span className="num">78%</span>
-            <p>of customers hire whoever answers first, not the cheapest bid.</p>
+            <span className="num">1st</span>
+            <p>
+              The contractor who answers first usually wins the job — speed
+              beats the cheapest bid.
+            </p>
           </div>
         </div>
       </section>
@@ -206,39 +220,46 @@ export default function HomeServicesLandingPage() {
       <section className="hs-section" id="bundle">
         <h2>What you get</h2>
         <p className="lead">
-          One simple setup. Plain English. No apps to learn, no new phone, nothing
-          for you to babysit.
+          One simple setup. Plain English. No apps to learn, no new phone,
+          nothing for you to babysit.
         </p>
         <div className="hs-bundle">
           <div className="hs-step">
-            <span className="badge" aria-hidden="true">1</span>
+            <span className="badge" aria-hidden="true">
+              1
+            </span>
             <div>
               <h3>We answer when you can&apos;t</h3>
               <p>
-                Miss a call and the caller instantly gets a friendly text: &ldquo;Sorry
-                we missed you &mdash; what do you need?&rdquo; It books the job while you
-                are still on the ladder. Works 24/7, weekends and nights too.
+                Miss a call and the caller instantly gets a friendly text:
+                &ldquo;Sorry we missed you &mdash; what do you need?&rdquo; It
+                books the job while you are still on the ladder. Works 24/7,
+                weekends and nights too.
               </p>
             </div>
           </div>
           <div className="hs-step">
-            <span className="badge" aria-hidden="true">2</span>
+            <span className="badge" aria-hidden="true">
+              2
+            </span>
             <div>
               <h3>Your Google listing, fixed</h3>
               <p>
-                We clean up your Google Business Profile so you show up when someone
-                searches &ldquo;plumber near me&rdquo; at 9pm &mdash; with photos, hours,
-                and a button that calls you.
+                We clean up your Google Business Profile so you show up when
+                someone searches &ldquo;plumber near me&rdquo; at 9pm &mdash;
+                with photos, hours, and a button that calls you.
               </p>
             </div>
           </div>
           <div className="hs-step">
-            <span className="badge" aria-hidden="true">3</span>
+            <span className="badge" aria-hidden="true">
+              3
+            </span>
             <div>
               <h3>A simple 1-page site</h3>
               <p>
-                A clean, fast page that says what you do, where you work, and how to
-                reach you. Built to turn a click into a call. No bloat.
+                A clean, fast page that says what you do, where you work, and
+                how to reach you. Built to turn a click into a call. No bloat.
               </p>
             </div>
           </div>
@@ -249,24 +270,39 @@ export default function HomeServicesLandingPage() {
         <h2>Up and running in one week</h2>
         <div className="hs-bundle">
           <div className="hs-step">
-            <span className="badge" aria-hidden="true">1</span>
+            <span className="badge" aria-hidden="true">
+              1
+            </span>
             <div>
               <h3>Day 1 &mdash; the audit</h3>
-              <p>We show you exactly how many calls slipped last month and what they were worth.</p>
+              <p>
+                We show you exactly how many calls slipped last month and what
+                they were worth.
+              </p>
             </div>
           </div>
           <div className="hs-step">
-            <span className="badge" aria-hidden="true">2</span>
+            <span className="badge" aria-hidden="true">
+              2
+            </span>
             <div>
               <h3>Days 2&ndash;5 &mdash; we build</h3>
-              <p>We set up the missed-call text-back, fix your Google listing, and build your page. You keep working.</p>
+              <p>
+                We set up the missed-call text-back, fix your Google listing,
+                and build your page. You keep working.
+              </p>
             </div>
           </div>
           <div className="hs-step">
-            <span className="badge" aria-hidden="true">3</span>
+            <span className="badge" aria-hidden="true">
+              3
+            </span>
             <div>
               <h3>Day 7 &mdash; you go live</h3>
-              <p>Every missed call now gets answered. You see each new lead the moment it lands.</p>
+              <p>
+                Every missed call now gets answered. You see each new lead the
+                moment it lands.
+              </p>
             </div>
           </div>
         </div>
@@ -275,13 +311,11 @@ export default function HomeServicesLandingPage() {
       <section className="hs-section">
         <div className="hs-proof">
           <h2>Do the math</h2>
-          <p>
-            One missed call a day at $275 to $1,200 each adds up to
-          </p>
+          <p>One missed call a day at $275 to $1,200 each adds up to</p>
           <p className="big">$45,000&ndash;$120,000 a year</p>
           <p>
-            slipping to the contractor who picked up. Plugging that leak costs less
-            than the price of one missed job a month.
+            slipping to the contractor who picked up. Plugging that leak costs
+            less than the price of one missed job a month.
           </p>
         </div>
       </section>
@@ -290,14 +324,18 @@ export default function HomeServicesLandingPage() {
         <h2>See what you missed last month</h2>
         <p className="lead" style={{ margin: "0 auto 24px" }}>
           Free missed-call audit. No call required. We show you exactly how many
-          leads slipped &mdash; and what they were worth &mdash; before you decide
-          anything.
+          leads slipped &mdash; and what they were worth &mdash; before you
+          decide anything.
         </p>
         <AuditForm id="audit-form" />
         <p className="hs-note">
           One email. No sales call to get the report. We do not share your info.
         </p>
-        <a href="https://calendly.com/skynetlabs" className="hs-secondary" data-meta-event="Schedule">
+        <a
+          href="https://calendly.com/skynetlabs"
+          className="hs-secondary"
+          data-meta-event="Schedule"
+        >
           Prefer to talk it through? Book a 15-min call instead
         </a>
       </section>
@@ -307,19 +345,34 @@ export default function HomeServicesLandingPage() {
         <div className="hs-faq">
           <details>
             <summary>Do I need a new phone or number?</summary>
-            <p>No. We work with the number you already use. Nothing changes for your callers except that they finally get a reply.</p>
+            <p>
+              No. We work with the number you already use. Nothing changes for
+              your callers except that they finally get a reply.
+            </p>
           </details>
           <details>
             <summary>Is this hard to set up?</summary>
-            <p>Not for you. We do the whole setup. You answer a few quick questions and keep running your business. It is live within a week.</p>
+            <p>
+              Not for you. We do the whole setup. You answer a few quick
+              questions and keep running your business. It is live within a
+              week.
+            </p>
           </details>
           <details>
             <summary>What does the free audit actually show me?</summary>
-            <p>How many calls you missed last month, when they came in, and a dollar estimate of the work that likely walked away. No strings.</p>
+            <p>
+              How many calls you missed last month, when they came in, and a
+              dollar estimate of the work that likely walked away. No strings.
+            </p>
           </details>
           <details>
-            <summary>What if I am too busy to deal with this right now?</summary>
-            <p>That is exactly when calls get missed the most. The audit takes you two minutes to request and we handle the rest.</p>
+            <summary>
+              What if I am too busy to deal with this right now?
+            </summary>
+            <p>
+              That is exactly when calls get missed the most. The audit takes
+              you two minutes to request and we handle the rest.
+            </p>
           </details>
         </div>
       </section>

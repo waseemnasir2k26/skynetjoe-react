@@ -57,7 +57,7 @@ const content: ServiceFunnelContent = {
       {
         dimension: "Pricing",
         us: "Public, fixed tiers on the page. Scope locked in writing within 48 hours of your brief.",
-        them: "\"Book a call for a quote.\" Stacked monthly app fees that creep as order volume grows.",
+        them: '"Book a call for a quote." Stacked monthly app fees that creep as order volume grows.',
       },
       {
         dimension: "What you own",
@@ -90,7 +90,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "Carts recovered while you do nothing",
-      body: "A two-hour email nudge, a 24-hour SMS with an offer, a 72-hour \"what went wrong\" survey — all source-tagged so recovery attribution joins back to ad spend instead of guessing.",
+      body: 'A two-hour email nudge, a 24-hour SMS with an offer, a 72-hour "what went wrong" survey — all source-tagged so recovery attribution joins back to ad spend instead of guessing.',
       proof: "Recovery flow runs unattended",
     },
     {
@@ -100,7 +100,7 @@ const content: ServiceFunnelContent = {
     },
     {
       title: "Supplier and stock that stay in sync",
-      body: "Low-stock threshold trips a Slack alert and a draft reorder PO to the supplier; inbound restocks write back to Shopify. No more \"we sold out yesterday\" surprises or oversold orders to refund.",
+      body: 'Low-stock threshold trips a Slack alert and a draft reorder PO to the supplier; inbound restocks write back to Shopify. No more "we sold out yesterday" surprises or oversold orders to refund.',
       proof: "0 manual stock reconciliations",
     },
   ],
@@ -121,10 +121,10 @@ const content: ServiceFunnelContent = {
   ],
 
   proof: {
-    metric: "Cart-surprise ~38% → <3%",
+    metric: "Cart-surprise cut sharply",
     client: "KSA fashion retailer (anonymized)",
     detail:
-      "A bilingual RTL-native Shopify shoe store shipped null-to-launch in 14 days, with the Aramex courier rate surfaced on the cart page — cutting cart-stage shipping surprise from roughly 38% to under 3% and pulling the size-return rate from 22% to 9%. Showroom appointments roughly doubled, from about 12 a month to 25.",
+      "A bilingual RTL-native Shopify shoe store shipped null-to-launch in 14 days, with the Aramex courier rate surfaced on the cart page — sharply cutting cart-stage shipping surprise, pulling down the size-return rate, and roughly doubling showroom appointments.",
   },
 
   secondaryProof: {
