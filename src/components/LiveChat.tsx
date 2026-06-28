@@ -15,111 +15,225 @@ type Msg = {
 const INITIAL: Msg = {
   id: 0,
   from: "bot",
-  text:
-    "Hey 👋 I'm Waseem's assistant. Ask me about services, pricing, n8n automation, AEO/SEO, chatbots — or how to book a call.",
+  text: "Hey 👋 I'm Waseem's assistant. Ask me about services, pricing, n8n automation, AEO/SEO, chatbots — or how to book a call.",
 };
 
 function botReply(input: string, nextId: number): Msg {
   const q = input.toLowerCase().trim();
   const has = (...keys: string[]) => keys.some((k) => q.includes(k));
-  const reply = (text: string, cta?: Msg["cta"]): Msg => ({ id: nextId, from: "bot", text, cta });
+  const reply = (text: string, cta?: Msg["cta"]): Msg => ({
+    id: nextId,
+    from: "bot",
+    text,
+    cta,
+  });
 
   // ── Specific topics first (most → least specific) ──
-  if (has("book", "call", "audit", "consult", "meeting", "schedule", "discovery"))
+  if (
+    has("book", "call", "audit", "consult", "meeting", "schedule", "discovery")
+  )
     return reply(
       "Easiest path: apply for a free discovery call. 3-min brief, Waseem reads every one personally and replies within 8 hours.",
-      { label: "Apply for a call", href: "/discovery-call" }
+      { label: "Apply for a call", href: "/discovery-call" },
     );
 
-  if (has("price", "cost", "how much", "budget", "rate", "pricing", "quote", "$"))
+  if (
+    has("price", "cost", "how much", "budget", "rate", "pricing", "quote", "$")
+  )
     return reply(
       "Pricing is public — no mystery quotes. Starter from $1,497 up to $9,500 for a flagship build. Fixed scope, returned within 48h of your brief.",
-      { label: "See pricing", href: "/pricing" }
+      { label: "See pricing", href: "/pricing" },
     );
 
-  if (has("n8n", "automat", "workflow", "zapier", "make.com", "integrat", "no-code", "nocode"))
+  if (
+    has(
+      "n8n",
+      "automat",
+      "workflow",
+      "zapier",
+      "make.com",
+      "integrat",
+      "no-code",
+      "nocode",
+    )
+  )
     return reply(
       "Automation is our core: n8n/Make/Zapier workflows that run while you sleep — lead capture, CRM sync, reminders, billing. n8n self-hosted for the heavy stuff. Want the n8n vs Zapier breakdown?",
-      { label: "n8n vs Zapier", href: "/n8n-vs-zapier" }
+      { label: "n8n vs Zapier", href: "/n8n-vs-zapier" },
     );
 
-  if (has("aeo", "geo", "seo", "rank", "google", "chatgpt", "perplexity", "citation", "answer engine", "llm"))
+  if (
+    has(
+      "aeo",
+      "geo",
+      "seo",
+      "rank",
+      "google",
+      "chatgpt",
+      "perplexity",
+      "citation",
+      "answer engine",
+      "llm",
+    )
+  )
     return reply(
       "AEO/GEO = getting your business cited by ChatGPT, Perplexity & Google AI Overviews, not just ranked. We build answer-first content + schema so AI engines quote you. Full playbook in the guide.",
-      { label: "Read the AEO guide", href: "/aeo-guide" }
+      { label: "Read the AEO guide", href: "/aeo-guide" },
     );
 
-  if (has("chatbot", "chat bot", "whatsapp", "ai agent", "agent", "support bot", "receptionist"))
+  if (
+    has(
+      "chatbot",
+      "chat bot",
+      "whatsapp",
+      "ai agent",
+      "agent",
+      "support bot",
+      "receptionist",
+    )
+  )
     return reply(
       "We build AI chatbots & agents — web chat, WhatsApp, voice receptionists — wired into your CRM so they book calls and answer FAQs 24/7.",
-      { label: "AI Chatbots", href: "/services/ai-chatbots" }
+      { label: "AI Chatbots", href: "/services/ai-chatbots" },
     );
 
-  if (has("content", "video", "reel", "youtube", "tiktok", "social media", "post"))
+  if (
+    has("content", "video", "reel", "youtube", "tiktok", "social media", "post")
+  )
     return reply(
       "AI content at volume: reels, shorts, talking-head video, and faceless channel pipelines — voice-locked to your brand.",
-      { label: "Browse services", href: "/services" }
+      { label: "Browse services", href: "/services" },
     );
 
-  if (has("website", "site", "web ", "develop", "next.js", "nextjs", "wordpress", "shopify", "ecommerce", "landing"))
+  if (
+    has(
+      "website",
+      "site",
+      "web ",
+      "develop",
+      "next.js",
+      "nextjs",
+      "wordpress",
+      "shopify",
+      "ecommerce",
+      "landing",
+    )
+  )
     return reply(
       "We ship custom Next.js sites, WordPress SEO blogs, and Shopify/e-commerce builds — AEO-tuned, 7–14 day ship window.",
-      { label: "Browse services", href: "/services" }
+      { label: "Browse services", href: "/services" },
     );
 
-  if (has("service", "offer", "what do you do", "what can you", "help with", "do you do"))
+  if (
+    has(
+      "service",
+      "offer",
+      "what do you do",
+      "what can you",
+      "help with",
+      "do you do",
+    )
+  )
     return reply(
       "16 productized services across Automation, AI Content, Development & Consulting — n8n, GoHighLevel, chatbots, AEO sites, AI video and more.",
-      { label: "Browse services", href: "/services" }
+      { label: "Browse services", href: "/services" },
     );
 
-  if (has("about", "who are", "who is", "who's", "your story", "yourself", "waseem", "founder"))
+  if (
+    has(
+      "about",
+      "who are",
+      "who is",
+      "who's",
+      "your story",
+      "yourself",
+      "waseem",
+      "founder",
+    )
+  )
     return reply(
       "SkynetLabs is run solo by Waseem Nasir from Bali — n8n + AI automation, AEO sites and GHL CRM systems for service businesses. 4 builds/month max, 14-day ship.",
-      { label: "About Waseem", href: "/author/waseem-nasir" }
+      { label: "About Waseem", href: "/author/waseem-nasir" },
     );
 
-  if (has("where", "located", "location", "bali", "based", "country", "timezone", "remote"))
+  if (
+    has(
+      "where",
+      "located",
+      "location",
+      "bali",
+      "based",
+      "country",
+      "timezone",
+      "remote",
+    )
+  )
     return reply(
       "Based in Canggu, Bali (GMT+8) with roots in Lahore, Pakistan. Fully remote — clients across 9 countries.",
-      { label: "Apply for a call", href: "/discovery-call" }
+      { label: "Apply for a call", href: "/discovery-call" },
     );
 
   if (has("contact", "email", "reach", "get in touch", "phone", "number"))
     return reply(
       "Fastest is the discovery form (8-hour reply). Or reach us via the contact page.",
-      { label: "Contact", href: "/contact" }
+      { label: "Contact", href: "/contact" },
     );
 
   // ── Greetings / smalltalk ──
   if (has("how are you", "how r u", "how are u", "how's it", "hows it"))
     return reply(
       "Running smooth, thanks for asking 🙂 I can help with services, pricing, n8n automation, AEO or booking a call — what are you after?",
-      { label: "Browse services", href: "/services" }
+      { label: "Browse services", href: "/services" },
     );
 
-  if (has("hi", "hello", "hey", "yo", "sup", "good morning", "good evening", "salam", "assalam"))
+  if (
+    has(
+      "hi",
+      "hello",
+      "hey",
+      "yo",
+      "sup",
+      "good morning",
+      "good evening",
+      "salam",
+      "assalam",
+    )
+  )
     return reply(
       "Hey! 👋 Ask me about services, pricing, n8n automation, AEO/SEO, chatbots — or say 'book a call'.",
     );
 
-  if (has("thank", "thanks", "great", "awesome", "cool", "nice", "perfect", "ok", "okay", "got it"))
+  if (
+    has(
+      "thank",
+      "thanks",
+      "great",
+      "awesome",
+      "cool",
+      "nice",
+      "perfect",
+      "ok",
+      "okay",
+      "got it",
+    )
+  )
     return reply(
       "Anytime! Want me to point you to services, pricing, or set up a quick call?",
-      { label: "Apply for a call", href: "/discovery-call" }
+      { label: "Apply for a call", href: "/discovery-call" },
     );
 
   // ── Helpful fallback (not a dead-end) ──
   return reply(
     "Not sure I caught that — I can help with: services, pricing, n8n/automation, AEO/SEO, chatbots, or booking a call. Which one?",
-    { label: "Browse services", href: "/services" }
+    { label: "Browse services", href: "/services" },
   );
 }
 
 export default function LiveChat() {
   const pathname = usePathname();
-  // Default CLOSED so the panel never covers content on first load (small phones).
-  // The floating bubble shows first; user opens on intent. #livechat-open still auto-opens.
+  // Default CLOSED — panel never auto-covers content on first load.
+  // On desktop (≥768 px) a #livechat-open deep-link may auto-open the panel;
+  // on phones it shows only the floating button (matchMedia gate below).
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
   const [msgs, setMsgs] = useState<Msg[]>([INITIAL]);
@@ -148,20 +262,34 @@ export default function LiveChat() {
       if (a) {
         e.preventDefault();
         setOpen(true);
-        try { sessionStorage.removeItem("livechat-closed"); } catch {}
+        try {
+          sessionStorage.removeItem("livechat-closed");
+        } catch {}
       }
     }
     function onHashChange() {
       if (window.location.hash === "#livechat-open") {
         setOpen(true);
-        try { sessionStorage.removeItem("livechat-closed"); } catch {}
+        try {
+          sessionStorage.removeItem("livechat-closed");
+        } catch {}
       }
     }
     document.addEventListener("click", onAnchor);
     window.addEventListener("hashchange", onHashChange);
-    if (window.location.hash === "#livechat-open") {
+    // P0 mobile fix (audit-2026-06-28): gate page-load auto-open behind
+    // matchMedia so a #livechat-open deep-link only expands the panel on
+    // desktop (≥768 px). Phones show only the floating button; user taps
+    // to open on intent. Anchor-click and hashchange remain ungated
+    // because those are explicit user actions regardless of screen size.
+    if (
+      window.location.hash === "#livechat-open" &&
+      window.matchMedia("(min-width: 768px)").matches
+    ) {
       setOpen(true);
-      try { sessionStorage.removeItem("livechat-closed"); } catch {}
+      try {
+        sessionStorage.removeItem("livechat-closed");
+      } catch {}
     }
     return () => {
       document.removeEventListener("click", onAnchor);
@@ -246,7 +374,9 @@ export default function LiveChat() {
             <button
               onClick={() => {
                 setOpen(true);
-                try { sessionStorage.removeItem("livechat-closed"); } catch {}
+                try {
+                  sessionStorage.removeItem("livechat-closed");
+                } catch {}
               }}
               aria-label="Open live chat"
               className="w-16 h-16 flex items-center justify-center transition"
@@ -307,7 +437,10 @@ export default function LiveChat() {
             }}
           >
             <div className="flex items-center gap-2">
-              <MessageCircle className="w-4 h-4" style={{ color: "var(--terracotta)" }} />
+              <MessageCircle
+                className="w-4 h-4"
+                style={{ color: "var(--terracotta)" }}
+              />
               <span
                 style={{
                   fontFamily: "var(--font-mono)",
@@ -338,7 +471,9 @@ export default function LiveChat() {
             <button
               onClick={() => {
                 setOpen(false);
-                try { sessionStorage.setItem("livechat-closed", "1"); } catch {}
+                try {
+                  sessionStorage.setItem("livechat-closed", "1");
+                } catch {}
               }}
               aria-label="Close chat"
               style={{
@@ -390,7 +525,9 @@ export default function LiveChat() {
                       href={m.cta.href}
                       onClick={() => {
                         setOpen(false);
-                        try { sessionStorage.setItem("livechat-closed", "1"); } catch {}
+                        try {
+                          sessionStorage.setItem("livechat-closed", "1");
+                        } catch {}
                       }}
                       className="mt-2 inline-flex items-center gap-1"
                       style={{
