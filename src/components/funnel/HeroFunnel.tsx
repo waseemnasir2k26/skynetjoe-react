@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Star, Zap, Repeat, ListChecks } from "lucide-react";
 
 /**
@@ -16,6 +16,12 @@ import { ArrowRight, Star, Zap, Repeat, ListChecks } from "lucide-react";
  */
 
 export default function HeroFunnel() {
+  // P0 LCP fix (audit-2026-06-28): use reduced-motion preference to skip
+  // animation entirely for users who opt out, and always start at opacity:1
+  // so the hero H1 and card are visible on first paint — not hidden behind a
+  // JS-driven fade-in that inflates Largest Contentful Paint.
+  const reducedMotion = useReducedMotion();
+
   return (
     <section
       className="relative overflow-hidden"
@@ -38,9 +44,12 @@ export default function HeroFunnel() {
         }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          // LCP fix: hero H1 paints at full opacity on first render.
+          // Only the y-transform animates; opacity stays at 1 throughout.
+          // prefers-reduced-motion: initial={false} = snap to final state, no motion.
+          initial={reducedMotion ? false : { opacity: 1, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: reducedMotion ? 0 : 0.6 }}
         >
           {/* Mono em-dash eyebrow */}
           <div
@@ -137,7 +146,12 @@ export default function HeroFunnel() {
               />
               Top Rated Plus · Upwork
             </span>
-            <span className="trust-sep" style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span
+              className="trust-sep"
+              style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}
+            >
+              ·
+            </span>
             <span style={{ color: "#A8451F" }}>
               <Star
                 style={{
@@ -152,17 +166,34 @@ export default function HeroFunnel() {
               />
               Top Rated · Fiverr
             </span>
-            <span className="trust-sep" style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span
+              className="trust-sep"
+              style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}
+            >
+              ·
+            </span>
             <span>
               <span style={{ color: "var(--ink)" }}>180+</span> workflows
             </span>
-            <span className="trust-sep" style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}>·</span>
+            <span
+              className="trust-sep"
+              style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}
+            >
+              ·
+            </span>
             <span>
               <span style={{ color: "var(--ink)" }}>9</span> countries
             </span>
           </div>
 
-          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 24 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: 24,
+            }}
+          >
             <Link
               href="/discovery-call"
               style={{
@@ -222,11 +253,21 @@ export default function HeroFunnel() {
         {/* Icon-driven "what we set up" card — replaces founder photo.
             Diagrams/icons, not personal photography (Webex pattern). */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
+          // LCP fix: card starts visible (opacity:1); only scale eases in.
+          // prefers-reduced-motion: snap to final state.
+          initial={reducedMotion ? false : { opacity: 1, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
+          transition={{
+            duration: reducedMotion ? 0 : 0.7,
+            delay: reducedMotion ? 0 : 0.15,
+          }}
           className="relative block"
-          style={{ width: "100%", maxWidth: 420, marginLeft: "auto", marginRight: "auto" }}
+          style={{
+            width: "100%",
+            maxWidth: 420,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
         >
           <div
             style={{
@@ -250,9 +291,21 @@ export default function HeroFunnel() {
               What we set up for you
             </div>
             {[
-              { Icon: Zap, title: "Instant replies", body: "Every new lead gets a friendly answer within a minute — day or night." },
-              { Icon: Repeat, title: "Automatic follow-up", body: "Polite reminders go out for you until they book or buy. Nothing slips." },
-              { Icon: ListChecks, title: "Repeat work, handled", body: "The boring admin runs itself, so your team works on what actually pays." },
+              {
+                Icon: Zap,
+                title: "Instant replies",
+                body: "Every new lead gets a friendly answer within a minute — day or night.",
+              },
+              {
+                Icon: Repeat,
+                title: "Automatic follow-up",
+                body: "Polite reminders go out for you until they book or buy. Nothing slips.",
+              },
+              {
+                Icon: ListChecks,
+                title: "Repeat work, handled",
+                body: "The boring admin runs itself, so your team works on what actually pays.",
+              },
             ].map(({ Icon, title, body }, i) => (
               <div
                 key={title}
@@ -278,13 +331,31 @@ export default function HeroFunnel() {
                     justifyContent: "center",
                   }}
                 >
-                  <Icon style={{ width: 20, height: 20, color: "#A8451F" }} strokeWidth={2} />
+                  <Icon
+                    style={{ width: 20, height: 20, color: "#A8451F" }}
+                    strokeWidth={2}
+                  />
                 </span>
                 <span>
-                  <span style={{ display: "block", fontWeight: 700, fontSize: 16, color: "var(--ink)", marginBottom: 2 }}>
+                  <span
+                    style={{
+                      display: "block",
+                      fontWeight: 700,
+                      fontSize: 16,
+                      color: "var(--ink)",
+                      marginBottom: 2,
+                    }}
+                  >
                     {title}
                   </span>
-                  <span style={{ display: "block", fontSize: 14, lineHeight: 1.5, color: "var(--ink-2)" }}>
+                  <span
+                    style={{
+                      display: "block",
+                      fontSize: 14,
+                      lineHeight: 1.5,
+                      color: "var(--ink-2)",
+                    }}
+                  >
                     {body}
                   </span>
                 </span>
