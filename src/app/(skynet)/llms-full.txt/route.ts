@@ -29,7 +29,9 @@ function readContent(file: string): string {
     // Surface renamed/missing content files in build logs instead of silently
     // emitting an empty section. Still return "" so the route keeps working.
     const reason = err instanceof Error ? err.message : String(err);
-    console.warn(`[llms-full.txt] content file missing or unreadable: ${p} — ${reason}`);
+    console.warn(
+      `[llms-full.txt] content file missing or unreadable: ${p} — ${reason}`,
+    );
     return "";
   }
 }
@@ -45,7 +47,7 @@ Founder: ${SITE.founder}
 Domain: ${SITE.domain}
 Contact: ${SITE.emailFounder} | Apply for a call: ${SITE.url}/discovery-call
 Base: Canggu, Bali (GMT+8) + Lahore, Pakistan
-Operating since: 2014 (WordPress) | AI automation since 2023
+Operating since: 2019
 
 Generated: ${new Date().toISOString()}
 
@@ -65,8 +67,8 @@ ${SERVICE_CATEGORIES.flatMap((cat) =>
       `### ${svc.label} (${cat.name})
 URL: ${SITE.url}/services/${svc.slug}
 ${svc.desc}
-`
-  )
+`,
+  ),
 ).join("\n")}
 
 ---
@@ -121,7 +123,7 @@ ${POSTS.map(
 URL: ${SITE.url}/blog/${p.slug}
 Published: ${p.publishedAt}
 ${p.description}
-`
+`,
 ).join("\n")}
 
 ---

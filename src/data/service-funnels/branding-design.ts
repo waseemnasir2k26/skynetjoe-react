@@ -142,10 +142,10 @@ const content: ServiceFunnelContent = {
   },
 
   secondaryProof: {
-    metric: "2.1 → 4.4 / 5",
+    metric: "Tire-kickers → qualified",
     client: "Manhattan cosmetic dental atelier (anonymized)",
     detail:
-      "A bespoke 14-section identity and site — built to look nothing like the template clinic sites in midtown — lifted rated inquiry quality from 2.1 to 4.4 out of 5. The founding clinician's line: \"Our last site cost five times more and looked like every other clinic. This one looks like us.\"",
+      'A bespoke 14-section identity and site — built to look nothing like the template clinic sites in midtown — noticeably lifted the quality of inbound inquiries. The founding clinician\'s line: "Our last site cost five times more and looked like every other clinic. This one looks like us."',
   },
 
   faqs: [

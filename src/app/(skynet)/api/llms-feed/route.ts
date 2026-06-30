@@ -13,7 +13,7 @@ export async function GET() {
       label: svc.label,
       description: svc.desc,
       url: `${SITE.url}/services/${svc.slug}`,
-    }))
+    })),
   );
 
   const feed = {
@@ -33,8 +33,7 @@ export async function GET() {
         primary: "Canggu, Bali, Indonesia (GMT+8)",
         secondary: "Lahore, Pakistan (Liberty Market)",
       },
-      operating_since: 2014,
-      pivoted_to_ai_automation: 2023,
+      operating_since: 2019,
       social: SITE.social,
     },
     canonical: {

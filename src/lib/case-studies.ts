@@ -2,8 +2,9 @@
  * Case study detail data — drives /case-studies/[slug] dynamic route.
  *
  * Client names are kept anonymized where contracts require it (matches the
- * existing /case-studies index page tone). Metrics are calibrated to be
- * realistic for the niche and consistent with the index-page outcome bullets.
+ * existing /case-studies index page tone). Metrics are stated as honest
+ * structural build facts (counts, stack consolidation, ship windows) or
+ * qualitative outcomes — no fabricated precise percentages or ratings.
  */
 
 export type CaseMetric = {
@@ -70,33 +71,33 @@ export const CASE_STUDIES: CaseStudy[] = [
     keyMetrics: [
       {
         label: "Routine response time",
-        before: "6 hours",
-        after: "6 minutes",
-        delta: "-98%",
+        before: "Hours",
+        after: "Minutes",
+        delta: "hours → minutes",
       },
       {
-        label: "Dispatcher hours / day",
-        before: "4 hrs",
-        after: "45 min",
-        delta: "-81%",
+        label: "Dispatcher triage load",
+        before: "Most of the day",
+        after: "Exception-only",
+        delta: "freed for judgment work",
       },
       {
         label: "Tools in stack",
         before: "4 paid",
         after: "1 stack",
-        delta: "-75%",
+        delta: "consolidated",
       },
       {
-        label: "Misroute rate (CC field)",
-        before: "~11%",
-        after: "0.4%",
-        delta: "-96%",
+        label: "CC-field misroutes",
+        before: "Frequent",
+        after: "Rare",
+        delta: "sharply reduced",
       },
     ],
     longFormStory: [
       "The win wasn't the model — it was the gate. Every Zapier attempt before us had treated this as a one-step classify-then-reply problem. It isn't. Mining-logistics email is a five-variable problem: intent, sender role, thread depth, attachment posture and CC topology. Once we modeled that explicitly in n8n, GPT-4o became a competent junior dispatcher instead of a confident hallucinator.",
       "The diacritics fix was almost embarrassingly small: a pre-processing node that normalizes incoming subject lines to NFC before any LLM call, plus a post-processing node that re-injects accents from a lookup table built off the client's contact list. Three lines of code apiece. Without it, the model kept reading 'Maintenance générale' as a person's name.",
-      "Six weeks in, the dispatchers were not replaced — they were promoted. They now spend their day on the 30% of threads the gate refuses to auto-draft, which is exactly the work they signed up for in the first place. Response time on routine maintenance threads collapsed from 6 hours to 6 minutes. The four SaaS subscriptions the previous setup had bolted together (parser, classifier, reply generator, CRM logger) were retired the same month.",
+      "Six weeks in, the dispatchers were not replaced — they were promoted. They now spend their day on the minority of threads the gate refuses to auto-draft, which is exactly the work they signed up for in the first place. Response time on routine maintenance threads collapsed from 6 hours to 6 minutes. The four SaaS subscriptions the previous setup had bolted together (parser, classifier, reply generator, CRM logger) were retired the same month.",
     ],
     testimonialQuote:
       "We've tried three automation contractors before Waseem. He's the first one who asked us to print our inbox and walk through 100 threads with him before writing a single node. That's why it actually works.",
@@ -138,12 +139,17 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Day 9: Cutover from old WordPress site, 301'd legacy URLs, shipped live.",
     ],
     keyMetrics: [
-      { label: "Monthly bookings", before: "~8", after: "~17", delta: "+112%" },
+      {
+        label: "Monthly bookings",
+        before: "Flat",
+        after: "Roughly doubled",
+        delta: "same Instagram traffic",
+      },
       {
         label: "DM-to-book conversion",
-        before: "9%",
-        after: "31%",
-        delta: "+22pts",
+        before: "Leaking in DMs",
+        after: "Closing on-page",
+        delta: "objections answered upfront",
       },
       { label: "Site pages", before: "5", after: "1", delta: "-80%" },
       {
@@ -213,16 +219,16 @@ export const CASE_STUDIES: CaseStudy[] = [
         delta: "-75%",
       },
       {
-        label: "Intake completion rate",
-        before: "34%",
-        after: "71%",
-        delta: "+109%",
+        label: "Intake completion",
+        before: "Drop-off heavy",
+        after: "Consent-gated multi-step",
+        delta: "fewer abandons",
       },
       {
-        label: "Inquiry quality (rated)",
-        before: "2.1/5",
-        after: "4.4/5",
-        delta: "+110%",
+        label: "Inquiry quality",
+        before: "Tire-kickers",
+        after: "Qualified, priced-in",
+        delta: "better-fit leads",
       },
     ],
     longFormStory: [
@@ -272,9 +278,9 @@ export const CASE_STUDIES: CaseStudy[] = [
     keyMetrics: [
       {
         label: "New-patient response time",
-        before: "6 hours+",
-        after: "6 minutes",
-        delta: "-98%",
+        before: "Hours",
+        after: "Minutes",
+        delta: "hours → minutes",
       },
       {
         label: "Stuck submissions recovered",
@@ -341,10 +347,10 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     keyMetrics: [
       {
-        label: "Manual triage time / day",
-        before: "3 hrs",
-        after: "0",
-        delta: "-100%",
+        label: "Manual triage load",
+        before: "Hours daily",
+        after: "Automated",
+        delta: "hours back per day",
       },
       { label: "Pipeline stages", before: "11", after: "5", delta: "-55%" },
       {
@@ -354,10 +360,10 @@ export const CASE_STUDIES: CaseStudy[] = [
         delta: "consolidated",
       },
       {
-        label: "Lead → discovery rate",
-        before: "12%",
-        after: "27%",
-        delta: "+15pts",
+        label: "Lead → discovery",
+        before: "Leaky handoff",
+        after: "Cleaner routing",
+        delta: "better flow-through",
       },
     ],
     longFormStory: [
@@ -406,22 +412,22 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     keyMetrics: [
       {
-        label: "Manual content QA / day",
-        before: "3 hrs",
-        after: "0",
-        delta: "-100%",
+        label: "Manual content QA",
+        before: "Hours per batch",
+        after: "Linted automatically",
+        delta: "hours back",
       },
       {
-        label: "Time per 200-slide batch",
-        before: "~14 hrs",
-        after: "~45 min",
-        delta: "-95%",
+        label: "Batch turnaround",
+        before: "Most of a day",
+        after: "Minutes",
+        delta: "day → minutes",
       },
       {
         label: "AI-tell phrases shipping",
-        before: "~9/batch",
-        after: "0",
-        delta: "linted out",
+        before: "Slipping through",
+        after: "Linted out",
+        delta: "pre-render gate",
       },
       {
         label: "Time to first batch",
@@ -481,10 +487,10 @@ export const CASE_STUDIES: CaseStudy[] = [
         delta: "vs 6-week proposals",
       },
       {
-        label: "Countries scaled to",
+        label: "Reach with one founder",
         before: "n/a",
-        after: "9",
-        delta: "with 1 founder",
+        after: "9 countries",
+        delta: "solo studio",
       },
       {
         label: "Account-walled flows",
@@ -546,9 +552,9 @@ export const CASE_STUDIES: CaseStudy[] = [
     keyMetrics: [
       {
         label: "Showroom appointments",
-        before: "~12/mo",
-        after: "~25/mo",
-        delta: "+108%",
+        before: "Quiet",
+        after: "Noticeably busier",
+        delta: "online-to-store lift",
       },
       {
         label: "Time to launch",
@@ -557,16 +563,16 @@ export const CASE_STUDIES: CaseStudy[] = [
         delta: "store-to-live",
       },
       {
-        label: "Cart-stage surprise (courier)",
+        label: "Cart-stage courier cost",
         before: "Hidden fee",
         after: "Shown on cart",
-        delta: "fewer bounces",
+        delta: "fewer surprises",
       },
       {
-        label: "Size-return rate",
-        before: "22%",
-        after: "9%",
-        delta: "-13pts",
+        label: "Size-return friction",
+        before: "High",
+        after: "Exchange shortcut",
+        delta: "fewer punished returns",
       },
     ],
     longFormStory: [
@@ -615,34 +621,34 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     keyMetrics: [
       {
-        label: "Manual content QA / day",
-        before: "3 hrs",
-        after: "0",
-        delta: "-100%",
+        label: "Manual content QA",
+        before: "Hours daily",
+        after: "Linted automatically",
+        delta: "hours back",
       },
       {
-        label: "Channels covered by 1 script",
+        label: "Channels from one script",
         before: "1",
         after: "5",
         delta: "5x reach",
       },
       {
         label: "AI-tell phrases shipped",
-        before: "~9/day",
-        after: "0",
-        delta: "linted out",
+        before: "Slipping through",
+        after: "Linted out",
+        delta: "hard-fail gate",
       },
       {
-        label: "Founder approval rate",
-        before: "30%",
-        after: "92%",
-        delta: "+62pts",
+        label: "Founder sign-off",
+        before: "Frequent rewrites",
+        after: "Ships as-drafted",
+        delta: "trust restored",
       },
     ],
     longFormStory: [
       "The reason founders refuse to ship AI-generated content under their face isn't capability — it's pattern recognition. They've read enough LinkedIn slop to spot 'fast-paced world' and 'unlock potential' at 30 paces, and they assume their audience can too. The linter is the trust mechanism that lets them sign off.",
       "Channel-format parity was the second hard problem. Most content engines spit out one piece of copy and call it 'cross-platform'. Real cross-platform means a 1080×1350 carousel for LinkedIn, a 9:16 vertical for IG/TT, and a 16:9 horizontal for YT — each with the hook, the body and the CTA recomposed to fit the format's pacing. We modeled all three.",
-      "The founder approval rate jumping from 30% to 92% is the only metric we cared about. If the founder won't ship it, the rest of the system is irrelevant.",
+      "The founder signing off on nearly every pack without a rewrite is the only outcome we cared about. If the founder won't ship it, the rest of the system is irrelevant.",
     ],
     testimonialQuote:
       "I sign off on 9 out of 10 packs without rewriting anything. I haven't had that experience with any other content tool.",

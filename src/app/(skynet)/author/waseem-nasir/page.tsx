@@ -7,7 +7,7 @@ import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "author-waseem-nasir.html"),
-  "utf8"
+  "utf8",
 );
 
 export const metadata: Metadata = {
@@ -94,10 +94,10 @@ const schema = {
       },
       alumniOf: {
         "@type": "EducationalOrganization",
-        name: "Self-taught — 180+ shipped automation workflows and 40+ websites since 2022",
+        name: "Self-taught — 180+ shipped automation workflows and 40+ websites since 2019",
       },
       award: [
-        "180+ n8n workflows shipped (2022–2026)",
+        "180+ n8n workflows shipped (2019–2026)",
         "40+ websites delivered across 9 countries",
         "Top Rated Plus on Upwork",
         "Top Rated on Fiverr",

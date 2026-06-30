@@ -88,7 +88,15 @@ function useCount(target: number, durationMs = 1400, start: boolean) {
   return value;
 }
 
-function StatCard({ card, start, i }: { card: Card; start: boolean; i: number }) {
+function StatCard({
+  card,
+  start,
+  i,
+}: {
+  card: Card;
+  start: boolean;
+  i: number;
+}) {
   const value = useCount(card.count, 1500, start);
   const Icon = card.icon;
   const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
@@ -102,7 +110,14 @@ function StatCard({ card, start, i }: { card: Card; start: boolean; i: number })
         transition: "transform 0.25s ease",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: 16,
+        }}
+      >
         <div
           style={{
             width: 40,
@@ -155,7 +170,14 @@ function StatCard({ card, start, i }: { card: Card; start: boolean; i: number })
       >
         {card.label}
       </div>
-      <p style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
+      <p
+        style={{
+          fontSize: 14,
+          color: "var(--ink-2)",
+          lineHeight: 1.6,
+          margin: 0,
+        }}
+      >
         {card.sub}
       </p>
     </div>
@@ -178,7 +200,7 @@ export default function Achievements() {
           }
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
     io.observe(sectionRef.current);
     return () => io.disconnect();
@@ -212,8 +234,10 @@ export default function Achievements() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-            The receipts · 2022 → 2026
+            <span
+              style={{ width: 28, height: 1, background: "var(--terracotta)" }}
+            />
+            The receipts · 2019 → 2026
           </div>
           <h2
             id="achievements-heading"
@@ -228,7 +252,13 @@ export default function Achievements() {
             }}
           >
             1,000+ shipped.{" "}
-            <span style={{ fontStyle: "normal", color: "var(--terracotta-aa)", fontWeight: 700 }}>
+            <span
+              style={{
+                fontStyle: "normal",
+                color: "var(--terracotta-aa)",
+                fontWeight: 700,
+              }}
+            >
               Most under one keyboard.
             </span>
           </h2>
@@ -249,7 +279,8 @@ export default function Achievements() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(220px, 100%), 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(220px, 100%), 1fr))",
             gap: 20,
           }}
         >
@@ -352,7 +383,13 @@ export default function Achievements() {
               }}
             >
               Waseem Nasir — founder, builder, the one who{" "}
-              <span style={{ fontStyle: "normal", color: "var(--terracotta-aa)", fontWeight: 700 }}>
+              <span
+                style={{
+                  fontStyle: "normal",
+                  color: "var(--terracotta-aa)",
+                  fontWeight: 700,
+                }}
+              >
                 actually ships.
               </span>
             </p>
