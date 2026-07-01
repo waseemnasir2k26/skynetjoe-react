@@ -5,6 +5,7 @@ import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import WorkShowcase from "@/components/sections/WorkShowcase";
 import { Reveal } from "@/components/motion/Reveal";
+import { WORK_BUILDS } from "@/lib/work-builds";
 
 export const metadata: Metadata = {
   title: "Portfolio — Recent Projects",
@@ -33,10 +34,25 @@ const schema = {
   author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
 };
 
+// ItemList of all 47 builds → their /work detail pages (AEO / rich results).
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "SkynetLabs shipped builds",
+  numberOfItems: WORK_BUILDS.length,
+  itemListElement: WORK_BUILDS.map((b, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: `${SITE.url}/work/${b.slug}`,
+    name: b.title,
+  })),
+};
+
 export default function PortfolioPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={itemListSchema} />
 
       {/* HERO */}
       <section

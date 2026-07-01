@@ -5,6 +5,7 @@ import { POSTS } from "@/lib/posts";
 import { NEWS } from "@/lib/news";
 import { INDUSTRIES } from "@/data/industries";
 import { CASE_STUDIES } from "@/lib/case-studies";
+import { WORK_BUILDS } from "@/lib/work-builds";
 import {
   isCaseStudyIndexable,
   isIndustryIndexable,
@@ -69,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: STATIC_LASTMOD,
       changeFrequency: "monthly" as const,
       priority: 0.7,
-    }))
+    })),
   );
 
   // Location pages — quality-gated by isLocationIndexable (state-enrichment.ts).
@@ -122,6 +123,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
+  // Work showcase detail pages — drives /work/[slug] dynamic route (47 builds).
+  const workRoutes = WORK_BUILDS.map((b) => ({
+    url: `${base}/work/${b.slug}`,
+    lastModified: STATIC_LASTMOD,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
   return [
     ...staticRoutes,
     ...serviceRoutes,
@@ -130,5 +139,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...newsRoutes,
     ...caseStudyRoutes,
     ...industryRoutes,
+    ...workRoutes,
   ];
 }
