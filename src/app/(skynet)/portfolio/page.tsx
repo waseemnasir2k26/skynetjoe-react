@@ -9,12 +9,12 @@ import { Reveal } from "@/components/motion/Reveal";
 export const metadata: Metadata = {
   title: "Portfolio — Recent Projects",
   description:
-    "Live screenshots of every shipped SkynetLabs build: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. 20+ deployed sites. Built solo from Bali by Waseem Nasir.",
+    "Live screenshots of every shipped SkynetLabs build: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. 47 deployed sites. Built solo from Bali by Waseem Nasir.",
   alternates: { canonical: `${SITE.url}/portfolio` },
   openGraph: {
     title: "SkynetLabs Portfolio — Recent Projects",
     description:
-      "Live screenshots of 20+ shipped builds. Click any tile for the deployed site.",
+      "Live screenshots of 47 shipped builds. Filter by category, click any tile for the deployed site.",
     url: `${SITE.url}/portfolio`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -25,8 +25,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: "SkynetLabs Portfolio — Recent Projects",
-  description:
-    "Live screenshots of every shipped build across nine countries.",
+  description: "Live screenshots of every shipped build across nine countries.",
   url: `${SITE.url}/portfolio`,
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },
@@ -49,7 +48,14 @@ export default function PortfolioPage() {
           zIndex: 2,
         }}
       >
-        <Reveal initialVisible style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <Reveal
+          initialVisible
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -63,7 +69,9 @@ export default function PortfolioPage() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--terracotta)" }}
+            />
             Portfolio · live builds
           </div>
           <h1
@@ -78,7 +86,7 @@ export default function PortfolioPage() {
               maxWidth: "20ch",
             }}
           >
-            20+ shipped builds.{" "}
+            47 shipped builds.{" "}
             <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
               Real receipts.
             </span>
@@ -93,8 +101,8 @@ export default function PortfolioPage() {
             }}
           >
             Live screenshots of every site I&apos;ve shipped — dental, real
-            estate, wellness, HVAC, logistics, legal, healthcare. Click any
-            tile to open the deployed site. Built solo from Bali.
+            estate, wellness, HVAC, logistics, legal, healthcare. Click any tile
+            to open the deployed site. Built solo from Bali.
           </p>
         </Reveal>
       </section>
@@ -194,7 +202,14 @@ export default function PortfolioPage() {
             Send a brief, get a fixed-price scope back. Reply in 8h · scope in
             48h — and a 30-min call decides if we&apos;re the right fit.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 12,
+            }}
+          >
             <Link
               href="/discovery-call"
               style={{
