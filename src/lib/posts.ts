@@ -13,6 +13,17 @@ export type Post = {
 
 export const POSTS: Post[] = [
   {
+    slug: "claude-fable-5-prompts-40-master-prompts",
+    title: "Claude Fable 5 Prompts: 40 Master Prompts to Run Before July 12",
+    description:
+      "40 master prompts for Claude Fable 5 — Claude Code, n8n, GHL and agency templates that build reusable assets. Free access ends July 12.",
+    publishedAt: "2026-07-11",
+    readingTime: 25,
+    category: "playbook",
+    tags: ["claude", "fable-5", "prompts", "claude-code", "n8n", "gohighlevel", "ai"],
+    author: "Waseem Nasir",
+  },
+  {
     slug: "n8n-vs-zapier-2026",
     title: "n8n vs Zapier in 2026: When to Use Which (and the Real Cost Math)",
     description:
