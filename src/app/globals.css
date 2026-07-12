@@ -1191,3 +1191,83 @@ pre, code {
   }
 }
 
+
+/* ============================================================
+   BLOG FRAGMENT LIGHT BRIDGE (2026-07-12)
+   All content/blog/posts/*.html fragments ship dark-theme inline
+   <style> (white headings, #d1d5db body, cyan accents) written for
+   the pre-2026-05-25 ocean theme. The blog template renders them on
+   cream paper, so text was near-invisible. This bridge retargets
+   every fragment to ink-on-cream + terracotta WITHOUT editing the
+   9 fragment files. Scoped to .prose-wn (blog [slug] page only).
+   Exceptions kept dark on purpose: pre code blocks, .verdict panels.
+   ============================================================ */
+.prose-wn,
+.prose-wn p,
+.prose-wn ul,
+.prose-wn ol,
+.prose-wn li,
+.prose-wn td {
+  color: var(--ink-2) !important;
+}
+.prose-wn h1,
+.prose-wn h2,
+.prose-wn h4,
+.prose-wn strong {
+  color: var(--ink) !important;
+}
+.prose-wn h3 {
+  color: var(--terracotta-aa) !important;
+}
+.prose-wn h4 {
+  background: rgba(198, 107, 63, 0.08) !important;
+  border-left-color: var(--terracotta) !important;
+}
+.prose-wn a {
+  color: var(--terracotta-aa) !important;
+}
+.prose-wn a:hover {
+  color: var(--terracotta-2) !important;
+}
+.prose-wn blockquote {
+  background: rgba(198, 107, 63, 0.08) !important;
+  border-left-color: var(--terracotta) !important;
+}
+.prose-wn blockquote p,
+.prose-wn blockquote strong {
+  color: var(--ink) !important;
+}
+.prose-wn .callout {
+  background: rgba(198, 107, 63, 0.08) !important;
+  border-left-color: var(--terracotta) !important;
+}
+.prose-wn .callout strong {
+  color: var(--terracotta-aa) !important;
+}
+.prose-wn table th {
+  background: rgba(198, 107, 63, 0.10) !important;
+  color: var(--terracotta-aa) !important;
+}
+.prose-wn table td {
+  border-bottom-color: var(--border) !important;
+}
+.prose-wn code {
+  background: rgba(198, 107, 63, 0.10) !important;
+  color: var(--oxblood) !important;
+}
+/* Code blocks stay a dark island — readable + intentional */
+.prose-wn pre {
+  background: #1c2430 !important;
+  border-color: rgba(26, 26, 26, 0.20) !important;
+}
+.prose-wn pre code {
+  background: none !important;
+  color: #d7e3f4 !important;
+}
+/* Gradient verdict/CTA panels keep white type on their own bg */
+.prose-wn .verdict,
+.prose-wn .verdict p,
+.prose-wn .verdict strong,
+.prose-wn .verdict a {
+  color: #fff !important;
+}
