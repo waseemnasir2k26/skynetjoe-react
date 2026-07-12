@@ -11,7 +11,7 @@ const SLUG = "small-fleet-paid-tools-2026";
 const article = getArticle(SLUG)!;
 
 export const metadata: Metadata = {
-  title: `${article.title} | SkynetLabs`,
+  title: article.seoTitle ?? article.title,
   description: article.description,
   alternates: { canonical: `${SITE.url}/news/${SLUG}` },
   openGraph: {
