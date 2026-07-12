@@ -1271,3 +1271,18 @@ pre, code {
 .prose-wn .verdict a {
   color: #fff !important;
 }
+
+/* Anchor jumps land below the fixed header (TOC + in-content anchors) */
+.prose-wn h2,
+.prose-wn h3,
+.prose-wn h4 {
+  scroll-margin-top: 96px;
+}
+/* Article body images — framed, responsive, never overflow */
+.prose-wn img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  margin: 1.75rem 0;
+}

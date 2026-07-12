@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" font-family="Arial, Helvetica, sans-serif">
+  <rect width="960" height="380" fill="#FAF7F0"/>
+  <rect x="0.5" y="0.5" width="959" height="379" fill="none" stroke="#1A1A1A" stroke-opacity="0.12"/>
+  <text x="48" y="56" font-size="13" letter-spacing="4" fill="#A8451F" font-weight="700">TIMELINE</text>
+  <text x="48" y="92" font-size="30" fill="#1A1A1A" font-weight="800">The Fable 5 included-access window</text>
+
+  <line x1="80" y1="220" x2="880" y2="220" stroke="#1A1A1A" stroke-opacity="0.25" stroke-width="2"/>
+  <polygon points="880,220 866,213 866,227" fill="#1A1A1A" fill-opacity="0.25"/>
+
+  <circle cx="180" cy="220" r="9" fill="#C66B3F"/>
+  <text x="180" y="176" font-size="15" fill="#1A1A1A" font-weight="700" text-anchor="middle">Included in every</text>
+  <text x="180" y="196" font-size="15" fill="#1A1A1A" font-weight="700" text-anchor="middle">paid Claude plan</text>
+  <text x="180" y="256" font-size="13" fill="#3A3A36" text-anchor="middle">up to 50% of weekly usage</text>
+
+  <circle cx="480" cy="220" r="12" fill="#6B2C2C"/>
+  <circle cx="480" cy="220" r="18" fill="none" stroke="#6B2C2C" stroke-opacity="0.35" stroke-width="2"/>
+  <text x="480" y="170" font-size="17" fill="#6B2C2C" font-weight="800" text-anchor="middle">JULY 12, 2026</text>
+  <text x="480" y="192" font-size="14" fill="#6B2C2C" font-weight="700" text-anchor="middle">11:59 PM PT</text>
+  <text x="480" y="260" font-size="13" fill="#3A3A36" text-anchor="middle">window closes</text>
+
+  <circle cx="780" cy="220" r="9" fill="#C66B3F"/>
+  <text x="780" y="176" font-size="15" fill="#1A1A1A" font-weight="700" text-anchor="middle">Usage pricing</text>
+  <text x="780" y="196" font-size="14" fill="#3A3A36" text-anchor="middle">$10 / M input tokens</text>
+  <text x="780" y="256" font-size="14" fill="#3A3A36" text-anchor="middle">$50 / M output tokens</text>
+
+  <text x="48" y="336" font-size="13" fill="#56564F" font-style="italic">Terms have changed once already — confirm current dates in your Claude billing page.</text>
+</svg>

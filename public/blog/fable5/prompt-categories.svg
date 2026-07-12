@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="Arial, Helvetica, sans-serif">
+  <rect width="960" height="560" fill="#FAF7F0"/>
+  <rect x="0.5" y="0.5" width="959" height="559" fill="none" stroke="#1A1A1A" stroke-opacity="0.12"/>
+  <text x="48" y="56" font-size="13" letter-spacing="4" fill="#A8451F" font-weight="700">MAP</text>
+  <text x="48" y="92" font-size="30" fill="#1A1A1A" font-weight="800">40 prompts, 8 categories</text>
+  <text x="48" y="118" font-size="15" fill="#3A3A36">Built for the Claude Code / n8n / GoHighLevel crowd — every output is a reusable asset.</text>
+
+  <g>
+    <rect x="48" y="150" width="424" height="86" fill="#F2EFE6" stroke="#C66B3F"/>
+    <text x="72" y="186" font-size="17" fill="#1A1A1A" font-weight="700">Claude Code &amp; Dev</text>
+    <text x="72" y="212" font-size="14" fill="#A8451F" font-weight="700">Prompts 1–5</text>
+    <text x="420" y="200" font-size="34" fill="#C66B3F" font-weight="800" text-anchor="end" fill-opacity="0.35">01</text>
+  </g>
+  <g>
+    <rect x="488" y="150" width="424" height="86" fill="#F2EFE6" stroke="#C66B3F"/>
+    <text x="512" y="186" font-size="17" fill="#1A1A1A" font-weight="700">AI Agents &amp; Skills</text>
+    <text x="512" y="212" font-size="14" fill="#A8451F" font-weight="700">Prompts 6–10</text>
+    <text x="860" y="200" font-size="34" fill="#C66B3F" font-weight="800" text-anchor="end" fill-opacity="0.35">02</text>
+  </g>
+  <g>
+    <rect x="48" y="248" width="424" height="86" fill="#F2EFE6" stroke="#C66B3F"/>
+    <text x="72" y="284" font-size="17" fill="#1A1A1A" font-weight="700">n8n &amp; Automation</text>
+    <text x="72" y="310" font-size="14" fill="#A8451F" font-weight="700">Prompts 11–15</text>
+    <text x="420" y="298" font-size="34" fill="#C66B3F" font-weight="800" text-anchor="end" fill-opacity="0.35">03</text>
+  </g>
+  <g>
+    <rect x="488" y="248" width="424" height="86" fill="#F2EFE6" stroke="#C66B3F"/>
+    <text x="512" y="284" font-size="17" fill="#1A1A1A" font-weight="700">GHL &amp; Client Systems</text>
+    <text x="512" y="310" font-size="14" fill="#A8451F" font-weight="700">Prompts 16–20</text>
+    <text x="860" y="298" font-size="34" fill="#C66B3F" font-weight="800" text-anchor="end" fill-opacity="0.35">04</text>
+  </g>
+  <g>
+    <rect x="48" y="346" width="424" height="86" fill="#F2EFE6" stroke="#C66B3F"/>
+    <text x="72" y="382" font-size="17" fill="#1A1A1A" font-weight="700">Agency Growth</text>
+    <text x="72" y="408" font-size="14" fill="#A8451F" font-weight="700">Prompts 21–25</text>
+    <text x="420" y="396" font-size="34" fill="#C66B3F" font-weight="800" text-anchor="end" fill-opacity="0.35">05</text>
+  </g>
+  <g>
+    <rect x="488" y="346" width="424" height="86" fill="#F2EFE6" stroke="#C66B3F"/>
+    <text x="512" y="382" font-size="17" fill="#1A1A1A" font-weight="700">Content &amp; SEO</text>
+    <text x="512" y="408" font-size="14" fill="#A8451F" font-weight="700">Prompts 26–30</text>
+    <text x="860" y="396" font-size="34" fill="#C66B3F" font-weight="800" text-anchor="end" fill-opacity="0.35">06</text>
+  </g>
+  <g>
+    <rect x="48" y="444" width="424" height="86" fill="#F2EFE6" stroke="#C66B3F"/>
+    <text x="72" y="480" font-size="17" fill="#1A1A1A" font-weight="700">Data &amp; Ops</text>
+    <text x="72" y="506" font-size="14" fill="#A8451F" font-weight="700">Prompts 31–35</text>
+    <text x="420" y="494" font-size="34" fill="#C66B3F" font-weight="800" text-anchor="end" fill-opacity="0.35">07</text>
+  </g>
+  <g>
+    <rect x="488" y="444" width="424" height="86" fill="#F2EFE6" stroke="#C66B3F"/>
+    <text x="512" y="480" font-size="17" fill="#1A1A1A" font-weight="700">Research &amp; Strategy</text>
+    <text x="512" y="506" font-size="14" fill="#A8451F" font-weight="700">Prompts 36–40</text>
+    <text x="860" y="494" font-size="34" fill="#C66B3F" font-weight="800" text-anchor="end" fill-opacity="0.35">08</text>
+  </g>
+</svg>
