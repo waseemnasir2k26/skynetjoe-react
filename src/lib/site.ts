@@ -94,16 +94,56 @@ export type NavItem = {
  * Keep in sync when a tool is added/removed.
  */
 export const TOOL_LINKS: NavSubItem[] = [
-  { label: "AI Readiness Score", href: "/tools/ai-readiness-score", desc: "10 questions, 0-100 score + 4-axis breakdown" },
-  { label: "Agency Stress Quiz", href: "/tools/agency-stress-quiz", desc: "60-second diagnostic — chill to chaos" },
-  { label: "Automation Gap Analyzer", href: "/tools/automation-gap-analyzer", desc: "Find where your ops lose time and money" },
-  { label: "Before/After Slider", href: "/tools/before-after-slider", desc: "Drag to compare manual vs automated" },
-  { label: "Content Calendar", href: "/tools/content-calendar", desc: "30-day cross-platform post engine" },
-  { label: "Executive Summary Generator", href: "/tools/executive-summary-generator", desc: "Raw notes → TL;DR, email, deck slide" },
-  { label: "Prompt Library", href: "/tools/prompt-library", desc: "50 production-tested AI prompts" },
-  { label: "Revenue Calculator", href: "/tools/revenue-calculator", desc: "What your missed leads cost per month" },
-  { label: "Video Prompt Generator", href: "/tools/video-prompt-generator", desc: "Runway, Pika, Sora, Veo — side-by-side" },
-  { label: "Voice Persona Builder", href: "/tools/voice-persona-builder", desc: "AI system prompt in your brand voice" },
+  {
+    label: "AI Readiness Score",
+    href: "/tools/ai-readiness-score",
+    desc: "10 questions, 0-100 score + 4-axis breakdown",
+  },
+  {
+    label: "Agency Stress Quiz",
+    href: "/tools/agency-stress-quiz",
+    desc: "60-second diagnostic — chill to chaos",
+  },
+  {
+    label: "Automation Gap Analyzer",
+    href: "/tools/automation-gap-analyzer",
+    desc: "Find where your ops lose time and money",
+  },
+  {
+    label: "Before/After Slider",
+    href: "/tools/before-after-slider",
+    desc: "Drag to compare manual vs automated",
+  },
+  {
+    label: "Content Calendar",
+    href: "/tools/content-calendar",
+    desc: "30-day cross-platform post engine",
+  },
+  {
+    label: "Executive Summary Generator",
+    href: "/tools/executive-summary-generator",
+    desc: "Raw notes → TL;DR, email, deck slide",
+  },
+  {
+    label: "Prompt Library",
+    href: "/tools/prompt-library",
+    desc: "50 production-tested AI prompts",
+  },
+  {
+    label: "Revenue Calculator",
+    href: "/tools/revenue-calculator",
+    desc: "What your missed leads cost per month",
+  },
+  {
+    label: "Video Prompt Generator",
+    href: "/tools/video-prompt-generator",
+    desc: "Runway, Pika, Sora, Veo — side-by-side",
+  },
+  {
+    label: "Voice Persona Builder",
+    href: "/tools/voice-persona-builder",
+    desc: "AI system prompt in your brand voice",
+  },
 ];
 
 // Restructured from 10 flat items → 6 top-level axes (+ Book-audit CTA in Header).
@@ -117,21 +157,57 @@ export const NAV_PRIMARY: NavItem[] = [
     label: "By Industry",
     href: "/industries",
     subItems: [
-      { label: "All industries", href: "/industries", desc: "Vertical-tuned automation playbooks" },
-      { label: "Dental Clinics", href: "/industries/dental-clinics", desc: "New-patient capture + recall engine" },
-      { label: "Wellness & Medspas", href: "/industries/wellness-spas", desc: "Booking AI + reputation engine" },
-      { label: "Freight & Logistics", href: "/industries/freight-logistics", desc: "Voice dispatch + EDI triage" },
-      { label: "Freight LP — quick demo", href: "/lp/freight", desc: "AI voice agent — never miss a load" },
-      { label: "Home Services LP", href: "/lp/home-services", desc: "Never miss a call — HVAC / plumbing" },
-      { label: "FreightOps Dispatch", href: "/lp/logistics", desc: "Dispatch dashboard for small fleets" },
+      {
+        label: "All industries",
+        href: "/industries",
+        desc: "Vertical-tuned automation playbooks",
+      },
+      {
+        label: "Dental Clinics",
+        href: "/industries/dental-clinics",
+        desc: "New-patient capture + recall engine",
+      },
+      {
+        label: "Wellness & Medspas",
+        href: "/industries/wellness-spas",
+        desc: "Booking AI + reputation engine",
+      },
+      {
+        label: "Freight & Logistics",
+        href: "/industries/freight-logistics",
+        desc: "Voice dispatch + EDI triage",
+      },
+      {
+        label: "Freight LP — quick demo",
+        href: "/lp/freight",
+        desc: "AI voice agent — never miss a load",
+      },
+      {
+        label: "Home Services LP",
+        href: "/lp/home-services",
+        desc: "Never miss a call — HVAC / plumbing",
+      },
+      {
+        label: "FreightOps Dispatch",
+        href: "/lp/logistics",
+        desc: "Dispatch dashboard for small fleets",
+      },
     ],
   },
   {
     label: "Work",
     href: "/portfolio",
     subItems: [
-      { label: "Recent Projects", href: "/portfolio", desc: "Live screenshots of every shipped build" },
-      { label: "Case Studies", href: "/case-studies", desc: "Deep dives — problem, fix, numbers" },
+      {
+        label: "Recent Projects",
+        href: "/portfolio",
+        desc: "Live screenshots of every shipped build",
+      },
+      {
+        label: "Case Studies",
+        href: "/case-studies",
+        desc: "Deep dives — problem, fix, numbers",
+      },
       { label: "Locations", href: "/locations", desc: "Service coverage map" },
     ],
   },
@@ -145,7 +221,11 @@ export const NAV_PRIMARY: NavItem[] = [
     label: "Company",
     href: "/about",
     subItems: [
-      { label: "About", href: "/about", desc: "Solo studio, Bali-built, 14-day ship" },
+      {
+        label: "About",
+        href: "/about",
+        desc: "Solo studio, Bali-built, 14-day ship",
+      },
       { label: "Latest News", href: "/news", desc: "Field notes + playbooks" },
       { label: "Contact", href: "/contact", desc: "Reach us — 8-hour reply" },
     ],
@@ -157,38 +237,125 @@ export const SERVICE_CATEGORIES = [
   {
     name: "Automation",
     services: [
-      { slug: "freightops-logistics", label: "FreightOps — Dispatch Canvas", icon: "Truck", desc: "Site + dispatch + AI voice agent for US small-fleet carriers, 14 days", href: "/lp/logistics", badge: "NEW" },
-      { slug: "n8n-automation", label: "n8n Automation", icon: "Bot", desc: "Workflow automation that runs while you sleep" },
-      { slug: "gohighlevel", label: "GoHighLevel CRM", icon: "Target", desc: "Full CRM + sales pipeline setup" },
-      { slug: "zapier-make", label: "Zapier & Make", icon: "Link", desc: "Multi-tool connectivity layer" },
-      { slug: "social-automation", label: "Social Automation", icon: "Smartphone", desc: "Auto-post + DM responder stack" },
+      {
+        slug: "freightops-logistics",
+        label: "FreightOps — Dispatch Canvas",
+        icon: "Truck",
+        desc: "Site + dispatch + AI voice agent for US small-fleet carriers, 14 days",
+        href: "/lp/logistics",
+        badge: "NEW",
+      },
+      {
+        slug: "n8n-automation",
+        label: "n8n Automation",
+        icon: "Bot",
+        desc: "Workflow automation that runs while you sleep",
+      },
+      {
+        slug: "gohighlevel",
+        label: "GoHighLevel CRM",
+        icon: "Target",
+        desc: "Full CRM + sales pipeline setup",
+      },
+      {
+        slug: "zapier-make",
+        label: "Zapier & Make",
+        icon: "Link",
+        desc: "Multi-tool connectivity layer",
+      },
+      {
+        slug: "social-automation",
+        label: "Social Automation",
+        icon: "Smartphone",
+        desc: "Auto-post + DM responder stack",
+      },
     ],
   },
   {
     name: "AI Content",
     services: [
-      { slug: "ai-video", label: "AI Video Creation", icon: "Clapperboard", desc: "Reels, shorts, talking-head at scale" },
-      { slug: "youtube-automation", label: "YouTube Automation", icon: "PlayCircle", desc: "Faceless channel pipeline" },
-      { slug: "tiktok-automation", label: "TikTok Automation", icon: "Music", desc: "Daily content engine" },
-      { slug: "facebook-automation", label: "Facebook Automation", icon: "Users", desc: "Page + DM + group reach" },
+      {
+        slug: "ai-video",
+        label: "AI Video Creation",
+        icon: "Clapperboard",
+        desc: "Reels, shorts, talking-head at scale",
+      },
+      {
+        slug: "youtube-automation",
+        label: "YouTube Automation",
+        icon: "PlayCircle",
+        desc: "Faceless channel pipeline",
+      },
+      {
+        slug: "tiktok-automation",
+        label: "TikTok Automation",
+        icon: "Music",
+        desc: "Daily content engine",
+      },
+      {
+        slug: "facebook-automation",
+        label: "Facebook Automation",
+        icon: "Users",
+        desc: "Page + DM + group reach",
+      },
     ],
   },
   {
     name: "Development",
     services: [
-      { slug: "wordpress-seo", label: "WordPress SEO Blog", icon: "Globe", desc: "AEO-tuned content engine" },
-      { slug: "ecommerce-automation", label: "E-commerce Automation", icon: "ShoppingCart", desc: "Shopify + Stripe + n8n stack" },
-      { slug: "vibe-coded-sites", label: "Vibe-Coded Websites", icon: "Zap", desc: "Custom Next.js builds, 7-day ship" },
-      { slug: "ai-chatbots", label: "AI Chatbots", icon: "MessageSquare", desc: "Live chat + web + voice agents" },
+      {
+        slug: "wordpress-seo",
+        label: "WordPress SEO Blog",
+        icon: "Globe",
+        desc: "AEO-tuned content engine",
+      },
+      {
+        slug: "ecommerce-automation",
+        label: "E-commerce Automation",
+        icon: "ShoppingCart",
+        desc: "Shopify + Stripe + n8n stack",
+      },
+      {
+        slug: "vibe-coded-sites",
+        label: "Vibe-Coded Websites",
+        icon: "Zap",
+        desc: "Custom Next.js builds, 7-day ship",
+      },
+      {
+        slug: "ai-chatbots",
+        label: "AI Chatbots",
+        icon: "MessageSquare",
+        desc: "Live chat + web + voice agents",
+      },
     ],
   },
   {
     name: "Consulting",
     services: [
-      { slug: "ai-business-systems", label: "AI Business Systems", icon: "Building2", desc: "Operator-grade ops blueprint" },
-      { slug: "strategy-training", label: "Strategy & Training", icon: "BookOpen", desc: "Team upskilling + playbooks" },
-      { slug: "branding-design", label: "Branding & Design", icon: "Palette", desc: "Identity + design system" },
-      { slug: "ai-content-creation", label: "AI Content Creation", icon: "PenTool", desc: "Voice-locked content at volume" },
+      {
+        slug: "ai-business-systems",
+        label: "AI Business Systems",
+        icon: "Building2",
+        desc: "Operator-grade ops blueprint",
+      },
+      {
+        slug: "strategy-training",
+        label: "Strategy & Training",
+        icon: "BookOpen",
+        desc: "Team upskilling + playbooks",
+      },
+      {
+        slug: "branding-design",
+        label: "Branding & Design",
+        icon: "Palette",
+        desc: "Identity + design system",
+      },
+      {
+        slug: "ai-content-creation",
+        label: "AI Content Creation",
+        icon: "PenTool",
+        desc: "Voice-locked content at volume",
+      },
     ],
   },
 ] as const;
@@ -229,6 +396,10 @@ export const FOOTER_COLUMNS = [
       { label: "Glossary", href: "/glossary" },
       { label: "FAQs", href: "/faqs" },
       { label: "n8n vs Zapier", href: "/n8n-vs-zapier" },
+      {
+        label: "5 Boring Automations",
+        href: "/boring-automations-small-businesses-pay-for",
+      },
       { label: "Case Studies", href: "/case-studies" },
     ],
   },

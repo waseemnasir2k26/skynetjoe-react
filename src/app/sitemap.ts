@@ -49,6 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/glossary",
     "/faqs",
     "/n8n-vs-zapier",
+    "/boring-automations-small-businesses-pay-for",
     "/author/waseem-nasir",
     "/blog",
     "/news",

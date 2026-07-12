@@ -44,7 +44,7 @@ export async function generateMetadata({
   const post = getPost(slug);
   if (!post) return { title: "Post not found" };
   return {
-    title: `${post.title} | SkynetLabs Journal`,
+    title: post.title,
     description: post.description,
     alternates: { canonical: `${SITE.url}/blog/${post.slug}` },
     openGraph: {

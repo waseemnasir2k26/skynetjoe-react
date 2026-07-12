@@ -85,6 +85,14 @@ ${readContent("n8n-vs-zapier.html").slice(0, 5000)}
 
 ---
 
+## 5 Boring Automations Small Businesses Pay For — Field Notes
+
+URL: ${SITE.url}/boring-automations-small-businesses-pay-for
+
+${readContent("boring-automations-small-businesses-pay-for.html").slice(0, 5000)}
+
+---
+
 ## Case studies summary
 
 ${readContent("case-studies.html").slice(0, 4000)}
