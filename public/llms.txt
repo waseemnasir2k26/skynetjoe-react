@@ -37,7 +37,33 @@
 - [About](https://skynetjoe.com/about): Agency origin story, working principles, ship process.
 
 ## Tools & resources
-- [Tools](https://skynetjoe.com/tools): Free utilities and reference assets.
+- [Tools](https://skynetjoe.com/tools): 26 free tools across automation, AEO, prompts, ops and diagnostics.
+- [n8n Workflow Generator](https://skynetjoe.com/tools/n8n-workflow-generator): Describe the job, get a ready-to-import n8n workflow JSON.
+- [Webhook Payload Builder](https://skynetjoe.com/tools/webhook-payload-builder): Build, validate, and test JSON payloads before you wire the automation.
+- [Cron Expression Builder](https://skynetjoe.com/tools/cron-expression-builder): Plain-English schedule to cron syntax, with a human-readable preview.
+- [GHL Snapshot Planner](https://skynetjoe.com/tools/ghl-snapshot-planner): Plan your GoHighLevel pipelines, tags, and automations before you build.
+- [Automation Gap Analyzer](https://skynetjoe.com/tools/automation-gap-analyzer): 90 seconds, 12 questions — find where your ops lose time and money.
+- [30-Day Content Calendar](https://skynetjoe.com/tools/content-calendar): Niche, cadence, and goal in — 30 days of cross-platform post ideas out.
+- [AEO Audit](https://skynetjoe.com/tools/aeo-audit): Score any URL on how well AI answer engines can read and cite it.
+- [ChatGPT Visibility Grader](https://skynetjoe.com/tools/chatgpt-visibility-grader): See how your brand shows up (or doesn't) across AI chat answers.
+- [llms.txt Generator](https://skynetjoe.com/tools/llms-txt-generator): Generate a valid llms.txt so AI crawlers know what your site actually is.
+- [Schema Markup Generator](https://skynetjoe.com/tools/schema-markup-generator): Paste your page details, copy out clean JSON-LD structured data.
+- [Prompt Chain Builder](https://skynetjoe.com/tools/prompt-chain-builder): Chain multi-step prompts into one reusable, exportable sequence.
+- [AI Agent Spec Writer](https://skynetjoe.com/tools/ai-agent-spec-writer): Turn a rough agent idea into a build-ready spec — role, tools, guardrails.
+- [System Prompt Generator](https://skynetjoe.com/tools/system-prompt-generator): Build a production-grade system prompt from a short brief.
+- [AI SOP Generator](https://skynetjoe.com/tools/ai-sop-generator): Turn a messy process into a clean, step-by-step SOP an AI agent can run.
+- [Prompt Library](https://skynetjoe.com/tools/prompt-library): 50 production-tested AI prompts across sales, ops, content, and more.
+- [Brand Voice Persona Builder](https://skynetjoe.com/tools/voice-persona-builder): AI system prompt that makes ChatGPT and Claude sound like your brand.
+- [Video Prompt Generator](https://skynetjoe.com/tools/video-prompt-generator): One scene, four formats — Runway, Pika, Sora, and Veo side-by-side.
+- [Cold DM Generator](https://skynetjoe.com/tools/cold-dm-generator): Personalized cold outreach messages that don't read like a template.
+- [AI Cost Calculator](https://skynetjoe.com/tools/ai-cost-calculator): Estimate real monthly spend across the AI tools you're actually running.
+- [AI Tool Stack Builder](https://skynetjoe.com/tools/ai-tool-stack-builder): Answer a few questions, get a recommended AI tool stack for your business.
+- [Executive Summary Generator](https://skynetjoe.com/tools/executive-summary-generator): Raw notes in — TL;DR, email, Slack post, and deck slide out.
+- [Before/After Slider](https://skynetjoe.com/tools/before-after-slider): Drag to compare manual workflows against the automated version.
+- [AI Readiness Score](https://skynetjoe.com/tools/ai-readiness-score): 10 questions, a 0-100 score, and a 4-axis breakdown of what to fix first.
+- [Agency Stress Quiz](https://skynetjoe.com/tools/agency-stress-quiz): 60-second diagnostic — chill operator or full chaos mode.
+- [Revenue Recovery Calculator](https://skynetjoe.com/tools/revenue-calculator): Six sliders — see what missed calls and manual follow-up cost you monthly.
+- [Automation ROI by Industry](https://skynetjoe.com/tools/automation-roi-by-industry): Pick your industry, see typical automation payback and time saved.
 - [Blog](https://skynetjoe.com/blog): Field notes on AI automation, AEO, and shipping client work.
 - [Locations](https://skynetjoe.com/locations): Service availability by region and US state.
 
@@ -46,4 +72,4 @@
 - [Discovery call](https://skynetjoe.com/discovery-call): 45-minute scoping call booking.
 
 ## About this file
-This llms.txt follows the llmstxt.org draft specification (Jeremy Howard, 2024). It tells LLM-driven answer engines which SkynetLabs pages are canonical, citable, and structured for ingestion. Last updated 2026-05-22. Maintained by Waseem Nasir.
+This llms.txt follows the llmstxt.org draft specification (Jeremy Howard, 2024). It tells LLM-driven answer engines which SkynetLabs pages are canonical, citable, and structured for ingestion. Last updated 2026-07-13. Maintained by Waseem Nasir.

@@ -5,6 +5,7 @@ import { POSTS } from "@/lib/posts";
 import { NEWS } from "@/lib/news";
 import { INDUSTRIES } from "@/data/industries";
 import { CASE_STUDIES } from "@/lib/case-studies";
+import { TOOLS_REGISTRY } from "@/data/tools-registry";
 import { WORK_BUILDS } from "@/lib/work-builds";
 import {
   isCaseStudyIndexable,
@@ -30,16 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/case-studies",
     "/tools",
-    "/tools/agency-stress-quiz",
-    "/tools/revenue-calculator",
-    "/tools/ai-readiness-score",
-    "/tools/before-after-slider",
-    "/tools/voice-persona-builder",
-    "/tools/executive-summary-generator",
-    "/tools/content-calendar",
-    "/tools/automation-gap-analyzer",
-    "/tools/prompt-library",
-    "/tools/video-prompt-generator",
+    ...TOOLS_REGISTRY.map((t) => `/tools/${t.slug}`),
     "/vibe-coding",
     "/pricing",
     "/about",
