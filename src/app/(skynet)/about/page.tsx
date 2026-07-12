@@ -6,7 +6,13 @@ import { SITE } from "@/lib/site";
 import { organization, person } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Community from "@/components/sections/Community";
-import { Reveal, RevealGroup, RevealItem, ParallaxFigure, StatCounter } from "@/components/motion/Reveal";
+import {
+  Reveal,
+  RevealGroup,
+  RevealItem,
+  ParallaxFigure,
+  StatCounter,
+} from "@/components/motion/Reveal";
 
 const TIMELINE = [
   {
@@ -48,6 +54,49 @@ const TIMELINE = [
     year: "2026",
     title: "180+ workflows · 9 countries · Bali base",
     note: "Solo operator, AI as second seat. Public pricing. Same builder, different game.",
+  },
+];
+
+const BUILDER_LIFE_PHOTOS = [
+  {
+    src: "/img/pro/CAFE-WORK-2026-03-29-rooftop-cafe-laptop-mountain-clouds.jpg",
+    alt: "Waseem working on a laptop at a rooftop cafe above mountain clouds",
+    cap: "Rooftop deploys · Bali",
+  },
+  {
+    src: "/img/pro/BALI-2026-05-06-cafe-arch-working-side.jpg",
+    alt: "Working on a laptop under a stone arch cafe, side profile",
+    cap: "Cafe office · Ubud",
+  },
+  {
+    src: "/img/pro/CAFE-WORK-2026-02-14-night-rooftop-cafe-phone-city-lights.jpg",
+    alt: "Night rooftop cafe, phone in hand with city lights behind",
+    cap: "Night shift · city lights",
+  },
+  {
+    src: "/img/pro/TRAVEL-2026-05-05-airport-lounge-armchair-phone-paintings.jpg",
+    alt: "Airport lounge armchair between flights, phone in hand",
+    cap: "Terminals · between flights",
+  },
+  {
+    src: "/img/pro/CAFE-WORK-2026-03-30-dual-laptop-analytics-dashboard-coffee.jpg",
+    alt: "Dual laptops with an analytics dashboard over coffee",
+    cap: "Dashboards · client ops",
+  },
+  {
+    src: "/img/pro/BALI-2026-05-07-veranda-phone-thinking.jpg",
+    alt: "Thinking through a build on a veranda, phone in hand",
+    cap: "Veranda · thinking time",
+  },
+  {
+    src: "/img/pro/TRAVEL-kuala-lumpur-street-crossbody-bag-portrait.jpg",
+    alt: "Street portrait in Kuala Lumpur with a crossbody bag",
+    cap: "Kuala Lumpur · on the road",
+  },
+  {
+    src: "/img/pro/PORTRAIT-2026-06-09-guitar-closeup-strumming-glasses.jpg",
+    alt: "Strumming a guitar, close-up in glasses — off the clock",
+    cap: "Off the clock",
   },
 ];
 
@@ -163,7 +212,13 @@ export default function AboutPage() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                }}
+              />
               About · since 2019
             </div>
             <h1
@@ -208,9 +263,13 @@ export default function AboutPage() {
               }}
             >
               <span style={{ color: "var(--ink)" }}>7 years</span> shipping
-              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>·</span>
+              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>
+                ·
+              </span>
               Lahore → <span style={{ color: "var(--ink)" }}>Bali</span>
-              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>·</span>
+              <span style={{ margin: "0 12px", color: "rgba(26,26,26,0.20)" }}>
+                ·
+              </span>
               <span style={{ color: "var(--ink)" }}>9</span> countries served
             </div>
           </Reveal>
@@ -274,7 +333,13 @@ export default function AboutPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 800,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           {/* FOUNDER TRUST STRIP — small round photo, "you talk to the builder" */}
           <Reveal
             style={{
@@ -318,7 +383,10 @@ export default function AboutPage() {
               }}
             >
               No account managers. You talk to the builder —{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>Waseem</span>, directly.
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                Waseem
+              </span>
+              , directly.
             </span>
           </Reveal>
 
@@ -336,7 +404,13 @@ export default function AboutPage() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                }}
+              />
               The arc
             </div>
             <h2
@@ -355,13 +429,24 @@ export default function AboutPage() {
                 failing in public.
               </span>
             </h2>
-            <p style={{ fontSize: 16, color: "var(--ink-2)", maxWidth: "56ch", marginBottom: 36, lineHeight: 1.6 }}>
-              Every pivot below was a real bet. Most of them lost. The wins taught
-              me what to stop doing.
+            <p
+              style={{
+                fontSize: 16,
+                color: "var(--ink-2)",
+                maxWidth: "56ch",
+                marginBottom: 36,
+                lineHeight: 1.6,
+              }}
+            >
+              Every pivot below was a real bet. Most of them lost. The wins
+              taught me what to stop doing.
             </p>
           </Reveal>
 
-          <RevealGroup as="ol" style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          <RevealGroup
+            as="ol"
+            style={{ listStyle: "none", padding: 0, margin: 0 }}
+          >
             {TIMELINE.map((t, i) => {
               const rotate = i % 2 === 0 ? "-0.2deg" : "0.2deg";
               return (
@@ -461,48 +546,48 @@ export default function AboutPage() {
           }}
         >
           <Reveal>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.22em",
-              color: "var(--cream-3)",
-              opacity: 0.85,
-              marginBottom: 20,
-            }}
-          >
-            — A letter to 2019
-          </div>
-          <blockquote
-            style={{
-              fontFamily: "var(--font-display)",
-              fontStyle: "normal",
-              fontSize: "clamp(24px, 4.4vw, 44px)",
-              fontWeight: 400,
-              lineHeight: 1.25,
-              letterSpacing: "-0.015em",
-              color: "var(--cream-3)",
-              margin: 0,
-            }}
-          >
-            &ldquo;If I could go back to 2019, I&apos;d say: 2026 Waseem is proud
-            of you. Just don&apos;t quit. You did it — with the blessing of
-            God.&rdquo;
-          </blockquote>
-          <footer
-            style={{
-              marginTop: 24,
-              fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              textTransform: "uppercase",
-              letterSpacing: "0.18em",
-              color: "var(--cream-3)",
-              opacity: 0.85,
-            }}
-          >
-            — Waseem · 2026
-          </footer>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.22em",
+                color: "var(--cream-3)",
+                opacity: 0.85,
+                marginBottom: 20,
+              }}
+            >
+              — A letter to 2019
+            </div>
+            <blockquote
+              style={{
+                fontFamily: "var(--font-display)",
+                fontStyle: "normal",
+                fontSize: "clamp(24px, 4.4vw, 44px)",
+                fontWeight: 400,
+                lineHeight: 1.25,
+                letterSpacing: "-0.015em",
+                color: "var(--cream-3)",
+                margin: 0,
+              }}
+            >
+              &ldquo;If I could go back to 2019, I&apos;d say: 2026 Waseem is
+              proud of you. Just don&apos;t quit. You did it — with the blessing
+              of God.&rdquo;
+            </blockquote>
+            <footer
+              style={{
+                marginTop: 24,
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                textTransform: "uppercase",
+                letterSpacing: "0.18em",
+                color: "var(--cream-3)",
+                opacity: 0.85,
+              }}
+            >
+              — Waseem · 2026
+            </footer>
           </Reveal>
         </div>
       </section>
@@ -516,7 +601,13 @@ export default function AboutPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <Reveal style={{ maxWidth: 720, marginBottom: 40 }}>
             <div
               style={{
@@ -531,7 +622,13 @@ export default function AboutPage() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                }}
+              />
               The builder life
             </div>
             <h2
@@ -550,12 +647,70 @@ export default function AboutPage() {
                 Deploys.
               </span>
             </h2>
-            <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
+            <p
+              style={{
+                fontSize: 16,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "60ch",
+              }}
+            >
               Same builder you&apos;d hire — actually here, actually shipping.
               No agency layer, no Zoom mask. Just a fixed rhythm that ends with
               your thing live.
             </p>
           </Reveal>
+
+          <RevealGroup
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+              gap: 16,
+              marginBottom: 40,
+            }}
+          >
+            {BUILDER_LIFE_PHOTOS.map((p, i) => (
+              <RevealItem
+                key={p.src}
+                style={{
+                  transform: i % 2 === 0 ? "rotate(-0.4deg)" : "rotate(0.4deg)",
+                }}
+              >
+                <figure style={{ margin: 0 }}>
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      aspectRatio: "4 / 5",
+                      overflow: "hidden",
+                      background: "var(--cream-2)",
+                      border: "1px solid rgba(26,26,26,0.12)",
+                    }}
+                  >
+                    <Image
+                      src={p.src}
+                      alt={p.alt}
+                      fill
+                      sizes="(min-width: 900px) 260px, 45vw"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                  <figcaption
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.10em",
+                      color: "var(--ink-faint)",
+                      paddingTop: 8,
+                    }}
+                  >
+                    {p.cap}
+                  </figcaption>
+                </figure>
+              </RevealItem>
+            ))}
+          </RevealGroup>
 
           <RevealGroup
             style={{
@@ -613,7 +768,13 @@ export default function AboutPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <RevealGroup
             style={{
               display: "grid",
@@ -680,7 +841,14 @@ export default function AboutPage() {
           zIndex: 2,
         }}
       >
-        <Reveal style={{ maxWidth: 720, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)", textAlign: "center" }}>
+        <Reveal
+          style={{
+            maxWidth: 720,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+            textAlign: "center",
+          }}
+        >
           <h2
             style={{
               fontFamily: "var(--font-display)",
@@ -709,7 +877,14 @@ export default function AboutPage() {
             Send a 3-sentence brief. Scope + price back in 8 hours. Same
             builder, same hands.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 12,
+            }}
+          >
             <Link
               href="/discovery-call"
               style={{
