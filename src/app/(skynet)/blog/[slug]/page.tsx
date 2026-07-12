@@ -13,6 +13,7 @@ import TableOfContents, {
   type TocItem,
 } from "@/components/blog/TableOfContents";
 import ViewCounter from "@/components/blog/ViewCounter";
+import CodeCopyButtons from "@/components/blog/CodeCopyButtons";
 
 function extractToc(html: string): TocItem[] {
   const items: TocItem[] = [];
@@ -205,6 +206,7 @@ export default async function BlogPost({
       </section>
 
       <article className="section">
+        <CodeCopyButtons />
         <div className="container-x px-6">
           {toc.length >= 3 ? (
             <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-[230px_minmax(0,1fr)] lg:gap-12 lg:items-start">
