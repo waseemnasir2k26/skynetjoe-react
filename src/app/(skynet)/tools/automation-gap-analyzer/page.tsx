@@ -308,14 +308,14 @@ export default function AutomationGapPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 {
-                  href: "/tools/revenue-calculator",
-                  title: "Revenue Recovery Calculator",
-                  body: "Put a dollar figure on the manual hours your gap score implies.",
+                  href: "/tools/n8n-workflow-generator",
+                  title: "n8n Workflow Generator",
+                  body: "Turn your weakest axis into a working automation — download the workflow JSON.",
                 },
                 {
-                  href: "/tools/ai-readiness-score",
-                  title: "AI Readiness Score",
-                  body: "See whether your stack and data are ready for AI automation.",
+                  href: "/tools/aeo-audit",
+                  title: "AEO Audit",
+                  body: "Check whether AI answer engines can read and cite your site.",
                 },
                 {
                   href: "/discovery-call",

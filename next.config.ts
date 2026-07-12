@@ -232,6 +232,13 @@ const killedServiceStateRedirects = SERVICE_CATEGORIES.flatMap((cat) =>
   ),
 );
 
+const removedToolRedirects = [
+  { source: "/tools/ai-readiness-score", destination: "/tools/automation-gap-analyzer", permanent: true },
+  { source: "/tools/agency-stress-quiz", destination: "/tools/automation-gap-analyzer", permanent: true },
+  { source: "/tools/revenue-calculator", destination: "/tools", permanent: true },
+  { source: "/tools/automation-roi-by-industry", destination: "/tools", permanent: true },
+];
+
 const nextConfig: NextConfig = {
   // Produces .next/standalone/server.js for smaller cold-boot on
   // Hostinger Node.js Web Apps (and any non-Vercel host).
@@ -245,7 +252,7 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
-    return [...wpRedirects, ...killedServiceStateRedirects];
+    return [...wpRedirects, ...killedServiceStateRedirects, ...removedToolRedirects];
   },
 };
 

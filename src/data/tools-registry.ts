@@ -229,41 +229,6 @@ export const TOOLS_REGISTRY: ToolEntry[] = [
     icon: "ArrowLeftRight",
   },
 
-  // ---------------------------------------------------------------
-  // Diagnostics
-  // ---------------------------------------------------------------
-  {
-    slug: "ai-readiness-score",
-    name: "AI Readiness Score",
-    oneLiner:
-      "10 questions, a 0-100 score, and a 4-axis breakdown of what to fix first.",
-    category: "Diagnostics",
-    icon: "Compass",
-  },
-  {
-    slug: "agency-stress-quiz",
-    name: "Agency Stress Quiz",
-    oneLiner: "60-second diagnostic — chill operator or full chaos mode.",
-    category: "Diagnostics",
-    icon: "Activity",
-  },
-  {
-    slug: "revenue-calculator",
-    name: "Revenue Recovery Calculator",
-    oneLiner:
-      "Six sliders — see what missed calls and manual follow-up cost you monthly.",
-    category: "Diagnostics",
-    icon: "TrendingUp",
-  },
-  {
-    slug: "automation-roi-by-industry",
-    name: "Automation ROI by Industry",
-    oneLiner:
-      "Pick your industry, see typical automation payback and time saved.",
-    category: "Diagnostics",
-    icon: "BarChart3",
-    isNew: true,
-  },
 ];
 
 export const TOOL_CATEGORIES: ToolCategory[] = [
@@ -271,7 +236,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
   "AEO & AI Visibility",
   "Prompts & Agents",
   "Ops & Outbound",
-  "Diagnostics",
 ];
 
 export function toolsByCategory(category: ToolCategory): ToolEntry[] {

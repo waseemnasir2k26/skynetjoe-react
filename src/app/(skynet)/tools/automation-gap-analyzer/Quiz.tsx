@@ -765,11 +765,11 @@ function ResultCard({
             <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
           </a>
           <a
-            href={`/tools/revenue-calculator?${calcQuery}`}
+            href="/tools/n8n-workflow-generator"
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-6 py-4 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:bg-[var(--cream-2)] sm:text-base"
           >
             <Calculator className="h-4 w-4" />
-            See what {hours} hrs/wk costs you
+            Automate your weakest workflow
             <ArrowRight className="h-4 w-4" />
           </a>
           <button

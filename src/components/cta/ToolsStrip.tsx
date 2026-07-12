@@ -27,19 +27,19 @@ type Tool = {
 // Curated 8 — picked the highest-value mix across calc / quiz / library / generator.
 const TOOLS: Tool[] = [
   {
-    slug: "revenue-calculator",
-    name: "Revenue Calculator",
-    blurb: "What automation actually saves you",
+    slug: "n8n-workflow-generator",
+    name: "n8n Workflow Generator",
+    blurb: "Download a working automation JSON",
   },
   {
-    slug: "ai-readiness-score",
-    name: "AI Readiness Score",
-    blurb: "Score your AI readiness in 90 seconds",
+    slug: "aeo-audit",
+    name: "AEO Audit",
+    blurb: "Can AI answer engines cite your site?",
   },
   {
-    slug: "agency-stress-quiz",
-    name: "Agency Stress Quiz",
-    blurb: "How burnt out is your agency stack?",
+    slug: "cold-dm-generator",
+    name: "Cold DM Generator",
+    blurb: "Outreach scripts that get replies",
   },
   {
     slug: "automation-gap-analyzer",

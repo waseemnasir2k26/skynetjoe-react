@@ -68,14 +68,14 @@ const ICONS: Record<
 };
 
 export const metadata: Metadata = {
-  title: "26 Free Tools for Service Businesses",
+  title: "22 Free Tools for Service Businesses",
   description:
-    "26 free tools across automation, AEO, prompts, ops and diagnostics — n8n workflow generator, AEO audit, cold DM generator and more.",
+    "22 free tools across automation, AEO, prompts, ops and diagnostics — n8n workflow generator, AEO audit, cold DM generator and more.",
   alternates: { canonical: `${SITE.url}/tools` },
   openGraph: {
-    title: "SkynetLabs Free Tools — 26 calculators, diagnostics and generators",
+    title: "SkynetLabs Free Tools — 22 automation, AEO and prompt tools",
     description:
-      "Find out where your business is losing time and money. 26 free tools across automation, AEO, prompts, ops, and diagnostics.",
+      "Find out where your business is losing time and money. 22 free tools across automation, AEO, prompts, ops, and diagnostics.",
     url: `${SITE.url}/tools`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -100,7 +100,7 @@ const schema = {
   "@type": "CollectionPage",
   name: "SkynetLabs Free Tools",
   description:
-    "26 free utilities from SkynetLabs across automation & workflows, AEO & AI visibility, prompts & agents, ops & outbound, and diagnostics.",
+    "22 free utilities from SkynetLabs across automation & workflows, AEO & AI visibility, prompts & agents, and ops & outbound.",
   url: `${SITE.url}/tools`,
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },
@@ -156,7 +156,7 @@ export default function ToolsIndexPage() {
                   background: "var(--terracotta)",
                 }}
               />
-              26 free tools
+              22 free tools
             </div>
             <h1
               style={{
@@ -182,7 +182,7 @@ export default function ToolsIndexPage() {
                 lineHeight: 1.6,
               }}
             >
-              26 free tools I built for myself before I built them for clients —
+              22 free tools I built for myself before I built them for clients —
               automation planning, AEO/AI visibility, prompt and agent builders,
               outbound ops, and diagnostics. All free. Some hand you the result
               instantly; a few ask for an email to unlock it. Just numbers,

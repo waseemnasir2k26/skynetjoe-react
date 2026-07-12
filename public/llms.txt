@@ -37,7 +37,7 @@
 - [About](https://skynetjoe.com/about): Agency origin story, working principles, ship process.
 
 ## Tools & resources
-- [Tools](https://skynetjoe.com/tools): 26 free tools across automation, AEO, prompts, ops and diagnostics.
+- [Tools](https://skynetjoe.com/tools): 22 free tools across automation, AEO, prompts and ops.
 - [n8n Workflow Generator](https://skynetjoe.com/tools/n8n-workflow-generator): Describe the job, get a ready-to-import n8n workflow JSON.
 - [Webhook Payload Builder](https://skynetjoe.com/tools/webhook-payload-builder): Build, validate, and test JSON payloads before you wire the automation.
 - [Cron Expression Builder](https://skynetjoe.com/tools/cron-expression-builder): Plain-English schedule to cron syntax, with a human-readable preview.
@@ -60,10 +60,6 @@
 - [AI Tool Stack Builder](https://skynetjoe.com/tools/ai-tool-stack-builder): Answer a few questions, get a recommended AI tool stack for your business.
 - [Executive Summary Generator](https://skynetjoe.com/tools/executive-summary-generator): Raw notes in — TL;DR, email, Slack post, and deck slide out.
 - [Before/After Slider](https://skynetjoe.com/tools/before-after-slider): Drag to compare manual workflows against the automated version.
-- [AI Readiness Score](https://skynetjoe.com/tools/ai-readiness-score): 10 questions, a 0-100 score, and a 4-axis breakdown of what to fix first.
-- [Agency Stress Quiz](https://skynetjoe.com/tools/agency-stress-quiz): 60-second diagnostic — chill operator or full chaos mode.
-- [Revenue Recovery Calculator](https://skynetjoe.com/tools/revenue-calculator): Six sliders — see what missed calls and manual follow-up cost you monthly.
-- [Automation ROI by Industry](https://skynetjoe.com/tools/automation-roi-by-industry): Pick your industry, see typical automation payback and time saved.
 - [Blog](https://skynetjoe.com/blog): Field notes on AI automation, AEO, and shipping client work.
 - [Locations](https://skynetjoe.com/locations): Service availability by region and US state.
 
