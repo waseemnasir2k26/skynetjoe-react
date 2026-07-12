@@ -17,6 +17,7 @@ import {
   TOTAL_QUESTIONS,
   MAX_SCORE,
   DIMENSIONS,
+  BUCKETS,
   bucketForScore,
   buildCalculatorParams,
   buildBookingParams,
@@ -68,6 +69,11 @@ export default function Quiz() {
   const [savedToast, setSavedToast] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
+  /** shared-link override — URL score/bucket win over locally derived values */
+  const [shared, setShared] = useState<{
+    score: number;
+    bucket: Bucket;
+  } | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   /* ───── hydrate from URL or localStorage ───── */
@@ -77,35 +83,47 @@ export default function Quiz() {
     const urlResult = params.get("result");
     const urlBucket = params.get("bucket");
     if (urlResult) {
-      // shared-link path → jump to result, but rebuild dim breakdown from saved scores if same browser
-      const numeric = Math.max(
-        0,
-        Math.min(MAX_SCORE, Number(urlResult) || 0)
-      );
+      // shared-link path → URL score wins; only reuse local scores if they add up to it
+      const numeric = Math.max(0, Math.min(MAX_SCORE, Number(urlResult) || 0));
+      const bucketFromUrl = BUCKETS.find((b) => b.key === urlBucket);
       try {
         const raw = window.localStorage.getItem(STORAGE_KEY);
         if (raw) {
           const saved = JSON.parse(raw) as SavedState;
-          if (saved.scores && Object.keys(saved.scores).length === TOTAL_QUESTIONS) {
-            setScores(saved.scores);
-            setAnswers(saved.answers ?? {});
-            setPhase("result");
-            setHydrated(true);
-            return;
+          if (
+            saved.scores &&
+            Object.keys(saved.scores).length === TOTAL_QUESTIONS
+          ) {
+            const localTotal = Object.values(saved.scores).reduce(
+              (a, b) => a + b,
+              0,
+            );
+            if (localTotal === numeric) {
+              // same browser, same result → real dim breakdown available
+              setScores(saved.scores);
+              setAnswers(saved.answers ?? {});
+              setPhase("result");
+              setHydrated(true);
+              return;
+            }
           }
         }
       } catch {
         // ignore corrupt storage
       }
-      // pure shared link with no local context → fake even-split scores so radar renders
+      // shared link without matching local context → fake even-split scores so
+      // the radar renders, and pin score + bucket to the URL values so
+      // rounding drift can't change the displayed result
       const evenSplit: Record<string, number> = {};
       QUESTIONS.forEach((q) => {
-        evenSplit[q.id] = numeric / TOTAL_QUESTIONS;
+        evenSplit[q.id] = Math.round(numeric / TOTAL_QUESTIONS);
       });
       setScores(evenSplit);
+      setShared({
+        score: numeric,
+        bucket: bucketFromUrl ?? bucketForScore(numeric),
+      });
       setPhase("result");
-      // mark bucket via answers no-op
-      void urlBucket;
       setHydrated(true);
       return;
     }
@@ -141,10 +159,11 @@ export default function Quiz() {
     try {
       const payload: SavedState = { step, answers, scores };
       if (phase === "result") {
-        const total = Object.values(scores).reduce((a, b) => a + b, 0);
+        const total =
+          shared?.score ?? Object.values(scores).reduce((a, b) => a + b, 0);
         payload.result = {
           score: total,
-          bucket: bucketForScore(total).key,
+          bucket: (shared?.bucket ?? bucketForScore(total)).key,
           savedAt: Date.now(),
         };
       }
@@ -152,16 +171,16 @@ export default function Quiz() {
     } catch {
       // quota / private mode, silent
     }
-  }, [step, answers, scores, phase, hydrated]);
+  }, [step, answers, scores, phase, hydrated, shared]);
 
   const totalScore = useMemo(
-    () => Object.values(scores).reduce((a, b) => a + b, 0),
-    [scores]
+    () => shared?.score ?? Object.values(scores).reduce((a, b) => a + b, 0),
+    [scores, shared],
   );
   const subscores = useMemo(() => computeSubscores(scores), [scores]);
   const bucket: Bucket = useMemo(
-    () => bucketForScore(totalScore),
-    [totalScore]
+    () => shared?.bucket ?? bucketForScore(totalScore),
+    [totalScore, shared],
   );
   const weakest = useMemo(() => weakestDimension(subscores), [subscores]);
 
@@ -208,6 +227,7 @@ export default function Quiz() {
   function restart() {
     setAnswers({});
     setScores({});
+    setShared(null);
     setStep(0);
     setPhase("quiz");
     try {
@@ -473,7 +493,9 @@ function ScoreCountUp({
       style={{ color }}
     >
       {display}
-      <span className="text-2xl text-[var(--ink-faint)] md:text-3xl">/{MAX_SCORE}</span>
+      <span className="text-2xl text-[var(--ink-faint)] md:text-3xl">
+        /{MAX_SCORE}
+      </span>
     </span>
   );
 }
@@ -578,8 +600,8 @@ function RadarChart({
             Math.abs(a.lx - CENTER) < 1
               ? "middle"
               : a.lx > CENTER
-              ? "start"
-              : "end";
+                ? "start"
+                : "end";
           const dy = a.ly > CENTER ? "1em" : "-0.25em";
           return (
             <text
@@ -649,8 +671,6 @@ function ResultCard({
   const bookingQuery = buildBookingParams({
     score,
     bucket: bucket.key,
-    weakestDim: weakest.key,
-    subscores,
   });
 
   // weakest-dim callout swaps in over the first generic bullet
@@ -767,8 +787,7 @@ function ResultCard({
             rel="noopener noreferrer"
             className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
             style={{
-              background:
-                "var(--terracotta)",
+              background: "var(--terracotta)",
               boxShadow: "0 10px 32px rgba(198,107,63,0.25)",
             }}
           >
@@ -812,7 +831,6 @@ function ResultCard({
           Retake the quiz
         </button>
       </div>
-
     </div>
   );
 }

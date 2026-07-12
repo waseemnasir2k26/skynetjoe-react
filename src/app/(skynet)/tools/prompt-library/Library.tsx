@@ -9,6 +9,7 @@ import {
   ExternalLink,
   Sparkles,
   Mail,
+  Loader2,
 } from "lucide-react";
 import {
   PROMPTS,
@@ -23,7 +24,7 @@ export default function Library() {
   const [activeCats, setActiveCats] = useState<PromptCategory[]>([]);
   const [openPrompt, setOpenPrompt] = useState<Prompt | null>(null);
   const [copyStateById, setCopyStateById] = useState<Record<string, boolean>>(
-    {}
+    {},
   );
 
   /* close modal on Escape */
@@ -42,7 +43,7 @@ export default function Library() {
 
   function toggleCat(key: PromptCategory) {
     setActiveCats((curr) =>
-      curr.includes(key) ? curr.filter((k) => k !== key) : [...curr, key]
+      curr.includes(key) ? curr.filter((k) => k !== key) : [...curr, key],
     );
   }
 
@@ -58,7 +59,8 @@ export default function Library() {
         return false;
       }
       if (!q) return true;
-      const hay = `${p.title} ${p.useCase} ${p.body} ${p.category}`.toLowerCase();
+      const hay =
+        `${p.title} ${p.useCase} ${p.body} ${p.category}`.toLowerCase();
       return hay.includes(q);
     });
   }, [query, activeCats]);
@@ -86,13 +88,13 @@ export default function Library() {
         <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-3">
           — Prompt library · {PROMPTS.length} working prompts
         </p>
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4">
+        <h2 className="text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight text-[var(--ink)] mb-4">
           The prompts I actually use.
-        </h1>
+        </h2>
         <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed max-w-3xl">
-          Pulled from 18 months of shipped client work — automations, copy,
-          ops, audits. Copy, paste, ship. No course, no Notion template, no
-          upsell. Just the prompts that earned me six figures.
+          Pulled from 18 months of shipped client work — automations, copy, ops,
+          audits. Copy, paste, ship. No course, no Notion template, no upsell.
+          Just the prompts that earned me six figures.
         </p>
       </div>
 
@@ -146,7 +148,9 @@ export default function Library() {
               >
                 <span aria-hidden>{c.icon}</span>
                 {c.label}
-                <span className="text-[10px] text-[var(--ink-faint)]">· {count}</span>
+                <span className="text-[10px] text-[var(--ink-faint)]">
+                  · {count}
+                </span>
               </button>
             );
           })}
@@ -163,7 +167,10 @@ export default function Library() {
         </div>
 
         <div className="mt-4 text-xs text-[var(--ink-faint)]">
-          Showing <span className="text-[var(--terracotta-aa)] font-bold">{filtered.length}</span>{" "}
+          Showing{" "}
+          <span className="text-[var(--terracotta-aa)] font-bold">
+            {filtered.length}
+          </span>{" "}
           of {PROMPTS.length} prompts
           {activeCats.length > 0 && (
             <>
@@ -180,7 +187,9 @@ export default function Library() {
       {/* Grid */}
       {filtered.length === 0 ? (
         <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-10 text-center">
-          <p className="text-lg font-semibold text-[var(--ink)]">No prompts match.</p>
+          <p className="text-lg font-semibold text-[var(--ink)]">
+            No prompts match.
+          </p>
           <p className="mt-2 text-sm text-[var(--ink-faint)]">
             Try clearing the filters or searching for a broader keyword.
           </p>
@@ -198,11 +207,19 @@ export default function Library() {
             const cat = CATEGORIES.find((c) => c.key === p.category);
             const copied = copyStateById[p.id];
             return (
-              <button
+              <div
                 key={p.id}
-                type="button"
+                role="button"
+                tabIndex={0}
+                aria-label={`Open prompt: ${p.title}`}
                 onClick={() => setOpenPrompt(p)}
-                className="group text-left rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5 transition hover:border-[var(--terracotta)]/50 hover:bg-[var(--cream-2)]"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setOpenPrompt(p);
+                  }
+                }}
+                className="group cursor-pointer text-left rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5 transition hover:border-[var(--terracotta)]/50 hover:bg-[var(--cream-2)]"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] bg-[rgba(198,107,63,0.10)] text-[var(--terracotta-aa)] border border-[rgba(198,107,63,0.30)]">
@@ -223,22 +240,15 @@ export default function Library() {
                   <span className="text-[11px] uppercase tracking-wider text-[var(--ink-faint)]">
                     {p.body.length} chars
                   </span>
-                  <span
+                  <button
+                    type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       copyPrompt(p);
                     }}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        copyPrompt(p);
-                      }
-                    }}
+                    onKeyDown={(e) => e.stopPropagation()}
                     className="inline-flex items-center gap-1.5 rounded-lg border border-[rgba(26,26,26,0.12)] px-2.5 py-1 text-[11px] font-semibold text-[var(--ink-2)] hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)] transition cursor-pointer"
-                    aria-label="Copy prompt"
+                    aria-label={`Copy prompt: ${p.title}`}
                   >
                     {copied ? (
                       <>
@@ -251,9 +261,9 @@ export default function Library() {
                         Copy
                       </>
                     )}
-                  </span>
+                  </button>
                 </div>
-              </button>
+              </div>
             );
           })}
         </div>
@@ -279,19 +289,22 @@ export default function Library() {
             <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               1
             </span>
-            Pick the one prompt your business loses the most time on right now (sales, ops, content). Run it three times this week.
+            Pick the one prompt your business loses the most time on right now
+            (sales, ops, content). Run it three times this week.
           </li>
           <li className="flex gap-3">
             <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               2
             </span>
-            Notice what it gets wrong. Edit the prompt, lock the wins, save it inside your CRM or helpdesk.
+            Notice what it gets wrong. Edit the prompt, lock the wins, save it
+            inside your CRM or helpdesk.
           </li>
           <li className="flex gap-3">
             <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               3
             </span>
-            When it&apos;s earning its keep, book a call and we&apos;ll wire it into the rest of your stack.
+            When it&apos;s earning its keep, book a call and we&apos;ll wire it
+            into the rest of your stack.
           </li>
         </ul>
         <a
@@ -315,7 +328,8 @@ export default function Library() {
         </h3>
         <p className="text-sm text-[var(--ink-2)] max-w-xl mx-auto mb-5 leading-relaxed">
           The library grows from real working prompts, not theoretical ones.
-          Send the prompt plus the result it produced — I&apos;ll add it with credit.
+          Send the prompt plus the result it produced — I&apos;ll add it with
+          credit.
         </p>
         <a
           href="mailto:info@skynetjoe.com?subject=Prompt%20Library%20submission&body=Category%3A%20%0AUse-case%3A%20%0APrompt%20body%3A%20%0AResult%20it%20produced%3A%20"
@@ -336,7 +350,8 @@ export default function Library() {
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
-          One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+          One missing field, one weird output, one tool you wish existed — tell
+          me. I read every reply.
         </p>
         <form action="/api/tool-feedback" method="POST" className="space-y-3">
           <input type="hidden" name="tool" value="prompt-library" />
@@ -350,7 +365,8 @@ export default function Library() {
               background: "var(--cream-3)",
               border: "1px solid rgba(26,26,26,0.18)",
               boxShadow: "inset 0 1px 2px rgba(26,26,26,0.04)",
-              fontFamily: "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
+              fontFamily:
+                "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
               fontSize: "0.875rem",
             }}
           />
@@ -375,18 +391,180 @@ export default function Library() {
         </form>
       </div>
 
+      {/* MONTHLY PROMPTS CAPTURE — optional, never gates the library */}
+      <MonthlyPromptsCapture />
+
       {/* Modal */}
-      {openPrompt && <PromptModal prompt={openPrompt} onClose={() => setOpenPrompt(null)} />}
+      {openPrompt && (
+        <PromptModal prompt={openPrompt} onClose={() => setOpenPrompt(null)} />
+      )}
 
       <style jsx>{`
         .pl-prompt-search:focus {
           border-color: var(--terracotta) !important;
-          box-shadow: 0 0 0 3px rgba(198,107,63,0.10), inset 0 1px 2px rgba(26,26,26,0.04) !important;
+          box-shadow:
+            0 0 0 3px rgba(198, 107, 63, 0.1),
+            inset 0 1px 2px rgba(26, 26, 26, 0.04) !important;
         }
         .pl-prompt-search::placeholder {
           color: var(--ink-faint);
         }
       `}</style>
+    </div>
+  );
+}
+
+/**
+ * Inline, non-gating email capture — the library stays fully free.
+ * POSTs to /api/lead-capture with source "prompt-library" (same endpoint
+ * as EmailGate, but rendered inline with a success state instead of a gate).
+ */
+function MonthlyPromptsCapture() {
+  const STORAGE_KEY = "skynet-tool-prompt-library-email";
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+
+  /* already subscribed on a previous visit → show success state */
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY);
+      if (stored && EMAIL_RE.test(stored)) setDone(true);
+    } catch {
+      /* ignore */
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmed = email.trim();
+    if (!trimmed || trimmed.length > 254 || !EMAIL_RE.test(trimmed)) {
+      setError("That doesn't look like an email — try again.");
+      return;
+    }
+    setError(null);
+    setSubmitting(true);
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY, trimmed);
+    } catch {
+      /* private mode / quota — ignore */
+    }
+
+    /* Fire to backend — failure never blocks the success state */
+    try {
+      await Promise.race([
+        fetch("/api/lead-capture", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: trimmed,
+            source: "prompt-library",
+            capturedAt: new Date().toISOString(),
+          }),
+        }).catch((err) => {
+          console.log(
+            "[prompt-library] /api/lead-capture failed silently",
+            err,
+          );
+        }),
+        new Promise((resolve) => setTimeout(resolve, 1500)),
+      ]);
+    } catch {
+      /* swallow */
+    }
+
+    setSubmitting(false);
+    setDone(true);
+  }
+
+  return (
+    <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
+      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-2">
+        — Optional · The library above stays free either way
+      </p>
+      <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-3">
+        Get 20 more prompts monthly.
+      </h3>
+      {done ? (
+        <div className="flex items-center gap-2 text-[var(--ink)] font-semibold">
+          <Check className="h-5 w-5 text-[var(--terracotta-aa)]" />
+          <span>
+            You&apos;re in. First batch lands in your inbox this month.
+          </span>
+        </div>
+      ) : (
+        <>
+          <p className="text-sm text-[var(--ink-2)] max-w-xl mb-5 leading-relaxed">
+            Once a month I ship 20 new production-tested prompts to email before
+            they hit the site. No course pitch, no drip sequence — one email,
+            unsubscribe anytime.
+          </p>
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            className="flex flex-col sm:flex-row gap-3 max-w-xl"
+          >
+            <input
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError(null);
+              }}
+              placeholder="you@company.com"
+              aria-label="Your email"
+              aria-invalid={!!error}
+              disabled={submitting}
+              className="flex-1 rounded-xl px-4 py-3 text-[var(--ink)] text-sm focus:outline-none transition"
+              style={{
+                background: "var(--cream-3)",
+                border: error
+                  ? "1px solid var(--terracotta)"
+                  : "1px solid rgba(26,26,26,0.18)",
+                boxShadow: "inset 0 1px 2px rgba(26,26,26,0.04)",
+              }}
+            />
+            <button
+              type="submit"
+              disabled={submitting}
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+              style={{
+                background: "var(--terracotta)",
+                cursor: submitting ? "not-allowed" : "pointer",
+                opacity: submitting ? 0.6 : 1,
+              }}
+            >
+              {submitting ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Sending…
+                </>
+              ) : (
+                <>Send me the prompts →</>
+              )}
+            </button>
+          </form>
+          {error && (
+            <p
+              role="alert"
+              className="mt-2 text-xs text-[var(--terracotta-aa)]"
+            >
+              {error}
+            </p>
+          )}
+          <p className="mt-3 text-[11px] text-[var(--ink-faint)] leading-relaxed">
+            Stored locally + sent to my CRM. I&apos;m the only person who sees
+            it.
+          </p>
+        </>
+      )}
     </div>
   );
 }
@@ -468,9 +646,7 @@ function PromptModal({
               onClick={copy}
               className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-[var(--cream-3)] transition hover:opacity-90"
               style={{
-                background: copied
-                  ? "var(--sage)"
-                  : "var(--terracotta)",
+                background: copied ? "var(--sage)" : "var(--terracotta)",
               }}
             >
               {copied ? (

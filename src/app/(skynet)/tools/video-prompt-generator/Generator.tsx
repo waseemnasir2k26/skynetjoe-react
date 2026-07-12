@@ -5,6 +5,8 @@ import {
   Check,
   Copy,
   Film,
+  Loader2,
+  Mail,
   RotateCcw,
   Save,
   Sparkles,
@@ -117,10 +119,12 @@ const CAMERA_DESC: Record<CameraMove, string> = {
 };
 
 const STYLE_DESC: Record<Style, string> = {
-  realistic: "photoreal cinematography, 35mm film grain, shallow depth of field",
+  realistic:
+    "photoreal cinematography, 35mm film grain, shallow depth of field",
   anime: "stylized 2D anime, hand-drawn key frames, cel-shaded color palette",
   "3d-render": "polished 3D render, soft global illumination, octane-style",
-  claymation: "stop-motion claymation aesthetic, tactile, slight texture jitter",
+  claymation:
+    "stop-motion claymation aesthetic, tactile, slight texture jitter",
   "film-noir":
     "black-and-white noir, hard chiaroscuro lighting, venetian blind shadows",
   watercolor:
@@ -129,24 +133,18 @@ const STYLE_DESC: Record<Style, string> = {
 
 /* ────────── prompt composers ────────── */
 
-function moodAdj(m: Mood): string {
-  const arr = MOOD_ADJ[m];
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
 type Format = "runway" | "pika" | "sora" | "veo";
 
 function composeRunway(i: Inputs, salt: number): string {
   const adj = MOOD_ADJ[i.mood][salt % MOOD_ADJ[i.mood].length];
-  const neg = i.negative.trim()
-    ? `\nNegative: ${i.negative.trim()}.`
-    : "";
+  const neg = i.negative.trim() ? `\nNegative: ${i.negative.trim()}.` : "";
   return `${adj.charAt(0).toUpperCase() + adj.slice(1)}, ${i.mood} shot of ${i.subject}. ${CAMERA_DESC[i.camera].charAt(0).toUpperCase() + CAMERA_DESC[i.camera].slice(1)}. ${LIGHTING_DESC[i.lighting].charAt(0).toUpperCase() + LIGHTING_DESC[i.lighting].slice(1)}. ${STYLE_DESC[i.style]}. Aspect ratio ${i.aspect}, ${i.duration} duration, 24fps, motion bracket 4, upscale enabled.${neg}`;
 }
 
 function composePika(i: Inputs, salt: number): string {
   const adj = MOOD_ADJ[i.mood][(salt + 1) % MOOD_ADJ[i.mood].length];
-  const move = CAMERA_MOVES.find((c) => c.value === i.camera)?.label ?? i.camera;
+  const move =
+    CAMERA_MOVES.find((c) => c.value === i.camera)?.label ?? i.camera;
   const lightLabel =
     LIGHTING.find((l) => l.value === i.lighting)?.label ?? i.lighting;
   const styleLabel = STYLES.find((s) => s.value === i.style)?.label ?? i.style;
@@ -155,16 +153,13 @@ function composePika(i: Inputs, salt: number): string {
 }
 
 function composeSora(i: Inputs, salt: number): string {
-  const adj = moodAdj(i.mood);
-  void salt;
-  const neg = i.negative.trim()
-    ? ` Avoid: ${i.negative.trim()}.`
-    : "";
+  const adj = MOOD_ADJ[i.mood][(salt + 2) % MOOD_ADJ[i.mood].length];
+  const neg = i.negative.trim() ? ` Avoid: ${i.negative.trim()}.` : "";
   return `A ${i.duration} ${adj} ${i.mood} scene. We see ${i.subject}. ${CAMERA_DESC[i.camera].charAt(0).toUpperCase() + CAMERA_DESC[i.camera].slice(1)}, holding ${i.aspect} framing throughout. ${LIGHTING_DESC[i.lighting].charAt(0).toUpperCase() + LIGHTING_DESC[i.lighting].slice(1)}, lending a ${i.mood} atmosphere. The visual treatment is ${STYLE_DESC[i.style]}, with continuity preserved from first to last frame.${neg}`;
 }
 
 function composeVeo(i: Inputs, salt: number): string {
-  void salt;
+  const adj = MOOD_ADJ[i.mood][(salt + 3) % MOOD_ADJ[i.mood].length];
   const moveLabel =
     CAMERA_MOVES.find((c) => c.value === i.camera)?.label ?? i.camera;
   const lightLabel =
@@ -177,7 +172,7 @@ function composeVeo(i: Inputs, salt: number): string {
   return `Subject: ${i.subject}.
 Camera: ${moveLabel}.
 Lighting: ${lightLabel}.
-Mood: ${moodLabel}.
+Mood: ${moodLabel}, ${adj}.
 Style: ${styleLabel} — ${STYLE_DESC[i.style]}.
 Aspect ratio: ${i.aspect}.
 Duration: ${i.duration}.
@@ -221,7 +216,10 @@ const FORMAT_META: Record<
 
 const HISTORY_KEY = "skynet:video-prompt-generator:history:v1";
 const INPUTS_KEY = "skynet:video-prompt-generator:inputs:v1";
+const LEAD_KEY = "skynet:video-prompt-generator:lead-email:v1";
 const HISTORY_MAX = 20;
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type HistoryEntry = {
   id: string;
@@ -283,7 +281,7 @@ export default function Generator() {
         sora: composeSora(inputs, salt),
         veo: composeVeo(inputs, salt),
       }) satisfies Record<Format, string>,
-    [inputs, salt]
+    [inputs, salt],
   );
 
   function update<K extends keyof Inputs>(key: K, value: Inputs[K]) {
@@ -433,7 +431,8 @@ export default function Generator() {
         {/* Negative */}
         <label className="block mb-5">
           <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-2">
-            Negative prompts <span className="text-[var(--ink-faint)]">(optional)</span>
+            Negative prompts{" "}
+            <span className="text-[var(--ink-faint)]">(optional)</span>
           </span>
           <input
             type="text"
@@ -535,6 +534,9 @@ export default function Generator() {
           })}
         </div>
 
+        {/* Optional lead capture — non-gating, prompts above stay free */}
+        {hydrated && <TemplatesCapture />}
+
         {/* History */}
         {history.length > 0 && (
           <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md p-5 md:p-6">
@@ -570,8 +572,8 @@ export default function Generator() {
                       {h.inputs.subject || "(no subject)"}
                     </div>
                     <div className="text-[10px] text-[var(--ink-faint)] uppercase tracking-wider">
-                      {h.inputs.style} · {h.inputs.mood} ·{" "}
-                      {h.inputs.duration} · {h.inputs.aspect}
+                      {h.inputs.style} · {h.inputs.mood} · {h.inputs.duration} ·{" "}
+                      {h.inputs.aspect}
                     </div>
                   </button>
                   <button
@@ -588,6 +590,129 @@ export default function Generator() {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+/* ────────── optional lead capture (non-gating) ────────── */
+
+function TemplatesCapture() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  /* already submitted on a previous visit → show success state */
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(LEAD_KEY);
+      if (stored && EMAIL_RE.test(stored)) setStatus("done");
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmed = email.trim();
+    if (!EMAIL_RE.test(trimmed) || trimmed.length > 254) {
+      setError("That doesn't look like an email — try again.");
+      return;
+    }
+    setError(null);
+    setStatus("sending");
+
+    /* Save locally FIRST — user's experience never blocked on backend */
+    try {
+      window.localStorage.setItem(LEAD_KEY, trimmed);
+    } catch {
+      /* private mode / quota — ignore */
+    }
+
+    /* Fire to backend — short await, failure never blocks success state */
+    try {
+      await Promise.race([
+        fetch("/api/lead-capture", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: trimmed,
+            source: "video-prompt-generator",
+            capturedAt: new Date().toISOString(),
+          }),
+        }).catch((err) => {
+          console.log(
+            "[video-prompt-generator] /api/lead-capture failed silently",
+            err,
+          );
+        }),
+        new Promise((resolve) => setTimeout(resolve, 1500)),
+      ]);
+    } catch {
+      /* swallow — local save already done */
+    }
+
+    setStatus("done");
+  }
+
+  if (status === "done") {
+    return (
+      <div className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5 flex items-center gap-3">
+        <Check className="h-4 w-4 shrink-0 text-[var(--terracotta-aa)]" />
+        <p className="text-sm text-[var(--ink-2)]">
+          Done — 10 pro video prompt templates are on their way to your inbox.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5">
+      <div className="flex items-center gap-2 mb-1.5">
+        <Mail className="h-4 w-4 text-[var(--terracotta-aa)]" />
+        <h3 className="text-sm font-extrabold text-[var(--ink)]">
+          Email me 10 pro video prompt templates
+        </h3>
+      </div>
+      <p className="text-xs text-[var(--ink-faint)] mb-3.5">
+        Optional — the generator above stays free either way. No spam, no drip.
+      </p>
+      <form onSubmit={handleSubmit} noValidate className="flex gap-2.5">
+        <input
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (error) setError(null);
+          }}
+          placeholder="you@company.com"
+          aria-label="Your email"
+          aria-invalid={!!error}
+          disabled={status === "sending"}
+          className="flex-1 min-w-0 bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] rounded-xl px-3 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] focus:outline-none focus:border-[var(--terracotta)] transition text-sm"
+        />
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--cream-3)] transition hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
+          style={{ background: "var(--terracotta)" }}
+        >
+          {status === "sending" ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Sending
+            </>
+          ) : (
+            "Send templates"
+          )}
+        </button>
+      </form>
+      {error && (
+        <p role="alert" className="text-xs text-[var(--terracotta-aa)] mt-2">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
@@ -658,7 +783,9 @@ function RadioRow<T extends string>({
   wrap?: boolean;
 }) {
   return (
-    <div className={wrap ? "flex flex-wrap gap-1.5" : "grid grid-cols-4 gap-1.5"}>
+    <div
+      className={wrap ? "flex flex-wrap gap-1.5" : "grid grid-cols-4 gap-1.5"}
+    >
       {options.map((o) => {
         const selected = o.value === value;
         return (

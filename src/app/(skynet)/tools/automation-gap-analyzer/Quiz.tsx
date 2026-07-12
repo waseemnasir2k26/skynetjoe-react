@@ -68,6 +68,7 @@ export default function Quiz() {
   const [copyState, setCopyState] = useState<"idle" | "copied">("idle");
   const [savedToast, setSavedToast] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [shared, setShared] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
@@ -82,12 +83,23 @@ export default function Quiz() {
         const stored = window.localStorage.getItem(STORAGE_KEY);
         if (stored) {
           const saved = JSON.parse(stored) as SavedState;
-          if (saved.scores && Object.keys(saved.scores).length === TOTAL_QUESTIONS) {
-            setScores(saved.scores);
-            setAnswers(saved.answers ?? {});
-            setPhase("result");
-            setHydrated(true);
-            return;
+          if (
+            saved.scores &&
+            Object.keys(saved.scores).length === TOTAL_QUESTIONS
+          ) {
+            const total = Object.values(saved.scores).reduce(
+              (a, b) => a + b,
+              0,
+            );
+            // reuse local scores only when they reproduce the shared score —
+            // otherwise the URL score wins over a stale local result
+            if (normalizedScore(total) === raw) {
+              setScores(saved.scores);
+              setAnswers(saved.answers ?? {});
+              setPhase("result");
+              setHydrated(true);
+              return;
+            }
           }
         }
       } catch {
@@ -97,8 +109,9 @@ export default function Quiz() {
       const target = (raw / 100) * MAX_RAW_SCORE;
       const evenSplit: Record<string, number> = {};
       QUESTIONS.forEach((q) => {
-        evenSplit[q.id] = target / TOTAL_QUESTIONS;
+        evenSplit[q.id] = Math.round(target / TOTAL_QUESTIONS);
       });
+      setShared(true);
       setScores(evenSplit);
       setPhase("result");
       setHydrated(true);
@@ -128,9 +141,9 @@ export default function Quiz() {
     setHydrated(true);
   }, []);
 
-  /* persist */
+  /* persist — never for shared-link views (approximated scores) */
   useEffect(() => {
-    if (!hydrated) return;
+    if (!hydrated || shared) return;
     try {
       const payload: SavedState = { step, answers, scores };
       if (phase === "result") {
@@ -149,11 +162,14 @@ export default function Quiz() {
 
   const rawTotal = useMemo(
     () => Object.values(scores).reduce((a, b) => a + b, 0),
-    [scores]
+    [scores],
   );
   const totalScore = useMemo(() => normalizedScore(rawTotal), [rawTotal]);
   const subscores = useMemo(() => computeSubscores(scores), [scores]);
-  const bucket: Bucket = useMemo(() => bucketForScore(totalScore), [totalScore]);
+  const bucket: Bucket = useMemo(
+    () => bucketForScore(totalScore),
+    [totalScore],
+  );
   const weakest = useMemo(() => weakestAxis(subscores), [subscores]);
 
   const current = QUESTIONS[step];
@@ -200,6 +216,7 @@ export default function Quiz() {
     setAnswers({});
     setScores({});
     setStep(0);
+    setShared(false);
     setPhase("quiz");
     try {
       window.localStorage.removeItem(STORAGE_KEY);
@@ -561,8 +578,8 @@ function RadarChart({
             Math.abs(a.lx - CENTER) < 1
               ? "middle"
               : a.lx > CENTER
-              ? "start"
-              : "end";
+                ? "start"
+                : "end";
           const dy = a.ly > CENTER ? "1em" : "-0.25em";
           return (
             <text
@@ -627,9 +644,7 @@ function ResultCard({
   const calcQuery = buildCalculatorParams(subs);
   const bookingQuery = buildBookingParams({
     score,
-    bucket: bucket.key,
     weakestAxis: weakest.key,
-    subs,
   });
   const hours = impliedManualHours(subs);
 
@@ -715,8 +730,8 @@ function ResultCard({
           <ul className="space-y-3">
             <li className="flex gap-3 rounded-xl border border-[rgba(198,107,63,0.30)] bg-[var(--terracotta)]/[0.06] px-4 py-3 text-sm leading-relaxed text-[var(--terracotta-aa)] md:text-base">
               <Sparkles className="mt-0.5 h-4 w-4 flex-shrink-0 text-[var(--terracotta-aa)]" />
-              You&apos;re losing roughly <b>{hours} manual hours/week</b>{" "}
-              from the {weakest.label.toLowerCase()} axis alone.
+              You&apos;re losing roughly <b>{hours} manual hours/week</b> from
+              the {weakest.label.toLowerCase()} axis alone.
             </li>
             {weakest.recommendations.map((line, idx) => (
               <li

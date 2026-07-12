@@ -9,7 +9,11 @@
  * Implied manual hours (computed from axis weakness) → Revenue Calculator prefill.
  */
 
-export type Axis = "leadCapture" | "followUp" | "reporting" | "teamProductivity";
+export type Axis =
+  | "leadCapture"
+  | "followUp"
+  | "reporting"
+  | "teamProductivity";
 
 export type GapOption = {
   label: string;
@@ -132,7 +136,8 @@ export const QUESTIONS: GapQuestion[] = [
     step: 8,
     axis: "reporting",
     icon: "🎯",
-    prompt: "Can you see your conversion rate per channel without asking someone?",
+    prompt:
+      "Can you see your conversion rate per channel without asking someone?",
     options: [
       { label: "No, I have no idea", value: "no", score: 0 },
       { label: "Only at month-end", value: "monthly", score: 4 },
@@ -173,7 +178,8 @@ export const QUESTIONS: GapQuestion[] = [
     step: 11,
     axis: "teamProductivity",
     icon: "🔄",
-    prompt: "How does work hand off between roles (e.g. sales → ops → delivery)?",
+    prompt:
+      "How does work hand off between roles (e.g. sales → ops → delivery)?",
     options: [
       { label: "Slack messages and luck", value: "slack", score: 0 },
       { label: "Email + spreadsheets", value: "email", score: 3 },
@@ -186,7 +192,8 @@ export const QUESTIONS: GapQuestion[] = [
     step: 12,
     axis: "teamProductivity",
     icon: "🧾",
-    prompt: "How does data move between your tools (contacts, accounting, calendar, billing)?",
+    prompt:
+      "How does data move between your tools (contacts, accounting, calendar, billing)?",
     options: [
       { label: "Copy-paste manually", value: "copy", score: 0 },
       { label: "CSV exports occasionally", value: "csv", score: 3 },
@@ -272,7 +279,7 @@ export const AXES: AxisMeta[] = [
 /* ────────── Scoring ────────── */
 
 export function computeSubscores(
-  scores: Record<string, number>
+  scores: Record<string, number>,
 ): Record<Axis, number> {
   const subs: Record<Axis, number> = {
     leadCapture: 0,
@@ -292,9 +299,7 @@ export function normalizedScore(rawTotal: number): number {
   return Math.round((rawTotal / MAX_RAW_SCORE) * 100);
 }
 
-export function weakestAxis(
-  subs: Record<Axis, number>
-): AxisMeta {
+export function weakestAxis(subs: Record<Axis, number>): AxisMeta {
   let weakest = AXES[0];
   let weakestPct = 1.1;
   for (const ax of AXES) {
@@ -363,24 +368,21 @@ export const BUCKETS: Bucket[] = [
     label: "Mostly automated",
     color: "#10b981",
     range: [81, 100],
-    headline: "Lean operation. The remaining gaps are edge cases worth scoping.",
+    headline:
+      "Lean operation. The remaining gaps are edge cases worth scoping.",
     recommendation:
       "You're in the top 10% of service businesses. The last 20% is custom — AI agents, multi-system orchestration, or operator-grade dashboards.",
   },
 ];
 
 export function bucketForScore(score: number): Bucket {
-  const found = BUCKETS.find(
-    (b) => score >= b.range[0] && score <= b.range[1]
-  );
+  const found = BUCKETS.find((b) => score >= b.range[0] && score <= b.range[1]);
   return found ?? BUCKETS[BUCKETS.length - 1];
 }
 
 /* ────────── URL pre-fill helpers ────────── */
 
-export function buildCalculatorParams(
-  subs: Record<Axis, number>
-): string {
+export function buildCalculatorParams(subs: Record<Axis, number>): string {
   const params = new URLSearchParams();
   const hours = impliedManualHours(subs);
   params.set("hours", String(hours));
@@ -391,16 +393,11 @@ export function buildCalculatorParams(
 
 export function buildBookingParams(opts: {
   score: number;
-  bucket: BucketKey;
   weakestAxis: Axis;
-  subs: Record<Axis, number>;
 }): string {
+  // Calendly drops arbitrary query params — only utm_* survive to the booking.
   const params = new URLSearchParams();
-  params.set("score", String(opts.score));
-  params.set("bucket", opts.bucket);
-  params.set("weakest", opts.weakestAxis);
-  const pains = AXES.map((a) => `${a.key}:${opts.subs[a.key]}`).join(",");
-  params.set("axes", pains);
-  params.set("source", "automation-gap");
+  params.set("utm_source", "automation-gap");
+  params.set("utm_content", `score-${opts.score}-${opts.weakestAxis}`);
   return params.toString();
 }

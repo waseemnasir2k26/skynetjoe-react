@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { upsertGhlContact } from "@/lib/ghl";
 
 export const runtime = "nodejs";
 
@@ -17,6 +18,8 @@ export const runtime = "nodejs";
 //   - Else → appends a JSON line to /tmp/tool-feedback.log (best-effort).
 //     Vercel filesystem is read-only outside /tmp, so writes are explicitly
 //     pointed at /tmp and failures are swallowed (Slack is the real sink).
+//   - If an email is present → also fire-and-forget a GHL contact upsert
+//     (source "tool-feedback") so replies land in the CRM. Errors swallowed.
 //   - Returns 200 JSON { ok: true } for JSON callers.
 //   - For form-encoded callers (no-JS degradation) returns a 303 redirect
 //     to /tools?feedback=sent so the browser shows a thank-you screen.
@@ -71,7 +74,9 @@ async function parseBody(req: Request): Promise<{
       const form = await req.formData();
       return {
         data: {
-          tool: isStr(form.get("tool")) ? (form.get("tool") as string) : undefined,
+          tool: isStr(form.get("tool"))
+            ? (form.get("tool") as string)
+            : undefined,
           message: isStr(form.get("message"))
             ? (form.get("message") as string)
             : undefined,
@@ -186,6 +191,18 @@ export async function POST(req: Request) {
     const slackOk = await forwardSlack({ tool, message, email });
     // Always also append to log as belt-and-suspenders
     await appendLog({ tool, message, email });
+
+    // Email present → fire-and-forget GHL upsert so replies land in the CRM.
+    // upsertGhlContact never throws (dev-skips on missing env / API failure);
+    // the extra catch is belt-and-suspenders so feedback never 500s on GHL.
+    if (email) {
+      void upsertGhlContact({ email, source: "tool-feedback" }, null, [
+        tool,
+        "tool-feedback",
+      ]).catch(() => {
+        // swallow — Slack/log already have the feedback
+      });
+    }
 
     if (isForm) {
       return NextResponse.redirect(

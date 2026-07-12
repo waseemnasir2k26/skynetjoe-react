@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Quiz from "./Quiz";
@@ -32,11 +33,11 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Is this anonymous?",
-    a: "Yes. Nothing leaves your browser. We don't ask for an email, name, or company. Your answers live in localStorage and your score lives in the URL so you can share it if you want.",
+    a: "Yes. Nothing leaves your browser unless you opt in to the email summary. The quiz itself never asks for an email, name, or company. Your answers live in localStorage and your score lives in the URL so you can share it if you want.",
   },
   {
     q: "What do you do with my answers?",
-    a: "Nothing. There's no server call, no analytics event tied to your answers, no follow-up sequence. The whole thing runs client-side. If you click through to the calculator we pre-fill it with your numbers, that's it.",
+    a: "Nothing, unless you opt in to the email summary on the result card — that's the only server call tied to you, and it only sends your email plus your score bucket. Otherwise the whole thing runs client-side: no analytics event tied to your answers, no follow-up sequence. If you click through to the calculator we pre-fill it with your numbers, that's it.",
   },
   {
     q: "How accurate is the score?",
@@ -50,8 +51,16 @@ const faqs = [
 
 const heroStats = [
   { icon: Timer, label: "60 seconds", body: "7 questions, one tap each." },
-  { icon: ShieldCheck, label: "Anonymous", body: "Nothing leaves your browser." },
-  { icon: Flame, label: "Brutally honest", body: "Score from 0 (chill) to 70 (chaos)." },
+  {
+    icon: ShieldCheck,
+    label: "Anonymous",
+    body: "Nothing leaves your browser unless you opt in.",
+  },
+  {
+    icon: Flame,
+    label: "Brutally honest",
+    body: "Score from 0 (chill) to 70 (chaos).",
+  },
 ];
 
 /** Quiz schema (https://schema.org/Quiz). Uses Question subtype for each step. */
@@ -78,7 +87,7 @@ const quizSchema = {
     "@type": "Question",
     position: q.step,
     name: q.prompt,
-    acceptedAnswer: q.options.map((o) => ({
+    suggestedAnswer: q.options.map((o) => ({
       "@type": "Answer",
       text: o.label,
     })),
@@ -162,14 +171,30 @@ export default function StressQuizPage() {
               One brutally honest score.
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
               I&apos;ve sat inside 200+ service businesses. The same five
               patterns blow up every founder I talk to. This quiz scores you
               against those patterns and tells you where to fix first.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
-              No email gate. No drip sequence. No data leaves your browser. Just
-              a number from 0 to 70 and three priorities.
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
+              No email gate. No drip sequence. No data leaves your browser
+              unless you opt in to the email summary. Just a number from 0 to 70
+              and three priorities.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
@@ -180,14 +205,36 @@ export default function StressQuizPage() {
                     padding: 16,
                     background: "var(--cream-2)",
                     border: "1px solid var(--border)",
-                    transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                    transform:
+                      i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
                   }}
                 >
-                  <div className="flex items-center gap-2" style={{ color: "var(--ink)" }}>
-                    <Icon className="w-4 h-4" style={{ color: "var(--terracotta-aa)" }} />
-                    <span style={{ fontSize: 13, fontWeight: 600, fontFamily: "var(--font-sans)" }}>{label}</span>
+                  <div
+                    className="flex items-center gap-2"
+                    style={{ color: "var(--ink)" }}
+                  >
+                    <Icon
+                      className="w-4 h-4"
+                      style={{ color: "var(--terracotta-aa)" }}
+                    />
+                    <span
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 600,
+                        fontFamily: "var(--font-sans)",
+                      }}
+                    >
+                      {label}
+                    </span>
                   </div>
-                  <p style={{ marginTop: 6, fontSize: 12, color: "var(--ink-faint)", lineHeight: 1.5 }}>
+                  <p
+                    style={{
+                      marginTop: 6,
+                      fontSize: 12,
+                      color: "var(--ink-faint)",
+                      lineHeight: 1.5,
+                    }}
+                  >
                     {body}
                   </p>
                 </div>
@@ -309,6 +356,43 @@ export default function StressQuizPage() {
                   </p>
                 </details>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEXT STEPS — crawlable internal links */}
+      <section className="section pt-0">
+        <div className="container-x">
+          <div className="max-w-3xl mx-auto">
+            <div className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-5 md:px-8 md:py-6">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
+                Next steps
+              </p>
+              <ul className="space-y-2 text-sm md:text-base">
+                <li>
+                  <Link
+                    href="/tools/revenue-calculator"
+                    className="font-semibold text-[var(--ink)] underline decoration-[var(--terracotta)]/40 underline-offset-4 transition hover:text-[var(--terracotta-aa)]"
+                  >
+                    Revenue-loss calculator
+                  </Link>{" "}
+                  <span className="text-[var(--ink-faint)]">
+                    — turn your stress score into a dollar figure.
+                  </span>
+                </li>
+                <li>
+                  <Link
+                    href="/discovery-call"
+                    className="font-semibold text-[var(--ink)] underline decoration-[var(--terracotta)]/40 underline-offset-4 transition hover:text-[var(--terracotta-aa)]"
+                  >
+                    Book a free 30-min audit
+                  </Link>{" "}
+                  <span className="text-[var(--ink-faint)]">
+                    — map the first three fixes before the call ends.
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

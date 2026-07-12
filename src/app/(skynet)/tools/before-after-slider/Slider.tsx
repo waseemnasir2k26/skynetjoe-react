@@ -12,14 +12,22 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, RotateCcw, Hand } from "lucide-react";
+import {
+  ArrowRight,
+  RotateCcw,
+  Hand,
+  Loader2,
+  CheckCircle2,
+} from "lucide-react";
 import { SCENARIOS, type Scenario } from "@/data/before-after-scenarios";
 
 const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function Slider() {
   const [activeSlug, setActiveSlug] = useState<string>(SCENARIOS[0].slug);
-  const [position, setPosition] = useState<number>(50); // 0 = all manual, 100 = all automated
+  const [position, setPosition] = useState<number>(50); // 0 = all automated, 100 = all manual (position% = left inset clipping the automated layer)
   const [dragging, setDragging] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
@@ -96,7 +104,7 @@ export default function Slider() {
     if (!el) return;
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left;
-    setPosition(x / rect.width < 0.5 ? 100 : 0); // tap LEFT → show all automated, tap RIGHT → show all manual
+    setPosition(x / rect.width < 0.5 ? 100 : 0); // tap LEFT → show all manual (100), tap RIGHT → show all automated (0)
   };
 
   // Keyboard a11y
@@ -200,8 +208,7 @@ export default function Slider() {
           style={{
             // Use CSS height for consistent ratio; mobile uses smaller pad
             minHeight: "520px",
-            background:
-              "var(--cream-3)",
+            background: "var(--cream-3)",
             cursor: dragging ? "grabbing" : isTouch ? "pointer" : "grab",
           }}
         >
@@ -220,7 +227,11 @@ export default function Slider() {
             className="absolute inset-0 p-6 md:p-10"
             style={{
               clipPath: `inset(0 0 0 ${position}%)`,
-              transition: reduceMotion ? "none" : dragging ? "none" : "clip-path 120ms ease-out",
+              transition: reduceMotion
+                ? "none"
+                : dragging
+                  ? "none"
+                  : "clip-path 120ms ease-out",
               background: "var(--cream-3)",
             }}
           >
@@ -235,7 +246,8 @@ export default function Slider() {
               background: "var(--terracotta)",
               boxShadow: "0 0 12px rgba(198,107,63,0.35)",
               transform: "translateX(-0.5px)",
-              transition: reduceMotion || dragging ? "none" : "left 120ms ease-out",
+              transition:
+                reduceMotion || dragging ? "none" : "left 120ms ease-out",
               display: reduceMotion ? "none" : "block",
             }}
           />
@@ -281,7 +293,10 @@ export default function Slider() {
                   className="text-[var(--cream-3)]"
                 >
                   <polyline points="15 18 9 12 15 6" />
-                  <polyline points="9 18 15 12 9 6" transform="translate(0,0)" />
+                  <polyline
+                    points="9 18 15 12 9 6"
+                    transform="translate(0,0)"
+                  />
                 </svg>
               </div>
             </div>
@@ -358,6 +373,9 @@ export default function Slider() {
         </div>
       </div>
 
+      {/* BLUEPRINT EMAIL CAPTURE (optional, non-gating) */}
+      <BlueprintCapture />
+
       {/* CTA */}
       <div
         className="rounded-3xl p-8 md:p-10 text-center border border-[rgba(26,26,26,0.12)]"
@@ -393,7 +411,8 @@ export default function Slider() {
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
-          One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+          One missing field, one weird output, one tool you wish existed — tell
+          me. I read every reply.
         </p>
         <form action="/api/tool-feedback" method="POST" className="space-y-3">
           <input type="hidden" name="tool" value="before-after-slider" />
@@ -410,11 +429,142 @@ export default function Slider() {
             placeholder="Email (optional — only if you want a reply)"
             className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm focus:outline-none transition"
           />
-          <button type="submit" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition" style={{ background: "var(--terracotta)" }}>
+          <button
+            type="submit"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
+            style={{ background: "var(--terracotta)" }}
+          >
             Send feedback →
           </button>
         </form>
       </div>
+    </div>
+  );
+}
+
+/**
+ * Optional inline email capture — "email me the blueprint". Non-gating:
+ * the slider works with or without it. Same payload pattern as
+ * components/cta/EmailGate.tsx → POST /api/lead-capture, fire-and-forget
+ * with a short await for feedback; backend failure never blocks the
+ * success state.
+ */
+function BlueprintCapture() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = email.trim();
+    if (!trimmed || trimmed.length > 254 || !EMAIL_RE.test(trimmed)) {
+      setError("That doesn't look like an email — try again.");
+      return;
+    }
+    setError(null);
+    setSubmitting(true);
+
+    const payload = {
+      email: trimmed,
+      source: "before-after-slider",
+      capturedAt: new Date().toISOString(),
+    };
+
+    // Fire to backend — short await for feedback, never blocks the success state
+    try {
+      await Promise.race([
+        fetch("/api/lead-capture", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }).catch((err) => {
+          console.log(
+            "[before-after-slider] /api/lead-capture failed silently",
+            err,
+          );
+        }),
+        new Promise((resolve) => setTimeout(resolve, 1500)),
+      ]);
+    } catch {
+      // Swallow — success state proceeds regardless
+    }
+
+    setSubmitting(false);
+    setSent(true);
+  };
+
+  return (
+    <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
+      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-2">
+        — Optional · No gate, slider stays free
+      </p>
+      <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--ink)] mb-2">
+        Email me the automation blueprint for my industry
+      </h3>
+      <p className="text-sm text-[var(--ink-2)] mb-4 max-w-xl">
+        One email with the manual-vs-automated breakdown for workflows like
+        yours. No spam, no drip.
+      </p>
+
+      {sent ? (
+        <p
+          role="status"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ink)]"
+        >
+          <CheckCircle2
+            className="w-4 h-4"
+            style={{ color: "var(--sage)" }}
+            aria-hidden
+          />
+          Done — the blueprint is on its way to your inbox.
+        </p>
+      ) : (
+        <form onSubmit={handleSubmit} noValidate>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError(null);
+              }}
+              placeholder="you@company.com"
+              aria-label="Your email"
+              aria-invalid={!!error}
+              disabled={submitting}
+              className={`w-full sm:max-w-sm bg-[var(--cream-3)] border rounded-xl px-4 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm font-mono focus:outline-none transition ${
+                error
+                  ? "border-[var(--terracotta)]"
+                  : "border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)]"
+              }`}
+            />
+            <button
+              type="submit"
+              disabled={submitting}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
+              style={{ background: "var(--terracotta)" }}
+            >
+              {submitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Sending…
+                </>
+              ) : (
+                <>Email me the blueprint →</>
+              )}
+            </button>
+          </div>
+          {error && (
+            <p role="alert" className="text-xs text-[var(--terracotta)] mt-2">
+              {error}
+            </p>
+          )}
+        </form>
+      )}
     </div>
   );
 }

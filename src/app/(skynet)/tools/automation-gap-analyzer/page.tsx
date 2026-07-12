@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Quiz from "./Quiz";
@@ -8,8 +9,7 @@ import { Sparkles, Timer, ShieldCheck, Target } from "lucide-react";
 const PATH = "/tools/automation-gap-analyzer";
 
 export const metadata: Metadata = {
-  title:
-    "Automation Gap Analyzer — find your biggest manual time-sink in 90 seconds · SkynetLabs",
+  title: "Automation Gap Analyzer — 90-Second Score · SkynetLabs",
   description:
     "Free 12-question diagnostic across lead capture, follow-up, reporting, team productivity. Get an automation gap % score plus the one axis to fix first.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -87,7 +87,7 @@ const quizSchema = {
     "@type": "Question",
     position: q.step,
     name: q.prompt,
-    acceptedAnswer: q.options.map((o) => ({
+    suggestedAnswer: q.options.map((o) => ({
       "@type": "Answer",
       text: o.label,
     })),
@@ -126,7 +126,12 @@ export default function AutomationGapPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -144,7 +149,17 @@ export default function AutomationGapPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               Where is your business{" "}
               <span
                 style={{
@@ -160,12 +175,27 @@ export default function AutomationGapPage() {
               </span>
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
               12 questions across the four axes that bleed hours in every
               service business: lead capture, follow-up, reporting, and team
               productivity. 90 seconds to score, one biggest gap to fix first.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
               You get a 0 to 100 automation gap %, a four-axis radar, and a
               tailored callout for the weakest axis. Then choose: book a call,
               run the revenue calculator on your implied manual hours, or share
@@ -259,6 +289,52 @@ export default function AutomationGapPage() {
                     {f.a}
                   </p>
                 </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* KEEP GOING — crawlable internal links */}
+      <section className="section pt-0">
+        <div className="container-x">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3 text-center">
+              Keep going
+            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
+              Turn your score into a plan.
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                {
+                  href: "/tools/revenue-calculator",
+                  title: "Revenue Recovery Calculator",
+                  body: "Put a dollar figure on the manual hours your gap score implies.",
+                },
+                {
+                  href: "/tools/ai-readiness-score",
+                  title: "AI Readiness Score",
+                  body: "See whether your stack and data are ready for AI automation.",
+                },
+                {
+                  href: "/discovery-call",
+                  title: "Book a discovery call",
+                  body: "30 minutes on your weakest axis and exactly what to wire first.",
+                },
+              ].map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="group rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5 transition hover:border-[var(--terracotta)]"
+                >
+                  <h3 className="text-[var(--ink)] text-lg font-extrabold mb-1 group-hover:text-[var(--terracotta-aa)] transition">
+                    {l.title}
+                  </h3>
+                  <p className="text-sm text-[var(--ink-faint)] leading-relaxed">
+                    {l.body}
+                  </p>
+                </Link>
               ))}
             </div>
           </div>

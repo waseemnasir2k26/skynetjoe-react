@@ -8,6 +8,7 @@ import {
   Check,
   Copy,
   Loader2,
+  Mail,
   RotateCcw,
 } from "lucide-react";
 import {
@@ -21,6 +22,7 @@ import {
 
 type Phase = "quiz" | "loading" | "result";
 const STORAGE_KEY = "skynet:stress-quiz:v1";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type SavedState = {
   step: number;
@@ -74,7 +76,7 @@ export default function Quiz() {
     try {
       window.localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ step, answers, scores })
+        JSON.stringify({ step, answers, scores }),
       );
     } catch {
       // quota / private mode, silent
@@ -86,7 +88,10 @@ export default function Quiz() {
     return Object.values(scores).reduce((a, b) => a + b, 0);
   }, [scores, phase]);
 
-  const bucket: Bucket = useMemo(() => bucketForScore(totalScore), [totalScore]);
+  const bucket: Bucket = useMemo(
+    () => bucketForScore(totalScore),
+    [totalScore],
+  );
   const current = QUIZ[step];
   const progressPct = ((step + 1) / QUIZ.length) * 100;
 
@@ -328,147 +333,278 @@ function ResultCard({
   const calcQuery = buildCalculatorParams(answers);
   return (
     <div className="overflow-hidden rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] backdrop-blur-md">
-        {/* diagnosis header */}
-        <div
-          className="relative px-7 py-10 md:px-12 md:py-14"
-          style={{
-            background: `linear-gradient(135deg, ${bucket.color}33 0%, ${bucket.color}11 100%)`,
-            borderBottom: `1px solid ${bucket.color}55`,
-          }}
-        >
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em]"
-                style={{ background: `${bucket.color}22`, color: bucket.color }}
-              >
-                <span
-                  className="inline-block h-2 w-2 rounded-full"
-                  style={{ background: bucket.color }}
-                />
-                Diagnosis
-              </div>
-              <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-[var(--ink)] md:text-5xl">
-                {bucket.label}
-              </h2>
-              <p className="mt-3 max-w-2xl text-base text-[var(--ink-2)] md:text-lg">
-                {bucket.headline}
-              </p>
-            </div>
-            <div className="text-right">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--ink-faint)]">
-                Stress score
-              </div>
-              <div
-                className="text-5xl font-extrabold leading-none tracking-tight md:text-6xl"
-                style={{ color: bucket.color }}
-              >
-                {score}
-                <span className="text-2xl text-[var(--ink-faint)] md:text-3xl">
-                  /{MAX_SCORE}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* body */}
-        <div className="grid grid-cols-1 gap-8 px-7 py-8 md:grid-cols-2 md:px-12 md:py-10">
+      {/* diagnosis header */}
+      <div
+        className="relative px-7 py-10 md:px-12 md:py-14"
+        style={{
+          background: `linear-gradient(135deg, ${bucket.color}33 0%, ${bucket.color}11 100%)`,
+          borderBottom: `1px solid ${bucket.color}55`,
+        }}
+      >
+        <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
-              What this means
+            <div
+              className="mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em]"
+              style={{ background: `${bucket.color}22`, color: bucket.color }}
+            >
+              <span
+                className="inline-block h-2 w-2 rounded-full"
+                style={{ background: bucket.color }}
+              />
+              Diagnosis
+            </div>
+            <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-[var(--ink)] md:text-5xl">
+              {bucket.label}
+            </h2>
+            <p className="mt-3 max-w-2xl text-base text-[var(--ink-2)] md:text-lg">
+              {bucket.headline}
             </p>
-            <ul className="space-y-3">
-              {bucket.snapshot.map((line) => (
-                <li
-                  key={line}
-                  className="flex gap-3 text-sm leading-relaxed text-[var(--ink-2)] md:text-base"
-                >
-                  <span
-                    className="mt-2 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full"
-                    style={{ background: bucket.color }}
-                  />
-                  {line}
-                </li>
-              ))}
-            </ul>
           </div>
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
-              What we&apos;d fix first
-            </p>
-            <ul className="space-y-3">
-              {bucket.priorities.map((line, idx) => (
-                <li
-                  key={line}
-                  className="flex gap-3 text-sm leading-relaxed text-[var(--ink-2)] md:text-base"
-                >
-                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
-                    {idx + 1}
-                  </span>
-                  {line}
-                </li>
-              ))}
-            </ul>
+          <div className="text-right">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--ink-faint)]">
+              Stress score
+            </div>
+            <div
+              className="text-5xl font-extrabold leading-none tracking-tight md:text-6xl"
+              style={{ color: bucket.color }}
+            >
+              {score}
+              <span className="text-2xl text-[var(--ink-faint)] md:text-3xl">
+                /{MAX_SCORE}
+              </span>
+            </div>
           </div>
-        </div>
-
-        {/* CTAs */}
-        <div className="border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-7 py-7 md:px-12 md:py-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a
-              href={`/tools/revenue-calculator?${calcQuery}`}
-              className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
-              style={{
-                background: "var(--terracotta)",
-                boxShadow: "0 10px 32px rgba(198,107,63,0.25)",
-              }}
-            >
-              <Calculator className="h-4 w-4" />
-              See exactly how much you&apos;re losing
-              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="/discovery-call"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-6 py-4 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:bg-[var(--cream-3)] sm:text-base"
-            >
-              <CalendarCheck className="h-4 w-4" />
-              Book a free 30-min audit
-            </a>
-            <button
-              type="button"
-              onClick={onCopy}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 text-sm font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
-            >
-              {copyState === "copied" ? (
-                <>
-                  <Check className="h-4 w-4 text-[var(--terracotta-aa)]" />
-                  Link copied
-                </>
-              ) : (
-                <>
-                  <Copy className="h-4 w-4" />
-                  Share your score
-                </>
-              )}
-            </button>
-          </div>
-
-          <button
-            type="button"
-            onClick={onRestart}
-            className="mt-5 inline-flex items-center gap-1.5 rounded-lg border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
-          >
-            <RotateCcw className="h-3 w-3" />
-            Retake the quiz
-          </button>
         </div>
       </div>
+
+      {/* body */}
+      <div className="grid grid-cols-1 gap-8 px-7 py-8 md:grid-cols-2 md:px-12 md:py-10">
+        <div>
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
+            What this means
+          </p>
+          <ul className="space-y-3">
+            {bucket.snapshot.map((line) => (
+              <li
+                key={line}
+                className="flex gap-3 text-sm leading-relaxed text-[var(--ink-2)] md:text-base"
+              >
+                <span
+                  className="mt-2 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                  style={{ background: bucket.color }}
+                />
+                {line}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
+            What we&apos;d fix first
+          </p>
+          <ul className="space-y-3">
+            {bucket.priorities.map((line, idx) => (
+              <li
+                key={line}
+                className="flex gap-3 text-sm leading-relaxed text-[var(--ink-2)] md:text-base"
+              >
+                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
+                  {idx + 1}
+                </span>
+                {line}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* optional email summary — the result is already visible above, no gate */}
+      <div className="border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-7 py-6 md:px-12 md:py-7">
+        <EmailMyScore bucketKey={bucket.key} />
+      </div>
+
+      {/* CTAs */}
+      <div className="border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-7 py-7 md:px-12 md:py-8">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a
+            href={`/tools/revenue-calculator?${calcQuery}`}
+            className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
+            style={{
+              background: "var(--terracotta)",
+              boxShadow: "0 10px 32px rgba(198,107,63,0.25)",
+            }}
+          >
+            <Calculator className="h-4 w-4" />
+            See exactly how much you&apos;re losing
+            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+          </a>
+          <a
+            href="/discovery-call"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-6 py-4 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:bg-[var(--cream-3)] sm:text-base"
+          >
+            <CalendarCheck className="h-4 w-4" />
+            Book a free 30-min audit
+          </a>
+          <button
+            type="button"
+            onClick={onCopy}
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-5 py-4 text-sm font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
+          >
+            {copyState === "copied" ? (
+              <>
+                <Check className="h-4 w-4 text-[var(--terracotta-aa)]" />
+                Link copied
+              </>
+            ) : (
+              <>
+                <Copy className="h-4 w-4" />
+                Share your score
+              </>
+            )}
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onClick={onRestart}
+          className="mt-5 inline-flex items-center gap-1.5 rounded-lg border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ink)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
+        >
+          <RotateCcw className="h-3 w-3" />
+          Retake the quiz
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────── Optional "email me my score" capture ─────────── */
+
+function EmailMyScore({ bucketKey }: { bucketKey: string }) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (status !== "idle") return;
+    const trimmed = email.trim();
+    if (!EMAIL_RE.test(trimmed)) {
+      setError("That doesn't look like an email — try again.");
+      return;
+    }
+    setError(null);
+    setStatus("sending");
+    // Fire-and-forget capture — the result is already on screen, nothing gated
+    try {
+      await fetch("/api/lead-capture", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: trimmed,
+          source: `stress-quiz-${bucketKey}`,
+          capturedAt: new Date().toISOString(),
+        }),
+      });
+    } catch {
+      // swallow — user still gets the confirmation, backend is best-effort
+    }
+    setStatus("sent");
+  }
+
+  if (status === "sent") {
+    return (
+      <p className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ink)]">
+        <Check className="h-4 w-4 text-[var(--terracotta-aa)]" />
+        Sent — check your inbox for the score + fix plan.
+      </p>
+    );
+  }
+
+  return (
+    <div>
+      <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)]">
+        Optional · your score stays on screen either way
+      </p>
+      <p className="mb-3 text-sm text-[var(--ink-2)]">
+        Email me my score + a fix plan
+      </p>
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="flex flex-col gap-2.5 sm:flex-row"
+      >
+        <input
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (error) setError(null);
+          }}
+          placeholder="you@company.com"
+          aria-label="Email for your score + fix plan"
+          aria-invalid={!!error}
+          disabled={status === "sending"}
+          className="flex-1 bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm focus:outline-none transition"
+        />
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-[var(--cream-3)] hover:opacity-90 transition disabled:cursor-not-allowed disabled:opacity-60"
+          style={{ background: "var(--terracotta)" }}
+        >
+          {status === "sending" ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Sending…
+            </>
+          ) : (
+            <>
+              <Mail className="h-4 w-4" />
+              Email me my score
+            </>
+          )}
+        </button>
+      </form>
+      {error && (
+        <p role="alert" className="mt-2 text-xs text-[var(--terracotta-aa)]">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }
 
 /* ─────────── Feedback form ─────────── */
 
 function FeedbackForm() {
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (status === "sending") return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/tool-feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          tool: "agency-stress-quiz",
+          message: message.trim(),
+          email: email.trim() || undefined,
+        }),
+      });
+      setStatus(res.ok ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <div className="mt-12 rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 md:p-8">
       <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)] mb-2">
@@ -478,27 +614,56 @@ function FeedbackForm() {
         What should this tool do next?
       </h3>
       <p className="text-sm text-[var(--ink-2)] mb-4">
-        One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+        One missing field, one weird output, one tool you wish existed — tell
+        me. I read every reply.
       </p>
-      <form action="/api/tool-feedback" method="POST" className="space-y-3">
-        <input type="hidden" name="tool" value="agency-stress-quiz" />
-        <textarea
-          name="message"
-          required
-          rows={3}
-          placeholder="What should we improve, fix, or build?"
-          className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-3 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm font-mono focus:outline-none transition"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email (optional — only if you want a reply)"
-          className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm focus:outline-none transition"
-        />
-        <button type="submit" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition" style={{ background: "var(--terracotta)" }}>
-          Send feedback →
-        </button>
-      </form>
+      {status === "sent" ? (
+        <p className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ink)]">
+          <Check className="h-4 w-4 text-[var(--terracotta-aa)]" />
+          Thanks — sent.
+        </p>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <textarea
+            name="message"
+            required
+            rows={3}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="What should we improve, fix, or build?"
+            className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-3 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm font-mono focus:outline-none transition"
+          />
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email (optional — only if you want a reply)"
+            className="w-full bg-[var(--cream-3)] border border-[rgba(26,26,26,0.18)] focus:border-[var(--terracotta)] rounded-xl px-4 py-2.5 text-[var(--ink)] placeholder:text-[var(--ink-faint)] text-sm focus:outline-none transition"
+          />
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition disabled:cursor-not-allowed disabled:opacity-60"
+            style={{ background: "var(--terracotta)" }}
+          >
+            {status === "sending" ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Sending…
+              </>
+            ) : (
+              <>Send feedback →</>
+            )}
+          </button>
+          {status === "error" && (
+            <p role="alert" className="text-xs text-[var(--terracotta-aa)]">
+              Couldn&apos;t send — check the message has a few words and try
+              again.
+            </p>
+          )}
+        </form>
+      )}
     </div>
   );
 }

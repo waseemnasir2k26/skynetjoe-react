@@ -21,6 +21,7 @@ import {
   type IdeaTemplate,
 } from "@/data/content-calendar-ideas";
 import EmailGate from "@/components/cta/EmailGate";
+import { TOP_TESTIMONIALS } from "@/data/social-proof";
 
 const STORAGE_KEY = "skynet:content-calendar:v1";
 
@@ -55,14 +56,25 @@ const PLATFORM_ORDER: PlatformKey[] = [
 
 const DAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-function tomorrowIso(): string {
-  const d = new Date();
-  d.setHours(0, 0, 0, 0);
-  d.setDate(d.getDate() + 1);
+/** Format a Date as local yyyy-mm-dd (no UTC shift, unlike toISOString). */
+function toLocalIso(d: Date): string {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
   return `${y}-${m}-${day}`;
+}
+
+/** Parse yyyy-mm-dd as LOCAL midnight (new Date(string) would parse UTC). */
+function parseLocalIso(iso: string): Date {
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(y, (m || 1) - 1, d || 1);
+}
+
+function tomorrowIso(): string {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() + 1);
+  return toLocalIso(d);
 }
 
 const DEFAULTS: Inputs = {
@@ -92,10 +104,9 @@ function mulberry32(a: number) {
 
 function pickIdea(
   rand: () => number,
-  kindMix: Record<"educate" | "story" | "proof" | "cta", number>
+  kindMix: Record<"educate" | "story" | "proof" | "cta", number>,
 ): IdeaTemplate {
-  const total =
-    kindMix.educate + kindMix.story + kindMix.proof + kindMix.cta;
+  const total = kindMix.educate + kindMix.story + kindMix.proof + kindMix.cta;
   let r = rand() * total;
   let kind: IdeaTemplate["kind"] = "educate";
   if (r < kindMix.educate) kind = "educate";
@@ -114,9 +125,12 @@ function interpolate(s: string, inputs: Inputs, rand: () => number): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
-  const month = new Date(inputs.startDate || tomorrowIso()).toLocaleString("en-US", {
-    month: "long",
-  });
+  const month = parseLocalIso(inputs.startDate || tomorrowIso()).toLocaleString(
+    "en-US",
+    {
+      month: "long",
+    },
+  );
   const outcomes = [
     "30 % more booked calls",
     "10 hours back per week",
@@ -149,7 +163,7 @@ function interpolate(s: string, inputs: Inputs, rand: () => number): string {
 function pickAsset(
   template: IdeaTemplate,
   platform: PlatformKey,
-  rand: () => number
+  rand: () => number,
 ): AssetKind {
   if (template.assets && template.assets[platform]) {
     return template.assets[platform] as AssetKind;
@@ -170,7 +184,7 @@ function pickAsset(
 function buildPosts(inputs: Inputs): Post[] {
   if (!inputs.startDate) return [];
   const rand = mulberry32(inputs.seed);
-  const start = new Date(inputs.startDate);
+  const start = parseLocalIso(inputs.startDate);
   const startMs = start.getTime();
   if (Number.isNaN(startMs)) return [];
 
@@ -195,7 +209,7 @@ function buildPosts(inputs: Inputs): Post[] {
         if (dayOffset >= 35) continue;
         const date = new Date(startMs);
         date.setDate(start.getDate() + dayOffset);
-        const iso = date.toISOString().slice(0, 10);
+        const iso = toLocalIso(date);
         const template = pickIdea(rand, mix);
         const hook = interpolate(template.hook, inputs, rand);
         const body = interpolate(template.body, inputs, rand);
@@ -219,13 +233,15 @@ function buildPosts(inputs: Inputs): Post[] {
   posts.sort((a, b) =>
     a.date === b.date
       ? PLATFORM_ORDER.indexOf(a.platform) - PLATFORM_ORDER.indexOf(b.platform)
-      : a.date.localeCompare(b.date)
+      : a.date.localeCompare(b.date),
   );
   return posts;
 }
 
-function buildCalendarGrid(startIso: string): { date: string; weekday: number }[] {
-  const start = new Date(startIso);
+function buildCalendarGrid(
+  startIso: string,
+): { date: string; weekday: number }[] {
+  const start = parseLocalIso(startIso);
   // Walk back to Monday
   const startDow = (start.getDay() + 6) % 7; // 0 = Mon
   const gridStart = new Date(start);
@@ -234,7 +250,7 @@ function buildCalendarGrid(startIso: string): { date: string; weekday: number }[
   for (let i = 0; i < 35; i++) {
     const d = new Date(gridStart);
     d.setDate(gridStart.getDate() + i);
-    cells.push({ date: d.toISOString().slice(0, 10), weekday: i % 7 });
+    cells.push({ date: toLocalIso(d), weekday: i % 7 });
   }
   return cells;
 }
@@ -279,7 +295,7 @@ function toCsv(posts: Post[]): string {
       ASSET_LABEL[p.asset],
     ]
       .map(csvEscape)
-      .join(",")
+      .join(","),
   );
   return [header, ...rows].join("\n");
 }
@@ -313,41 +329,39 @@ function toIcs(posts: Post[]): string {
       `DTEND:${fmt(p.date, "09", "30")}`,
       `SUMMARY:[${PLATFORM_META[p.platform].short}] ${p.hook.replace(/,/g, "\\,")}`,
       `DESCRIPTION:${desc}`,
-      "END:VEVENT"
+      "END:VEVENT",
     );
   }
   lines.push("END:VCALENDAR");
   return lines.join("\r\n");
 }
 
-const KIND_PSYCH: Record<
-  IdeaTemplate["kind"],
-  { lever: string; why: string }
-> = {
-  educate: {
-    lever: "Curiosity gap + authority",
-    why: "Promising a specific number (e.g. '3 things') opens a knowledge loop the reader's brain has to close. Pair that with a how-to angle and you signal expertise without bragging.",
-  },
-  story: {
-    lever: "Identification + emotional contagion",
-    why: "Specific narrative beats let the reader cast themselves as the protagonist. They feel what you felt, which is what builds parasocial trust faster than facts ever will.",
-  },
-  proof: {
-    lever: "Social proof + loss aversion",
-    why: "Numbers from a peer ('we did X, here's the result') anchor the reader and trigger the fear of falling behind. Concrete > clever every single time.",
-  },
-  cta: {
-    lever: "Reciprocity + scarcity",
-    why: "After giving away value all week, asking for one small action lands lightly. Tight framing (cohort size, deadline, slots) does the closing work for you.",
-  },
-};
+const KIND_PSYCH: Record<IdeaTemplate["kind"], { lever: string; why: string }> =
+  {
+    educate: {
+      lever: "Curiosity gap + authority",
+      why: "Promising a specific number (e.g. '3 things') opens a knowledge loop the reader's brain has to close. Pair that with a how-to angle and you signal expertise without bragging.",
+    },
+    story: {
+      lever: "Identification + emotional contagion",
+      why: "Specific narrative beats let the reader cast themselves as the protagonist. They feel what you felt, which is what builds parasocial trust faster than facts ever will.",
+    },
+    proof: {
+      lever: "Social proof + loss aversion",
+      why: "Numbers from a peer ('we did X, here's the result') anchor the reader and trigger the fear of falling behind. Concrete > clever every single time.",
+    },
+    cta: {
+      lever: "Reciprocity + scarcity",
+      why: "After giving away value all week, asking for one small action lands lightly. Tight framing (cohort size, deadline, slots) does the closing work for you.",
+    },
+  };
 
 function toMarkdown(posts: Post[], inputs: Inputs): string {
   const lines: string[] = [];
   lines.push(`# 30-day content calendar — ${inputs.niche || "your business"}`);
   lines.push("");
   lines.push(
-    `Audience: ${inputs.audience || "—"} · Goal: ${GOAL_META[inputs.goal].label} · Start: ${inputs.startDate}`
+    `Audience: ${inputs.audience || "—"} · Goal: ${GOAL_META[inputs.goal].label} · Start: ${inputs.startDate}`,
   );
   lines.push("");
   // Group by date
@@ -360,7 +374,9 @@ function toMarkdown(posts: Post[], inputs: Inputs): string {
   for (const d of dates) {
     lines.push(`## ${d}`);
     for (const p of byDate.get(d) || []) {
-      lines.push(`- [ ] **${PLATFORM_META[p.platform].label}** · ${ASSET_LABEL[p.asset]} · ${p.hook}`);
+      lines.push(
+        `- [ ] **${PLATFORM_META[p.platform].label}** · ${ASSET_LABEL[p.asset]} · ${p.hook}`,
+      );
       lines.push(`  - Body: ${p.body}`);
       lines.push(`  - CTA: ${p.cta}`);
       lines.push(`  - Tags: ${p.tags.map((t) => `#${t}`).join(" ")}`);
@@ -415,7 +431,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
   const posts = useMemo(() => buildPosts(inputs), [inputs]);
   const grid = useMemo(
     () => (inputs.startDate ? buildCalendarGrid(inputs.startDate) : []),
-    [inputs.startDate]
+    [inputs.startDate],
   );
 
   const postsByDate = useMemo(() => {
@@ -439,14 +455,14 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
     downloadFile(
       `content-calendar-${inputs.startDate}.csv`,
       toCsv(posts),
-      "text/csv"
+      "text/csv",
     );
   };
   const onDownloadIcs = () => {
     downloadFile(
       `content-calendar-${inputs.startDate}.ics`,
       toIcs(posts),
-      "text/calendar"
+      "text/calendar",
     );
   };
   const onCopyMarkdown = async () => {
@@ -473,8 +489,8 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           Stop staring at the empty week.
         </h2>
         <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed max-w-3xl">
-          Plug in your niche, your tone, your platform mix. You walk away with
-          a 30-day calendar — hooks, formats, hashtags, and a cadence that
+          Plug in your niche, your tone, your platform mix. You walk away with a
+          30-day calendar — hooks, formats, hashtags, and a cadence that
           won&apos;t burn you out by week three.
         </p>
       </div>
@@ -531,17 +547,26 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             <select
               value={inputs.goal}
               onChange={(e) =>
-                setInputs((s) => ({ ...s, goal: e.target.value as CalendarGoal }))
+                setInputs((s) => ({
+                  ...s,
+                  goal: e.target.value as CalendarGoal,
+                }))
               }
               className="cc-input"
             >
-              {(["awareness", "leadgen", "engagement", "sales", "authority"] as CalendarGoal[]).map(
-                (g) => (
-                  <option key={g} value={g}>
-                    {GOAL_META[g].label}
-                  </option>
-                )
-              )}
+              {(
+                [
+                  "awareness",
+                  "leadgen",
+                  "engagement",
+                  "sales",
+                  "authority",
+                ] as CalendarGoal[]
+              ).map((g) => (
+                <option key={g} value={g}>
+                  {GOAL_META[g].label}
+                </option>
+              ))}
             </select>
           </Field>
           <Field
@@ -552,7 +577,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
               type="date"
               value={inputs.startDate}
               onChange={(e) =>
-                setInputs((s) => ({ ...s, startDate: e.target.value || tomorrowIso() }))
+                setInputs((s) => ({
+                  ...s,
+                  startDate: e.target.value || tomorrowIso(),
+                }))
               }
               className="cc-input"
             />
@@ -563,7 +591,8 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           — Posting cadence
         </p>
         <p className="text-xs text-[var(--ink-faint)] mb-3">
-          0 means we skip the channel. Cap each at what you&apos;ll actually ship.
+          0 means we skip the channel. Cap each at what you&apos;ll actually
+          ship.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PLATFORM_ORDER.map((p) => {
@@ -576,7 +605,11 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                   <label className="text-sm font-semibold text-[var(--ink)] flex items-center gap-2">
                     <span
                       className="inline-flex items-center justify-center rounded-md w-7 h-7 text-[10px] font-bold"
-                      style={{ background: meta.bg, color: meta.color, border: `1px solid ${meta.color}40` }}
+                      style={{
+                        background: meta.bg,
+                        color: meta.color,
+                        border: `1px solid ${meta.color}40`,
+                      }}
                     >
                       {meta.short}
                     </span>
@@ -594,7 +627,9 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                   value={v}
                   onChange={(e) => setCadence(p, Number(e.target.value))}
                   className="rc-range w-full"
-                  style={{ ["--rc-fill" as never]: `${pct}%` } as React.CSSProperties}
+                  style={
+                    { ["--rc-fill" as never]: `${pct}%` } as React.CSSProperties
+                  }
                   aria-label={`${meta.label} posts per week`}
                 />
               </div>
@@ -603,13 +638,13 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         </div>
       </div>
 
-      {/* GATE — captures email before showing 12-month calendar */}
+      {/* GATE — captures email before showing 30-day calendar */}
       {!unlocked && (
         <div className="mb-6">
           <EmailGate
             toolSlug="content-calendar"
             toolName="Content Calendar"
-            promise="your 12-month content calendar"
+            promise="your 30-day content calendar"
             onUnlock={() => setUnlocked(true)}
           />
         </div>
@@ -617,195 +652,189 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
 
       {/* EXPORT BAR */}
       {unlocked && (
-      <>
-      <div
-        className="rounded-2xl p-4 md:p-5 mb-6 flex flex-wrap items-center justify-between gap-3"
-        style={{
-          background: "var(--cream-2)",
-          border: "1px solid rgba(26,26,26,0.12)",
-          backdropFilter: "blur(14px)",
-        }}
-      >
-        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)]">
-          — {posts.length} posts ready · 30 days · regenerate till you love it
-        </p>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={onDownloadCsv}
-            disabled={posts.length === 0}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+        <>
+          <div
+            className="rounded-2xl p-4 md:p-5 mb-6 flex flex-wrap items-center justify-between gap-3"
+            style={{
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.12)",
+              backdropFilter: "blur(14px)",
+            }}
           >
-            <Download className="w-4 h-4" /> CSV
-          </button>
-          <button
-            type="button"
-            onClick={onDownloadIcs}
-            disabled={posts.length === 0}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            <Download className="w-4 h-4" /> ICS
-          </button>
-          <button
-            type="button"
-            onClick={onCopyMarkdown}
-            disabled={posts.length === 0}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            {mdCopied ? <ClipboardList className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-            {mdCopied ? "MD copied" : "Markdown"}
-          </button>
-          <button
-            type="button"
-            onClick={regen}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] hover:bg-[var(--cream-2)] transition"
-          >
-            <RefreshCw className="w-4 h-4" /> Regenerate
-          </button>
-        </div>
-      </div>
-
-      {/* GRID */}
-      <div
-        className="rounded-3xl p-3 md:p-5 mb-6"
-        style={{
-          background: "var(--cream-2)",
-          border: "1px solid rgba(26,26,26,0.12)",
-          backdropFilter: "blur(14px)",
-        }}
-      >
-        <div className="grid grid-cols-7 gap-1.5 sm:gap-2 mb-2">
-          {DAY_LABELS.map((d) => (
-            <div
-              key={d}
-              className="text-[10px] sm:text-xs uppercase tracking-wider text-[var(--terracotta-aa)]/70 font-semibold text-center"
-            >
-              {d}
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--terracotta-aa)]">
+              — {posts.length} posts ready · 30 days · regenerate till you love
+              it
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={onDownloadCsv}
+                disabled={posts.length === 0}
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                <Download className="w-4 h-4" /> CSV
+              </button>
+              <button
+                type="button"
+                onClick={onDownloadIcs}
+                disabled={posts.length === 0}
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                <Download className="w-4 h-4" /> ICS
+              </button>
+              <button
+                type="button"
+                onClick={onCopyMarkdown}
+                disabled={posts.length === 0}
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {mdCopied ? (
+                  <ClipboardList className="w-4 h-4" />
+                ) : (
+                  <Copy className="w-4 h-4" />
+                )}
+                {mdCopied ? "MD copied" : "Markdown"}
+              </button>
+              <button
+                type="button"
+                onClick={regen}
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-[var(--ink)] border border-[rgba(26,26,26,0.18)] bg-[var(--cream-2)] hover:bg-[var(--cream-2)] transition"
+              >
+                <RefreshCw className="w-4 h-4" /> Regenerate
+              </button>
             </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-7 gap-1.5 sm:gap-2">
-          {grid.map((cell) => {
-            const cellDate = new Date(cell.date);
-            const inRange =
-              !!inputs.startDate &&
-              cellDate >= new Date(inputs.startDate) &&
-              cellDate <
-                new Date(
-                  new Date(inputs.startDate).getTime() + 30 * 24 * 3600 * 1000
-                );
-            const isToday = cellDate.getTime() === today.getTime();
-            const cellPosts = postsByDate.get(cell.date) || [];
-            return (
-              <div
-                key={cell.date}
-                className="rounded-lg p-1.5 sm:p-2 min-h-[78px] sm:min-h-[100px] flex flex-col"
-                style={{
-                  background: inRange ? "var(--cream-3)" : "rgba(237, 232, 220, 0.5)",
-                  border: `1px solid ${
-                    isToday ? "var(--terracotta)" : "rgba(26,26,26,0.10)"
-                  }`,
-                  boxShadow: isToday
-                    ? "0 0 0 3px rgba(198,107,63,0.10), inset 0 1px 2px rgba(26,26,26,0.04)"
-                    : "inset 0 1px 2px rgba(26,26,26,0.03)",
-                  opacity: inRange ? 1 : 0.5,
-                }}
-              >
-                <p className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[var(--ink-faint)] mb-1 flex items-center justify-between">
-                  <span>{cell.date.slice(8, 10)}</span>
-                  {isToday && (
-                    <span className="text-[var(--terracotta-aa)] font-bold">Today</span>
-                  )}
-                </p>
-                <div className="flex flex-col gap-1 overflow-hidden">
-                  {cellPosts.slice(0, 3).map((p) => {
-                    const meta = PLATFORM_META[p.platform];
-                    return (
-                      <button
-                        key={p.id}
-                        type="button"
-                        onClick={() => setOpenPost(p)}
-                        className="text-left rounded px-1.5 py-0.5 text-[10px] sm:text-[11px] truncate transition hover:brightness-125"
-                        style={{
-                          background: meta.bg,
-                          color: meta.color,
-                          border: `1px solid ${meta.color}40`,
-                        }}
-                        title={p.hook}
-                      >
-                        <span className="font-bold mr-1">{meta.short}</span>
-                        <span className="opacity-90">{p.hook}</span>
-                      </button>
-                    );
-                  })}
-                  {cellPosts.length > 3 && (
-                    <button
-                      type="button"
-                      onClick={() => setOpenPost(cellPosts[3])}
-                      className="text-[10px] sm:text-[11px] text-[var(--terracotta-aa)] hover:text-[var(--terracotta-aa)] text-left"
-                    >
-                      +{cellPosts.length - 3} more
-                    </button>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+          </div>
 
-        {/* Legend */}
-        <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px]">
-          {PLATFORM_ORDER.map((p) => {
-            const meta = PLATFORM_META[p];
-            return (
-              <span
-                key={p}
-                className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1"
-                style={{
-                  background: meta.bg,
-                  color: meta.color,
-                  border: `1px solid ${meta.color}40`,
-                }}
-              >
-                <span className="font-bold">{meta.short}</span>
-                {meta.label}
-              </span>
-            );
-          })}
-        </div>
-      </div>
-      </>
+          {/* GRID */}
+          <div
+            className="rounded-3xl p-3 md:p-5 mb-6"
+            style={{
+              background: "var(--cream-2)",
+              border: "1px solid rgba(26,26,26,0.12)",
+              backdropFilter: "blur(14px)",
+            }}
+          >
+            <div className="grid grid-cols-7 gap-1.5 sm:gap-2 mb-2">
+              {DAY_LABELS.map((d) => (
+                <div
+                  key={d}
+                  className="text-[10px] sm:text-xs uppercase tracking-wider text-[var(--terracotta-aa)]/70 font-semibold text-center"
+                >
+                  {d}
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-7 gap-1.5 sm:gap-2">
+              {grid.map((cell) => {
+                const cellDate = parseLocalIso(cell.date);
+                const inRange =
+                  !!inputs.startDate &&
+                  cellDate >= parseLocalIso(inputs.startDate) &&
+                  cellDate <
+                    new Date(
+                      parseLocalIso(inputs.startDate).getTime() +
+                        30 * 24 * 3600 * 1000,
+                    );
+                const isToday = cellDate.getTime() === today.getTime();
+                const cellPosts = postsByDate.get(cell.date) || [];
+                return (
+                  <div
+                    key={cell.date}
+                    className="rounded-lg p-1.5 sm:p-2 min-h-[78px] sm:min-h-[100px] flex flex-col"
+                    style={{
+                      background: inRange
+                        ? "var(--cream-3)"
+                        : "rgba(237, 232, 220, 0.5)",
+                      border: `1px solid ${
+                        isToday ? "var(--terracotta)" : "rgba(26,26,26,0.10)"
+                      }`,
+                      boxShadow: isToday
+                        ? "0 0 0 3px rgba(198,107,63,0.10), inset 0 1px 2px rgba(26,26,26,0.04)"
+                        : "inset 0 1px 2px rgba(26,26,26,0.03)",
+                      opacity: inRange ? 1 : 0.5,
+                    }}
+                  >
+                    <p className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[var(--ink-faint)] mb-1 flex items-center justify-between">
+                      <span>{cell.date.slice(8, 10)}</span>
+                      {isToday && (
+                        <span className="text-[var(--terracotta-aa)] font-bold">
+                          Today
+                        </span>
+                      )}
+                    </p>
+                    <div className="flex flex-col gap-1 overflow-hidden">
+                      {cellPosts.slice(0, 3).map((p) => {
+                        const meta = PLATFORM_META[p.platform];
+                        return (
+                          <button
+                            key={p.id}
+                            type="button"
+                            onClick={() => setOpenPost(p)}
+                            className="text-left rounded px-1.5 py-0.5 text-[10px] sm:text-[11px] truncate transition hover:brightness-125"
+                            style={{
+                              background: meta.bg,
+                              color: meta.color,
+                              border: `1px solid ${meta.color}40`,
+                            }}
+                            title={p.hook}
+                          >
+                            <span className="font-bold mr-1">{meta.short}</span>
+                            <span className="opacity-90">{p.hook}</span>
+                          </button>
+                        );
+                      })}
+                      {cellPosts.length > 3 && (
+                        <button
+                          type="button"
+                          onClick={() => setOpenPost(cellPosts[3])}
+                          className="text-[10px] sm:text-[11px] text-[var(--terracotta-aa)] hover:text-[var(--terracotta-aa)] text-left"
+                        >
+                          +{cellPosts.length - 3} more
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Legend */}
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px]">
+              {PLATFORM_ORDER.map((p) => {
+                const meta = PLATFORM_META[p];
+                return (
+                  <span
+                    key={p}
+                    className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1"
+                    style={{
+                      background: meta.bg,
+                      color: meta.color,
+                      border: `1px solid ${meta.color}40`,
+                    }}
+                  >
+                    <span className="font-bold">{meta.short}</span>
+                    {meta.label}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </>
       )}
 
-      {/* SOCIAL PROOF STRIP */}
+      {/* SOCIAL PROOF STRIP — real client outcomes from social-proof.ts */}
       <div className="my-6 grid grid-cols-1 md:grid-cols-3 gap-3">
-        {[
-          {
-            quote:
-              "Stopped writing posts at midnight. The calendar runs three weeks ahead of me now.",
-            who: "Maya R., dental SaaS founder",
-          },
-          {
-            quote:
-              "Used the regenerate button until I had 30 posts I'd actually publish. That was the whole job.",
-            who: "Daniel O., agency owner ($28k MRR)",
-          },
-          {
-            quote:
-              "We hit our first 1k LinkedIn followers month two. The hooks do the heavy lifting.",
-            who: "Aisha K., ops consultant",
-          },
-        ].map((t, i) => (
+        {TOP_TESTIMONIALS.slice(0, 3).map((t) => (
           <div
-            key={i}
+            key={t.name}
             className="rounded-2xl p-4 border border-[rgba(26,26,26,0.12)] bg-[var(--cream-3)]"
             style={{ boxShadow: "inset 0 1px 2px rgba(26,26,26,0.04)" }}
           >
             <p className="text-sm leading-relaxed text-[var(--ink-2)] mb-2">
-              &ldquo;{t.quote}&rdquo;
+              &ldquo;{t.outcome}&rdquo;
             </p>
             <p className="text-[11px] uppercase tracking-wider font-semibold text-[var(--terracotta-aa)]">
-              — {t.who}
+              — {t.name}, {t.company}
             </p>
           </div>
         ))}
@@ -828,8 +857,8 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           </h3>
           <p className="text-sm text-[var(--ink-2)] leading-relaxed">
             30-minute call. We wire the calendar into your GHL, Buffer, or n8n
-            so posts ship on the day they should. If automation isn&apos;t
-            worth it for your stage, we&apos;ll say so.
+            so posts ship on the day they should. If automation isn&apos;t worth
+            it for your stage, we&apos;ll say so.
           </p>
         </div>
         <a
@@ -841,7 +870,8 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             background: "var(--terracotta)",
           }}
         >
-          <CalendarCheck className="w-4 h-4" /> Book the call <ArrowRight className="w-4 h-4" />
+          <CalendarCheck className="w-4 h-4" /> Book the call{" "}
+          <ArrowRight className="w-4 h-4" />
         </a>
       </div>
 
@@ -852,7 +882,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           aria-modal="true"
           aria-label="Post detail"
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 sm:p-6"
-          style={{ background: "rgba(26,26,26,0.75)", backdropFilter: "blur(6px)" }}
+          style={{
+            background: "rgba(26,26,26,0.75)",
+            backdropFilter: "blur(6px)",
+          }}
           onClick={() => setOpenPost(null)}
         >
           <div
@@ -915,9 +948,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                 </span>
               </ModalRow>
 
-              <details
-                className="group rounded-2xl border border-[rgba(138,154,123,0.40)] bg-[rgba(138,154,123,0.10)] p-4 mt-2"
-              >
+              <details className="group rounded-2xl border border-[rgba(138,154,123,0.40)] bg-[rgba(138,154,123,0.10)] p-4 mt-2">
                 <summary className="cursor-pointer list-none flex items-center justify-between gap-3">
                   <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--sage)]">
                     Why this hook works
@@ -974,7 +1005,8 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           What should this tool do next?
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
-          One missing field, one weird output, one tool you wish existed — tell me. I read every reply.
+          One missing field, one weird output, one tool you wish existed — tell
+          me. I read every reply.
         </p>
         <form action="/api/tool-feedback" method="POST" className="space-y-3">
           <input type="hidden" name="tool" value="content-calendar" />
@@ -984,7 +1016,12 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             rows={3}
             placeholder="What should we improve, fix, or build?"
             className="cc-input"
-            style={{ fontFamily: "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)", minHeight: 96, resize: "vertical" }}
+            style={{
+              fontFamily:
+                "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
+              minHeight: 96,
+              resize: "vertical",
+            }}
           />
           <input
             type="email"
@@ -1125,7 +1162,13 @@ function Field({
   );
 }
 
-function ModalRow({ label, children }: { label: string; children: React.ReactNode }) {
+function ModalRow({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <p className="text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1">

@@ -3,6 +3,13 @@
  * Ported from v5.5 WP theme (front-page.php + header.php + footer.php).
  */
 
+// Relative import (not "@/…") — next.config.ts imports SITE/NAV_PRIMARY
+// directly and its config loader does NOT resolve the `@/` path alias
+// (see next.config.ts comment above the `isIndexableHere` mirror). Using
+// "@/data/tools-registry" here would break `next build`/`next dev` config
+// loading with "Cannot find module".
+import { TOOLS_REGISTRY } from "../data/tools-registry";
+
 /**
  * Asset host used for og:image / twitter:image resolution.
  *
@@ -87,64 +94,20 @@ export type NavItem = {
   label: string;
   href: string;
   hasMega?: boolean;
+  hasToolsMega?: boolean;
   subItems?: NavSubItem[];
 };
 /**
- * Free tools — canonical list mirroring `src/app/tools/page.tsx`.
- * Keep in sync when a tool is added/removed.
+ * Free tools — canonical list mirroring `src/data/tools-registry.ts`
+ * (TOOLS_REGISTRY). Used as the mobile-menu / fallback flat list; the
+ * desktop nav renders the categorized ToolsMegaMenu instead. Keep in sync
+ * when a tool is added/removed — TOOLS_REGISTRY is the source of truth.
  */
-export const TOOL_LINKS: NavSubItem[] = [
-  {
-    label: "AI Readiness Score",
-    href: "/tools/ai-readiness-score",
-    desc: "10 questions, 0-100 score + 4-axis breakdown",
-  },
-  {
-    label: "Agency Stress Quiz",
-    href: "/tools/agency-stress-quiz",
-    desc: "60-second diagnostic — chill to chaos",
-  },
-  {
-    label: "Automation Gap Analyzer",
-    href: "/tools/automation-gap-analyzer",
-    desc: "Find where your ops lose time and money",
-  },
-  {
-    label: "Before/After Slider",
-    href: "/tools/before-after-slider",
-    desc: "Drag to compare manual vs automated",
-  },
-  {
-    label: "Content Calendar",
-    href: "/tools/content-calendar",
-    desc: "30-day cross-platform post engine",
-  },
-  {
-    label: "Executive Summary Generator",
-    href: "/tools/executive-summary-generator",
-    desc: "Raw notes → TL;DR, email, deck slide",
-  },
-  {
-    label: "Prompt Library",
-    href: "/tools/prompt-library",
-    desc: "50 production-tested AI prompts",
-  },
-  {
-    label: "Revenue Calculator",
-    href: "/tools/revenue-calculator",
-    desc: "What your missed leads cost per month",
-  },
-  {
-    label: "Video Prompt Generator",
-    href: "/tools/video-prompt-generator",
-    desc: "Runway, Pika, Sora, Veo — side-by-side",
-  },
-  {
-    label: "Voice Persona Builder",
-    href: "/tools/voice-persona-builder",
-    desc: "AI system prompt in your brand voice",
-  },
-];
+export const TOOL_LINKS: NavSubItem[] = TOOLS_REGISTRY.map((t) => ({
+  label: t.name,
+  href: `/tools/${t.slug}`,
+  desc: t.oneLiner,
+}));
 
 // Restructured from 10 flat items → 6 top-level axes (+ Book-audit CTA in Header).
 // Two clean axes: WHAT we do (Services mega) × WHO it's for (By Industry).
@@ -214,6 +177,7 @@ export const NAV_PRIMARY: NavItem[] = [
   {
     label: "Tools",
     href: "/tools",
+    hasToolsMega: true,
     subItems: TOOL_LINKS,
   },
   { label: "Pricing", href: "/pricing" },

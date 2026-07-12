@@ -2,114 +2,118 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import { Calculator, Activity, Compass, ArrowLeftRight, Mic, FileText, CalendarDays, Target, Library, Film, ArrowRight } from "lucide-react";
+import {
+  Workflow,
+  Webhook,
+  Clock,
+  GitBranch,
+  Target,
+  CalendarDays,
+  SearchCheck,
+  MessageCircleQuestion,
+  FileCode2,
+  Braces,
+  Link2,
+  Bot,
+  TerminalSquare,
+  ListChecks,
+  Library,
+  Mic,
+  Film,
+  Send,
+  Calculator,
+  LayoutGrid,
+  FileText,
+  ArrowLeftRight,
+  Compass,
+  Activity,
+  TrendingUp,
+  BarChart3,
+  ArrowRight,
+} from "lucide-react";
 import Reveal from "./Reveal";
+import ToolUsage from "@/components/tools/ToolUsage";
+import { TOOL_CATEGORIES, toolsByCategory } from "@/data/tools-registry";
+
+const ICONS: Record<
+  string,
+  React.ComponentType<{ className?: string; style?: React.CSSProperties }>
+> = {
+  Workflow,
+  Webhook,
+  Clock,
+  GitBranch,
+  Target,
+  CalendarDays,
+  SearchCheck,
+  MessageCircleQuestion,
+  FileCode2,
+  Braces,
+  Link2,
+  Bot,
+  TerminalSquare,
+  ListChecks,
+  Library,
+  Mic,
+  Film,
+  Send,
+  Calculator,
+  LayoutGrid,
+  FileText,
+  ArrowLeftRight,
+  Compass,
+  Activity,
+  TrendingUp,
+  BarChart3,
+};
 
 export const metadata: Metadata = {
-  title: "Free Tools — 10-tool suite for service businesses | SkynetLabs",
+  title: "26 Free Tools for Service Businesses",
   description:
-    "Ten free utilities from SkynetLabs: revenue calculator, AI readiness score, automation gap analyzer, brand voice builder, executive summary generator, 30-day content calendar, prompt library, video prompt generator, before/after slider and agency stress quiz.",
+    "26 free tools across automation, AEO, prompts, ops and diagnostics — n8n workflow generator, AEO audit, cold DM generator and more.",
   alternates: { canonical: `${SITE.url}/tools` },
   openGraph: {
-    title: "SkynetLabs Free Tools — 10 calculators, diagnostics and generators",
+    title: "SkynetLabs Free Tools — 26 calculators, diagnostics and generators",
     description:
-      "Find out where your business is losing time and money. Ten free tools: calculators, diagnostics and generators for service businesses.",
+      "Find out where your business is losing time and money. 26 free tools across automation, AEO, prompts, ops, and diagnostics.",
     url: `${SITE.url}/tools`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
 };
 
-const TOOLS = [
-  {
-    slug: "revenue-calculator",
-    name: "Revenue Recovery Calculator",
-    blurb:
-      "Six sliders. Live math. See exactly what your missed-call queue and manual follow-ups are costing per month — and what we'd recover.",
-    Icon: Calculator,
-  },
-  {
-    slug: "agency-stress-quiz",
-    name: "Agency Stress Quiz",
-    blurb:
-      "60 seconds. 7 questions. One brutally honest score. Diagnoses whether you're at chill operator or full chaos mode — pipes straight into the calculator.",
-    Icon: Activity,
-  },
-  {
-    slug: "ai-readiness-score",
-    name: "AI Readiness Score",
-    blurb:
-      "90 seconds. 10 questions. A 0 to 100 score plus a four-axis breakdown of foundation, process, demand and buy-in — and exactly what to fix first.",
-    Icon: Compass,
-  },
-  {
-    slug: "before-after-slider",
-    name: "Before/After Slider",
-    blurb:
-      "Drag-to-compare 6 real workflows: lead response, content production, customer service, CRM data entry, reporting, lead qualification. Visualise the gap manual vs automated.",
-    Icon: ArrowLeftRight,
-  },
-  {
-    slug: "voice-persona-builder",
-    name: "Brand Voice Persona Builder",
-    blurb:
-      "Four steps, eight tone sliders, three example fields. Outputs a paste-ready Brand Voice Profile and AI system prompt that makes Claude and ChatGPT sound like your brand instead of themselves.",
-    Icon: Mic,
-  },
-  {
-    slug: "executive-summary-generator",
-    name: "Executive Summary Generator",
-    blurb:
-      "Paste raw notes, get five ready-to-send formats: TL;DR, email, Slack post, deck slide and investor 1-pager. Built in your browser, instant, uses your own words.",
-    Icon: FileText,
-  },
-  {
-    slug: "content-calendar",
-    name: "30-Day Content Calendar",
-    blurb:
-      "Niche, cadence and goal in. Thirty days of cross-platform post ideas out, across LinkedIn, X, IG, Shorts and email — with CSV, ICS and markdown export.",
-    Icon: CalendarDays,
-  },
-  {
-    slug: "automation-gap-analyzer",
-    name: "Automation Gap Analyzer",
-    blurb:
-      "90 seconds. 12 questions across lead capture, follow-up, reporting, team productivity. One automation gap %, four-axis radar, and the one biggest time-sink to fix first.",
-    Icon: Target,
-  },
-  {
-    slug: "prompt-library",
-    name: "Prompt Library",
-    blurb:
-      "Fifty production-tested AI prompts across sales, marketing, ops, content, data, recruitment, customer service and founder brain. Search, copy, open in Claude or ChatGPT.",
-    Icon: Library,
-  },
-  {
-    slug: "video-prompt-generator",
-    name: "Video Prompt Generator",
-    blurb:
-      "One scene, four formats. Build Runway, Pika, Sora and Veo prompts side-by-side from one set of inputs. Save the good ones to local history. Zero backend.",
-    Icon: Film,
-  },
-];
+const CATEGORY_DESC: Record<string, string> = {
+  "Automation & Workflows":
+    "n8n, GHL, webhooks, and cron — plan and generate the wiring before you build it.",
+  "AEO & AI Visibility":
+    "Audit, grade, and structure your site for AI answer engines and crawlers.",
+  "Prompts & Agents":
+    "Build production-grade prompts, agent specs, and SOPs for AI you actually run.",
+  "Ops & Outbound":
+    "Cold outreach, cost modeling, and stack decisions for lean operators.",
+  Diagnostics:
+    "Score, quiz, and calculate exactly where your business leaks time and money.",
+};
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: "SkynetLabs Free Tools",
   description:
-    "Ten free utilities from SkynetLabs: revenue calculator, AI readiness score, automation gap analyzer, brand voice persona builder, executive summary generator, 30-day content calendar, prompt library, video prompt generator, before/after slider and agency stress quiz.",
+    "26 free utilities from SkynetLabs across automation & workflows, AEO & AI visibility, prompts & agents, ops & outbound, and diagnostics.",
   url: `${SITE.url}/tools`,
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },
-  hasPart: TOOLS.map((t) => ({
-    "@type": "SoftwareApplication",
-    name: t.name,
-    url: `${SITE.url}/tools/${t.slug}`,
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
-    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-  })),
+  hasPart: TOOL_CATEGORIES.flatMap((cat) =>
+    toolsByCategory(cat).map((t) => ({
+      "@type": "SoftwareApplication",
+      name: t.name,
+      url: `${SITE.url}/tools/${t.slug}`,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    })),
+  ),
 };
 
 export default function ToolsIndexPage() {
@@ -125,7 +129,10 @@ export default function ToolsIndexPage() {
       >
         <section
           className="container-x px-6 pt-32 pb-16 md:pt-40"
-          style={{ background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+          style={{
+            background: "var(--cream-3)",
+            borderBottom: "1px solid var(--border)",
+          }}
         >
           <Reveal className="max-w-3xl">
             <div
@@ -142,8 +149,14 @@ export default function ToolsIndexPage() {
                 gap: 12,
               }}
             >
-              <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
-              Ten free tools
+              <span
+                style={{
+                  width: 28,
+                  height: 1,
+                  background: "var(--terracotta)",
+                }}
+              />
+              26 free tools
             </div>
             <h1
               style={{
@@ -161,67 +174,162 @@ export default function ToolsIndexPage() {
                 losing money.
               </span>
             </h1>
-            <p style={{ fontSize: 18, color: "var(--ink-2)", maxWidth: "52ch", lineHeight: 1.6 }}>
-              Ten utilities I built for myself before I built them for clients.
-              All free. Some hand you the result instantly; a few ask for an
-              email to unlock it. Just numbers, either way.
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                maxWidth: "52ch",
+                lineHeight: 1.6,
+              }}
+            >
+              26 free tools I built for myself before I built them for clients —
+              automation planning, AEO/AI visibility, prompt and agent builders,
+              outbound ops, and diagnostics. All free. Some hand you the result
+              instantly; a few ask for an email to unlock it. Just numbers,
+              either way.
             </p>
           </Reveal>
         </section>
-        <section className="container-x px-6 py-20">
-          <div className="grid md:grid-cols-2 gap-6">
-            {TOOLS.map(({ slug, name, blurb, Icon }, i) => (
-              <Reveal key={slug} delay={(i % 2) * 0.06}>
-              <Link
-                href={`/tools/${slug}`}
-                className="group relative"
-                style={{
-                  display: "block",
-                  padding: 28,
-                  background: "var(--cream-2)",
-                  border: "1px solid var(--border)",
-                  textDecoration: "none",
-                  color: "var(--ink)",
-                  transform: i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
-                }}
-              >
-                <div className="flex items-start justify-between mb-5">
-                  <div
-                    style={{
-                      width: 48,
-                      height: 48,
-                      background: "var(--cream-3)",
-                      border: "1px solid var(--border)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Icon className="w-6 h-6" style={{ color: "var(--terracotta-aa)" }} />
-                  </div>
-                  <ArrowRight
-                    className="w-5 h-5 group-hover:translate-x-1 transition-all"
-                    style={{ color: "var(--ink-faint)" }}
-                  />
+
+        {TOOL_CATEGORIES.map((cat, catIdx) => {
+          const tools = toolsByCategory(cat);
+          return (
+            <section
+              key={cat}
+              className="container-x px-6 py-16"
+              style={
+                catIdx % 2 === 1 ? { background: "var(--cream-2)" } : undefined
+              }
+            >
+              <Reveal className="mb-10 max-w-2xl">
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.16em",
+                    color: "var(--terracotta-aa)",
+                    fontWeight: 700,
+                    marginBottom: 8,
+                  }}
+                >
+                  {String(catIdx + 1).padStart(2, "0")} — {tools.length} tools
                 </div>
                 <h2
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: 22,
-                    fontWeight: 600,
-                    marginBottom: 12,
+                    fontSize: "clamp(26px, 3.4vw, 36px)",
+                    fontWeight: 700,
+                    letterSpacing: "-0.015em",
                     color: "var(--ink)",
-                    letterSpacing: "-0.01em",
+                    marginBottom: 10,
                   }}
                 >
-                  {name}
+                  {cat}
                 </h2>
-                <p style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6 }}>{blurb}</p>
-              </Link>
+                <p
+                  style={{
+                    fontSize: 15,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {CATEGORY_DESC[cat]}
+                </p>
               </Reveal>
-            ))}
-          </div>
-        </section>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {tools.map((tool, i) => {
+                  const Icon = ICONS[tool.icon];
+                  return (
+                    <Reveal key={tool.slug} delay={(i % 2) * 0.06}>
+                      <Link
+                        href={`/tools/${tool.slug}`}
+                        className="group relative"
+                        style={{
+                          display: "block",
+                          padding: 28,
+                          background: "var(--cream-2)",
+                          border: "1px solid var(--border)",
+                          textDecoration: "none",
+                          color: "var(--ink)",
+                          transform:
+                            i % 2 === 0 ? "rotate(-0.3deg)" : "rotate(0.3deg)",
+                        }}
+                      >
+                        <div className="flex items-start justify-between mb-5">
+                          <div
+                            style={{
+                              width: 48,
+                              height: 48,
+                              background: "var(--cream-3)",
+                              border: "1px solid var(--border)",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {Icon && (
+                              <Icon
+                                className="w-6 h-6"
+                                style={{ color: "var(--terracotta-aa)" }}
+                              />
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            {tool.isNew && (
+                              <span
+                                style={{
+                                  fontFamily: "var(--font-mono)",
+                                  fontSize: 9,
+                                  fontWeight: 700,
+                                  letterSpacing: "0.12em",
+                                  padding: "3px 8px",
+                                  background: "var(--terracotta)",
+                                  color: "var(--cream)",
+                                  borderRadius: 999,
+                                }}
+                              >
+                                NEW
+                              </span>
+                            )}
+                            <ArrowRight
+                              className="w-5 h-5 group-hover:translate-x-1 transition-all"
+                              style={{ color: "var(--ink-faint)" }}
+                            />
+                          </div>
+                        </div>
+                        <h3
+                          style={{
+                            fontFamily: "var(--font-display)",
+                            fontSize: 22,
+                            fontWeight: 600,
+                            marginBottom: 12,
+                            color: "var(--ink)",
+                            letterSpacing: "-0.01em",
+                          }}
+                        >
+                          {tool.name}
+                        </h3>
+                        <p
+                          style={{
+                            fontSize: 14,
+                            color: "var(--ink-2)",
+                            lineHeight: 1.6,
+                            marginBottom: 16,
+                          }}
+                        >
+                          {tool.oneLiner}
+                        </p>
+                        <ToolUsage slug={tool.slug} />
+                      </Link>
+                    </Reveal>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
       </main>
     </>
   );

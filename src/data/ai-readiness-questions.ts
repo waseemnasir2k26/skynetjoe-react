@@ -180,7 +180,7 @@ export const QUESTIONS: ReadinessQuestion[] = [
 export const TOTAL_QUESTIONS = QUESTIONS.length;
 export const MAX_SCORE = QUESTIONS.reduce(
   (acc, q) => acc + Math.max(...q.options.map((o) => o.score)),
-  0
+  0,
 );
 
 /* ───────────────────── Dimension metadata ───────────────────── */
@@ -231,7 +231,7 @@ export const DIMENSIONS: DimensionMeta[] = [
  * Returned values are the RAW sums (not normalized).
  */
 export function computeSubscores(
-  scores: Record<string, number>
+  scores: Record<string, number>,
 ): Record<Dimension, number> {
   const subs: Record<Dimension, number> = {
     foundation: 0,
@@ -251,7 +251,7 @@ export function computeSubscores(
  * Used to pick the "fix this first" callout.
  */
 export function weakestDimension(
-  subs: Record<Dimension, number>
+  subs: Record<Dimension, number>,
 ): DimensionMeta {
   let weakest = DIMENSIONS[0];
   let weakestPct = 1.1;
@@ -341,9 +341,7 @@ export const BUCKETS: Bucket[] = [
 ];
 
 export function bucketForScore(score: number): Bucket {
-  const found = BUCKETS.find(
-    (b) => score >= b.range[0] && score <= b.range[1]
-  );
+  const found = BUCKETS.find((b) => score >= b.range[0] && score <= b.range[1]);
   return found ?? BUCKETS[BUCKETS.length - 1];
 }
 
@@ -379,24 +377,16 @@ export function buildCalculatorParams(answers: Record<string, string>): string {
 /* ───────────── Calendly prefill mapping ───────────── */
 
 /**
- * Build query params for the strategy-call URL. Hands the booking
- * destination structured context so the call opens with score visible.
+ * Build query params for the strategy-call URL. Calendly silently drops
+ * arbitrary params (score/bucket/weakest/dims), but passes UTM params
+ * through to the booking payload — so the context rides in utm_content.
  */
 export function buildBookingParams(opts: {
   score: number;
   bucket: BucketKey;
-  weakestDim: Dimension;
-  subscores: Record<Dimension, number>;
 }): string {
   const params = new URLSearchParams();
-  params.set("score", String(opts.score));
-  params.set("bucket", opts.bucket);
-  params.set("weakest", opts.weakestDim);
-  // Dim breakdown as a compact comma string e.g. foundation:20,process:18,demand:14,buyIn:8
-  const pains = DIMENSIONS.map(
-    (d) => `${d.key}:${opts.subscores[d.key]}`
-  ).join(",");
-  params.set("dims", pains);
-  params.set("source", "ai-readiness");
+  params.set("utm_source", "ai-readiness");
+  params.set("utm_content", `score-${opts.score}-${opts.bucket}`);
   return params.toString();
 }

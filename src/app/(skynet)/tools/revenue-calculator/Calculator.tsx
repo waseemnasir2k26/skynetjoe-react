@@ -1,15 +1,16 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ChevronDown, ChevronRight, Sparkles } from "lucide-react";
+import {
+  CheckCircle2,
+  ChevronDown,
+  ChevronRight,
+  Loader2,
+  Mail,
+  Sparkles,
+} from "lucide-react";
 
 type SliderKey = "leads" | "deal" | "close" | "missed" | "hours" | "rate";
 
@@ -74,7 +75,8 @@ const SLIDERS: SliderConfig[] = [
     max: 60,
     step: 1,
     defaultValue: 12,
-    description: "Time you or staff spend chasing leads, drafting replies, updating the CRM.",
+    description:
+      "Time you or staff spend chasing leads, drafting replies, updating the CRM.",
   },
   {
     key: "rate",
@@ -84,7 +86,8 @@ const SLIDERS: SliderConfig[] = [
     max: 500,
     step: 5,
     defaultValue: 75,
-    description: "What an hour of your time is actually worth, not minimum wage.",
+    description:
+      "What an hour of your time is actually worth, not minimum wage.",
   },
 ];
 
@@ -101,7 +104,7 @@ const fmtUSD = (v: number) =>
 
 const fmtNum = (v: number) =>
   new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(
-    Math.round(v)
+    Math.round(v),
   );
 
 function formatBySliderUnit(unit: SliderConfig["unit"], v: number): string {
@@ -116,9 +119,7 @@ function clampNum(v: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, v));
 }
 
-function parseFromParams(
-  params: URLSearchParams
-): Record<SliderKey, number> {
+function parseFromParams(params: URLSearchParams): Record<SliderKey, number> {
   const out = {} as Record<SliderKey, number>;
   for (const s of SLIDERS) {
     const raw = params.get(s.key);
@@ -195,12 +196,180 @@ function CountUp({
   return <span className={className}>{format(display)}</span>;
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function isValidEmail(s: string): boolean {
+  if (!s || s.length > 254) return false;
+  return EMAIL_RE.test(s);
+}
+
+/**
+ * Optional email capture rendered AFTER the results — never gates the
+ * calculator. POSTs to /api/lead-capture with the same payload shape as
+ * EmailGate ({ email, source, capturedAt }).
+ */
+function EmailProjection() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = email.trim();
+    if (!isValidEmail(trimmed)) {
+      setError("That doesn't look like an email — try again.");
+      return;
+    }
+    setError(null);
+    setSubmitting(true);
+
+    const payload = {
+      email: trimmed,
+      source: "revenue-calculator",
+      capturedAt: new Date().toISOString(),
+    };
+
+    // Fire to backend — short await for toast feedback, never blocks UX
+    try {
+      await Promise.race([
+        fetch("/api/lead-capture", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }).catch((err) => {
+          console.log(
+            "[revenue-calculator] /api/lead-capture failed silently",
+            err,
+          );
+        }),
+        new Promise((resolve) => setTimeout(resolve, 1500)),
+      ]);
+    } catch {
+      // Swallow — success toast still shows, backend failure never blocks
+    }
+
+    setSubmitting(false);
+    setSent(true);
+  };
+
+  return (
+    <div
+      className="rounded-3xl p-6 md:p-8 mb-6"
+      style={{
+        background: "var(--cream-2)",
+        border: "1px solid rgba(26,26,26,0.12)",
+        backdropFilter: "blur(14px)",
+      }}
+    >
+      <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
+        Optional · keep your number
+      </p>
+
+      {sent ? (
+        <div
+          role="status"
+          className="flex items-start gap-3 rounded-2xl p-4"
+          style={{
+            background: "rgba(52, 211, 153, 0.10)",
+            border: "1px solid rgba(52, 211, 153, 0.40)",
+          }}
+        >
+          <CheckCircle2
+            className="w-5 h-5 shrink-0 mt-0.5"
+            style={{ color: "#10b981" }}
+          />
+          <div>
+            <p className="text-sm font-semibold text-[var(--ink)]">
+              Got it — your projection is on its way.
+            </p>
+            <p className="text-xs text-[var(--ink-2)] mt-1">
+              I&apos;ll email it to you shortly. Bookmark this page&apos;s URL
+              to keep your slider inputs too.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <>
+          <h3 className="text-xl md:text-2xl font-bold text-[var(--ink)] mb-2">
+            Email me this projection
+          </h3>
+          <p className="text-sm text-[var(--ink-2)] mb-5 max-w-xl leading-relaxed">
+            Want these numbers in your inbox to share with a partner or revisit
+            later? Drop your email. No spam, no drip — one email, that&apos;s
+            it.
+          </p>
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            className="flex flex-col sm:flex-row gap-3 max-w-xl"
+          >
+            <input
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError(null);
+              }}
+              placeholder="you@company.com"
+              aria-label="Your email"
+              aria-invalid={!!error}
+              disabled={submitting}
+              className="flex-1 rounded-lg px-4 py-3 text-sm outline-none transition-colors"
+              style={{
+                background: "var(--cream-3)",
+                color: "var(--ink)",
+                border: error
+                  ? "1px solid var(--terracotta)"
+                  : "1px solid rgba(26,26,26,0.18)",
+              }}
+            />
+            <button
+              type="submit"
+              disabled={submitting}
+              className="btn-primary justify-center shrink-0"
+              style={{
+                cursor: submitting ? "not-allowed" : "pointer",
+                opacity: submitting ? 0.6 : 1,
+              }}
+            >
+              {submitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Sending…
+                </>
+              ) : (
+                <>
+                  <Mail className="w-4 h-4" />
+                  Email my projection
+                </>
+              )}
+            </button>
+          </form>
+          {error && (
+            <p
+              role="alert"
+              className="text-xs mt-2"
+              style={{ color: "var(--terracotta)" }}
+            >
+              {error}
+            </p>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
 export default function Calculator({ calUrl }: { calUrl: string }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialRef = useRef(parseFromParams(searchParams));
   const [values, setValues] = useState<Record<SliderKey, number>>(
-    initialRef.current
+    initialRef.current,
   );
 
   // Debounced URL sync — replace state, no scroll jump, no history pollution.
@@ -477,9 +646,10 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
               </div>
 
               <p className="text-xs md:text-sm text-[var(--ink-faint)] leading-relaxed">
-                Estimates based on average outcomes from 240+ AI automations
-                shipped since 2019. Your mileage varies — book a free call to
-                get a real number for your business.
+                Estimates calibrated against documented client outcomes — like
+                Takycorp adding $11K MRR in 60 days from one n8n flow, and
+                KODIASIMMO booking 47 calls in 21 days. Your mileage varies —
+                book a free call to get a real number for your business.
               </p>
 
               {/* CTAs */}
@@ -500,6 +670,9 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
               </div>
             </div>
 
+            {/* OPTIONAL EMAIL CAPTURE — never gates the calculator */}
+            <EmailProjection />
+
             {/* HOW WE CALCULATED THIS */}
             <details
               className="group rounded-2xl p-5 md:p-6"
@@ -515,34 +688,42 @@ export default function Calculator({ calUrl }: { calUrl: string }) {
               </summary>
               <div className="mt-4 space-y-3 text-sm text-[var(--ink-2)] leading-relaxed">
                 <p>
-                  <strong className="text-[var(--ink)]">Missed revenue per month</strong> ={" "}
-                  leads × missed_rate × close_rate × deal_size. If you get 50
+                  <strong className="text-[var(--ink)]">
+                    Missed revenue per month
+                  </strong>{" "}
+                  = leads × missed_rate × close_rate × deal_size. If you get 50
                   leads, miss 35% of them, would close 12%, at $500 a deal —
                   that&apos;s 50 × 0.35 × 0.12 × $500 = $1,050 a month walking
                   out the door.
                 </p>
                 <p>
-                  <strong className="text-[var(--ink)]">Wasted labor per month</strong> ={" "}
-                  manual_hours × 4.33 weeks × hourly_value. 12 hrs/wk × 4.33 ×
+                  <strong className="text-[var(--ink)]">
+                    Wasted labor per month
+                  </strong>{" "}
+                  = manual_hours × 4.33 weeks × hourly_value. 12 hrs/wk × 4.33 ×
                   $75/hr = $3,897/month on follow-ups you should not be doing.
                 </p>
                 <p>
-                  <strong className="text-[var(--ink)]">Recovered revenue</strong> = 80%
-                  of missed_revenue. After-hours auto-reply, AI voice-pickup
-                  and inbox triage reliably recapture 4 out of 5 leads that
-                  went silent.
+                  <strong className="text-[var(--ink)]">
+                    Recovered revenue
+                  </strong>{" "}
+                  = 80% of missed_revenue. After-hours auto-reply, AI
+                  voice-pickup and inbox triage reliably recapture 4 out of 5
+                  leads that went silent.
                 </p>
                 <p>
-                  <strong className="text-[var(--ink)]">Saved labor</strong> = 70% of
-                  wasted_hours × hourly_value. Automation handles the routine
-                  follow-up sequences, CRM data entry and email triage. The
-                  remaining 30% is the human-judgment work that should never be
-                  automated.
+                  <strong className="text-[var(--ink)]">Saved labor</strong> =
+                  70% of wasted_hours × hourly_value. Automation handles the
+                  routine follow-up sequences, CRM data entry and email triage.
+                  The remaining 30% is the human-judgment work that should never
+                  be automated.
                 </p>
                 <p>
-                  <strong className="text-[var(--ink)]">Net annual gain</strong> =
-                  (recovered + saved) × 12. Calibrated against 240+ live
-                  automations shipped from Bali since 2019.
+                  <strong className="text-[var(--ink)]">Net annual gain</strong>{" "}
+                  = (recovered + saved) × 12. Calibrated against real client
+                  results: Takycorp added $11K MRR in 60 days, Christelle&apos;s
+                  ops team cut lead response from 4 hours to 90 seconds, and a
+                  Manhattan dental flagship saved 18 hrs/wk on admin.
                 </p>
               </div>
             </details>

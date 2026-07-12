@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Builder from "./Builder";
 import { Sparkles, Timer, ShieldCheck, FileText } from "lucide-react";
 
 const PATH = "/tools/voice-persona-builder";
-const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=voice-persona-builder";
+const CAL_URL =
+  "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=voice-persona-builder";
 
 export const metadata: Metadata = {
-  title:
-    "Brand Voice Persona Builder — paste-ready system prompt for Claude + ChatGPT · SkynetLabs",
+  title: "Voice Persona Builder — Free AI System Prompt",
   description:
     "Free 4-step brand voice builder. Identity, tone sliders, vocabulary, examples. Outputs a paste-ready Brand Voice Profile + AI system prompt. Enter your email to unlock the result.",
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
-    title:
-      "Brand Voice Persona Builder · paste-ready system prompt for AI assistants",
+    title: "Voice Persona Builder — Free AI System Prompt",
     description:
       "4 steps. 8 tone sliders. One downloadable Brand Voice Profile + system prompt. Free. Email to unlock.",
     url: `${SITE.url}${PATH}`,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Brand Voice Persona Builder · SkynetLabs",
+    title: "Voice Persona Builder · SkynetLabs",
     description:
       "Build a paste-ready Brand Voice Profile in 4 steps. Free. Email to unlock.",
   },
@@ -58,7 +58,7 @@ const softwareSchema = {
   url: `${SITE.url}${PATH}`,
   description:
     "Free 4-step web tool that generates a Brand Voice Profile document and AI system prompt from identity, 8 tone sliders, vocabulary lists and writing samples.",
-  offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   provider: {
     "@type": "Organization",
     "@id": `${SITE.url}/#organization`,
@@ -76,6 +76,29 @@ const faqSchema = {
     acceptedAnswer: { "@type": "Answer", text: f.a },
   })),
 };
+
+const relatedLinks = [
+  {
+    href: "/tools/prompt-library",
+    title: "Prompt Library",
+    body: "Battle-tested prompts to pair with your new voice profile.",
+  },
+  {
+    href: "/tools/video-prompt-generator",
+    title: "Video Prompt Generator",
+    body: "Turn ideas into structured AI video prompts in seconds.",
+  },
+  {
+    href: "/tools",
+    title: "All free tools",
+    body: "Calculators, quizzes and builders — the full SkynetLabs toolbox.",
+  },
+  {
+    href: "/discovery-call",
+    title: "Book a discovery call",
+    body: "Want the voice work done for you? Let's talk it through.",
+  },
+];
 
 const heroStats = [
   { icon: Timer, label: "4 steps", body: "About 5 minutes end-to-end." },
@@ -99,7 +122,12 @@ export default function VoicePersonaBuilderPage() {
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -117,7 +145,17 @@ export default function VoicePersonaBuilderPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               Your brand voice,{" "}
               <span
                 style={{
@@ -133,12 +171,27 @@ export default function VoicePersonaBuilderPage() {
               </span>
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
-              Four steps. Identity, eight tone sliders, vocabulary,
-              examples. Spits out a paste-ready Brand Voice Profile and
-              system prompt your AI of choice will actually obey.
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
+              Four steps. Identity, eight tone sliders, vocabulary, examples.
+              Spits out a paste-ready Brand Voice Profile and system prompt your
+              AI of choice will actually obey.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
               Stop re-explaining your voice in every prompt. Build it once,
               paste it forever.
             </p>
@@ -191,15 +244,14 @@ export default function VoicePersonaBuilderPage() {
                   default voice.
                 </p>
                 <p>
-                  After the 40th time of rebuilding a voice doc from scratch,
-                  I made this. Four steps, eight axes, three example fields.
-                  The model behaves because the profile leaves it no wiggle
-                  room — what to say, what to avoid, and what good actually
-                  looks like.
+                  After the 40th time of rebuilding a voice doc from scratch, I
+                  made this. Four steps, eight axes, three example fields. The
+                  model behaves because the profile leaves it no wiggle room —
+                  what to say, what to avoid, and what good actually looks like.
                 </p>
                 <p>
-                  Build yours, paste it once, and watch every email, page
-                  and post sound like the same brand wrote it.
+                  Build yours, paste it once, and watch every email, page and
+                  post sound like the same brand wrote it.
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">
@@ -236,6 +288,36 @@ export default function VoicePersonaBuilderPage() {
                     {f.a}
                   </p>
                 </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* RELATED TOOLS */}
+      <section className="section pt-0">
+        <div className="container-x px-6">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3 text-center">
+              Keep going
+            </p>
+            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-8 text-center text-[var(--ink)]">
+              Related tools
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {relatedLinks.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="group rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-6 block transition-transform hover:-translate-y-1"
+                >
+                  <h3 className="font-semibold text-[var(--ink)] group-hover:text-[var(--terracotta-aa)] transition-colors">
+                    {l.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-[var(--ink-2)] leading-relaxed">
+                    {l.body}
+                  </p>
+                </Link>
               ))}
             </div>
           </div>
