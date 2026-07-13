@@ -13,6 +13,25 @@ export type Post = {
 
 export const POSTS: Post[] = [
   {
+    slug: "ai-ops-command-center-never-miss-a-lead",
+    title:
+      "The AI Ops Command Center: How Small Businesses Stop Missing Leads Forever",
+    description:
+      "An AI receptionist that answers, texts back, and books your calendar in under a minute, 24/7 — built in your own GoHighLevel and n8n accounts. How it works, what it costs to run, and who it's actually for.",
+    publishedAt: "2026-07-13",
+    readingTime: 11,
+    category: "automation",
+    tags: [
+      "ai receptionist",
+      "missed call text back",
+      "speed to lead",
+      "business automation",
+      "gohighlevel",
+      "n8n",
+    ],
+    author: "Waseem Nasir",
+  },
+  {
     slug: "claude-fable-5-prompts-40-master-prompts",
     title: "Claude Fable 5 Prompts: 40 Master Prompts to Run Before July 12",
     description:
@@ -20,7 +39,15 @@ export const POSTS: Post[] = [
     publishedAt: "2026-07-11",
     readingTime: 25,
     category: "playbook",
-    tags: ["claude", "fable-5", "prompts", "claude-code", "n8n", "gohighlevel", "ai"],
+    tags: [
+      "claude",
+      "fable-5",
+      "prompts",
+      "claude-code",
+      "n8n",
+      "gohighlevel",
+      "ai",
+    ],
     author: "Waseem Nasir",
   },
   {
@@ -36,7 +63,8 @@ export const POSTS: Post[] = [
   },
   {
     slug: "ghl-no-show-automation-case-study",
-    title: "Case Study: How We Cut a Dental Practice's No-Show Rate from 32% to 7%",
+    title:
+      "Case Study: How We Cut a Dental Practice's No-Show Rate from 32% to 7%",
     description:
       "Real client. Real numbers. The GoHighLevel + Signal + n8n stack that recovered $11,400/month in lost revenue inside 14 days.",
     publishedAt: "2026-05-15",
@@ -46,7 +74,8 @@ export const POSTS: Post[] = [
   },
   {
     slug: "aeo-playbook-service-businesses",
-    title: "The AEO Playbook for Service Businesses: Getting Cited by ChatGPT, Claude & Perplexity",
+    title:
+      "The AEO Playbook for Service Businesses: Getting Cited by ChatGPT, Claude & Perplexity",
     description:
       "Answer-engine optimization is SEO's bigger, weirder cousin. Here's the practical 7-step playbook we use to get clients cited in LLM answers — without keyword stuffing or fake authority signals.",
     publishedAt: "2026-05-12",
@@ -57,7 +86,8 @@ export const POSTS: Post[] = [
   },
   {
     slug: "llmo-vs-geo-vs-aeo",
-    title: "LLMO vs GEO vs AEO: The 2026 Acronym Guide for AI Search Optimization",
+    title:
+      "LLMO vs GEO vs AEO: The 2026 Acronym Guide for AI Search Optimization",
     description:
       "Three acronyms, one job. LLMO, GEO and AEO are 80% the same discipline with different emphasis. Here's which term to use when, what overlaps, and where the work actually diverges.",
     publishedAt: "2026-05-13",
@@ -69,19 +99,29 @@ export const POSTS: Post[] = [
   },
   {
     slug: "track-ai-citations",
-    title: "How to Track AI Citations Across ChatGPT, Claude, Gemini and Perplexity",
+    title:
+      "How to Track AI Citations Across ChatGPT, Claude, Gemini and Perplexity",
     description:
       "The manual tracking method I use on every AEO engagement before touching a paid tool. 20 prompts, four engines, one spreadsheet, weekly cadence. Costs nothing, works for six months minimum.",
     publishedAt: "2026-05-13",
     updatedAt: "2026-05-22",
     readingTime: 9,
     category: "aeo",
-    tags: ["aeo", "tracking", "citation-rate", "chatgpt", "claude", "perplexity", "gemini"],
+    tags: [
+      "aeo",
+      "tracking",
+      "citation-rate",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "gemini",
+    ],
     author: "Waseem Nasir",
   },
   {
     slug: "how-to-rank-in-chatgpt",
-    title: "How to Rank in ChatGPT: Direct Answers for Brands That Want to Be Cited",
+    title:
+      "How to Rank in ChatGPT: Direct Answers for Brands That Want to Be Cited",
     description:
       "Five schema types, an llms.txt file, FAQ blocks in claim-plus-example pattern, explicit dateModified, and a 20-prompt tracking set. The playbook that actually moves ChatGPT citation rate.",
     publishedAt: "2026-05-13",
@@ -93,7 +133,8 @@ export const POSTS: Post[] = [
   },
   {
     slug: "get-cited-by-claude",
-    title: "How to Get Cited by Claude: Direct Answers for Anthropic AI Visibility",
+    title:
+      "How to Get Cited by Claude: Direct Answers for Anthropic AI Visibility",
     description:
       "Claude is the conservative engine. Marketing copy that gets pulled by ChatGPT gets filtered by Claude. The Wikidata + Crunchbase + claim-with-source playbook that actually lifts Claude citation rate.",
     publishedAt: "2026-05-13",
