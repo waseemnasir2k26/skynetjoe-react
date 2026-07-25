@@ -1,6 +1,14 @@
 /**
  * Case study detail data — drives /case-studies/[slug] dynamic route.
  *
+ * ATTRIBUTION: `testimonialAuthor` carries role + sector ONLY. A quote is a
+ * personal statement, so a name against it needs that person's consent, and
+ * consent is not yet on file for any of these (requests are drafted in
+ * memory/site-watch/2026-W30-owner-actions.html). `clientName` may name the
+ * client because it describes work performed, not words attributed to a person
+ * -- except where a client has asked not to be named. Same rule as
+ * components/sections/Testimonials.tsx; keep the two in step.
+ *
  * Client names are kept anonymized where contracts require it (matches the
  * existing /case-studies index page tone). Metrics are stated as honest
  * structural build facts (counts, stack consolidation, ship windows) or
@@ -166,7 +174,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     testimonialQuote:
       "I stopped explaining the same things in DMs five times a day. The site does it now, and in my voice. I didn't realize how much energy that was draining until it stopped.",
-    testimonialAuthor: "Christelle, wellness practitioner, Ubud",
+    testimonialAuthor: "Wellness practitioner, Ubud",
     publishDate: "2026-02-08",
     relatedServices: [
       { slug: "vibe-coded-sites", label: "Vibe-Coded Websites" },
@@ -308,7 +316,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     testimonialQuote:
       "He had it fixed before lunch. The previous agency took 6 weeks and left us with a form that didn't work.",
-    testimonialAuthor: "Clinical Director, KODIASIMMO",
+    testimonialAuthor: "Clinical Director, clinical recovery network (US)",
     publishDate: "2025-11-19",
     relatedServices: [
       { slug: "ai-business-systems", label: "AI Business Systems" },
@@ -373,7 +381,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     testimonialQuote:
       "Seventh time we've hired Waseem. Nothing else to add — the result is the result.",
-    testimonialAuthor: "Operations Lead, Takycorp",
+    testimonialAuthor: "Operations Lead, insurance retainer client (US)",
     publishDate: "2026-01-22",
     relatedServices: [
       { slug: "gohighlevel", label: "GoHighLevel CRM" },

@@ -341,7 +341,7 @@ const VARIANTS: HeroVariantProps[] = [
     ),
     sub: "Stéphanie did too. Now her n8n + GPT-4o agent drafts every reply in 20 minutes. She goes home at 6pm. I build the same for service businesses across nine countries.",
     primaryCta: { label: "Get my workflow audited", href: "/contact" },
-    secondaryCta: { label: "See how Takycorp solved it", href: "/case-studies" },
+    secondaryCta: { label: "See how a client solved it", href: "/case-studies" },
     visualNote: "Clock face left (3h) → calendar w/ family dinner right (6pm)",
     style: "split",
   },

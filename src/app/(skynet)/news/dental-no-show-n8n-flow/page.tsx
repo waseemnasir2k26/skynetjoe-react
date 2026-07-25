@@ -77,7 +77,7 @@ export default function Page() {
         </p>
         <p>
           A Karachi dental flagship (six chairs, three dentists, full cosmetic
-          and orthodontic suite) was losing roughly PKR 480,000 per month —
+          and orthodontic suite) was losing roughly PKR 480,000 a week —
           about $1,720 USD at the current rate — to people who booked,
           confirmed, and then ghosted on the day. The owner had tried two things
           before me: SMS reminders through a Pakistani telco bulk-SMS service
@@ -307,7 +307,7 @@ Call list (T-24 no reply):
         </p>
         <p>
           The audit&apos;s free. Eight-hour reply. Yes, no, or referral. If
-          you&apos;re losing more than $1,000/month to no-shows, the math works.
+          you&apos;re losing more than $1,000 a month to no-shows, the math works.
         </p>
       </LetterArticle>
     </>
