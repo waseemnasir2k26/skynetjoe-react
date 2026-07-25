@@ -206,7 +206,10 @@ export default function DiscoveryFunnel() {
     async (state: QualifierState) => {
       setQualification(state);
       try {
-        await fetch("/api/leads", {
+        // Inspect the response. This previously ignored it entirely, so a 429
+        // or a 502 looked identical to success and the funnel advanced anyway,
+        // discarding the answers the visitor had just typed.
+        const res = await fetch("/api/leads", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -216,6 +219,12 @@ export default function DiscoveryFunnel() {
             submittedAt: new Date().toISOString(),
           }),
         });
+        if (!res.ok) {
+          console.error(
+            "[discovery-call] qualifier POST rejected — lead may not have been recorded",
+            { status: res.status },
+          );
+        }
       } catch (err) {
         console.error("[discovery-call] qualifier POST failed", err);
       }

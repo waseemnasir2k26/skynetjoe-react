@@ -65,6 +65,9 @@ export async function POST(req: Request) {
 
   // Honeypot: filled = bot → fake-success, do nothing further.
   if (payload._honeypot) {
+    console.warn("[lead-capture] honeypot tripped — submission dropped", {
+      source: payload.source,
+    });
     return NextResponse.json({ ok: true });
   }
 

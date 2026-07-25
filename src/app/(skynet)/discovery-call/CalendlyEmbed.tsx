@@ -97,11 +97,18 @@ export default function CalendlyEmbed({
         submittedAt: new Date().toISOString(),
       };
       try {
-        await fetch("/api/leads", {
+        // Inspect the response — see the matching note in DiscoveryFunnel.
+        const res = await fetch("/api/leads", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
+        if (!res.ok) {
+          console.error(
+            "[discovery-call] booking POST rejected — lead may not have been recorded",
+            { status: res.status },
+          );
+        }
       } catch (err) {
         console.error("[discovery-call] booking POST failed", err);
       }

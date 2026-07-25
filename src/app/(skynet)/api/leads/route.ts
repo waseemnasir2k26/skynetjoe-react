@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
+import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -35,9 +36,16 @@ const MAX_BODY_BYTES = 16 * 1024;
 //
 // Behavior:
 //   - Validates body (qualification OR booking + email required)
-//   - Honeypot rejection (_honeypot truthy → silent 200 fake-success)
+//   - Honeypot rejection (_honeypot truthy → 200 fake-success, logged)
 //   - Calls handleGhlLead — direct GHL REST (no webhook hop)
-//   - Always returns 200 so the client UI can advance
+//   - Confirms the CRM actually took it. If not, emails the lead to Waseem via
+//     Resend; if that also fails, returns 502 with an honest message.
+//
+// It does NOT "always return 200". It used to, which meant every GHL failure
+// mode reported success over a discarded lead — handleGhlLead never throws, so
+// an unset token, a non-2xx, a 200 with no id and the 8s abort all resolve to
+// contactId "dev-skip". A visitor seeing a thank-you page is not evidence that
+// anyone received their answers.
 // ============================================================
 
 type Qualification = {
@@ -140,6 +148,12 @@ export async function POST(req: Request) {
 
   // Honeypot: filled = bot → fake-success, do nothing.
   if (payload._honeypot) {
+    // Leave a trace. A false positive here (a form-filler extension touching a
+    // hidden field) is the one remaining path where a real lead disappears with
+    // no record, so it must at least be greppable in the logs.
+    console.warn("[leads] honeypot tripped — submission dropped", {
+      source: payload.source,
+    });
     return NextResponse.json({ ok: true, leadId: mintLeadId() });
   }
 
@@ -219,11 +233,62 @@ export async function POST(req: Request) {
     ].filter(Boolean) as string[],
   });
 
+  const { confirmed, emailFallbackSent } = await confirmOrEscalate(
+    ghl.contactId,
+    { email, source, capturedAt: new Date().toISOString() },
+  );
+
+  if (!confirmed && !emailFallbackSent) {
+    // Nothing took the lead. Tell the truth instead of showing a success state
+    // over a discarded submission.
+    return NextResponse.json(
+      {
+        error:
+          "Couldn't confirm delivery. Please email info@skynetjoe.com directly so nothing gets lost.",
+      },
+      { status: 502 },
+    );
+  }
+
   return NextResponse.json({
     ok: true,
     leadId,
     score,
     contactId: ghl.contactId,
     opportunityId: ghl.opportunityId,
+    ...(emailFallbackSent ? { emailFallback: true } : {}),
   });
+}
+
+/**
+ * Confirm the CRM actually took the lead, or get it to a human another way.
+ *
+ * This route previously returned `{ok:true}` unconditionally. `handleGhlLead`
+ * never throws by design — every failure mode (token unset, non-2xx, a 200 with
+ * no id, the 8s abort) resolves to `contactId: "dev-skip"` — so a lead could be
+ * accepted, written nowhere, and reported as success. That was proven live:
+ * `POST /api/leads` answered 200 with `contactId:"dev-skip"` while
+ * /api/lead-capture correctly answered 502 on the same server and env.
+ *
+ * This is the higher-value route of the two: it backs the discovery-call
+ * qualification funnel, so a silent loss here costs a qualified lead.
+ */
+async function confirmOrEscalate(
+  ghlContactId: string | null | undefined,
+  lead: { email: string; source: string; capturedAt: string },
+): Promise<{ confirmed: boolean; emailFallbackSent: boolean }> {
+  if (ghlContactId && ghlContactId !== "dev-skip") {
+    return { confirmed: true, emailFallbackSent: false };
+  }
+  const reason = ghlContactId
+    ? `CRM write unconfirmed (contactId=${ghlContactId})`
+    : "CRM write unconfirmed (no contactId returned)";
+  const fallback = await sendLeadFallbackEmail(lead, reason);
+  if (!fallback.ok) {
+    console.error(
+      "[leads] LEAD AT RISK — no CRM write confirmed and no email fallback sent. Check GHL_API_TOKEN and RESEND_API_KEY.",
+      { ...lead, reason },
+    );
+  }
+  return { confirmed: false, emailFallbackSent: fallback.ok };
 }
