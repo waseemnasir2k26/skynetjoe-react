@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { upsertGhlContact } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
+import { appendLeadToSink } from "@/lib/lead-sink";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -111,6 +112,23 @@ export async function POST(req: Request) {
       reason,
     );
     emailFallbackSent = fallback.ok;
+
+    if (!fallback.ok) {
+      // Last resort before failing: durable on-disk append. See lead-sink.ts.
+      const sink = await appendLeadToSink({
+        email,
+        source,
+        capturedAt,
+        reason,
+      });
+      if (sink.written && sink.durable) {
+        console.warn(
+          "[lead-capture] CRM and email both unavailable — lead persisted to the on-disk sink. Read it with: cat .data/leads.jsonl",
+          { email, source, reason, file: sink.file },
+        );
+        return NextResponse.json({ ok: true, sink: true });
+      }
+    }
 
     if (!fallback.ok) {
       // Neither the CRM write nor the email fallback confirmed. This is the

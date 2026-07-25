@@ -58,3 +58,6 @@ next-env.d.ts
 
 # Hostinger deploy source-archive (produced by scripts/deploy-archive.*)
 /skynetjoe-deploy.zip
+
+# Captured leads + view counts — runtime data, never commit
+.data/

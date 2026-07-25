@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
+import { appendLeadToSink } from "@/lib/lead-sink";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -38,8 +39,9 @@ const MAX_BODY_BYTES = 16 * 1024;
 //   - Validates body (qualification OR booking + email required)
 //   - Honeypot rejection (_honeypot truthy → 200 fake-success, logged)
 //   - Calls handleGhlLead — direct GHL REST (no webhook hop)
-//   - Confirms the CRM actually took it. If not, emails the lead to Waseem via
-//     Resend; if that also fails, returns 502 with an honest message.
+//   - Confirms the CRM actually took it. If not: emails the lead to Waseem via
+//     Resend; if that fails, appends it to the on-disk sink (.data/leads.jsonl,
+//     durable on this host); only if ALL THREE fail does it return 502.
 //
 // It does NOT "always return 200". It used to, which meant every GHL failure
 // mode reported success over a discarded lead — handleGhlLead never throws, so
@@ -233,12 +235,12 @@ export async function POST(req: Request) {
     ].filter(Boolean) as string[],
   });
 
-  const { confirmed, emailFallbackSent } = await confirmOrEscalate(
+  const { confirmed, emailFallbackSent, sunk } = await confirmOrEscalate(
     ghl.contactId,
     { email, source, capturedAt: new Date().toISOString() },
   );
 
-  if (!confirmed && !emailFallbackSent) {
+  if (!confirmed && !emailFallbackSent && !sunk) {
     // Nothing took the lead. Tell the truth instead of showing a success state
     // over a discarded submission.
     return NextResponse.json(
@@ -276,19 +278,36 @@ export async function POST(req: Request) {
 async function confirmOrEscalate(
   ghlContactId: string | null | undefined,
   lead: { email: string; source: string; capturedAt: string },
-): Promise<{ confirmed: boolean; emailFallbackSent: boolean }> {
+): Promise<{
+  confirmed: boolean;
+  emailFallbackSent: boolean;
+  sunk: boolean;
+}> {
   if (ghlContactId && ghlContactId !== "dev-skip") {
-    return { confirmed: true, emailFallbackSent: false };
+    return { confirmed: true, emailFallbackSent: false, sunk: false };
   }
   const reason = ghlContactId
     ? `CRM write unconfirmed (contactId=${ghlContactId})`
     : "CRM write unconfirmed (no contactId returned)";
   const fallback = await sendLeadFallbackEmail(lead, reason);
-  if (!fallback.ok) {
-    console.error(
-      "[leads] LEAD AT RISK — no CRM write confirmed and no email fallback sent. Check GHL_API_TOKEN and RESEND_API_KEY.",
-      { ...lead, reason },
-    );
+  if (fallback.ok) {
+    return { confirmed: false, emailFallbackSent: true, sunk: false };
   }
-  return { confirmed: false, emailFallbackSent: fallback.ok };
+
+  // Last resort: append to disk. Hostinger has a persistent filesystem, so this
+  // is a real save. Only counts if it both wrote AND is durable on this host.
+  const sink = await appendLeadToSink({ ...lead, reason });
+  if (sink.written && sink.durable) {
+    console.warn(
+      "[leads] CRM and email both unavailable — lead persisted to the on-disk sink. Read it with: cat .data/leads.jsonl",
+      { ...lead, reason, file: sink.file },
+    );
+    return { confirmed: false, emailFallbackSent: false, sunk: true };
+  }
+
+  console.error(
+    "[leads] LEAD AT RISK — no CRM write, no email fallback, no durable sink. Check GHL_API_TOKEN and RESEND_API_KEY.",
+    { ...lead, reason },
+  );
+  return { confirmed: false, emailFallbackSent: false, sunk: false };
 }
