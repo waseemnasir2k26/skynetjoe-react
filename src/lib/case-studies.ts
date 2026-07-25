@@ -9,6 +9,14 @@
  * -- except where a client has asked not to be named. Same rule as
  * components/sections/Testimonials.tsx; keep the two in step.
  *
+ * POLICY (must stay in step with src/data/social-proof.ts and
+ * components/sections/Testimonials.tsx -- three files previously stated three
+ * different rules): NO client company name or personal name appears in
+ * `clientName` or `testimonialAuthor`. These fields render into indexed page
+ * titles, JSON-LD headlines, breadcrumbs and H1s, so naming here is publishing.
+ * Consent is not on file for any of them, and one client has explicitly asked
+ * not to be named. Role + sector only until that changes.
+ *
  * Client names are kept anonymized where contracts require it (matches the
  * existing /case-studies index page tone). Metrics are stated as honest
  * structural build facts (counts, stack consolidation, ship windows) or
@@ -119,7 +127,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "bali-wellness-conversion-funnel",
     position: 2,
-    clientName: "Bali wellness practitioner (Christelle)",
+    clientName: "Wellness practitioner, Ubud",
     industry: "Holistic wellness & coaching",
     industryTag: "Websites",
     location: "Ubud, Bali",
@@ -256,7 +264,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "northeast-recovery-brand-intake-rescue",
     position: 4,
-    clientName: "Northeast US clinical recovery network (KODIASIMMO)",
+    clientName: "Clinical recovery network, Northeast US",
     industry: "Clinical recovery & behavioral health",
     industryTag: "Consulting",
     location: "Northeast US",
@@ -326,7 +334,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "us-insurance-gohighlevel-rebuild",
     position: 5,
-    clientName: "US insurance retainer client (Takycorp)",
+    clientName: "Insurance retainer client, US",
     industry: "Insurance",
     industryTag: "Automation",
     location: "United States",

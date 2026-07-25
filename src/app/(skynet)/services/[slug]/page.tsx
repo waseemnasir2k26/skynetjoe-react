@@ -233,15 +233,19 @@ export default async function ServicePage({
               </span>
             </h2>
             <p style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.6 }}>
-              Same fixed-scope build, delivered remotely to any US state. Click
-              your state for the local-vertical breakdown — agency rate
-              benchmarks, dominant industries, state-specific compliance hooks
-              and city-level intent we tune for.
+              Same fixed-scope build, delivered remotely to any US state. The
+              per-state breakdown is being rewritten — it carried
+              first-party performance figures we could not substantiate, so it
+              is withheld rather than shipped unverified. Ask on the call and
+              you will get the local detail directly.
             </p>
           </div>
 
-          {/* 8 priority states with deep enrichment as collapsible accordion */}
-          <div className="space-y-3 mb-8">
+          {/* Priority-state accordion. Renders nothing while the enrichment is
+              withheld (see src/data/service-state-enrichment.ts) -- each entry
+              bails on a null cell, so this collapses to an empty list rather
+              than a gap, and the states below carry every state instead. */}
+          <div className="mb-8">
             {PRIORITY_STATE_SLUGS.map((stateSlug) => {
               const state = STATES.find((s) => s.slug === stateSlug);
               if (!state) return null;
@@ -354,12 +358,16 @@ export default async function ServicePage({
                 margin: 0,
               }}
             >
-              Also serving — all 48 states
+              Delivered in all 48 states
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+            {/* Previously excluded the 8 priority states because they had their
+                own accordion above. That accordion is empty while the
+                enrichment is withheld, so excluding them here hid 8 states
+                entirely. List all 48. */}
             {STATES.filter(
-              (s) => !(PRIORITY_STATE_SLUGS as readonly string[]).includes(s.slug),
+              () => true,
             ).map((s) => (
               <Link
                 key={s.slug}

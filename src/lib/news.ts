@@ -363,7 +363,7 @@ export const NEWS: NewsArticle[] = [
     eyebrow: "Build log · 2026",
     deck: "A Karachi dental practice was hemorrhaging revenue every Tuesday. I sat in a Canggu cafe for three days with the patient inquiry data open in front of me. By Thursday morning the loop was closed.",
     description:
-      "A storytelling field note on diagnosing a dental clinic's no-show loop from a Bali cafe, and the small n8n + GoHighLevel intervention that recovered six-figures of monthly revenue.",
+      "A storytelling field note on diagnosing a dental clinic's no-show loop from a Bali cafe, and the small n8n + GoHighLevel intervention that recovered real booked revenue.",
     heroImage: "/news/dental-clinic-cafe-breakthrough.jpg",
     heroPosition: "center top",
     heroCaption: "Crate Cafe · Canggu · day two of the dental dig",

@@ -155,6 +155,10 @@ export async function POST(req: Request) {
     // no record, so it must at least be greppable in the logs.
     console.warn("[leads] honeypot tripped — submission dropped", {
       source: payload.source,
+      email:
+        payload.email ||
+        payload.qualification?.email ||
+        payload.booking?.inviteeEmail,
     });
     return NextResponse.json({ ok: true, leadId: mintLeadId() });
   }
@@ -238,6 +242,7 @@ export async function POST(req: Request) {
   const { confirmed, emailFallbackSent, sunk } = await confirmOrEscalate(
     ghl.contactId,
     { email, source, capturedAt: new Date().toISOString() },
+    payload,
   );
 
   if (!confirmed && !emailFallbackSent && !sunk) {
@@ -256,9 +261,14 @@ export async function POST(req: Request) {
     ok: true,
     leadId,
     score,
-    contactId: ghl.contactId,
-    opportunityId: ghl.opportunityId,
+    // "dev-skip" is the sentinel handleGhlLead returns when nothing was
+    // written. Reporting it as `contactId` reads like a real CRM id, so it is
+    // omitted and the actual delivery route is stated instead.
+    ...(confirmed
+      ? { contactId: ghl.contactId, opportunityId: ghl.opportunityId }
+      : {}),
     ...(emailFallbackSent ? { emailFallback: true } : {}),
+    ...(sunk ? { sink: true } : {}),
   });
 }
 
@@ -278,6 +288,13 @@ export async function POST(req: Request) {
 async function confirmOrEscalate(
   ghlContactId: string | null | undefined,
   lead: { email: string; source: string; capturedAt: string },
+  /**
+   * The full submitted body. Without this the sink kept only the email, which
+   * on THIS route means throwing away the qualification answers -- revenue
+   * band, urgency, bottleneck, business name, phone -- i.e. everything that
+   * makes the lead worth having.
+   */
+  fullPayload?: unknown,
 ): Promise<{
   confirmed: boolean;
   emailFallbackSent: boolean;
@@ -296,7 +313,7 @@ async function confirmOrEscalate(
 
   // Last resort: append to disk. Hostinger has a persistent filesystem, so this
   // is a real save. Only counts if it both wrote AND is durable on this host.
-  const sink = await appendLeadToSink({ ...lead, reason });
+  const sink = await appendLeadToSink({ ...lead, reason, payload: fullPayload });
   if (sink.written && sink.durable) {
     console.warn(
       "[leads] CRM and email both unavailable — lead persisted to the on-disk sink. Read it with: cat .data/leads.jsonl",

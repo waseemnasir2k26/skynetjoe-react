@@ -581,7 +581,7 @@ export const INDUSTRIES: Industry[] = [
         clientName: "EU logistics group (mining + freight)",
         location: "Lyon, France",
         oneLineOutcome:
-          "Built an automated email triage system. Routine response time collapsed from 6 hours to 6 minutes, dispatcher hours dropped 81%.",
+          "Built an automated email triage system. Routine response time collapsed from 6 hours to 6 minutes, dispatcher hours dropped sharply.",
         metricLabel: "Routine response time",
         metricBefore: "6 hours",
         metricAfter: "6 minutes",
@@ -591,7 +591,7 @@ export const INDUSTRIES: Industry[] = [
         clientName: "Midwest US flatbed broker (anon)",
         location: "Chicago, IL",
         oneLineOutcome:
-          "Voice dispatch agent live on overnight + weekend coverage. Booked 19 net-new loads in the first 30 days that would have gone to a faster competitor.",
+          "Voice dispatch agent live on overnight + weekend coverage. Started booking loads it had previously missed that would have gone to a faster competitor.",
         metricLabel: "Off-hours load capture",
         metricBefore: "~2/wk",
         metricAfter: "19/mo net new",

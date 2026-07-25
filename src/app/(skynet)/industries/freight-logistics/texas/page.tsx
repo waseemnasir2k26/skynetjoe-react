@@ -352,7 +352,7 @@ export default function TexasFreightGuide() {
               {
                 metro: "Austin",
                 anchor: "Tech-trucking + API-first brokerages",
-                body: "Austin freight is the cleanest buyer profile in our pipeline. Tech-trucking founders (mostly ex-Coyote, ex-Convoy, ex-Uber-Freight alumni) are building API-first brokerages and TMS-as-a-service products. They don't want a fully-managed automation — they want n8n as the glue between their Python core and the carrier-comms layer. We've shipped Project44-to-Postgres-to-Slack exception monitors, FreightWaves SONAR rate alerts feeding into procurement decisions, Plaid-fired carrier payment flows that cut DSO from 38 to 9 days. Austin tech-trucking buyers behave like Bay Area buyers — they pay closer to SF rates and ship faster than any other TX metro.",
+                body: "Austin freight buyers are unusually technical. Tech-trucking founders (mostly ex-Coyote, ex-Convoy, ex-Uber-Freight alumni) are building API-first brokerages and TMS-as-a-service products. They don't want a fully-managed automation — they want n8n as the glue between their Python core and the carrier-comms layer. We've shipped Project44-to-Postgres-to-Slack exception monitors, FreightWaves SONAR rate alerts feeding into procurement decisions, Plaid-fired carrier payment flows that shorten days-sales-outstanding. Austin tech-trucking buyers behave like Bay Area buyers and scope like engineers.",
               },
               {
                 metro: "San Antonio + Laredo",
@@ -367,7 +367,7 @@ export default function TexasFreightGuide() {
               {
                 metro: "Beaumont + Galveston",
                 anchor: "Petrochemical + Gulf port flows",
-                body: "Beaumont and Galveston run petrochem logistics — tank truck, ISO container, bulk liquid. Every dispatch decision touches HAZMAT placarding, USDOT-PHMSA reporting, and a 24/7 emergency-response phone tree that has to actually answer at 3am. We've shipped automation for a 28-truck Beaumont chemical hauler that cut spill-response response-time from 14 minutes to under 3 minutes via a Twilio + GoHighLevel + Slack escalation cascade. Average HAZMAT build: $3.1K and 10-day ship because the compliance scoping alone runs 4 hours.",
+                body: "Beaumont and Galveston run petrochem logistics — tank truck, ISO container, bulk liquid. Every dispatch decision touches HAZMAT placarding, USDOT-PHMSA reporting, and a 24/7 emergency-response phone tree that has to actually answer at 3am. The build that fits is a Twilio + GoHighLevel + Slack escalation cascade, so a spill-response page reaches a human on the first attempt instead of a phone tree. Average HAZMAT build: $3.1K and 10-day ship because the compliance scoping alone runs 4 hours.",
               },
             ].map((m) => (
               <RevealItem key={m.metro} style={card}>
@@ -658,15 +658,15 @@ export default function TexasFreightGuide() {
               },
               {
                 metro: "Dallas wholesale",
-                metric: "$48K/yr",
+                metric: "Accessorials recovered",
                 metricLabel: "accessorial recovery",
-                body: "Mid-market DFW wholesale carrier serving 14 retail accounts. EDI 856/810 round-trip with audit logging plus a detention + lumper auto-billing engine. Recovered $48K/year in accessorials that were previously written off. Stack: n8n + McLeod LoadMaster + SPS Commerce + Stripe.",
+                body: "Mid-market DFW wholesale carrier serving 14 retail accounts. EDI 856/810 round-trip with audit logging plus a detention + lumper auto-billing engine. Recovers detention and lumper accessorials that were previously written off. Stack: n8n + McLeod LoadMaster + SPS Commerce + Stripe.",
               },
               {
                 metro: "Austin tech-trucking",
-                metric: "DSO 38→9 days",
+                metric: "Carriers paid on POD",
                 metricLabel: "carrier payments",
-                body: "API-first brokerage founded by ex-Coyote alumni. Built a Plaid-fired QuickPay flow that pays carriers within 24 hours of POD verification. DSO collapsed from 38 days to 9 days, freed up $1.2M in working capital. Stack: n8n + Plaid + Project44 + custom Python core.",
+                body: "API-first brokerage founded by ex-Coyote alumni. Built a Plaid-fired QuickPay flow that pays carriers within 24 hours of POD verification. Carriers get paid within 24 hours of POD verification instead of waiting on a monthly cycle. Stack: n8n + Plaid + Project44 + custom Python core.",
               },
             ].map((c) => (
               <RevealItem key={c.metro} style={card}>

@@ -94,7 +94,7 @@ export default function Library() {
         <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed max-w-3xl">
           Pulled from 18 months of shipped client work — automations, copy, ops,
           audits. Copy, paste, ship. No course, no Notion template, no upsell.
-          Just the prompts that earned me six figures.
+          Just the prompts I actually reuse.
         </p>
       </div>
 

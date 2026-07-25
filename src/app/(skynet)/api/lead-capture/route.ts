@@ -68,6 +68,7 @@ export async function POST(req: Request) {
   if (payload._honeypot) {
     console.warn("[lead-capture] honeypot tripped — submission dropped", {
       source: payload.source,
+      email: payload.email,
     });
     return NextResponse.json({ ok: true });
   }
