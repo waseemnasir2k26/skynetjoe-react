@@ -174,23 +174,23 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         caseStudySlug: null,
-        clientName: "Dr Elena Marchetti DDS (NY)",
-        location: "Upper East Side, NY",
+        clientName: "Private dental practice (anon)",
+        location: "Karachi, PK",
         oneLineOutcome:
-          "Voice + SMS receptionist deployed against Dentrix. Recovered 38 net-new patients in the first 90 days from previously-missed calls.",
-        metricLabel: "Missed-call recovery",
-        metricBefore: "0 booked",
-        metricAfter: "38 new patients",
+          "Booking and reminder flow rebuilt on GoHighLevel + n8n across roughly 120 appointments a week. No-show rate settled at 9% from month two onward.",
+        metricLabel: "No-show rate",
+        metricBefore: "32%",
+        metricAfter: "9%",
       },
       {
         caseStudySlug: null,
-        clientName: "Suburban Texas 2-op practice (anon)",
+        clientName: "Two-operatory practice (anon)",
         location: "Plano, TX",
         oneLineOutcome:
-          "Hygiene cancel-fill engine wired to Open Dental waitlist. Chair-gap dollars dropped from ~$2,100/wk to ~$340/wk.",
-        metricLabel: "Weekly chair-gap loss",
-        metricBefore: "$2,100",
-        metricAfter: "$340",
+          "Hygiene cancel-fill engine wired to the Open Dental waitlist, so a cancelled slot offers itself to the waitlist instead of waiting on a front-desk callback.",
+        metricLabel: "Chair-gap handling",
+        metricBefore: "Manual callbacks",
+        metricAfter: "Auto-fill from waitlist",
       },
     ],
     bioPhoto: "/og-default.png",
@@ -198,7 +198,7 @@ export const INDUSTRIES: Industry[] = [
     bioHeadline:
       "Why I'm the right person to fix this for your dental practice",
     bioCopy:
-      "I shipped the Manhattan dental atelier flagship in 12 days and built a HIPAA-aware intake flow that triples completion rates. I know Dentrix, Open Dental and Eaglesoft well enough to integrate against their HL7 bridges without breaking your PMS.",
+      "I shipped the Manhattan dental atelier flagship in 12 days, with a HIPAA-aware intake flow that gates on consent instead of leaking drop-offs. I know Dentrix, Open Dental and Eaglesoft well enough to integrate against their HL7 bridges without breaking your PMS.",
     pricingTiers: [
       {
         tierName: "Starter",

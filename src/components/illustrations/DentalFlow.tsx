@@ -33,14 +33,31 @@ export default function DentalFlow({ className }: Props) {
       <circle cx="40" cy="40" r="48" fill="#fff" opacity="0.08" />
       <circle cx="290" cy="150" r="36" fill="#fff" opacity="0.06" />
       <circle cx="280" cy="30" r="6" fill="#FFD9DF" opacity="0.85" />
-      <rect x="22" y="124" width="10" height="10" rx="2" transform="rotate(35 27 129)" fill="#fff" opacity="0.4" />
+      <rect
+        x="22"
+        y="124"
+        width="10"
+        height="10"
+        rx="2"
+        transform="rotate(35 27 129)"
+        fill="#fff"
+        opacity="0.4"
+      />
 
       {/* Calendar card (left) */}
       <g transform="translate(28 56)">
         <rect width="92" height="80" rx="10" fill="#fff" opacity="0.96" />
         <rect width="92" height="20" rx="10" fill="#E85A6F" />
         <rect y="14" width="92" height="6" fill="#E85A6F" />
-        <text x="46" y="14" textAnchor="middle" fontFamily="system-ui,sans-serif" fontSize="9" fontWeight="700" fill="#fff">
+        <text
+          x="46"
+          y="14"
+          textAnchor="middle"
+          fontFamily="system-ui,sans-serif"
+          fontSize="9"
+          fontWeight="700"
+          fill="#fff"
+        >
           APPOINTMENTS
         </text>
         {/* Grid dots */}
@@ -56,11 +73,19 @@ export default function DentalFlow({ className }: Props) {
                 fill={filled ? "#E85A6F" : "#FCE4E8"}
               />
             );
-          })
+          }),
         )}
         {/* Highlighted day */}
         <rect x="42" y="40" width="14" height="14" rx="3" fill="#7A2540" />
-        <text x="49" y="50" textAnchor="middle" fontFamily="system-ui,sans-serif" fontSize="8" fontWeight="700" fill="#fff">
+        <text
+          x="49"
+          y="50"
+          textAnchor="middle"
+          fontFamily="system-ui,sans-serif"
+          fontSize="8"
+          fontWeight="700"
+          fill="#fff"
+        >
           14
         </text>
       </g>
@@ -73,7 +98,13 @@ export default function DentalFlow({ className }: Props) {
           stroke="#fff"
           strokeWidth="1.5"
         />
-        <path d="M22 30 Q 28 24 38 26" stroke="#FFB8C2" strokeWidth="2" fill="none" strokeLinecap="round" />
+        <path
+          d="M22 30 Q 28 24 38 26"
+          stroke="#FFB8C2"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+        />
         <circle cx="40" cy="48" r="3.2" fill="#fff" opacity="0.9" />
       </g>
 
@@ -83,9 +114,33 @@ export default function DentalFlow({ className }: Props) {
           d="M14 0 H 64 A 14 14 0 0 1 78 14 V 46 A 14 14 0 0 1 64 60 H 20 L 8 70 L 12 60 H 14 A 14 14 0 0 1 0 46 V 14 A 14 14 0 0 1 14 0 Z"
           fill="url(#dental-bubble)"
         />
-        <rect x="10" y="14" width="56" height="3.5" rx="1.5" fill="#fff" opacity="0.85" />
-        <rect x="10" y="22" width="44" height="3.5" rx="1.5" fill="#fff" opacity="0.7" />
-        <rect x="10" y="30" width="50" height="3.5" rx="1.5" fill="#fff" opacity="0.7" />
+        <rect
+          x="10"
+          y="14"
+          width="56"
+          height="3.5"
+          rx="1.5"
+          fill="#fff"
+          opacity="0.85"
+        />
+        <rect
+          x="10"
+          y="22"
+          width="44"
+          height="3.5"
+          rx="1.5"
+          fill="#fff"
+          opacity="0.7"
+        />
+        <rect
+          x="10"
+          y="30"
+          width="50"
+          height="3.5"
+          rx="1.5"
+          fill="#fff"
+          opacity="0.7"
+        />
         <circle cx="14" cy="44" r="2.5" fill="#fff" />
         <circle cx="22" cy="44" r="2.5" fill="#fff" />
         <circle cx="30" cy="44" r="2.5" fill="#fff" />
@@ -112,8 +167,16 @@ export default function DentalFlow({ className }: Props) {
       {/* Stat chip */}
       <g transform="translate(16 154)">
         <rect width="96" height="18" rx="9" fill="#100f14" opacity="0.6" />
-        <text x="48" y="12" textAnchor="middle" fontFamily="system-ui,sans-serif" fontSize="9" fontWeight="700" fill="#FFD9DF">
-          30% → 8% no-show
+        <text
+          x="48"
+          y="12"
+          textAnchor="middle"
+          fontFamily="system-ui,sans-serif"
+          fontSize="9"
+          fontWeight="700"
+          fill="#FFD9DF"
+        >
+          32% → 9% no-show
         </text>
       </g>
     </svg>

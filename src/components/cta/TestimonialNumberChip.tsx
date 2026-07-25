@@ -27,7 +27,9 @@ export default function TestimonialNumberChip({
   className = "",
   size = "sm",
 }: TestimonialNumberChipProps) {
-  const stars = testimonial.stars ?? 5;
+  // No star rating is rendered: this site collects no ratings, so any star row
+  // would be a fabricated review score. The previous default (`stars ?? 5`)
+  // painted five stars on every quote whether or not one was ever given.
   const isSm = size === "sm";
 
   return (
@@ -42,14 +44,6 @@ export default function TestimonialNumberChip({
         WebkitBackdropFilter: "blur(10px)",
       }}
     >
-      <span
-        aria-label={`${stars} out of 5 stars`}
-        className={`text-amber-400 tracking-tight shrink-0 ${
-          isSm ? "text-[11px]" : "text-xs"
-        }`}
-      >
-        {"★".repeat(stars)}
-      </span>
       <blockquote
         className={`text-white font-medium leading-snug truncate ${
           isSm ? "text-xs" : "text-sm"

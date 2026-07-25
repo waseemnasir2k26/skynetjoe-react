@@ -87,9 +87,8 @@ export default function Page() {
         <p>
           I sketched the flow on a paper napkin that night. Eleven days later it
           was in production. Six months later the cancellation rate sat at{" "}
-          <mark>under 10%, sometimes dipping to 7%</mark> on weeks the Signal
-          engagement was high. Here&apos;s the entire graph, every node, every
-          decision, every fallback.
+          <mark>9%</mark>, holding there from month two onward. Here&apos;s the
+          entire graph, every node, every decision, every fallback.
         </p>
 
         <h2>The architecture in one paragraph</h2>

@@ -1,25 +1,31 @@
 import { Quote } from "lucide-react";
 
+// Quotes are sourced verbatim from src/lib/case-studies.ts (testimonialQuote /
+// testimonialAuthor), the one proof file with a no-fabrication policy in its
+// docblock. Attribution is role + sector only: several clients have not given
+// written permission to be named, and one explicitly asked to stay anonymous.
+// Do NOT add a company name, a client's personal name, or a numeric outcome
+// here without written client approval on file.
 const QUOTES = [
   {
-    text: "Waseem rebuilt our entire patient-intake flow in 11 days. We went from 23% show-rate to 71% in 6 weeks. No-show revenue alone paid for the engagement 4x over.",
-    name: "Dr Elena Marchetti",
-    role: "Founder, Grand Mercer Dental (SoHo NY)",
+    text: "We've tried three automation contractors before Waseem. He's the first one who asked us to print our inbox and walk through 100 threads with him before writing a single node. That's why it actually works.",
+    name: "Operations Director",
+    role: "Freight & logistics group (EU)",
   },
   {
-    text: "The ElevenLabs + n8n recouvrement agent he built for us handles 200+ debtor calls/week in French. Our collection ops team can finally focus on the complex cases.",
-    name: "Patrick Mabangu",
-    role: "CEO, KODIASIMMO (France)",
+    text: "He had it fixed before lunch. The previous agency took 6 weeks and left us with a form that didn't work.",
+    name: "Clinical Director",
+    role: "Clinical recovery network (US)",
   },
   {
-    text: "Hired Skynetjoe for one Fiverr gig. Five months later he runs three of our automation stacks. The man delivers.",
-    name: "Christelle Dubois",
-    role: "Owner, Christelle Wellness",
+    text: "I stopped explaining the same things in DMs five times a day. The site does it now, and in my voice. I didn't realize how much energy that was draining until it stopped.",
+    name: "Wellness practitioner",
+    role: "Independent studio, Ubud",
   },
   {
-    text: "Stéphanie's email triage workflow used to eat 3 hours/day. Waseem's GPT-4o + Gmail draft agent dropped it to 20 minutes. She actually went home at 6pm last week.",
-    name: "Esther Kalala",
-    role: "PM, Takycorp Mining & Logistics",
+    text: "Seventh time we've hired Waseem. Nothing else to add — the result is the result.",
+    name: "Operations Lead",
+    role: "Insurance retainer client (US)",
   },
 ];
 
@@ -103,7 +109,8 @@ export default function Testimonials() {
                 key={i}
                 style={{
                   position: "relative",
-                  padding: "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4.5vw, 26px)",
+                  padding:
+                    "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4.5vw, 26px)",
                   background: "var(--cream-2)",
                   border: "1px solid rgba(26,26,26,0.12)",
                   transform: `rotate(${a.rotate})`,

@@ -88,7 +88,7 @@ export const NEWS: NewsArticle[] = [
     eyebrow: "Build log · Volume II · 2026",
     deck: "A real Karachi dental flagship was losing PKR 480,000/month to no-shows. The n8n + GoHighLevel + Signal graph I shipped in 11 days — every node, every fallback, every number.",
     description:
-      "Full breakdown of the dental no-show n8n flow that took a Karachi practice from 32% to under 10% cancellation rate. Architecture, message timing, fallback logic, and the cost math.",
+      "Full breakdown of the dental no-show n8n flow that took a Karachi practice from a 32% to a 9% cancellation rate. Architecture, message timing, fallback logic, and the cost math.",
     heroImage: "/news/dental-no-show-n8n-flow.jpg",
     heroCaption: "Dental flagship · Defence Karachi · production graph",
     publishedAt: "2026-05-09",

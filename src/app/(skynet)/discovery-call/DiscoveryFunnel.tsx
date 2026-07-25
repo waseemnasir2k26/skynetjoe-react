@@ -454,9 +454,9 @@ export default function DiscoveryFunnel() {
                         margin: 0,
                       }}
                     >
-                      23% show-rate to{" "}
+                      Routine reply time went from 6 hours to{" "}
                       <span style={{ color: C.terraAA, fontWeight: 600 }}>
-                        71% in 6 weeks.
+                        6 minutes.
                       </span>
                     </p>
                     <p
@@ -469,7 +469,7 @@ export default function DiscoveryFunnel() {
                         marginTop: 8,
                       }}
                     >
-                      — Dr. Elena Marchetti · Grand Mercer Dental
+                      — Operations Director · Logistics group, EU
                     </p>
                   </div>
                 </div>
