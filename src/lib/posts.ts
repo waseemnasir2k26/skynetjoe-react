@@ -64,13 +64,14 @@ export const POSTS: Post[] = [
   {
     slug: "ghl-no-show-automation-case-study",
     // Canonical dental figures: 32% -> 9% steady-state, ~PKR 345,000 (~$1,235)
-    // recovered per month, shipped in 11 days. Sourced from the cost-math table
+    // recovered per WEEK (~PKR 1.49M / ~$5,350 per month at 4.33 weeks),
+    // shipped in 11 days. Sourced from the cost-math table
     // in app/(skynet)/news/dental-no-show-n8n-flow/page.tsx. Do not restate
     // these numbers anywhere without matching that table.
     title:
       "Case Study: How We Cut a Dental Practice's No-Show Rate from 32% to 9%",
     description:
-      "The GoHighLevel + Signal + n8n stack that took a dental practice from a 32% no-show rate to 9%, recovering around $1,235/month in booked revenue. Shipped in 11 days.",
+      "The GoHighLevel + Signal + n8n stack that took a dental practice from a 32% no-show rate to 9%, recovering around $1,235 a week in booked revenue. Shipped in 11 days.",
     publishedAt: "2026-05-15",
     readingTime: 7,
     category: "case-study",

@@ -1,4 +1,4 @@
-import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
+import { SITE, SERVICE_CATEGORIES, svcHref } from "@/lib/site";
 import { POSTS } from "@/lib/posts";
 import fs from "fs";
 import path from "path";
@@ -65,7 +65,7 @@ ${SERVICE_CATEGORIES.flatMap((cat) =>
   cat.services.map(
     (svc) =>
       `### ${svc.label} (${cat.name})
-URL: ${SITE.url}/services/${svc.slug}
+URL: ${SITE.url}${svcHref(svc)}
 ${svc.desc}
 `,
   ),

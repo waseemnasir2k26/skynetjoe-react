@@ -174,7 +174,7 @@ export default async function StatePage({
         offers: allServices.map((svc) => ({
           "@type": "Offer",
           name: `${svc.label} in ${s.name}`,
-          url: `${SITE.url}/services/${svc.slug}`,
+          url: `${SITE.url}${svcHref(svc)}`,
           description: svc.desc,
         })),
         hasOfferCatalog: {
@@ -185,7 +185,7 @@ export default async function StatePage({
             itemOffered: {
               "@type": "Service",
               name: `${svc.label} expert in ${s.name}`,
-              url: `${SITE.url}/services/${svc.slug}`,
+              url: `${SITE.url}${svcHref(svc)}`,
             },
           })),
         },

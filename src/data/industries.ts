@@ -383,10 +383,10 @@ export const INDUSTRIES: Industry[] = [
         clientName: "Scottsdale medspa (3 providers, anon)",
         location: "Scottsdale, AZ",
         oneLineOutcome:
-          "Concierge AI on IG + SMS dropped speed-to-lead from 4.5 hours to 90 seconds. Booked-consultation rate jumped 64% in the first 60 days.",
-        metricLabel: "Speed to first reply",
-        metricBefore: "4h 32m",
-        metricAfter: "0h 1m 24s",
+          "Concierge AI on Instagram DMs + SMS answers new enquiries the moment they land, so a first reply no longer waits on a front-desk gap.",
+        metricLabel: "First reply",
+        metricBefore: "Waits on staff",
+        metricAfter: "Automatic",
       },
       {
         caseStudySlug: null,

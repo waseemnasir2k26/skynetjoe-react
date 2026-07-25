@@ -250,21 +250,25 @@ Call list (T-24 no reply):
         <ul>
           <li>32% no-show rate on ~120 appointments/week</li>
           <li>Average appointment value: PKR 12,500 ($45)</li>
-          <li>Monthly revenue lost to no-shows: PKR 480,000 ($1,720)</li>
+          <li>
+            Weekly revenue lost to no-shows: PKR 480,000 ($1,720) &mdash; that
+            is 0.32 &times; 120 &times; 12,500
+          </li>
         </ul>
         <p>After:</p>
         <ul>
           <li>9% no-show rate (steady-state, post-month 2)</li>
-          <li>Monthly revenue lost to no-shows: ~PKR 135,000 ($485)</li>
+          <li>Weekly revenue lost to no-shows: ~PKR 135,000 ($485)</li>
           <li>
-            <strong>Recovered monthly revenue: ~PKR 345,000 ($1,235)</strong>
+            <strong>Recovered revenue: ~PKR 345,000 ($1,235) per week</strong>,
+            or roughly PKR 1.49M ($5,350) a month at 4.33 weeks
           </li>
         </ul>
         <p>
           Build cost: $4,200 one-time (11 days), $397/month retainer for ongoing
           template updates, n8n hosting, and the two hours/month I spend on the
-          flow. The whole system pays back in under four months and prints money
-          after that.
+          flow. On those numbers the build pays for itself inside the first
+          month.
         </p>
         <blockquote>
           The honest part: the n8n flow is maybe 60% of the win. The other 40%

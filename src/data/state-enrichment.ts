@@ -1,7 +1,8 @@
 /**
  * State enrichment paragraphs for /locations/[state].
  *
- * 48 hand-written 220-280 word unique blocks. Each references:
+ * 38 hand-written 220-280 word unique blocks (of 48 states; the 10 without
+ * one are gated to noindex by isLocationIndexable). Each references:
  *   - Real cities + metro markets in that state
  *   - 2-3 dominant verticals
  *   - State-specific compliance / regulatory / market hook

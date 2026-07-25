@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES, svcHref } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import PainSolverGrid from "@/components/services/PainSolverGrid";
 import ServiceMenuCollapsed from "@/components/services/ServiceMenuCollapsed";
@@ -48,12 +48,12 @@ const schema = {
       itemListElement: allServices.map((svc, i) => ({
         "@type": "Offer",
         position: i + 1,
-        url: `${SITE.url}/services/${svc.slug}`,
+        url: `${SITE.url}${svcHref(svc)}`,
         itemOffered: {
           "@type": "Service",
           name: svc.label,
           description: svc.desc,
-          url: `${SITE.url}/services/${svc.slug}`,
+          url: `${SITE.url}${svcHref(svc)}`,
           provider: { "@id": `${SITE.url}/#organization` },
         },
       })),

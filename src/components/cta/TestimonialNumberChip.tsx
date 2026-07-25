@@ -1,5 +1,5 @@
 /**
- * TestimonialNumberChip — inline social-proof chip with star rating + numerical outcome.
+ * TestimonialNumberChip — inline social-proof chip carrying a client outcome (no rating).
  *
  * Psychology stack:
  *   - Cialdini social proof (real client, real outcome)
@@ -8,7 +8,8 @@
  * Server component. Pulls from src/data/social-proof.ts so testimonials
  * are editable in one file sitewide.
  *
- * Format: ★★★★★ "[number outcome]" — [name], [company]
+ * Format: "[outcome]" — [role], [sector]. No star rating is rendered: this
+ * site collects no ratings, so a star row would be an invented review score.
  */
 
 import {

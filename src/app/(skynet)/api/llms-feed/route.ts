@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { SITE, SERVICE_CATEGORIES } from "@/lib/site";
+import { SITE, SERVICE_CATEGORIES, svcHref } from "@/lib/site";
 import { POSTS } from "@/lib/posts";
 
 export const dynamic = "force-static";
@@ -12,7 +12,7 @@ export async function GET() {
       slug: svc.slug,
       label: svc.label,
       description: svc.desc,
-      url: `${SITE.url}/services/${svc.slug}`,
+      url: `${SITE.url}${svcHref(svc)}`,
     })),
   );
 

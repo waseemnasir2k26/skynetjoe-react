@@ -2,10 +2,21 @@ import { Quote } from "lucide-react";
 
 // Quotes are sourced verbatim from src/lib/case-studies.ts (testimonialQuote /
 // testimonialAuthor), the one proof file with a no-fabrication policy in its
-// docblock. Attribution is role + sector only: several clients have not given
-// written permission to be named, and one explicitly asked to stay anonymous.
+// docblock.
+//
+// THE ATTRIBUTION STANDARD (applies site-wide; state it, don't improvise):
+//   * A QUOTE is a personal statement, so publishing a name against it needs
+//     that person's consent. Until consent is on file, quotes carry role +
+//     sector only -- which is why this file names nobody.
+//   * A CASE-STUDY RECORD is a description of work performed, not words put in
+//     someone's mouth. Those may name the client (see case-studies.ts and
+//     industries.ts), except where a client has asked not to be named.
+// That is the line. It is not "anonymise everything" and it is not
+// "name everything" -- consent governs quotes, and only quotes.
+//
 // Do NOT add a company name, a client's personal name, or a numeric outcome
-// here without written client approval on file.
+// here without written client approval on file. Approval requests are drafted
+// in memory/site-watch/2026-W30-owner-actions.html.
 const QUOTES = [
   {
     text: "We've tried three automation contractors before Waseem. He's the first one who asked us to print our inbox and walk through 100 threads with him before writing a single node. That's why it actually works.",

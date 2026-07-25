@@ -53,7 +53,7 @@ async function load(): Promise<Store> {
       if (typeof v === "number" && Number.isFinite(v)) store[k] = Math.floor(v);
     }
   } catch {
-    // no file yet — start from baselines
+    // no file yet — start from zero
   }
   CACHE = store;
   loaded = true;

@@ -527,7 +527,7 @@ export default function LogisticsLP() {
       <div className="scroll-progress" aria-hidden="true"></div>
 
       <div className="ribbon">
-        <span className="ribbon-pulse"></span>June dispatch cohort ·{" "}
+        <span className="ribbon-pulse"></span>Dispatch cohort ·{" "}
         <strong>limited builds</strong> · 8-hour reply window
       </div>
 
@@ -549,7 +549,7 @@ export default function LogisticsLP() {
             <div className="hero-inner">
               <div className="hero-eyebrow">
                 <span className="pulse"></span>For US carriers{" "}
-                <strong>5–25 trucks</strong>&nbsp;· June 2026 cohort booking now
+                <strong>5–25 trucks</strong>&nbsp;· cohort booking now
               </div>
               <h1>
                 Your dispatch stack is <em>bleeding loads.</em> We rebuild it in
@@ -576,11 +576,10 @@ export default function LogisticsLP() {
                 </a>
               </div>
               <div className="hero-scarcity">
-                <strong>Limited June builds</strong>&nbsp;· 8-hour reply window
+                <strong>Limited build slots</strong>&nbsp;· 8-hour reply window
               </div>
               <div className="featured-in">
                 <span className="featured-lbl">Featured</span>
-                <span>Claude Code Partner</span>
                 <span>Upwork Top Rated Plus</span>
                 <span>Vercel SaaS</span>
                 <span>Canggu Builders Bali</span>
@@ -1706,70 +1705,18 @@ export default function LogisticsLP() {
         </section>
 
         {/* TESTIMONIALS */}
-        <section className="section">
-          <div className="wrap">
-            <div className="section-head reveal">
-              <div className="section-kicker">Operators on the stack</div>
-              <h2>
-                Named clients. <em>Real testimonials.</em>
-              </h2>
-            </div>
-            <div className="testi-row reveal">
-              <div className="testi-card">
-                <div className="testi-stars">★★★★★</div>
-                <p className="testi-quote">
-                  &quot;I get more done in <em>eight hours</em> than my last
-                  agency got done in eight weeks. He sends Loom walkthroughs at
-                  3am his time — that&apos;s the actual founder, not a project
-                  manager.&quot;
-                </p>
-                <div className="testi-meta">
-                  <div className="testi-avatar">CS</div>
-                  <div>
-                    <div className="testi-name">Chrissy S.</div>
-                    <div className="testi-role">
-                      Founder · Vow Sanctuary · Asheville NC
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="testi-card">
-                <div className="testi-stars">★★★★★</div>
-                <p className="testi-quote">
-                  &quot;Inbound calls used to die after 8pm. The voice agent
-                  caught <em>17 loads in week one</em> — three I&apos;d have
-                  lost. Stack paid for itself the first month.&quot;
-                </p>
-                <div className="testi-meta">
-                  <div className="testi-avatar">DR</div>
-                  <div>
-                    <div className="testi-name">Diego R.</div>
-                    <div className="testi-role">
-                      Dispatch lead · 9-truck regional · Houston TX
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="testi-card">
-                <div className="testi-stars">★★★★★</div>
-                <p className="testi-quote">
-                  &quot;Closed <em>6 new lanes</em> the month we launched.
-                  Factoring widget alone saved us 4 days of cash float —
-                  that&apos;s $18K of trucks not sitting at the bank.&quot;
-                </p>
-                <div className="testi-meta">
-                  <div className="testi-avatar">MT</div>
-                  <div>
-                    <div className="testi-name">Marcus T.</div>
-                    <div className="testi-role">
-                      Owner-op · 14-truck regional · Dallas TX
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* PROOF — testimonials intentionally absent.
+            This section previously rendered three named testimonials with
+            five-star ratings under the heading "Named clients. Real
+            testimonials." They were fabricated: "Diego R." and "Marcus T." are
+            the placeholder driver names used by this same page's product mockup
+            (see the dispatch-board markup above), and no FreightOps client
+            record exists in src/lib/work-builds.ts. There is also no
+            star-rating system on this site, so the stars were an invented
+            review score -- see the truth rules in src/data/social-proof.ts.
+            A real quote goes here only when a named client has approved their
+            own words in writing. Until then this renders nothing: an honest
+            absence beats invented proof. Do NOT re-add placeholder names. */}
 
         {/* EMAIL CAPTURE LEAD MAGNET */}
         <section className="section tinted">
@@ -2064,13 +2011,13 @@ export default function LogisticsLP() {
         <div className="scarcity-band">
           <p>
             Four operator builds a month ·{" "}
-            <strong>limited June availability</strong> · July books mid-June
+            <strong>limited build slots</strong> · next opening confirmed on the call
           </p>
         </div>
 
         {/* CLOSER */}
         <section className="closer">
-          <div className="closer-scarcity">● Limited June builds</div>
+          <div className="closer-scarcity">● Limited build slots</div>
           <h2>
             Fifteen minutes. <em>Yes, no, or referral.</em>
           </h2>
@@ -2150,7 +2097,7 @@ export default function LogisticsLP() {
           data-meta-name="mobile-sticky"
         >
           <span>
-            <strong>Limited June builds</strong> · Book audit
+            <strong>Limited build slots</strong> · Book audit
           </span>
         </a>
       </main>

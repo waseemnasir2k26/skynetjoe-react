@@ -111,7 +111,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Can you build dispatch automation for a sub-50-truck carrier in Houston?",
-    a: "That's our sweet spot. We've shipped 6 dispatch builds for Houston-area carriers under 50 power units in the last 18 months. The standard package: load posting from DAT/Truckstop into your TMS, driver-facing SMS via GoHighLevel when a load is offered (auto-accept inside 90 seconds or it routes to next driver), and a customer-portal that lets your top 5 shippers self-track without calling the office. Fixed scope, $2.6K, 9 days.",
+    a: "That's our sweet spot — carriers under 50 power units. The standard package: load posting from DAT/Truckstop into your TMS, driver-facing SMS via GoHighLevel when a load is offered (auto-accept inside 90 seconds or it routes to next driver), and a customer-portal that lets your top 5 shippers self-track without calling the office. Fixed scope, $2.6K, 9 days.",
   },
   {
     q: "Do you handle Permian Basin oilfield service ops in West Texas?",
@@ -342,7 +342,7 @@ export default function TexasFreightGuide() {
               {
                 metro: "Houston",
                 anchor: "Energy + port logistics + midstream",
-                body: "Houston is energy gravity. Pipeline operators, water-haul fleets, frac-sand carriers, and crude transporters all run on a paperwork stack that's mostly PDFs flowing from iOS apps into SharePoint, then routed to ESG compliance reviewers and AP. The Port of Houston adds drayage volume — chassis pool reservations re-keyed into McLeod, terminal appointment systems (eModal, Voyage Control) that don't talk to anyone's TMS. We've shipped 8 Houston builds in the last 24 months. The flow that wins every time: AFE approval routing into Slack, JIB statement reconciliation across leases, and an ISNetworld + Avetta automation layer that handles the seasonal 200-person crew swings.",
+                body: "Houston is energy gravity. Pipeline operators, water-haul fleets, frac-sand carriers, and crude transporters all run on a paperwork stack that's mostly PDFs flowing from iOS apps into SharePoint, then routed to ESG compliance reviewers and AP. The Port of Houston adds drayage volume — chassis pool reservations re-keyed into McLeod, terminal appointment systems (eModal, Voyage Control) that don't talk to anyone's TMS. The flow that wins every time: AFE approval routing into Slack, JIB statement reconciliation across leases, and an ISNetworld + Avetta automation layer that handles the seasonal 200-person crew swings.",
               },
               {
                 metro: "Dallas / Fort Worth",
@@ -873,8 +873,7 @@ export default function TexasFreightGuide() {
               }}
             >
               Fixed scope. Public pricing. 8-day ship window. Built remotely
-              from Bali by founder Waseem Nasir. We've shipped 14 freight builds
-              in the last 24 months — 6 in Texas. No quote dance, no SOW
+              from Bali by founder Waseem Nasir. No quote dance, no SOW
               theater.
             </p>
             <div className="flex flex-wrap gap-3">
