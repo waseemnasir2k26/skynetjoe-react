@@ -31,7 +31,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 const PAGE_TITLE =
-  "Freight + Logistics Automation in Texas — n8n, GoHighLevel & Dispatch AI | SkynetLabs";
+  "Freight + Logistics Automation in Texas — n8n, GoHighLevel & Dispatch AI";
 const PAGE_DESCRIPTION =
   "Houston midstream, Dallas wholesale, Austin tech-trucking, San Antonio drayage, Laredo crossing — Texas freight ops automation built by SkynetLabs. n8n + GoHighLevel + AI dispatch on McLeod, MercuryGate, Samsara, Geotab. Fixed scope, 8-day ship.";
 const PAGE_URL = `${SITE.url}/industries/freight-logistics/texas`;
@@ -205,7 +205,10 @@ export default function TexasFreightGuide() {
             items={[
               { label: "Home", href: "/" },
               { label: "By Industry", href: "/industries" },
-              { label: "Freight + Logistics", href: "/industries/freight-logistics" },
+              {
+                label: "Freight + Logistics",
+                href: "/industries/freight-logistics",
+              },
               { label: "Texas" },
             ]}
           />
@@ -230,9 +233,8 @@ export default function TexasFreightGuide() {
                 margin: "0 0 24px",
               }}
             >
-              Freight automation for{" "}
-              <em style={emTerra}>Texas operators</em> who refuse to keep paying
-              dispatchers to chase ELD pings.
+              Freight automation for <em style={emTerra}>Texas operators</em>{" "}
+              who refuse to keep paying dispatchers to chase ELD pings.
             </h1>
             <p
               style={{
@@ -245,10 +247,10 @@ export default function TexasFreightGuide() {
             >
               Houston midstream, DFW wholesale, Austin tech-trucking, San
               Antonio drayage, Laredo border crossing — Texas freight has the
-              messiest ops stack in the country. SkynetLabs builds n8n + GoHighLevel
-              + dispatch automations on top of your existing McLeod, MercuryGate,
-              Samsara or Geotab. Fixed scope. Public pricing. 8-day ship from
-              Bali.
+              messiest ops stack in the country. SkynetLabs builds n8n +
+              GoHighLevel + dispatch automations on top of your existing McLeod,
+              MercuryGate, Samsara or Geotab. Fixed scope. Public pricing. 8-day
+              ship from Bali.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -345,7 +347,7 @@ export default function TexasFreightGuide() {
               {
                 metro: "Dallas / Fort Worth",
                 anchor: "Wholesale + warehousing + DFW air cargo",
-                body: "DFW is the wholesale + warehousing capital of the southern US. CSCMP DFW chapter has 700+ active members. The pain here is EDI-shaped: SPS Commerce ASN inbound into Netsuite item-match, then a Slack exception alert when something fails. Add the 2025 Hyundai Metaplant supplier ramp (8,500 new Tier-2 jobs across DFW and Savannah) and every supplier needs EDI 856 + 810 round-trips with audit logging that survives an OEM spot check. DFW air cargo carriers (American Airlines Cargo HQ is here) bring a different vertical — ULD tracking, dim-weight reconciliation, and the dreaded \"freight has cleared customs but the AWB shows a different status\" bug.",
+                body: 'DFW is the wholesale + warehousing capital of the southern US. CSCMP DFW chapter has 700+ active members. The pain here is EDI-shaped: SPS Commerce ASN inbound into Netsuite item-match, then a Slack exception alert when something fails. Add the 2025 Hyundai Metaplant supplier ramp (8,500 new Tier-2 jobs across DFW and Savannah) and every supplier needs EDI 856 + 810 round-trips with audit logging that survives an OEM spot check. DFW air cargo carriers (American Airlines Cargo HQ is here) bring a different vertical — ULD tracking, dim-weight reconciliation, and the dreaded "freight has cleared customs but the AWB shows a different status" bug.',
               },
               {
                 metro: "Austin",
@@ -427,9 +429,9 @@ export default function TexasFreightGuide() {
             <p style={proseP}>
               Most carriers don&apos;t need everything. We scope the first build
               to the 2-3 modules that recover the most ops hours fastest. The
-              rest land on a 90-day expansion plan. Every module is built on
-              n8n (self-hosted in your tenant) with GoHighLevel as the SMS
-              and inbound-lead layer.
+              rest land on a 90-day expansion plan. Every module is built on n8n
+              (self-hosted in your tenant) with GoHighLevel as the SMS and
+              inbound-lead layer.
             </p>
           </Reveal>
 
@@ -445,7 +447,8 @@ export default function TexasFreightGuide() {
               {
                 num: "02",
                 title: "EDI + customer portal",
-                stack: "n8n + EDI 850/856/810/214 + customer self-service portal",
+                stack:
+                  "n8n + EDI 850/856/810/214 + customer self-service portal",
                 body: "Inbound ASN/PO from SPS Commerce, TrueCommerce, or direct AS2 into your TMS with item-master matching. Outbound 856 (ASN) + 810 (invoice) with audit logging. A self-service customer portal that lets your top 5 shippers see load status, request expedites, and download proof-of-delivery PDFs without calling the office. Cuts inbound shipper calls by 40-60% in the first month.",
               },
               {
@@ -465,7 +468,7 @@ export default function TexasFreightGuide() {
                 title: "Inbound lead capture + AEO",
                 stack:
                   "GoHighLevel + AEO-optimized landing pages + structured data",
-                body: "An AEO-optimized website that ranks for the long-tail buyer-intent searches your shippers actually type — \"reefer carrier Houston Brownsville lane\", \"hazmat trucking Galveston Beaumont\", \"expedited Dallas to Laredo\". GoHighLevel captures inbound leads with TCPA-safe consent flows. Schema.org markup (Service + AdministrativeArea + Offer) so Google's AI Overviews and Claude both surface your company when a shipper asks ChatGPT for a carrier recommendation.",
+                body: 'An AEO-optimized website that ranks for the long-tail buyer-intent searches your shippers actually type — "reefer carrier Houston Brownsville lane", "hazmat trucking Galveston Beaumont", "expedited Dallas to Laredo". GoHighLevel captures inbound leads with TCPA-safe consent flows. Schema.org markup (Service + AdministrativeArea + Offer) so Google\'s AI Overviews and Claude both surface your company when a shipper asks ChatGPT for a carrier recommendation.',
               },
             ].map((mod) => (
               <RevealItem
@@ -544,15 +547,15 @@ export default function TexasFreightGuide() {
               Texas-specific regulatory hooks
             </div>
             <h2 style={h2Style}>
-              The state rules that{" "}
-              <em style={emTerra}>off-the-shelf TMS</em> templates miss.
+              The state rules that <em style={emTerra}>off-the-shelf TMS</em>{" "}
+              templates miss.
             </h2>
             <p style={proseP}>
-              Texas has the second-largest commercial-vehicle population in
-              the US (only California is larger). It also has its own DOT
-              ruleset that diverges from federal FMCSA in a handful of
-              annoying ways. Here's what every Texas freight automation has to
-              handle correctly to survive a TXDPS or Texas DMV audit.
+              Texas has the second-largest commercial-vehicle population in the
+              US (only California is larger). It also has its own DOT ruleset
+              that diverges from federal FMCSA in a handful of annoying ways.
+              Here's what every Texas freight automation has to handle correctly
+              to survive a TXDPS or Texas DMV audit.
             </p>
 
             <div className="space-y-5 mt-8">
@@ -870,9 +873,9 @@ export default function TexasFreightGuide() {
               }}
             >
               Fixed scope. Public pricing. 8-day ship window. Built remotely
-              from Bali by founder Waseem Nasir. We've shipped 14 freight
-              builds in the last 24 months — 6 in Texas. No quote dance, no
-              SOW theater.
+              from Bali by founder Waseem Nasir. We've shipped 14 freight builds
+              in the last 24 months — 6 in Texas. No quote dance, no SOW
+              theater.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link

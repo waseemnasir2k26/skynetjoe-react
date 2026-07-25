@@ -16,9 +16,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import * as Icons from "lucide-react";
-import { ArrowRight, MessageCircle, Calendar, MapPin, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  MessageCircle,
+  Calendar,
+  MapPin,
+  CheckCircle2,
+} from "lucide-react";
 import { STATES, getStateBySlug, type StateEntry } from "@/lib/states";
-import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import {
+  SERVICE_CATEGORIES,
+  SITE,
+  DEFAULT_OG_IMAGES,
+  svcHref,
+} from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getStateEnrichment } from "@/data/state-enrichment";
@@ -26,7 +37,13 @@ import { isLocationIndexable } from "@/lib/sitemap-quality";
 import { Reveal } from "@/components/motion/Reveal";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
-type SvcItem = { slug: string; label: string; icon: string; desc: string };
+type SvcItem = {
+  slug: string;
+  label: string;
+  icon: string;
+  desc: string;
+  href?: string;
+};
 
 export const dynamicParams = false;
 
@@ -42,7 +59,10 @@ export async function generateMetadata({
   const { state } = await params;
   const s = getStateBySlug(state);
   if (!s) return {};
-  const title = `AI Automation Expert in ${s.name} — n8n, GoHighLevel & AEO | ${SITE.brand}`;
+  // No `| ${SITE.brand}` suffix — root layout's title.template already
+  // appends it; a hardcoded suffix doubled the brand in <title> across
+  // all 47 indexable /locations/[state] pages.
+  const title = `AI Automation Expert in ${s.name} — n8n, GoHighLevel & AEO`;
   const description = `Hire an AI automation expert serving ${s.name} founders. n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents delivered to ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5–14 day ship.`;
   const indexable = isLocationIndexable(state);
   return {
@@ -127,7 +147,7 @@ export default async function StatePage({
   if (!s) notFound();
 
   const allServices: SvcItem[] = SERVICE_CATEGORIES.flatMap(
-    (c) => c.services as readonly SvcItem[]
+    (c) => c.services as readonly SvcItem[],
   );
 
   const enrichment = getStateEnrichment(s.slug);
@@ -201,7 +221,10 @@ export default async function StatePage({
               <span style={eyebrowRule} />
               <span
                 className="w-2 h-2 rounded-full animate-pulse"
-                style={{ background: "var(--terracotta)", display: "inline-block" }}
+                style={{
+                  background: "var(--terracotta)",
+                  display: "inline-block",
+                }}
               />
               Serving {s.name} · {s.abbr}
             </div>
@@ -216,8 +239,7 @@ export default async function StatePage({
                 margin: "0 0 24px",
               }}
             >
-              AI Automation Expert in{" "}
-              <em style={emTerra}>{s.name}</em>
+              AI Automation Expert in <em style={emTerra}>{s.name}</em>
             </h1>
             <p
               style={{
@@ -427,7 +449,10 @@ export default async function StatePage({
       </section>
 
       {/* Services Hub */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream)" }}
+      >
         <div className="container-x px-6">
           <div className="max-w-3xl mb-12">
             <div className="mb-5" style={eyebrow}>
@@ -435,14 +460,13 @@ export default async function StatePage({
               Every service, available in {s.name}
             </div>
             <h2 style={h2Style}>
-              16 builds for {s.name}{" "}
-              <em style={emTerra}>operators.</em>
+              16 builds for {s.name} <em style={emTerra}>operators.</em>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
               From {s.industries[0]} practices in {s.cities[0]} to{" "}
-              {s.industries[1]} firms in {s.cities[1]} and{" "}
-              {s.industries[2]} operations in {s.cities[2]} — these 16 services
-              are ready to ship into your stack.
+              {s.industries[1]} firms in {s.cities[1]} and {s.industries[2]}{" "}
+              operations in {s.cities[2]} — these 16 services are ready to ship
+              into your stack.
             </p>
           </div>
 
@@ -473,12 +497,12 @@ export default async function StatePage({
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {cat.services.map((svc) => {
                     const Icon =
-                      ((Icons as unknown) as Record<string, IconCmp>)[svc.icon] ??
-                      ((Icons as unknown) as Record<string, IconCmp>).Bot;
+                      (Icons as unknown as Record<string, IconCmp>)[svc.icon] ??
+                      (Icons as unknown as Record<string, IconCmp>).Bot;
                     return (
                       <Link
                         key={svc.slug}
-                        href={`/services/${svc.slug}`}
+                        href={svcHref(svc)}
                         className="group relative"
                         style={{
                           ...cardCream,
@@ -638,7 +662,10 @@ export default async function StatePage({
       </section>
 
       {/* Local SEO keyword expansion */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream-3)" }}
+      >
         <div className="container-x px-6">
           <div className="max-w-3xl mb-12">
             <div className="mb-5" style={eyebrow}>
@@ -651,18 +678,18 @@ export default async function StatePage({
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
               Whatever exact phrase brought you here — &ldquo;n8n expert near{" "}
-              {s.cities[0]}&rdquo;, &ldquo;GoHighLevel agency in {s.abbr}&rdquo;,
-              &ldquo;AI chatbot consultant for {s.industries[0]}&rdquo; — these
-              are all the same one operator. Click any phrase to scope that
-              service for {s.name}.
+              {s.cities[0]}&rdquo;, &ldquo;GoHighLevel agency in {s.abbr}
+              &rdquo;, &ldquo;AI chatbot consultant for {s.industries[0]}&rdquo;
+              — these are all the same one operator. Click any phrase to scope
+              that service for {s.name}.
             </p>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {allServices.map((svc) => {
               const Icon =
-                ((Icons as unknown) as Record<string, IconCmp>)[svc.icon] ??
-                ((Icons as unknown) as Record<string, IconCmp>).Bot;
+                (Icons as unknown as Record<string, IconCmp>)[svc.icon] ??
+                (Icons as unknown as Record<string, IconCmp>).Bot;
               const phrases = buildKeywordPhrases(svc, s);
               return (
                 <div key={svc.slug} style={{ ...cardCream, padding: 24 }}>
@@ -692,12 +719,18 @@ export default async function StatePage({
                       >
                         {svc.label} — {s.name}
                       </h3>
-                      <p style={{ fontSize: 13, color: "var(--ink-faint)", lineHeight: 1.5 }}>
+                      <p
+                        style={{
+                          fontSize: 13,
+                          color: "var(--ink-faint)",
+                          lineHeight: 1.5,
+                        }}
+                      >
                         {svc.desc}
                       </p>
                     </div>
                     <Link
-                      href={`/services/${svc.slug}`}
+                      href={svcHref(svc)}
                       className="hidden sm:inline-flex items-center gap-1.5"
                       style={{
                         fontFamily: "var(--font-sans)",
@@ -715,7 +748,7 @@ export default async function StatePage({
                     {phrases.map((p) => (
                       <Link
                         key={p}
-                        href={`/services/${svc.slug}`}
+                        href={svcHref(svc)}
                         style={{
                           padding: "6px 12px",
                           borderRadius: 9999,
@@ -741,9 +774,19 @@ export default async function StatePage({
       </section>
 
       {/* Cities + Industries panel */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream)" }}
+      >
         <div className="container-x px-6">
-          <div style={{ ...cardCream, padding: "40px 32px", maxWidth: "920px", margin: "0 auto" }}>
+          <div
+            style={{
+              ...cardCream,
+              padding: "40px 32px",
+              maxWidth: "920px",
+              margin: "0 auto",
+            }}
+          >
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
                 <div className="mb-3" style={eyebrow}>
@@ -762,18 +805,32 @@ export default async function StatePage({
                 >
                   AI automation across {s.abbr}
                 </h3>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 8 }}>
+                <ul
+                  style={{
+                    listStyle: "none",
+                    padding: 0,
+                    margin: 0,
+                    display: "grid",
+                    gap: 8,
+                  }}
+                >
                   {s.cities.map((city) => (
                     <li
                       key={city}
                       className="flex items-center gap-2"
-                      style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.5 }}
+                      style={{
+                        fontSize: 14,
+                        color: "var(--ink-2)",
+                        lineHeight: 1.5,
+                      }}
                     >
                       <MapPin
                         className="w-4 h-4 flex-shrink-0"
                         style={{ color: "var(--terracotta)" }}
                       />
-                      <span>AI automation services in {city}, {s.abbr}</span>
+                      <span>
+                        AI automation services in {city}, {s.abbr}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -804,15 +861,21 @@ export default async function StatePage({
                   }}
                 >
                   Most {s.name} engagements come from{" "}
-                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
+                  <strong
+                    style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}
+                  >
                     {s.industries[0]}
                   </strong>
                   ,{" "}
-                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
+                  <strong
+                    style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}
+                  >
                     {s.industries[1]}
                   </strong>
                   , and{" "}
-                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
+                  <strong
+                    style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}
+                  >
                     {s.industries[2]}
                   </strong>{" "}
                   operators looking to cut admin time and ship lead capture that
@@ -839,7 +902,10 @@ export default async function StatePage({
       </section>
 
       {/* Nearby states */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream-3)" }}
+      >
         <div className="container-x px-6">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
@@ -859,7 +925,9 @@ export default async function StatePage({
               >
                 Also active in
               </h3>
-              <p style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6 }}>
+              <p
+                style={{ fontSize: 14, color: "var(--ink-2)", lineHeight: 1.6 }}
+              >
                 SkynetLabs delivers AI automation across all 48 contiguous US
                 states. {s.name} engagements run alongside builds for operators
                 in every other state.

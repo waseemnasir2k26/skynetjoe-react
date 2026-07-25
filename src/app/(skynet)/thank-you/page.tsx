@@ -31,13 +31,13 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "You're in — see what happens next | SkynetLabs",
+  title: "You're in — see what happens next",
   description:
     "Your discovery call with Waseem is confirmed. Here's exactly what happens next, what to bring to the call, and what I'll have ready before we talk.",
   alternates: { canonical: `${SITE.url}/thank-you` },
   robots: { index: false, follow: false },
   openGraph: {
-    title: "You're in — see what happens next | SkynetLabs",
+    title: "You're in — see what happens next",
     description:
       "Your discovery call with Waseem is confirmed. Here's exactly what happens next.",
     url: `${SITE.url}/thank-you`,
@@ -55,9 +55,7 @@ const FEATURED_SLUGS = [
   "northeast-recovery-brand-intake-rescue",
 ] as const;
 
-function firstParam(
-  v: string | string[] | undefined,
-): string | undefined {
+function firstParam(v: string | string[] | undefined): string | undefined {
   if (Array.isArray(v)) return v[0];
   return v;
 }
@@ -195,10 +193,8 @@ export default async function ThankYouPage({
     firstParam(sp.event_start_time) ||
     firstParam(sp.invitee_event_start_time) ||
     firstParam(sp.start_time);
-  const inviteeName =
-    firstParam(sp.invitee_full_name) || firstParam(sp.name);
-  const inviteeEmail =
-    firstParam(sp.invitee_email) || firstParam(sp.email);
+  const inviteeName = firstParam(sp.invitee_full_name) || firstParam(sp.name);
+  const inviteeEmail = firstParam(sp.invitee_email) || firstParam(sp.email);
 
   const bookedTime = formatBookedTime(startTime);
   const greetingName = inviteeName ? inviteeName.split(" ")[0] : null;
@@ -209,9 +205,9 @@ export default async function ThankYouPage({
     `Hey Waseem — Loom link to my funnel walkthrough below.\n\n[paste loom URL here]\n\n${ref ? `Source: ${ref}` : ""}${bucket ? `\nBucket: ${bucket}` : ""}${score ? `\nReadiness score: ${score}` : ""}`,
   );
 
-  const featured = FEATURED_SLUGS
-    .map((slug) => CASE_STUDIES.find((c) => c.slug === slug))
-    .filter((c): c is NonNullable<typeof c> => Boolean(c));
+  const featured = FEATURED_SLUGS.map((slug) =>
+    CASE_STUDIES.find((c) => c.slug === slug),
+  ).filter((c): c is NonNullable<typeof c> => Boolean(c));
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -373,8 +369,8 @@ export default async function ThankYouPage({
                   maxWidth: "60ch",
                 }}
               >
-                Scroll down — there&apos;s 1 small thing I need from you before we
-                talk, and a preview of what I&apos;ll likely find inside your
+                Scroll down — there&apos;s 1 small thing I need from you before
+                we talk, and a preview of what I&apos;ll likely find inside your
                 stack.
               </p>
             </div>
@@ -441,7 +437,10 @@ export default async function ThankYouPage({
       </section>
 
       {/* TIMELINE */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream)" }}
+      >
         <div className="container-x px-6">
           <div className="max-w-2xl mb-12">
             <div className="mb-5" style={eyebrow}>
@@ -458,7 +457,11 @@ export default async function ThankYouPage({
             {TIMELINE.map((step) => {
               const Icon = step.icon;
               return (
-                <li key={step.title} className="ty-step relative" style={cardCream}>
+                <li
+                  key={step.title}
+                  className="ty-step relative"
+                  style={cardCream}
+                >
                   <div
                     className="flex items-center justify-center mb-4"
                     style={{
@@ -469,7 +472,10 @@ export default async function ThankYouPage({
                       borderRadius: 2,
                     }}
                   >
-                    <Icon className="w-5 h-5" style={{ color: "var(--terracotta)" }} />
+                    <Icon
+                      className="w-5 h-5"
+                      style={{ color: "var(--terracotta)" }}
+                    />
                   </div>
                   <p
                     style={{
@@ -497,7 +503,13 @@ export default async function ThankYouPage({
                   >
                     {step.title}
                   </h3>
-                  <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.55 }}>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: "var(--ink-2)",
+                      lineHeight: 1.55,
+                    }}
+                  >
                     {step.body}
                   </p>
                 </li>
@@ -508,9 +520,18 @@ export default async function ThankYouPage({
       </section>
 
       {/* AI AUDIT PREVIEW */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream-3)" }}
+      >
         <div className="container-x px-6">
-          <div style={{ ...cardCream, padding: "40px 32px", border: "1px solid rgba(26,26,26,0.18)" }}>
+          <div
+            style={{
+              ...cardCream,
+              padding: "40px 32px",
+              border: "1px solid rgba(26,26,26,0.18)",
+            }}
+          >
             <div className="grid md:grid-cols-[1fr_1.4fr] gap-8 md:gap-12">
               <div>
                 <div className="mb-5" style={eyebrow}>
@@ -521,23 +542,43 @@ export default async function ThankYouPage({
                   Here&apos;s what I&apos;ll{" "}
                   <em style={emTerra}>likely find.</em>
                 </h2>
-                <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6 }}>
+                <p
+                  style={{
+                    fontSize: 15,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.6,
+                  }}
+                >
                   After 200+ service businesses, the patterns rhyme. I&apos;m
-                  not bluffing — these are the 4 we find inside roughly 8 out
-                  of every 10 funnels we audit.
+                  not bluffing — these are the 4 we find inside roughly 8 out of
+                  every 10 funnels we audit.
                   {bucket ? (
                     <>
                       {" "}
-                      <span style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
-                        Tuned for your &quot;{bucket}&quot; bucket from the stress
-                        quiz.
+                      <span
+                        style={{
+                          color: "var(--terracotta-aa)",
+                          fontWeight: 600,
+                        }}
+                      >
+                        Tuned for your &quot;{bucket}&quot; bucket from the
+                        stress quiz.
                       </span>
                     </>
                   ) : null}
                 </p>
               </div>
 
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+              <ul
+                style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 12,
+                }}
+              >
                 {leakBullets.map((bullet, i) => (
                   <li
                     key={i}
@@ -570,7 +611,13 @@ export default async function ThankYouPage({
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p style={{ color: "var(--ink-2)", fontSize: 15, lineHeight: 1.6 }}>
+                    <p
+                      style={{
+                        color: "var(--ink-2)",
+                        fontSize: 15,
+                        lineHeight: 1.6,
+                      }}
+                    >
                       {bullet}
                     </p>
                   </li>
@@ -582,7 +629,10 @@ export default async function ThankYouPage({
       </section>
 
       {/* PRE-CALL HOMEWORK */}
-      <section className="py-16 md:py-20 pt-0" style={{ background: "var(--cream-3)" }}>
+      <section
+        className="py-16 md:py-20 pt-0"
+        style={{ background: "var(--cream-3)" }}
+      >
         <div className="container-x px-6">
           <div
             style={{
@@ -604,17 +654,32 @@ export default async function ThankYouPage({
                   borderRadius: 2,
                 }}
               >
-                <Video className="w-7 h-7" style={{ color: "var(--terracotta)" }} />
+                <Video
+                  className="w-7 h-7"
+                  style={{ color: "var(--terracotta)" }}
+                />
               </div>
               <div>
                 <div className="mb-3" style={eyebrow}>
-                  <span style={eyebrowRule} />
-                  1 thing to do before our call
+                  <span style={eyebrowRule} />1 thing to do before our call
                 </div>
-                <h2 style={{ ...h2Style, fontSize: "clamp(22px, 3vw, 32px)", marginBottom: 12 }}>
+                <h2
+                  style={{
+                    ...h2Style,
+                    fontSize: "clamp(22px, 3vw, 32px)",
+                    marginBottom: 12,
+                  }}
+                >
                   Send me ONE Loom of your current funnel.
                 </h2>
-                <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
+                <p
+                  style={{
+                    fontSize: 16,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.6,
+                    maxWidth: "60ch",
+                  }}
+                >
                   2 minutes max. Just screen-record and walk me through how a
                   lead enters, what tools touch them, and where you think
                   it&apos;s breaking down. I prep against your real funnel — not
@@ -671,9 +736,12 @@ export default async function ThankYouPage({
                   fontFamily: "var(--font-mono)",
                 }}
               >
-                Email pre-filled to send from <strong style={{ color: "var(--terracotta-aa)" }}>{inviteeEmail}</strong>.
-                If you&apos;d rather drop the Loom in Slack or LinkedIn DM, that
-                works too.
+                Email pre-filled to send from{" "}
+                <strong style={{ color: "var(--terracotta-aa)" }}>
+                  {inviteeEmail}
+                </strong>
+                . If you&apos;d rather drop the Loom in Slack or LinkedIn DM,
+                that works too.
               </p>
             ) : null}
           </div>
@@ -681,7 +749,10 @@ export default async function ThankYouPage({
       </section>
 
       {/* 3 CASE STUDIES */}
-      <section className="py-16 md:py-20 pt-0" style={{ background: "var(--cream-3)" }}>
+      <section
+        className="py-16 md:py-20 pt-0"
+        style={{ background: "var(--cream-3)" }}
+      >
         <div className="container-x px-6">
           <div className="max-w-2xl mb-10">
             <div className="mb-5" style={eyebrow}>
@@ -700,7 +771,11 @@ export default async function ThankYouPage({
                 key={c.slug}
                 href={`/case-studies/${c.slug}`}
                 className="group"
-                style={{ ...cardCream, textDecoration: "none", transition: "border-color 0.18s" }}
+                style={{
+                  ...cardCream,
+                  textDecoration: "none",
+                  transition: "border-color 0.18s",
+                }}
               >
                 <div
                   style={{
@@ -756,7 +831,10 @@ export default async function ThankYouPage({
       </section>
 
       {/* REFERRAL NUDGE */}
-      <section className="py-16 md:py-20 pt-0" style={{ background: "var(--cream-3)" }}>
+      <section
+        className="py-16 md:py-20 pt-0"
+        style={{ background: "var(--cream-3)" }}
+      >
         <div className="container-x px-6">
           <div style={{ ...cardCream, padding: "40px 32px" }}>
             <div className="grid md:grid-cols-[auto_1fr] gap-5 items-start mb-6">
@@ -770,18 +848,37 @@ export default async function ThankYouPage({
                   borderRadius: 2,
                 }}
               >
-                <Gift className="w-5 h-5" style={{ color: "var(--terracotta)" }} />
+                <Gift
+                  className="w-5 h-5"
+                  style={{ color: "var(--terracotta)" }}
+                />
               </div>
               <div>
-                <h2 style={{ ...h2Style, fontSize: "clamp(22px, 3vw, 30px)", marginBottom: 10 }}>
+                <h2
+                  style={{
+                    ...h2Style,
+                    fontSize: "clamp(22px, 3vw, 30px)",
+                    marginBottom: 10,
+                  }}
+                >
                   Know another founder drowning in manual ops?
                 </h2>
-                <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "60ch" }}>
+                <p
+                  style={{
+                    fontSize: 15,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.6,
+                    maxWidth: "60ch",
+                  }}
+                >
                   Send the intro. If they sign for a build, I&apos;ll drop{" "}
-                  <strong style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}>
+                  <strong
+                    style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}
+                  >
                     $200 credit
                   </strong>{" "}
-                  on your next invoice. No expiry, no fine print, no MLM nonsense.
+                  on your next invoice. No expiry, no fine print, no MLM
+                  nonsense.
                 </p>
               </div>
             </div>

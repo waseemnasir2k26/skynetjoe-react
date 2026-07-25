@@ -29,7 +29,10 @@ export async function generateMetadata({
   const b = getBuild(slug);
   if (!b) return { title: "Build not found" };
   const n = getNarrative(slug);
-  const title = `${b.title} — ${b.niche} build | SkynetLabs`;
+  // No `| SkynetLabs` suffix here — the root layout's title.template
+  // (`%s | ${SITE.brand}`) already appends it; a hardcoded suffix produced
+  // "... | SkynetLabs | SkynetLabs" in the rendered <title>.
+  const title = `${b.title} — ${b.niche} build`;
   const description = n?.seoDescription ?? b.outcome;
   return {
     title,

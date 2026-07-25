@@ -324,6 +324,24 @@ export const SERVICE_CATEGORIES = [
   },
 ] as const;
 
+/**
+ * Resolves the click-through href for a service tile.
+ *
+ * Most services route to `/services/[slug]`. A few (currently
+ * `freightops-logistics`) carry an explicit `href` in SERVICE_CATEGORIES
+ * pointing at a dedicated funnel LP (`/lp/logistics`) — those slugs are
+ * deliberately excluded from `/services/[slug]`'s generateStaticParams
+ * (dynamicParams=false there), so `/services/freightops-logistics` is a
+ * guaranteed 404. EVERY renderer that turns a service entry into a link
+ * MUST call this helper instead of hand-building `/services/${slug}` —
+ * otherwise it silently links into that 404.
+ */
+export function svcHref(svc: { slug: string; href?: string }): string {
+  return svc.href && typeof svc.href === "string"
+    ? svc.href
+    : `/services/${svc.slug}`;
+}
+
 export const STATS = [
   { value: "180+", label: "Workflows shipped" },
   { value: "40+", label: "Websites delivered" },

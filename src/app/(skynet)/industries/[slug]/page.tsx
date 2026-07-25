@@ -37,7 +37,13 @@ export async function generateMetadata({
   const i = getIndustry(slug);
   if (!i) return { title: "Industry not found" };
 
-  const title = i.metaTitle;
+  // src/data/industries.ts is hand-authored content data (out of scope to
+  // edit here) and one entry's metaTitle already carries a hardcoded
+  // "| SkynetLabs" suffix. The root layout's title.template appends
+  // "%s | SkynetLabs" to every page title, so leaving that suffix in would
+  // double the brand in <title>. Strip it defensively for every industry,
+  // not just the one that currently has it.
+  const title = i.metaTitle.replace(/\s*\|\s*SkynetLabs\s*$/i, "");
   const description = i.metaDescription;
   const url = `${SITE.url}/industries/${i.slug}`;
 

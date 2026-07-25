@@ -61,19 +61,31 @@ export function isServiceStateIndexable(
 }
 
 // ── Location pages (/locations/[state]) ─────────────────────────────────────
-// Scoring:
-//   - Unique 200+ word enrichment paragraph     40 pts
+// Scoring (bar actually implemented, 2026-07-25 rewrite):
+//   - Unique 200+ word enrichment paragraph     40 pts  — REQUIRED GATE
 //   - State has 3+ industries listed            20 pts
 //   - State has 3+ cities listed                20 pts
 //   - Base (page exists, JSON-LD emitted)       20 pts
 // Threshold 60 → index. Below → noindex, follow.
-
+//
+// Why the gate: industries/cities/base were unconditional for every one of
+// the 48 STATES entries (every state ships with >=3 industries and >=3
+// cities in src/lib/states.ts), so those three alone summed to exactly 60
+// and cleared INDEX_THRESHOLD with ZERO real, unique content — the
+// documented "noindex un-enriched states" behavior could never fire.
+// Enrichment (a real 200+ word hand-written paragraph, >=800 chars) is the
+// ONLY signal that proves the page isn't a templated stub, so it's now a
+// hard prerequisite: no enrichment -> score 0 -> noindex, regardless of the
+// other three flags. This matches the docstring's own claim that the
+// enrichment paragraph is what separates a real page from a thin one.
 export function locationQualityScore(stateSlug: string): number {
-  let score = 0;
   const enrichment = getStateEnrichment(stateSlug);
   const state = STATES.find((s) => s.slug === stateSlug);
+  const hasRealEnrichment = !!enrichment && enrichment.length >= 800;
 
-  if (enrichment && enrichment.length >= 800) score += 40;
+  if (!hasRealEnrichment) return 0;
+
+  let score = 40;
   if (state && state.industries.length >= 3) score += 20;
   if (state && state.cities.length >= 3) score += 20;
   if (state) score += 20;

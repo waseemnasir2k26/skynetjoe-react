@@ -13,9 +13,21 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import * as Icons from "lucide-react";
-import { MapPin, ArrowUpRight, ArrowRight, MessageCircle, Calendar, CheckCircle2 } from "lucide-react";
+import {
+  MapPin,
+  ArrowUpRight,
+  ArrowRight,
+  MessageCircle,
+  Calendar,
+  CheckCircle2,
+} from "lucide-react";
 import { STATES } from "@/lib/states";
-import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES } from "@/lib/site";
+import {
+  SITE,
+  SERVICE_CATEGORIES,
+  DEFAULT_OG_IMAGES,
+  svcHref,
+} from "@/lib/site";
 import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
 import JsonLd from "@/components/JsonLd";
 import USStatesMap from "@/components/locations/USStatesMap";
@@ -122,7 +134,10 @@ export default function LocationsIndexPage() {
             <span style={eyebrowRule} />
             <span
               className="w-2 h-2 rounded-full animate-pulse"
-              style={{ background: "var(--terracotta)", display: "inline-block" }}
+              style={{
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
             />
             Active in all 48 states
           </div>
@@ -282,10 +297,10 @@ export default function LocationsIndexPage() {
               margin: "0 auto 48px",
             }}
           >
-            One operator, every state. Click any state to see the work we
-            do there and a 5-city map of where we&apos;ve already shipped.
-            The 8 highlighted states are our priority markets — covered in
-            the most detail.
+            One operator, every state. Click any state to see the work we do
+            there and a 5-city map of where we&apos;ve already shipped. The 8
+            highlighted states are our priority markets — covered in the most
+            detail.
           </p>
 
           <USStatesMap />
@@ -297,7 +312,10 @@ export default function LocationsIndexPage() {
           >
             {[
               { value: "48", label: "Contiguous states served" },
-              { value: String(PRIORITY_STATE_SLUGS.length), label: "Priority markets, covered in depth" },
+              {
+                value: String(PRIORITY_STATE_SLUGS.length),
+                label: "Priority markets, covered in depth",
+              },
               { value: "180+", label: "Workflows shipped" },
               { value: "9", label: "Countries (US is one)" },
             ].map((stat) => (
@@ -366,7 +384,10 @@ export default function LocationsIndexPage() {
       </section>
 
       {/* All Services Hub + Book a Call */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream)" }}
+      >
         <div className="container-x px-6">
           <Reveal className="max-w-3xl mb-12">
             <div className="mb-5" style={eyebrow}>
@@ -374,8 +395,7 @@ export default function LocationsIndexPage() {
               16 services · 48 states · one operator
             </div>
             <h2 style={h2Style}>
-              Every service ships{" "}
-              <em style={emTerra}>into every state.</em>
+              Every service ships <em style={emTerra}>into every state.</em>
             </h2>
             <p
               style={{
@@ -389,7 +409,14 @@ export default function LocationsIndexPage() {
             </p>
           </Reveal>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 40, marginBottom: 40 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 40,
+              marginBottom: 40,
+            }}
+          >
             {SERVICE_CATEGORIES.map((cat) => (
               <div key={cat.name}>
                 <h3
@@ -416,12 +443,12 @@ export default function LocationsIndexPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {cat.services.map((svc) => {
                     const Icon =
-                      ((Icons as unknown) as Record<string, IconCmp>)[svc.icon] ??
-                      ((Icons as unknown) as Record<string, IconCmp>).Bot;
+                      (Icons as unknown as Record<string, IconCmp>)[svc.icon] ??
+                      (Icons as unknown as Record<string, IconCmp>).Bot;
                     return (
                       <Link
                         key={svc.slug}
-                        href={`/services/${svc.slug}`}
+                        href={svcHref(svc)}
                         className="group relative"
                         style={{
                           background: "var(--cream-2)",
@@ -574,7 +601,10 @@ export default function LocationsIndexPage() {
       </section>
 
       {/* 48-state grid */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream-3)" }}
+      >
         <div className="container-x px-6">
           <Reveal className="max-w-3xl mb-10">
             <div className="mb-5" style={eyebrow}>

@@ -17,7 +17,7 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "Journal — Long-form on AI Automation, AEO & Shipping | SkynetLabs",
+  title: "Journal — Long-form on AI Automation, AEO & Shipping",
   description:
     "Honest writing on automation, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying.",
   alternates: { canonical: `${SITE.url}/blog` },
@@ -36,7 +36,8 @@ const schema = {
   "@type": "Blog",
   name: "SkynetLabs Journal",
   url: `${SITE.url}/blog`,
-  description: "Long-form writing on AI automation, AEO, and shipping software.",
+  description:
+    "Long-form writing on AI automation, AEO, and shipping software.",
   author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
   publisher: { "@type": "Organization", name: SITE.brand, url: SITE.url },
   blogPost: POSTS.map((p) => ({
@@ -147,11 +148,18 @@ export default function BlogPage() {
       </section>
 
       {/* POST GRID */}
-      <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>
+      <section
+        className="py-16 md:py-20"
+        style={{ background: "var(--cream)" }}
+      >
         <div className="container-x px-6">
           <RevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {POSTS.map((p) => (
-              <RevealItem key={p.slug} as="article" className="flex flex-col h-full">
+              <RevealItem
+                key={p.slug}
+                as="article"
+                className="flex flex-col h-full"
+              >
                 <Link
                   href={`/blog/${p.slug}`}
                   className="group flex flex-col h-full"

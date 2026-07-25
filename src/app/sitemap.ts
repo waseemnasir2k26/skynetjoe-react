@@ -57,13 +57,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "" ? 1 : 0.8,
   }));
 
+  // Services carrying an `href` (e.g. freightops-logistics -> /lp/logistics)
+  // are deliberately excluded from /services/[slug]'s generateStaticParams
+  // (dynamicParams=false there), so /services/<that-slug> is a guaranteed
+  // 404. Never advertise it in the sitemap. Its funnel LP itself is under
+  // robots.ts DISALLOW (/lp/) and self-sets noindex — it isn't a sitemap
+  // candidate either, so the fix is simply: emit nothing for it.
   const serviceRoutes = SERVICE_CATEGORIES.flatMap((cat) =>
-    cat.services.map((svc) => ({
-      url: `${base}/services/${svc.slug}`,
-      lastModified: STATIC_LASTMOD,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    })),
+    cat.services
+      .filter(
+        (svc): svc is (typeof cat.services)[number] & { href?: undefined } =>
+          !("href" in svc) || !svc.href,
+      )
+      .map((svc) => ({
+        url: `${base}/services/${svc.slug}`,
+        lastModified: STATIC_LASTMOD,
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      })),
   );
 
   // Location pages — quality-gated by isLocationIndexable (state-enrichment.ts).
