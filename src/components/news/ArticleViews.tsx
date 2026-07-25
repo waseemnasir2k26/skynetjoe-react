@@ -50,7 +50,10 @@ export default function ArticleViews({ slug }: { slug: string }) {
     };
   }, [slug]);
 
-  if (count === null) return null;
+  // Hide the counter entirely below a handful of real reads. The API no longer
+  // seeds an invented baseline, so an unread article honestly returns 0 — and
+  // "0 reads" under a headline is worse than no counter at all.
+  if (count === null || count < 5) return null;
 
   const label = count.toLocaleString("en-US");
 

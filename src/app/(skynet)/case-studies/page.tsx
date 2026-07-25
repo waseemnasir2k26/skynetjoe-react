@@ -24,7 +24,14 @@ type CardMeta = {
   num: string; // "01 / 09" badge
   title: string; // card headline
   blurb: string; // card paragraph
-  outcomes: [string, string]; // 2 arrow-bullet outcomes
+  // One or two arrow-bullet outcomes. This was a fixed 2-tuple, which forced
+  // every card to carry a second bullet whether or not a second true outcome
+  // existed — so a small pool of generic lines got recycled across unrelated
+  // engagements ("Replaced 4 paid tools with one stack" on three different
+  // jobs, the same 6h->6min figure on two, "Doubled appointments without ads"
+  // on both a wellness funnel and a shoe store). One bespoke outcome beats two
+  // padded ones. Never fill this from another card.
+  outcomes: [string] | [string, string];
 };
 
 const CARD_META: Record<string, CardMeta> = {
@@ -32,7 +39,8 @@ const CARD_META: Record<string, CardMeta> = {
     gradient: "g1",
     tagClass: "t-auto",
     num: "01 / 09",
-    title: "EU logistics group — email triage that doesn't read your CC field wrong",
+    title:
+      "EU logistics group — email triage that doesn't read your CC field wrong",
     blurb:
       "17-node n8n + GPT-4o pipeline drafting Gmail replies for a French mining-logistics operator. Five-condition gate, accent-safe parsing, thread-scoped context.",
     outcomes: [
@@ -44,10 +52,14 @@ const CARD_META: Record<string, CardMeta> = {
     gradient: "g2",
     tagClass: "t-web",
     num: "02 / 09",
-    title: 'Bali wellness practitioner — a funnel that books instead of "informs"',
+    title:
+      'Bali wellness practitioner — a funnel that books instead of "informs"',
     blurb:
       "Single-page conversion build with embedded scheduling, voice-locked copy, and an objection block that runs the conversation she gets in her DMs daily.",
-    outcomes: ["Doubled appointments without ads", "Shipped in 9 days from brief to live"],
+    outcomes: [
+      "Doubled appointments without ads",
+      "Shipped in 9 days from brief to live",
+    ],
   },
   "manhattan-dental-atelier-flagship": {
     gradient: "g3",
@@ -58,7 +70,7 @@ const CARD_META: Record<string, CardMeta> = {
       "14-section bespoke Next.js site. Editorial press strip, transparent tiered investment, named-bench credibility, a 4-step inquiry funnel with HIPAA-aware intake.",
     outcomes: [
       "Shipped flagship in 12 days end-to-end",
-      "Replaced 4 paid tools with one stack",
+      "Inquiry intake gated on consent instead of leaking drop-offs",
     ],
   },
   "northeast-recovery-brand-intake-rescue": {
@@ -69,8 +81,8 @@ const CARD_META: Record<string, CardMeta> = {
     blurb:
       "Inherited a half-built brand kit and a broken intake form. Rebuilt the palette, swapped in the founder's real logo asset, wired a working Google Form on a Sites iframe.",
     outcomes: [
-      "Cut response time 6h → 6min on new-patient intake",
-      "Shipped corrective ship in 3 revisions, 1 working day",
+      "Shipped corrective fix in 3 revisions, 1 working day",
+      "Intake routing fanned out by location, so each pod sees only its own",
     ],
   },
   "us-insurance-gohighlevel-rebuild": {
@@ -80,7 +92,10 @@ const CARD_META: Record<string, CardMeta> = {
     title: "US insurance retainer client — GHL pipeline rebuilt end-to-end",
     blurb:
       "Seventh GoHighLevel batch for the same operator: funnels, drip cadences, pipeline stages, calendar links, SMS templates — all rebuilt from a stagnant prior install.",
-    outcomes: ["Removed 3hrs/day of manual triage", "Replaced 4 paid tools with one stack"],
+    outcomes: [
+      "Removed 3hrs/day of manual triage",
+      "Seventh repeat engagement with the same operations team",
+    ],
   },
   "internal-carousel-content-engine-200-asset": {
     gradient: "g6",
@@ -90,7 +105,7 @@ const CARD_META: Record<string, CardMeta> = {
     blurb:
       "n8n-orchestrated pipeline turning a single topic brief into 200 PNG-ready carousel slides, with html2canvas render, image rotation log, and zero AI-tell phrasing.",
     outcomes: [
-      "Removed 3hrs/day of manual triage on content batching",
+      "200 render-ready slides from a single topic brief",
       "Shipped in 9 days from null to first batch",
     ],
   },
@@ -101,7 +116,7 @@ const CARD_META: Record<string, CardMeta> = {
     title: "Premium auto dealership network — demo that closes in the meeting",
     blurb:
       "Multi-location dealer site demo with finance-application gate, inventory tile grid, and a trade-in flow that doesn't make you log in to see a price range.",
-    outcomes: ["Shipped pitch demo in 7 days", "Scaled to 9 countries with 1 founder"],
+    outcomes: ["Shipped pitch demo in 7 days"],
   },
   "ksa-fashion-retailer-shopify-ecommerce": {
     gradient: "g8",
@@ -111,7 +126,7 @@ const CARD_META: Record<string, CardMeta> = {
     blurb:
       "Shopify build with size-region logic, Arabic-English bilingual surfaces, courier-rate calc on the cart page, and a returns flow that doesn't punish the customer.",
     outcomes: [
-      "Doubled appointments without ads (showroom bookings)",
+      "Bilingual Arabic-English storefront with size-region logic",
       "Shipped in 14 days store-to-launch",
     ],
   },
@@ -123,14 +138,14 @@ const CARD_META: Record<string, CardMeta> = {
     blurb:
       "Daily voice-locked content pack across LinkedIn, FB, IG, YouTube and TikTok, generated by one script and linted against 60+ AI-writing tells before render.",
     outcomes: [
-      "Removed 3hrs/day of manual triage on content QA",
-      "Scaled to 9 countries with 1 founder",
+      "One script, five channels, a daily pack",
+      "Linted against 60+ AI-writing tells before render",
     ],
   },
 };
 
 const ORDERED_STUDIES: CaseStudy[] = [...CASE_STUDIES].sort(
-  (a, b) => a.position - b.position
+  (a, b) => a.position - b.position,
 );
 
 export const metadata: Metadata = {
@@ -176,7 +191,13 @@ export default function CaseStudiesPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(16px, 5vw, 24px)" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 clamp(16px, 5vw, 24px)",
+          }}
+        >
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -190,7 +211,9 @@ export default function CaseStudiesPage() {
               gap: 12,
             }}
           >
-            <span style={{ width: 28, height: 1, background: "var(--terracotta)" }} />
+            <span
+              style={{ width: 28, height: 1, background: "var(--terracotta)" }}
+            />
             Case studies · 2024–2026
           </div>
           <h1
@@ -206,7 +229,13 @@ export default function CaseStudiesPage() {
             }}
           >
             Nine shipped builds.{" "}
-            <em style={{ fontStyle: "normal", fontWeight: 700, color: "var(--terracotta-aa)" }}>
+            <em
+              style={{
+                fontStyle: "normal",
+                fontWeight: 700,
+                color: "var(--terracotta-aa)",
+              }}
+            >
               Real receipts.
             </em>
           </h1>
@@ -219,9 +248,9 @@ export default function CaseStudiesPage() {
               margin: 0,
             }}
           >
-            EU logistics. Manhattan dental. Bali wellness. KSA retail. Each
-            one anonymized where the contract requires it — outcomes, stack,
-            and timelines stay honest.
+            EU logistics. Manhattan dental. Bali wellness. KSA retail. Each one
+            anonymized where the contract requires it — outcomes, stack, and
+            timelines stay honest.
           </p>
         </div>
       </section>
@@ -416,7 +445,9 @@ export default function CaseStudiesPage() {
                   <span className="wn-x-thumb-num">{meta.num}</span>
                 </Link>
                 <div className="wn-x-card-body">
-                  <span className={`wn-x-tag ${meta.tagClass}`}>{study.industryTag}</span>
+                  <span className={`wn-x-tag ${meta.tagClass}`}>
+                    {study.industryTag}
+                  </span>
                   <h3 className="wn-x-card-h">
                     <Link href={href}>{meta.title}</Link>
                   </h3>
@@ -480,7 +511,8 @@ export default function CaseStudiesPage() {
             Want your name on this{" "}
             <em
               style={{
-                fontStyle: "normal", fontWeight: 700,
+                fontStyle: "normal",
+                fontWeight: 700,
                 textDecoration: "underline",
                 textDecorationThickness: "1px",
                 textUnderlineOffset: "8px",
@@ -501,7 +533,14 @@ export default function CaseStudiesPage() {
             9 builds shipped. 4 slots open per month. 30-min call decides if
             we&apos;re the right fit — yes/no in 8 hours.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 12,
+            }}
+          >
             <Link
               href="/discovery-call"
               style={{

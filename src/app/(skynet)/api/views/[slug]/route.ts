@@ -18,8 +18,14 @@ export const dynamic = "force-dynamic";
 // deploys. Falls back to .data/ locally and /tmp on Vercel. All disk
 // failures are swallowed — the in-memory map is the live source of truth.
 //
-// Counts are seeded with a small baseline so a fresh deploy never shows
-// "0 views" on an article that has genuinely been read for weeks.
+// Counts are REAL reads only. There is deliberately no seeded baseline: a
+// previous version added a deterministic 40-199 per slug and then persisted
+// that invented figure to disk on the first genuine read, so every published
+// number was inflated by an unearned offset and the fiction became permanent.
+// If an article has not been read, the honest answer is 0 and the UI hides the
+// counter. Do not reintroduce a baseline.
+// Note: any news-views.json already on a deployed host still carries the old
+// seeded values — those must be cleared on the host to fully clean up.
 // ============================================================
 
 const SLUG_RE = /^[a-z0-9][a-z0-9-]{1,80}$/;
@@ -31,14 +37,6 @@ function dataDir(): string {
 }
 function dataFile(): string {
   return path.join(dataDir(), "news-views.json");
-}
-
-// Deterministic baseline so counts look lived-in without faking momentum.
-// Older articles carry a slightly higher floor; newest starts modest.
-function baselineFor(slug: string): number {
-  let h = 0;
-  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
-  return 40 + (h % 160); // 40–199
 }
 
 type Store = Record<string, number>;
@@ -76,7 +74,7 @@ function isKnownSlug(slug: string): boolean {
 }
 
 function countFor(store: Store, slug: string): number {
-  return store[slug] ?? baselineFor(slug);
+  return store[slug] ?? 0;
 }
 
 export async function GET(

@@ -5,21 +5,24 @@ import { useEffect, useRef, useState } from "react";
 /**
  * LiveVisitors — sitewide "X people viewing now" pill (bottom-left).
  *
- * Behaviour (per spec):
- *   • When NO real visitor is present, it shows a demo figure that drifts
- *     up and down within 1–17 (so an empty site never looks dead).
- *   • The moment a REAL visitor is on the site it starts from 18 and climbs:
- *     displayed = 17 (demo baseline) + real concurrent visitors, floored at 18,
- *     with a gentle ±drift so the number breathes instead of freezing.
+ * Shows the REAL concurrent visitor count from /api/presence and nothing else.
  *
- * Real concurrency comes from /api/presence (server-side heartbeat map). The
- * widget itself heartbeats every 10s, so a live viewer is always counted —
- * which is exactly why a real visitor sees ≥18.
+ * The previous implementation displayed a manufactured number: a "demo
+ * baseline" of 17 that random-walked between 1 and 17 on an empty site, and
+ * `Math.max(18, 17 + real + drift)` whenever anyone was present. Because the
+ * widget heartbeats itself, `real` was always >= 1 for the person looking at
+ * the pill — so every human visitor was shown "18+ viewing now" on a site
+ * that had one viewer. That is a fabricated social-proof number presented as
+ * live data, and it sat on the same pages as a fabricated testimonial.
+ *
+ * The pill now hides itself unless at least two people really are on the site,
+ * because "1 viewing now" is true but pointless. An honest absence beats an
+ * invented crowd — do not reintroduce a floor, a baseline, or a drift.
  */
 
-const DEMO_BASE = 17; // "17 viewers from my side" — the demo baseline
 const HEARTBEAT_MS = 10_000;
-const DRIFT_MS = 4_500;
+/** Below this many concurrent viewers the pill renders nothing at all. */
+const MIN_TO_SHOW = 2;
 
 function newId(): string {
   try {
@@ -35,8 +38,6 @@ function newId(): string {
 export default function LiveVisitors() {
   const [display, setDisplay] = useState<number | null>(null);
   const realRef = useRef(0); // last known real concurrent count (from server)
-  const demoRef = useRef(11); // drifts within 1..17 when no real traffic
-  const driftRef = useRef(0); // small ±drift on top of the real count
 
   useEffect(() => {
     let alive = true;
@@ -54,16 +55,8 @@ export default function LiveVisitors() {
     }
 
     function recompute() {
-      const real = realRef.current;
-      let n: number;
-      if (real >= 1) {
-        // real visitor present → start from 18 and climb with concurrency
-        n = Math.max(18, DEMO_BASE + real + driftRef.current);
-      } else {
-        // empty site → demo figure drifting within 1..17
-        n = demoRef.current;
-      }
-      if (alive) setDisplay(n);
+      // The real count, unmodified. No baseline, no floor, no drift.
+      if (alive) setDisplay(realRef.current);
     }
 
     async function beat() {
@@ -83,18 +76,8 @@ export default function LiveVisitors() {
       recompute();
     }
 
-    function drift() {
-      // demo random walk, bounded 1..17
-      const stepA = Math.floor(performance.now() % 3) - 1; // -1,0,1
-      demoRef.current = Math.min(17, Math.max(1, demoRef.current + stepA));
-      // gentle breathing on the real figure
-      driftRef.current = Math.floor(performance.now() % 4); // 0..3
-      recompute();
-    }
-
     beat();
     const hb = setInterval(beat, HEARTBEAT_MS);
-    const df = setInterval(drift, DRIFT_MS);
 
     // best-effort: tell server we're gone on unload (count drops faster)
     const onHide = () => {
@@ -116,12 +99,12 @@ export default function LiveVisitors() {
     return () => {
       alive = false;
       clearInterval(hb);
-      clearInterval(df);
       document.removeEventListener("visibilitychange", onHide);
     };
   }, []);
 
-  if (display === null) return null;
+  // Render nothing rather than a lonely or invented figure.
+  if (display === null || display < MIN_TO_SHOW) return null;
 
   return (
     <div
