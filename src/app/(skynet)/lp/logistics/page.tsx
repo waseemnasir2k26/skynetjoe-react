@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
 import { SITE } from "@/lib/site";
+import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
 // Canonical/OG host resolves via SITE.url (env-overridable, defaults to the
 // production domain) — same source the rest of the app uses for canonicals.
@@ -25,12 +26,54 @@ const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
-    { "@type": "Question", name: "Are you a freight broker or motor carrier?", acceptedAnswer: { "@type": "Answer", text: "No. SkynetLabs is a software, design, and marketing studio. We build the dispatch dashboard, voice agent, and CRM that sit alongside your broker authority. No FMCSA filings on our end." } },
-    { "@type": "Question", name: "What if I already pay for DAT and a TMS?", acceptedAnswer: { "@type": "Answer", text: "Better. We integrate them. The canvas pulls DAT loads, your TMS data, factoring activity, and broker calls into one screen." } },
-    { "@type": "Question", name: "How fast can you actually ship?", acceptedAnswer: { "@type": "Answer", text: "Starter ships in 14 calendar days. Pro 21. Premium 30. Flagship 45. Miss the window — nights and weekends free until live." } },
-    { "@type": "Question", name: "What happens at month 12?", acceptedAnswer: { "@type": "Answer", text: "You own the GitHub repo, n8n workflows, and GHL subaccount on day one. Cancel anytime, keep everything live." } },
-    { "@type": "Question", name: "TCPA-compliance on the voice agent?", acceptedAnswer: { "@type": "Answer", text: "Yes. Inbound-only by default. Outbound requires documented opt-in per FCC 2024 rulings." } },
-    { "@type": "Question", name: "I only run 5 trucks. Am I too small?", acceptedAnswer: { "@type": "Answer", text: "Starter $1,497 is built for 5–10 trucks. Site + CRM + inbound inbox in 14 days. No monthly retainer." } },
+    {
+      "@type": "Question",
+      name: "Are you a freight broker or motor carrier?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. SkynetLabs is a software, design, and marketing studio. We build the dispatch dashboard, voice agent, and CRM that sit alongside your broker authority. No FMCSA filings on our end.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What if I already pay for DAT and a TMS?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Better. We integrate them. The canvas pulls DAT loads, your TMS data, factoring activity, and broker calls into one screen.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How fast can you actually ship?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Starter ships in 14 calendar days. Pro 21. Premium 30. Flagship 45. Miss the window — nights and weekends free until live.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What happens at month 12?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You own the GitHub repo, n8n workflows, and GHL subaccount on day one. Cancel anytime, keep everything live.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "TCPA-compliance on the voice agent?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Inbound-only by default. Outbound requires documented opt-in per FCC 2024 rulings.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "I only run 5 trucks. Am I too small?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Starter $1,497 is built for 5–10 trucks. Site + CRM + inbound inbox in 14 days. No monthly retainer.",
+      },
+    },
   ],
 };
 
@@ -476,16 +519,26 @@ export default function LogisticsLP() {
       <MetaPixel />
       <MetaPixelEvents />
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
       <div className="scroll-progress" aria-hidden="true"></div>
 
-      <div className="ribbon"><span className="ribbon-pulse"></span>June dispatch cohort · <strong>limited builds</strong> · 8-hour reply window</div>
+      <div className="ribbon">
+        <span className="ribbon-pulse"></span>June dispatch cohort ·{" "}
+        <strong>limited builds</strong> · 8-hour reply window
+      </div>
 
       <header className="nav">
         <div className="nav-inner">
-          <a href="#" className="brand"><span className="brand-dot"></span>SkynetLabs <em>FreightOps</em></a>
-          <a href="/discovery-call" className="nav-cta">Book audit →</a>
+          <a href="#" className="brand">
+            <span className="brand-dot"></span>SkynetLabs <em>FreightOps</em>
+          </a>
+          <a href="/discovery-call" className="nav-cta">
+            Book audit →
+          </a>
         </div>
       </header>
 
@@ -494,14 +547,37 @@ export default function LogisticsLP() {
         <section className="hero">
           <div className="wrap">
             <div className="hero-inner">
-              <div className="hero-eyebrow"><span className="pulse"></span>For US carriers <strong>5–25 trucks</strong>&nbsp;· June 2026 cohort booking now</div>
-              <h1>Your dispatch stack is <em>bleeding loads.</em> We rebuild it in 14 days.</h1>
-              <p className="hero-sub">Six paid tabs. <strong>$847/mo SaaS bill.</strong> Voicemail after 8pm. SkynetLabs ships the dispatch canvas — AI voice agent, factoring widget, lane economics — under one roof. Public pricing. Source-controlled. <strong>Repo in your GitHub on launch day.</strong></p>
-              <div className="cta-row">
-                <a href="/discovery-call" className="btn-primary" data-meta-event="Schedule" data-meta-name="hero-book-audit">Book a 15-min discovery call →</a>
-                <a href="#pricing" className="btn-line">See public pricing</a>
+              <div className="hero-eyebrow">
+                <span className="pulse"></span>For US carriers{" "}
+                <strong>5–25 trucks</strong>&nbsp;· June 2026 cohort booking now
               </div>
-              <div className="hero-scarcity"><strong>Limited June builds</strong>&nbsp;· 8-hour reply window</div>
+              <h1>
+                Your dispatch stack is <em>bleeding loads.</em> We rebuild it in
+                14 days.
+              </h1>
+              <p className="hero-sub">
+                Six paid tabs. <strong>$847/mo SaaS bill.</strong> Voicemail
+                after 8pm. SkynetLabs ships the dispatch canvas — AI voice
+                agent, factoring widget, lane economics — under one roof. Public
+                pricing. Source-controlled.{" "}
+                <strong>Repo in your GitHub on launch day.</strong>
+              </p>
+              <div className="cta-row">
+                <a
+                  href="/discovery-call"
+                  className="btn-primary"
+                  data-meta-event="Schedule"
+                  data-meta-name="hero-book-audit"
+                >
+                  Book a 15-min discovery call →
+                </a>
+                <a href="#pricing" className="btn-line">
+                  See public pricing
+                </a>
+              </div>
+              <div className="hero-scarcity">
+                <strong>Limited June builds</strong>&nbsp;· 8-hour reply window
+              </div>
               <div className="featured-in">
                 <span className="featured-lbl">Featured</span>
                 <span>Claude Code Partner</span>
@@ -514,144 +590,467 @@ export default function LogisticsLP() {
 
           {/* DASHBOARD MOCKUP — interactive tabs */}
           <div className="mockup-wrap">
-            <div className="mockup" role="region" aria-label="FreightOps dispatch canvas preview — interactive">
+            <div
+              className="mockup"
+              role="region"
+              aria-label="FreightOps dispatch canvas preview — interactive"
+            >
               <span className="interactive-hint">Click tabs →</span>
               {/* hidden radios drive panel switching */}
-              <input className="ws-radio" type="radio" name="ws" id="ws-dispatch" defaultChecked />
-              <input className="ws-radio" type="radio" name="ws" id="ws-lanes" />
-              <input className="ws-radio" type="radio" name="ws" id="ws-brokers" />
-              <input className="ws-radio" type="radio" name="ws" id="ws-drivers" />
-              <input className="ws-radio" type="radio" name="ws" id="ws-factoring" />
-              <input className="ai-radio" type="radio" name="ai" id="ai-voice" defaultChecked />
+              <input
+                className="ws-radio"
+                type="radio"
+                name="ws"
+                id="ws-dispatch"
+                defaultChecked
+              />
+              <input
+                className="ws-radio"
+                type="radio"
+                name="ws"
+                id="ws-lanes"
+              />
+              <input
+                className="ws-radio"
+                type="radio"
+                name="ws"
+                id="ws-brokers"
+              />
+              <input
+                className="ws-radio"
+                type="radio"
+                name="ws"
+                id="ws-drivers"
+              />
+              <input
+                className="ws-radio"
+                type="radio"
+                name="ws"
+                id="ws-factoring"
+              />
+              <input
+                className="ai-radio"
+                type="radio"
+                name="ai"
+                id="ai-voice"
+                defaultChecked
+              />
               <input className="ai-radio" type="radio" name="ai" id="ai-sms" />
               <input className="ai-radio" type="radio" name="ai" id="ai-rate" />
 
               {/* Mobile horizontal tab pills — only <980px */}
-              <div className="mobile-tabs" role="tablist" aria-label="Workspace tabs">
-                <label htmlFor="ws-dispatch" data-for="ws-dispatch">Dispatch</label>
-                <label htmlFor="ws-lanes" data-for="ws-lanes">Lanes</label>
-                <label htmlFor="ws-brokers" data-for="ws-brokers">Brokers</label>
-                <label htmlFor="ws-drivers" data-for="ws-drivers">Drivers</label>
-                <label htmlFor="ws-factoring" data-for="ws-factoring">Factoring</label>
+              <div
+                className="mobile-tabs"
+                role="tablist"
+                aria-label="Workspace tabs"
+              >
+                <label htmlFor="ws-dispatch" data-for="ws-dispatch">
+                  Dispatch
+                </label>
+                <label htmlFor="ws-lanes" data-for="ws-lanes">
+                  Lanes
+                </label>
+                <label htmlFor="ws-brokers" data-for="ws-brokers">
+                  Brokers
+                </label>
+                <label htmlFor="ws-drivers" data-for="ws-drivers">
+                  Drivers
+                </label>
+                <label htmlFor="ws-factoring" data-for="ws-factoring">
+                  Factoring
+                </label>
               </div>
 
               <div className="mockup-bar">
-                <div className="mockup-dots"><span></span><span></span><span></span></div>
-                <div className="mockup-addr">freightops.skynetlabs.app/dispatch/today</div>
+                <div className="mockup-dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div className="mockup-addr">
+                  freightops.skynetlabs.app/dispatch/today
+                </div>
               </div>
               <div className="mockup-body">
                 <aside className="mock-side">
                   <div className="mock-side-head">Workspace</div>
-                  <label htmlFor="ws-dispatch" className="mock-side-item tab" data-for="ws-dispatch">Dispatch <span className="badge">12</span></label>
-                  <label htmlFor="ws-lanes" className="mock-side-item tab" data-for="ws-lanes">Lanes</label>
-                  <label htmlFor="ws-brokers" className="mock-side-item tab" data-for="ws-brokers">Brokers</label>
-                  <label htmlFor="ws-drivers" className="mock-side-item tab" data-for="ws-drivers">Drivers</label>
-                  <label htmlFor="ws-factoring" className="mock-side-item tab" data-for="ws-factoring">Factoring</label>
-                  <div className="mock-side-head" style={{ marginTop: 20 }}>AI Agents</div>
-                  <label htmlFor="ai-voice" className="mock-side-item ai-tab" data-for="ai-voice">Voice intake <span className="badge">3</span></label>
-                  <label htmlFor="ai-sms" className="mock-side-item ai-tab" data-for="ai-sms">SMS confirm</label>
-                  <label htmlFor="ai-rate" className="mock-side-item ai-tab" data-for="ai-rate">Rate qualifier</label>
+                  <label
+                    htmlFor="ws-dispatch"
+                    className="mock-side-item tab"
+                    data-for="ws-dispatch"
+                  >
+                    Dispatch <span className="badge">12</span>
+                  </label>
+                  <label
+                    htmlFor="ws-lanes"
+                    className="mock-side-item tab"
+                    data-for="ws-lanes"
+                  >
+                    Lanes
+                  </label>
+                  <label
+                    htmlFor="ws-brokers"
+                    className="mock-side-item tab"
+                    data-for="ws-brokers"
+                  >
+                    Brokers
+                  </label>
+                  <label
+                    htmlFor="ws-drivers"
+                    className="mock-side-item tab"
+                    data-for="ws-drivers"
+                  >
+                    Drivers
+                  </label>
+                  <label
+                    htmlFor="ws-factoring"
+                    className="mock-side-item tab"
+                    data-for="ws-factoring"
+                  >
+                    Factoring
+                  </label>
+                  <div className="mock-side-head" style={{ marginTop: 20 }}>
+                    AI Agents
+                  </div>
+                  <label
+                    htmlFor="ai-voice"
+                    className="mock-side-item ai-tab"
+                    data-for="ai-voice"
+                  >
+                    Voice intake <span className="badge">3</span>
+                  </label>
+                  <label
+                    htmlFor="ai-sms"
+                    className="mock-side-item ai-tab"
+                    data-for="ai-sms"
+                  >
+                    SMS confirm
+                  </label>
+                  <label
+                    htmlFor="ai-rate"
+                    className="mock-side-item ai-tab"
+                    data-for="ai-rate"
+                  >
+                    Rate qualifier
+                  </label>
                 </aside>
 
                 <div className="mock-main">
                   {/* PANEL: DISPATCH (default) */}
                   <div className="panel panel-dispatch">
                     <div className="mock-h">Dispatch · Thursday, June 12</div>
-                    <div className="mock-sub">Live load + lane economics across your 9 trucks</div>
+                    <div className="mock-sub">
+                      Live load + lane economics across your 9 trucks
+                    </div>
                     <div className="mock-tiles">
-                      <div className="mock-tile up"><div className="mock-tile-lbl">Booked today</div><div className="mock-tile-num">112</div><div className="mock-tile-delta">+18 vs avg</div></div>
-                      <div className="mock-tile up"><div className="mock-tile-lbl">$/mi avg</div><div className="mock-tile-num">$3.41</div><div className="mock-tile-delta">+$0.22 vs Mon</div></div>
-                      <div className="mock-tile warm"><div className="mock-tile-lbl">Qualify time</div><div className="mock-tile-num">8.2s</div><div className="mock-tile-delta">−72% vs human</div></div>
+                      <div className="mock-tile up">
+                        <div className="mock-tile-lbl">Booked today</div>
+                        <div className="mock-tile-num">112</div>
+                        <div className="mock-tile-delta">+18 vs avg</div>
+                      </div>
+                      <div className="mock-tile up">
+                        <div className="mock-tile-lbl">$/mi avg</div>
+                        <div className="mock-tile-num">$3.41</div>
+                        <div className="mock-tile-delta">+$0.22 vs Mon</div>
+                      </div>
+                      <div className="mock-tile warm">
+                        <div className="mock-tile-lbl">Qualify time</div>
+                        <div className="mock-tile-num">8.2s</div>
+                        <div className="mock-tile-delta">−72% vs human</div>
+                      </div>
                     </div>
-                    <div className="mock-lanes-h"><span>Active lanes</span><span className="live">Live</span></div>
+                    <div className="mock-lanes-h">
+                      <span>Active lanes</span>
+                      <span className="live">Live</span>
+                    </div>
                     <div className="mock-lane">
-                      <div className="mock-lane-route">Dallas → Phoenix<small>53ft dry · 1,066 mi · Maverick</small></div>
+                      <div className="mock-lane-route">
+                        Dallas → Phoenix
+                        <small>53ft dry · 1,066 mi · Maverick</small>
+                      </div>
                       <div className="mock-lane-rate">$2,840</div>
-                      <div className="mock-lane-status status-booked">BOOKED</div>
+                      <div className="mock-lane-status status-booked">
+                        BOOKED
+                      </div>
                     </div>
                     <div className="mock-lane">
-                      <div className="mock-lane-route">Atlanta → Charlotte<small>Reefer · 244 mi · CRST</small></div>
+                      <div className="mock-lane-route">
+                        Atlanta → Charlotte<small>Reefer · 244 mi · CRST</small>
+                      </div>
                       <div className="mock-lane-rate">$1,120</div>
-                      <div className="mock-lane-status status-routing">ROUTING</div>
+                      <div className="mock-lane-status status-routing">
+                        ROUTING
+                      </div>
                     </div>
                     <div className="mock-lane">
-                      <div className="mock-lane-route">Chicago → Indianapolis<small>Flatbed · 184 mi · Landstar</small></div>
+                      <div className="mock-lane-route">
+                        Chicago → Indianapolis
+                        <small>Flatbed · 184 mi · Landstar</small>
+                      </div>
                       <div className="mock-lane-rate">$890</div>
-                      <div className="mock-lane-status status-booked">BOOKED</div>
+                      <div className="mock-lane-status status-booked">
+                        BOOKED
+                      </div>
                     </div>
                     <div className="mock-lane">
-                      <div className="mock-lane-route">Memphis → Nashville<small>Dry van · 213 mi · ArcBest</small></div>
+                      <div className="mock-lane-route">
+                        Memphis → Nashville
+                        <small>Dry van · 213 mi · ArcBest</small>
+                      </div>
                       <div className="mock-lane-rate">$960</div>
-                      <div className="mock-lane-status status-pending">PENDING</div>
+                      <div className="mock-lane-status status-pending">
+                        PENDING
+                      </div>
                     </div>
                   </div>
 
                   {/* PANEL: LANES */}
                   <div className="panel panel-lanes">
                     <div className="mock-h">Lanes · Top 5 this month</div>
-                    <div className="mock-sub">Repeat lanes ranked by $/mi · last 30 days</div>
-                    <div className="mock-tiles">
-                      <div className="mock-tile up"><div className="mock-tile-lbl">Lanes booked</div><div className="mock-tile-num">348</div><div className="mock-tile-delta">+42 vs May</div></div>
-                      <div className="mock-tile up"><div className="mock-tile-lbl">Best $/mi</div><div className="mock-tile-num">$4.12</div><div className="mock-tile-delta">DAL → DEN</div></div>
-                      <div className="mock-tile warm"><div className="mock-tile-lbl">Avg margin</div><div className="mock-tile-num">28%</div><div className="mock-tile-delta">+3 pts</div></div>
+                    <div className="mock-sub">
+                      Repeat lanes ranked by $/mi · last 30 days
                     </div>
-                    <table><thead><tr><th>Lane</th><th>Loads</th><th>Avg $/mi</th><th>Margin</th></tr></thead><tbody>
-                      <tr><td>Dallas → Denver</td><td>42</td><td className="num up">$4.12</td><td>34%</td></tr>
-                      <tr><td>Atlanta → Charlotte</td><td>38</td><td className="num up">$3.86</td><td>31%</td></tr>
-                      <tr><td>Houston → Phoenix</td><td>31</td><td className="num up">$3.74</td><td>29%</td></tr>
-                      <tr><td>Chicago → Indianapolis</td><td>28</td><td className="num">$3.41</td><td>27%</td></tr>
-                      <tr><td>Memphis → Nashville</td><td>24</td><td className="num warm">$2.98</td><td>22%</td></tr>
-                    </tbody></table>
+                    <div className="mock-tiles">
+                      <div className="mock-tile up">
+                        <div className="mock-tile-lbl">Lanes booked</div>
+                        <div className="mock-tile-num">348</div>
+                        <div className="mock-tile-delta">+42 vs May</div>
+                      </div>
+                      <div className="mock-tile up">
+                        <div className="mock-tile-lbl">Best $/mi</div>
+                        <div className="mock-tile-num">$4.12</div>
+                        <div className="mock-tile-delta">DAL → DEN</div>
+                      </div>
+                      <div className="mock-tile warm">
+                        <div className="mock-tile-lbl">Avg margin</div>
+                        <div className="mock-tile-num">28%</div>
+                        <div className="mock-tile-delta">+3 pts</div>
+                      </div>
+                    </div>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Lane</th>
+                          <th>Loads</th>
+                          <th>Avg $/mi</th>
+                          <th>Margin</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Dallas → Denver</td>
+                          <td>42</td>
+                          <td className="num up">$4.12</td>
+                          <td>34%</td>
+                        </tr>
+                        <tr>
+                          <td>Atlanta → Charlotte</td>
+                          <td>38</td>
+                          <td className="num up">$3.86</td>
+                          <td>31%</td>
+                        </tr>
+                        <tr>
+                          <td>Houston → Phoenix</td>
+                          <td>31</td>
+                          <td className="num up">$3.74</td>
+                          <td>29%</td>
+                        </tr>
+                        <tr>
+                          <td>Chicago → Indianapolis</td>
+                          <td>28</td>
+                          <td className="num">$3.41</td>
+                          <td>27%</td>
+                        </tr>
+                        <tr>
+                          <td>Memphis → Nashville</td>
+                          <td>24</td>
+                          <td className="num warm">$2.98</td>
+                          <td>22%</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
 
                   {/* PANEL: BROKERS */}
                   <div className="panel panel-brokers">
                     <div className="mock-h">Brokers · Top relationships</div>
-                    <div className="mock-sub">Repeat brokers ranked by lifetime revenue</div>
-                    <div className="mock-tiles">
-                      <div className="mock-tile up"><div className="mock-tile-lbl">Active brokers</div><div className="mock-tile-num">24</div><div className="mock-tile-delta">+4 this qtr</div></div>
-                      <div className="mock-tile up"><div className="mock-tile-lbl">Top broker rev</div><div className="mock-tile-num">$184K</div><div className="mock-tile-delta">YTD · Maverick</div></div>
-                      <div className="mock-tile warm"><div className="mock-tile-lbl">Win rate</div><div className="mock-tile-num">62%</div><div className="mock-tile-delta">on quoted</div></div>
+                    <div className="mock-sub">
+                      Repeat brokers ranked by lifetime revenue
                     </div>
-                    <table><thead><tr><th>Broker</th><th>Loads YTD</th><th>Avg rate</th><th>Win %</th></tr></thead><tbody>
-                      <tr><td>Maverick Transport</td><td>87</td><td className="num up">$2,640</td><td>71%</td></tr>
-                      <tr><td>CH Robinson</td><td>62</td><td className="num">$2,420</td><td>58%</td></tr>
-                      <tr><td>Landstar</td><td>54</td><td className="num up">$2,820</td><td>66%</td></tr>
-                      <tr><td>CRST</td><td>41</td><td className="num">$1,890</td><td>52%</td></tr>
-                      <tr><td>ArcBest</td><td>38</td><td className="num warm">$1,720</td><td>48%</td></tr>
-                    </tbody></table>
+                    <div className="mock-tiles">
+                      <div className="mock-tile up">
+                        <div className="mock-tile-lbl">Active brokers</div>
+                        <div className="mock-tile-num">24</div>
+                        <div className="mock-tile-delta">+4 this qtr</div>
+                      </div>
+                      <div className="mock-tile up">
+                        <div className="mock-tile-lbl">Top broker rev</div>
+                        <div className="mock-tile-num">$184K</div>
+                        <div className="mock-tile-delta">YTD · Maverick</div>
+                      </div>
+                      <div className="mock-tile warm">
+                        <div className="mock-tile-lbl">Win rate</div>
+                        <div className="mock-tile-num">62%</div>
+                        <div className="mock-tile-delta">on quoted</div>
+                      </div>
+                    </div>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Broker</th>
+                          <th>Loads YTD</th>
+                          <th>Avg rate</th>
+                          <th>Win %</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Maverick Transport</td>
+                          <td>87</td>
+                          <td className="num up">$2,640</td>
+                          <td>71%</td>
+                        </tr>
+                        <tr>
+                          <td>CH Robinson</td>
+                          <td>62</td>
+                          <td className="num">$2,420</td>
+                          <td>58%</td>
+                        </tr>
+                        <tr>
+                          <td>Landstar</td>
+                          <td>54</td>
+                          <td className="num up">$2,820</td>
+                          <td>66%</td>
+                        </tr>
+                        <tr>
+                          <td>CRST</td>
+                          <td>41</td>
+                          <td className="num">$1,890</td>
+                          <td>52%</td>
+                        </tr>
+                        <tr>
+                          <td>ArcBest</td>
+                          <td>38</td>
+                          <td className="num warm">$1,720</td>
+                          <td>48%</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
 
                   {/* PANEL: DRIVERS */}
                   <div className="panel panel-drivers">
-                    <div className="mock-h">Drivers · 9 trucks, live status</div>
-                    <div className="mock-sub">Real-time ETA + last comms across fleet</div>
+                    <div className="mock-h">
+                      Drivers · 9 trucks, live status
+                    </div>
+                    <div className="mock-sub">
+                      Real-time ETA + last comms across fleet
+                    </div>
                     <div className="driver-grid">
-                      <div className="driver-card"><div className="nm">Alvin C.</div><div className="st route">● On route · ATL→CLT</div><div className="meta">ETA 18:42 EDT · last ping 4m</div></div>
-                      <div className="driver-card"><div className="nm">Diego R.</div><div className="st route">● On route · DAL→PHX</div><div className="meta">ETA Fri 09:20 MST · last ping 11m</div></div>
-                      <div className="driver-card"><div className="nm">Marcus T.</div><div className="st route">● On route · CHI→IND</div><div className="meta">ETA 21:08 CDT · last ping 2m</div></div>
-                      <div className="driver-card"><div className="nm">Sarah W.</div><div className="st idle">○ Available · Memphis TN</div><div className="meta">Off-deck 4h · home base</div></div>
-                      <div className="driver-card"><div className="nm">James K.</div><div className="st route">● On route · HOU→PHX</div><div className="meta">ETA Sat 14:00 MST · last ping 7m</div></div>
-                      <div className="driver-card"><div className="nm">Tony M.</div><div className="st off">○ Off-duty · 34hr reset</div><div className="meta">Resumes Friday 06:00 CDT</div></div>
+                      <div className="driver-card">
+                        <div className="nm">Alvin C.</div>
+                        <div className="st route">● On route · ATL→CLT</div>
+                        <div className="meta">ETA 18:42 EDT · last ping 4m</div>
+                      </div>
+                      <div className="driver-card">
+                        <div className="nm">Diego R.</div>
+                        <div className="st route">● On route · DAL→PHX</div>
+                        <div className="meta">
+                          ETA Fri 09:20 MST · last ping 11m
+                        </div>
+                      </div>
+                      <div className="driver-card">
+                        <div className="nm">Marcus T.</div>
+                        <div className="st route">● On route · CHI→IND</div>
+                        <div className="meta">ETA 21:08 CDT · last ping 2m</div>
+                      </div>
+                      <div className="driver-card">
+                        <div className="nm">Sarah W.</div>
+                        <div className="st idle">○ Available · Memphis TN</div>
+                        <div className="meta">Off-deck 4h · home base</div>
+                      </div>
+                      <div className="driver-card">
+                        <div className="nm">James K.</div>
+                        <div className="st route">● On route · HOU→PHX</div>
+                        <div className="meta">
+                          ETA Sat 14:00 MST · last ping 7m
+                        </div>
+                      </div>
+                      <div className="driver-card">
+                        <div className="nm">Tony M.</div>
+                        <div className="st off">○ Off-duty · 34hr reset</div>
+                        <div className="meta">Resumes Friday 06:00 CDT</div>
+                      </div>
                     </div>
                   </div>
 
                   {/* PANEL: FACTORING */}
                   <div className="panel panel-factoring">
                     <div className="mock-h">Factoring · Triumph queue</div>
-                    <div className="mock-sub">Same-day settle ranked by fee efficiency</div>
-                    <div className="mock-tiles">
-                      <div className="mock-tile up"><div className="mock-tile-lbl">Settled today</div><div className="mock-tile-num">$28,640</div><div className="mock-tile-delta">4 invoices</div></div>
-                      <div className="mock-tile up"><div className="mock-tile-lbl">Avg cash-to-day</div><div className="mock-tile-num">1.4d</div><div className="mock-tile-delta">−15.6d vs no widget</div></div>
-                      <div className="mock-tile warm"><div className="mock-tile-lbl">Fee saved YTD</div><div className="mock-tile-num">$4,820</div><div className="mock-tile-delta">vs flat rate</div></div>
+                    <div className="mock-sub">
+                      Same-day settle ranked by fee efficiency
                     </div>
-                    <table><thead><tr><th>Invoice</th><th>Broker</th><th>Net</th><th>Status</th></tr></thead><tbody>
-                      <tr><td>INV-4291</td><td>Maverick</td><td className="num up">$2,756</td><td>Settled</td></tr>
-                      <tr><td>INV-4288</td><td>Landstar</td><td className="num up">$2,723</td><td>Settled</td></tr>
-                      <tr><td>INV-4284</td><td>CH Robinson</td><td className="num">$2,348</td><td>Settled</td></tr>
-                      <tr><td>INV-4282</td><td>CRST</td><td className="num">$1,086</td><td>Settled</td></tr>
-                      <tr><td>INV-4279</td><td>ArcBest</td><td className="num warm">$931</td><td>Pending</td></tr>
-                    </tbody></table>
+                    <div className="mock-tiles">
+                      <div className="mock-tile up">
+                        <div className="mock-tile-lbl">Settled today</div>
+                        <div className="mock-tile-num">$28,640</div>
+                        <div className="mock-tile-delta">4 invoices</div>
+                      </div>
+                      <div className="mock-tile up">
+                        <div className="mock-tile-lbl">Avg cash-to-day</div>
+                        <div className="mock-tile-num">1.4d</div>
+                        <div className="mock-tile-delta">
+                          −15.6d vs no widget
+                        </div>
+                      </div>
+                      <div className="mock-tile warm">
+                        <div className="mock-tile-lbl">Fee saved YTD</div>
+                        <div className="mock-tile-num">$4,820</div>
+                        <div className="mock-tile-delta">vs flat rate</div>
+                      </div>
+                    </div>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Invoice</th>
+                          <th>Broker</th>
+                          <th>Net</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>INV-4291</td>
+                          <td>Maverick</td>
+                          <td className="num up">$2,756</td>
+                          <td>Settled</td>
+                        </tr>
+                        <tr>
+                          <td>INV-4288</td>
+                          <td>Landstar</td>
+                          <td className="num up">$2,723</td>
+                          <td>Settled</td>
+                        </tr>
+                        <tr>
+                          <td>INV-4284</td>
+                          <td>CH Robinson</td>
+                          <td className="num">$2,348</td>
+                          <td>Settled</td>
+                        </tr>
+                        <tr>
+                          <td>INV-4282</td>
+                          <td>CRST</td>
+                          <td className="num">$1,086</td>
+                          <td>Settled</td>
+                        </tr>
+                        <tr>
+                          <td>INV-4279</td>
+                          <td>ArcBest</td>
+                          <td className="num warm">$931</td>
+                          <td>Pending</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
@@ -659,100 +1058,200 @@ export default function LogisticsLP() {
                   {/* AI agent panel — VOICE (default) */}
                   <div className="ai-panel ai-panel-voice">
                     <div className="agent-card">
-                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">LIVE</div><div className="agent-title">Voice intake</div></div>
-                      <div className="agent-body">Inbound from <code>(214) 555-0192</code> · <strong>Maverick dispatch</strong> · Dallas → Phoenix offered at $2,650 · counter pushed to $2,840.</div>
+                      <div className="agent-head">
+                        <div className="agent-pulse"></div>
+                        <div className="agent-pill">LIVE</div>
+                        <div className="agent-title">Voice intake</div>
+                      </div>
+                      <div className="agent-body">
+                        Inbound from <code>(214) 555-0192</code> ·{" "}
+                        <strong>Maverick dispatch</strong> · Dallas → Phoenix
+                        offered at $2,650 · counter pushed to $2,840.
+                      </div>
                     </div>
                     <div className="agent-card">
-                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">LIVE</div><div className="agent-title">Voice intake</div></div>
-                      <div className="agent-body">Inbound from <code>(404) 555-0288</code> · <strong>CRST</strong> · Atlanta → Charlotte at $1,120 · qualified, routed to dispatcher.</div>
+                      <div className="agent-head">
+                        <div className="agent-pulse"></div>
+                        <div className="agent-pill">LIVE</div>
+                        <div className="agent-title">Voice intake</div>
+                      </div>
+                      <div className="agent-body">
+                        Inbound from <code>(404) 555-0288</code> ·{" "}
+                        <strong>CRST</strong> · Atlanta → Charlotte at $1,120 ·
+                        qualified, routed to dispatcher.
+                      </div>
                     </div>
                     <div className="factor-card">
-                      <div className="agent-title" style={{ marginBottom: 4 }}>Today · Voice intake</div>
+                      <div className="agent-title" style={{ marginBottom: 4 }}>
+                        Today · Voice intake
+                      </div>
                       <div className="factor-num">47 calls</div>
-                      <div className="factor-sub">22 qualified · 8 booked · 17 referred</div>
-                      <div className="factor-bar"><div className="factor-bar-fill"></div></div>
-                      <div className="factor-sub" style={{ marginTop: 6 }}>74% qualified rate · avg 8.2s response</div>
+                      <div className="factor-sub">
+                        22 qualified · 8 booked · 17 referred
+                      </div>
+                      <div className="factor-bar">
+                        <div className="factor-bar-fill"></div>
+                      </div>
+                      <div className="factor-sub" style={{ marginTop: 6 }}>
+                        74% qualified rate · avg 8.2s response
+                      </div>
                     </div>
                   </div>
 
                   {/* AI agent panel — SMS confirm */}
                   <div className="ai-panel ai-panel-sms">
                     <div className="agent-card">
-                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">QUEUED</div><div className="agent-title">SMS confirm</div></div>
-                      <div className="agent-body">Driver Alvin C. confirmed pickup at <code>15:40 CDT</code>. ETA Phoenix Friday 09:20 MST.</div>
+                      <div className="agent-head">
+                        <div className="agent-pulse"></div>
+                        <div className="agent-pill">QUEUED</div>
+                        <div className="agent-title">SMS confirm</div>
+                      </div>
+                      <div className="agent-body">
+                        Driver Alvin C. confirmed pickup at{" "}
+                        <code>15:40 CDT</code>. ETA Phoenix Friday 09:20 MST.
+                      </div>
                     </div>
                     <div className="agent-card">
-                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">SENT</div><div className="agent-title">SMS confirm</div></div>
-                      <div className="agent-body">Driver Diego R. → load <code>L-4291</code> · rate $2,840 · POD reminder queued for delivery.</div>
+                      <div className="agent-head">
+                        <div className="agent-pulse"></div>
+                        <div className="agent-pill">SENT</div>
+                        <div className="agent-title">SMS confirm</div>
+                      </div>
+                      <div className="agent-body">
+                        Driver Diego R. → load <code>L-4291</code> · rate $2,840
+                        · POD reminder queued for delivery.
+                      </div>
                     </div>
                     <div className="factor-card">
-                      <div className="agent-title" style={{ marginBottom: 4 }}>Today · SMS confirm</div>
+                      <div className="agent-title" style={{ marginBottom: 4 }}>
+                        Today · SMS confirm
+                      </div>
                       <div className="factor-num">114 sent</div>
-                      <div className="factor-sub">94 ack · 18 pending · 2 escalated</div>
-                      <div className="factor-bar"><div className="factor-bar-fill"></div></div>
-                      <div className="factor-sub" style={{ marginTop: 6 }}>82% driver ack rate · avg 4 min</div>
+                      <div className="factor-sub">
+                        94 ack · 18 pending · 2 escalated
+                      </div>
+                      <div className="factor-bar">
+                        <div className="factor-bar-fill"></div>
+                      </div>
+                      <div className="factor-sub" style={{ marginTop: 6 }}>
+                        82% driver ack rate · avg 4 min
+                      </div>
                     </div>
                   </div>
 
                   {/* AI agent panel — Rate qualifier */}
                   <div className="ai-panel ai-panel-rate">
                     <div className="agent-card">
-                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">PASS</div><div className="agent-title">Rate qualifier</div></div>
-                      <div className="agent-body">Lane Houston → Phoenix · offered $2,400 · floor $2,650 · <strong>auto-rejected.</strong> Counter sent at $2,840.</div>
+                      <div className="agent-head">
+                        <div className="agent-pulse"></div>
+                        <div className="agent-pill">PASS</div>
+                        <div className="agent-title">Rate qualifier</div>
+                      </div>
+                      <div className="agent-body">
+                        Lane Houston → Phoenix · offered $2,400 · floor $2,650 ·{" "}
+                        <strong>auto-rejected.</strong> Counter sent at $2,840.
+                      </div>
                     </div>
                     <div className="agent-card">
-                      <div className="agent-head"><div className="agent-pulse"></div><div className="agent-pill">FLAG</div><div className="agent-title">Rate qualifier</div></div>
-                      <div className="agent-body">Memphis → Nashville at $960 · margin <code>22%</code> · below 28% target · dispatcher review.</div>
+                      <div className="agent-head">
+                        <div className="agent-pulse"></div>
+                        <div className="agent-pill">FLAG</div>
+                        <div className="agent-title">Rate qualifier</div>
+                      </div>
+                      <div className="agent-body">
+                        Memphis → Nashville at $960 · margin <code>22%</code> ·
+                        below 28% target · dispatcher review.
+                      </div>
                     </div>
                     <div className="factor-card">
-                      <div className="agent-title" style={{ marginBottom: 4 }}>Today · Rate qualifier</div>
+                      <div className="agent-title" style={{ marginBottom: 4 }}>
+                        Today · Rate qualifier
+                      </div>
                       <div className="factor-num">+$3,420</div>
-                      <div className="factor-sub">recovered via counters · 6 of 8 hit</div>
-                      <div className="factor-bar"><div className="factor-bar-fill"></div></div>
-                      <div className="factor-sub" style={{ marginTop: 6 }}>74% counter-acceptance · avg uplift $428</div>
+                      <div className="factor-sub">
+                        recovered via counters · 6 of 8 hit
+                      </div>
+                      <div className="factor-bar">
+                        <div className="factor-bar-fill"></div>
+                      </div>
+                      <div className="factor-sub" style={{ marginTop: 6 }}>
+                        74% counter-acceptance · avg uplift $428
+                      </div>
                     </div>
                   </div>
                 </aside>
               </div>
             </div>
           </div>
-          <a href="#problem" className="scroll-indicator" aria-label="Scroll to problem section">↓</a>
+          <a
+            href="#problem"
+            className="scroll-indicator"
+            aria-label="Scroll to problem section"
+          >
+            ↓
+          </a>
         </section>
 
         {/* LIVE TICKER — across-cohort activity */}
         <div className="live-ticker">
           <span className="ticker-pulse"></span>
           <span className="ticker-lbl">LIVE</span>
-          <span><strong>47</strong> calls qualified across cohort today</span>
+          <span>
+            <strong>47</strong> calls qualified across cohort today
+          </span>
           <span className="sep">·</span>
-          <span><strong>$184K</strong> in loads booked this week</span>
+          <span>
+            <strong>$184K</strong> in loads booked this week
+          </span>
           <span className="sep">·</span>
-          <span><strong>9.2s</strong> avg AI response</span>
+          <span>
+            <strong>9.2s</strong> avg AI response
+          </span>
         </div>
 
         {/* MARQUEE LOGO STRIP */}
         <section className="logo-strip">
-          <div className="logo-label">Operators on the stack — 9 shipped builds, every repo handed over</div>
+          <div className="logo-label">
+            Operators on the stack — 9 shipped builds, every repo handed over
+          </div>
           <div className="logo-marquee">
-            <span className="name">Vow Sanctuary</span><span className="dot"></span>
-            <span className="name">GutReno</span><span className="dot"></span>
-            <span className="name">Wellness DNA</span><span className="dot"></span>
-            <span className="name">Pretty Potty</span><span className="dot"></span>
-            <span className="name">TimeLapse Reno</span><span className="dot"></span>
-            <span className="name">SkynetJoe</span><span className="dot"></span>
-            <span className="name">Cirrosis360</span><span className="dot"></span>
-            <span className="name">Kitts Recovery</span><span className="dot"></span>
-            <span className="name">Bayou Savage</span><span className="dot"></span>
+            <span className="name">Vow Sanctuary</span>
+            <span className="dot"></span>
+            <span className="name">GutReno</span>
+            <span className="dot"></span>
+            <span className="name">Wellness DNA</span>
+            <span className="dot"></span>
+            <span className="name">Pretty Potty</span>
+            <span className="dot"></span>
+            <span className="name">TimeLapse Reno</span>
+            <span className="dot"></span>
+            <span className="name">SkynetJoe</span>
+            <span className="dot"></span>
+            <span className="name">Cirrosis360</span>
+            <span className="dot"></span>
+            <span className="name">Kitts Recovery</span>
+            <span className="dot"></span>
+            <span className="name">Bayou Savage</span>
+            <span className="dot"></span>
             {/* duplicate for seamless marquee */}
-            <span className="name">Vow Sanctuary</span><span className="dot"></span>
-            <span className="name">GutReno</span><span className="dot"></span>
-            <span className="name">Wellness DNA</span><span className="dot"></span>
-            <span className="name">Pretty Potty</span><span className="dot"></span>
-            <span className="name">TimeLapse Reno</span><span className="dot"></span>
-            <span className="name">SkynetJoe</span><span className="dot"></span>
-            <span className="name">Cirrosis360</span><span className="dot"></span>
-            <span className="name">Kitts Recovery</span><span className="dot"></span>
-            <span className="name">Bayou Savage</span><span className="dot"></span>
+            <span className="name">Vow Sanctuary</span>
+            <span className="dot"></span>
+            <span className="name">GutReno</span>
+            <span className="dot"></span>
+            <span className="name">Wellness DNA</span>
+            <span className="dot"></span>
+            <span className="name">Pretty Potty</span>
+            <span className="dot"></span>
+            <span className="name">TimeLapse Reno</span>
+            <span className="dot"></span>
+            <span className="name">SkynetJoe</span>
+            <span className="dot"></span>
+            <span className="name">Cirrosis360</span>
+            <span className="dot"></span>
+            <span className="name">Kitts Recovery</span>
+            <span className="dot"></span>
+            <span className="name">Bayou Savage</span>
+            <span className="dot"></span>
           </div>
         </section>
 
@@ -761,28 +1260,50 @@ export default function LogisticsLP() {
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">The problem</div>
-              <h2>Your dispatch stack is <em>six browser tabs</em> and a personal cell.</h2>
-              <p className="section-sub">Small-fleet operators run six paid SaaS tools that don&apos;t talk. The dispatcher is the integration layer — and they cost more than every license combined.</p>
+              <h2>
+                Your dispatch stack is <em>six browser tabs</em> and a personal
+                cell.
+              </h2>
+              <p className="section-sub">
+                Small-fleet operators run six paid SaaS tools that don&apos;t
+                talk. The dispatcher is the integration layer — and they cost
+                more than every license combined.
+              </p>
             </div>
             <div className="pain-row reveal">
               <div className="pain-cell">
-                <div className="pain-stat">31<em>%</em></div>
-                <div className="pain-line">of off-hours broker calls go to <strong>voicemail</strong>.</div>
+                <div className="pain-stat">
+                  31<em>%</em>
+                </div>
+                <div className="pain-line">
+                  of off-hours broker calls go to <strong>voicemail</strong>.
+                </div>
                 <div className="pain-src">SkynetLabs audits Q1 2026 · n=8</div>
               </div>
               <div className="pain-cell">
                 <div className="pain-stat">$847</div>
-                <div className="pain-line">avg monthly SaaS cost across <strong>six disconnected</strong> dispatch + back-office tools.</div>
+                <div className="pain-line">
+                  avg monthly SaaS cost across <strong>six disconnected</strong>{" "}
+                  dispatch + back-office tools.
+                </div>
                 <div className="pain-src">5–12 truck operators · n=8</div>
               </div>
               <div className="pain-cell">
-                <div className="pain-stat">17<em>d</em></div>
-                <div className="pain-line">avg invoice → factoring → cash without <strong>widget integration</strong>.</div>
+                <div className="pain-stat">
+                  17<em>d</em>
+                </div>
+                <div className="pain-line">
+                  avg invoice → factoring → cash without{" "}
+                  <strong>widget integration</strong>.
+                </div>
                 <div className="pain-src">SkynetLabs ops research</div>
               </div>
               <div className="pain-cell">
                 <div className="pain-stat">0</div>
-                <div className="pain-line">tools that talk. Dispatcher does the <strong>glue manually</strong>, every shift.</div>
+                <div className="pain-line">
+                  tools that talk. Dispatcher does the{" "}
+                  <strong>glue manually</strong>, every shift.
+                </div>
                 <div className="pain-src">Every audit, no exceptions</div>
               </div>
             </div>
@@ -794,8 +1315,14 @@ export default function LogisticsLP() {
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">The 5-line map</div>
-              <h2>Where the others <em>stop,</em> SkynetLabs begins.</h2>
-              <p className="section-sub">Brokerage tools own the load board. Agencies own the brand. Dev shops own the code. SkynetLabs ships all three under one roof, in 14 days, at public price.</p>
+              <h2>
+                Where the others <em>stop,</em> SkynetLabs begins.
+              </h2>
+              <p className="section-sub">
+                Brokerage tools own the load board. Agencies own the brand. Dev
+                shops own the code. SkynetLabs ships all three under one roof,
+                in 14 days, at public price.
+              </p>
             </div>
             <div className="compare-wrap reveal">
               <table className="compare-tbl">
@@ -809,13 +1336,111 @@ export default function LogisticsLP() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>Marketing site + CRM</td><td className="us"><strong>✓ 14 days</strong></td><td className="bad"><span className="xmark">— not their scope</span></td><td><span className="check">✓ 60 days</span></td><td className="bad"><span className="xmark">— sub-contracted</span></td></tr>
-                  <tr><td>Live dispatch dashboard</td><td className="us"><strong>✓ included Pro tier</strong></td><td><span className="check">✓ but their UI only</span></td><td className="bad"><span className="xmark">—</span></td><td><span className="check">✓ 180 days, T&amp;M</span></td></tr>
-                  <tr><td>AI voice agent (Vapi)</td><td className="us"><strong>✓ branded, your voice</strong></td><td className="bad"><span className="xmark">—</span></td><td className="bad"><span className="xmark">—</span></td><td className="bad"><span className="xmark">— specialized hire</span></td></tr>
-                  <tr><td>Factoring widget</td><td className="us"><strong>✓ Triumph/Apex/RTS</strong></td><td className="bad"><span className="xmark">— external</span></td><td className="bad"><span className="xmark">—</span></td><td><span className="check">✓ custom build</span></td></tr>
-                  <tr><td>Public, fixed pricing</td><td className="us"><strong>✓ four tiers, visible</strong></td><td><span className="check">✓ per-seat SaaS</span></td><td className="bad"><span className="xmark">— custom quote</span></td><td className="bad"><span className="xmark">— T&amp;M</span></td></tr>
-                  <tr><td>Source-controlled hand-off</td><td className="us"><strong>✓ your GitHub day 1</strong></td><td className="bad"><span className="xmark">— vendor SaaS</span></td><td className="bad"><span className="xmark">— hostage data</span></td><td><span className="check">✓ partial</span></td></tr>
-                  <tr><td>Ship guarantee</td><td className="us"><strong>✓ miss = free nights</strong></td><td className="bad"><span className="xmark">—</span></td><td className="bad"><span className="xmark">—</span></td><td className="bad"><span className="xmark">— scope creep</span></td></tr>
+                  <tr>
+                    <td>Marketing site + CRM</td>
+                    <td className="us">
+                      <strong>✓ 14 days</strong>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">— not their scope</span>
+                    </td>
+                    <td>
+                      <span className="check">✓ 60 days</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">— sub-contracted</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Live dispatch dashboard</td>
+                    <td className="us">
+                      <strong>✓ included Pro tier</strong>
+                    </td>
+                    <td>
+                      <span className="check">✓ but their UI only</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">—</span>
+                    </td>
+                    <td>
+                      <span className="check">✓ 180 days, T&amp;M</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>AI voice agent (Vapi)</td>
+                    <td className="us">
+                      <strong>✓ branded, your voice</strong>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">—</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">—</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">— specialized hire</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Factoring widget</td>
+                    <td className="us">
+                      <strong>✓ Triumph/Apex/RTS</strong>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">— external</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">—</span>
+                    </td>
+                    <td>
+                      <span className="check">✓ custom build</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Public, fixed pricing</td>
+                    <td className="us">
+                      <strong>✓ four tiers, visible</strong>
+                    </td>
+                    <td>
+                      <span className="check">✓ per-seat SaaS</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">— custom quote</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">— T&amp;M</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Source-controlled hand-off</td>
+                    <td className="us">
+                      <strong>✓ your GitHub day 1</strong>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">— vendor SaaS</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">— hostage data</span>
+                    </td>
+                    <td>
+                      <span className="check">✓ partial</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Ship guarantee</td>
+                    <td className="us">
+                      <strong>✓ miss = free nights</strong>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">—</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">—</span>
+                    </td>
+                    <td className="bad">
+                      <span className="xmark">— scope creep</span>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -825,9 +1450,21 @@ export default function LogisticsLP() {
         {/* MID-FUNNEL CTA */}
         <section className="mid-cta">
           <div className="mid-cta-inner reveal">
-            <h3>Reading this at <em>2am</em> because dispatch died again?</h3>
-            <p>Audit takes 15 minutes. Reply window: 8 hours, weekday Bali time. Yes, no, or referral — you walk with the findings.</p>
-            <a href="/discovery-call" className="btn-primary" data-meta-event="Schedule" data-meta-name="mid-cta-2am">Book the audit — free →</a>
+            <h3>
+              Reading this at <em>2am</em> because dispatch died again?
+            </h3>
+            <p>
+              Audit takes 15 minutes. Reply window: 8 hours, weekday Bali time.
+              Yes, no, or referral — you walk with the findings.
+            </p>
+            <a
+              href="/discovery-call"
+              className="btn-primary"
+              data-meta-event="Schedule"
+              data-meta-name="mid-cta-2am"
+            >
+              Book the audit — free →
+            </a>
           </div>
         </section>
 
@@ -836,33 +1473,70 @@ export default function LogisticsLP() {
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">The solution</div>
-              <h2>One canvas. <em>Four modules.</em> Yours to keep.</h2>
-              <p className="section-sub">Every module ships to your GitHub on day one. Cancel the retainer anytime — stack stays live, code is yours. No vendor lock-in, no hostage data.</p>
+              <h2>
+                One canvas. <em>Four modules.</em> Yours to keep.
+              </h2>
+              <p className="section-sub">
+                Every module ships to your GitHub on day one. Cancel the
+                retainer anytime — stack stays live, code is yours. No vendor
+                lock-in, no hostage data.
+              </p>
             </div>
             <div className="feature-row reveal">
               <div className="feat-card">
                 <div className="feat-tag">VOICE · AGENT</div>
                 <div className="feat-title">Vapi inbound dispatcher</div>
-                <div className="feat-body">Off-hours load calls qualified in eight seconds. Route, rate, contact, notes auto-attached to your CRM. Pipeline populated by sunrise.</div>
-                <ul className="feat-list"><li>24/7 phone coverage, zero graveyard shift</li><li>Custom rate qualifier per lane</li><li>Auto-callback for filtered loads</li><li>TCPA-compliant inbound only</li></ul>
+                <div className="feat-body">
+                  Off-hours load calls qualified in eight seconds. Route, rate,
+                  contact, notes auto-attached to your CRM. Pipeline populated
+                  by sunrise.
+                </div>
+                <ul className="feat-list">
+                  <li>24/7 phone coverage, zero graveyard shift</li>
+                  <li>Custom rate qualifier per lane</li>
+                  <li>Auto-callback for filtered loads</li>
+                  <li>TCPA-compliant inbound only</li>
+                </ul>
               </div>
               <div className="feat-card">
                 <div className="feat-tag">DISPATCH · OPS</div>
                 <div className="feat-title">Live dispatch canvas</div>
-                <div className="feat-body">DAT feed + truck inventory + repeat-broker pipeline + factoring on one screen. Six tabs replaced with focus.</div>
-                <ul className="feat-list"><li>Lane economics in real time</li><li>Driver ETA + SMS auto-confirms</li><li>Searchable route history</li><li>Public driver portal</li></ul>
+                <div className="feat-body">
+                  DAT feed + truck inventory + repeat-broker pipeline +
+                  factoring on one screen. Six tabs replaced with focus.
+                </div>
+                <ul className="feat-list">
+                  <li>Lane economics in real time</li>
+                  <li>Driver ETA + SMS auto-confirms</li>
+                  <li>Searchable route history</li>
+                  <li>Public driver portal</li>
+                </ul>
               </div>
               <div className="feat-card">
                 <div className="feat-tag">CASH · FACTORING</div>
                 <div className="feat-title">Factoring widget</div>
-                <div className="feat-body">Direct Triumph, Apex, RTS integration. Same-day settle on qualifying loads, fee-aware ranking, auto invoice attach.</div>
-                <ul className="feat-list"><li>74% queue settled within 4 hours</li><li>Fee diff display per load</li><li>Push to QuickBooks ledger</li></ul>
+                <div className="feat-body">
+                  Direct Triumph, Apex, RTS integration. Same-day settle on
+                  qualifying loads, fee-aware ranking, auto invoice attach.
+                </div>
+                <ul className="feat-list">
+                  <li>74% queue settled within 4 hours</li>
+                  <li>Fee diff display per load</li>
+                  <li>Push to QuickBooks ledger</li>
+                </ul>
               </div>
               <div className="feat-card">
                 <div className="feat-tag">FUNNEL · LEAD-GEN</div>
                 <div className="feat-title">Ad ops + content batch</div>
-                <div className="feat-body">Meta + LinkedIn campaigns wired to GHL pipeline. Monthly content batch from the Bali studio, weekly review call.</div>
-                <ul className="feat-list"><li>Pixel + CAPI on day one</li><li>Cold + warm lead-gen flows</li><li>Monthly Loom audit + roadmap</li></ul>
+                <div className="feat-body">
+                  Meta + LinkedIn campaigns wired to GHL pipeline. Monthly
+                  content batch from the Bali studio, weekly review call.
+                </div>
+                <ul className="feat-list">
+                  <li>Pixel + CAPI on day one</li>
+                  <li>Cold + warm lead-gen flows</li>
+                  <li>Monthly Loom audit + roadmap</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -873,29 +1547,56 @@ export default function LogisticsLP() {
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">The 14-day ship</div>
-              <h2>Day 1 to live, <em>no scope theater.</em></h2>
-              <p className="section-sub">Fixed gates. Public timeline. Miss it and we work nights + weekends free until live — written into the SOW. Below = exact Starter tier track.</p>
+              <h2>
+                Day 1 to live, <em>no scope theater.</em>
+              </h2>
+              <p className="section-sub">
+                Fixed gates. Public timeline. Miss it and we work nights +
+                weekends free until live — written into the SOW. Below = exact
+                Starter tier track.
+              </p>
             </div>
             <div className="process-track reveal">
               <div className="process-step">
-                <div className="process-marker">I<small>Day 1</small></div>
+                <div className="process-marker">
+                  I<small>Day 1</small>
+                </div>
                 <h4>Kickoff + audit</h4>
-                <p>Live walkthrough of your six tabs. We map the gaps. Domain + GHL subaccount provisioned. You get a Loom recap by EOD.</p>
+                <p>
+                  Live walkthrough of your six tabs. We map the gaps. Domain +
+                  GHL subaccount provisioned. You get a Loom recap by EOD.
+                </p>
               </div>
               <div className="process-step">
-                <div className="process-marker">II<small>Day 4</small></div>
+                <div className="process-marker">
+                  II<small>Day 4</small>
+                </div>
                 <h4>Wireframe lock</h4>
-                <p>Site map + CRM pipeline + inbound routing in Figma. Two revision rounds inside this window. Lock means lock.</p>
+                <p>
+                  Site map + CRM pipeline + inbound routing in Figma. Two
+                  revision rounds inside this window. Lock means lock.
+                </p>
               </div>
               <div className="process-step">
-                <div className="process-marker">III<small>Day 10</small></div>
+                <div className="process-marker">
+                  III<small>Day 10</small>
+                </div>
                 <h4>Build review</h4>
-                <p>Staging URL live. We walk every page on a Loom. You approve copy + Pixel + CAPI. Last polish window.</p>
+                <p>
+                  Staging URL live. We walk every page on a Loom. You approve
+                  copy + Pixel + CAPI. Last polish window.
+                </p>
               </div>
               <div className="process-step">
-                <div className="process-marker">IV<small>Day 14</small></div>
+                <div className="process-marker">
+                  IV<small>Day 14</small>
+                </div>
                 <h4>Live + handoff</h4>
-                <p>Production push. GitHub repo transferred to your org. n8n + GHL credentials handed over. Walk anytime — you own everything.</p>
+                <p>
+                  Production push. GitHub repo transferred to your org. n8n +
+                  GHL credentials handed over. Walk anytime — you own
+                  everything.
+                </p>
               </div>
             </div>
           </div>
@@ -904,24 +1605,63 @@ export default function LogisticsLP() {
         {/* VALUE STACK */}
         <section className="section tinted">
           <div className="wrap">
-            <div className="section-head reveal" style={{ textAlign: "center", marginLeft: "auto", marginRight: "auto" }}>
-              <div className="section-kicker" style={{ marginLeft: "auto", marginRight: "auto" }}>What you get</div>
-              <h2 style={{ marginLeft: "auto", marginRight: "auto" }}>Starter tier · <em>$1,497 flat</em></h2>
+            <div
+              className="section-head reveal"
+              style={{
+                textAlign: "center",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
+              <div
+                className="section-kicker"
+                style={{ marginLeft: "auto", marginRight: "auto" }}
+              >
+                What you get
+              </div>
+              <h2 style={{ marginLeft: "auto", marginRight: "auto" }}>
+                Starter tier · <em>$1,497 flat</em>
+              </h2>
             </div>
             <div className="value-stack reveal">
-              <div className="value-stack-h">Inside the $1,497 Starter build</div>
-              <div className="value-stack-sub">Comparable agency quotes — same scope, no source-controlled hand-off.</div>
-              <div className="value-row strike"><span>5-page premium Next.js site</span><strong>$3,500</strong></div>
-              <div className="value-row strike"><span>GHL CRM pipeline + custom fields</span><strong>$1,200</strong></div>
-              <div className="value-row strike"><span>Inbound contact inbox + routing</span><strong>$800</strong></div>
-              <div className="value-row strike"><span>Meta Pixel + Conversions API</span><strong>$600</strong></div>
-              <div className="value-row strike"><span>2 revision rounds</span><strong>$500</strong></div>
-              <div className="value-row strike"><span>GitHub repo handoff (you own everything)</span><strong>included</strong></div>
+              <div className="value-stack-h">
+                Inside the $1,497 Starter build
+              </div>
+              <div className="value-stack-sub">
+                Comparable agency quotes — same scope, no source-controlled
+                hand-off.
+              </div>
+              <div className="value-row strike">
+                <span>5-page premium Next.js site</span>
+                <strong>$3,500</strong>
+              </div>
+              <div className="value-row strike">
+                <span>GHL CRM pipeline + custom fields</span>
+                <strong>$1,200</strong>
+              </div>
+              <div className="value-row strike">
+                <span>Inbound contact inbox + routing</span>
+                <strong>$800</strong>
+              </div>
+              <div className="value-row strike">
+                <span>Meta Pixel + Conversions API</span>
+                <strong>$600</strong>
+              </div>
+              <div className="value-row strike">
+                <span>2 revision rounds</span>
+                <strong>$500</strong>
+              </div>
+              <div className="value-row strike">
+                <span>GitHub repo handoff (you own everything)</span>
+                <strong>included</strong>
+              </div>
               <div className="value-total">
                 <span className="value-total-lbl">Your price</span>
                 <span className="value-total-amt">$1,497</span>
               </div>
-              <span className="value-saved">↓ saves $5,103 vs comparable agency</span>
+              <span className="value-saved">
+                ↓ saves $5,103 vs comparable agency
+              </span>
             </div>
           </div>
         </section>
@@ -932,14 +1672,33 @@ export default function LogisticsLP() {
             <div className="risk reveal">
               <div className="risk-inner">
                 <div>
-                  <div className="section-kicker" style={{ color: "var(--ochre)" }}>The guarantee</div>
-                  <h3 className="risk-h">Three ways we <em>de-risk</em> the build for you.</h3>
-                  <p className="risk-p">Public pricing, sourced-controlled, fixed ship windows. The audit is free. You only commit after the 15-minute call.</p>
+                  <div
+                    className="section-kicker"
+                    style={{ color: "var(--ochre)" }}
+                  >
+                    The guarantee
+                  </div>
+                  <h3 className="risk-h">
+                    Three ways we <em>de-risk</em> the build for you.
+                  </h3>
+                  <p className="risk-p">
+                    Public pricing, sourced-controlled, fixed ship windows. The
+                    audit is free. You only commit after the 15-minute call.
+                  </p>
                 </div>
                 <ul className="risk-list">
-                  <li><strong>Miss the ship window?</strong> Nights and weekends free until live. Written into the SOW.</li>
-                  <li><strong>Cancel the retainer?</strong> Stack stays live. Repo + n8n + GHL stay yours.</li>
-                  <li><strong>Not a fit?</strong> Audit ends with a referral. No upsell, no funnel.</li>
+                  <li>
+                    <strong>Miss the ship window?</strong> Nights and weekends
+                    free until live. Written into the SOW.
+                  </li>
+                  <li>
+                    <strong>Cancel the retainer?</strong> Stack stays live. Repo
+                    + n8n + GHL stay yours.
+                  </li>
+                  <li>
+                    <strong>Not a fit?</strong> Audit ends with a referral. No
+                    upsell, no funnel.
+                  </li>
                 </ul>
               </div>
             </div>
@@ -951,31 +1710,61 @@ export default function LogisticsLP() {
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">Operators on the stack</div>
-              <h2>Named clients. <em>Real testimonials.</em></h2>
+              <h2>
+                Named clients. <em>Real testimonials.</em>
+              </h2>
             </div>
             <div className="testi-row reveal">
               <div className="testi-card">
                 <div className="testi-stars">★★★★★</div>
-                <p className="testi-quote">&quot;I get more done in <em>eight hours</em> than my last agency got done in eight weeks. He sends Loom walkthroughs at 3am his time — that&apos;s the actual founder, not a project manager.&quot;</p>
+                <p className="testi-quote">
+                  &quot;I get more done in <em>eight hours</em> than my last
+                  agency got done in eight weeks. He sends Loom walkthroughs at
+                  3am his time — that&apos;s the actual founder, not a project
+                  manager.&quot;
+                </p>
                 <div className="testi-meta">
                   <div className="testi-avatar">CS</div>
-                  <div><div className="testi-name">Chrissy S.</div><div className="testi-role">Founder · Vow Sanctuary · Asheville NC</div></div>
+                  <div>
+                    <div className="testi-name">Chrissy S.</div>
+                    <div className="testi-role">
+                      Founder · Vow Sanctuary · Asheville NC
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="testi-card">
                 <div className="testi-stars">★★★★★</div>
-                <p className="testi-quote">&quot;Inbound calls used to die after 8pm. The voice agent caught <em>17 loads in week one</em> — three I&apos;d have lost. Stack paid for itself the first month.&quot;</p>
+                <p className="testi-quote">
+                  &quot;Inbound calls used to die after 8pm. The voice agent
+                  caught <em>17 loads in week one</em> — three I&apos;d have
+                  lost. Stack paid for itself the first month.&quot;
+                </p>
                 <div className="testi-meta">
                   <div className="testi-avatar">DR</div>
-                  <div><div className="testi-name">Diego R.</div><div className="testi-role">Dispatch lead · 9-truck regional · Houston TX</div></div>
+                  <div>
+                    <div className="testi-name">Diego R.</div>
+                    <div className="testi-role">
+                      Dispatch lead · 9-truck regional · Houston TX
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="testi-card">
                 <div className="testi-stars">★★★★★</div>
-                <p className="testi-quote">&quot;Closed <em>6 new lanes</em> the month we launched. Factoring widget alone saved us 4 days of cash float — that&apos;s $18K of trucks not sitting at the bank.&quot;</p>
+                <p className="testi-quote">
+                  &quot;Closed <em>6 new lanes</em> the month we launched.
+                  Factoring widget alone saved us 4 days of cash float —
+                  that&apos;s $18K of trucks not sitting at the bank.&quot;
+                </p>
                 <div className="testi-meta">
                   <div className="testi-avatar">MT</div>
-                  <div><div className="testi-name">Marcus T.</div><div className="testi-role">Owner-op · 14-truck regional · Dallas TX</div></div>
+                  <div>
+                    <div className="testi-name">Marcus T.</div>
+                    <div className="testi-role">
+                      Owner-op · 14-truck regional · Dallas TX
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -988,16 +1777,36 @@ export default function LogisticsLP() {
             <div className="email-capture reveal">
               <div className="email-capture-inner">
                 <div>
-                  <div className="ec-kicker">Free teardown · No call required</div>
-                  <h3 className="ec-h">Get the <em>12-tab dispatch teardown PDF.</em></h3>
-                  <p className="ec-p">Real audit of a 12-truck Houston operator&apos;s six-tab stack. Where the leaks live, what to replace, what to keep. 9 pages. Instant inbox.</p>
+                  <div className="ec-kicker">
+                    Free teardown · No call required
+                  </div>
+                  <h3 className="ec-h">
+                    Get the <em>12-tab dispatch teardown.</em>
+                  </h3>
+                  <p className="ec-p">
+                    Real teardown of a 12-truck Houston operator&apos;s six-tab
+                    stack &mdash; where the leaks live, what to replace, what to
+                    keep. Drop your email and I&apos;ll send it over myself.
+                  </p>
                 </div>
-                <form className="ec-form" action="/discovery-call" method="GET" data-meta-event="Lead">
-                  <input className="ec-input" type="email" name="email" placeholder="you@yourcarrier.com" required aria-label="Email address" />
-                  <input type="hidden" name="source" value="teardown-pdf" />
-                  <button className="ec-btn" type="submit">Send me the PDF →</button>
-                  <p className="ec-note">No spam. One email, one PDF. Unsubscribe one click.</p>
-                </form>
+                <LeadCaptureForm
+                  source="teardown-pdf"
+                  formClassName="ec-form"
+                  buttonClassName="ec-btn"
+                  inputClassName="ec-input"
+                  ariaLabel="Email address"
+                  emailPlaceholder="you@yourcarrier.com"
+                  buttonLabel="Email me the teardown →"
+                  submittingLabel="Sending…"
+                  formMetaEvent="Lead"
+                  successHeading="Got it."
+                  successBody="I'll send the teardown to that inbox myself, usually within a day."
+                  belowButton={
+                    <p className="ec-note">
+                      No spam. One email, from me directly.
+                    </p>
+                  }
+                />
               </div>
             </div>
           </div>
@@ -1008,8 +1817,15 @@ export default function LogisticsLP() {
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">The menu, public</div>
-              <h2>Four tiers. <em>No custom-quote theater.</em></h2>
-              <p className="section-sub">Half on signature, half on launch. Walk anytime with what&apos;s built. You own the GitHub repo + n8n workflows + GHL subaccount on day one. The audit comes first — pricing matters only if we&apos;re a fit.</p>
+              <h2>
+                Four tiers. <em>No custom-quote theater.</em>
+              </h2>
+              <p className="section-sub">
+                Half on signature, half on launch. Walk anytime with what&apos;s
+                built. You own the GitHub repo + n8n workflows + GHL subaccount
+                on day one. The audit comes first — pricing matters only if
+                we&apos;re a fit.
+              </p>
             </div>
             <div className="pricing-row reveal">
               <div className="price-cell">
@@ -1017,16 +1833,44 @@ export default function LogisticsLP() {
                 <div className="price-window">14 days · site + CRM</div>
                 <div className="price-amount">$1,497</div>
                 <div className="price-recur">flat · no retainer</div>
-                <ul className="price-list"><li>Five-page premium site</li><li>GHL CRM pipeline wired</li><li>Inbound contact inbox</li><li>Meta Pixel + CAPI</li><li>Two revision rounds</li></ul>
-                <a href="/discovery-call" className="price-cta" data-meta-event="InitiateCheckout" data-meta-name="Starter" data-meta-value="1497">Book discovery →</a>
+                <ul className="price-list">
+                  <li>Five-page premium site</li>
+                  <li>GHL CRM pipeline wired</li>
+                  <li>Inbound contact inbox</li>
+                  <li>Meta Pixel + CAPI</li>
+                  <li>Two revision rounds</li>
+                </ul>
+                <a
+                  href="/discovery-call"
+                  className="price-cta"
+                  data-meta-event="InitiateCheckout"
+                  data-meta-name="Starter"
+                  data-meta-value="1497"
+                >
+                  Book discovery →
+                </a>
               </div>
               <div className="price-cell">
                 <div className="price-tier">Pro</div>
                 <div className="price-window">21 days · + dispatch</div>
                 <div className="price-amount">$3,997</div>
                 <div className="price-recur">+ $497/mo ops</div>
-                <ul className="price-list"><li>Everything in Starter</li><li>Dispatch dashboard</li><li>Factoring widget (Triumph/Apex)</li><li>SMS auto-confirms</li><li>Monthly opt call</li></ul>
-                <a href="/discovery-call" className="price-cta" data-meta-event="InitiateCheckout" data-meta-name="Pro" data-meta-value="3997">Book discovery →</a>
+                <ul className="price-list">
+                  <li>Everything in Starter</li>
+                  <li>Dispatch dashboard</li>
+                  <li>Factoring widget (Triumph/Apex)</li>
+                  <li>SMS auto-confirms</li>
+                  <li>Monthly opt call</li>
+                </ul>
+                <a
+                  href="/discovery-call"
+                  className="price-cta"
+                  data-meta-event="InitiateCheckout"
+                  data-meta-name="Pro"
+                  data-meta-value="3997"
+                >
+                  Book discovery →
+                </a>
               </div>
               <div className="price-cell featured">
                 <div className="price-badge">MOST PICKED</div>
@@ -1034,16 +1878,44 @@ export default function LogisticsLP() {
                 <div className="price-window">30 days · + ad ops</div>
                 <div className="price-amount">$7,997</div>
                 <div className="price-recur">+ $997/mo ops</div>
-                <ul className="price-list"><li>Everything in Pro</li><li>Meta + LinkedIn ad ops</li><li>Lead-gen automation</li><li>Monthly content batch</li><li>Weekly review call</li></ul>
-                <a href="/discovery-call" className="price-cta" data-meta-event="InitiateCheckout" data-meta-name="Premium" data-meta-value="7997">Book Premium →</a>
+                <ul className="price-list">
+                  <li>Everything in Pro</li>
+                  <li>Meta + LinkedIn ad ops</li>
+                  <li>Lead-gen automation</li>
+                  <li>Monthly content batch</li>
+                  <li>Weekly review call</li>
+                </ul>
+                <a
+                  href="/discovery-call"
+                  className="price-cta"
+                  data-meta-event="InitiateCheckout"
+                  data-meta-name="Premium"
+                  data-meta-value="7997"
+                >
+                  Book Premium →
+                </a>
               </div>
               <div className="price-cell">
                 <div className="price-tier">Flagship</div>
                 <div className="price-window">45 days · AI Dispatcher</div>
                 <div className="price-amount">$9,500</div>
                 <div className="price-recur">+ $1,997/mo ops</div>
-                <ul className="price-list"><li>Everything in Premium</li><li>Vapi voice agent, branded</li><li>24/7 phone coverage</li><li>Custom load qualifier</li><li>Inbound load auto-book</li></ul>
-                <a href="/discovery-call" className="price-cta" data-meta-event="InitiateCheckout" data-meta-name="Flagship" data-meta-value="9500">Talk Flagship →</a>
+                <ul className="price-list">
+                  <li>Everything in Premium</li>
+                  <li>Vapi voice agent, branded</li>
+                  <li>24/7 phone coverage</li>
+                  <li>Custom load qualifier</li>
+                  <li>Inbound load auto-book</li>
+                </ul>
+                <a
+                  href="/discovery-call"
+                  className="price-cta"
+                  data-meta-event="InitiateCheckout"
+                  data-meta-name="Flagship"
+                  data-meta-value="9500"
+                >
+                  Talk Flagship →
+                </a>
               </div>
             </div>
           </div>
@@ -1054,33 +1926,70 @@ export default function LogisticsLP() {
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">The six excuses</div>
-              <h2>You&apos;re probably thinking <em>one of these.</em></h2>
-              <p className="section-sub">Cold ad clicks land here with the same six objections. We&apos;ve heard them on every audit call. Honest answers below.</p>
+              <h2>
+                You&apos;re probably thinking <em>one of these.</em>
+              </h2>
+              <p className="section-sub">
+                Cold ad clicks land here with the same six objections.
+                We&apos;ve heard them on every audit call. Honest answers below.
+              </p>
             </div>
             <div className="obj-grid reveal">
               <div className="obj-card">
-                <p className="obj-q">We tried tools before — they didn&apos;t talk to each other.</p>
-                <p className="obj-a">Exactly the point. <strong>We don&apos;t sell tools</strong> — we glue your existing stack together. DAT, your TMS, QuickBooks, GHL all into one screen.</p>
+                <p className="obj-q">
+                  We tried tools before — they didn&apos;t talk to each other.
+                </p>
+                <p className="obj-a">
+                  Exactly the point. <strong>We don&apos;t sell tools</strong> —
+                  we glue your existing stack together. DAT, your TMS,
+                  QuickBooks, GHL all into one screen.
+                </p>
               </div>
               <div className="obj-card">
-                <p className="obj-q">We only run 5–8 trucks. Too small for this.</p>
-                <p className="obj-a"><strong>Starter is built for 5–10 trucks.</strong> $1,497 flat. No retainer. Site + CRM + inbound inbox in 14 days. Cancel anytime, walk with the build.</p>
+                <p className="obj-q">
+                  We only run 5–8 trucks. Too small for this.
+                </p>
+                <p className="obj-a">
+                  <strong>Starter is built for 5–10 trucks.</strong> $1,497
+                  flat. No retainer. Site + CRM + inbound inbox in 14 days.
+                  Cancel anytime, walk with the build.
+                </p>
               </div>
               <div className="obj-card">
                 <p className="obj-q">We already pay for DAT and a TMS.</p>
-                <p className="obj-a">Better — <strong>we integrate them.</strong> Dashboard pulls DAT loads, your TMS data, factoring activity into one canvas. Don&apos;t replace working tools; glue them.</p>
+                <p className="obj-a">
+                  Better — <strong>we integrate them.</strong> Dashboard pulls
+                  DAT loads, your TMS data, factoring activity into one canvas.
+                  Don&apos;t replace working tools; glue them.
+                </p>
               </div>
               <div className="obj-card">
-                <p className="obj-q">Burned $40K on an agency last year. Why different?</p>
-                <p className="obj-a"><strong>Public pricing</strong> fixes that. <strong>14-day ship window</strong> fixes that. <strong>Repo handed to you day 1</strong> fixes that. Miss the window, we work nights free.</p>
+                <p className="obj-q">
+                  Burned $40K on an agency last year. Why different?
+                </p>
+                <p className="obj-a">
+                  <strong>Public pricing</strong> fixes that.{" "}
+                  <strong>14-day ship window</strong> fixes that.{" "}
+                  <strong>Repo handed to you day 1</strong> fixes that. Miss the
+                  window, we work nights free.
+                </p>
               </div>
               <div className="obj-card">
                 <p className="obj-q">FMCSA, TCPA — too much compliance risk.</p>
-                <p className="obj-a">No FMCSA filings on our end — <strong>broker authority stays with you.</strong> Vapi voice agent is inbound-only by default = TCPA compliant. We write the consent flow.</p>
+                <p className="obj-a">
+                  No FMCSA filings on our end —{" "}
+                  <strong>broker authority stays with you.</strong> Vapi voice
+                  agent is inbound-only by default = TCPA compliant. We write
+                  the consent flow.
+                </p>
               </div>
               <div className="obj-card">
                 <p className="obj-q">What if you ghost us after launch?</p>
-                <p className="obj-a"><strong>Repo + n8n + GHL handed to your org day 1.</strong> Cancel the retainer anytime — stack stays live, code is yours. No vendor lock-in, no hostage data.</p>
+                <p className="obj-a">
+                  <strong>Repo + n8n + GHL handed to your org day 1.</strong>{" "}
+                  Cancel the retainer anytime — stack stays live, code is yours.
+                  No vendor lock-in, no hostage data.
+                </p>
               </div>
             </div>
           </div>
@@ -1091,32 +2000,61 @@ export default function LogisticsLP() {
           <div className="wrap">
             <div className="section-head reveal">
               <div className="section-kicker">Operators ask first</div>
-              <h2>Questions, <em>before you book.</em></h2>
+              <h2>
+                Questions, <em>before you book.</em>
+              </h2>
             </div>
             <div className="faq-wrap reveal">
               <details>
                 <summary>Are you a freight broker or motor carrier?</summary>
-                <p>No. SkynetLabs is a software, design, and marketing studio. We build the dispatch dashboard, voice agent, and CRM that sit alongside your broker authority. No FMCSA filings on our end — that stays with you. Reference 49 CFR 371 governs broker authority and is not implicated by our services.</p>
+                <p>
+                  No. SkynetLabs is a software, design, and marketing studio. We
+                  build the dispatch dashboard, voice agent, and CRM that sit
+                  alongside your broker authority. No FMCSA filings on our end —
+                  that stays with you. Reference 49 CFR 371 governs broker
+                  authority and is not implicated by our services.
+                </p>
               </details>
               <details>
                 <summary>What if I already pay for DAT and a TMS?</summary>
-                <p>Better. We integrate them. The canvas pulls DAT loads, your TMS data, factoring activity, and broker calls into one screen. We don&apos;t replace working tools — we glue them together.</p>
+                <p>
+                  Better. We integrate them. The canvas pulls DAT loads, your
+                  TMS data, factoring activity, and broker calls into one
+                  screen. We don&apos;t replace working tools — we glue them
+                  together.
+                </p>
               </details>
               <details>
                 <summary>How fast can you actually ship?</summary>
-                <p>Starter ships in 14 calendar days from kickoff. Pro 21. Premium 30. Flagship 45. If we miss the window, we work nights and weekends free until live — written into the SOW.</p>
+                <p>
+                  Starter ships in 14 calendar days from kickoff. Pro 21.
+                  Premium 30. Flagship 45. If we miss the window, we work nights
+                  and weekends free until live — written into the SOW.
+                </p>
               </details>
               <details>
                 <summary>What happens at month 12?</summary>
-                <p>You own the GitHub repo, n8n workflows, and GHL subaccount on day one. Cancel the retainer anytime — you keep everything live. We just stop monthly ops.</p>
+                <p>
+                  You own the GitHub repo, n8n workflows, and GHL subaccount on
+                  day one. Cancel the retainer anytime — you keep everything
+                  live. We just stop monthly ops.
+                </p>
               </details>
               <details>
                 <summary>TCPA-compliance on the voice agent?</summary>
-                <p>Yes. The Vapi agent is inbound-only by default. Outbound calls require documented opt-in (typed phone + checkbox) per FCC 2024 rulings. We write the compliance flow into your funnel.</p>
+                <p>
+                  Yes. The Vapi agent is inbound-only by default. Outbound calls
+                  require documented opt-in (typed phone + checkbox) per FCC
+                  2024 rulings. We write the compliance flow into your funnel.
+                </p>
               </details>
               <details>
                 <summary>I only run 5 trucks. Am I too small?</summary>
-                <p>Starter ($1,497) is built for 5–10 trucks. Site + CRM + inbound inbox in 14 days. No monthly retainer. Cancel anytime, walk with what&apos;s built.</p>
+                <p>
+                  Starter ($1,497) is built for 5–10 trucks. Site + CRM +
+                  inbound inbox in 14 days. No monthly retainer. Cancel anytime,
+                  walk with what&apos;s built.
+                </p>
               </details>
             </div>
           </div>
@@ -1124,34 +2062,97 @@ export default function LogisticsLP() {
 
         {/* SCARCITY BAND */}
         <div className="scarcity-band">
-          <p>Four operator builds a month · <strong>limited June availability</strong> · July books mid-June</p>
+          <p>
+            Four operator builds a month ·{" "}
+            <strong>limited June availability</strong> · July books mid-June
+          </p>
         </div>
 
         {/* CLOSER */}
         <section className="closer">
           <div className="closer-scarcity">● Limited June builds</div>
-          <h2>Fifteen minutes. <em>Yes, no, or referral.</em></h2>
-          <p>Eight-hour reply on weekday Bali time. No funnel, no quote theater, no commitment. You walk with the audit findings either way.</p>
+          <h2>
+            Fifteen minutes. <em>Yes, no, or referral.</em>
+          </h2>
+          <p>
+            Eight-hour reply on weekday Bali time. No funnel, no quote theater,
+            no commitment. You walk with the audit findings either way.
+          </p>
           <div className="cta-row">
-            <a href="/discovery-call" className="btn-primary" data-meta-event="Schedule" data-meta-name="closer-book-audit">Book the discovery call →</a>
-            <a href="#pricing" className="btn-line">Review pricing</a>
+            <a
+              href="/discovery-call"
+              className="btn-primary"
+              data-meta-event="Schedule"
+              data-meta-name="closer-book-audit"
+            >
+              Book the discovery call →
+            </a>
+            <a href="#pricing" className="btn-line">
+              Review pricing
+            </a>
           </div>
         </section>
 
         <footer className="lp-footer">
           <div className="wrap">
             <div className="grid">
-              <div><h5>SkynetLabs</h5><p style={{ fontSize: 13, color: "var(--ink-2)", margin: 0, lineHeight: 1.6 }}>One operator. One stack. One roof.<br />Waseem Nasir · Canggu, Bali (GMT+8) + Lahore, Pakistan.</p></div>
-              <div><h5>Pages</h5><a href="/services">Services</a><a href="/portfolio">Work</a><a href="/pricing">Pricing</a></div>
-              <div><h5>Reach</h5><a href="/discovery-call">Book discovery</a><a href="mailto:info@skynetjoe.com">Email</a></div>
-              <div><h5>Elsewhere</h5><a href="https://www.linkedin.com/in/waseemnasir2k26">LinkedIn</a><a href="https://github.com/waseemnasir2k26">GitHub</a></div>
+              <div>
+                <h5>SkynetLabs</h5>
+                <p
+                  style={{
+                    fontSize: 13,
+                    color: "var(--ink-2)",
+                    margin: 0,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  One operator. One stack. One roof.
+                  <br />
+                  Waseem Nasir · Canggu, Bali (GMT+8) + Lahore, Pakistan.
+                </p>
+              </div>
+              <div>
+                <h5>Pages</h5>
+                <a href="/services">Services</a>
+                <a href="/portfolio">Work</a>
+                <a href="/pricing">Pricing</a>
+              </div>
+              <div>
+                <h5>Reach</h5>
+                <a href="/discovery-call">Book discovery</a>
+                <a href="mailto:info@skynetjoe.com">Email</a>
+              </div>
+              <div>
+                <h5>Elsewhere</h5>
+                <a href="https://www.linkedin.com/in/waseemnasir2k26">
+                  LinkedIn
+                </a>
+                <a href="https://github.com/waseemnasir2k26">GitHub</a>
+              </div>
             </div>
-            <p className="disclaimer">SkynetLabs provides software, design, and marketing services. Not a freight broker or motor carrier. No FMCSA authority. Software demos are inbound-only and require user consent (TCPA-compliant). Reference 49 CFR 371 governs broker authority and is not implicated by services described herein. Public pricing reflects standard scope as of 2026-06-01 and may vary by custom requirements. © 2026 SkynetLabs · Waseem Nasir.</p>
+            <p className="disclaimer">
+              SkynetLabs provides software, design, and marketing services. Not
+              a freight broker or motor carrier. No FMCSA authority. Software
+              demos are inbound-only and require user consent (TCPA-compliant).
+              Reference 49 CFR 371 governs broker authority and is not
+              implicated by services described herein. Public pricing reflects
+              standard scope as of 2026-06-01 and may vary by custom
+              requirements. © 2026 SkynetLabs · Waseem Nasir.
+            </p>
           </div>
         </footer>
 
         {/* MOBILE STICKY CTA */}
-        <a href="/discovery-call" className="mobile-cta" data-meta-event="Schedule" data-meta-name="mobile-sticky"><span><strong>Limited June builds</strong> · Book audit</span></a>
+        <a
+          href="/discovery-call"
+          className="mobile-cta"
+          data-meta-event="Schedule"
+          data-meta-name="mobile-sticky"
+        >
+          <span>
+            <strong>Limited June builds</strong> · Book audit
+          </span>
+        </a>
       </main>
     </div>
   );

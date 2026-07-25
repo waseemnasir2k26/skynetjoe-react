@@ -7,7 +7,7 @@ type Status = "idle" | "loading" | "success" | "error";
 export default function ReferralForm() {
   const [email, setEmail] = useState("");
   const [referrerEmail, setReferrerEmail] = useState("");
-  const [website, setWebsite] = useState(""); // honeypot
+  const [honeypot, setHoneypot] = useState(""); // honeypot — server checks `_honeypot`
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
 
@@ -28,7 +28,7 @@ export default function ReferralForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           source: "referral",
-          website, // honeypot — server can silently swallow if present
+          _honeypot: honeypot, // server silently swallows if present
           qualification: {
             businessType: "referral",
             customAnswers: {
@@ -58,8 +58,8 @@ export default function ReferralForm() {
       <div className="p-6 rounded-2xl bg-emerald-500/10 border border-[rgba(198,107,63,0.30)] text-emerald-100">
         <p className="font-semibold mb-1">Got it. Thanks for the intro.</p>
         <p className="text-sm text-[var(--terracotta)]/80">
-          I&apos;ll reach out within 24 hours. If they sign for a build, $200 credit
-          lands on your next invoice automatically.
+          I&apos;ll reach out within 24 hours. If they sign for a build, $200
+          credit lands on your next invoice automatically.
         </p>
       </div>
     );
@@ -74,11 +74,11 @@ export default function ReferralForm() {
       {/* Honeypot — hidden from humans, bots fill it */}
       <input
         type="text"
-        name="website"
+        name="_honeypot"
         tabIndex={-1}
         autoComplete="off"
-        value={website}
-        onChange={(e) => setWebsite(e.target.value)}
+        value={honeypot}
+        onChange={(e) => setHoneypot(e.target.value)}
         style={{
           position: "absolute",
           left: "-10000px",

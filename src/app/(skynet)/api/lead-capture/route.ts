@@ -1,31 +1,40 @@
 import { NextResponse } from "next/server";
 import { upsertGhlContact } from "@/lib/ghl";
+import { sendLeadFallbackEmail } from "@/lib/lead-notify";
+import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // ============================================================
-// /api/lead-capture — tool-gate email capture endpoint.
+// /api/lead-capture — LP audit-form + tool-gate email capture endpoint.
 //
 // POST shape:
-//   { email: string, source: string, capturedAt: string }
+//   { email: string, source: string, capturedAt: string, _honeypot?: string }
 //
 // Behavior:
+//   - Rate-limited per IP (in-process, best-effort — see lib/rate-limit).
+//   - Payload capped at 8KB before JSON.parse.
+//   - Honeypot (`_honeypot` filled) → fake-success 200, no CRM/email writes.
 //   - Server-side email regex validation. Reject 400 if invalid.
 //   - If GHL env (GHL_API_TOKEN) is set, upsert contact tagged with
 //     [source, "tool-lead"] via the shared upsertGhlContact helper.
-//   - If GHL is NOT configured, log to console and still return 200
-//     so the client-side unlock proceeds.
-//   - All GHL errors are swallowed inside upsertGhlContact (devSkip) —
-//     this route never 500s on backend failure. User experience first.
+//   - CRITICAL: a lead must never vanish with zero trace. If the GHL write
+//     doesn't CONFIRM (env unset, upsert throws, or returns dev-skip), we
+//     fall back to emailing the lead to Waseem via Resend (same pattern as
+//     /api/discovery). If Resend is ALSO unconfigured, we log an unmissable
+//     console.error with the full lead so it's at least recoverable from
+//     server/deploy logs.
 // ============================================================
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_BODY_BYTES = 8 * 1024;
 
 type Payload = {
   email?: string;
   source?: string;
   capturedAt?: string;
+  _honeypot?: string;
 };
 
 function isValidEmail(s: string | undefined): s is string {
@@ -35,11 +44,28 @@ function isValidEmail(s: string | undefined): s is string {
 }
 
 export async function POST(req: Request) {
+  const rl = checkRateLimit(req, {
+    limit: 8,
+    windowMs: 60_000,
+    keyPrefix: "lead-capture",
+  });
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "Too many requests. Try again in a minute." },
+      { status: 429 },
+    );
+  }
+
   let payload: Payload;
   try {
-    payload = await req.json();
+    payload = await readCappedJson<Payload>(req, MAX_BODY_BYTES);
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  // Honeypot: filled = bot → fake-success, do nothing further.
+  if (payload._honeypot) {
+    return NextResponse.json({ ok: true });
   }
 
   const email = payload.email?.trim();
@@ -50,34 +76,66 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
-  if (!process.env.GHL_API_TOKEN) {
-    console.log("[lead-capture] GHL not configured, logging only", {
-      email,
-      source,
-      capturedAt,
-    });
-    return NextResponse.json({ ok: true, queued: true });
+  const ghlConfigured = Boolean(process.env.GHL_API_TOKEN);
+  let ghlConfirmed = false;
+  let contactId: string | undefined;
+
+  if (ghlConfigured) {
+    try {
+      const result = await upsertGhlContact(
+        { email, source: `tool-gate:${source}` },
+        null,
+        [source, "tool-lead"],
+      );
+      if (result.contactId && result.contactId !== "dev-skip") {
+        ghlConfirmed = true;
+        contactId = result.contactId;
+      }
+    } catch (err) {
+      console.error("[lead-capture] GHL upsert threw (falling back)", err);
+    }
+  } else {
+    console.warn("[lead-capture] GHL_API_TOKEN unset — falling back to email");
   }
 
-  // Best-effort GHL upsert — helper already wraps fetch in try/catch and
-  // returns dev-skip on failure. We never throw out of this route.
-  try {
-    const result = await upsertGhlContact(
-      {
-        email,
-        source: `tool-gate:${source}`,
-      },
-      null,
-      [source, "tool-lead"],
+  let emailFallbackSent = false;
+  if (!ghlConfirmed) {
+    const reason = ghlConfigured
+      ? "GHL upsert did not confirm a contact id"
+      : "GHL_API_TOKEN is not configured";
+    const fallback = await sendLeadFallbackEmail(
+      { email, source, capturedAt },
+      reason,
     );
+    emailFallbackSent = fallback.ok;
 
-    return NextResponse.json({
-      ok: true,
-      contactId: result.contactId,
-      isNew: result.isNew,
-    });
-  } catch (err) {
-    console.log("[lead-capture] GHL upsert threw (swallowed)", err);
-    return NextResponse.json({ ok: true, queued: true });
+    if (!fallback.ok) {
+      // Neither the CRM write nor the email fallback confirmed. This is the
+      // failure mode the whole route exists to prevent — make it loud.
+      console.error(
+        "[lead-capture] LEAD AT RISK — no CRM write confirmed and no email fallback sent. Check RESEND_API_KEY.",
+        { email, source, capturedAt, reason },
+      );
+    }
   }
+
+  if (!ghlConfirmed && !emailFallbackSent) {
+    // Both delivery paths failed to confirm — tell the truth instead of
+    // showing a fake success screen. The client renders this as a real
+    // error state so the visitor knows to email directly.
+    return NextResponse.json(
+      {
+        error:
+          "Couldn't confirm delivery. Please email info@skynetjoe.com directly so nothing gets lost.",
+      },
+      { status: 502 },
+    );
+  }
+
+  return NextResponse.json({
+    ok: true,
+    contactId,
+    ghl: ghlConfirmed,
+    emailFallback: emailFallbackSent,
+  });
 }

@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
+import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
+
+const MAX_BODY_BYTES = 16 * 1024;
 
 // ============================================================
 // /api/leads — discovery-call funnel lead drop
@@ -116,9 +119,21 @@ function flattenAutomation(q: Qualification | undefined): string | undefined {
 }
 
 export async function POST(req: Request) {
+  const rl = checkRateLimit(req, {
+    limit: 8,
+    windowMs: 60_000,
+    keyPrefix: "leads",
+  });
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: "Too many requests. Try again in a minute." },
+      { status: 429 },
+    );
+  }
+
   let payload: Payload;
   try {
-    payload = await req.json();
+    payload = await readCappedJson<Payload>(req, MAX_BODY_BYTES);
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
@@ -154,8 +169,9 @@ export async function POST(req: Request) {
   const source = payload.source || "discovery-call";
 
   // Parse name out of booking.inviteeName if top-level is empty
-  const bookingNameParts =
-    (payload.booking?.inviteeName || "").trim().split(/\s+/);
+  const bookingNameParts = (payload.booking?.inviteeName || "")
+    .trim()
+    .split(/\s+/);
   const firstNameFromBooking = bookingNameParts[0] || undefined;
   const lastNameFromBooking =
     bookingNameParts.length > 1
@@ -177,8 +193,7 @@ export async function POST(req: Request) {
       businessType: payload.qualification?.businessType,
       teamSize: payload.qualification?.teamSize,
       bottleneck:
-        payload.qualification?.bottleneck ||
-        payload.qualification?.biggestLeak,
+        payload.qualification?.bottleneck || payload.qualification?.biggestLeak,
       monthlyLeads: payload.qualification?.monthlyLeads,
       automationWishlist: flattenAutomation(payload.qualification),
       revenueRange: payload.qualification?.revenueRange,

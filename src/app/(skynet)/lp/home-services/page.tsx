@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
 import { SITE } from "@/lib/site";
+import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
 // Canonical/OG host resolves via SITE.url (env-overridable, defaults to the
 // production domain) — same source the rest of the app uses for canonicals.
@@ -118,21 +119,20 @@ const css = `
 
 function AuditForm({ id }: { id?: string }) {
   return (
-    <form className="hs-form" action="/api/leads" method="POST" id={id}>
-      <input type="hidden" name="source" value="lp-home-services" />
-      <label htmlFor="hs-email">Your email</label>
-      <input
-        id="hs-email"
-        name="email"
-        type="email"
-        required
-        autoComplete="email"
-        placeholder="you@yourcompany.com"
-      />
-      <button type="submit" className="hs-btn" data-meta-event="Lead">
-        Get my free missed-call audit
-      </button>
-    </form>
+    <LeadCaptureForm
+      id={id}
+      source="lp-home-services"
+      formClassName="hs-form"
+      buttonClassName="hs-btn"
+      buttonMetaEvent="Lead"
+      emailId="hs-email"
+      emailLabel="Your email"
+      emailPlaceholder="you@yourcompany.com"
+      buttonLabel="Get my free missed-call audit"
+      submittingLabel="Sending…"
+      successHeading="Got it — check your inbox."
+      successBody="I'll personally send you the breakdown within one business day. If you don't hear from me by then, email info@skynetjoe.com and I'll chase it down."
+    />
   );
 }
 
@@ -321,15 +321,16 @@ export default function HomeServicesLandingPage() {
       </section>
 
       <section className="hs-section hs-capture" id="audit">
-        <h2>See what you missed last month</h2>
+        <h2>See what you&apos;re likely losing</h2>
         <p className="lead" style={{ margin: "0 auto 24px" }}>
-          Free missed-call audit. No call required. We show you exactly how many
-          leads slipped &mdash; and what they were worth &mdash; before you
-          decide anything.
+          Free missed-call breakdown. No call required. Drop your email and
+          I&apos;ll personally send you what missed calls typically cost a shop
+          your size &mdash; and where the text-back system plugs the leak.
         </p>
         <AuditForm id="audit-form" />
         <p className="hs-note">
-          One email. No sales call to get the report. We do not share your info.
+          One email, from me directly. No sales call, no funnel. I do not share
+          your info.
         </p>
         <a
           href="https://calendly.com/skynetlabs"
@@ -361,8 +362,10 @@ export default function HomeServicesLandingPage() {
           <details>
             <summary>What does the free audit actually show me?</summary>
             <p>
-              How many calls you missed last month, when they came in, and a
-              dollar estimate of the work that likely walked away. No strings.
+              A personal email from me on what missed calls typically cost a
+              shop your size, and where the text-back system would catch the
+              leak for you specifically. Not an auto-generated report &mdash; I
+              write it myself. No strings.
             </p>
           </details>
           <details>
