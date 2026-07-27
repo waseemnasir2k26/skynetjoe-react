@@ -1,19 +1,33 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { PROOF_MODE, seededProofValue } from "@/lib/proof-mode";
 
 /**
  * ArticleViews — the "eye" preview counter shown in a news article's meta row.
  *
- * On mount it reads the current count, then increments exactly once per
- * browser session (guarded by sessionStorage) so a refresh doesn't inflate
- * the number. Backed by /api/views/[slug]. Fails silent: if the API is
- * unreachable the pill simply doesn't render, never blocking the article.
+ * Behavior is governed by the single PROOF_MODE switch in
+ * `src/lib/proof-mode.ts` (default 'off' — renders nothing, no fetch):
+ *   'off'    — no fetch, no render.
+ *   'real'   — reads the true count and increments it once per session via
+ *              /api/views/[slug]. Hidden below a small honesty threshold.
+ *   'seeded' — a date+slug-deterministic 5-30 figure, identical all day and
+ *              on every reload. No fetch, no session increment.
+ *
+ * In 'real' mode: on mount it reads the current count, then increments
+ * exactly once per browser session (guarded by sessionStorage) so a refresh
+ * doesn't inflate the number. Fails silent: if the API is unreachable the
+ * pill simply doesn't render, never blocking the article.
  */
 export default function ArticleViews({ slug }: { slug: string }) {
   const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
+    // 'off' renders nothing, no fetch. 'seeded' is a pure function of the
+    // date+slug computed directly in render below — no effect, no fetch,
+    // no session increment. Only 'real' needs the /api/views round-trip.
+    if (PROOF_MODE !== "real") return;
+
     let alive = true;
     const key = `nv:${slug}`;
     const alreadyCounted =
@@ -50,12 +64,20 @@ export default function ArticleViews({ slug }: { slug: string }) {
     };
   }, [slug]);
 
+  if (PROOF_MODE === "off") return null;
+
+  // 'seeded' is a pure function of today's date + slug — computed directly
+  // here, not via state/effect, so server and client render identically.
+  const resolved =
+    PROOF_MODE === "seeded" ? seededProofValue(`article:${slug}`) : count;
+
   // Hide the counter entirely below a handful of real reads. The API no longer
   // seeds an invented baseline, so an unread article honestly returns 0 — and
-  // "0 reads" under a headline is worse than no counter at all.
-  if (count === null || count < 5) return null;
+  // "0 reads" under a headline is worse than no counter at all. (Seeded mode
+  // always lands within [5, 30], so this only guards the real-mode floor.)
+  if (resolved === null || (PROOF_MODE === "real" && resolved < 5)) return null;
 
-  const label = count.toLocaleString("en-US");
+  const label = resolved.toLocaleString("en-US");
 
   return (
     <span

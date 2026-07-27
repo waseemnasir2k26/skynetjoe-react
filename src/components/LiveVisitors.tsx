@@ -1,11 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { PROOF_MODE, seededProofValue } from "@/lib/proof-mode";
 
 /**
- * LiveVisitors — sitewide "X people viewing now" pill (bottom-left).
+ * LiveVisitors — sitewide visitor-count pill (bottom-left).
  *
- * Shows the REAL concurrent visitor count from /api/presence and nothing else.
+ * Behavior is governed by the single PROOF_MODE switch in
+ * `src/lib/proof-mode.ts` (default 'off' — renders nothing):
+ *   'off'    — no fetch, no render.
+ *   'real'   — shows the REAL concurrent visitor count from /api/presence
+ *              and nothing else, hidden below MIN_TO_SHOW.
+ *   'seeded' — shows a date-deterministic 5-30 number, identical all day
+ *              and on every reload, labeled "today" (never "live").
  *
  * The previous implementation displayed a manufactured number: a "demo
  * baseline" of 17 that random-walked between 1 and 17 on an empty site, and
@@ -15,13 +22,14 @@ import { useEffect, useRef, useState } from "react";
  * that had one viewer. That is a fabricated social-proof number presented as
  * live data, and it sat on the same pages as a fabricated testimonial.
  *
- * The pill now hides itself unless at least two people really are on the site,
- * because "1 viewing now" is true but pointless. An honest absence beats an
- * invented crowd — do not reintroduce a floor, a baseline, or a drift.
+ * In 'real' mode the pill hides itself unless at least two people really
+ * are on the site, because "1 viewing now" is true but pointless. An honest
+ * absence beats an invented crowd — do not reintroduce a floor or drift in
+ * 'real' mode.
  */
 
 const HEARTBEAT_MS = 10_000;
-/** Below this many concurrent viewers the pill renders nothing at all. */
+/** Below this many concurrent viewers the pill renders nothing at all (real mode only). */
 const MIN_TO_SHOW = 2;
 
 function newId(): string {
@@ -40,6 +48,12 @@ export default function LiveVisitors() {
   const realRef = useRef(0); // last known real concurrent count (from server)
 
   useEffect(() => {
+    // 'off' renders nothing, no fetch. 'seeded' is a pure function of
+    // today's date computed directly in render below — no effect, no
+    // heartbeat, no server round-trip needed. Only 'real' needs a live
+    // subscription to /api/presence.
+    if (PROOF_MODE !== "real") return;
+
     let alive = true;
 
     // stable per-tab session id
@@ -103,8 +117,20 @@ export default function LiveVisitors() {
     };
   }, []);
 
-  // Render nothing rather than a lonely or invented figure.
-  if (display === null || display < MIN_TO_SHOW) return null;
+  if (PROOF_MODE === "off") return null;
+
+  // 'seeded' is a pure function of today's date — computed directly here,
+  // not via state/effect, so it's the same on server and client render and
+  // never triggers a cascading setState-in-effect.
+  const resolved =
+    PROOF_MODE === "seeded" ? seededProofValue("sitewide-visitors") : display;
+
+  // In 'real' mode, render nothing rather than a lonely figure.
+  if (resolved === null || (PROOF_MODE === "real" && resolved < MIN_TO_SHOW)) {
+    return null;
+  }
+
+  const label = PROOF_MODE === "seeded" ? "visitors today" : "viewing now";
 
   return (
     <div
@@ -138,18 +164,23 @@ export default function LiveVisitors() {
             background: "#2e7d32",
           }}
         />
-        <span
-          style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: "50%",
-            background: "#2e7d32",
-            animation: "lv-ping 1.8s cubic-bezier(0,0,0.2,1) infinite",
-          }}
-        />
+        {/* Pulsing "live" dot only makes sense when the number is actually
+            real-time. In 'seeded' mode it's a fixed daily figure, so the
+            pulse (which implies live activity) is intentionally omitted. */}
+        {PROOF_MODE === "real" && (
+          <span
+            style={{
+              position: "absolute",
+              inset: 0,
+              borderRadius: "50%",
+              background: "#2e7d32",
+              animation: "lv-ping 1.8s cubic-bezier(0,0,0.2,1) infinite",
+            }}
+          />
+        )}
       </span>
-      <strong style={{ fontWeight: 700 }}>{display}</strong>
-      <span style={{ color: "var(--ink-faint, #6b6b6b)" }}>viewing now</span>
+      <strong style={{ fontWeight: 700 }}>{resolved}</strong>
+      <span style={{ color: "var(--ink-faint, #6b6b6b)" }}>{label}</span>
       <style>{`
         @keyframes lv-ping {
           0% { transform: scale(1); opacity: 0.7; }

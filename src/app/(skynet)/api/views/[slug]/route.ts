@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { NEWS } from "@/lib/news";
+import { PROOF_MODE, seededProofValue } from "@/lib/proof-mode";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -88,6 +89,21 @@ export async function GET(
       { status: 404 },
     );
   }
+  // Gated by the single PROOF_MODE switch (src/lib/proof-mode.ts). The
+  // client (ArticleViews) already short-circuits before calling this route,
+  // but the route enforces the same behavior for any other caller.
+  if (PROOF_MODE === "off") {
+    return NextResponse.json(
+      { ok: true, slug, count: 0 },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
+  if (PROOF_MODE === "seeded") {
+    return NextResponse.json(
+      { ok: true, slug, count: seededProofValue(`article:${slug}`) },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
   const store = await load();
   return NextResponse.json(
     { ok: true, slug, count: countFor(store, slug) },
@@ -104,6 +120,19 @@ export async function POST(
     return NextResponse.json(
       { ok: false, error: "unknown slug" },
       { status: 404 },
+    );
+  }
+  if (PROOF_MODE === "off") {
+    return NextResponse.json(
+      { ok: true, slug, count: 0 },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
+  if (PROOF_MODE === "seeded") {
+    // Deterministic — never actually increments, so a refresh can't inflate it.
+    return NextResponse.json(
+      { ok: true, slug, count: seededProofValue(`article:${slug}`) },
+      { headers: { "Cache-Control": "no-store" } },
     );
   }
   const store = await load();
