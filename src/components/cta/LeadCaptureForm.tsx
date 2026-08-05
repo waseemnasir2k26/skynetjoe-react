@@ -59,6 +59,8 @@ export type LeadCaptureFormProps = {
   buttonMetaEvent?: string;
   /** Extra content rendered inside the form, below the button, only while idle/error (e.g. the ec-note copy). */
   belowButton?: React.ReactNode;
+  /** Extra content rendered inside the success state, below successBody (e.g. a booking CTA). */
+  successCta?: React.ReactNode;
 };
 
 export default function LeadCaptureForm({
@@ -78,6 +80,7 @@ export default function LeadCaptureForm({
   formMetaEvent,
   buttonMetaEvent,
   belowButton,
+  successCta,
 }: LeadCaptureFormProps) {
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState("");
@@ -138,6 +141,7 @@ export default function LeadCaptureForm({
         <p style={{ fontSize: "0.92rem", margin: 0, opacity: 0.85 }}>
           {successBody}
         </p>
+        {successCta}
       </div>
     );
   }
