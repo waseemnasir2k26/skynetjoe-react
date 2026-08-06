@@ -11,6 +11,18 @@ import type { NextRequest } from "next/server";
 const BLOCKED_IN_PROD = ["/gradient-lab", "/hero-lab", "/site-stats"];
 
 export function proxy(req: NextRequest) {
+  // Canonical-host redirect: www.skynetjoe.com serves 200 with zero redirects,
+  // splitting equity with the apex (canonical + sitemap are non-www). Scoped
+  // to the exact www host so local dev and previews never touch it.
+  const host = req.headers.get("host") ?? "";
+  if (host === "www.skynetjoe.com") {
+    const url = req.nextUrl.clone();
+    url.host = "skynetjoe.com";
+    url.protocol = "https";
+    url.port = "";
+    return NextResponse.redirect(url, 308);
+  }
+
   if (
     process.env.NODE_ENV === "production" &&
     BLOCKED_IN_PROD.includes(req.nextUrl.pathname)
@@ -22,5 +34,7 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/gradient-lab", "/hero-lab", "/site-stats"],
+  // Broad matcher (minus static assets) so the host redirect covers every
+  // route; the prod block above still only fires on its 3 paths.
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

@@ -59,7 +59,7 @@ export const DEFAULT_OG_IMAGES = [
     url: DEFAULT_OG_IMAGE_URL,
     width: 1200,
     height: 630,
-    alt: "SkynetLabs — AI Automation Agency for Founders Who Refuse to Be Average",
+    alt: "SkynetLabs — AI Automation & AEO Agency for Service Businesses",
   },
 ] as const;
 
@@ -75,7 +75,7 @@ export const SITE = {
   assetsUrl: resolveAssetsUrl(),
   founder: "Waseem Nasir",
   founderUrl: "https://www.waseemnasir.com",
-  tagline: "AI Automation Agency for Founders Who Refuse to Be Average",
+  tagline: "AI Automation & AEO Agency for Service Businesses",
   description:
     "SkynetLabs builds n8n + AI automation, AEO-optimized websites, and chat-first CRM systems for service businesses. Run by Waseem Nasir from Bali.",
   email: "info@skynetjoe.com",

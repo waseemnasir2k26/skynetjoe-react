@@ -6,14 +6,19 @@ export const dynamic = "force-static";
 export const revalidate = 86400;
 
 export async function GET() {
+  // Mirror sitemap.ts: services carrying an `href` (freightops-logistics ->
+  // /lp/logistics) have no /services/[slug] page and their LP is noindex —
+  // exclude them so the feed's count matches the 16 browsable services.
   const services = SERVICE_CATEGORIES.flatMap((cat) =>
-    cat.services.map((svc) => ({
-      category: cat.name,
-      slug: svc.slug,
-      label: svc.label,
-      description: svc.desc,
-      url: `${SITE.url}${svcHref(svc)}`,
-    })),
+    cat.services
+      .filter((svc) => !("href" in svc && svc.href))
+      .map((svc) => ({
+        category: cat.name,
+        slug: svc.slug,
+        label: svc.label,
+        description: svc.desc,
+        url: `${SITE.url}${svcHref(svc)}`,
+      })),
   );
 
   const feed = {
