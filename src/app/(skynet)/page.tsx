@@ -2,6 +2,7 @@ import HeroFunnel from "@/components/funnel/HeroFunnel";
 import PainPoints from "@/components/funnel/PainPoints";
 import Outcomes from "@/components/funnel/Outcomes";
 import Testimonials from "@/components/sections/Testimonials";
+import FAQHome, { HOME_FAQS } from "@/components/sections/FAQHome";
 import FinalCTA from "@/components/funnel/FinalCTA";
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
@@ -60,6 +61,17 @@ export default function Home() {
           "Chatbot Development",
         ],
       },
+      {
+        // FAQPage node built from the same HOME_FAQS array FAQHome renders,
+        // so the schema text can never drift from what's on the page.
+        "@type": "FAQPage",
+        "@id": `${SITE.url}/#faq`,
+        mainEntity: HOME_FAQS.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
     ],
   };
 
@@ -70,6 +82,7 @@ export default function Home() {
       <PainPoints />
       <Outcomes />
       <Testimonials />
+      <FAQHome />
       <FinalCTA />
     </>
   );
