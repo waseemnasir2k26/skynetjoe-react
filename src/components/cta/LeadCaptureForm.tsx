@@ -53,9 +53,13 @@ export type LeadCaptureFormProps = {
   submittingLabel?: string;
   successHeading: string;
   successBody: string;
-  /** data-meta-event placed on the <form> (logistics convention). */
+  /** data-meta-event placed on the <form> (logistics convention).
+      "Lead" is IGNORED — the form now fires a deduped fbq Lead itself on
+      confirmed success (shared eventID with the server-side CAPI event);
+      rendering the attribute too would double-count via MetaPixelEvents. */
   formMetaEvent?: string;
-  /** data-meta-event placed on the submit <button> (freight/home-services convention). */
+  /** data-meta-event placed on the submit <button> (freight/home-services
+      convention). "Lead" is IGNORED — same reason as formMetaEvent. */
   buttonMetaEvent?: string;
   /** Extra content rendered inside the form, below the button, only while idle/error (e.g. the ec-note copy). */
   belowButton?: React.ReactNode;
@@ -101,6 +105,13 @@ export default function LeadCaptureForm({
     setError(null);
     setStatus("submitting");
 
+    // Shared event id: sent to the server (CAPI Lead) AND used for the
+    // browser fbq Lead below, so Meta deduplicates the pixel/CAPI pair.
+    const eventId =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `lead-${Date.now()}-${Math.floor(Math.random() * 1e9)}`;
+
     try {
       const res = await fetch("/api/lead-capture", {
         method: "POST",
@@ -109,6 +120,7 @@ export default function LeadCaptureForm({
           email: trimmed,
           source,
           capturedAt: new Date().toISOString(),
+          eventId,
           _honeypot: honeypot,
         }),
       });
@@ -117,6 +129,13 @@ export default function LeadCaptureForm({
         const body = await res.json().catch(() => ({}) as { error?: string });
         throw new Error(body?.error || `Server error ${res.status}`);
       }
+
+      // Fire the browser Lead only on CONFIRMED capture (better signal than
+      // submit-attempt) with the same eventID the server sent via CAPI.
+      const w = window as unknown as {
+        fbq?: (...args: unknown[]) => void;
+      };
+      w.fbq?.("track", "Lead", {}, { eventID: eventId });
 
       setStatus("success");
       setEmail("");
@@ -152,7 +171,7 @@ export default function LeadCaptureForm({
       id={id}
       onSubmit={handleSubmit}
       noValidate
-      data-meta-event={formMetaEvent}
+      data-meta-event={formMetaEvent === "Lead" ? undefined : formMetaEvent}
     >
       {/* Honeypot — hidden from humans, bots fill it. Server checks `_honeypot`. */}
       <input
@@ -195,7 +214,9 @@ export default function LeadCaptureForm({
         type="submit"
         className={buttonClassName}
         disabled={status === "submitting"}
-        data-meta-event={buttonMetaEvent}
+        data-meta-event={
+          buttonMetaEvent === "Lead" ? undefined : buttonMetaEvent
+        }
       >
         {status === "submitting" ? submittingLabel : buttonLabel}
       </button>

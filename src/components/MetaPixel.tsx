@@ -1,6 +1,10 @@
 import Script from "next/script";
 
-const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+// Pixel IDs are public by nature (visible in every page that fires them).
+// The fallback keeps the pixel alive even when the host builds without the
+// env var — Hostinger builds on-host, and NEXT_PUBLIC_* is inlined at build
+// time, so a missing panel var would otherwise silently ship a null pixel.
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "1040197438955330";
 
 export function MetaPixel() {
   if (!PIXEL_ID) return null;
@@ -11,7 +15,13 @@ export function MetaPixel() {
       </Script>
       <noscript>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img height="1" width="1" style={{ display: "none" }} src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`} alt="" />
+        <img
+          height="1"
+          width="1"
+          style={{ display: "none" }}
+          src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
+          alt=""
+        />
       </noscript>
     </>
   );

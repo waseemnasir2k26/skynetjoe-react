@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { upsertGhlContact } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { appendLeadToSink } from "@/lib/lead-sink";
+import { sendCapiLead } from "@/lib/meta-capi";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -35,6 +36,9 @@ type Payload = {
   email?: string;
   source?: string;
   capturedAt?: string;
+  /** Browser-generated UUID shared with the client-side fbq Lead event so
+      Meta deduplicates the pixel/CAPI pair. Optional — older callers omit it. */
+  eventId?: string;
   _honeypot?: string;
 };
 
@@ -79,6 +83,26 @@ export async function POST(req: Request) {
 
   if (!isValidEmail(email)) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+  }
+
+  // Server-side CAPI Lead, deduped against the browser pixel via eventId.
+  // Fail-soft by design: no token (pre-Gate-1) or Graph error never blocks
+  // the lead paths below. Fire-and-forget would risk the runtime freezing
+  // the promise on some hosts, so we await but ignore the result.
+  if (payload.eventId) {
+    await sendCapiLead({
+      email,
+      eventId: payload.eventId,
+      source,
+      sourceUrl: req.headers.get("referer") || undefined,
+      ip:
+        req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+        req.headers.get("x-real-ip") ||
+        undefined,
+      userAgent: req.headers.get("user-agent") || undefined,
+      fbp: req.headers.get("cookie")?.match(/(?:^|;\s*)_fbp=([^;]+)/)?.[1],
+      fbc: req.headers.get("cookie")?.match(/(?:^|;\s*)_fbc=([^;]+)/)?.[1],
+    });
   }
 
   const ghlConfigured = Boolean(process.env.GHL_API_TOKEN);

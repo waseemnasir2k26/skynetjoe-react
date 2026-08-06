@@ -11,6 +11,7 @@ import LiveChat from "@/components/LiveChat";
 //   ExitIntentModal @/components/cta/ExitIntentModal · (earlier: IncomingCallPopup, SocialProofPopup)
 // LiveChat (passive chat bubble, click-to-open) kept on — smart intent bot rebuilt 2026-05-29.
 import LiveVisitors from "@/components/LiveVisitors";
+import { MetaPixel } from "@/components/MetaPixel";
 import "../globals.css";
 
 // Readability overhaul 2026-06-01 — ONE clean, highly-legible sans site-wide.
@@ -158,6 +159,11 @@ export default function RootLayout({
             popups (Discovery/ExitIntent/StickyBar) stay disabled per 2026-05-29 request. */}
         <LiveVisitors />
         <LiveChat />
+        {/* Site-wide Meta pixel — seasons the dataset on organic traffic ahead of
+            any paid launch (virgin pixel + first funding + new domain in 72h is
+            the sibling-ban fingerprint). LP pages also mount it; next/script
+            dedupes by id so this is safe. */}
+        <MetaPixel />
       </body>
     </html>
   );
