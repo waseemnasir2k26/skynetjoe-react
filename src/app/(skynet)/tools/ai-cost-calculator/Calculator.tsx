@@ -208,7 +208,7 @@ export default function Calculator() {
         </div>
         <p className="mt-3 text-xs text-[var(--ink-faint)]">
           {requestsPerMonth.toLocaleString("en-US")} requests/month at this
-          volume · pricing is {PRICING_AS_OF}
+          volume · pricing as of {PRICING_AS_OF}
         </p>
       </div>
 
@@ -266,6 +266,11 @@ export default function Calculator() {
                     >
                       <td className="py-2.5 pr-4 font-semibold text-[var(--ink)]">
                         {model.provider} {model.model}
+                        {model.note && (
+                          <span className="mt-0.5 block max-w-[26ch] text-[11px] font-normal leading-snug text-[var(--ink-faint)]">
+                            {model.note}
+                          </span>
+                        )}
                       </td>
                       <td className="py-2.5 pr-4 text-[var(--ink-faint)]">
                         {model.tier}
@@ -286,8 +291,9 @@ export default function Calculator() {
             </table>
           </div>
           <p className="mt-4 text-xs text-[var(--ink-faint)]">
-            All rates are {PRICING_AS_OF}. Provider pricing changes often —
-            check the provider&apos;s own pricing page before budgeting.
+            All rates as of {PRICING_AS_OF}. This is not a live feed and
+            provider pricing changes often — check the provider&apos;s own
+            pricing page before budgeting.
           </p>
 
           <button

@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Where does the pricing data come from?",
-    a: `Published provider pricing pages, condensed into a static table (${PRICING_AS_OF}). This is not a live feed — no API is called and nothing is fetched from the providers. Rates change often, so treat every number here as an approximation and verify on the provider's own pricing page before budgeting real spend.`,
+    a: `Published provider pricing pages, condensed into a static table as of ${PRICING_AS_OF}. This is not a live feed — no API is called and nothing is fetched from the providers. Rates change often, so treat every number here as an approximation and verify on the provider's own pricing page before budgeting real spend.`,
   },
   {
     q: "Why is my actual bill different from this estimate?",
@@ -174,8 +174,8 @@ export default function AiCostCalculatorPage() {
                 maxWidth: "52ch",
               }}
             >
-              Pricing table is {PRICING_AS_OF}. API pricing moves fast, so treat
-              every number as a directional estimate, not an invoice.
+              Pricing table as of {PRICING_AS_OF}. API pricing moves fast, so
+              treat every number as a directional estimate, not an invoice.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">

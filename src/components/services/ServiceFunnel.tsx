@@ -688,6 +688,17 @@ export default function ServiceFunnel({
                             fontWeight: 600,
                             borderBottom: "1px solid rgba(26,26,26,0.08)",
                             verticalAlign: "top",
+                            // Global `td { overflow-wrap: anywhere }` (globals.css) lets the
+                            // table's auto layout squeeze this label column to min-content
+                            // widths that break mid-word ("Storefro / nt"). This is the
+                            // narrow label column, not a URL/long-token cell, so it should
+                            // wrap at word boundaries only, and never break a word — a
+                            // min-width keeps the column from being squeezed narrower than
+                            // its longest single word.
+                            wordBreak: "normal",
+                            overflowWrap: "normal",
+                            hyphens: "none",
+                            minWidth: 118,
                           }}
                         >
                           {r.dimension}

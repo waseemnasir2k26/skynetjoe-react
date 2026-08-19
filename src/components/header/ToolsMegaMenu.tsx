@@ -105,7 +105,7 @@ export default function ToolsMegaMenu({ onClose }: Props) {
         overflowY: "auto",
       }}
     >
-      <div className="p-6">
+      <div className="p-6 pb-9">
         <div
           className="flex items-center gap-3 mb-5"
           style={{
@@ -128,11 +128,22 @@ export default function ToolsMegaMenu({ onClose }: Props) {
           {TOOLS_REGISTRY.length} free tools, zero paywall
         </div>
 
-        <div className="grid grid-cols-3 gap-x-8 gap-y-6">
+        {/*
+          5 TOOL_CATEGORIES in a 3-col CSS grid leaves a structural empty
+          cell on the last row (5 doesn't divide evenly by 3) — that read as
+          a large blank right pane once scrolled to that row. A balanced
+          multi-column flow (vs. a row-major grid) fills all 3 columns by
+          height instead of leaving a fixed empty cell.
+        */}
+        <div className="sm:columns-2 lg:columns-3 gap-8">
           {TOOL_CATEGORIES.map((cat) => {
             const items = toolsByCategory(cat);
             return (
-              <div key={cat}>
+              <div
+                key={cat}
+                className="mb-6"
+                style={{ breakInside: "avoid-column" }}
+              >
                 <div
                   style={{
                     fontFamily: "var(--font-display)",
