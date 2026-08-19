@@ -53,6 +53,7 @@ import {
 import { NAV_PRIMARY, SERVICE_CATEGORIES } from "@/lib/site";
 import ServicesMegaMenu from "@/components/header/ServicesMegaMenu";
 import ToolsMegaMenu from "@/components/header/ToolsMegaMenu";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import { TOOL_CATEGORIES, toolsByCategory } from "@/data/tools-registry";
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -199,6 +200,7 @@ export default function Header() {
           : "bg-transparent"
       }`}
     >
+      <AnnouncementBar />
       <div className="container-x flex items-center justify-between px-4 sm:px-6 py-3.5 gap-2">
         <Link href="/" className="flex items-center gap-2.5 group">
           <span

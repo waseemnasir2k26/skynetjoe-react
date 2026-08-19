@@ -30,7 +30,7 @@ export default function HeroFunnel() {
         color: "var(--ink)",
         fontFamily: "var(--font-sans)",
         borderBottom: "1px solid rgba(26,26,26,0.12)",
-        paddingTop: "clamp(96px, 18vw, 144px)",
+        paddingTop: "clamp(140px, 18vw + 44px, 188px)",
         paddingBottom: "clamp(56px, 12vw, 112px)",
       }}
     >
@@ -217,18 +217,18 @@ export default function HeroFunnel() {
             </Link>
             <Link
               href="/case-studies"
+              className="hover:underline"
               style={{
                 background: "transparent",
-                color: "var(--ink-2)",
+                color: "var(--ink-faint)",
                 fontFamily: "var(--font-sans)",
                 fontWeight: 500,
                 fontSize: 14,
                 textDecoration: "none",
+                textUnderlineOffset: 3,
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 5,
-                borderBottom: "1px solid rgba(26,26,26,0.25)",
-                paddingBottom: 1,
               }}
             >
               See real results
