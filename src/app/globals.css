@@ -195,9 +195,14 @@ html.theme-dark body::before {
   mix-blend-mode: overlay;
   opacity: 0.06;
 }
-body > * {
-  position: relative;
-  z-index: 2;
+/* Layered (base) so Tailwind utility classes like .fixed/.sticky — which live in
+   a later cascade layer — still win over this default. Unlayered, this rule
+   silently defeated position:fixed on the Header site-wide. */
+@layer base {
+  body > * {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 /* Force images out of any inherited blend/filter stacking context so cream pivot
@@ -324,7 +329,7 @@ select:focus-visible,
 body {
   background: var(--bg);
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 html.theme-dark body {
   background: linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%);
@@ -518,7 +523,7 @@ html.light .orb {
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ============================================
@@ -1172,7 +1177,7 @@ html:not(.theme-dark) main.bg-gradient-to-br[class*="061827"] {
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* 3. Images + media never overflow */

@@ -26,7 +26,7 @@ const OUTCOMES = [
     title: "An AI voice that answers your calls",
     promise:
       "It picks up, asks the right questions, and follows up in your language — so no conversation slips through the cracks.",
-    proof: "French-language voice agent shipped for a collections team",
+    proof: "Answers, qualifies, and books the job while you're on site",
     Art: AIDispatcher,
   },
   {
