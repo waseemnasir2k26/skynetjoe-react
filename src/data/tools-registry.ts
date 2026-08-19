@@ -2,7 +2,8 @@
  * TOOLS_REGISTRY — single source of truth for the /tools hub, the header's
  * Tools mega-menu, and the /api/tool-usage/[slug] slug allow-list.
  *
- * 26 tools across 5 categories. `icon` is a lucide-react export name
+ * Tools across 5 categories (count changes as tools ship — see array below,
+ * don't hardcode a number in this comment). `icon` is a lucide-react export name
  * (string, resolved via an ICONS map at render sites — see
  * ToolsMegaMenu.tsx and tools/page.tsx). `isNew` drives the terracotta
  * "NEW" badge. Keep this in sync when a tool is added/removed/renamed —
@@ -80,6 +81,15 @@ export const TOOLS_REGISTRY: ToolEntry[] = [
     category: "Automation & Workflows",
     icon: "CalendarDays",
   },
+  {
+    slug: "n8n-workflow-linter",
+    name: "n8n Workflow Linter",
+    oneLiner:
+      "Paste your n8n workflow JSON, get a node graph and a 20-point health check.",
+    category: "Automation & Workflows",
+    icon: "ScanSearch",
+    isNew: true,
+  },
 
   // ---------------------------------------------------------------
   // AEO & AI Visibility
@@ -118,6 +128,15 @@ export const TOOLS_REGISTRY: ToolEntry[] = [
       "Paste your page details, copy out clean JSON-LD structured data.",
     category: "AEO & AI Visibility",
     icon: "Braces",
+    isNew: true,
+  },
+  {
+    slug: "ai-crawler-access-checker",
+    name: "AI Crawler Access Checker",
+    oneLiner:
+      "Real robots.txt parse — see exactly which AI crawlers you're blocking.",
+    category: "AEO & AI Visibility",
+    icon: "Radar",
     isNew: true,
   },
 
@@ -228,7 +247,78 @@ export const TOOLS_REGISTRY: ToolEntry[] = [
     category: "Ops & Outbound",
     icon: "ArrowLeftRight",
   },
-
+  {
+    slug: "speed-to-lead-calculator",
+    name: "Speed-to-Lead Revenue Calculator",
+    oneLiner:
+      "See what slow lead response is costing you — formula shown, source cited.",
+    category: "Ops & Outbound",
+    icon: "Zap",
+    isNew: true,
+  },
+  {
+    slug: "webhook-inspector",
+    name: "Webhook Inspector",
+    oneLiner:
+      "Point any webhook here, watch the real payload land live, then export the n8n node that catches it.",
+    category: "Automation & Workflows",
+    icon: "Webhook",
+    isNew: true,
+  },
+  {
+    slug: "email-deliverability-checker",
+    name: "Email Deliverability Checker",
+    oneLiner:
+      "Live SPF, DKIM, DMARC and MX check for any domain — real DNS, plain-English verdicts.",
+    category: "Ops & Outbound",
+    icon: "MailCheck",
+    isNew: true,
+  },
+  {
+    slug: "domain-trust-lookup",
+    name: "Domain Trust & Age Lookup",
+    oneLiner:
+      "Vet any lead or vendor domain — registry age, registrar and mail setup in one card.",
+    category: "Ops & Outbound",
+    icon: "Globe",
+    isNew: true,
+  },
+  {
+    slug: "cold-outreach-compliance-checker",
+    name: "Cold Outreach Compliance Checker",
+    oneLiner:
+      "Paste your cold email or SMS — rule-by-rule CAN-SPAM and opt-out checks, each one cited.",
+    category: "Ops & Outbound",
+    icon: "ShieldCheck",
+    isNew: true,
+  },
+  {
+    slug: "automation-readiness-scanner",
+    name: "Automation Readiness Scanner",
+    oneLiner:
+      "Paste your website URL — a live scan of forms, chat, booking, pixels and schema, scored.",
+    category: "Diagnostics",
+    icon: "ScanLine",
+    isNew: true,
+  },
+  {
+    slug: "tech-stack-xray",
+    name: "Tech Stack X-Ray",
+    oneLiner:
+      "See the CRM, chat, pixels and frameworks any website runs — live detection, sourced pricing links.",
+    category: "Diagnostics",
+    icon: "Layers",
+    isNew: true,
+  },
+  {
+    slug: "core-web-vitals-audit",
+    name: "Core Web Vitals Mini-Audit",
+    oneLiner:
+      "Real Google Lighthouse scores for any URL — mobile and desktop, no signup.",
+    category: "Diagnostics",
+    icon: "Gauge",
+    isNew: true,
+  },
 ];
 
 export const TOOL_CATEGORIES: ToolCategory[] = [

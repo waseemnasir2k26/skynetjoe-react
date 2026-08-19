@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import Reveal from "@/components/home/Reveal";
 
 const PAINS = [
   {
@@ -30,7 +31,7 @@ export default function PainPoints() {
       }}
     >
       <div className="container-x">
-        <div className="max-w-2xl mb-12">
+        <Reveal className="max-w-2xl mb-10">
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -79,66 +80,68 @@ export default function PainPoints() {
             </span>{" "}
             without even noticing.
           </h2>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {PAINS.map((p) => (
-            <div
-              key={p.pain}
-              style={{
-                background: "var(--cream-2)",
-                border: "1px solid rgba(26,26,26,0.12)",
-                padding: "clamp(20px, 5vw, 28px)",
-                // Tilt removed — same ±0.3deg card rotation repeated across
-                // PainPoints → Outcomes → Testimonials read as a template tic.
-                // Tilt now lives only on Testimonials. (P3 motif variety)
-              }}
-            >
+          {PAINS.map((p, i) => (
+            <Reveal key={p.pain} delay={i * 0.08}>
               <div
                 style={{
-                  width: 36,
-                  height: 36,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 16,
-                  background: "rgba(107, 44, 44, 0.08)",
-                  border: "1px solid rgba(107, 44, 44, 0.30)",
-                  borderRadius: 2,
+                  background: "var(--cream-2)",
+                  border: "1px solid rgba(26,26,26,0.12)",
+                  padding: "clamp(20px, 5vw, 28px)",
+                  height: "100%",
+                  // Tilt removed — same ±0.3deg card rotation repeated across
+                  // PainPoints → Outcomes → Testimonials read as a template tic.
+                  // Tilt now lives only on Testimonials. (P3 motif variety)
                 }}
               >
-                <X
+                <div
                   style={{
-                    width: 18,
-                    height: 18,
-                    color: "var(--oxblood)",
+                    width: 36,
+                    height: 36,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 16,
+                    background: "rgba(107, 44, 44, 0.08)",
+                    border: "1px solid rgba(107, 44, 44, 0.30)",
+                    borderRadius: 2,
                   }}
-                />
+                >
+                  <X
+                    style={{
+                      width: 18,
+                      height: 18,
+                      color: "var(--oxblood)",
+                    }}
+                  />
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 19,
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                    marginBottom: 10,
+                    lineHeight: 1.25,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {p.pain}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 14,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  {p.detail}
+                </p>
               </div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 19,
-                  fontWeight: 600,
-                  color: "var(--ink)",
-                  marginBottom: 10,
-                  lineHeight: 1.25,
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                {p.pain}
-              </h3>
-              <p
-                style={{
-                  fontSize: 14,
-                  color: "var(--ink-2)",
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
-                {p.detail}
-              </p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
@@ -154,7 +157,9 @@ export default function PainPoints() {
           }}
         >
           Each of these has a 14-day fix.{" "}
-          <span aria-hidden style={{ color: "#A8451F" }}>↓</span>
+          <span aria-hidden style={{ color: "#A8451F" }}>
+            ↓
+          </span>
         </p>
       </div>
     </section>

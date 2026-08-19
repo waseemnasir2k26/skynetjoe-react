@@ -5,6 +5,9 @@ import {
   AIDispatcher,
   ContentPipeline,
 } from "@/components/illustrations";
+import Reveal from "@/components/home/Reveal";
+import TiltPanel from "@/components/home/TiltPanel";
+import ConnectorLine from "@/components/home/ConnectorLine";
 
 // `proof` lines must be traceable to src/lib/case-studies.ts, which carries a
 // no-fabricated-metrics policy. Attribution stays role/sector only — no client
@@ -47,7 +50,7 @@ export default function Outcomes() {
       }}
     >
       <div className="container-x relative z-10">
-        <div className="max-w-2xl mb-12">
+        <Reveal className="max-w-2xl mb-12">
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -95,101 +98,109 @@ export default function Outcomes() {
               Shipped in 14 days.
             </span>
           </h2>
-        </div>
+        </Reveal>
 
+        <ConnectorLine />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {OUTCOMES.map((o, i) => {
             const Art = o.Art;
             return (
-              <div
-                key={o.title}
-                style={{
-                  background: "var(--cream-2)",
-                  border: "1px solid rgba(26,26,26,0.12)",
-                  padding:
-                    "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4vw, 24px)",
-                  // Tilt removed — same ±0.3deg card rotation repeated across
-                  // PainPoints → Outcomes → Testimonials read as a template tic.
-                  // Tilt now lives only on Testimonials. (P3 motif variety)
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                {/* Bespoke decorative SVG (no photo) */}
-                <div
-                  aria-hidden
-                  style={{
-                    marginBottom: 18,
-                    borderRadius: 2,
-                    overflow: "hidden",
-                    border: "1px solid rgba(26,26,26,0.10)",
-                    aspectRatio: "320 / 180",
-                  }}
-                >
-                  <Art className="w-full h-full block" />
-                </div>
+              <Reveal key={o.title} delay={i * 0.12}>
                 <div
                   style={{
-                    fontFamily: "var(--font-display)",
-                    fontStyle: "normal",
-                    fontSize: 36,
-                    fontWeight: 700,
-                    color: "var(--terracotta-aa)",
-                    lineHeight: 1,
-                    marginBottom: 12,
-                  }}
-                >
-                  0{i + 1}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 20,
-                    fontWeight: 600,
-                    color: "var(--ink)",
-                    marginBottom: 10,
-                    lineHeight: 1.25,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {o.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: 14,
-                    color: "var(--ink-2)",
-                    lineHeight: 1.6,
-                    marginBottom: 16,
-                    flex: 1,
-                  }}
-                >
-                  {o.promise}
-                </p>
-                <div
-                  style={{
-                    paddingTop: 12,
-                    borderTop: "1px solid rgba(26,26,26,0.10)",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 11,
-                    letterSpacing: "0.04em",
-                    color: "var(--ink)",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
+                    padding:
+                      "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4vw, 24px)",
+                    // Tilt removed — same ±0.3deg card rotation repeated across
+                    // PainPoints → Outcomes → Testimonials read as a template tic.
+                    // Tilt now lives only on Testimonials. (P3 motif variety)
                     display: "flex",
-                    alignItems: "flex-start",
-                    gap: 6,
+                    flexDirection: "column",
+                    height: "100%",
                   }}
                 >
-                  <Check
+                  {/* Bespoke decorative SVG (no photo) — now with subtle
+                    cursor-parallax tilt + pulsing "live" status dot, so the
+                    "mock dashboard" reads as alive rather than a static
+                    drawing. No numbers on the artwork itself change. */}
+                  <TiltPanel>
+                    <div
+                      aria-hidden
+                      style={{
+                        marginBottom: 18,
+                        borderRadius: 2,
+                        overflow: "hidden",
+                        border: "1px solid rgba(26,26,26,0.10)",
+                        aspectRatio: "320 / 180",
+                      }}
+                    >
+                      <Art className="w-full h-full block" />
+                    </div>
+                  </TiltPanel>
+                  <div
                     style={{
-                      width: 13,
-                      height: 13,
-                      marginTop: 2,
-                      flexShrink: 0,
-                      color: "var(--sage)",
+                      fontFamily: "var(--font-display)",
+                      fontStyle: "normal",
+                      fontSize: 36,
+                      fontWeight: 700,
+                      color: "var(--terracotta-aa)",
+                      lineHeight: 1,
+                      marginBottom: 12,
                     }}
-                  />
-                  <span>{o.proof}</span>
+                  >
+                    0{i + 1}
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 20,
+                      fontWeight: 600,
+                      color: "var(--ink)",
+                      marginBottom: 10,
+                      lineHeight: 1.25,
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
+                    {o.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: "var(--ink-2)",
+                      lineHeight: 1.6,
+                      marginBottom: 16,
+                      flex: 1,
+                    }}
+                  >
+                    {o.promise}
+                  </p>
+                  <div
+                    style={{
+                      paddingTop: 12,
+                      borderTop: "1px solid rgba(26,26,26,0.10)",
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      letterSpacing: "0.04em",
+                      color: "var(--ink)",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: 6,
+                    }}
+                  >
+                    <Check
+                      style={{
+                        width: 13,
+                        height: 13,
+                        marginTop: 2,
+                        flexShrink: 0,
+                        color: "var(--sage)",
+                      }}
+                    />
+                    <span>{o.proof}</span>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>

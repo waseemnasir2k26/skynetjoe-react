@@ -2,11 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
 import { N8N_TEMPLATES } from "@/data/tools/n8n-templates";
 import { Download, ShieldCheck, Sparkles, Workflow } from "lucide-react";
 
 const PATH = "/tools/n8n-workflow-generator";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "n8n Workflow Generator", url: `${SITE.url}${PATH}` },
+]);
 
 export const metadata: Metadata = {
   title: "n8n Workflow Generator — Free n8n Templates",
@@ -76,6 +83,7 @@ const softwareSchema = {
   description:
     "Free tool that generates valid, importable n8n workflow JSON from a trigger app and action app pick. 12 real automation recipes, no fabricated credentials.",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -92,6 +100,7 @@ export default function N8nWorkflowGeneratorPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

@@ -1,5 +1,6 @@
 import { SITE, SERVICE_CATEGORIES, svcHref } from "@/lib/site";
 import { POSTS } from "@/lib/posts";
+import { TOOLS_REGISTRY } from "@/data/tools-registry";
 import fs from "fs";
 import path from "path";
 
@@ -90,6 +91,21 @@ ${readContent("n8n-vs-zapier.html").slice(0, 5000)}
 URL: ${SITE.url}/boring-automations-small-businesses-pay-for
 
 ${readContent("boring-automations-small-businesses-pay-for.html").slice(0, 5000)}
+
+---
+
+## Tools (${TOOLS_REGISTRY.length} free tools, dogfooded — the site's own llms.txt was generated with the llms.txt Generator below)
+
+URL: ${SITE.url}/tools
+
+${TOOLS_REGISTRY.map(
+  (t) =>
+    `### ${t.name}
+URL: ${SITE.url}/tools/${t.slug}
+Category: ${t.category}
+${t.oneLiner}
+`,
+).join("\n")}
 
 ---
 

@@ -208,7 +208,7 @@ export default function Calculator() {
         </div>
         <p className="mt-3 text-xs text-[var(--ink-faint)]">
           {requestsPerMonth.toLocaleString("en-US")} requests/month at this
-          volume · pricing {PRICING_AS_OF}
+          volume · pricing is {PRICING_AS_OF}
         </p>
       </div>
 
@@ -286,8 +286,8 @@ export default function Calculator() {
             </table>
           </div>
           <p className="mt-4 text-xs text-[var(--ink-faint)]">
-            All rates are approximate, {PRICING_AS_OF}. Provider pricing changes
-            often — check the provider&apos;s own pricing page before budgeting.
+            All rates are {PRICING_AS_OF}. Provider pricing changes often —
+            check the provider&apos;s own pricing page before budgeting.
           </p>
 
           <button

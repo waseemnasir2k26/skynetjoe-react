@@ -9,7 +9,8 @@
  * on the provider's own pricing page before making a purchasing decision.
  */
 
-export const PRICING_AS_OF = "as of July 2026 — verify current pricing";
+export const PRICING_AS_OF =
+  "approximate — not a live feed, verify on the provider's pricing page";
 
 export type LlmModel = {
   id: string;

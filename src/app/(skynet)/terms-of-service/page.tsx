@@ -7,11 +7,11 @@ import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "terms-of-service.html"),
-  "utf8"
+  "utf8",
 );
 
 export const metadata: Metadata = {
-  title: "Terms of Service — SkynetLabs",
+  title: "Terms of Service",
   description:
     "Terms governing engagements with SkynetLabs and use of skynetjoe.com. Plain-language contract: 50% deposit, IP transfer on payment, Indonesian jurisdiction. Last updated 2026-05-20.",
   alternates: { canonical: `${SITE.url}/terms-of-service` },
@@ -39,9 +39,15 @@ const schema = {
     "@type": "Organization",
     name: SITE.brand,
     url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/waseem-portrait.jpg` },
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE.assetsUrl}/waseem-portrait.jpg`,
+    },
   },
-  mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/terms-of-service` },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `${SITE.url}/terms-of-service`,
+  },
 };
 
 export default function TermsOfServicePage() {

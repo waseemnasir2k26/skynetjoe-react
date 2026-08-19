@@ -1,6 +1,8 @@
 import HeroFunnel from "@/components/funnel/HeroFunnel";
 import PainPoints from "@/components/funnel/PainPoints";
 import Outcomes from "@/components/funnel/Outcomes";
+import ProofReceipts from "@/components/home/ProofReceipts";
+import ToolsTeaser from "@/components/home/ToolsTeaser";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQHome, { HOME_FAQS } from "@/components/sections/FAQHome";
 import FinalCTA from "@/components/funnel/FinalCTA";
@@ -79,8 +81,10 @@ export default function Home() {
     <>
       <JsonLd data={orgSchema} />
       <HeroFunnel />
-      <PainPoints />
       <Outcomes />
+      <PainPoints />
+      <ProofReceipts />
+      <ToolsTeaser />
       <Testimonials />
       <FAQHome />
       <FinalCTA />

@@ -11,11 +11,19 @@ import aiBusinessSystems from "./ai-business-systems";
 import strategyTraining from "./strategy-training";
 import brandingDesign from "./branding-design";
 import aiContentCreation from "./ai-content-creation";
+import n8nAutomation from "./n8n-automation";
+import gohighlevel from "./gohighlevel";
+import aiChatbots from "./ai-chatbots";
+import wordpressSeo from "./wordpress-seo";
+import vibeCodedSites from "./vibe-coded-sites";
 
 export type { ServiceFunnelContent } from "./types";
 
 /**
- * Data-driven funnel content for the 11 non-top-5 service slugs.
+ * Data-driven funnel content for all 16 service slugs (2026-08-19: the
+ * former top-5 bespoke-LP slugs migrated onto this same data-driven
+ * <ServiceFunnel/> template so every service page carries FAQPage schema,
+ * pricing tiers, and an honest comparison section).
  * Keyed by slug; consumed by /services/[slug] → <ServiceFunnel/>.
  * zapier-make is the full exemplar; the rest are Phase-B stubs.
  */
@@ -31,4 +39,9 @@ export const SERVICE_FUNNELS: Record<string, ServiceFunnelContent> = {
   "strategy-training": strategyTraining,
   "branding-design": brandingDesign,
   "ai-content-creation": aiContentCreation,
+  "n8n-automation": n8nAutomation,
+  gohighlevel: gohighlevel,
+  "ai-chatbots": aiChatbots,
+  "wordpress-seo": wordpressSeo,
+  "vibe-coded-sites": vibeCodedSites,
 };

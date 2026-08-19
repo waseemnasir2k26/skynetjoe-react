@@ -2,13 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Builder from "./Builder";
 import { Clock, Webhook, Workflow, ArrowRight } from "lucide-react";
 
 const PATH = "/tools/cron-expression-builder";
 
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "Cron Expression Generator", url: `${SITE.url}${PATH}` },
+]);
+
 export const metadata: Metadata = {
-  title: "Cron Expression Generator — plain-English to cron · SkynetLabs",
+  title: "Free Cron Expression Generator — Plain English to Cron Syntax",
   description:
     "Pick a schedule in plain English, get a valid cron expression plus an n8n Schedule Trigger config — including the field:hours fix for the triggerAtMinute gotcha.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -57,6 +64,7 @@ const softwareSchema = {
   description:
     "Free tool that converts a plain-English schedule into a valid cron expression and a matching n8n Schedule Trigger node configuration.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -73,6 +81,7 @@ export default function CronExpressionBuilderPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

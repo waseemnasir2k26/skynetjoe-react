@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES, CAL_URL } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Link from "next/link";
 import Writer from "./Writer";
 import { Sparkles, Timer, ShieldCheck, ListChecks } from "lucide-react";
 
 const PATH = "/tools/ai-agent-spec-writer";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "AI Agent Spec Writer", url: `${SITE.url}${PATH}` },
+]);
 const TOOL_CAL_URL = `${CAL_URL}?utm_source=ai-agent-spec-writer`;
 
 export const metadata: Metadata = {
@@ -58,6 +65,7 @@ const softwareSchema = {
   description:
     "Free tool that turns role, tools, guardrails, success criteria and escalation rules into a structured AI agent spec document with a copy-paste system prompt block.",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  dateModified: "2026-08-19",
   provider: {
     "@type": "Organization",
     "@id": `${SITE.url}/#organization`,
@@ -98,6 +106,7 @@ export default function AiAgentSpecWriterPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

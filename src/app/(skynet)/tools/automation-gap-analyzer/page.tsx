@@ -2,14 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Quiz from "./Quiz";
 import { QUESTIONS, AXES } from "@/data/automation-gap-questions";
 import { Sparkles, Timer, ShieldCheck, Target } from "lucide-react";
 
 const PATH = "/tools/automation-gap-analyzer";
 
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "Automation Gap Analyzer", url: `${SITE.url}${PATH}` },
+]);
+
 export const metadata: Metadata = {
-  title: "Automation Gap Analyzer — 90-Second Score · SkynetLabs",
+  title:
+    "Free Automation Gap Analyzer — Find Your Biggest Time Drain in 90 Seconds",
   description:
     "Free 12-question diagnostic across lead capture, follow-up, reporting, team productivity. Get an automation gap % score plus the one axis to fix first.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -105,6 +113,7 @@ const softwareSchema = {
   description:
     "Free 90-second diagnostic that scores service-business automation maturity 0 to 100 across four axes and routes results into a strategy call or the Revenue Recovery Calculator.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -122,6 +131,7 @@ export default function AutomationGapPage() {
     <>
       <JsonLd data={quizSchema} />
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

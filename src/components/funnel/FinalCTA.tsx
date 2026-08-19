@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import MagneticButton from "@/components/home/MagneticButton";
 
 export default function FinalCTA() {
   return (
@@ -30,7 +31,7 @@ export default function FinalCTA() {
               opacity: 0.85,
             }}
           >
-— Limited audits each month
+            — Limited audits each month
           </div>
           <h2
             style={{
@@ -70,28 +71,30 @@ export default function FinalCTA() {
             A free 30-min check-up. We share screens, spot the one fix that pays
             off fastest, and send you a short build plan. No pitch deck.
           </p>
-          <Link
-            href="/discovery-call"
-            style={{
-              background: "var(--cream-3)",
-              color: "var(--terracotta-aa)",
-              padding: "16px 28px",
-              fontFamily: "var(--font-sans)",
-              fontWeight: 700,
-              fontSize: 16,
-              borderRadius: 2,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              textDecoration: "none",
-              transition: "transform 0.18s",
-              boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
-              minHeight: 48,
-            }}
-          >
-            Book free 30-min audit
-            <ArrowRight style={{ width: 16, height: 16 }} />
-          </Link>
+          <MagneticButton>
+            <Link
+              href="/discovery-call"
+              style={{
+                background: "var(--cream-3)",
+                color: "var(--terracotta-aa)",
+                padding: "16px 28px",
+                fontFamily: "var(--font-sans)",
+                fontWeight: 700,
+                fontSize: 16,
+                borderRadius: 2,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                textDecoration: "none",
+                transition: "transform 0.18s",
+                boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
+                minHeight: 48,
+              }}
+            >
+              Book free 30-min audit
+              <ArrowRight style={{ width: 16, height: 16 }} />
+            </Link>
+          </MagneticButton>
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -102,7 +105,7 @@ export default function FinalCTA() {
               marginTop: 22,
             }}
           >
-— Reply in 8h · scope in 48h · Bali (GMT+8) · 9 countries served
+            — Reply in 8h · scope in 48h · Bali (GMT+8) · 9 countries served
           </div>
         </div>
       </div>

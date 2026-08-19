@@ -45,17 +45,67 @@ export default function AEOEngine({ className }: Props) {
       {/* Quote/answer card (center) */}
       <g transform="translate(106 50)">
         <rect width="108" height="84" rx="10" fill="url(#aeo-quote)" />
-        <text x="10" y="16" fontFamily="Georgia,serif" fontSize="22" fontWeight="700" fill="#4338CA" opacity="0.45">
+        <text
+          x="10"
+          y="16"
+          fontFamily="Georgia,serif"
+          fontSize="22"
+          fontWeight="700"
+          fill="#4338CA"
+          opacity="0.45"
+        >
           “
         </text>
-        <rect x="22" y="22" width="76" height="4" rx="1.5" fill="#4338CA" opacity="0.65" />
-        <rect x="10" y="32" width="88" height="4" rx="1.5" fill="#4338CA" opacity="0.45" />
-        <rect x="10" y="40" width="68" height="4" rx="1.5" fill="#4338CA" opacity="0.45" />
+        <rect
+          x="22"
+          y="22"
+          width="76"
+          height="4"
+          rx="1.5"
+          fill="#4338CA"
+          opacity="0.65"
+        />
+        <rect
+          x="10"
+          y="32"
+          width="88"
+          height="4"
+          rx="1.5"
+          fill="#4338CA"
+          opacity="0.45"
+        />
+        <rect
+          x="10"
+          y="40"
+          width="68"
+          height="4"
+          rx="1.5"
+          fill="#4338CA"
+          opacity="0.45"
+        />
         <rect x="10" y="56" width="58" height="10" rx="3" fill="#1E1B4B" />
-        <text x="39" y="63" textAnchor="middle" fontFamily="system-ui,sans-serif" fontSize="6" fontWeight="700" fill="#5EEAD4" letterSpacing="0.4">
-          CITED 14x
+        <text
+          x="39"
+          y="63"
+          textAnchor="middle"
+          fontFamily="system-ui,sans-serif"
+          fontSize="6"
+          fontWeight="700"
+          fill="#5EEAD4"
+          letterSpacing="0.4"
+        >
+          GETS CITED
         </text>
-        <text x="10" y="78" fontFamily="system-ui,sans-serif" fontSize="6" fontWeight="700" fill="#4338CA" opacity="0.6" letterSpacing="0.5">
+        <text
+          x="10"
+          y="78"
+          fontFamily="system-ui,sans-serif"
+          fontSize="6"
+          fontWeight="700"
+          fill="#4338CA"
+          opacity="0.6"
+          letterSpacing="0.5"
+        >
           PERPLEXITY · CHATGPT
         </text>
       </g>
@@ -72,7 +122,15 @@ export default function AEOEngine({ className }: Props) {
             fill="none"
             strokeLinecap="round"
           />
-          <text y="-18" textAnchor="middle" fontFamily="system-ui,sans-serif" fontSize="6" fontWeight="700" fill="#fff" letterSpacing="0.5">
+          <text
+            y="-18"
+            textAnchor="middle"
+            fontFamily="system-ui,sans-serif"
+            fontSize="6"
+            fontWeight="700"
+            fill="#fff"
+            letterSpacing="0.5"
+          >
             CLAUDE
           </text>
         </g>
@@ -82,8 +140,22 @@ export default function AEOEngine({ className }: Props) {
           <circle r="14" fill="#fff" opacity="0.97" />
           <circle r="3" fill="#4338CA" />
           <circle r="7" fill="none" stroke="#4338CA" strokeWidth="1" />
-          <circle r="10" fill="none" stroke="#4338CA" strokeWidth="0.7" opacity="0.5" />
-          <text y="-22" textAnchor="middle" fontFamily="system-ui,sans-serif" fontSize="6" fontWeight="700" fill="#fff" letterSpacing="0.5">
+          <circle
+            r="10"
+            fill="none"
+            stroke="#4338CA"
+            strokeWidth="0.7"
+            opacity="0.5"
+          />
+          <text
+            y="-22"
+            textAnchor="middle"
+            fontFamily="system-ui,sans-serif"
+            fontSize="6"
+            fontWeight="700"
+            fill="#fff"
+            letterSpacing="0.5"
+          >
             GPT-4o
           </text>
         </g>
@@ -91,8 +163,22 @@ export default function AEOEngine({ className }: Props) {
         {/* Bottom-left node */}
         <g transform="translate(46 140)">
           <circle r="14" fill="#fff" opacity="0.97" />
-          <path d="M-6 -2 L -2 4 L 6 -4" stroke="#1E1B4B" strokeWidth="2" fill="none" strokeLinecap="round" />
-          <text y="26" textAnchor="middle" fontFamily="system-ui,sans-serif" fontSize="6" fontWeight="700" fill="#fff" letterSpacing="0.5">
+          <path
+            d="M-6 -2 L -2 4 L 6 -4"
+            stroke="#1E1B4B"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <text
+            y="26"
+            textAnchor="middle"
+            fontFamily="system-ui,sans-serif"
+            fontSize="6"
+            fontWeight="700"
+            fill="#fff"
+            letterSpacing="0.5"
+          >
             PERPLEXITY
           </text>
         </g>
@@ -100,18 +186,29 @@ export default function AEOEngine({ className }: Props) {
         {/* Bottom-right node */}
         <g transform="translate(272 140)">
           <circle r="14" fill="#fff" opacity="0.97" />
-          <path
-            d="M-5 0 L 0 -6 L 5 0 L 0 6 Z"
-            fill="#4338CA"
-          />
-          <text y="26" textAnchor="middle" fontFamily="system-ui,sans-serif" fontSize="6" fontWeight="700" fill="#fff" letterSpacing="0.5">
+          <path d="M-5 0 L 0 -6 L 5 0 L 0 6 Z" fill="#4338CA" />
+          <text
+            y="26"
+            textAnchor="middle"
+            fontFamily="system-ui,sans-serif"
+            fontSize="6"
+            fontWeight="700"
+            fill="#fff"
+            letterSpacing="0.5"
+          >
             GEMINI
           </text>
         </g>
       </g>
 
       {/* Connector lines */}
-      <g stroke="#00D4FF" strokeWidth="1.4" fill="none" strokeDasharray="3 4" opacity="0.75">
+      <g
+        stroke="#00D4FF"
+        strokeWidth="1.4"
+        fill="none"
+        strokeDasharray="3 4"
+        opacity="0.75"
+      >
         <path d="M56 32 Q 100 56 116 60" />
         <path d="M264 36 Q 230 56 210 60" />
         <path d="M60 140 Q 100 130 120 124" />
@@ -120,7 +217,10 @@ export default function AEOEngine({ className }: Props) {
 
       {/* 4-point sparkle */}
       <g transform="translate(160 18)">
-        <path d="M0 -10 L 2 -2 L 10 0 L 2 2 L 0 10 L -2 2 L -10 0 L -2 -2 Z" fill="#5EEAD4" />
+        <path
+          d="M0 -10 L 2 -2 L 10 0 L 2 2 L 0 10 L -2 2 L -10 0 L -2 -2 Z"
+          fill="#5EEAD4"
+        />
       </g>
     </svg>
   );

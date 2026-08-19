@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES, CAL_URL } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Link from "next/link";
 import Generator from "./Generator";
 import { Sparkles, Timer, ShieldCheck, Bot } from "lucide-react";
 
 const PATH = "/tools/ai-sop-generator";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "SOP Generator", url: `${SITE.url}${PATH}` },
+]);
 const TOOL_CAL_URL = `${CAL_URL}?utm_source=ai-sop-generator`;
 
 export const metadata: Metadata = {
@@ -58,6 +65,7 @@ const softwareSchema = {
   description:
     "Free tool that turns a process name and step list into a formatted standard operating procedure with automation-candidate flags on each step.",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  dateModified: "2026-08-19",
   provider: {
     "@type": "Organization",
     "@id": `${SITE.url}/#organization`,
@@ -98,6 +106,7 @@ export default function AiSopGeneratorPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

@@ -29,6 +29,15 @@ import {
   TrendingUp,
   BarChart3,
   ArrowRight,
+  ScanSearch,
+  Radar,
+  Zap,
+  MailCheck,
+  Globe,
+  ShieldCheck,
+  ScanLine,
+  Layers,
+  Gauge,
 } from "lucide-react";
 import { TOOL_CATEGORIES, toolsByCategory } from "@/data/tools-registry";
 
@@ -59,6 +68,15 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   Activity,
   TrendingUp,
   BarChart3,
+  ScanSearch,
+  Radar,
+  Zap,
+  MailCheck,
+  Globe,
+  ShieldCheck,
+  ScanLine,
+  Layers,
+  Gauge,
 };
 
 type Props = {

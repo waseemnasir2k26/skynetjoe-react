@@ -2,14 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Builder from "./Builder";
 import { WEBHOOK_APPS } from "@/data/tools/webhook-payloads";
 import { Webhook, ShieldCheck, Zap, ArrowRight } from "lucide-react";
 
 const PATH = "/tools/webhook-payload-builder";
 
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "Webhook Payload Builder", url: `${SITE.url}${PATH}` },
+]);
+
 export const metadata: Metadata = {
-  title: "Webhook Payload Builder — free JSON payload generator · SkynetLabs",
+  title: "Free Webhook Payload Builder — Sample JSON Payloads, Instantly",
   description:
     "Build and validate JSON payloads for GHL, Stripe, Typeform, Calendly, and Shopify webhooks. Live validation, one-click copy, no signup.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -58,6 +65,7 @@ const softwareSchema = {
   description:
     "Free tool to build and validate JSON webhook payloads for GoHighLevel, Stripe, Typeform, Calendly, and Shopify, with live JSON validation and one-click copy.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -74,6 +82,7 @@ export default function WebhookPayloadBuilderPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

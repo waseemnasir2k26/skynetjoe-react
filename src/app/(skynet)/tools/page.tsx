@@ -30,10 +30,28 @@ import {
   TrendingUp,
   BarChart3,
   ArrowRight,
+  ScanSearch,
+  Radar,
+  Zap,
+  MailCheck,
+  Globe,
+  ShieldCheck,
+  ScanLine,
+  Layers,
+  Gauge,
 } from "lucide-react";
 import Reveal from "./Reveal";
 import ToolUsage from "@/components/tools/ToolUsage";
 import { TOOL_CATEGORIES, toolsByCategory } from "@/data/tools-registry";
+import { breadcrumbSchema } from "@/lib/schema";
+
+function categoryAnchor(cat: string): string {
+  return cat
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
 
 const ICONS: Record<
   string,
@@ -65,17 +83,26 @@ const ICONS: Record<
   Activity,
   TrendingUp,
   BarChart3,
+  ScanSearch,
+  Radar,
+  Zap,
+  MailCheck,
+  Globe,
+  ShieldCheck,
+  ScanLine,
+  Layers,
+  Gauge,
 };
 
 export const metadata: Metadata = {
-  title: "22 Free Tools for Service Businesses",
+  title: "32 Free Tools for Service Businesses",
   description:
-    "22 free tools across automation, AEO, prompts, ops and diagnostics — n8n workflow generator, AEO audit, cold DM generator and more.",
+    "32 free tools across automation, AEO, prompts, ops and diagnostics — n8n workflow generator, AEO audit, cold DM generator and more.",
   alternates: { canonical: `${SITE.url}/tools` },
   openGraph: {
     title: "SkynetLabs Free Tools — 22 automation, AEO and prompt tools",
     description:
-      "Find out where your business is losing time and money. 22 free tools across automation, AEO, prompts, ops, and diagnostics.",
+      "Find out where your business is losing time and money. 32 free tools across automation, AEO, prompts, ops, and diagnostics.",
     url: `${SITE.url}/tools`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -100,7 +127,7 @@ const schema = {
   "@type": "CollectionPage",
   name: "SkynetLabs Free Tools",
   description:
-    "22 free utilities from SkynetLabs across automation & workflows, AEO & AI visibility, prompts & agents, and ops & outbound.",
+    "32 free utilities from SkynetLabs across automation & workflows, AEO & AI visibility, prompts & agents, and ops & outbound.",
   url: `${SITE.url}/tools`,
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },
@@ -116,10 +143,16 @@ const schema = {
   ),
 };
 
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+]);
+
 export default function ToolsIndexPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={breadcrumbListSchema} />
       <main
         style={{
           minHeight: "100vh",
@@ -156,7 +189,7 @@ export default function ToolsIndexPage() {
                   background: "var(--terracotta)",
                 }}
               />
-              22 free tools
+              32 free tools
             </div>
             <h1
               style={{
@@ -182,7 +215,7 @@ export default function ToolsIndexPage() {
                 lineHeight: 1.6,
               }}
             >
-              22 free tools I built for myself before I built them for clients —
+              32 free tools I built for myself before I built them for clients —
               automation planning, AEO/AI visibility, prompt and agent builders,
               outbound ops, and diagnostics. All free. Some hand you the result
               instantly; a few ask for an email to unlock it. Just numbers,
@@ -191,12 +224,38 @@ export default function ToolsIndexPage() {
           </Reveal>
         </section>
 
+        {/* Category jump nav — anchors down to each section below */}
+        <nav
+          aria-label="Tool categories"
+          className="container-x px-6 py-6 flex flex-wrap gap-2"
+          style={{ borderBottom: "1px solid var(--border)" }}
+        >
+          {TOOL_CATEGORIES.map((cat) => (
+            <a
+              key={cat}
+              href={`#${categoryAnchor(cat)}`}
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                padding: "8px 14px",
+                border: "1px solid var(--border)",
+                borderRadius: 999,
+                color: "var(--ink-2)",
+                textDecoration: "none",
+              }}
+            >
+              {cat}
+            </a>
+          ))}
+        </nav>
+
         {TOOL_CATEGORIES.map((cat, catIdx) => {
           const tools = toolsByCategory(cat);
           return (
             <section
               key={cat}
-              className="container-x px-6 py-16"
+              id={categoryAnchor(cat)}
+              className="container-x px-6 py-16 scroll-mt-24"
               style={
                 catIdx % 2 === 1 ? { background: "var(--cream-2)" } : undefined
               }

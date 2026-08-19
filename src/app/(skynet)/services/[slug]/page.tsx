@@ -3,7 +3,6 @@ import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import type { FC } from "react";
 import { MapPin, ArrowRight } from "lucide-react";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { STATES } from "@/lib/states";
@@ -11,31 +10,24 @@ import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
 import { getEnrichment } from "@/data/service-state-enrichment";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import N8nAutomationLP from "@/components/services/lp/N8nAutomationLP";
-import GoHighLevelLP from "@/components/services/lp/GoHighLevelLP";
-import AiChatbotsLP from "@/components/services/lp/AiChatbotsLP";
-import WordpressSeoLP from "@/components/services/lp/WordpressSeoLP";
-import VibeCodedSitesLP from "@/components/services/lp/VibeCodedSitesLP";
 import ServiceFunnel from "@/components/services/ServiceFunnel";
 import { SERVICE_FUNNELS } from "@/data/service-funnels";
 import { findServicePricing } from "@/lib/service-pricing";
 
 /**
- * Top-5 service slugs that render a bespoke funnel LP component
- * instead of the generic <div dangerouslySetInnerHTML> HTML payload.
- * All other slugs continue on the existing HTML render.
+ * 2026-08-19: the former top-5 bespoke-LP slugs (n8n-automation,
+ * gohighlevel, ai-chatbots, wordpress-seo, vibe-coded-sites) were migrated
+ * onto the same data-driven <ServiceFunnel/> template as the other 11
+ * services (src/data/service-funnels/*.ts) so every service page carries
+ * FAQPage schema, pricing tiers, and an honest comparison section.
+ * The old bespoke components (src/components/services/lp/*) are retired.
+ * All 16 slugs now render via SERVICE_FUNNELS; remaining slugs (if any)
+ * fall back to the static HTML payload.
  */
-const TOP_5_LP: Partial<Record<string, FC>> = {
-  "n8n-automation": N8nAutomationLP,
-  gohighlevel: GoHighLevelLP,
-  "ai-chatbots": AiChatbotsLP,
-  "wordpress-seo": WordpressSeoLP,
-  "vibe-coded-sites": VibeCodedSitesLP,
-};
 
 type ServiceItem = { slug: string; label: string; icon: string; desc: string };
 const SERVICES: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
-  (c) => c.services as readonly (ServiceItem & { href?: string })[]
+  (c) => c.services as readonly (ServiceItem & { href?: string })[],
 ).filter((s): s is ServiceItem => !("href" in s) || !s.href);
 const SLUGS = SERVICES.map((s) => s.slug);
 
@@ -66,7 +58,10 @@ export async function generateMetadata({
   if (!svc) return {};
   const longDesc = buildLongDescription(svc);
   return {
-    title: `${svc.label} — ${SITE.brand}`,
+    // No brand suffix here — the (skynet) layout's title.template
+    // (`%s | ${SITE.brand}`) already appends it; a hardcoded suffix rendered
+    // "... — SkynetLabs | SkynetLabs".
+    title: svc.label,
     description: longDesc,
     alternates: { canonical: `${SITE.url}/services/${svc.slug}` },
     openGraph: {
@@ -94,21 +89,18 @@ export default async function ServicePage({
   if (!SLUGS.includes(slug)) notFound();
 
   // Content source, in priority order:
-  //   1. bespoke LP component (top-5 funnels)
-  //   2. data-driven <ServiceFunnel/> (the other 11 funnel services)
-  //   3. static HTML payload from content/services/{slug}.html (fallback)
+  //   1. data-driven <ServiceFunnel/> (all 16 funnel services, 2026-08-19)
+  //   2. static HTML payload from content/services/{slug}.html (fallback)
   // Git is the CMS — Payload was removed 2026-05-29. Only read the HTML when
-  // neither an LP nor funnel content exists, so an unused/deleted payload can
-  // never crash a page that no longer renders it.
-  const LPComponent = TOP_5_LP[slug];
-  const funnel = LPComponent ? undefined : SERVICE_FUNNELS[slug];
-  const html =
-    LPComponent || funnel
-      ? null
-      : fs.readFileSync(
-          path.join(process.cwd(), "content", "services", `${slug}.html`),
-          "utf8"
-        );
+  // no funnel content exists, so an unused/deleted payload can never crash
+  // a page that no longer renders it.
+  const funnel = SERVICE_FUNNELS[slug];
+  const html = funnel
+    ? null
+    : fs.readFileSync(
+        path.join(process.cwd(), "content", "services", `${slug}.html`),
+        "utf8",
+      );
   const svc = SERVICES.find((s) => s.slug === slug)!;
 
   const schema = {
@@ -163,9 +155,7 @@ export default async function ServicePage({
       <style>{`
         .cream-state-pill:hover { border-color: var(--terracotta) !important; }
       `}</style>
-      {LPComponent ? (
-        <LPComponent />
-      ) : funnel ? (
+      {funnel ? (
         <ServiceFunnel content={funnel} pricing={findServicePricing(slug)} />
       ) : (
         <div
@@ -234,10 +224,10 @@ export default async function ServicePage({
             </h2>
             <p style={{ color: "var(--ink-2)", fontSize: 16, lineHeight: 1.6 }}>
               Same fixed-scope build, delivered remotely to any US state. The
-              per-state breakdown is being rewritten — it carried
-              first-party performance figures we could not substantiate, so it
-              is withheld rather than shipped unverified. Ask on the call and
-              you will get the local detail directly.
+              per-state breakdown is being rewritten — it carried first-party
+              performance figures we could not substantiate, so it is withheld
+              rather than shipped unverified. Ask on the call and you will get
+              the local detail directly.
             </p>
           </div>
 
@@ -366,9 +356,7 @@ export default async function ServicePage({
                 own accordion above. That accordion is empty while the
                 enrichment is withheld, so excluding them here hid 8 states
                 entirely. List all 48. */}
-            {STATES.filter(
-              () => true,
-            ).map((s) => (
+            {STATES.filter(() => true).map((s) => (
               <Link
                 key={s.slug}
                 href={`/locations/${s.slug}`}

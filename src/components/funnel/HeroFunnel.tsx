@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Star, Zap, Repeat, ListChecks } from "lucide-react";
+import NodeGraphHero from "@/components/home/NodeGraphHero";
+import MagneticButton from "@/components/home/MagneticButton";
+import ScrambleText from "@/components/home/ScrambleText";
 
 /**
  * Cream editorial hero (2026-06-01 readability + plain-language overhaul).
@@ -35,6 +38,7 @@ export default function HeroFunnel() {
       }}
     >
       <style>{`@media (max-width: 400px){.trust-sep{display:none}}`}</style>
+      <NodeGraphHero />
       <div
         className="container-x relative z-10 grid md:grid-cols-[1.3fr_1fr] items-end"
         style={{
@@ -91,7 +95,7 @@ export default function HeroFunnel() {
               wordBreak: "break-word",
             }}
           >
-            Stop losing customers{" "}
+            <ScrambleText text="Stop losing customers" />{" "}
             <em
               style={{
                 fontStyle: "normal",
@@ -99,7 +103,7 @@ export default function HeroFunnel() {
                 fontWeight: 700,
               }}
             >
-              while you&apos;re busy.
+              <ScrambleText text="while you're busy." />
             </em>
           </h1>
 
@@ -194,27 +198,29 @@ export default function HeroFunnel() {
               gap: 24,
             }}
           >
-            <Link
-              href="/discovery-call"
-              style={{
-                background: "var(--terracotta)",
-                color: "var(--cream-3)",
-                padding: "14px 24px",
-                fontFamily: "var(--font-sans)",
-                fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 2,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                transition: "background 0.18s",
-                textDecoration: "none",
-                minHeight: 48,
-              }}
-            >
-              Book a free 30-min check-up
-              <ArrowRight style={{ width: 16, height: 16 }} />
-            </Link>
+            <MagneticButton>
+              <Link
+                href="/discovery-call"
+                style={{
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  padding: "14px 24px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 15,
+                  borderRadius: 2,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  transition: "background 0.18s",
+                  textDecoration: "none",
+                  minHeight: 48,
+                }}
+              >
+                Book a free 30-min check-up
+                <ArrowRight style={{ width: 16, height: 16 }} />
+              </Link>
+            </MagneticButton>
             <Link
               href="/case-studies"
               className="hover:underline"

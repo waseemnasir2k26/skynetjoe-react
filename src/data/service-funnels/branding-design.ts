@@ -141,13 +141,6 @@ const content: ServiceFunnelContent = {
     ],
   },
 
-  secondaryProof: {
-    metric: "Tire-kickers → qualified",
-    client: "Manhattan cosmetic dental atelier (anonymized)",
-    detail:
-      'A bespoke 14-section identity and site — built to look nothing like the template clinic sites in midtown — noticeably lifted the quality of inbound inquiries. The founding clinician\'s line: "Our last site cost five times more and looked like every other clinic. This one looks like us."',
-  },
-
   faqs: [
     {
       q: "Do we need a full rebrand or just a refresh?",

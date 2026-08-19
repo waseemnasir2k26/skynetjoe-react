@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
 import { DM_TEMPLATES, PLATFORMS } from "@/data/tools/cold-dm-scripts";
 import { Sparkles, Send, Copy, MessageSquare } from "lucide-react";
 
 const PATH = "/tools/cold-dm-generator";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "Cold DM Script Generator", url: `${SITE.url}${PATH}` },
+]);
 
 export const metadata: Metadata = {
   title: "Cold DM Script Generator — Free Outreach Scripts",
@@ -74,6 +81,7 @@ const softwareSchema = {
   url: `${SITE.url}${PATH}`,
   description: `Free cold outreach script generator across ${PLATFORMS.length} platforms and 5 angles, producing ${DM_TEMPLATES.length} personalized scripts from a niche, offer, and proof point.`,
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -90,6 +98,7 @@ export default function ColdDmGeneratorPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

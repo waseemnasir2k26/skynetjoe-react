@@ -1,20 +1,26 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
 import { Sparkles, Film, Layers, Zap } from "lucide-react";
 
 const PATH = "/tools/video-prompt-generator";
 
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "AI Video Prompt Generator", url: `${SITE.url}${PATH}` },
+]);
+
 export const metadata: Metadata = {
   title:
-    "Video Prompt Generator — Runway, Pika, Sora & Veo prompts in one click · SkynetLabs",
+    "Free AI Video Prompt Generator — Runway, Pika, Sora & Veo Prompts in One Click",
   description:
     "Free AI video prompt builder. Pick a subject, camera, mood, lighting, duration. Get production-ready prompts in 4 formats — Runway, Pika, Sora, Veo. Copy + ship.",
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
-    title:
-      "Video Prompt Generator · Runway, Pika, Sora, Veo in one click",
+    title: "Video Prompt Generator · Runway, Pika, Sora, Veo in one click",
     description:
       "Generate AI video prompts in 4 formats side-by-side. Free, no email gate. Built for creators who ship.",
     url: `${SITE.url}${PATH}`,
@@ -58,6 +64,7 @@ const softwareSchema = {
   description:
     "Free interactive prompt builder for AI video generation. Composes the same scene description in 4 model-native formats — Runway Gen-3, Pika, Sora, and Veo — side-by-side with one-click copy.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -92,11 +99,17 @@ export default function VideoPromptGeneratorPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}
       <section
-        style={{ position: "relative", padding: "96px 0 48px", background: "var(--cream-3)", borderBottom: "1px solid var(--border)" }}
+        style={{
+          position: "relative",
+          padding: "96px 0 48px",
+          background: "var(--cream-3)",
+          borderBottom: "1px solid var(--border)",
+        }}
       >
         <div className="container-x px-6 relative z-10">
           <div className="max-w-3xl">
@@ -114,7 +127,17 @@ export default function VideoPromptGeneratorPage() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6.5vw, 72px)", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.04, color: "var(--ink)", marginBottom: 22 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(42px, 6.5vw, 72px)",
+                fontWeight: 500,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.04,
+                color: "var(--ink)",
+                marginBottom: 22,
+              }}
+            >
               One scene.{" "}
               <span
                 style={{
@@ -130,16 +153,31 @@ export default function VideoPromptGeneratorPage() {
               </span>
             </h1>
 
-            <p style={{ fontSize: 18, color: "var(--ink-2)", lineHeight: 1.6, marginBottom: 14, maxWidth: "52ch" }}>
+            <p
+              style={{
+                fontSize: 18,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                marginBottom: 14,
+                maxWidth: "52ch",
+              }}
+            >
               Pick your subject, camera move, mood, lighting, duration, style
               and aspect ratio. The generator composes the same scene in 4
-              model-native formats — Runway, Pika, Sora, Veo — so you paste
-              into whichever you&apos;re running today.
+              model-native formats — Runway, Pika, Sora, Veo — so you paste into
+              whichever you&apos;re running today.
             </p>
-            <p style={{ fontSize: 15, color: "var(--ink-2)", lineHeight: 1.6, maxWidth: "52ch" }}>
-              Each format speaks the model&apos;s native voice. Pika gets
-              motion tags. Runway gets technical params. Sora gets
-              cinematographic narration. Veo gets structured key:value.
+            <p
+              style={{
+                fontSize: 15,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                maxWidth: "52ch",
+              }}
+            >
+              Each format speaks the model&apos;s native voice. Pika gets motion
+              tags. Runway gets technical params. Sora gets cinematographic
+              narration. Veo gets structured key:value.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
@@ -210,17 +248,16 @@ export default function VideoPromptGeneratorPage() {
             <div
               className="rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"
               style={{
-                background:
-                  "var(--ink)",
+                background: "var(--ink)",
               }}
             >
               <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--ink)] mb-4">
                 Want a full AI video pipeline, not just prompts?
               </h2>
               <p className="text-base md:text-lg text-[var(--ink-2)] mb-6 max-w-2xl mx-auto">
-                Generating prompts is step one. We build n8n pipelines that
-                pump 30+ AI-generated reels a month into your social channels
-                on autopilot. Book a call.
+                Generating prompts is step one. We build n8n pipelines that pump
+                30+ AI-generated reels a month into your social channels on
+                autopilot. Book a call.
               </p>
               <a
                 href="https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=video-prompt-generator"

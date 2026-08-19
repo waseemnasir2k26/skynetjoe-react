@@ -131,7 +131,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What's the difference between this and just hiring a Zapier consultant?",
-    a: "Zapier hits a wall at about 100 tasks per minute and $200/month for any real freight ops workflow — and most Texas dispatch flows blow past both within 2 weeks. n8n is self-hosted (we deploy in your AWS or DigitalOcean tenant), has no task cap, costs about $20/month to run, and gives you a visual canvas plus full Postgres audit logging. The freight ops we've migrated off Zapier cut their automation bill by 88% on average inside the first month.",
+    a: "Zapier hits a wall at about 100 tasks per minute and $200/month for any real freight ops workflow — and most Texas dispatch flows blow past both within 2 weeks. n8n is self-hosted (we deploy in your AWS or DigitalOcean tenant), has no task cap, costs about $20/month to run, and gives you a visual canvas plus full Postgres audit logging. Self-hosting typically cuts the automation bill to a fraction of Zapier's per-task pricing.",
   },
 ];
 
@@ -641,32 +641,33 @@ export default function TexasFreightGuide() {
           <div className="max-w-4xl mb-12">
             <div className="mb-4" style={eyebrow}>
               <span style={eyebrowRule} />
-              Real Texas freight builds
+              Example scenarios — illustrative, not client case studies
             </div>
             <h2 style={h2Style}>
-              Three teasers from the last <em style={emTerra}>18 months</em>.
+              What we&apos;d build for a{" "}
+              <em style={emTerra}>Texas freight operator</em>.
             </h2>
           </div>
 
           <RevealGroup className="grid md:grid-cols-3 gap-6">
             {[
               {
-                metro: "Houston midstream",
-                metric: "14 hrs/week",
-                metricLabel: "ops time recovered",
-                body: "32-truck water-haul + frac-sand operator out of Cypress, TX. Replaced a 14-hour weekly JIB reconciliation spreadsheet with an n8n flow pulling from FieldTicket Pro into NetSuite. Driver onboarding cut from 11 days to 3 days via GoHighLevel ISNetworld + Avetta document collection. Stack: n8n + NetSuite + GoHighLevel + Samsara.",
+                metro: "Houston midstream — example",
+                metric: "Ops time back",
+                metricLabel: "example scenario",
+                body: "For a water-haul or frac-sand operator: replace the weekly JIB reconciliation spreadsheet with an n8n flow pulling field tickets into NetSuite, and compress driver onboarding with GoHighLevel-driven ISNetworld + Avetta document collection. Stack: n8n + NetSuite + GoHighLevel + Samsara.",
               },
               {
-                metro: "Dallas wholesale",
-                metric: "Accessorials recovered",
-                metricLabel: "accessorial recovery",
-                body: "Mid-market DFW wholesale carrier serving 14 retail accounts. EDI 856/810 round-trip with audit logging plus a detention + lumper auto-billing engine. Recovers detention and lumper accessorials that were previously written off. Stack: n8n + McLeod LoadMaster + SPS Commerce + Stripe.",
+                metro: "Dallas wholesale — example",
+                metric: "Accessorials billed",
+                metricLabel: "example scenario",
+                body: "For a mid-market DFW wholesale carrier: EDI 856/810 round-trip with audit logging plus a detention + lumper auto-billing engine, so accessorials that usually get written off are invoiced automatically. Stack: n8n + McLeod LoadMaster + SPS Commerce + Stripe.",
               },
               {
-                metro: "Austin tech-trucking",
-                metric: "Carriers paid on POD",
-                metricLabel: "carrier payments",
-                body: "API-first brokerage founded by ex-Coyote alumni. Built a Plaid-fired QuickPay flow that pays carriers within 24 hours of POD verification. Carriers get paid within 24 hours of POD verification instead of waiting on a monthly cycle. Stack: n8n + Plaid + Project44 + custom Python core.",
+                metro: "Austin tech-trucking — example",
+                metric: "Pay on POD",
+                metricLabel: "example scenario",
+                body: "For an API-first brokerage: a Plaid-fired QuickPay flow that pays carriers on POD verification instead of a monthly cycle. Stack: n8n + Plaid + Project44 + custom Python core.",
               },
             ].map((c) => (
               <RevealItem key={c.metro} style={card}>
@@ -873,8 +874,7 @@ export default function TexasFreightGuide() {
               }}
             >
               Fixed scope. Public pricing. 8-day ship window. Built remotely
-              from Bali by founder Waseem Nasir. No quote dance, no SOW
-              theater.
+              from Bali by founder Waseem Nasir. No quote dance, no SOW theater.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link

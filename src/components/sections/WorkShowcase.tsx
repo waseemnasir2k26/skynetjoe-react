@@ -1,7 +1,8 @@
 "use client";
 
 /**
- * WorkShowcase — /portfolio gallery of 47 shipped builds, filterable by
+ * WorkShowcase — /portfolio gallery of all builds (client, flagship, portal,
+ * and self-initiated niche demos), filterable by
  * category (client / flagship / portal / demo) with animated reflow.
  *
  * Cream-pivot port 2026-05-25:
@@ -414,7 +415,7 @@ export default function WorkShowcase() {
                   lineHeight: 1.55,
                 }}
               >
-                3-min brief · 8-hour reply · 4 slots/month.
+                3-min brief · 8-hour reply · limited slots.
               </div>
             </div>
           </div>

@@ -2,10 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Builder from "./Builder";
 import { Sparkles, Timer, ShieldCheck, FileText } from "lucide-react";
 
 const PATH = "/tools/voice-persona-builder";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "Voice Persona Builder", url: `${SITE.url}${PATH}` },
+]);
 const CAL_URL =
   "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=voice-persona-builder";
 
@@ -59,6 +66,7 @@ const softwareSchema = {
   description:
     "Free 4-step web tool that generates a Brand Voice Profile document and AI system prompt from identity, 8 tone sliders, vocabulary lists and writing samples.",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  dateModified: "2026-08-19",
   provider: {
     "@type": "Organization",
     "@id": `${SITE.url}/#organization`,
@@ -118,6 +126,7 @@ export default function VoicePersonaBuilderPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

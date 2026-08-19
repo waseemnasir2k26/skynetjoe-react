@@ -29,14 +29,14 @@ const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 export const metadata: Metadata = {
   title:
-    "Vibe Coding by SkynetLabs — Ship Real Apps in 5–14 Days with Claude Code + the AI Toolchain",
+    "Vibe Coding — Ship Real Apps in 5–14 Days with Claude Code + the AI Toolchain",
   description:
     "Vibe coding is Waseem Nasir's human-led, AI-paired build workflow from Bali. Claude Code as primary, Cursor + Replit + Codex + Gemini as backup. Ship in 5–14 days.",
   alternates: { canonical: `${SITE.url}/vibe-coding` },
   openGraph: {
     title: "Vibe Coding by SkynetLabs — Real Human, AI Pair, 5–14 Day Ship",
     description:
-      "Human-led, AI-paired builds from Bali. Claude Code primary + Cursor/Replit/Codex/Gemini. Real Waseem at a real keyboard, just typing 12x faster.",
+      "Human-led, AI-paired builds from Bali. Claude Code primary + Cursor/Replit/Codex/Gemini. Real Waseem at a real keyboard, just shipping far faster.",
     url: `${SITE.url}/vibe-coding`,
     type: "website",
     images: [
@@ -89,8 +89,7 @@ const toolchain = [
     name: "Claude Code",
     badge: "Primary",
     role: "The brain. Long-context refactors, multi-file edits, agent loops.",
-    when:
-      "Every build. From the first scaffold to the final deploy. It reads the whole repo and plans the work.",
+    when: "Every build. From the first scaffold to the final deploy. It reads the whole repo and plans the work.",
     icon: Brain,
     accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
@@ -98,8 +97,7 @@ const toolchain = [
     name: "Replit",
     badge: "Speed",
     role: "When the deploy needs to be live in 8 minutes.",
-    when:
-      "Throwaway demos, client pitch sandboxes, the 'can you just show me' builds that don't deserve a full repo.",
+    when: "Throwaway demos, client pitch sandboxes, the 'can you just show me' builds that don't deserve a full repo.",
     icon: Rocket,
     accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
@@ -107,8 +105,7 @@ const toolchain = [
     name: "Cursor",
     badge: "IDE",
     role: "When you want IDE-grade inline edits.",
-    when:
-      "Mid-build, when I'm touching specific files and want tab-complete + a small chat that sees only the open buffer.",
+    when: "Mid-build, when I'm touching specific files and want tab-complete + a small chat that sees only the open buffer.",
     icon: Code2,
     accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
@@ -116,8 +113,7 @@ const toolchain = [
     name: "Codex",
     badge: "Volume",
     role: "Heavy code-gen, batch boilerplate, throwaway scripts.",
-    when:
-      "When I need 40 similar API route handlers, or a CSV-to-TS-types pipeline. It's the boring-bulk specialist.",
+    when: "When I need 40 similar API route handlers, or a CSV-to-TS-types pipeline. It's the boring-bulk specialist.",
     icon: FileCode,
     accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
@@ -125,8 +121,7 @@ const toolchain = [
     name: "Gemini",
     badge: "Context",
     role: "Long-doc analysis, big-context image grounding.",
-    when:
-      "When the client sends a 90-page PDF spec, or 30 screenshots of their old site. Million-token window earns its keep.",
+    when: "When the client sends a 90-page PDF spec, or 30 screenshots of their old site. Million-token window earns its keep.",
     icon: Sparkles,
     accent: "from-[var(--terracotta)] to-[var(--ink)]",
   },
@@ -212,10 +207,10 @@ const buildTypes = [
 
 const shippedCases = [
   {
-    slug: "manhattan-dental-atelier-flagship",
-    title: "Manhattan dental atelier flagship",
-    outcome: "14-section bespoke Next.js, end-to-end in 12 days.",
-    tag: "Next.js + Tailwind",
+    slug: "northeast-recovery-brand-intake-rescue",
+    title: "Northeast US clinical recovery network",
+    outcome: "Brand kit + intake rebuild rescued in 1 working day.",
+    tag: "Google Sites + Apps Script",
   },
   {
     slug: "bali-wellness-conversion-funnel",
@@ -345,15 +340,15 @@ export default function VibeCodingPage() {
                     fontWeight: 700,
                   }}
                 >
-                  Just one that types 12x faster now.
+                  Just one that ships a lot faster now.
                 </em>
               </h1>
 
               <p className="text-lg md:text-xl text-[var(--ink-2)] leading-relaxed mb-4">
                 Vibe coding is how I (Waseem, the actual person you&apos;ll be
                 talking to) ship real apps, sites, and tools from a cafe in
-                Bali, with Claude Code as my pair partner and the rest of the
-                AI toolchain on the bench.
+                Bali, with Claude Code as my pair partner and the rest of the AI
+                toolchain on the bench.
               </p>
               <p className="text-base md:text-lg text-[var(--ink-2)] leading-relaxed mb-8">
                 5 to 14 days from brief to live. No agency layer, no PM email
@@ -476,15 +471,14 @@ export default function VibeCodingPage() {
                 &ldquo;
               </div>
               <p className="text-lg md:text-xl text-[var(--ink)] leading-[1.7]">
-                Vibe coding is a human-led, AI-paired build workflow in which
-                an experienced developer drives the design and judgment calls
-                while large language models like Claude Code, Cursor, and
-                Codex handle the typing, the scaffolding, and the
-                multi-file refactors. At SkynetLabs, Waseem Nasir runs the
-                workflow from Bali and ships production websites, Chrome
-                extensions, n8n nodes, and AI micro-products in a fixed 5 to
-                14 day window. The vibe is not the laptop. The vibe is the
-                builder.
+                Vibe coding is a human-led, AI-paired build workflow in which an
+                experienced developer drives the design and judgment calls while
+                large language models like Claude Code, Cursor, and Codex handle
+                the typing, the scaffolding, and the multi-file refactors. At
+                SkynetLabs, Waseem Nasir runs the workflow from Bali and ships
+                production websites, Chrome extensions, n8n nodes, and AI
+                micro-products in a fixed 5 to 14 day window. The vibe is not
+                the laptop. The vibe is the builder.
               </p>
             </div>
           </div>
@@ -521,7 +515,9 @@ export default function VibeCodingPage() {
                   SL
                 </div>
                 <div>
-                  <p className="font-bold text-[var(--ink)]">One builder. One inbox.</p>
+                  <p className="font-bold text-[var(--ink)]">
+                    One builder. One inbox.
+                  </p>
                   <p className="text-xs font-mono uppercase tracking-[0.12em] text-[#A8451F] mt-1">
                     Bali · GMT+8 · solo founder
                   </p>
@@ -559,21 +555,21 @@ export default function VibeCodingPage() {
                 </span>
               </h2>
               <p className="text-lg text-[var(--ink-2)] leading-relaxed mb-4">
-                I sit at the cafe under the brick arch in Canggu most
-                mornings. Blue polo, oat-milk americano, a 14-inch laptop, and
-                Claude Code humming in the terminal. That&apos;s where your
-                build happens. No offshored ticketing system, no &quot;your
-                account manager will be in touch&quot;, no AI-only agency.
+                I sit at the cafe under the brick arch in Canggu most mornings.
+                Blue polo, oat-milk americano, a 14-inch laptop, and Claude Code
+                humming in the terminal. That&apos;s where your build happens.
+                No offshored ticketing system, no &quot;your account manager
+                will be in touch&quot;, no AI-only agency.
               </p>
               <p className="text-lg text-[var(--ink-2)] leading-relaxed mb-4">
                 When you ping me on email, you get me. When we hop on a call,
-                you see my face. When something breaks on production at 2am
-                Bali time, you get a reply from me, not from a queue.
+                you see my face. When something breaks on production at 2am Bali
+                time, you get a reply from me, not from a queue.
               </p>
               <p className="text-base text-[var(--ink-2)] leading-relaxed">
-                The AI part of the stack is loud and impressive and it
-                deserves a page like this. The human part is the part that
-                actually decides if your thing is any good.
+                The AI part of the stack is loud and impressive and it deserves
+                a page like this. The human part is the part that actually
+                decides if your thing is any good.
               </p>
             </div>
           </div>
@@ -594,8 +590,8 @@ export default function VibeCodingPage() {
               </span>
             </h2>
             <p className="text-lg text-[var(--ink-2)]">
-              No single model is best at everything. Here&apos;s the lineup
-              and when each one comes in.
+              No single model is best at everything. Here&apos;s the lineup and
+              when each one comes in.
             </p>
           </div>
 
@@ -733,8 +729,8 @@ export default function VibeCodingPage() {
               </span>
             </h2>
             <p className="text-lg text-[var(--ink-2)]">
-              If it&apos;s code that ships in under two weeks, it probably
-              fits in one of these.
+              If it&apos;s code that ships in under two weeks, it probably fits
+              in one of these.
             </p>
           </div>
 
@@ -869,13 +865,13 @@ export default function VibeCodingPage() {
                 &rdquo;
               </p>
               <p className="text-base text-[var(--ink-2)] leading-relaxed">
-                A team of agents can scaffold a Next.js app in 90 seconds.
-                None of them know your client base. None of them know that
-                the dental atelier in Manhattan won&apos;t trust a site that
-                hides pricing. None of them know that a Bali wellness funnel
-                needs to address the &quot;is this only for people who
-                already meditate&quot; objection in the hero. That&apos;s the
-                judgment layer. That&apos;s what you&apos;re paying for.
+                A team of agents can scaffold a Next.js app in 90 seconds. None
+                of them know your client base. None of them know that the dental
+                atelier in Manhattan won&apos;t trust a site that hides pricing.
+                None of them know that a Bali wellness funnel needs to address
+                the &quot;is this only for people who already meditate&quot;
+                objection in the hero. That&apos;s the judgment layer.
+                That&apos;s what you&apos;re paying for.
               </p>
               <div className="mt-6 text-sm text-[var(--ink-2)]">
                 Waseem Nasir, founder, SkynetLabs

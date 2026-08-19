@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES, CAL_URL } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Link from "next/link";
 import Generator from "./Generator";
 import { Sparkles, Timer, ShieldCheck, Terminal } from "lucide-react";
 
 const PATH = "/tools/system-prompt-generator";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "System Prompt Generator", url: `${SITE.url}${PATH}` },
+]);
 const TOOL_CAL_URL = `${CAL_URL}?utm_source=system-prompt-generator`;
 
 export const metadata: Metadata = {
@@ -59,6 +66,7 @@ const softwareSchema = {
   description:
     "Free tool that turns role, constraints, tone and output format into a production-ready system prompt for custom GPTs and AI agents.",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  dateModified: "2026-08-19",
   provider: {
     "@type": "Organization",
     "@id": `${SITE.url}/#organization`,
@@ -99,6 +107,7 @@ export default function SystemPromptGeneratorPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

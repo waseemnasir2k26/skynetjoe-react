@@ -21,12 +21,18 @@ export type CategoryMeta = {
   maxScore: number;
 };
 
+// maxScore per category = the sum of that category's own question maxima
+// below (schema: 25+12, content: 15+10, crawlability: 10+10+10,
+// entity: 15+15, citations: 15). These MUST stay in sync with QUESTIONS —
+// a mismatch here previously let raw scores exceed 100 after normalization,
+// which broke bucketForScore's 0-100 range (a perfect score fell through to
+// the "Not Readable" fallback bucket). Fixed 2026-08-19.
 export const CATEGORIES: CategoryMeta[] = [
   {
     key: "schema",
     label: "Structured Data",
     short: "Schema.org / JSON-LD an engine can parse without guessing.",
-    maxScore: 25,
+    maxScore: 37,
   },
   {
     key: "content",
@@ -38,14 +44,14 @@ export const CATEGORIES: CategoryMeta[] = [
     key: "crawlability",
     label: "Crawlability",
     short: "robots.txt, llms.txt, sitemap, no JS-only rendering walls.",
-    maxScore: 20,
+    maxScore: 30,
   },
   {
     key: "entity",
     label: "Entity Clarity",
     short:
       "Who you are is unambiguous — Organization/Person markup, About page.",
-    maxScore: 15,
+    maxScore: 30,
   },
   {
     key: "citations",
@@ -362,9 +368,14 @@ export const BUCKETS: Bucket[] = [
 ];
 
 export function bucketForScore(score: number): Bucket {
+  // Clamp defensively: a normalized score should always land in [0,100], but
+  // if a future data change lets raw exceed MAX_SCORE, don't silently mislabel
+  // a top score as "Not Readable" (BUCKETS[0]) — fall to the nearest edge bucket.
+  if (score >= 100) return BUCKETS[BUCKETS.length - 1];
+  if (score <= 0) return BUCKETS[0];
   return (
     BUCKETS.find((b) => score >= b.range[0] && score <= b.range[1]) ??
-    BUCKETS[0]
+    BUCKETS[BUCKETS.length - 1]
   );
 }
 

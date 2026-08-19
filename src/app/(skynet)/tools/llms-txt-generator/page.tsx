@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
 import { FileCode2, Timer, ShieldCheck, FileText } from "lucide-react";
 
 const PATH = "/tools/llms-txt-generator";
 
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "llms.txt Generator", url: `${SITE.url}${PATH}` },
+]);
+
 export const metadata: Metadata = {
-  title: "llms.txt Generator — Free llmstxt.org Spec Builder · SkynetLabs",
+  title: "Free llms.txt Generator — Spec-Valid llmstxt.org File in Minutes",
   description:
     "Generate a valid llms.txt file from your site name, summary, sections, and docs URLs. Free, spec-compliant, copy or download. Enter your email to unlock the download.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -44,6 +51,10 @@ const faqs = [
     q: "Why do I need to enter my email to download?",
     a: "The copy and preview are free to use while you build it. I gate the download so I know who's generating one — mainly so I can follow up if you want help wiring the rest of your AEO setup.",
   },
+  {
+    q: "Do you actually use this on your own site?",
+    a: "Yes — skynetjoe.com's own llms.txt was built with this generator, not hand-written. You can see it live at skynetjoe.com/llms.txt.",
+  },
 ];
 
 const heroStats = [
@@ -74,6 +85,7 @@ const softwareSchema = {
   description:
     "Free tool that generates a spec-compliant llms.txt file from a site name, summary, context, and doc sections, per the llmstxt.org specification.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -90,6 +102,7 @@ export default function LlmsTxtGeneratorPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

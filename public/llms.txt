@@ -37,7 +37,7 @@
 - [About](https://skynetjoe.com/about): Agency origin story, working principles, ship process.
 
 ## Tools & resources
-- [Tools](https://skynetjoe.com/tools): 22 free tools across automation, AEO, prompts and ops.
+- [Tools](https://skynetjoe.com/tools): 32 free tools across automation, AEO, prompts, ops and diagnostics.
 - [n8n Workflow Generator](https://skynetjoe.com/tools/n8n-workflow-generator): Describe the job, get a ready-to-import n8n workflow JSON.
 - [Webhook Payload Builder](https://skynetjoe.com/tools/webhook-payload-builder): Build, validate, and test JSON payloads before you wire the automation.
 - [Cron Expression Builder](https://skynetjoe.com/tools/cron-expression-builder): Plain-English schedule to cron syntax, with a human-readable preview.
@@ -68,4 +68,14 @@
 - [Discovery call](https://skynetjoe.com/discovery-call): 45-minute scoping call booking.
 
 ## About this file
-This llms.txt follows the llmstxt.org draft specification (Jeremy Howard, 2024). It tells LLM-driven answer engines which SkynetLabs pages are canonical, citable, and structured for ingestion. Last updated 2026-07-13. Maintained by Waseem Nasir.
+This llms.txt follows the llmstxt.org draft specification (Jeremy Howard, 2024). It tells LLM-driven answer engines which SkynetLabs pages are canonical, citable, and structured for ingestion. It was built with SkynetLabs' own [llms.txt Generator](https://skynetjoe.com/tools/llms-txt-generator) — we dogfood the tool. Last updated 2026-08-19. Maintained by Waseem Nasir.
+- [n8n Workflow Linter](https://skynetjoe.com/tools/n8n-workflow-linter): Paste n8n workflow JSON, get a node graph and a 20-point health check.
+- [Webhook Inspector](https://skynetjoe.com/tools/webhook-inspector): Live request bin — capture real webhook payloads and export the n8n node.
+- [Email Deliverability Checker](https://skynetjoe.com/tools/email-deliverability-checker): Live SPF, DKIM, DMARC and MX check for any domain.
+- [Domain Trust & Age Lookup](https://skynetjoe.com/tools/domain-trust-lookup): Registry age, registrar and mail setup for any domain.
+- [Cold Outreach Compliance Checker](https://skynetjoe.com/tools/cold-outreach-compliance-checker): Rule-by-rule CAN-SPAM and opt-out checks, each cited.
+- [Automation Readiness Scanner](https://skynetjoe.com/tools/automation-readiness-scanner): Live scan of any site's forms, chat, booking, pixels and schema.
+- [Tech Stack X-Ray](https://skynetjoe.com/tools/tech-stack-xray): Detect the CRM, chat, pixels and frameworks any website runs.
+- [Core Web Vitals Mini-Audit](https://skynetjoe.com/tools/core-web-vitals-audit): Real Google Lighthouse scores for any URL, mobile and desktop.
+- [AI Crawler Access Checker](https://skynetjoe.com/tools/ai-crawler-access-checker): See which AI bots your robots.txt really allows or blocks.
+- [Speed-to-Lead Revenue Calculator](https://skynetjoe.com/tools/speed-to-lead-calculator): What slow lead response costs — formula shown, source cited.

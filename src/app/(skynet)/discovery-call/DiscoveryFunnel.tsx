@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CalendarClock,
-  Star,
   Hammer,
   Quote,
   ShieldCheck,
@@ -358,21 +357,6 @@ export default function DiscoveryFunnel() {
                   marginBottom: 28,
                 }}
               >
-                <span style={{ color: C.terraAA }}>
-                  <Star
-                    style={{
-                      display: "inline-block",
-                      width: 12,
-                      height: 12,
-                      verticalAlign: "-2px",
-                      marginRight: 4,
-                      fill: C.terra,
-                      stroke: "none",
-                    }}
-                  />
-                  4.9 / 5
-                </span>
-                <span style={{ margin: "0 12px", color: C.rule }}>·</span>
                 <span>
                   <span style={{ color: C.ink }}>180+</span> workflows
                 </span>

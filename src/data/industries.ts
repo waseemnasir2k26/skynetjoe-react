@@ -99,8 +99,8 @@ export const INDUSTRIES: Industry[] = [
       href: "/discovery-call",
     },
     heroCtaSecondary: {
-      label: "See dental case study",
-      href: "/case-studies/manhattan-dental-atelier-flagship",
+      label: "See case studies",
+      href: "/case-studies",
     },
     painPoints: [
       {
@@ -163,16 +163,6 @@ export const INDUSTRIES: Industry[] = [
     ],
     caseTeasers: [
       {
-        caseStudySlug: "manhattan-dental-atelier-flagship",
-        clientName: "Manhattan cosmetic dental atelier",
-        location: "Manhattan, NY",
-        oneLineOutcome:
-          "14-section flagship Next.js site with HIPAA-aware 4-step intake. Inquiry quality noticeably improved after launch.",
-        metricLabel: "Intake completion",
-        metricBefore: "Drop-off heavy",
-        metricAfter: "Consent-gated",
-      },
-      {
         caseStudySlug: null,
         clientName: "Private dental practice (anon)",
         location: "Karachi, PK",
@@ -198,7 +188,7 @@ export const INDUSTRIES: Industry[] = [
     bioHeadline:
       "Why I'm the right person to fix this for your dental practice",
     bioCopy:
-      "I shipped the Manhattan dental atelier flagship in 12 days, with a HIPAA-aware intake flow that gates on consent instead of leaking drop-offs. I know Dentrix, Open Dental and Eaglesoft well enough to integrate against their HL7 bridges without breaking your PMS.",
+      "I've shipped bespoke flagship sites with HIPAA-aware intake flows that gate on consent instead of leaking drop-offs. I know Dentrix, Open Dental and Eaglesoft well enough to integrate against their HL7 bridges without breaking your PMS.",
     pricingTiers: [
       {
         tierName: "Starter",

@@ -1,4 +1,5 @@
 import { Quote } from "lucide-react";
+import Reveal from "@/components/home/Reveal";
 
 // Quotes are sourced verbatim from src/lib/case-studies.ts (testimonialQuote /
 // testimonialAuthor), the one proof file with a no-fabrication policy in its
@@ -116,81 +117,82 @@ export default function Testimonials() {
           {QUOTES.map((q, i) => {
             const a = ACCENT[i % ACCENT.length];
             return (
-              <article
-                key={i}
-                style={{
-                  position: "relative",
-                  padding:
-                    "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4.5vw, 26px)",
-                  background: "var(--cream-2)",
-                  border: "1px solid rgba(26,26,26,0.12)",
-                  transform: `rotate(${a.rotate})`,
-                }}
-              >
-                <div
-                  aria-hidden
+              <Reveal key={i} delay={(i % 2) * 0.1}>
+                <article
                   style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 3,
-                    background: a.ruleColor,
-                  }}
-                />
-                <Quote
-                  style={{
-                    width: 32,
-                    height: 32,
-                    color: a.ruleColor,
-                    opacity: 0.4,
-                    position: "absolute",
-                    top: 18,
-                    right: 18,
-                  }}
-                />
-                <p
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    // Roman (non-italic) for mobile legibility — long serif
-                    // italic quote bodies tax readability. (P2 legibility)
-                    fontStyle: "normal",
-                    fontSize: "clamp(15px, 3.6vw, 17px)",
-                    color: "var(--ink)",
-                    lineHeight: 1.55,
-                    marginBottom: 18,
-                    paddingTop: 6,
-                    paddingRight: 40,
-                    maxWidth: "44ch",
+                    position: "relative",
+                    padding:
+                      "clamp(20px, 5vw, 28px) clamp(20px, 5vw, 28px) clamp(18px, 4.5vw, 26px)",
+                    background: "var(--cream-2)",
+                    border: "1px solid rgba(26,26,26,0.12)",
+                    transform: `rotate(${a.rotate})`,
                   }}
                 >
-                  &ldquo;{q.text}&rdquo;
-                </p>
-                <footer>
                   <div
+                    aria-hidden
                     style={{
-                      fontFamily: "var(--font-sans)",
-                      fontSize: 14,
-                      fontWeight: 700,
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: 3,
+                      background: a.ruleColor,
+                    }}
+                  />
+                  <Quote
+                    style={{
+                      width: 32,
+                      height: 32,
+                      color: a.ruleColor,
+                      opacity: 0.4,
+                      position: "absolute",
+                      top: 18,
+                      right: 18,
+                    }}
+                  />
+                  <p
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      // Roman (non-italic) for mobile legibility — long serif
+                      // italic quote bodies tax readability. (P2 legibility)
+                      fontStyle: "normal",
+                      fontSize: "clamp(15px, 3.6vw, 17px)",
                       color: "var(--ink)",
+                      lineHeight: 1.55,
+                      marginBottom: 18,
+                      paddingTop: 6,
+                      paddingRight: 40,
+                      maxWidth: "44ch",
                     }}
                   >
-                    {q.name}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 10,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.12em",
-                      color: "var(--ink-faint)",
-                      marginTop: 4,
-                    }}
-                  >
-                    — {q.role}
-                  </div>
-                </footer>
-              </article>
+                    &ldquo;{q.text}&rdquo;
+                  </p>
+                  <footer>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-sans)",
+                        fontSize: 14,
+                        fontWeight: 700,
+                        color: "var(--ink)",
+                      }}
+                    >
+                      {q.name}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 10,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                        color: "var(--ink-faint)",
+                        marginTop: 4,
+                      }}
+                    >
+                      — {q.role}
+                    </div>
+                  </footer>
+                </article>
+              </Reveal>
             );
           })}
         </div>

@@ -74,4 +74,11 @@ export type ServiceFunnelContent = {
   /** A SECOND mini proof receipt for proof variety. MUST ground to a real
    *  case study or be labelled representative (see PROOF RULE above). */
   secondaryProof?: { metric: string; client: string; detail: string };
+
+  /** "Try it free" cross-link strip to the matching /tools/* utilities —
+   *  closes the hub↔spoke↔money loop. Renders after the FAQ, before final CTA. */
+  freeTools?: {
+    label: string;
+    items: { label: string; href: string }[];
+  };
 };

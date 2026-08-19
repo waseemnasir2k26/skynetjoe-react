@@ -2,14 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Planner from "./Planner";
 import { BUSINESS_TYPES } from "@/data/tools/ghl-snapshots";
 import { GitBranch, Target, Webhook, ArrowRight } from "lucide-react";
 
 const PATH = "/tools/ghl-snapshot-planner";
 
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "GoHighLevel Snapshot Planner", url: `${SITE.url}${PATH}` },
+]);
+
 export const metadata: Metadata = {
-  title: "GoHighLevel Snapshot Template Planner · SkynetLabs",
+  title:
+    "Free GoHighLevel Snapshot Planner — Pipelines, Workflows & Fields Mapped",
   description:
     "Pick your business type, get a recommended GHL snapshot structure — pipelines, workflows, custom fields, calendars — as an exportable checklist.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -57,6 +65,7 @@ const softwareSchema = {
   description:
     "Free planning tool that recommends a GoHighLevel snapshot structure — pipelines, workflows, custom fields, and calendars — by business type, exportable as a checklist.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -73,6 +82,7 @@ export default function GhlSnapshotPlannerPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

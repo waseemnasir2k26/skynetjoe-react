@@ -460,12 +460,13 @@ export default async function StatePage({
               Every service, available in {s.name}
             </div>
             <h2 style={h2Style}>
-              16 builds for {s.name} <em style={emTerra}>operators.</em>
+              Remote-first — we build for {s.name}{" "}
+              <em style={emTerra}>operators.</em>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
               From {s.industries[0]} practices in {s.cities[0]} to{" "}
               {s.industries[1]} firms in {s.cities[1]} and {s.industries[2]}{" "}
-              operations in {s.cities[2]} — these 16 services are ready to ship
+              operations in {s.cities[2]} — these services are ready to ship
               into your stack.
             </p>
           </div>

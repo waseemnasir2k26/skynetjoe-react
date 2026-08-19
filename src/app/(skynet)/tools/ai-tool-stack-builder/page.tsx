@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Builder from "./Builder";
 import { ROLE_OPTIONS, GOAL_OPTIONS } from "@/data/tools/ai-tool-stack";
 import { Sparkles, LayoutGrid, Workflow, Target } from "lucide-react";
 
 const PATH = "/tools/ai-tool-stack-builder";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "AI Tool Stack Builder", url: `${SITE.url}${PATH}` },
+]);
 
 export const metadata: Metadata = {
   title: "AI Tool Stack Builder — Free Personalized Stack",
@@ -74,6 +81,7 @@ const softwareSchema = {
   url: `${SITE.url}${PATH}`,
   description: `Free tool that recommends an AI tool stack from ${ROLE_OPTIONS.length} roles and ${GOAL_OPTIONS.length} goals, with a static n8n automation-glue suggestion per combination.`,
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -90,6 +98,7 @@ export default function AiToolStackBuilderPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

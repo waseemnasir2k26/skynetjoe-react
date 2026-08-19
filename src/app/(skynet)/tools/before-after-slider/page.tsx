@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, howToSchema } from "@/lib/schema";
 import Slider from "./Slider";
 import { SCENARIOS } from "@/data/before-after-scenarios";
 import { Sparkles, Hand, ShieldCheck } from "lucide-react";
 
 const PATH = "/tools/before-after-slider";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "Before/After Slider", url: `${SITE.url}${PATH}` },
+]);
 
 export const metadata: Metadata = {
   title: "Before/After Slider — see what AI automation actually does",
@@ -56,6 +63,7 @@ const softwareSchema = {
   description:
     "Interactive drag-to-compare slider showing six manual-versus-automated workflow scenarios with KPI deltas for lead response, content production, customer service, CRM data entry, reporting and lead qualification.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
   publisher: { "@id": `${SITE.url}/#organization` },
 };
 
@@ -100,11 +108,37 @@ const faqSchema = {
   })),
 };
 
+const howToSteps = howToSchema({
+  name: "How to use the Before/After Slider",
+  description:
+    "Compare a manual workflow against its automated version for six common business processes.",
+  steps: [
+    {
+      name: "Pick a scenario",
+      text: "Pick the scenario closest to your own workflow.",
+    },
+    {
+      name: "Drag the handle",
+      text: "Drag the handle to compare the manual and automated steps.",
+    },
+    {
+      name: "Read the delta",
+      text: "Read the KPI delta under the slider — that's the gap worth closing.",
+    },
+    {
+      name: "Book a call",
+      text: "Book a call if the gap looks worth building against.",
+    },
+  ],
+});
+
 export default function BeforeAfterSliderPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
       <JsonLd data={itemListSchema} />
+      <JsonLd data={breadcrumbListSchema} />
+      <JsonLd data={howToSteps} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}
@@ -197,6 +231,88 @@ export default function BeforeAfterSliderPage() {
         <div className="container-x px-6">
           <div className="max-w-5xl mx-auto">
             <Slider />
+          </div>
+        </div>
+      </section>
+
+      {/* WHY THIS EXISTS */}
+      <section className="section pt-0">
+        <div className="container-x px-6">
+          <div className="max-w-3xl mx-auto">
+            <div className="rounded-3xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-8 md:p-12">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--terracotta-aa)] font-semibold mb-3">
+                Why this tool exists
+              </p>
+              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-6 text-[var(--ink)]">
+                &quot;Automation saves time&quot; is a claim. This is a picture.
+              </h2>
+              <div className="space-y-5 text-[var(--ink-2)] leading-relaxed text-base md:text-lg">
+                <p>
+                  Most automation pitches lead with a percentage. Percentages
+                  are easy to write and easy to ignore. Dragging a slider and
+                  watching a five-step manual process collapse into one
+                  automated step lands differently — it&apos;s the same reason
+                  before/after photos work in every other industry.
+                </p>
+                <p>
+                  Each of the six scenarios is a workflow shape we&apos;ve
+                  actually built — lead response, content production, customer
+                  service, CRM data entry, reporting, lead qualification. Pick
+                  the one closest to your own bottleneck and use the delta as a
+                  starting estimate, not a guarantee.
+                </p>
+              </div>
+              <h3 className="text-lg font-bold mt-8 mb-3 text-[var(--ink)]">
+                How to use it
+              </h3>
+              <ol className="space-y-2 text-[var(--ink-2)] text-sm md:text-base list-decimal list-inside">
+                <li>Pick the scenario closest to your own workflow.</li>
+                <li>
+                  Drag the handle to compare the manual and automated steps.
+                </li>
+                <li>
+                  Read the KPI delta under the slider — that&apos;s the gap
+                  worth closing.
+                </li>
+                <li>Book a call if the gap looks worth building against.</li>
+              </ol>
+              <h3 className="text-lg font-bold mt-8 mb-3 text-[var(--ink)]">
+                Who this is for
+              </h3>
+              <ul className="space-y-2 text-[var(--ink-2)] text-sm md:text-base list-disc list-inside">
+                <li>
+                  Founders scoping whether an automation build is worth the
+                  spend.
+                </li>
+                <li>
+                  Ops leads building the internal case for a workflow change.
+                </li>
+                <li>
+                  Agencies pitching automation who need a visual, not a slide of
+                  bullet points.
+                </li>
+              </ul>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href="/tools/automation-gap-analyzer"
+                  className="text-sm font-semibold text-[var(--terracotta-aa)] hover:underline"
+                >
+                  → Find your own automation gap
+                </a>
+                <a
+                  href="/tools/n8n-workflow-generator"
+                  className="text-sm font-semibold text-[var(--terracotta-aa)] hover:underline"
+                >
+                  → Generate an n8n workflow
+                </a>
+                <a
+                  href="/services/n8n-automation"
+                  className="text-sm font-semibold text-[var(--terracotta-aa)] hover:underline"
+                >
+                  → n8n automation service
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Calendar from "./Calendar";
 import { Sparkles, CalendarDays, Layers, Download } from "lucide-react";
 
 const PATH = "/tools/content-calendar";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "Content Calendar Generator", url: `${SITE.url}${PATH}` },
+]);
 const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=content-calendar";
 
 export const metadata: Metadata = {
@@ -59,6 +66,7 @@ const softwareSchema = {
   description:
     "Free browser tool that generates a 30-day cross-platform content calendar from niche, audience and posting cadence, with CSV, ICS and markdown export.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
   provider: {
     "@type": "Organization",
     "@id": `${SITE.url}/#organization`,
@@ -95,6 +103,7 @@ export default function ContentCalendarPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

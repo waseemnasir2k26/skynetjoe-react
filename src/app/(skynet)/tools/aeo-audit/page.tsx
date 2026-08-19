@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Quiz from "./Quiz";
 import {
   QUESTIONS,
@@ -11,6 +12,12 @@ import {
 import { SearchCheck, Timer, ShieldCheck, ListChecks } from "lucide-react";
 
 const PATH = "/tools/aeo-audit";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "AEO Audit", url: `${SITE.url}${PATH}` },
+]);
 
 export const metadata: Metadata = {
   title: "AEO Audit — Free AI Readiness Checker",
@@ -99,6 +106,7 @@ const softwareSchema = {
   url: `${SITE.url}${PATH}`,
   description: `Free heuristic diagnostic that scores AI answer engine readiness across ${QUESTIONS.length} questions (raw max ${MAX_SCORE}), normalized to a 0-100 score across 5 categories, and routes results to a prioritized fix list.`,
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -116,6 +124,7 @@ export default function AeoAuditPage() {
     <>
       <JsonLd data={quizSchema} />
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

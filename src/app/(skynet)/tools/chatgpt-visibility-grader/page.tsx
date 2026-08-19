@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Quiz from "./Quiz";
 import {
   QUESTIONS,
@@ -17,9 +18,14 @@ import {
 
 const PATH = "/tools/chatgpt-visibility-grader";
 
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "ChatGPT Visibility Grader", url: `${SITE.url}${PATH}` },
+]);
+
 export const metadata: Metadata = {
-  title:
-    "ChatGPT Visibility Grader — Is Your Brand Visible to AI? · SkynetLabs",
+  title: "Free ChatGPT Visibility Grader — Is Your Brand Visible to AI?",
   description:
     "9-question heuristic grader for AI chat visibility. Score coverage, structured citations, identity consistency, and content authority. Enter your email to unlock the full roadmap.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -107,6 +113,7 @@ const softwareSchema = {
   url: `${SITE.url}${PATH}`,
   description: `Free heuristic diagnostic that scores AI chat visibility inputs across ${QUESTIONS.length} questions (raw max ${MAX_SCORE}), normalized to a 0-100 score across 4 categories, with a prioritized roadmap.`,
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -124,6 +131,7 @@ export default function ChatgptVisibilityPage() {
     <>
       <JsonLd data={quizSchema} />
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

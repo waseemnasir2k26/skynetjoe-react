@@ -10,12 +10,12 @@ import { WORK_BUILDS } from "@/lib/work-builds";
 export const metadata: Metadata = {
   title: "Portfolio — Recent Projects",
   description:
-    "Live screenshots of every shipped SkynetLabs build: dental flagship, real estate, wellness, HVAC, logistics, legal, healthcare. 47 deployed sites. Built solo from Bali by Waseem Nasir.",
+    "Live screenshots of every SkynetLabs build: 21 client & flagship builds plus 26 niche demos — dental, real estate, wellness, logistics, legal, healthcare. Built solo from Bali by Waseem Nasir.",
   alternates: { canonical: `${SITE.url}/portfolio` },
   openGraph: {
     title: "SkynetLabs Portfolio — Recent Projects",
     description:
-      "Live screenshots of 47 shipped builds. Filter by category, click any tile for the deployed site.",
+      "Live screenshots of 21 client & flagship builds and 26 niche demos. Filter by category, click any tile for the deployed site.",
     url: `${SITE.url}/portfolio`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -102,9 +102,9 @@ export default function PortfolioPage() {
               maxWidth: "20ch",
             }}
           >
-            47 shipped builds.{" "}
+            21 client &amp; flagship builds.{" "}
             <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-              Real receipts.
+              26 niche demos.
             </span>
           </h1>
           <p
@@ -116,9 +116,10 @@ export default function PortfolioPage() {
               margin: 0,
             }}
           >
-            Live screenshots of every site I&apos;ve shipped — dental, real
-            estate, wellness, HVAC, logistics, legal, healthcare. Click any tile
-            to open the deployed site. Built solo from Bali.
+            Live screenshots of every build — client work, flagship demos, and
+            self-initiated niche concepts across dental, real estate, wellness,
+            logistics, legal, healthcare. Click any tile to open the deployed
+            site. Built solo from Bali.
           </p>
         </Reveal>
       </section>

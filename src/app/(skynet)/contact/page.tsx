@@ -16,13 +16,23 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-label="LinkedIn" className={className}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-label="LinkedIn"
+    className={className}
+  >
     <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.78C.8 0 0 .77 0 1.73v20.54C0 23.23.8 24 1.78 24h20.44C23.2 24 24 23.23 24 22.27V1.73C24 .77 23.2 0 22.22 0z" />
   </svg>
 );
 
 const GithubIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub" className={className}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-label="GitHub"
+    className={className}
+  >
     <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
   </svg>
 );
@@ -111,17 +121,49 @@ const channels = [
 ];
 
 const guarantees = [
-  { icon: Clock, title: "8-hour reply", body: "On weekdays. Bali is GMT+8 — your morning is my afternoon." },
-  { icon: Zap, title: "48-hour fixed scope", body: "Send a brief, get back a one-pager with price and timeline." },
-  { icon: ShieldCheck, title: "No NDA dance", body: "I sign yours, you don't sign mine. Or skip it entirely." },
-  { icon: Globe, title: "9 countries served", body: "Bali, Pakistan, US, UK, France, Australia, UAE, Singapore, Italy." },
+  {
+    icon: Clock,
+    title: "8-hour reply",
+    body: "On weekdays. Bali is GMT+8 — your morning is my afternoon.",
+  },
+  {
+    icon: Zap,
+    title: "48-hour fixed scope",
+    body: "Send a brief, get back a one-pager with price and timeline.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "No NDA dance",
+    body: "I sign yours, you don't sign mine. Or skip it entirely.",
+  },
+  {
+    icon: Globe,
+    title: "9 countries served",
+    body: "Bali, Pakistan, US, UK, France, Australia, UAE, Singapore, Italy.",
+  },
 ];
 
 const expect = [
-  { step: "01", title: "You send a brief", body: "Bullet points are fine. Loom video is great. Don't pre-design — that's my job." },
-  { step: "02", title: "I reply within 8 hours", body: "Either a clarifying question or 'this is doable — scope in 48h'." },
-  { step: "03", title: "Fixed scope arrives", body: "One pager: deliverables, price, timeline, stack. No surprises." },
-  { step: "04", title: "You say yes/no", body: "If yes: 50% deposit, work starts in 24h. If no: file stays useful — yours." },
+  {
+    step: "01",
+    title: "You send a brief",
+    body: "Bullet points are fine. Loom video is great. Don't pre-design — that's my job.",
+  },
+  {
+    step: "02",
+    title: "I reply within 8 hours",
+    body: "Either a clarifying question or 'this is doable — scope in 48h'.",
+  },
+  {
+    step: "03",
+    title: "Fixed scope arrives",
+    body: "One pager: deliverables, price, timeline, stack. No surprises.",
+  },
+  {
+    step: "04",
+    title: "You say yes/no",
+    body: "If yes: 50% deposit, work starts in 24h. If no: file stays useful — yours.",
+  },
 ];
 
 const eyebrow = (text: string, color = "var(--terracotta-aa)") => (
@@ -176,7 +218,7 @@ export default function ContactPage() {
             }
           `}</style>
           <Reveal initialVisible>
-            {eyebrow("Open for 2 builds — June 2026")}
+            {eyebrow("Currently taking a limited number of builds")}
             <h1
               style={{
                 fontFamily: "var(--font-display)",
@@ -205,7 +247,9 @@ export default function ContactPage() {
               The fastest way to work with me: skip the discovery dance. Email a
               one-pager, ping me on LinkedIn, or open live chat bottom-right —
               I&apos;ll{" "}
-              <strong style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+              <strong
+                style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}
+              >
                 reply in 8h · scope in 48h
               </strong>
               . If I&apos;m not the right fit, I&apos;ll tell you who is.
@@ -337,7 +381,12 @@ export default function ContactPage() {
 
       {/* CHANNELS */}
       <section
-        style={{ padding: "72px 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
+        style={{
+          padding: "72px 0",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
           <div style={{ maxWidth: 700, marginBottom: 32 }}>
@@ -359,11 +408,18 @@ export default function ContactPage() {
               </span>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
-              All four hit the same inbox. Use whichever feels least like homework.
+              All four hit the same inbox. Use whichever feels least like
+              homework.
             </p>
           </div>
 
-          <Reveal style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+          <Reveal
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: 16,
+            }}
+          >
             {channels.map((c, i) => {
               const Icon = c.icon;
               const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
@@ -372,7 +428,11 @@ export default function ContactPage() {
                   key={c.name}
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
-                  rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  rel={
+                    c.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                   style={{
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.12)",
@@ -396,7 +456,14 @@ export default function ContactPage() {
                   >
                     <Icon className="w-5 h-5" />
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      marginBottom: 6,
+                    }}
+                  >
                     <h3
                       style={{
                         fontFamily: "var(--font-display)",
@@ -425,7 +492,14 @@ export default function ContactPage() {
                       {c.badge}
                     </span>
                   </div>
-                  <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.55, margin: "0 0 12px" }}>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: "var(--ink-2)",
+                      lineHeight: 1.55,
+                      margin: "0 0 12px",
+                    }}
+                  >
                     {c.desc}
                   </p>
                   <div
@@ -476,14 +550,22 @@ export default function ContactPage() {
               }}
             >
               Four steps,{" "}
-              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>zero funnel.</span>
+              <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+                zero funnel.
+              </span>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
               No CRM auto-replies. No discovery-call upsell. No 14-day follow-up
               sequence. Just one human writing back.
             </p>
           </div>
-          <RevealGroup style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+          <RevealGroup
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: 16,
+            }}
+          >
             {expect.map((e, i) => (
               <RevealItem
                 key={e.step}
@@ -517,7 +599,14 @@ export default function ContactPage() {
                 >
                   {e.title}
                 </h3>
-                <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
+                <p
+                  style={{
+                    fontSize: 13,
+                    color: "var(--ink-2)",
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
                   {e.body}
                 </p>
               </RevealItem>
@@ -528,10 +617,21 @@ export default function ContactPage() {
 
       {/* GUARANTEES */}
       <section
-        style={{ padding: "72px 0", borderBottom: "1px solid rgba(26,26,26,0.10)", position: "relative", zIndex: 2 }}
+        style={{
+          padding: "72px 0",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+          position: "relative",
+          zIndex: 2,
+        }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
-          <RevealGroup style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+          <RevealGroup
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: 16,
+            }}
+          >
             {guarantees.map((g, i) => {
               const Icon = g.icon;
               return (
@@ -541,7 +641,8 @@ export default function ContactPage() {
                     background: "var(--cream-2)",
                     border: "1px solid rgba(26,26,26,0.12)",
                     padding: "22px",
-                    transform: i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
+                    transform:
+                      i % 2 === 0 ? "rotate(-0.2deg)" : "rotate(0.2deg)",
                   }}
                 >
                   <div
@@ -569,7 +670,14 @@ export default function ContactPage() {
                   >
                     {g.title}
                   </h3>
-                  <p style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.6, margin: 0 }}>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: "var(--ink-2)",
+                      lineHeight: 1.6,
+                      margin: 0,
+                    }}
+                  >
                     {g.body}
                   </p>
                 </RevealItem>
@@ -581,10 +689,29 @@ export default function ContactPage() {
 
       {/* CLOSER */}
       <section
-        style={{ padding: "88px 0", background: "var(--terracotta)", position: "relative", zIndex: 2 }}
+        style={{
+          padding: "88px 0",
+          background: "var(--terracotta)",
+          position: "relative",
+          zIndex: 2,
+        }}
       >
-        <Reveal style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
-          <CheckCircle2 style={{ width: 36, height: 36, color: "var(--cream-3)", margin: "0 auto 16px" }} />
+        <Reveal
+          style={{
+            maxWidth: 720,
+            margin: "0 auto",
+            padding: "0 24px",
+            textAlign: "center",
+          }}
+        >
+          <CheckCircle2
+            style={{
+              width: 36,
+              height: 36,
+              color: "var(--cream-3)",
+              margin: "0 auto 16px",
+            }}
+          />
           <h2
             style={{
               fontFamily: "var(--font-display)",
@@ -623,7 +750,14 @@ export default function ContactPage() {
             Worst case: you waste 2 minutes. Best case: your CRM, calendar and
             inbox stop fighting each other in 14 days.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 12,
+            }}
+          >
             <Link
               href="/discovery-call"
               style={{

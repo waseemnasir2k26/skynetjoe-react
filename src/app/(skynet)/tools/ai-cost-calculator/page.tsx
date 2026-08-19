@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Calculator from "./Calculator";
 import { LLM_PRICING, PRICING_AS_OF } from "@/data/tools/llm-pricing";
 import { Sparkles, Calculator as CalcIcon, Table, Copy } from "lucide-react";
 
 const PATH = "/tools/ai-cost-calculator";
+
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "LLM API Cost Calculator", url: `${SITE.url}${PATH}` },
+]);
 
 export const metadata: Metadata = {
   title: "LLM API Cost Calculator — Free Monthly Estimate",
@@ -72,8 +79,9 @@ const softwareSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   url: `${SITE.url}${PATH}`,
-  description: `Free calculator that estimates monthly LLM API spend across ${LLM_PRICING.length} models from Anthropic, OpenAI, and Google, based on token volume you provide. Pricing table ${PRICING_AS_OF}.`,
+  description: `Free calculator that estimates monthly LLM API spend across ${LLM_PRICING.length} models from Anthropic, OpenAI, and Google, based on token volume you provide. Pricing table is ${PRICING_AS_OF}.`,
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -90,6 +98,7 @@ export default function AiCostCalculatorPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}
@@ -165,8 +174,8 @@ export default function AiCostCalculatorPage() {
                 maxWidth: "52ch",
               }}
             >
-              Pricing table is {PRICING_AS_OF} — API pricing moves fast, so
-              treat every number as a directional estimate, not an invoice.
+              Pricing table is {PRICING_AS_OF}. API pricing moves fast, so treat
+              every number as a directional estimate, not an invoice.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">

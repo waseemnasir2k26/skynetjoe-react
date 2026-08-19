@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
 import { SCHEMA_TYPES } from "@/data/tools/schema-markup-generator";
 import { Braces, Timer, CheckCircle2, Layers } from "lucide-react";
 
 const PATH = "/tools/schema-markup-generator";
 
+const breadcrumbListSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Tools", url: `${SITE.url}/tools` },
+  { name: "Schema Markup Generator", url: `${SITE.url}${PATH}` },
+]);
+
 export const metadata: Metadata = {
-  title: "Schema Markup Generator — Free JSON-LD Builder · SkynetLabs",
+  title: "Free Schema Markup Generator — Clean JSON-LD in Minutes",
   description:
     "Pick a schema.org type — Organization, FAQPage, Article, LocalBusiness, or SoftwareApplication — fill in the form, and copy clean JSON-LD. Free, no email required.",
   alternates: { canonical: `${SITE.url}${PATH}` },
@@ -75,6 +82,7 @@ const softwareSchema = {
   description:
     "Free tool that generates clean JSON-LD structured data for Organization, FAQPage, Article, LocalBusiness, and SoftwareApplication schema.org types.",
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+  dateModified: "2026-08-19",
 };
 
 const faqSchema = {
@@ -91,6 +99,7 @@ export default function SchemaMarkupGeneratorPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
+      <JsonLd data={breadcrumbListSchema} />
       <JsonLd data={faqSchema} />
 
       {/* HERO */}

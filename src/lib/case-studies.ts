@@ -190,80 +190,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    slug: "manhattan-dental-atelier-flagship",
-    position: 3,
-    clientName: "Manhattan cosmetic dental atelier (anonymized)",
-    industry: "Cosmetic dentistry",
-    industryTag: "Websites",
-    location: "Manhattan, NY",
-    coverImage: "/case-studies/manhattan-dental-atelier-flagship.jpg",
-    oneLineOutcome:
-      "Shipped a 14-section bespoke Next.js flagship site end-to-end in 12 days.",
-    problemStatement: [
-      "A high-end Manhattan dental atelier was being pitched template-based clinic sites at $30-50k that all looked like every other concierge dental site in the city. Their referral base — Park Avenue concierge medicine, members-only clubs, financial-services HR — needed signals that the practice was not interchangeable.",
-      "The previous site was a Squarespace template with stock images, a Calendly link, and a contact form that didn't honor HIPAA-aware intake handling.",
-      "The brief was for a flagship build that looked bespoke at first glance, communicated tiered investment levels transparently, and gave new patients an intake flow that didn't ask for PHI in a plain text form field.",
-    ],
-    solutionStack: [
-      "Next.js (App Router)",
-      "Tailwind",
-      "Framer Motion",
-      "Vercel",
-      "HIPAA-aware intake form (multi-step)",
-      "Schema.org Dentist + MedicalBusiness",
-    ],
-    implementationPeriod: "12 days",
-    implementationBreakdown: [
-      "Day 1-2: Discovery, named-bench interviews, editorial reference moodboard.",
-      "Day 3-4: Designed 14-section flagship layout — press strip, named-doctor bios, tiered investment table, before/after gallery, HIPAA-aware 4-step intake.",
-      "Day 5-9: Build & content authoring (real copy, not lorem).",
-      "Day 10: SEO/AEO pass, schema, OG cards, sitemap.",
-      "Day 11: Stakeholder review + 2 rounds of micro-edits.",
-      "Day 12: DNS cutover, 301 map, live.",
-    ],
-    keyMetrics: [
-      {
-        label: "Time to ship",
-        before: "n/a",
-        after: "12 days",
-        delta: "end-to-end",
-      },
-      {
-        label: "Stack tools",
-        before: "4 paid",
-        after: "1 stack",
-        delta: "-75%",
-      },
-      {
-        label: "Intake completion",
-        before: "Drop-off heavy",
-        after: "Consent-gated multi-step",
-        delta: "fewer abandons",
-      },
-      {
-        label: "Inquiry quality",
-        before: "Tire-kickers",
-        after: "Qualified, priced-in",
-        delta: "better-fit leads",
-      },
-    ],
-    longFormStory: [
-      "The mistake most dental sites make is leading with the practice. We led with the named clinicians, their fellowship credentials, and the specific publications they'd been quoted in. Concierge referrers don't refer to 'a practice' — they refer to a person.",
-      "The tiered investment table was the single most uncomfortable conversation in the project. The owner had been advised by three previous agencies to never put prices on the site. We argued the opposite — that Park Avenue patients are insulted, not reassured, by 'investment ranges available upon consultation'. We won the argument. The table publishes three tiers with starting figures. Inquiry quality jumped immediately.",
-      "The HIPAA-aware intake form is the unglamorous win. It's a 4-step flow that collects identifying info in step 1, scheduling preference in step 2, and only asks for the medical context in step 3 after explicit consent. PHI never lands in a plain email — it routes to an encrypted intake channel.",
-    ],
-    testimonialQuote:
-      "Our last site cost five times more and looked like every other clinic in midtown. This one looks like us.",
-    testimonialAuthor: "Founding clinician, Manhattan dental atelier",
-    publishDate: "2026-04-02",
-    relatedServices: [
-      { slug: "vibe-coded-sites", label: "Vibe-Coded Websites" },
-      { slug: "branding-design", label: "Branding & Design" },
-    ],
-  },
-  {
     slug: "northeast-recovery-brand-intake-rescue",
-    position: 4,
+    position: 3,
     clientName: "Clinical recovery network, Northeast US",
     industry: "Clinical recovery & behavioral health",
     industryTag: "Consulting",
@@ -333,7 +261,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "us-insurance-gohighlevel-rebuild",
-    position: 5,
+    position: 4,
     clientName: "Insurance retainer client, US",
     industry: "Insurance",
     industryTag: "Automation",
@@ -398,7 +326,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "internal-carousel-content-engine-200-asset",
-    position: 6,
+    position: 5,
     clientName: "SkynetLabs internal R&D",
     industry: "Agency operations & content R&D",
     industryTag: "AI Content",
@@ -468,7 +396,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "premium-auto-dealership-network-demo",
-    position: 7,
+    position: 6,
     clientName: "Premium auto dealership network (anonymized)",
     industry: "Automotive retail",
     industryTag: "Websites",
@@ -505,7 +433,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       {
         label: "Reach with one founder",
         before: "n/a",
-        after: "9 countries",
+        after: "multiple countries",
         delta: "solo studio",
       },
       {
@@ -537,7 +465,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "ksa-fashion-retailer-shopify-ecommerce",
-    position: 8,
+    position: 7,
     clientName: "KSA fashion retailer (anonymized)",
     industry: "Fashion e-commerce (footwear)",
     industryTag: "Websites",
@@ -607,7 +535,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "saas-multi-channel-aeo-content-engine",
-    position: 9,
+    position: 8,
     clientName: "Multi-channel SaaS launch (anonymized)",
     industry: "SaaS / B2B software",
     industryTag: "AI Content",
