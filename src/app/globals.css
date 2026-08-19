@@ -1362,7 +1362,7 @@ code {
 .prose-wn h2,
 .prose-wn h3,
 .prose-wn h4 {
-  scroll-margin-top: 140px;
+  scroll-margin-top: calc(var(--promo-h, 44px) + 96px);
 }
 /* Article body images — framed, responsive, never overflow */
 .prose-wn img {

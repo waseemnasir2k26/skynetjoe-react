@@ -30,7 +30,7 @@ export default function HeroFunnel() {
         color: "var(--ink)",
         fontFamily: "var(--font-sans)",
         borderBottom: "1px solid rgba(26,26,26,0.12)",
-        paddingTop: "clamp(140px, 18vw + 44px, 188px)",
+        paddingTop: "calc(var(--promo-h, 44px) + clamp(96px, 18vw, 144px))",
         paddingBottom: "clamp(56px, 12vw, 112px)",
       }}
     >

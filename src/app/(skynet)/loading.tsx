@@ -28,7 +28,7 @@ export default function Loading() {
       `}</style>
       <section
         style={{
-          paddingTop: "clamp(140px, 18vw + 44px, 188px)",
+          paddingTop: "calc(var(--promo-h, 44px) + clamp(96px, 18vw, 144px))",
           paddingBottom: "clamp(56px, 12vw, 112px)",
         }}
       >

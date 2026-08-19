@@ -445,7 +445,7 @@ export default function Header() {
 
       {mobileOpen && (
         <div
-          className="lg:hidden backdrop-blur-md max-h-[calc(100vh-64px)] overflow-y-auto"
+          className="lg:hidden backdrop-blur-md max-h-[calc(100vh_-_64px_-_var(--promo-h,44px))] overflow-y-auto"
           style={{
             background: "rgba(242, 239, 230, 0.97)",
             borderTop: "1px solid var(--border)",

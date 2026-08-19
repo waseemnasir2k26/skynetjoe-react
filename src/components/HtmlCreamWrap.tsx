@@ -18,7 +18,7 @@ export default function HtmlCreamWrap({ html }: { html: string }) {
         color: "var(--ink)",
         position: "relative",
         zIndex: 2,
-        paddingTop: 88,
+        paddingTop: "calc(var(--promo-h, 44px) + 88px)",
       }}
     >
       <style>{`

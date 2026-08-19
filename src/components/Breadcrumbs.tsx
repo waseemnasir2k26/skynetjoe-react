@@ -78,7 +78,9 @@ export default function Breadcrumbs({
         style={{
           // When rendered above a hero that lacks the fixed-header offset,
           // clear the fixed Header (~56px tall) with breathing room.
-          paddingTop: offsetTop ? "clamp(88px, 14vw, 104px)" : undefined,
+          paddingTop: offsetTop
+            ? "calc(var(--promo-h, 44px) + clamp(88px, 14vw, 104px))"
+            : undefined,
           marginBottom,
         }}
       >
@@ -137,7 +139,10 @@ export default function Breadcrumbs({
                   </span>
                 )}
                 {!isLast && (
-                  <span aria-hidden="true" style={{ color: "var(--ink-faint)" }}>
+                  <span
+                    aria-hidden="true"
+                    style={{ color: "var(--ink-faint)" }}
+                  >
                     /
                   </span>
                 )}
