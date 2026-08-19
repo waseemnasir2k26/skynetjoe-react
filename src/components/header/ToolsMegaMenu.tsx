@@ -39,7 +39,11 @@ import {
   Layers,
   Gauge,
 } from "lucide-react";
-import { TOOL_CATEGORIES, toolsByCategory } from "@/data/tools-registry";
+import {
+  TOOL_CATEGORIES,
+  TOOLS_REGISTRY,
+  toolsByCategory,
+} from "@/data/tools-registry";
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   Workflow,
@@ -121,7 +125,7 @@ export default function ToolsMegaMenu({ onClose }: Props) {
               display: "inline-block",
             }}
           />
-          26 free tools, zero paywall
+          {TOOLS_REGISTRY.length} free tools, zero paywall
         </div>
 
         <div className="grid grid-cols-3 gap-x-8 gap-y-6">

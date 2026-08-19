@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { howToSchema, breadcrumbSchema } from "@/lib/schema";
+import { howToSchema } from "@/lib/schema";
 import Lookup from "./Lookup";
 import { Building2, Mail, ShieldCheck, ArrowRight } from "lucide-react";
 
@@ -108,18 +108,12 @@ const howTo = howToSchema({
   ],
 });
 
-const breadcrumbs = breadcrumbSchema([
-  { name: "Tools", url: `${SITE.url}/tools` },
-  { name: "Domain Trust & Age Lookup", url: `${SITE.url}${PATH}` },
-]);
-
 export default function DomainTrustLookupPage() {
   return (
     <>
       <JsonLd data={softwareSchema} />
       <JsonLd data={faqSchema} />
       <JsonLd data={howTo} />
-      <JsonLd data={breadcrumbs} />
 
       {/* HERO */}
       <section

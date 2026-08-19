@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { howToSchema, breadcrumbSchema } from "@/lib/schema";
+import { howToSchema } from "@/lib/schema";
 import Inspector from "./Inspector";
 import { RadioTower, Webhook, Workflow, ArrowRight } from "lucide-react";
 
@@ -108,11 +108,6 @@ const howTo = howToSchema({
   ],
 });
 
-const breadcrumbs = breadcrumbSchema([
-  { name: "Tools", url: `${SITE.url}/tools` },
-  { name: "Webhook Inspector", url: `${SITE.url}${PATH}` },
-]);
-
 const comparisonRows: [string, string, string][] = [
   ["Price", "Free, no signup", "Free tier + paid plans"],
   [
@@ -139,7 +134,6 @@ export default function WebhookInspectorPage() {
       <JsonLd data={softwareSchema} />
       <JsonLd data={faqSchema} />
       <JsonLd data={howTo} />
-      <JsonLd data={breadcrumbs} />
 
       {/* HERO */}
       <section

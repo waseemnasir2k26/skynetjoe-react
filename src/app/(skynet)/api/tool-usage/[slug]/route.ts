@@ -18,8 +18,8 @@ export const dynamic = "force-dynamic";
 // deploys. Falls back to .data/ locally and /tmp on Vercel. All disk
 // failures are swallowed — the in-memory map is the live source of truth.
 //
-// Counts are seeded with a small baseline so a fresh deploy never shows
-// "0 uses" on a tool that has genuinely been used for weeks.
+// Counts are REAL increments only — no seeding. The ToolUsage pill hides
+// itself below a display threshold, so honest low counts never render.
 // ============================================================
 
 const SLUG_RE = /^[a-z0-9][a-z0-9-]{1,80}$/;
@@ -31,13 +31,6 @@ function dataDir(): string {
 }
 function dataFile(): string {
   return path.join(dataDir(), "tool-usage.json");
-}
-
-// Deterministic baseline so counts look lived-in without faking momentum.
-function baselineFor(slug: string): number {
-  let h = 0;
-  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
-  return 105 + (h % 196); // 105–300
 }
 
 type Store = Record<string, number>;
@@ -54,7 +47,7 @@ async function load(): Promise<Store> {
       if (typeof v === "number" && Number.isFinite(v)) store[k] = Math.floor(v);
     }
   } catch {
-    // no file yet — start from baselines
+    // no file yet — start from zero
   }
   CACHE = store;
   loaded = true;
@@ -75,7 +68,7 @@ function isKnownSlug(slug: string): boolean {
 }
 
 function countFor(store: Store, slug: string): number {
-  return store[slug] ?? baselineFor(slug);
+  return store[slug] ?? 0;
 }
 
 export async function GET(

@@ -53,7 +53,8 @@ export default function ToolUsage({ slug }: { slug: string }) {
     };
   }, [slug]);
 
-  if (count === null) return null;
+  // Hide until the tool has real traction — never render a seeded/low count.
+  if (count === null || count < 25) return null;
 
   const label = count.toLocaleString("en-US");
 

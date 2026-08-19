@@ -326,6 +326,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
   "AEO & AI Visibility",
   "Prompts & Agents",
   "Ops & Outbound",
+  "Diagnostics",
 ];
 
 export function toolsByCategory(category: ToolCategory): ToolEntry[] {
