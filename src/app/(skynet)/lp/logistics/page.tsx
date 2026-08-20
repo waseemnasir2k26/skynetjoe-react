@@ -1230,8 +1230,6 @@ export default function LogisticsLP() {
             <span className="dot"></span>
             <span className="name">Kitts Recovery</span>
             <span className="dot"></span>
-            <span className="name">Bayou Savage</span>
-            <span className="dot"></span>
             {/* duplicate for seamless marquee */}
             <span className="name">Vow Sanctuary</span>
             <span className="dot"></span>
@@ -1248,8 +1246,6 @@ export default function LogisticsLP() {
             <span className="name">Cirrosis360</span>
             <span className="dot"></span>
             <span className="name">Kitts Recovery</span>
-            <span className="dot"></span>
-            <span className="name">Bayou Savage</span>
             <span className="dot"></span>
           </div>
         </section>
@@ -2010,8 +2006,8 @@ export default function LogisticsLP() {
         {/* SCARCITY BAND */}
         <div className="scarcity-band">
           <p>
-            Four operator builds a month ·{" "}
-            <strong>limited build slots</strong> · next opening confirmed on the call
+            Four operator builds a month · <strong>limited build slots</strong>{" "}
+            · next opening confirmed on the call
           </p>
         </div>
 

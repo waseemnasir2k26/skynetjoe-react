@@ -1,0 +1,14 @@
+commit 075478feed6ca8c8301deb5f1a481a280b2bb4ae
+Author: Waseem Nasir <waseemhome8@gmail.com>
+Date:   Wed Aug 19 14:15:43 2026 +0800
+
+    feat: Hostinger referral announcement bar + hero CTA hierarchy
+    
+    Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+
+ src/app/(skynet)/loading.tsx         |   2 +-
+ src/app/globals.css                  | 296 ++++++++++++++++++++++-------------
+ src/components/AnnouncementBar.tsx   | 107 +++++++++++++
+ src/components/Header.tsx            |   2 +
+ src/components/funnel/HeroFunnel.tsx |   8 +-
+ 5 files changed, 305 insertions(+), 110 deletions(-)

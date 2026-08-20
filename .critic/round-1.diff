@@ -1,0 +1,783 @@
+commit 075478feed6ca8c8301deb5f1a481a280b2bb4ae
+Author: Waseem Nasir <waseemhome8@gmail.com>
+Date:   Wed Aug 19 14:15:43 2026 +0800
+
+    feat: Hostinger referral announcement bar + hero CTA hierarchy
+    
+    Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+
+diff --git a/src/app/(skynet)/loading.tsx b/src/app/(skynet)/loading.tsx
+index 9dbd76e..9c33bc0 100644
+--- a/src/app/(skynet)/loading.tsx
++++ b/src/app/(skynet)/loading.tsx
+@@ -28,7 +28,7 @@ export default function Loading() {
+       `}</style>
+       <section
+         style={{
+-          paddingTop: "clamp(96px, 18vw, 144px)",
++          paddingTop: "clamp(140px, 18vw + 44px, 188px)",
+           paddingBottom: "clamp(56px, 12vw, 112px)",
+         }}
+       >
+diff --git a/src/app/globals.css b/src/app/globals.css
+index 8a1733a..92050c5 100644
+--- a/src/app/globals.css
++++ b/src/app/globals.css
+@@ -10,57 +10,57 @@
+      ============================================================ */
+ 
+   /* Primary palette — cream ground, ink type, terracotta accent */
+-  --cream:        #F2EFE6;
+-  --cream-2:      #EDE8DC;
+-  --cream-3:      #FAF7F0;
+-  --ink:          #1A1A1A;
+-  --ink-2:        #3A3A36;
+-  --ink-faint:    #56564F; /* WCAG AA: ~5:1 on cream (#FAF7F0); was #6B6B65 (~4.0:1, failed AA) */
+-  --terracotta:   #C66B3F;
+-  --terracotta-2: #B85A30;
++  --cream: #f2efe6;
++  --cream-2: #ede8dc;
++  --cream-3: #faf7f0;
++  --ink: #1a1a1a;
++  --ink-2: #3a3a36;
++  --ink-faint: #56564f; /* WCAG AA: ~5:1 on cream (#FAF7F0); was #6B6B65 (~4.0:1, failed AA) */
++  --terracotta: #c66b3f;
++  --terracotta-2: #b85a30;
+   /* AA-safe terracotta for SMALL text (eyebrows/labels ≤12px). #C66B3F is ~3.4:1
+      on cream (fine for large display per WCAG, fails AA small-text 4.5:1). #A8451F
+      hits ≥4.5:1 on cream — use var(--terracotta-aa) or .terracotta-aa for micro-copy. */
+-  --terracotta-aa: #A8451F;
+-  --sage:         #8A9A7B;
+-  --oxblood:      #6B2C2C;
+-  --ochre:        #C9A96E;
++  --terracotta-aa: #a8451f;
++  --sage: #8a9a7b;
++  --oxblood: #6b2c2c;
++  --ochre: #c9a96e;
+ 
+   /* Semantic mappings (most components use these) */
+-  --bg:           var(--cream);
+-  --bg-alt:       var(--cream-2);
+-  --surface:      var(--cream-2);
+-  --surface-alt:  var(--cream-3);
+-  --fg:           var(--ink);
+-  --fg-muted:     var(--ink-2);
+-  --fg-faint:     var(--ink-faint);
+-  --border:       rgba(26, 26, 26, 0.10);
+-  --border-strong:rgba(26, 26, 26, 0.20);
+-  --glass-bg:     var(--cream-3);
++  --bg: var(--cream);
++  --bg-alt: var(--cream-2);
++  --surface: var(--cream-2);
++  --surface-alt: var(--cream-3);
++  --fg: var(--ink);
++  --fg-muted: var(--ink-2);
++  --fg-faint: var(--ink-faint);
++  --border: rgba(26, 26, 26, 0.1);
++  --border-strong: rgba(26, 26, 26, 0.2);
++  --glass-bg: var(--cream-3);
+ 
+   /* Static "skynet" brand tokens — retargeted from cyan/teal to cream-friendly.
+      Most legacy components reference these directly; the swap flips the brand. */
+-  --skynet-primary:        var(--terracotta);
+-  --skynet-primary-glow:   rgba(198, 107, 63, 0.28);
+-  --skynet-primary-dark:   var(--terracotta-2);
+-  --skynet-primary-light:  var(--terracotta);
+-  --skynet-secondary:      var(--ochre);
++  --skynet-primary: var(--terracotta);
++  --skynet-primary-glow: rgba(198, 107, 63, 0.28);
++  --skynet-primary-dark: var(--terracotta-2);
++  --skynet-primary-light: var(--terracotta);
++  --skynet-secondary: var(--ochre);
+   --skynet-secondary-glow: rgba(201, 169, 110, 0.25);
+-  --skynet-secondary-dark: #B89958;
+-  --skynet-secondary-light:#D6BC85;
+-  --skynet-darker:         var(--cream-3);
+-  --skynet-surface:        var(--cream-2);
++  --skynet-secondary-dark: #b89958;
++  --skynet-secondary-light: #d6bc85;
++  --skynet-darker: var(--cream-3);
++  --skynet-surface: var(--cream-2);
+ 
+   /* Legacy neon vars — kept but retargeted to muted warm tones */
+-  --ai-neon-green:  var(--sage);
+-  --ai-neon-cyan:   var(--terracotta);
++  --ai-neon-green: var(--sage);
++  --ai-neon-cyan: var(--terracotta);
+   --ai-neon-purple: var(--ochre);
+ 
+   /* Gradients — replaced cyan/teal with flat terracotta (no glow, no slop) */
+-  --gradient-primary:       var(--terracotta);
++  --gradient-primary: var(--terracotta);
+   --gradient-primary-hover: var(--terracotta-2);
+-  --gradient-neural:        var(--terracotta);
+-  --gradient-neon:          var(--terracotta);
++  --gradient-neural: var(--terracotta);
++  --gradient-neon: var(--terracotta);
+   --gradient-mesh: none;
+ }
+ 
+@@ -76,24 +76,29 @@ html.theme-dark {
+   --fg: #eaf6ff;
+   --fg-muted: #b8d4e8;
+   --fg-faint: #7ea3bf;
+-  --border: rgba(126, 228, 255, 0.10);
+-  --border-strong: rgba(126, 228, 255, 0.20);
++  --border: rgba(126, 228, 255, 0.1);
++  --border-strong: rgba(126, 228, 255, 0.2);
+   --glass-bg: rgba(6, 24, 39, 0.78);
+-  --skynet-primary: #1E88E5;
+-  --skynet-primary-glow: rgba(30, 136, 229, 0.30);
+-  --skynet-primary-dark: #1565C0;
+-  --skynet-primary-light: #42A5F5;
+-  --skynet-secondary: #14B8A6;
+-  --skynet-secondary-glow: rgba(20, 184, 166, 0.30);
+-  --skynet-secondary-dark: #0F766E;
+-  --skynet-secondary-light: #5EEAD4;
+-  --ai-neon-green:  #5EEAD4;
+-  --ai-neon-cyan:   #00D4FF;
+-  --ai-neon-purple: #14B8A6;
+-  --gradient-primary: linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%);
+-  --gradient-primary-hover: linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%);
+-  --gradient-neural: linear-gradient(90deg, #1E88E5 0%, #00D4FF 50%, #14B8A6 100%);
+-  --gradient-neon: linear-gradient(135deg, #00D4FF 0%, #14B8A6 100%);
++  --skynet-primary: #1e88e5;
++  --skynet-primary-glow: rgba(30, 136, 229, 0.3);
++  --skynet-primary-dark: #1565c0;
++  --skynet-primary-light: #42a5f5;
++  --skynet-secondary: #14b8a6;
++  --skynet-secondary-glow: rgba(20, 184, 166, 0.3);
++  --skynet-secondary-dark: #0f766e;
++  --skynet-secondary-light: #5eead4;
++  --ai-neon-green: #5eead4;
++  --ai-neon-cyan: #00d4ff;
++  --ai-neon-purple: #14b8a6;
++  --gradient-primary: linear-gradient(135deg, #1e88e5 0%, #14b8a6 100%);
++  --gradient-primary-hover: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%);
++  --gradient-neural: linear-gradient(
++    90deg,
++    #1e88e5 0%,
++    #00d4ff 50%,
++    #14b8a6 100%
++  );
++  --gradient-neon: linear-gradient(135deg, #00d4ff 0%, #14b8a6 100%);
+   --gradient-mesh:
+     radial-gradient(at 18% 22%, rgba(30, 136, 229, 0.32) 0px, transparent 55%),
+     radial-gradient(at 82% 28%, rgba(0, 212, 255, 0.22) 0px, transparent 55%),
+@@ -125,9 +130,29 @@ html.theme-dark {
+   /* Readability overhaul 2026-06-01 — ONE clean sans (Inter) for body AND
+      headings. No serif display face. Legacy --font-sans-onest fallback kept
+      so any cached/SSR frame before Inter loads still resolves to a sans. */
+-  --font-sans: var(--font-sans-inter, var(--font-sans-onest), system-ui, -apple-system, "Segoe UI", sans-serif);
+-  --font-display: var(--font-sans-inter, var(--font-sans-onest), system-ui, -apple-system, "Segoe UI", sans-serif);
+-  --font-mono: var(--font-mono-plex, ui-monospace, SFMono-Regular, Menlo, monospace);
++  --font-sans: var(
++    --font-sans-inter,
++    var(--font-sans-onest),
++    system-ui,
++    -apple-system,
++    "Segoe UI",
++    sans-serif
++  );
++  --font-display: var(
++    --font-sans-inter,
++    var(--font-sans-onest),
++    system-ui,
++    -apple-system,
++    "Segoe UI",
++    sans-serif
++  );
++  --font-mono: var(
++    --font-mono-plex,
++    ui-monospace,
++    SFMono-Regular,
++    Menlo,
++    monospace
++  );
+   --color-terracotta: var(--terracotta);
+   --color-terracotta-aa: var(--terracotta-aa);
+   --color-ink: var(--ink);
+@@ -137,7 +162,8 @@ html.theme-dark {
+   --color-oxblood: var(--oxblood);
+ }
+ 
+-html, body {
++html,
++body {
+   background: var(--bg);
+   color: var(--fg);
+   font-family: var(--font-sans);
+@@ -148,7 +174,7 @@ html, body {
+   -webkit-font-smoothing: antialiased;
+   /* Inter ss01 = single-story 'a'/'g' alt; cv11 = open digits. Keeps glyphs
+      friendly + unambiguous (legibility). */
+-  font-feature-settings: 'cv11', 'ss01';
++  font-feature-settings: "cv11", "ss01";
+   transition: color 0.2s ease;
+   min-height: 100%;
+ }
+@@ -156,7 +182,7 @@ html, body {
+ /* Paper grain — site-wide texture, anti-AI-slop signal.
+    Reduced opacity + soft-light blend so photos stay vivid (multiply was greying them). */
+ body::before {
+-  content: '';
++  content: "";
+   position: fixed;
+   inset: 0;
+   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/></svg>");
+@@ -169,11 +195,17 @@ html.theme-dark body::before {
+   mix-blend-mode: overlay;
+   opacity: 0.06;
+ }
+-body > * { position: relative; z-index: 2; }
++body > * {
++  position: relative;
++  z-index: 2;
++}
+ 
+ /* Force images out of any inherited blend/filter stacking context so cream pivot
+    grain + parent filters never desaturate photos. */
+-img, picture, video, canvas {
++img,
++picture,
++video,
++canvas {
+   isolation: isolate;
+ }
+ 
+@@ -181,7 +213,11 @@ img, picture, video, canvas {
+    Headings now Inter (via --font-display). Bumped to 700 — Inter at the old
+    Fraunces weight 500 reads too light at display sizes. Heading line-heights
+    are set per-component (hero clamps etc.); we set a safe default here. */
+-h1, h2, h3, .display, .serif {
++h1,
++h2,
++h3,
++.display,
++.serif {
+   font-family: var(--font-display);
+   font-weight: 700;
+   letter-spacing: -0.02em;
+@@ -189,7 +225,8 @@ h1, h2, h3, .display, .serif {
+ }
+ /* Emphasis: NO italic, NO serif anywhere (was italic Fraunces — the core
+    readability complaint). Emphasis now reads as AA-safe terracotta + weight. */
+-em.accent, .serif-italic {
++em.accent,
++.serif-italic {
+   font-family: var(--font-display);
+   font-style: normal;
+   font-weight: 700;
+@@ -199,8 +236,12 @@ em.accent, .serif-italic {
+ /* A11Y — AA-safe terracotta for SMALL micro-copy (eyebrows/labels ≤12px).
+    Use this instead of var(--terracotta) on small colored text so it clears
+    WCAG AA 4.5:1 on cream. Large display terracotta is unaffected. */
+-.terracotta-aa { color: var(--terracotta-aa); }
+-html.theme-dark .terracotta-aa { color: var(--terracotta); }
++.terracotta-aa {
++  color: var(--terracotta-aa);
++}
++html.theme-dark .terracotta-aa {
++  color: var(--terracotta);
++}
+ 
+ /* ============================================
+    A11Y — Global :focus-visible outline (WCAG 2.4.7 + 2.4.11)
+@@ -209,7 +250,9 @@ html.theme-dark .terracotta-aa { color: var(--terracotta); }
+    Component-level :focus-visible rules below (skip-link, zoom-badge) still
+    override — they appear later in the cascade.
+    ============================================ */
+-*:focus { outline: none; }
++*:focus {
++  outline: none;
++}
+ *:focus-visible {
+   outline: 2px solid var(--terracotta);
+   outline-offset: 2px;
+@@ -284,16 +327,19 @@ body {
+   overflow-x: hidden;
+ }
+ html.theme-dark body {
+-  background:
+-    linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%);
++  background: linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%);
+   background-attachment: fixed;
+ }
+ 
+ /* Legacy orbs — only render under opt-in ocean theme. On cream default
+    we hide all .orb spans so legacy markup doesn't paint blue blobs on
+    the editorial paper background. */
+-.orb { display: none !important; }
+-html.theme-dark .orb { display: block !important; }
++.orb {
++  display: none !important;
++}
++html.theme-dark .orb {
++  display: block !important;
++}
+ 
+ html.theme-dark body::after,
+ html.theme-dark main::before {
+@@ -310,8 +356,8 @@ html.theme-dark body::after {
+   right: -180px;
+   width: 580px;
+   height: 580px;
+-  background: #00D4FF;
+-  opacity: 0.30;
++  background: #00d4ff;
++  opacity: 0.3;
+   animation-delay: -7s;
+ }
+ html.theme-dark main::before {
+@@ -319,7 +365,7 @@ html.theme-dark main::before {
+   left: 30%;
+   width: 480px;
+   height: 480px;
+-  background: #14B8A6;
++  background: #14b8a6;
+   opacity: 0.35;
+   animation-delay: -3s;
+ }
+@@ -400,9 +446,16 @@ header {
+ }
+ 
+ @keyframes float-orb {
+-  0%, 100% { transform: translate(0, 0) scale(1); }
+-  33% { transform: translate(30px, -20px) scale(1.05); }
+-  66% { transform: translate(-20px, 20px) scale(0.95); }
++  0%,
++  100% {
++    transform: translate(0, 0) scale(1);
++  }
++  33% {
++    transform: translate(30px, -20px) scale(1.05);
++  }
++  66% {
++    transform: translate(-20px, 20px) scale(0.95);
++  }
+ }
+ .orb {
+   position: absolute;
+@@ -412,13 +465,17 @@ header {
+   animation: float-orb 14s ease-in-out infinite;
+   pointer-events: none;
+ }
+-html.light .orb { opacity: 0.35; }
++html.light .orb {
++  opacity: 0.35;
++}
+ 
+ .section {
+   padding: clamp(48px, 10vw, 80px) clamp(16px, 5vw, 24px);
+ }
+ @media (min-width: 768px) {
+-  .section { padding: 7rem 2rem; }
++  .section {
++    padding: 7rem 2rem;
++  }
+ }
+ 
+ .container-x {
+@@ -429,7 +486,8 @@ html.light .orb { opacity: 0.35; }
+ 
+ /* Mobile overflow guard — prevent rogue inline transforms/rotations from
+    triggering horizontal scroll on 360px viewports. */
+-html, body {
++html,
++body {
+   max-width: 100%;
+   overflow-x: hidden;
+ }
+@@ -478,8 +536,11 @@ html.light .text-skynet-primary-light {
+ .bg-skynet-darker\/40,
+ .bg-skynet-darker\/50 {
+   background-color: transparent !important;
+-  background-image:
+-    radial-gradient(at 50% 0%, rgba(0, 212, 255, 0.06) 0, transparent 60%) !important;
++  background-image: radial-gradient(
++    at 50% 0%,
++    rgba(0, 212, 255, 0.06) 0,
++    transparent 60%
++  ) !important;
+ }
+ .bg-skynet-surface\/60,
+ .bg-skynet-surface\/40 {
+@@ -493,26 +554,29 @@ html.light .bg-skynet-darker,
+ html.light .bg-skynet-darker\/40,
+ html.light .bg-skynet-darker\/50 {
+   background-color: transparent !important;
+-  background-image:
+-    radial-gradient(at 50% 0%, rgba(30, 136, 229, 0.06) 0, transparent 60%) !important;
++  background-image: radial-gradient(
++    at 50% 0%,
++    rgba(30, 136, 229, 0.06) 0,
++    transparent 60%
++  ) !important;
+ }
+ html.light .bg-skynet-surface\/60,
+ html.light .bg-skynet-surface\/40 {
+   background-color: rgba(255, 255, 255, 0.78) !important;
+-  border-color: rgba(15, 20, 25, 0.10) !important;
++  border-color: rgba(15, 20, 25, 0.1) !important;
+   box-shadow: 0 1px 3px rgba(15, 20, 25, 0.04);
+ }
+ 
+ /* Kill solid Footer bg — let body ocean breathe through */
+ footer.bg-skynet-darker {
+-  background-color: rgba(3, 16, 26, 0.40) !important;
++  background-color: rgba(3, 16, 26, 0.4) !important;
+   backdrop-filter: blur(14px);
+   -webkit-backdrop-filter: blur(14px);
+   border-top: 1px solid rgba(126, 228, 255, 0.12) !important;
+ }
+ html.light footer.bg-skynet-darker {
+   background-color: rgba(243, 241, 234, 0.65) !important;
+-  border-top: 1px solid rgba(15, 20, 25, 0.10) !important;
++  border-top: 1px solid rgba(15, 20, 25, 0.1) !important;
+ }
+ 
+ /* Glass effect adapts to theme */
+@@ -553,7 +617,7 @@ html.light article[class*="wn-"] {
+   --wn-bg: transparent;
+   --wn-surface: rgba(255, 255, 255, 0.85);
+   --wn-surface-alt: rgba(247, 245, 239, 0.85);
+-  --wn-border: rgba(15, 20, 25, 0.10);
++  --wn-border: rgba(15, 20, 25, 0.1);
+ }
+ 
+ /* Glass-card effect on every wn- card — picks up the ocean glow */
+@@ -578,7 +642,7 @@ html.light article[class*="wn-"] .wn-hero::before {
+ 
+ /* Section dividers — softer, glow-tinted */
+ article[class*="wn-"] .wn-section {
+-  border-top-color: rgba(126, 228, 255, 0.10) !important;
++  border-top-color: rgba(126, 228, 255, 0.1) !important;
+ }
+ html.light article[class*="wn-"] .wn-section {
+   border-top-color: rgba(15, 20, 25, 0.08) !important;
+@@ -633,8 +697,7 @@ html.light .bg-white\/15 {
+    Add class="theme-hero-ocean" wherever hero uses inline ocean gradient.
+    These mimic the existing inline gradient but flip on light theme. */
+ .theme-hero-ocean {
+-  background:
+-    linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%);
++  background: linear-gradient(135deg, #061827 0%, #0a2d4a 45%, #073846 100%);
+ }
+ html.light .theme-hero-ocean {
+   background:
+@@ -687,7 +750,7 @@ html.light .text-slate-400 {
+ 
+ /* Orbs softer in light */
+ html.light section .orb {
+-  opacity: 0.30 !important;
++  opacity: 0.3 !important;
+ }
+ 
+ /* Stat number cyan-300 on dark → primary-dark on light */
+@@ -879,7 +942,7 @@ html:not(.theme-dark) .border-cyan-300\/60,
+ html:not(.theme-dark) .border-emerald-400\/40,
+ html:not(.theme-dark) .border-teal-400\/40,
+ html:not(.theme-dark) .border-fuchsia-400\/30 {
+-  border-color: rgba(198, 107, 63, 0.30) !important;
++  border-color: rgba(198, 107, 63, 0.3) !important;
+ }
+ 
+ /* Calendly iframe surround — cream-3 paper */
+@@ -947,7 +1010,7 @@ html:not(.theme-dark) [style*="rgba(0,212,255"],
+ html:not(.theme-dark) [style*="rgba(20, 184, 166"],
+ html:not(.theme-dark) [style*="rgba(20,184,166"] {
+   /* Soft override — only re-tints if inline color leaks through */
+-  border-color: rgba(198, 107, 63, 0.30) !important;
++  border-color: rgba(198, 107, 63, 0.3) !important;
+ }
+ 
+ /* CTA gradient bars (linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)) → flat terracotta */
+@@ -1039,7 +1102,9 @@ html:not(.theme-dark) main.bg-gradient-to-br[class*="061827"] {
+   text-transform: uppercase;
+   cursor: zoom-in;
+   opacity: 0;
+-  transition: opacity 0.18s ease, background 0.18s ease;
++  transition:
++    opacity 0.18s ease,
++    background 0.18s ease;
+ }
+ .group:hover .zoom-badge,
+ .zoom-badge:focus-visible {
+@@ -1066,24 +1131,44 @@ html:not(.theme-dark) main.bg-gradient-to-br[class*="061827"] {
+    ============================================================ */
+ 
+ /* 1. Box-sizing universal (safety net — also set by Tailwind preflight) */
+-*, *::before, *::after { box-sizing: border-box; }
++*,
++*::before,
++*::after {
++  box-sizing: border-box;
++}
+ 
+ /* 2. Prevent horizontal overflow at root (extends existing body overflow-x) */
+ /* max-width:100% (NOT 100vw) — 100vw includes the scrollbar gutter on desktop,
+    causing a 1–17px horizontal-scroll wobble. Matches the correct rule ~line 395. */
+-html, body {
++html,
++body {
+   max-width: 100%;
+   overflow-x: hidden;
+ }
+ 
+ /* 3. Images + media never overflow */
+-img, video, svg, canvas {
++img,
++video,
++svg,
++canvas {
+   max-width: 100%;
+   height: auto;
+ }
+ 
+ /* 4. Long words / URLs break instead of overflowing container */
+-p, li, td, th, a, span, h1, h2, h3, h4, h5, h6, blockquote {
++p,
++li,
++td,
++th,
++a,
++span,
++h1,
++h2,
++h3,
++h4,
++h5,
++h6,
++blockquote {
+   overflow-wrap: anywhere;
+   word-break: break-word;
+ }
+@@ -1097,7 +1182,8 @@ p, li, td, th, a, span, h1, h2, h3, h4, h5, h6, blockquote {
+ }
+ 
+ /* 6. Pre / code blocks scroll horizontally instead of overflowing */
+-pre, code {
++pre,
++code {
+   max-width: 100%;
+   overflow-x: auto;
+ }
+@@ -1170,7 +1256,8 @@ pre, code {
+ 
+ /* 12. Tap target minimum on small screens */
+ @media (max-width: 768px) {
+-  a, button,
++  a,
++  button,
+   [role="button"],
+   input[type="submit"],
+   input[type="button"] {
+@@ -1191,7 +1278,6 @@ pre, code {
+   }
+ }
+ 
+-
+ /* ============================================================
+    BLOG FRAGMENT LIGHT BRIDGE (2026-07-12)
+    All content/blog/posts/*.html fragments ship dark-theme inline
+@@ -1245,20 +1331,20 @@ pre, code {
+   color: var(--terracotta-aa) !important;
+ }
+ .prose-wn table th {
+-  background: rgba(198, 107, 63, 0.10) !important;
++  background: rgba(198, 107, 63, 0.1) !important;
+   color: var(--terracotta-aa) !important;
+ }
+ .prose-wn table td {
+   border-bottom-color: var(--border) !important;
+ }
+ .prose-wn code {
+-  background: rgba(198, 107, 63, 0.10) !important;
++  background: rgba(198, 107, 63, 0.1) !important;
+   color: var(--oxblood) !important;
+ }
+ /* Code blocks stay a dark island — readable + intentional */
+ .prose-wn pre {
+   background: #1c2430 !important;
+-  border-color: rgba(26, 26, 26, 0.20) !important;
++  border-color: rgba(26, 26, 26, 0.2) !important;
+ }
+ .prose-wn pre code {
+   background: none !important;
+@@ -1276,7 +1362,7 @@ pre, code {
+ .prose-wn h2,
+ .prose-wn h3,
+ .prose-wn h4 {
+-  scroll-margin-top: 96px;
++  scroll-margin-top: 140px;
+ }
+ /* Article body images — framed, responsive, never overflow */
+ .prose-wn img {
+diff --git a/src/components/AnnouncementBar.tsx b/src/components/AnnouncementBar.tsx
+new file mode 100644
+index 0000000..789adb4
+--- /dev/null
++++ b/src/components/AnnouncementBar.tsx
+@@ -0,0 +1,107 @@
++"use client";
++
++import { useEffect, useState } from "react";
++import { X } from "lucide-react";
++
++const STORAGE_KEY = "sj-hostinger-promo-v1";
++const HOSTINGER_URL = "https://www.hostinger.com?REFERRALCODE=skynetlabs";
++
++/**
++ * Hostinger referral announcement bar — rendered as the first child inside
++ * the fixed <header> so it sits above the nav row and mega-menus (which
++ * anchor with `top-full` off the header) still line up correctly.
++ *
++ * Persistence: optimistic `useState(true)` (visible) so there's no
++ * server/client mismatch on first paint; a `useEffect` reads localStorage
++ * on mount and hides the bar if previously dismissed. Returning visitors who
++ * dismissed it may see a brief flash before the effect runs — accepted
++ * trade-off per spec, avoids hydration errors from reading localStorage
++ * during render.
++ */
++export default function AnnouncementBar() {
++  const [visible, setVisible] = useState(true);
++
++  useEffect(() => {
++    try {
++      if (window.localStorage.getItem(STORAGE_KEY) === "1") {
++        setVisible(false);
++      }
++    } catch {
++      // localStorage unavailable (privacy mode, etc.) — leave bar visible.
++    }
++  }, []);
++
++  const dismiss = () => {
++    setVisible(false);
++    try {
++      window.localStorage.setItem(STORAGE_KEY, "1");
++    } catch {
++      // ignore write failures
++    }
++  };
++
++  if (!visible) return null;
++
++  return (
++    <div
++      style={{
++        background: "var(--ink)",
++        color: "var(--cream-3)",
++      }}
++    >
++      <div
++        className="container-x flex items-center justify-center gap-x-3 gap-y-0.5 px-4 sm:px-6 flex-wrap"
++        style={{ minHeight: 40, padding: "6px 16px" }}
++      >
++        <p
++          className="flex items-center gap-x-2 flex-wrap justify-center text-center"
++          style={{
++            fontSize: 13,
++            lineHeight: 1.4,
++            margin: 0,
++            fontFamily: "var(--font-sans)",
++          }}
++        >
++          <span>We host on Hostinger — get up to 20% off your first plan.</span>
++          <a
++            href={HOSTINGER_URL}
++            target="_blank"
++            rel="sponsored noopener"
++            className="font-semibold underline-offset-2 hover:underline"
++            style={{ color: "var(--terracotta)" }}
++          >
++            Get the link →
++          </a>
++          <span
++            className="hidden sm:inline"
++            style={{ opacity: 0.65, fontSize: 12 }}
++          >
++            Referral link — we may earn a commission at no extra cost to you.
++          </span>
++          <span className="sr-only sm:hidden">
++            Referral link — we may earn a commission at no extra cost to you.
++          </span>
++        </p>
++
++        <button
++          type="button"
++          onClick={dismiss}
++          aria-label="Dismiss announcement"
++          className="inline-flex items-center justify-center flex-shrink-0"
++          style={{
++            width: 24,
++            height: 24,
++            minWidth: 24,
++            minHeight: 24,
++            color: "var(--cream-3)",
++            opacity: 0.75,
++          }}
++          onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
++          onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.75")}
++        >
++          <X className="w-4 h-4" />
++        </button>
++      </div>
++    </div>
++  );
++}
+diff --git a/src/components/Header.tsx b/src/components/Header.tsx
+index 478de07..3b3e84d 100644
+--- a/src/components/Header.tsx
++++ b/src/components/Header.tsx
+@@ -53,6 +53,7 @@ import {
+ import { NAV_PRIMARY, SERVICE_CATEGORIES } from "@/lib/site";
+ import ServicesMegaMenu from "@/components/header/ServicesMegaMenu";
+ import ToolsMegaMenu from "@/components/header/ToolsMegaMenu";
++import AnnouncementBar from "@/components/AnnouncementBar";
+ import { TOOL_CATEGORIES, toolsByCategory } from "@/data/tools-registry";
+ 
+ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+@@ -199,6 +200,7 @@ export default function Header() {
+           : "bg-transparent"
+       }`}
+     >
++      <AnnouncementBar />
+       <div className="container-x flex items-center justify-between px-4 sm:px-6 py-3.5 gap-2">
+         <Link href="/" className="flex items-center gap-2.5 group">
+           <span
+diff --git a/src/components/funnel/HeroFunnel.tsx b/src/components/funnel/HeroFunnel.tsx
+index a50c26d..5cb298c 100644
+--- a/src/components/funnel/HeroFunnel.tsx
++++ b/src/components/funnel/HeroFunnel.tsx
+@@ -30,7 +30,7 @@ export default function HeroFunnel() {
+         color: "var(--ink)",
+         fontFamily: "var(--font-sans)",
+         borderBottom: "1px solid rgba(26,26,26,0.12)",
+-        paddingTop: "clamp(96px, 18vw, 144px)",
++        paddingTop: "clamp(140px, 18vw + 44px, 188px)",
+         paddingBottom: "clamp(56px, 12vw, 112px)",
+       }}
+     >
+@@ -217,18 +217,18 @@ export default function HeroFunnel() {
+             </Link>
+             <Link
+               href="/case-studies"
++              className="hover:underline"
+               style={{
+                 background: "transparent",
+-                color: "var(--ink-2)",
++                color: "var(--ink-faint)",
+                 fontFamily: "var(--font-sans)",
+                 fontWeight: 500,
+                 fontSize: 14,
+                 textDecoration: "none",
++                textUnderlineOffset: 3,
+                 display: "inline-flex",
+                 alignItems: "center",
+                 gap: 5,
+-                borderBottom: "1px solid rgba(26,26,26,0.25)",
+-                paddingBottom: 1,
+               }}
+             >
+               See real results

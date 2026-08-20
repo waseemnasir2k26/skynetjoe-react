@@ -1,0 +1,22 @@
+{
+  "target": "skynetjoe-react-2026-05-20/app — Hostinger referral banner (075478f + b3aa8d0)",
+  "score": 92,
+  "judges": ["A", "B", "R2"],
+  "round": 2,
+  "findings_resolved": [
+    "A1 dynamic --promo-h via ResizeObserver: 56px live -> 0px dismissed, hero clearance delta exactly 56px, headerBottom==heroTop (0.0px gap) both states at 1440",
+    "A2 interior clearance: /faqs h1 top 334px vs header bottom 126px; news article h1 367px; served CSS has scroll-margin-top:calc(var(--promo-h,44px) + 96px)",
+    "A3 mobile drawer: at 375x812 promo-h=108px, drawer computed max-height 640px = 100vh-64-108, bottom 651.6 < 812, overflow-y auto — verified against generated CSS via getComputedStyle",
+    "A4 mobile disclosure: 'Referral link · we may earn a commission' visible at 375, bounding box y=86.5 in viewport"
+  ],
+  "regressions": "REFERRALCODE=skynetlabs x1, rel=sponsored x1, no 490/countdown/days-left, 'up to 20' present in SSR HTML",
+  "artifact_shas": {
+    "src/app/(skynet)/loading.tsx": "77ed33763db560e047ad25e43a1dedb1c2f39081e7cc4ee0da327d1b8794a9f4",
+    "src/app/globals.css": "039f10372729f3b1dd39172ded992f89451d4605ecf5a3253d39a5bb81f2989f",
+    "src/components/AnnouncementBar.tsx": "ca91f4d0060be32f0cc3977c1206a0e9d7c209a685ea6af7a03f7cfe358f545b",
+    "src/components/Breadcrumbs.tsx": "64eea8b4c687347833b04a52093992a64c2475d3efc82676a2cb4708f4581054",
+    "src/components/Header.tsx": "48c856370f11f165a0331bee63b682d7f5fd49ad3daf60cf2ff1ccbab7b803ee",
+    "src/components/HtmlCreamWrap.tsx": "a3b7d37aac1a63832ad4688d8e0a48666fce6c10c2add78e844301f738b12a25",
+    "src/components/funnel/HeroFunnel.tsx": "7f7772c3dd0a27813c821694f51d1e5df83a9b1e27eb98099d50c1be33ab98ac"
+  }
+}

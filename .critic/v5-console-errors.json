@@ -1,0 +1,12 @@
+[
+  "[1440] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=Lt6LSjwuWOdB41rPk-wqm' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE",
+  "[1440] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=Lt6LSjwuWOdB41rPk-wqm' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE",
+  "[1440] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=Lt6LSjwuWOdB41rPk-wqm' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE",
+  "[1440] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=Lt6LSjwuWOdB41rPk-wqm' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE",
+  "[1440] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=Lt6LSjwuWOdB41rPk-wqm' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE",
+  "[1440] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=Lt6LSjwuWOdB41rPk-wqm' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE",
+  "[390] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=scIjlHRm-fft7yizo02Vn' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE",
+  "[390] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=scIjlHRm-fft7yizo02Vn' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE",
+  "[reduced] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=LKI3p_DYuylbAUJfaakLd' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE",
+  "[reduced] WebSocket connection to 'ws://127.0.0.1:4881/_next/webpack-hmr?id=LKI3p_DYuylbAUJfaakLd' failed: Error during WebSocket handshake: net::ERR_INVALID_HTTP_RESPONSE"
+]

@@ -1,36 +1,52 @@
 <article class="wn-cases">
   <style>
     .wn-cases {
-      --x-bg: #F2EFE6;
-      --x-bg-alt: #EDE8DC;
-      --x-surface: #EDE8DC;
-      --x-surface-2: #FAF7F0;
-      --x-fg: #1A1A1A;
-      --x-fg-muted: #3A3A36;
-      --x-fg-faint: #6B6B65;
-      --x-border: rgba(26, 26, 26, 0.10);
+      --x-bg: #f2efe6;
+      --x-bg-alt: #ede8dc;
+      --x-surface: #ede8dc;
+      --x-surface-2: #faf7f0;
+      --x-fg: #1a1a1a;
+      --x-fg-muted: #3a3a36;
+      --x-fg-faint: #6b6b65;
+      --x-border: rgba(26, 26, 26, 0.1);
       --x-border-strong: rgba(26, 26, 26, 0.18);
-      --x-green: #C66B3F;
-      --x-green-dark: #6B2C2C;
-      --x-green-light: #C66B3F;
-      --x-purple: #8A9A7B;
-      --x-purple-light: #8A9A7B;
-      --x-cyan: #C9A96E;
-      --x-coral: #C66B3F;
-      --x-amber: #C9A96E;
+      --x-green: #c66b3f;
+      --x-green-dark: #6b2c2c;
+      --x-green-light: #c66b3f;
+      --x-purple: #8a9a7b;
+      --x-purple-light: #8a9a7b;
+      --x-cyan: #c9a96e;
+      --x-coral: #c66b3f;
+      --x-amber: #c9a96e;
       --x-radius: 14px;
       --x-radius-sm: 10px;
       background: var(--x-bg);
       color: var(--x-fg);
-      font-family: var(--font-onest, system-ui, -apple-system, "Segoe UI", sans-serif);
+      font-family: var(
+        --font-onest,
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        sans-serif
+      );
       display: block;
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
       overflow: hidden;
     }
-    .wn-cases *, .wn-cases *::before, .wn-cases *::after { box-sizing: border-box; }
-    .wn-cases a { color: var(--x-green-light); text-decoration: none; transition: color .15s ease; }
-    .wn-cases a:hover { color: var(--x-green); }
+    .wn-cases *,
+    .wn-cases *::before,
+    .wn-cases *::after {
+      box-sizing: border-box;
+    }
+    .wn-cases a {
+      color: var(--x-green-light);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .wn-cases a:hover {
+      color: var(--x-green);
+    }
 
     .wn-cases .wn-x-wrap {
       max-width: 1200px;
@@ -106,10 +122,14 @@
       color: var(--x-fg-muted);
       background: transparent;
       cursor: default;
-      transition: all .15s ease;
+      transition: all 0.15s ease;
     }
     .wn-cases .wn-x-filter.is-active {
-      background: linear-gradient(135deg, var(--x-green) 0%, var(--x-green-dark) 100%);
+      background: linear-gradient(
+        135deg,
+        var(--x-green) 0%,
+        var(--x-green-dark) 100%
+      );
       border-color: transparent;
       color: #fff;
     }
@@ -130,7 +150,10 @@
       border: 1px solid var(--x-border);
       border-radius: var(--x-radius);
       overflow: hidden;
-      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
       display: flex;
       flex-direction: column;
     }
@@ -172,15 +195,48 @@
       z-index: 2;
     }
     /* 9 distinct gradients per card */
-    .wn-cases .wn-x-thumb.g1 { background: linear-gradient(135deg, #C66B3F 0%, #6B2C2C 100%); }
-    .wn-cases .wn-x-thumb.g2 { background: linear-gradient(135deg, #8A9A7B 0%, #6B2C2C 50%, #C66B3F 100%); }
-    .wn-cases .wn-x-thumb.g3 { background: linear-gradient(135deg, #C9A96E 0%, #C66B3F 100%); }
-    .wn-cases .wn-x-thumb.g4 { background: linear-gradient(135deg, #C66B3F 0%, #8A9A7B 100%); }
-    .wn-cases .wn-x-thumb.g5 { background: linear-gradient(135deg, #EDE8DC 0%, #C66B3F 90%); }
-    .wn-cases .wn-x-thumb.g6 { background: linear-gradient(135deg, #8A9A7B 0%, #C9A96E 100%); }
-    .wn-cases .wn-x-thumb.g7 { background: linear-gradient(135deg, #C9A96E 0%, #C66B3F 60%, #8A9A7B 100%); }
-    .wn-cases .wn-x-thumb.g8 { background: linear-gradient(135deg, #6B2C2C 0%, #C9A96E 100%); }
-    .wn-cases .wn-x-thumb.g9 { background: linear-gradient(135deg, #FAF7F0 0%, #8A9A7B 70%, #C66B3F 100%); }
+    .wn-cases .wn-x-thumb.g1 {
+      background: linear-gradient(135deg, #c66b3f 0%, #6b2c2c 100%);
+    }
+    .wn-cases .wn-x-thumb.g2 {
+      background: linear-gradient(
+        135deg,
+        #8a9a7b 0%,
+        #6b2c2c 50%,
+        #c66b3f 100%
+      );
+    }
+    .wn-cases .wn-x-thumb.g3 {
+      background: linear-gradient(135deg, #c9a96e 0%, #c66b3f 100%);
+    }
+    .wn-cases .wn-x-thumb.g4 {
+      background: linear-gradient(135deg, #c66b3f 0%, #8a9a7b 100%);
+    }
+    .wn-cases .wn-x-thumb.g5 {
+      background: linear-gradient(135deg, #ede8dc 0%, #c66b3f 90%);
+    }
+    .wn-cases .wn-x-thumb.g6 {
+      background: linear-gradient(135deg, #8a9a7b 0%, #c9a96e 100%);
+    }
+    .wn-cases .wn-x-thumb.g7 {
+      background: linear-gradient(
+        135deg,
+        #c9a96e 0%,
+        #c66b3f 60%,
+        #8a9a7b 100%
+      );
+    }
+    .wn-cases .wn-x-thumb.g8 {
+      background: linear-gradient(135deg, #6b2c2c 0%, #c9a96e 100%);
+    }
+    .wn-cases .wn-x-thumb.g9 {
+      background: linear-gradient(
+        135deg,
+        #faf7f0 0%,
+        #8a9a7b 70%,
+        #c66b3f 100%
+      );
+    }
 
     .wn-cases .wn-x-card-body {
       padding: 1.5rem;
@@ -201,10 +257,22 @@
       color: var(--x-green-light);
       align-self: flex-start;
     }
-    .wn-cases .wn-x-tag.t-auto { background: rgba(19, 185, 115, 0.12); color: var(--x-green-light); }
-    .wn-cases .wn-x-tag.t-web { background: rgba(139, 92, 246, 0.14); color: var(--x-purple-light); }
-    .wn-cases .wn-x-tag.t-ai { background: rgba(0, 212, 255, 0.12); color: var(--x-cyan); }
-    .wn-cases .wn-x-tag.t-cons { background: rgba(255, 181, 71, 0.12); color: var(--x-amber); }
+    .wn-cases .wn-x-tag.t-auto {
+      background: rgba(19, 185, 115, 0.12);
+      color: var(--x-green-light);
+    }
+    .wn-cases .wn-x-tag.t-web {
+      background: rgba(139, 92, 246, 0.14);
+      color: var(--x-purple-light);
+    }
+    .wn-cases .wn-x-tag.t-ai {
+      background: rgba(0, 212, 255, 0.12);
+      color: var(--x-cyan);
+    }
+    .wn-cases .wn-x-tag.t-cons {
+      background: rgba(255, 181, 71, 0.12);
+      color: var(--x-amber);
+    }
 
     .wn-cases .wn-x-card-h {
       font-size: 1.08rem;
@@ -245,7 +313,11 @@
     /* Bottom CTA */
     .wn-cases .wn-x-cta {
       padding: 2.75rem 2rem;
-      background: linear-gradient(135deg, rgba(19, 185, 115, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      background: linear-gradient(
+        135deg,
+        rgba(19, 185, 115, 0.1) 0%,
+        rgba(139, 92, 246, 0.1) 100%
+      );
       border: 1px solid var(--x-border-strong);
       border-radius: var(--x-radius);
       text-align: center;
@@ -269,13 +341,19 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: linear-gradient(135deg, var(--x-green) 0%, var(--x-green-dark) 100%);
+      background: linear-gradient(
+        135deg,
+        var(--x-green) 0%,
+        var(--x-green-dark) 100%
+      );
       color: #fff !important;
       font-weight: 700;
       padding: 0.9rem 1.6rem;
       border-radius: var(--x-radius-sm);
       box-shadow: 0 4px 18px rgba(19, 185, 115, 0.25);
-      transition: transform .15s ease, box-shadow .15s ease;
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
     }
     .wn-cases .wn-x-cta-btn:hover {
       transform: translateY(-1px);
@@ -285,29 +363,92 @@
 
     /* Responsive */
     @media (max-width: 1024px) {
-      .wn-cases .wn-x-grid { grid-template-columns: repeat(2, 1fr); }
+      .wn-cases .wn-x-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
     @media (max-width: 768px) {
-      .wn-cases .wn-x-wrap { padding: 3.5rem 1.25rem; }
-      .wn-cases .wn-x-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .wn-cases .wn-x-filters { gap: 0.4rem; }
-      .wn-cases .wn-x-filter { padding: 0.45rem 0.9rem; font-size: 0.82rem; }
+      .wn-cases .wn-x-wrap {
+        padding: 3.5rem 1.25rem;
+      }
+      .wn-cases .wn-x-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .wn-cases .wn-x-filters {
+        gap: 0.4rem;
+      }
+      .wn-cases .wn-x-filter {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.82rem;
+      }
     }
     @media (max-width: 480px) {
-      .wn-cases .wn-x-wrap { padding: 2.75rem 1rem; }
-      .wn-cases .wn-x-cta { padding: 1.75rem 1.25rem; }
-      .wn-cases .wn-x-cta-h { font-size: 1.35rem; }
+      .wn-cases .wn-x-wrap {
+        padding: 2.75rem 1rem;
+      }
+      .wn-cases .wn-x-cta {
+        padding: 1.75rem 1.25rem;
+      }
+      .wn-cases .wn-x-cta-h {
+        font-size: 1.35rem;
+      }
     }
   </style>
 
   <div class="wn-x-wrap">
     <header class="wn-x-hero">
       <span class="wn-x-eyebrow">Case studies</span>
-      <h2 class="wn-x-h1">What we've shipped &mdash; <em>anonymized where contracts require it</em>.</h2>
-      <p class="wn-x-sub">Nine builds across automation, websites and AI content. No vanity metrics. No fake numbers. Just the thing that stopped breaking after we shipped.</p>
-      <div style="background:linear-gradient(135deg, rgba(19,185,115,.08), rgba(139,92,246,.08));border:1px solid var(--x-border);border-radius:var(--x-radius);padding:1.4rem 1.6rem;margin-top:1.5rem;">
-        <p style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--x-green);font-weight:700;margin:0 0 8px;">Direct answer</p>
-        <p style="margin:0;color:var(--x-fg-muted);font-size:15.5px;line-height:1.6;">SkynetLabs has shipped 180+ n8n automation workflows and 40+ websites across 9 countries since 2019. Typical outcomes include cutting email-triage response time from 6 hours to 6 minutes, doubling wellness-practitioner appointments without paid ads, and shipping bespoke Next.js flagship sites in 12 days. The agency is run by founder Waseem Nasir from Bali, with fixed-price scopes and no junior offshore subcontracting.</p>
+      <h2 class="wn-x-h1">
+        What we've shipped &mdash;
+        <em>anonymized where contracts require it</em>.
+      </h2>
+      <p class="wn-x-sub">
+        Eight builds across automation, websites and AI content. No vanity
+        metrics. No fake numbers. Just the thing that stopped breaking after we
+        shipped.
+      </p>
+      <div
+        style="
+          background: linear-gradient(
+            135deg,
+            rgba(19, 185, 115, 0.08),
+            rgba(139, 92, 246, 0.08)
+          );
+          border: 1px solid var(--x-border);
+          border-radius: var(--x-radius);
+          padding: 1.4rem 1.6rem;
+          margin-top: 1.5rem;
+        "
+      >
+        <p
+          style="
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--x-green);
+            font-weight: 700;
+            margin: 0 0 8px;
+          "
+        >
+          Direct answer
+        </p>
+        <p
+          style="
+            margin: 0;
+            color: var(--x-fg-muted);
+            font-size: 15.5px;
+            line-height: 1.6;
+          "
+        >
+          SkynetLabs has shipped n8n automation workflows and bespoke websites
+          for clients across multiple countries since 2019. Typical outcomes
+          include cutting email-triage response time from 6 hours to 6 minutes,
+          doubling wellness-practitioner appointments without paid ads, and
+          shipping bespoke Next.js flagship sites in 12 days. The agency is run
+          by founder Waseem Nasir from Bali, with fixed-price scopes and no
+          junior offshore subcontracting.
+        </p>
       </div>
     </header>
 
@@ -320,18 +461,26 @@
     </nav>
 
     <section class="wn-x-grid" aria-label="Case studies">
-
       <article class="wn-x-card">
         <div class="wn-x-thumb g1" aria-hidden="true">
-          <span class="wn-x-thumb-num">01 / 09</span>
+          <span class="wn-x-thumb-num">01 / 08</span>
           <span class="wn-x-thumb-glyph">n8n</span>
         </div>
         <div class="wn-x-card-body">
           <span class="wn-x-tag t-auto">Automation</span>
-          <h3 class="wn-x-card-h">EU logistics group &mdash; email triage that doesn't read your CC field wrong</h3>
-          <p class="wn-x-card-p">17-node n8n + GPT-4o pipeline drafting Gmail replies for a French mining-logistics operator. Five-condition gate, accent-safe parsing, thread-scoped context.</p>
+          <h3 class="wn-x-card-h">
+            EU logistics group &mdash; email triage that doesn't read your CC
+            field wrong
+          </h3>
+          <p class="wn-x-card-p">
+            17-node n8n + GPT-4o pipeline drafting Gmail replies for a French
+            mining-logistics operator. Five-condition gate, accent-safe parsing,
+            thread-scoped context.
+          </p>
           <ul class="wn-x-outcomes">
-            <li>Cut response time 6h &rarr; 6min on routine maintenance threads</li>
+            <li>
+              Cut response time 6h &rarr; 6min on routine maintenance threads
+            </li>
             <li>Replaced 4 paid tools with one stack</li>
           </ul>
         </div>
@@ -339,13 +488,20 @@
 
       <article class="wn-x-card">
         <div class="wn-x-thumb g2" aria-hidden="true">
-          <span class="wn-x-thumb-num">02 / 09</span>
+          <span class="wn-x-thumb-num">02 / 08</span>
           <span class="wn-x-thumb-glyph">funnel</span>
         </div>
         <div class="wn-x-card-body">
           <span class="wn-x-tag t-web">Websites</span>
-          <h3 class="wn-x-card-h">Bali wellness practitioner &mdash; a funnel that books instead of "informs"</h3>
-          <p class="wn-x-card-p">Single-page conversion build with embedded scheduling, voice-locked copy, and an objection block that runs the conversation she gets in her DMs daily.</p>
+          <h3 class="wn-x-card-h">
+            Bali wellness practitioner &mdash; a funnel that books instead of
+            "informs"
+          </h3>
+          <p class="wn-x-card-p">
+            Single-page conversion build with embedded scheduling, voice-locked
+            copy, and an objection block that runs the conversation she gets in
+            her DMs daily.
+          </p>
           <ul class="wn-x-outcomes">
             <li>Doubled appointments without ads</li>
             <li>Shipped in 9 days from brief to live</li>
@@ -354,30 +510,21 @@
       </article>
 
       <article class="wn-x-card">
-        <div class="wn-x-thumb g3" aria-hidden="true">
-          <span class="wn-x-thumb-num">03 / 09</span>
-          <span class="wn-x-thumb-glyph">atelier</span>
-        </div>
-        <div class="wn-x-card-body">
-          <span class="wn-x-tag t-web">Websites</span>
-          <h3 class="wn-x-card-h">Manhattan cosmetic dental atelier &mdash; flagship build, not a template</h3>
-          <p class="wn-x-card-p">14-section bespoke Next.js site. Editorial press strip, transparent tiered investment, named-bench credibility, a 4-step inquiry funnel with HIPAA-aware intake.</p>
-          <ul class="wn-x-outcomes">
-            <li>Shipped flagship in 12 days end-to-end</li>
-            <li>Replaced 4 paid tools with one stack</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="wn-x-card">
         <div class="wn-x-thumb g4" aria-hidden="true">
-          <span class="wn-x-thumb-num">04 / 09</span>
+          <span class="wn-x-thumb-num">03 / 08</span>
           <span class="wn-x-thumb-glyph">recovery</span>
         </div>
         <div class="wn-x-card-body">
           <span class="wn-x-tag t-cons">Consulting</span>
-          <h3 class="wn-x-card-h">Northeast US clinical recovery network &mdash; brand &amp; intake rescue</h3>
-          <p class="wn-x-card-p">Inherited a half-built brand kit and a broken intake form. Rebuilt the palette, swapped in the founder's real logo asset, wired a working Google Form on a Sites iframe.</p>
+          <h3 class="wn-x-card-h">
+            Northeast US clinical recovery network &mdash; brand &amp; intake
+            rescue
+          </h3>
+          <p class="wn-x-card-p">
+            Inherited a half-built brand kit and a broken intake form. Rebuilt
+            the palette, swapped in the founder's real logo asset, wired a
+            working Google Form on a Sites iframe.
+          </p>
           <ul class="wn-x-outcomes">
             <li>Cut response time 6h &rarr; 6min on new-patient intake</li>
             <li>Shipped corrective ship in 3 revisions, 1 working day</li>
@@ -387,13 +534,19 @@
 
       <article class="wn-x-card">
         <div class="wn-x-thumb g5" aria-hidden="true">
-          <span class="wn-x-thumb-num">05 / 09</span>
+          <span class="wn-x-thumb-num">04 / 08</span>
           <span class="wn-x-thumb-glyph">CRM</span>
         </div>
         <div class="wn-x-card-body">
           <span class="wn-x-tag t-auto">Automation</span>
-          <h3 class="wn-x-card-h">US insurance retainer client &mdash; GHL pipeline rebuilt end-to-end</h3>
-          <p class="wn-x-card-p">Seventh GoHighLevel batch for the same operator: funnels, drip cadences, pipeline stages, calendar links, SMS templates &mdash; all rebuilt from a stagnant prior install.</p>
+          <h3 class="wn-x-card-h">
+            US insurance retainer client &mdash; GHL pipeline rebuilt end-to-end
+          </h3>
+          <p class="wn-x-card-p">
+            Seventh GoHighLevel batch for the same operator: funnels, drip
+            cadences, pipeline stages, calendar links, SMS templates &mdash; all
+            rebuilt from a stagnant prior install.
+          </p>
           <ul class="wn-x-outcomes">
             <li>Removed 3hrs/day of manual triage</li>
             <li>Replaced 4 paid tools with one stack</li>
@@ -403,13 +556,19 @@
 
       <article class="wn-x-card">
         <div class="wn-x-thumb g6" aria-hidden="true">
-          <span class="wn-x-thumb-num">06 / 09</span>
+          <span class="wn-x-thumb-num">05 / 08</span>
           <span class="wn-x-thumb-glyph">content</span>
         </div>
         <div class="wn-x-card-body">
           <span class="wn-x-tag t-ai">AI Content</span>
-          <h3 class="wn-x-card-h">Internal content engine &mdash; 200-asset carousel pipeline</h3>
-          <p class="wn-x-card-p">n8n-orchestrated pipeline turning a single topic brief into 200 PNG-ready carousel slides, with html2canvas render, image rotation log, and zero AI-tell phrasing.</p>
+          <h3 class="wn-x-card-h">
+            Internal content engine &mdash; 200-asset carousel pipeline
+          </h3>
+          <p class="wn-x-card-p">
+            n8n-orchestrated pipeline turning a single topic brief into 200
+            PNG-ready carousel slides, with html2canvas render, image rotation
+            log, and zero AI-tell phrasing.
+          </p>
           <ul class="wn-x-outcomes">
             <li>Removed 3hrs/day of manual triage on content batching</li>
             <li>Shipped in 9 days from null to first batch</li>
@@ -419,29 +578,42 @@
 
       <article class="wn-x-card">
         <div class="wn-x-thumb g7" aria-hidden="true">
-          <span class="wn-x-thumb-num">07 / 09</span>
+          <span class="wn-x-thumb-num">06 / 08</span>
           <span class="wn-x-thumb-glyph">auto</span>
         </div>
         <div class="wn-x-card-body">
           <span class="wn-x-tag t-web">Websites</span>
-          <h3 class="wn-x-card-h">Premium auto dealership network &mdash; demo that closes in the meeting</h3>
-          <p class="wn-x-card-p">Multi-location dealer site demo with finance-application gate, inventory tile grid, and a trade-in flow that doesn't make you log in to see a price range.</p>
+          <h3 class="wn-x-card-h">
+            Premium auto dealership network &mdash; demo that closes in the
+            meeting
+          </h3>
+          <p class="wn-x-card-p">
+            Multi-location dealer site demo with finance-application gate,
+            inventory tile grid, and a trade-in flow that doesn't make you log
+            in to see a price range.
+          </p>
           <ul class="wn-x-outcomes">
             <li>Shipped pitch demo in 7 days</li>
-            <li>Scaled to 9 countries with 1 founder</li>
+            <li>Scaled across multiple countries, one founder</li>
           </ul>
         </div>
       </article>
 
       <article class="wn-x-card">
         <div class="wn-x-thumb g8" aria-hidden="true">
-          <span class="wn-x-thumb-num">08 / 09</span>
+          <span class="wn-x-thumb-num">07 / 08</span>
           <span class="wn-x-thumb-glyph">shop</span>
         </div>
         <div class="wn-x-card-body">
           <span class="wn-x-tag t-web">Websites</span>
-          <h3 class="wn-x-card-h">KSA fashion retailer &mdash; e-commerce shoe store from null</h3>
-          <p class="wn-x-card-p">Shopify build with size-region logic, Arabic-English bilingual surfaces, courier-rate calc on the cart page, and a returns flow that doesn't punish the customer.</p>
+          <h3 class="wn-x-card-h">
+            KSA fashion retailer &mdash; e-commerce shoe store from null
+          </h3>
+          <p class="wn-x-card-p">
+            Shopify build with size-region logic, Arabic-English bilingual
+            surfaces, courier-rate calc on the cart page, and a returns flow
+            that doesn't punish the customer.
+          </p>
           <ul class="wn-x-outcomes">
             <li>Doubled appointments without ads (showroom bookings)</li>
             <li>Shipped in 14 days store-to-launch</li>
@@ -451,157 +623,216 @@
 
       <article class="wn-x-card">
         <div class="wn-x-thumb g9" aria-hidden="true">
-          <span class="wn-x-thumb-num">09 / 09</span>
+          <span class="wn-x-thumb-num">08 / 08</span>
           <span class="wn-x-thumb-glyph">launch</span>
         </div>
         <div class="wn-x-card-body">
           <span class="wn-x-tag t-ai">AI Content</span>
-          <h3 class="wn-x-card-h">Multi-channel SaaS launch &mdash; AEO content engine across 5 channels</h3>
-          <p class="wn-x-card-p">Daily voice-locked content pack across LinkedIn, FB, IG, YouTube and TikTok, generated by one script and linted against 60+ AI-writing tells before render.</p>
+          <h3 class="wn-x-card-h">
+            Multi-channel SaaS launch &mdash; AEO content engine across 5
+            channels
+          </h3>
+          <p class="wn-x-card-p">
+            Daily voice-locked content pack across LinkedIn, FB, IG, YouTube and
+            TikTok, generated by one script and linted against 60+ AI-writing
+            tells before render.
+          </p>
           <ul class="wn-x-outcomes">
             <li>Removed 3hrs/day of manual triage on content QA</li>
-            <li>Scaled to 9 countries with 1 founder</li>
+            <li>Scaled to 5 channels with 1 founder</li>
           </ul>
         </div>
       </article>
-
     </section>
 
     <section class="wn-x-cta">
       <h2 class="wn-x-cta-h">Yours could be <em>#10</em>.</h2>
-      <p class="wn-x-cta-p">Send the brief. Fixed-price scope in 48h. No retainer hostage situation.</p>
+      <p class="wn-x-cta-p">
+        Send the brief. Fixed-price scope in 48h. No retainer hostage situation.
+      </p>
       <a class="wn-x-cta-btn" href="/contact">Start the brief &rarr;</a>
     </section>
   </div>
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "SkynetLabs Case Studies",
-    "description": "Nine anonymized client builds across automation, websites, AI content and consulting — delivered by Waseem Nasir and SkynetLabs between 2019 and 2026.",
-    "itemListOrder": "https://schema.org/ItemListOrderDescending",
-    "numberOfItems": 9,
-    "dateModified": "2026-05-22",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@type": "CreativeWork",
-          "name": "EU logistics group — email triage automation",
-          "about": "17-node n8n + GPT-4o Gmail auto-reply pipeline for a French mining-logistics operator with 5-condition gate and accent-safe parsing",
-          "creator": { "@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com" },
-          "author": { "@type": "Person", "name": "Waseem Nasir", "url": "https://skynetjoe.com/author/waseem-nasir" },
-          "genre": "Automation",
-          "result": "Response time cut from 6 hours to 6 minutes on routine maintenance threads. Replaced 4 paid tools with one stack."
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "SkynetLabs Case Studies",
+      "description": "Eight anonymized client builds across automation, websites, AI content and consulting — delivered by Waseem Nasir and SkynetLabs between 2019 and 2026.",
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "numberOfItems": 8,
+      "dateModified": "2026-05-22",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "EU logistics group — email triage automation",
+            "about": "17-node n8n + GPT-4o Gmail auto-reply pipeline for a French mining-logistics operator with 5-condition gate and accent-safe parsing",
+            "creator": {
+              "@type": "Organization",
+              "name": "SkynetLabs",
+              "url": "https://skynetjoe.com"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Waseem Nasir",
+              "url": "https://skynetjoe.com/author/waseem-nasir"
+            },
+            "genre": "Automation",
+            "result": "Response time cut from 6 hours to 6 minutes on routine maintenance threads. Replaced 4 paid tools with one stack."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Bali wellness practitioner — conversion funnel",
+            "about": "Single-page voice-locked booking funnel with embedded scheduling and a DM-objection block",
+            "creator": {
+              "@type": "Organization",
+              "name": "SkynetLabs",
+              "url": "https://skynetjoe.com"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Waseem Nasir",
+              "url": "https://skynetjoe.com/author/waseem-nasir"
+            },
+            "genre": "Website",
+            "result": "Appointments doubled without paid ads. Shipped in 9 days from brief to live."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Northeast US clinical recovery network — brand & intake rescue",
+            "about": "Brand kit rebuild plus Google Form intake rewire on a Google Sites front-end",
+            "creator": {
+              "@type": "Organization",
+              "name": "SkynetLabs",
+              "url": "https://skynetjoe.com"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Waseem Nasir",
+              "url": "https://skynetjoe.com/author/waseem-nasir"
+            },
+            "genre": "Consulting",
+            "result": "New-patient intake response time cut from 6 hours to 6 minutes. Corrective ship in 3 revisions across 1 working day."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "US insurance retainer client — GoHighLevel pipeline",
+            "about": "Seventh-batch CRM rebuild for a US insurance operator: funnels, drip cadences, pipeline stages, calendar links, SMS templates",
+            "creator": {
+              "@type": "Organization",
+              "name": "SkynetLabs",
+              "url": "https://skynetjoe.com"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Waseem Nasir",
+              "url": "https://skynetjoe.com/author/waseem-nasir"
+            },
+            "genre": "Automation",
+            "result": "Removed 3 hours per day of manual triage. Replaced 4 paid tools with one stack."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Internal content engine — 200-asset carousel pipeline",
+            "about": "n8n + html2canvas pipeline turning one brief into 200 carousel PNGs with image-rotation log and AI-tell linting",
+            "creator": {
+              "@type": "Organization",
+              "name": "SkynetLabs",
+              "url": "https://skynetjoe.com"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Waseem Nasir",
+              "url": "https://skynetjoe.com/author/waseem-nasir"
+            },
+            "genre": "AI Content",
+            "result": "Removed 3 hours per day of manual content QA. Shipped in 9 days from null to first batch."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Premium auto dealership network — demo site",
+            "about": "Multi-location dealer demo with finance-application gate, inventory tiles, and a trade-in flow without login wall",
+            "creator": {
+              "@type": "Organization",
+              "name": "SkynetLabs",
+              "url": "https://skynetjoe.com"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Waseem Nasir",
+              "url": "https://skynetjoe.com/author/waseem-nasir"
+            },
+            "genre": "Website",
+            "result": "Pitch demo shipped in 7 days. Scaled across multiple countries with one founder."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "KSA fashion retailer — e-commerce shoe store",
+            "about": "Bilingual Arabic-English Shopify storefront with size-region logic, courier-rate cart calc, and a returns flow",
+            "creator": {
+              "@type": "Organization",
+              "name": "SkynetLabs",
+              "url": "https://skynetjoe.com"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Waseem Nasir",
+              "url": "https://skynetjoe.com/author/waseem-nasir"
+            },
+            "genre": "Website",
+            "result": "Showroom appointments doubled. Shipped in 14 days store-to-launch."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Multi-channel SaaS launch — AEO content engine",
+            "about": "Voice-locked daily content pack across LinkedIn, Facebook, Instagram, YouTube and TikTok, generated by one script and linted against 60+ AI-tell phrases before render",
+            "creator": {
+              "@type": "Organization",
+              "name": "SkynetLabs",
+              "url": "https://skynetjoe.com"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Waseem Nasir",
+              "url": "https://skynetjoe.com/author/waseem-nasir"
+            },
+            "genre": "AI Content",
+            "result": "Removed 3 hours per day of manual content QA. Scaled to 5 channels with one founder."
+          }
         }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@type": "CreativeWork",
-          "name": "Bali wellness practitioner — conversion funnel",
-          "about": "Single-page voice-locked booking funnel with embedded scheduling and a DM-objection block",
-          "creator": { "@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com" },
-          "author": { "@type": "Person", "name": "Waseem Nasir", "url": "https://skynetjoe.com/author/waseem-nasir" },
-          "genre": "Website",
-          "result": "Appointments doubled without paid ads. Shipped in 9 days from brief to live."
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@type": "CreativeWork",
-          "name": "Manhattan cosmetic dental atelier — flagship build",
-          "about": "14-section bespoke Next.js flagship site with tiered investment table and HIPAA-aware 4-step intake",
-          "creator": { "@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com" },
-          "author": { "@type": "Person", "name": "Waseem Nasir", "url": "https://skynetjoe.com/author/waseem-nasir" },
-          "genre": "Website",
-          "result": "Flagship shipped in 12 days end-to-end. Replaced 4 paid tools with one stack."
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "item": {
-          "@type": "CreativeWork",
-          "name": "Northeast US clinical recovery network — brand & intake rescue",
-          "about": "Brand kit rebuild plus Google Form intake rewire on a Google Sites front-end",
-          "creator": { "@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com" },
-          "author": { "@type": "Person", "name": "Waseem Nasir", "url": "https://skynetjoe.com/author/waseem-nasir" },
-          "genre": "Consulting",
-          "result": "New-patient intake response time cut from 6 hours to 6 minutes. Corrective ship in 3 revisions across 1 working day."
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 5,
-        "item": {
-          "@type": "CreativeWork",
-          "name": "US insurance retainer client — GoHighLevel pipeline",
-          "about": "Seventh-batch CRM rebuild for a US insurance operator: funnels, drip cadences, pipeline stages, calendar links, SMS templates",
-          "creator": { "@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com" },
-          "author": { "@type": "Person", "name": "Waseem Nasir", "url": "https://skynetjoe.com/author/waseem-nasir" },
-          "genre": "Automation",
-          "result": "Removed 3 hours per day of manual triage. Replaced 4 paid tools with one stack."
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 6,
-        "item": {
-          "@type": "CreativeWork",
-          "name": "Internal content engine — 200-asset carousel pipeline",
-          "about": "n8n + html2canvas pipeline turning one brief into 200 carousel PNGs with image-rotation log and AI-tell linting",
-          "creator": { "@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com" },
-          "author": { "@type": "Person", "name": "Waseem Nasir", "url": "https://skynetjoe.com/author/waseem-nasir" },
-          "genre": "AI Content",
-          "result": "Removed 3 hours per day of manual content QA. Shipped in 9 days from null to first batch."
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 7,
-        "item": {
-          "@type": "CreativeWork",
-          "name": "Premium auto dealership network — demo site",
-          "about": "Multi-location dealer demo with finance-application gate, inventory tiles, and a trade-in flow without login wall",
-          "creator": { "@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com" },
-          "author": { "@type": "Person", "name": "Waseem Nasir", "url": "https://skynetjoe.com/author/waseem-nasir" },
-          "genre": "Website",
-          "result": "Pitch demo shipped in 7 days. Scaled to 9 countries with one founder."
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 8,
-        "item": {
-          "@type": "CreativeWork",
-          "name": "KSA fashion retailer — e-commerce shoe store",
-          "about": "Bilingual Arabic-English Shopify storefront with size-region logic, courier-rate cart calc, and a returns flow",
-          "creator": { "@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com" },
-          "author": { "@type": "Person", "name": "Waseem Nasir", "url": "https://skynetjoe.com/author/waseem-nasir" },
-          "genre": "Website",
-          "result": "Showroom appointments doubled. Shipped in 14 days store-to-launch."
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 9,
-        "item": {
-          "@type": "CreativeWork",
-          "name": "Multi-channel SaaS launch — AEO content engine",
-          "about": "Voice-locked daily content pack across LinkedIn, Facebook, Instagram, YouTube and TikTok, generated by one script and linted against 60+ AI-tell phrases before render",
-          "creator": { "@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com" },
-          "author": { "@type": "Person", "name": "Waseem Nasir", "url": "https://skynetjoe.com/author/waseem-nasir" },
-          "genre": "AI Content",
-          "result": "Removed 3 hours per day of manual content QA. Scaled to 5 channels with one founder."
-        }
-      }
-    ]
-  }
+      ]
+    }
   </script>
 </article>

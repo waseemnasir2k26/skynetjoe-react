@@ -50,7 +50,7 @@ type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 // Featured case studies — highest-ROI proof points to show after booking.
 const FEATURED_SLUGS = [
-  "manhattan-dental-atelier-flagship",
+  "bali-wellness-conversion-funnel",
   "eu-logistics-email-triage-n8n",
   "northeast-recovery-brand-intake-rescue",
 ] as const;

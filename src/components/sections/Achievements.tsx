@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import {
   Megaphone,
   Palette,
@@ -13,91 +12,47 @@ import {
 
 type Card = {
   icon: React.ComponentType<{ className?: string }>;
-  count: number;
-  suffix: string;
   label: string;
   sub: string;
 };
 
+// No per-category counts here on purpose: only the categories themselves are
+// documented (SERVICE_CATEGORIES in src/lib/site.ts). We don't have receipts
+// for a per-category volume breakdown, so we don't publish invented numbers.
 const CARDS: Card[] = [
   {
     icon: Megaphone,
-    count: 320,
-    suffix: "+",
     label: "Marketing campaigns",
     sub: "Ad sets, funnels, email drips, content engines.",
   },
   {
     icon: Palette,
-    count: 180,
-    suffix: "+",
     label: "Branding builds",
     sub: "Logos, design systems, deck rebrands, brand books.",
   },
   {
     icon: Bot,
-    count: 240,
-    suffix: "+",
     label: "AI automations",
     sub: "n8n + GHL + custom agents. The kind that survive Mondays.",
   },
   {
     icon: Code2,
-    count: 110,
-    suffix: "+",
     label: "Vibe-coded apps & sites",
     sub: "Next.js, internal tools, one-shot dashboards, weekend builds.",
   },
   {
     icon: Puzzle,
-    count: 60,
-    suffix: "+",
     label: "Chrome extensions",
     sub: "Scrapers, overlays, productivity hacks shipped to the store.",
   },
   {
     icon: Wrench,
-    count: 90,
-    suffix: "+",
     label: "Custom plugins",
     sub: "WordPress, n8n nodes, GHL workflows — glue you can read.",
   },
 ];
 
-function useCount(target: number, durationMs = 1400, start: boolean) {
-  const [value, setValue] = useState(0);
-  const startedAt = useRef<number | null>(null);
-  const raf = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (!start) return;
-    const tick = (now: number) => {
-      if (startedAt.current === null) startedAt.current = now;
-      const elapsed = now - startedAt.current;
-      const t = Math.min(elapsed / durationMs, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setValue(Math.round(target * eased));
-      if (t < 1) raf.current = requestAnimationFrame(tick);
-    };
-    raf.current = requestAnimationFrame(tick);
-    return () => {
-      if (raf.current) cancelAnimationFrame(raf.current);
-    };
-  }, [start, target, durationMs]);
-
-  return value;
-}
-
-function StatCard({
-  card,
-  start,
-  i,
-}: {
-  card: Card;
-  start: boolean;
-  i: number;
-}) {
-  const value = useCount(card.count, 1500, start);
+function StatCard({ card, i }: { card: Card; i: number }) {
   const Icon = card.icon;
   const rotate = i % 2 === 0 ? "-0.3deg" : "0.3deg";
   return (
@@ -146,21 +101,6 @@ function StatCard({
       <div
         style={{
           fontFamily: "var(--font-display)",
-          fontStyle: "normal",
-          fontSize: 56,
-          fontWeight: 700,
-          color: "var(--terracotta-aa)",
-          lineHeight: 1,
-          marginBottom: 10,
-          letterSpacing: "-0.02em",
-        }}
-      >
-        {value}
-        <span style={{ fontSize: 32 }}>{card.suffix}</span>
-      </div>
-      <div
-        style={{
-          fontFamily: "var(--font-display)",
           fontSize: 20,
           fontWeight: 600,
           color: "var(--ink)",
@@ -185,30 +125,8 @@ function StatCard({
 }
 
 export default function Achievements() {
-  const [start, setStart] = useState(false);
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            setStart(true);
-            io.disconnect();
-            break;
-          }
-        }
-      },
-      { threshold: 0.2 },
-    );
-    io.observe(sectionRef.current);
-    return () => io.disconnect();
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       aria-labelledby="achievements-heading"
       style={{
         background: "var(--cream-3)",
@@ -251,7 +169,7 @@ export default function Achievements() {
               marginBottom: 14,
             }}
           >
-            1,000+ shipped.{" "}
+            Six disciplines.{" "}
             <span
               style={{
                 fontStyle: "normal",
@@ -259,7 +177,7 @@ export default function Achievements() {
                 fontWeight: 700,
               }}
             >
-              Most under one keyboard.
+              One keyboard.
             </span>
           </h2>
           <p
@@ -285,7 +203,7 @@ export default function Achievements() {
           }}
         >
           {CARDS.map((c, i) => (
-            <StatCard key={c.label} card={c} start={start} i={i} />
+            <StatCard key={c.label} card={c} i={i} />
           ))}
         </div>
 
