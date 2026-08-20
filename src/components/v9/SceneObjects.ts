@@ -20,7 +20,12 @@ import { C, DUSK, DISTRICT, WORK } from "./tokens";
 
 export type SceneObject = {
   group: THREE.Object3D;
-  update: (dt: number, elapsed: number, dayness: number) => void;
+  update: (
+    dt: number,
+    elapsed: number,
+    dayness: number,
+    perf?: { packetsHalved: boolean },
+  ) => void;
   dispose: () => void;
 };
 
@@ -531,7 +536,7 @@ export function buildInterconnect(mats: Mats): SceneObject {
 
   return {
     group,
-    update: (dt, _elapsed, dayness) => {
+    update: (dt, _elapsed, dayness, perf) => {
       // smoothstep(0.6, 0.75, dayness) — the narrative gate: below deep
       // night, bridges + packets are fully invisible.
       const x = THREE.MathUtils.clamp((dayness - 0.6) / (0.75 - 0.6), 0, 1);
@@ -539,14 +544,24 @@ export function buildInterconnect(mats: Mats): SceneObject {
       (mats.bridge as THREE.MeshBasicMaterial).opacity = gate * 0.06;
       (mats.packet as THREE.MeshBasicMaterial).opacity = gate;
 
+      // Frame-budget governor tier: once MeridianCanvas's rolling frame
+      // average sustains >22ms, halve BOTH the per-frame JS work (fewer
+      // states advanced) and the actual GPU instance draw count via
+      // InstancedMesh.count — not just a decorative dataset flag.
+      const activeCount = perf?.packetsHalved
+        ? Math.max(1, Math.floor(totalPackets / 2))
+        : totalPackets;
+      packets.count = activeCount;
+
       if (gate > 0.001) {
-        states.forEach((s, i) => {
+        for (let i = 0; i < activeCount; i++) {
+          const s = states[i];
           s.phase = (s.phase + dt * s.speed) % 1;
           samplePoint(s.arc, s.phase, dummy.position);
           dummy.scale.setScalar(gate);
           dummy.updateMatrix();
           packets.setMatrixAt(i, dummy.matrix);
-        });
+        }
         packets.instanceMatrix.needsUpdate = true;
       }
     },

@@ -65,19 +65,21 @@ function supportsWebGL(): boolean {
   }
 }
 
-/* SCENES = the 7 altitude bands from the source's approved scroll
-   choreography. altStart/altEnd drive the Altimeter Rail's HUD readout —
-   decorative meters, not the camera's actual world-space Y (see
-   CameraPath.ts). This HUD is the ALTITUDE mechanic itself (part of the
-   interactive descent, not a business claim), so it keeps its numbers. */
+/* SCENES = the 7 descent bands from the source's approved scroll
+   choreography. TRUTH GATE: this build previously carried a live numeric
+   altimeter (ALT 2400M, ALT 0M, per-district ALT ranges) — decorative HUD
+   flavor, but still digits, and this site's house rule allows only 180+ /
+   40+ / 9 / 2019 in any user-facing string. `stage` replaces every one of
+   those numbers with a digit-free descent-narrative label (word-only HUD,
+   same mono chrome) — the fiction survives as words instead of meters. */
 const SCENES = [
-  { id: "sky", altStart: 2400, altEnd: 2100, label: "SKY" },
-  { id: "punch", altStart: 2100, altEnd: 1700, label: "CLOUD PUNCH" },
-  { id: "signal", altStart: 1700, altEnd: 1200, label: "SIGNAL HEIGHTS" },
-  { id: "pipeline", altStart: 1200, altEnd: 800, label: "PIPELINE ROW" },
-  { id: "portal", altStart: 800, altEnd: 450, label: "PORTAL QUARTER" },
-  { id: "broadcast", altStart: 450, altEnd: 150, label: "BROADCAST BASIN" },
-  { id: "touchdown", altStart: 150, altEnd: 0, label: "TOUCHDOWN" },
+  { id: "sky", stage: "ABOVE THE CLOUDS", label: "SKY" },
+  { id: "punch", stage: "CLOUD DECK", label: "CLOUD PUNCH" },
+  { id: "signal", stage: "UPPER DESCENT", label: "SIGNAL HEIGHTS" },
+  { id: "pipeline", stage: "MID DESCENT", label: "PIPELINE ROW" },
+  { id: "portal", stage: "LOWER DESCENT", label: "PORTAL QUARTER" },
+  { id: "broadcast", stage: "STREET APPROACH", label: "BROADCAST BASIN" },
+  { id: "touchdown", stage: "LANDED", label: "TOUCHDOWN" },
 ] as const;
 
 type SceneId = (typeof SCENES)[number]["id"];
@@ -147,7 +149,6 @@ export default function V10Client() {
           />
         )}
 
-        <MiniNav />
         <AltimeterRail progress={is3D ? scrollYProgress : null} />
 
         {/* One stable DOM node for the whole component lifetime — the
@@ -226,66 +227,19 @@ function useDescentReceipt(progress: MotionValue<number> | null) {
   return surveyed;
 }
 
-/* ── minimal fixed nav — cream brand mark on the dark ground ── */
-function MiniNav() {
-  return (
-    <header
-      className="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-5 py-3 sm:px-6"
-      style={{
-        background: "rgba(22,15,11,0.72)",
-        backdropFilter: "blur(14px) saturate(160%)",
-        WebkitBackdropFilter: "blur(14px) saturate(160%)",
-        borderBottom: `1px solid ${C.hairline}`,
-      }}
-    >
-      <a href="#sky" className="flex flex-col leading-none">
-        <span
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 600,
-            fontSize: "0.95rem",
-            color: C.ink,
-            letterSpacing: "-0.01em",
-          }}
-        >
-          SkynetLabs
-        </span>
-        <span
-          className="font-mono"
-          style={{
-            fontFamily: "var(--font-mono)",
-            color: C.mute,
-            fontSize: "0.58rem",
-            letterSpacing: "0.1em",
-            marginTop: 2,
-          }}
-        >
-          ALTITUDE ZERO PREVIEW
-        </span>
-      </a>
-      <Link
-        href={CTA_URL}
-        className="v10-cta inline-flex items-center rounded-full font-semibold transition-opacity hover:opacity-90"
-        style={{
-          background: C.jade,
-          color: C.onDeep,
-          fontSize: "0.82rem",
-          padding: "0.5rem 1rem",
-        }}
-      >
-        {CTA_LABEL}
-      </Link>
-    </header>
-  );
-}
+/* MiniNav (the source's own fixed brand + CTA bar) is intentionally NOT
+   rendered here — this route lives inside the shared app/(skynet)/layout.tsx,
+   which already renders a sitewide fixed Header (logo, nav, CTA) at z-50.
+   The route-local MiniNav used to stack a second fixed header at z-40 under
+   it, duplicating branding/CTA chrome — same deviation note as v9/v11. */
 
 /* ============================================================
-   THE ALTIMETER RAIL — pure HTML, fixed left edge on desktop. Doubles as
-   click-nav: each band is an anchor. Reads a live altitude number off
-   scroll progress in 3D mode (motionValue only, no re-renders); in
-   static mode there is no fixed rail at all — StaticTrack's in-flow
-   elevation strip covers that case instead, per the "no motion, no
-   distraction" static-mode rule.
+   THE DESCENT RAIL — pure HTML, fixed left edge on desktop. Doubles as
+   click-nav: each band is an anchor. Reads a live descent-stage label off
+   scroll progress in 3D mode (motionValue only, no re-renders) — word-only
+   HUD, no altitude digits (truth gate); in static mode there is no fixed
+   rail at all — StaticTrack's in-flow elevation strip covers that case
+   instead, per the "no motion, no distraction" static-mode rule.
    ============================================================ */
 function AltimeterRail({ progress }: { progress: MotionValue<number> | null }) {
   if (!progress) return null;
@@ -293,17 +247,20 @@ function AltimeterRail({ progress }: { progress: MotionValue<number> | null }) {
 }
 
 function AltimeterRailLive({ progress }: { progress: MotionValue<number> }) {
-  const altText = useTransform(progress, (p) => {
-    const alt = Math.round(2400 - clampNum(p, 0, 1) * 2400);
-    return `ALT ${alt}M`;
-  });
+  const stageText = useTransform(progress, (p) => {
+    const i = Math.min(
+      SCENES.length - 1,
+      Math.floor(clampNum(p, 0, 1) * SCENES.length),
+    );
+    return SCENES[i].stage;
+  }) as MotionValue<string>;
   const status = useTransform(progress, (p) =>
     p >= 0.995 ? "LANDED" : "DESCENDING",
   ) as MotionValue<string>;
   return (
     <div
       className="fixed left-4 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-3 lg:flex"
-      aria-label="Altimeter — click a district to jump there"
+      aria-label="Descent rail — click a district to jump there"
     >
       <div
         className="rounded-2xl px-4 py-3"
@@ -315,7 +272,7 @@ function AltimeterRailLive({ progress }: { progress: MotionValue<number> }) {
         }}
       >
         <motion.div style={{ color: C.jadeBright, fontSize: "0.85rem" }}>
-          {altText}
+          {stageText}
         </motion.div>
         <motion.div
           style={{ color: C.mute, fontSize: "0.6rem", letterSpacing: "0.08em" }}
@@ -338,7 +295,7 @@ function AltimeterRailLive({ progress }: { progress: MotionValue<number> }) {
               background: "rgba(22,15,11,0.5)",
             }}
           >
-            {s.altStart}M — {s.label}
+            {s.stage} — {s.label}
           </a>
         ))}
       </nav>
@@ -414,16 +371,27 @@ function PinnedScene({
     [start, end],
     i === 0 ? [0, -20] : [20, -20],
   );
-  const active = progress.get() >= start - fade && progress.get() < end + fade;
+  // Live subscription (not a one-time progress.get() read at mount) — every
+  // scene after the first must un-inert as scroll passes through its band,
+  // or its links/CTAs stay unclickable and hidden from AT for the rest of
+  // the session.
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const isActive = (p: number) => p >= start - fade && p < end + fade;
+    if (sectionRef.current)
+      sectionRef.current.inert = !isActive(progress.get());
+    const unsubscribe = progress.on("change", (p) => {
+      if (sectionRef.current) sectionRef.current.inert = !isActive(p);
+    });
+    return unsubscribe;
+  }, [progress, start, end, fade]);
   return (
     <motion.section
       id={id}
       aria-label={id}
       className="absolute inset-0 flex items-center"
       style={{ opacity, y, pointerEvents: "none" }}
-      ref={(el: HTMLElement | null) => {
-        if (el) el.inert = !active;
-      }}
+      ref={sectionRef}
     >
       <div
         className="mx-auto w-full max-w-[1200px] px-5 sm:px-6"
@@ -634,7 +602,10 @@ function sceneContent(id: SceneId, surveyed: SceneId[]) {
 function SkyScene() {
   return (
     <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
-      <div className="lg:col-span-7" style={{ paddingTop: "4.5rem" }}>
+      <div
+        className="lg:col-span-7"
+        style={{ paddingTop: "calc(var(--promo-h, 44px) + 4.5rem)" }}
+      >
         <Scrim className="px-6 py-7 sm:px-8 sm:py-9">
           <Mono color={C.jadeBright}>AI automation that pays for itself</Mono>
           <h1
@@ -686,7 +657,7 @@ function SkyScene() {
             </a>
           </div>
           <div className="mt-6">
-            <Mono color={C.jadeBright}>ALT 2400M · V 0.0 M/S</Mono>
+            <Mono color={C.jadeBright}>ABOVE THE CLOUDS · DESCENDING</Mono>
           </div>
         </Scrim>
       </div>
@@ -755,7 +726,7 @@ function CloudIllustration() {
 function PunchScene() {
   return (
     <Scrim className="px-6 py-8 sm:px-8 sm:py-10">
-      <DistrictHeader survey="CLOUD PUNCH · ALT 2100–1700M" />
+      <DistrictHeader survey="CLOUD DECK · CLOUD PUNCH" />
       <h2
         className="mt-4"
         style={{
@@ -844,7 +815,12 @@ function DistrictScene({ district }: { district: (typeof DISTRICTS)[number] }) {
 
 function PortalScene() {
   const d = DISTRICTS[2];
-  const w = WORK[0];
+  // No WorkCard here. The EU logistics inbox-triage case (WORK[0]) used to
+  // render inline right below the FreightOps landmark description, which
+  // implied that case belonged to the FreightOps spec build — it doesn't;
+  // FreightOps is a demo funnel, EU logistics is a separate live client.
+  // Every WORK entry (including EU logistics) already appears together,
+  // unattributed to any single district, in BroadcastScene's grid below.
   return (
     <Scrim className="px-6 py-8 sm:px-8 sm:py-10">
       <DistrictHeader survey={d.survey} />
@@ -877,7 +853,6 @@ function PortalScene() {
           {d.linkLabel} →
         </Link>
       </div>
-      <WorkCard w={w} className="mt-8" />
     </Scrim>
   );
 }
@@ -1005,7 +980,7 @@ function TouchdownScene({ surveyed }: { surveyed: SceneId[] }) {
         boxShadow: "0 24px 48px rgba(0,0,0,0.5)",
       }}
     >
-      <Mono color={C.jadeBright}>ALT 0M · LANDED</Mono>
+      <Mono color={C.jadeBright}>TOUCHDOWN · LANDED</Mono>
       <h2
         style={{
           fontFamily: "var(--font-display)",

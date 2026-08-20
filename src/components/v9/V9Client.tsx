@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -10,11 +10,6 @@ import {
   useReducedMotion,
   type MotionValue,
 } from "framer-motion";
-import {
-  Bricolage_Grotesque,
-  Hanken_Grotesk,
-  JetBrains_Mono,
-} from "next/font/google";
 import Magnetic from "./Magnetic";
 import CountUp from "./CountUp";
 import {
@@ -63,24 +58,11 @@ const MeridianCanvas = dynamic(() => import("./MeridianCanvas"), {
   ssr: false,
 });
 
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-v9-display",
-  weight: ["400", "500", "600", "700", "800"],
-});
-const body = Hanken_Grotesk({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-v9-body",
-  weight: ["400", "500", "600", "700"],
-});
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-v9-mono",
-  weight: ["400", "500"],
-});
+/* Fonts are NOT loaded here — this route lives under the shared
+   app/(skynet)/layout.tsx, which already sets --font-sans / --font-display
+   (Inter) and --font-mono (IBM Plex Mono) on <html>. Loading a second
+   Google Fonts set (Bricolage + Hanken Grotesk + JetBrains Mono) here was a
+   duplicate-payload regression — see v10/V10Client.tsx's identical note. */
 
 type Mode = "static" | "3d";
 
@@ -148,11 +130,11 @@ export default function V9Client() {
       />
       <main
         id="v9-main"
-        className={`v9-root relative ${display.variable} ${body.variable} ${mono.variable}`}
+        className="v9-root relative"
         style={{
           background: C.skyDark,
           color: C.body,
-          fontFamily: "var(--font-v9-body)",
+          fontFamily: "var(--font-sans)",
           overflowX: "clip",
         }}
       >
@@ -240,16 +222,27 @@ function PinnedScene({
     [start, end],
     i === 0 ? [0, -24] : [24, -24],
   );
-  const active = progress.get() >= start - fade && progress.get() < end + fade;
+  // Live subscription (not a one-time progress.get() read at mount) — every
+  // scene after the first must un-inert as scroll passes through its band,
+  // or its links/CTAs stay unclickable and hidden from AT for the rest of
+  // the session. See PinnedTrack's V10/V11 siblings for the identical fix.
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const isActive = (p: number) => p >= start - fade && p < end + fade;
+    if (sectionRef.current)
+      sectionRef.current.inert = !isActive(progress.get());
+    const unsubscribe = progress.on("change", (p) => {
+      if (sectionRef.current) sectionRef.current.inert = !isActive(p);
+    });
+    return unsubscribe;
+  }, [progress, start, end, fade]);
   return (
     <motion.section
       id={`v9-${id}`}
       aria-label={id}
       className="absolute inset-0 flex items-center"
       style={{ opacity, y, pointerEvents: "none" }}
-      ref={(el: HTMLElement | null) => {
-        if (el) el.inert = !active;
-      }}
+      ref={sectionRef}
     >
       <div
         className="mx-auto w-full max-w-[1200px] px-5 sm:px-6"
@@ -323,7 +316,7 @@ function Mono({
       className={`font-mono uppercase ${className}`}
       style={{
         color,
-        fontFamily: "var(--font-v9-mono)",
+        fontFamily: "var(--font-mono)",
         fontSize: "0.72rem",
         fontWeight: 500,
         letterSpacing: "0.08em",
@@ -409,7 +402,7 @@ function GoldenScene({ pinned }: { pinned: boolean }) {
           <h1
             className="mt-5"
             style={{
-              fontFamily: "var(--font-v9-display)",
+              fontFamily: "var(--font-display)",
               fontWeight: 600,
               fontSize: "clamp(2.5rem, 5.5vw, 4.25rem)",
               lineHeight: 1.03,
@@ -481,7 +474,7 @@ function SunsetScene() {
       <h2
         className="mt-4"
         style={{
-          fontFamily: "var(--font-v9-display)",
+          fontFamily: "var(--font-display)",
           fontWeight: 500,
           fontSize: "clamp(1.9rem,4vw,3rem)",
           lineHeight: 1.05,
@@ -507,7 +500,7 @@ function SunsetScene() {
           >
             <span
               style={{
-                fontFamily: "var(--font-v9-display)",
+                fontFamily: "var(--font-display)",
                 fontWeight: 600,
                 color: C.ink,
                 fontSize: "1.05rem",
@@ -533,7 +526,7 @@ function DuskScene() {
       <h2
         className="mt-4"
         style={{
-          fontFamily: "var(--font-v9-display)",
+          fontFamily: "var(--font-display)",
           fontWeight: 500,
           fontSize: "clamp(1.9rem,4vw,3rem)",
           lineHeight: 1.05,
@@ -548,7 +541,7 @@ function DuskScene() {
           <div key={p.label}>
             <div
               style={{
-                fontFamily: "var(--font-v9-display)",
+                fontFamily: "var(--font-display)",
                 fontWeight: 700,
                 fontSize: "clamp(2.2rem,4.5vw,3rem)",
                 color: C.jadeBright,
@@ -577,7 +570,7 @@ function NightfallScene() {
       <h2
         className="mt-4"
         style={{
-          fontFamily: "var(--font-v9-display)",
+          fontFamily: "var(--font-display)",
           fontWeight: 500,
           fontSize: "clamp(1.9rem,4vw,3rem)",
           lineHeight: 1.05,
@@ -619,7 +612,7 @@ function NightfallScene() {
             </div>
             <div
               style={{
-                fontFamily: "var(--font-v9-display)",
+                fontFamily: "var(--font-display)",
                 fontWeight: 700,
                 fontSize: "1.9rem",
                 color: C.jadeBright,
@@ -646,7 +639,7 @@ function DeepNightScene() {
       <h2
         className="mt-4"
         style={{
-          fontFamily: "var(--font-v9-display)",
+          fontFamily: "var(--font-display)",
           fontWeight: 500,
           fontSize: "clamp(1.9rem,4vw,3rem)",
           lineHeight: 1.05,
@@ -686,7 +679,7 @@ function MidnightScene() {
       <Mono color={C.jadeBright}>Dock — midnight</Mono>
       <h2
         style={{
-          fontFamily: "var(--font-v9-display)",
+          fontFamily: "var(--font-display)",
           fontWeight: 600,
           fontSize: "clamp(2rem,4.5vw,3.25rem)",
           lineHeight: 1.05,
@@ -836,7 +829,7 @@ function DistrictAccordion() {
           <summary className="flex items-center justify-between">
             <span
               style={{
-                fontFamily: "var(--font-v9-display)",
+                fontFamily: "var(--font-display)",
                 fontWeight: 600,
                 color: C.ink,
                 fontSize: "0.95rem",
