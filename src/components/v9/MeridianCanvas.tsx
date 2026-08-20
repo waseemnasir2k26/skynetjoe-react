@@ -112,6 +112,10 @@ export default function MeridianCanvas({
     const frameTimes: number[] = [];
     let packetsHalved = false;
     let dprLowered = false;
+    // Stable object reused every frame (no per-frame allocation) — flips
+    // to true once the governor fires, halving packet/instance load in
+    // buildInterconnect's update() (see SceneObjects.ts).
+    const perf = { packetsHalved: false };
 
     let raf = 0;
     let last = performance.now();
@@ -138,7 +142,8 @@ export default function MeridianCanvas({
       if (frameTimes.length === 60) {
         const avg = frameTimes.reduce((a, b) => a + b, 0) / 60;
         if (avg > 22 && !packetsHalved) {
-          packetsHalved = true; // logged via dataset, no UI
+          packetsHalved = true;
+          perf.packetsHalved = true; // actually halves packet/instance load
           mount.dataset.governor = "packets-reduced";
         }
         if (avg > 26 && !dprLowered) {
@@ -182,7 +187,7 @@ export default function MeridianCanvas({
         0.18 * THREE.MathUtils.clamp((dayness - 0.4) / 0.3, 0, 1);
       ambient.intensity = 0.18 + dayness * 0.2;
 
-      objects.forEach((o) => o.update(dt, elapsed, dayness));
+      objects.forEach((o) => o.update(dt, elapsed, dayness, perf));
       renderer.render(scene, camera);
     };
     raf = requestAnimationFrame(tick);

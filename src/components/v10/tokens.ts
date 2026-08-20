@@ -110,13 +110,16 @@ export const UTILITIES = [
    never the /services/[slug] page (see getServiceHref() in site.ts).
    Building heights in SceneObjects.ts are explicitly decorative, never
    tied to any of these labels — same honesty rule carried over from the
-   source. */
+   source. `survey` used to encode a numeric ALT range per district
+   ("DISTRICT 01 · ... · ALT 1700-1200M") — digits, in breach of the
+   180+/40+/9/2019-only truth gate. Districts are now lettered A-D, no
+   altitude figure, matching v11/tokens.ts SERVICES' DISTRICT A-D convention. */
 export const DISTRICTS = [
   {
     id: "signal",
     order: 1,
     name: "Signal Heights",
-    survey: "DISTRICT 01 · SIGNAL HEIGHTS · ALT 1700–1200M",
+    survey: "DISTRICT A · SIGNAL HEIGHTS",
     landmark: "The Signal Spire",
     pitch:
       "Lead response & inbox automation: every new customer answered before they go cold.",
@@ -127,7 +130,7 @@ export const DISTRICTS = [
     id: "pipeline",
     order: 2,
     name: "Pipeline Row",
-    survey: "DISTRICT 02 · PIPELINE ROW · ALT 1200–800M",
+    survey: "DISTRICT B · PIPELINE ROW",
     landmark: "Pipeline Row HQ",
     pitch: "Ops & CRM follow-up: first touch to close, no manual relay.",
     href: "/services/gohighlevel",
@@ -137,7 +140,7 @@ export const DISTRICTS = [
     id: "portal",
     order: 3,
     name: "Portal Quarter",
-    survey: "DISTRICT 03 · PORTAL QUARTER · ALT 800–450M",
+    survey: "DISTRICT C · PORTAL QUARTER",
     landmark: "FreightOps Dispatch Canvas",
     pitch:
       "A dispatch portal for US small-fleet carriers: site, booking, and an AI voice agent that answers when you can't.",
@@ -148,7 +151,7 @@ export const DISTRICTS = [
     id: "broadcast",
     order: 4,
     name: "Broadcast Basin",
-    survey: "DISTRICT 04 · BROADCAST BASIN · ALT 450–150M",
+    survey: "DISTRICT D · BROADCAST BASIN",
     landmark: "The Cutting House",
     pitch:
       "AI video editing & content, shipped on repeat — without sounding like a machine wrote it.",

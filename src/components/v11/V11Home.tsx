@@ -244,16 +244,27 @@ function PinnedScene({
     [start, end],
     i === 0 ? [0, -24] : [24, -24],
   );
-  const active = progress.get() >= start - fade && progress.get() < end + fade;
+  // Live subscription (not a one-time progress.get() read at mount) — every
+  // scene after the first must un-inert as scroll passes through its band,
+  // or its links/CTAs stay unclickable and hidden from AT for the rest of
+  // the session.
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const isActive = (p: number) => p >= start - fade && p < end + fade;
+    if (sectionRef.current)
+      sectionRef.current.inert = !isActive(progress.get());
+    const unsubscribe = progress.on("change", (p) => {
+      if (sectionRef.current) sectionRef.current.inert = !isActive(p);
+    });
+    return unsubscribe;
+  }, [progress, start, end, fade]);
   return (
     <motion.section
       id={id}
       aria-label={id}
       className="absolute inset-0 flex items-center"
       style={{ opacity, y, pointerEvents: "none" }}
-      ref={(el: HTMLElement | null) => {
-        if (el) el.inert = !active;
-      }}
+      ref={sectionRef}
     >
       <div
         className="mx-auto w-full max-w-[1200px] px-5 sm:px-6"
@@ -720,29 +731,60 @@ function ProofScene() {
         Substation heights are decorative — they never encode these numbers.
       </p>
       <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
-        {PROOF.map((p) => (
-          <div key={p.label}>
-            <CountUp
-              value={p.value}
-              suffix={p.suffix}
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 700,
-                fontSize: "clamp(2.2rem,4.5vw,3rem)",
-                color: C.jadeBright,
-                letterSpacing: "-0.02em",
-                display: "block",
-              }}
-            />
-            <Mono className="mt-1">{p.label}</Mono>
-          </div>
-        ))}
+        {PROOF.map((p) => {
+          const numberStyle: React.CSSProperties = {
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            fontSize: "clamp(2.2rem,4.5vw,3rem)",
+            color: C.jadeBright,
+            letterSpacing: "-0.02em",
+            display: "block",
+            fontVariantNumeric: "tabular-nums",
+          };
+          return (
+            <div key={p.label}>
+              {p.value === 2019 ? (
+                // A year reads wrong as a rolling tally (0 -> 2019 looks
+                // like a counter, not a founding year) — the shared
+                // home/CountUp.tsx has no non-rolling mode, so render it
+                // as static text instead. Same "roll: false" precedent as
+                // v9/CountUp.tsx's local `roll` prop for the 2019 entry.
+                <span style={numberStyle}>
+                  {p.value}
+                  {p.suffix}
+                </span>
+              ) : (
+                <CountUp
+                  value={p.value}
+                  suffix={p.suffix}
+                  style={numberStyle}
+                />
+              )}
+              <Mono className="mt-1">{p.label}</Mono>
+            </div>
+          );
+        })}
       </div>
     </Scrim>
   );
 }
 
 function WorksScene({ setFocus }: { setFocus: (id: string | null) => void }) {
+  // Local "which card is driving the canvas focus" state — drives
+  // aria-pressed below. Real <button>s (not <div tabIndex={0}>) so these
+  // are genuine tab stops with real semantics in both static and 3D mode,
+  // not a11y noise; in static mode `setFocus` is already a no-op (see
+  // StaticTrack's sceneContent call), so this state just tracks hover/focus
+  // for the toggle-button affordance with no canvas side effect.
+  const [focusedId, setFocusedId] = useState<string | null>(null);
+  const focusOn = (id: string) => {
+    setFocus(id);
+    setFocusedId(id);
+  };
+  const focusOff = () => {
+    setFocus(null);
+    setFocusedId(null);
+  };
   return (
     <Scrim className="px-6 py-8 sm:px-8 sm:py-10">
       <Mono color={C.jadeBright}>Works boulevard — named clients</Mono>
@@ -761,14 +803,15 @@ function WorksScene({ setFocus }: { setFocus: (id: string | null) => void }) {
       </h2>
       <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {WORK.map((w) => (
-          <div
+          <button
             key={w.id}
-            className="sg-tower-btn flex flex-col gap-2 rounded-2xl p-6"
-            tabIndex={0}
-            onFocus={() => setFocus(w.id)}
-            onBlur={() => setFocus(null)}
-            onMouseEnter={() => setFocus(w.id)}
-            onMouseLeave={() => setFocus(null)}
+            type="button"
+            aria-pressed={focusedId === w.id}
+            className="sg-tower-btn flex w-full flex-col gap-2 rounded-2xl p-6 text-left"
+            onFocus={() => focusOn(w.id)}
+            onBlur={focusOff}
+            onMouseEnter={() => focusOn(w.id)}
+            onMouseLeave={focusOff}
             style={{
               background: C.card,
               border: w.dashed
@@ -818,7 +861,7 @@ function WorksScene({ setFocus }: { setFocus: (id: string | null) => void }) {
             <Mono color={C.mute} className="mt-1">
               {LANE_HONESTY_CHIP}
             </Mono>
-          </div>
+          </button>
         ))}
       </div>
     </Scrim>

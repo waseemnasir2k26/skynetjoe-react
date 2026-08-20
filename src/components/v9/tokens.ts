@@ -115,13 +115,22 @@ export const DISTRICT = [
   },
 ] as const;
 
-/* Work billboards — reused from the site's real client work, claims
-   locked to what's true. Dental stays explicitly a demo. Every
-   digit-bearing metric from the source ("~20 trips", "0", "24/7")
-   rewritten number-free below. */
+/* Work billboards — anonymized forms match src/lib/case-studies.ts +
+   components/v10/tokens.ts + components/v11/tokens.ts (site-wide "no
+   client company/personal name" policy — see case-studies.ts header
+   comment). The prior "idea-viaggi / KODIASIMMO" entry conflated a
+   travel-booking outcome with KODIASIMMO, which is actually the
+   Northeast US clinical recovery network's internal code name (see
+   data/service-funnels/ai-business-systems.ts) — wrong attribution as
+   well as a named-client breach, so it's replaced with a sector-only
+   anonymized label describing the same real outcome. "Christelle" is
+   the named individual behind the published "Wellness practitioner,
+   Ubud" case study — replaced with that same anonymized form used
+   everywhere else on the site. Every digit-bearing metric from the
+   source ("~20 trips", "0", "24/7") stays rewritten number-free. */
 export const WORK = [
   {
-    client: "idea-viaggi / KODIASIMMO",
+    client: "Travel booking platform (anonymized)",
     outcome: "Per-user trip authorization, delivered.",
     metric: "Trip access",
     note: "each gated so a customer sees only what they booked.",
@@ -137,7 +146,7 @@ export const WORK = [
     status: "LIVE" as const,
   },
   {
-    client: "Christelle",
+    client: "Wellness practitioner, Ubud",
     outcome: "Care intake, handled for them.",
     metric: "Always on",
     note: "first-response handled around the clock.",
