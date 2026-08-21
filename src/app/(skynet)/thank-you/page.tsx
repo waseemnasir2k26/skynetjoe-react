@@ -383,25 +383,13 @@ export default async function ThankYouPage({
                 background: "var(--cream-2)",
               }}
             >
-              <div
-                aria-hidden
-                style={{
-                  width: 112,
-                  height: 112,
-                  borderRadius: "50%",
-                  background: "#A8451F",
-                  color: "var(--cream-3)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: "var(--font-mono)",
-                  fontWeight: 700,
-                  fontSize: 40,
-                  letterSpacing: "0.04em",
-                }}
-              >
-                SL
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/waseem-portrait.jpg"
+                alt="Waseem Nasir, founder of SkynetLabs"
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ objectPosition: "center top" }}
+              />
               <div
                 className="absolute inset-x-0 bottom-0 p-4"
                 style={{
