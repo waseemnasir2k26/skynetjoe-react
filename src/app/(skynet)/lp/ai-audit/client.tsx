@@ -34,7 +34,15 @@ function fireFbq(event: string) {
   if (w.fbq) w.fbq("track", event);
 }
 
-function BookingEmbed() {
+// /api/leads requires an email; Calendly's scheduled event exposes only URIs.
+// So the email is captured in a gate step BEFORE the calendar (same pattern as
+// /discovery-call's qualifier): the lead posts to GHL immediately, and the
+// calendar opens prefilled. The booking POST then updates the same leadId.
+function BookingEmbed({
+  lead,
+}: {
+  lead: { name: string; email: string; leadId: string };
+}) {
   const router = useRouter();
   const [scheduled, setScheduled] = useState(false);
 
@@ -48,11 +56,14 @@ function BookingEmbed() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            leadId: null,
+            leadId: lead.leadId,
             source: "lp-ai-audit",
+            email: lead.email,
             booking: {
               event: e.data.payload?.event?.uri,
               invitee: e.data.payload?.invitee?.uri,
+              inviteeEmail: lead.email,
+              inviteeName: lead.name,
               scheduledAt: new Date().toISOString(),
             },
             utm: {
@@ -98,6 +109,7 @@ function BookingEmbed() {
       >
         <InlineWidget
           url={CALENDLY_URL}
+          prefill={{ name: lead.name, email: lead.email }}
           utm={{
             utmSource: "meta",
             utmMedium: "paid-social",
@@ -211,6 +223,148 @@ function BookingEmbed() {
         </div>
       )}
     </div>
+  );
+}
+
+function BookingSection() {
+  const [lead, setLead] = useState<{
+    name: string;
+    email: string;
+    leadId: string;
+  } | null>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+
+  async function unlock(ev: React.FormEvent) {
+    ev.preventDefault();
+    const n = name.trim();
+    const em = email.trim();
+    if (!n || !/.+@.+\..+/.test(em)) {
+      setErr("A name and a working email — that's all it needs.");
+      return;
+    }
+    setErr("");
+    setBusy(true);
+    fireFbq("Lead");
+    const leadId = `lead_${Date.now().toString(36)}_${Math.random()
+      .toString(36)
+      .slice(2, 8)}`;
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          leadId,
+          source: "lp-ai-audit",
+          email: em,
+          qualification: {
+            email: em,
+            firstName: n.split(/\s+/)[0],
+            lastName: n.split(/\s+/).slice(1).join(" ") || undefined,
+          },
+          utm: {
+            source: "meta",
+            medium: "paid-social",
+            campaign: "ai-audit-2026",
+          },
+          submittedAt: new Date().toISOString(),
+        }),
+      });
+      if (!res.ok) {
+        console.error("[lp-ai-audit] lead POST rejected", {
+          status: res.status,
+        });
+      }
+    } catch (e) {
+      console.error("[lp-ai-audit] lead POST failed", e);
+    }
+    // Calendar opens regardless — the booking itself must never be blocked
+    // by a CRM hiccup; Calendly's own confirmation is the safety net.
+    setLead({ name: n, email: em, leadId });
+    setBusy(false);
+  }
+
+  if (lead) return <BookingEmbed lead={lead} />;
+
+  return (
+    <form
+      onSubmit={unlock}
+      style={{
+        background: C.cream3,
+        border: `1px solid ${C.ink}`,
+        padding: "34px 28px",
+        maxWidth: 520,
+        margin: "0 auto",
+        boxShadow: "0 18px 48px rgba(26,26,26,0.10)",
+      }}
+    >
+      <p
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: 18,
+          fontWeight: 700,
+          margin: "0 0 6px",
+        }}
+      >
+        First, where should the audit summary go?
+      </p>
+      <p style={{ fontSize: 14, color: C.ink2, margin: "0 0 18px" }}>
+        You&apos;ll get the calendar right after — and the written findings land
+        in this inbox after the call.
+      </p>
+      <div style={{ display: "grid", gap: 12 }}>
+        <input
+          type="text"
+          autoComplete="name"
+          placeholder="Your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={{
+            border: `1px solid ${C.rule}`,
+            padding: "13px 14px",
+            fontSize: 15,
+            fontFamily: "inherit",
+            background: "#fff",
+          }}
+        />
+        <input
+          type="email"
+          autoComplete="email"
+          placeholder="you@yourbusiness.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{
+            border: `1px solid ${C.rule}`,
+            padding: "13px 14px",
+            fontSize: 15,
+            fontFamily: "inherit",
+            background: "#fff",
+          }}
+        />
+        {err && (
+          <p style={{ color: C.terra, fontSize: 13, margin: 0 }}>{err}</p>
+        )}
+        <button
+          type="submit"
+          disabled={busy}
+          style={{
+            background: C.terra,
+            color: "#fff",
+            border: 0,
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            fontSize: 16,
+            padding: "14px 20px",
+            cursor: "pointer",
+            opacity: busy ? 0.7 : 1,
+          }}
+        >
+          {busy ? "One second…" : "Show me the calendar"}
+        </button>
+      </div>
+    </form>
   );
 }
 
@@ -525,7 +679,7 @@ export default function AiAuditClient() {
             Pick a time below — you&apos;ll get an instant confirmation email
             with the Zoom link.
           </p>
-          <BookingEmbed />
+          <BookingSection />
         </div>
       </section>
 
