@@ -23,6 +23,9 @@ const sha256 = (s: string) =>
 export type CapiLeadInput = {
   email: string;
   eventId: string;
+  // Meta standard event name to send; defaults to "Lead". The ai-audit funnel
+  // also sends "Schedule" when a Calendly booking completes.
+  eventName?: string;
   sourceUrl?: string;
   ip?: string;
   userAgent?: string;
@@ -45,7 +48,7 @@ export async function sendCapiLead(
   const payload: Record<string, unknown> = {
     data: [
       {
-        event_name: "Lead",
+        event_name: input.eventName || "Lead",
         event_time: Math.floor(Date.now() / 1000),
         event_id: input.eventId,
         event_source_url: input.sourceUrl,

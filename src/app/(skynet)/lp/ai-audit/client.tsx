@@ -28,10 +28,29 @@ const CALENDLY_URL =
 
 const BOOK_ID = "book";
 
-function fireFbq(event: string) {
+function fireFbq(event: string, eventId?: string) {
   if (typeof window === "undefined") return;
   const w = window as unknown as { fbq?: (...args: unknown[]) => void };
-  if (w.fbq) w.fbq("track", event);
+  // eventID is shared with the server CAPI mirror so Meta dedupes the pair.
+  if (w.fbq)
+    w.fbq("track", event, {}, eventId ? { eventID: eventId } : undefined);
+}
+
+function newEventId() {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    return `ev_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+  }
+}
+
+// Ad-level attribution: Ads Manager appends ?utm_content=<ad name> via url_tags;
+// it rides along to /api/leads so per-ad booking counts are enforceable.
+function utmContent() {
+  if (typeof window === "undefined") return undefined;
+  return (
+    new URLSearchParams(window.location.search).get("utm_content") || undefined
+  );
 }
 
 // /api/leads requires an email; Calendly's scheduled event exposes only URIs.
@@ -50,7 +69,8 @@ function BookingEmbed({
     onEventScheduled: async (e) => {
       if (scheduled) return;
       setScheduled(true);
-      fireFbq("Schedule");
+      const eventId = newEventId();
+      fireFbq("Schedule", eventId);
       try {
         const res = await fetch("/api/leads", {
           method: "POST",
@@ -59,6 +79,7 @@ function BookingEmbed({
             leadId: lead.leadId,
             source: "lp-ai-audit",
             email: lead.email,
+            eventId,
             booking: {
               event: e.data.payload?.event?.uri,
               invitee: e.data.payload?.invitee?.uri,
@@ -70,6 +91,7 @@ function BookingEmbed({
               source: "meta",
               medium: "paid-social",
               campaign: "ai-audit-2026",
+              content: utmContent(),
             },
             submittedAt: new Date().toISOString(),
           }),
@@ -266,7 +288,8 @@ function BookingSection() {
     const isBot = Boolean(trap) || Date.now() - mountedAt < 3000;
     setErr("");
     setBusy(true);
-    if (!isBot) fireFbq("Lead");
+    const eventId = newEventId();
+    if (!isBot) fireFbq("Lead", eventId);
     const leadId = `lead_${Date.now().toString(36)}_${Math.random()
       .toString(36)
       .slice(2, 8)}`;
@@ -278,6 +301,7 @@ function BookingSection() {
           leadId,
           source: "lp-ai-audit",
           email: em,
+          eventId,
           ...(isBot ? { _honeypot: "1" } : {}),
           qualification: {
             email: em,
@@ -288,6 +312,7 @@ function BookingSection() {
             source: "meta",
             medium: "paid-social",
             campaign: "ai-audit-2026",
+            content: utmContent(),
           },
           submittedAt: new Date().toISOString(),
         }),

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendCapiLead } from "@/lib/meta-capi";
 import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { appendLeadToSink } from "@/lib/lead-sink";
@@ -82,6 +83,7 @@ type Payload = {
   leadId?: string;
   source?: string;
   email?: string;
+  eventId?: string;
   firstName?: string;
   lastName?: string;
   phone?: string;
@@ -89,7 +91,12 @@ type Payload = {
   _honeypot?: string;
   qualification?: Qualification;
   booking?: Booking;
-  utm?: { source?: string; medium?: string; campaign?: string };
+  utm?: {
+    source?: string;
+    medium?: string;
+    campaign?: string;
+    content?: string;
+  };
   submittedAt?: string;
 };
 
@@ -230,6 +237,8 @@ export async function POST(req: Request) {
     extraTags: [
       "discovery-call",
       payload.booking ? "booked" : "qualified-only",
+      // ad-level attribution tag — makes per-ad booking counts queryable in GHL
+      payload.utm?.content ? `ad:${payload.utm.content.slice(0, 60)}` : "",
       payload.qualification?.urgency
         ? `urgency:${payload.qualification.urgency}`
         : "",
@@ -238,6 +247,23 @@ export async function POST(req: Request) {
         : "",
     ].filter(Boolean) as string[],
   });
+
+  // Server-side CAPI mirror of the browser pixel event, deduped via eventId
+  // (browser fires fbq('track', <event>, {}, {eventID}) with the same id).
+  // Fail-soft by design — never blocks the lead path.
+  if (payload.eventId) {
+    const capi = await sendCapiLead({
+      email,
+      eventId: payload.eventId,
+      eventName: payload.booking ? "Schedule" : "Lead",
+      sourceUrl: req.headers.get("referer") || undefined,
+      ip:
+        req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || undefined,
+      userAgent: req.headers.get("user-agent") || undefined,
+      source,
+    });
+    if (!capi.sent) console.warn("[leads] CAPI not sent:", capi.reason);
+  }
 
   const { confirmed, emailFallbackSent, sunk } = await confirmOrEscalate(
     ghl.contactId,
@@ -313,7 +339,11 @@ async function confirmOrEscalate(
 
   // Last resort: append to disk. Hostinger has a persistent filesystem, so this
   // is a real save. Only counts if it both wrote AND is durable on this host.
-  const sink = await appendLeadToSink({ ...lead, reason, payload: fullPayload });
+  const sink = await appendLeadToSink({
+    ...lead,
+    reason,
+    payload: fullPayload,
+  });
   if (sink.written && sink.durable) {
     console.warn(
       "[leads] CRM and email both unavailable — lead persisted to the on-disk sink. Read it with: cat .data/leads.jsonl",
