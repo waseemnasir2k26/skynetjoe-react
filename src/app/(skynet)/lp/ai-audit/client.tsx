@@ -234,20 +234,39 @@ function BookingSection() {
   } | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [trap, setTrap] = useState(""); // honeypot — humans never see it
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
+  // Bot heuristics: honeypot field + time-to-submit. A hidden "website" input
+  // filled, or a submit under 3s from mount, marks the POST _honeypot so the
+  // server fake-succeeds and drops it (no GHL write, no pixel Lead event).
+  const [mountedAt] = useState(() => Date.now());
 
   async function unlock(ev: React.FormEvent) {
     ev.preventDefault();
-    const n = name.trim();
-    const em = email.trim();
-    if (!n || !/.+@.+\..+/.test(em)) {
+    const n = name.trim().slice(0, 120);
+    const em = email.trim().slice(0, 200);
+    if (!n || n.length < 2) {
       setErr("A name and a working email — that's all it needs.");
       return;
     }
+    if (
+      !/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(em) ||
+      /@(test|example|mailinator|guerrillamail|10minutemail|tempmail|trashmail|yopmail)\./i.test(
+        em,
+      )
+    ) {
+      setErr("That email doesn't look deliverable — the findings go there.");
+      return;
+    }
+    if (/https?:\/\/|www\.|<|>/i.test(n)) {
+      setErr("Just your name — no links needed here.");
+      return;
+    }
+    const isBot = Boolean(trap) || Date.now() - mountedAt < 3000;
     setErr("");
     setBusy(true);
-    fireFbq("Lead");
+    if (!isBot) fireFbq("Lead");
     const leadId = `lead_${Date.now().toString(36)}_${Math.random()
       .toString(36)
       .slice(2, 8)}`;
@@ -259,6 +278,7 @@ function BookingSection() {
           leadId,
           source: "lp-ai-audit",
           email: em,
+          ...(isBot ? { _honeypot: "1" } : {}),
           qualification: {
             email: em,
             firstName: n.split(/\s+/)[0],
@@ -314,6 +334,22 @@ function BookingSection() {
         You&apos;ll get the calendar right after — and the written findings land
         in this inbox after the call.
       </p>
+      <input
+        type="text"
+        name="company_website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={trap}
+        onChange={(e) => setTrap(e.target.value)}
+        style={{
+          position: "absolute",
+          left: -9999,
+          width: 1,
+          height: 1,
+          opacity: 0,
+        }}
+      />
       <div style={{ display: "grid", gap: 12 }}>
         <input
           type="text"
