@@ -4,6 +4,7 @@ import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { appendLeadToSink } from "@/lib/lead-sink";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
+import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 
 export const runtime = "nodejs";
 
@@ -264,6 +265,35 @@ export async function POST(req: Request) {
     });
     if (!capi.sent) console.warn("[leads] CAPI not sent:", capi.reason);
   }
+
+  // Page the phone. MA-04 Lead Firehose was found ACTIVE with zero
+  // executions in its lifetime on 2026-08-23 — not broken, just never
+  // called by anything. Without this hop the "we call you within
+  // minutes" promise the paid funnel sells has nothing behind it.
+  //
+  // Deliberately fire-and-forget and deliberately AFTER the CRM write:
+  // this is an alert, not a delivery path, and it must never be able
+  // to fail a lead or hold a visitor's form open.
+  void pingLeadFirehose({
+    contactId: ghl.contactId,
+    email,
+    phone: payload.phone || payload.qualification?.phone,
+    firstName: payload.firstName || payload.qualification?.firstName,
+    lastName: payload.lastName || payload.qualification?.lastName,
+    source,
+    score,
+    booked: Boolean(payload.booking),
+    extras: {
+      business_name: payload.qualification?.businessName ?? null,
+      urgency: payload.qualification?.urgency ?? null,
+      revenue_range: payload.qualification?.revenueRange ?? null,
+      biggest_leak: payload.qualification?.biggestLeak ?? null,
+      utm_campaign: payload.utm?.campaign ?? null,
+      utm_content: payload.utm?.content ?? null,
+    },
+  }).then((r) => {
+    if (!r.sent) console.warn("[leads] MA-04 lead ping not sent:", r.reason);
+  });
 
   const { confirmed, emailFallbackSent, sunk } = await confirmOrEscalate(
     ghl.contactId,
