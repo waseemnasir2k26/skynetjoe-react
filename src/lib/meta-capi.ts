@@ -32,6 +32,10 @@ export type CapiLeadInput = {
   fbp?: string;
   fbc?: string;
   source?: string;
+  /** Overrides custom_data.content_name (defaults to `source` below). */
+  contentName?: string;
+  value?: number;
+  currency?: string;
 };
 
 export async function sendCapiLead(
@@ -45,6 +49,16 @@ export async function sendCapiLead(
   if (input.fbp) user_data.fbp = input.fbp;
   if (input.fbc) user_data.fbc = input.fbc;
 
+  // content_name defaults to `source` (pre-existing behavior) but a caller
+  // may override it (e.g. ops-audit sends "ops-audit-48h" to match the
+  // browser fbq call exactly). value/currency are opt-in — most callers
+  // (freight/home-services/logistics tool-gates) have no dollar figure.
+  const custom_data: Record<string, string | number> = {};
+  if (input.contentName || input.source)
+    custom_data.content_name = input.contentName || input.source!;
+  if (typeof input.value === "number") custom_data.value = input.value;
+  if (input.currency) custom_data.currency = input.currency;
+
   const payload: Record<string, unknown> = {
     data: [
       {
@@ -54,7 +68,7 @@ export async function sendCapiLead(
         event_source_url: input.sourceUrl,
         action_source: "website",
         user_data,
-        custom_data: input.source ? { content_name: input.source } : {},
+        custom_data,
       },
     ],
     access_token: CAPI_TOKEN,

@@ -1,9 +1,24 @@
+import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { upsertGhlContact } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { appendLeadToSink } from "@/lib/lead-sink";
+import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 import { sendCapiLead } from "@/lib/meta-capi";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
+
+/**
+ * MA-04 refuses any payload without a dedupe key, so the fallback paths — which
+ * never get a GHL contact id — would silently never page. Those are the leads
+ * most at risk of being lost, so they are exactly the ones that must alert.
+ * Derived from email + capture time so a retry dedupes instead of double-paging.
+ */
+function syntheticLeadKey(email: string, capturedAt: string): string {
+  const digest = createHash("sha256")
+    .update(`${email}|${capturedAt}`)
+    .digest("hex");
+  return `lp-${digest.slice(0, 24)}`;
+}
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -39,6 +54,12 @@ type Payload = {
   /** Browser-generated UUID shared with the client-side fbq Lead event so
       Meta deduplicates the pixel/CAPI pair. Optional — older callers omit it. */
   eventId?: string;
+  /** Optional custom_data mirror — sent by LeadCaptureForm when the caller
+      passes metaContentName/metaValue/metaCurrency (e.g. ops-audit's $497
+      offer). Older callers omit these; sendCapiLead treats them as optional. */
+  contentName?: string;
+  value?: number;
+  currency?: string;
   _honeypot?: string;
 };
 
@@ -94,6 +115,9 @@ export async function POST(req: Request) {
       email,
       eventId: payload.eventId,
       source,
+      contentName: payload.contentName,
+      value: typeof payload.value === "number" ? payload.value : undefined,
+      currency: payload.currency,
       sourceUrl: req.headers.get("referer") || undefined,
       ip:
         req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
@@ -151,6 +175,13 @@ export async function POST(req: Request) {
           "[lead-capture] CRM and email both unavailable — lead persisted to the on-disk sink. Read it with: cat .data/leads.jsonl",
           { email, source, reason, file: sink.file },
         );
+        // Never awaited — alerting side-channel, never a delivery path.
+        void pingLeadFirehose({
+          contactId: syntheticLeadKey(email, capturedAt),
+          email,
+          source,
+          extras: { delivery: "disk-sink", ghl_confirmed: false, reason },
+        });
         return NextResponse.json({ ok: true, sink: true });
       }
     }
@@ -177,6 +208,18 @@ export async function POST(req: Request) {
       { status: 502 },
     );
   }
+
+  // Never awaited — alerting side-channel, never a delivery path. The lead is
+  // already written by this point; if n8n is down the visitor must still succeed.
+  void pingLeadFirehose({
+    contactId: contactId ?? syntheticLeadKey(email, capturedAt),
+    email,
+    source,
+    extras: {
+      delivery: ghlConfirmed ? "ghl" : "email-fallback",
+      ghl_confirmed: ghlConfirmed,
+    },
+  });
 
   return NextResponse.json({
     ok: true,

@@ -1,7 +1,17 @@
 import type { Metadata } from "next";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
-import { SITE } from "@/lib/site";
+import { SITE, CAL_URL } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
+
+// Free-step CTA for the ~98% of cold Meta traffic not ready to pay $497 on
+// first contact. Deliberately secondary (smaller, outline, "not ready to
+// buy?" framing) — the $497 audit stays the hero offer everywhere on this
+// page. Copy is duration-agnostic on purpose: the live Calendly event is
+// titled "Schedule a Free Consultation" and is currently 30 minutes, not
+// the 20 a prior draft of this CTA assumed. Calendly's API cannot change
+// event duration — only Waseem can, by hand, in the Calendly dashboard —
+// so this string must stay true whether he does that or not.
+const FREE_CONSULT_URL = `${CAL_URL}?utm_source=meta-ads&utm_content=lp-ops-audit`;
 
 // Meta-ads destination LP for the 48-Hour Ops Audit ($497).
 // Claims discipline: every factual assertion on this page must exist in
@@ -69,6 +79,17 @@ const css = `
   .lp-ops-book { display: inline-block; margin-top: 12px; background: var(--ops-rust); color: var(--ops-cream);
     font-weight: 700; padding: 10px 16px; border-radius: 10px; text-decoration: none; font-size: 0.95rem; }
 
+  /* Secondary CTA — a free step for the cold-traffic majority not ready to
+     pay $497 on first contact. Deliberately quieter than .lp-ops-book:
+     outline not fill, smaller type, sits below the paid form. Never the
+     hero action — that stays the $497 form above it. */
+  .lp-ops-free-step { text-align: center; padding: 6px 4px 4px; }
+  .lp-ops-free-step .q { font-size: 0.86rem; color: #5c5c5c; margin: 0 0 8px; }
+  .lp-ops-free-cta { display: inline-block; border: 2px solid var(--ops-ink); color: var(--ops-ink);
+    background: transparent; font-weight: 700; padding: 9px 16px; border-radius: 10px;
+    text-decoration: none; font-size: 0.9rem; }
+  .lp-ops-free-cta:hover { background: var(--ops-ink); color: var(--ops-cream); }
+
   .lp-ops-sec { padding: 34px 0 8px; }
   .lp-ops-sec h2 { font-size: clamp(1.5rem, 3.6vw, 2rem); letter-spacing: -0.02em; color: var(--ops-ink); margin: 0 0 16px; font-weight: 800; }
 
@@ -107,6 +128,30 @@ const css = `
   .lp-ops-final { padding: 30px 0 70px; }
 `;
 
+// Secondary, deliberately smaller CTA for the ~98% of cold Meta traffic who
+// won't buy a $497 audit on first contact. Links straight to the live
+// Calendly event ("Schedule a Free Consultation") with ad attribution.
+// Copy carries no duration — the event is 30 minutes on Calendly today, not
+// the 20 an earlier draft assumed, and Calendly's API cannot change that
+// duration, only Waseem can by hand. Naming a number here that Calendly then
+// contradicts on the next screen is a trust break, so this stays generic.
+function FreeStepCta() {
+  return (
+    <p className="lp-ops-free-step">
+      <span className="q">Not ready to buy?</span>
+      <br />
+      <a
+        className="lp-ops-free-cta"
+        href={FREE_CONSULT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Book a free look at your setup →
+      </a>
+    </p>
+  );
+}
+
 function OpsAuditForm({ id }: { id?: string }) {
   return (
     <LeadCaptureForm
@@ -116,6 +161,9 @@ function OpsAuditForm({ id }: { id?: string }) {
       buttonClassName="lp-ops-btn"
       inputClassName="lp-ops-input"
       buttonMetaEvent="Lead"
+      metaContentName="ops-audit-48h"
+      metaValue={497}
+      metaCurrency="AUD"
       emailId="lp-ops-email"
       emailLabel="Your work email"
       emailPlaceholder="you@yourbusiness.com"
@@ -171,6 +219,7 @@ export default function OpsAuditLandingPage() {
           Your email goes to me, nowhere else.{" "}
           <a href="/privacy-policy">Privacy policy</a>.
         </p>
+        <FreeStepCta />
       </section>
 
       <section className="lp-ops-sec">
@@ -308,6 +357,7 @@ export default function OpsAuditLandingPage() {
           </p>
           <OpsAuditForm />
         </div>
+        <FreeStepCta />
       </section>
     </main>
   );

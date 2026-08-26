@@ -61,6 +61,14 @@ export type LeadCaptureFormProps = {
   /** data-meta-event placed on the submit <button> (freight/home-services
       convention). "Lead" is IGNORED — same reason as formMetaEvent. */
   buttonMetaEvent?: string;
+  /** Optional custom_data for the browser fbq Lead event AND the server-side
+      CAPI mirror (forwarded to /api/lead-capture, which passes it to
+      sendCapiLead). Omit to fall back to the pre-existing behavior
+      (content_name = `source`, no value/currency) — safe no-op for every
+      caller that doesn't pass these. */
+  metaContentName?: string;
+  metaValue?: number;
+  metaCurrency?: string;
   /** Extra content rendered inside the form, below the button, only while idle/error (e.g. the ec-note copy). */
   belowButton?: React.ReactNode;
   /** Extra content rendered inside the success state, below successBody (e.g. a booking CTA). */
@@ -83,6 +91,9 @@ export default function LeadCaptureForm({
   successBody,
   formMetaEvent,
   buttonMetaEvent,
+  metaContentName,
+  metaValue,
+  metaCurrency,
   belowButton,
   successCta,
 }: LeadCaptureFormProps) {
@@ -121,6 +132,9 @@ export default function LeadCaptureForm({
           source,
           capturedAt: new Date().toISOString(),
           eventId,
+          contentName: metaContentName,
+          value: metaValue,
+          currency: metaCurrency,
           _honeypot: honeypot,
         }),
       });
@@ -131,11 +145,27 @@ export default function LeadCaptureForm({
       }
 
       // Fire the browser Lead only on CONFIRMED capture (better signal than
-      // submit-attempt) with the same eventID the server sent via CAPI.
+      // submit-attempt) with the same eventID the server sent via CAPI, and
+      // the same custom_data so the pixel/CAPI pair matches Meta's dedup
+      // pair exactly (event_name + event_id + one browser + one server).
+      const customData: Record<string, string | number> = {};
+      if (metaContentName) customData.content_name = metaContentName;
+      if (typeof metaValue === "number") customData.value = metaValue;
+      if (metaCurrency) customData.currency = metaCurrency;
+
       const w = window as unknown as {
         fbq?: (...args: unknown[]) => void;
       };
-      w.fbq?.("track", "Lead", {}, { eventID: eventId });
+      // Guarded: fbq may be undefined (blocked/absent) — must never throw
+      // and must never block the success UI below.
+      try {
+        if (typeof w.fbq === "function") {
+          w.fbq("track", "Lead", customData, { eventID: eventId });
+        }
+      } catch {
+        // fbq threw (ad-blocker shim, etc.) — the lead is already captured
+        // server-side; never let pixel noise fail the success state.
+      }
 
       setStatus("success");
       setEmail("");
