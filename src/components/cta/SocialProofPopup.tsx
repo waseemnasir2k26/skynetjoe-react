@@ -43,7 +43,7 @@ const PROOFS: Proof[] = [
     when: "April",
   },
   {
-    client: "Takycorp Insurance",
+    client: "US Insurance Retainer",
     outcome: "7th GHL rebuild — 3 hrs/day triage killed",
     href: "/case-studies/us-insurance-gohighlevel-rebuild",
     when: "January",
