@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 
 // Claims discipline (CLAIMS-WHITELIST.md): no statistics, no client names,
 // no testimonials, no guarantees, no asserted reply-time numbers. The SMS
@@ -10,6 +11,32 @@ import { useEffect, useRef, useState } from "react";
 const WHATSAPP_URL =
   "https://wa.me/6281316077185?text=Hi%20Waseem%20—%20saw%20the%20HVAC%20speed-to-lead%20page.";
 const INSTAGRAM_URL = "https://instagram.com/waseemnasir009";
+const CALENDLY_URL =
+  "https://calendly.com/skynetlabs/schedule-a-free-consultation";
+
+function fireFbq(event: string, eventId?: string) {
+  if (typeof window === "undefined") return;
+  const w = window as unknown as { fbq?: (...args: unknown[]) => void };
+  // eventID is shared with the server CAPI mirror so Meta dedupes the pair.
+  if (w.fbq)
+    w.fbq("track", event, {}, eventId ? { eventID: eventId } : undefined);
+}
+
+function newEventId() {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    return `ev_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+  }
+}
+
+// Ad-level attribution: Ads Manager appends ?utm_content=<ad name> via url_tags.
+function utmContent() {
+  if (typeof window === "undefined") return undefined;
+  return (
+    new URLSearchParams(window.location.search).get("utm_content") || undefined
+  );
+}
 
 const css = `
   .s2l-wrap { max-width: 840px; margin: 0 auto; padding: 0 20px;
@@ -128,6 +155,23 @@ const css = `
   .s2l-cbtn.ig:hover { border-color:var(--rust-soft); color:var(--rust-soft); }
   .s2l-founder { font-size:.93rem; color:rgba(242,239,230,.85); margin:14px 0 0; line-height:1.55; }
   .s2l-foot-note { color:#6b6b6b; font-size:.84rem; margin:26px 0 90px; }
+
+  /* ---------- BOOK A CALL ---------- */
+  .s2l-book-card { background:#fff; border:1px solid rgba(26,26,26,.16); border-radius:18px; padding:28px 26px; max-width:560px; margin:0 auto;
+    box-shadow:0 14px 44px rgba(26,26,26,.10); }
+  .s2l-book-card h3 { margin:0 0 6px; font-size:1.2rem; }
+  .s2l-book-card .hint { color:#444; font-size:.93rem; margin:0 0 16px; line-height:1.5; }
+  .s2l-book-card input.fld { width:100%; box-sizing:border-box; border:1.5px solid rgba(26,26,26,.25); border-radius:11px;
+    padding:13px 14px; font-size:1rem; font-family:inherit; background:#fff; color:var(--ink); }
+  .s2l-book-card input.fld:focus { outline:none; border-color:var(--rust); }
+  .s2l-book-btn { width:100%; border:none; cursor:pointer; background:var(--rust); color:#fff; font-weight:800; font-size:1.05rem;
+    padding:15px 20px; border-radius:13px; margin-top:12px; transition:transform .2s ease; }
+  .s2l-book-btn:hover { transform:translateY(-2px); }
+  .s2l-book-btn:disabled { opacity:.6; cursor:wait; }
+  .s2l-book-err { color:#b3261e; font-size:.88rem; margin:10px 0 0; }
+  .s2l-book-wrap { background:#fff; border:1px solid rgba(26,26,26,.16); border-radius:18px; padding:8px; position:relative; overflow:hidden; }
+  .s2l-book-done { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:rgba(242,239,230,.95); z-index:10; text-align:center; font-weight:800; font-size:1.15rem; color:var(--ink); padding:0 20px; }
 
   /* ---------- STICKY MOBILE CTA ---------- */
   .s2l-sticky { position:fixed; left:0; right:0; bottom:0; z-index:60; display:flex; gap:10px; align-items:center;
@@ -382,6 +426,198 @@ function SmsDemo() {
   );
 }
 
+// Free-call booking: same gate→calendar pattern as /lp/ai-audit. Email gate
+// posts the lead (fires pixel Lead + CAPI mirror via /api/leads) BEFORE the
+// calendar opens; the Calendly onEventScheduled then fires Schedule and
+// updates the same leadId. Booking is never blocked by a CRM hiccup.
+function BookCall() {
+  const [lead, setLead] = useState<{
+    name: string;
+    email: string;
+    leadId: string;
+  } | null>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [trap, setTrap] = useState(""); // honeypot — humans never see it
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const [scheduled, setScheduled] = useState(false);
+  const [mountedAt] = useState(() => Date.now());
+
+  useCalendlyEventListener({
+    onEventScheduled: async (e) => {
+      if (!lead || scheduled) return;
+      setScheduled(true);
+      const eventId = newEventId();
+      fireFbq("Schedule", eventId);
+      try {
+        await fetch("/api/leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            leadId: lead.leadId,
+            source: "lp-speed-to-lead",
+            email: lead.email,
+            eventId,
+            booking: {
+              event: e.data.payload?.event?.uri,
+              invitee: e.data.payload?.invitee?.uri,
+              inviteeEmail: lead.email,
+              inviteeName: lead.name,
+              scheduledAt: new Date().toISOString(),
+            },
+            utm: {
+              source: "meta",
+              medium: "paid-social",
+              campaign: "hvac-speed-to-lead-2026",
+              content: utmContent(),
+            },
+            submittedAt: new Date().toISOString(),
+          }),
+        });
+      } catch (e2) {
+        console.error("[lp-speed-to-lead] booking POST failed", e2);
+      }
+    },
+  });
+
+  async function unlock(ev: React.FormEvent) {
+    ev.preventDefault();
+    const n = name.trim().slice(0, 120);
+    const em = email.trim().slice(0, 200);
+    if (!n || n.length < 2) {
+      setErr("A name and a working email — that's all it needs.");
+      return;
+    }
+    if (
+      !/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(em) ||
+      /@(test|example|mailinator|guerrillamail|10minutemail|tempmail|trashmail|yopmail)\./i.test(
+        em,
+      )
+    ) {
+      setErr("That email doesn't look deliverable.");
+      return;
+    }
+    if (/https?:\/\/|www\.|<|>/i.test(n)) {
+      setErr("Just your name — no links needed here.");
+      return;
+    }
+    const isBot = Boolean(trap) || Date.now() - mountedAt < 3000;
+    setErr("");
+    setBusy(true);
+    const eventId = newEventId();
+    if (!isBot) fireFbq("Lead", eventId);
+    const leadId = `lead_${Date.now().toString(36)}_${Math.random()
+      .toString(36)
+      .slice(2, 8)}`;
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          leadId,
+          source: "lp-speed-to-lead",
+          email: em,
+          eventId,
+          ...(isBot ? { _honeypot: "1" } : {}),
+          qualification: {
+            email: em,
+            firstName: n.split(/\s+/)[0],
+            lastName: n.split(/\s+/).slice(1).join(" ") || undefined,
+          },
+          utm: {
+            source: "meta",
+            medium: "paid-social",
+            campaign: "hvac-speed-to-lead-2026",
+            content: utmContent(),
+          },
+          submittedAt: new Date().toISOString(),
+        }),
+      });
+    } catch (e) {
+      console.error("[lp-speed-to-lead] lead POST failed", e);
+    }
+    setLead({ name: n, email: em, leadId });
+    setBusy(false);
+  }
+
+  if (lead)
+    return (
+      <div className="s2l-book-wrap">
+        <InlineWidget
+          url={CALENDLY_URL}
+          prefill={{ name: lead.name, email: lead.email }}
+          utm={{
+            utmSource: "meta",
+            utmMedium: "paid-social",
+            utmCampaign: "hvac-speed-to-lead-2026",
+          }}
+          styles={{ height: "700px", minWidth: "300px" }}
+          pageSettings={{
+            backgroundColor: "FAF7F0",
+            primaryColor: "C66B3F",
+            textColor: "1A1A1A",
+            hideGdprBanner: true,
+          }}
+          iframeTitle="SkynetLabs · Free 15-minute call"
+        />
+        {scheduled && (
+          <div className="s2l-book-done">
+            Slot locked ✔ Check your email for the confirmation.
+          </div>
+        )}
+      </div>
+    );
+
+  return (
+    <form className="s2l-book-card" onSubmit={unlock}>
+      <h3>Book a free 15-minute call</h3>
+      <p className="hint">
+        No pitch deck, no obligation — we look at how your calls are handled
+        today and whether this fits. Calendar opens right after.
+      </p>
+      <input
+        type="text"
+        name="company_website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={trap}
+        onChange={(e) => setTrap(e.target.value)}
+        style={{
+          position: "absolute",
+          left: -9999,
+          width: 1,
+          height: 1,
+          opacity: 0,
+        }}
+      />
+      <div style={{ display: "grid", gap: 12 }}>
+        <input
+          className="fld"
+          type="text"
+          placeholder="Your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          autoComplete="name"
+        />
+        <input
+          className="fld"
+          type="email"
+          placeholder="Email for the call details"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
+        />
+      </div>
+      {err && <p className="s2l-book-err">{err}</p>}
+      <button className="s2l-book-btn" type="submit" disabled={busy}>
+        {busy ? "Opening calendar…" : "Pick a time →"}
+      </button>
+    </form>
+  );
+}
+
 function StickyCta() {
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -393,11 +629,9 @@ function StickyCta() {
   return (
     <div className={`s2l-sticky${show ? " show" : ""}`}>
       <span className="txt">
-        <b>HVAC missed-call rescue</b> — talk to Waseem directly
+        <b>HVAC missed-call rescue</b> — free 15-min call
       </span>
-      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-        💬 WhatsApp
-      </a>
+      <a href="#book">📅 Book a call</a>
     </div>
   );
 }
@@ -497,6 +731,19 @@ export default function SpeedToLeadClient() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="s2l-sec" id="book">
+        <div className="s2l-rev">
+          <h2>See if it fits — free 15-minute call</h2>
+          <p className="lead">
+            Bring your phone habits, I&apos;ll show you the machine. One saved
+            job pays for the build.
+          </p>
+        </div>
+        <div className="s2l-rev">
+          <BookCall />
+        </div>
       </section>
 
       <section className="s2l-sec">
