@@ -38,7 +38,7 @@ type IconCmp = React.ComponentType<{ className?: string }>;
 export const metadata: Metadata = {
   title: "AI Automation Services Across All 48 US States",
   description:
-    "SkynetLabs delivers AI automation, n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents to founders in all 48 contiguous US states. Pick your state — fixed scope, public pricing, 5–14 day ship.",
+    "AI automation, n8n workflows, GoHighLevel CRM and AEO websites for founders in all 48 contiguous US states. Fixed scope, 5–14 day ship.",
   alternates: { canonical: `${SITE.url}/locations` },
   openGraph: {
     title: "SkynetLabs — Active in all 48 US states",

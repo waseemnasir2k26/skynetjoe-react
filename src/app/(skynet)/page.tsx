@@ -55,6 +55,10 @@ export default function Home() {
         url: SITE.url,
         provider: { "@id": `${SITE.url}/#organization` },
         areaServed: "Worldwide",
+        // public pricing lives on /pricing — Google-recommended property.
+        // Bounds match published figures: n8n builds "From $750" (llms.txt,
+        // services) up to $9,500 flagship (faqs, pricing).
+        priceRange: "$750-$9,500",
         serviceType: [
           "AI Automation",
           "n8n Workflow",

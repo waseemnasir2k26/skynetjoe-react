@@ -7,26 +7,29 @@ import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
   path.join(process.cwd(), "content", "faqs.html"),
-  "utf8"
+  "utf8",
 );
 
 export const metadata: Metadata = {
-  title: "AI Automation FAQs — 30 Questions Answered",
+  title: "AI Automation FAQs — 33 Questions Answered",
   description:
     "Real founder questions about n8n, Zapier, AEO/SEO, chatbots, live chat, and working with SkynetLabs. Honest answers — including when the answer is 'don't hire us.'",
   alternates: { canonical: `${SITE.url}/faqs` },
   openGraph: {
-    title: "AI Automation FAQs — 30 Questions Answered",
+    title: "AI Automation FAQs — 33 Questions Answered",
     description:
-      "30 real founder questions on n8n, AEO, chatbots, and working with SkynetLabs. Concrete answers, no hedging.",
+      "33 real founder questions on n8n, AEO, chatbots, and working with SkynetLabs. Concrete answers, no hedging.",
     url: `${SITE.url}/faqs`,
     type: "article",
     images: [...DEFAULT_OG_IMAGES],
   },
 };
 
-// Top-level FAQs surfaced for FAQPage schema. The full 30 live in the HTML
-// content; these 6 are the most common and act as the citation surface.
+// NOTE (2026-08-31): the page-level FAQPage JSON-LD was REMOVED — the full
+// question set already ships its own FAQPage block inside content/faqs.html,
+// and Google allows only one FAQPage per URL (two competing blocks risk the
+// rich result being dropped). TOP_FAQS is kept only as the curated list if a
+// visible "top questions" section is ever added; it emits no schema.
 const TOP_FAQS = [
   {
     q: "What's the difference between n8n and Zapier?",
@@ -54,23 +57,28 @@ const TOP_FAQS = [
   },
 ];
 
-const schema = {
+void TOP_FAQS;
+
+// Breadcrumb keeps SERP breadcrumbs + LLM site-structure parsing without
+// competing with the FAQPage block embedded in the HTML content.
+const breadcrumb = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  url: `${SITE.url}/faqs`,
-  inLanguage: "en",
-  mainEntity: TOP_FAQS.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-  publisher: { "@id": `${SITE.url}/#organization` },
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "FAQs",
+      item: `${SITE.url}/faqs`,
+    },
+  ],
 };
 
 export default function FaqsPage() {
   return (
     <>
-      <JsonLd data={schema} />
+      <JsonLd data={breadcrumb} />
       <HtmlCreamWrap html={html} />
     </>
   );

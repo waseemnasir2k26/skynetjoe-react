@@ -137,7 +137,7 @@ const ORDERED_STUDIES: CaseStudy[] = [...CASE_STUDIES].sort(
 );
 
 export const metadata: Metadata = {
-  title: "Case Studies — 8 builds across automation, websites & AI content",
+  title: "Case Studies — 8 Shipped Builds With Honest Outcomes",
   description:
     "Eight anonymized client wins from SkynetLabs: n8n automation, flagship websites, AEO content engines and CRM rebuilds. Honest outcomes, no vanity metrics.",
   alternates: { canonical: `${SITE.url}/case-studies` },
@@ -162,6 +162,24 @@ const schema = {
   isPartOf: { "@id": `${SITE.url}/#website` },
   publisher: { "@id": `${SITE.url}/#organization` },
   about: { "@id": `${SITE.url}/#organization` },
+  // ItemList makes each build individually machine-readable so answer engines
+  // can cite a SPECIFIC case study, not just the collection.
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: ORDERED_STUDIES.map((cs, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "CreativeWork",
+        "@id": `${SITE.url}/case-studies/${cs.slug}`,
+        name: cs.oneLineOutcome,
+        url: `${SITE.url}/case-studies/${cs.slug}`,
+        about: cs.industry,
+        datePublished: cs.publishDate,
+        author: { "@id": `${SITE.url}/#organization` },
+      },
+    })),
+  },
 };
 
 export default function CaseStudiesPage() {

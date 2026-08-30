@@ -133,7 +133,7 @@
   </style>
 
   <div class="wn-wrap">
-    <h1>AI Automation FAQs — 30 Questions Answered</h1>
+    <h1>AI Automation FAQs — 33 Questions Answered</h1>
     <p class="wn-sub">
       Real questions founders have sent us by email, voice note, and DM. Honest
       answers — including when the answer is "don't hire us." Last updated 2026.
@@ -513,6 +513,27 @@
         document it well enough.
       </p>
     </details>
+  
+    <details>
+      <summary>How do I get my business mentioned by ChatGPT and other AI assistants?</summary>
+      <p>
+        Make your site the easiest source to cite: publish direct answers to real questions (FAQ, glossary, comparison pages), add FAQPage and Organization schema, serve an llms.txt file, and allow AI crawlers like GPTBot and ClaudeBot in robots.txt. Then earn mentions on pages engines already trust — directories, communities, and comparison articles. Our AEO Field Guide covers the full stack.
+      </p>
+    </details>
+
+    <details>
+      <summary>What is an llms.txt file and do I need one?</summary>
+      <p>
+        llms.txt is a plain-text file at your site root that summarizes what your business does and links your key pages, written for AI crawlers instead of humans. It follows the llmstxt.org draft spec. It takes under an hour to write, and answer engines increasingly read it — we ship one with every site build, and this site's own is at skynetjoe.com/llms.txt.
+      </p>
+    </details>
+
+    <details>
+      <summary>Do you offer ongoing maintenance after a build ships?</summary>
+      <p>
+        Yes, optionally. Every build ships with documentation and a walkthrough video so you can run it yourself. If you'd rather not, a monthly care plan covers monitoring, fixes, and small changes — priced per system, agreed before kickoff. No lock-in: cancel any month.
+      </p>
+    </details>
   </div>
 
   <div class="wn-cta">
@@ -523,250 +544,274 @@
 
   <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How fast can a 5-step n8n workflow be shipped?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Five to seven business days end-to-end if you have credentials ready on day one. Three days of build, one day of test with real payloads, one day for you to dogfood it before we flip it live."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What does a typical engagement look like from inquiry to launch?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Day 0 brief. Day 1 Loom walkthrough. Day 2-3 approval and credentials. Day 4-10 build with daily progress videos. Day 11-14 live with real data. Total 14 days for one workflow."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you do fixed-price or hourly?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Fixed-price per workflow or per site. Hourly billing rewards slow building. Scope changes get a change order with a new fixed number before continuing."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's your minimum project size?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "One workflow, one website, or one chatbot. Every build includes a 30-day handover window for small tweaks."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you offer ongoing support or just one-time builds?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Both. Every build includes a 30-day bug-fix window. After that you pick no retainer, light retainer (4 hours per month) or growth retainer (16+ hours)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I see real work before paying?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. The case-studies page has anonymized writeups with screenshots and outcome metrics. For specific stacks we send a 5-minute Loom of a live build we own."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's the difference between n8n and Zapier and when do I pick which?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Zapier is rented infrastructure with polished UI; n8n is self-hostable with less polish. Pick Zapier for one or two simple flows and no engineers. Pick n8n for more than five flows, branching/loops, or to avoid per-task pricing."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I migrate from Zapier to n8n without breaking running workflows?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, one flow at a time. Rebuild in parallel, run both for 48 hours with a comparison dashboard, then disable Zapier. A typical 12-zap migration takes three weeks."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need to self-host n8n or can I use n8n Cloud?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "n8n Cloud is fine until you need IP allowlisting, more than ~10 concurrent executions, or custom TypeScript nodes. Self-host on a small Hetzner VPS with Docker + Caddy + Postgres takes 90 minutes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I handle errors and retries properly in n8n?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Three layers: workflow-level error trigger to Slack, node-level continue-on-fail with branched error path to Postgres, and a daily cron that re-runs anything in the error table within a retry window."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's queue mode and when do I need it?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Queue mode separates n8n main from workers via Redis. Use it when executions can exceed webhook timeout, when you process more than ~1K executions/hour, or for zero-downtime restarts."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can n8n call OpenAI / Anthropic / Gemini APIs reliably?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Parse LLM output with try/catch in a Code node, fall back to a smaller model on first failure, and log bad output to Postgres for prompt iteration."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why does Google's AI Overview ignore my product page?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Usually missing structured data (Product, Offer, FAQPage), sales-copy tone instead of answering questions directly in the first 80 words, and no external mentions on authoritative sources."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's the difference between SEO, AEO, and GEO?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "SEO optimizes for ten blue links. AEO optimizes for LLM chat answers (Claude, ChatGPT, Perplexity, Gemini). GEO is a near-synonym for AEO. AEO rewards definitions, lists, comparison tables and clear authorship."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Should I block GPTBot and ClaudeBot in robots.txt?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Only if you sell content as your product. For service businesses, blocking them is counterproductive. Add an llms.txt file listing what you allow."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long until AEO efforts show citations?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Two to twelve weeks. Perplexity updates fastest (often within 7 days). ChatGPT browse and Gemini take longer. If nothing shows in 8 weeks, the issue is content quality."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is llms.txt and do I actually need it?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A draft standard for a markdown index file at /llms.txt telling LLMs which pages are canonical and citable. Not yet enforced but Claude, Perplexity and others have started honoring it. Cost: 30 minutes. Yes, add one."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does schema markup still matter when LLMs read the whole page?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "More than ever. Schema is how an LLM disambiguates entities and dateModified in JSON-LD is a freshness heuristic LLMs use to prefer your version over stale alternatives."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Should I build my chatbot on GPT-4 or Claude or Gemini?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Use the model that wins on your specific evals. Claude leads on tool-use. Gemini wins long context. Haiku and Gemini Flash are cheap for simple replies. Build with an SDK that lets you swap in 10 minutes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I keep a chatbot from hallucinating about my pricing?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Don't let the model generate prices freely. Put pricing in a structured tool call: bot calls a function that returns current price from your CMS or static JSON. The model only paraphrases."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's RAG and when do I actually need it?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Retrieval-Augmented Generation: the bot searches your knowledge base first, passes relevant chunks to the LLM as context. Need it when content base exceeds ~30K tokens."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I integrate a chatbot with Meta's messaging APIs properly?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Use the official Meta Cloud API via Business Manager. Verify business, get an outbound template approved, use freeform replies inside the 24-hour session. Route through n8n or a webhook."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can a chatbot handle bookings and payment without a human?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes for low-ticket transactions with small average order value. Above that conversion drops. Bot qualifies and books a 15-minute call; human closes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I measure if a chatbot is actually working?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Containment rate (% resolved without handoff), goal conversion rate (% hitting defined outcome), CSAT or thumbs-up rate. Track weekly. Containment over 60% and CSAT over 4/5 means it's working."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Who actually does the work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Waseem Nasir leads every project. For larger builds a senior partner handles video/visual work. No junior offshore subcontracting. 4-6 projects concurrent maximum."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What time zone do you work in?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Bali (UTC+8). Overlap: 7am-12pm GMT, 2pm-7pm EST, all day APAC. Async is the default — daily Loom updates and shared Notion."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you sign NDAs?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, before scope discussion. Mutual one-pager available if you don't have one. We don't sign non-competes that prevent working in your industry."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What happens if a project goes sideways?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Called out the same day, fix proposed in writing within 24 hours. If our fault we eat the cost. Two refunds issued in three years, each with a written postmortem."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can you work with my existing developer / agency?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. We slot in as the automation/AEO specialist while your dev handles the main product. We've co-shipped with internal teams in 12 of the last 30 projects."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What if I'm not technical at all?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Fine — most clients aren't. We translate decisions into outcomes and document in plain English. After ship you get a 20-minute walkthrough video and a one-page operations doc."
-          }
-        }
-      ]
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How fast can a 5-step n8n workflow be shipped?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Five to seven business days end-to-end if you have credentials ready on day one. Three days of build, one day of test with real payloads, one day for you to dogfood it before we flip it live."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does a typical engagement look like from inquiry to launch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Day 0 brief. Day 1 Loom walkthrough. Day 2-3 approval and credentials. Day 4-10 build with daily progress videos. Day 11-14 live with real data. Total 14 days for one workflow."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you do fixed-price or hourly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fixed-price per workflow or per site. Hourly billing rewards slow building. Scope changes get a change order with a new fixed number before continuing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's your minimum project size?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "One workflow, one website, or one chatbot. Every build includes a 30-day handover window for small tweaks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer ongoing support or just one-time builds?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both. Every build includes a 30-day bug-fix window. After that you pick no retainer, light retainer (4 hours per month) or growth retainer (16+ hours)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I see real work before paying?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The case-studies page has anonymized writeups with screenshots and outcome metrics. For specific stacks we send a 5-minute Loom of a live build we own."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between n8n and Zapier and when do I pick which?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Zapier is rented infrastructure with polished UI; n8n is self-hostable with less polish. Pick Zapier for one or two simple flows and no engineers. Pick n8n for more than five flows, branching/loops, or to avoid per-task pricing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I migrate from Zapier to n8n without breaking running workflows?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, one flow at a time. Rebuild in parallel, run both for 48 hours with a comparison dashboard, then disable Zapier. A typical 12-zap migration takes three weeks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to self-host n8n or can I use n8n Cloud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "n8n Cloud is fine until you need IP allowlisting, more than ~10 concurrent executions, or custom TypeScript nodes. Self-host on a small Hetzner VPS with Docker + Caddy + Postgres takes 90 minutes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I handle errors and retries properly in n8n?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Three layers: workflow-level error trigger to Slack, node-level continue-on-fail with branched error path to Postgres, and a daily cron that re-runs anything in the error table within a retry window."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's queue mode and when do I need it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Queue mode separates n8n main from workers via Redis. Use it when executions can exceed webhook timeout, when you process more than ~1K executions/hour, or for zero-downtime restarts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can n8n call OpenAI / Anthropic / Gemini APIs reliably?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Parse LLM output with try/catch in a Code node, fall back to a smaller model on first failure, and log bad output to Postgres for prompt iteration."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Google's AI Overview ignore my product page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually missing structured data (Product, Offer, FAQPage), sales-copy tone instead of answering questions directly in the first 80 words, and no external mentions on authoritative sources."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between SEO, AEO, and GEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SEO optimizes for ten blue links. AEO optimizes for LLM chat answers (Claude, ChatGPT, Perplexity, Gemini). GEO is a near-synonym for AEO. AEO rewards definitions, lists, comparison tables and clear authorship."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I block GPTBot and ClaudeBot in robots.txt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if you sell content as your product. For service businesses, blocking them is counterproductive. Add an llms.txt file listing what you allow."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long until AEO efforts show citations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Two to twelve weeks. Perplexity updates fastest (often within 7 days). ChatGPT browse and Gemini take longer. If nothing shows in 8 weeks, the issue is content quality."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is llms.txt and do I actually need it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A draft standard for a markdown index file at /llms.txt telling LLMs which pages are canonical and citable. Not yet enforced but Claude, Perplexity and others have started honoring it. Cost: 30 minutes. Yes, add one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does schema markup still matter when LLMs read the whole page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "More than ever. Schema is how an LLM disambiguates entities and dateModified in JSON-LD is a freshness heuristic LLMs use to prefer your version over stale alternatives."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I build my chatbot on GPT-4 or Claude or Gemini?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the model that wins on your specific evals. Claude leads on tool-use. Gemini wins long context. Haiku and Gemini Flash are cheap for simple replies. Build with an SDK that lets you swap in 10 minutes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I keep a chatbot from hallucinating about my pricing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Don't let the model generate prices freely. Put pricing in a structured tool call: bot calls a function that returns current price from your CMS or static JSON. The model only paraphrases."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's RAG and when do I actually need it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Retrieval-Augmented Generation: the bot searches your knowledge base first, passes relevant chunks to the LLM as context. Need it when content base exceeds ~30K tokens."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I integrate a chatbot with Meta's messaging APIs properly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the official Meta Cloud API via Business Manager. Verify business, get an outbound template approved, use freeform replies inside the 24-hour session. Route through n8n or a webhook."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a chatbot handle bookings and payment without a human?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes for low-ticket transactions with small average order value. Above that conversion drops. Bot qualifies and books a 15-minute call; human closes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I measure if a chatbot is actually working?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Containment rate (% resolved without handoff), goal conversion rate (% hitting defined outcome), CSAT or thumbs-up rate. Track weekly. Containment over 60% and CSAT over 4/5 means it's working."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who actually does the work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Waseem Nasir leads every project. For larger builds a senior partner handles video/visual work. No junior offshore subcontracting. 4-6 projects concurrent maximum."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What time zone do you work in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bali (UTC+8). Overlap: 7am-12pm GMT, 2pm-7pm EST, all day APAC. Async is the default — daily Loom updates and shared Notion."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you sign NDAs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, before scope discussion. Mutual one-pager available if you don't have one. We don't sign non-competes that prevent working in your industry."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if a project goes sideways?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Called out the same day, fix proposed in writing within 24 hours. If our fault we eat the cost. Two refunds issued in three years, each with a written postmortem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you work with my existing developer / agency?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We slot in as the automation/AEO specialist while your dev handles the main product. We've co-shipped with internal teams in 12 of the last 30 projects."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I'm not technical at all?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fine — most clients aren't. We translate decisions into outcomes and document in plain English. After ship you get a 20-minute walkthrough video and a one-page operations doc."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get my business mentioned by ChatGPT and other AI assistants?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Make your site the easiest source to cite: publish direct answers to real questions (FAQ, glossary, comparison pages), add FAQPage and Organization schema, serve an llms.txt file, and allow AI crawlers like GPTBot and ClaudeBot in robots.txt. Then earn mentions on pages engines already trust — directories, communities, and comparison articles. Our AEO Field Guide covers the full stack."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an llms.txt file and do I need one?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "llms.txt is a plain-text file at your site root that summarizes what your business does and links your key pages, written for AI crawlers instead of humans. It follows the llmstxt.org draft spec. It takes under an hour to write, and answer engines increasingly read it — we ship one with every site build, and this site's own is at skynetjoe.com/llms.txt."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer ongoing maintenance after a build ships?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, optionally. Every build ships with documentation and a walkthrough video so you can run it yourself. If you'd rather not, a monthly care plan covers monitoring, fixes, and small changes — priced per system, agreed before kickoff. No lock-in: cancel any month."
+      }
     }
+  ]
+}
   </script>
 </article>

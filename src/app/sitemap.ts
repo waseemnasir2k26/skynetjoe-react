@@ -21,7 +21,7 @@ import {
 // modified — a weak/noisy freshness signal to crawlers. Bump this constant only
 // when these routes' content actually changes. Dynamic blog/news routes below
 // keep their real p.updatedAt || p.publishedAt dates.
-const STATIC_LASTMOD = new Date("2026-06-01");
+const STATIC_LASTMOD = new Date("2026-08-31");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;

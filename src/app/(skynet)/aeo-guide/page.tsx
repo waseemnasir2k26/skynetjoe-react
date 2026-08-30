@@ -12,9 +12,9 @@ const html = fs.readFileSync(
 
 export const metadata: Metadata = {
   title:
-    "The AEO Field Guide — Get Cited by Claude, ChatGPT, Perplexity & Gemini",
+    "AEO Field Guide — Get Cited by ChatGPT, Claude & Perplexity",
   description:
-    "Eight chapters covering what Answer Engine Optimization actually is, the 5-layer stack to ship, llms.txt and the new robots ecosystem, citation-worthy content patterns, measurement, and a 90-day rollout for service businesses.",
+    "Eight chapters on Answer Engine Optimization: the 5-layer stack, llms.txt, citation-worthy content patterns, measurement, and a 90-day rollout.",
   alternates: { canonical: `${SITE.url}/aeo-guide` },
   openGraph: {
     title:
