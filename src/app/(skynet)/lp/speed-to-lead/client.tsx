@@ -204,7 +204,7 @@ const FLOW = [
     icon: "❓",
     hot: false,
     h: "It qualifies the job",
-    p: "No cooling? Furnace out? Emergency call-out or routine AC service? It asks what your office would ask, and politely filters the tyre-kickers.",
+    p: "No cooling? Heating out? Emergency call-out or routine aircon service? It asks what your office would ask, and politely filters the tyre-kickers.",
   },
   {
     icon: "📅",
@@ -229,7 +229,7 @@ const CONVO: { side: "sys" | "cust"; who: string; text: string }[] = [
   {
     side: "cust",
     who: "Homeowner",
-    text: "AC stopped blowing cold this afternoon. It's 97 out.",
+    text: "Aircon stopped blowing cold this afternoon. It's 38 degrees out.",
   },
   {
     side: "sys",
@@ -318,10 +318,10 @@ function LiveClock() {
   const [now, setNow] = useState<string | null>(null);
   useEffect(() => {
     const fmt = () =>
-      new Intl.DateTimeFormat("en-US", {
+      new Intl.DateTimeFormat("en-AU", {
         hour: "numeric",
         minute: "2-digit",
-        timeZone: "America/Chicago",
+        timeZone: "Australia/Sydney",
       }).format(new Date());
     setNow(fmt());
     const id = setInterval(() => setNow(fmt()), 15000);
@@ -331,7 +331,7 @@ function LiveClock() {
     <div className="s2l-livebar">
       <span className="ph">📞</span>
       <span className="t">
-        Right now it&apos;s <b>{now ?? "…"}</b> in Texas. If your phone rang
+        Right now it&apos;s <b>{now ?? "…"}</b> in Sydney. If your phone rang
         this second — <b>who&apos;s answering it?</b>
       </span>
     </div>
