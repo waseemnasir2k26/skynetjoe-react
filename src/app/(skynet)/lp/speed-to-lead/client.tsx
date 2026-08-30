@@ -156,6 +156,12 @@ const css = `
   .s2l-founder { font-size:.93rem; color:rgba(242,239,230,.85); margin:14px 0 0; line-height:1.55; }
   .s2l-foot-note { color:#6b6b6b; font-size:.84rem; margin:26px 0 90px; }
 
+  .s2l-hero-cta { display:inline-flex; align-items:center; gap:8px; background:var(--rust); color:#fff;
+    font-weight:800; font-size:1.05rem; padding:15px 24px; border-radius:13px; text-decoration:none;
+    margin:0 0 24px; animation:s2l-pulse 3s infinite; transition:transform .2s ease;
+    opacity:0; animation:s2l-word .7s 1.05s forwards, s2l-pulse 3s 1.8s infinite; }
+  .s2l-hero-cta:hover { transform:translateY(-2px); }
+
   /* ---------- BOOK A CALL ---------- */
   .s2l-book-card { background:#fff; border:1px solid rgba(26,26,26,.16); border-radius:18px; padding:28px 26px; max-width:560px; margin:0 auto;
     box-shadow:0 14px 44px rgba(26,26,26,.10); }
@@ -671,6 +677,9 @@ export default function SpeedToLeadClient() {
           calendar. You stay on the tools.
         </p>
         <LiveClock />
+        <a className="s2l-hero-cta" href="#book">
+          📅 Book a free 15-min call →
+        </a>
         <div className="s2l-spec">
           <span>HVAC · AC REPAIR · HEATING</span>
           <span>DONE-FOR-YOU BUILD</span>
