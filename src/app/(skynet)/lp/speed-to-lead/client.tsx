@@ -258,8 +258,8 @@ const PAINS = [
   },
   {
     icon: "🪜",
-    b: "You're the office.",
-    t: "You quote, dispatch, invoice and answer the phone — from the attic, on a ladder, in a crawlspace.",
+    b: "The owner IS the office.",
+    t: "Most small trade outfits quote, dispatch, invoice and answer the phone — from the attic, on a ladder, in a roof cavity.",
   },
   {
     icon: "📵",
@@ -665,10 +665,10 @@ export default function SpeedToLeadClient() {
           </span>
         </h1>
         <p className="sub">
-          Built for HVAC owner-operators running 1–5 trucks. When you can&apos;t
-          answer — after-hours, on a roof, mid-repair — this system texts the
-          caller back, qualifies the job and books it onto your calendar while
-          you stay on the tools.
+          Built for HVAC businesses with crews on the road. When a call comes in
+          and nobody can answer — after-hours, on a roof, mid-repair — this
+          system texts the caller back, qualifies the job and books it onto your
+          calendar. You stay on the tools.
         </p>
         <LiveClock />
         <div className="s2l-spec">
@@ -737,8 +737,8 @@ export default function SpeedToLeadClient() {
         <div className="s2l-rev">
           <h2>See if it fits — free 15-minute call</h2>
           <p className="lead">
-            Bring your phone habits, I&apos;ll show you the machine. One saved
-            job pays for the build.
+            Bring your phone habits, I&apos;ll show you the machine. Straight
+            answers, no pitch deck.
           </p>
         </div>
         <div className="s2l-rev">
