@@ -49,7 +49,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
   <h2><span class="wn-num">2.</span> What we collect</h2>
   <p>We try to collect the smallest amount of data needed to actually reply to you and ship the work.</p>
   <ul>
-    <li><strong>Site visit data</strong> — an anonymous, cookieless funnel counter we run ourselves. On page load, booking-link clicks and completed bookings, the browser sends the site name, event name, page path (no query string), referring domain, booking step and (on a click) the address of the booking link you clicked to our own self-hosted n8n server. No cookies, no local storage, no user or device identifier; it stays silent if your browser sends Do-Not-Track or Global Privacy Control.</li>
+    <li><strong>Site visit data</strong> — an anonymous, cookieless funnel counter we run ourselves. On page load, booking-link clicks and completed bookings, the browser sends the site name, event name, page path (no query string), referring domain, booking step and (on a click) the address of the booking link you clicked to our own self-hosted n8n server. No cookies, no local storage, no user or device identifier; it stays silent if your browser sends Do-Not-Track or Global Privacy Control. Like any web request, the receiving server sees your IP address in transit; it is not written to the events table.</li>
     <li><strong>Advertising measurement</strong> — the <strong>Meta Pixel</strong> loads on every page and sets Meta cookies, governed by Meta's privacy terms. Google Analytics / Tag Manager are not loaded on this site today.</li>
     <li><strong>Lead forms and tool email gates</strong> — when you enter an email to unlock a free tool result or submit a lead form, that email (plus the tool you used) is sent to our CRM so we can follow up, and the tool remembers it in your browser so you are not asked twice. When the Meta Conversions API integration is switched on, a hashed (SHA-256) copy of that email plus browser identifiers is also sent to Meta server-side so ad results can be matched to enquiries.</li>
     <li><strong>Contact form submissions</strong> — name, email, and the project brief you send through the form on /contact. Nothing else is required.</li>
@@ -74,10 +74,12 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li><strong>Google Workspace</strong> — for email correspondence with clients and inbound briefs.</li>
     <li><strong>Hostinger</strong> — hosts skynetjoe.com and our self-hosted n8n server, which receives the anonymous funnel counts.</li>
     <li><strong>Meta Platforms</strong> — receives Meta Pixel events for advertising measurement.</li>
+    <li><strong>GoHighLevel</strong> — our CRM; receives the email address you enter on a lead form or a tool email gate, plus which tool or form it came from, so we can follow up.</li>
+    <li><strong>Resend</strong> — transactional email service; if the CRM write fails, it sends us an internal notification carrying that address.</li>
     <li><strong>Calendly</strong> — runs the call booking on /discovery-call and the landing pages; when you book, your name, email, time zone and any answers you type go to Calendly under its own privacy terms, and its webhook tells us a booking happened.</li>
     <li><strong>GitHub</strong> — source code storage. No client business data lives here unless a client has explicitly asked us to host their repo for them.</li>
   </ul>
-  <p>We do not share data with any other third party without your explicit written consent.</p>
+  <p>Beyond the services listed here, we do not share your data with any other third party without your explicit written consent.</p>
 
   <h2><span class="wn-num">5.</span> How long we keep it</h2>
   <ul>
@@ -112,6 +114,8 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li>Hostinger — website hosting (EU data center) and our self-hosted n8n server (Contabo/Hostinger VPS, EU) that receives the anonymous funnel counts.</li>
     <li>Meta Platforms — US (Pixel and Conversions API data).</li>
     <li>Calendly — US (booking details).</li>
+    <li>GoHighLevel — US (CRM contact records).</li>
+    <li>Resend — US (internal lead-notification emails).</li>
     <li>Google Workspace — US and EU data centers.</li>
     <li>GitHub — US data centers.</li>
     <li>Stripe — US and EU.</li>
