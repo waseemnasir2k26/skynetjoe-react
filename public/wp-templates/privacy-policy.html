@@ -74,6 +74,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li><strong>Google Workspace</strong> — for email correspondence with clients and inbound briefs.</li>
     <li><strong>Hostinger</strong> — hosts skynetjoe.com and our self-hosted n8n server, which receives the anonymous funnel counts.</li>
     <li><strong>Meta Platforms</strong> — receives Meta Pixel events for advertising measurement.</li>
+    <li><strong>Calendly</strong> — runs the call booking on /discovery-call and the landing pages; when you book, your name, email, time zone and any answers you type go to Calendly under its own privacy terms, and its webhook tells us a booking happened.</li>
     <li><strong>GitHub</strong> — source code storage. No client business data lives here unless a client has explicitly asked us to host their repo for them.</li>
   </ul>
   <p>We do not share data with any other third party without your explicit written consent.</p>
@@ -99,16 +100,18 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
   <h2><span class="wn-num">7.</span> Cookies</h2>
   <p>What this site stores in your browser:</p>
   <ul>
-    <li><strong>localStorage</strong> (browser-side store, never read by the funnel counter): the free tools keep your in-progress answers so a refresh does not lose them; if you unlocked a tool with your email, that email is remembered so you are not asked again (the same email was already sent to our CRM when you entered it); and small dismissal flags remember that you closed the announcement bar, the exit prompt or the sticky book-a-call bar.</li>
+    <li><strong>localStorage</strong> (browser-side store, never read by the funnel counter): the free tools keep your in-progress answers and the results you generate so a refresh does not lose them; if you unlocked a tool with your email, that email is remembered so you are not asked again (the same email was already sent to our CRM when you entered it); the call qualifier on /discovery-call keeps your answers the same way; and small dismissal flags remember that you closed the announcement bar, the exit prompt or the sticky book-a-call bar.</li>
+    <li><strong>sessionStorage</strong> (cleared when the tab closes): flags that stop pop-ups, the chat bubble and article-view counters from repeating within one visit. Nothing identifying.</li>
     <li>The <strong>Meta Pixel</strong> sets Meta's advertising cookies (e.g. <code>_fbp</code>) so ad performance can be measured. Our own funnel counter sets nothing. Calendly's booking embed on /discovery-call and the landing pages sets its own cookies, under Calendly's terms.</li>
   </ul>
-  <p>We do not currently show a cookie consent banner. Because the Meta Pixel sets advertising cookies, EU/UK visitors may be entitled to be asked first; a consent gate is under evaluation. Until it ships you can block the pixel with any tracker-blocking browser or extension, and our own counter already honours Do-Not-Track / Global Privacy Control.</p>
+  <p>We do not currently show a cookie consent banner. Because the Meta Pixel sets advertising cookies (and Calendly sets its own on the booking pages), EU/UK visitors may be entitled to be asked first; a consent gate is under evaluation. Until it ships you can block the pixel with any tracker-blocking browser or extension, and our own counter already honours Do-Not-Track / Global Privacy Control.</p>
 
   <h2><span class="wn-num">8.</span> Data location</h2>
   <p>The infrastructure we use is hosted in the United States and the European Union:</p>
   <ul>
     <li>Hostinger — website hosting (EU data center) and our self-hosted n8n server (Contabo/Hostinger VPS, EU) that receives the anonymous funnel counts.</li>
     <li>Meta Platforms — US (Pixel and Conversions API data).</li>
+    <li>Calendly — US (booking details).</li>
     <li>Google Workspace — US and EU data centers.</li>
     <li>GitHub — US data centers.</li>
     <li>Stripe — US and EU.</li>
@@ -124,7 +127,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
   <p>If we make material changes to how we handle your data, active clients and newsletter subscribers will receive an email notice. The "last updated" date at the top of this page always reflects the most recent revision. Minor wording changes are made silently.</p>
 
   <div class="wn-callout">
-    <p><strong>Quick read:</strong> we collect the bare minimum, we don't sell anything, we delete on request, and the only third-party tracking is the Meta Pixel, disclosed above.</p>
+    <p><strong>Quick read:</strong> we collect the bare minimum, we don't sell anything, we delete on request, and the only third-party advertising tracker is the Meta Pixel, disclosed above; Calendly sets its own cookies where the booking embed appears.</p>
   </div>
 
   <section class="wn-cta-block">
