@@ -4,6 +4,7 @@ import { SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Analytics, { GtmNoscript } from "@/components/Analytics";
+import SxoBeacon from "@/components/SxoBeacon";
 import AISignals from "@/components/aeo/AISignals";
 import LiveChat from "@/components/LiveChat";
 // 2026-05-29 — Interrupting popups disabled (kept in repo, re-add JSX to restore):
@@ -164,6 +165,8 @@ export default function RootLayout({
             the sibling-ban fingerprint). LP pages also mount it; next/script
             dedupes by id so this is safe. */}
         <MetaPixel />
+        {/* Cookieless 4-event funnel counter -> n8n SXO-01. No cookies, no ids. */}
+        <SxoBeacon />
       </body>
     </html>
   );
