@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SkynetLabs Privacy Policy",
     description:
-      "How we handle your data. Minimum collection, no tracking cookies, deletion on request.",
+      "How we handle your data. Minimum collection, one disclosed advertising pixel, no data sales, deletion on request.",
     url: `${SITE.url}/privacy-policy`,
     type: "article",
     images: [...DEFAULT_OG_IMAGES],
