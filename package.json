@@ -14,7 +14,9 @@
     "start": "next start",
     "lint": "eslint",
     "seo:check": "node scripts/seo-guard.mjs",
-    "sync-wp": "node scripts/sync-wp-templates.mjs"
+    "sync-wp": "node scripts/sync-wp-templates.mjs",
+    "seo:locations": "node scripts/location-index-report.mjs",
+    "test": "node scripts/location-gate.test.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.8",

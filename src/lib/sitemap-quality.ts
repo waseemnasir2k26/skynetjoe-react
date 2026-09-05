@@ -20,7 +20,6 @@ import {
   SERVICE_STATE_ENRICHMENT,
   getEnrichment,
 } from "@/data/service-state-enrichment";
-import { getStateEnrichment } from "@/data/state-enrichment";
 import { isPriorityState } from "@/data/state-priority";
 import { STATES } from "@/lib/states";
 import { POSTS } from "@/lib/posts";
@@ -61,41 +60,22 @@ export function isServiceStateIndexable(
 }
 
 // ── Location pages (/locations/[state]) ─────────────────────────────────────
-// Scoring (bar actually implemented, 2026-07-25 rewrite):
-//   - Unique 200+ word enrichment paragraph     40 pts  — REQUIRED GATE
-//   - State has 3+ industries listed            20 pts
-//   - State has 3+ cities listed                20 pts
-//   - Base (page exists, JSON-LD emitted)       20 pts
-// Threshold 60 → index. Below → noindex, follow.
-//
-// Why the gate: industries/cities/base were unconditional for every one of
-// the 48 STATES entries (every state ships with >=3 industries and >=3
-// cities in src/lib/states.ts), so those three alone summed to exactly 60
-// and cleared INDEX_THRESHOLD with ZERO real, unique content — the
-// documented "noindex un-enriched states" behavior could never fire.
-// Enrichment (a real 200+ word hand-written paragraph, >=800 chars) is the
-// ONLY signal that proves the page isn't a templated stub, so it's now a
-// hard prerequisite: no enrichment -> score 0 -> noindex, regardless of the
-// other three flags. This matches the docstring's own claim that the
-// enrichment paragraph is what separates a real page from a thin one.
-export function locationQualityScore(stateSlug: string): number {
-  const enrichment = getStateEnrichment(stateSlug);
-  const state = STATES.find((s) => s.slug === stateSlug);
-  const hasRealEnrichment = !!enrichment && enrichment.length >= 800;
-
-  if (!hasRealEnrichment) return 0;
-
-  let score = 40;
-  if (state && state.industries.length >= 3) score += 20;
-  if (state && state.cities.length >= 3) score += 20;
-  if (state) score += 20;
-
-  return score;
-}
-
-export function isLocationIndexable(stateSlug: string): boolean {
-  return locationQualityScore(stateSlug) >= INDEX_THRESHOLD;
-}
+// The gate itself lives in ./location-index-gate.ts (one rule table, no `@/`
+// aliases so a plain Node script can run it). 2026-09-06: it is no longer an
+// existence check — enrichment length, own-city coverage AND 8-gram Jaccard
+// uniqueness vs every other state are hard prerequisites. See that file.
+// Run `npm run seo:locations` for the 48-state pass/fail table.
+export {
+  locationQualityScore,
+  isLocationIndexable,
+  evaluateLocation,
+  locationIndexReport,
+  LOCATION_INDEX_THRESHOLD,
+  LOCATION_MIN_ENRICHMENT_CHARS,
+  LOCATION_MAX_PAIRWISE_SIMILARITY,
+  LOCATION_MIN_OWN_CITIES,
+} from "./location-index-gate";
+export type { LocationGateResult } from "./location-index-gate";
 
 // ── Case studies ────────────────────────────────────────────────────────────
 // Every CASE_STUDIES entry is hand-written. Indexable iff it has substantive

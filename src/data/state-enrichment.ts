@@ -1,15 +1,21 @@
 /**
  * State enrichment paragraphs for /locations/[state].
  *
- * 38 hand-written 220-280 word unique blocks (of 48 states; the 10 without
- * one are gated to noindex by isLocationIndexable). Each references:
+ * 48 hand-written 220-280 word unique blocks — one per state (the "38 of 48"
+ * in the pre-2026-09-06 docstring was stale; all 48 are enriched). A state
+ * without one is gated to noindex,follow by the location index gate.
+ * Each references:
  *   - Real cities + metro markets in that state
  *   - 2-3 dominant verticals
  *   - State-specific compliance / regulatory / market hook
  *   - SkynetLabs offer angle (n8n, GHL, AEO sites, chatbots)
  *
  * Surfaced inside /locations/[state]/page.tsx and gated by
- * isLocationIndexable() in @/lib/sitemap-quality.
+ * the gate in @/lib/location-index-gate (re-exported by @/lib/sitemap-quality).
+ *
+ * TRUTH RULE: everything in these paragraphs must be checkable — real cities,
+ * real verticals, named statutes. No invented local-market percentages and no
+ * ranking/timeline promises (29 were stripped 2026-09-06).
  *
  * Keyed by state slug.
  */
