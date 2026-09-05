@@ -27,7 +27,7 @@ export const CATEGORIES: CategoryMeta[] = [
   {
     key: "structure",
     label: "Structured Citations",
-    short: "Schema, llms.txt, and machine-readable facts about your brand.",
+    short: "Schema and machine-readable facts about your brand (plus an optional llms.txt index).",
     maxScore: 25,
   },
   {
@@ -147,7 +147,11 @@ export const QUESTIONS: Question[] = [
         value: "no",
         label: "No",
         score: 0,
-        move: "Generate an llms.txt — it's the clearest single signal you can give an AI crawler.",
+        // 2026-09-06: Google states Search ignores llms.txt, and two independent
+        // datasets (Ahrefs 137k sites, SE Ranking ~300k domains) found near-zero
+        // bot fetches and no citation correlation. Sold honestly as agent
+        // readability, never as a ranking or citation lever.
+        move: "Add an llms.txt if you want a clean human/agent-readable index of the site. Google says Search ignores it, so treat it as housekeeping, not a visibility lever.",
       },
       { value: "yes", label: "Yes", score: 8 },
     ],

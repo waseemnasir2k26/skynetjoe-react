@@ -55,7 +55,7 @@ const faqs = [
   },
   {
     q: "What's a good score?",
-    a: "80+ means answer engines can parse, trust, and cite your site with minimal friction. Under 30 means the fundamentals — schema, server rendering, llms.txt — aren't there yet, and that's where to start, not with advanced citation tactics.",
+    a: "80+ means answer engines can parse, trust, and cite your site with minimal friction. Under 30 means the fundamentals — schema, server rendering, crawlable answer blocks — aren't there yet, and that's where to start, not with advanced citation tactics.",
   },
 ];
 
