@@ -23,7 +23,7 @@ import {
   MapPin,
   CheckCircle2,
 } from "lucide-react";
-import { STATES, getStateBySlug, type StateEntry } from "@/lib/states";
+import { STATES, getStateBySlug } from "@/lib/states";
 import {
   SERVICE_CATEGORIES,
   SITE,
@@ -86,18 +86,12 @@ export async function generateMetadata({
   };
 }
 
-// Local SEO keyword variants per service × state
-function buildKeywordPhrases(svc: SvcItem, s: StateEntry): string[] {
-  const label = svc.label;
-  return [
-    `${label} expert in ${s.name}`,
-    `${label} services for ${s.name} founders`,
-    `${label} consultant near ${s.cities[0]}`,
-    `${label} agency in ${s.abbr}`,
-    `Hire ${label} freelancer in ${s.name}`,
-    `Best ${label} provider near ${s.cities[1]}`,
-  ];
-}
+// Doorway cleanup 2026-09-06 (SEO report §5 #3): the per-service keyword-phrase
+// generator (6 machine-built "[service] expert in [state]" strings x 16 services
+// = ~96 phrases per page) was removed. Google's scaled-content-abuse policy names
+// "pages that contain search keywords" and "substantially similar pages ... closer
+// to search results than a clearly defined, browseable hierarchy" as doorway
+// signals. The section now renders a plain, browsable service index instead.
 
 // Shared cream-pivot inline styles
 const eyebrow = {
@@ -662,7 +656,7 @@ export default async function StatePage({
         </div>
       </section>
 
-      {/* Local SEO keyword expansion */}
+      {/* Service index for this state — browsable hierarchy, no keyword lists */}
       <section
         className="py-16 md:py-20"
         style={{ background: "var(--cream-3)" }}
@@ -671,18 +665,16 @@ export default async function StatePage({
           <div className="max-w-3xl mb-12">
             <div className="mb-5" style={eyebrow}>
               <span style={eyebrowRule} />
-              Local intent · {s.name}
+              Services · {s.name}
             </div>
             <h2 style={h2Style}>
-              Searching in {s.abbr}?{" "}
-              <em style={emTerra}>You&apos;re in the right place.</em>
+              What we build for{" "}
+              <em style={emTerra}>{s.name} businesses.</em>
             </h2>
             <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.6 }}>
-              Whatever exact phrase brought you here — &ldquo;n8n expert near{" "}
-              {s.cities[0]}&rdquo;, &ldquo;GoHighLevel agency in {s.abbr}
-              &rdquo;, &ldquo;AI chatbot consultant for {s.industries[0]}&rdquo;
-              — these are all the same one operator. Click any phrase to scope
-              that service for {s.name}.
+              Every engagement below is scoped and delivered by one operator —
+              remote, fixed-scope, 5–14 day ship. Open a service to see what it
+              covers, what it costs and how long it takes.
             </p>
           </div>
 
@@ -691,7 +683,6 @@ export default async function StatePage({
               const Icon =
                 (Icons as unknown as Record<string, IconCmp>)[svc.icon] ??
                 (Icons as unknown as Record<string, IconCmp>).Bot;
-              const phrases = buildKeywordPhrases(svc, s);
               return (
                 <div key={svc.slug} style={{ ...cardCream, padding: 24 }}>
                   <div className="flex items-start gap-4 mb-4">
@@ -745,28 +736,20 @@ export default async function StatePage({
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {phrases.map((p) => (
-                      <Link
-                        key={p}
-                        href={svcHref(svc)}
-                        style={{
-                          padding: "6px 12px",
-                          borderRadius: 9999,
-                          background: "var(--cream-3)",
-                          border: "1px solid rgba(26,26,26,0.12)",
-                          color: "var(--ink-2)",
-                          fontSize: 12,
-                          fontFamily: "var(--font-mono)",
-                          fontWeight: 500,
-                          textDecoration: "none",
-                          transition: "border-color 0.18s",
-                        }}
-                      >
-                        {p}
-                      </Link>
-                    ))}
-                  </div>
+                  <Link
+                    href={svcHref(svc)}
+                    className="sm:hidden inline-flex items-center gap-1.5"
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "var(--terracotta-aa)",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Scope it
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
               );
             })}
@@ -893,7 +876,7 @@ export default async function StatePage({
                     textDecoration: "none",
                   }}
                 >
-                  Get a {s.name} engagement scoped
+                  Scope an engagement in {s.name}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
