@@ -398,6 +398,13 @@ const nextConfig: NextConfig = {
   // Produces .next/standalone/server.js for smaller cold-boot on
   // Hostinger Node.js Web Apps (and any non-Vercel host).
   output: "standalone",
+  experimental: {
+    // Enables src/app/global-not-found.tsx — the branded 404 for URLs that
+    // match no route. Required because the root layout lives in the (skynet)
+    // route group, so a root-level not-found.tsx has no layout to render into
+    // and unmatched URLs fell through to Next's built-in bare 404.
+    globalNotFound: true,
+  },
   async headers() {
     return [
       {

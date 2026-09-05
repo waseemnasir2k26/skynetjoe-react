@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import {
   Brain,
   Rocket,
@@ -283,10 +284,17 @@ const schema = {
   ],
 };
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Vibe Coding", url: `${SITE.url}/vibe-coding` },
+]);
+
 export default function VibeCodingPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={hubBreadcrumbSchema} />
 
       {/* HERO ============================================ */}
       <section

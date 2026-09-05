@@ -30,6 +30,7 @@ import {
 } from "@/lib/site";
 import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import USStatesMap from "@/components/locations/USStatesMap";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
@@ -82,6 +83,12 @@ const emTerra = {
   fontWeight: 700,
 };
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Locations", url: `${SITE.url}/locations` },
+]);
+
 export default function LocationsIndexPage() {
   const schema = {
     "@context": "https://schema.org",
@@ -120,6 +127,7 @@ export default function LocationsIndexPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={hubBreadcrumbSchema} />
 
       {/* HERO — cream editorial */}
       <section

@@ -11,9 +11,11 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "Waseem Nasir — Founder, SkynetLabs",
+  // No ", SkynetLabs" here — title.template in (skynet)/layout.tsx appends
+  // " | SkynetLabs", which produced "... SkynetLabs | SkynetLabs" live.
+  title: "Waseem Nasir — Founder & Automation Engineer",
   description:
-    "I build automation that doesn't need me to babysit it. Lahore → Singapore → Bangkok → KL → Bali. 180+ workflows, 40+ websites, 9 countries served.",
+    "Founder of SkynetLabs. n8n workflows, AI chatbots and conversion-tuned websites, built solo from Bali for service businesses worldwide.",
   alternates: { canonical: `${SITE.url}/author/waseem-nasir` },
   openGraph: {
     title: "Waseem Nasir — Founder, SkynetLabs",

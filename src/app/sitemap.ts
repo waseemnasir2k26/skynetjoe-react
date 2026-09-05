@@ -23,6 +23,32 @@ import {
 // keep their real p.updatedAt || p.publishedAt dates.
 const STATIC_LASTMOD = new Date("2026-08-31");
 
+// Pages actually changed by the 2026-09-06 SEO pass (doorway cleanup on all 48
+// /locations/[state] pages, BreadcrumbList added to the hubs below, author
+// title de-duplicated, meta trims). Only these get the newer date — a uniform
+// sitewide bump is a discounted freshness signal (SEO report §5 #7).
+const TOUCHED_LASTMOD = new Date("2026-09-06");
+const TOUCHED_PATHS = new Set([
+  "/about",
+  "/pricing",
+  "/contact",
+  "/portfolio",
+  "/glossary",
+  "/aeo-guide",
+  "/case-studies",
+  "/locations",
+  "/n8n-vs-zapier",
+  "/vibe-coding",
+  "/blog",
+  "/news",
+  "/author/waseem-nasir",
+  "/industries",
+  "/services",
+  "/tools/core-web-vitals-audit",
+]);
+const staticLastMod = (path: string) =>
+  TOUCHED_PATHS.has(path) ? TOUCHED_LASTMOD : STATIC_LASTMOD;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;
 
@@ -50,10 +76,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy-policy",
     "/terms-of-service",
     "/locations",
+    // /industries index page exists (src/app/(skynet)/industries/page.tsx) but
+    // was never advertised in the sitemap (SEO report §5 #7).
+    "/industries",
     "/industries/freight-logistics/texas",
   ].map((path) => ({
     url: `${base}${path}`,
-    lastModified: STATIC_LASTMOD,
+    lastModified: staticLastMod(path),
     changeFrequency: "weekly" as const,
     priority: path === "" ? 1 : 0.8,
   }));
@@ -72,7 +101,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       )
       .map((svc) => ({
         url: `${base}/services/${svc.slug}`,
-        lastModified: STATIC_LASTMOD,
+        lastModified: TOUCHED_LASTMOD, // description trims 2026-09-06
         changeFrequency: "monthly" as const,
         priority: 0.7,
       })),
@@ -83,7 +112,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const stateRoutes = STATES.filter((s) => isLocationIndexable(s.slug)).map(
     (s) => ({
       url: `${base}/locations/${s.slug}`,
-      lastModified: STATIC_LASTMOD,
+      // Every state page had the doorway block removed on 2026-09-06.
+      lastModified: TOUCHED_LASTMOD,
       changeFrequency: "monthly" as const,
       priority: 0.6,
     }),

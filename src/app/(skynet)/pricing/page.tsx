@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { SERVICE_PRICING } from "@/lib/service-pricing";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import ServicePricingTabs from "@/components/pricing/ServicePricingTabs";
 import PricingCalculator from "@/components/pricing/PricingCalculator";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
@@ -145,10 +146,18 @@ const faqSchema = {
   })),
 };
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Pricing", url: `${SITE.url}/pricing` },
+]);
+
 export default function PricingPage() {
   return (
     <>
       <JsonLd data={priceSchema} />
+
+      <JsonLd data={hubBreadcrumbSchema} />
       <JsonLd data={offerCatalog} />
       <JsonLd data={faqSchema} />
       <style>{`

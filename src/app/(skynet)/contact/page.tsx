@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
@@ -185,10 +186,17 @@ const eyebrow = (text: string, color = "var(--terracotta-aa)") => (
   </div>
 );
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Contact", url: `${SITE.url}/contact` },
+]);
+
 export default function ContactPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={hubBreadcrumbSchema} />
 
       {/* HERO */}
       <section

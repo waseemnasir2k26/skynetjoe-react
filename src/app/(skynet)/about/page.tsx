@@ -3,7 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
-import { organization, person } from "@/lib/schema";
+import { organization, person, breadcrumbSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Community from "@/components/sections/Community";
 import {
@@ -159,10 +159,17 @@ const schema = {
   ],
 };
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "About", url: `${SITE.url}/about` },
+]);
+
 export default function AboutPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={hubBreadcrumbSchema} />
 
       {/* HERO */}
       <section

@@ -14,6 +14,7 @@ import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { POSTS } from "@/lib/posts";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
@@ -56,10 +57,17 @@ function categoryLabel(c: string): string {
   return c.replace("-", " ");
 }
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Blog", url: `${SITE.url}/blog` },
+]);
+
 export default function BlogPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={hubBreadcrumbSchema} />
 
       {/* HERO — cream editorial */}
       <section

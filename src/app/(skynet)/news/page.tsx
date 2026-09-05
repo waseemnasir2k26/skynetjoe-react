@@ -6,6 +6,7 @@ import { NEWS } from "@/lib/news";
 import { POSTS } from "@/lib/posts";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import {
   Reveal,
   RevealGroup,
@@ -135,6 +136,12 @@ function formatDate(iso: string) {
   });
 }
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "News", url: `${SITE.url}/news` },
+]);
+
 export default async function NewsIndex({
   searchParams,
 }: {
@@ -161,6 +168,7 @@ export default async function NewsIndex({
   return (
     <>
       <JsonLd data={makeSchema(posts)} />
+      <JsonLd data={hubBreadcrumbSchema} />
 
       {/* HERO */}
       <section

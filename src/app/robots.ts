@@ -5,6 +5,9 @@ import { SITE } from "@/lib/site";
 // generic API, and LP routes stay off-limits everywhere (including LLM bots).
 // `/api/llms-feed` is the AEO feed and stays explicitly allowed despite the
 // generic `/api/` disallow (specific allow beats generic disallow per RFC 9309).
+// TODO 2026-09-11 — re-review the "/lp/" disallow. Waseem's paid-traffic
+// freeze keeps the ad landing pages out of the index until then; do NOT lift
+// it earlier (memory: reference-skynetjoe-paid-traffic-freeze-still-live).
 const DISALLOW = ["/admin", "/admin/", "/api/", "/lp/"];
 const ALLOW = ["/", "/api/llms-feed"];
 
@@ -21,6 +24,9 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "anthropic-ai", allow: ALLOW, disallow: DISALLOW },
       { userAgent: "Claude-Web", allow: ALLOW, disallow: DISALLOW },
       { userAgent: "Claude-SearchBot", allow: ALLOW, disallow: DISALLOW },
+      // Claude-User = a person's Claude fetching a page on request (retrieval,
+      // not training). Was missing; Claude-Web is the older/legacy name.
+      { userAgent: "Claude-User", allow: ALLOW, disallow: DISALLOW },
       // Perplexity
       { userAgent: "PerplexityBot", allow: ALLOW, disallow: DISALLOW },
       { userAgent: "Perplexity-User", allow: ALLOW, disallow: DISALLOW },

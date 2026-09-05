@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import { CASE_STUDIES, type CaseStudy } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 /**
  * Card presentation metadata, keyed by case-study `slug`.
@@ -182,10 +183,17 @@ const schema = {
   },
 };
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Case Studies", url: `${SITE.url}/case-studies` },
+]);
+
 export default function CaseStudiesPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={hubBreadcrumbSchema} />
 
       {/* HERO */}
       <section

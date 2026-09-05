@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import WorkShowcase from "@/components/sections/WorkShowcase";
 import { Reveal } from "@/components/motion/Reveal";
 import { WORK_BUILDS } from "@/lib/work-builds";
@@ -48,10 +49,17 @@ const itemListSchema = {
   })),
 };
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Portfolio", url: `${SITE.url}/portfolio` },
+]);
+
 export default function PortfolioPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={hubBreadcrumbSchema} />
       <JsonLd data={itemListSchema} />
 
       {/* HERO */}

@@ -3,6 +3,7 @@ import path from "path";
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
@@ -37,10 +38,17 @@ const schema = {
   publisher: { "@id": `${SITE.url}/#organization` },
 };
 
+// BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
+const hubBreadcrumbSchema = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Glossary", url: `${SITE.url}/glossary` },
+]);
+
 export default function GlossaryPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={hubBreadcrumbSchema} />
       <HtmlCreamWrap html={html} />
     </>
   );

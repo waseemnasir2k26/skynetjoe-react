@@ -1,0 +1,22 @@
+{
+  "target": "SXO layer — waseemnasir-react + skynetjoe app",
+  "score": 89,
+  "judges": ["A-correctness-privacy", "B-craft-claims", "VerificationUnit"],
+  "round": 8,
+  "findings_resolved": 17,
+  "scorecard_sha": "d08246c12db0a1b84d66ee4facab22ce68429496a0f3ad3240c56dbec042253b",
+  "artifact_shas": {
+    "waseemnasir-react/components/SxoBeacon.tsx": "e4a523351824b750b4ecb896cdac6c6dd4faf7ed029d5015c3e02ee89135d488",
+    "waseemnasir-react/app/layout.tsx": "df4cc367747ee4bb93fdbb93e92d3d97dd7bb5bae30e1bc5ab442ab64626cfcf",
+    "waseemnasir-react/app/book/BookClient.tsx": "266aca8739599a6e5363ee5bd52024fc0b5bfb3824209fd1368248c2921b6f4d",
+    "waseemnasir-react/app/privacy/page.tsx": "64d1a21e19d8229a485c780852c767eeea328902ec849354ec47ecac0034aa76",
+    "skynetjoe/app/src/components/SxoBeacon.tsx": "101ee1a314970a4ad8a3e87adb70ef9d55db91b0fa1a6993e5d0eee6ca9a8f38",
+    "skynetjoe/app/src/app/(skynet)/layout.tsx": "654ca7ff1b23cd733c6f2586e69260eb968cf221b2a36c6b1f285c933a5b2050",
+    "skynetjoe/app/next.config.ts": "c67660ab8cd84fa764ad41e4bb129f6948a0027d6d5f0640b85380cca95b9818",
+    "skynetjoe/app/content/privacy-policy.html": "0c80d2b5bb1f0df95239e100475bb2cb5105c3fbc279c8b25a18209e8a33d47a",
+    "skynetjoe/app/src/app/(skynet)/privacy-policy/page.tsx": "cbd068629fe9145f80c2eaae82618f2e9355cf2bed53c21cc034d805d84876ae"
+  },
+  "verified_at": "2026-09-01T16:02:26Z",
+  "gitleaks": "clean",
+  "builds": "pass"
+}
