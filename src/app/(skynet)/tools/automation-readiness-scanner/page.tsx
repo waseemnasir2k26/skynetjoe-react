@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageDescription, pageTitle } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Scanner from "./Scanner";
 import { AUTOMATION_CHECKS } from "@/data/tools/automation-readiness";
@@ -10,9 +10,9 @@ const TITLE =
   "Free Automation Readiness Scanner — Find Your Site's Lead Gaps | SkynetJoe";
 
 export const metadata: Metadata = {
-  title: TITLE,
+  title: pageTitle(TITLE),
   description:
-    "Paste a URL. We fetch the homepage server-side and check for a contact form, chat widget, booking, pixels, schema, WhatsApp and click-to-call — real detections only, scored 0-100.",
+    pageDescription("Paste a URL. We fetch the homepage server-side and check for a contact form, chat widget, booking, pixels, schema, WhatsApp and click-to-call — real detections only, scored 0-100."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Automation Readiness Scanner — Free URL Checker",

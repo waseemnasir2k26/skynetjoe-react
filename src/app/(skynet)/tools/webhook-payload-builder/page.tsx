@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Builder from "./Builder";
@@ -16,9 +16,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "Free Webhook Payload Builder — Sample JSON Payloads, Instantly",
+  title: pageTitle("Free Webhook Payload Builder — Sample JSON Payloads, Instantly"),
   description:
-    "Build and validate JSON payloads for GHL, Stripe, Typeform, Calendly, and Shopify webhooks. Live validation, one-click copy, no signup.",
+    pageDescription("Build and validate JSON payloads for GHL, Stripe, Typeform, Calendly, and Shopify webhooks. Live validation, one-click copy, no signup."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Webhook Payload Builder · sample payloads + live JSON validation",

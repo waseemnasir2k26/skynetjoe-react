@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies";
-import { SITE, svcHref } from "@/lib/site";
+import { SITE, svcHref, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ZoomableImage from "@/components/ZoomableImage";
@@ -31,8 +31,8 @@ export async function generateMetadata({
 
   // No `| SkynetLabs` suffix — root layout's title.template already
   // appends it; a hardcoded suffix here doubled the brand in <title>.
-  const title = `${c.clientName} — ${c.industryTag} case study`;
-  const description = c.oneLineOutcome;
+  const title = pageTitle(`${c.clientName} — ${c.industryTag} case study`);
+  const description = pageDescription(c.oneLineOutcome);
 
   return {
     title,

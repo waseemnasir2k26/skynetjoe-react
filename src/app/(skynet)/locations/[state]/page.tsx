@@ -29,6 +29,8 @@ import {
   SITE,
   DEFAULT_OG_IMAGES,
   svcHref,
+  pageTitle,
+  pageDescription,
 } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -62,8 +64,12 @@ export async function generateMetadata({
   // No `| ${SITE.brand}` suffix — root layout's title.template already
   // appends it; a hardcoded suffix doubled the brand in <title> across
   // all 47 indexable /locations/[state] pages.
-  const title = `AI Automation Expert in ${s.name} — n8n, GoHighLevel & AEO`;
-  const description = `Hire an AI automation expert serving ${s.name} founders. n8n workflows, GoHighLevel CRM, AEO websites and live-chat agents delivered to ${s.cities.slice(0, 3).join(", ")} and surrounding ${s.abbr} businesses. Fixed scope, 5–14 day ship.`;
+  // Kept short enough that the ' | SkynetLabs' template still lands under
+  // ~60 chars for the longest state name (North Carolina).
+  const title = pageTitle(`n8n & AI Automation in ${s.name}`);
+  const description = pageDescription(
+    `n8n workflows, GoHighLevel CRM and AEO sites for ${s.name} businesses in ${s.cities.slice(0, 2).join(" and ")}. Fixed scope, 5–14 day ship.`,
+  );
   const indexable = isLocationIndexable(state);
   return {
     title,

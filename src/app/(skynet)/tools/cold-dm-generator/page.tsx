@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
@@ -15,9 +15,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "Cold DM Script Generator — Free Outreach Scripts",
+  title: pageTitle("Cold DM Script Generator — Free Outreach Scripts"),
   description:
-    "Free cold DM script generator for LinkedIn, Instagram, and email. Enter your niche, offer, and proof point — get personalized outreach scripts instantly. Email unlocks the full 15-script pack.",
+    pageDescription("Free cold DM script generator for LinkedIn, Instagram, and email. Enter your niche, offer, and proof point — get personalized outreach scripts instantly. Email unlocks the full 15-script pack."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Cold DM Script Generator — personalized outreach in seconds",

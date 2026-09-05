@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import { SERVICE_PRICING } from "@/lib/service-pricing";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -32,9 +32,9 @@ const MONTHLY_PRICES = SERVICE_PRICING.flatMap((s) =>
 const MIN_MONTHLY = Math.min(...MONTHLY_PRICES);
 
 export const metadata: Metadata = {
-  title: "Pricing — Public, honest, no 'request a quote'",
+  title: pageTitle("Pricing — Public, honest, no 'request a quote'"),
   description:
-    "Transparent per-service pricing across 16 SkynetLabs services. Three tiers each, optional add-ons, live stack calculator. No hidden enterprise tier, no discovery dance.",
+    pageDescription("Transparent per-service pricing across 16 SkynetLabs services. Three tiers each, optional add-ons, live stack calculator. No hidden enterprise tier, no discovery dance."),
   alternates: { canonical: `${SITE.url}/pricing` },
   openGraph: {
     title: "SkynetLabs Pricing — public, per-service, calculator-backed",

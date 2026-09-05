@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
@@ -15,9 +15,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 
 export const metadata: Metadata = {
   title:
-    "Free AI Video Prompt Generator — Runway, Pika, Sora & Veo Prompts in One Click",
+    pageTitle("Free AI Video Prompt Generator — Runway, Pika, Sora & Veo Prompts in One Click"),
   description:
-    "Free AI video prompt builder. Pick a subject, camera, mood, lighting, duration. Get production-ready prompts in 4 formats — Runway, Pika, Sora, Veo. Copy + ship.",
+    pageDescription("Free AI video prompt builder. Pick a subject, camera, mood, lighting, duration. Get production-ready prompts in 4 formats — Runway, Pika, Sora, Veo. Copy + ship."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Video Prompt Generator · Runway, Pika, Sora, Veo in one click",

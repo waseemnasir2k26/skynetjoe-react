@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { WORK_BUILDS, getBuild, getNarrative } from "@/lib/work-builds";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 
 export const dynamicParams = false;
@@ -32,8 +32,8 @@ export async function generateMetadata({
   // No `| SkynetLabs` suffix here — the root layout's title.template
   // (`%s | ${SITE.brand}`) already appends it; a hardcoded suffix produced
   // "... | SkynetLabs | SkynetLabs" in the rendered <title>.
-  const title = `${b.title} — ${b.niche} build`;
-  const description = n?.seoDescription ?? b.outcome;
+  const title = pageTitle(`${b.title} — ${b.niche} build`);
+  const description = pageDescription(n?.seoDescription ?? b.outcome);
   return {
     title,
     description,

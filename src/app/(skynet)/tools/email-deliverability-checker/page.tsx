@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { howToSchema } from "@/lib/schema";
@@ -11,9 +11,9 @@ const PATH = "/tools/email-deliverability-checker";
 
 export const metadata: Metadata = {
   title:
-    "Free Email Deliverability Checker — Live SPF/DKIM/DMARC Test | SkynetJoe",
+    pageTitle("Free Email Deliverability Checker — Live SPF/DKIM/DMARC Test | SkynetJoe"),
   description:
-    "Enter a domain, get a live SPF, DKIM, DMARC, and MX check pulled straight from DNS — plain-English verdicts, not a jargon dump. Free, no signup.",
+    pageDescription("Enter a domain, get a live SPF, DKIM, DMARC, and MX check pulled straight from DNS — plain-English verdicts, not a jargon dump. Free, no signup."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Email Deliverability Checker — live SPF/DKIM/DMARC test",

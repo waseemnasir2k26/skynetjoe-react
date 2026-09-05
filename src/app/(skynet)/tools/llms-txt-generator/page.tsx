@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
@@ -14,9 +14,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "Free llms.txt Generator — Spec-Valid llmstxt.org File in Minutes",
+  title: pageTitle("Free llms.txt Generator — Spec-Valid llmstxt.org File in Minutes"),
   description:
-    "Generate a valid llms.txt file from your site name, summary, sections, and docs URLs. Free, spec-compliant, copy or download. Enter your email to unlock the download.",
+    pageDescription("Generate a valid llms.txt file from your site name, summary, sections, and docs URLs. Free, spec-compliant, copy or download. Enter your email to unlock the download."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "llms.txt Generator — build a spec-valid llms.txt in minutes",

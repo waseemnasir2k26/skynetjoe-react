@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, howToSchema } from "@/lib/schema";
 import Generator from "./Generator";
@@ -17,9 +17,9 @@ const CAL_URL =
 
 export const metadata: Metadata = {
   title:
-    "Free Executive Summary Generator — Raw Notes to 5 Ready-to-Send Formats",
+    pageTitle("Free Executive Summary Generator — Raw Notes to 5 Ready-to-Send Formats"),
   description:
-    "Free tool. Paste meeting notes, project docs or call transcripts. Out comes a TL;DR, email, Slack post, deck slide and investor 1-pager. No API key — enter your email to unlock the formats.",
+    pageDescription("Free tool. Paste meeting notes, project docs or call transcripts. Out comes a TL;DR, email, Slack post, deck slide and investor 1-pager. No API key — enter your email to unlock the formats."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Executive Summary Generator · 5 formats from one block of notes",

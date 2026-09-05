@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import WorkShowcase from "@/components/sections/WorkShowcase";
@@ -9,9 +9,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { WORK_BUILDS } from "@/lib/work-builds";
 
 export const metadata: Metadata = {
-  title: "Portfolio — Recent Projects",
+  title: pageTitle("Portfolio — Recent Projects"),
   description:
-    "Live screenshots of every SkynetLabs build: 21 client & flagship builds plus 26 niche demos — dental, real estate, wellness, logistics, legal, healthcare. Built solo from Bali by Waseem Nasir.",
+    pageDescription("Live screenshots of every SkynetLabs build: 21 client & flagship builds plus 26 niche demos — dental, real estate, wellness, logistics, legal, healthcare. Built solo from Bali by Waseem Nasir."),
   alternates: { canonical: `${SITE.url}/portfolio` },
   openGraph: {
     title: "SkynetLabs Portfolio — Recent Projects",

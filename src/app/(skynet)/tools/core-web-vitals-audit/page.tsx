@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageDescription, pageTitle } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Audit from "./Audit";
 import { Gauge, Timer, ShieldCheck, ListChecks } from "lucide-react";
@@ -8,9 +8,9 @@ const PATH = "/tools/core-web-vitals-audit";
 const TITLE = "Free Core Web Vitals Mini-Audit — Real Google Data | SkynetJoe";
 
 export const metadata: Metadata = {
-  title: TITLE,
+  title: pageTitle(TITLE),
   description:
-    "Mobile + desktop LCP, INP, and CLS from Google's own PageSpeed Insights API — pass/fail against Google's thresholds, plus lab performance score. Slow site, wasted ad spend.",
+    pageDescription("Mobile + desktop LCP, INP, and CLS from Google's own PageSpeed Insights API — pass/fail against Google's thresholds, plus lab performance score. Slow site, wasted ad spend."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Core Web Vitals Mini-Audit — Free, Google Data Only",

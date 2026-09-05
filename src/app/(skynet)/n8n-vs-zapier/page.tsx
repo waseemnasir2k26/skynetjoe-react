@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
@@ -12,9 +12,9 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)",
+  title: pageTitle("n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)"),
   description:
-    "Side-by-side n8n vs Zapier comparison from someone who has shipped 180+ workflows across both. 15-row criteria table, 5 real-world scenarios, decision tree, and when to use neither.",
+    pageDescription("Side-by-side n8n vs Zapier comparison from someone who has shipped 180+ workflows across both. 15-row criteria table, 5 real-world scenarios, decision tree, and when to use neither."),
   alternates: { canonical: `${SITE.url}/n8n-vs-zapier` },
   openGraph: {
     title:

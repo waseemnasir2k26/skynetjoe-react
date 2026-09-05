@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
@@ -16,9 +16,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "n8n Workflow Generator — Free n8n Templates",
+  title: pageTitle("n8n Workflow Generator — Free n8n Templates"),
   description:
-    "Pick a trigger and an action, get an importable n8n workflow JSON in seconds. 12 real recipes — GHL, Slack, Stripe, Gmail and more. Free.",
+    pageDescription("Pick a trigger and an action, get an importable n8n workflow JSON in seconds. 12 real recipes — GHL, Slack, Stripe, Gmail and more. Free."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "n8n Workflow Generator — free n8n templates, instant download",

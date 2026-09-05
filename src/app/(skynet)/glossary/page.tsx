@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
@@ -12,9 +12,9 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "AI Automation & AEO Glossary — 50+ Terms Defined",
+  title: pageTitle("AI Automation & AEO Glossary — 50+ Terms Defined"),
   description:
-    "Working reference for the vocabulary that comes up when shipping LLM features, automation workflows, and content that gets cited by answer engines. 50+ terms, plain definitions, no fluff.",
+    pageDescription("Working reference for the vocabulary that comes up when shipping LLM features, automation workflows, and content that gets cited by answer engines. 50+ terms, plain definitions, no fluff."),
   alternates: { canonical: `${SITE.url}/glossary` },
   openGraph: {
     title: "AI Automation & AEO Glossary — 50+ Terms Defined",

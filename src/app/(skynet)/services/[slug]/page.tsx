@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MapPin, ArrowRight } from "lucide-react";
-import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import { STATES } from "@/lib/states";
 import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
 import { getEnrichment } from "@/data/service-state-enrichment";
@@ -61,8 +61,10 @@ export async function generateMetadata({
     // No brand suffix here — the (skynet) layout's title.template
     // (`%s | ${SITE.brand}`) already appends it; a hardcoded suffix rendered
     // "... — SkynetLabs | SkynetLabs".
-    title: svc.label,
-    description: longDesc,
+    title: pageTitle(svc.label),
+    // buildLongDescription() runs 287-309 chars — great on-page, truncated in
+    // the SERP. Clamp for <meta>, keep the long form for og/twitter below.
+    description: pageDescription(longDesc),
     alternates: { canonical: `${SITE.url}/services/${svc.slug}` },
     openGraph: {
       title: `${svc.label} — ${SITE.brand}`,

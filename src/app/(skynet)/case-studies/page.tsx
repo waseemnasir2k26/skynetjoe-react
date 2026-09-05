@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import { CASE_STUDIES, type CaseStudy } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -138,9 +138,9 @@ const ORDERED_STUDIES: CaseStudy[] = [...CASE_STUDIES].sort(
 );
 
 export const metadata: Metadata = {
-  title: "Case Studies — 8 Shipped Builds With Honest Outcomes",
+  title: pageTitle("Case Studies — 8 Shipped Builds With Honest Outcomes"),
   description:
-    "Eight anonymized client wins from SkynetLabs: n8n automation, flagship websites, AEO content engines and CRM rebuilds. Honest outcomes, no vanity metrics.",
+    pageDescription("Eight anonymized client wins from SkynetLabs: n8n automation, flagship websites, AEO content engines and CRM rebuilds. Honest outcomes, no vanity metrics."),
   alternates: { canonical: `${SITE.url}/case-studies` },
   openGraph: {
     title: "SkynetLabs Case Studies — 8 shipped builds",

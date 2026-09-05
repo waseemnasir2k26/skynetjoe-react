@@ -19,14 +19,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { INDUSTRIES } from "@/data/industries";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "Industries — Vertical-Built AI Systems",
+  title: pageTitle("Industries — Vertical-Built AI Systems"),
   description:
-    "Industry-specific AI receptionists, booking agents, and revenue automation for dental clinics, wellness spas, and freight & logistics. Vertical tools, vertical voice, vertical scope.",
+    pageDescription("Industry-specific AI receptionists, booking agents, and revenue automation for dental clinics, wellness spas, and freight & logistics. Vertical tools, vertical voice, vertical scope."),
   alternates: { canonical: `${SITE.url}/industries` },
   openGraph: {
     title: "SkynetLabs Industries — Vertical-built AI systems",

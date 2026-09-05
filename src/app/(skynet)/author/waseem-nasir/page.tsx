@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -13,9 +13,9 @@ const html = fs.readFileSync(
 export const metadata: Metadata = {
   // No ", SkynetLabs" here — title.template in (skynet)/layout.tsx appends
   // " | SkynetLabs", which produced "... SkynetLabs | SkynetLabs" live.
-  title: "Waseem Nasir — Founder & Automation Engineer",
+  title: pageTitle("Waseem Nasir — Founder & Automation Engineer"),
   description:
-    "Founder of SkynetLabs. n8n workflows, AI chatbots and conversion-tuned websites, built solo from Bali for service businesses worldwide.",
+    pageDescription("Founder of SkynetLabs. n8n workflows, AI chatbots and conversion-tuned websites, built solo from Bali for service businesses worldwide."),
   alternates: { canonical: `${SITE.url}/author/waseem-nasir` },
   openGraph: {
     title: "Waseem Nasir — Founder, SkynetLabs",

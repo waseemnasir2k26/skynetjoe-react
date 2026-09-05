@@ -8,14 +8,16 @@ import FAQHome, { HOME_FAQS } from "@/components/sections/FAQHome";
 import FinalCTA from "@/components/funnel/FinalCTA";
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageDescription } from "@/lib/site";
 import { organization, person } from "@/lib/schema";
 
 // Explicit homepage metadata. `title.absolute` skips the global "%s | SkynetLabs"
 // template so the home tab/SERP title is the full brand line, not suffixed.
 export const metadata: Metadata = {
-  title: { absolute: `${SITE.brand} — ${SITE.tagline}` },
-  description: SITE.description,
+  // 62 chars with the full tagline — trimmed to sit under the ~60-char SERP
+  // truncation line while keeping the brand + both categories.
+  title: { absolute: `${SITE.brand} — AI Automation & AEO for Service Businesses` },
+  description: pageDescription(SITE.description),
   alternates: { canonical: SITE.url },
   openGraph: {
     title: `${SITE.brand} — ${SITE.tagline}`,

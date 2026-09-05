@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
@@ -15,9 +15,9 @@ const html = fs.readFileSync(
 
 export const metadata: Metadata = {
   title:
-    "The 5 Boring Automations Small Businesses Actually Pay For — Field Notes",
+    pageTitle("The 5 Boring Automations Small Businesses Actually Pay For — Field Notes"),
   description:
-    "Five automations I shipped and got paid for — email triage, after-hours lead capture, quote tracking, order ops, and a posting engine — grounded in real builds, with the honest lesson from over-engineering one.",
+    pageDescription("Five automations I shipped and got paid for — email triage, after-hours lead capture, quote tracking, order ops, and a posting engine — grounded in real builds, with the honest lesson from over-engineering one."),
   alternates: {
     canonical: `${SITE.url}/boring-automations-small-businesses-pay-for`,
   },

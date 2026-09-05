@@ -4,14 +4,14 @@ import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { articleSchema } from "@/lib/schema";
 import { getArticle, relatedFor } from "@/lib/news";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 
 const SLUG = "n8n-vs-zapier-2026-switch";
 const article = getArticle(SLUG)!;
 
 export const metadata: Metadata = {
-  title: article.seoTitle ?? article.title,
-  description: article.description,
+  title: pageTitle(article.seoTitle ?? article.title),
+  description: pageDescription(article.description),
   alternates: { canonical: `${SITE.url}/news/${SLUG}` },
   openGraph: {
     title: article.title,

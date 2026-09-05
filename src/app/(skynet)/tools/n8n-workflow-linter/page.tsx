@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema";
 import Linter from "./Linter";
@@ -9,9 +9,9 @@ import { ShieldCheck, SearchCheck, Workflow } from "lucide-react";
 const PATH = "/tools/n8n-workflow-linter";
 
 export const metadata: Metadata = {
-  title: "Free n8n Workflow Linter — Health Check + Node Graph | SkynetJoe",
+  title: pageTitle("Free n8n Workflow Linter — Health Check + Node Graph | SkynetJoe"),
   description:
-    "Paste your n8n workflow JSON, get a rendered node graph and a 20-point health check — hardcoded credentials, missing retry-on-fail, orphan nodes, and more. Free, runs in your browser.",
+    pageDescription("Paste your n8n workflow JSON, get a rendered node graph and a 20-point health check — hardcoded credentials, missing retry-on-fail, orphan nodes, and more. Free, runs in your browser."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Free n8n Workflow Linter — health check + node graph",

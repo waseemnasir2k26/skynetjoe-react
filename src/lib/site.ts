@@ -408,3 +408,78 @@ export const FOOTER_COLUMNS = [
     ],
   },
 ] as const;
+
+// ── Metadata length helpers (2026-09-06 SEO pass) ────────────────────────────
+// Live audit found 166/233 rendered <title> over 60 chars (max 99) and
+// 174/233 meta descriptions over 160 (services ran 287-309). Google truncates
+// both, so the tail is wasted and the useful words fall off screen.
+//
+// `title.template` in (skynet)/layout.tsx appends " | SkynetLabs" (13 chars),
+// so a PAGE title has 60 - 13 = 47 chars to work with. Anything a page passes
+// as `title` should go through pageTitle().
+//
+// Both helpers cut at a boundary, never mid-word, and never append an
+// ellipsis (a truncated marker in a SERP reads worse than a shorter phrase).
+
+export const TITLE_SUFFIX_CHARS = ` | ${"SkynetLabs"}`.length; // 13
+export const MAX_TITLE_CHARS = 60;
+export const MAX_PAGE_TITLE_CHARS = MAX_TITLE_CHARS - TITLE_SUFFIX_CHARS; // 47
+export const MAX_DESCRIPTION_CHARS = 155;
+
+/** Separators we prefer to cut at, longest-first. */
+const CUT_POINTS = [" — ", " – ", " · ", " | ", ": ", ", ", " - "];
+
+/** Tidy a truncated fragment: no unclosed bracket, no dangling connector. */
+function tidyFragment(fragment: string): string {
+  let out = fragment.replace(/[\s.,;:|·—–-]+$/, "");
+  const opens = (out.match(/\(/g) ?? []).length;
+  const closes = (out.match(/\)/g) ?? []).length;
+  if (opens > closes) out = out.slice(0, out.lastIndexOf("(")).trim();
+  const dangling =
+    /\s+(?:with|and|or|for|to|in|on|of|the|a|an|by|from|at|into|plus|vs|&|\+)$/i;
+  while (dangling.test(out)) out = out.replace(dangling, "");
+  return out.replace(/[\s.,;:|·—–-]+$/, "");
+}
+
+function clampAtBoundary(input: string, max: number): string {
+  const text = input.trim().replace(/\s+/g, " ");
+  if (text.length <= max) return text;
+
+  // 1. Prefer the last separator that still fits — keeps a whole clause.
+  let best = -1;
+  for (const sep of CUT_POINTS) {
+    let i = text.indexOf(sep);
+    while (i !== -1) {
+      if (i > 0 && i <= max) best = Math.max(best, i);
+      i = text.indexOf(sep, i + 1);
+    }
+  }
+  if (best > max * 0.5) return tidyFragment(text.slice(0, best));
+
+  // 2. Otherwise cut at the last whole word, then tidy the fragment.
+  const hard = text.slice(0, max);
+  const space = hard.lastIndexOf(" ");
+  return tidyFragment(space > 0 ? hard.slice(0, space) : hard);
+}
+
+/**
+ * Normalise a page title: drop any hardcoded brand suffix (the layout template
+ * adds exactly one) and clamp to the per-page budget.
+ * `pageTitle("Foo — Bar | SkynetLabs")` -> `"Foo — Bar"`.
+ */
+export function pageTitle(title: string, max = MAX_PAGE_TITLE_CHARS): string {
+  const deBranded = title
+    .replace(/\s*[|·—–-]\s*SkynetLabs\s*$/i, "")
+    .replace(/\s*[|·—–-]\s*SkynetJoe\s*$/i, "")
+    .replace(/\s*[|·—–-]\s*SkynetLabs\s*$/i, "") // handles a doubled suffix
+    .trim();
+  return clampAtBoundary(deBranded, max);
+}
+
+/** Clamp a meta description to what Google will actually render. */
+export function pageDescription(
+  description: string,
+  max = MAX_DESCRIPTION_CHARS,
+): string {
+  return clampAtBoundary(description, max);
+}

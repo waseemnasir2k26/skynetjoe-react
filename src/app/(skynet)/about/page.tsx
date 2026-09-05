@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import { organization, person, breadcrumbSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Community from "@/components/sections/Community";
@@ -116,9 +116,9 @@ const BUILDER_LIFE = [
 ];
 
 export const metadata: Metadata = {
-  title: "About — From a $10 Fiverr gig (2019) to 180+ workflows (2026)",
+  title: pageTitle("About — From a $10 Fiverr gig (2019) to 180+ workflows (2026)"),
   description:
-    "SkynetLabs is run by Waseem Nasir from Bali. Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon — kept building. Today: 180+ automations across 9 countries.",
+    pageDescription("SkynetLabs is run by Waseem Nasir from Bali. Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon — kept building. Today: 180+ automations across 9 countries."),
   alternates: { canonical: `${SITE.url}/about` },
   openGraph: {
     title: "About SkynetLabs — From $10 Fiverr gig to 180+ workflows",

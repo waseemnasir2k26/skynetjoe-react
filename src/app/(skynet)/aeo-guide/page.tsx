@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
@@ -13,9 +13,9 @@ const html = fs.readFileSync(
 
 export const metadata: Metadata = {
   title:
-    "AEO Field Guide — Get Cited by ChatGPT, Claude & Perplexity",
+    pageTitle("AEO Field Guide — Get Cited by ChatGPT, Claude & Perplexity"),
   description:
-    "Eight chapters on Answer Engine Optimization: the 5-layer stack, llms.txt, citation-worthy content patterns, measurement, and a 90-day rollout.",
+    pageDescription("Eight chapters on Answer Engine Optimization: the 5-layer stack, llms.txt, citation-worthy content patterns, measurement, and a 90-day rollout."),
   alternates: { canonical: `${SITE.url}/aeo-guide` },
   openGraph: {
     title:

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { howToSchema } from "@/lib/schema";
@@ -11,9 +11,9 @@ const PATH = "/tools/cold-outreach-compliance-checker";
 
 export const metadata: Metadata = {
   title:
-    "Free Cold Outreach Compliance Checker — CAN-SPAM & SMS Rules | SkynetJoe",
+    pageTitle("Free Cold Outreach Compliance Checker — CAN-SPAM & SMS Rules | SkynetJoe"),
   description:
-    "Paste your cold email or SMS copy and check it against CAN-SPAM's postal address, opt-out, and deceptive-subject rules, plus a spam-trigger-word scan. Not legal advice. Free, no signup.",
+    pageDescription("Paste your cold email or SMS copy and check it against CAN-SPAM's postal address, opt-out, and deceptive-subject rules, plus a spam-trigger-word scan. Not legal advice. Free, no signup."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Cold Outreach Compliance Checker — CAN-SPAM basics, checked live",

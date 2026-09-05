@@ -6,7 +6,7 @@ import { NEWS } from "@/lib/news";
 import { POSTS } from "@/lib/posts";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import { STATES } from "@/lib/states";
-import { SERVICE_CATEGORIES, SITE } from "@/lib/site";
+import { SERVICE_CATEGORIES, SITE, pageTitle, pageDescription } from "@/lib/site";
 import { INDUSTRIES } from "@/data/industries";
 import {
   publishedServiceStatePairs,
@@ -15,8 +15,8 @@ import {
 } from "@/lib/sitemap-quality";
 
 export const metadata: Metadata = {
-  title: "Site stats — internal",
-  description: "Live page-count dashboard for SkynetLabs site.",
+  title: pageTitle("Site stats — internal"),
+  description: pageDescription("Live page-count dashboard for SkynetLabs site."),
   robots: { index: false, follow: false },
   alternates: { canonical: `${SITE.url}/site-stats` },
 };

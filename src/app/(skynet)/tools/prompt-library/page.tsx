@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageDescription, pageTitle } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Library from "./Library";
@@ -15,9 +15,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: `Free Prompt Library — ${PROMPT_COUNT} Reusable AI Prompts for Service Businesses`,
+  title: pageTitle(`Free Prompt Library — ${PROMPT_COUNT} Reusable AI Prompts for Service Businesses`),
   description:
-    "Free library of 50 production-tested AI prompts across sales, marketing, ops, content, data, recruitment, customer service and founder brain. Copy + run in Claude or ChatGPT.",
+    pageDescription("Free library of 50 production-tested AI prompts across sales, marketing, ops, content, data, recruitment, customer service and founder brain. Copy + run in Claude or ChatGPT."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: `Prompt Library · ${PROMPT_COUNT} reusable AI prompts for service businesses`,

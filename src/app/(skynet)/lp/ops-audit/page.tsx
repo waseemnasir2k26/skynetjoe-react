@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
-import { SITE, CAL_URL } from "@/lib/site";
+import { SITE, CAL_URL, pageTitle, pageDescription } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
 // Free-step CTA for the ~98% of cold Meta traffic not ready to pay $497 on
@@ -23,9 +23,9 @@ const FREE_CONSULT_URL = `${CAL_URL}?utm_source=meta-ads&utm_content=lp-ops-audi
 const PAGE_URL = `${SITE.url.replace(/\/+$/, "")}/lp/ops-audit`;
 
 export const metadata: Metadata = {
-  title: "48-Hour Ops Audit — $497 | SkynetLabs",
+  title: pageTitle("48-Hour Ops Audit — $497 | SkynetLabs"),
   description:
-    "One flat fee. I audit how work actually moves through your business — inbox, handoffs, follow-up, tooling — and you get a scored audit with a prioritised fix list inside 48 hours. No retainer.",
+    pageDescription("One flat fee. I audit how work actually moves through your business — inbox, handoffs, follow-up, tooling — and you get a scored audit with a prioritised fix list inside 48 hours. No retainer."),
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "48-Hour Ops Audit — $497",

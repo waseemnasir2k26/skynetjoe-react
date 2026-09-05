@@ -27,6 +27,8 @@ import {
   SERVICE_CATEGORIES,
   DEFAULT_OG_IMAGES,
   svcHref,
+  pageTitle,
+  pageDescription,
 } from "@/lib/site";
 import { PRIORITY_STATE_SLUGS } from "@/data/state-priority";
 import JsonLd from "@/components/JsonLd";
@@ -37,9 +39,9 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 type IconCmp = React.ComponentType<{ className?: string }>;
 
 export const metadata: Metadata = {
-  title: "AI Automation Services Across All 48 US States",
+  title: pageTitle("AI Automation Services Across All 48 US States"),
   description:
-    "AI automation, n8n workflows, GoHighLevel CRM and AEO websites for founders in all 48 contiguous US states. Fixed scope, 5–14 day ship.",
+    pageDescription("AI automation, n8n workflows, GoHighLevel CRM and AEO websites for founders in all 48 contiguous US states. Fixed scope, 5–14 day ship."),
   alternates: { canonical: `${SITE.url}/locations` },
   openGraph: {
     title: "SkynetLabs — Active in all 48 US states",

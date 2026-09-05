@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import AiAuditClient from "./client";
 
 // Meta-ads companion page for the free AI Systems Audit call funnel
@@ -12,9 +12,9 @@ import AiAuditClient from "./client";
 const PAGE_URL = `${SITE.url.replace(/\/+$/, "")}/lp/ai-audit`;
 
 export const metadata: Metadata = {
-  title: "Free AI Systems Audit — 20-Minute Call | SkynetLabs",
+  title: pageTitle("Free AI Systems Audit — 20-Minute Call | SkynetLabs"),
   description:
-    "A 20-minute call for business owners: we walk through how your website, phone and inbox actually handle an enquiry, find where leads leak, and map what an AI system would do at each hole. Free — you keep the findings.",
+    pageDescription("A 20-minute call for business owners: we walk through how your website, phone and inbox actually handle an enquiry, find where leads leak, and map what an AI system would do at each hole. Free — you keep the findings."),
   alternates: { canonical: PAGE_URL },
   robots: { index: false, follow: false },
   openGraph: {

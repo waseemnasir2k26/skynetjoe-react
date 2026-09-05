@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { howToSchema } from "@/lib/schema";
@@ -10,9 +10,9 @@ import { Building2, Mail, ShieldCheck, ArrowRight } from "lucide-react";
 const PATH = "/tools/domain-trust-lookup";
 
 export const metadata: Metadata = {
-  title: "Free Domain Trust & Age Lookup — Vet Leads/Vendors | SkynetJoe",
+  title: pageTitle("Free Domain Trust & Age Lookup — Vet Leads/Vendors | SkynetJoe"),
   description:
-    "Look up a domain's real registration date, registrar, and DNS footprint via live RDAP + DNS queries — before you trust a lead, vendor, or inbound pitch. Free, no signup.",
+    pageDescription("Look up a domain's real registration date, registrar, and DNS footprint via live RDAP + DNS queries — before you trust a lead, vendor, or inbound pitch. Free, no signup."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Domain Trust & Age Lookup — vet before you trust",

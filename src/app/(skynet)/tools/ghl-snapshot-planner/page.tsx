@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Planner from "./Planner";
@@ -17,9 +17,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 
 export const metadata: Metadata = {
   title:
-    "Free GoHighLevel Snapshot Planner — Pipelines, Workflows & Fields Mapped",
+    pageTitle("Free GoHighLevel Snapshot Planner — Pipelines, Workflows & Fields Mapped"),
   description:
-    "Pick your business type, get a recommended GHL snapshot structure — pipelines, workflows, custom fields, calendars — as an exportable checklist.",
+    pageDescription("Pick your business type, get a recommended GHL snapshot structure — pipelines, workflows, custom fields, calendars — as an exportable checklist."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "GHL Snapshot Planner · pipelines, workflows, fields, calendars",

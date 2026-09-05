@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES, CAL_URL } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, CAL_URL, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Link from "next/link";
@@ -16,9 +16,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 const TOOL_CAL_URL = `${CAL_URL}?utm_source=ai-sop-generator`;
 
 export const metadata: Metadata = {
-  title: "Free SOP Generator — AI Automation Flags per Step",
+  title: pageTitle("Free SOP Generator — AI Automation Flags per Step"),
   description:
-    "Free SOP generator. Enter a process name and steps, get a formatted standard operating procedure with automation-candidate flags on every step. Enter your email to unlock the full doc.",
+    pageDescription("Free SOP generator. Enter a process name and steps, get a formatted standard operating procedure with automation-candidate flags on every step. Enter your email to unlock the full doc."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Free SOP Generator — Formatted SOP + Automation Flags",

@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { POSTS, getPost } from "@/lib/posts";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
@@ -44,8 +44,8 @@ export async function generateMetadata({
   const post = getPost(slug);
   if (!post) return { title: "Post not found" };
   return {
-    title: post.title,
-    description: post.description,
+    title: pageTitle(post.title),
+    description: pageDescription(post.description),
     alternates: { canonical: `${SITE.url}/blog/${post.slug}` },
     openGraph: {
       title: post.title,

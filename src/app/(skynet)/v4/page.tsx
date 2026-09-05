@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageTitle } from "@/lib/site";
 import V4Home from "@/components/v4/V4Home";
 
 // Internal preview route — never indexed, never linked from primary nav.
@@ -6,7 +7,7 @@ import V4Home from "@/components/v4/V4Home";
 // robots below is the enforcement layer, matching the /v3 and /lp/*
 // noindex pattern already used sitewide.
 export const metadata: Metadata = {
-  title: "SkynetLabs — V4 preview",
+  title: pageTitle("SkynetLabs — V4 preview"),
   robots: { index: false, follow: false },
 };
 

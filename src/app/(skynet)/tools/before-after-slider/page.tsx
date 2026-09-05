@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, howToSchema } from "@/lib/schema";
 import Slider from "./Slider";
@@ -15,9 +15,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "Before/After Slider — see what AI automation actually does",
+  title: pageTitle("Before/After Slider — see what AI automation actually does"),
   description:
-    "Drag-to-compare slider across 6 real workflows: lead response, content production, customer service, CRM data entry, reporting, lead qualification. Manual vs automated side by side.",
+    pageDescription("Drag-to-compare slider across 6 real workflows: lead response, content production, customer service, CRM data entry, reporting, lead qualification. Manual vs automated side by side."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Before/After Slider — manual vs automated, side by side",

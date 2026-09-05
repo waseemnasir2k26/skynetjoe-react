@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Calculator from "./Calculator";
@@ -15,9 +15,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "LLM API Cost Calculator — Free Monthly Estimate",
+  title: pageTitle("LLM API Cost Calculator — Free Monthly Estimate"),
   description:
-    "Free LLM API cost calculator. Pick a model — Claude, GPT, or Gemini — enter your token volume, and get an estimated monthly cost, compared across every provider. No email required.",
+    pageDescription("Free LLM API cost calculator. Pick a model — Claude, GPT, or Gemini — enter your token volume, and get an estimated monthly cost, compared across every provider. No email required."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "LLM API Cost Calculator — free monthly cost estimate",

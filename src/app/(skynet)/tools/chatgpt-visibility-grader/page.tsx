@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Quiz from "./Quiz";
@@ -25,9 +25,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "Free ChatGPT Visibility Grader — Is Your Brand Visible to AI?",
+  title: pageTitle("Free ChatGPT Visibility Grader — Is Your Brand Visible to AI?"),
   description:
-    "9-question heuristic grader for AI chat visibility. Score coverage, structured citations, identity consistency, and content authority. Enter your email to unlock the full roadmap.",
+    pageDescription("9-question heuristic grader for AI chat visibility. Score coverage, structured citations, identity consistency, and content authority. Enter your email to unlock the full roadmap."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "ChatGPT Visibility Grader — Is my brand in ChatGPT?",

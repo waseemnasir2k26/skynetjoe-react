@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
 // Canonical/OG host resolves via SITE.url (env-overridable, defaults to the
@@ -8,9 +8,9 @@ import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 const PAGE_URL = `${SITE.url.replace(/\/+$/, "")}/lp/logistics`;
 
 export const metadata: Metadata = {
-  title: "Dispatch canvas for small-fleet carriers",
+  title: pageTitle("Dispatch canvas for small-fleet carriers"),
   description:
-    "Stop running freight ops from six browser tabs and a personal cell. SkynetLabs ships the dispatch canvas — AI voice agent, factoring widget, lane economics — in 14 days. Public pricing. For US small-fleet carriers (5–25 trucks).",
+    pageDescription("Stop running freight ops from six browser tabs and a personal cell. SkynetLabs ships the dispatch canvas — AI voice agent, factoring widget, lane economics — in 14 days. Public pricing. For US small-fleet carriers (5–25 trucks)."),
   alternates: { canonical: PAGE_URL },
   robots: { index: false, follow: false },
   openGraph: {

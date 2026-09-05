@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Builder from "./Builder";
@@ -15,9 +15,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "Free Cron Expression Generator — Plain English to Cron Syntax",
+  title: pageTitle("Free Cron Expression Generator — Plain English to Cron Syntax"),
   description:
-    "Pick a schedule in plain English, get a valid cron expression plus an n8n Schedule Trigger config — including the field:hours fix for the triggerAtMinute gotcha.",
+    pageDescription("Pick a schedule in plain English, get a valid cron expression plus an n8n Schedule Trigger config — including the field:hours fix for the triggerAtMinute gotcha."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Cron Expression Builder · schedule to cron in seconds",

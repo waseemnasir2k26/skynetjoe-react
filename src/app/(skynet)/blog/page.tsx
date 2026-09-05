@@ -12,15 +12,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { POSTS } from "@/lib/posts";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "Journal — Long-form on AI Automation, AEO & Shipping",
+  title: pageTitle("Journal — Long-form on AI Automation, AEO & Shipping"),
   description:
-    "Honest writing on automation, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying.",
+    pageDescription("Honest writing on automation, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying."),
   alternates: { canonical: `${SITE.url}/blog` },
   openGraph: {
     title: "SkynetLabs Journal",

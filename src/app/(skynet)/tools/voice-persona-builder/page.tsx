@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Builder from "./Builder";
@@ -17,9 +17,9 @@ const CAL_URL =
   "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=voice-persona-builder";
 
 export const metadata: Metadata = {
-  title: "Voice Persona Builder — Free AI System Prompt",
+  title: pageTitle("Voice Persona Builder — Free AI System Prompt"),
   description:
-    "Free 4-step brand voice builder. Identity, tone sliders, vocabulary, examples. Outputs a paste-ready Brand Voice Profile + AI system prompt. Enter your email to unlock the result.",
+    pageDescription("Free 4-step brand voice builder. Identity, tone sliders, vocabulary, examples. Outputs a paste-ready Brand Voice Profile + AI system prompt. Enter your email to unlock the result."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Voice Persona Builder — Free AI System Prompt",

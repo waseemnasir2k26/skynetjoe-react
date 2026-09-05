@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
@@ -15,9 +15,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "Free Schema Markup Generator — Clean JSON-LD in Minutes",
+  title: pageTitle("Free Schema Markup Generator — Clean JSON-LD in Minutes"),
   description:
-    "Pick a schema.org type — Organization, FAQPage, Article, LocalBusiness, or SoftwareApplication — fill in the form, and copy clean JSON-LD. Free, no email required.",
+    pageDescription("Pick a schema.org type — Organization, FAQPage, Article, LocalBusiness, or SoftwareApplication — fill in the form, and copy clean JSON-LD. Free, no email required."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Schema Markup Generator — build JSON-LD in minutes",

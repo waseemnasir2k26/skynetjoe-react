@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageTitle } from "@/lib/site";
 import V10Client from "@/components/v10/V10Client";
 
 // Internal preview route — never indexed, never linked from primary nav.
@@ -7,7 +8,7 @@ import V10Client from "@/components/v10/V10Client";
 // noindex pattern already used sitewide. Metadata shape cloned verbatim
 // from app/(skynet)/v8/page.tsx.
 export const metadata: Metadata = {
-  title: "SkynetLabs — V10 preview",
+  title: pageTitle("SkynetLabs — V10 preview"),
   robots: { index: false, follow: false },
 };
 

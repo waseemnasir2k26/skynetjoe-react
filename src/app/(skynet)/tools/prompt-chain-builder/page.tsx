@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES, CAL_URL } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, CAL_URL, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Link from "next/link";
@@ -16,9 +16,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 const TOOL_CAL_URL = `${CAL_URL}?utm_source=prompt-chain-builder`;
 
 export const metadata: Metadata = {
-  title: "Prompt Chain Builder — Free Multi-Step Prompt Chain",
+  title: pageTitle("Prompt Chain Builder — Free Multi-Step Prompt Chain"),
   description:
-    "Free prompt chain builder. Compose multi-step chains — goal, prompt, expected output, pass-to-next per step. Export as markdown or JSON. Enter your email to unlock the export.",
+    pageDescription("Free prompt chain builder. Compose multi-step chains — goal, prompt, expected output, pass-to-next per step. Export as markdown or JSON. Enter your email to unlock the export."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Prompt Chain Builder — Compose Multi-Step AI Prompt Chains",

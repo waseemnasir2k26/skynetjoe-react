@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageTitle } from "@/lib/site";
 import Testimonials from "@/components/sections/Testimonials";
 import V2Experience from "@/components/v2/V2Experience";
 import V2Hero from "@/components/v2/V2Hero";
@@ -9,7 +10,7 @@ import V2FinalCTA from "@/components/v2/V2FinalCTA";
 // Preview variant — not a real indexable route yet, so it stays out of
 // search results and the sitemap entirely.
 export const metadata: Metadata = {
-  title: "SkynetLabs — V2 preview",
+  title: pageTitle("SkynetLabs — V2 preview"),
   robots: { index: false, follow: false },
 };
 

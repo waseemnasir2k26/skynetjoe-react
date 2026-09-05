@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { NEWS } from "@/lib/news";
 import { POSTS } from "@/lib/posts";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import {
@@ -15,9 +15,9 @@ import {
 } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "Latest news & field notes",
+  title: pageTitle("Latest news & field notes"),
   description:
-    "Honest field notes from one operator shipping AI automation, n8n, AEO, and bespoke websites from Bali. Real client builds, real cost math, real failure modes.",
+    pageDescription("Honest field notes from one operator shipping AI automation, n8n, AEO, and bespoke websites from Bali. Real client builds, real cost math, real failure modes."),
   alternates: { canonical: `${SITE.url}/news` },
   openGraph: {
     title: "SkynetLabs — Latest news & field notes",

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { NEWS, getArticle, relatedFor } from "@/lib/news";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ZoomableImage from "@/components/ZoomableImage";
@@ -54,8 +54,8 @@ export async function generateMetadata({
   // line. Falls back to the long editorial headline. og/twitter keep the full
   // title for social cards (no width limit there).
   return {
-    title: a.seoTitle ?? a.title,
-    description: a.description,
+    title: pageTitle(a.seoTitle ?? a.title),
+    description: pageDescription(a.description),
     alternates: { canonical: `${SITE.url}/news/${a.slug}` },
     openGraph: {
       title: a.title,

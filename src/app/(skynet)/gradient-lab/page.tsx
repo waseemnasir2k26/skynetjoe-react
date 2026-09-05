@@ -1,4 +1,5 @@
 import fs from "fs";
+import { pageTitle, pageDescription } from "@/lib/site";
 import path from "path";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -9,9 +10,9 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "Gradient Lab — 10 landing palettes",
+  title: pageTitle("Gradient Lab — 10 landing palettes"),
   description:
-    "10 hero variants in different gradient palettes. Pick one to swap into the live homepage.",
+    pageDescription("10 hero variants in different gradient palettes. Pick one to swap into the live homepage."),
   robots: { index: false, follow: false },
 };
 

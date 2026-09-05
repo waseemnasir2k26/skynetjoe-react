@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageDescription, pageTitle } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import XRay from "./XRay";
 import { TECH_STACK_SIGNATURES } from "@/data/tools/tech-stack-signatures";
@@ -11,8 +11,8 @@ const TITLE = "Free Tech Stack X-Ray — See What Any Site Runs | SkynetJoe";
 const VENDOR_COUNT = TECH_STACK_SIGNATURES.length;
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: `Paste any URL and fingerprint the tools it runs — CMS, ecommerce, CRM, analytics, chat, payments, and more — against a curated ${VENDOR_COUNT}-vendor signature list. See what your competitor runs.`,
+  title: pageTitle(TITLE),
+  description: pageDescription(`Paste any URL and fingerprint the tools it runs — CMS, ecommerce, CRM, analytics, chat, payments, and more — against a curated ${VENDOR_COUNT}-vendor signature list. See what your competitor runs.`),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Tech Stack X-Ray — Free Vendor Fingerprint Tool",

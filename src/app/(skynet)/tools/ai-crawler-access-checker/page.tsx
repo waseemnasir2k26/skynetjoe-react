@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema";
 import Checker from "./Checker";
@@ -11,9 +11,9 @@ const PATH = "/tools/ai-crawler-access-checker";
 
 export const metadata: Metadata = {
   title:
-    "Free AI Crawler Access Checker — GPTBot, ClaudeBot & More | SkynetJoe",
+    pageTitle("Free AI Crawler Access Checker — GPTBot, ClaudeBot & More | SkynetJoe"),
   description:
-    "Enter a domain, get a real robots.txt parse showing exactly which AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and more) are allowed, blocked, or partially blocked — plus an llms.txt check.",
+    pageDescription("Enter a domain, get a real robots.txt parse showing exactly which AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and more) are allowed, blocked, or partially blocked — plus an llms.txt check."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title:

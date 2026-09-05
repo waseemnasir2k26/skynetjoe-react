@@ -15,7 +15,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
 import ReferralForm from "./ReferralForm";
@@ -31,9 +31,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "You're in — see what happens next",
+  title: pageTitle("You're in — see what happens next"),
   description:
-    "Your discovery call with Waseem is confirmed. Here's exactly what happens next, what to bring to the call, and what I'll have ready before we talk.",
+    pageDescription("Your discovery call with Waseem is confirmed. Here's exactly what happens next, what to bring to the call, and what I'll have ready before we talk."),
   alternates: { canonical: `${SITE.url}/thank-you` },
   robots: { index: false, follow: false },
   openGraph: {

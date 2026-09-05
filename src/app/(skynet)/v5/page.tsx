@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageTitle } from "@/lib/site";
 import "./v5.css";
 import V5Home from "@/components/v5/V5Home";
 
@@ -7,7 +8,7 @@ import V5Home from "@/components/v5/V5Home";
 // src/proxy.ts (out of scope for this build) — page-level robots below is
 // the enforcement layer, matching the /v2 and /v3 preview-route pattern.
 export const metadata: Metadata = {
-  title: "SkynetLabs — V5 preview",
+  title: pageTitle("SkynetLabs — V5 preview"),
   robots: { index: false, follow: false },
 };
 

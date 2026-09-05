@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES, CAL_URL } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, CAL_URL, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Link from "next/link";
@@ -16,9 +16,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 const TOOL_CAL_URL = `${CAL_URL}?utm_source=ai-agent-spec-writer`;
 
 export const metadata: Metadata = {
-  title: "AI Agent Spec Writer — Free Agent Spec Template",
+  title: pageTitle("AI Agent Spec Writer — Free Agent Spec Template"),
   description:
-    "Free AI agent spec template. Fill in role, tools, guardrails, success criteria and escalation rules — get a structured agent spec doc ready to hand to a developer or framework. Enter your email to unlock the export.",
+    pageDescription("Free AI agent spec template. Fill in role, tools, guardrails, success criteria and escalation rules — get a structured agent spec doc ready to hand to a developer or framework. Enter your email to unlock the export."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "AI Agent Spec Writer — Structured Agent Spec Doc",

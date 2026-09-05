@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema, howToSchema, breadcrumbSchema } from "@/lib/schema";
 import Calculator from "./Calculator";
@@ -10,9 +10,9 @@ const PATH = "/tools/speed-to-lead-calculator";
 
 export const metadata: Metadata = {
   title:
-    "Free Speed-to-Lead Revenue Calculator — Response Time Cost | SkynetJoe",
+    pageTitle("Free Speed-to-Lead Revenue Calculator — Response Time Cost | SkynetJoe"),
   description:
-    "See what slow lead response is actually costing you, in your own dollars — using your leads/month, close rate, and deal value against a published contact-decay study. Formula shown, source cited.",
+    pageDescription("See what slow lead response is actually costing you, in your own dollars — using your leads/month, close rate, and deal value against a published contact-decay study. Formula shown, source cited."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Free Speed-to-Lead Revenue Calculator",

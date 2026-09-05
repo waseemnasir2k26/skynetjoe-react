@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import SpeedToLeadClient from "./client";
 
 // Meta-ads companion page for the HVAC AI Speed-to-Lead system
@@ -12,9 +12,9 @@ import SpeedToLeadClient from "./client";
 const PAGE_URL = `${SITE.url.replace(/\/+$/, "")}/lp/speed-to-lead`;
 
 export const metadata: Metadata = {
-  title: "HVAC Missed-Call Rescue — AI Speed-to-Lead System | SkynetLabs",
+  title: pageTitle("HVAC Missed-Call Rescue — AI Speed-to-Lead System | SkynetLabs"),
   description:
-    "For HVAC owner-operators running 1–5 trucks. When a call rings out, the system texts the homeowner back, qualifies the job (AC repair, heating, emergency call-outs) and books it onto your calendar while you stay on the tools.",
+    pageDescription("For HVAC owner-operators running 1–5 trucks. When a call rings out, the system texts the homeowner back, qualifies the job (AC repair, heating, emergency call-outs) and books it onto your calendar while you stay on the tools."),
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "HVAC Missed-Call Rescue — AI Speed-to-Lead",

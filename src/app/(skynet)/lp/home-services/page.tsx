@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
 // Canonical/OG host resolves via SITE.url (env-overridable, defaults to the
@@ -9,9 +9,9 @@ import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 const PAGE_URL = `${SITE.url.replace(/\/+$/, "")}/lp/home-services`;
 
 export const metadata: Metadata = {
-  title: "Never Miss a Service Call Again",
+  title: pageTitle("Never Miss a Service Call Again"),
   description:
-    "Texas HVAC & plumbing owners: when crews are on jobs, missed calls go to your competitor. We answer and text back every missed call 24/7. Free missed-call audit.",
+    pageDescription("Texas HVAC & plumbing owners: when crews are on jobs, missed calls go to your competitor. We answer and text back every missed call 24/7. Free missed-call audit."),
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Every Call You Miss, Your Competitor Answers",

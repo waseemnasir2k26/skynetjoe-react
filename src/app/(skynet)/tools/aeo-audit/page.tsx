@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Quiz from "./Quiz";
@@ -20,9 +20,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "AEO Audit — Free AI Readiness Checker",
+  title: pageTitle("AEO Audit — Free AI Readiness Checker"),
   description:
-    "10-question AEO audit. Score your site 0-100 on schema, answer-ready content, crawlability and entity clarity — get a prioritized fix list.",
+    pageDescription("10-question AEO audit. Score your site 0-100 on schema, answer-ready content, crawlability and entity clarity — get a prioritized fix list."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "AEO Audit — Answer Engine Optimization Checker",

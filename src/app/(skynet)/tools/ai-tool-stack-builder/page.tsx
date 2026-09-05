@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Builder from "./Builder";
@@ -15,9 +15,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: "AI Tool Stack Builder — Free Personalized Stack",
+  title: pageTitle("AI Tool Stack Builder — Free Personalized Stack"),
   description:
-    "Free AI tool stack builder. Pick your role and goal, get a recommended stack of AI tools plus an n8n glue suggestion to wire it together. Email unlocks the full stack doc.",
+    pageDescription("Free AI tool stack builder. Pick your role and goal, get a recommended stack of AI tools plus an n8n glue suggestion to wire it together. Email unlocks the full stack doc."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "AI Tool Stack Builder — role + goal in, tool stack out",

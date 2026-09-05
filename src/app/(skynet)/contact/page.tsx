@@ -11,7 +11,7 @@ import {
   Globe,
   ShieldCheck,
 } from "lucide-react";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
@@ -39,9 +39,9 @@ const GithubIcon = ({ className }: { className?: string }) => (
 );
 
 export const metadata: Metadata = {
-  title: "Contact — 8-hour reply guarantee from Bali",
+  title: pageTitle("Contact — 8-hour reply guarantee from Bali"),
   description:
-    "Skip the discovery-call dance. Send a brief, get a fixed-price scope back in 48 hours. Email, LinkedIn, live chat, or formal application — pick your channel. Reply within 8h on weekdays.",
+    pageDescription("Skip the discovery-call dance. Send a brief, get a fixed-price scope back in 48 hours. Email, LinkedIn, live chat, or formal application — pick your channel. Reply within 8h on weekdays."),
   alternates: { canonical: `${SITE.url}/contact` },
   openGraph: {
     title: "Talk to Waseem — SkynetLabs",

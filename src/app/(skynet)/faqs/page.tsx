@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -11,9 +11,9 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "AI Automation FAQs — 33 Questions Answered",
+  title: pageTitle("AI Automation FAQs — 33 Questions Answered"),
   description:
-    "Real founder questions about n8n, Zapier, AEO/SEO, chatbots, live chat, and working with SkynetLabs. Honest answers — including when the answer is 'don't hire us.'",
+    pageDescription("Real founder questions about n8n, Zapier, AEO/SEO, chatbots, live chat, and working with SkynetLabs. Honest answers — including when the answer is 'don't hire us.'"),
   alternates: { canonical: `${SITE.url}/faqs` },
   openGraph: {
     title: "AI Automation FAQs — 33 Questions Answered",

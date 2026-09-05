@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -11,9 +11,9 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: pageTitle("Privacy Policy"),
   description:
-    "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement. Last updated 2026-09-01.",
+    pageDescription("How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement. Last updated 2026-09-01."),
   alternates: { canonical: `${SITE.url}/privacy-policy` },
   openGraph: {
     title: "SkynetLabs Privacy Policy",

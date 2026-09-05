@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Calendar from "./Calendar";
@@ -16,9 +16,9 @@ const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?ut
 
 export const metadata: Metadata = {
   title:
-    "30-Day Content Calendar Generator — cross-platform posts in 30 seconds",
+    pageTitle("30-Day Content Calendar Generator — cross-platform posts in 30 seconds"),
   description:
-    "Free 30-day cross-platform content calendar. Set niche, cadence and goal. Get LinkedIn, X, IG, Shorts and email ideas — with CSV, ICS and markdown export.",
+    pageDescription("Free 30-day cross-platform content calendar. Set niche, cadence and goal. Get LinkedIn, X, IG, Shorts and email ideas — with CSV, ICS and markdown export."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title:

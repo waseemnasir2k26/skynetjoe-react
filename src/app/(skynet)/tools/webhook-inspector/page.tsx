@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { howToSchema } from "@/lib/schema";
@@ -10,9 +10,9 @@ import { RadioTower, Webhook, Workflow, ArrowRight } from "lucide-react";
 const PATH = "/tools/webhook-inspector";
 
 export const metadata: Metadata = {
-  title: "Free Webhook Inspector — Test & Debug Webhooks Live | SkynetJoe",
+  title: pageTitle("Free Webhook Inspector — Test & Debug Webhooks Live | SkynetJoe"),
   description:
-    "Get a unique URL, point any webhook at it, and watch the real request — method, headers, query, body — show up live. Then generate the matching n8n Webhook node. Free, no signup.",
+    pageDescription("Get a unique URL, point any webhook at it, and watch the real request — method, headers, query, body — show up live. Then generate the matching n8n Webhook node. Free, no signup."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Webhook Inspector · live request-bin + n8n node generator",

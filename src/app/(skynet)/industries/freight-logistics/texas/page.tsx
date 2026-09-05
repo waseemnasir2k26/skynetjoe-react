@@ -25,7 +25,7 @@ import {
   Clock,
   TrendingUp,
 } from "lucide-react";
-import { SITE, DEFAULT_OG_IMAGES, CAL_URL } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, CAL_URL, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
@@ -37,8 +37,8 @@ const PAGE_DESCRIPTION =
 const PAGE_URL = `${SITE.url}/industries/freight-logistics/texas`;
 
 export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
+  title: pageTitle(PAGE_TITLE),
+  description: pageDescription(PAGE_DESCRIPTION),
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: PAGE_TITLE,

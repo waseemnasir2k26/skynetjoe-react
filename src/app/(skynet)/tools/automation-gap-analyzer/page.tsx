@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Quiz from "./Quiz";
@@ -17,9 +17,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 
 export const metadata: Metadata = {
   title:
-    "Free Automation Gap Analyzer — Find Your Biggest Time Drain in 90 Seconds",
+    pageTitle("Free Automation Gap Analyzer — Find Your Biggest Time Drain in 90 Seconds"),
   description:
-    "Free 12-question diagnostic across lead capture, follow-up, reporting, team productivity. Get an automation gap % score plus the one axis to fix first.",
+    pageDescription("Free 12-question diagnostic across lead capture, follow-up, reporting, team productivity. Get an automation gap % score plus the one axis to fix first."),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title:

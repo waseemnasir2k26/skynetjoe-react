@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -11,9 +11,9 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: "Terms of Service",
+  title: pageTitle("Terms of Service"),
   description:
-    "Terms governing engagements with SkynetLabs and use of skynetjoe.com. Plain-language contract: 50% deposit, IP transfer on payment, Indonesian jurisdiction. Last updated 2026-05-20.",
+    pageDescription("Terms governing engagements with SkynetLabs and use of skynetjoe.com. Plain-language contract: 50% deposit, IP transfer on payment, Indonesian jurisdiction. Last updated 2026-05-20."),
   alternates: { canonical: `${SITE.url}/terms-of-service` },
   openGraph: {
     title: "SkynetLabs Terms of Service",

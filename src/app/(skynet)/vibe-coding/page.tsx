@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import {
@@ -30,9 +30,9 @@ const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 export const metadata: Metadata = {
   title:
-    "Vibe Coding — Ship Real Apps in 5–14 Days with Claude Code + the AI Toolchain",
+    pageTitle("Vibe Coding — Ship Real Apps in 5–14 Days with Claude Code + the AI Toolchain"),
   description:
-    "Vibe coding is Waseem Nasir's human-led, AI-paired build workflow from Bali. Claude Code as primary, Cursor + Replit + Codex + Gemini as backup. Ship in 5–14 days.",
+    pageDescription("Vibe coding is Waseem Nasir's human-led, AI-paired build workflow from Bali. Claude Code as primary, Cursor + Replit + Codex + Gemini as backup. Ship in 5–14 days."),
   alternates: { canonical: `${SITE.url}/vibe-coding` },
   openGraph: {
     title: "Vibe Coding by SkynetLabs — Real Human, AI Pair, 5–14 Day Ship",

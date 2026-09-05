@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import {
   Workflow,
@@ -95,9 +95,9 @@ const ICONS: Record<
 };
 
 export const metadata: Metadata = {
-  title: "32 Free Tools for Service Businesses",
+  title: pageTitle("32 Free Tools for Service Businesses"),
   description:
-    "32 free tools across automation, AEO, prompts, ops and diagnostics — n8n workflow generator, AEO audit, cold DM generator and more.",
+    pageDescription("32 free tools across automation, AEO, prompts, ops and diagnostics — n8n workflow generator, AEO audit, cold DM generator and more."),
   alternates: { canonical: `${SITE.url}/tools` },
   openGraph: {
     title: "SkynetLabs Free Tools — 22 automation, AEO and prompt tools",

@@ -1,15 +1,15 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES, svcHref } from "@/lib/site";
+import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES, svcHref, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import PainSolverGrid from "@/components/services/PainSolverGrid";
 import ServiceMenuCollapsed from "@/components/services/ServiceMenuCollapsed";
 
 export const metadata: Metadata = {
-  title: "Services — We don't sell services. We fix what's costing you.",
+  title: pageTitle("Services — We don't sell services. We fix what's costing you."),
   description:
-    "Eight founder problems, eight done-for-you fixes. Behind them: 16 production-grade services across automation, AI content, websites and consulting. Fixed scope, public pricing, 5-14 day ship.",
+    pageDescription("Eight founder problems, eight done-for-you fixes. Behind them: 16 production-grade services across automation, AI content, websites and consulting. Fixed scope, public pricing, 5-14 day ship."),
   alternates: { canonical: `${SITE.url}/services` },
   openGraph: {
     title: "SkynetLabs — We fix the problem, not sell you a service",

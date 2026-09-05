@@ -17,7 +17,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { INDUSTRIES, getIndustry } from "@/data/industries";
-import { SITE } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import IndustryLanding from "@/components/sections/IndustryLanding";
@@ -43,8 +43,9 @@ export async function generateMetadata({
   // "%s | SkynetLabs" to every page title, so leaving that suffix in would
   // double the brand in <title>. Strip it defensively for every industry,
   // not just the one that currently has it.
-  const title = i.metaTitle.replace(/\s*\|\s*SkynetLabs\s*$/i, "");
-  const description = i.metaDescription;
+  // pageTitle() also strips the brand suffix, so the manual replace is gone.
+  const title = pageTitle(i.metaTitle);
+  const description = pageDescription(i.metaDescription);
   const url = `${SITE.url}/industries/${i.slug}`;
 
   return {
