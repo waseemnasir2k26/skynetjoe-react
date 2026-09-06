@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
-    creator: "@skynetlabs",
+    creator: "@Skynetjoe1",
   },
 };
 

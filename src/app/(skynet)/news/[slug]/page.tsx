@@ -71,7 +71,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: a.title,
       description: a.description,
-      creator: "@skynetlabs",
+      creator: "@Skynetjoe1",
     },
   };
 }

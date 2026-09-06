@@ -82,7 +82,7 @@ export const SITE = {
   emailFounder: "info@skynetjoe.com",
   social: {
     linkedin: "https://www.linkedin.com/in/waseemnasir2k26",
-    twitter: "https://x.com/skynetlabs",
+    twitter: "https://x.com/Skynetjoe1",
     github: "https://github.com/waseemnasir2k26",
     youtube: "https://www.youtube.com/@vibecodewithWASEEMNASIR",
     fiverr: "https://www.fiverr.com/skynetjoellc",

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Waseem Nasir — Founder, SkynetLabs",
     description:
       "I build automation that doesn't need me to babysit it. 180+ workflows, 40+ websites, 9 countries.",
-    creator: "@skynetlabs",
+    creator: "@Skynetjoe1",
     images: ["/og-default.png"],
   },
 };
@@ -107,7 +107,7 @@ const schema = {
       sameAs: [
         "https://www.linkedin.com/in/waseemnasir",
         SITE.social.linkedin,
-        "https://x.com/skynetlabs",
+        "https://x.com/Skynetjoe1",
         SITE.social.twitter,
         SITE.social.github,
         SITE.social.fiverr,

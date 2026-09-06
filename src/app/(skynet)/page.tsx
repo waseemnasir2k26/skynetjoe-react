@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.brand} — ${SITE.tagline}`,
     description: SITE.description,
-    creator: "@skynetlabs",
+    creator: "@Skynetjoe1",
   },
 };
 

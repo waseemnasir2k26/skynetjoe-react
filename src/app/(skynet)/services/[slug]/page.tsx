@@ -77,7 +77,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${svc.label} — ${SITE.brand}`,
       description: longDesc,
-      creator: "@skynetlabs",
+      creator: "@Skynetjoe1",
     },
   };
 }

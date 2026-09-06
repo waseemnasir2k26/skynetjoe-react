@@ -85,8 +85,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.brand} — ${SITE.tagline}`,
     description: SITE.description,
-    creator: "@skynetlabs",
-    site: "@skynetlabs",
+    creator: "@Skynetjoe1",
+    site: "@Skynetjoe1",
     images: ["/og-default.png"],
   },
   robots: {
