@@ -1,3 +1,11 @@
+# skynetjoe-react
+
+Next.js (App Router) rebuild of skynetjoe.com for SkynetLabs. Deploy is an archive upload to Hostinger - see `DEPLOY-REAL.md`, not `DEPLOY_HOSTINGER.md`.
+
+## Status
+
+Last reviewed: September 2026 · release v2026.09
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
