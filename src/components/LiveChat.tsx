@@ -279,6 +279,15 @@ export default function LiveChat() {
       document.querySelector<HTMLElement>("main section");
     if (!hero) return;
     const path = pathname;
+    // Service funnels pin their own CTA bar to the bottom (.sf-sticky); two
+    // fixed elements in the same corner overlapped at 390 px (jury r2).
+    if (document.querySelector(".sf-sticky")) {
+      const t = window.setTimeout(
+        () => setHeroState({ path, inView: true }),
+        0,
+      );
+      return () => window.clearTimeout(t);
+    }
     // Watch the hero AND the closing CTA band: the launcher covered the
     // final CTA's micro-copy at 390 px (jury 2026-09-21).
     const watched = [hero, document.getElementById("final-cta")].filter(

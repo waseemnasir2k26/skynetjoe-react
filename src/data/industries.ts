@@ -37,9 +37,9 @@ export type IndustryPricingTier = {
 };
 
 export type IndustryCaseTeaser = {
-  // Reuses an existing slug from src/lib/case-studies.ts when available;
-  // otherwise renders a plausible new mini-case inline (caseStudySlug = null).
-  caseStudySlug: string | null;
+  // MUST reuse an existing slug from src/lib/case-studies.ts — invented
+  // "plausible" mini-cases were removed 2026-09-21 (critic jury BLOCKER).
+  caseStudySlug: string;
   clientName: string;
   location: string;
   oneLineOutcome: string;
@@ -162,16 +162,6 @@ export const INDUSTRIES: Industry[] = [
       },
     ],
     caseTeasers: [
-      {
-        caseStudySlug: null,
-        clientName: "Two-operatory practice (anon)",
-        location: "Plano, TX",
-        oneLineOutcome:
-          "Hygiene cancel-fill engine wired to the Open Dental waitlist, so a cancelled slot offers itself to the waitlist instead of waiting on a front-desk callback.",
-        metricLabel: "Chair-gap handling",
-        metricBefore: "Manual callbacks",
-        metricAfter: "Auto-fill from waitlist",
-      },
     ],
     bioPhoto: "/og-default.png",
     bioPhotoAlt: "SkynetLabs — AI automation studio, Bali.",
@@ -354,29 +344,9 @@ export const INDUSTRIES: Industry[] = [
         location: "Ubud, Bali",
         oneLineOutcome:
           "Single-page conversion funnel that doubled monthly bookings with no paid ads in 30 days post-launch.",
-        metricLabel: "DM-to-book conversion",
-        metricBefore: "9%",
-        metricAfter: "31%",
-      },
-      {
-        caseStudySlug: null,
-        clientName: "Scottsdale medspa (3 providers, anon)",
-        location: "Scottsdale, AZ",
-        oneLineOutcome:
-          "Concierge AI on Instagram DMs + SMS answers new enquiries the moment they land, so a first reply no longer waits on a front-desk gap.",
-        metricLabel: "First reply",
-        metricBefore: "Waits on staff",
-        metricAfter: "Automatic",
-      },
-      {
-        caseStudySlug: null,
-        clientName: "Boutique laser studio (anon)",
-        location: "Austin, TX",
-        oneLineOutcome:
-          "Reactivation engine recovered 41 dormant clients in 90 days and resold 17 expired laser packages. ROI on the engine paid in month one.",
-        metricLabel: "Dormant clients recovered (90d)",
-        metricBefore: "~3",
-        metricAfter: "41",
+        metricLabel: "Monthly bookings (same traffic)",
+        metricBefore: "Baseline",
+        metricAfter: "Roughly doubled",
       },
     ],
     bioPhoto: "/og-default.png",
@@ -565,26 +535,6 @@ export const INDUSTRIES: Industry[] = [
         metricLabel: "Routine response time",
         metricBefore: "6 hours",
         metricAfter: "6 minutes",
-      },
-      {
-        caseStudySlug: null,
-        clientName: "Midwest US flatbed broker (anon)",
-        location: "Chicago, IL",
-        oneLineOutcome:
-          "Voice dispatch agent live on overnight + weekend coverage. Started booking loads it had previously missed that would have gone to a faster competitor.",
-        metricLabel: "Off-hours load capture",
-        metricBefore: "~2/wk",
-        metricAfter: "19/mo net new",
-      },
-      {
-        caseStudySlug: null,
-        clientName: "Reefer carrier fleet (anon, 22 trucks)",
-        location: "Atlanta, GA",
-        oneLineOutcome:
-          "Rate-sheet OCR + historical lane intelligence wired into Tailwind TMS. Margin per load up $94 across the first 200 loads after deployment.",
-        metricLabel: "Margin per load",
-        metricBefore: "$310",
-        metricAfter: "$404",
       },
     ],
     bioPhoto: "/og-default.png",

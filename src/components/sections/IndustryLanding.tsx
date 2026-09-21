@@ -376,6 +376,7 @@ export default function IndustryLanding({ industry: i }: Props) {
       </section>
 
       {/* 5. CASE TEASERS ─────────────────────────────────────────────────── */}
+      {i.caseTeasers.length > 0 && (
       <section className="py-16 md:py-20" style={{ background: "var(--cream-3)" }}>
         <div className="container-x px-6">
           <div className="max-w-3xl mb-12">
@@ -498,6 +499,7 @@ export default function IndustryLanding({ industry: i }: Props) {
           </div>
         </div>
       </section>
+      )}
 
       {/* 5.5 FOUNDER MINI-BIO ────────────────────────────────────────────── */}
       <section className="py-16 md:py-20" style={{ background: "var(--cream)" }}>

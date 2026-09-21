@@ -433,88 +433,48 @@
   </div>
 
   <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
+      "@type": "Article",
+      "@id": "https://skynetjoe.com/boring-automations-small-businesses-pay-for#article",
+      "headline": "The 5 Boring Automations Small Businesses Actually Pay For",
+      "description": "Field notes from five real automation builds — email triage, after-hours lead capture, quote tracking, order operations, and a content posting engine — plus the honest lesson from over-engineering one of them.",
+      "author": {
+        "@type": "Person",
+        "name": "Waseem Nasir",
+        "url": "https://skynetjoe.com/author/waseem-nasir"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SkynetLabs",
+        "url": "https://skynetjoe.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://skynetjoe.com/og-default.png"
+        }
+      },
+      "datePublished": "2026-07-06",
+      "dateModified": "2026-07-06",
+      "mainEntityOfPage": "https://skynetjoe.com/boring-automations-small-businesses-pay-for",
+      "about": [
         {
-          "@type": "Article",
-          "@id": "https://skynetjoe.com/boring-automations-small-businesses-pay-for#article",
-          "headline": "The 5 Boring Automations Small Businesses Actually Pay For",
-          "description": "Field notes from five real automation builds — email triage, after-hours lead capture, quote tracking, order operations, and a content posting engine — plus the honest lesson from over-engineering one of them.",
-          "author": {
-            "@type": "Person",
-            "name": "Waseem Nasir",
-            "url": "https://skynetjoe.com/author/waseem-nasir"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "SkynetLabs",
-            "url": "https://skynetjoe.com",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://skynetjoe.com/og-default.png"
-            }
-          },
-          "datePublished": "2026-07-06",
-          "dateModified": "2026-07-06",
-          "mainEntityOfPage": "https://skynetjoe.com/boring-automations-small-businesses-pay-for",
-          "about": [
-            { "@type": "Thing", "name": "Business process automation" },
-            { "@type": "Thing", "name": "Small business operations" },
-            {
-              "@type": "SoftwareApplication",
-              "name": "n8n",
-              "applicationCategory": "BusinessApplication"
-            }
-          ]
+          "@type": "Thing",
+          "name": "Business process automation"
         },
         {
-          "@type": "FAQPage",
-          "@id": "https://skynetjoe.com/boring-automations-small-businesses-pay-for#faq",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What automations do small businesses actually pay for?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The ones that remove a specific, repeating pain: email triage that sorts and routes an inbox, website lead capture that catches and acknowledges leads after hours, quote or request tracking so nothing stalls unseen, order-handling workflows that cover refunds and edge cases, and content posting engines that keep a consistent cadence. They are unglamorous by design, which is exactly why they get paid for."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Should automated email replies send automatically?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Usually no. A safer pattern is to have the workflow classify, route, and draft the reply, then keep a human on the send step. Auto-sending is where these systems embarrass you. Drafting plus one-click approval keeps the speed while a person owns the risky final action."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Why would an order-automation workflow need hundreds of nodes?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Because real order flows have edge cases — refunds, address changes after dispatch, out-of-stock variants — and each case you skip becomes a support ticket or a bad review later. A high node count reflects the messy reality of order operations, not complexity for its own sake. Testing tier by tier catches the silent failures that hide on the unhappy path."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How do I decide which task to automate first?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Pick the task you dread that repeats, follows a rule you could write on an index card, costs you time or trust when it slips, and where a mistake is recoverable. Ship the boring core that pays for itself in week one, then add edge-case handling once the value is felt and the trust is there."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do many small businesses already use automation?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No. Fewer than one in five small businesses currently use any real automation, so the opportunity is rarely about building something novel. It is about shipping the dependable, boring system that quietly removes a daily cost and then staying out of the way."
-              }
-            }
-          ]
+          "@type": "Thing",
+          "name": "Small business operations"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "n8n",
+          "applicationCategory": "BusinessApplication"
         }
       ]
     }
-  </script>
+  ]
+}
+</script>
 </article>

@@ -43,42 +43,6 @@ const content: ServiceFunnelContent = {
     },
   ],
 
-  comparison: {
-    heading: "n8n vs Zapier — the honest breakdown.",
-    cols: ["", "n8n (what I build)", "Zapier / Make"],
-    rows: [
-      {
-        dimension: "Who owns it",
-        us: "Your account or your VPS. Git-versioned, exportable JSON — fork it, extend it, take it anywhere.",
-        them: "Locked inside their platform. Cancel the subscription and every Zap stops existing.",
-      },
-      {
-        dimension: "Running cost",
-        us: "A few dollars a month self-hosted, flat — no per-task metering.",
-        them: "Priced per task/run; the bill climbs as volume grows, often past $200-400/mo for a handful of active flows.",
-      },
-      {
-        dimension: "Failure handling",
-        us: "Error branches, auto-retry, and a Slack/email alert built into every flow by default.",
-        them: "Failures silently pause the Zap unless you've manually wired a separate error-handling Zap.",
-      },
-      {
-        dimension: "Complex logic",
-        us: "Native code nodes (JS/Python), loops, and branching for anything Zapier's linear model can't express.",
-        them: "Linear step model — multi-branch logic usually needs Make or a workaround, not native Zapier.",
-      },
-      {
-        dimension: "When it breaks",
-        us: "A readable copy of every workflow, plus a fix window after handoff.",
-        them: "A support ticket queue; the automation logic itself is opaque to anyone but the original builder.",
-      },
-      {
-        dimension: "See the full comparison",
-        us: "→ n8n vs Zapier (2026 switch guide)",
-        them: "",
-      },
-    ],
-  },
 
   outcomes: [
     {
