@@ -1,0 +1,767 @@
+<style>
+  .wn-n8n-freight-quote-email-parser {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-freight-quote-email-parser h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-freight-quote-email-parser h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-freight-quote-email-parser p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-freight-quote-email-parser ul,
+  .wn-n8n-freight-quote-email-parser ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-freight-quote-email-parser li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-freight-quote-email-parser strong {
+    color: #fff;
+  }
+  .wn-n8n-freight-quote-email-parser a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-freight-quote-email-parser a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-freight-quote-email-parser .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-freight-quote-email-parser .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-freight-quote-email-parser .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-freight-quote-email-parser table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-freight-quote-email-parser th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-freight-quote-email-parser td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-freight-quote-email-parser code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-freight-quote-email-parser .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-freight-quote-email-parser .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-freight-quote-email-parser .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<p>
+  A freight quote email goes in and eight structured fields come out: origin
+  port, destination port, mode, gross weight, dimensions, cargo type, incoterm
+  and deadline. On 2026-09-18 this n8n workflow read 20 sample emails and filled
+  6.75 of the 8 fields on average at 10.1 seconds per email, writing one
+  Postgres row each, under n8n execution 26430. The reply it writes is a draft.
+</p>
+
+<p>
+  Ask a freight forwarder where the day goes and somebody will mention the
+  retyping. Quote requests arrive as prose, written by people describing a
+  shipment rather than filling in a form, and a human copies eight or nine
+  values out of each one into a rating tool. The reading is not skilled work.
+  The judgement that follows it is, which is why the reading is the part worth
+  handing to a machine.
+</p>
+
+<p>
+  Episode 04 of the n8n Workflows series splits those two jobs apart. An email
+  arrives, Claude Haiku 4.5 is forced into a fixed tool schema so its answer can
+  only ever be the eight fields, a validator throws away anything the model
+  guessed, Postgres takes one row keyed on the message id, and a draft reply
+  lists every field back to the sender. Commercial terms need a person, so the
+  draft is where the workflow stops.
+</p>
+
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/vuOnqlIa_rw"
+    title="One email in, eight fields out - n8n freight quote parser, Episode 04"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+<p class="video-note">
+  If iframes are blocked where you are reading this, the video is at
+  <a href="https://youtu.be/vuOnqlIa_rw">youtu.be/vuOnqlIa_rw</a>.
+</p>
+
+<div class="callout">
+  <strong>Where the emails come from.</strong> The demo feeds 20 synthetic quote
+  emails through a webhook, and no live mailbox was read at any point. A Gmail
+  trigger and a Gmail draft node sit on the canvas disabled, as documented swap
+  points for a real inbox. Every sender is fictional and every address ends in
+  <code>.example</code>.
+</div>
+
+<h2 id="specifications">Specifications</h2>
+
+<div class="verdict">
+  One quote email in. Eight validated fields in a Postgres row keyed on the
+  message id, plus a stored draft reply that echoes every field back and marks
+  the blanks NOT FOUND. 16 nodes, of which 13 do work and 3 are sticky notes.
+  Two of the 13 ship disabled on purpose.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Workflow name</td>
+      <td>
+        <code>04 Freight Quote Parser (Claude -&gt; table + draft reply)</code>
+      </td>
+    </tr>
+    <tr>
+      <td>Nodes</td>
+      <td>
+        16 (13 working nodes plus 3 sticky notes), 2 of the 13 shipped disabled
+      </td>
+    </tr>
+    <tr>
+      <td>Trigger</td>
+      <td>
+        Three doors: a manual trigger, a webhook at
+        <code>/webhook/ep04-email-in</code>, and a disabled Gmail trigger
+      </td>
+    </tr>
+    <tr>
+      <td>Data source</td>
+      <td>
+        <code>samples/quotes-20.json</code>, 20 synthetic quote emails in the
+        public repo
+      </td>
+    </tr>
+    <tr>
+      <td>Model</td>
+      <td>
+        <code>claude-haiku-4-5-20251001</code>, temperature 0, one call per
+        email, with <code>tool_choice</code> forced to
+        <code>extract_quote</code>
+      </td>
+    </tr>
+    <tr>
+      <td>Fields extracted</td>
+      <td>
+        8 counted: origin port, destination port, mode, weight, dimensions,
+        cargo type, incoterm, deadline. Plus pieces, notes and a confidence
+        score, uncounted.
+      </td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+      <td>
+        Postgres tables <code>ep04_quotes</code> and <code>ep04_drafts</code>,
+        both keyed on <code>message_id</code>, indexed on <code>run_id</code>
+      </td>
+    </tr>
+    <tr>
+      <td>Idempotency</td>
+      <td>
+        <code>INSERT ... ON CONFLICT (message_id) DO UPDATE</code>. A second
+        pass updates and never duplicates
+      </td>
+    </tr>
+    <tr>
+      <td>Caps</td>
+      <td>
+        25 emails per run, 600 output tokens per email, 3 tries, 1 item per
+        400ms, 900-second workflow timeout
+      </td>
+    </tr>
+    <tr>
+      <td>Output</td>
+      <td>
+        One summary item: run id, emails seen, rows written, rows inserted,
+        rows updated, drafts written, average fields filled, average
+        confidence, average seconds, token totals
+      </td>
+    </tr>
+    <tr>
+      <td>Public JSON includes</td>
+      <td>
+        All 16 nodes, the tool schema, the validator, both upsert statements,
+        the draft builder, <code>schema.sql</code> and the 20 sample emails.
+        Credentials stripped to <code>REPLACE_ME</code>.
+      </td>
+    </tr>
+    <tr>
+      <td>Licence</td>
+      <td>MIT</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="how-it-works">How does the n8n freight quote parser read an email?</h2>
+
+<p>
+  In five moves: normalise whatever arrived into one item per email, call Claude
+  with a forced tool schema, re-check every field in code, upsert the row into
+  Postgres, then build and store a draft reply. A final Code node emits one
+  summary item, so the number you quote is the number the table holds.
+</p>
+
+<p>
+  <code>Normalize email</code> is the funnel that all three doors land on. It
+  parses <code>Name &lt;address&gt;</code> into two fields, falls back to a djb2
+  hash of sender plus subject plus body when a feed carries no message id, drops
+  duplicates inside a single feed, stamps <code>arrived_ms</code> so the timing
+  has an honest start, and caps the run at 25 emails. <code>Config</code> then
+  carries the run id, the model and the token ceiling as data, because n8n 2.x
+  Code nodes run in task runners with no <code>$env</code>.
+</p>
+
+<p>
+  <code>Claude extract</code> is one HTTP POST per email to the Messages API,
+  and it does not ask for JSON. It sends a tool called
+  <code>extract_quote</code> whose input schema is the eight fields, and sets
+  <code>tool_choice</code> to that tool by name, which removes prose from the
+  set of things the model is able to return. Temperature 0, one item every
+  400ms, three tries.
+</p>
+
+<p>
+  <code>Validate + score</code> decides whether the row is trustworthy. It reads
+  the <code>tool_use</code> block, re-checks every field independently of the
+  model, nulls anything that came back as a hedge rather than a value, counts
+  <code>fields_filled</code> out of 8, and clamps confidence into 0 to 1, or to
+  0 when the response could not be parsed. It and
+  <code>Build draft reply</code> both run per item and read their email through
+  <code>$('Config').item</code>, because a run-once-for-all node returning a
+  re-ordered array would pair the wrong email with the wrong extraction
+  silently.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Node</th>
+      <th>Type</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Click to run (20 samples)</code></td>
+      <td>Manual trigger</td>
+      <td>The demo door. Starts the sample fetch.</td>
+    </tr>
+    <tr>
+      <td><code>Fetch sample emails</code></td>
+      <td>HTTP</td>
+      <td>GETs <code>samples/quotes-20.json</code>, response format pinned to JSON.</td>
+    </tr>
+    <tr>
+      <td><code>Email in (webhook)</code></td>
+      <td>Webhook</td>
+      <td>
+        POST one email or an array, responds with the run summary. The door an
+        IMAP poller points at.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Gmail trigger</code></td>
+      <td>Gmail (disabled)</td>
+      <td>Swap point. Enable it and add a credential to poll a real label.</td>
+    </tr>
+    <tr>
+      <td><code>Normalize email</code></td>
+      <td>Code</td>
+      <td>
+        One item per email from any door. Message id fallback, in-feed dedupe,
+        arrival stamp, 25-email cap.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Config</code></td>
+      <td>Set</td>
+      <td>run_id, model, max_tokens 600, today. Keeps the email fields.</td>
+    </tr>
+    <tr>
+      <td><code>Claude extract</code></td>
+      <td>HTTP</td>
+      <td>
+        One Messages API call per email. Tool forced, temperature 0, 3 tries.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Validate + score</code></td>
+      <td>Code, per item</td>
+      <td>
+        Re-checks every field, nulls the guesses, counts fields_filled, clamps
+        confidence.
+      </td>
+    </tr>
+    <tr>
+      <td><code>UPSERT ep04_quotes</code></td>
+      <td>Postgres</td>
+      <td>
+        ON CONFLICT (message_id) DO UPDATE, seconds_to_row computed in SQL.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Build draft reply</code></td>
+      <td>Code, per item</td>
+      <td>
+        Every field echoed, NOT FOUND on the blanks, a date request when the
+        deadline was a phrase, a DRAFT footer.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Gmail create draft</code></td>
+      <td>Gmail (disabled)</td>
+      <td>Swap point. Enabled, the same text lands in a real Drafts folder.</td>
+    </tr>
+    <tr>
+      <td><code>Store draft (ep04_drafts)</code></td>
+      <td>Postgres</td>
+      <td>The full reply text, status draft, keyed on message_id.</td>
+    </tr>
+    <tr>
+      <td><code>Run summary</code></td>
+      <td>Code</td>
+      <td>The item you read off the execution panel: counts and averages.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="placeholders">
+  What is real in the public JSON and what is a placeholder?
+</h2>
+
+<p>
+  All 16 nodes, the tool schema, the validator, both upsert statements, the
+  draft builder, <code>schema.sql</code> and the 20 sample emails are exactly
+  what ran on 2026-09-18. Three credentials ship as <code>REPLACE_ME</code>: a
+  Header Auth credential for your Anthropic key, a Postgres credential for the
+  two table nodes, and an optional Gmail OAuth2 credential for the two disabled
+  nodes.
+</p>
+
+<p>Two more things worth knowing before you import it:</p>
+
+<ul>
+  <li>
+    <strong>The tables are its own.</strong> The workflow writes to
+    <code>ep04_quotes</code> and <code>ep04_drafts</code> and nothing else. Run
+    <code>schema.sql</code> first. Both are keyed on <code>message_id</code>,
+    and <code>status</code> never leaves <code>draft</code>.
+  </li>
+  <li>
+    <strong>The webhook ships with no authentication.</strong> Fine on a laptop,
+    wrong on a public host. Add Header Auth on
+    <code>Email in (webhook)</code> before you leave the workflow active
+    anywhere reachable.
+  </li>
+</ul>
+
+<h2 id="measured">What did the measured run produce?</h2>
+
+<p>
+  On 2026-09-18, under n8n execution 26430 and run_id 20260918-2138, the
+  workflow read 20 emails, filled 6.75 of 8 fields on average, recorded an
+  average model confidence of 0.83, took 10.1 seconds per email from arrival to
+  written row, and stored 20 draft replies. The query behind those numbers is
+  <code
+    >select run_id, count(*), round(avg(fields_filled),2),
+    round(avg(seconds_to_row),1) from ep04_quotes group by 1;</code
+  >, which returned <code>20260918-2138 | 20 | 6.75 | 10.1</code>.
+</p>
+
+<p>
+  The idempotency check is a separate run and a separate number. Feeding the
+  same 20 emails again on 2026-09-18, under execution 26439 and run_id
+  20260918-2146, produced 0 rows inserted and 20 rows updated. That is the
+  behaviour worth having on an inbox: a poller that re-delivers a message moves
+  a row rather than adding one.
+</p>
+
+<p>
+  Read 6.75 out of 8 correctly: it is not an accuracy score and not a failure
+  rate. Most of the missing fields were absent from the emails, because people
+  asking for a rate do not always mention an incoterm or a piece count, and a
+  field nobody wrote down comes back null by design. The 10.1 seconds is stamped
+  in SQL from <code>arrived_ms</code>, so it includes the Claude call and the
+  insert, not only the parts that look fast.
+</p>
+
+<h2 id="gotchas">Which build gotchas cost a failed run?</h2>
+
+<h3>raw.githubusercontent.com serves JSON as text/plain</h3>
+
+<p>
+  This one killed the chain with an error that pointed at the wrong node.
+  <code>Fetch sample emails</code> GETs the sample file from the repo, and
+  raw.githubusercontent.com returns it as <code>text/plain</code>. The n8n HTTP
+  node reads the content type rather than the payload, so it emitted a string.
+  <code>Normalize email</code> found no array to iterate, and the run died with
+  "no emails in the feed" three nodes away from the problem.
+</p>
+
+<p>
+  The fix is one line of node configuration:
+  <code>options.response.response.responseFormat = "json"</code>, which parses
+  regardless of what the server claimed. A content type is a claim made by
+  whoever serves the file, so a pipeline that branches on it has handed control
+  of its data shape to a third party. Pin the format when you know what the file
+  is.
+</p>
+
+<h3>
+  With three triggers on one canvas, the Execute button picks the wrong one
+</h3>
+
+<p>
+  This workflow has a manual trigger, a webhook and a disabled Gmail trigger.
+  The button at the bottom of the n8n editor defaults to the webhook, so
+  pressing it puts the canvas into test-listen and waits for a POST that is
+  never coming. Nothing runs, nothing errors, and it reads as a hung workflow.
+  To run the demo path, hover the manual trigger node and click its own execute
+  button. It cost a confused ten minutes here, and it will cost them again on
+  any multi-trigger canvas.
+</p>
+
+<h3>Force the tool, do not ask the model for JSON</h3>
+
+<p>
+  A prompt that says "reply only with JSON" still produces code fences and a
+  paragraph of hedging when the input is a messy forwarded thread, and then you
+  are writing a fence-stripper. Sending a tool definition and setting
+  <code>tool_choice</code> to that tool by name changes what the API is able to
+  return: the reply arrives as a <code>tool_use</code> block shaped like the
+  schema every time. The validator keeps a text-JSON fallback for models without
+  forced tools, which never had to fire on this run.
+</p>
+
+<h3>The model was not rewarded for guessing</h3>
+
+<p>
+  Every nullable field in the schema is typed <code>["string", "null"]</code>,
+  and the <code>mode</code> and <code>incoterm</code> enums carry
+  <code>null</code> as a permitted value. That sounds like a detail and it is
+  the whole safety property: a schema that only permits a string tells the model
+  a string is required, and a model that must produce one will. That is how a
+  port nobody mentioned reaches a rating tool.
+</p>
+
+<p>
+  The forwarded reefer thread in the sample set is the clearest case. The sender
+  asks for a move in "the 3rd week of November", which is not a date, and the
+  workflow does not convert it into one: the phrase is stored as written,
+  <code>deadline_is_date</code> is false, and the draft prints the sender's own
+  words followed by a request to give a date. Deadlines are text for the same
+  reason. "Before Eid" and "ASAP" carry information a date column would throw
+  away, and <code>deadline_is_date</code> tells you which rows are sortable.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cap</th>
+      <th>Where</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Emails per run</td>
+      <td><code>Normalize email</code> (<code>MAX_EMAILS</code>)</td>
+      <td>25, the rest are dropped and counted</td>
+    </tr>
+    <tr>
+      <td>Output tokens per email</td>
+      <td><code>Config.max_tokens</code></td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <td>Model</td>
+      <td><code>Config.model</code></td>
+      <td><code>claude-haiku-4-5-20251001</code>, swapped in one place</td>
+    </tr>
+    <tr>
+      <td>Claude call</td>
+      <td><code>Claude extract</code></td>
+      <td>60-second timeout, 3 tries, 1 item per 400ms</td>
+    </tr>
+    <tr>
+      <td>Execution timeout</td>
+      <td>Workflow settings</td>
+      <td>900 seconds</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="run-it">How do I run the freight quote parser myself?</h2>
+
+<p>
+  Import the free workflow JSON (MIT) from
+  <a
+    href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/04-freight-quote-parser"
+    >github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/04-freight-quote-parser</a
+  >, run <code>schema.sql</code> against a Postgres database, create the
+  credentials, and press the manual trigger's own execute button. It fetches the
+  20 samples and fills both tables.
+</p>
+
+<p>What you have to supply:</p>
+
+<ol>
+  <li>
+    An Anthropic API key, as a Header Auth credential with the name
+    <code>x-api-key</code>. The node adds <code>anthropic-version</code> itself.
+  </li>
+  <li>
+    A Postgres database with <code>schema.sql</code> applied. The workflow
+    writes to <code>ep04_quotes</code> and <code>ep04_drafts</code> and nothing
+    else.
+  </li>
+  <li>
+    Optionally a Gmail OAuth2 credential, to enable the two disabled nodes and
+    read a real label instead of the webhook.
+  </li>
+</ol>
+
+<p>
+  To point it at real mail without Gmail, either wire an Email Trigger (IMAP)
+  node into <code>Normalize email</code>, which already understands
+  <code>from</code>, <code>subject</code>, <code>text</code> and
+  <code>messageId</code>, or point a mail provider's inbound webhook at
+  <code>/webhook/ep04-email-in</code>. On the IMAP path the drafts stay in
+  <code>ep04_drafts</code>.
+</p>
+
+<p>
+  On running costs, in general terms: the Anthropic API call is the metered part
+  and is billed to your own account by tokens consumed, while n8n and Postgres
+  are infrastructure you host. One email is a short input and a capped 600-token
+  output. Check your own usage page before raising <code>MAX_EMAILS</code> or
+  pointing the webhook at a busy mailbox, because volume multiplies the metered
+  side and nothing else.
+</p>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>Can n8n read emails and extract structured data with AI?</h3>
+
+<p>
+  Yes. n8n handles the reading, the storage and the reply, and the extraction is
+  one HTTP call per email to the Claude Messages API with a forced tool schema,
+  so the model returns the eight fields rather than prose. On 2026-09-18 this
+  workflow processed 20 emails at 10.1 seconds each and filled 6.75 of 8 fields
+  on average, under execution 26430.
+</p>
+
+<h3>How do I stop an LLM inventing data it cannot find?</h3>
+
+<p>
+  Permit null in the schema and re-check the answer in code. Every nullable
+  field is typed as string or null, the enums carry null as a value, and a
+  validator node nulls anything that came back as a hedge before the row is
+  written. A schema that only permits a string tells the model a string is
+  required, and that is where invented ports come from.
+</p>
+
+<h3>Does this n8n workflow send the reply automatically?</h3>
+
+<p>
+  No. It builds a reply that echoes every extracted field, marks each blank NOT
+  FOUND, asks for a date when the deadline arrived as a phrase, and stores it in
+  the <code>ep04_drafts</code> table with a status that never leaves draft. The
+  Gmail draft node ships disabled, and even enabled it creates a draft rather
+  than sending. Commercial terms need a person.
+</p>
+
+<h3>Does this workflow read a live Gmail inbox?</h3>
+
+<p>
+  Not in this build. The demo feeds 20 synthetic quote emails through a webhook,
+  and no live mailbox was read on 2026-09-18 or at any other point. A Gmail
+  trigger and a Gmail draft node sit on the canvas disabled as documented swap
+  points, so you add your own credential when you want a real inbox.
+</p>
+
+<h3>What do I need to run this n8n workflow?</h3>
+
+<p>
+  Two credentials and one database: an Anthropic API key as a Header Auth
+  credential named <code>x-api-key</code>, and a Postgres credential with
+  <code>schema.sql</code> applied so <code>ep04_quotes</code> and
+  <code>ep04_drafts</code> exist. A Gmail OAuth2 credential is optional and only
+  needed for the two disabled nodes. All three ship as
+  <code>REPLACE_ME</code> in the public JSON.
+</p>
+
+<h2 id="series">The rest of the series</h2>
+
+<p>
+  One workflow per video, the JSON given away under MIT each time, built by
+  Waseem Nasir at SkynetLabs. The other three published episodes:
+</p>
+
+<ul>
+  <li>
+    <a href="/blog/n8n-shorts-factory-workflow"
+      >Episode 01, n8n Shorts Factory</a
+    >: one topic string in, a captioned 9:16 Short out, with the publish step
+    deliberately switched off.
+  </li>
+  <li>
+    <a href="/blog/n8n-speed-to-lead-workflow">Episode 02, n8n speed-to-lead</a
+    >: a form fill gets an AI reply in about two seconds, a second model
+    qualifies the follow-up and proposes a visit window.
+  </li>
+  <li>
+    <a href="/blog/n8n-google-maps-lead-table"
+      >Episode 03, n8n Maps lead harvest</a
+    >: a trade and a city in, a deduped lead table out, keyed on place id,
+    written to Postgres.
+  </li>
+</ul>
+
+<p>WhatsApp +92 300 1001957 &middot; Waseem Nasir, SkynetLabs</p>
+
+<p>
+  Hire SkynetLabs, our Top Rated agency on Fiverr:
+  <a href="https://www.fiverr.com/agencies/skynetjoellc"
+    >https://www.fiverr.com/agencies/skynetjoellc</a
+  >
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "One email in, eight fields out - n8n freight quote parser (Episode 04)",
+    "description": "An n8n workflow that reads freight quote emails and extracts eight fields with Claude Haiku 4.5 under a forced tool schema, writes one Postgres row per email keyed on the message id, and stores a draft reply that marks every missing field NOT FOUND. Nothing sends.",
+    "thumbnailUrl": "https://i.ytimg.com/vi/vuOnqlIa_rw/maxresdefault.jpg",
+    "uploadDate": "2026-09-21",
+    "duration": "PT1M12S",
+    "embedUrl": "https://www.youtube.com/embed/vuOnqlIa_rw",
+    "contentUrl": "https://youtu.be/vuOnqlIa_rw",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com"
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can n8n read emails and extract structured data with AI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. n8n handles the reading, the storage and the reply, and the extraction is one HTTP call per email to the Claude Messages API with a forced tool schema, so the model returns the eight fields rather than prose. On 2026-09-18 this workflow processed 20 emails at 10.1 seconds each and filled 6.75 of 8 fields on average, under execution 26430."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I stop an LLM inventing data it cannot find?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Permit null in the schema and re-check the answer in code. Every nullable field is typed as string or null, the enums carry null as a value, and a validator node nulls anything that came back as a hedge before the row is written. A schema that only permits a string tells the model a string is required, and that is where invented ports come from."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this n8n workflow send the reply automatically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It builds a reply that echoes every extracted field, marks each blank NOT FOUND, asks for a date when the deadline arrived as a phrase, and stores it in the ep04_drafts table with a status that never leaves draft. The Gmail draft node ships disabled, and even enabled it creates a draft rather than sending. Commercial terms need a person."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this workflow read a live Gmail inbox?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not in this build. The demo feeds 20 synthetic quote emails through a webhook, and no live mailbox was read on 2026-09-18 or at any other point. A Gmail trigger and a Gmail draft node sit on the canvas disabled as documented swap points, so you add your own credential when you want a real inbox."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I need to run this n8n workflow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two credentials and one database: an Anthropic API key as a Header Auth credential named x-api-key, and a Postgres credential with schema.sql applied so ep04_quotes and ep04_drafts exist. A Gmail OAuth2 credential is optional and only needed for the two disabled nodes. All three ship as REPLACE_ME in the public JSON."
+        }
+      }
+    ]
+  }
+</script>

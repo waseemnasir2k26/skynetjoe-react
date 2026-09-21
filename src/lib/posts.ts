@@ -56,6 +56,29 @@ export function categoryLabel(c: PostCategory): string {
 
 export const POSTS: Post[] = [
   {
+    slug: "n8n-freight-quote-email-parser",
+    title: "The n8n Freight Quote Email Parser: One Email In, Eight Fields Out",
+    seoTitle: "n8n Freight Quote Email Parser with Claude",
+    description:
+      "An n8n workflow read 20 freight quote emails on 2026-09-18, filling 6.75 of 8 fields each with Claude Haiku 4.5 and writing one Postgres row per email.",
+    publishedAt: "2026-09-21",
+    updatedAt: "2026-09-21",
+    readingTime: 12,
+    category: "automation",
+    tags: [
+      "n8n email parser",
+      "free n8n template",
+      "n8n workflow json",
+      "claude api",
+      "anthropic claude haiku 4.5",
+      "freight quote automation",
+      "logistics automation",
+      "postgres automation",
+      "ai email extraction",
+    ],
+    author: "Waseem Nasir",
+  },
+  {
     slug: "n8n-shorts-factory-workflow",
     title:
       "The n8n Shorts Factory Workflow: One Topic In, a Captioned 9:16 Short Out",
