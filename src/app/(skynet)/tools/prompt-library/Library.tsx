@@ -481,31 +481,36 @@ function MonthlyPromptsCapture() {
       /* private mode / quota — ignore */
     }
 
-    /* Fire to backend — failure never blocks the success state */
+    /* Success only when the backend confirms the signup (jury 2026-09-21:
+       "You're in" used to render on a 502 or an aborted request). */
+    let ok = false;
     try {
-      await Promise.race([
-        fetch("/api/lead-capture", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: trimmed,
-            source: "prompt-library",
-            capturedAt: new Date().toISOString(),
-          }),
-        }).catch((err) => {
-          console.log(
-            "[prompt-library] /api/lead-capture failed silently",
-            err,
-          );
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 8000);
+      const res = await fetch("/api/lead-capture", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: trimmed,
+          source: "prompt-library",
+          capturedAt: new Date().toISOString(),
         }),
-        new Promise((resolve) => setTimeout(resolve, 1500)),
-      ]);
+        signal: ctrl.signal,
+      });
+      clearTimeout(t);
+      ok = res.ok;
     } catch {
-      /* swallow */
+      ok = false;
     }
 
     setSubmitting(false);
-    setDone(true);
+    if (ok) {
+      setDone(true);
+    } else {
+      setError(
+        "Couldn't reach the signup service — email waseem@skynetjoe.com and I'll add you by hand.",
+      );
+    }
   }
 
   return (

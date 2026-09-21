@@ -187,13 +187,6 @@ export default function Page() {
           builds the &quot;these people are straightforward&quot; reputation
           that closes deals.
         </p>
-        <blockquote>
-          What I love about your pricing is that I can send it to my business
-          partner without scheduling a call first. Half the agencies we&apos;ve
-          talked to make you sit through a 45-minute sales pitch before
-          they&apos;ll even tell you the number.
-          <cite>— Karachi dental client, post-close</cite>
-        </blockquote>
 
         <h2>The one tier I refused to publish</h2>
         <p>

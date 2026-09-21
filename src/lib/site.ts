@@ -208,6 +208,7 @@ export const FOOTER_COLUMNS = [
       { label: "Blog", href: "/blog" },
       { label: "Free Tools", href: "/tools" },
       { label: "FAQs", href: "/faqs" },
+      { label: "Glossary", href: "/glossary" },
       {
         label: "5 Boring Automations",
         href: "/boring-automations-small-businesses-pay-for",
