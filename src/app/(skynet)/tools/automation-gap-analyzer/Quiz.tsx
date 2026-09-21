@@ -294,6 +294,7 @@ export default function Quiz() {
           onRestart={restart}
           onCopy={copyShareLink}
           copyState={copyState}
+          shared={shared}
         />
       </div>
     );
@@ -630,6 +631,9 @@ type ResultProps = {
   onRestart: () => void;
   onCopy: () => void;
   copyState: "idle" | "copied";
+  /** True when the score came from a shared URL — the per-axis breakdown is
+   *  not in the link, so it must not be drawn as if it were measured. */
+  shared?: boolean;
 };
 
 function ResultCard({
@@ -640,6 +644,7 @@ function ResultCard({
   onRestart,
   onCopy,
   copyState,
+  shared = false,
 }: ResultProps) {
   const calcQuery = buildCalculatorParams(subs);
   const bookingQuery = buildBookingParams({
@@ -692,6 +697,21 @@ function ResultCard({
         </div>
       </div>
 
+      {shared ? (
+        <div className="px-7 py-8 md:px-12 md:py-10">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
+            Shared result
+          </p>
+          <p className="text-base leading-relaxed text-[var(--ink-2)] md:text-lg">
+            This link carries the overall score only. The four-axis breakdown
+            and the biggest-gap callout come from the 12 answers, which stay in
+            the browser that took the quiz. Retake it below to get yours.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-[var(--ink-2)]">
+            {bucket.recommendation}
+          </p>
+        </div>
+      ) : (
       <div className="grid grid-cols-1 gap-8 px-7 py-8 md:grid-cols-[1fr_1.2fr] md:px-12 md:py-10">
         <div>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--terracotta-aa)]">
@@ -730,8 +750,11 @@ function ResultCard({
           <ul className="space-y-3">
             <li className="flex gap-3 rounded-xl border border-[rgba(198,107,63,0.30)] bg-[var(--terracotta)]/[0.06] px-4 py-3 text-sm leading-relaxed text-[var(--terracotta-aa)] md:text-base">
               <Sparkles className="mt-0.5 h-4 w-4 flex-shrink-0 text-[var(--terracotta-aa)]" />
-              You&apos;re losing roughly <b>{hours} manual hours/week</b> from
-              the {weakest.label.toLowerCase()} axis alone.
+              <span className="min-w-0 flex-1">
+                Estimated <b>{hours} manual hours/week</b> across the axes
+                scoring under 50% — {weakest.label.toLowerCase()} is the one to
+                fix first.
+              </span>
             </li>
             {weakest.recommendations.map((line, idx) => (
               <li
@@ -747,6 +770,7 @@ function ResultCard({
           </ul>
         </div>
       </div>
+      )}
 
       <div className="border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-7 py-7 md:px-12 md:py-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
