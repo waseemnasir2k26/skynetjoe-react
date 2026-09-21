@@ -16,7 +16,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Development · WordPress SEO · 2026",
     h1: "Content that AI answers actually cite.",
     sub: "Search now answers the question on the page — and today the credit goes to the business next door. I rebuild the site's structured data, merge the thin pages dragging you down, and write AEO-tuned content built to get cited by Claude, GPT, and Perplexity, not just ranked by Google.",
-    primary: { label: "Book a free 30-min check-up", href: "/discovery-call" },
+    primary: { label: "Book a free 30-min check-up", href: "/contact" },
     secondary: { label: "Run a free AEO audit", href: "/tools/aeo-audit" },
     trust: ["Public pricing", "9 countries", "AEO-tuned", "Ship in 7-14 days"],
   },

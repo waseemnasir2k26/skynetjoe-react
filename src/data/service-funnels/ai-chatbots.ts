@@ -16,7 +16,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Development · AI Chatbots · 2026",
     h1: "A chat flow that closes leads instead of losing them.",
     sub: "Stop the flow getting stuck on one branch while the customer rage-types out. I build web, WhatsApp, and voice agents trained on your actual knowledge base, wired straight into your CRM with source and campaign data intact — so sales stops blaming marketing every Monday.",
-    primary: { label: "Book a free 30-min check-up", href: "/discovery-call" },
+    primary: { label: "Book a free 30-min check-up", href: "/contact" },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
       "8h weekday reply guarantee",

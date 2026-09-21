@@ -455,7 +455,7 @@ export default function PricingCalculator() {
             </div>
 
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center justify-center gap-2"
               style={{
                 whiteSpace: "nowrap",

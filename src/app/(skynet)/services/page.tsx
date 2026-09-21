@@ -1,30 +1,50 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight } from "lucide-react";
-import { SITE, SERVICE_CATEGORIES, DEFAULT_OG_IMAGES, svcHref, pageTitle, pageDescription } from "@/lib/site";
+import {
+  ArrowRight,
+  Bot,
+  Globe,
+  MessageSquare,
+  Target,
+  Zap,
+} from "lucide-react";
+import {
+  SITE,
+  SERVICES,
+  DEFAULT_OG_IMAGES,
+  svcHref,
+  pageTitle,
+  pageDescription,
+} from "@/lib/site";
+import { findServicePricing } from "@/lib/service-pricing";
 import JsonLd from "@/components/JsonLd";
-import PainSolverGrid from "@/components/services/PainSolverGrid";
-import ServiceMenuCollapsed from "@/components/services/ServiceMenuCollapsed";
+
+const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Bot,
+  Globe,
+  MessageSquare,
+  Target,
+  Zap,
+};
+
+const fmtUSD = (n: number) => `$${n.toLocaleString("en-US")}`;
 
 export const metadata: Metadata = {
-  title: pageTitle("Services — We don't sell services. We fix what's costing you."),
+  title: pageTitle("Services — five things we build, fixed scope"),
   description:
-    pageDescription("Eight founder problems, eight done-for-you fixes. Behind them: 16 production-grade services across automation, AI content, websites and consulting. Fixed scope, public pricing, 5-14 day ship."),
+    pageDescription("Five services: n8n automation, AI chatbots, GoHighLevel CRM, vibe-coded Next.js sites and WordPress SEO. Fixed scope, public pricing, 5-14 day ship."),
   alternates: { canonical: `${SITE.url}/services` },
   openGraph: {
-    title: "SkynetLabs — We fix the problem, not sell you a service",
+    title: "SkynetLabs — five services, fixed scope, public pricing",
     description:
-      "Pick the problem. We fix it. Eight founder problems mapped to 16 production services. Fixed scope, public pricing.",
+      "n8n automation, AI chatbots, GoHighLevel CRM, vibe-coded sites and WordPress SEO. Fixed scope, public pricing, 5-14 day ship.",
     url: `${SITE.url}/services`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
   },
 };
 
-type ServiceItem = { slug: string; label: string; icon: string; desc: string };
-const allServices: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
-  (c) => c.services as readonly ServiceItem[]
-);
+const allServices = SERVICES;
 
 const schema = {
   "@context": "https://schema.org",
@@ -34,7 +54,7 @@ const schema = {
       "@id": `${SITE.url}/services#collection`,
       name: `${SITE.brand} Services`,
       description:
-        "Eight founder problems, eight done-for-you fixes. Sixteen production-grade services across workflow automation, AI content, modern websites and operator consulting.",
+        "Five core services from SkynetLabs: n8n workflow automation, AI chatbots, GoHighLevel CRM, vibe-coded Next.js websites and WordPress SEO content engines.",
       url: `${SITE.url}/services`,
       inLanguage: "en",
       isPartOf: { "@id": `${SITE.url}/#website` },
@@ -105,7 +125,7 @@ export default function ServicesIndexPage() {
                 display: "inline-block",
               }}
             />
-            We fix the problem · not sell a service
+            Five services · fixed scope · public pricing
           </div>
 
           <h1
@@ -119,14 +139,14 @@ export default function ServicesIndexPage() {
               margin: "0 0 24px",
             }}
           >
-            We don&apos;t sell services.{" "}
+            Five things we build.{" "}
             <span
               style={{
                 color: "var(--terracotta-aa)",
                 fontWeight: 700,
               }}
             >
-              We fix what&apos;s costing you.
+              Nothing we don&apos;t.
             </span>
           </h1>
 
@@ -139,14 +159,15 @@ export default function ServicesIndexPage() {
               marginBottom: 28,
             }}
           >
-            Every founder brief lands in one of eight problems. Pick the one
-            hurting you this week — see the fix, see the outcome, see the
-            approach. The service menu is just the toolkit.
+            Automation, chat, CRM, websites and search. Each one ships with a
+            written scope, a public price and a 5-14 day window. Pick the one
+            that matches your brief, or send the brief and we will tell you
+            which it is.
           </p>
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--terracotta)",
@@ -196,11 +217,93 @@ export default function ServicesIndexPage() {
         </div>
       </section>
 
-      {/* 8 PAIN CARDS */}
-      <PainSolverGrid />
-
-      {/* COLLAPSED FULL MENU (SEO + power browsers) */}
-      <ServiceMenuCollapsed />
+      {/* 5 SERVICE CARDS */}
+      <section className="py-16 md:py-24" style={{ background: "var(--cream-2)" }}>
+        <div className="container-x px-6">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 list-none p-0 m-0">
+            {allServices.map((svc) => {
+              const Icon = ICONS[svc.icon];
+              const pricing = findServicePricing(svc.slug);
+              const from = pricing?.tiers[0];
+              return (
+                <li key={svc.slug} className="flex">
+                  <Link
+                    href={svcHref(svc)}
+                    className="group flex flex-col w-full p-7 transition-colors"
+                    style={{
+                      background: "var(--cream-3)",
+                      border: "1px solid rgba(26,26,26,0.10)",
+                      borderRadius: 2,
+                      color: "var(--ink)",
+                    }}
+                  >
+                    <span
+                      className="inline-flex items-center justify-center mb-5"
+                      style={{
+                        width: 40,
+                        height: 40,
+                        background: "rgba(198,107,63,0.10)",
+                        color: "var(--terracotta-aa)",
+                        borderRadius: 2,
+                      }}
+                    >
+                      {Icon && <Icon className="w-5 h-5" />}
+                    </span>
+                    <h2
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 700,
+                        fontSize: 22,
+                        letterSpacing: "-0.02em",
+                        lineHeight: 1.15,
+                        margin: "0 0 8px",
+                      }}
+                    >
+                      {svc.label}
+                    </h2>
+                    <p
+                      style={{
+                        color: "var(--ink-2)",
+                        fontSize: 15,
+                        lineHeight: 1.6,
+                        margin: 0,
+                      }}
+                    >
+                      {pricing?.tagline ?? svc.desc}
+                    </p>
+                    <span
+                      className="mt-auto pt-6 flex items-center justify-between gap-3"
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: 12,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                        color: "var(--ink-faint)",
+                      }}
+                    >
+                      {from ? (
+                        <span>
+                          From {fmtUSD(from.price)}
+                          {from.cadence === "monthly" ? "/mo" : ""} · {from.ship}
+                        </span>
+                      ) : (
+                        <span>Fixed scope</span>
+                      )}
+                      <span
+                        className="inline-flex items-center gap-1 transition-transform group-hover:translate-x-1"
+                        style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}
+                      >
+                        See service
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
 
       {/* CLOSER — cream editorial */}
       <section
@@ -266,7 +369,7 @@ export default function ServicesIndexPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--terracotta)",

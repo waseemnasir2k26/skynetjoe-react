@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SkynetLabs Pricing — public, per-service, calculator-backed",
     description:
-      "16 services × 3 tiers each. Live calculator. Public prices. No quote form.",
+      "5 services × 3 tiers each. Live calculator. Public prices. No quote form.",
     url: `${SITE.url}/pricing`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -52,7 +52,7 @@ const priceSchema = {
   name: `${SITE.brand} Pricing`,
   url: `${SITE.url}/pricing`,
   description:
-    "Per-service pricing across 16 services, 3 tiers each (Starter / Pro / Custom), plus optional add-ons. Live calculator on page.",
+    "Per-service pricing across 5 core services, 3 tiers each (Starter / Pro / Custom), plus optional add-ons. Live calculator on page.",
   priceCurrency: "USD",
   // Derived from SERVICE_PRICING tiers — never hand-keyed.
   minPrice: MIN_PRICE,
@@ -80,7 +80,7 @@ const offerCatalog = {
         maxPrice: MAX_ONE_TIME,
       },
       description:
-        "Fixed-scope one-time build across any of 16 services — Starter, Pro and one-time Custom tiers. Single payment, 3-21 day ship.",
+        "Fixed-scope one-time build across any of 5 core services — Starter, Pro and one-time Custom tiers. Single payment, 3-21 day ship.",
     },
     {
       // Monthly retainers ARE a real, separately-priced product — so this
@@ -218,7 +218,7 @@ export default function PricingPage() {
               marginBottom: 24,
             }}
           >
-            16 services. 3 tiers each. Optional add-ons and a live calculator
+            5 core services. 3 tiers each. Optional add-ons and a live calculator
             below. No quote form, no &ldquo;request pricing&rdquo; wall.
           </p>
           <div
@@ -551,7 +551,7 @@ export default function PricingPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--cream-3)",

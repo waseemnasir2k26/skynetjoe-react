@@ -599,7 +599,7 @@ export default function ServiceFunnel({
                 flexWrap: "wrap",
               }}
             >
-              <Link href="/discovery-call" style={primaryBtn}>
+              <Link href="/contact" style={primaryBtn}>
                 Book a free 30-min check-up
                 <ArrowRight style={{ width: 16, height: 16 }} />
               </Link>
@@ -1566,7 +1566,7 @@ export default function ServiceFunnel({
             {content.finalCta.body}
           </p>
           <Link
-            href="/discovery-call"
+            href="/contact"
             style={{
               ...primaryBtn,
               padding: "18px 32px",
@@ -1606,7 +1606,7 @@ export default function ServiceFunnel({
         }}
       >
         <Link
-          href="/discovery-call"
+          href="/contact"
           style={{
             ...primaryBtn,
             flex: 1,

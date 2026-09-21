@@ -18,7 +18,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Automation · n8n · 2026",
     h1: "Stop renting your automation. Own it.",
     sub: "Keep the automations your business runs on — without the rising monthly SaaS bill. The same flows you pay hundreds a month for, rebuilt on n8n to run for a few dollars, version-controlled, with auto-retry so they stop failing in silence.",
-    primary: { label: "Book a free 30-min check-up", href: "/discovery-call" },
+    primary: { label: "Book a free 30-min check-up", href: "/contact" },
     secondary: { label: "Compare n8n vs Zapier", href: "/n8n-vs-zapier" },
     trust: [
       "180+ flows shipped",
@@ -128,18 +128,20 @@ const content: ServiceFunnelContent = {
     ],
   },
 
+  // Both receipts trace to the same shipped build — the EU logistics email
+  // triage case study (/case-studies). No pooled or unattributed numbers.
   proof: {
-    metric: "180+",
-    client: "Flows shipped since 2019, 9 countries",
-    detail:
-      "Workflows shipped from a Canggu cafe since 2019, across 9 countries, with no monthly retainer required to keep them running.",
-  },
-
-  secondaryProof: {
     metric: "6h → 6min",
     client: "EU logistics group (anonymized), Lyon, France",
     detail:
-      "A self-hosted n8n + GPT-4o email-triage pipeline (17 nodes, 6-week build) cut routine Gmail response time from hours to minutes and retired 4 separate paid tools into 1 stack.",
+      "A self-hosted n8n + GPT-4o email-triage pipeline (17 nodes, 6-week build) cut routine Gmail response time from hours to minutes.",
+  },
+
+  secondaryProof: {
+    metric: "4 → 1",
+    client: "EU logistics group (anonymized), Lyon, France",
+    detail:
+      "The same build retired 4 separate paid tools into one self-hosted n8n stack, with no monthly retainer required to keep it running.",
   },
 
   guarantee: {

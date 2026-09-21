@@ -446,7 +446,7 @@ export default function ServicePricingTabs() {
               lineHeight: 1.55,
             }}
           >
-            16 services across 4 categories. Each has 3 tiers — Starter, Pro,
+            Five core services. Each has 3 tiers — Starter, Pro,
             Custom — plus optional add-ons. Same transparency, scoped per
             service.
           </p>

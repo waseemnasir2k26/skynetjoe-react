@@ -17,7 +17,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Development · Bespoke Next.js Builds · 2026",
     h1: "A fast site you own outright, not a template.",
     sub: "Your old site loads slowly on a phone, looks tired, and no developer wants to touch the code. I build bespoke Next.js sites — conversion-tuned, mobile-first, and structured so both search engines and AI answers can actually read them — deployed to Vercel with analytics wired from day one.",
-    primary: { label: "Book a free 30-min check-up", href: "/discovery-call" },
+    primary: { label: "Book a free 30-min check-up", href: "/contact" },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
       "Public pricing",

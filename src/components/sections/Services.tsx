@@ -53,7 +53,7 @@ export default function Services() {
               marginBottom: 16,
             }}
           >
-            16 services. One operator.{" "}
+            Five services. One operator.{" "}
             <em style={{ fontStyle: "normal", fontWeight: 700, color: C.terra }}>Zero excuses.</em>
           </h2>
           <p style={{ fontSize: 17, color: C.ink2, lineHeight: 1.6 }}>
@@ -82,7 +82,7 @@ export default function Services() {
                 <span style={{ width: 32, height: 1, background: C.terra }} />
                 {cat.name}
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {cat.services.map((svc, idx) => {
                   const Icon = ((Icons as unknown) as Record<string, IconCmp>)[svc.icon] ?? ((Icons as unknown) as Record<string, IconCmp>).Bot;
                   return (

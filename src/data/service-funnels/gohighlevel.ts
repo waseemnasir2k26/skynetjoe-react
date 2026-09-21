@@ -17,7 +17,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Automation · GoHighLevel · 2026",
     h1: "Stop losing booked customers. Bring them back.",
     sub: "Fewer missed appointments. Fewer leads slipping past. I set up your booking and follow-up around how your team actually sells, with pipeline stages and reminders mapped to your real sales motion — not a stock template nobody uses.",
-    primary: { label: "Book a free 30-min check-up", href: "/discovery-call" },
+    primary: { label: "Book a free 30-min check-up", href: "/contact" },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
       "Public pricing",
