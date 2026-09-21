@@ -26,11 +26,40 @@ import { CAL_URL } from "@/lib/site";
 
 const STORAGE_KEY = "skynet:llms-txt:v1";
 
+
+/** Clipboard write with a legacy fallback (older mobile browsers / non-secure contexts). */
+async function writeClipboard(text: string): Promise<boolean> {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    /* fall through to legacy path */
+  }
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch {
+    return false;
+  }
+}
+
 export default function Generator() {
   const [form, setForm] = useState<LlmsTxtForm>(DEFAULT_FORM);
   const [hydrated, setHydrated] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
-  const [copyState, setCopyState] = useState<"idle" | "copied">("idle");
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
+    "idle",
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -126,13 +155,13 @@ export default function Generator() {
   }
 
   async function copyOutput() {
-    try {
-      await navigator.clipboard.writeText(output);
-      setCopyState("copied");
-      window.setTimeout(() => setCopyState("idle"), 1600);
-    } catch {
-      setCopyState("idle");
+    const ok = await writeClipboard(output);
+    if (!ok) {
+      setCopyState("failed");
+      return;
     }
+    setCopyState("copied");
+    window.setTimeout(() => setCopyState("idle"), 1600);
   }
 
   function downloadOutput() {
@@ -385,6 +414,12 @@ export default function Generator() {
               </button>
             </div>
           </div>
+          {copyState === "failed" && (
+            <p role="alert" className="mb-3 text-xs text-[var(--terracotta-aa)]">
+              Your browser blocked clipboard access — select the text below and
+              copy it manually, or use Download llms.txt.
+            </p>
+          )}
           <pre
             className="rounded-2xl p-4 sm:p-5 text-sm text-[var(--ink)] leading-relaxed whitespace-pre-wrap font-mono overflow-x-auto"
             style={{
