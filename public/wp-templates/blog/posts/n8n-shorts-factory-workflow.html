@@ -1,0 +1,716 @@
+<style>
+  .wn-n8n-shorts-factory-workflow {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-shorts-factory-workflow h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-shorts-factory-workflow h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-shorts-factory-workflow p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-shorts-factory-workflow ul,
+  .wn-n8n-shorts-factory-workflow ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-shorts-factory-workflow li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-shorts-factory-workflow strong {
+    color: #fff;
+  }
+  .wn-n8n-shorts-factory-workflow a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-shorts-factory-workflow a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-shorts-factory-workflow .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-shorts-factory-workflow .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-shorts-factory-workflow .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-shorts-factory-workflow table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-shorts-factory-workflow th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-shorts-factory-workflow td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-shorts-factory-workflow code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-shorts-factory-workflow .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-shorts-factory-workflow .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-shorts-factory-workflow .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<p>
+  The n8n Shorts Factory workflow turns one topic string into a finished,
+  captioned 9:16 MP4. It is 28 nodes: Groq writes a six-scene script, ElevenLabs
+  voices it, one image is generated per scene, and a self-hosted ffmpeg service
+  renders and captions the cut. The finished video arrives by email. The JSON is
+  MIT-licensed.
+</p>
+
+<p>
+  Every service business owner I talk to has the same unshipped list: the ten
+  things they know they should be posting, and the ten things that never get
+  posted. The ideas are not the problem. Turning one idea into a finished
+  vertical video means a script, a voice, six pictures, an edit, captions and an
+  export, and that is most of an afternoon for something that lives for a day.
+</p>
+
+<p>
+  Episode 01 of the n8n Workflows series is the machine that removes the
+  afternoon. You hand it one line of text. It writes a six-scene script, voices
+  every scene, generates one vertical image per scene, turns each image into a
+  slow-zoom clip cut to the exact length of its own voiceover, muxes the voice
+  onto the clip, concatenates the six, burns word-highlight captions, and emails
+  you the finished 9:16 MP4 with a title, a description and a tag list. The
+  YouTube upload node is wired at the end and shipped disabled, on purpose.
+  Nothing publishes until a person says so.
+</p>
+
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/5p7IYgR-c2E"
+    title="One line of text in, a finished short out - n8n workflow, Episode 01"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+<p class="video-note">
+  If iframes are blocked where you are reading this, the video is at
+  <a href="https://youtu.be/5p7IYgR-c2E">youtu.be/5p7IYgR-c2E</a>.
+</p>
+
+<h2 id="specifications">Specifications</h2>
+
+<div class="verdict">
+  One topic string in. A 9:16 MP4 with burnt-in captions, plus a title, a
+  description and a tag list out, delivered by email. 28 nodes. Two entry
+  points. The publish step stays off until you turn it on.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Workflow name</td>
+      <td>
+        <code
+          >SF-01 Shorts Factory (script -&gt; voice -&gt; clips -&gt; render
+          -&gt; upload)</code
+        >
+      </td>
+    </tr>
+    <tr>
+      <td>Nodes</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>Trigger</td>
+      <td>
+        Manual Execute in the n8n editor, or POST to the
+        <code>shorts-factory</code> webhook
+      </td>
+    </tr>
+    <tr>
+      <td>Script model</td>
+      <td>Groq chat completions, forced to a JSON object response</td>
+    </tr>
+    <tr>
+      <td>Voice</td>
+      <td>ElevenLabs, one MP3 per scene</td>
+    </tr>
+    <tr>
+      <td>Images</td>
+      <td>One generated vertical image per scene, six per video</td>
+    </tr>
+    <tr>
+      <td>Render and captions</td>
+      <td>
+        No-Code Architects Toolkit, an open-source media API you self-host
+      </td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+      <td>Any S3-compatible bucket (MinIO, Backblaze B2, Wasabi, AWS S3)</td>
+    </tr>
+    <tr>
+      <td>Delivery</td>
+      <td>SMTP email with both render URLs, title, description and tags</td>
+    </tr>
+    <tr>
+      <td>Output</td>
+      <td>1080x1920 MP4, word-highlight captions burnt in</td>
+    </tr>
+    <tr>
+      <td>Public JSON includes</td>
+      <td>
+        All 28 nodes, all connections, all prompts and ffmpeg parameters.
+        Credentials stripped to <code>REPLACE_ME</code>, hosts stripped to
+        <code>YOUR-NCA-HOST</code> and <code>YOUR-N8N</code>.
+      </td>
+    </tr>
+    <tr>
+      <td>Licence</td>
+      <td>MIT</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="how-it-works">
+  How does the n8n Shorts Factory workflow turn a topic into a video?
+</h2>
+
+<p>
+  It runs the topic through five stages in order: script, voice, timing, images,
+  render. Groq writes six scenes as structured JSON, ElevenLabs voices each
+  scene, the media API measures the real length of each MP3, an image is
+  generated per scene, and each image becomes a clip of exactly its own
+  voiceover length before the six are joined and captioned.
+</p>
+
+<p>
+  You start it one of two ways. In the editor you open the workflow, edit the
+  <code>Topic</code> node, and press Execute. Or you POST to the
+  <code>shorts-factory</code> webhook path with a JSON body containing a topic.
+  The webhook responds the moment it receives the request and runs the rest in
+  the background, which matters, because the full run is minutes long and no
+  HTTP client is going to hold that connection open. Both entry points converge
+  on the same node, <code>Build Groq request</code>.
+</p>
+
+<p>
+  The timing stage is the part people skip and regret. The clip length is not
+  guessed from reading speed; the media API is asked how long each MP3 actually
+  is, in seconds, and the clip is set to that duration plus 0.4 seconds, rounded
+  up to the nearest tenth. Every later ffmpeg parameter descends from that
+  measurement.
+</p>
+
+<p>
+  Then the image loop. One scene at a time: wait, request the image, check
+  whether a binary actually came back, and if it did not, wait again and ask
+  again. Once all six images exist the render chain runs. Each image becomes a
+  30fps slow-zoom clip of exactly its own scene length, the voice is muxed on
+  with a crop that removes the image provider's watermark and a scale-and-crop
+  to 1080x1920, the six clips are concatenated, and captions are burnt on by a
+  Whisper pass on the server. The caption node is deliberately set to continue
+  on error, so a failed caption pass delivers an uncaptioned render rather than
+  destroying nine minutes of work.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Node</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Input</td>
+      <td><code>Topic</code> / <code>Topic from webhook</code></td>
+      <td>The topic string plus the system prompt. The only thing you edit.</td>
+    </tr>
+    <tr>
+      <td>Script</td>
+      <td><code>Groq: write script</code></td>
+      <td>
+        HTTP POST to the Groq chat-completions endpoint, forced to a JSON object
+        response.
+      </td>
+    </tr>
+    <tr>
+      <td>Script</td>
+      <td><code>Parse script</code></td>
+      <td>
+        Code. JSON becomes six items, one per scene. Builds the run id and the
+        per-scene image URL.
+      </td>
+    </tr>
+    <tr>
+      <td>Voice</td>
+      <td><code>ElevenLabs: voice</code></td>
+      <td>One MP3 per scene, batch size 1, spaced 800ms apart.</td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+      <td><code>Upload VO to MinIO</code></td>
+      <td>
+        S3 node. Writes to <code>sf/&lt;run_id&gt;-&lt;index&gt;.mp3</code>.
+      </td>
+    </tr>
+    <tr>
+      <td>Timing</td>
+      <td><code>NCA: VO duration</code></td>
+      <td>Asks the media API for the real length of each MP3 in seconds.</td>
+    </tr>
+    <tr>
+      <td>Timing</td>
+      <td><code>Scene plan</code></td>
+      <td>
+        Code. Pairs duration back to scene. Clip length is voiceover plus 0.4s.
+      </td>
+    </tr>
+    <tr>
+      <td>Images</td>
+      <td>
+        <code>Loop over scenes</code>, <code>Breathe</code>,
+        <code>Got image?</code>
+      </td>
+      <td>
+        Batch size 1, a 20-second wait, a request, and an explicit retry lane
+        when nothing came back.
+      </td>
+    </tr>
+    <tr>
+      <td>Render</td>
+      <td><code>NCA: image to clip</code></td>
+      <td>
+        Still image becomes a 30fps slow-zoom clip of that scene's length.
+      </td>
+    </tr>
+    <tr>
+      <td>Render</td>
+      <td><code>Mux body</code>, <code>NCA: mux voice</code></td>
+      <td>
+        Crops the watermark, scales and crops to 1080x1920, pads the audio,
+        hard-caps duration.
+      </td>
+    </tr>
+    <tr>
+      <td>Render</td>
+      <td><code>NCA: concatenate</code></td>
+      <td>Six scene clips become one cut.</td>
+    </tr>
+    <tr>
+      <td>Captions</td>
+      <td><code>Caption body</code>, <code>NCA: captions</code></td>
+      <td>
+        Word-highlight style, centred, four words a line, caps. Continues on
+        error.
+      </td>
+    </tr>
+    <tr>
+      <td>Delivery</td>
+      <td><code>Email me the Short</code></td>
+      <td>
+        SMTP. Both URLs, the title, the description, the tags, and the expiry
+        note.
+      </td>
+    </tr>
+    <tr>
+      <td>Publish</td>
+      <td><code>YouTube: upload</code></td>
+      <td>
+        Shipped disabled. Defaults to unlisted if you connect an account and
+        enable it.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="placeholders">
+  What is real in the public JSON and what is a placeholder?
+</h2>
+
+<p>
+  Every node, connection, prompt and ffmpeg parameter in the public JSON is
+  real. Only the secrets and the hostnames are placeholders. Credentials ship as
+  <code>REPLACE_ME</code>, the media-API host reads <code>YOUR-NCA-HOST</code>,
+  and the webhook example reads <code>YOUR-N8N</code>. Nothing else has been
+  simplified for publication.
+</p>
+
+<ul>
+  <li>
+    <strong>Five credentials, all <code>REPLACE_ME</code>.</strong> A Groq
+    header-auth key, an ElevenLabs header-auth key, one media-API key reused
+    across five nodes, an S3 credential for the two upload nodes, and an SMTP
+    credential for the email. Create them in your own n8n and re-select them on
+    the matching nodes after import. The disabled YouTube node needs a sixth
+    only if you enable it.
+  </li>
+  <li>
+    <strong><code>YOUR-NCA-HOST</code> appears in seven places.</strong> Five
+    HTTP node URLs, and two object-URL bases inside the
+    <code>Scene plan</code> Code node. Find and replace all seven or the render
+    chain will fail on the first call.
+  </li>
+  <li>
+    <strong
+      >The bucket name is <code>nca</code> and the prefix is
+      <code>sf/</code>.</strong
+    >
+    If your bucket is called something else, change <code>bucketName</code> on
+    both upload nodes.
+  </li>
+</ul>
+
+<h2 id="measured">What did the measured run actually produce?</h2>
+
+<p>
+  The run this workflow was built from, during the Episode 01 build published on
+  2026-09-16, produced a 41-second Short in about nine minutes end to end.
+  Roughly two of those nine minutes were deliberate waiting rather than
+  processing, caused by the image provider's rate limit described below.
+</p>
+
+<p>
+  I did not record an n8n execution id for that run, so I am not quoting one.
+  Those two figures are what was observed, and nothing beyond them was measured.
+  Your own run time will move with your render box, the length of your script,
+  and whichever image source you point it at.
+</p>
+
+<h2 id="gotchas">Which build gotchas cost a failed run?</h2>
+
+<p>
+  Six of them, and each is the reason a node is shaped the way it is. Refactor
+  them out and you will re-earn them.
+</p>
+
+<h3>ffmpeg -shortest does not truncate when apad is in the filter chain</h3>
+
+<p>
+  This is the one that will take your evening. <code>apad</code> pads audio
+  indefinitely, so the shortest stream never ends, so
+  <code>-shortest</code> never fires. Six clips of about five seconds each
+  produced a 2217-second container. The file was not corrupt and ffmpeg did not
+  complain. It simply wrote a 37-minute video consisting of a five-second clip
+  and a very long silence.
+</p>
+
+<p>
+  The fix is to stop relying on <code>-shortest</code> and pass an explicit
+  <code>-t</code> per clip, computed from the voiceover duration already
+  measured a few nodes earlier. That is why the timing branch exists at all. If
+  your output comes out absurdly long, this is almost certainly the cause.
+</p>
+
+<h3>The anonymous image tier allows exactly one queued request per IP</h3>
+
+<p>
+  Parallel calls, or serial calls sent too quickly, come back with a 429 and the
+  message <code>Queue full for IP</code>. That is the entire reason there is a
+  loop with a wait node in it rather than node-level batching. Six images
+  therefore cost about two minutes of pure waiting, which is the price of the
+  tier rather than a defect in the workflow. Swap in a paid image provider and
+  you can delete the wait node with it.
+</p>
+
+<h3>n8n caps waitBetweenTries at 5000ms</h3>
+
+<p>
+  Related, and worth knowing on its own. A node's built-in retry setting cannot
+  express a 20-second backoff, so the backoff has to be a real Wait node inside
+  a loop. The image node keeps its own three tries at five seconds as a first
+  line of defence, with continue-on-error and always-output-data set, so a hard
+  failure falls through to the IF node instead of killing the execution.
+</p>
+
+<h3>An n8n Code node in per-item mode must return a bare object</h3>
+
+<p>
+  <code>return { json: {...} }</code>, not
+  <code>return [{ json: {...} }]</code>. The array form is only valid in
+  run-once-for-all-items mode. <code>Mux body</code> is the single per-item node
+  in this workflow and every other Code node is per-run. Getting this backwards
+  produces an error that does not obviously point at the mode setting.
+</p>
+
+<h3>Whisper captioning is killed at a 2GB container limit</h3>
+
+<p>
+  The caption endpoint runs Whisper on CPU. At a 2GB memory limit the process is
+  killed on the server and the n8n node sees a 502. 3GB works. Give the
+  media-API container at least that much, and leave the caption node on
+  continue-on-error so that when it does fail you still receive the uncaptioned
+  render.
+</p>
+
+<h3>The watermark crop is tied to the image source</h3>
+
+<p>
+  The anonymous image tier stamps a bottom-right watermark, which the mux step
+  removes with <code>crop=in_w:in_h-72:0:0</code> before scaling. Change the
+  image source and you must delete that crop, or you will be cutting 72 pixels
+  off a clean frame for no reason.
+</p>
+
+<h2 id="run-it">How do I run the Shorts Factory workflow myself?</h2>
+
+<p>
+  Import the free workflow JSON (MIT) from
+  <a
+    href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/01-shorts-factory"
+    >github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/01-shorts-factory</a
+  >
+  into your own n8n, create the five credentials, replace the seven host
+  placeholders, and press Execute. It will load with every credential blank and
+  fail loudly until you fill them.
+</p>
+
+<p>What you have to supply:</p>
+
+<ol>
+  <li>A Groq API key, as header auth.</li>
+  <li>
+    An ElevenLabs API key, as header auth, sent raw rather than as a bearer
+    token.
+  </li>
+  <li>
+    A deployment of the
+    <a href="https://github.com/stephengpope/no-code-architects-toolkit"
+      >No-Code Architects Toolkit</a
+    >, the open-source media API this workflow calls for every video operation.
+    The workflow renders nothing itself.
+  </li>
+  <li>
+    An S3-compatible bucket that both n8n and the toolkit can read and write,
+    serving objects at a predictable public URL, because the workflow constructs
+    those URLs itself from the run id and the scene index.
+  </li>
+  <li>An SMTP host, and a from-address that host is allowed to send as.</li>
+</ol>
+
+<p>
+  On running costs, in general terms: the model, the voice and the images are
+  metered APIs billed to your own accounts, the n8n instance and the media API
+  are servers you host, and the marginal cost of one more video is mostly the
+  text-to-speech characters. No figures from me, because they would be my usage
+  and not yours. Check your own provider dashboards before you run this at
+  volume.
+</p>
+
+<div class="callout">
+  <strong>One sizing note worth repeating.</strong> Give the media-API container
+  at least 3GB of memory. Everything else in this workflow degrades gracefully.
+  Captioning does not, it simply dies.
+</div>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>Can n8n make a YouTube Short on its own?</h3>
+
+<p>
+  Yes. n8n orchestrates the steps but renders nothing itself. In this workflow
+  n8n calls Groq for the script, ElevenLabs for the voice, an image generator
+  per scene, and a self-hosted media API for every video operation. The result
+  is a 1080x1920 MP4 with captions burnt in, delivered by email.
+</p>
+
+<h3>Does the Shorts Factory workflow upload to YouTube automatically?</h3>
+
+<p>
+  No. The YouTube upload node exists at the end of the chain and ships disabled.
+  You connect your own Google OAuth credential and enable it if you want that
+  behaviour. Left as shipped, the workflow emails you the finished file and a
+  person decides whether it is good enough to publish.
+</p>
+
+<h3>Why does the workflow wait 20 seconds between images?</h3>
+
+<p>
+  Because the anonymous image tier allows exactly one queued request per IP
+  address and returns a 429 with the message
+  <code>Queue full for IP</code> otherwise. n8n caps its own retry backoff at
+  5000ms, so the 20-second gap has to be a real Wait node inside a loop rather
+  than a node retry setting.
+</p>
+
+<h3>Why did my ffmpeg output come out far longer than the clips?</h3>
+
+<p>
+  Because <code>apad</code> pads audio indefinitely, so
+  <code>-shortest</code> never fires. During this build, six clips of about five
+  seconds each produced a 2217-second container with no error. Pass an explicit
+  <code>-t</code> per clip, computed from the measured voiceover duration,
+  instead of relying on <code>-shortest</code>.
+</p>
+
+<h3>What do I need to run this workflow in my own n8n?</h3>
+
+<p>
+  Five credentials and one self-hosted service: a Groq key, an ElevenLabs key, a
+  media-API key, an S3-compatible bucket, and an SMTP host, plus your own
+  deployment of the No-Code Architects Toolkit with at least 3GB of memory.
+  Every credential in the public JSON ships as <code>REPLACE_ME</code>.
+</p>
+
+<h2 id="series">The rest of the series</h2>
+
+<p>
+  One workflow per video, the JSON given away under MIT each time, built by
+  Waseem Nasir at SkynetLabs. The other two published episodes:
+</p>
+
+<ul>
+  <li>
+    <a href="/blog/n8n-speed-to-lead-workflow">Episode 02, n8n speed-to-lead</a
+    >: a form fill gets an AI reply in about two seconds, a second model
+    qualifies the follow-up and proposes a visit window, with nothing
+    free-text-parsed.
+  </li>
+  <li>
+    <a href="/blog/n8n-google-maps-lead-table"
+      >Episode 03, n8n Maps lead harvest</a
+    >: a trade and a city in, a deduped lead table out, keyed on place id,
+    written to Postgres.
+  </li>
+</ul>
+
+<p>WhatsApp +92 300 1001957 &middot; Waseem Nasir, SkynetLabs</p>
+
+<p>
+  Hire SkynetLabs, our Top Rated agency on Fiverr:
+  <a href="https://www.fiverr.com/agencies/skynetjoellc"
+    >https://www.fiverr.com/agencies/skynetjoellc</a
+  >
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "One line of text in, a finished short out - n8n workflow (Episode 01)",
+    "description": "A real n8n workflow that turns one line of text into a finished, captioned 9:16 short. Groq writes the scenes, ElevenLabs voices them, an image is generated per scene, and a self-hosted ffmpeg service renders the cut.",
+    "thumbnailUrl": "https://i.ytimg.com/vi/5p7IYgR-c2E/maxresdefault.jpg",
+    "uploadDate": "2026-09-16",
+    "duration": "PT36S",
+    "embedUrl": "https://www.youtube.com/embed/5p7IYgR-c2E",
+    "contentUrl": "https://youtu.be/5p7IYgR-c2E",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com"
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can n8n make a YouTube Short on its own?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. n8n orchestrates the steps but renders nothing itself. In this workflow n8n calls Groq for the script, ElevenLabs for the voice, an image generator per scene, and a self-hosted media API for every video operation. The result is a 1080x1920 MP4 with captions burnt in, delivered by email."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Shorts Factory workflow upload to YouTube automatically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The YouTube upload node exists at the end of the chain and ships disabled. You connect your own Google OAuth credential and enable it if you want that behaviour. Left as shipped, the workflow emails you the finished file and a person decides whether it is good enough to publish."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the workflow wait 20 seconds between images?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because the anonymous image tier allows exactly one queued request per IP address and returns a 429 with the message Queue full for IP otherwise. n8n caps its own retry backoff at 5000ms, so the 20-second gap has to be a real Wait node inside a loop rather than a node retry setting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did my ffmpeg output come out far longer than the clips?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because apad pads audio indefinitely, so -shortest never fires. During this build, six clips of about five seconds each produced a 2217-second container with no error. Pass an explicit -t per clip, computed from the measured voiceover duration, instead of relying on -shortest."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I need to run this workflow in my own n8n?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Five credentials and one self-hosted service: a Groq key, an ElevenLabs key, a media-API key, an S3-compatible bucket, and an SMTP host, plus your own deployment of the No-Code Architects Toolkit with at least 3GB of memory. Every credential in the public JSON ships as REPLACE_ME."
+        }
+      }
+    ]
+  }
+</script>

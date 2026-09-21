@@ -56,6 +56,75 @@ export function categoryLabel(c: PostCategory): string {
 
 export const POSTS: Post[] = [
   {
+    slug: "n8n-shorts-factory-workflow",
+    title:
+      "The n8n Shorts Factory Workflow: One Topic In, a Captioned 9:16 Short Out",
+    seoTitle: "n8n Shorts Factory: Topic In, Short Out",
+    description:
+      "The n8n Shorts Factory workflow turns one topic string into a captioned 9:16 MP4: 28 nodes wiring Groq, ElevenLabs and a self-hosted ffmpeg service.",
+    publishedAt: "2026-09-21",
+    updatedAt: "2026-09-21",
+    readingTime: 12,
+    category: "automation",
+    tags: [
+      "n8n",
+      "free n8n template",
+      "n8n workflow json",
+      "youtube shorts automation",
+      "ai video automation",
+      "elevenlabs",
+      "groq",
+      "ffmpeg",
+      "self hosted n8n",
+    ],
+    author: "Waseem Nasir",
+  },
+  {
+    slug: "n8n-speed-to-lead-workflow",
+    title: "The n8n Speed-to-Lead Workflow: an AI Reply in About Two Seconds",
+    seoTitle: "n8n Speed-to-Lead Workflow: 2-Second Reply",
+    description:
+      "An n8n speed-to-lead workflow answered a web form in 2.4s and 1.9s on 2026-09-17, then qualified the reply and proposed a visit window. MIT JSON.",
+    publishedAt: "2026-09-21",
+    updatedAt: "2026-09-21",
+    readingTime: 12,
+    category: "automation",
+    tags: [
+      "n8n speed to lead",
+      "n8n lead generation workflow",
+      "free n8n template",
+      "n8n claude api",
+      "anthropic claude haiku 4.5",
+      "postgres automation",
+      "webhook automation",
+      "home services automation",
+    ],
+    author: "Waseem Nasir",
+  },
+  {
+    slug: "n8n-google-maps-lead-table",
+    title:
+      "n8n Google Maps Lead Harvest: Trade and City In, a Deduped Lead Table Out",
+    seoTitle: "n8n Google Maps Lead Harvest Workflow",
+    description:
+      "This n8n workflow wrote 100 Denver roofing businesses to Postgres in 31.9 seconds on 2026-09-18, deduped on place_id via the Apify Maps actor.",
+    publishedAt: "2026-09-21",
+    updatedAt: "2026-09-21",
+    readingTime: 12,
+    category: "automation",
+    tags: [
+      "n8n google maps scraper",
+      "n8n lead generation workflow",
+      "free n8n template",
+      "apify",
+      "postgres automation",
+      "local lead generation",
+      "home services leads",
+      "n8n code node",
+    ],
+    author: "Waseem Nasir",
+  },
+  {
     slug: "ai-ops-command-center-never-miss-a-lead",
     title:
       "The AI Ops Command Center: How Small Businesses Stop Missing Leads Forever",

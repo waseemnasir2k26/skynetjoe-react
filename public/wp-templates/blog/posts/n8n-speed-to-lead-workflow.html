@@ -1,0 +1,686 @@
+<style>
+  .wn-n8n-speed-to-lead-workflow {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-speed-to-lead-workflow h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-speed-to-lead-workflow h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-speed-to-lead-workflow p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-speed-to-lead-workflow ul,
+  .wn-n8n-speed-to-lead-workflow ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-speed-to-lead-workflow li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-speed-to-lead-workflow strong {
+    color: #fff;
+  }
+  .wn-n8n-speed-to-lead-workflow a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-speed-to-lead-workflow a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-speed-to-lead-workflow .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-speed-to-lead-workflow .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-speed-to-lead-workflow .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-speed-to-lead-workflow table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-speed-to-lead-workflow th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-speed-to-lead-workflow td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-speed-to-lead-workflow code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-speed-to-lead-workflow .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-speed-to-lead-workflow .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-speed-to-lead-workflow .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<p>
+  This n8n speed-to-lead workflow answered a web form submission in 2.4 seconds
+  and 1.9 seconds, measured on 2026-09-17. Anthropic Claude Haiku 4.5 drafts the
+  first text, Claude Opus 5 reads the homeowner's reply, qualifies the job and
+  proposes a visit window, and every state change is written to Postgres. The
+  demo is simulated and the JSON is MIT-licensed.
+</p>
+
+<p>
+  The advice every home-services owner has already heard is a checklist: call
+  within five minutes, text within ten, never let a form sit overnight. Nobody
+  explains how you do that at 11pm on a Sunday, or during a job, or while you
+  are on a roof. The five minutes is not the hard part. Being awake for it is.
+</p>
+
+<p>
+  Episode 02 of the n8n Workflows series makes the reply itself the automation
+  rather than the rule. A homeowner fills a form and a text is already written
+  and saved before the page has finished loading. They reply. A second, larger
+  model reads what they said, decides whether it knows enough to book, and
+  proposes a real visit window. The decision arrives as a bare JSON object, not
+  as prose somebody has to parse. Nothing in the chain is allowed to invent a
+  price, a warranty, an arrival time or a technician name.
+</p>
+
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/-lEQYzTgI5o"
+    title="This n8n workflow answers a lead in about two seconds - Episode 02"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+<p class="video-note">
+  If iframes are blocked where you are reading this, the video is at
+  <a href="https://youtu.be/-lEQYzTgI5o">youtu.be/-lEQYzTgI5o</a>.
+</p>
+
+<div class="callout">
+  <strong>Read this before anything else.</strong> The company in the demo, Lone
+  Star Air, is fictional. Every page of the public demo is labelled SIMULATED.
+  No SMS provider is wired into this workflow: the text message is a JSON string
+  returned to the caller, meant to be drawn as a chat bubble on a demo page.
+  This is a simulation built to be understood, not a production lead-routing
+  system.
+</div>
+
+<h2 id="specifications">Specifications</h2>
+
+<div class="verdict">
+  Three public webhook lanes, 17 nodes, two Anthropic Claude models and three
+  Postgres tables. A lead form creates a session and gets a reply. A homeowner
+  reply is qualified and may create a booking. A page polls its own conversation
+  by token.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Workflow name</td>
+      <td><code>Speed-to-Lead (simulated demo)</code></td>
+    </tr>
+    <tr>
+      <td>Nodes</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>Triggers</td>
+      <td>
+        <code>POST /webhook/demo/lead</code>,
+        <code>POST /webhook/demo/reply</code>,
+        <code>GET /webhook/demo/state?token=</code>
+      </td>
+    </tr>
+    <tr>
+      <td>First-reply model</td>
+      <td>Anthropic Claude Haiku 4.5, capped at 200 output tokens</td>
+    </tr>
+    <tr>
+      <td>Qualifying model</td>
+      <td>Anthropic Claude Opus 5, capped at 300 output tokens</td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+      <td>
+        Postgres: <code>demo_sessions</code>, <code>demo_messages</code>,
+        <code>demo_bookings</code>
+      </td>
+    </tr>
+    <tr>
+      <td>Messaging</td>
+      <td>None. No SMS provider, no CRM contact, no send queue.</td>
+    </tr>
+    <tr>
+      <td>Session key</td>
+      <td>
+        <code>md5(random || clock_timestamp())</code>, generated in SQL rather
+        than in the workflow
+      </td>
+    </tr>
+    <tr>
+      <td>Public JSON includes</td>
+      <td>
+        All 17 nodes, both system prompts, every SQL statement and the
+        slot-mapping code. Credentials stripped to <code>REPLACE_ME</code>, host
+        examples read <code>YOUR-N8N</code>.
+      </td>
+    </tr>
+    <tr>
+      <td>Licence</td>
+      <td>MIT</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="how-it-works">
+  How does the n8n speed-to-lead workflow reply in about two seconds?
+</h2>
+
+<p>
+  It skips everything that normally sits between a form and a human. The webhook
+  receives the form, one Code node cleans it, one SQL statement creates the
+  session and returns a token, and one Anthropic call drafts a text of under 320
+  characters. The reply is saved to Postgres and returned in the same HTTP
+  response, so the page can draw it immediately.
+</p>
+
+<p>
+  Lane one is the new lead. <code>Clean Lead</code> treats the body as hostile,
+  because the endpoint is public: it strips control characters, clamps the name,
+  phone, city and issue to fixed lengths, falls back to placeholders where a
+  field is empty, and returns a 400 if there is no issue left after cleaning.
+  <code>Create Session</code> inserts the row and returns the token.
+  <code>AI First Text</code> casts Claude Haiku 4.5 as the dispatcher for a demo
+  HVAC company and instructs it to use the first name, reference the stated
+  problem, ask exactly one qualifying question, and never invent prices,
+  warranties, technician names or arrival times.
+</p>
+
+<p>
+  Lane two is the homeowner's reply. <code>Clean Reply</code> whitelists the
+  token to hex characters and clamps the text to 400 characters.
+  <code>Log Lead Text</code> writes the new message and builds the transcript.
+  <code>AI Qualify + Book</code> hands that transcript to Claude Opus 5 with one
+  instruction that makes the whole lane deterministic: reply with bare JSON
+  containing a message, a boolean for whether to book, a job type and a slot
+  hint. The slot hint is one of four tokens, never a raw date.
+  <code>Parse Decision</code> turns that hint into both a machine timestamp and
+  a finished human string, and <code>Save AI Reply</code> writes the message,
+  conditionally inserts the booking, and stamps the session the first time a
+  booking happens.
+</p>
+
+<p>
+  Lane three is the page polling its own state by token, one Postgres query
+  returning the message list and any booking as a single JSON object.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lane</th>
+      <th>Node</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lead</td>
+      <td><code>Web Lead In</code></td>
+      <td>
+        Webhook, POST <code>/demo/lead</code>. Accepts name, phone, city, issue.
+      </td>
+    </tr>
+    <tr>
+      <td>Lead</td>
+      <td><code>Clean Lead</code></td>
+      <td>
+        Code. Strips control chars, clamps every field, 400s on an empty issue.
+      </td>
+    </tr>
+    <tr>
+      <td>Lead</td>
+      <td><code>Create Session</code></td>
+      <td>
+        Postgres INSERT returning id, token, name, city, issue. Token generated
+        in SQL.
+      </td>
+    </tr>
+    <tr>
+      <td>Lead</td>
+      <td><code>AI First Text</code></td>
+      <td>
+        Anthropic Claude Haiku 4.5. Under 320 characters, exactly one qualifying
+        question.
+      </td>
+    </tr>
+    <tr>
+      <td>Lead</td>
+      <td><code>Save AI Text</code>, <code>Respond Lead</code></td>
+      <td>Writes the message, returns ok, token and message to the page.</td>
+    </tr>
+    <tr>
+      <td>Reply</td>
+      <td><code>Homeowner Reply In</code>, <code>Clean Reply</code></td>
+      <td>Webhook plus a token whitelist and a 400-character clamp.</td>
+    </tr>
+    <tr>
+      <td>Reply</td>
+      <td><code>Log Lead Text</code></td>
+      <td>
+        One statement: insert the message, then build the transcript by
+        aggregation plus an explicit append. See the gotcha.
+      </td>
+    </tr>
+    <tr>
+      <td>Reply</td>
+      <td><code>AI Qualify + Book</code></td>
+      <td>
+        Anthropic Claude Opus 5. Returns bare JSON: message, book, job_type,
+        slot_hint.
+      </td>
+    </tr>
+    <tr>
+      <td>Reply</td>
+      <td><code>Parse Decision</code></td>
+      <td>
+        Code. Maps the slot hint to a day plus a fixed four-hour window, renders
+        the label server-side.
+      </td>
+    </tr>
+    <tr>
+      <td>Reply</td>
+      <td><code>Save AI Reply</code>, <code>Respond Reply</code></td>
+      <td>
+        Message plus at most one booking per session, then the JSON response.
+      </td>
+    </tr>
+    <tr>
+      <td>State</td>
+      <td>
+        <code>State In</code>, <code>Read State</code>,
+        <code>Respond State</code>
+      </td>
+      <td>
+        One Postgres query by token returning messages and booking as JSON.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="placeholders">
+  What is real in the public JSON and what is a placeholder?
+</h2>
+
+<p>
+  Both system prompts, every SQL statement, the slot mapping and all 17 nodes
+  are exactly what ran. Two credentials ship as <code>REPLACE_ME</code>: a
+  Postgres credential and a header-auth credential carrying the Anthropic key as
+  <code>x-api-key</code>. The curl examples read <code>YOUR-N8N</code>, which is
+  your own instance hostname.
+</p>
+
+<p>Two further things you should know before importing:</p>
+
+<ul>
+  <li>
+    <strong
+      >The model names come from environment variables with hardcoded
+      fallbacks.</strong
+    >
+    <code>CLASSIFIER_MODEL</code> defaults to <code>claude-haiku-4-5</code> and
+    <code>CLAUDE_MODEL_SONNET</code> defaults to <code>claude-opus-5</code>. The
+    second variable name is misleading and the fallback is genuinely Opus 5.
+    Rename the variable or edit the fallback string if you want a different
+    model on that lane.
+  </li>
+  <li>
+    <strong
+      >The column types in <code>schema.sql</code> were derived from the SQL,
+      not exported from a live database.</strong
+    >
+    They are sensible defaults rather than a verified dump, and the file says
+    so. The unique index on <code>demo_sessions.token</code> is load-bearing:
+    every lane after the first looks a session up by token.
+  </li>
+  <li>
+    <strong>The demo page is not in the repo.</strong> It is a static page
+    making exactly three fetch calls against the contract above. Build your own.
+  </li>
+</ul>
+
+<h2 id="measured">How fast was it, measured?</h2>
+
+<p>
+  Submit to first reply was 2.4 seconds and 1.9 seconds. Reply to booking was
+  4.35 seconds and 3.37 seconds. All four figures were observed on 2026-09-17
+  across n8n executions 25090, 25091, 25095 and 25096.
+</p>
+
+<p>
+  Those are four measurements on one instance, on one day, against one Anthropic
+  account. They are not a benchmark and they are not a promise about your stack.
+  Latency here is dominated by the model call, so it will move with the model
+  you choose, your region, and how busy the provider is at that moment. The
+  Postgres writes are not the expensive part.
+</p>
+
+<h2 id="gotchas">Which build gotchas cost a failed run?</h2>
+
+<h3>A data-modifying CTE is invisible to the rest of the same statement</h3>
+
+<p>
+  This is the one worth the read, because it produced a bug that looked like a
+  model failure and was not.
+</p>
+
+<p>
+  <code>Log Lead Text</code> runs a single SQL statement. A CTE inserts the
+  homeowner's new message into <code>demo_messages</code>, and the final SELECT
+  in that same statement builds the transcript by aggregating rows from
+  <code>demo_messages</code>. The intuition is that the row inserted a moment
+  ago is now there to be aggregated. It is not. In Postgres, every CTE in a
+  statement sees the same snapshot of the table, taken when the statement
+  started, so the row the CTE just inserted does not exist as far as the
+  aggregation is concerned.
+</p>
+
+<p>
+  The visible symptom: the workflow qualified the lead against a transcript
+  missing the customer's most recent message. It answered the message before the
+  one the homeowner had just sent. Every log looked healthy. The model was
+  behaving correctly on the input it was given, and the input was one message
+  stale.
+</p>
+
+<p>
+  The fix is not a second CTE and not a smarter query. It is splitting the write
+  from the read: append the new line to the aggregated transcript explicitly,
+  with <code>|| E'\nCustomer: ' || $2</code> on the end. If you refactor that
+  statement and drop the explicit append because it looks redundant, the bug
+  comes straight back, and it will not announce itself.
+</p>
+
+<h3>
+  The backend ships a finished slot label and the browser must not re-derive it
+</h3>
+
+<p>
+  <code>Parse Decision</code> produces two things from the same Date object:
+  <code>slot_at</code>, a UTC timestamp for the machine, and
+  <code>slot_label</code>, a finished human string such as "Tomorrow, Sep 18 -
+  8:00am - 12:00pm". If a page instead formats <code>slot_at</code> itself in
+  the browser, timezone conversion can shift the hour across the boundary the
+  model chose, so an 8am to 12pm window renders as 12pm to 4pm and the chat
+  bubble and the booking card visibly disagree about when someone is coming.
+  Render <code>slot_label</code> as given. Never recompute it client-side.
+</p>
+
+<h3>Parse Decision salvages JSON out of a misbehaving model</h3>
+
+<p>
+  The system prompt asks for bare JSON with no markdown fence. Nothing enforces
+  that. The Code node tries a direct parse, falls back to extracting the first
+  brace-delimited block out of prose, and finally falls back to a generic
+  message with <code>book: false</code> rather than throwing. The homeowner is
+  holding a phone waiting for a reply; a thrown error in that path is a dead
+  webhook response, which is a worse outcome than a generic answer.
+</p>
+
+<h3>The webhooks are public, so the inputs are clamped</h3>
+
+<p>
+  There is no auth in front of any of the three endpoints. Every field is
+  length-capped and control-character-stripped before it reaches Postgres or a
+  model. That keeps abuse cheap rather than impossible. If you fork this for a
+  real intake flow, add rate limiting before you add anything else.
+</p>
+
+<h2 id="run-it">How do I run the speed-to-lead workflow myself?</h2>
+
+<p>
+  Import the free workflow JSON (MIT) from
+  <a
+    href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/02-speed-to-lead"
+    >github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/02-speed-to-lead</a
+  >, run <code>schema.sql</code> against a Postgres database, create the two
+  credentials, and POST to the lead webhook.
+</p>
+
+<p>What you have to supply:</p>
+
+<ol>
+  <li>
+    A Postgres database, with <code>schema.sql</code> applied first. The
+    workflow writes only to its own three tables.
+  </li>
+  <li>
+    An Anthropic API key, as a header-auth credential named
+    <code>x-api-key</code>. The <code>anthropic-version</code> header is already
+    a literal parameter on both nodes and needs no credential.
+  </li>
+  <li>
+    A demo page of your own, if you want to see it as a conversation rather than
+    as JSON in a terminal.
+  </li>
+</ol>
+
+<p>
+  On running costs, in general terms: there are exactly two metered calls per
+  conversation, one short Anthropic call for the first text and one for the
+  qualifying decision, both output-token capped. There is no media generation
+  and no other external API. The n8n instance and the Postgres database are
+  infrastructure you host. Your provider dashboard is the only honest source for
+  what that costs you, so check it rather than trusting anybody's arithmetic,
+  including mine.
+</p>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>How fast can an AI reply to a web form lead?</h3>
+
+<p>
+  In this workflow, submit to first reply was 2.4 seconds and 1.9 seconds,
+  measured on 2026-09-17 across n8n executions 25090, 25091, 25095 and 25096.
+  Latency is dominated by the model call rather than by the database, so your
+  figures will move with the model, the region and the provider load.
+</p>
+
+<h3>Is Lone Star Air a real company?</h3>
+
+<p>
+  No. Lone Star Air is a fictional company invented for this demo, and every
+  page of the public demo is labelled SIMULATED. No SMS provider is wired in:
+  the text message is a JSON string returned to the caller for a page to render
+  as a chat bubble. Treat the whole thing as a simulation.
+</p>
+
+<h3>Why does the workflow use two different Claude models?</h3>
+
+<p>
+  Because the two jobs are not the same job. The first text is short, formulaic
+  and latency-critical, so it runs on Anthropic Claude Haiku 4.5 capped at 200
+  output tokens. Qualifying a reply and choosing a visit window is a judgement
+  call, so it runs on Claude Opus 5 capped at 300 output tokens.
+</p>
+
+<h3>Why did the workflow answer the wrong message?</h3>
+
+<p>
+  Because a data-modifying CTE is invisible to the rest of the same SQL
+  statement. The CTE inserted the newest message while the aggregation in the
+  same statement still saw the pre-statement snapshot, so the transcript was one
+  message stale. The fix is to append the new line explicitly rather than
+  relying on the insert being visible.
+</p>
+
+<h3>What do I need to run this n8n workflow?</h3>
+
+<p>
+  Two credentials and one database: a Postgres credential with
+  <code>schema.sql</code> already applied, and a header-auth credential carrying
+  your Anthropic API key as <code>x-api-key</code>. Both ship as
+  <code>REPLACE_ME</code> in the public JSON. The demo page is not included and
+  you build your own against the three webhook endpoints.
+</p>
+
+<h2 id="series">The rest of the series</h2>
+
+<p>
+  One workflow per video, the JSON given away under MIT each time, built by
+  Waseem Nasir at SkynetLabs. The other two published episodes:
+</p>
+
+<ul>
+  <li>
+    <a href="/blog/n8n-shorts-factory-workflow"
+      >Episode 01, n8n Shorts Factory</a
+    >: one topic string in, a captioned 9:16 Short out, with the publish step
+    deliberately switched off.
+  </li>
+  <li>
+    <a href="/blog/n8n-google-maps-lead-table"
+      >Episode 03, n8n Maps lead harvest</a
+    >: a trade and a city in, a deduped lead table out, keyed on place id,
+    written to Postgres.
+  </li>
+</ul>
+
+<p>WhatsApp +92 300 1001957 &middot; Waseem Nasir, SkynetLabs</p>
+
+<p>
+  Hire SkynetLabs, our Top Rated agency on Fiverr:
+  <a href="https://www.fiverr.com/agencies/skynetjoellc"
+    >https://www.fiverr.com/agencies/skynetjoellc</a
+  >
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "This n8n workflow answers a lead in about two seconds (Episode 02)",
+    "description": "A simulated n8n speed-to-lead workflow. Anthropic Claude Haiku 4.5 drafts the first reply, Claude Opus 5 qualifies the homeowner's response and proposes a visit window, and every step is logged in Postgres. Demo company Lone Star Air is fictional.",
+    "thumbnailUrl": "https://i.ytimg.com/vi/-lEQYzTgI5o/maxresdefault.jpg",
+    "uploadDate": "2026-09-17",
+    "duration": "PT1M12S",
+    "embedUrl": "https://www.youtube.com/embed/-lEQYzTgI5o",
+    "contentUrl": "https://youtu.be/-lEQYzTgI5o",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com"
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How fast can an AI reply to a web form lead?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In this workflow, submit to first reply was 2.4 seconds and 1.9 seconds, measured on 2026-09-17 across n8n executions 25090, 25091, 25095 and 25096. Latency is dominated by the model call rather than by the database, so your figures will move with the model, the region and the provider load."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Lone Star Air a real company?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Lone Star Air is a fictional company invented for this demo, and every page of the public demo is labelled SIMULATED. No SMS provider is wired in: the text message is a JSON string returned to the caller for a page to render as a chat bubble. Treat the whole thing as a simulation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the workflow use two different Claude models?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because the two jobs are not the same job. The first text is short, formulaic and latency-critical, so it runs on Anthropic Claude Haiku 4.5 capped at 200 output tokens. Qualifying a reply and choosing a visit window is a judgement call, so it runs on Claude Opus 5 capped at 300 output tokens."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did the workflow answer the wrong message?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because a data-modifying CTE is invisible to the rest of the same SQL statement. The CTE inserted the newest message while the aggregation in the same statement still saw the pre-statement snapshot, so the transcript was one message stale. The fix is to append the new line explicitly rather than relying on the insert being visible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I need to run this n8n workflow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two credentials and one database: a Postgres credential with schema.sql already applied, and a header-auth credential carrying your Anthropic API key as x-api-key. Both ship as REPLACE_ME in the public JSON. The demo page is not included and you build your own against the three webhook endpoints."
+        }
+      }
+    ]
+  }
+</script>

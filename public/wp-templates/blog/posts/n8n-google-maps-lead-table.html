@@ -1,0 +1,726 @@
+<style>
+  .wn-n8n-google-maps-lead-table {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-google-maps-lead-table h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-google-maps-lead-table h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-google-maps-lead-table p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-google-maps-lead-table ul,
+  .wn-n8n-google-maps-lead-table ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-google-maps-lead-table li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-google-maps-lead-table strong {
+    color: #fff;
+  }
+  .wn-n8n-google-maps-lead-table a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-google-maps-lead-table a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-google-maps-lead-table .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-google-maps-lead-table .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-google-maps-lead-table .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-google-maps-lead-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-google-maps-lead-table th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-google-maps-lead-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-google-maps-lead-table code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-google-maps-lead-table .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-google-maps-lead-table .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-google-maps-lead-table .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<p>
+  This n8n workflow turns a trade and a city into a deduped lead table in
+  Postgres. On 2026-09-18 it wrote 100 businesses in 31.9 seconds for the query
+  "roofing contractors Denver CO" (n8n execution 26333, run_id 20260918-1945).
+  Google Maps data arrives through the Apify actor
+  <code>compass/crawler-google-places</code>. The JSON is MIT-licensed.
+</p>
+
+<p>
+  If you sell to local operators, the list is the whole job. Every agency owner
+  has at some point paid somebody on a marketplace for a spreadsheet of roofers,
+  received 400 rows with three columns of nonsense, and spent an evening
+  deduping it by hand. The list is not hard to get. A list you can trust the
+  second time you run it, that does not silently repeat last week's rows, is
+  harder.
+</p>
+
+<p>
+  Episode 03 of the n8n Workflows series is that second version. You type a
+  trade, a city and a state into one Set node and press Execute. The workflow
+  starts an Apify actor for that one search string, waits for it with a bounded
+  poll loop, pulls the dataset, cleans each business, drops the obvious
+  non-operators, dedupes on the Google <code>place_id</code>, and upserts
+  everything into its own Postgres table stamped with a run id. The last node
+  emits one summary item so the number you quote is the number the table
+  actually holds.
+</p>
+
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/FwBva2bm_d8"
+    title="Trade and city in, a deduped lead table out - n8n workflow, Episode 03"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+<p class="video-note">
+  If iframes are blocked where you are reading this, the video is at
+  <a href="https://youtu.be/FwBva2bm_d8">youtu.be/FwBva2bm_d8</a>.
+</p>
+
+<div class="callout">
+  <strong>Where the data comes from.</strong> This workflow does not scrape
+  Google itself. Every Maps call goes through the Apify actor
+  <code>compass/crawler-google-places</code>, and the workflow only starts the
+  run, polls it and reads the resulting dataset. Business listings only, no
+  person data.
+</div>
+
+<h2 id="specifications">Specifications</h2>
+
+<div class="verdict">
+  Trade and city in. A Postgres table of local operators out, deduped on
+  place_id, stamped with a run id, with a summary item reporting rows seen, rows
+  written and elapsed seconds. 18 nodes, of which 15 do work and 3 are sticky
+  notes.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Workflow name</td>
+      <td><code>03 Maps Lead Harvest (Apify -&gt; Postgres)</code></td>
+    </tr>
+    <tr>
+      <td>Nodes</td>
+      <td>18 (15 working nodes plus 3 sticky notes)</td>
+    </tr>
+    <tr>
+      <td>Trigger</td>
+      <td>
+        Manual Execute. There is no form; you edit the <code>Inputs</code> Set
+        node.
+      </td>
+    </tr>
+    <tr>
+      <td>Inputs</td>
+      <td><code>trade</code>, <code>city</code>, <code>state</code></td>
+    </tr>
+    <tr>
+      <td>Data source</td>
+      <td>Apify actor <code>compass/crawler-google-places</code></td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+      <td>
+        Postgres table <code>ep03_leads</code>, keyed on <code>place_id</code>,
+        indexed on <code>run_id</code>
+      </td>
+    </tr>
+    <tr>
+      <td>Dedupe key</td>
+      <td>
+        <code>place_id</code>, in code during normalisation and again via
+        <code>ON CONFLICT</code> in SQL
+      </td>
+    </tr>
+    <tr>
+      <td>Caps</td>
+      <td>
+        100 places per run, 20 polls at 30 seconds, 900-second workflow timeout
+      </td>
+    </tr>
+    <tr>
+      <td>Output</td>
+      <td>
+        One summary item: <code>run_id</code>, <code>query</code>,
+        <code>rows_seen</code>, <code>rows_written</code>,
+        <code>rows_deduped</code>, <code>seconds</code>
+      </td>
+    </tr>
+    <tr>
+      <td>Public JSON includes</td>
+      <td>
+        All 18 nodes, the actor request body, the normalisation code and the
+        upsert statement, plus <code>schema.sql</code>. Credentials stripped to
+        <code>REPLACE_ME</code>.
+      </td>
+    </tr>
+    <tr>
+      <td>Licence</td>
+      <td>MIT</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="how-it-works">
+  How does the n8n Google Maps workflow build the lead table?
+</h2>
+
+<p>
+  In five moves: start the actor, poll until it finishes, fetch the dataset,
+  normalise and dedupe in a Code node, then upsert into Postgres one statement
+  per row. A final Code node reports what happened. Nothing reads environment
+  variables, because n8n 2.x Code nodes run in task runners with no
+  <code>$env</code>, so configuration travels through the workflow as data on a
+  Set node.
+</p>
+
+<p>
+  <code>Config</code> derives everything from your three inputs: the query is
+  the trade plus the city, the run id is a timestamp down to the minute, the
+  start time is stamped for the elapsed-seconds calculation, and the ceiling is
+  100 places. <code>Start Apify Actor</code> then POSTs the run asynchronously
+  and keeps the run id and the default dataset id. Asynchronous is not a style
+  preference: the synchronous run endpoints time out past 300 seconds, and a
+  real Maps query for 100 places can take longer than that.
+</p>
+
+<p>
+  The poll loop is Wait, Poll, Check, repeated.
+  <code>Check Finished</code> reads the status, counts the attempt from the loop
+  index, and sets a proceed flag when either the status is terminal or the
+  attempt count reaches 20. That second condition is the circuit breaker. A
+  stuck actor run can cost you ten minutes of waiting, and then the loop stops
+  regardless of status rather than spinning until the workflow timeout. Anything
+  other than a succeeded status ends at a NoOp node and writes nothing at all.
+</p>
+
+<p>
+  <code>Normalize + Dedupe</code> is where the table is actually made. It
+  flattens whatever shape the dataset endpoint returned, drops rows with no
+  place id, drops obvious non-operators by category (supplier, wholesale,
+  distributor, store, charity, non-profit), reduces the phone to digits, reduces
+  the website to a bare host, and keeps a Set of place ids so a business
+  appearing on two result pages is emitted once. It attaches
+  <code>rows_seen</code> and <code>rows_written</code> to every item it emits,
+  and it throws if there are zero usable rows.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Node</th>
+      <th>Type</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Click to run</code></td>
+      <td>Manual trigger</td>
+      <td>Starts the run.</td>
+    </tr>
+    <tr>
+      <td><code>Inputs</code></td>
+      <td>Set</td>
+      <td>trade, city, state. The only node you edit.</td>
+    </tr>
+    <tr>
+      <td><code>Config</code></td>
+      <td>Set</td>
+      <td>
+        query, run_id, started_at, maxResults 100. Keeps the input fields for
+        later nodes.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Start Apify Actor (async)</code></td>
+      <td>HTTP</td>
+      <td>
+        POSTs a run of <code>compass/crawler-google-places</code> with the
+        search string and location query.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Prep Poll</code></td>
+      <td>Set</td>
+      <td>Keeps the run id and the default dataset id.</td>
+    </tr>
+    <tr>
+      <td><code>Wait 30s</code></td>
+      <td>Wait</td>
+      <td>The poll interval.</td>
+    </tr>
+    <tr>
+      <td><code>Poll Run Status</code></td>
+      <td>HTTP</td>
+      <td>GETs the actor run and returns its status.</td>
+    </tr>
+    <tr>
+      <td><code>Check Finished</code></td>
+      <td>Code</td>
+      <td>
+        Status, attempt number, succeeded flag, and the proceed flag that breaks
+        the loop at 20.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Run Finished?</code> / <code>Run Succeeded?</code></td>
+      <td>IF</td>
+      <td>
+        Loop back, or fall through to <code>Run failed</code> and write nothing.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Fetch Dataset Items</code></td>
+      <td>HTTP</td>
+      <td>GETs the dataset items as clean JSON.</td>
+    </tr>
+    <tr>
+      <td><code>Normalize + Dedupe</code></td>
+      <td>Code</td>
+      <td>
+        Filters, cleans phone and website, dedupes on place_id, throws on zero
+        rows.
+      </td>
+    </tr>
+    <tr>
+      <td><code>UPSERT ep03_leads</code></td>
+      <td>Postgres</td>
+      <td>
+        One statement per row, <code>ON CONFLICT (place_id) DO UPDATE</code>,
+        returning the place id.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Run Summary</code></td>
+      <td>Code</td>
+      <td>run_id, query, rows_seen, rows_written, rows_deduped, seconds.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="placeholders">
+  What is real in the public JSON and what is a placeholder?
+</h2>
+
+<p>
+  All 18 nodes, the actor request body, the normalisation code, the upsert
+  statement and <code>schema.sql</code> are exactly what ran. Two credentials
+  ship as <code>REPLACE_ME</code>: a Query Auth credential named
+  <code>Apify Token (REPLACE_ME)</code> that appends the token to all three HTTP
+  calls, and a Postgres credential named <code>Postgres (REPLACE_ME)</code>.
+</p>
+
+<p>Two more things worth knowing before you import it:</p>
+
+<ul>
+  <li>
+    <strong>The table is its own.</strong> The workflow writes to
+    <code>ep03_leads</code> and nothing else. Run <code>schema.sql</code> first;
+    it creates the table keyed on <code>place_id</code> with an index on
+    <code>run_id</code> and a <code>seen_at</code> stamp on every upsert.
+  </li>
+  <li>
+    <strong>Postgres is swappable.</strong> n8n's built-in Data Tables can hold
+    this table if you would rather not run an external database. Replace the
+    upsert node with a Data Table upsert on <code>place_id</code> and drop
+    <code>schema.sql</code>. That variant is not built in the repo.
+  </li>
+</ul>
+
+<h2 id="measured">What did the measured run produce?</h2>
+
+<p>
+  The run wrote 100 businesses to Postgres in 31.9 seconds on 2026-09-18, under
+  n8n execution 26333 and run_id 20260918-1945, for the query "roofing
+  contractors Denver CO". The summary item for that run reported 100 rows seen,
+  100 rows written and 0 deduped.
+</p>
+
+<p>
+  Zero duplicates is worth reading correctly. It does not mean the dedupe is
+  decorative; it means that on this particular query the actor's page walk
+  happened not to repeat a business. <code>rows_seen</code> minus
+  <code>rows_written</code> is exactly the number of duplicates the page walk
+  produced, and on a broader query or a denser city that number stops being
+  zero. The 31.9 seconds is also dominated by how long Apify took, not by n8n,
+  so it will move with the query and the actor's own queue.
+</p>
+
+<h2 id="gotchas">Which build gotchas cost a failed run?</h2>
+
+<h3>The n8n Code sandbox has no URL constructor</h3>
+
+<p>This is the one that cost the most time, because it failed quietly.</p>
+
+<p>
+  The website column is meant to hold a bare host: <code>example.com</code>, not
+  <code>https://www.example.com/contact?utm_source=maps</code>. The obvious
+  implementation is <code>new URL(raw).hostname</code> wrapped in a try/catch,
+  because some of those strings are junk and you do not want one bad row killing
+  the run.
+</p>
+
+<p>
+  The n8n Code node does not run in a browser and does not expose browser
+  globals. There is no <code>URL</code> and no <code>URLSearchParams</code>. So
+  every single call threw, the catch swallowed every single throw, and the
+  fallback ran for every row. There is no error in the execution log, because
+  the code did exactly what it was told. The output just quietly holds the wrong
+  shape of value in every row, which you will not notice until you look at the
+  table, and might not notice then.
+</p>
+
+<p>
+  The fix is string operations: strip the scheme, split on the first slash,
+  question mark and hash, drop anything before an at sign, drop a trailing port,
+  drop a leading <code>www.</code>. Less elegant, works everywhere. The broader
+  lesson is that a try/catch which always catches is indistinguishable from a
+  try/catch that never runs, so if a fallback path seems to be producing every
+  row, test the happy path directly instead of trusting that it exists.
+</p>
+
+<p>
+  One related detail: <code>has_website</code> is set from the raw field before
+  cleaning, so a junk website string still counts as having one. For this kind
+  of list, <code>has_website = false</code> is usually the most interesting
+  column on the table.
+</p>
+
+<h3>The actor run is asynchronous and the poll has to be bounded</h3>
+
+<p>
+  The synchronous run endpoints time out past 300 seconds, and a real Maps query
+  for 100 places can exceed that, so the workflow starts the run and polls it.
+  The bound matters as much as the poll: at 20 attempts the loop stops
+  regardless of status, so a stuck actor can never spin the workflow until its
+  own 900-second timeout. A non-succeeded status ends at a NoOp node and writes
+  nothing.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cap</th>
+      <th>Where</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Places per run</td>
+      <td><code>Config.maxResults</code></td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <td>Poll ceiling</td>
+      <td><code>Check Finished</code></td>
+      <td>20 polls at 30 seconds, about 10 minutes, then it gives up</td>
+    </tr>
+    <tr>
+      <td>Execution timeout</td>
+      <td>Workflow settings</td>
+      <td>900 seconds</td>
+    </tr>
+    <tr>
+      <td>HTTP timeouts</td>
+      <td>Per node</td>
+      <td>Start 60s, poll 30s, fetch 60s</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Dedupe happens in code first, and in SQL second</h3>
+
+<p>
+  The actor walks the Maps results page by page and the same business can appear
+  on two pages. The Code node keeps a Set of place ids and emits each one once.
+  The upsert's <code>ON CONFLICT (place_id)</code> is the second line of
+  defence, which is what protects you when you run the same query again next
+  week.
+</p>
+
+<h3>Phone is digits only, and short numbers become NULL</h3>
+
+<p>
+  Everything non-numeric is stripped, and anything under 10 digits is not a
+  dialable number and is stored as NULL. Format on the way out, not on the way
+  in. The column is text, not a number, because leading zeros and country codes
+  matter and integers destroy both.
+</p>
+
+<h3>Zero rows throws on purpose</h3>
+
+<p>
+  If the actor returns no usable places, the Code node throws rather than
+  writing an empty run. The execution goes red, and the summary never gets to
+  claim zero rows written as a success. A green run that wrote nothing is the
+  failure mode that wastes a week.
+</p>
+
+<h2 id="run-it">How do I run the Maps lead harvest workflow myself?</h2>
+
+<p>
+  Import the free workflow JSON (MIT) from
+  <a
+    href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/03-maps-lead-harvest"
+    >github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/03-maps-lead-harvest</a
+  >, run <code>schema.sql</code> against a Postgres database, create the two
+  credentials, edit the three strings on the <code>Inputs</code> node, and press
+  Execute.
+</p>
+
+<p>What you have to supply:</p>
+
+<ol>
+  <li>
+    An Apify API token, as a Query Auth credential named <code>token</code>. All
+    three HTTP nodes append it to every call.
+  </li>
+  <li>
+    A Postgres database with <code>schema.sql</code> applied. The workflow
+    writes to <code>ep03_leads</code> and nothing else.
+  </li>
+</ol>
+
+<p>
+  On running costs, in general terms: the Apify actor run is the metered part
+  and it is billed to your own Apify account by what the run consumes, while n8n
+  and Postgres are infrastructure you host. One search string at 100 places is a
+  small run. Check the actual cost on the actor run page in your own account
+  before you raise <code>maxResults</code> or add more search strings, because
+  both of those multiply the metered side and neither of them touches the rest
+  of the workflow.
+</p>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>Can n8n scrape Google Maps?</h3>
+
+<p>
+  Not directly, and this workflow does not try. It calls the Apify actor
+  <code>compass/crawler-google-places</code>, which does the Maps work, and n8n
+  starts the run, polls it, and reads the resulting dataset. That keeps the Maps
+  interaction in one auditable place and leaves n8n doing orchestration,
+  cleaning and storage.
+</p>
+
+<h3>How do I dedupe Google Maps results in n8n?</h3>
+
+<p>
+  Twice. In the Code node, keep a JavaScript Set of <code>place_id</code> values
+  and emit each business once, which handles the actor walking the same business
+  onto two result pages. Then key the Postgres table on
+  <code>place_id</code> and use <code>ON CONFLICT (place_id) DO UPDATE</code>,
+  which handles re-running the same query later.
+</p>
+
+<h3>Is the n8n Code node able to use the URL constructor?</h3>
+
+<p>
+  No. The Code node does not run in a browser and does not expose browser
+  globals, so <code>URL</code> and <code>URLSearchParams</code> are undefined.
+  Calls to <code>new URL()</code> throw, and a try/catch around them silently
+  falls through to the fallback on every row. Parse hosts with string operations
+  instead.
+</p>
+
+<h3>How long does a 100-business Maps harvest take?</h3>
+
+<p>
+  One measured run wrote 100 businesses in 31.9 seconds on 2026-09-18, under n8n
+  execution 26333 and run_id 20260918-1945, for the query "roofing contractors
+  Denver CO". Most of that elapsed time is the Apify actor rather than n8n, so
+  it moves with the query, the city density and the actor's own queue.
+</p>
+
+<h3>What do I need to run this n8n workflow?</h3>
+
+<p>
+  Two credentials and one database: an Apify API token as a Query Auth
+  credential named <code>token</code>, and a Postgres credential with
+  <code>schema.sql</code> already applied. Both ship as
+  <code>REPLACE_ME</code> in the public JSON. You then edit three strings,
+  trade, city and state, on the <code>Inputs</code> node.
+</p>
+
+<h2 id="series">The rest of the series</h2>
+
+<p>
+  One workflow per video, the JSON given away under MIT each time, built by
+  Waseem Nasir at SkynetLabs. The other two published episodes:
+</p>
+
+<ul>
+  <li>
+    <a href="/blog/n8n-shorts-factory-workflow"
+      >Episode 01, n8n Shorts Factory</a
+    >: one topic string in, a captioned 9:16 Short out, with the publish step
+    deliberately switched off.
+  </li>
+  <li>
+    <a href="/blog/n8n-speed-to-lead-workflow">Episode 02, n8n speed-to-lead</a
+    >: a form fill gets an AI reply in about two seconds, a second model
+    qualifies the follow-up and proposes a visit window.
+  </li>
+</ul>
+
+<p>WhatsApp +92 300 1001957 &middot; Waseem Nasir, SkynetLabs</p>
+
+<p>
+  Hire SkynetLabs, our Top Rated agency on Fiverr:
+  <a href="https://www.fiverr.com/agencies/skynetjoellc"
+    >https://www.fiverr.com/agencies/skynetjoellc</a
+  >
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Trade and city in, a deduped lead table out - n8n workflow (Episode 03)",
+    "description": "An n8n workflow that turns a trade and a city into a deduped lead table in Postgres. Google Maps data arrives through the Apify actor compass/crawler-google-places, rows are cleaned and deduped on place_id, and every run is stamped with a run id.",
+    "thumbnailUrl": "https://i.ytimg.com/vi/FwBva2bm_d8/maxresdefault.jpg",
+    "duration": "PT1M12S",
+    "embedUrl": "https://www.youtube.com/embed/FwBva2bm_d8",
+    "contentUrl": "https://youtu.be/FwBva2bm_d8",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com"
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can n8n scrape Google Maps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not directly, and this workflow does not try. It calls the Apify actor compass/crawler-google-places, which does the Maps work, and n8n starts the run, polls it, and reads the resulting dataset. That keeps the Maps interaction in one auditable place and leaves n8n doing orchestration, cleaning and storage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I dedupe Google Maps results in n8n?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Twice. In the Code node, keep a JavaScript Set of place_id values and emit each business once, which handles the actor walking the same business onto two result pages. Then key the Postgres table on place_id and use ON CONFLICT (place_id) DO UPDATE, which handles re-running the same query later."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the n8n Code node able to use the URL constructor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The Code node does not run in a browser and does not expose browser globals, so URL and URLSearchParams are undefined. Calls to new URL() throw, and a try/catch around them silently falls through to the fallback on every row. Parse hosts with string operations instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a 100-business Maps harvest take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One measured run wrote 100 businesses in 31.9 seconds on 2026-09-18, under n8n execution 26333 and run_id 20260918-1945, for the query roofing contractors Denver CO. Most of that elapsed time is the Apify actor rather than n8n, so it moves with the query, the city density and the actor's own queue."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I need to run this n8n workflow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two credentials and one database: an Apify API token as a Query Auth credential named token, and a Postgres credential with schema.sql already applied. Both ship as REPLACE_ME in the public JSON. You then edit three strings, trade, city and state, on the Inputs node."
+        }
+      }
+    ]
+  }
+</script>
