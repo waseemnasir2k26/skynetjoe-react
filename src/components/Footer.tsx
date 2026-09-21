@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { SITE, FOOTER_COLUMNS } from "@/lib/site";
+import { SITE, FOOTER_COLUMNS, FOOTER_LEGAL } from "@/lib/site";
 import ToolsStrip from "@/components/cta/ToolsStrip";
 
 const SocialIcon = ({ d, label }: { d: string; label: string }) => (
@@ -29,15 +29,9 @@ export default function Footer() {
   const pathname = usePathname();
   if (pathname?.startsWith("/lp/")) return null;
 
-  // ToolsStrip cross-promo: render on every route EXCEPT homepage, /lp/*
-  // (already filtered above), and the /v2 + /v3 hero variants — the strip
-  // would skew those pages' conversion comparison against the baseline.
-  const showToolsStrip =
-    pathname !== "/" &&
-    pathname !== null &&
-    pathname !== undefined &&
-    !pathname.startsWith("/v2") &&
-    !pathname.startsWith("/v3");
+  // ToolsStrip cross-promo: render on every route EXCEPT homepage and /lp/*
+  // (already filtered above). Derives from TOOLS_REGISTRY.
+  const showToolsStrip = pathname !== "/" && pathname != null;
   let currentSlug: string | undefined;
   if (pathname?.startsWith("/tools/")) {
     const seg = pathname.split("/")[2];
@@ -55,7 +49,7 @@ export default function Footer() {
         }}
       >
         <div className="container-x px-5 sm:px-6 py-12 sm:py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
             <div className="lg:col-span-2">
               <Link
                 href="/"
@@ -206,6 +200,7 @@ export default function Footer() {
               </a>
             </p>
             <p
+              className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1"
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: 11,
@@ -216,6 +211,18 @@ export default function Footer() {
                 overflowWrap: "anywhere",
               }}
             >
+              {FOOTER_LEGAL.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  style={{
+                    color: "var(--ink-2)",
+                    borderBottom: "1px solid var(--border)",
+                  }}
+                >
+                  {l.label}
+                </Link>
+              ))}
               <a
                 href={`mailto:${SITE.email}`}
                 style={{

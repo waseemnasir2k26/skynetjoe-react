@@ -8,6 +8,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { TOOLS_REGISTRY } from "@/data/tools-registry";
 
 export type ToolsStripProps = {
   /** Optional tool slug to hide from the strip (use on /tools/[slug] pages). */
@@ -18,55 +19,12 @@ export type ToolsStripProps = {
   eyebrow?: string;
 };
 
-type Tool = {
-  slug: string;
-  name: string;
-  blurb: string;
-};
-
-// Curated 8 — picked the highest-value mix across calc / quiz / library / generator.
-const TOOLS: Tool[] = [
-  {
-    slug: "n8n-workflow-generator",
-    name: "n8n Workflow Generator",
-    blurb: "Download a working automation JSON",
-  },
-  {
-    slug: "aeo-audit",
-    name: "AEO Audit",
-    blurb: "Can AI answer engines cite your site?",
-  },
-  {
-    slug: "cold-dm-generator",
-    name: "Cold DM Generator",
-    blurb: "Outreach scripts that get replies",
-  },
-  {
-    slug: "automation-gap-analyzer",
-    name: "Automation Gap Analyzer",
-    blurb: "Find the 3 workflows costing you sleep",
-  },
-  {
-    slug: "prompt-library",
-    name: "Prompt Library",
-    blurb: "200+ prompts, ready to ship",
-  },
-  {
-    slug: "content-calendar",
-    name: "Content Calendar",
-    blurb: "12-month posting plan in 60 sec",
-  },
-  {
-    slug: "voice-persona-builder",
-    name: "Voice Persona Builder",
-    blurb: "Brand voice doc in 4 steps",
-  },
-  {
-    slug: "video-prompt-generator",
-    name: "Video Prompt Generator",
-    blurb: "Runway / Pika / Sora / Veo formats",
-  },
-];
+// Derived from TOOLS_REGISTRY (single source of truth) — 2026-09-21.
+const TOOLS = TOOLS_REGISTRY.map((t) => ({
+  slug: t.slug,
+  name: t.name,
+  blurb: t.oneLiner,
+}));
 
 export default function ToolsStrip({
   currentSlug,

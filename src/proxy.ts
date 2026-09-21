@@ -1,14 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Internal design/inventory pages. They are `noindex`, but noindex only stops
-// ranking — not direct access. Block them at request time in production so the
-// internal hero/gradient labs and the full site-inventory dashboard aren't
-// publicly reachable. They stay fully usable in local dev.
-//   Note: an in-page `if (NODE_ENV === "production") notFound()` guard does NOT
-//   fire on these `force-static` prerendered routes, so the gate lives here.
-//   (Next 16: `middleware` was renamed to `proxy`.)
-const BLOCKED_IN_PROD = ["/gradient-lab", "/hero-lab", "/site-stats"];
+// (Next 16: `middleware` was renamed to `proxy`.) The gradient-lab / hero-lab /
+// site-stats prod block was removed with those routes (2026-09-21).
 
 export function proxy(req: NextRequest) {
   // Canonical-host redirect: www.skynetjoe.com serves 200 with zero redirects,
@@ -22,19 +16,11 @@ export function proxy(req: NextRequest) {
     url.port = "";
     return NextResponse.redirect(url, 308);
   }
-
-  if (
-    process.env.NODE_ENV === "production" &&
-    BLOCKED_IN_PROD.includes(req.nextUrl.pathname)
-  ) {
-    // Rewrite to a non-existent path → Next serves not-found.tsx with a 404.
-    return NextResponse.rewrite(new URL("/_blocked-internal", req.url));
-  }
   return NextResponse.next();
 }
 
 export const config = {
   // Broad matcher (minus static assets) so the host redirect covers every
-  // route; the prod block above still only fires on its 3 paths.
+  // route.
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

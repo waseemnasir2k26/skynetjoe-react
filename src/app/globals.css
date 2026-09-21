@@ -5,6 +5,9 @@
    ============================================ */
 
 :root {
+  /* Announcement bar removed 2026-09-21 — fixed-header offsets read this var
+     with a 44px fallback, so pin it to 0 to avoid a dead gap under the nav. */
+  --promo-h: 0px;
   /* ============================================================
      CREAM EDITORIAL THEME · DEFAULT (anti-AI-slop pivot 2026-05-25)
      ============================================================ */

@@ -90,18 +90,11 @@ export const SITE = {
 } as const;
 
 export type NavSubItem = { label: string; href: string; desc?: string };
-export type NavItem = {
-  label: string;
-  href: string;
-  hasMega?: boolean;
-  hasToolsMega?: boolean;
-  subItems?: NavSubItem[];
-};
+export type NavItem = { label: string; href: string };
 /**
  * Free tools — canonical list mirroring `src/data/tools-registry.ts`
- * (TOOLS_REGISTRY). Used as the mobile-menu / fallback flat list; the
- * desktop nav renders the categorized ToolsMegaMenu instead. Keep in sync
- * when a tool is added/removed — TOOLS_REGISTRY is the source of truth.
+ * (TOOLS_REGISTRY). Consumed by the footer ToolsStrip / tools index.
+ * TOOLS_REGISTRY is the source of truth — never hand-edit this list.
  */
 export const TOOL_LINKS: NavSubItem[] = TOOLS_REGISTRY.map((t) => ({
   label: t.name,
@@ -109,111 +102,39 @@ export const TOOL_LINKS: NavSubItem[] = TOOLS_REGISTRY.map((t) => ({
   desc: t.oneLiner,
 }));
 
-// Restructured from 10 flat items → 6 top-level axes (+ Book-audit CTA in Header).
-// Two clean axes: WHAT we do (Services mega) × WHO it's for (By Industry).
-// Displaced links (News, Contact, Locations, Case Studies) folded into dropdowns
-// so every destination stays reachable. "Home" dropped — logo links home.
+/**
+ * 2026-09-21 simplification: flat six-item nav, no mega menus, no dropdowns.
+ * Header CTA ("Book a call" → /contact) lives in Header.tsx.
+ */
 export const NAV_PRIMARY: NavItem[] = [
-  { label: "Services", href: "/services", hasMega: true },
-  {
-    // WHO-it's-for axis. Parent is the (previously orphaned) /industries hub.
-    label: "By Industry",
-    href: "/industries",
-    subItems: [
-      {
-        label: "All industries",
-        href: "/industries",
-        desc: "Vertical-tuned automation playbooks",
-      },
-      {
-        label: "Dental Clinics",
-        href: "/industries/dental-clinics",
-        desc: "New-patient capture + recall engine",
-      },
-      {
-        label: "Wellness & Medspas",
-        href: "/industries/wellness-spas",
-        desc: "Booking AI + reputation engine",
-      },
-      {
-        label: "Freight & Logistics",
-        href: "/industries/freight-logistics",
-        desc: "Voice dispatch + EDI triage",
-      },
-      {
-        label: "Freight LP — quick demo",
-        href: "/lp/freight",
-        desc: "AI voice agent — never miss a load",
-      },
-      {
-        label: "Home Services LP",
-        href: "/lp/home-services",
-        desc: "Never miss a call — HVAC / plumbing",
-      },
-      {
-        label: "FreightOps Dispatch",
-        href: "/lp/logistics",
-        desc: "Dispatch dashboard for small fleets",
-      },
-    ],
-  },
-  {
-    label: "Work",
-    href: "/portfolio",
-    subItems: [
-      {
-        label: "Recent Projects",
-        href: "/portfolio",
-        desc: "Live screenshots of every shipped build",
-      },
-      {
-        label: "Case Studies",
-        href: "/case-studies",
-        desc: "Deep dives — problem, fix, numbers",
-      },
-      { label: "Locations", href: "/locations", desc: "Service coverage map" },
-    ],
-  },
-  {
-    label: "Tools",
-    href: "/tools",
-    hasToolsMega: true,
-    subItems: TOOL_LINKS,
-  },
+  { label: "Services", href: "/services" },
+  { label: "Work", href: "/portfolio" },
+  { label: "Tools", href: "/tools" },
   { label: "Pricing", href: "/pricing" },
-  {
-    label: "Company",
-    href: "/about",
-    subItems: [
-      {
-        label: "About",
-        href: "/about",
-        desc: "Solo studio, Bali-built, 14-day ship",
-      },
-      { label: "Latest News", href: "/news", desc: "Field notes + playbooks" },
-      { label: "Contact", href: "/contact", desc: "Reach us — 8-hour reply" },
-    ],
-  },
+  { label: "Blog", href: "/blog" },
+  { label: "About", href: "/about" },
 ];
 
-// 16 services across 4 categories (from THEME-SUMMARY.md)
+/** Header / mobile-drawer CTA. */
+export const NAV_CTA = { label: "Book a call", href: "/contact" } as const;
+
+// 5 core services, one category (2026-09-21 simplification — the 11
+// non-core slugs 301 via src/lib/simplify-redirects.ts).
 export const SERVICE_CATEGORIES = [
   {
-    name: "Automation",
+    name: "Services",
     services: [
-      {
-        slug: "freightops-logistics",
-        label: "FreightOps — Dispatch Canvas",
-        icon: "Truck",
-        desc: "Site + dispatch + AI voice agent for US small-fleet carriers, 14 days",
-        href: "/lp/logistics",
-        badge: "NEW",
-      },
       {
         slug: "n8n-automation",
         label: "n8n Automation",
         icon: "Bot",
         desc: "Workflow automation that runs while you sleep",
+      },
+      {
+        slug: "ai-chatbots",
+        label: "AI Chatbots",
+        icon: "MessageSquare",
+        desc: "Live chat + web + voice agents",
       },
       {
         slug: "gohighlevel",
@@ -222,119 +143,27 @@ export const SERVICE_CATEGORIES = [
         desc: "Full CRM + sales pipeline setup",
       },
       {
-        slug: "zapier-make",
-        label: "Zapier & Make",
-        icon: "Link",
-        desc: "Multi-tool connectivity layer",
-      },
-      {
-        slug: "social-automation",
-        label: "Social Automation",
-        icon: "Smartphone",
-        desc: "Auto-post + DM responder stack",
-      },
-    ],
-  },
-  {
-    name: "AI Content",
-    services: [
-      {
-        slug: "ai-video",
-        label: "AI Video Creation",
-        icon: "Clapperboard",
-        desc: "Reels, shorts, talking-head at scale",
-      },
-      {
-        slug: "youtube-automation",
-        label: "YouTube Automation",
-        icon: "PlayCircle",
-        desc: "Faceless channel pipeline",
-      },
-      {
-        slug: "tiktok-automation",
-        label: "TikTok Automation",
-        icon: "Music",
-        desc: "Daily content engine",
-      },
-      {
-        slug: "facebook-automation",
-        label: "Facebook Automation",
-        icon: "Users",
-        desc: "Page + DM + group reach",
-      },
-    ],
-  },
-  {
-    name: "Development",
-    services: [
-      {
-        slug: "wordpress-seo",
-        label: "WordPress SEO Blog",
-        icon: "Globe",
-        desc: "AEO-tuned content engine",
-      },
-      {
-        slug: "ecommerce-automation",
-        label: "E-commerce Automation",
-        icon: "ShoppingCart",
-        desc: "Shopify + Stripe + n8n stack",
-      },
-      {
         slug: "vibe-coded-sites",
         label: "Vibe-Coded Websites",
         icon: "Zap",
         desc: "Custom Next.js builds, 7-day ship",
       },
       {
-        slug: "ai-chatbots",
-        label: "AI Chatbots",
-        icon: "MessageSquare",
-        desc: "Live chat + web + voice agents",
-      },
-    ],
-  },
-  {
-    name: "Consulting",
-    services: [
-      {
-        slug: "ai-business-systems",
-        label: "AI Business Systems",
-        icon: "Building2",
-        desc: "Operator-grade ops blueprint",
-      },
-      {
-        slug: "strategy-training",
-        label: "Strategy & Training",
-        icon: "BookOpen",
-        desc: "Team upskilling + playbooks",
-      },
-      {
-        slug: "branding-design",
-        label: "Branding & Design",
-        icon: "Palette",
-        desc: "Identity + design system",
-      },
-      {
-        slug: "ai-content-creation",
-        label: "AI Content Creation",
-        icon: "PenTool",
-        desc: "Voice-locked content at volume",
+        slug: "wordpress-seo",
+        label: "WordPress SEO Blog",
+        icon: "Globe",
+        desc: "AEO-tuned content engine",
       },
     ],
   },
 ] as const;
 
+/** Flat list of the 5 core services. */
+export const SERVICES = SERVICE_CATEGORIES.flatMap((c) => c.services);
+
 /**
- * Resolves the click-through href for a service tile.
- *
- * Most services route to `/services/[slug]`. A few (currently
- * `freightops-logistics`) carry an explicit `href` in SERVICE_CATEGORIES
- * pointing at a dedicated funnel LP (`/lp/logistics`) — those slugs are
- * deliberately excluded from `/services/[slug]`'s generateStaticParams
- * (dynamicParams=false there), so `/services/freightops-logistics` is a
- * guaranteed 404. EVERY renderer that turns a service entry into a link
- * MUST call this helper instead of hand-building `/services/${slug}` —
- * otherwise it silently links into that 404.
+ * Resolves the click-through href for a service tile. Every core service
+ * routes to `/services/[slug]`; an explicit `href` (none today) wins.
  */
 export function svcHref(svc: { slug: string; href?: string }): string {
   return svc.href && typeof svc.href === "string"
@@ -365,48 +194,36 @@ export const FOOTER_COLUMNS = [
     title: "Services",
     links: [
       { label: "n8n Automation", href: "/services/n8n-automation" },
-      { label: "GoHighLevel CRM", href: "/services/gohighlevel" },
       { label: "AI Chatbots", href: "/services/ai-chatbots" },
-      { label: "WordPress SEO", href: "/services/wordpress-seo" },
+      { label: "GoHighLevel CRM", href: "/services/gohighlevel" },
       { label: "Vibe-Coded Sites", href: "/services/vibe-coded-sites" },
+      { label: "WordPress SEO", href: "/services/wordpress-seo" },
     ],
   },
   {
-    title: "AEO Resources",
+    title: "Resources",
     links: [
       { label: "AEO Guide", href: "/aeo-guide" },
-      { label: "Glossary", href: "/glossary" },
-      { label: "FAQs", href: "/faqs" },
-      { label: "n8n vs Zapier", href: "/n8n-vs-zapier" },
-      {
-        label: "5 Boring Automations",
-        href: "/boring-automations-small-businesses-pay-for",
-      },
       { label: "Case Studies", href: "/case-studies" },
+      { label: "Blog", href: "/blog" },
+      { label: "Free Tools", href: "/tools" },
     ],
   },
   {
     title: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Author", href: "/author/waseem-nasir" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Portfolio", href: "/portfolio" },
-      { label: "Latest News", href: "/news" },
-      { label: "Journal", href: "/blog" },
-    ],
-  },
-  {
-    // Conversion + product links, split out of the old Legal column.
-    title: "Get Started",
-    links: [
-      { label: "Apply for a call", href: "/discovery-call" },
       { label: "Contact", href: "/contact" },
-      { label: "Free Tools", href: "/tools" },
-      { label: "Privacy Policy", href: "/privacy-policy" },
-      { label: "Terms of Service", href: "/terms-of-service" },
+      { label: "Author", href: "/author/waseem-nasir" },
     ],
   },
+] as const;
+
+/** Rendered on the footer bottom line, next to the copyright. */
+export const FOOTER_LEGAL = [
+  { label: "Privacy", href: "/privacy-policy" },
+  { label: "Terms", href: "/terms-of-service" },
 ] as const;
 
 // ── Metadata length helpers (2026-09-06 SEO pass) ────────────────────────────
