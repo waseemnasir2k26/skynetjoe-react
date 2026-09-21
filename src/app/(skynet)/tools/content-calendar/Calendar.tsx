@@ -132,7 +132,7 @@ function interpolate(s: string, inputs: Inputs, rand: () => number): string {
     },
   );
   const outcomes = [
-    "30 % more booked calls",
+    "30% more booked calls",
     "10 hours back per week",
     "your first 5 retainer clients",
     "a documented sales process",
@@ -391,7 +391,43 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
   const [hydrated, setHydrated] = useState(false);
   const [openPost, setOpenPost] = useState<Post | null>(null);
   const [mdCopied, setMdCopied] = useState(false);
+  const [postCopied, setPostCopied] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
+  const [feedback, setFeedback] = useState<{
+    message: string;
+    email: string;
+    state: "idle" | "sending" | "sent" | "error";
+  }>({ message: "", email: "", state: "idle" });
+
+  const onSendFeedback = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const message = feedback.message.trim();
+    if (message.length < 4) {
+      setFeedback((f) => ({ ...f, state: "error" }));
+      return;
+    }
+    setFeedback((f) => ({ ...f, state: "sending" }));
+    try {
+      const res = await fetch("/api/tool-feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          tool: "content-calendar",
+          message,
+          email: feedback.email.trim() || undefined,
+        }),
+      });
+      const json = (await res.json().catch(() => null)) as {
+        ok?: boolean;
+      } | null;
+      setFeedback((f) => ({
+        ...f,
+        state: res.ok && json?.ok ? "sent" : "error",
+      }));
+    } catch {
+      setFeedback((f) => ({ ...f, state: "error" }));
+    }
+  };
 
   // Hydrate
   useEffect(() => {
@@ -798,6 +834,50 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
               })}
             </div>
 
+            {/* Mobile agenda — the 7-column grid is unreadable under 640px */}
+            <div className="mt-4 sm:hidden">
+              <p className="text-[10px] uppercase tracking-wider text-[var(--terracotta-aa)]/70 font-semibold mb-2">
+                Day by day
+              </p>
+              <ol className="space-y-2">
+                {[...postsByDate.entries()].map(([date, dayPosts]) => (
+                  <li
+                    key={date}
+                    className="rounded-lg border border-[rgba(26,26,26,0.10)] bg-[var(--cream-3)] p-2"
+                  >
+                    <p className="text-[10px] uppercase tracking-wider text-[var(--ink-faint)] mb-1">
+                      {parseLocalIso(date).toLocaleDateString("en-US", {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </p>
+                    <div className="flex flex-col gap-1">
+                      {dayPosts.map((p) => {
+                        const meta = PLATFORM_META[p.platform];
+                        return (
+                          <button
+                            key={`m-${p.id}`}
+                            type="button"
+                            onClick={() => setOpenPost(p)}
+                            className="text-left rounded px-2 py-1.5 text-xs leading-snug transition"
+                            style={{
+                              background: meta.bg,
+                              color: meta.color,
+                              border: `1px solid ${meta.color}40`,
+                            }}
+                          >
+                            <span className="font-bold mr-1.5">{meta.short}</span>
+                            {p.hook}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
             {/* Legend */}
             <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px]">
               {PLATFORM_ORDER.map((p) => {
@@ -914,7 +994,10 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
               </div>
               <button
                 type="button"
-                onClick={() => setOpenPost(null)}
+                onClick={() => {
+                  setOpenPost(null);
+                  setPostCopied(false);
+                }}
                 className="text-[var(--ink-2)] hover:text-[var(--ink)]"
                 aria-label="Close"
               >
@@ -976,13 +1059,20 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
                       .map((t) => `#${t}`)
                       .join(" ")}`;
                     await navigator.clipboard.writeText(txt);
+                    setPostCopied(true);
+                    setTimeout(() => setPostCopied(false), 1500);
                   } catch {
                     // ignore
                   }
                 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-[var(--ink)] border border-[rgba(198,107,63,0.30)] bg-[rgba(198,107,63,0.10)] hover:bg-[rgba(198,107,63,0.85)]/20 transition"
               >
-                <Copy className="w-4 h-4" /> Copy post
+                {postCopied ? (
+                  <ClipboardList className="w-4 h-4" />
+                ) : (
+                  <Copy className="w-4 h-4" />
+                )}
+                {postCopied ? "Copied" : "Copy post"}
               </button>
               <button
                 type="button"
@@ -1008,35 +1098,62 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
           One missing field, one weird output, one tool you wish existed — tell
           me. I read every reply.
         </p>
-        <form action="/api/tool-feedback" method="POST" className="space-y-3">
-          <input type="hidden" name="tool" value="content-calendar" />
-          <textarea
-            name="message"
-            required
-            rows={3}
-            placeholder="What should we improve, fix, or build?"
-            className="cc-input"
-            style={{
-              fontFamily:
-                "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
-              minHeight: 96,
-              resize: "vertical",
-            }}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email (optional — only if you want a reply)"
-            className="cc-input"
-          />
-          <button
-            type="submit"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
-            style={{ background: "var(--terracotta)" }}
+        {feedback.state === "sent" ? (
+          <p
+            role="status"
+            className="rounded-xl border border-[rgba(138,154,123,0.40)] bg-[rgba(138,154,123,0.10)] px-4 py-3 text-sm text-[var(--ink)]"
           >
-            Send feedback →
-          </button>
-        </form>
+            Sent — thank you. I read every reply.
+          </p>
+        ) : (
+          <form onSubmit={onSendFeedback} className="space-y-3">
+            <textarea
+              name="message"
+              required
+              rows={3}
+              value={feedback.message}
+              onChange={(e) =>
+                setFeedback((f) => ({
+                  ...f,
+                  message: e.target.value,
+                  state: "idle",
+                }))
+              }
+              placeholder="What should we improve, fix, or build?"
+              className="cc-input"
+              style={{
+                fontFamily:
+                  "var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
+                minHeight: 96,
+                resize: "vertical",
+              }}
+            />
+            <input
+              type="email"
+              name="email"
+              value={feedback.email}
+              onChange={(e) =>
+                setFeedback((f) => ({ ...f, email: e.target.value }))
+              }
+              placeholder="Email (optional — only if you want a reply)"
+              className="cc-input"
+            />
+            {feedback.state === "error" && (
+              <p role="alert" className="text-sm text-[var(--terracotta-aa)]">
+                Couldn&apos;t send just now — email info@skynetjoe.com instead
+                and it still lands with me.
+              </p>
+            )}
+            <button
+              type="submit"
+              disabled={feedback.state === "sending"}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
+              style={{ background: "var(--terracotta)" }}
+            >
+              {feedback.state === "sending" ? "Sending…" : "Send feedback →"}
+            </button>
+          </form>
+        )}
       </div>
 
       <style>{`

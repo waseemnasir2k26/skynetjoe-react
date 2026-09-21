@@ -119,7 +119,7 @@ export const IDEA_TEMPLATES: IdeaTemplate[] = [
   },
   {
     kind: "educate",
-    hook: "How to {outcome} in under {n} days — even if you have no team",
+    hook: "How to get {outcome} in under {n} days — even if you have no team",
     body: "Step-by-step framework. One paragraph per step. End with a checklist.",
     cta: "Save this for the next time it hits.",
     tags: ["{niche}", "framework", "howto"],
@@ -195,7 +195,7 @@ export const IDEA_TEMPLATES: IdeaTemplate[] = [
   // ─────── proof ───────
   {
     kind: "proof",
-    hook: "Client win: how a {niche} operator added {outcome} in {n} weeks",
+    hook: "Client win: how a {niche} operator got {outcome} in {n} weeks",
     body: "Problem, what we shipped, the numbers, the lessons. Anonymise if needed.",
     cta: "Want a teardown of your situation? DM 'teardown'.",
     tags: ["{niche}", "case-study", "results"],
