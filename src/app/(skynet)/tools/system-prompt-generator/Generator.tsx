@@ -126,6 +126,33 @@ function isValid(state: State): boolean {
   return state.role.trim().length > 0;
 }
 
+
+/** Clipboard write with a legacy fallback (older mobile browsers / non-secure contexts). */
+async function writeClipboard(text: string): Promise<boolean> {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    /* fall through to legacy path */
+  }
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch {
+    return false;
+  }
+}
+
 export default function Generator({ calUrl }: { calUrl: string }) {
   const [state, setState] = useState<State>(INITIAL_STATE);
   const [hydrated, setHydrated] = useState(false);
@@ -133,6 +160,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
   const [phase, setPhase] = useState<"build" | "result">("build");
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [copiedDoc, setCopiedDoc] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
   const resultRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -188,17 +216,15 @@ export default function Generator({ calUrl }: { calUrl: string }) {
   };
 
   const copy = async (text: string, which: "prompt" | "doc") => {
-    try {
-      await navigator.clipboard.writeText(text);
-      if (which === "prompt") {
-        setCopiedPrompt(true);
-        setTimeout(() => setCopiedPrompt(false), 1500);
-      } else {
-        setCopiedDoc(true);
-        setTimeout(() => setCopiedDoc(false), 1500);
-      }
-    } catch {
-      // ignore
+    const ok = await writeClipboard(text);
+    setCopyFailed(!ok);
+    if (!ok) return;
+    if (which === "prompt") {
+      setCopiedPrompt(true);
+      setTimeout(() => setCopiedPrompt(false), 1500);
+    } else {
+      setCopiedDoc(true);
+      setTimeout(() => setCopiedDoc(false), 1500);
     }
   };
 
@@ -385,6 +411,12 @@ export default function Generator({ calUrl }: { calUrl: string }) {
             </div>
           </div>
 
+          {copyFailed && (
+            <p role="alert" className="mb-3 text-xs text-[var(--terracotta-aa)]">
+              Your browser blocked clipboard access — select the text below and
+              copy it manually, or use Download .md.
+            </p>
+          )}
           <pre
             className="text-xs sm:text-sm leading-relaxed text-[var(--ink)] overflow-x-auto rounded-2xl p-4 sm:p-5 whitespace-pre-wrap break-words"
             style={{
