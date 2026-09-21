@@ -96,88 +96,12 @@ export default function WorkShowcase() {
 
   return (
     <section
-      className="relative pt-24 md:pt-32 pb-16"
+      className="relative pt-4 pb-16"
       style={{
         background: "var(--cream-3)",
       }}
     >
       <div className="container-x px-6 relative z-10">
-        {/* HERO */}
-        <div className="max-w-3xl mb-10">
-          <div
-            className="inline-flex items-center gap-3 mb-5"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.6875rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--terracotta-aa)",
-            }}
-          >
-            <span
-              style={{
-                width: 28,
-                height: 1,
-                background: "var(--terracotta)",
-                display: "inline-block",
-              }}
-            />
-            Recent projects · real screenshots
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.04,
-              color: "var(--ink)",
-              fontSize: "clamp(40px, 6vw, 68px)",
-              margin: "0 0 18px",
-            }}
-          >
-            Filter, then open{" "}
-            <span
-              style={{
-                fontStyle: "normal",
-                color: "var(--terracotta-aa)",
-                fontWeight: 700,
-              }}
-            >
-              any live tile.
-            </span>
-          </h2>
-          <p
-            style={{
-              fontSize: "1.0625rem",
-              color: "var(--ink-2)",
-              lineHeight: 1.6,
-              maxWidth: "62ch",
-            }}
-          >
-            Live screenshots, not mockups. Every tile links to the deployed
-            site. Built solo from Bali + Lahore. Video below walks through one
-            being built end-to-end in Claude Code.
-          </p>
-        </div>
-
-        {/* Video — 1px ink border on cream, no dark frame */}
-        <div
-          className="overflow-hidden mb-12 aspect-video"
-          style={{
-            border: "1px solid rgba(26,26,26,0.18)",
-            borderRadius: 2,
-            background: "var(--ink)",
-          }}
-        >
-          <iframe
-            src="https://www.youtube.com/embed/5lT9vrzssU0"
-            title="WordPress plugin development using Claude Code by Anthropic — Waseem Nasir"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            className="w-full h-full"
-          />
-        </div>
-
         {/* FILTER TABS */}
         <div className="flex flex-wrap gap-2.5 mb-8">
           {FILTERS.map((f) => {
