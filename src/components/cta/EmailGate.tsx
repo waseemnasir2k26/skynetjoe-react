@@ -3,8 +3,8 @@
 /**
  * EmailGate — capture an email before revealing a tool's result.
  *
- * Used by result-producing tools (ai-readiness-score, automation-gap-analyzer,
- * executive-summary-generator, voice-persona-builder, content-calendar).
+ * Used by the result-producing tools (aeo-audit, automation-gap-analyzer,
+ * cold-dm-generator, content-calendar, llms-txt, system-prompt, n8n generator).
  *
  * Behavior:
  *   - On mount, read localStorage. If a valid email is already stored for this

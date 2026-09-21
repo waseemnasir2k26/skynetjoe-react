@@ -240,8 +240,8 @@ export default function SystemPromptGeneratorPage() {
                 <p>
                   Note this is a functional agent prompt, not a brand-voice
                   document — if you&apos;re trying to make an LLM write
-                  marketing copy that sounds like your company, use the Voice
-                  Persona Builder instead.
+                  marketing copy that sounds like your company, start from a
+                  brand-voice prompt in the Prompt Library instead.
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">
