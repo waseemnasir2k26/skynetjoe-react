@@ -44,6 +44,10 @@ export type DmInputs = {
   niche: string;
   offer: string;
   proof: string;
+  /** Sender's sign-off for the email scripts. Empty → "[Your name]". */
+  yourName: string;
+  /** Prospect's first name. Empty → "[FirstName]" placeholder. */
+  theirName: string;
 };
 
 export const DEFAULT_INPUTS: DmInputs = {
@@ -51,6 +55,8 @@ export const DEFAULT_INPUTS: DmInputs = {
   niche: "dental clinics",
   offer: "an AI booking assistant that answers calls 24/7",
   proof: "recovered 30+ missed calls a month for a clinic in Austin",
+  yourName: "",
+  theirName: "",
 };
 
 export const DM_TEMPLATES: DmTemplate[] = [
@@ -130,50 +136,78 @@ export const DM_TEMPLATES: DmTemplate[] = [
     platform: "email",
     angle: "problem-first",
     subject: "Quick question about {{niche}} follow-up",
-    body: "Hi {{firstName}},\n\nMost {{niche}} businesses I talk to aren't losing on demand — they're losing on follow-up speed. I built {{offer}} to close that gap. {{proof}}.\n\nWorth 15 minutes to see if it fits?\n\nWaseem",
+    body: "Hi {{firstName}},\n\nMost {{niche}} businesses I talk to aren't losing on demand — they're losing on follow-up speed. I built {{offer}} to close that gap. {{proof}}.\n\nWorth 15 minutes to see if it fits?\n\n{{yourName}}",
   },
   {
     id: "em-proof",
     platform: "email",
     angle: "proof-first",
     subject: "{{proof}}",
-    body: "Hi {{firstName}},\n\n{{proof}}. I do this specifically for {{niche}} businesses with {{offer}}.\n\nHappy to send the exact numbers if you're curious, or grab 15 minutes this week.\n\nWaseem",
+    body: "Hi {{firstName}},\n\n{{proof}}. I do this specifically for {{niche}} businesses with {{offer}}.\n\nHappy to send the exact numbers if you're curious, or grab 15 minutes this week.\n\n{{yourName}}",
   },
   {
     id: "em-curiosity",
     platform: "email",
     angle: "curiosity",
     subject: "How is {{niche}} handled after hours?",
-    body: "Hi {{firstName}},\n\nCurious how your team currently handles inquiries outside business hours. I ask because I built {{offer}} for {{niche}} businesses and it's changed the math for a few of them recently.\n\nOpen to a quick look?\n\nWaseem",
+    body: "Hi {{firstName}},\n\nCurious how your team currently handles inquiries outside business hours. I ask because I built {{offer}} for {{niche}} businesses and it's changed the math for a few of them recently.\n\nOpen to a quick look?\n\n{{yourName}}",
   },
   {
     id: "em-direct",
     platform: "email",
     angle: "direct-ask",
     subject: "15 minutes this week?",
-    body: "Hi {{firstName}},\n\nI help {{niche}} businesses with {{offer}}. {{proof}}.\n\nIf that's relevant right now, I've got time Wednesday or Thursday — want the link?\n\nWaseem",
+    body: "Hi {{firstName}},\n\nI help {{niche}} businesses with {{offer}}. {{proof}}.\n\nIf that's relevant right now, I've got time Wednesday or Thursday — want the link?\n\n{{yourName}}",
   },
   {
     id: "em-warm",
     platform: "email",
     angle: "warm-observation",
     subject: "Saw your {{niche}} business growing",
-    body: "Hi {{firstName}},\n\nNoticed your {{niche}} business has been picking up — that's great, and it usually means the manual side (calls, scheduling, follow-up) starts costing real hours. I built {{offer}} for exactly that stage. {{proof}}.\n\nOpen to comparing notes for 15 minutes?\n\nWaseem",
+    body: "Hi {{firstName}},\n\nNoticed your {{niche}} business has been picking up — that's great, and it usually means the manual side (calls, scheduling, follow-up) starts costing real hours. I built {{offer}} for exactly that stage. {{proof}}.\n\nOpen to comparing notes for 15 minutes?\n\n{{yourName}}",
   },
 ];
 
-export function fillTemplate(t: DmTemplate, inputs: DmInputs): string {
-  const map: Record<string, string> = {
+function buildMap(inputs: DmInputs): Record<string, string> {
+  return {
     "{{niche}}": inputs.niche.trim() || "your niche",
     "{{offer}}": inputs.offer.trim() || "your offer",
-    "{{proof}}": inputs.proof.trim() || "a proof point from a past client",
-    "{{firstName}}": "[FirstName]",
+    "{{proof}}": cleanProof(
+      inputs.proof.trim() || "a proof point from a past client",
+    ),
+    "{{firstName}}": inputs.theirName.trim() || "[FirstName]",
+    "{{yourName}}": inputs.yourName.trim() || "[Your name]",
   };
-  let out = t.body;
-  for (const [k, v] of Object.entries(map)) {
+}
+
+/**
+ * Capitalise the first letter of every sentence (start of text, or after
+ * ". ", "! ", "? " or a line break). User inputs like "recovered 30 calls"
+ * are usually typed lower-case and often land at a sentence start.
+ * Instagram scripts are deliberately lower-case and skip this.
+ */
+export function sentenceCase(s: string): string {
+  return s.replace(
+    /(^|[.!?]\s+|\n\s*)([a-z])/g,
+    (_m, pre: string, ch: string) => pre + ch.toUpperCase(),
+  );
+}
+
+/** Trim trailing punctuation from a proof so "{{proof}}." never doubles up. */
+function cleanProof(p: string): string {
+  return p.replace(/[.!\s]+$/g, "");
+}
+
+function interpolate(src: string, t: DmTemplate, inputs: DmInputs): string {
+  let out = src;
+  for (const [k, v] of Object.entries(buildMap(inputs))) {
     out = out.split(k).join(v);
   }
-  return out;
+  return t.platform === "instagram" ? out : sentenceCase(out);
+}
+
+export function fillTemplate(t: DmTemplate, inputs: DmInputs): string {
+  return interpolate(t.body, t, inputs);
 }
 
 export function fillSubject(
@@ -181,17 +215,7 @@ export function fillSubject(
   inputs: DmInputs,
 ): string | undefined {
   if (!t.subject) return undefined;
-  const map: Record<string, string> = {
-    "{{niche}}": inputs.niche.trim() || "your niche",
-    "{{offer}}": inputs.offer.trim() || "your offer",
-    "{{proof}}": inputs.proof.trim() || "a proof point from a past client",
-    "{{firstName}}": "[FirstName]",
-  };
-  let out = t.subject;
-  for (const [k, v] of Object.entries(map)) {
-    out = out.split(k).join(v);
-  }
-  return out;
+  return interpolate(t.subject, t, inputs);
 }
 
 export function templatesForPlatform(platform: DmPlatform): DmTemplate[] {

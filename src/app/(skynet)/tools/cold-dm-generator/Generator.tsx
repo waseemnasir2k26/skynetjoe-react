@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Check, Copy, Send, Sparkles } from "lucide-react";
 import {
@@ -16,7 +16,6 @@ import {
   type DmTemplate,
 } from "@/data/tools/cold-dm-scripts";
 import EmailGate from "@/components/cta/EmailGate";
-import ToolUsage from "@/components/tools/ToolUsage";
 
 const STATE_KEY = "skynet:cold-dm-generator:v1";
 const UNLOCK_KEY = "skynet-tool-cold-dm-generator-email";
@@ -30,6 +29,8 @@ function ScriptCard({
   inputs: DmInputs;
 }) {
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
+  const bodyRef = useRef<HTMLParagraphElement | null>(null);
   const body = fillTemplate(template, inputs);
   const subject = fillSubject(template, inputs);
 
@@ -40,7 +41,18 @@ function ScriptCard({
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1600);
     } catch {
-      /* ignore */
+      // Clipboard blocked (http, iframe, old browser) — select the text so a
+      // manual Ctrl/Cmd+C still works instead of failing silently.
+      const el = bodyRef.current;
+      if (el) {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+      }
+      setCopyFailed(true);
+      window.setTimeout(() => setCopyFailed(false), 2500);
     }
   }
 
@@ -73,9 +85,17 @@ function ScriptCard({
           Subject: {subject}
         </p>
       )}
-      <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--ink-2)]">
+      <p
+        ref={bodyRef}
+        className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--ink-2)]"
+      >
         {body}
       </p>
+      {copyFailed && (
+        <p role="status" className="mt-2 text-xs text-[var(--terracotta-aa)]">
+          Clipboard blocked by the browser — text selected, press Ctrl/Cmd+C.
+        </p>
+      )}
     </div>
   );
 }
@@ -231,6 +251,55 @@ export default function Generator() {
             />
           </div>
         </div>
+
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label
+              htmlFor="theirName"
+              className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-[var(--terracotta-aa)]"
+            >
+              Their first name{" "}
+              <span className="normal-case tracking-normal text-[var(--ink-faint)]">
+                (optional)
+              </span>
+            </label>
+            <input
+              id="theirName"
+              type="text"
+              value={inputs.theirName}
+              onChange={(e) => setField("theirName", e.target.value)}
+              placeholder="leave blank for [FirstName]"
+              className="w-full rounded-xl px-4 py-3 text-sm text-[var(--ink)] focus:outline-none transition"
+              style={{
+                background: "var(--cream-3)",
+                border: "1px solid rgba(26,26,26,0.18)",
+              }}
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="yourName"
+              className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-[var(--terracotta-aa)]"
+            >
+              Your name{" "}
+              <span className="normal-case tracking-normal text-[var(--ink-faint)]">
+                (email sign-off)
+              </span>
+            </label>
+            <input
+              id="yourName"
+              type="text"
+              value={inputs.yourName}
+              onChange={(e) => setField("yourName", e.target.value)}
+              placeholder="e.g. Sam"
+              className="w-full rounded-xl px-4 py-3 text-sm text-[var(--ink)] focus:outline-none transition"
+              style={{
+                background: "var(--cream-3)",
+                border: "1px solid rgba(26,26,26,0.18)",
+              }}
+            />
+          </div>
+        </div>
       </div>
 
       {/* PREVIEW SCRIPTS */}
@@ -250,11 +319,6 @@ export default function Generator() {
           ))}
         </div>
 
-        {hydrated && (
-          <div className="mt-5">
-            <ToolUsage slug="cold-dm-generator" />
-          </div>
-        )}
       </div>
 
       {/* FULL PACK — gated */}
