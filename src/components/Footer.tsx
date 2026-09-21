@@ -42,7 +42,7 @@ export default function Footer() {
     <>
       {showToolsStrip && <ToolsStrip currentSlug={currentSlug} />}
       <footer
-        className="mt-24 border-t"
+        className="border-t"
         style={{
           background: "var(--cream-2)",
           borderColor: "var(--border)",

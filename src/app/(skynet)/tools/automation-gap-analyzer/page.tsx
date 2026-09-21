@@ -328,7 +328,7 @@ export default function AutomationGapPage() {
                   body: "Check whether AI answer engines can read and cite your site.",
                 },
                 {
-                  href: "/discovery-call",
+                  href: "/contact",
                   title: "Book a discovery call",
                   body: "30 minutes on your weakest axis and exactly what to wire first.",
                 },

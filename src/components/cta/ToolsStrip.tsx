@@ -40,7 +40,6 @@ export default function ToolsStrip({
       style={{
         background: "var(--cream-2)",
         borderTop: "1px solid var(--ink)",
-        borderBottom: "1px solid var(--ink)",
       }}
     >
       <div className="container-x px-6 py-14 md:py-16">

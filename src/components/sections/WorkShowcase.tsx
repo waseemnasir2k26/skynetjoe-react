@@ -66,7 +66,15 @@ const FILTERS: { key: "all" | Gig["category"]; label: string }[] = [
 const CAT_ORDER: Gig["category"][] = ["client", "flagship", "portal", "demo"];
 
 export default function WorkShowcase() {
-  const [active, setActive] = useState<"all" | Gig["category"]>("all");
+  const [active, setActiveRaw] = useState<"all" | Gig["category"]>("all");
+  // Paginate: 12 tiles first, "Show more" reveals the rest (47 stacked tiles
+  // made the mobile page ~24k px tall).
+  const PAGE = 12;
+  const [limit, setLimit] = useState(PAGE);
+  const setActive = (v: "all" | Gig["category"]) => {
+    setActiveRaw(v);
+    setLimit(PAGE);
+  };
 
   // Sort once: client → flagship → portal → demo, so "All work" reads cleanly.
   const sorted = useMemo(
@@ -81,8 +89,10 @@ export default function WorkShowcase() {
     for (const g of GIGS) c[g.category] = (c[g.category] ?? 0) + 1;
     return c;
   }, []);
-  const visible =
+  const matching =
     active === "all" ? sorted : sorted.filter((g) => g.category === active);
+  const visible = matching.slice(0, limit);
+  const hidden = matching.length - visible.length;
 
   return (
     <section
@@ -367,6 +377,23 @@ export default function WorkShowcase() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {hidden > 0 && (
+          <div className="flex justify-center -mt-6 mb-14">
+            <button
+              type="button"
+              onClick={() => setLimit((n) => n + PAGE)}
+              className="rounded-full border px-6 py-3 text-sm font-semibold transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
+              style={{
+                borderColor: "rgba(26,26,26,0.2)",
+                background: "var(--cream-2)",
+                color: "var(--ink)",
+              }}
+            >
+              Show {Math.min(PAGE, hidden)} more · {hidden} left
+            </button>
+          </div>
+        )}
 
         {/* Founder strip */}
         <div

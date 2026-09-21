@@ -121,7 +121,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     publishDate: "2026-03-14",
     relatedServices: [
       { slug: "n8n-automation", label: "n8n Automation" },
-      { slug: "ai-business-systems", label: "AI Business Systems" },
+      { slug: "ai-chatbots", label: "AI Chatbots" },
     ],
   },
   {
@@ -186,7 +186,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     publishDate: "2026-02-08",
     relatedServices: [
       { slug: "vibe-coded-sites", label: "Vibe-Coded Websites" },
-      { slug: "ai-content-creation", label: "AI Content Creation" },
+      { slug: "n8n-automation", label: "n8n Automation" },
     ],
   },
   {
@@ -255,8 +255,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     testimonialAuthor: "Clinical Director, clinical recovery network (US)",
     publishDate: "2025-11-19",
     relatedServices: [
-      { slug: "ai-business-systems", label: "AI Business Systems" },
-      { slug: "branding-design", label: "Branding & Design" },
+      { slug: "ai-chatbots", label: "AI Chatbots" },
+      { slug: "vibe-coded-sites", label: "Vibe-Coded Websites" },
     ],
   },
   {
@@ -390,7 +390,6 @@ export const CASE_STUDIES: CaseStudy[] = [
     testimonialAuthor: "Waseem Nasir, founder, SkynetLabs",
     publishDate: "2026-02-26",
     relatedServices: [
-      { slug: "ai-content-creation", label: "AI Content Creation" },
       { slug: "n8n-automation", label: "n8n Automation" },
     ],
   },
@@ -460,7 +459,6 @@ export const CASE_STUDIES: CaseStudy[] = [
     publishDate: "2026-03-29",
     relatedServices: [
       { slug: "vibe-coded-sites", label: "Vibe-Coded Websites" },
-      { slug: "ecommerce-automation", label: "E-commerce Automation" },
     ],
   },
   {
@@ -529,7 +527,6 @@ export const CASE_STUDIES: CaseStudy[] = [
     testimonialAuthor: "E-commerce Manager, KSA fashion retailer",
     publishDate: "2026-04-19",
     relatedServices: [
-      { slug: "ecommerce-automation", label: "E-commerce Automation" },
       { slug: "vibe-coded-sites", label: "Vibe-Coded Websites" },
     ],
   },
@@ -599,8 +596,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     testimonialAuthor: "Founder, multi-channel SaaS launch",
     publishDate: "2026-05-10",
     relatedServices: [
-      { slug: "ai-content-creation", label: "AI Content Creation" },
-      { slug: "social-automation", label: "Social Automation" },
+      { slug: "n8n-automation", label: "n8n Automation" },
     ],
   },
 ];
