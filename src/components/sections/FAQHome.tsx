@@ -4,13 +4,12 @@
  * Facts sourced only from what's already published elsewhere in this repo:
  *   - Pricing (Starter $1,497 / Pro $5,000, 5-14 day ship window) from
  *     src/lib/service-pricing.ts + src/app/(skynet)/pricing/page.tsx.
- *   - Service catalog (16 services / 4 categories) from src/lib/site.ts
+ *   - Service catalog (5 core services, 2026-09-21) from src/lib/site.ts
  *     (SERVICE_CATEGORIES).
  *   - NDA facts (sign client NDA, own one-page mutual NDA) from
- *     content/faqs.html; scope-turnaround from
- *     src/app/(skynet)/discovery-call/page.tsx (48h scope, 50% deposit).
- *   - Location/coverage: discovery-call schema's Bali GMT+8, 9am-6pm slot
- *     overlap facts (Europe mornings / US evenings).
+ *     content/faqs.html; scope-turnaround (48h scope, 50% deposit) and the
+ *     Bali GMT+8, 9am-6pm slot overlap facts (Europe mornings / US evenings)
+ *     from src/app/(skynet)/contact/page.tsx.
  *
  * HOME_FAQS is exported so page.tsx can build the FAQPage JSON-LD from the
  * exact same array — DOM text and schema text can never drift apart.
@@ -18,7 +17,7 @@
 export const HOME_FAQS = [
   {
     q: "What does SkynetLabs actually do?",
-    a: "We build n8n + AI automation, AEO-optimized websites, and chat-first CRM systems for service businesses — 16 services across 4 categories (Automation, AI Content, Development, Consulting), run solo by founder Waseem Nasir from Bali.",
+    a: "Five things, done properly: n8n automation, AI chatbots, GoHighLevel CRM setups, vibe-coded websites, and WordPress + SEO — for service businesses, run solo by founder Waseem Nasir from Bali.",
   },
   {
     q: "How much does a project cost?",

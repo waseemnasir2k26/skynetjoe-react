@@ -73,7 +73,7 @@ export default function FinalCTA() {
           </p>
           <MagneticButton>
             <Link
-              href="/discovery-call"
+              href="/contact"
               style={{
                 background: "var(--cream-3)",
                 color: "var(--terracotta-aa)",
@@ -105,7 +105,7 @@ export default function FinalCTA() {
               marginTop: 22,
             }}
           >
-            — Reply in 8h · scope in 48h · Bali (GMT+8) · 9 countries served
+            — Reply in 8h · scope in 48h · Bali (GMT+8)
           </div>
         </div>
       </div>
