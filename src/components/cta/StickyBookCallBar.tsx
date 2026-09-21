@@ -5,7 +5,7 @@
  *
  * Psychology stack unchanged:
  *   - Cialdini scarcity ("3 slots left this week", real number from data/availability)
- *   - Fogg ability (1-click route to /discovery-call, no form first)
+ *   - Fogg ability (1-click route to /contact, no form first)
  *   - Hick's Law (1 destination, no choice paralysis)
  *
  * Behavior unchanged:
@@ -14,7 +14,7 @@
  *   - Desktop: top bar
  *   - Mobile: bottom-fixed pill bar
  *   - prefers-reduced-motion: fade only
- *   - Hidden on /discovery-call, /lp/*, /api/*
+ *   - Hidden on /contact, /lp/*, /api/*
  */
 
 import { useEffect, useState } from "react";
@@ -42,7 +42,7 @@ export default function StickyBookCallBar() {
   }, []);
 
   const disabled =
-    pathname === "/discovery-call" ||
+    pathname === "/contact" ||
     pathname?.startsWith("/lp/") ||
     pathname?.startsWith("/api/");
 
@@ -129,7 +129,7 @@ export default function StickyBookCallBar() {
             aria-hidden
           />
           <Link
-            href="/discovery-call"
+            href="/contact"
             className="flex-1 flex items-center gap-2"
             style={{
               fontSize: 13,
@@ -200,7 +200,7 @@ export default function StickyBookCallBar() {
           aria-hidden
         />
         <Link
-          href="/discovery-call"
+          href="/contact"
           className="flex-1 leading-snug"
           style={{
             fontSize: 13,
@@ -215,7 +215,7 @@ export default function StickyBookCallBar() {
           </span>
         </Link>
         <Link
-          href="/discovery-call"
+          href="/contact"
           className="inline-flex items-center justify-center shrink-0"
           style={{
             background: "var(--terracotta)",

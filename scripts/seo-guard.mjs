@@ -66,8 +66,9 @@ const MOJIBAKE = [
 }
 
 // ── 2. Metadata coverage on public pages ─────────────────────────────────────
-// Pages intentionally without public metadata (noindex labs etc.).
-const META_ALLOWLIST = [/gradient-lab/, /hero-lab/];
+// Pages intentionally without public metadata. (gradient-lab / hero-lab
+// deleted 2026-09-21 — nothing is allowlisted today.)
+const META_ALLOWLIST = [];
 {
   const pageFiles = walk(path.join(ROOT, "src", "app"), (f) => /[/\\]page\.tsx$/.test(f));
   for (const f of pageFiles) {
@@ -95,7 +96,7 @@ const META_ALLOWLIST = [/gradient-lab/, /hero-lab/];
 }
 
 // ── 4. Accidental noindex (warn) ─────────────────────────────────────────────
-const NOINDEX_ALLOWLIST = [/gradient-lab/, /hero-lab/, /not-found/, /\bin\b.*\[state\]/];
+const NOINDEX_ALLOWLIST = [/not-found/, /\bin\b.*\[state\]/];
 {
   const pageFiles = walk(path.join(ROOT, "src", "app"), (f) => /\.tsx$/.test(f));
   for (const f of pageFiles) {

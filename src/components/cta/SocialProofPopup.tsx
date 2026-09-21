@@ -7,7 +7,7 @@
  *  - Rotates through real recent ships every 12s
  *  - User can dismiss (sessionStorage key — won't reappear in same tab)
  *  - Bottom-left float, doesn't block hero or sticky CTAs
- *  - Disabled on /discovery-call + /lp/* + /api/*
+ *  - Disabled on /contact + /lp/* + /api/*
  *  - Respects prefers-reduced-motion (no slide-up animation in that case)
  */
 
@@ -67,7 +67,7 @@ export default function SocialProofPopup() {
   const [idx, setIdx] = useState(0);
 
   const disabled =
-    pathname === "/discovery-call" ||
+    pathname === "/contact" ||
     pathname?.startsWith("/lp/") ||
     pathname?.startsWith("/api/");
 

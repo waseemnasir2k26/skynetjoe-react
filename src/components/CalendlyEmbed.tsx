@@ -1,14 +1,20 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 import { Loader2, CalendarClock } from "lucide-react";
-import type { QualifierState } from "./Qualifier";
 
 /**
  * Cream editorial pivot 2026-05-25 — Calendly container.
  * Cream-3 paper container with 1px ink border. No gradient, no glow.
+ *
+ * 2026-09-21: moved from app/(skynet)/discovery-call/ to components/ when
+ * /discovery-call was folded into /contact. The 7-question qualifier that
+ * used to prefill Calendly custom answers went with that page; the embed is
+ * now a plain booking widget. On a confirmed booking it fires the dataLayer
+ * event and forwards to /thank-you; the lead is written by the Calendly
+ * webhook route (/api/webhooks/calendly), not from the browser.
  */
 
 const C = {
@@ -24,106 +30,39 @@ const C = {
 const CALENDLY_URL =
   "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
-function buildPrefill(q: QualifierState | null) {
-  if (!q) return undefined;
-  const businessLabel =
-    q.businessType === "other"
-      ? q.businessTypeOther || "Other"
-      : q.businessType;
-  const leakLabel =
-    q.biggestLeak === "other" ? q.biggestLeakOther || "Other" : q.biggestLeak;
-  const automateList = q.automateTargets
-    .map((v) => (v === "other" ? q.automateTargetsOther || "Other" : v))
-    .join(", ");
-
-  return {
-    customAnswers: {
-      a1: businessLabel || "",
-      a2: q.teamSize || "",
-      a3: leakLabel || "",
-      a4: q.monthlyLeads || "",
-      a5: automateList,
-      a6: q.revenueRange || "",
-      a7: q.urgency || "",
-    },
-  };
-}
-
-function buildUtm(leadId: string | null) {
-  return {
-    utmSource: "skynetjoe",
-    utmMedium: "discovery-call",
-    utmCampaign: "qualified-funnel",
-    utmContent: leadId || "anon",
-  };
-}
+const UTM = {
+  utmSource: "skynetjoe",
+  utmMedium: "contact",
+  utmCampaign: "book-a-call",
+} as const;
 
 export default function CalendlyEmbed({
-  qualification,
-  leadId,
   onScheduled,
 }: {
-  qualification: QualifierState | null;
-  leadId: string | null;
   onScheduled?: () => void;
-}) {
+} = {}) {
   const router = useRouter();
   const [scheduled, setScheduled] = useState(false);
 
-  const prefill = useMemo(
-    () => buildPrefill(qualification),
-    [qualification],
-  );
-  const utm = useMemo(() => buildUtm(leadId), [leadId]);
-
   useCalendlyEventListener({
-    onEventScheduled: async (e) => {
+    onEventScheduled: () => {
       if (scheduled) return;
       setScheduled(true);
-      const payload = {
-        leadId,
-        source: "discovery-call",
-        qualification: qualification || undefined,
-        booking: {
-          event: e.data.payload?.event?.uri,
-          invitee: e.data.payload?.invitee?.uri,
-          scheduledAt: new Date().toISOString(),
-        },
-        utm: {
-          source: utm.utmSource,
-          medium: utm.utmMedium,
-          campaign: utm.utmCampaign,
-        },
-        submittedAt: new Date().toISOString(),
-      };
-      try {
-        // Inspect the response — see the matching note in DiscoveryFunnel.
-        const res = await fetch("/api/leads", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) {
-          console.error(
-            "[discovery-call] booking POST rejected — lead may not have been recorded",
-            { status: res.status },
-          );
-        }
-      } catch (err) {
-        console.error("[discovery-call] booking POST failed", err);
-      }
+      // The lead itself is recorded server-side by /api/webhooks/calendly
+      // (invitee.created carries the email; the browser event does not), so
+      // there is no client POST here — the old one only worked because the
+      // qualifier had already captured the email.
       if (
         typeof window !== "undefined" &&
         (window as unknown as { dataLayer?: unknown[] }).dataLayer
       ) {
         (window as unknown as { dataLayer: unknown[] }).dataLayer.push({
           event: "discovery_call_scheduled",
-          leadId,
         });
       }
       onScheduled?.();
       window.setTimeout(() => {
-        router.push("/thank-you?ref=discovery-call");
+        router.push("/thank-you?ref=contact");
       }, 1200);
     },
   });
@@ -149,8 +88,7 @@ export default function CalendlyEmbed({
       >
         <InlineWidget
           url={CALENDLY_URL}
-          prefill={prefill}
-          utm={utm}
+          utm={UTM}
           styles={{ height: "720px", minWidth: "320px" }}
           pageSettings={{
             backgroundColor: "FAF7F0",

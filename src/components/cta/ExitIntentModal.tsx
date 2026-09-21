@@ -38,7 +38,7 @@ export default function ExitIntentModal() {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const disabled =
-    pathname === "/discovery-call" ||
+    pathname === "/contact" ||
     pathname?.startsWith("/lp/") ||
     pathname?.startsWith("/api/");
 

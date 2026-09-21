@@ -100,7 +100,7 @@ export default function KonamiUnlock() {
             </p>
             <div className="flex flex-col gap-2">
               <a
-                href="/discovery-call"
+                href="/contact"
                 className="block py-3 text-[11px] tracking-[0.2em]"
                 style={{
                   background: "linear-gradient(135deg, #1E88E5 0%, #14B8A6 100%)",

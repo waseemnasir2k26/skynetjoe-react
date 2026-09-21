@@ -15,7 +15,8 @@ import ScrambleText from "@/components/home/ScrambleText";
  *  - Inter h1 (no serif, no italic) — one accent phrase in AA-safe terracotta.
  *  - Founder photo REMOVED. Right column is an icon-driven "what we set up"
  *    card (Lucide icons) per the Webex pattern — diagrams not personal photos.
- *  - Mono em-dash eyebrow + trust strip (real proof) kept.
+ *  - Mono em-dash eyebrow + platform trust strip kept; the "180+ workflows /
+ *    9 countries" micro-stats were dropped 2026-09-21 (untraceable).
  */
 
 export default function HeroFunnel() {
@@ -27,6 +28,7 @@ export default function HeroFunnel() {
 
   return (
     <section
+      id="hero"
       className="relative overflow-hidden"
       style={{
         background: "var(--cream-3)",
@@ -170,24 +172,8 @@ export default function HeroFunnel() {
               />
               Top Rated · Fiverr
             </span>
-            <span
-              className="trust-sep"
-              style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}
-            >
-              ·
-            </span>
-            <span>
-              <span style={{ color: "var(--ink)" }}>180+</span> workflows
-            </span>
-            <span
-              className="trust-sep"
-              style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}
-            >
-              ·
-            </span>
-            <span>
-              <span style={{ color: "var(--ink)" }}>9</span> countries
-            </span>
+            {/* 2026-09-21: "180+ workflows · 9 countries" removed — not
+                traceable to src/lib/case-studies.ts (board-truth rule). */}
           </div>
 
           <div
@@ -200,7 +186,7 @@ export default function HeroFunnel() {
           >
             <MagneticButton>
               <Link
-                href="/discovery-call"
+                href="/contact"
                 style={{
                   background: "var(--terracotta)",
                   color: "var(--cream-3)",

@@ -80,7 +80,7 @@ const VARIANT_STYLES: Record<InlineCTAVariant, VariantStyle> = {
 export default function InlineCTABand({
   headline,
   subhead,
-  primaryCTA = { label: "Book a 30-min strategy call", href: "/discovery-call" },
+  primaryCTA = { label: "Book a 30-min strategy call", href: "/contact" },
   secondaryCTA = { label: "See case studies", href: "/case-studies" },
   variant = "default",
   id,

@@ -221,7 +221,7 @@ export default function Outcomes() {
               fontWeight: 600,
             }}
           >
-            See all 16 services
+            See the 5 services
             <ArrowRight style={{ width: 13, height: 13 }} />
           </Link>
         </div>
