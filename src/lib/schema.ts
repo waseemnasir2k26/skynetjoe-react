@@ -43,6 +43,13 @@ const organization = {
   // numeric ratings — adding ratingValue/reviewCount would be fabricated.
   founder: { "@id": `${SITE.url}/#person` },
   email: SITE.email,
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    email: "waseem@skynetjoe.com",
+    url: `${SITE.url}/contact`,
+    availableLanguage: ["en"],
+  },
   sameAs: [
     SITE.social.linkedin,
     SITE.social.twitter,

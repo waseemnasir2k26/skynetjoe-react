@@ -96,7 +96,7 @@ export const INDUSTRIES: Industry[] = [
       "An AI receptionist trained on your practice, your insurance list, and your hygiene cadence. It books, confirms, and recalls patients while your team treats the ones already in the chair.",
     heroCtaPrimary: {
       label: "Book a dental-specific audit",
-      href: "/discovery-call",
+      href: "/contact",
     },
     heroCtaSecondary: {
       label: "See case studies",
@@ -202,7 +202,7 @@ export const INDUSTRIES: Industry[] = [
           "5-day ship, 30-day post-launch tuning",
         ],
         ctaLabel: "Start with missed-call rescue",
-        ctaHref: "/discovery-call",
+        ctaHref: "/contact",
       },
       {
         tierName: "Dental Pro",
@@ -217,7 +217,7 @@ export const INDUSTRIES: Industry[] = [
           "10-day ship, 60-day tuning, monthly report",
         ],
         ctaLabel: "Book Dental Pro audit",
-        ctaHref: "/discovery-call",
+        ctaHref: "/contact",
         featured: true,
       },
       {
@@ -233,7 +233,7 @@ export const INDUSTRIES: Industry[] = [
           "Priority response: 1 business hour",
         ],
         ctaLabel: "Talk DSO scope",
-        ctaHref: "/discovery-call",
+        ctaHref: "/contact",
       },
     ],
     faqs: [
@@ -266,7 +266,7 @@ export const INDUSTRIES: Industry[] = [
     finalCtaSubhead:
       "Book a dental-specific audit. We pull your last 30 days of missed-call data, model the recovered revenue, and tell you honestly whether this pays for itself inside 90 days.",
     finalCtaButtonLabel: "Book the dental audit",
-    finalCtaHref: "/discovery-call",
+    finalCtaHref: "/contact",
     metaTitle: "Dental AI Receptionist — Dentrix & Open Dental | SkynetLabs",
     metaDescription:
       "AI receptionist for dental clinics. Recovers missed calls, fills hygiene cancels, works recall lists. Integrates with Dentrix, Open Dental, Eaglesoft. 5-14 day ship.",
@@ -292,7 +292,7 @@ export const INDUSTRIES: Industry[] = [
       "A concierge AI that lives in MindBody, Vagaro or Boulevard, answers Instagram DMs in your spa's tone, confirms in three taps, and recovers no-shows the same hour they happen.",
     heroCtaPrimary: {
       label: "Book a spa-specific audit",
-      href: "/discovery-call",
+      href: "/contact",
     },
     heroCtaSecondary: {
       label: "See wellness case study",
@@ -407,7 +407,7 @@ export const INDUSTRIES: Industry[] = [
           "5-day ship, 30-day post-launch tuning",
         ],
         ctaLabel: "Start with DM-to-book",
-        ctaHref: "/discovery-call",
+        ctaHref: "/contact",
       },
       {
         tierName: "Spa Pro",
@@ -422,7 +422,7 @@ export const INDUSTRIES: Industry[] = [
           "10-day ship, 60-day tuning, monthly report",
         ],
         ctaLabel: "Book Spa Pro audit",
-        ctaHref: "/discovery-call",
+        ctaHref: "/contact",
         featured: true,
       },
       {
@@ -439,7 +439,7 @@ export const INDUSTRIES: Industry[] = [
           "Priority response: 1 business hour",
         ],
         ctaLabel: "Talk multi-location scope",
-        ctaHref: "/discovery-call",
+        ctaHref: "/contact",
       },
     ],
     faqs: [
@@ -473,7 +473,7 @@ export const INDUSTRIES: Industry[] = [
     finalCtaSubhead:
       "Book a spa-specific audit. We pull a week of your IG DMs, your no-show rate from MindBody or Vagaro, and tell you honestly what the Concierge AI is worth to your spa in month one.",
     finalCtaButtonLabel: "Book the spa audit",
-    finalCtaHref: "/discovery-call",
+    finalCtaHref: "/contact",
     metaTitle: "Wellness Spa Concierge AI — MindBody, Vagaro, Boulevard",
     metaDescription:
       "Concierge AI for wellness spas & medspas. DM-to-book in 90 sec, refills no-shows, runs reactivation. Integrates with MindBody, Vagaro, Boulevard. 5-14 day ship.",
@@ -500,7 +500,7 @@ export const INDUSTRIES: Industry[] = [
       "A dispatch agent that triages broker calls, parses rate sheets, quotes back inside 30 seconds, and logs everything to McLeod, AscendTMS or Truckstop while your dispatchers sleep.",
     heroCtaPrimary: {
       label: "Book a freight-specific audit",
-      href: "/discovery-call",
+      href: "/contact",
     },
     heroCtaSecondary: {
       label: "See freight case study",
@@ -615,7 +615,7 @@ export const INDUSTRIES: Industry[] = [
           "7-day ship, 30-day post-launch tuning",
         ],
         ctaLabel: "Start with voice dispatch",
-        ctaHref: "/discovery-call",
+        ctaHref: "/contact",
       },
       {
         tierName: "Freight Pro",
@@ -631,7 +631,7 @@ export const INDUSTRIES: Industry[] = [
           "14-day ship, 60-day tuning, monthly report",
         ],
         ctaLabel: "Book Freight Pro audit",
-        ctaHref: "/discovery-call",
+        ctaHref: "/contact",
         featured: true,
       },
       {
@@ -647,7 +647,7 @@ export const INDUSTRIES: Industry[] = [
           "Priority response: 1 business hour",
         ],
         ctaLabel: "Talk multi-terminal scope",
-        ctaHref: "/discovery-call",
+        ctaHref: "/contact",
       },
     ],
     faqs: [
@@ -680,7 +680,7 @@ export const INDUSTRIES: Industry[] = [
     finalCtaSubhead:
       "Book a freight-specific audit. We pull a week of your dispatch logs, model the off-hours capture rate and the margin lift from lane intelligence, and tell you honestly whether this earns out inside 60 days.",
     finalCtaButtonLabel: "Book the freight audit",
-    finalCtaHref: "/discovery-call",
+    finalCtaHref: "/contact",
     metaTitle: "Freight Dispatch Agent — McLeod, AscendTMS, FreightWaves",
     metaDescription:
       "AI dispatch agent for freight brokers & carriers. 23-sec call response, rate-sheet OCR, lane intelligence. Integrates with McLeod, AscendTMS, Truckstop, Samsara.",

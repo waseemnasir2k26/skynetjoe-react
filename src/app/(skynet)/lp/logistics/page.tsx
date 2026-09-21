@@ -536,7 +536,7 @@ export default function LogisticsLP() {
           <a href="#" className="brand">
             <span className="brand-dot"></span>SkynetLabs <em>FreightOps</em>
           </a>
-          <a href="/discovery-call" className="nav-cta">
+          <a href="/contact" className="nav-cta">
             Book audit →
           </a>
         </div>
@@ -564,7 +564,7 @@ export default function LogisticsLP() {
               </p>
               <div className="cta-row">
                 <a
-                  href="/discovery-call"
+                  href="/contact"
                   className="btn-primary"
                   data-meta-event="Schedule"
                   data-meta-name="hero-book-audit"
@@ -1453,7 +1453,7 @@ export default function LogisticsLP() {
               Yes, no, or referral — you walk with the findings.
             </p>
             <a
-              href="/discovery-call"
+              href="/contact"
               className="btn-primary"
               data-meta-event="Schedule"
               data-meta-name="mid-cta-2am"
@@ -1784,7 +1784,7 @@ export default function LogisticsLP() {
                   <li>Two revision rounds</li>
                 </ul>
                 <a
-                  href="/discovery-call"
+                  href="/contact"
                   className="price-cta"
                   data-meta-event="InitiateCheckout"
                   data-meta-name="Starter"
@@ -1806,7 +1806,7 @@ export default function LogisticsLP() {
                   <li>Monthly opt call</li>
                 </ul>
                 <a
-                  href="/discovery-call"
+                  href="/contact"
                   className="price-cta"
                   data-meta-event="InitiateCheckout"
                   data-meta-name="Pro"
@@ -1829,7 +1829,7 @@ export default function LogisticsLP() {
                   <li>Weekly review call</li>
                 </ul>
                 <a
-                  href="/discovery-call"
+                  href="/contact"
                   className="price-cta"
                   data-meta-event="InitiateCheckout"
                   data-meta-name="Premium"
@@ -1851,7 +1851,7 @@ export default function LogisticsLP() {
                   <li>Inbound load auto-book</li>
                 </ul>
                 <a
-                  href="/discovery-call"
+                  href="/contact"
                   className="price-cta"
                   data-meta-event="InitiateCheckout"
                   data-meta-name="Flagship"
@@ -2023,7 +2023,7 @@ export default function LogisticsLP() {
           </p>
           <div className="cta-row">
             <a
-              href="/discovery-call"
+              href="/contact"
               className="btn-primary"
               data-meta-event="Schedule"
               data-meta-name="closer-book-audit"
@@ -2062,7 +2062,7 @@ export default function LogisticsLP() {
               </div>
               <div>
                 <h5>Reach</h5>
-                <a href="/discovery-call">Book discovery</a>
+                <a href="/contact">Book discovery</a>
                 <a href="mailto:info@skynetjoe.com">Email</a>
               </div>
               <div>
@@ -2087,7 +2087,7 @@ export default function LogisticsLP() {
 
         {/* MOBILE STICKY CTA */}
         <a
-          href="/discovery-call"
+          href="/contact"
           className="mobile-cta"
           data-meta-event="Schedule"
           data-meta-name="mobile-sticky"

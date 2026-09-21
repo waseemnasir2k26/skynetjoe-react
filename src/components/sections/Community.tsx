@@ -169,7 +169,7 @@ export default function Community() {
             no broker layer, just warm DMs.
           </p>
           <Link
-            href="/discovery-call"
+            href="/contact"
             style={{
               background: "var(--terracotta)",
               color: "var(--cream-3)",

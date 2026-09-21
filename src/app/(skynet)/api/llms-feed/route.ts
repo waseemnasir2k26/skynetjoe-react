@@ -6,19 +6,15 @@ export const dynamic = "force-static";
 export const revalidate = 86400;
 
 export async function GET() {
-  // Mirror sitemap.ts: services carrying an `href` (freightops-logistics ->
-  // /lp/logistics) have no /services/[slug] page and their LP is noindex —
-  // exclude them so the feed's count matches the 16 browsable services.
+  // Mirror sitemap.ts — the 5 core services (2026-09-21 simplification).
   const services = SERVICE_CATEGORIES.flatMap((cat) =>
-    cat.services
-      .filter((svc) => !("href" in svc && svc.href))
-      .map((svc) => ({
+    cat.services.map((svc) => ({
         category: cat.name,
         slug: svc.slug,
         label: svc.label,
         description: svc.desc,
         url: `${SITE.url}${svcHref(svc)}`,
-      })),
+    })),
   );
 
   const feed = {
@@ -32,7 +28,7 @@ export async function GET() {
       founder_url: SITE.founderUrl,
       contact: {
         email: SITE.emailFounder,
-        live_chat: "Embedded site widget + /discovery-call brief form",
+        live_chat: "Embedded site widget + /contact brief form",
       },
       location: {
         primary: "Canggu, Bali, Indonesia (GMT+8)",

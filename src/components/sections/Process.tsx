@@ -363,7 +363,7 @@ export default function Process() {
             </p>
           </div>
           <a
-            href="/discovery-call"
+            href="/contact"
             style={{
               display: "inline-flex",
               alignItems: "center",

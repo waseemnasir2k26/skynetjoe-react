@@ -47,7 +47,7 @@ export const GRAPH_NODES: GraphNode[] = [
   {
     id: "whatsapp",
     label: "WhatsApp",
-    href: "/services/social-automation",
+    href: "/services/ai-chatbots",
     angle: start + step * 2,
   },
   {
@@ -65,7 +65,7 @@ export const GRAPH_NODES: GraphNode[] = [
   {
     id: "calendar",
     label: "Calendar",
-    href: "/discovery-call",
+    href: "/contact",
     angle: start + step * 5,
     // Default ring position (~0.20, 0.78) sits directly under the hero's
     // CTA row at 1440, and drifts even lower relative to the (much taller,
@@ -89,7 +89,7 @@ export const GRAPH_NODES: GraphNode[] = [
   {
     id: "content",
     label: "Content",
-    href: "/services/ai-content-creation",
+    href: "/services/wordpress-seo",
     angle: start + step * 7,
     // Default ring position (~0.20, 0.22) sits directly under the hero
     // eyebrow line at 1440/768. Pulled up toward the top-left corner,

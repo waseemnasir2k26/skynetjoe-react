@@ -87,7 +87,7 @@ export const KEYWORDS: Keyword[] = [
   { term: "n8n migrate from zapier", cluster: "n8n-longtail", intent: "informational", volume: "med", competition: "low", target: "NEW /blog/migrate-zapier-to-n8n" },
   { term: "n8n migrate from make", cluster: "n8n-longtail", intent: "informational", volume: "low", competition: "low", target: "NEW blog post" },
   { term: "n8n consultant rates", cluster: "n8n-longtail", intent: "informational", volume: "low", competition: "low", target: "/pricing (add n8n row)" },
-  { term: "n8n agency near me", cluster: "n8n-longtail", intent: "local", volume: "med", competition: "low", target: "/locations (add n8n variant)" },
+  { term: "n8n agency near me", cluster: "n8n-longtail", intent: "local", volume: "med", competition: "low", target: "/services/n8n-automation (add near-me H2)" },
   { term: "hire n8n developer remote", cluster: "n8n-longtail", intent: "transactional", volume: "low", competition: "low", target: "/services/n8n-automation" },
   { term: "best n8n templates 2026", cluster: "n8n-longtail", intent: "informational", volume: "low", competition: "low", target: "NEW blog post" },
 
@@ -206,8 +206,8 @@ export const KEYWORDS: Keyword[] = [
   { term: "claude code project setup", cluster: "claude-code-vibe", intent: "informational", volume: "low", competition: "low", target: "NEW blog post" },
 
   // ── Cluster F — AI business systems consulting (25)
-  { term: "ai consultant for small business", cluster: "ai-business-systems", intent: "transactional", volume: "high", competition: "high", target: "/services/ai-business-systems" },
-  { term: "ai transformation consultant", cluster: "ai-business-systems", intent: "transactional", volume: "med", competition: "high", target: "/services/ai-business-systems" },
+  { term: "ai consultant for small business", cluster: "ai-business-systems", intent: "transactional", volume: "high", competition: "high", target: "/services/ai-chatbots" },
+  { term: "ai transformation consultant", cluster: "ai-business-systems", intent: "transactional", volume: "med", competition: "high", target: "/services/ai-chatbots" },
   { term: "ai operations consultant", cluster: "ai-business-systems", intent: "transactional", volume: "low", competition: "med", target: "NEW niche page" },
   { term: "ai workflow audit", cluster: "ai-business-systems", intent: "informational", volume: "low", competition: "low", target: "NEW /blog/ai-workflow-audit-template" },
   { term: "ai readiness assessment", cluster: "ai-business-systems", intent: "informational", volume: "med", competition: "med", target: "NEW pillar post" },
@@ -217,7 +217,7 @@ export const KEYWORDS: Keyword[] = [
   { term: "ai for service business", cluster: "ai-business-systems", intent: "informational", volume: "med", competition: "med", target: "NEW pillar post" },
   { term: "ai for solo founders", cluster: "ai-business-systems", intent: "informational", volume: "low", competition: "low", target: "NEW blog post" },
   { term: "ai stack for agencies", cluster: "ai-business-systems", intent: "informational", volume: "low", competition: "low", target: "NEW blog post" },
-  { term: "ai integration consultant", cluster: "ai-business-systems", intent: "transactional", volume: "low", competition: "low", target: "/services/ai-business-systems" },
+  { term: "ai integration consultant", cluster: "ai-business-systems", intent: "transactional", volume: "low", competition: "low", target: "/services/ai-chatbots" },
   { term: "ai automation for clinics", cluster: "ai-business-systems", intent: "transactional", volume: "low", competition: "low", target: "NEW niche page" },
   { term: "ai automation for law firms", cluster: "ai-business-systems", intent: "transactional", volume: "low", competition: "low", target: "NEW niche page" },
   { term: "ai automation for ecommerce", cluster: "ai-business-systems", intent: "transactional", volume: "med", competition: "med", target: "NEW niche page" },
@@ -279,7 +279,7 @@ export const KEYWORDS: Keyword[] = [
   { term: "gohighlevel consultant in chicago", cluster: "local-state-city", intent: "local", volume: "low", competition: "low", target: "future city page" },
   { term: "ai chatbot agency in san francisco", cluster: "local-state-city", intent: "local", volume: "low", competition: "low", target: "future city page" },
   { term: "whatsapp bot developer in dallas", cluster: "local-state-city", intent: "local", volume: "low", competition: "low", target: "future city page" },
-  { term: "ai automation agency near me", cluster: "local-state-city", intent: "local", volume: "high", competition: "low", target: "/locations (add geo block)" },
+  { term: "ai automation agency near me", cluster: "local-state-city", intent: "local", volume: "high", competition: "low", target: "/services/n8n-automation (add geo block)" },
   { term: "best automation agency in [STATE_CAPITAL]", cluster: "local-state-city", intent: "local", volume: "low", competition: "low", target: "each state page (add H2)" },
   { term: "hire n8n developer in seattle", cluster: "local-state-city", intent: "local", volume: "low", competition: "low", target: "future city page" },
   { term: "vibe coding agency in austin", cluster: "local-state-city", intent: "local", volume: "low", competition: "low", target: "future city page" },
@@ -290,7 +290,7 @@ export const KEYWORDS: Keyword[] = [
   { term: "shopify expert in nashville", cluster: "local-state-city", intent: "local", volume: "low", competition: "low", target: "future city page" },
   { term: "ai chatbot for dentist in [STATE_CAPITAL]", cluster: "local-state-city", intent: "local", volume: "low", competition: "low", target: "future combo page" },
   { term: "gohighlevel coach in phoenix", cluster: "local-state-city", intent: "local", volume: "low", competition: "low", target: "future city page" },
-  { term: "ai automation consultant remote", cluster: "local-state-city", intent: "transactional", volume: "med", competition: "low", target: "/locations (add H2)" },
+  { term: "ai automation consultant remote", cluster: "local-state-city", intent: "transactional", volume: "med", competition: "low", target: "/services/n8n-automation (add remote H2)" },
   { term: "global ai automation agency", cluster: "local-state-city", intent: "transactional", volume: "low", competition: "low", target: "/about (Bali angle)" },
 ];
 

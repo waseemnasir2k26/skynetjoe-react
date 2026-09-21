@@ -1,29 +1,9 @@
 import type { NextConfig } from "next";
-import { STATES } from "./src/lib/states";
-import { SERVICE_CATEGORIES } from "./src/lib/site";
-import { PRIORITY_STATE_SLUGS } from "./src/data/state-priority";
-
-/**
- * Inline mirror of `isServiceStateIndexable` from src/lib/sitemap-quality.ts.
- *
- * Why duplicated: next.config.ts is transpiled by Next's config loader which
- * does NOT resolve the `@/` path alias. Importing sitemap-quality directly
- * would transitively pull in `@/data/service-state-enrichment` and fail at
- * build time with `Cannot find module './src/data/service-state-enrichment'`.
- *
- * The full scorer is generous on purpose (every state earns +20 for existing
- * and +20 for having 3+ industries). With the current data, the score
- * passes the 60 threshold iff the state is a priority state. So inlining
- * `priorityStateSet.has(stateSlug)` gives the same 128 indexable cells
- * (16 services x 8 priority states) as the full scorer.
- *
- * If non-priority cells later get enrichment (and thus +40), update this
- * mirror to also check that enrichment map.
- */
-const priorityStateSet = new Set<string>(PRIORITY_STATE_SLUGS);
-function isIndexableHere(_serviceSlug: string, stateSlug: string): boolean {
-  return priorityStateSet.has(stateSlug);
-}
+// Relative import: Next's config loader does not resolve the `@/` alias.
+import {
+  SIMPLIFY_REDIRECTS,
+  KILLED_SERVICES,
+} from "./src/lib/simplify-redirects";
 
 /**
  * Security headers applied site-wide.
@@ -132,12 +112,12 @@ const wpRedirects = [
   },
   {
     source: "/social-media",
-    destination: "/services/social-automation",
+    destination: "/services/n8n-automation",
     permanent: true,
   },
   {
     source: "/service-ai-business-systems",
-    destination: "/services/ai-business-systems",
+    destination: "/services/ai-chatbots",
     permanent: true,
   },
   {
@@ -162,7 +142,7 @@ const wpRedirects = [
   },
   {
     source: "/shopify-store-build",
-    destination: "/services/ecommerce-automation",
+    destination: "/services/vibe-coded-sites",
     permanent: true,
   },
   {
@@ -305,16 +285,20 @@ const wpRedirects = [
 
   // ── Tools / library / variants → /tools or / ─────────────────────────────
   { source: "/ai-tool", destination: "/tools", permanent: true },
-  { source: "/prompt-library", destination: "/tools", permanent: true },
+  {
+    source: "/prompt-library",
+    destination: "/tools/prompt-library",
+    permanent: true,
+  },
   { source: "/skynetlabs-hmp", destination: "/", permanent: true },
   {
     source: "/h4-quiz-funnel",
-    destination: "/tools/agency-stress-quiz",
+    destination: "/tools/automation-gap-analyzer",
     permanent: true,
   },
   {
     source: "/h5-comparison-crusher",
-    destination: "/tools/revenue-calculator",
+    destination: "/tools",
     permanent: true,
   },
   { source: "/all-variations", destination: "/", permanent: true },
@@ -332,43 +316,17 @@ const wpRedirects = [
 ];
 
 /**
- * Programmatic 301s for ALL 768 svc × state URLs (16 services × 48 states).
- *
- * Background — Hub-consolidation cleanup (2026-05-28):
- *   Old structure had 128 indexable svc×state pages (priority states) + 640
- *   redirected pages (non-priority). Now collapsed entirely: ALL svc×state
- *   URLs 301 to the parent hub with a state-anchor fragment.
- *
- *   The 8 priority-state enrichment paragraphs now render in an accordion
- *   inside the service hub page (see /services/[slug]/page.tsx) with stable
- *   anchor IDs like #state-texas. So an old URL like:
- *
- *     /services/n8n-automation/in/texas
- *
- *   permanently redirects to:
- *
- *     /services/n8n-automation#state-texas
- *
- *   Result: one strong canonical hub per service (16 total) instead of
- *   17 thin pages per service (1 hub + 16 doorway cells). All link equity
- *   consolidated. Sitemap drops from ~275 to ~139 indexable URLs.
+ * Old `/services/<killed-slug>/in/<state>` URLs jump straight to the kept
+ * service (one hop). Must precede SIMPLIFY_REDIRECTS, whose generic
+ * `/services/:svc/in/:state` → `/services/:svc` rule would otherwise chain
+ * through the killed hub. Next matches redirects in array order.
  */
-// Services carrying an explicit `href` (currently only freightops-logistics
-// -> /lp/logistics) are excluded from /services/[slug]'s static params
-// (dynamicParams=false, src/app/(skynet)/services/[slug]/page.tsx), so
-// `/services/<that-slug>` is a guaranteed 404. Without this filter every
-// old `/services/<slug>/in/<state>` URL for that slug would 301 straight
-// into that 404 — 48 redirect-into-404s. Skip those slugs entirely.
-const killedServiceStateRedirects = SERVICE_CATEGORIES.flatMap((cat) =>
-  cat.services
-    .filter((svc) => !("href" in svc) || !svc.href)
-    .flatMap((svc) =>
-      STATES.map((s) => ({
-        source: `/services/${svc.slug}/in/${s.slug}`,
-        destination: `/services/${svc.slug}#state-${s.slug}`,
-        permanent: true as const,
-      })),
-    ),
+const killedServiceStateRedirects = Object.entries(KILLED_SERVICES).map(
+  ([slug, destination]) => ({
+    source: `/services/${slug}/in/:state`,
+    destination,
+    permanent: true as const,
+  }),
 );
 
 const removedToolRedirects = [
@@ -417,6 +375,7 @@ const nextConfig: NextConfig = {
     return [
       ...wpRedirects,
       ...killedServiceStateRedirects,
+      ...SIMPLIFY_REDIRECTS,
       ...removedToolRedirects,
     ];
   },

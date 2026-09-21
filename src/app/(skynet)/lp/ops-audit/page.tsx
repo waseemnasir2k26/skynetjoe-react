@@ -172,7 +172,7 @@ function OpsAuditForm({ id }: { id?: string }) {
       successHeading="Got it — you're in the queue."
       successBody="I'll reply personally with the intake checklist (what access to send, nothing invasive). Your 48 hours start when access arrives. Want to talk first?"
       successCta={
-        <a className="lp-ops-book" href="/discovery-call">
+        <a className="lp-ops-book" href="/contact">
           Book the consult call
         </a>
       }

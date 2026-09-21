@@ -146,7 +146,7 @@ export default function IndustriesIndexPage() {
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--terracotta)",
@@ -358,7 +358,7 @@ export default function IndustriesIndexPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--terracotta)",

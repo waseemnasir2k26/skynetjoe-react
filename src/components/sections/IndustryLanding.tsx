@@ -284,7 +284,7 @@ export default function IndustryLanding({ industry: i }: Props) {
               ))}
             </ul>
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center gap-2"
               style={ctaPrimary}
             >

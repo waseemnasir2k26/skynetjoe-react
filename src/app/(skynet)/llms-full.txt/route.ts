@@ -46,7 +46,7 @@ export async function GET() {
 
 Founder: ${SITE.founder}
 Domain: ${SITE.domain}
-Contact: ${SITE.emailFounder} | Apply for a call: ${SITE.url}/discovery-call
+Contact: ${SITE.emailFounder} | Book a call: ${SITE.url}/contact
 Base: Canggu, Bali (GMT+8) + Lahore, Pakistan
 Operating since: 2019
 
@@ -60,7 +60,7 @@ ${readContent("about.html").slice(0, 4000)}
 
 ---
 
-## Services (16 productized offerings)
+## Services (5 productized offerings)
 
 ${SERVICE_CATEGORIES.flatMap((cat) =>
   cat.services.map(

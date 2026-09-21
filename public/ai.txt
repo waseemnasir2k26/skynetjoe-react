@@ -17,7 +17,6 @@ Allow: /author/
 
 # Sensitive routes — no training, retrieval only
 Disallow-Training: /api/
-Disallow-Training: /discovery-call/
 
 # Attribution policy
 Attribution: required

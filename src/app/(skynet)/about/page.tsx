@@ -893,7 +893,7 @@ export default function AboutPage() {
             }}
           >
             <Link
-              href="/discovery-call"
+              href="/contact"
               style={{
                 background: "var(--terracotta)",
                 color: "var(--cream-3)",

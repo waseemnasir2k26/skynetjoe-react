@@ -6,8 +6,8 @@
  *   route group at `src/app/(skynet)/layout.tsx`. Next therefore cannot pick a
  *   layout for a root-level `not-found.tsx`, and every unmatched URL fell
  *   through to Next's built-in black-and-white "404: This page could not be
- *   found." (verified live 2026-09-05 on /this-page-does-not-exist-xyz and
- *   /services/freightops-logistics). `global-not-found.tsx` is Next's answer:
+ *   found." (verified live 2026-09-05 on /this-page-does-not-exist-xyz).
+ *   `global-not-found.tsx` is Next's answer:
  *   it renders its OWN <html>/<body>, so it needs no layout.
  *   Enabled by `experimental.globalNotFound` in next.config.ts.
  *
