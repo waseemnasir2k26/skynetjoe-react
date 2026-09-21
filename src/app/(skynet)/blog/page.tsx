@@ -11,7 +11,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
-import { POSTS } from "@/lib/posts";
+import { postsByDate, categoryLabel } from "@/lib/posts";
 import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -41,7 +41,7 @@ const schema = {
     "Long-form writing on AI automation, AEO, and shipping software.",
   author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
   publisher: { "@type": "Organization", name: SITE.brand, url: SITE.url },
-  blogPost: POSTS.map((p) => ({
+  blogPost: postsByDate().map((p) => ({
     "@type": "BlogPosting",
     headline: p.title,
     description: p.description,
@@ -51,11 +51,6 @@ const schema = {
     author: { "@type": "Person", name: SITE.founder },
   })),
 };
-
-// Category label kept simple — no gradient classes in cream system.
-function categoryLabel(c: string): string {
-  return c.replace("-", " ");
-}
 
 // BreadcrumbList — hub pages shipped without one (SEO report 2026-09-05 §5 #5).
 const hubBreadcrumbSchema = breadcrumbSchema([
@@ -126,31 +121,11 @@ export default function BlogPage() {
                 marginBottom: 0,
               }}
             >
-              In-depth guides and essays — the long reads on automation,
-              answer-engine optimization, and shipping software. Posts when
-              there&apos;s something worth saying, not on a schedule.
+              Guides, essays and field notes — the long reads on automation,
+              answer-engine optimization, and shipping software from Bali.
+              Posts when there&apos;s something worth saying, not on a schedule.
             </p>
 
-            {/* Cross-link to the short-form hub — keeps News + Journal distinct. */}
-            <Link
-              href="/news"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                marginTop: 22,
-                fontFamily: "var(--font-mono)",
-                fontSize: 12,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                fontWeight: 600,
-                color: "var(--terracotta-aa)",
-                textDecoration: "none",
-              }}
-            >
-              Looking for short field notes &amp; updates? → Latest News
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
           </Reveal>
         </div>
       </section>
@@ -162,7 +137,7 @@ export default function BlogPage() {
       >
         <div className="container-x px-6">
           <RevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {POSTS.map((p) => (
+            {postsByDate().map((p) => (
               <RevealItem
                 key={p.slug}
                 as="article"
@@ -320,7 +295,7 @@ export default function BlogPage() {
               send back a fixed scope in 48 hours.
             </p>
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--terracotta)",
@@ -333,7 +308,7 @@ export default function BlogPage() {
                 border: "none",
               }}
             >
-              Apply for a discovery call
+              Send a brief
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Reveal>

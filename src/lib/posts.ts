@@ -1,15 +1,58 @@
+export type PostCategory =
+  | "automation"
+  | "aeo"
+  | "case-study"
+  | "playbook"
+  | "operations"
+  | "pricing"
+  | "tools"
+  | "stack"
+  | "field-notes";
+
 export type Post = {
   slug: string;
   title: string;
+  /** Optional SERP-tuned title (≤55 chars) for <title>/metadata only. */
+  seoTitle?: string;
   description: string;
   publishedAt: string;
   updatedAt?: string;
   readingTime: number;
-  category: "automation" | "aeo" | "case-study" | "playbook";
+  category: PostCategory;
   tags: string[];
   coverImage?: string;
   author?: string;
+  /**
+   * How the body is rendered.
+   *  - "html" (default): /blog/[slug] reads content/blog/posts/<slug>.html
+   *  - "page": the post ships its own src/app/(skynet)/blog/<slug>/page.tsx
+   *    (letter-design essays promoted from /news on 2026-09-21). The dynamic
+   *    route skips these in generateStaticParams.
+   */
+  layout?: "html" | "page";
+  /** Letter-design fields (only on layout: "page" posts). */
+  eyebrow?: string;
+  deck?: string;
+  heroImage?: string;
+  heroCaption?: string;
+  cta?: { label: string; href: string; tagline: string; serviceLabel: string };
 };
+
+const CATEGORY_LABEL: Record<PostCategory, string> = {
+  automation: "Automation",
+  aeo: "AEO",
+  "case-study": "Case study",
+  playbook: "Playbook",
+  operations: "Operations",
+  pricing: "Pricing",
+  tools: "Tools",
+  stack: "Stack",
+  "field-notes": "Field notes",
+};
+
+export function categoryLabel(c: PostCategory): string {
+  return CATEGORY_LABEL[c] ?? c;
+}
 
 export const POSTS: Post[] = [
   {
@@ -35,7 +78,7 @@ export const POSTS: Post[] = [
     slug: "claude-fable-5-prompts-40-master-prompts",
     title: "Claude Fable 5 Prompts: 40 Master Prompts to Run Before July 12",
     description:
-      "40 master prompts for Claude Fable 5 — Claude Code, n8n, GHL and agency templates that build reusable assets. Free access ends July 12.",
+      "40 master prompts for Claude Fable 5 — Claude Code, n8n, GHL and agency templates that build reusable assets.",
     publishedAt: "2026-07-11",
     readingTime: 25,
     category: "playbook",
@@ -51,28 +94,17 @@ export const POSTS: Post[] = [
     author: "Waseem Nasir",
   },
   {
-    slug: "n8n-vs-zapier-2026",
-    title: "n8n vs Zapier in 2026: When to Use Which (and the Real Cost Math)",
-    description:
-      "After 180+ shipped workflows, here's the honest breakdown — when n8n wins, when Zapier wins, and the cost numbers nobody puts in writing.",
-    publishedAt: "2026-05-18",
-    updatedAt: "2026-05-21",
-    readingTime: 9,
-    category: "automation",
-    tags: ["n8n", "zapier", "make", "automation", "tooling"],
-  },
-  {
     slug: "ghl-no-show-automation-case-study",
-    // Canonical dental figures: 32% -> 9% steady-state, ~PKR 345,000 (~$1,235)
-    // recovered per WEEK (~PKR 1.49M / ~$5,350 per month at 4.33 weeks),
-    // shipped in 11 days. Sourced from the cost-math table
-    // in app/(skynet)/news/dental-no-show-n8n-flow/page.tsx. Do not restate
-    // these numbers anywhere without matching that table.
+    // Canonical dental figure: 32% -> 7% no-show rate. Reconciled 2026-09-21 —
+    // this post's own body (content/blog/posts/ghl-no-show-automation-case-study.html)
+    // always said 7%; the title/description and the build-log essay at
+    // /blog/dental-no-show-n8n-flow said 9%. One number now, everywhere.
     title:
-      "Case Study: How We Cut a Dental Practice's No-Show Rate from 32% to 9%",
+      "Case Study: How We Cut a Dental Practice's No-Show Rate from 32% to 7%",
     description:
-      "The GoHighLevel + Signal + n8n stack that took a dental practice from a 32% no-show rate to 9%, recovering around $1,235 a week in booked revenue. Shipped in 11 days.",
+      "The GoHighLevel + Signal + n8n stack that took a dental practice from a 32% no-show rate to 7%, and what the recovered chair time was worth. Shipped in 11 days.",
     publishedAt: "2026-05-15",
+    updatedAt: "2026-09-21",
     readingTime: 7,
     category: "case-study",
     tags: ["gohighlevel", "whatsapp", "no-show", "dental", "case-study"],
@@ -161,8 +193,222 @@ export const POSTS: Post[] = [
     tags: ["aeo", "seo", "comparison", "strategy", "citation-rate", "ranking"],
     author: "Waseem Nasir",
   },
+  {
+    slug: "edit-videos-with-claude",
+    // Moved from /edit-videos-with-claude on 2026-09-21; page.tsx lives in
+    // src/app/(skynet)/blog/edit-videos-with-claude/. Dates = git history.
+    title: "Edit Your Videos Using Claude Code",
+    description:
+      "The video-editing skills behind every SkynetLabs reel, vlog, and promo — each with the full master prompt you can paste into Claude Code and run. Free. One email unlocks the lot.",
+    publishedAt: "2026-08-10",
+    updatedAt: "2026-09-06",
+    readingTime: 12,
+    category: "playbook",
+    tags: ["claude-code", "video-editing", "prompts", "reels", "ffmpeg"],
+    author: "Waseem Nasir",
+    layout: "page",
+  },
+  // ── Promoted from /news on 2026-09-21 (same slugs, 301 /news/<slug> → /blog/<slug>) ──
+  {
+    slug: "ai-agents-running-the-shop-2026",
+    title: "The week AI agents started running my shop while I slept",
+    seoTitle: "The Week AI Agents Started Running My Shop",
+    description:
+      "A mid-2026 field note on running a small AI agency where autonomous agents handle overnight builds, lead triage, and content drafting — what they own, the one mistake that cost a morning, and the guardrails that make it safe.",
+    publishedAt: "2026-06-28",
+    readingTime: 8,
+    category: "stack",
+    tags: ["ai-agents", "claude", "automation", "workflow", "2026"],
+    author: "Waseem Nasir",
+  },
+  {
+    slug: "bali-canggu-coworking-economics",
+    title:
+      "Bali co-working economics — what shipping from Canggu actually costs",
+    seoTitle: "Bali Co-Working Economics: The Real Monthly Cost",
+    description:
+      "A line-by-line breakdown of the monthly cost of running SkynetLabs from Canggu, Bali — including the categories digital-nomad blogs leave out: visa runs, scooter rental, fast Wi-Fi tax, and food delivery.",
+    publishedAt: "2026-05-19",
+    readingTime: 11,
+    category: "field-notes",
+    tags: ["bali", "remote", "economics", "digital-nomad", "operations"],
+    author: "Waseem Nasir",
+    layout: "page",
+    eyebrow: "Field notes · Volume II · 2026",
+    deck: "The honest monthly burn for one operator running client builds out of Canggu — visa, scooter, villa, coffee shops, fiber, gym, food. With Lahore comparison so the numbers feel real.",
+    heroImage: "/news/bali-canggu-coworking-economics.jpg",
+    heroCaption: "Canggu rooftop · scooter parked · 5pm work block",
+    cta: {
+      serviceLabel: "Work with SkynetLabs",
+      label: "See the services",
+      href: "/services",
+      tagline:
+        "Want a remote operator who ships like a small team? Browse the full menu of builds — automation, AEO, bespoke sites, and the systems that hold them together.",
+    },
+  },
+  {
+    slug: "weekend-with-claude-code",
+    title: "A weekend with Claude Code",
+    description:
+      "A weekend rebuild of the SkynetJoe theme using Claude Code as the primary tooling. What got faster, what got harder, and the five things I still do by hand.",
+    publishedAt: "2026-05-17",
+    readingTime: 9,
+    category: "stack",
+    tags: ["claude-code", "tooling", "nextjs", "developer-experience"],
+    author: "Waseem Nasir",
+    layout: "page",
+    eyebrow: "Stack notes · Volume II · 2026",
+    deck: "Two days, one Next.js 16 rebuild, zero Cursor. What changed about how I ship sites when the IDE became a CLI agent with full repo context — and the five places it still doesn't help.",
+    heroImage: "/news/weekend-with-claude-code.jpg",
+    heroCaption: "Claude Code session · TUI logs · weekend rebuild",
+    cta: {
+      serviceLabel: "Vibe-Coded Websites",
+      label: "See the bespoke site service",
+      href: "/services/vibe-coded-sites",
+      tagline:
+        "Need a fast, bespoke Next.js build instead of another template? I ship vibe-coded sites with full repo context — usually a 7-day turnaround.",
+    },
+  },
+  {
+    slug: "public-pricing-ai-builds",
+    title:
+      "Why I price my AI builds publicly while every agency hides the number",
+    seoTitle: "Why I Price AI Builds Publicly",
+    description:
+      "An essay on the strategic case for public pricing in AI services — how SkynetLabs filtered out a year of wrong-fit briefs by publishing four flat-rate tiers, and what we still negotiate.",
+    publishedAt: "2026-05-15",
+    readingTime: 8,
+    category: "pricing",
+    tags: ["pricing", "agency", "transparency", "sales"],
+    author: "Waseem Nasir",
+    layout: "page",
+    eyebrow: "Pricing essay · Volume II · 2026",
+    deck: 'Four tiers. No "custom quote" theater. Why public pricing kills the worst clients before they reach the call, and the one tier I refused to publish because nobody ever needed it.',
+    heroImage: "/news/public-pricing-ai-builds.jpg",
+    heroCaption: "Pricing whiteboard · Bali rooftop · April retreat",
+    cta: {
+      serviceLabel: "Pricing",
+      label: "See the public pricing",
+      href: "/pricing",
+      tagline:
+        'Tired of "request a quote" theater? The full SkynetLabs price list is public — flat tiers, no custom-quote runaround. See where your build lands before you ever book a call.',
+    },
+  },
+  {
+    slug: "small-fleet-paid-tools-2026",
+    title: "The 6 paid tools every small fleet uses (and which 4 to delete)",
+    seoTitle: "6 Paid Tools Every Small Fleet Uses (Delete 4)",
+    description:
+      "An audit of the typical $800/mo small-fleet SaaS stack — load board, ELD, dispatch, factoring portal, two CRMs, accounting — with specific recommendations on which to keep, which to consolidate, and which to delete.",
+    publishedAt: "2026-05-13",
+    readingTime: 10,
+    category: "tools",
+    tags: ["freight", "fleet", "saas", "audit", "stack"],
+    author: "Waseem Nasir",
+    layout: "page",
+    eyebrow: "Stack audit · Volume II · 2026",
+    deck: "Most 8-to-20-truck operators are paying $800–$1,400/month for tools that don't talk to each other. After auditing twelve fleets in early 2026, here are the four you can delete this week.",
+    heroImage: "/news/small-fleet-paid-tools-2026.jpg",
+    heroCaption: "Truckstop receipts · client stack audit · April",
+    cta: {
+      serviceLabel: "n8n Automation",
+      label: "See the n8n service",
+      href: "/services/n8n-automation",
+      tagline:
+        "Paying for six tools that don't talk to each other? I audit the small-fleet stack, kill the dead subscriptions, and wire the survivors together in n8n.",
+    },
+  },
+  {
+    slug: "aeo-2026-meaning",
+    title: 'What "AEO" actually means in 2026',
+    description:
+      "A grounded explainer on what AEO is, why it's structurally different from SEO, what retrieval-augmented generation cares about, and the five things SkynetLabs ships on every AEO-tuned client site.",
+    publishedAt: "2026-05-11",
+    readingTime: 13,
+    category: "aeo",
+    tags: ["aeo", "llm", "chatgpt", "perplexity", "seo", "retrieval"],
+    author: "Waseem Nasir",
+    layout: "page",
+    eyebrow: "AEO field guide · Volume II · 2026",
+    deck: "Answer-engine optimization is not SEO with a new label. It's the discipline of getting your business cited inside ChatGPT, Claude, and Perplexity answers — and most agencies selling it don't understand the underlying retrieval mechanics.",
+    heroImage: "/news/aeo-2026-meaning.jpg",
+    heroCaption: "AEO retrieval map · client whiteboard · Lahore",
+    cta: {
+      serviceLabel: "WordPress SEO Blog",
+      label: "See the AEO content engine service",
+      href: "/services/wordpress-seo",
+      tagline:
+        "Want to get cited inside ChatGPT, Claude, and Perplexity? I ship AEO content engines — schema-first, llms.txt-correct, direct-answer blocks on every page.",
+    },
+  },
+  {
+    slug: "dental-no-show-n8n-flow",
+    // Same canonical figure as ghl-no-show-automation-case-study: 32% → 7%.
+    title: "I built a dental no-show flow that cut cancellations from 32% to 7%",
+    seoTitle: "Dental No-Show n8n Flow: 32% to 7%",
+    description:
+      "Full breakdown of the dental no-show n8n flow that took a Karachi practice from a 32% to a 7% cancellation rate. Architecture, message timing, fallback logic, and the cost math.",
+    publishedAt: "2026-05-09",
+    updatedAt: "2026-09-21",
+    readingTime: 12,
+    category: "automation",
+    tags: ["n8n", "gohighlevel", "whatsapp", "dental", "no-show"],
+    author: "Waseem Nasir",
+    layout: "page",
+    eyebrow: "Build log · Volume II · 2026",
+    deck: "A real Karachi dental flagship was losing PKR 480,000 a week to no-shows. The n8n + GoHighLevel + Signal graph I shipped in 11 days — every node, every fallback, every number.",
+    heroImage: "/news/dental-no-show-n8n-flow.jpg",
+    heroCaption: "Dental flagship · Defence Karachi · production graph",
+    cta: {
+      serviceLabel: "n8n Automation",
+      label: "See the n8n service",
+      href: "/services/n8n-automation",
+      tagline:
+        "Losing money to no-shows? I ship n8n + GoHighLevel reminder graphs in the practice's own voice — every node, every fallback, built around your real booking data.",
+    },
+  },
+  {
+    slug: "8-hour-reply-rule",
+    title: "The 8-hour reply rule",
+    description:
+      "The exact operating rhythm — Signal queue, Notion build board, eight-hour weekday reply window — that lets one operator ship 4 client builds/month from Canggu without slipping.",
+    publishedAt: "2026-05-07",
+    readingTime: 9,
+    category: "operations",
+    tags: ["operations", "solo", "remote", "workflow", "client-management"],
+    author: "Waseem Nasir",
+    layout: "page",
+    eyebrow: "Operations · Volume II · 2026",
+    deck: "How SkynetLabs handles four builds a month from a cafe in Bali without missing replies, dropping builds, or burning out. The unsexy Signal-and-Notion stack that actually runs the shop.",
+    heroImage: "/news/8-hour-reply-rule.jpg",
+    heroCaption: "Crate Cafe · Canggu · 7am scooter slot",
+    cta: {
+      serviceLabel: "AI Chatbots & Systems",
+      label: "See the AI chatbot service",
+      href: "/services/ai-chatbots",
+      tagline:
+        "Builds slipping through the cracks? I design the operating system behind the shop — intake queue, build board, and a reply window you can actually keep.",
+    },
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {
   return POSTS.find((p) => p.slug === slug);
+}
+
+/** Newest first — the /blog index order. */
+export function postsByDate(): Post[] {
+  return [...POSTS].sort(
+    (a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt),
+  );
+}
+
+/** Same-category first, then most recent of everything else. */
+export function relatedPosts(slug: string, count = 3): Post[] {
+  const current = getPost(slug);
+  const pool = postsByDate().filter((p) => p.slug !== slug);
+  if (!current) return pool.slice(0, count);
+  const same = pool.filter((p) => p.category === current.category);
+  const rest = pool.filter((p) => p.category !== current.category);
+  return [...same, ...rest].slice(0, count);
 }

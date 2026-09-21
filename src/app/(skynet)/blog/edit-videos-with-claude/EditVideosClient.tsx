@@ -51,7 +51,21 @@ function claudeLink(prompt: string): string {
   return `https://claude.ai/new?q=${encodeURIComponent(prompt)}`;
 }
 
-export default function EditVideosClient() {
+function fmtDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+export default function EditVideosClient({
+  publishedAt,
+  updatedAt,
+}: {
+  publishedAt: string;
+  updatedAt?: string;
+}) {
   // Session unlock (set when the gate fires) OR a previously-stored email.
   const [sessionUnlocked, setSessionUnlocked] = useState(false);
   const storedUnlocked = useSyncExternalStore(
@@ -85,6 +99,12 @@ export default function EditVideosClient() {
           Edit your videos using <span className="evc-accent">Claude Code</span>
           .
         </h1>
+        <p className="evc-dateline">
+          Published {fmtDate(publishedAt)}
+          {updatedAt && updatedAt !== publishedAt
+            ? ` · Updated ${fmtDate(updatedAt)}`
+            : null}
+        </p>
         <p className="evc-sub">
           The reels, vlogs, and promos we make start as one prompt. Here&apos;s
           the whole library — {VIDEO_SKILL_COUNT} editing skills, each with the
@@ -240,7 +260,7 @@ export default function EditVideosClient() {
           Hand us the raw footage. We run these exact prompts and send back the
           finished cut. Book a 15-minute call.
         </p>
-        <Link href="/discovery-call" className="evc-cta">
+        <Link href="/contact" className="evc-cta">
           Book a discovery call <ArrowRight size={16} />
         </Link>
       </section>
@@ -254,6 +274,7 @@ const css = `
 .evc .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 .evc-section { padding: 56px 24px; }
 
+.evc-dateline { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint, #6b6b6b); margin: -8px 0 16px; }
 .evc-eyebrow { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--terracotta, #C66B3F); display: inline-flex; align-items: center; gap: 12px; margin-bottom: 22px; }
 .evc-rule { width: 28px; height: 1px; background: var(--terracotta, #C66B3F); display: inline-block; }
 

@@ -155,6 +155,16 @@
 <div class="wn-leaf-n8n">→ n8n self-hosted on your VPC with audited PHI handling</div>
 </div>
 
+<h2 id="zaps-we-kept">The three Zaps we still pay for</h2>
+
+<p>We're not anti-Zapier, and a full migration rarely means 100%. After moving every client onboarding flow, form-to-CRM sync, calendar-to-GHL sync, Slack alerter and Airtable mirror to self-hosted n8n, three flows stayed on Zapier because rebuilding them cost more engineering time than the bill:</p>
+<ul>
+<li><strong>Pipedrive deals → QuickBooks invoices.</strong> The pre-built Zap handles tax codes, line items and customer dedupe; the n8n rebuild was abandoned after four hours. $19.99/mo, worth it.</li>
+<li><strong>Webflow CMS → Algolia sync.</strong> Webflow's "item updated" webhook doesn't fire reliably on partial updates. Zapier's polling trigger absorbs that quirk; in n8n it needs a cron-wrapped poller.</li>
+<li><strong>Stripe → Mailchimp.</strong> Failed payments, refunds and plan changes are edge-case heavy, and the battle-tested Zap is safer than a custom flow for a $9.99/mo line item.</li>
+</ul>
+<p>The rule that falls out of this: migrate the flows where n8n's per-execution economics or branching win outright, and leave the handful where a mature connector is doing real work you'd otherwise have to re-derive.</p>
+
 <h2 id="when-neither">When NOT to use either</h2>
 
 <p>Automation evangelism has a habit of forgetting that some problems aren't workflow problems. Three cases where n8n and Zapier are both the wrong answer:</p>

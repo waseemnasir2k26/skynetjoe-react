@@ -54,6 +54,7 @@ export const LETTER_CSS = `
 .lp-v3 .meta-line { text-align:center; margin-bottom:48px; font-family:var(--font-sans-inter),Inter,sans-serif; font-size:12px; letter-spacing:0.08em; color:var(--navy-2); text-transform:uppercase; }
 .lp-v3 .meta-line span { margin:0 10px; }
 .lp-v3 .meta-line span.dot { color:var(--gold); }
+.lp-v3 .updated-line { text-align:center; margin:-36px 0 48px; font-family:var(--font-sans-inter),Inter,sans-serif; font-size:12px; letter-spacing:0.08em; color:var(--gold); text-transform:uppercase; }
 .lp-v3 .letter { padding:32px 0 96px; }
 .lp-v3 .letter p { margin-bottom:24px; font-size:19px; color:var(--ink); max-width:64ch; }
 .lp-v3 .letter > .wrap > p:first-of-type::first-letter { font-family:var(--font-letter-lora),Georgia,serif; font-style:italic; font-size:72px; float:left; line-height:0.8; margin:12px 12px 0 0; color:var(--navy); font-weight:600; }
@@ -137,6 +138,8 @@ export type LetterArticleProps = {
   heroImage: string;
   heroCaption: string;
   datePublished: string;
+  /** ISO date; when set and later than datePublished, renders a visible "Updated" line. */
+  dateModified?: string;
   readingTime: number;
   category: string;
   children: ReactNode;
@@ -172,6 +175,7 @@ export default function LetterArticle({
   heroImage,
   heroCaption,
   datePublished,
+  dateModified,
   readingTime,
   category,
   children,
@@ -189,7 +193,8 @@ export default function LetterArticle({
             <h1>{title}</h1>
             <p className="hero-sub">{deck}</p>
             <figure className="hero-photo-wrap">
-              {/* next/image: heroImage is a local /public path (e.g. /news/foo.jpg) so it
+              {/* next/image: heroImage is a local /public path (e.g. /news/foo.jpg — the
+                  image folder kept its name when the essays moved to /blog) so it
                   optimizes without remote patterns. width/height match the 16:10 frame
                   (620 max-width); .hero-photo CSS (width:100%; aspect-ratio:16/10;
                   object-fit:cover) still governs the rendered size. `priority` eager-loads
@@ -215,6 +220,13 @@ export default function LetterArticle({
               <span className="dot">·</span>
               <span>{category}</span>
             </div>
+            {dateModified && dateModified !== datePublished && (
+              <p className="updated-line">
+                <time dateTime={dateModified}>
+                  Updated {formatDate(dateModified)}
+                </time>
+              </p>
+            )}
           </div>
         </section>
 
@@ -231,8 +243,8 @@ export default function LetterArticle({
                   <Link href={cta.href} className="btn btn-gold">
                     {cta.label} →
                   </Link>
-                  <Link href="/discovery-call" className="btn btn-paper">
-                    Book a strategy call
+                  <Link href="/contact" className="btn btn-paper">
+                    Book a call
                   </Link>
                 </div>
               </aside>
@@ -256,7 +268,7 @@ export default function LetterArticle({
                 {related.map((r) => (
                   <Link
                     key={r.slug}
-                    href={`/news/${r.slug}`}
+                    href={`/blog/${r.slug}`}
                     className="related-card"
                   >
                     <div className="related-card-meta">{r.category}</div>
@@ -278,16 +290,15 @@ export default function LetterArticle({
             Audit&apos;s free. Either way you walk with findings.
           </p>
           <div className="closer-cta-row">
-            <a href="/discovery-call" className="btn btn-gold">
-              Apply for a call →
+            <a href="/contact" className="btn btn-gold">
+              Send the brief →
             </a>
           </div>
         </section>
 
         <footer className="news-foot">
           <div className="wide">
-            <Link href="/news">← All articles</Link>
-            <Link href="/blog">Long-form journal</Link>
+            <Link href="/blog">← All posts</Link>
             <Link href="/services">Services</Link>
             <Link href="/pricing">Pricing</Link>
             <Link href="/about">About</Link>

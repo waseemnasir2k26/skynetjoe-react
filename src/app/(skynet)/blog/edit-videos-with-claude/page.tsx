@@ -1,21 +1,34 @@
 import type { Metadata } from "next";
-import { pageTitle, pageDescription } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { articleSchema } from "@/lib/schema";
+import { getPost } from "@/lib/posts";
 import EditVideosClient from "./EditVideosClient";
 import { VIDEO_SKILLS, VIDEO_SKILL_COUNT } from "@/data/video-skills";
 
-const TITLE = "Edit Your Videos Using Claude Code";
-const DESCRIPTION = `The ${VIDEO_SKILL_COUNT} video-editing skills behind every SkynetLabs reel, vlog, and promo — each with the full master prompt you can paste into Claude Code and run. Free. One email unlocks the lot.`;
+// Moved from /edit-videos-with-claude → /blog/edit-videos-with-claude on
+// 2026-09-21 (301 in place). Listed on /blog via src/lib/posts.ts (layout: "page").
+const SLUG = "edit-videos-with-claude";
+const post = getPost(SLUG)!;
+
+const TITLE = post.title;
+const DESCRIPTION = post.description;
 
 export const metadata: Metadata = {
   title: pageTitle(TITLE),
   description: pageDescription(DESCRIPTION),
-  alternates: { canonical: "/edit-videos-with-claude" },
+  alternates: { canonical: `${SITE.url}/blog/${SLUG}` },
   robots: { index: true, follow: true },
   openGraph: {
     title: TITLE,
     description: `Our editing workflows, each as a prompt. ${VIDEO_SKILL_COUNT} Claude Code video-editing master prompts — cinematic reels, kinetic captions, branded proof reels, faceless explainers.`,
-    url: "/edit-videos-with-claude",
-    type: "website",
+    url: `${SITE.url}/blog/${SLUG}`,
+    type: "article",
+    publishedTime: post.publishedAt,
+    modifiedTime: post.updatedAt ?? post.publishedAt,
+    authors: [SITE.founder],
+    tags: post.tags,
     images: ["/og-default.png"],
   },
   twitter: {
@@ -25,6 +38,15 @@ export const metadata: Metadata = {
     images: ["/og-default.png"],
   },
 };
+
+const postSchema = articleSchema({
+  title: TITLE,
+  description: DESCRIPTION,
+  slug: SLUG,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt,
+  keywords: post.tags,
+});
 
 const itemListSchema = {
   "@context": "https://schema.org",
@@ -43,11 +65,20 @@ const itemListSchema = {
 export default function Page() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      <JsonLd data={postSchema} />
+      <JsonLd data={itemListSchema} />
+      <Breadcrumbs
+        offsetTop
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Blog", href: "/blog" },
+          { label: TITLE },
+        ]}
       />
-      <EditVideosClient />
+      <EditVideosClient
+        publishedAt={post.publishedAt}
+        updatedAt={post.updatedAt}
+      />
     </>
   );
 }

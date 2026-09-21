@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
-import { POSTS, getPost } from "@/lib/posts";
+import { getPost, postsByDate, categoryLabel } from "@/lib/posts";
 import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -31,8 +31,12 @@ function extractToc(html: string): TocItem[] {
 
 export const dynamicParams = false;
 
+// layout: "page" posts ship their own blog/<slug>/page.tsx — that static
+// segment wins the route, so the dynamic route must not try to prerender them.
+const HTML_POSTS = postsByDate().filter((p) => p.layout !== "page");
+
 export function generateStaticParams() {
-  return POSTS.map((p) => ({ slug: p.slug }));
+  return HTML_POSTS.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -44,7 +48,7 @@ export async function generateMetadata({
   const post = getPost(slug);
   if (!post) return { title: "Post not found" };
   return {
-    title: pageTitle(post.title),
+    title: pageTitle(post.seoTitle ?? post.title),
     description: pageDescription(post.description),
     alternates: { canonical: `${SITE.url}/blog/${post.slug}` },
     openGraph: {
@@ -74,7 +78,7 @@ export default async function BlogPost({
 }) {
   const { slug } = await params;
   const post = getPost(slug);
-  if (!post) notFound();
+  if (!post || post.layout === "page") notFound();
 
   const htmlPath = path.join(
     process.cwd(),
@@ -91,9 +95,14 @@ export default async function BlogPost({
   }
 
   const toc = extractToc(html);
-  const idx = POSTS.findIndex((p) => p.slug === post.slug);
-  const prev = idx > 0 ? POSTS[idx - 1] : null;
-  const next = idx < POSTS.length - 1 ? POSTS[idx + 1] : null;
+  const ordered = postsByDate();
+  const idx = ordered.findIndex((p) => p.slug === post.slug);
+  const prev = idx > 0 ? ordered[idx - 1] : null;
+  const next = idx < ordered.length - 1 ? ordered[idx + 1] : null;
+  const updated =
+    post.updatedAt && post.updatedAt !== post.publishedAt
+      ? post.updatedAt
+      : null;
 
   const schema = {
     "@context": "https://schema.org",
@@ -168,7 +177,7 @@ export default async function BlogPost({
                   letterSpacing: "0.14em",
                 }}
               >
-                {post.category}
+                {categoryLabel(post.category)}
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5" />
@@ -195,6 +204,25 @@ export default async function BlogPost({
             >
               {post.title}
             </h1>
+            {updated && (
+              <p
+                className="text-xs uppercase tracking-wider mb-4"
+                style={{
+                  color: "var(--terracotta-aa)",
+                  fontFamily: "var(--font-mono)",
+                  letterSpacing: "0.12em",
+                }}
+              >
+                <time dateTime={updated}>
+                  Updated{" "}
+                  {new Date(updated).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+              </p>
+            )}
             <p
               className="text-lg md:text-xl leading-relaxed"
               style={{ color: "var(--ink-2)" }}
@@ -303,7 +331,7 @@ export default async function BlogPost({
               Send a brief. Yes/no in 8 hours. No funnel.
             </p>
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center gap-2 px-6 py-3 font-semibold transition"
               style={{
                 background: "var(--terracotta)",
@@ -312,7 +340,7 @@ export default async function BlogPost({
                 fontFamily: "var(--font-sans)",
               }}
             >
-              Apply for a discovery call
+              Send a brief
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Reveal>

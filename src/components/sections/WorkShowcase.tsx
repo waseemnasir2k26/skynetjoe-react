@@ -25,12 +25,6 @@ import { ExternalLink, Play, Star } from "lucide-react";
 import PortfolioScreenshot from "@/components/PortfolioScreenshot";
 import { WORK_BUILDS as GIGS, type Gig } from "@/lib/work-builds";
 
-const Github = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6a3.1 3.1 0 0 0-1.3-1.7c-1.1-.7.1-.7.1-.7a2.5 2.5 0 0 1 1.8 1.2 2.5 2.5 0 0 0 3.4 1 2.5 2.5 0 0 1 .8-1.6c-2.7-.3-5.5-1.3-5.5-6a4.7 4.7 0 0 1 1.3-3.3 4.3 4.3 0 0 1 .1-3.2s1-.3 3.3 1.3a11.5 11.5 0 0 1 6 0c2.3-1.6 3.3-1.3 3.3-1.3a4.3 4.3 0 0 1 .1 3.2 4.7 4.7 0 0 1 1.3 3.3c0 4.7-2.9 5.7-5.6 6a2.8 2.8 0 0 1 .8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z" />
-  </svg>
-);
-
 // Category chip styles, cream-safe.
 const CATEGORY_CHIP: Record<Gig["category"], React.CSSProperties> = {
   client: {
@@ -457,7 +451,7 @@ export default function WorkShowcase() {
               <Star className="w-4 h-4" /> All repos
             </a>
             <a
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--terracotta)",
