@@ -46,6 +46,7 @@ const organization = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",
+      telephone: "+6281316077185",
     email: "waseem@skynetjoe.com",
     url: `${SITE.url}/contact`,
     availableLanguage: ["en"],

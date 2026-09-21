@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
-import { NAV_PRIMARY, NAV_CTA } from "@/lib/site";
+import { NAV_PRIMARY, NAV_CTA, WHATSAPP } from "@/lib/site";
 
 /**
  * Site header — flat six-item nav + one CTA (2026-09-21 simplification).
@@ -139,6 +139,21 @@ export default function Header() {
             style={{ background: "var(--border)" }}
             aria-hidden="true"
           />
+          <a
+            href={WHATSAPP.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Contact us on WhatsApp, ${WHATSAPP.display}`}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-semibold transition-all hover:-translate-y-0.5"
+            style={{
+              background: "#25D366",
+              color: "#0b2e1a",
+              borderRadius: 2,
+            }}
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            {WHATSAPP.label}
+          </a>
           <Link
             href={NAV_CTA.href}
             className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold transition-all hover:-translate-y-0.5"
@@ -225,6 +240,25 @@ export default function Header() {
                 {NAV_CTA.label}
                 <ArrowRight className="w-4 h-4" />
               </Link>
+              <a
+                href={WHATSAPP.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="mt-3 inline-flex items-center justify-center gap-2 w-full"
+                style={{
+                  background: "#25D366",
+                  color: "#0b2e1a",
+                  borderRadius: 2,
+                  padding: "14px 24px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 15,
+                }}
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+                Contact us on WhatsApp
+              </a>
             </div>
           </nav>
         </div>

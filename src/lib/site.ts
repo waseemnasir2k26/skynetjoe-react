@@ -117,6 +117,13 @@ export const NAV_PRIMARY: NavItem[] = [
 
 /** Header / mobile-drawer CTA. */
 export const NAV_CTA = { label: "Book a call", href: "/contact" } as const;
+// WhatsApp CTA in the header (Waseem, 2026-09-21). E.164 without "+" for wa.me.
+export const WHATSAPP = {
+  number: "6281316077185",
+  display: "+62 813-1607-7185",
+  label: "WhatsApp",
+  href: "https://wa.me/6281316077185?text=Hi%20Waseem%2C%20I%27m%20reaching%20out%20from%20skynetjoe.com",
+} as const;
 
 // 5 core services, one category (2026-09-21 simplification — the 11
 // non-core slugs 301 via src/lib/simplify-redirects.ts).
