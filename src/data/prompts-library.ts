@@ -3,7 +3,8 @@
  *
  * 8 categories × 5-8 prompts each. Each prompt is self-contained,
  * variable-friendly (uses [PLACEHOLDER] convention), and ships with
- * a recommended model and a 1-line use-case.
+ * a recommended assistant (product name, never a model version — those
+ * go stale) and a 1-line use-case.
  */
 
 export type PromptCategory =
@@ -16,7 +17,7 @@ export type PromptCategory =
   | "recruitment"
   | "founderBrain";
 
-export type RecommendedModel = "Claude" | "GPT-4" | "Gemini";
+export type RecommendedModel = "Claude" | "ChatGPT" | "Gemini";
 
 export type Prompt = {
   id: string;
@@ -109,7 +110,7 @@ export const PROMPTS: Prompt[] = [
     title: "Objection handling responses",
     useCase: "Draft replies to the 5 most common objections.",
     body: `For a [PRODUCT/SERVICE] sold to [BUYER PERSONA], write the response to each of these objections: (1) too expensive, (2) we already use [COMPETITOR], (3) bad timing — Q4 budget frozen, (4) we tried something like this and it failed, (5) I need to check with my team. Each response: max 60 words, acknowledges the concern in one sentence, reframes with one specific question, ends with an offer that doesn't require buying anything today. No hard sells.`,
-    model: "GPT-4",
+    model: "ChatGPT",
   },
   {
     id: "sales-followup-sequence",
@@ -141,7 +142,7 @@ export const PROMPTS: Prompt[] = [
     title: "Tighten a proposal in one pass",
     useCase: "Cut 30% of fluff before sending.",
     body: `Rewrite this sales proposal: [PASTE PROPOSAL]. Cut every sentence that doesn't either (a) describe the prospect's problem in their language, (b) describe what we'll do, (c) describe the outcome with a number. Target: 40% shorter. Keep the structure but ruthlessly compress. If a paragraph doesn't include a noun the prospect would recognize, delete it. End with a single bolded CTA.`,
-    model: "GPT-4",
+    model: "ChatGPT",
   },
 
   /* ────────── CUSTOMER SERVICE (6) ────────── */
@@ -183,7 +184,7 @@ export const PROMPTS: Prompt[] = [
     title: "10 canned reply templates",
     useCase: "Bank of templates that don't sound canned.",
     body: `Write 10 canned customer service replies for [COMPANY] selling [PRODUCT]. Cover: order status, shipping delay, broken product, password reset, refund processed, technical issue, account locked, subscription cancellation, billing question, positive review thank-you. Each: 40 words, one named greeting, one specific next step, one signature line. Voice: warm, competent, brief. No "thank you for reaching out" openers.`,
-    model: "GPT-4",
+    model: "ChatGPT",
   },
   {
     id: "cs-saas-onboarding",
@@ -209,7 +210,7 @@ export const PROMPTS: Prompt[] = [
     title: "10 email subject lines to A/B test",
     useCase: "Push open rate past 35%.",
     body: `Write 10 email subject lines for an email going to [AUDIENCE]. Topic: [EMAIL TOPIC]. Mix: 3 curiosity gaps (no clickbait), 3 specific number-driven, 2 question-based, 1 contrarian, 1 plain-spoken. Each under 50 chars. Ban: emojis, ALL CAPS, "important", "urgent", "don't miss", "last chance". For each line, give a 1-line hypothesis on who would open it. Rank them 1-10 by my odds of beating control.`,
-    model: "GPT-4",
+    model: "ChatGPT",
   },
   {
     id: "mkt-ad-copy-meta",
@@ -217,7 +218,7 @@ export const PROMPTS: Prompt[] = [
     title: "Meta ad copy with 3 variants",
     useCase: "Test creative against the same offer.",
     body: `Write 3 Meta ad variants for [PRODUCT] targeting [AUDIENCE]. Offer: [OFFER]. For each variant: 4-word hook, 30-word body, 5-word CTA. Variant A: pain-led. Variant B: outcome-led. Variant C: identity-led ("for [PERSONA] who [BEHAVIOR]"). Each variant must work without an image. Include a 1-line hypothesis on which persona each variant targets. No emojis except where it earns its place.`,
-    model: "GPT-4",
+    model: "ChatGPT",
   },
   {
     id: "mkt-positioning-statement",
@@ -275,7 +276,7 @@ export const PROMPTS: Prompt[] = [
     title: "Vendor RFP template",
     useCase: "Get apples-to-apples vendor comparisons.",
     body: `I'm evaluating vendors for [CATEGORY — e.g. CRM, helpdesk, dev agency]. Write an RFP template. Sections: (1) about us in 100 words, (2) the problem we're solving, (3) functional requirements as a checklist, (4) integration requirements, (5) implementation timeline, (6) pricing structure question, (7) 5 references format, (8) deal-breakers we won't compromise on. End with a scoring rubric I can fill in for each vendor.`,
-    model: "GPT-4",
+    model: "ChatGPT",
   },
   {
     id: "ops-hiring-runbook",
@@ -518,7 +519,7 @@ export function buildModelLink(
 ): string {
   const q = encodeURIComponent(promptBody);
   if (model === "chatgpt") {
-    return `https://chat.openai.com/?q=${q}`;
+    return `https://chatgpt.com/?q=${q}`;
   }
   return `https://claude.ai/new?q=${q}`;
 }

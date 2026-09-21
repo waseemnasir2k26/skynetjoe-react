@@ -19,6 +19,33 @@ import {
   type PromptCategory,
 } from "@/data/prompts-library";
 
+
+/** Clipboard write with a legacy fallback (older mobile browsers / non-secure contexts). */
+async function writeClipboard(text: string): Promise<boolean> {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    /* fall through to legacy path */
+  }
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch {
+    return false;
+  }
+}
+
 export default function Library() {
   const [query, setQuery] = useState("");
   const [activeCats, setActiveCats] = useState<PromptCategory[]>([]);
@@ -66,19 +93,19 @@ export default function Library() {
   }, [query, activeCats]);
 
   async function copyPrompt(p: Prompt) {
-    try {
-      await navigator.clipboard.writeText(p.body);
-      setCopyStateById((curr) => ({ ...curr, [p.id]: true }));
-      window.setTimeout(() => {
-        setCopyStateById((curr) => {
-          const next = { ...curr };
-          delete next[p.id];
-          return next;
-        });
-      }, 1800);
-    } catch {
-      /* ignore */
+    const ok = await writeClipboard(p.body);
+    if (!ok) {
+      setOpenPrompt(p); // fallback: show the full text so it can be selected by hand
+      return;
     }
+    setCopyStateById((curr) => ({ ...curr, [p.id]: true }));
+    window.setTimeout(() => {
+      setCopyStateById((curr) => {
+        const next = { ...curr };
+        delete next[p.id];
+        return next;
+      });
+    }, 1800);
   }
 
   return (
@@ -577,16 +604,18 @@ function PromptModal({
   onClose: () => void;
 }) {
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
   const cat = CATEGORIES.find((c) => c.key === prompt.category);
 
   async function copy() {
-    try {
-      await navigator.clipboard.writeText(prompt.body);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      /* ignore */
+    const ok = await writeClipboard(prompt.body);
+    if (!ok) {
+      setCopyFailed(true);
+      return;
     }
+    setCopyFailed(false);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
   }
 
   return (
@@ -640,6 +669,12 @@ function PromptModal({
         </div>
 
         <div className="px-6 md:px-8 pb-7 pt-2 border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)]">
+          {copyFailed && (
+            <p role="alert" className="mb-3 text-xs text-[var(--terracotta-aa)]">
+              Your browser blocked clipboard access — select the prompt text
+              above and copy it manually.
+            </p>
+          )}
           <div className="flex flex-col sm:flex-row gap-2.5">
             <button
               type="button"

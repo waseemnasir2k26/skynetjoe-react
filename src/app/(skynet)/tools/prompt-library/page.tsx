@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     q: "Why does each prompt have a recommended model?",
-    a: "Claude is sharper for long-form, voice-locked writing, and decision frameworks. GPT-4 is faster for quick variations and structured outputs like tables. Gemini handles certain code and data tasks well. The tag is a starting point — you can override it.",
+    a: "Claude is sharper for long-form, voice-locked writing, and decision frameworks. ChatGPT is quick for variations and structured outputs like tables. Gemini handles certain code and data tasks well. The tag is a starting point — you can override it.",
   },
   {
     q: "Can I submit prompts I've built?",
