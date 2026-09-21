@@ -2,20 +2,20 @@
  * llm-pricing.ts — static pricing table for the AI Cost Calculator tool.
  *
  * Every rate below was hand-verified against the provider's OWN pricing page
- * on 2026-08-19 (sources in the comments next to each model). This file is
+ * on 2026-09-21 (sources in the comments next to each model). This file is
  * NOT a live feed — no API is called at runtime. LLM API pricing changes
  * often and providers frequently ship new model tiers, so always verify
  * current pricing on the provider's pricing page before making a purchasing
  * decision.
  *
- * Sources (fetched 2026-08-19):
+ * Sources (fetched 2026-09-21):
  * - Anthropic: https://platform.claude.com/docs/en/docs/about-claude/pricing
  * - OpenAI:    https://developers.openai.com/api/docs/pricing
  * - Google:    https://ai.google.dev/gemini-api/docs/pricing
  */
 
 export const PRICING_AS_OF =
-  "August 2026 (verified against provider pricing pages)";
+  "September 21, 2026 (indicative — verified against provider pricing pages)";
 
 export type LlmModel = {
   id: string;
@@ -35,13 +35,13 @@ export const LLM_PRICING: LlmModel[] = [
   // Source: https://platform.claude.com/docs/en/docs/about-claude/pricing
   // ---------------------------------------------------------------
   {
-    id: "claude-fable-5",
+    id: "claude-fable-5-1",
     provider: "Anthropic",
-    model: "Claude Fable 5",
+    model: "Claude Fable 5.1",
     inputPer1M: 10,
     outputPer1M: 50,
     tier: "flagship",
-    note: "Anthropic's top-end model tier.",
+    note: "Anthropic's top-end tier. Fable 5 is priced the same.",
   },
   {
     id: "claude-opus-5",
@@ -56,10 +56,10 @@ export const LLM_PRICING: LlmModel[] = [
     id: "claude-sonnet-5",
     provider: "Anthropic",
     model: "Claude Sonnet 5",
-    inputPer1M: 3,
-    outputPer1M: 15,
+    inputPer1M: 2,
+    outputPer1M: 10,
     tier: "mid",
-    note: "Standard price; a $2/$10 intro rate runs through Aug 31, 2026.",
+    note: "The $2/$10 launch rate is now the standard price (the Sept 2026 rise to $3/$15 was cancelled).",
   },
   {
     id: "claude-haiku-4-5",
@@ -76,13 +76,22 @@ export const LLM_PRICING: LlmModel[] = [
   // Source: https://developers.openai.com/api/docs/pricing
   // ---------------------------------------------------------------
   {
+    id: "gpt-6-astra",
+    provider: "OpenAI",
+    model: "GPT-6-astra",
+    inputPer1M: 10,
+    outputPer1M: 50,
+    tier: "flagship",
+    note: "OpenAI's top-end model tier.",
+  },
+  {
     id: "gpt-5-6-sol",
     provider: "OpenAI",
     model: "GPT-5.6-sol",
-    inputPer1M: 5,
-    outputPer1M: 30,
+    inputPer1M: 4,
+    outputPer1M: 20,
     tier: "flagship",
-    note: "OpenAI's current flagship text model.",
+    note: "High-end reasoning tier below GPT-6-astra.",
   },
   {
     id: "gpt-5-6-terra",
@@ -126,13 +135,13 @@ export const LLM_PRICING: LlmModel[] = [
     note: "Rates for prompts up to 200k tokens; longer prompts cost more ($4 in / $18 out).",
   },
   {
-    id: "gemini-3-7-flash",
+    id: "gemini-3-8-flash",
     provider: "Google",
-    model: "Gemini 3.7 Flash",
+    model: "Gemini 3.8 Flash",
     inputPer1M: 0.75,
     outputPer1M: 3.75,
     tier: "mid",
-    note: "Promotional rate through Dec 31, 2026; rises to $1.50 / $7.50 from Jan 1, 2027.",
+    note: "Promotional rate through Dec 31, 2026; rises to $1.50 / $7.50 from Jan 1, 2027. Gemini 3.7 / 3.6 Flash share this rate.",
   },
   {
     id: "gemini-3-5-flash-lite",

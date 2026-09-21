@@ -235,8 +235,8 @@ export default function Calculator() {
           <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)]">
             Compare across providers, same volume
           </p>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+          <div className="-mx-2 overflow-x-auto px-2">
+            <table className="w-full min-w-[560px] text-left text-sm">
               <thead>
                 <tr className="text-[11px] uppercase tracking-wider text-[var(--ink-faint)]">
                   <th className="pb-2 pr-4 font-semibold">Model</th>
@@ -272,16 +272,16 @@ export default function Calculator() {
                           </span>
                         )}
                       </td>
-                      <td className="py-2.5 pr-4 text-[var(--ink-faint)]">
+                      <td className="whitespace-nowrap py-2.5 pr-4 text-[var(--ink-faint)]">
                         {model.tier}
                       </td>
-                      <td className="py-2.5 pr-4 text-right text-[var(--ink-2)]">
+                      <td className="whitespace-nowrap py-2.5 pr-4 text-right text-[var(--ink-2)]">
                         ${model.inputPer1M}
                       </td>
-                      <td className="py-2.5 pr-4 text-right text-[var(--ink-2)]">
+                      <td className="whitespace-nowrap py-2.5 pr-4 text-right text-[var(--ink-2)]">
                         ${model.outputPer1M}
                       </td>
-                      <td className="py-2.5 text-right font-bold text-[var(--terracotta-aa)]">
+                      <td className="whitespace-nowrap py-2.5 text-right font-bold text-[var(--terracotta-aa)]">
                         {fmtUsd(monthlyCost)}
                       </td>
                     </tr>
@@ -291,9 +291,10 @@ export default function Calculator() {
             </table>
           </div>
           <p className="mt-4 text-xs text-[var(--ink-faint)]">
-            All rates as of {PRICING_AS_OF}. This is not a live feed and
-            provider pricing changes often — check the provider&apos;s own
-            pricing page before budgeting.
+            Indicative rates as of {PRICING_AS_OF}. Standard non-batch,
+            non-cached prices; this is not a live feed and provider pricing
+            changes often — check the provider&apos;s own pricing page before
+            budgeting. Table scrolls sideways on small screens.
           </p>
 
           <button

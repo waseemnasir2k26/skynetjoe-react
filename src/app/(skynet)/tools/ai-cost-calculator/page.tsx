@@ -81,7 +81,7 @@ const softwareSchema = {
   url: `${SITE.url}${PATH}`,
   description: `Free calculator that estimates monthly LLM API spend across ${LLM_PRICING.length} models from Anthropic, OpenAI, and Google, based on token volume you provide. Pricing table is ${PRICING_AS_OF}.`,
   offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
-  dateModified: "2026-08-19",
+  dateModified: "2026-09-21",
 };
 
 const faqSchema = {
