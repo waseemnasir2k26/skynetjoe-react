@@ -192,7 +192,15 @@ export default function ToolsTeaser() {
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {/* Mobile: one swipeable row instead of three stacked cards — the
+          390 px page was 9,963 px tall; card grids were most of it. */}
+      <style>{`@media (max-width: 767px){
+        .tools-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;
+          padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+        .tools-row::-webkit-scrollbar{display:none}
+        .tools-row>*{flex:0 0 86%;scroll-snap-align:start}
+      }`}</style>
+        <div className="tools-row grid grid-cols-1 md:grid-cols-3 gap-5">
           {cards.map((tool, i) => {
             const Icon = ICONS[icons[tool.slug]];
             return (
