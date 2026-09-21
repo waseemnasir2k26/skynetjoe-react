@@ -17,7 +17,7 @@ export default function DiscoveryPopup() {
 
   const disabled =
     pathname?.startsWith("/lp/freight-") ||
-    pathname === "/discovery-call" ||
+    pathname === "/contact" ||
     pathname?.startsWith("/api/") ||
     searchParams?.get("popup") === "off";
 
@@ -201,7 +201,7 @@ export default function DiscoveryPopup() {
 
           <div className="flex flex-col gap-3">
             <Link
-              href="/discovery-call"
+              href="/contact"
               onClick={handleClose}
               className="inline-flex items-center justify-center gap-2"
               style={{
