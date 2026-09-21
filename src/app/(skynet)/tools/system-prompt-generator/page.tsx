@@ -39,10 +39,6 @@ export const metadata: Metadata = {
 
 const faqs = [
   {
-    q: "Is this the same as the Voice Persona Builder?",
-    a: "No — different job. The Voice Persona Builder produces a brand voice profile for writing copy that sounds like your brand (marketing, emails, social posts). This tool produces a functional system prompt for an agent or custom GPT — what it's allowed to do, what tone to use, and exactly what format to reply in. If you're building a brand-voice writing assistant, start with the Voice Persona Builder. If you're building a functional agent or GPT, use this one.",
-  },
-  {
     q: "What platforms does the output work on?",
     a: "Any platform that accepts a system message or custom instructions — ChatGPT custom GPTs, Claude Projects, Gemini Gems, or a system prompt field in an agent framework like LangChain, CrewAI or n8n's AI Agent node.",
   },
@@ -264,10 +260,14 @@ export default function SystemPromptGeneratorPage() {
               More free tools
             </p>
             <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-4">
-              Writing brand copy, not a functional agent? Use the{" "}
-              . Need the full review doc with guardrails and escalation rules,
-              not just the prompt? Try the{" "}
-              . Chaining several prompts together? Use the{" "}
+              Need a full set of reusable prompts instead of one agent? Browse
+              the{" "}
+              <Link
+                href="/tools/prompt-library"
+                className="font-semibold text-[var(--terracotta-aa)] hover:underline"
+              >
+                Prompt Library
+              </Link>
               , or{" "}
               <Link
                 href="/contact"
