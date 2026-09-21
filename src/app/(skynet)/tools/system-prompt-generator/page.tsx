@@ -183,15 +183,8 @@ export default function SystemPromptGeneratorPage() {
                 maxWidth: "52ch",
               }}
             >
-              For an agent&apos;s function, not your brand&apos;s writing voice
-              — for brand voice, use the{" "}
-              <Link
-                href="/tools/voice-persona-builder"
-                style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}
-              >
-                Voice Persona Builder
-              </Link>{" "}
-              instead.
+              For an agent&apos;s function, not your brand&apos;s writing
+              voice.
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl">
@@ -272,30 +265,12 @@ export default function SystemPromptGeneratorPage() {
             </p>
             <p className="text-sm text-[var(--ink-2)] leading-relaxed mb-4">
               Writing brand copy, not a functional agent? Use the{" "}
-              <Link
-                href="/tools/voice-persona-builder"
-                className="font-semibold text-[var(--terracotta-aa)] hover:underline"
-              >
-                Voice Persona Builder
-              </Link>
               . Need the full review doc with guardrails and escalation rules,
               not just the prompt? Try the{" "}
-              <Link
-                href="/tools/ai-agent-spec-writer"
-                className="font-semibold text-[var(--terracotta-aa)] hover:underline"
-              >
-                AI Agent Spec Writer
-              </Link>
               . Chaining several prompts together? Use the{" "}
-              <Link
-                href="/tools/prompt-chain-builder"
-                className="font-semibold text-[var(--terracotta-aa)] hover:underline"
-              >
-                Prompt Chain Builder
-              </Link>
               , or{" "}
               <Link
-                href="/discovery-call"
+                href="/contact"
                 className="font-semibold text-[var(--terracotta-aa)] hover:underline"
               >
                 book a free discovery call

@@ -189,14 +189,6 @@ const content: ServiceFunnelContent = {
         label: "n8n Workflow Generator",
         href: "/tools/n8n-workflow-generator",
       },
-      {
-        label: "Cron Expression Builder",
-        href: "/tools/cron-expression-builder",
-      },
-      {
-        label: "Webhook Payload Builder",
-        href: "/tools/webhook-payload-builder",
-      },
     ],
   },
 };

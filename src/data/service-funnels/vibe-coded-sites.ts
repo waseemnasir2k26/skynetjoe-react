@@ -172,7 +172,6 @@ const content: ServiceFunnelContent = {
   freeTools: {
     label: "Try it free first:",
     items: [
-      { label: "Before/After Slider", href: "/tools/before-after-slider" },
     ],
   },
 };

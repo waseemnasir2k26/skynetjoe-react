@@ -249,18 +249,6 @@ export default function LlmsTxtGeneratorPage() {
                 >
                   → Run the AEO audit
                 </a>
-                <a
-                  href="/tools/schema-markup-generator"
-                  className="text-sm font-semibold text-[var(--terracotta-aa)] hover:underline"
-                >
-                  → Build your schema markup
-                </a>
-                <a
-                  href="/tools/chatgpt-visibility-grader"
-                  className="text-sm font-semibold text-[var(--terracotta-aa)] hover:underline"
-                >
-                  → Check your ChatGPT visibility
-                </a>
               </div>
             </div>
           </div>

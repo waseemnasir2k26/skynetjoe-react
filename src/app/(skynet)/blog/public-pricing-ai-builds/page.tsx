@@ -113,7 +113,7 @@ export default function Page() {
           self-deselect. They don&apos;t book a call. They don&apos;t waste 45
           minutes of mine. They don&apos;t email back three times asking if I
           have a smaller package. They simply move on. Net result: I take far
-          fewer wrong-fit <Link href="/discovery-call">discovery calls</Link>{" "}
+          fewer wrong-fit <Link href="/contact">discovery calls</Link>{" "}
           than I did when pricing was &quot;starts around $X depending on
           scope.&quot;
         </p>

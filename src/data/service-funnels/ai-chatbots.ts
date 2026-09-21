@@ -173,7 +173,6 @@ const content: ServiceFunnelContent = {
         label: "System Prompt Generator",
         href: "/tools/system-prompt-generator",
       },
-      { label: "Voice Persona Builder", href: "/tools/voice-persona-builder" },
     ],
   },
 };

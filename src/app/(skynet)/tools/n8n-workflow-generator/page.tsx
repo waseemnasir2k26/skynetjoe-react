@@ -282,31 +282,6 @@ export default function N8nWorkflowGeneratorPage() {
                   Find where your ops lose time and money before you build.
                 </p>
               </Link>
-              <Link
-                href="/tools/webhook-payload-builder"
-                className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5 transition hover:border-[var(--terracotta)]/50"
-              >
-                <Workflow className="h-5 w-5 text-[var(--terracotta-aa)] mb-2" />
-                <h3 className="text-[var(--ink)] font-extrabold mb-1">
-                  Webhook Payload Builder
-                </h3>
-                <p className="text-sm text-[var(--ink-faint)]">
-                  Build and validate a JSON payload before you wire the
-                  automation.
-                </p>
-              </Link>
-              <Link
-                href="/tools/ghl-snapshot-planner"
-                className="rounded-2xl border border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] p-5 transition hover:border-[var(--terracotta)]/50"
-              >
-                <Sparkles className="h-5 w-5 text-[var(--terracotta-aa)] mb-2" />
-                <h3 className="text-[var(--ink)] font-extrabold mb-1">
-                  GHL Snapshot Planner
-                </h3>
-                <p className="text-sm text-[var(--ink-faint)]">
-                  Plan your GoHighLevel pipelines and tags before you build.
-                </p>
-              </Link>
             </div>
           </div>
         </div>
@@ -357,7 +332,7 @@ export default function N8nWorkflowGeneratorPage() {
               legacy system with no API — that&apos;s a build, not a download.
             </p>
             <Link
-              href="/discovery-call"
+              href="/contact"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
               style={{
                 background: "var(--terracotta)",

@@ -318,7 +318,7 @@ export default function Page() {
 
         <h2>If you want the audit</h2>
         <p>
-          The <Link href="/discovery-call">free 15-minute audit</Link> looks at
+          The <Link href="/contact">free 15-minute audit</Link> looks at
           your top 20 buyer-journey questions, queries them against the three
           major LLMs, and gives you a citation-rate baseline plus the three
           highest-leverage fixes. No deck. No retainer pitch. Yes, no, or

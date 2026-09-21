@@ -177,7 +177,6 @@ const content: ServiceFunnelContent = {
   freeTools: {
     label: "Try it free first:",
     items: [
-      { label: "GHL Snapshot Planner", href: "/tools/ghl-snapshot-planner" },
     ],
   },
 };

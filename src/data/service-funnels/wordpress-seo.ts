@@ -165,10 +165,6 @@ const content: ServiceFunnelContent = {
     label: "Try it free first:",
     items: [
       { label: "AEO Audit", href: "/tools/aeo-audit" },
-      {
-        label: "Schema Markup Generator",
-        href: "/tools/schema-markup-generator",
-      },
       { label: "llms.txt Generator", href: "/tools/llms-txt-generator" },
     ],
   },

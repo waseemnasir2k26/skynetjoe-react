@@ -390,12 +390,6 @@ export default function Generator() {
         </p>
         <div className="flex flex-wrap gap-2">
           <Link
-            href="/tools/ai-tool-stack-builder"
-            className="rounded-full border border-[rgba(26,26,26,0.12)] bg-[var(--cream-3)] px-4 py-2 text-sm font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
-          >
-            AI Tool Stack Builder →
-          </Link>
-          <Link
             href="/tools/prompt-library"
             className="rounded-full border border-[rgba(26,26,26,0.12)] bg-[var(--cream-3)] px-4 py-2 text-sm font-semibold text-[var(--ink-2)] transition hover:border-[var(--terracotta)] hover:text-[var(--terracotta-aa)]"
           >
@@ -408,7 +402,7 @@ export default function Generator() {
             n8n Workflow Generator →
           </Link>
           <Link
-            href="/discovery-call"
+            href="/contact"
             className="rounded-full border border-[var(--terracotta)] bg-[rgba(198,107,63,0.10)] px-4 py-2 text-sm font-semibold text-[var(--terracotta-aa)] transition hover:bg-[rgba(198,107,63,0.18)]"
           >
             Book a discovery call →
