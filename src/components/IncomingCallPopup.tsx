@@ -25,7 +25,7 @@ export default function IncomingCallPopup() {
   useEffect(() => {
     if (!pathname) return;
     if (pathname.startsWith("/lp/")) return;
-    if (pathname.startsWith("/contact")) return;
+    if (pathname.startsWith("/discovery-call")) return;
     if (pathname.startsWith("/api/")) return;
 
     if (typeof window === "undefined") return;
@@ -64,7 +64,7 @@ export default function IncomingCallPopup() {
   const accept = () => {
     clearShared();
     setVisible(false);
-    router.push("/contact");
+    router.push("/discovery-call");
   };
   const decline = () => {
     clearShared();

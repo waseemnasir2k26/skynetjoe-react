@@ -135,7 +135,7 @@ export default function ErrorBoundary({
               Go home
             </Link>
             <Link
-              href="/contact"
+              href="/discovery-call"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

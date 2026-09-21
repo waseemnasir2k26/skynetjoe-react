@@ -1,0 +1,405 @@
+<article class="wn-gradient-lab">
+<style>
+.wn-gradient-lab{--gl-fg:#0f1419;--gl-fg-muted:#3d4654;--gl-fg-faint:#6b7280;--gl-bg:#fbfaf6;--gl-surface:#ffffff;--gl-border:rgba(15,20,25,.10);font-family:var(--font-lexend,system-ui,sans-serif);line-height:1.55;color:var(--gl-fg);background:var(--gl-bg);display:block}
+.wn-gradient-lab *{box-sizing:border-box}
+html.dark .wn-gradient-lab{--gl-fg:#f5f5f7;--gl-fg-muted:#c6c7d0;--gl-fg-faint:#8e8e9a;--gl-bg:#14141f;--gl-surface:#1c1c28;--gl-border:rgba(255,255,255,.10)}
+.wn-gradient-lab .gl-wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+.wn-gradient-lab .gl-page-hero{padding:4rem 1.5rem 2rem;text-align:center}
+.wn-gradient-lab .gl-page-hero h1{font-size:clamp(1.75rem,3.5vw,2.6rem);font-weight:800;letter-spacing:-.02em;margin:0 0 .75rem}
+.wn-gradient-lab .gl-page-hero p{color:var(--gl-fg-muted);margin:0 auto;max-width:60ch;font-size:1.05rem}
+.wn-gradient-lab .gl-toc{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0 0}
+.wn-gradient-lab .gl-toc a{font-size:.78rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;border:1px solid var(--gl-border);border-radius:999px;text-decoration:none;color:var(--gl-fg);background:var(--gl-surface);transition:transform .15s ease, border-color .15s ease}
+.wn-gradient-lab .gl-toc a:hover{transform:translateY(-1px);border-color:rgba(15,20,25,.25)}
+
+.wn-gradient-lab .gl-variant{position:relative;min-height:600px;padding:5rem 1.5rem;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--gl-border)}
+.wn-gradient-lab .gl-variant-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;width:100%}
+.wn-gradient-lab .gl-tag{position:absolute;top:1.25rem;left:1.5rem;z-index:3;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.65);padding:.4rem .8rem;border-radius:6px;backdrop-filter:blur(6px)}
+.wn-gradient-lab .gl-swatch{position:absolute;top:1.25rem;right:1.5rem;z-index:3;display:flex;gap:.25rem;background:rgba(0,0,0,.55);padding:.45rem .6rem;border-radius:8px;backdrop-filter:blur(6px)}
+.wn-gradient-lab .gl-swatch i{width:14px;height:14px;border-radius:50%;display:block;border:1px solid rgba(255,255,255,.4)}
+.wn-gradient-lab .gl-pick{position:absolute;bottom:1.25rem;right:1.5rem;z-index:3;font-size:.78rem;font-weight:600;color:#fff;background:rgba(0,0,0,.7);padding:.5rem .95rem;border-radius:999px;backdrop-filter:blur(6px);text-decoration:none;border:1px solid rgba(255,255,255,.2);transition:transform .15s ease}
+.wn-gradient-lab .gl-pick:hover{transform:translateY(-1px)}
+
+.wn-gradient-lab .gl-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.7;pointer-events:none}
+.wn-gradient-lab .gl-eyebrow{display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.35rem .8rem;border-radius:999px;margin-bottom:1.25rem}
+.wn-gradient-lab .gl-h{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.05;letter-spacing:-.025em;margin:0 0 1.1rem;max-width:18ch}
+.wn-gradient-lab .gl-h .gl-grad{background:var(--gl-text-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.wn-gradient-lab .gl-sub{font-size:1.1rem;line-height:1.55;max-width:60ch;margin:0 0 1.75rem}
+.wn-gradient-lab .gl-cta-row{display:flex;flex-wrap:wrap;gap:.6rem}
+.wn-gradient-lab .gl-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:transform .15s ease, box-shadow .15s ease}
+.wn-gradient-lab .gl-btn-primary{color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.wn-gradient-lab .gl-btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(0,0,0,.22)}
+.wn-gradient-lab .gl-btn-ghost{background:rgba(255,255,255,.85);color:#0f1419;border:1px solid rgba(15,20,25,.12)}
+.wn-gradient-lab .gl-btn-ghost:hover{background:#fff;transform:translateY(-1px)}
+.wn-gradient-lab .gl-stat-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2.25rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.18)}
+.wn-gradient-lab .gl-stat{display:flex;flex-direction:column;gap:.15rem}
+.wn-gradient-lab .gl-stat b{font-size:1.35rem;font-weight:800;letter-spacing:-.01em}
+.wn-gradient-lab .gl-stat span{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+
+/* ===== Variant 01 — AURORA (green → cyan → purple) — current ===== */
+.gl-v01{background:linear-gradient(135deg,#0c2922 0%,#0d2a3d 45%,#1a1338 100%);color:#f5f5f7}
+.gl-v01 .gl-orb-a{width:520px;height:520px;background:#1E88E5;top:-100px;left:-120px;opacity:.55}
+.gl-v01 .gl-orb-b{width:600px;height:600px;background:#00D4FF;top:60px;right:-200px;opacity:.40}
+.gl-v01 .gl-orb-c{width:480px;height:480px;background:#14B8A6;bottom:-160px;left:30%;opacity:.45}
+.gl-v01 .gl-eyebrow{background:rgba(19,185,115,.18);color:#5fe9a8;border:1px solid rgba(19,185,115,.40)}
+.gl-v01{--gl-text-grad:linear-gradient(120deg,#00D4FF,#5fe9a8)}
+.gl-v01 .gl-btn-primary{background:linear-gradient(135deg,#1E88E5,#00D4FF)}
+.gl-v01 .gl-sub{color:rgba(245,245,247,.78)}
+
+/* ===== Variant 02 — SUNSET (coral → pink → purple) ===== */
+.gl-v02{background:linear-gradient(135deg,#2a0e1f 0%,#3a1428 50%,#1f0d2e 100%);color:#fdf1ee}
+.gl-v02 .gl-orb-a{width:520px;height:520px;background:#FF6B6B;top:-80px;left:-100px;opacity:.55}
+.gl-v02 .gl-orb-b{width:600px;height:600px;background:#FF3DA1;top:100px;right:-180px;opacity:.45}
+.gl-v02 .gl-orb-c{width:480px;height:480px;background:#14B8A6;bottom:-140px;right:30%;opacity:.45}
+.gl-v02 .gl-eyebrow{background:rgba(255,107,107,.18);color:#ffb1b1;border:1px solid rgba(255,107,107,.40)}
+.gl-v02{--gl-text-grad:linear-gradient(120deg,#FFB1B1,#FF3DA1)}
+.gl-v02 .gl-btn-primary{background:linear-gradient(135deg,#FF6B6B,#FF3DA1)}
+.gl-v02 .gl-sub{color:rgba(253,241,238,.80)}
+
+/* ===== Variant 03 — OCEAN (deep blue → cyan → teal) ===== */
+.gl-v03{background:linear-gradient(135deg,#061827 0%,#0a2d4a 45%,#073846 100%);color:#eaf6ff}
+.gl-v03 .gl-orb-a{width:540px;height:540px;background:#1E88E5;top:-90px;left:-130px;opacity:.55}
+.gl-v03 .gl-orb-b{width:580px;height:580px;background:#00D4FF;top:80px;right:-160px;opacity:.45}
+.gl-v03 .gl-orb-c{width:460px;height:460px;background:#14B8A6;bottom:-140px;left:35%;opacity:.50}
+.gl-v03 .gl-eyebrow{background:rgba(0,212,255,.16);color:#7ee4ff;border:1px solid rgba(0,212,255,.42)}
+.gl-v03{--gl-text-grad:linear-gradient(120deg,#7ee4ff,#5eead4)}
+.gl-v03 .gl-btn-primary{background:linear-gradient(135deg,#1E88E5,#14B8A6)}
+.gl-v03 .gl-sub{color:rgba(234,246,255,.80)}
+
+/* ===== Variant 04 — FOREST (deep green → emerald → lime) ===== */
+.gl-v04{background:linear-gradient(135deg,#06241a 0%,#0a3322 50%,#1a2e0a 100%);color:#e9f7ed}
+.gl-v04 .gl-orb-a{width:520px;height:520px;background:#1E88E5;top:-90px;left:-110px;opacity:.55}
+.gl-v04 .gl-orb-b{width:580px;height:580px;background:#10B981;top:90px;right:-180px;opacity:.45}
+.gl-v04 .gl-orb-c{width:460px;height:460px;background:#A3E635;bottom:-150px;left:35%;opacity:.40}
+.gl-v04 .gl-eyebrow{background:rgba(19,185,115,.18);color:#6ee7a8;border:1px solid rgba(19,185,115,.42)}
+.gl-v04{--gl-text-grad:linear-gradient(120deg,#A3E635,#6ee7a8)}
+.gl-v04 .gl-btn-primary{background:linear-gradient(135deg,#1E88E5,#A3E635)}
+.gl-v04 .gl-sub{color:rgba(233,247,237,.80)}
+
+/* ===== Variant 05 — PLUM (purple → magenta → pink) ===== */
+.gl-v05{background:linear-gradient(135deg,#1a0a2e 0%,#2d0f3f 50%,#3a0e2a 100%);color:#f5edff}
+.gl-v05 .gl-orb-a{width:520px;height:520px;background:#14B8A6;top:-90px;left:-110px;opacity:.55}
+.gl-v05 .gl-orb-b{width:600px;height:600px;background:#14B8A6;top:90px;right:-180px;opacity:.45}
+.gl-v05 .gl-orb-c{width:460px;height:460px;background:#FF3DA1;bottom:-150px;left:35%;opacity:.45}
+.gl-v05 .gl-eyebrow{background:rgba(139,92,246,.20);color:#c4a3ff;border:1px solid rgba(139,92,246,.45)}
+.gl-v05{--gl-text-grad:linear-gradient(120deg,#c4a3ff,#FF8AC4)}
+.gl-v05 .gl-btn-primary{background:linear-gradient(135deg,#14B8A6,#14B8A6)}
+.gl-v05 .gl-sub{color:rgba(245,237,255,.82)}
+
+/* ===== Variant 06 — CITRUS (yellow → orange → coral) — LIGHT BG ===== */
+.gl-v06{background:linear-gradient(135deg,#fff6e2 0%,#fff0d2 50%,#ffe2da 100%);color:#1a0e08}
+.gl-v06 .gl-orb-a{width:520px;height:520px;background:#FFD200;top:-90px;left:-110px;opacity:.55}
+.gl-v06 .gl-orb-b{width:580px;height:580px;background:#FF9F1C;top:90px;right:-180px;opacity:.45}
+.gl-v06 .gl-orb-c{width:460px;height:460px;background:#FF6B6B;bottom:-150px;left:35%;opacity:.40}
+.gl-v06 .gl-eyebrow{background:rgba(255,159,28,.18);color:#a55600;border:1px solid rgba(255,159,28,.40)}
+.gl-v06{--gl-text-grad:linear-gradient(120deg,#c84a00,#FF6B6B)}
+.gl-v06 .gl-btn-primary{background:linear-gradient(135deg,#FF9F1C,#FF6B6B);color:#fff}
+.gl-v06 .gl-stat-row{border-top-color:rgba(15,20,25,.15)}
+.gl-v06 .gl-sub{color:rgba(26,14,8,.72)}
+
+/* ===== Variant 07 — MINT (mint → cyan → sky blue) — LIGHT BG ===== */
+.gl-v07{background:linear-gradient(135deg,#e6fff5 0%,#dff6ff 50%,#e6efff 100%);color:#0a1f1c}
+.gl-v07 .gl-orb-a{width:520px;height:520px;background:#5EEAD4;top:-90px;left:-110px;opacity:.55}
+.gl-v07 .gl-orb-b{width:580px;height:580px;background:#7DD3FC;top:90px;right:-180px;opacity:.50}
+.gl-v07 .gl-orb-c{width:460px;height:460px;background:#A5B4FC;bottom:-150px;left:35%;opacity:.45}
+.gl-v07 .gl-eyebrow{background:rgba(20,184,166,.16);color:#0f766e;border:1px solid rgba(20,184,166,.40)}
+.gl-v07{--gl-text-grad:linear-gradient(120deg,#0e7490,#0f766e)}
+.gl-v07 .gl-btn-primary{background:linear-gradient(135deg,#14B8A6,#0EA5E9);color:#fff}
+.gl-v07 .gl-stat-row{border-top-color:rgba(15,20,25,.15)}
+.gl-v07 .gl-sub{color:rgba(10,31,28,.72)}
+
+/* ===== Variant 08 — BERRY (raspberry → purple → indigo) ===== */
+.gl-v08{background:linear-gradient(135deg,#2a0a1e 0%,#1f0d3a 50%,#0e0d3a 100%);color:#f4ecff}
+.gl-v08 .gl-orb-a{width:520px;height:520px;background:#E11D74;top:-90px;left:-110px;opacity:.55}
+.gl-v08 .gl-orb-b{width:600px;height:600px;background:#14B8A6;top:90px;right:-180px;opacity:.45}
+.gl-v08 .gl-orb-c{width:460px;height:460px;background:#6366F1;bottom:-150px;left:35%;opacity:.50}
+.gl-v08 .gl-eyebrow{background:rgba(225,29,116,.18);color:#ffa3c8;border:1px solid rgba(225,29,116,.42)}
+.gl-v08{--gl-text-grad:linear-gradient(120deg,#ffa3c8,#5EEAD4)}
+.gl-v08 .gl-btn-primary{background:linear-gradient(135deg,#E11D74,#6366F1)}
+.gl-v08 .gl-sub{color:rgba(244,236,255,.80)}
+
+/* ===== Variant 09 — SAND (cream → amber → rust) — LIGHT BG, EDITORIAL ===== */
+.gl-v09{background:linear-gradient(135deg,#fbf5e8 0%,#f7ebd1 50%,#f3dcc4 100%);color:#2a1810}
+.gl-v09 .gl-orb-a{width:520px;height:520px;background:#D4A04F;top:-90px;left:-110px;opacity:.45}
+.gl-v09 .gl-orb-b{width:580px;height:580px;background:#C2410C;top:90px;right:-180px;opacity:.30}
+.gl-v09 .gl-orb-c{width:460px;height:460px;background:#7C2D12;bottom:-150px;left:35%;opacity:.25}
+.gl-v09 .gl-eyebrow{background:rgba(194,65,12,.14);color:#7c2d12;border:1px solid rgba(194,65,12,.32)}
+.gl-v09{--gl-text-grad:linear-gradient(120deg,#7c2d12,#C2410C)}
+.gl-v09 .gl-btn-primary{background:linear-gradient(135deg,#C2410C,#7C2D12);color:#fff}
+.gl-v09 .gl-stat-row{border-top-color:rgba(15,20,25,.15)}
+.gl-v09 .gl-sub{color:rgba(42,24,16,.72)}
+
+/* ===== Variant 10 — NEON (electric green → cyan → purple) — HIGH CONTRAST ===== */
+.gl-v10{background:#06050a;color:#f5f5f7;background-image:radial-gradient(circle at 30% 20%,rgba(0,255,136,.22) 0%,transparent 38%),radial-gradient(circle at 70% 80%,rgba(0,212,255,.20) 0%,transparent 38%),radial-gradient(circle at 50% 50%,rgba(191,0,255,.18) 0%,transparent 50%),linear-gradient(180deg,#06050a 0%,#0a0a14 100%)}
+.gl-v10 .gl-orb-a{width:520px;height:520px;background:#5EEAD4;top:-90px;left:-110px;opacity:.45}
+.gl-v10 .gl-orb-b{width:580px;height:580px;background:#00D4FF;top:90px;right:-180px;opacity:.40}
+.gl-v10 .gl-orb-c{width:460px;height:460px;background:#14B8A6;bottom:-150px;left:35%;opacity:.42}
+.gl-v10 .gl-eyebrow{background:rgba(0,255,136,.16);color:#85ffc1;border:1px solid rgba(0,255,136,.50)}
+.gl-v10{--gl-text-grad:linear-gradient(120deg,#5EEAD4,#00D4FF,#14B8A6)}
+.gl-v10 .gl-btn-primary{background:linear-gradient(135deg,#5EEAD4,#00D4FF);color:#06050a;box-shadow:0 6px 22px rgba(0,255,136,.30)}
+.gl-v10 .gl-sub{color:rgba(245,245,247,.78)}
+
+.wn-gradient-lab .gl-footer{padding:3rem 1.5rem;text-align:center;background:var(--gl-surface);border-top:1px solid var(--gl-border)}
+.wn-gradient-lab .gl-footer h3{font-size:1.2rem;font-weight:700;margin:0 0 .5rem}
+.wn-gradient-lab .gl-footer p{color:var(--gl-fg-muted);margin:0 0 1rem}
+.wn-gradient-lab .gl-footer code{background:var(--gl-bg);padding:.2rem .5rem;border-radius:6px;font-size:.88rem;border:1px solid var(--gl-border)}
+
+@media (max-width:768px){
+  .wn-gradient-lab .gl-variant{padding:4rem 1.25rem;min-height:540px}
+  .wn-gradient-lab .gl-h{font-size:2.1rem}
+  .wn-gradient-lab .gl-stat-row{gap:1rem}
+  .wn-gradient-lab .gl-swatch{display:none}
+}
+</style>
+
+<header class="gl-page-hero gl-wrap">
+  <h1>Gradient Lab — 10 landing palettes</h1>
+  <p>Each variant below is a full hero in a different gradient family. Scroll, pick one, tell Claude the number. We swap it into the live Hero.tsx in one edit.</p>
+  <nav class="gl-toc">
+    <a href="#v01">01 Aurora</a>
+    <a href="#v02">02 Sunset</a>
+    <a href="#v03">03 Ocean</a>
+    <a href="#v04">04 Forest</a>
+    <a href="#v05">05 Plum</a>
+    <a href="#v06">06 Citrus</a>
+    <a href="#v07">07 Mint</a>
+    <a href="#v08">08 Berry</a>
+    <a href="#v09">09 Sand</a>
+    <a href="#v10">10 Neon</a>
+  </nav>
+</header>
+
+<!-- 01 AURORA -->
+<section id="v01" class="gl-variant gl-v01">
+  <span class="gl-tag">01 · Aurora (current)</span>
+  <div class="gl-swatch"><i style="background:#1E88E5"></i><i style="background:#00D4FF"></i><i style="background:#14B8A6"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">You hired 2 VAs to copy-paste leads. <span class="gl-grad">They still miss 1 in 4.</span></h1>
+    <p class="gl-sub">We build the n8n workflow that catches every row before it falls — site, automation, chatbot, content engine, all shipped in 5–14 days.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Start the brief →</a>
+      <a href="/case-studies" class="gl-btn gl-btn-ghost">See case studies</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-01" class="gl-pick">Pick 01 →</a>
+</section>
+
+<!-- 02 SUNSET -->
+<section id="v02" class="gl-variant gl-v02">
+  <span class="gl-tag">02 · Sunset</span>
+  <div class="gl-swatch"><i style="background:#FF6B6B"></i><i style="background:#FF3DA1"></i><i style="background:#14B8A6"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">Your last 30 posts read like 30 different people wrote them. <span class="gl-grad">Because they did.</span></h1>
+    <p class="gl-sub">Voice-locked content engines + n8n pipelines + AEO-tuned sites. Built solo in Bali with AI as the second seat.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Lock my voice →</a>
+      <a href="/aeo-guide" class="gl-btn gl-btn-ghost">Read the AEO guide</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-02" class="gl-pick">Pick 02 →</a>
+</section>
+
+<!-- 03 OCEAN -->
+<section id="v03" class="gl-variant gl-v03">
+  <span class="gl-tag">03 · Ocean</span>
+  <div class="gl-swatch"><i style="background:#1E88E5"></i><i style="background:#00D4FF"></i><i style="background:#14B8A6"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">Your CRM, calendar, and inbox <span class="gl-grad">never talk to each other.</span></h1>
+    <p class="gl-sub">We wire them in n8n, replace 4 paid tools with one stack, and hand it back so it runs without you.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Wire it up →</a>
+      <a href="/n8n-vs-zapier" class="gl-btn gl-btn-ghost">n8n vs Zapier</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-03" class="gl-pick">Pick 03 →</a>
+</section>
+
+<!-- 04 FOREST -->
+<section id="v04" class="gl-variant gl-v04">
+  <span class="gl-tag">04 · Forest</span>
+  <div class="gl-swatch"><i style="background:#1E88E5"></i><i style="background:#10B981"></i><i style="background:#A3E635"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">You're stuck at $10K MRR <span class="gl-grad">because you ARE the bottleneck.</span></h1>
+    <p class="gl-sub">We extract you from the workflow — site, automation, chatbot, content. Built lean, shipped fast, owned by you.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Unstick me →</a>
+      <a href="/case-studies" class="gl-btn gl-btn-ghost">See case studies</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-04" class="gl-pick">Pick 04 →</a>
+</section>
+
+<!-- 05 PLUM -->
+<section id="v05" class="gl-variant gl-v05">
+  <span class="gl-tag">05 · Plum</span>
+  <div class="gl-swatch"><i style="background:#14B8A6"></i><i style="background:#14B8A6"></i><i style="background:#FF3DA1"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">You're the founder. <span class="gl-grad">You shouldn't be the typist.</span></h1>
+    <p class="gl-sub">Premium automation builds for founders who refuse to be average. AEO-tuned sites, n8n pipelines, content engines.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Stop typing →</a>
+      <a href="/pricing" class="gl-btn gl-btn-ghost">See pricing</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-05" class="gl-pick">Pick 05 →</a>
+</section>
+
+<!-- 06 CITRUS -->
+<section id="v06" class="gl-variant gl-v06">
+  <span class="gl-tag">06 · Citrus</span>
+  <div class="gl-swatch"><i style="background:#FFD200"></i><i style="background:#FF9F1C"></i><i style="background:#FF6B6B"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">Your leads are leaking. <span class="gl-grad">Six hours to first reply kills the deal.</span></h1>
+    <p class="gl-sub">We build the n8n + AI flow that replies in 60 seconds, books the call, and notifies you only when humans are needed.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Plug the leak →</a>
+      <a href="/services/ai-chatbots" class="gl-btn gl-btn-ghost">Chatbot service</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-06" class="gl-pick">Pick 06 →</a>
+</section>
+
+<!-- 07 MINT -->
+<section id="v07" class="gl-variant gl-v07">
+  <span class="gl-tag">07 · Mint</span>
+  <div class="gl-swatch"><i style="background:#5EEAD4"></i><i style="background:#7DD3FC"></i><i style="background:#A5B4FC"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">Your team watched 12 hours of AI courses. <span class="gl-grad">Nobody shipped a single workflow.</span></h1>
+    <p class="gl-sub">Role-specific AI playbooks + hands-on workshops + 30 days of accountability. Adoption you can measure.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Train my team →</a>
+      <a href="/services/strategy-training" class="gl-btn gl-btn-ghost">Training service</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-07" class="gl-pick">Pick 07 →</a>
+</section>
+
+<!-- 08 BERRY -->
+<section id="v08" class="gl-variant gl-v08">
+  <span class="gl-tag">08 · Berry</span>
+  <div class="gl-swatch"><i style="background:#E11D74"></i><i style="background:#14B8A6"></i><i style="background:#6366F1"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">Google ignores you. <span class="gl-grad">Claude can't even quote you.</span></h1>
+    <p class="gl-sub">AEO-tuned sites that get cited by ChatGPT, Claude, Perplexity, and Gemini. Built on the 5-layer stack.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Fix my AEO →</a>
+      <a href="/aeo-guide" class="gl-btn gl-btn-ghost">Read the guide</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-08" class="gl-pick">Pick 08 →</a>
+</section>
+
+<!-- 09 SAND -->
+<section id="v09" class="gl-variant gl-v09">
+  <span class="gl-tag">09 · Sand (editorial)</span>
+  <div class="gl-swatch"><i style="background:#D4A04F"></i><i style="background:#C2410C"></i><i style="background:#7C2D12"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">Built solo in Bali. <span class="gl-grad">Claude is the second seat.</span></h1>
+    <p class="gl-sub">A 1-founder + 1-AI agency for service businesses that hate retainers without proof. Editorial-grade builds, public pricing.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Send a brief →</a>
+      <a href="/about" class="gl-btn gl-btn-ghost">How we work</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-09" class="gl-pick">Pick 09 →</a>
+</section>
+
+<!-- 10 NEON -->
+<section id="v10" class="gl-variant gl-v10">
+  <span class="gl-tag">10 · Neon (high contrast)</span>
+  <div class="gl-swatch"><i style="background:#5EEAD4"></i><i style="background:#00D4FF"></i><i style="background:#14B8A6"></i></div>
+  <span class="gl-orb gl-orb-a"></span><span class="gl-orb gl-orb-b"></span><span class="gl-orb gl-orb-c"></span>
+  <div class="gl-variant-inner">
+    <span class="gl-eyebrow">SkynetLabs · AI Automation</span>
+    <h1 class="gl-h">Solo founder + Claude as cofounder. <span class="gl-grad">180 workflows shipped from Bali.</span></h1>
+    <p class="gl-sub">No agency bloat. No 90-day onboarding. Pick a leak, get a fixed-price scope back inside 48 hours.</p>
+    <div class="gl-cta-row">
+      <a href="/contact" class="gl-btn gl-btn-primary">Pick a leak →</a>
+      <a href="/portfolio" class="gl-btn gl-btn-ghost">See portfolio</a>
+    </div>
+    <div class="gl-stat-row">
+      <div class="gl-stat"><b>180+</b><span>Workflows shipped</span></div>
+      <div class="gl-stat"><b>40+</b><span>Websites delivered</span></div>
+      <div class="gl-stat"><b>9</b><span>Countries served</span></div>
+      <div class="gl-stat"><b>5–14d</b><span>Ship window</span></div>
+    </div>
+  </div>
+  <a href="#picked-10" class="gl-pick">Pick 10 →</a>
+</section>
+
+<footer class="gl-footer">
+  <h3>Picked one?</h3>
+  <p>Tell Claude the number — e.g. <code>swap homepage hero to 04 Forest</code> — we change <code>src/components/sections/Hero.tsx</code> in one edit and push.</p>
+</footer>
+</article>

@@ -1,25 +1,10 @@
 import { NextResponse } from "next/server";
-import { appendLeadToSink } from "@/lib/lead-sink";
-import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
-
-// ============================================================
-// /api/discovery — brief drop from the /contact form (2026-09-21: was the
-// 11-field /discovery-call application; now name + email + pain, the rest
-// optional). GHL webhook + Resend run in parallel; if NEITHER confirms
-// (both unset counts as not confirmed), the brief is appended to the
-// on-disk sink so it is at least recoverable. Only if that fails too is
-// the visitor told to email directly.
-// ============================================================
-
-const MAX_BODY_BYTES = 16 * 1024;
 
 type Payload = {
   name?: string;
   email?: string;
-  source?: string;
-  _honeypot?: string;
   whatsapp?: string;
   company?: string;
   website?: string;
@@ -69,7 +54,7 @@ async function sendToGhl(payload: Payload, lead: "HOT" | "WARM" | "COLD") {
   if (!url) return { ok: false, skipped: true };
 
   const body = {
-    source: `skynetjoe.com /${payload.source || "contact"}`,
+    source: "skynetjoe.com /discovery-call",
     lead_score: lead,
     first_name: (payload.name || "").split(" ")[0] || "",
     last_name: (payload.name || "").split(" ").slice(1).join(" ") || "",
@@ -83,12 +68,7 @@ async function sendToGhl(payload: Payload, lead: "HOT" | "WARM" | "COLD") {
     stack: (payload.stack || []).join(", "),
     pain_description: payload.pain,
     heard_from: payload.heard,
-    tags: [
-      "discovery-apply",
-      `budget:${payload.budget || "not-asked"}`,
-      `timeline:${payload.timeline || "not-asked"}`,
-      `score:${lead}`,
-    ],
+    tags: ["discovery-apply", `budget:${payload.budget}`, `timeline:${payload.timeline}`, `score:${lead}`],
     submitted_at: new Date().toISOString(),
   };
 
@@ -158,36 +138,16 @@ function row(label: string, value?: string) {
 }
 
 export async function POST(req: Request) {
-  const rl = checkRateLimit(req, {
-    limit: 8,
-    windowMs: 60_000,
-    keyPrefix: "discovery",
-  });
-  if (!rl.allowed) {
-    return NextResponse.json(
-      { error: "Too many requests. Try again in a minute." },
-      { status: 429 },
-    );
-  }
-
   let payload: Payload;
   try {
-    payload = await readCappedJson<Payload>(req, MAX_BODY_BYTES);
+    payload = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  // Honeypot: filled = bot → fake-success, no CRM/email writes.
-  if (payload._honeypot) {
-    console.warn("[discovery] honeypot tripped — submission dropped", {
-      email: payload.email,
-    });
-    return NextResponse.json({ ok: true });
-  }
-
-  if (!payload.name || !payload.email || !payload.pain) {
+  if (!payload.name || !payload.email || !payload.budget || !payload.timeline || !payload.pain || !payload.consent) {
     return NextResponse.json(
-      { error: "Name, email and what's broken are required." },
+      { error: "Missing required fields" },
       { status: 400 },
     );
   }
@@ -203,30 +163,15 @@ export async function POST(req: Request) {
     sendEmailFallback(payload, lead),
   ]);
 
-  // "skipped" (env unset) is NOT delivery. It used to count as OK here,
-  // which meant a host with neither GHL nor Resend configured returned
-  // ok:true over a discarded brief.
-  const ghlOk = ghlRes.status === "fulfilled" && ghlRes.value.ok;
-  const emailOk = emailRes.status === "fulfilled" && emailRes.value.ok;
+  const ghlOk = ghlRes.status === "fulfilled" && (ghlRes.value.ok || ghlRes.value.skipped);
+  const emailOk = emailRes.status === "fulfilled" && (emailRes.value.ok || emailRes.value.skipped);
 
   if (!ghlOk && !emailOk) {
-    console.error("[discovery] neither GHL nor email confirmed", {
-      ghlRes,
-      emailRes,
-    });
-    const sink = await appendLeadToSink({
-      email: payload.email,
-      source: payload.source || "contact",
-      capturedAt: new Date().toISOString(),
-      reason: "discovery: ghl+email unconfirmed",
-      payload: { name: payload.name, pain: payload.pain, lead },
-    });
-    if (!sink.written) {
-      return NextResponse.json(
-        { error: "Couldn't deliver brief. Email info@skynetjoe.com directly." },
-        { status: 502 },
-      );
-    }
+    console.error("[discovery] both GHL + email failed", { ghlRes, emailRes });
+    return NextResponse.json(
+      { error: "Couldn't deliver brief. Email info@skynetjoe.com directly." },
+      { status: 502 },
+    );
   }
 
   return NextResponse.json({

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MessageCircle, X, Send, ArrowRight } from "lucide-react";
@@ -33,8 +33,8 @@ function botReply(input: string, nextId: number): Msg {
     has("book", "call", "audit", "consult", "meeting", "schedule", "discovery")
   )
     return reply(
-      "Easiest path: book a free 30-min call on the contact page — or send a 3-field brief there and Waseem replies within 8 hours.",
-      { label: "Book a call", href: "/contact" },
+      "Easiest path: apply for a free discovery call. 3-min brief, Waseem reads every one personally and replies within 8 hours.",
+      { label: "Apply for a call", href: "/discovery-call" },
     );
 
   if (
@@ -170,12 +170,12 @@ function botReply(input: string, nextId: number): Msg {
   )
     return reply(
       "Based in Canggu, Bali (GMT+8) with roots in Lahore, Pakistan. Fully remote — clients across 9 countries.",
-      { label: "Book a call", href: "/contact" },
+      { label: "Apply for a call", href: "/discovery-call" },
     );
 
   if (has("contact", "email", "reach", "get in touch", "phone", "number"))
     return reply(
-      "Everything lives on the contact page — book a call or send a short brief. 8-hour reply on weekdays.",
+      "Fastest is the discovery form (8-hour reply). Or reach us via the contact page.",
       { label: "Contact", href: "/contact" },
     );
 
@@ -219,7 +219,7 @@ function botReply(input: string, nextId: number): Msg {
   )
     return reply(
       "Anytime! Want me to point you to services, pricing, or set up a quick call?",
-      { label: "Book a call", href: "/contact" },
+      { label: "Apply for a call", href: "/discovery-call" },
     );
 
   // ── Helpful fallback (not a dead-end) ──
@@ -227,19 +227,6 @@ function botReply(input: string, nextId: number): Msg {
     "Not sure I caught that — I can help with: services, pricing, n8n/automation, AEO/SEO, chatbots, or booking a call. Which one?",
     { label: "Browse services", href: "/services" },
   );
-}
-
-const MOBILE_QUERY = "(max-width: 767px)";
-function subscribeMobileQuery(onChange: () => void) {
-  const mq = window.matchMedia(MOBILE_QUERY);
-  mq.addEventListener("change", onChange);
-  return () => mq.removeEventListener("change", onChange);
-}
-function getMobileSnapshot(): boolean | null {
-  return window.matchMedia(MOBILE_QUERY).matches;
-}
-function getMobileServerSnapshot(): boolean | null {
-  return null;
 }
 
 export default function LiveChat() {
@@ -251,43 +238,6 @@ export default function LiveChat() {
   const [draft, setDraft] = useState("");
   const [msgs, setMsgs] = useState<Msg[]>([INITIAL]);
   const [modalOpen, setModalOpen] = useState(false);
-  // Mobile (<768 px): the launcher used to sit bottom-right at 64 px and
-  // covered the hero's primary CTA at 390 px (home-mob.png, 2026-09-21).
-  // Now it is 44 px, bottom-LEFT, 12 px inset, and stays hidden while the
-  // hero (#hero, or the page's first <section>) is in view. Desktop unchanged.
-  // Viewport class comes from matchMedia as an external store: null during
-  // SSR/hydration (launcher not rendered, so a phone never flashes the 64 px
-  // desktop bubble over the hero), then true/false once the client snapshot
-  // is read.
-  const isMobile = useSyncExternalStore(
-    subscribeMobileQuery,
-    getMobileSnapshot,
-    getMobileServerSnapshot,
-  );
-  // Keyed by pathname so a stale "hero in view" from the previous route can
-  // never hide the launcher on a page that has no hero at all.
-  const [heroState, setHeroState] = useState<{
-    path: string | null;
-    inView: boolean;
-  }>({ path: null, inView: false });
-  const heroInView = heroState.path === pathname && heroState.inView;
-
-  useEffect(() => {
-    if (!isMobile || typeof IntersectionObserver === "undefined") return;
-    const hero =
-      document.getElementById("hero") ??
-      document.querySelector<HTMLElement>("main section");
-    if (!hero) return;
-    const path = pathname;
-    const io = new IntersectionObserver(
-      // Any sliver of the hero on screen keeps the launcher hidden.
-      ([entry]) => setHeroState({ path, inView: entry.isIntersecting }),
-      { threshold: 0 },
-    );
-    io.observe(hero);
-    return () => io.disconnect();
-    // Re-run per route: the hero element changes with the page.
-  }, [isMobile, pathname]);
 
   // Hide the chat bubble while a modal popup is open (one overlay at a time).
   useEffect(() => {
@@ -296,6 +246,13 @@ export default function LiveChat() {
     return () => window.removeEventListener("skynet:modal", h);
   }, []);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try {
+      const closed = sessionStorage.getItem("livechat-closed");
+      if (closed === "1") setOpen(false);
+    } catch {}
+  }, []);
 
   useEffect(() => {
     function onAnchor(e: MouseEvent) {
@@ -325,18 +282,16 @@ export default function LiveChat() {
     // desktop (≥768 px). Phones show only the floating button; user taps
     // to open on intent. Anchor-click and hashchange remain ungated
     // because those are explicit user actions regardless of screen size.
-    // Deferred one tick: the hash is external state read after hydration,
-    // and opening synchronously inside the effect body would cascade a
-    // render before the first paint settles.
-    let deepLink = 0;
     if (
       window.location.hash === "#livechat-open" &&
       window.matchMedia("(min-width: 768px)").matches
     ) {
-      deepLink = window.setTimeout(onHashChange, 0);
+      setOpen(true);
+      try {
+        sessionStorage.removeItem("livechat-closed");
+      } catch {}
     }
     return () => {
-      window.clearTimeout(deepLink);
       document.removeEventListener("click", onAnchor);
       window.removeEventListener("hashchange", onHashChange);
     };
@@ -349,9 +304,7 @@ export default function LiveChat() {
   }, [msgs, open]);
 
   if (pathname?.startsWith("/lp/freight-")) return null;
-  // /contact carries the Calendly embed + brief form; the bubble would sit on
-  // top of the primary CTA there for no gain.
-  if (pathname === "/contact") return null;
+  if (pathname === "/discovery-call") return null;
   if (modalOpen && !open) return null;
 
   function send() {
@@ -382,51 +335,30 @@ export default function LiveChat() {
         }
       `}</style>
 
-      {/* Floating button — flat terracotta, pulsing + ring + "Chat" label.
-          Mobile: 44 px, bottom-left, 12 px inset, hidden while the hero is
-          on screen so it never overlaps the primary CTA. */}
-      {!open && isMobile !== null && !(isMobile && heroInView) && (
+      {/* Floating button — flat terracotta, pulsing + ring + "Chat" label */}
+      {!open && (
         <div
-          className={
-            isMobile
-              ? "fixed z-[60] flex items-center gap-2"
-              : "fixed right-5 z-[60] flex items-center gap-2"
-          }
-          style={
-            isMobile
-              ? {
-                  left: 12,
-                  bottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)",
-                }
-              : { bottom: "calc(env(safe-area-inset-bottom, 0px) + 88px)" }
-          }
+          className="fixed right-5 z-[60] flex items-center gap-2"
+          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 88px)" }}
         >
-          {!isMobile && (
-            <span
-              aria-hidden
-              style={{
-                background: "var(--ink)",
-                color: "var(--cream-3)",
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.14em",
-                padding: "6px 10px",
-                borderRadius: 2,
-                boxShadow: "0 8px 20px rgba(26,26,26,0.25)",
-              }}
-            >
-              Chat
-            </span>
-          )}
-          <div
+          <span
+            aria-hidden
             style={{
-              position: "relative",
-              width: isMobile ? 44 : 64,
-              height: isMobile ? 44 : 64,
+              background: "var(--ink)",
+              color: "var(--cream-3)",
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              padding: "6px 10px",
+              borderRadius: 2,
+              boxShadow: "0 8px 20px rgba(26,26,26,0.25)",
             }}
           >
+            Chat
+          </span>
+          <div style={{ position: "relative", width: 64, height: 64 }}>
             <span
               aria-hidden
               style={{
@@ -447,11 +379,9 @@ export default function LiveChat() {
                 } catch {}
               }}
               aria-label="Open live chat"
-              className="flex items-center justify-center transition"
+              className="w-16 h-16 flex items-center justify-center transition"
               style={{
                 position: "relative",
-                width: isMobile ? 44 : 64,
-                height: isMobile ? 44 : 64,
                 background: "var(--terracotta)",
                 color: "var(--cream-3)",
                 borderRadius: 2,
@@ -462,7 +392,7 @@ export default function LiveChat() {
                 animation: "livechat-pulse 1.5s ease-in-out infinite",
               }}
             >
-              <MessageCircle className={isMobile ? "w-5 h-5" : "w-7 h-7"} />
+              <MessageCircle className="w-7 h-7" />
             </button>
           </div>
         </div>

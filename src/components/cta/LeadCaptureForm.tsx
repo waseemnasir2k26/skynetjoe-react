@@ -5,7 +5,7 @@
  * LP audit/teardown forms (freight, home-services, logistics).
  *
  * Replaces the old native <form action="/api/leads" method="POST"> /
- * <form action="/contact" method="GET"> markup (the old /discovery-call) that either 400'd
+ * <form action="/discovery-call" method="GET"> markup that either 400'd
  * on urlencoded bodies or silently discarded the email in a query string.
  *
  * Behavior:
