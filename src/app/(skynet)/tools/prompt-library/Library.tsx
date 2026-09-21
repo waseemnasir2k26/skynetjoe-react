@@ -508,7 +508,7 @@ function MonthlyPromptsCapture() {
       setDone(true);
     } else {
       setError(
-        "Couldn't reach the signup service — email waseem@skynetjoe.com and I'll add you by hand.",
+        "Couldn't reach the signup service — email info@skynetjoe.com and I'll add you by hand.",
       );
     }
   }

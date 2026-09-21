@@ -100,11 +100,35 @@ const breadcrumbListSchema = breadcrumbSchema([
   { name: "Tools", url: `${SITE.url}/tools` },
 ]);
 
-export default function ToolsIndexPage() {
+export default async function ToolsIndexPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ feedback?: string }>;
+}) {
+  // Tool feedback forms POST → 303 → /tools?feedback=sent; acknowledge it
+  // (jury 2026-09-21: the redirect landed on a page that said nothing).
+  const { feedback } = await searchParams;
   return (
     <>
       <JsonLd data={schema} />
       <JsonLd data={breadcrumbListSchema} />
+      {feedback === "sent" && (
+        <div
+          role="status"
+          className="container-x px-6 pt-24"
+          style={{ color: "var(--ink)" }}
+        >
+          <p
+            className="rounded-xl px-5 py-4 text-sm font-semibold"
+            style={{
+              background: "var(--cream-2)",
+              border: "1px solid var(--terracotta)",
+            }}
+          >
+            Feedback received — thank you. I read every reply.
+          </p>
+        </div>
+      )}
       <main
         style={{
           minHeight: "100vh",
