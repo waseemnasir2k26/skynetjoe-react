@@ -36,12 +36,15 @@ export default function PortfolioScreenshot({ src, alt }: Props) {
         classDialog="cream-zoom-dialog"
         zoomMargin={40}
       >
+        {/* Explicit width/height (16:10 source screenshots) so the browser
+            reserves the box before the image lands — zero CLS on the grid. */}
         <Image
           src={src}
           alt={alt}
-          fill
+          width={1280}
+          height={800}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
       </Controlled>
 

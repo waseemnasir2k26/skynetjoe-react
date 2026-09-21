@@ -35,7 +35,7 @@ const schema = {
   author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
 };
 
-// ItemList of all 47 builds → their /work detail pages (AEO / rich results).
+// ItemList of every build → the live deployed URL (AEO / rich results).
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -44,7 +44,7 @@ const itemListSchema = {
   itemListElement: WORK_BUILDS.map((b, i) => ({
     "@type": "ListItem",
     position: i + 1,
-    url: `${SITE.url}/work/${b.slug}`,
+    url: b.liveUrl,
     name: b.title,
   })),
 };

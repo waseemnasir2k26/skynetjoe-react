@@ -14,6 +14,9 @@
  *     gradient pill with cyan glow)
  *   - Category chips re-tinted to cream-safe terracotta / sage / ink
  *   - Gigs data shape + URLs unchanged.
+ *
+ * 2026-09-21: /work/[slug] detail pages removed — every tile now opens the
+ *   live deployed site directly (new tab, rel=noopener).
  */
 
 import { useMemo, useState } from "react";
@@ -224,7 +227,10 @@ export default function WorkShowcase() {
               <motion.a
                 layout
                 key={g.slug}
-                href={`/work/${g.slug}`}
+                href={g.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${g.title} — open the live site in a new tab`}
                 className="group flex flex-col"
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -293,7 +299,7 @@ export default function WorkShowcase() {
                       border: "1px solid var(--terracotta)",
                     }}
                   >
-                    <ExternalLink className="w-3 h-3" /> View build
+                    <ExternalLink className="w-3 h-3" /> Open live site
                   </span>
                 </div>
                 <div className="p-5 flex-1 flex flex-col">
@@ -309,6 +315,17 @@ export default function WorkShowcase() {
                     }}
                   >
                     {g.title}
+                    <span
+                      aria-hidden
+                      style={{
+                        marginLeft: 6,
+                        fontSize: 13,
+                        color: "var(--terracotta-aa)",
+                        fontWeight: 500,
+                      }}
+                    >
+                      ↗
+                    </span>
                   </h2>
                   <p
                     style={{
