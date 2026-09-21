@@ -207,6 +207,11 @@ export const FOOTER_COLUMNS = [
       { label: "Case Studies", href: "/case-studies" },
       { label: "Blog", href: "/blog" },
       { label: "Free Tools", href: "/tools" },
+      { label: "FAQs", href: "/faqs" },
+      {
+        label: "5 Boring Automations",
+        href: "/boring-automations-small-businesses-pay-for",
+      },
     ],
   },
   {

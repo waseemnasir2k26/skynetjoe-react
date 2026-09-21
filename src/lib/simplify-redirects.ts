@@ -69,7 +69,6 @@ export const PROMOTED_NEWS = [
   "8-hour-reply-rule",
   "aeo-2026-meaning",
   "bali-canggu-coworking-economics",
-  "dental-no-show-n8n-flow",
   "public-pricing-ai-builds",
   "small-fleet-paid-tools-2026",
   "weekend-with-claude-code",
@@ -119,6 +118,11 @@ export const SIMPLIFY_REDIRECTS: Redirect[] = [
   ...KILLED_NEWS.map((slug) => r(`/news/${slug}`, "/blog")),
   r("/news/n8n-vs-zapier-2026-switch", "/n8n-vs-zapier"),
   r("/blog/n8n-vs-zapier-2026", "/n8n-vs-zapier"),
+
+  // dental no-show story: three incompatible provenances, no source of truth (jury 09-21)
+  r("/blog/ghl-no-show-automation-case-study", "/blog"),
+  r("/blog/dental-no-show-n8n-flow", "/blog"),
+  r("/news/dental-no-show-n8n-flow", "/blog"),
 
   // singles
   r("/vibe-coding", "/services/vibe-coded-sites"),

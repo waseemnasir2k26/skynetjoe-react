@@ -1049,142 +1049,61 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
   </div>
 
   <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
+      "@type": "DefinedTerm",
+      "@id": "https://skynetjoe.com/aeo-guide#term-aeo",
+      "name": "Answer Engine Optimization (AEO)",
+      "description": "The practice of structuring website content so generative search interfaces (Claude, ChatGPT, Perplexity, Google AI Overview, Gemini) cite the page inside their natural-language answer. AEO ranks claims inside documents rather than whole pages.",
+      "inDefinedTermSet": "https://skynetjoe.com/glossary#termset"
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://skynetjoe.com/aeo-guide#howto",
+      "name": "30/60/90-day AEO rollout for a service business",
+      "description": "Week-by-week implementation of the five-layer AEO stack: schema, content, authority, distribution, freshness.",
+      "totalTime": "P90D",
+      "step": [
         {
-          "@type": "Article",
-          "@id": "https://app-mauve-eta-66.vercel.app/aeo-guide#article",
-          "headline": "The AEO Field Guide — How to Get Cited by Claude, ChatGPT, Perplexity & Gemini in 2026",
-          "description": "Eight chapters covering what Answer Engine Optimization actually is, the five-layer stack to ship, the new robots ecosystem, citation-worthy content patterns, measurement, and a 90-day rollout for service businesses.",
-          "author": {
-            "@type": "Person",
-            "name": "Waseem Nasir",
-            "url": "https://app-mauve-eta-66.vercel.app/author/waseem-nasir"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "SkynetLabs",
-            "url": "https://app-mauve-eta-66.vercel.app"
-          },
-          "datePublished": "2026-05-20",
-          "dateModified": "2026-05-22",
-          "mainEntityOfPage": "https://app-mauve-eta-66.vercel.app/aeo-guide"
+          "@type": "HowToStep",
+          "name": "Week 1 — Schema foundation",
+          "text": "Audit existing JSON-LD. Add Organization, Person, Article, FAQPage schema where applicable. Validate in Rich Results Test. Deploy."
         },
         {
-          "@type": "DefinedTerm",
-          "@id": "https://app-mauve-eta-66.vercel.app/aeo-guide#term-aeo",
-          "name": "Answer Engine Optimization (AEO)",
-          "description": "The practice of structuring website content so generative search interfaces (Claude, ChatGPT, Perplexity, Google AI Overview, Gemini) cite the page inside their natural-language answer. AEO ranks claims inside documents rather than whole pages.",
-          "inDefinedTermSet": "https://app-mauve-eta-66.vercel.app/glossary#termset"
+          "@type": "HowToStep",
+          "name": "Week 2 — robots.txt + llms.txt",
+          "text": "Write robots.txt allowing GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot. Block Bytespider unless targeting that market. Write llms.txt listing 10–20 canonical pages."
         },
         {
-          "@type": "FAQPage",
-          "@id": "https://app-mauve-eta-66.vercel.app/aeo-guide#faq",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is Answer Engine Optimization (AEO)?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "AEO is the practice of structuring website content so generative search interfaces — Claude, ChatGPT, Perplexity, Google's AI Overview, Gemini — cite your page inside the natural-language answer they show users. AEO ranks claims inside documents, not whole documents like classic SEO."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How is AEO different from SEO?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "SEO ranks documents and rewards long-form pages with backlinks. AEO ranks claims inside documents and rewards short direct answers, definitions, comparison tables, named authorship, and freshness. AEO citations appear in 2–12 weeks; SEO rankings take 3–6 months."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What are the five layers of the AEO stack?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Schema (JSON-LD markup), content (direct-answer paragraphs and definitions), authority (named author with Person schema), distribution (Reddit, Substack, GitHub README mentions), and freshness (dateModified plus quarterly refreshes). Ship in that order — schema before content, content before distribution."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Which LLM crawlers should I allow in robots.txt?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Allow GPTBot (OpenAI), ClaudeBot (Anthropic), PerplexityBot, Google-Extended (Gemini), and CCBot (Common Crawl). Block Bytespider unless you target the China/TikTok market. Add an llms.txt file at the root listing your canonical citable pages."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How long until AEO efforts show citations?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Two to twelve weeks. Perplexity updates fastest, often within 7 days of publishing. Claude with web search picks up new content within days. ChatGPT browse and Gemini take longer because they pull from Bing and Google indexes. If nothing appears in 8 weeks, the issue is content quality, not patience."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is llms.txt and do I need it?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "llms.txt is a draft standard (proposed by Jeremy Howard, 2024) for a markdown index file at /llms.txt that tells LLMs which pages on your site are canonical and citable. Claude, Perplexity, and a handful of newer engines have started honoring it. Cost to add: 30 minutes."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What's the maximum length of a direct-answer paragraph for AEO?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Aim for 60 words, never more than 80. The answer must lead with the noun phrase being defined, contain no preamble, and sit at the top of the page above any narrative or marketing copy. Long-form depth is fine below the answer block."
-              }
-            }
-          ]
+          "@type": "HowToStep",
+          "name": "Week 3–4 — Glossary + FAQs",
+          "text": "Build 40–60-term glossary with DefinedTermSet schema. Build 25–35 question FAQ with FAQPage schema. Use real client questions."
         },
         {
-          "@type": "HowTo",
-          "@id": "https://app-mauve-eta-66.vercel.app/aeo-guide#howto",
-          "name": "30/60/90-day AEO rollout for a service business",
-          "description": "Week-by-week implementation of the five-layer AEO stack: schema, content, authority, distribution, freshness.",
-          "totalTime": "P90D",
-          "step": [
-            {
-              "@type": "HowToStep",
-              "name": "Week 1 — Schema foundation",
-              "text": "Audit existing JSON-LD. Add Organization, Person, Article, FAQPage schema where applicable. Validate in Rich Results Test. Deploy."
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Week 2 — robots.txt + llms.txt",
-              "text": "Write robots.txt allowing GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot. Block Bytespider unless targeting that market. Write llms.txt listing 10–20 canonical pages."
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Week 3–4 — Glossary + FAQs",
-              "text": "Build 40–60-term glossary with DefinedTermSet schema. Build 25–35 question FAQ with FAQPage schema. Use real client questions."
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Week 5–6 — Comparison + decision content",
-              "text": "Build deep comparison pages for two or three X vs Y queries with 15+ row tables, 5+ scenarios, and decision trees."
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Week 7–8 — Author authority",
-              "text": "Build /author/[name] page with full Person schema and sameAs links. Add bylines to every existing post."
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Week 9–10 — Case studies",
-              "text": "Publish 3–5 named case studies with concrete metrics and time windows. Mark up with Article schema."
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Week 11–12 — Distribution + measurement",
-              "text": "Plant 5–10 authentic mentions on niche subreddits, Substack, GitHub READMEs. Set up weekly citation tracking across 15+ queries on the four major engines."
-            }
-          ]
+          "@type": "HowToStep",
+          "name": "Week 5–6 — Comparison + decision content",
+          "text": "Build deep comparison pages for two or three X vs Y queries with 15+ row tables, 5+ scenarios, and decision trees."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Week 7–8 — Author authority",
+          "text": "Build /author/[name] page with full Person schema and sameAs links. Add bylines to every existing post."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Week 9–10 — Case studies",
+          "text": "Publish 3–5 named case studies with concrete metrics and time windows. Mark up with Article schema."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Week 11–12 — Distribution + measurement",
+          "text": "Plant 5–10 authentic mentions on niche subreddits, Substack, GitHub READMEs. Set up weekly citation tracking across 15+ queries on the four major engines."
         }
       ]
     }
-  </script>
+  ]
+}
+</script>
 </article>

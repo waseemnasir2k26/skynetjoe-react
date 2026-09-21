@@ -94,22 +94,6 @@ export const POSTS: Post[] = [
     author: "Waseem Nasir",
   },
   {
-    slug: "ghl-no-show-automation-case-study",
-    // Canonical dental figure: 32% -> 7% no-show rate. Reconciled 2026-09-21 —
-    // this post's own body (content/blog/posts/ghl-no-show-automation-case-study.html)
-    // always said 7%; the title/description and the build-log essay at
-    // /blog/dental-no-show-n8n-flow said 9%. One number now, everywhere.
-    title:
-      "Case Study: How We Cut a Dental Practice's No-Show Rate from 32% to 7%",
-    description:
-      "The GoHighLevel + Signal + n8n stack that took a dental practice from a 32% no-show rate to 7%, and what the recovered chair time was worth. Shipped in 11 days.",
-    publishedAt: "2026-05-15",
-    updatedAt: "2026-09-21",
-    readingTime: 7,
-    category: "case-study",
-    tags: ["gohighlevel", "whatsapp", "no-show", "dental", "case-study"],
-  },
-  {
     slug: "aeo-playbook-service-businesses",
     title:
       "The AEO Playbook for Service Businesses: Getting Cited by ChatGPT, Claude & Perplexity",
@@ -339,32 +323,6 @@ export const POSTS: Post[] = [
       href: "/services/wordpress-seo",
       tagline:
         "Want to get cited inside ChatGPT, Claude, and Perplexity? I ship AEO content engines — schema-first, llms.txt-correct, direct-answer blocks on every page.",
-    },
-  },
-  {
-    slug: "dental-no-show-n8n-flow",
-    // Same canonical figure as ghl-no-show-automation-case-study: 32% → 7%.
-    title: "I built a dental no-show flow that cut cancellations from 32% to 7%",
-    seoTitle: "Dental No-Show n8n Flow: 32% to 7%",
-    description:
-      "Full breakdown of the dental no-show n8n flow that took a Karachi practice from a 32% to a 7% cancellation rate. Architecture, message timing, fallback logic, and the cost math.",
-    publishedAt: "2026-05-09",
-    updatedAt: "2026-09-21",
-    readingTime: 12,
-    category: "automation",
-    tags: ["n8n", "gohighlevel", "whatsapp", "dental", "no-show"],
-    author: "Waseem Nasir",
-    layout: "page",
-    eyebrow: "Build log · Volume II · 2026",
-    deck: "A real Karachi dental flagship was losing PKR 480,000 a week to no-shows. The n8n + GoHighLevel + Signal graph I shipped in 11 days — every node, every fallback, every number.",
-    heroImage: "/news/dental-no-show-n8n-flow.jpg",
-    heroCaption: "Dental flagship · Defence Karachi · production graph",
-    cta: {
-      serviceLabel: "n8n Automation",
-      label: "See the n8n service",
-      href: "/services/n8n-automation",
-      tagline:
-        "Losing money to no-shows? I ship n8n + GoHighLevel reminder graphs in the practice's own voice — every node, every fallback, built around your real booking data.",
     },
   },
   {

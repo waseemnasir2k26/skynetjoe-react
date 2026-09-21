@@ -41,6 +41,13 @@ export type EmailGateProps = {
   finePrint?: ReactNode;
   /** Submit button label. Default "Show my result →". */
   buttonLabel?: string;
+  /**
+   * Show a "skip — show it without email" link (default true, 2026-09-21).
+   * The jury found 7/9 tools withheld the whole result behind the gate; the
+   * n8n generator's free-result/gated-download pattern converts better and
+   * reads honest. Set false on a tool where the gate is the product.
+   */
+  skippable?: boolean;
 };
 
 function isValidEmail(s: string): boolean {
@@ -58,6 +65,7 @@ export default function EmailGate({
   subnote,
   finePrint,
   buttonLabel,
+  skippable = true,
 }: EmailGateProps) {
   const key = storageKey || `skynet-tool-${toolSlug}-email`;
   const [email, setEmail] = useState("");
@@ -311,6 +319,27 @@ export default function EmailGate({
             {finePrint ??
               "Stored locally + sent to my CRM. I'll be the only person who sees it."}
           </p>
+          {skippable && (
+            <button
+              type="button"
+              onClick={() => onUnlock("")}
+              disabled={submitting}
+              style={{
+                marginTop: 12,
+                background: "none",
+                border: 0,
+                padding: 0,
+                fontSize: 13,
+                fontFamily: "var(--font-sans)",
+                color: "var(--ink-2)",
+                textDecoration: "underline",
+                textUnderlineOffset: 3,
+                cursor: "pointer",
+              }}
+            >
+              Skip — show it without my email
+            </button>
+          )}
         </form>
       </div>
     </div>

@@ -279,12 +279,24 @@ export default function LiveChat() {
       document.querySelector<HTMLElement>("main section");
     if (!hero) return;
     const path = pathname;
+    // Watch the hero AND the closing CTA band: the launcher covered the
+    // final CTA's micro-copy at 390 px (jury 2026-09-21).
+    const watched = [hero, document.getElementById("final-cta")].filter(
+      (el): el is HTMLElement => Boolean(el),
+    );
+    const visible = new Set<Element>();
     const io = new IntersectionObserver(
-      // Any sliver of the hero on screen keeps the launcher hidden.
-      ([entry]) => setHeroState({ path, inView: entry.isIntersecting }),
+      // Any sliver of a watched block on screen keeps the launcher hidden.
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target);
+          else visible.delete(e.target);
+        }
+        setHeroState({ path, inView: visible.size > 0 });
+      },
       { threshold: 0 },
     );
-    io.observe(hero);
+    watched.forEach((el) => io.observe(el));
     return () => io.disconnect();
     // Re-run per route: the hero element changes with the page.
   }, [isMobile, pathname]);

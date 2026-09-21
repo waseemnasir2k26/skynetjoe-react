@@ -164,16 +164,6 @@ export const INDUSTRIES: Industry[] = [
     caseTeasers: [
       {
         caseStudySlug: null,
-        clientName: "Private dental practice (anon)",
-        location: "Karachi, PK",
-        oneLineOutcome:
-          "Booking and reminder flow rebuilt on GoHighLevel + n8n across roughly 120 appointments a week. No-show rate settled at 9% from month two onward.",
-        metricLabel: "No-show rate",
-        metricBefore: "32%",
-        metricAfter: "9%",
-      },
-      {
-        caseStudySlug: null,
         clientName: "Two-operatory practice (anon)",
         location: "Plano, TX",
         oneLineOutcome:

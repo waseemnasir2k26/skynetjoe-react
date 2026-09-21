@@ -61,3 +61,4 @@ next-env.d.ts
 
 # Captured leads + view counts — runtime data, never commit
 .data/
+.critic/

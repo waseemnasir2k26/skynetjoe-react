@@ -29,9 +29,10 @@ export default function Footer() {
   const pathname = usePathname();
   if (pathname?.startsWith("/lp/")) return null;
 
-  // ToolsStrip cross-promo: render on every route EXCEPT homepage and /lp/*
+  // ToolsStrip cross-promo: /tools/* only (2026-09-21 jury: a full second
+  // catalog under every page read as clutter; nav + footer already link /tools)
   // (already filtered above). Derives from TOOLS_REGISTRY.
-  const showToolsStrip = pathname !== "/" && pathname != null;
+  const showToolsStrip = pathname != null && pathname.startsWith("/tools/");
   let currentSlug: string | undefined;
   if (pathname?.startsWith("/tools/")) {
     const seg = pathname.split("/")[2];

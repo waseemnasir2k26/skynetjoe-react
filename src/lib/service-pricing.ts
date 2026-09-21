@@ -73,7 +73,7 @@ export const SERVICE_PRICING: ServicePricing[] = [
         tagline: "Multi-system pipeline replacing a stack.",
         features: [
           "Up to 3 connected workflows",
-          "AI nodes (GPT-4o / Claude) wired in",
+          "AI nodes (OpenAI / Claude / Gemini) wired in",
           "PostgreSQL log + audit trail",
           "Team SOP + 2 rounds of revisions",
         ],

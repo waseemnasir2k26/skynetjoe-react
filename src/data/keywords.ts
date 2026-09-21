@@ -118,7 +118,7 @@ export const KEYWORDS: Keyword[] = [
   { term: "gohighlevel setup cost", cluster: "ghl-funnel", intent: "informational", volume: "med", competition: "low", target: "/pricing" },
   { term: "gohighlevel for dental practice", cluster: "ghl-funnel", intent: "transactional", volume: "med", competition: "low", target: "/services/gohighlevel (add H2)" },
   { term: "gohighlevel for chiropractor", cluster: "ghl-funnel", intent: "transactional", volume: "low", competition: "low", target: "/services/gohighlevel" },
-  { term: "gohighlevel no show automation", cluster: "ghl-funnel", intent: "informational", volume: "low", competition: "low", target: "/blog/ghl-no-show-automation-case-study" },
+  { term: "gohighlevel no show automation", cluster: "ghl-funnel", intent: "informational", volume: "low", competition: "low", target: "/services/gohighlevel" },
   { term: "gohighlevel review 2026", cluster: "ghl-funnel", intent: "comparison", volume: "high", competition: "high", target: "NEW honest review post" },
   { term: "gohighlevel migration service", cluster: "ghl-funnel", intent: "transactional", volume: "low", competition: "low", target: "/services/gohighlevel" },
   { term: "gohighlevel agency partner", cluster: "ghl-funnel", intent: "transactional", volume: "low", competition: "low", target: "/services/gohighlevel" },

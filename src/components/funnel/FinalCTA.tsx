@@ -5,6 +5,7 @@ import MagneticButton from "@/components/home/MagneticButton";
 export default function FinalCTA() {
   return (
     <section
+      id="final-cta"
       style={{
         background: "var(--terracotta)",
         padding: "clamp(56px, 12vw, 100px) 0 clamp(64px, 14vw, 112px)",
