@@ -140,7 +140,7 @@ export const PROMPTS: Prompt[] = [
     id: "sales-proposal-rewrite",
     category: "sales",
     title: "Tighten a proposal in one pass",
-    useCase: "Cut 30% of fluff before sending.",
+    useCase: "Cut the fluff before sending.",
     body: `Rewrite this sales proposal: [PASTE PROPOSAL]. Cut every sentence that doesn't either (a) describe the prospect's problem in their language, (b) describe what we'll do, (c) describe the outcome with a number. Target: 40% shorter. Keep the structure but ruthlessly compress. If a paragraph doesn't include a noun the prospect would recognize, delete it. End with a single bolded CTA.`,
     model: "ChatGPT",
   },
@@ -208,7 +208,7 @@ export const PROMPTS: Prompt[] = [
     id: "mkt-subject-lines",
     category: "marketing",
     title: "10 email subject lines to A/B test",
-    useCase: "Push open rate past 35%.",
+    useCase: "Give your open rate something to beat.",
     body: `Write 10 email subject lines for an email going to [AUDIENCE]. Topic: [EMAIL TOPIC]. Mix: 3 curiosity gaps (no clickbait), 3 specific number-driven, 2 question-based, 1 contrarian, 1 plain-spoken. Each under 50 chars. Ban: emojis, ALL CAPS, "important", "urgent", "don't miss", "last chance". For each line, give a 1-line hypothesis on who would open it. Rank them 1-10 by my odds of beating control.`,
     model: "ChatGPT",
   },
@@ -515,7 +515,7 @@ export function promptsByCategory(key: PromptCategory): Prompt[] {
 /** Build a deep link that opens this prompt in ChatGPT or Claude. */
 export function buildModelLink(
   model: "chatgpt" | "claude",
-  promptBody: string
+  promptBody: string,
 ): string {
   const q = encodeURIComponent(promptBody);
   if (model === "chatgpt") {

@@ -146,8 +146,8 @@ export default function Page() {
           Pulling the v5.5 WordPress theme&apos;s CSS variables into a Tailwind
           config, mapping the color names, translating the spacing tokens —
           Claude did all of this in one pass after I pasted the SCSS and asked
-          for the Tailwind equivalent. The translation was 95% correct; I fixed
-          the remaining 5% by eye.
+          for the Tailwind equivalent. The translation came back close to right;
+          I fixed the handful of misses by eye.
         </p>
 
         <p>

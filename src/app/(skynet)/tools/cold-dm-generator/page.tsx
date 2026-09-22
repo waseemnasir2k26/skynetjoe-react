@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
+import {
+  SITE,
+  DEFAULT_OG_IMAGES,
+  pageTitle,
+  pageDescription,
+} from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
@@ -16,8 +21,9 @@ const breadcrumbListSchema = breadcrumbSchema([
 
 export const metadata: Metadata = {
   title: pageTitle("Cold DM Script Generator — Free Outreach Scripts"),
-  description:
-    pageDescription("Free cold DM script generator for LinkedIn, Instagram, and email. Enter your niche, offer, and proof point — get personalized outreach scripts instantly. Email unlocks the full 15-script pack."),
+  description: pageDescription(
+    "Free cold DM script generator for LinkedIn, Instagram, and email. Enter your niche, offer, and proof point — get personalized outreach scripts instantly. Email unlocks the full 15-script pack.",
+  ),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title: "Cold DM Script Generator — personalized outreach in seconds",
@@ -234,7 +240,7 @@ export default function ColdDmGeneratorPage() {
                   inputs: who you&apos;re talking to, what you&apos;re offering,
                   and one real proof point. You still have to swap in a real
                   first name and read the message once before you hit send —
-                  that&apos;s the 20% that makes the other 80% land.
+                  that last small edit is what makes the rest of it land.
                 </p>
                 <p>
                   Why three platforms in one tool? Because the best operators I

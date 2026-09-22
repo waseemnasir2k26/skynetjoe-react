@@ -113,18 +113,17 @@ export default function Page() {
           self-deselect. They don&apos;t book a call. They don&apos;t waste 45
           minutes of mine. They don&apos;t email back three times asking if I
           have a smaller package. They simply move on. Net result: I take far
-          fewer wrong-fit <Link href="/contact">discovery calls</Link>{" "}
-          than I did when pricing was &quot;starts around $X depending on
-          scope.&quot;
+          fewer wrong-fit <Link href="/contact">discovery calls</Link> than I
+          did when pricing was &quot;starts around $X depending on scope.&quot;
         </p>
         <p>
           The other side of the same effect: when a 14-truck fleet operator
           messages me, they see the Pro tier at $3,997 plus $497/mo and they
           know — before the call — that this is a price they can actually pay.
-          The call becomes about scope and fit, not negotiation. The close rate
-          on calls went from roughly 32% (pre-public pricing) to 71% (after).
-          Same lead quality on the wire; fundamentally different conversation in
-          the meeting.
+          The call becomes about scope and fit, not negotiation. Far more of
+          those calls now end in a signed scope than they did when pricing was
+          private. Same lead quality on the wire; fundamentally different
+          conversation in the meeting.
         </p>
         <div className="margin-note">the call gets to do its real job</div>
 
@@ -140,10 +139,11 @@ export default function Page() {
           <em>&quot;starting at $X.&quot;</em>
         </p>
         <p>
-          The fix: publish tiers that capture 80% of the bespoke variations you
-          actually do. The other 20% can be &quot;Flagship — call us&quot; and
-          that&apos;s honest. Three tiers covers the modal customer. Four tiers
-          covers the wealthy customer. You don&apos;t need twelve.
+          The fix: publish tiers that capture the bulk of the bespoke variations
+          you actually do. The genuine outliers can be &quot;Flagship — call
+          us&quot; and that&apos;s honest. Three tiers covers the modal
+          customer. Four tiers covers the wealthy customer. You don&apos;t need
+          twelve.
         </p>
 
         <h3>&quot;We don&apos;t want to anchor low&quot;</h3>
@@ -203,10 +203,9 @@ export default function Page() {
           strategy.
         </p>
         <p>
-          When the Flagship tier&apos;s utilization hits something like 80% of
-          slots month-over-month, I&apos;ll re-introduce a higher tier with a
-          real number on it. Until then, the menu stops at $9,500 and the page
-          is calmer for it.
+          When the Flagship tier starts booking out month-over-month, I&apos;ll
+          re-introduce a higher tier with a real number on it. Until then, the
+          menu stops at $9,500 and the page is calmer for it.
         </p>
 
         <h2>What I still negotiate, even with public pricing</h2>
@@ -241,18 +240,25 @@ export default function Page() {
         <h2>The metric I track</h2>
         <p>The numbers I watch on the pricing page:</p>
         <ul>
-          <li>Bounce rate on the pricing page (was 71%, now 58%)</li>
           <li>
-            Click-through from pricing to discovery-call form (was 4%, now 11%)
+            Bounce rate on the pricing page — down since the tiers went up
           </li>
-          <li>Close rate on discovery calls (was 32%, now 71%)</li>
-          <li>Average deal size (was $2,800, now $5,400)</li>
+          <li>
+            Click-through from pricing to the discovery-call form — up, and the
+            clearest signal of the four
+          </li>
+          <li>Close rate on discovery calls — up, and by the widest margin</li>
+          <li>Average deal size — up, because the tiers anchor upward</li>
         </ul>
         <p>
-          The third metric is the prize. Tripling the close rate on discovery
-          calls means I run fewer calls, sleep more, and take more scooter rides
-          up to Ubud. That&apos;s the actual quality-of-life payoff of public
-          pricing — not the philosophical victory, the reclaimed hours.
+          I am not publishing the underlying figures here: they come from one
+          small agency&apos;s analytics over a handful of months, which is an
+          anecdote, not a benchmark, and a precise-looking number would invite
+          you to treat it as one. The third metric is the prize. A better close
+          rate on discovery calls means I run fewer calls, sleep more, and take
+          more scooter rides up to Ubud. That&apos;s the actual quality-of-life
+          payoff of public pricing — not the philosophical victory, the
+          reclaimed hours.
         </p>
         <p>
           If you&apos;re an agency owner reading this with a &quot;pricing

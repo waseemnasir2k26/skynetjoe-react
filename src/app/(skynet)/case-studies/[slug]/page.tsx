@@ -353,6 +353,32 @@ export default async function CaseStudyDetail({
               </RevealItem>
             ))}
           </RevealGroup>
+
+          {/*
+            2026-09-23 sourcing pass. A delta like "-55%" reads as a published
+            benchmark unless the reader can see whose engagement it came from
+            and when. Every figure above is the arithmetic of the Before/After
+            counts on the same card, so the attribution line below states the
+            engagement, the implementation window and the write-up date —
+            all from the case-study record itself, no new claims. Client
+            anonymity is preserved (role + sector only, per the policy
+            docblock in src/lib/case-studies.ts).
+          */}
+          <p
+            style={{
+              marginTop: 18,
+              fontSize: 12.5,
+              lineHeight: 1.6,
+              color: "var(--ink-faint)",
+              maxWidth: 760,
+            }}
+          >
+            Before/after figures from a single engagement — {c.clientName},{" "}
+            {c.industry}, {c.location} — measured across a{" "}
+            {c.implementationPeriod} implementation and written up{" "}
+            {c.publishDate}. One client&apos;s result, not an industry
+            benchmark.
+          </p>
         </div>
       </section>
 

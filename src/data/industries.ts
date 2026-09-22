@@ -105,7 +105,7 @@ export const INDUSTRIES: Industry[] = [
     painPoints: [
       {
         title: "Front-desk burnout & the calls nobody answers",
-        body: "Average solo or 2-op practice misses 27 to 41% of inbound calls between 11am and 2pm. Every missed call from a new patient is roughly $700 in lifetime value walking to the next clinic on the Google result. Your front desk is not the problem. The volume is the problem.",
+        body: "A solo or 2-op practice misses a painful share of its inbound calls in the 11am-2pm crush — nobody is free to pick up while chairs are full. Every missed call from a new patient is roughly $700 in lifetime value walking to the next clinic on the Google result. Your front desk is not the problem. The volume is the problem.",
       },
       {
         title: "Same-day cancel chaos & hygiene chair gaps",
@@ -113,12 +113,12 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         title: "Recall lists rotting in Dentrix or Open Dental",
-        body: "Most practices have 800 to 2,400 patients sitting on 6-month recall lists nobody has touched in a year. The PMS knows. Nobody has time to work the list. That list, worked correctly, is a 6-figure annual revenue line item ignored by 90% of clinics under 4 ops.",
+        body: "Most practices have 800 to 2,400 patients sitting on 6-month recall lists nobody has touched in a year. The PMS knows. Nobody has time to work the list. That list, worked correctly, is a 6-figure annual revenue line item that most small clinics never work.",
       },
     ],
     flagshipProductName: "AI Receptionist for Dental",
     flagshipProductLede:
-      "A voice and SMS agent that lives on your existing practice number, integrates with Dentrix, Open Dental, Eaglesoft or Curve Dental via API or HL7, and handles the 80% of front-desk calls that are scripted (new-patient booking, insurance verification questions, hygiene confirmation, recall outreach). Your team handles the 20% that actually need a human.",
+      "A voice and SMS agent that lives on your existing practice number, integrates with Dentrix, Open Dental, Eaglesoft or Curve Dental via API or HL7, and handles the scripted front-desk calls (new-patient booking, insurance verification questions, hygiene confirmation, recall outreach). Your team handles the ones that actually need a human.",
     flagshipProductBullets: [
       "Answers in under 4 seconds, 24/7, in your practice's voice (we voice-lock from a 15-minute recording of your office manager)",
       "Books new patients directly into your PMS calendar with insurance pre-screen",
@@ -161,8 +161,7 @@ export const INDUSTRIES: Industry[] = [
         ],
       },
     ],
-    caseTeasers: [
-    ],
+    caseTeasers: [],
     bioPhoto: "/og-default.png",
     bioPhotoAlt: "SkynetLabs — AI automation studio, Bali.",
     bioHeadline:
@@ -265,9 +264,9 @@ export const INDUSTRIES: Industry[] = [
     slug: "wellness-spas",
     name: "Wellness Spas & Medspas",
     shortName: "spa",
-    eyebrowChip: "Same-day no-shows + ghosted DMs cost 30% of your week",
+    eyebrowChip: "Same-day no-shows + ghosted DMs are eating your week",
     heroH1:
-      "Same-day no-shows and ghosted DM leads cost you 30% of your week. Let's reclaim it.",
+      "Same-day no-shows and ghosted DM leads are eating your week. Let's reclaim it.",
     heroSubhead:
       "A concierge AI that lives in MindBody, Vagaro or Boulevard, answers Instagram DMs in your spa's tone, confirms in three taps, and recovers no-shows the same hour they happen.",
     heroCtaPrimary: {
@@ -281,7 +280,7 @@ export const INDUSTRIES: Industry[] = [
     painPoints: [
       {
         title: "Same-day no-shows you can't refill fast enough",
-        body: "Median medspa loses 12 to 18% of bookings to same-day no-shows or last-minute cancellations. Most spas pay a card-on-file fee or eat the cost outright. Almost nobody runs a real-time waitlist with auto-outreach inside 90 seconds, which is the only thing that actually refills the chair.",
+        body: "Same-day no-shows and last-minute cancellations quietly take a slice out of every medspa's book. Most spas pay a card-on-file fee or eat the cost outright. Almost nobody runs a real-time waitlist with auto-outreach inside 90 seconds, which is the only thing that actually refills the chair.",
       },
       {
         title: "Ghosted Instagram DMs and Facebook lead-ad replies",
@@ -429,7 +428,7 @@ export const INDUSTRIES: Industry[] = [
       },
     ],
     finalCtaHeadline:
-      "Reclaim the 30% of your week you are losing to no-shows and ghosted DMs.",
+      "Reclaim the hours you are losing to no-shows and ghosted DMs.",
     finalCtaSubhead:
       "Book a spa-specific audit. We pull a week of your IG DMs, your no-show rate from MindBody or Vagaro, and tell you honestly what the Concierge AI is worth to your spa in month one.",
     finalCtaButtonLabel: "Book the spa audit",
@@ -469,7 +468,7 @@ export const INDUSTRIES: Industry[] = [
     painPoints: [
       {
         title: "Dispatch lag on broker calls and load offers",
-        body: "Average mid-size broker loses 22 to 35% of attractive loads because the carrier-side dispatch is too slow to confirm. A 14-minute lag on a hot lane is a $180 to $310 margin hit per load. Multiply across 40 loads a week and that is roughly $400k a year in margin slipping away, and nobody is tracking it line-by-line.",
+        body: "Mid-size brokers lose attractive loads every week because the carrier-side dispatch is too slow to confirm. A 14-minute lag on a hot lane is a $180 to $310 margin hit per load. Multiply across 40 loads a week and that is roughly $400k a year in margin slipping away, and nobody is tracking it line-by-line.",
       },
       {
         title:
