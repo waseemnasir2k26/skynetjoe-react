@@ -89,9 +89,9 @@ export const INDUSTRIES: Industry[] = [
     slug: "dental-clinics",
     name: "Dental Clinics",
     shortName: "dental",
-    eyebrowChip: "Front-desk hangs up on $4,200/mo in new patients",
+    eyebrowChip: "Your front desk hangs up on new patients every lunch hour",
     heroH1:
-      "Your front desk hangs up on $4,200/month. We pick up the phone for you.",
+      "New patients call while every chair is full. We pick up, book them, and confirm.",
     heroSubhead:
       "An AI receptionist trained on your practice, your insurance list, and your hygiene cadence. It books, confirms, and recalls patients while your team treats the ones already in the chair.",
     heroCtaPrimary: {
@@ -105,15 +105,15 @@ export const INDUSTRIES: Industry[] = [
     painPoints: [
       {
         title: "Front-desk burnout & the calls nobody answers",
-        body: "A solo or 2-op practice misses a painful share of its inbound calls in the 11am-2pm crush — nobody is free to pick up while chairs are full. Every missed call from a new patient is roughly $700 in lifetime value walking to the next clinic on the Google result. Your front desk is not the problem. The volume is the problem.",
+        body: "A solo or 2-op practice misses a painful share of its inbound calls in the 11am-2pm crush — nobody is free to pick up while chairs are full. Every missed call from a new patient is a lifetime of hygiene visits walking to the next clinic on the Google result. Your front desk is not the problem. The volume is the problem.",
       },
       {
         title: "Same-day cancel chaos & hygiene chair gaps",
-        body: "A single same-day cancellation on a hygiene block costs $190 to $280 in lost chair time. Multiply by the 3-4 cancels a week the average practice eats and you're looking at $36k to $58k of revenue evaporating per chair per year.",
+        body: "A same-day cancellation on a hygiene block is chair time you cannot resell — the hygienist is paid, the room sits dark, the slot never comes back. Stack the cancels across a year and the chair earns a fraction of what it was bought to earn.",
       },
       {
         title: "Recall lists rotting in Dentrix or Open Dental",
-        body: "Most practices have 800 to 2,400 patients sitting on 6-month recall lists nobody has touched in a year. The PMS knows. Nobody has time to work the list. That list, worked correctly, is a 6-figure annual revenue line item, and almost nobody works the list.",
+        body: "Most practices have a 6-month recall list full of patients nobody has touched in a year. The PMS knows. Nobody has time to work the list. That list, worked correctly, is a standing revenue line for the practice, and almost nobody works it.",
       },
     ],
     flagshipProductName: "AI Receptionist for Dental",
@@ -241,7 +241,7 @@ export const INDUSTRIES: Industry[] = [
         a: "Yes. The Manhattan atelier flagship is the reference build (12 days, 14 sections, real HIPAA intake). That is a separate engagement starting at $9,500. It pairs naturally with the AI receptionist because the website is where new-patient inquiries enter the system.",
       },
     ],
-    finalCtaHeadline: "Stop bleeding $4,200/month at the front desk.",
+    finalCtaHeadline: "Stop losing new patients to the lunch-hour rush.",
     finalCtaSubhead:
       "Book a dental-specific audit. We pull your last 30 days of missed-call data, model the recovered revenue, and tell you honestly whether this pays for itself inside 90 days.",
     finalCtaButtonLabel: "Book the dental audit",
@@ -284,11 +284,11 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         title: "Ghosted Instagram DMs and Facebook lead-ad replies",
-        body: "Your IG DMs are full of '?', 'price?', and 'how much for botox?'. Half get answered 8 hours later when the front desk has time. By then the prospect has booked at the spa down the street that replied in 4 minutes. Speed-to-lead in aesthetics is brutal and most spas lose this race daily.",
+        body: "Your IG DMs are full of '?', 'price?', and 'how much for botox?'. They get answered later, when the front desk has a gap. By then the prospect has booked at the spa down the street that replied while she was still scrolling. Speed-to-lead in aesthetics is brutal and most spas lose this race daily.",
       },
       {
         title: "Reactivation lists never worked, packages never resold",
-        body: "Your 6-month dormant client list has more revenue in it than your next 30 days of marketing spend, and almost no spa works it systematically. Same for package resells. A client who finished a 6-session laser package 90 days ago is the warmest lead you will ever see, and most spas wait for them to come back on their own.",
+        body: "Your 6-month dormant client list is warmer than anything your next ad campaign will buy, and almost no spa works it systematically. Same for package resells. A client who finished a 6-session laser package 90 days ago is the warmest lead you will ever see, and most spas wait for them to come back on their own.",
       },
     ],
     flagshipProductName: "Concierge AI for Wellness & Medspas",
@@ -416,7 +416,7 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         q: "How fast does the waitlist refill a no-show?",
-        a: "Median refill in our deployments is under 11 minutes from cancellation to booked replacement. The waitlist is ranked (loyal repeat client first, then new-patient inquiry, then cold lead from last 90 days). Outreach fires inside 90 seconds of the cancel event.",
+        a: "Refill starts the moment the cancel is logged, not at the end of the day. The waitlist is ranked (loyal repeat client first, then new-patient inquiry, then cold lead from last 90 days). Outreach fires inside 90 seconds of the cancel event.",
       },
       {
         q: "Can it handle multi-language (Spanish, French)?",
@@ -452,9 +452,9 @@ export const INDUSTRIES: Industry[] = [
     slug: "freight-logistics",
     name: "Freight & Logistics",
     shortName: "freight",
-    eyebrowChip: "Dispatch lag of 14 minutes costs ~$180 per load",
+    eyebrowChip: "A slow dispatch confirm is a lost load",
     heroH1:
-      "Dispatch lag of 14 minutes costs you $180 per load. Our agents answer in 23 seconds.",
+      "Carriers move on while dispatch is still confirming. Our agents answer first.",
     heroSubhead:
       "A dispatch agent that triages broker calls, parses rate sheets, quotes back inside 30 seconds, and logs everything to McLeod, AscendTMS or Truckstop while your dispatchers sleep.",
     heroCtaPrimary: {
@@ -468,23 +468,23 @@ export const INDUSTRIES: Industry[] = [
     painPoints: [
       {
         title: "Dispatch lag on broker calls and load offers",
-        body: "Mid-size brokers lose attractive loads because the carrier-side dispatch is too slow to confirm. A 14-minute lag on a hot lane is a $180 to $310 margin hit per load. Multiply across 40 loads a week and that is roughly $400k a year in margin slipping away, and nobody is tracking it line-by-line.",
+        body: "Mid-size brokers lose attractive loads because the carrier-side dispatch is too slow to confirm. On a hot lane the broker does not wait — the load goes to whoever picks up first, and the margin goes with it. It leaks load by load, and nobody is tracking it line-by-line.",
       },
       {
         title:
           "Email triage on 4-party threads (carrier, broker, shipper, receiver)",
-        body: "Your dispatchers spend 3 to 5 hours a day reading and replying to 4-party email chains. Half are status-update boilerplate. The other half buries one real decision in a wall of CC'd reply-all. Zapier-built classifiers misread the CC field and route to the wrong party at least once a week.",
+        body: "Your dispatchers spend the day reading and replying to 4-party email chains instead of moving freight. Some are status-update boilerplate. The rest bury one real decision in a wall of CC'd reply-all. Zapier-built classifiers misread the CC field and route to the wrong party.",
       },
       {
         title: "Rate-sheet chaos, no historical lane intelligence",
-        body: "Every broker has a folder of 80 to 300 rate sheets in 12 different formats (PDF, XLSX, copied into email body). Quoting a new load means a dispatcher manually checking 3 to 5 sheets, then guessing on lane history. No real-time historical lane benchmark surfaces inside your TMS at the point of the quote.",
+        body: "Every broker has a folder of rate sheets in formats that do not talk to each other (PDF, XLSX, copied into email body). Quoting a new load means a dispatcher opening sheet after sheet, then guessing on lane history. No real-time historical lane benchmark surfaces inside your TMS at the point of the quote.",
       },
     ],
     flagshipProductName: "Dispatch Agent for Freight & Logistics",
     flagshipProductLede:
-      "A dispatch agent that picks up the load-offer call inside 23 seconds, pulls the relevant rate sheet and historical lane data in real time, confirms or counters with the broker, and logs the resulting booking straight to McLeod, AscendTMS or Truckstop. Your human dispatchers handle exceptions and relationships, not data entry.",
+      "A dispatch agent that picks up the load-offer call in seconds, pulls the relevant rate sheet and historical lane data in real time, confirms or counters with the broker, and logs the resulting booking straight to McLeod, AscendTMS or Truckstop. Your human dispatchers handle exceptions and relationships, not data entry.",
     flagshipProductBullets: [
-      "Voice agent picks up broker calls in 23 seconds median, 24/7",
+      "Voice agent picks up broker calls in seconds, 24/7",
       "Parses rate sheets in any format (PDF, XLSX, email body, scanned image) into a unified lane database",
       "Quotes against real historical lane data (your own + FreightWaves SONAR if subscribed)",
       "Books into McLeod, AscendTMS, Truckstop, or Tailwind TMS via API",
@@ -612,17 +612,17 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         q: "How long until I see ROI?",
-        a: "Off-hours load capture shows up inside week 1 (most carriers book 2 to 6 net-new loads in the first 7 days that would have gone to a competitor). Email-triage time savings show up immediately. Margin gains from lane intelligence compound over 60 to 90 days as the unified rate-history database fills in.",
+        a: "Off-hours load capture shows up inside week 1 (the calls that land after your desk goes home get answered instead of going to a competitor). Email-triage time savings show up immediately. Margin gains from lane intelligence compound over 60 to 90 days as the unified rate-history database fills in.",
       },
     ],
-    finalCtaHeadline: "Stop losing $180 per load to dispatch lag.",
+    finalCtaHeadline: "Stop losing loads to dispatch lag.",
     finalCtaSubhead:
       "Book a freight-specific audit. We pull a week of your dispatch logs, model the off-hours capture rate and the margin lift from lane intelligence, and tell you honestly whether this earns out inside 60 days.",
     finalCtaButtonLabel: "Book the freight audit",
     finalCtaHref: "/contact",
     metaTitle: "Freight Dispatch Agent — McLeod, AscendTMS, FreightWaves",
     metaDescription:
-      "AI dispatch agent for freight brokers & carriers. 23-sec call response, rate-sheet OCR, lane intelligence. Integrates with McLeod, AscendTMS, Truckstop, Samsara.",
+      "AI dispatch agent for freight brokers & carriers. Calls answered in seconds, rate-sheet OCR, lane intelligence. Integrates with McLeod, AscendTMS, Truckstop, Samsara.",
     integrationsListedForSchema: [
       "McLeod LoadMaster",
       "AscendTMS",
