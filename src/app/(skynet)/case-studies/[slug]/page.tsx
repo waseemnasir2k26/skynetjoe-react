@@ -107,6 +107,17 @@ export default async function CaseStudyDetail({
     day: "numeric",
   });
 
+  // Prose date for the inline attribution sentence — an ISO string reads as a
+  // machine field mid-sentence. "22 Jan 2026". Fixed locale + UTC so the
+  // prerendered HTML can't drift with the build machine's timezone.
+  const writtenUp = new Date(`${c.publishDate}T00:00:00Z`).toLocaleDateString(
+    "en-GB",
+    { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" },
+  );
+
+  // Provenance of the numbers. Absent field = a paid client engagement.
+  const kind = c.engagementKind ?? "client";
+
   return (
     <>
       <JsonLd data={articleSchema} />
@@ -363,6 +374,12 @@ export default async function CaseStudyDetail({
             all from the case-study record itself, no new claims. Client
             anonymity is preserved (role + sector only, per the policy
             docblock in src/lib/case-studies.ts).
+
+            2026-09-23 round 2: this line used to claim "One client's result"
+            on EVERY record, including our own internal R&D build and a
+            speculative pitch demo that no client ever bought. The provenance
+            now branches on `engagementKind` so each record says what it
+            actually is. Default (field absent) stays "client".
           */}
           <p
             style={{
@@ -373,11 +390,26 @@ export default async function CaseStudyDetail({
               maxWidth: 760,
             }}
           >
-            Before/after figures from a single engagement — {c.clientName},{" "}
-            {c.industry}, {c.location} — measured across a{" "}
-            {c.implementationPeriod} implementation and written up{" "}
-            {c.publishDate}. One client&apos;s result, not an industry
-            benchmark.
+            {kind === "internal" ? (
+              <>
+                Figures from SkynetLabs&apos; own build ({c.industry}), measured
+                across a {c.implementationPeriod} run and written up {writtenUp}
+                . Our own numbers, not client work.
+              </>
+            ) : kind === "demo" ? (
+              <>
+                Figures from a speculative pitch build, not a delivered client
+                engagement — written up {writtenUp}.
+              </>
+            ) : (
+              <>
+                Before/after figures from a single engagement — {c.clientName},{" "}
+                {c.industry}, {c.location} — measured across a{" "}
+                {c.implementationPeriod} implementation and written up{" "}
+                {writtenUp}. One client&apos;s result, not an industry
+                benchmark.
+              </>
+            )}
           </p>
         </div>
       </section>

@@ -171,7 +171,21 @@ export default function Header() {
           </a>
           {/* SECONDARY CTA (2026-09-23): outline, not filled — WhatsApp above
               is the primary action. Border colour carries the affordance; the
-              hover adds a light terracotta wash rather than a solid fill. */}
+              hover adds a light terracotta wash rather than a solid fill.
+
+              Transparent-header contrast audit (2026-09-23, round 2): every
+              hero this button can sit over is cream — var(--cream-3) #FAF7F0
+              on home (HeroFunnel), service, industry, blog, case-study, tools,
+              contact, thank-you and 404, var(--cream)/var(--cream-2) on the
+              tools index and ServiceFunnel shell, and cream-3 forced by
+              HtmlCreamWrap on the content-HTML pages (globals.css). No hero
+              is dark and none is a photo — the only overlay, NodeGraphSVG on
+              the home hero, is hairline ink/terracotta line art on that same
+              cream. So terracotta-aa text keeps its contrast with a
+              transparent fill and NO translucent plate is added here. If a
+              dark or photographic hero is ever introduced, this button needs
+              `bg-[color:var(--cream)]/80` + backdrop-blur in the scroll-top
+              state. /lp/* is exempt — Header returns null there. */}
           <Link
             href={NAV_CTA.href}
             className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold transition-all hover:-translate-y-0.5"

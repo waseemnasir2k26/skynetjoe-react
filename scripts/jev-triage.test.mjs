@@ -16,6 +16,9 @@
  *      cannot leak in.
  *   4. The secret header is omitted (not sent empty) when JEV_TRIAGE_SECRET
  *      is unset, and present when it is set.
+ *   5. A non-https JEV_TRIAGE_WEBHOOK is refused (no fetch at all).
+ *   6. Contact data a human typed into the free-text message — an email
+ *      address, a phone number — is scrubbed out before the body is built.
  *
  * Run: node scripts/jev-triage.test.mjs
  */
@@ -38,15 +41,20 @@ const modUrl = pathToFileURL(
 // ---- harness -------------------------------------------------------------
 let fetchCalls = [];
 const realFetch = globalThis.fetch;
-globalThis.fetch = async (url, init) => {
+const stubFetch = async (url, init) => {
   fetchCalls.push({ url, init });
   return new Response("{}", { status: 200 });
 };
+globalThis.fetch = stubFetch;
 
 const flush = () => new Promise((r) => setTimeout(r, 50));
 let failures = 0;
 async function test(name, fn) {
   fetchCalls = [];
+  // Re-arm the recording stub: the "rejecting fetch" case swaps in its own
+  // implementation and hands back the REAL fetch, which would silently make
+  // every later case hit the network and record nothing.
+  globalThis.fetch = stubFetch;
   try {
     await fn();
     console.log(`  PASS  ${name}`);
@@ -56,7 +64,7 @@ async function test(name, fn) {
   }
 }
 
-const { postTriageShadow, buildTriageBody, triageIsConfigured } =
+const { postTriageShadow, buildTriageBody, triageIsConfigured, scrubContacts } =
   await import(modUrl);
 
 const SAMPLE = {
@@ -146,6 +154,71 @@ await test("a throwing/rejecting fetch never escapes", async () => {
   assert.equal(postTriageShadow(SAMPLE), undefined);
   await flush();
   globalThis.fetch = realFetch;
+  delete process.env.JEV_TRIAGE_WEBHOOK;
+});
+
+await test("non-https JEV_TRIAGE_WEBHOOK => refused, zero fetch calls", async () => {
+  for (const bad of [
+    "http://triage.invalid/hook",
+    "triage.invalid/hook",
+    "ftp://triage.invalid/hook",
+    "HTTPS://triage.invalid/hook", // scheme is case-insensitive in URLs, but
+    // an env value that isn't literally https:// is a typo we refuse loudly
+    // rather than guess at.
+  ]) {
+    process.env.JEV_TRIAGE_WEBHOOK = bad;
+    assert.equal(triageIsConfigured(), false, `${bad} must not be configured`);
+    postTriageShadow(SAMPLE);
+  }
+  await flush();
+  assert.equal(
+    fetchCalls.length,
+    0,
+    `expected 0 fetch calls for non-https endpoints, got ${fetchCalls.length}`,
+  );
+  process.env.JEV_TRIAGE_WEBHOOK = "https://triage.invalid/hook";
+  assert.equal(triageIsConfigured(), true, "https endpoint must be accepted");
+  delete process.env.JEV_TRIAGE_WEBHOOK;
+});
+
+await test("free-text message is scrubbed of email + phone", async () => {
+  // Unit level: the scrub itself.
+  assert.equal(
+    scrubContacts("mail me at Bob.Smith+jobs@example.co.uk please"),
+    "mail me at [email] please",
+  );
+  assert.equal(
+    scrubContacts("call +62 813-0000-0000 after 6"),
+    "call [phone] after 6",
+  );
+  assert.equal(scrubContacts("ring 5551234 now"), "ring [phone] now");
+  // Short digit runs and money must survive — a triage model needs budget.
+  assert.equal(
+    scrubContacts("budget is 1497 for Q3 2026"),
+    "budget is 1497 for Q3 2026",
+  );
+
+  // Body level: it is the built payload that goes on the wire.
+  const body = buildTriageBody({
+    source: "contact-form",
+    message:
+      "Hi, I'm Dana - reach me on dana@acme-freight.com or +1 (415) 555-0134, thanks",
+  });
+  assert.ok(!/dana@acme-freight\.com/.test(body.message), "email survived");
+  assert.ok(!/555-?0134/.test(body.message), "phone survived");
+  assert.ok(body.message.includes("[email]"), "email placeholder missing");
+  assert.ok(body.message.includes("[phone]"), "phone placeholder missing");
+
+  // Wire level: nothing re-introduces it downstream of buildTriageBody.
+  process.env.JEV_TRIAGE_WEBHOOK = "https://triage.invalid/hook";
+  postTriageShadow({
+    ...SAMPLE,
+    message: "email me: prospect@example.com / tel 0812 3456 7890",
+  });
+  await flush();
+  const raw = fetchCalls.at(-1).init.body;
+  assert.ok(!/prospect@example\.com/.test(raw), "email leaked on the wire");
+  assert.ok(!/3456/.test(raw), "phone leaked on the wire");
   delete process.env.JEV_TRIAGE_WEBHOOK;
 });
 

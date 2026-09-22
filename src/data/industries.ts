@@ -113,7 +113,7 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         title: "Recall lists rotting in Dentrix or Open Dental",
-        body: "Most practices have 800 to 2,400 patients sitting on 6-month recall lists nobody has touched in a year. The PMS knows. Nobody has time to work the list. That list, worked correctly, is a 6-figure annual revenue line item that most small clinics never work.",
+        body: "Most practices have 800 to 2,400 patients sitting on 6-month recall lists nobody has touched in a year. The PMS knows. Nobody has time to work the list. That list, worked correctly, is a 6-figure annual revenue line item, and almost nobody works the list.",
       },
     ],
     flagshipProductName: "AI Receptionist for Dental",
@@ -468,7 +468,7 @@ export const INDUSTRIES: Industry[] = [
     painPoints: [
       {
         title: "Dispatch lag on broker calls and load offers",
-        body: "Mid-size brokers lose attractive loads every week because the carrier-side dispatch is too slow to confirm. A 14-minute lag on a hot lane is a $180 to $310 margin hit per load. Multiply across 40 loads a week and that is roughly $400k a year in margin slipping away, and nobody is tracking it line-by-line.",
+        body: "Mid-size brokers lose attractive loads because the carrier-side dispatch is too slow to confirm. A 14-minute lag on a hot lane is a $180 to $310 margin hit per load. Multiply across 40 loads a week and that is roughly $400k a year in margin slipping away, and nobody is tracking it line-by-line.",
       },
       {
         title:

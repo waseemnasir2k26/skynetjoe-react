@@ -5,10 +5,16 @@
  *
  * HARD CONSTRAINTS (do not relax any of these):
  *
- *  1. NO PII THAT IDENTIFIES A PERSON DIRECTLY. The body carries no email and
- *     no phone number, ever. `buildTriageBody` constructs the payload key by
- *     key from an allow-list rather than spreading the caller's object, so a
- *     future field added to SinkLead cannot leak into the webhook by accident.
+ *  1. NO PII THAT IDENTIFIES A PERSON DIRECTLY. `buildTriageBody` constructs
+ *     the payload key by key from an allow-list rather than spreading the
+ *     caller's object, so a future field added to SinkLead cannot leak into
+ *     the webhook by accident — the `email` and `phone` fields are never
+ *     forwarded. Free text is a different problem: a prospect can, and does,
+ *     type "call me on +62 813 0000 0000" into the message box. So `message`
+ *     is SCRUBBED, not trusted: email addresses and phone-like digit runs are
+ *     replaced with "[email]" / "[phone]" before the body is built. The claim
+ *     is "contact data is stripped from free text", NOT "free text never
+ *     contains contact data" — the latter was never true.
  *  2. NEVER IN THE RESPONSE PATH. Callers use `postTriageShadow(...)`, which
  *     returns void immediately. Nothing awaits it, so a hanging endpoint can
  *     never hold a visitor's form open.
@@ -17,9 +23,12 @@
  *     A broken triage webhook must never turn a captured lead into a 500.
  *  4. UNSET ENV = TOTAL NO-OP. With JEV_TRIAGE_WEBHOOK unset (the default,
  *     including production today) this does not even construct a request.
+ *  5. HTTPS ONLY. A webhook that is not `https://` is treated as unset. A
+ *     mistyped or http:// endpoint would put lead text on the wire in clear;
+ *     refusing to send is the correct failure mode for a shadow feature.
  *
  * Env:
- *   JEV_TRIAGE_WEBHOOK  — absolute https URL. Unset/blank → no-op.
+ *   JEV_TRIAGE_WEBHOOK  — absolute https URL. Unset/blank/non-https → no-op.
  *   JEV_TRIAGE_SECRET   — sent as the `x-triage-secret` header. Optional; if
  *                         unset the header is omitted entirely rather than
  *                         sent empty (an empty shared secret is worse than no
@@ -63,9 +72,47 @@ function clean(value: unknown, max: number): string | undefined {
   return trimmed.length > max ? trimmed.slice(0, max) : trimmed;
 }
 
-/** True when a triage endpoint is configured. Exported for tests + logging. */
+/**
+ * An email address anywhere in free text. Deliberately broad rather than
+ * RFC-exact: over-matching costs a triage model a little context, under-
+ * matching leaks a contact address.
+ */
+const EMAIL_RE = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+
+/**
+ * A phone-like run: an optional "+", then digits mixed with spaces, dashes,
+ * dots, parens. The digit count is re-checked in the callback so that short
+ * numbers and prices ("$1,497", "2026") survive; only runs of 7+ digits are
+ * treated as a phone number.
+ */
+const PHONEISH_RE = /\+?\d[\d\s().-]{5,}\d/g;
+
+/**
+ * Strip contact data a human typed into a free-text field. Exported so the
+ * scrub contract is testable directly, without a network call.
+ */
+export function scrubContacts(text: string): string {
+  return text
+    .replace(EMAIL_RE, "[email]")
+    .replace(PHONEISH_RE, (run) =>
+      (run.match(/\d/g)?.length ?? 0) >= 7 ? "[phone]" : run,
+    );
+}
+
+/**
+ * The configured endpoint, or undefined. Non-https values are refused (see
+ * constraint 5) rather than sent to, so a typo cannot start leaking lead text
+ * over plaintext http.
+ */
+function triageEndpoint(): string | undefined {
+  const url = process.env.JEV_TRIAGE_WEBHOOK?.trim();
+  if (!url) return undefined;
+  return url.startsWith("https://") ? url : undefined;
+}
+
+/** True when a usable (https) triage endpoint is configured. */
 export function triageIsConfigured(): boolean {
-  return Boolean(process.env.JEV_TRIAGE_WEBHOOK?.trim());
+  return Boolean(triageEndpoint());
 }
 
 /**
@@ -79,14 +126,21 @@ export function buildTriageBody(input: TriageInput): TriageBody {
     ts: clean(input.ts, MAX_FIELD_CHARS) ?? new Date().toISOString(),
     name: clean(input.name, MAX_FIELD_CHARS),
     company: clean(input.company, MAX_FIELD_CHARS),
-    message: clean(input.message, MAX_MESSAGE_CHARS),
+    // Scrub BEFORE the length clamp: truncating first could cut an address in
+    // half and leave the half that still identifies someone.
+    message: clean(
+      typeof input.message === "string"
+        ? scrubContacts(input.message)
+        : input.message,
+      MAX_MESSAGE_CHARS,
+    ),
     page: clean(input.page, MAX_FIELD_CHARS),
   };
 }
 
 async function send(input: TriageInput): Promise<void> {
-  const url = process.env.JEV_TRIAGE_WEBHOOK?.trim();
-  if (!url) return; // no-op: nothing configured
+  const url = triageEndpoint();
+  if (!url) return; // no-op: unset, blank, or not https
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TRIAGE_TIMEOUT_MS);

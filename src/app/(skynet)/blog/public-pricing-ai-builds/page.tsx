@@ -120,10 +120,10 @@ export default function Page() {
           The other side of the same effect: when a 14-truck fleet operator
           messages me, they see the Pro tier at $3,997 plus $497/mo and they
           know — before the call — that this is a price they can actually pay.
-          The call becomes about scope and fit, not negotiation. Far more of
-          those calls now end in a signed scope than they did when pricing was
-          private. Same lead quality on the wire; fundamentally different
-          conversation in the meeting.
+          The call becomes about scope and fit, not negotiation. More of those
+          calls end in a signed scope than when pricing was private — enough
+          that I stopped tracking the exact figure. Same lead quality on the
+          wire; fundamentally different conversation in the meeting.
         </p>
         <div className="margin-note">the call gets to do its real job</div>
 

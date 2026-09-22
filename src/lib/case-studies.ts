@@ -30,9 +30,24 @@ export type CaseMetric = {
   delta: string;
 };
 
+/**
+ * What kind of work a record actually describes. Absent = "client", because
+ * every record predating this field was a paid client engagement.
+ *
+ * This exists because the attribution line on the detail page used to say
+ * "Before/after figures from a single engagement ... One client's result" on
+ * ALL records — including SkynetLabs' own internal R&D build and a speculative
+ * pitch demo that was never a delivered engagement. That is a false provenance
+ * claim, not a formatting nit: it presents our own numbers and an unbought demo
+ * as client outcomes. Any new record that is not paid client work MUST set this.
+ */
+export type EngagementKind = "client" | "internal" | "demo";
+
 export type CaseStudy = {
   slug: string;
   position: number; // 01..09 ordering badge from index
+  /** Defaults to "client" when omitted. See EngagementKind. */
+  engagementKind?: EngagementKind;
   clientName: string;
   industry: string;
   industryTag: "Automation" | "Websites" | "AI Content" | "Consulting";
@@ -327,6 +342,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "internal-carousel-content-engine-200-asset",
     position: 5,
+    // SkynetLabs' own tooling, briefed internally — no client, no invoice.
+    engagementKind: "internal",
     clientName: "SkynetLabs internal R&D",
     industry: "Agency operations & content R&D",
     industryTag: "AI Content",
@@ -389,13 +406,14 @@ export const CASE_STUDIES: CaseStudy[] = [
       "This is the system every client launch now runs on. We don't talk about it on sales calls — it's the moat.",
     testimonialAuthor: "Waseem Nasir, founder, SkynetLabs",
     publishDate: "2026-02-26",
-    relatedServices: [
-      { slug: "n8n-automation", label: "n8n Automation" },
-    ],
+    relatedServices: [{ slug: "n8n-automation", label: "n8n Automation" }],
   },
   {
     slug: "premium-auto-dealership-network-demo",
     position: 6,
+    // Speculative pitch build shipped to win the work — not a delivered
+    // engagement. Figures describe the demo, not a client's live results.
+    engagementKind: "demo",
     clientName: "Premium auto dealership network (anonymized)",
     industry: "Automotive retail",
     industryTag: "Websites",
@@ -595,9 +613,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "I sign off on 9 out of 10 packs without rewriting anything. I haven't had that experience with any other content tool.",
     testimonialAuthor: "Founder, multi-channel SaaS launch",
     publishDate: "2026-05-10",
-    relatedServices: [
-      { slug: "n8n-automation", label: "n8n Automation" },
-    ],
+    relatedServices: [{ slug: "n8n-automation", label: "n8n Automation" }],
   },
 ];
 
