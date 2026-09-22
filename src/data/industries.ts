@@ -89,7 +89,7 @@ export const INDUSTRIES: Industry[] = [
     slug: "dental-clinics",
     name: "Dental Clinics",
     shortName: "dental",
-    eyebrowChip: "Your front desk hangs up on new patients every lunch hour",
+    eyebrowChip: "Your front desk hangs up on new patients during the lunch-hour rush",
     heroH1:
       "New patients call while every chair is full. We pick up, book them, and confirm.",
     heroSubhead:
@@ -284,7 +284,7 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         title: "Ghosted Instagram DMs and Facebook lead-ad replies",
-        body: "Your IG DMs are full of '?', 'price?', and 'how much for botox?'. They get answered later, when the front desk has a gap. By then the prospect has booked at the spa down the street that replied while she was still scrolling. Speed-to-lead in aesthetics is brutal and most spas lose this race daily.",
+        body: "Your IG DMs are full of '?', 'price?', and 'how much for botox?'. They get answered later, when the front desk has a gap. By then the prospect has booked at the spa down the street that replied while the message was still on screen. Speed-to-lead in aesthetics is brutal and most spas lose this race daily.",
       },
       {
         title: "Reactivation lists never worked, packages never resold",
@@ -452,9 +452,9 @@ export const INDUSTRIES: Industry[] = [
     slug: "freight-logistics",
     name: "Freight & Logistics",
     shortName: "freight",
-    eyebrowChip: "A slow dispatch confirm is a lost load",
+    eyebrowChip: "A slow dispatch confirmation is a lost load",
     heroH1:
-      "Carriers move on while dispatch is still confirming. Our agents answer first.",
+      "Brokers hand the load to whoever confirms first. Our agents answer before your desk can.",
     heroSubhead:
       "A dispatch agent that triages broker calls, parses rate sheets, quotes back inside 30 seconds, and logs everything to McLeod, AscendTMS or Truckstop while your dispatchers sleep.",
     heroCtaPrimary: {
@@ -622,7 +622,7 @@ export const INDUSTRIES: Industry[] = [
     finalCtaHref: "/contact",
     metaTitle: "Freight Dispatch Agent — McLeod, AscendTMS, FreightWaves",
     metaDescription:
-      "AI dispatch agent for freight brokers & carriers. Calls answered in seconds, rate-sheet OCR, lane intelligence. Integrates with McLeod, AscendTMS, Truckstop, Samsara.",
+      "AI dispatch agent for freight carriers. Calls answered in seconds, rate-sheet OCR, lane intelligence. Integrates with McLeod, AscendTMS, Truckstop, Samsara.",
     integrationsListedForSchema: [
       "McLeod LoadMaster",
       "AscendTMS",
