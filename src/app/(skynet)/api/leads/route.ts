@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { sendCapiLead } from "@/lib/meta-capi";
 import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
-import { appendLeadToSink } from "@/lib/lead-sink";
+import { postTriageShadow } from "@/lib/jev-triage";
+import { appendLeadToSink, type SinkLead } from "@/lib/lead-sink";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 
@@ -92,6 +93,12 @@ type Payload = {
   _honeypot?: string;
   qualification?: Qualification;
   booking?: Booking;
+  /**
+   * Site path the form was submitted from. ExitIntentModal posts this as
+   * `path`; other callers omit it and the Referer header is used instead.
+   * NOT the prospect's own website (that arrives as qualification.website).
+   */
+  path?: string;
   utm?: {
     source?: string;
     medium?: string;
@@ -125,6 +132,52 @@ function scoreLead(
   if (hotRev && hotUrgency) return "HOT";
   if (hotRev || hotUrgency) return "WARM";
   return "COLD";
+}
+
+/**
+ * Display name from whichever field the submitting form actually filled.
+ * Returns undefined rather than an empty string when nothing was collected.
+ */
+function resolveName(p: Payload): string | undefined {
+  const first = (p.firstName || p.qualification?.firstName || "").trim();
+  const last = (p.lastName || p.qualification?.lastName || "").trim();
+  const joined = [first, last].filter(Boolean).join(" ").trim();
+  if (joined) return joined;
+  const invitee = (p.booking?.inviteeName || "").trim();
+  return invitee || undefined;
+}
+
+/**
+ * The prospect's own words, for triage context. Ordered most-specific first:
+ * the bottleneck they typed beats a checkbox list. Never includes email/phone.
+ */
+function resolveMessage(p: Payload): string | undefined {
+  const q = p.qualification;
+  if (!q) return undefined;
+  const candidate =
+    q.bottleneck?.trim() ||
+    q.biggestLeak?.trim() ||
+    q.automationWishlist?.trim() ||
+    (q.automateTargets?.length ? q.automateTargets.join(", ") : "");
+  return candidate || undefined;
+}
+
+/**
+ * Path-only view of where the lead was submitted. `path` (posted by
+ * ExitIntentModal) wins; otherwise the Referer, stripped of its query string
+ * so UTM tails and prefilled answers never ride along into the sink or the
+ * triage webhook.
+ */
+function resolvePage(req: Request, p: Payload): string | undefined {
+  const posted = p.path?.trim();
+  if (posted) return posted.split("?")[0];
+  const raw = req.headers.get("referer");
+  if (!raw) return undefined;
+  try {
+    return new URL(raw).pathname;
+  } catch {
+    return undefined;
+  }
 }
 
 /** Flatten automateTargets[] into the single LARGE_TEXT field GHL expects. */
@@ -295,11 +348,34 @@ export async function POST(req: Request) {
     if (!r.sent) console.warn("[leads] MA-04 lead ping not sent:", r.reason);
   });
 
+  const capturedAt = new Date().toISOString();
+  const name = resolveName(payload);
+  const company = payload.qualification?.businessName?.trim() || undefined;
+  const message = resolveMessage(payload);
+  const page = resolvePage(req, payload);
+
   const { confirmed, emailFallbackSent, sunk } = await confirmOrEscalate(
     ghl.contactId,
-    { email, source, capturedAt: new Date().toISOString() },
+    { email, source, capturedAt, name, company, message, page, leadId },
     payload,
   );
+
+  /**
+   * Shadow triage (JEV_TRIAGE_WEBHOOK). Fire-and-forget, never awaited, never
+   * throws, no email and no phone in the body — unset env is a total no-op.
+   * Deliberately fired for the unconfirmed case too: a lead the CRM refused is
+   * exactly the one a triage lane wants to see. It sits after the delivery
+   * attempt so it can never delay or fail the visitor's response.
+   */
+  postTriageShadow({
+    leadId,
+    source,
+    ts: capturedAt,
+    name,
+    company,
+    message,
+    page,
+  });
 
   if (!confirmed && !emailFallbackSent && !sunk) {
     // Nothing took the lead. Tell the truth instead of showing a success state
@@ -343,7 +419,12 @@ export async function POST(req: Request) {
  */
 async function confirmOrEscalate(
   ghlContactId: string | null | undefined,
-  lead: { email: string; source: string; capturedAt: string },
+  /**
+   * Typed as the sink row minus `reason` (which this function decides) and
+   * minus `payload` (passed separately below), so adding a field to SinkLead
+   * surfaces here at compile time instead of silently not being written.
+   */
+  lead: Omit<SinkLead, "reason" | "payload">,
   /**
    * The full submitted body. Without this the sink kept only the email, which
    * on THIS route means throwing away the qualification answers -- revenue

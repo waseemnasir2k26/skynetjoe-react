@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { upsertGhlContact } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
+import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink } from "@/lib/lead-sink";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 import { sendCapiLead } from "@/lib/meta-capi";
@@ -63,6 +64,22 @@ type Payload = {
   _honeypot?: string;
 };
 
+/**
+ * Path-only view of the Referer, for the sink + triage `page` field.
+ * Query strings are dropped deliberately: UTM tails and tool state can carry
+ * an email or a prefilled answer, and neither belongs in a triage webhook.
+ * Returns undefined for a missing or unparseable header.
+ */
+function refererPath(req: Request): string | undefined {
+  const raw = req.headers.get("referer");
+  if (!raw) return undefined;
+  try {
+    return new URL(raw).pathname;
+  } catch {
+    return undefined;
+  }
+}
+
 function isValidEmail(s: string | undefined): s is string {
   if (!s || typeof s !== "string") return false;
   if (s.length > 254) return false;
@@ -105,6 +122,19 @@ export async function POST(req: Request) {
   if (!isValidEmail(email)) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
+
+  // Shared across the sink rows and the shadow-triage ping below, so one lead
+  // is one id everywhere. This route's callers are email-only gates, so there
+  // is no name/company/message to carry — only the capture page.
+  const leadId = syntheticLeadKey(email, capturedAt);
+  const page = refererPath(req);
+
+  /**
+   * Shadow triage (JEV_TRIAGE_WEBHOOK). Fire-and-forget, never awaited, never
+   * throws, no email and no phone in the body. Unset env = no-op.
+   */
+  const fireTriage = () =>
+    postTriageShadow({ leadId, source, ts: capturedAt, page });
 
   // Server-side CAPI Lead, deduped against the browser pixel via eventId.
   // Fail-soft by design: no token (pre-Gate-1) or Graph error never blocks
@@ -169,6 +199,8 @@ export async function POST(req: Request) {
         source,
         capturedAt,
         reason,
+        leadId,
+        page,
       });
       if (sink.written && sink.durable) {
         console.warn(
@@ -177,11 +209,12 @@ export async function POST(req: Request) {
         );
         // Never awaited — alerting side-channel, never a delivery path.
         void pingLeadFirehose({
-          contactId: syntheticLeadKey(email, capturedAt),
+          contactId: leadId,
           email,
           source,
           extras: { delivery: "disk-sink", ghl_confirmed: false, reason },
         });
+        fireTriage();
         return NextResponse.json({ ok: true, sink: true });
       }
     }
@@ -212,7 +245,7 @@ export async function POST(req: Request) {
   // Never awaited — alerting side-channel, never a delivery path. The lead is
   // already written by this point; if n8n is down the visitor must still succeed.
   void pingLeadFirehose({
-    contactId: contactId ?? syntheticLeadKey(email, capturedAt),
+    contactId: contactId ?? leadId,
     email,
     source,
     extras: {
@@ -220,6 +253,8 @@ export async function POST(req: Request) {
       ghl_confirmed: ghlConfirmed,
     },
   });
+
+  fireTriage();
 
   return NextResponse.json({
     ok: true,

@@ -26,11 +26,29 @@ import path from "node:path";
  *   cat .data/leads.jsonl
  */
 
+/**
+ * The optional fields below (2026-09-23) exist because the JSONL sink is the
+ * last-resort record of a lead, and "an email address and nothing else" is not
+ * a workable handover when the CRM and the mailer are both down. They are all
+ * optional: /api/lead-capture (tool gates, email-only forms) genuinely has no
+ * name or company to give, and an absent field must stay absent rather than
+ * become an empty string that looks like a filled-in blank.
+ */
 export type SinkLead = {
   email: string;
   source: string;
   capturedAt: string;
   reason: string;
+  /** Submitted name, if the form collected one. */
+  name?: string;
+  /** Submitted company / business name, if collected. */
+  company?: string;
+  /** Free-text the prospect wrote (brief, bottleneck, wishlist). */
+  message?: string;
+  /** Site path the lead was captured from — not the prospect's own website. */
+  page?: string;
+  /** Route-minted id, so a sink row can be matched to a log line. */
+  leadId?: string;
   payload?: unknown;
 };
 
