@@ -7,9 +7,17 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { NAV_PRIMARY, NAV_CTA, WHATSAPP } from "@/lib/site";
 
 /**
- * Site header — flat six-item nav + one CTA (2026-09-21 simplification).
+ * Site header — flat six-item nav + two CTAs (2026-09-21 simplification).
  * No mega menus, no dropdowns, no announcement bar. Desktop renders the
  * links inline; below `lg` a full-width drawer lists the same items.
+ *
+ * CTA hierarchy (Waseem ruling, 2026-09-23):
+ *   1. WhatsApp  — PRIMARY, filled green, first in both desktop and drawer.
+ *   2. Book a call — SECONDARY, outline button, second in both.
+ *   3. NO "Contact" nav link in the header. /contact is still reachable via
+ *      the Book-a-call CTA and the footer Company column; the page itself is
+ *      unchanged. NAV_PRIMARY (src/lib/site.ts) is header-only, so this does
+ *      not touch the footer.
  */
 export default function Header() {
   const pathname = usePathname();
@@ -151,22 +159,34 @@ export default function Header() {
               borderRadius: 2,
             }}
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            <svg
+              viewBox="0 0 24 24"
+              className="w-4 h-4"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z" />
+            </svg>
             {WHATSAPP.label}
           </a>
+          {/* SECONDARY CTA (2026-09-23): outline, not filled — WhatsApp above
+              is the primary action. Border colour carries the affordance; the
+              hover adds a light terracotta wash rather than a solid fill. */}
           <Link
             href={NAV_CTA.href}
             className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold transition-all hover:-translate-y-0.5"
             style={{
-              background: "var(--terracotta)",
-              color: "var(--cream-3)",
+              background: "transparent",
+              color: "var(--terracotta-aa)",
+              border: "1px solid var(--terracotta)",
               borderRadius: 2,
             }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.background = "var(--terracotta-2)")
+              (e.currentTarget.style.background =
+                "color-mix(in srgb, var(--terracotta) 12%, transparent)")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.background = "var(--terracotta)")
+              (e.currentTarget.style.background = "transparent")
             }
           >
             {NAV_CTA.label}
@@ -222,24 +242,10 @@ export default function Header() {
                 </Link>
               );
             })}
+            {/* 2026-09-23 CTA hierarchy: WhatsApp first and filled (primary),
+                "Book a call" below it as an outline button (secondary). Order
+                here is the visual order in the drawer — do not re-sort. */}
             <div className="mt-5">
-              <Link
-                href={NAV_CTA.href}
-                onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center justify-center gap-1.5 w-full"
-                style={{
-                  background: "var(--terracotta)",
-                  color: "var(--cream-3)",
-                  borderRadius: 2,
-                  padding: "14px 24px",
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: 15,
-                }}
-              >
-                {NAV_CTA.label}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
               <a
                 href={WHATSAPP.href}
                 target="_blank"
@@ -256,9 +262,34 @@ export default function Header() {
                   fontSize: 15,
                 }}
               >
-                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z" />
+                </svg>
                 Contact us on WhatsApp
               </a>
+              <Link
+                href={NAV_CTA.href}
+                onClick={() => setMobileOpen(false)}
+                className="mt-3 inline-flex items-center justify-center gap-1.5 w-full"
+                style={{
+                  background: "transparent",
+                  color: "var(--terracotta-aa)",
+                  border: "1px solid var(--terracotta)",
+                  borderRadius: 2,
+                  padding: "13px 24px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 15,
+                }}
+              >
+                {NAV_CTA.label}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </nav>
         </div>

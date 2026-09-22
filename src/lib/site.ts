@@ -105,6 +105,12 @@ export const TOOL_LINKS: NavSubItem[] = TOOLS_REGISTRY.map((t) => ({
 /**
  * 2026-09-21 simplification: flat six-item nav, no mega menus, no dropdowns.
  * Header CTA ("Book a call" → /contact) lives in Header.tsx.
+ *
+ * 2026-09-23 CTA hierarchy ruling: the header carries NO "Contact" nav link.
+ * /contact is reachable from the "Book a call" CTA (secondary style) and from
+ * the footer Company column (FOOTER_COLUMNS) — both must stay. This list is
+ * header-only (Header.tsx is its sole consumer); the footer builds its own
+ * links from FOOTER_COLUMNS, so removing/adding here never touches the footer.
  */
 export const NAV_PRIMARY: NavItem[] = [
   { label: "Services", href: "/services" },
@@ -115,9 +121,13 @@ export const NAV_PRIMARY: NavItem[] = [
   { label: "About", href: "/about" },
 ];
 
-/** Header / mobile-drawer CTA. */
+/**
+ * Header / mobile-drawer SECONDARY CTA (2026-09-23 ruling). Rendered as an
+ * outline button so WhatsApp is unambiguously the primary action.
+ */
 export const NAV_CTA = { label: "Book a call", href: "/contact" } as const;
-// WhatsApp CTA in the header (Waseem, 2026-09-21). E.164 without "+" for wa.me.
+// WhatsApp = PRIMARY header CTA (Waseem, 2026-09-21; promoted over "Book a
+// call" 2026-09-23). E.164 without "+" for wa.me.
 export const WHATSAPP = {
   number: "6281316077185",
   display: "+62 813-1607-7185",
