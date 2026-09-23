@@ -125,6 +125,30 @@ export const POSTS: Post[] = [
     author: "Waseem Nasir",
   },
   {
+    slug: "n8n-clinic-whatsapp-booking-bot",
+    title:
+      "The n8n Clinic WhatsApp Booking Agent: It Refuses by Code, Not by Prompt",
+    seoTitle: "n8n Clinic WhatsApp Booking Agent (Ep05)",
+    description:
+      "An n8n workflow handed off 10 of 10 medical and price questions by code before the model on 2026-09-22, then booked 4 of 12 simulated WhatsApp patients with 0 double bookings.",
+    publishedAt: "2026-09-23",
+    updatedAt: "2026-09-23",
+    readingTime: 12,
+    category: "automation",
+    tags: [
+      "n8n whatsapp booking bot",
+      "free n8n template",
+      "n8n workflow json",
+      "whatsapp cloud api",
+      "postgres chat memory",
+      "clinic automation",
+      "appointment booking automation",
+      "ai agent tool calling",
+      "n8n code node",
+    ],
+    author: "Waseem Nasir",
+  },
+  {
     slug: "n8n-google-maps-lead-table",
     title:
       "n8n Google Maps Lead Harvest: Trade and City In, a Deduped Lead Table Out",

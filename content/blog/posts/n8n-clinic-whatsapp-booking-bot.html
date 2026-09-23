@@ -1,0 +1,808 @@
+<style>
+  .wn-n8n-clinic-whatsapp-booking-bot {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot ul,
+  .wn-n8n-clinic-whatsapp-booking-bot ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot strong {
+    color: #fff;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot .rules {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot .rules strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot .rules ol {
+    margin: 0.75rem 0 0 1.25rem;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-clinic-whatsapp-booking-bot .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<p>
+  A guard written in code reads every WhatsApp message before the AI agent ever
+  sees it. On 2026-09-22, under n8n execution 31388, that guard handed off 10 of
+  10 messages about symptoms, medication, diagnosis, price or an emergency to a
+  human, and the agent that was left booked 4 of 12 simulated patients into a
+  Postgres slot table with zero double bookings, at a median 0.16 seconds from
+  webhook to first reply.
+</p>
+
+<p>
+  A clinic's WhatsApp inbox mixes three kinds of message: someone booking a
+  cleaning, someone asking what a filling costs, and someone describing pain. A
+  model can be told, in a system prompt, to defer the second and third kind to a
+  person. It can also be talked out of that instruction by a patient who
+  rephrases, or simply miss one on a bad day. Episode 05 of the n8n Workflows
+  series moves that decision out of the prompt and into a branch on the canvas,
+  so the refusal does not depend on the model at all.
+</p>
+
+<p>
+  It refuses by code, not by prompt. A deterministic regex guard, in Spanish and
+  English, runs on every inbound message first. Anything about symptoms,
+  medication, diagnosis, price or an emergency is intercepted before the AI
+  Agent's turn, written to a handoff table with a fixed bilingual reply, and
+  never reaches the model. Everything left, scheduling and general FAQ, goes to
+  a Tools Agent with Postgres-backed chat memory per patient and two Postgres
+  tools to check and book a slot.
+</p>
+
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/hbWm05jjwYU"
+    title="It refuses by code, not by prompt - n8n clinic WhatsApp booking agent, Episode 05"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+<p class="video-note">
+  If iframes are blocked where you are reading this, the video is at
+  <a href="https://youtu.be/hbWm05jjwYU">youtu.be/hbWm05jjwYU</a>.
+</p>
+
+<div class="callout">
+  <strong>Where the patients come from.</strong> The demo feeds 26 synthetic
+  WhatsApp-shaped messages from 12 fictional patients through a webhook, and no
+  live WhatsApp number and no real patient sent anything. The WhatsApp Trigger,
+  WhatsApp Send message, and Google Calendar create event nodes sit on the
+  canvas, disabled, as the swap points for a real inbox and a real calendar.
+  Phone numbers in the sample set are masked.
+</div>
+
+<h2 id="specifications">Specifications</h2>
+
+<div class="verdict">
+  One WhatsApp-shaped message in. A deterministic code guard decides, before the
+  model, whether it goes to a human or to an AI agent that checks and books a
+  Postgres slot with an atomic update. 25 nodes, of which 22 do work and 3 are
+  sticky notes. Three of the 22 ship disabled on purpose.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Workflow name</td>
+      <td>
+        <code
+          >05 Clinic WhatsApp Booking Agent (Postgres memory, code-side
+          handoff)</code
+        >
+      </td>
+    </tr>
+    <tr>
+      <td>Nodes</td>
+      <td>
+        25 (22 working nodes plus 3 sticky notes), 3 of the 22 shipped disabled
+      </td>
+    </tr>
+    <tr>
+      <td>Trigger</td>
+      <td>
+        Three doors: a manual trigger, a webhook at
+        <code>/webhook/ep05-wa-in</code>, and a disabled WhatsApp Trigger
+      </td>
+    </tr>
+    <tr>
+      <td>Data source</td>
+      <td>
+        <code>samples/patients-es.json</code>, 26 synthetic WhatsApp messages
+        from 12 fictional patients in the public repo
+      </td>
+    </tr>
+    <tr>
+      <td>Safety guard</td>
+      <td>
+        Code node, deterministic ES/EN regex, five categories in a fixed order:
+        emergency, symptoms, medication, diagnosis, price
+      </td>
+    </tr>
+    <tr>
+      <td>Model</td>
+      <td>
+        Any OpenAI-compatible chat model with tool calling; tested with
+        <code>openai/gpt-oss-20b</code> via OpenRouter
+      </td>
+    </tr>
+    <tr>
+      <td>Memory</td>
+      <td>
+        Postgres Chat Memory, session key = <code>wa_id</code>, context window 6
+      </td>
+    </tr>
+    <tr>
+      <td>Booking tool</td>
+      <td>
+        <code
+          >UPDATE ep05_slots SET status='booked' ... WHERE status='free' ...
+          RETURNING</code
+        >, so a slot can only be booked once
+      </td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+      <td>
+        Postgres, 7 tables: messages, sessions, slots, bookings, outbox,
+        handoffs, run_summary
+      </td>
+    </tr>
+    <tr>
+      <td>Idempotency</td>
+      <td>
+        <code>INSERT ... ON CONFLICT (message_id) DO NOTHING RETURNING</code>. A
+        redelivered message emits no downstream item.
+      </td>
+    </tr>
+    <tr>
+      <td>Caps</td>
+      <td>
+        30 messages per run, 5 agent iterations, 900-second workflow timeout
+      </td>
+    </tr>
+    <tr>
+      <td>Output</td>
+      <td>
+        One summary item: patients simulated, bookings confirmed, median seconds
+        to first reply, handoffs fired, double bookings, duplicate webhooks
+        ignored, languages
+      </td>
+    </tr>
+    <tr>
+      <td>Public JSON includes</td>
+      <td>
+        All 25 nodes, the safety guard, both Postgres tools, the system prompt,
+        <code>schema.sql</code> and the 26 sample messages. Credentials stripped
+        to <code>REPLACE_ME</code>.
+      </td>
+    </tr>
+    <tr>
+      <td>Licence</td>
+      <td>MIT</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="how-it-works">How does the n8n clinic WhatsApp booking agent work?</h2>
+
+<p>
+  In six moves: normalise whatever arrived into one item per message, dedupe on
+  the message id, run the safety guard in code, branch to a human or to the AI
+  Agent, write every reply to an outbox, and emit one summary item off the
+  execution panel.
+</p>
+
+<p>
+  <code>Normalize message</code> flattens any of the three doors into
+  <code>{message_id, wa_id, name, lang_hint, text, received_at}</code> and
+  guesses <code>lang_hint</code> from accented characters and a Spanish word
+  list, built entirely from ASCII source so nothing corrupts across a storage
+  round trip. <code>Dedupe on message.id</code> then does an
+  <code>INSERT ... ON CONFLICT (message_id) DO NOTHING RETURNING</code>, which
+  is the point rather than decoration: Meta webhooks redeliver, and the sample
+  set ships one deliberate duplicate message id to prove the workflow drops it.
+</p>
+
+<p>
+  <code>Safety guard</code> runs the five-category regex in a fixed order,
+  emergency first, then symptoms, medication, diagnosis, price. First match
+  wins, and a match sets <code>handoff=true</code>. The IF node that follows
+  either writes a handoff row plus a fixed bilingual notice to the outbox in one
+  Postgres statement, or hands the item to the AI Agent.
+</p>
+
+<p>
+  The AI Agent is a Tools Agent with Postgres Chat Memory keyed on
+  <code>wa_id</code> and two Postgres tools.
+  <code>check_availability</code> takes no arguments and returns one morning and
+  one earliest-afternoon slot per day for the next 7 days, using a window
+  function partitioned on the day and the morning or afternoon half, not a flat
+  <code>LIMIT</code> that lets one busy day crowd out every later day.
+  <code>book_slot</code> takes a model-chosen slot id and runs the atomic
+  update; 0 rows back means the slot is already taken and the model has to offer
+  another one. The system prompt's first line hard-locks the reply language from
+  <code>lang_hint</code>, and separately instructs the model never to repeat an
+  internal slot id back to the patient.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Node</th>
+      <th>Type</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>When clicking Execute</code></td>
+      <td>Manual trigger</td>
+      <td>The demo door. Fetches the 26 sample messages from the repo.</td>
+    </tr>
+    <tr>
+      <td><code>ep05-wa-in</code></td>
+      <td>Webhook</td>
+      <td>
+        POST a Meta Cloud API-shaped payload. The door a real WhatsApp Business
+        webhook points at.
+      </td>
+    </tr>
+    <tr>
+      <td><code>WhatsApp Trigger</code></td>
+      <td>WhatsApp (disabled)</td>
+      <td>
+        Swap point. Enable it and add a credential to poll inbound messages
+        directly.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Normalize message</code></td>
+      <td>Code</td>
+      <td>
+        One item per message from any door, language guess, 30-message cap.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Dedupe on message.id</code></td>
+      <td>Postgres</td>
+      <td>
+        ON CONFLICT DO NOTHING RETURNING; a redelivered message emits nothing.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Safety guard</code></td>
+      <td>Code, per item</td>
+      <td>
+        Five-category ES/EN regex, first match wins, sets handoff + reason.
+      </td>
+    </tr>
+    <tr>
+      <td><code>handoff?</code></td>
+      <td>IF</td>
+      <td>True routes to a human, false routes to the AI Agent.</td>
+    </tr>
+    <tr>
+      <td><code>Handoff: insert handoff + outbox</code></td>
+      <td>Postgres</td>
+      <td>
+        One data-modifying CTE writes the handoff row and the fixed notice.
+      </td>
+    </tr>
+    <tr>
+      <td><code>AI Agent</code></td>
+      <td>Tools Agent</td>
+      <td>
+        Any OpenAI-compatible model with tool calling, Postgres Chat Memory, two
+        Postgres tools.
+      </td>
+    </tr>
+    <tr>
+      <td><code>check_availability</code></td>
+      <td>Postgres tool</td>
+      <td>
+        No arguments; one morning and one earliest-afternoon slot per day, next
+        7 days.
+      </td>
+    </tr>
+    <tr>
+      <td><code>book_slot</code></td>
+      <td>Postgres tool</td>
+      <td>
+        UPDATE ... WHERE status='free' ... RETURNING. 0 rows means already
+        taken.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Parse agent output</code></td>
+      <td>Code</td>
+      <td>
+        Reads the reply text and whether book_slot actually returned a row.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Insert outbox (agent reply)</code></td>
+      <td>Postgres</td>
+      <td>Every reply into ep05_outbox, kind='agent_reply'.</td>
+    </tr>
+    <tr>
+      <td><code>Google Calendar create event</code></td>
+      <td>Google Calendar (disabled)</td>
+      <td>
+        Swap point. Enabled, a confirmed booking also writes a real calendar
+        event.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Insert bookings (conditional)</code></td>
+      <td>Postgres</td>
+      <td>
+        INSERT ... SELECT ... WHERE booked = true, a no-op when the turn did not
+        book.
+      </td>
+    </tr>
+    <tr>
+      <td><code>WhatsApp Send message</code></td>
+      <td>WhatsApp (disabled)</td>
+      <td>
+        Swap point. Enabled, the same reply text sends to the real number.
+      </td>
+    </tr>
+    <tr>
+      <td><code>Run summary</code></td>
+      <td>Code</td>
+      <td>
+        The item you read off the execution panel: counts and the median reply
+        time.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="measured">What did the measured run produce?</h2>
+
+<p>
+  On 2026-09-22, under n8n execution 31388, the workflow processed 25 of the 26
+  sent messages, dropping the one deliberate duplicate id, across 12 simulated
+  patients reached over a webhook. The safety guard handed off 10 of 10 messages
+  that should have gone to a human, before the model saw any of them. The AI
+  Agent confirmed 4 bookings, with 0 double bookings across every slot, at a
+  median 0.16 seconds from webhook to first reply.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Messages processed</td>
+      <td>25 of 26 sent, 1 exact duplicate id correctly ignored</td>
+    </tr>
+    <tr>
+      <td>Patients simulated</td>
+      <td>12, via webhook, no live WhatsApp number involved</td>
+    </tr>
+    <tr>
+      <td>Handoffs fired</td>
+      <td>10 of 10 medical, dosage, diagnosis, price and emergency messages</td>
+    </tr>
+    <tr>
+      <td>Bookings confirmed</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Double bookings</td>
+      <td>0, across every confirmed slot</td>
+    </tr>
+    <tr>
+      <td>Median time to first reply</td>
+      <td>0.16 seconds, webhook to reply</td>
+    </tr>
+    <tr>
+      <td>One control message</td>
+      <td>Did not book. Its exact requested slot was never offered.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  Read 4 of 12 as a count of complete booking conversations, not an accuracy
+  score. Several patients' sample messages were single-turn handoffs by design,
+  with no follow-up that could ever end in a confirmation, and one control
+  patient's exact requested slot was never among the slots the availability tool
+  returned, so that conversation correctly ended without a booking rather than
+  forcing one. The number the video quotes is the number
+  <code>ep05_run_summary</code> holds, not a rounded claim about how the agent
+  behaves in general.
+</p>
+
+<div class="rules">
+  <strong>The four rules</strong>
+  <ol>
+    <li>Scope lives in code, not the prompt.</li>
+    <li>Medical and price questions go to a human.</li>
+    <li>
+      One slot, one booking:
+      <code>UPDATE ... WHERE status = free ... RETURNING</code>.
+    </li>
+    <li>Every handoff is logged.</li>
+  </ol>
+</div>
+
+<h2 id="compliance">Where does this stop, on purpose?</h2>
+
+<p>
+  Scheduling and FAQ only. No symptoms, no diagnosis. No health data stored. n8n
+  offers no BAA. This is not a clinical tool, and the safety guard exists so the
+  model never has to be trusted with a health question in the first place:
+  anything that could be one is handed to a human before it reaches the agent.
+  <code>schema.sql</code> carries no PHI columns; message bodies are stored
+  because the dedupe check and the guard both need the raw text, and nothing
+  else about a patient is recorded.
+</p>
+
+<p>
+  The 12 patients and 26 messages are fictional, with masked phone numbers,
+  built to include 8 Spanish speakers and 4 English speakers plus the one
+  duplicate delivery. The demo feeds these samples through a webhook or the
+  manual trigger; it does not read a live WhatsApp number. Do not point a real
+  clinic's inbox at this without a legal review of your own — WhatsApp Business
+  plus n8n is not a covered, BAA-backed channel for protected health information
+  in a jurisdiction that requires one.
+</p>
+
+<h2 id="run-it">How do I import and run the clinic WhatsApp booking agent?</h2>
+
+<p>
+  Import the free workflow JSON (MIT) from
+  <a
+    href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/05-clinic-whatsapp-booking"
+    >github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/05-clinic-whatsapp-booking</a
+  >, run <code>schema.sql</code> against a Postgres database, create the two
+  credentials, and press the manual trigger's own execute button. It fetches the
+  26 samples and seeds a 7-day slot grid.
+</p>
+
+<p>What you have to supply:</p>
+
+<ol>
+  <li>
+    A Postgres credential, with <code>schema.sql</code> applied. It seeds
+    <code>ep05_slots</code> with a Monday-Saturday 09:00-17:00 grid, 30-minute
+    slots, starting tomorrow.
+  </li>
+  <li>
+    An OpenAI-compatible chat credential with tool calling. Type
+    <code>openAiApi</code> with the <code>url</code> overridden to your
+    provider's base URL. This build was tested with OpenRouter's
+    <code>openai/gpt-oss-20b</code> and with Gemini Flash's OpenAI-compatible
+    endpoint. Any Anthropic-compatible gateway with tool calling swaps in the
+    same way.
+  </li>
+  <li>
+    Optionally a WhatsApp Cloud API credential and a Google Calendar OAuth2
+    credential, to enable the three disabled nodes and point the workflow at a
+    real number and a real calendar.
+  </li>
+</ol>
+
+<p>
+  Groq's free tier is not a drop-in swap here: its per-model token-per-minute
+  ceiling is too small for a 12-patient batch, and three earlier passes on this
+  build measured 13 to 15 successful Groq calls before hitting that ceiling
+  mid-run, short of the roughly 22 calls a full run needs. Anything with a
+  larger free or paid throughput ceiling and tool calling works the same way, by
+  swapping the node's URL and key.
+</p>
+
+<h2 id="gotchas">Which build gotchas cost a failed run?</h2>
+
+<h3>A flat LIMIT is not the same as N per day</h3>
+
+<p>
+  Sorting free slots by start time and taking the first 8 lets one nearby busy
+  day exhaust the limit before a later day's slots ever appear, so a patient can
+  explicitly confirm a day the model can never see. The fix is a window
+  function, <code>row_number() OVER (PARTITION BY day ...)</code>, capped per
+  day rather than globally, then partitioned again on the morning or afternoon
+  half so an afternoon-specific request is not hidden behind two morning slots
+  on a 9-to-5 grid.
+</p>
+
+<h3>A soft language instruction is not reliable</h3>
+
+<p>
+  A mid-prompt line telling the model to reply in the patient's language
+  measured wrong twice in eleven replies during an earlier pass. Passing the
+  deterministic <code>lang_hint</code> field in as data and hard-locking it as
+  the literal first line of the system prompt closed the gap, because a
+  suggestion buried in a longer instruction competes with everything else in
+  that instruction.
+</p>
+
+<h3>A tool node does not always bind to the current item</h3>
+
+<p>
+  <code>$('NodeName').item</code> inside a Postgres node used as an AI Agent
+  tool does not bind to the currently-iterating item the way it does in a normal
+  main-flow node; it can resolve to the tool's own first invocation context and
+  read the same field across an entire batch. The fix here writes the
+  patient-identifying field from a verified main-flow node instead of from
+  inside the tool, through a single data-modifying statement that repairs both
+  tables at once. Verify identity-critical writes with a real execution, not by
+  reading the expression.
+</p>
+
+<h3>Never let the model see an internal id it might repeat back</h3>
+
+<p>
+  The numeric slot id has to reach the booking tool as an argument, because that
+  is the only path the tool call has. It does not have to reach the patient. The
+  system prompt explicitly forbids quoting any internal id back, which is the
+  only thing standing between a clean confirmation and a reply that leaks "(id
+  1)" next to the offered time.
+</p>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>Can an n8n WhatsApp bot tell a medical question from a booking request?</h3>
+
+<p>
+  Yes, and it does it before the AI model is involved. A deterministic regex
+  guard checks every incoming message in Spanish and English for symptoms,
+  medication, diagnosis, price and emergency language, in that order, and the
+  first match routes the message to a human handoff instead of the agent. On
+  2026-09-22, execution 31388 handed off 10 of 10 messages that should have gone
+  to a human.
+</p>
+
+<h3>How does this workflow stop a WhatsApp slot from being double-booked?</h3>
+
+<p>
+  The booking tool is a single Postgres statement,
+  <code
+    >UPDATE ep05_slots SET status='booked' ... WHERE status='free' ...
+    RETURNING</code
+  >. If two requests race for the same slot, only one update can match the
+  <code>WHERE status='free'</code> condition; the second gets 0 rows back and
+  the agent offers a different slot. The measured run recorded 0 double bookings
+  across every confirmed booking.
+</p>
+
+<h3>Does this workflow store or read real patient health data?</h3>
+
+<p>
+  No. The 12 patients and 26 messages are fictional, delivered through a webhook
+  or a manual trigger, and no live WhatsApp number is read.
+  <code>schema.sql</code> has no PHI columns beyond the raw message text the
+  dedupe check and the safety guard both need. n8n offers no BAA, so the
+  workflow is scoped to scheduling and FAQ only, never symptoms or diagnosis.
+</p>
+
+<h3>What do I need to run the clinic WhatsApp booking agent myself?</h3>
+
+<p>
+  A Postgres database with <code>schema.sql</code> applied, and an
+  OpenAI-compatible chat credential with tool calling, such as OpenRouter's
+  <code>openai/gpt-oss-20b</code> or Gemini Flash's OpenAI-compatible endpoint.
+  A WhatsApp Cloud API credential and a Google Calendar OAuth2 credential are
+  optional, only needed to enable the three disabled swap-point nodes. All
+  credentials ship as <code>REPLACE_ME</code> in the public JSON.
+</p>
+
+<h2 id="series">The rest of the series</h2>
+
+<p>
+  One workflow per video, the JSON given away under MIT each time, built by
+  Waseem Nasir at SkynetLabs. The four other published episodes:
+</p>
+
+<ul>
+  <li>
+    <a href="/blog/n8n-shorts-factory-workflow"
+      >Episode 01, n8n Shorts Factory</a
+    >: one topic string in, a captioned 9:16 Short out, with the publish step
+    deliberately switched off.
+  </li>
+  <li>
+    <a href="/blog/n8n-speed-to-lead-workflow">Episode 02, n8n speed-to-lead</a
+    >: a form fill gets an AI reply in about two seconds, a second model
+    qualifies the follow-up and proposes a visit window.
+  </li>
+  <li>
+    <a href="/blog/n8n-google-maps-lead-table"
+      >Episode 03, n8n Maps lead harvest</a
+    >: a trade and a city in, a deduped lead table out, keyed on place id,
+    written to Postgres.
+  </li>
+  <li>
+    <a href="/blog/n8n-freight-quote-email-parser"
+      >Episode 04, n8n freight quote parser</a
+    >: one quote email in, eight validated fields out with Claude Haiku 4.5
+    under a forced tool schema.
+  </li>
+</ul>
+
+<p>WhatsApp +92 300 1001957 &middot; Waseem Nasir, SkynetLabs</p>
+
+<p>
+  Hire SkynetLabs, our Top Rated agency on Fiverr:
+  <a href="https://www.fiverr.com/agencies/skynetjoellc"
+    >https://www.fiverr.com/agencies/skynetjoellc</a
+  >
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "It refuses by code, not by prompt - n8n clinic WhatsApp booking agent (Episode 05)",
+    "description": "An n8n workflow that runs a deterministic ES/EN safety guard in code before any model call, hands off symptoms, medication, diagnosis, price and emergency messages to a human, and lets an AI agent with Postgres chat memory check and book a clinic appointment slot through an atomic UPDATE that makes double booking impossible by construction.",
+    "thumbnailUrl": "https://i.ytimg.com/vi/hbWm05jjwYU/maxresdefault.jpg",
+    "uploadDate": "2026-09-23",
+    "duration": "PT1M12S",
+    "embedUrl": "https://www.youtube.com/embed/hbWm05jjwYU",
+    "contentUrl": "https://youtu.be/hbWm05jjwYU",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com"
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can an n8n WhatsApp bot tell a medical question from a booking request?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, and it does it before the AI model is involved. A deterministic regex guard checks every incoming message in Spanish and English for symptoms, medication, diagnosis, price and emergency language, in that order, and the first match routes the message to a human handoff instead of the agent. On 2026-09-22, execution 31388 handed off 10 of 10 messages that should have gone to a human."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does this workflow stop a WhatsApp slot from being double-booked?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The booking tool is a single Postgres statement, UPDATE ep05_slots SET status='booked' ... WHERE status='free' ... RETURNING. If two requests race for the same slot, only one update can match the WHERE status='free' condition; the second gets 0 rows back and the agent offers a different slot. The measured run recorded 0 double bookings across every confirmed booking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this workflow store or read real patient health data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The 12 patients and 26 messages are fictional, delivered through a webhook or a manual trigger, and no live WhatsApp number is read. schema.sql has no PHI columns beyond the raw message text the dedupe check and the safety guard both need. n8n offers no BAA, so the workflow is scoped to scheduling and FAQ only, never symptoms or diagnosis."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I need to run the clinic WhatsApp booking agent myself?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Postgres database with schema.sql applied, and an OpenAI-compatible chat credential with tool calling, such as OpenRouter's openai/gpt-oss-20b or Gemini Flash's OpenAI-compatible endpoint. A WhatsApp Cloud API credential and a Google Calendar OAuth2 credential are optional, only needed to enable the three disabled swap-point nodes. All credentials ship as REPLACE_ME in the public JSON."
+        }
+      }
+    ]
+  }
+</script>
