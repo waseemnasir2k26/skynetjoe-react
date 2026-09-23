@@ -1,0 +1,484 @@
+<style>
+  .wn-n8n-meta-ads-circuit-breaker {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-meta-ads-circuit-breaker h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-meta-ads-circuit-breaker h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-meta-ads-circuit-breaker p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-meta-ads-circuit-breaker ul,
+  .wn-n8n-meta-ads-circuit-breaker ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-meta-ads-circuit-breaker li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-meta-ads-circuit-breaker strong {
+    color: #fff;
+  }
+  .wn-n8n-meta-ads-circuit-breaker a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-meta-ads-circuit-breaker a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-meta-ads-circuit-breaker .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-meta-ads-circuit-breaker .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-meta-ads-circuit-breaker .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-meta-ads-circuit-breaker .rules {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .wn-n8n-meta-ads-circuit-breaker .rules strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-meta-ads-circuit-breaker .rules ol {
+    margin: 0.75rem 0 0 1.25rem;
+  }
+  .wn-n8n-meta-ads-circuit-breaker table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-meta-ads-circuit-breaker th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-meta-ads-circuit-breaker td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-meta-ads-circuit-breaker code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-meta-ads-circuit-breaker .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-meta-ads-circuit-breaker .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-meta-ads-circuit-breaker .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<p>
+  We already had a breaker running in production. It watched our own ad set
+  spend $70.15 for zero leads and never fired. The rule was not wrong; it was
+  written for the wrong level. Episode 06 is the workflow we built to close that
+  gap, plus the honest record of the run that found it.
+</p>
+
+<p>
+  A Meta campaign can be paused while a child ad set underneath it stays
+  configured <code>ACTIVE</code>. Pausing the campaign does not touch the ad
+  set's own <code>configured_status</code>, so an ad set can keep accruing spend
+  long after its own flight window has ended, invisible to anyone only watching
+  the campaign. Our own live breaker is a campaign-level rule and cannot see
+  that gap by construction. This workflow watches the ad set instead.
+</p>
+
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/[EP06_YOUTUBE_URL]"
+    title="Our own breaker missed our own loss - n8n Meta ads circuit breaker, Episode 06"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+<p class="video-note">
+  If iframes are blocked where you are reading this, the video is at
+  <a href="https://youtu.be/[EP06_YOUTUBE_URL]">youtu.be/[EP06_YOUTUBE_URL]</a>.
+</p>
+
+<div class="callout">
+  <strong
+    >ACCOUNT AND CAMPAIGN IDS MASKED · OUR OWN AD SET · NO CLIENT DATA.</strong
+  >
+  Every account, campaign and ad-set id is masked before it is stored, logged,
+  or shown on screen (<code>act_••••3502</code>,
+  <code>••••0014</code>). This is our own lead-generation ad set for HVAC
+  services, run and paid for by SkynetLabs. No client account was read, logged
+  or touched anywhere in this build.
+</div>
+
+<h2 id="what-it-does">What does the circuit breaker actually do?</h2>
+
+<p>
+  A poller reads one ad set's insights from the Meta Marketing API on a fixed
+  schedule, and every field is masked before anything is written to storage. The
+  masked row is checked against three caps that live in an n8n Data Table, not
+  buried in a Code node, so a threshold can change without touching the
+  workflow's logic. A deterministic rules engine reads those caps in a fixed
+  order and decides one of three outcomes: nothing happened, the breaker has
+  tripped on repeated errors, or the ad set should pause. A pause verdict still
+  has to pass a whitelist gate that builds the write itself, from fixed
+  constants, before it can reach Meta.
+  <strong>PAUSE IS THE ONLY WRITE IT CAN MAKE.</strong> No code path here can
+  raise a budget, change a bid, or touch targeting. Every decision is written to
+  Postgres as a receipt: the rule that fired, the numbers behind it, and whether
+  the write was real or a dry run.
+</p>
+
+<h2 id="honest-run">What did the honest run actually show?</h2>
+
+<p>
+  On 2026-09-23 at 09:34 local time (2026-09-23T01:34:47Z UTC), one sanctioned
+  manual execution read the ad set's insights over the window 2026-08-30 to
+  2026-09-22, 24 days, and evaluated them against the caps row. The caps were
+  breached, and the breaker decided to pause. No write reached Meta: the default
+  rule is that silence on a pause-permission question means dry run, and no
+  permission had been given.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Observed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Spend</td>
+      <td>$70.15</td>
+    </tr>
+    <tr>
+      <td>Leads</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Clicks</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <td>Impressions</td>
+      <td>982</td>
+    </tr>
+    <tr>
+      <td>CTR</td>
+      <td>4.48%</td>
+    </tr>
+    <tr>
+      <td>Spend cap</td>
+      <td>$60.00</td>
+    </tr>
+    <tr>
+      <td>Over the cap by</td>
+      <td>$10.15</td>
+    </tr>
+    <tr>
+      <td>Rule fired</td>
+      <td>R1, spend cap</td>
+    </tr>
+    <tr>
+      <td>Write sent</td>
+      <td>None. Dry run.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="verdict">
+  $200 WAS THE BUDGET. IT SPENT $70.15. Zero of that spend produced a lead, ten
+  dollars and fifteen cents past the $60 spend cap we would have set for it,
+  over a 24-day window. WOULD PAUSE — DRY RUN: the breaker decided, and no write
+  was sent.
+</div>
+
+<p>
+  Read the zero leads honestly. The breaker caps spend, not the funnel: 44
+  clicks and zero bookings can also mean the landing page or the offer needs
+  work. The workflow makes no claim about that. Its claim is narrower and
+  verifiable from Postgres: the ad set crossed a spend threshold with nothing to
+  show for it, and the rule built to catch that condition caught it.
+</p>
+
+<h2 id="why-missed">Why did the live production breaker miss it?</h2>
+
+<p>
+  Our existing breaker is older and lives one level up, on the campaign. Its
+  rule needs at least 40 clicks on the campaign before it fires. The campaign
+  this ad set sits under had only 32 over the same window. The ad set itself had
+  44, four more than the threshold, sitting unseen because nothing was reading
+  at that level. Two click counters, two different numbers: not a bad threshold,
+  a rule scoped one level too high.
+</p>
+
+<h2 id="cap-sheet">The cap sheet</h2>
+
+<div class="callout">
+  <strong>THE CAP SHEET.</strong> A daily spend cap, a cost-per-lead cap, a
+  spend-with-zero-leads cap, and a breaker that trips itself after three
+  consecutive API errors. These are our defaults, set them on the ad set, not
+  the campaign. None of these numbers are outputs of this run; they are
+  thresholds chosen and stored in the Data Table before the poller ran.
+</div>
+
+<h2 id="breaker-and-error-workflow">
+  The three caps, the breaker, and the error workflow
+</h2>
+
+<p>
+  Three deterministic rules sit ahead of the pause verdict, checked in a fixed
+  order: a cost-per-lead breach, a spend-cap breach, and a zero-lead-spend
+  breach. When two caps are set to the same number, as ours were here, the
+  earlier rule fires and the later one is never evaluated for that row. That is
+  the documented order, not a bug, and it is exactly why this run's receipt
+  reads R1, spend cap, rather than the zero-lead rule that was also true. A
+  separate error workflow counts consecutive API failures and trips the breaker
+  on its own, independent of any spend rule, so a broken connection to Meta
+  cannot silently do nothing forever.
+</p>
+
+<p>
+  This is a loop, and it is treated like one: no automation loop goes live
+  without a step cap, a wall-clock cap, and a spend cap, backed by a circuit
+  breaker.
+  <strong>SCHEDULE TRIGGER, DISABLED FOR THE RECORDING.</strong> It sits on the
+  canvas as the swap point for a live 15-minute cadence; the one execution
+  behind these numbers was a single manual test, and the schedule stays off
+  until a human turns it on.
+</p>
+
+<h2 id="privacy">Privacy, by construction</h2>
+
+<p>
+  Ids are masked before anything is stored, logged, or rendered on screen, not
+  after. Account and ad-set references only ever reach Postgres, the receipt, or
+  the video in their masked form. No client data passes through this workflow at
+  any point; it only ever points at our own ad set.
+</p>
+
+<h2 id="run-it">How do I import it and where are the swap points?</h2>
+
+<p>
+  The free workflow JSON is MIT-licensed at
+  <a
+    href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/06-meta-ads-breaker"
+    >github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/06-meta-ads-breaker</a
+  >. Import it, run the schema, create a Data Table for the caps row, and point
+  it at one ad set of your own.
+</p>
+
+<p>Three swap points are built into the canvas on purpose:</p>
+
+<ol>
+  <li>A Slack node that posts the receipt for a human, shipped disabled.</li>
+  <li>
+    A sample-insights lane that replays a fixture file instead of calling the
+    live Meta API, for testing the rules without spending a real API call.
+  </li>
+  <li>
+    A <code>dry_run</code> flag on the caps row, defaulted on, so the workflow
+    can decide and write a receipt without ever sending the pause. Flip it only
+    once you know exactly which ad set the id in that row points at.
+  </li>
+</ol>
+
+<p>
+  One gotcha for your own caps row: if the spend cap and the zero-lead-spend cap
+  are set to the same number, the spend-cap rule fires first and the zero-lead
+  rule is never evaluated, even when both are true. Set them apart if you want
+  the receipt to name the zero-lead condition specifically.
+</p>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>Why did an existing ad-spend breaker miss a real overspend?</h3>
+
+<p>
+  Because the rule lived at the campaign level and needed 40 clicks to fire. The
+  campaign under this ad set only saw 32 clicks over the window, while the ad
+  set itself had 44. The loss was visible at the ad-set level and invisible at
+  the campaign level, so no threshold on the campaign rule could have caught it.
+</p>
+
+<h3>What is the only write this workflow can make?</h3>
+
+<p>
+  A single status change on one ad set, built from fixed constants inside a
+  whitelist gate rather than caller-supplied input. It cannot raise a budget,
+  change bidding, or touch targeting. Pause is the only write it can make, and
+  every attempt is written to Postgres as a receipt.
+</p>
+
+<h3>Was this run a real pause, or a simulation?</h3>
+
+<p>
+  It was a dry run. The breaker read real insights, evaluated them against real
+  caps, and decided to pause: spend $70.15 against a $60.00 cap, ten dollars and
+  fifteen cents over. No write was sent; the ad set's configured status was
+  unchanged before and after.
+</p>
+
+<h3>Does this workflow ever touch client data?</h3>
+
+<p>
+  No. It only points at our own ad set, and every account, campaign and ad-set
+  id is masked before it is stored, logged, or shown on screen. Nothing here is
+  wired to a client's Meta account.
+</p>
+
+<h2 id="series">The rest of the series</h2>
+
+<p>
+  One workflow per video, the JSON given away under MIT each time, built by
+  Waseem Nasir at SkynetLabs.
+</p>
+
+<ul>
+  <li>
+    <a href="/blog/n8n-clinic-whatsapp-booking-bot"
+      >Episode 05, n8n clinic WhatsApp booking agent</a
+    >: a code guard hands off medical and price questions before the model.
+  </li>
+  <li>
+    <a href="/blog/n8n-freight-quote-email-parser"
+      >Episode 04, n8n freight quote parser</a
+    >: one quote email in, eight validated fields out.
+  </li>
+  <li>
+    <a href="/blog/n8n-google-maps-lead-table"
+      >Episode 03, n8n Maps lead harvest</a
+    >: a trade and a city in, a deduped lead table out.
+  </li>
+</ul>
+
+<p>
+  Want a breaker scoped correctly for your own ad accounts?
+  <a href="https://skynetjoe.com/discovery-call">Book a discovery call</a> with
+  SkynetLabs.
+</p>
+
+<p>WhatsApp +92 300 1001957 · Waseem Nasir, SkynetLabs</p>
+
+<p>
+  Hire SkynetLabs, our Top Rated agency on Fiverr:
+  <a href="https://www.fiverr.com/agencies/skynetjoellc"
+    >https://www.fiverr.com/agencies/skynetjoellc</a
+  >
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Our own breaker missed our own loss - n8n Meta ads circuit breaker (Episode 06)",
+    "description": "An n8n workflow that polls one Meta ad set's insights, masks every id before storage, checks the masked row against caps held in an n8n Data Table, runs a deterministic rules engine, and can make exactly one write, a pause, behind a whitelist gate that builds the request itself. A real run found a real overspend our older, campaign-level breaker had missed.",
+    "thumbnailUrl": "https://i.ytimg.com/vi/[EP06_YOUTUBE_URL]/maxresdefault.jpg",
+    "uploadDate": "2026-09-24",
+    "duration": "PT72S",
+    "embedUrl": "https://www.youtube.com/embed/[EP06_YOUTUBE_URL]",
+    "contentUrl": "https://youtu.be/[EP06_YOUTUBE_URL]",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com"
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why did an existing ad-spend breaker miss a real overspend?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because the rule lived at the campaign level and needed 40 clicks to fire. The campaign under this ad set only saw 32 clicks over the window, while the ad set itself had 44. The loss was visible at the ad-set level and invisible at the campaign level, so no threshold on the campaign rule could have caught it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the only write this workflow can make?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A single status change on one ad set, built from fixed constants inside a whitelist gate rather than caller-supplied input. It cannot raise a budget, change bidding, or touch targeting. Pause is the only write it can make, and every attempt is written to Postgres as a receipt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was this run a real pause, or a simulation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It was a dry run. The breaker read real insights, evaluated them against real caps, and decided to pause: spend $70.15 against a $60.00 cap, ten dollars and fifteen cents over. No write was sent; the ad set's configured status was unchanged before and after."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this workflow ever touch client data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It only points at our own ad set, and every account, campaign and ad-set id is masked before it is stored, logged, or shown on screen. Nothing here is wired to a client's Meta account."
+        }
+      }
+    ]
+  }
+</script>

@@ -149,6 +149,30 @@ export const POSTS: Post[] = [
     author: "Waseem Nasir",
   },
   {
+    slug: "n8n-meta-ads-circuit-breaker",
+    title:
+      "The n8n Meta Ads Circuit Breaker: Our Own Breaker Missed Our Own Loss",
+    seoTitle: "n8n Meta Ads Circuit Breaker (Ep06)",
+    description:
+      "An n8n workflow read our own ad set's insights on 2026-09-23 and found $70.15 spent, 0 leads, $10.15 over the $60 cap, a loss our older campaign-level breaker missed.",
+    publishedAt: "2026-09-24",
+    updatedAt: "2026-09-24",
+    readingTime: 8,
+    category: "automation",
+    tags: [
+      "n8n meta ads breaker",
+      "meta ads automation",
+      "facebook ads automation",
+      "circuit breaker",
+      "ad spend cap",
+      "meta marketing api",
+      "n8n data table",
+      "free n8n workflow",
+      "n8n tutorial",
+    ],
+    author: "Waseem Nasir",
+  },
+  {
     slug: "n8n-google-maps-lead-table",
     title:
       "n8n Google Maps Lead Harvest: Trade and City In, a Deduped Lead Table Out",
