@@ -1,0 +1,441 @@
+<style>
+  .wn-n8n-lead-stack-install {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-lead-stack-install h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-lead-stack-install h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-lead-stack-install p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-lead-stack-install ul,
+  .wn-n8n-lead-stack-install ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-lead-stack-install li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-lead-stack-install strong {
+    color: #fff;
+  }
+  .wn-n8n-lead-stack-install a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-lead-stack-install a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-lead-stack-install .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-lead-stack-install .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-lead-stack-install .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-lead-stack-install .rules {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .wn-n8n-lead-stack-install .rules strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-lead-stack-install .rules ol {
+    margin: 0.75rem 0 0 1.25rem;
+  }
+  .wn-n8n-lead-stack-install table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-lead-stack-install th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-lead-stack-install td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-lead-stack-install code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-lead-stack-install .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-lead-stack-install .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-lead-stack-install .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<p>
+  One seeded, synthetic, labelled lead travels through five already published
+  workflows from this series, on one fresh, throwaway n8n instance: harvest,
+  speed-to-lead, drafts, inbox router, and a silence watchdog. Episode 10 is not
+  a new workflow — it is an install script that wires five earlier episodes
+  together on one shared ledger, and proves the chain actually connects with a
+  real, controlled run.
+</p>
+
+<p>
+  <code>install.sh</code> imports all five inactive over the n8n API, wires one
+  shared schema, one shared caps Data Table, and one shared error workflow, then
+  a manual pass runs each brick by hand, in order, for a real execution id.
+  Three of the five runs finish clean; two error on an environment gap, shown on
+  screen rather than hidden. Then, on purpose, the install script runs a second
+  time — and it refuses, on a name collision, on screen.
+</p>
+
+<div class="video-embed">
+  <iframe
+    src="[EP10_YOUTUBE_URL]"
+    title="One lead, five workflows, one ledger: the stack installed - n8n Workflows, Episode 10"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+<p class="video-note">
+  If iframes are blocked where you are reading this, the video is at
+  <a href="[EP10_YOUTUBE_URL]">the Episode 10 video</a>.
+</p>
+
+<div class="callout">
+  <strong
+    >FRESH INSTANCE · SEEDED LEAD · NO ESTATE DATA · THROWAWAY INSTANCE, NEVER
+    PRODUCTION.</strong
+  >
+  Every brick in this demo runs on a fresh, throwaway n8n instance, never the
+  production VPS. Every run is triggered by hand, one at a time, and the install
+  script never sets a workflow active on its own. The lead on screen is
+  synthetic and labelled; no estate data touches this instance.
+</div>
+
+<h2 id="what-it-does">What does the install script actually do?</h2>
+
+<p>
+  Five separate, already published workflows go in: a lead harvester, a
+  speed-to-lead responder, a draft personaliser, an inbox router, and a silence
+  watchdog. The install script imports all five inactive, wires one shared
+  schema plus each brick's own tables, creates a shared caps Data Table, and
+  wires a shared error workflow onto all five. It reads back every workflow's
+  active status to prove none of them turned themselves on. Two of the five
+  bricks work outbound — the harvester and the draft personaliser — and three
+  react to what comes in: speed to lead, the inbox router, and the watchdog.
+</p>
+
+<h2 id="honest-run">What did the demo run actually show?</h2>
+
+<p>
+  The install completed in five to six seconds across the runs measured for this
+  build, with all five workflows read back inactive. One seeded lead's row was
+  run by hand through each brick in order, producing a real execution id on all
+  five: three finished clean, and two errored on an environment gap in the demo
+  box itself — one on a missing model credential, one on an http versus https
+  mismatch — both shown on screen rather than hidden.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Observed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Workflows imported</td>
+      <td>5, all inactive</td>
+    </tr>
+    <tr>
+      <td>Install time</td>
+      <td>5 to 6 seconds</td>
+    </tr>
+    <tr>
+      <td>Bricks run, by hand, real execution ids</td>
+      <td>5 of 5</td>
+    </tr>
+    <tr>
+      <td>Bricks finished clean</td>
+      <td>3 of 5</td>
+    </tr>
+    <tr>
+      <td>Bricks errored, shown on screen</td>
+      <td>2 of 5 (a credential gap, a scheme mismatch)</td>
+    </tr>
+    <tr>
+      <td>Second install attempt</td>
+      <td>refused, on a name collision, 0 changes</td>
+    </tr>
+    <tr>
+      <td>Workflows left active</td>
+      <td>0 — every brick stays inactive until a person flips it</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="verdict">
+  1 LEAD · 5 WORKFLOWS · 1 LEDGER. An install completed in five to six seconds,
+  five workflows read back inactive, and one seeded lead's row landed in each
+  brick's own table plus the shared events ledger — two of the five runs errored
+  on a real environment gap, shown on screen, not hidden.
+</div>
+
+<p>
+  Buyer evidence for a bundled stack like this is a hypothesis, not a confirmed
+  demand — stated here plainly rather than dressed up as proof. What is
+  confirmed is narrower and verifiable: five separately published workflows can
+  be chained on one shared ledger, installed together, and torn down cleanly.
+</p>
+
+<h2 id="cap-sheet">The cap sheet</h2>
+
+<div class="callout">
+  <strong>THE STACK MAP.</strong> A 5-minute execution timeout on every imported
+  brick, a 10-minute wall-clock cap on the install itself (measured actual: five
+  to six seconds), and a rollback that deletes exactly the ids the script
+  created, including the shared Postgres tables. One shared caps Data Table, one
+  shared error workflow wired to all five bricks, each brick registered as a
+  manual-run lane in the watchdog's own expectation table.
+</div>
+
+<h2 id="gotchas">Gotchas worth knowing before you fork this</h2>
+
+<p>
+  The watchdog's role in this demo is explicitly not the breaker for the install
+  — it lists all five bricks as manual-run lanes and reminds when one has not
+  been run, it does not detect the manual chain running in real time. And the
+  install script's refusal on a second run is a tested behavior, not an
+  assumption: a second run against an already-populated instance exits with an
+  error and zero changes, workflow and table counts identical before and after.
+</p>
+
+<p>
+  A rollback drops more than the workflow ids it created — it also drops the
+  shared Postgres tables the install script created, so a torn-down demo
+  instance leaves nothing behind. Nothing in this install or in any of the five
+  bricks activates or sends anything without a person clicking; the standing
+  posture across the whole series is drafts and labels only, never an automatic
+  send.
+</p>
+
+<h2 id="run-it">How do I install it and where are the swap points?</h2>
+
+<p>
+  The free workflow JSON for all five bricks is MIT-licensed at
+  <a
+    href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/10-lead-stack"
+    >github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/10-lead-stack</a
+  >. Point the install script at a fresh, throwaway n8n instance only — never a
+  production box — export your own base URL, API key, and Postgres credentials,
+  then run <code>install.sh</code> followed by the manual pass script.
+</p>
+
+<p>Swap points built into the stack on purpose:</p>
+
+<ol>
+  <li>
+    Every imported brick ships inactive — nothing in this stack turns itself on;
+    a person enables each one only after reviewing it on their own instance.
+  </li>
+  <li>
+    The shared error workflow wired to all five bricks, so one failing brick's
+    errors land in one place rather than five separate logs.
+  </li>
+  <li>
+    A rollback flag on the install script that reverses exactly what it created
+    — workflows, Data Tables, and the shared Postgres tables.
+  </li>
+</ol>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>Is this a live, autonomous system?</h3>
+
+<p>
+  No. Every brick in this demo is triggered by hand, one at a time, on a
+  throwaway instance built for the recording. The install script never sets a
+  workflow active on its own.
+</p>
+
+<h3>What happens if you run the install script twice?</h3>
+
+<p>
+  The second run refuses on a name collision and makes zero changes, shown on
+  screen in the video — an install that could silently double itself is not
+  something we would put on a client's box either.
+</p>
+
+<h3>Why did two of the five bricks error during the run?</h3>
+
+<p>
+  Both errors were environment gaps on the demo box itself, not logic bugs in
+  the workflows: a missing model credential on one brick, and an http versus
+  https mismatch on the watchdog's own check. Both are shown on screen rather
+  than edited out.
+</p>
+
+<h3>Does the watchdog detect this manual chain running?</h3>
+
+<p>
+  No. Every brick is registered as a manual-run lane, which the watchdog lists
+  and reminds about — it does not detect or flag the manual chain itself,
+  consistent with how a manual-run lane behaves everywhere else in the series.
+</p>
+
+<h2 id="series">The rest of the series</h2>
+
+<p>
+  One workflow per video, the JSON given away under an MIT license each time,
+  built by Waseem Nasir at SkynetLabs.
+</p>
+
+<ul>
+  <li>
+    <a href="/blog/n8n-clinic-whatsapp-booking-bot"
+      >Episode 05, n8n clinic WhatsApp booking agent</a
+    >: a code guard hands off medical and price questions before the model.
+  </li>
+  <li>
+    <a href="/blog/n8n-meta-ads-circuit-breaker"
+      >Episode 06, n8n Meta ads circuit breaker</a
+    >: our own breaker missed our own overspend, and this one closed the gap.
+  </li>
+  <li>
+    <a href="/blog/n8n-lead-draft-personaliser"
+      >Episode 09, n8n lead draft personaliser</a
+    >: a personalised draft per lead, and still no send node.
+  </li>
+</ul>
+
+<p>
+  Want any of these five bricks installed and tuned on your own instance?
+  <a href="https://skynetjoe.com/discovery-call">Book a discovery call</a>
+  with SkynetLabs.
+</p>
+
+<p>WhatsApp +92 300 1001957 · Waseem Nasir, SkynetLabs</p>
+
+<p>
+  Hire SkynetLabs, our Top Rated agency on Fiverr:
+  <a href="https://www.fiverr.com/agencies/skynetjoellc"
+    >https://www.fiverr.com/agencies/skynetjoellc</a
+  >
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "One lead, five workflows, one ledger: the stack installed (Episode 10)",
+    "description": "An install script that imports five already-published n8n workflows inactive onto a fresh, throwaway instance, wires them to one shared schema and one shared error workflow, and runs one seeded lead through all five by hand for real execution ids.",
+    "thumbnailUrl": "[EP10_YOUTUBE_URL]",
+    "uploadDate": "2026-09-24",
+    "duration": "PT36S",
+    "embedUrl": "[EP10_YOUTUBE_URL]",
+    "contentUrl": "[EP10_YOUTUBE_URL]",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com"
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this a live, autonomous system?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Every brick in this demo is triggered by hand, one at a time, on a throwaway instance built for the recording. The install script never sets a workflow active on its own."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if you run the install script twice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The second run refuses on a name collision and makes zero changes, shown on screen in the video - an install that could silently double itself is not something we would put on a client's box either."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did two of the five bricks error during the run?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both errors were environment gaps on the demo box itself, not logic bugs in the workflows: a missing model credential on one brick, and an http versus https mismatch on the watchdog's own check. Both are shown on screen rather than edited out."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the watchdog detect this manual chain running?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Every brick is registered as a manual-run lane, which the watchdog lists and reminds about - it does not detect or flag the manual chain itself, consistent with how a manual-run lane behaves everywhere else in the series."
+        }
+      }
+    ]
+  }
+</script>

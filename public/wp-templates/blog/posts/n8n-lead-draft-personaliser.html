@@ -1,0 +1,445 @@
+<style>
+  .wn-n8n-lead-draft-personaliser {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-lead-draft-personaliser h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-lead-draft-personaliser h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-lead-draft-personaliser p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-lead-draft-personaliser ul,
+  .wn-n8n-lead-draft-personaliser ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-lead-draft-personaliser li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-lead-draft-personaliser strong {
+    color: #fff;
+  }
+  .wn-n8n-lead-draft-personaliser a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-lead-draft-personaliser a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-lead-draft-personaliser .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-lead-draft-personaliser .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-lead-draft-personaliser .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-lead-draft-personaliser .rules {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .wn-n8n-lead-draft-personaliser .rules strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-lead-draft-personaliser .rules ol {
+    margin: 0.75rem 0 0 1.25rem;
+  }
+  .wn-n8n-lead-draft-personaliser table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-lead-draft-personaliser th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-lead-draft-personaliser td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-lead-draft-personaliser code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-lead-draft-personaliser .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-lead-draft-personaliser .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-lead-draft-personaliser .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<p>
+  Seventy nine lead drafts sit in one live table on census day, and zero had
+  been sent. That table belongs to our own HQ drafter, a TypeScript tool that
+  has been live since 24 September — it is not this workflow's output. Episode
+  09 rebuilds that same drafting logic as an n8n workflow, and every on-screen
+  run in the video comes from the rebuild, not from the 79-row history.
+</p>
+
+<p>
+  A lead row goes in, a personalised draft comes out, and nothing sends itself.
+  Leads are deduped by host — a chain touched twice by the same company is one
+  lead, not two drafts — then one model node writes a short outreach draft from
+  each lead's own public signals. Every surviving draft lands in Postgres with a
+  stage of draft-ready or needs-review.
+  <strong>There is no send node anywhere on the canvas.</strong>
+</p>
+
+<div class="video-embed">
+  <iframe
+    src="[EP09_YOUTUBE_URL]"
+    title="79 lead drafts, 0 sent: our outreach writer, rebuilt in n8n - Episode 09"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+<p class="video-note">
+  If iframes are blocked where you are reading this, the video is at
+  <a href="[EP09_YOUTUBE_URL]">the Episode 09 video</a>.
+</p>
+
+<div class="callout">
+  <strong
+    >THE 79: OUR HQ DRAFTER, NOT THIS WORKFLOW · LEAD HOSTS MASKED · OWN OR
+    SYNTHETIC TEST LEADS · NO SEND NODE.</strong
+  >
+  The 79-drafts figure describes our HQ TypeScript drafter, live since 24
+  September. This episode rebuilds its logic as an n8n workflow; the on-screen
+  leads are five, drawn from the rebuild's own test run. Every lead on screen is
+  one of our own domains or a synthetic
+  <code>.example</code> host, never a real third party.
+</div>
+
+<h2 id="what-it-does">What does the draft personaliser actually do?</h2>
+
+<p>
+  A batch of leads is loaded, masked to a stable host reference before anything
+  reaches storage, then deduped by host so a lead harvested twice through
+  different branches only produces one draft. A cap guard reads the daily
+  model-call budget before the model is ever called and slices the batch to
+  whatever headroom remains, throwing rather than silently truncating to zero.
+  One model node, over OpenRouter, writes a personalised draft from each
+  surviving lead's own public signals. A schema gate then rejects any draft over
+  120 words or carrying a link that was not already in the source row, and marks
+  everything that survives with a stage of draft-ready or needs-review before it
+  reaches Postgres.
+</p>
+
+<h2 id="honest-run">What did the rebuild's own test run actually show?</h2>
+
+<p>
+  Seven test leads went in — five distinct hosts, two duplicates by host built
+  in on purpose to prove the dedupe step, and one edge row with no usable public
+  signal. Five distinct hosts survived the dedupe step, five model calls were
+  made, and five rows were written: four marked draft-ready, one marked
+  needs-review — the edge row with no signal, correctly scored low-confidence.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Observed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Leads in the test batch</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>Duplicates dropped by host</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Drafts written</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Marked draft-ready</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Marked needs-review</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rejected by the schema gate</td>
+      <td>0 on this run</td>
+    </tr>
+    <tr>
+      <td>Wall clock for 5 drafts</td>
+      <td>56.5 seconds</td>
+    </tr>
+    <tr>
+      <td>Drafts sent</td>
+      <td>0 — there is no send node</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="verdict">
+  THE DRAFT IS THE LAST 10 PERCENT. Seven test leads went in, two planted
+  duplicates were dropped by host, and five drafts came out — the table, the
+  dedupe step, and the review lane do the rest. A person still decides what, if
+  anything, gets sent.
+</div>
+
+<p>
+  A second, older number sits next to the 79 honestly: 34 direct messages went
+  out in September across Instagram and LinkedIn, and 0 recorded replies came
+  back — recorded, because there is no reply column yet on that table, not
+  because a reply is known to be impossible.
+</p>
+
+<h2 id="cap-sheet">The cap sheet</h2>
+
+<div class="callout">
+  <strong>THE CAP SHEET.</strong> 5 drafts per run, 50 model calls per day
+  enforced before the model is ever called, a 300-second execution timeout, and
+  an error breaker that trips after 3 consecutive model failures. None of these
+  are outputs of this run; they are thresholds set on the caps row before the
+  batch ran.
+</div>
+
+<h2 id="gotchas">Gotchas worth knowing before you fork this</h2>
+
+<p>
+  A rejected draft is tested directly, not just asserted: a 130-word draft fed
+  into the schema gate's own stored code threw on the word count, and a draft
+  naming a host that was not the lead's own host threw on the link check. Both
+  were confirmed live, unprompted, on a real run — a model wrote a plausible but
+  foreign-looking domain for one lead, and the gate rejected it.
+</p>
+
+<p>
+  Masking happens in the earliest node to touch a lead row, before dedupe,
+  before the model, before anything is written — never rely on a later node to
+  mask something that has already reached storage. And the model's own output
+  does not carry the input item's other fields through automatically; the host
+  reference has to be pulled by node reference from the upstream item, or every
+  draft's key comes back malformed.
+</p>
+
+<h2 id="run-it">How do I import it and where are the swap points?</h2>
+
+<p>
+  The free workflow JSON is MIT-licensed at
+  <a
+    href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/09-lead-draft-personaliser"
+    >github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/09-lead-draft-personaliser</a
+  >. Create the caps Data Table, run the schema against your own Postgres,
+  import the workflow and its error workflow, set your own OpenRouter
+  credential, and load your own lead batch before running the manual test path.
+</p>
+
+<p>Swap points built into the canvas on purpose:</p>
+
+<ol>
+  <li>
+    A webhook lead-intake node, shipped disabled — a future inbound lane (a
+    form, a harvest hook) would post leads here instead of a sample file.
+  </li>
+  <li>
+    A GitHub sample-lead loader, shipped disabled until your own fork of this
+    repo is public — a Postgres loader carries the same sample rows until then.
+  </li>
+  <li>
+    A daily model-call budget on the caps row, enforced before the model is ever
+    called, so a runaway loop cannot silently spend past what you set.
+  </li>
+</ol>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>Did this n8n workflow produce the 79 drafts?</h3>
+
+<p>
+  No. The 79 drafts sit in a table owned by our HQ TypeScript drafter, live
+  since 24 September. This episode rebuilds that drafting logic as an n8n
+  workflow; the on-screen figures — five leads in, five drafts out — come from
+  the rebuild's own test run, not from the 79-row history.
+</p>
+
+<h3>Does this workflow send anything?</h3>
+
+<p>
+  No. There is no send node anywhere on the canvas. Every surviving draft lands
+  in Postgres marked draft-ready or needs-review, and a person decides what, if
+  anything, leaves.
+</p>
+
+<h3>How does it avoid drafting the same lead twice?</h3>
+
+<p>
+  A dedupe step keeps the earliest occurrence per host within a batch and drops
+  the rest — a lead reached through two branches of the same company is one
+  lead, not two drafts.
+</p>
+
+<h3>What happens when a draft fails quality checks?</h3>
+
+<p>
+  A schema gate rejects anything over 120 words or carrying a link that was not
+  already present in the lead's own row, and the rejection is counted in the run
+  summary rather than silently dropped.
+</p>
+
+<h2 id="series">The rest of the series</h2>
+
+<p>
+  One workflow per video, the JSON given away under an MIT license each time,
+  built by Waseem Nasir at SkynetLabs.
+</p>
+
+<ul>
+  <li>
+    <a href="/blog/n8n-clinic-whatsapp-booking-bot"
+      >Episode 05, n8n clinic WhatsApp booking agent</a
+    >: a code guard hands off medical and price questions before the model.
+  </li>
+  <li>
+    <a href="/blog/n8n-meta-ads-circuit-breaker"
+      >Episode 06, n8n Meta ads circuit breaker</a
+    >: our own breaker missed our own overspend, and this one closed the gap.
+  </li>
+  <li>
+    <a href="/blog/n8n-silent-lane-watchdog"
+      >Episode 08, n8n silent lane watchdog</a
+    >: one lane missed a test schedule, one was just quiet.
+  </li>
+</ul>
+
+<p>
+  Want a lead drafter tuned to your own outreach, with the send decision kept
+  with a person?
+  <a href="https://skynetjoe.com/discovery-call">Book a discovery call</a>
+  with SkynetLabs.
+</p>
+
+<p>WhatsApp +92 300 1001957 · Waseem Nasir, SkynetLabs</p>
+
+<p>
+  Hire SkynetLabs, our Top Rated agency on Fiverr:
+  <a href="https://www.fiverr.com/agencies/skynetjoellc"
+    >https://www.fiverr.com/agencies/skynetjoellc</a
+  >
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "79 lead drafts, 0 sent: our outreach writer, rebuilt in n8n (Episode 09)",
+    "description": "An n8n workflow that dedupes leads by host, drafts a personalised outreach message from each lead's own public signals with one model node, and stops at a review stage. There is no send node anywhere on the canvas.",
+    "thumbnailUrl": "[EP09_YOUTUBE_URL]",
+    "uploadDate": "2026-09-24",
+    "duration": "PT36S",
+    "embedUrl": "[EP09_YOUTUBE_URL]",
+    "contentUrl": "[EP09_YOUTUBE_URL]",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com"
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Did this n8n workflow produce the 79 drafts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The 79 drafts sit in a table owned by our HQ TypeScript drafter, live since 24 September. This episode rebuilds that drafting logic as an n8n workflow; the on-screen figures - five leads in, five drafts out - come from the rebuild's own test run, not from the 79-row history."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this workflow send anything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. There is no send node anywhere on the canvas. Every surviving draft lands in Postgres marked draft-ready or needs-review, and a person decides what, if anything, leaves."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does it avoid drafting the same lead twice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A dedupe step keeps the earliest occurrence per host within a batch and drops the rest - a lead reached through two branches of the same company is one lead, not two drafts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when a draft fails quality checks?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A schema gate rejects anything over 120 words or carrying a link that was not already present in the lead's own row, and the rejection is counted in the run summary rather than silently dropped."
+        }
+      }
+    ]
+  }
+</script>

@@ -1,0 +1,454 @@
+<style>
+  .wn-n8n-silent-lane-watchdog {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-silent-lane-watchdog h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-silent-lane-watchdog h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-silent-lane-watchdog p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-silent-lane-watchdog ul,
+  .wn-n8n-silent-lane-watchdog ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-silent-lane-watchdog li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-silent-lane-watchdog strong {
+    color: #fff;
+  }
+  .wn-n8n-silent-lane-watchdog a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-silent-lane-watchdog a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-silent-lane-watchdog .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-silent-lane-watchdog .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-silent-lane-watchdog .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-silent-lane-watchdog .rules {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .wn-n8n-silent-lane-watchdog .rules strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-silent-lane-watchdog .rules ol {
+    margin: 0.75rem 0 0 1.25rem;
+  }
+  .wn-n8n-silent-lane-watchdog table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-silent-lane-watchdog th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-silent-lane-watchdog td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-silent-lane-watchdog code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-silent-lane-watchdog .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-silent-lane-watchdog .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-silent-lane-watchdog .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<p>
+  Zero errors is not the same as healthy. A schedule can stop firing, a webhook
+  lane can lose its upstream feed, a mail poller can stick on an old cursor —
+  and the execution log stays green the whole time, because nothing threw.
+  Episode 08 is a workflow built to answer a sharper question than "has it run
+  recently": has a lane missed something it actually owed.
+</p>
+
+<p>
+  This workflow reads the estate's own workflow list, masks every real workflow
+  name into a pseudonymous reference before anything is stored, and checks each
+  lane against its own expectation row in an n8n Data Table — how often it
+  should run, and what kind of lane it is: scheduled, event-driven,
+  upstream-count, or manual-run. Silence only becomes an incident when a lane's
+  own obligation was missed, never from elapsed time alone.
+</p>
+
+<div class="video-embed">
+  <iframe
+    src="[EP08_YOUTUBE_URL]"
+    title="One lane missed a test schedule, one was just quiet - n8n Workflows, Episode 08"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
+<p class="video-note">
+  If iframes are blocked where you are reading this, the video is at
+  <a href="[EP08_YOUTUBE_URL]">the Episode 08 video</a>.
+</p>
+
+<div class="callout">
+  <strong
+    >LANE NAMES MASKED · CONTROLLED RUN · TEST THRESHOLD · SLACK: DISABLED · DRY
+    RUN.</strong
+  >
+  Every real workflow name is hashed into a pseudonymous
+  <code>lane_ref</code> before anything is stored, logged, or shown on screen.
+  The lane that trips in this recording did so against a threshold we set on
+  purpose for the demo, not a real service-level breach. The optional Slack
+  alert ships disabled, so the only write this run makes is a Postgres row.
+</div>
+
+<h2 id="what-it-does">What does the watchdog actually do?</h2>
+
+<p>
+  A poll lists the estate's active workflows, and a masking step hashes every
+  real name into a <code>lane_ref</code> before anything downstream can see it.
+  Each lane is checked against an expectation row: a scheduled lane trips when
+  its interval elapses with no run; an event-driven lane never trips on elapsed
+  time alone, only on a missed upstream arrival; a manual-run lane gets a
+  reminder row, never an incident. An open incident sends one reminder per
+  cooldown window and closes itself the moment the lane recovers. The only
+  writes are a Postgres row and, optionally, a Slack message — the Slack node
+  ships disabled, so the shipped default runs in dry run.
+</p>
+
+<h2 id="doctrine">Why elapsed time alone is the wrong question</h2>
+
+<p>
+  Three kinds of quiet are healthy: a lane with no saved successes yet cannot be
+  measured and should say so rather than claim silence off an absent number; a
+  demand-driven lane with zero upstream arrivals has nothing to have run, and
+  zero is correct, not silent; a lane switched off on purpose is a decision, not
+  a failure. A monitor that cannot tell these apart from a genuine miss cries
+  wolf until someone mutes it — and that is exactly when a real silence goes
+  unseen too. This workflow encodes all three as explicit branches, not an
+  afterthought bolted onto a single elapsed-time check.
+</p>
+
+<h2 id="honest-run">What did the recorded run actually show?</h2>
+
+<p>
+  A manual run against three configured lanes produced one open incident and one
+  recovered lane, out of 63 lanes evaluated overall. One event-driven lane sat
+  at zero upstream arrivals over the window and was correctly left alone — the
+  exact false-alarm story a naive elapsed-time watchdog would have flagged. A
+  second, scheduled lane was set to a 60-minute test threshold on purpose for
+  this recording and correctly tripped an incident when it went well past that
+  window.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Observed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lanes evaluated</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <td>Lanes missed</td>
+      <td>1 (scheduled, test threshold, 60 minutes)</td>
+    </tr>
+    <tr>
+      <td>Incidents opened</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Incidents recovered</td>
+      <td>1 (event-driven lane, correctly left quiet)</td>
+    </tr>
+    <tr>
+      <td>False alarms</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Slack messages sent</td>
+      <td>0 — the Slack node ships disabled</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="verdict">
+  1 LANE MISSED · 0 FALSE ALARMS. We set a 60-minute test threshold to trip the
+  missed lane on purpose; the genuinely quiet, event-driven lane was correctly
+  left alone. Zero errors is not health — this table is the evidence, not just
+  the incident row.
+</div>
+
+<p>
+  An honesty note on the history behind this build: an earlier figure attached
+  to the original watchdog incident that inspired this workflow does not
+  reconcile against current execution history on this instance — the largest gap
+  visible in the data is roughly three days, and the lane in question is itself
+  demand-driven, the same doctrine this episode teaches. We carry no retired
+  figure forward here; the card states only what the current data supports.
+</p>
+
+<h2 id="cap-sheet">The cap sheet</h2>
+
+<div class="callout">
+  <strong>THE CAP SHEET.</strong> A maximum of 3 incidents per run, 1 reminder
+  per lane per cooldown window (1440 minutes), a 120-second execution timeout,
+  and an error breaker that trips after 3 consecutive failures. None of these
+  are outputs of this run; they are thresholds set on the caps row before the
+  poller ran.
+</div>
+
+<h2 id="gotchas">Gotchas worth knowing before you fork this</h2>
+
+<p>
+  The workflow calls its own n8n instance's API to list active workflows, and
+  that pull returns full workflow bodies, including every node's parameters —
+  this is exactly why masking is the very next node, and nothing upstream of it
+  is ever written to Postgres or rendered on screen. A whitelist gate reads the
+  write's own action before it can reach Postgres and refuses anything outside a
+  fixed set of shapes; a fabricated write outside that set was tested directly
+  against the gate and it refused.
+</p>
+
+<p>
+  An event-driven lane needs an upstream-count window, not just a last-run
+  timestamp — treating zero runs alone as silence is the exact false alarm this
+  workflow exists to avoid. And a manual-run lane never opens an incident by
+  construction; the only outcome an overdue manual-run lane can produce is a
+  reminder row.
+</p>
+
+<h2 id="run-it">How do I import it and where are the swap points?</h2>
+
+<p>
+  The free workflow JSON is MIT-licensed at
+  <a
+    href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/08-silent-lane-watchdog"
+    >github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/08-silent-lane-watchdog</a
+  >. Create the two Data Tables (the expectation row per lane and the cap
+  sheet), run the schema against your own Postgres, import the workflow and its
+  error workflow, and point the estate-list call at your own n8n base URL before
+  running the manual test path.
+</p>
+
+<p>Swap points built into the canvas on purpose:</p>
+
+<ol>
+  <li>
+    The schedule trigger, shipped disabled — a real 6-hour cadence swaps in once
+    you enable it; the recorded run used one manual execution.
+  </li>
+  <li>
+    The Slack alert node, shipped disabled — the workflow's only optional write
+    beyond the incident row itself.
+  </li>
+  <li>
+    The expectation row per lane, which you own — add a row for every lane you
+    want watched, with its own kind and interval.
+  </li>
+</ol>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>What separates this from a plain "hasn't run in X minutes" alert?</h3>
+
+<p>
+  An overdue-only alert would have flagged the genuinely quiet, event-driven
+  lane in this run's own data. This workflow reads a kind column on every lane's
+  expectation row instead, and only a scheduled lane trips on elapsed time
+  alone; an event-driven lane trips only on a missed upstream arrival.
+</p>
+
+<h3>Does this workflow send anything on its own?</h3>
+
+<p>
+  The only writes it can make are a Postgres incident row and an optional Slack
+  message, which ships disabled by default. There is no path from this workflow
+  to a client-facing send of any kind.
+</p>
+
+<h3>Is workflow or client data exposed anywhere?</h3>
+
+<p>
+  No. Every real workflow name is hashed into a pseudonymous lane reference in
+  the node right after the estate pull, before anything is stored, logged, or
+  shown on screen.
+</p>
+
+<h3>What happens once an incident opens?</h3>
+
+<p>
+  It sends one reminder per cooldown window and closes itself automatically the
+  moment the lane's own obligation is met again — no human has to remember to
+  close it by hand.
+</p>
+
+<h2 id="series">The rest of the series</h2>
+
+<p>
+  One workflow per video, the JSON given away under an MIT license each time,
+  built by Waseem Nasir at SkynetLabs.
+</p>
+
+<ul>
+  <li>
+    <a href="/blog/n8n-clinic-whatsapp-booking-bot"
+      >Episode 05, n8n clinic WhatsApp booking agent</a
+    >: a code guard hands off medical and price questions before the model.
+  </li>
+  <li>
+    <a href="/blog/n8n-meta-ads-circuit-breaker"
+      >Episode 06, n8n Meta ads circuit breaker</a
+    >: our own breaker missed our own overspend, and this one closed the gap.
+  </li>
+  <li>
+    <a href="/blog/n8n-inbox-router-drafts-only"
+      >Episode 07, n8n shared inbox router</a
+    >: rules sort the mail before any model reads it, drafts only.
+  </li>
+</ul>
+
+<p>
+  Want your own workflow list watched for missed obligations, not just errors?
+  <a href="https://skynetjoe.com/discovery-call">Book a discovery call</a>
+  with SkynetLabs.
+</p>
+
+<p>WhatsApp +92 300 1001957 · Waseem Nasir, SkynetLabs</p>
+
+<p>
+  Hire SkynetLabs, our Top Rated agency on Fiverr:
+  <a href="https://www.fiverr.com/agencies/skynetjoellc"
+    >https://www.fiverr.com/agencies/skynetjoellc</a
+  >
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "One lane missed a test schedule, one was just quiet (Episode 08)",
+    "description": "An n8n workflow that reads an estate's own workflow list, masks every name into a pseudonymous lane reference, and checks each lane against its own expectation row instead of one elapsed-time clock. Silence only becomes an incident when a lane's own obligation was missed.",
+    "thumbnailUrl": "[EP08_YOUTUBE_URL]",
+    "uploadDate": "2026-09-24",
+    "duration": "PT36S",
+    "embedUrl": "[EP08_YOUTUBE_URL]",
+    "contentUrl": "[EP08_YOUTUBE_URL]",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SkynetLabs",
+      "url": "https://skynetjoe.com"
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What separates this from a plain \"hasn't run in X minutes\" alert?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An overdue-only alert would have flagged the genuinely quiet, event-driven lane in this run's own data. This workflow reads a kind column on every lane's expectation row instead, and only a scheduled lane trips on elapsed time alone; an event-driven lane trips only on a missed upstream arrival."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this workflow send anything on its own?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The only writes it can make are a Postgres incident row and an optional Slack message, which ships disabled by default. There is no path from this workflow to a client-facing send of any kind."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is workflow or client data exposed anywhere?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Every real workflow name is hashed into a pseudonymous lane reference in the node right after the estate pull, before anything is stored, logged, or shown on screen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens once an incident opens?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It sends one reminder per cooldown window and closes itself automatically the moment the lane's own obligation is met again - no human has to remember to close it by hand."
+        }
+      }
+    ]
+  }
+</script>
