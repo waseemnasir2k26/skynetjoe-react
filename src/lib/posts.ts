@@ -195,28 +195,28 @@ export const POSTS: Post[] = [
     ],
     author: "Waseem Nasir",
   },
-  /* unregistered 2026-09-25: placeholder [EPxx_YOUTUBE_URL] literal in HTML, video not ready
-    {
-      slug: "n8n-silent-lane-watchdog",
-      title: "The n8n Silent Lane Watchdog: Quiet Is Not Always Failure",
-      seoTitle: "n8n Silent Lane Watchdog (Ep08)",
-      description:
-        "An n8n workflow checked 63 lanes against their own expectation rows: 1 lane missed a test threshold, 0 false alarms on the lanes that were quiet by design.",
-      publishedAt: "2026-09-24",
-      updatedAt: "2026-09-24",
-      readingTime: 7,
-      category: "automation",
-      tags: [
-        "n8n workflow monitoring",
-        "silent failure",
-        "workflow watchdog",
-        "n8n data table",
-        "incident automation",
-        "free n8n workflow",
-        "n8n tutorial",
-      ],
-      author: "Waseem Nasir",
-    },
+  {
+    slug: "n8n-silent-lane-watchdog",
+    title: "The n8n Silent Lane Watchdog: Quiet Is Not Always Failure",
+    seoTitle: "n8n Silent Lane Watchdog (Ep08)",
+    description:
+      "An n8n workflow checked 63 lanes against their own expectation rows: 1 lane missed a test threshold, 0 false alarms on the lanes that were quiet by design.",
+    publishedAt: "2026-09-25",
+    updatedAt: "2026-09-25",
+    readingTime: 7,
+    category: "automation",
+    tags: [
+      "n8n workflow monitoring",
+      "silent failure",
+      "workflow watchdog",
+      "n8n data table",
+      "incident automation",
+      "free n8n workflow",
+      "n8n tutorial",
+    ],
+    author: "Waseem Nasir",
+  },
+  /* still unregistered 2026-09-25: placeholder [EPxx_YOUTUBE_URL] literal in HTML, video not ready
     {
       slug: "n8n-lead-draft-personaliser",
       title:
