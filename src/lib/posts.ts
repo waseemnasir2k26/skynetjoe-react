@@ -216,7 +216,7 @@ export const POSTS: Post[] = [
     ],
     author: "Waseem Nasir",
   },
-  /* still unregistered 2026-09-25: placeholder [EPxx_YOUTUBE_URL] literal in HTML, video not ready
+  /* EP09 still unregistered — no YouTube URL yet
     {
       slug: "n8n-lead-draft-personaliser",
       title:
@@ -239,28 +239,28 @@ export const POSTS: Post[] = [
       ],
       author: "Waseem Nasir",
     },
-    {
-      slug: "n8n-lead-stack-install",
-      title: "The n8n Lead Stack: One Lead, Five Workflows, One Shared Ledger",
-      seoTitle: "n8n Lead Stack Install (Ep10)",
-      description:
-        "An install script chains 5 published n8n workflows on one throwaway instance: install in 5-6 seconds, 5 of 5 inactive, a second install run refused on purpose.",
-      publishedAt: "2026-09-24",
-      updatedAt: "2026-09-24",
-      readingTime: 8,
-      category: "automation",
-      tags: [
-        "n8n workflow stack",
-        "lead management automation",
-        "n8n install script",
-        "n8n data table",
-        "workflow automation",
-        "free n8n workflow",
-        "n8n tutorial",
-      ],
-      author: "Waseem Nasir",
-    },
   */
+  {
+    slug: "n8n-lead-stack-install",
+    title: "The n8n Lead Stack: One Lead, Five Workflows, One Shared Ledger",
+    seoTitle: "n8n Lead Stack Install (Ep10)",
+    description:
+      "An install script chains 5 published n8n workflows on one throwaway instance: install in 112 seconds, 5 of 5 inactive, a second install run refused on purpose.",
+    publishedAt: "2026-09-28",
+    updatedAt: "2026-09-28",
+    readingTime: 8,
+    category: "automation",
+    tags: [
+      "n8n workflow stack",
+      "lead management automation",
+      "n8n install script",
+      "n8n data table",
+      "workflow automation",
+      "free n8n workflow",
+      "n8n tutorial",
+    ],
+    author: "Waseem Nasir",
+  },
   {
     slug: "n8n-google-maps-lead-table",
     title:
