@@ -1,0 +1,418 @@
+<style>
+  .wn-gemini-4-argon {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-gemini-4-argon h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-gemini-4-argon h3 {
+    color: #7ee4ff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 1.75rem 0 0.6rem;
+  }
+  .wn-gemini-4-argon p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-gemini-4-argon ul,
+  .wn-gemini-4-argon ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-gemini-4-argon li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-gemini-4-argon strong {
+    color: #fff;
+  }
+  .wn-gemini-4-argon a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-gemini-4-argon a:hover {
+    color: #7ee4ff;
+  }
+  .wn-gemini-4-argon .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-gemini-4-argon .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-gemini-4-argon table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-gemini-4-argon th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-gemini-4-argon td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-gemini-4-argon code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-gemini-4-argon pre {
+    background: rgba(0, 212, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+  }
+  .wn-gemini-4-argon pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .wn-gemini-4-argon .slides {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .wn-gemini-4-argon .slides img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  .wn-gemini-4-argon .caption {
+    font-size: 0.85rem;
+    color: #9ca3af;
+    margin-bottom: 2rem;
+  }
+  .wn-gemini-4-argon .table-wrap {
+    overflow-x: auto;
+  }
+</style>
+
+<p>
+  Google announced Gemini 4 Argon on 30 September 2026 and calls it its most
+  powerful model yet. It is built for what Google describes as "complex,
+  long-horizon workflows": real-world software engineering, enterprise knowledge
+  work like legal and finance, and cybersecurity defence.
+</p>
+
+<p>
+  The catch is in the rollout. Today Argon is only with a set of trusted cyber
+  defenders in Google's Fairwind Program. Paid API customers and Google AI Ultra
+  subscribers are next, and Google has not given a date. So this post covers
+  three things: what changes, what it will cost, and how to be ready the day it
+  opens.
+</p>
+
+<div class="callout">
+  <strong>SHORT VERSION:</strong> 1M-token answers (up from 64K), $2 in / $10
+  out per million tokens at the introductory price, Google's own benchmark
+  scores at or near the top, and no access for most people yet. Get a paid
+  Gemini API key or Google AI Ultra now if you want to be in the first queue.
+</div>
+
+<h2 id="what-changed">What actually changed with Gemini 4 Argon?</h2>
+
+<p>
+  The headline is the output limit. One answer can now run to
+  <strong>1 million tokens</strong>, up from 64,000. A full migration plan, a
+  long research pack or a complete module can come back in one pass instead of
+  many stitched-together replies.
+</p>
+
+<p>
+  The scores Google is publishing (its own numbers, not independent tests yet):
+</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Benchmark</th>
+        <th>Argon</th>
+        <th>What it measures</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>DeepSWE v1.1</td>
+        <td>77.9%</td>
+        <td>Real-world software engineering</td>
+      </tr>
+      <tr>
+        <td>AutomationBench</td>
+        <td>51.3% (ranked #1)</td>
+        <td>Automation tasks</td>
+      </tr>
+      <tr>
+        <td>LVBench</td>
+        <td>91.7%</td>
+        <td>Understanding long video</td>
+      </tr>
+      <tr>
+        <td>CWE-bench v1</td>
+        <td>68% (tied first)</td>
+        <td>Security vulnerabilities</td>
+      </tr>
+      <tr>
+        <td>Gray Swan IPI</td>
+        <td>Leads</td>
+        <td>Resisting prompt injection</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+  Google also says Argon leads the Vals Index. The prompt-injection result is
+  the one we would watch most closely. Prompt injection is hidden text in an
+  email or web page that tries to take over an AI agent. It is the main reason
+  businesses hesitate to let AI read their inbox, tickets or supplier sites.
+</p>
+
+<div class="slides">
+  <img
+    src="/blog/gemini-4-argon/scores.webp"
+    alt="Gemini 4 Argon benchmark scores published by Google: DeepSWE 77.9%, AutomationBench 51.3%, LVBench 91.7%, CWE-bench 68%"
+    width="720"
+    height="900"
+    loading="lazy"
+  />
+  <img
+    src="/blog/gemini-4-argon/access.webp"
+    alt="Who gets Gemini 4 Argon: cyber defenders now, paid API and Google AI Ultra next, no date given"
+    width="720"
+    height="900"
+    loading="lazy"
+  />
+  <img
+    src="/blog/gemini-4-argon/get-in-line.webp"
+    alt="How to get first in line for Gemini 4 Argon: paid Gemini API key, Google AI Ultra, check the model list daily"
+    width="720"
+    height="900"
+    loading="lazy"
+  />
+</div>
+<p class="caption">
+  From our 8-slide Argon carousel. Sources: Google blog, 30 Sep 2026.
+</p>
+
+<h2 id="pricing">How much will Gemini 4 Argon cost?</h2>
+
+<p>
+  The introductory price is <strong>$2 per million input tokens</strong> and
+  <strong>$10 per million output tokens</strong>, with cached input 95% off.
+  After the introductory period it moves to $4 input and $20 output.
+</p>
+
+<p>
+  Read that as a price per job, not per token. A full 1M-token answer at the $10
+  intro rate is $10 for one run. That is cheap for a codebase migration and
+  wasteful for every support email. The cache discount matters too: if you
+  resend the same long system prompt or reference document on every call, most
+  of that input gets the 95% discount after the first time.
+</p>
+
+<h2 id="can-you-use-it">Can you use Gemini 4 Argon today?</h2>
+
+<p>
+  Most people can't. Argon is rolling out to trusted cyber defenders through
+  Google's Fairwind Program, which is an application for vetted organisations:
+  governments and national cyber authorities, critical-infrastructure operators
+  and core technology platforms. If that is you, you can apply on the
+  <a href="https://deepmind.google/fairwind-program/" rel="noopener"
+    >DeepMind Fairwind page</a
+  >.
+</p>
+
+<p>
+  There is no public API model ID and no general waitlist yet. We checked the
+  Gemini API models page, the API changelog and OpenRouter on 1 October 2026.
+  Google says the next group is paid API customers and Google AI Ultra
+  subscribers, and that broader access will come "as soon as possible".
+</p>
+
+<h2 id="how-to-get-ready">How do you get first in line?</h2>
+
+<ol>
+  <li>
+    <strong>Developers and automations:</strong> create a Gemini API key in
+    <a href="https://aistudio.google.com" rel="noopener">Google AI Studio</a>
+    and turn on billing, so you are a paid API customer.
+  </li>
+  <li><strong>Chat use:</strong> a Google AI Ultra subscription.</li>
+  <li>
+    <strong>Catch the day it goes live:</strong> list the models your key can
+    see once a day, by hand or on an n8n schedule:
+  </li>
+</ol>
+
+<pre><code># first: pip install google-genai, then set GEMINI_API_KEY
+from google import genai
+
+client = genai.Client()
+for m in client.models.list():
+    if "argon" in m.name.lower():
+        print("ARGON IS LIVE:", m.name)</code></pre>
+
+<p>
+  When it appears, call it with the exact ID the list returns. Don't guess it.
+  Put a cap on output tokens while you test, because 1M is a ceiling, not a
+  target:
+</p>
+
+<pre><code>from google.genai import types
+
+resp = client.models.generate_content(
+    model="PASTE_ID_FROM_THE_LIST",
+    contents="Plan the migration of this codebase from X to Y: ...",
+    config=types.GenerateContentConfig(max_output_tokens=64000),
+)
+print(resp.text)</code></pre>
+
+<h2 id="where-it-fits">Where will Argon earn its price?</h2>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Give Argon</th>
+        <th>Keep on a cheap model</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Codebase migrations and big refactors</td>
+        <td>Email triage and replies</td>
+      </tr>
+      <tr>
+        <td>Long legal and finance research</td>
+        <td>Social captions and summaries</td>
+      </tr>
+      <tr>
+        <td>Security review of a site or repo</td>
+        <td>Classification and tagging in n8n</td>
+      </tr>
+      <tr>
+        <td>Long video analysis</td>
+        <td>Simple chat and FAQs</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+  In n8n, the switch is small: point your existing Gemini or HTTP Request node
+  at the new model ID and keep the current model as a fallback branch. Keep a
+  human approval step before anything is sent or deleted, even with better
+  injection resistance.
+</p>
+
+<h2 id="our-take">Our take</h2>
+
+<p>
+  The 1M-token output and the injection results are the two things that change
+  how we build. One means fewer stitched jobs. The other, if it holds up, means
+  agents can be trusted with more untrusted input. But these are Google's own
+  scores, and nobody outside the Fairwind group can test it yet. We will re-run
+  our own client tasks on it the week it opens, and keep the everyday work on
+  smaller, cheaper models either way.
+</p>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3>When was Gemini 4 Argon released?</h3>
+<p>
+  Google announced it on 30 September 2026. It is rolling out first to trusted
+  cyber defenders through the Fairwind Program.
+</p>
+
+<h3>Can I use Gemini 4 Argon now?</h3>
+<p>
+  Not unless your organisation is accepted into Google's Fairwind Program. Paid
+  API customers and Google AI Ultra subscribers are next, with no date given.
+</p>
+
+<h3>How much does Gemini 4 Argon cost?</h3>
+<p>
+  The introductory price is $2 per million input tokens and $10 per million
+  output tokens, with cached input 95% off. The standard price afterwards is $4
+  input and $20 output per million tokens.
+</p>
+
+<h3>What is the Gemini 4 Argon model ID?</h3>
+<p>
+  There is no public model ID yet. Once Google releases it, list the models your
+  API key can see and use the exact ID returned.
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When was Gemini 4 Argon released?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Google announced it on 30 September 2026. It is rolling out first to trusted cyber defenders through the Fairwind Program."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use Gemini 4 Argon now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not unless your organisation is accepted into Google's Fairwind Program. Paid API customers and Google AI Ultra subscribers are next, with no date given."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Gemini 4 Argon cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The introductory price is $2 per million input tokens and $10 per million output tokens, with cached input 95% off. The standard price afterwards is $4 input and $20 output per million tokens."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Gemini 4 Argon model ID?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no public model ID yet. Once Google releases it, list the models your API key can see and use the exact ID returned."
+        }
+      }
+    ]
+  }
+</script>

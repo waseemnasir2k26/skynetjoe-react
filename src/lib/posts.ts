@@ -577,6 +577,26 @@ export const POSTS: Post[] = [
         "Builds slipping through the cracks? I design the operating system behind the shop — intake queue, build board, and a reply window you can actually keep.",
     },
   },
+  {
+    slug: "gemini-4-argon",
+    title: "Gemini 4 Argon: What It Changes, What It Costs, and How to Get It",
+    seoTitle: "Gemini 4 Argon: What It Is and How to Get It",
+    description:
+      "Google's Gemini 4 Argon brings 1M-token answers at $2 in / $10 out per million tokens, but only cyber defenders get it today. Here's how to get first in line.",
+    publishedAt: "2026-10-01",
+    updatedAt: "2026-10-01",
+    readingTime: 6,
+    category: "tools",
+    tags: [
+      "gemini 4 argon",
+      "google gemini",
+      "ai models",
+      "gemini api",
+      "ai news",
+      "prompt injection",
+    ],
+    author: "Waseem Nasir",
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {
