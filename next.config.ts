@@ -313,6 +313,16 @@ const wpRedirects = [
   // ── Legacy/typed paths that 404 → closest live route ─────────────────────
   { source: "/work", destination: "/portfolio", permanent: true },
   { source: "/community", destination: "/", permanent: true },
+
+  /*
+   * WP had a `/portfolio/<client-slug>` page per project; the React rebuild
+   * kept only the `/portfolio` index. Bing still holds ~48 of those child
+   * URLs (e.g. /portfolio/icce-us, /portfolio/connectin-com-au), which now
+   * hard-404 and burn crawl budget. There is no /portfolio/[slug] route, so
+   * a catch-all consolidation is safe — it cannot shadow a live page.
+   * Verified against the Bing Webmaster crawl-issue list, 2026-10-01.
+   */
+  { source: "/portfolio/:slug*", destination: "/portfolio", permanent: true },
 ];
 
 /**
