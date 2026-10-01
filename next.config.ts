@@ -322,7 +322,10 @@ const wpRedirects = [
    * a catch-all consolidation is safe — it cannot shadow a live page.
    * Verified against the Bing Webmaster crawl-issue list, 2026-10-01.
    */
-  { source: "/portfolio/:slug*", destination: "/portfolio", permanent: true },
+  // `:slug+` (one-or-more), NOT `:slug*` — `*` matches ZERO segments too, so
+  // it matches /portfolio itself and self-redirects into an infinite loop.
+  // Shipped that bug once; caught live at 50 hops. Keep the `+`.
+  { source: "/portfolio/:slug+", destination: "/portfolio", permanent: true },
 ];
 
 /**
