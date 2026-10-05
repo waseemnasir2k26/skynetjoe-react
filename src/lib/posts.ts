@@ -56,6 +56,20 @@ export function categoryLabel(c: PostCategory): string {
 
 export const POSTS: Post[] = [
   {
+    slug: "muse-ai-account-vps-free-vpn-1-billion-tokens",
+    title:
+      "Muse AI Account Not Working? VPS + Free VPN Fix for 1 Billion Free Tokens",
+    seoTitle: "Muse AI Signup Fix: VPS + Free VPN",
+    description:
+      "Muse AI signup failing outside the US? Use a VPS, a free USA VPN and your email, then redeem an invite code for 1 billion free tokens. Steps and FAQ.",
+    publishedAt: "2026-10-05",
+    updatedAt: "2026-10-05",
+    readingTime: 4,
+    category: "tools",
+    tags: ["muse ai", "meta muse", "muse ai free tokens", "vpn", "vps", "ai tools"],
+    author: "Waseem Nasir",
+  },
+  {
     slug: "n8n-freight-quote-email-parser",
     title: "The n8n Freight Quote Email Parser: One Email In, Eight Fields Out",
     seoTitle: "n8n Freight Quote Email Parser with Claude",
