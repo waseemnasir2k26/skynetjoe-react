@@ -78,8 +78,8 @@ export const SITE = {
   tagline: "AI Automation & AEO Agency for Service Businesses",
   description:
     "SkynetLabs builds n8n + AI automation, AEO-optimized websites, and chat-first CRM systems for service businesses. Run by Waseem Nasir from Bali.",
-  email: "info@skynetjoe.com",
-  emailFounder: "info@skynetjoe.com",
+  email: "waseem@skynetjoe.com",
+  emailFounder: "waseem@skynetjoe.com",
   social: {
     linkedin: "https://www.linkedin.com/in/waseemnasir2k26",
     twitter: "https://x.com/Skynetjoe1",

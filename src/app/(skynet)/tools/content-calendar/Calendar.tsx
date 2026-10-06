@@ -1140,7 +1140,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             />
             {feedback.state === "error" && (
               <p role="alert" className="text-sm text-[var(--terracotta-aa)]">
-                Couldn&apos;t send just now — email info@skynetjoe.com instead
+                Couldn&apos;t send just now — email waseem@skynetjoe.com instead
                 and it still lands with me.
               </p>
             )}

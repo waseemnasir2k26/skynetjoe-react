@@ -245,7 +245,7 @@ export default function SystemPromptGeneratorPage() {
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">
-                Waseem, building from Bali · info@skynetjoe.com
+                Waseem, building from Bali · waseem@skynetjoe.com
               </p>
             </div>
           </div>

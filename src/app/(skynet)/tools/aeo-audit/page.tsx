@@ -342,7 +342,7 @@ export default function AeoAuditPage() {
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">
-                Waseem, building from Bali · info@skynetjoe.com
+                Waseem, building from Bali · waseem@skynetjoe.com
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a

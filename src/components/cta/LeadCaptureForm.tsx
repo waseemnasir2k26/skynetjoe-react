@@ -174,7 +174,7 @@ export default function LeadCaptureForm({
       setError(
         err instanceof Error
           ? err.message
-          : "Something went wrong — try again, or email info@skynetjoe.com directly.",
+          : "Something went wrong — try again, or email waseem@skynetjoe.com directly.",
       );
     }
   }

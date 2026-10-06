@@ -359,7 +359,7 @@ export default function Library() {
           credit.
         </p>
         <a
-          href="mailto:info@skynetjoe.com?subject=Prompt%20Library%20submission&body=Category%3A%20%0AUse-case%3A%20%0APrompt%20body%3A%20%0AResult%20it%20produced%3A%20"
+          href="mailto:waseem@skynetjoe.com?subject=Prompt%20Library%20submission&body=Category%3A%20%0AUse-case%3A%20%0APrompt%20body%3A%20%0AResult%20it%20produced%3A%20"
           className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
           style={{ background: "var(--terracotta)" }}
         >
@@ -508,7 +508,7 @@ function MonthlyPromptsCapture() {
       setDone(true);
     } else {
       setError(
-        "Couldn't reach the signup service — email info@skynetjoe.com and I'll add you by hand.",
+        "Couldn't reach the signup service — email waseem@skynetjoe.com and I'll add you by hand.",
       );
     }
   }

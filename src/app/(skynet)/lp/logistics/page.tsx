@@ -2063,7 +2063,7 @@ export default function LogisticsLP() {
               <div>
                 <h5>Reach</h5>
                 <a href="/contact">Book discovery</a>
-                <a href="mailto:info@skynetjoe.com">Email</a>
+                <a href="mailto:waseem@skynetjoe.com">Email</a>
               </div>
               <div>
                 <h5>Elsewhere</h5>

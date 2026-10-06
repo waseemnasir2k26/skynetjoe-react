@@ -8,7 +8,7 @@
  * Env contract:
  *   RESEND_API_KEY     — required for the fallback email to actually send.
  *   RESEND_FROM        — defaults to "leads@skynetjoe.com".
- *   LEAD_NOTIFY_EMAIL  — defaults to "info@skynetjoe.com".
+ *   LEAD_NOTIFY_EMAIL  — defaults to "waseem@skynetjoe.com".
  *
  * If RESEND_API_KEY is also unset, this never throws — it returns
  * `{ ok: false, skipped: true }` and the caller is responsible for logging
@@ -37,7 +37,7 @@ export async function sendLeadFallbackEmail(
   reason: string,
 ): Promise<{ ok: boolean; skipped?: boolean; status?: number }> {
   const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.LEAD_NOTIFY_EMAIL || "info@skynetjoe.com";
+  const toEmail = process.env.LEAD_NOTIFY_EMAIL || "waseem@skynetjoe.com";
   const fromEmail = process.env.RESEND_FROM || "leads@skynetjoe.com";
   if (!apiKey) return { ok: false, skipped: true };
 

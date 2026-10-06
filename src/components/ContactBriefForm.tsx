@@ -83,12 +83,12 @@ export default function ContactBriefForm() {
         } | null;
         return fail(
           body?.error ||
-            "Couldn't send that. Email info@skynetjoe.com directly instead.",
+            "Couldn't send that. Email waseem@skynetjoe.com directly instead.",
         );
       }
       setStatus("success");
     } catch {
-      fail("Network hiccup. Email info@skynetjoe.com directly instead.");
+      fail("Network hiccup. Email waseem@skynetjoe.com directly instead.");
     }
   }
 

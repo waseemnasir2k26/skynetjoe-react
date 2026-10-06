@@ -151,7 +151,7 @@ export default function ExitIntentModal() {
         });
         setStatus("error");
         setErrorMsg(
-          "Couldn't reach our inbox. Try email: info@skynetjoe.com"
+          "Couldn't reach our inbox. Try email: waseem@skynetjoe.com"
         );
         return;
       }
@@ -162,7 +162,7 @@ export default function ExitIntentModal() {
       });
       setStatus("error");
       setErrorMsg(
-        "Couldn't reach our inbox. Try email: info@skynetjoe.com"
+        "Couldn't reach our inbox. Try email: waseem@skynetjoe.com"
       );
       return;
     }
@@ -353,10 +353,10 @@ export default function ExitIntentModal() {
                   }}
                 >
                   {errorMsg ||
-                    "Couldn't reach our inbox. Try email: info@skynetjoe.com"}
+                    "Couldn't reach our inbox. Try email: waseem@skynetjoe.com"}
                 </div>
                 <a
-                  href="mailto:info@skynetjoe.com?subject=Free%20Loom%20funnel%20audit"
+                  href="mailto:waseem@skynetjoe.com?subject=Free%20Loom%20funnel%20audit"
                   style={{
                     display: "inline-block",
                     fontFamily: "var(--font-mono)",
@@ -369,7 +369,7 @@ export default function ExitIntentModal() {
                     textUnderlineOffset: 3,
                   }}
                 >
-                  Email info@skynetjoe.com
+                  Email waseem@skynetjoe.com
                 </a>
               </div>
             </div>
