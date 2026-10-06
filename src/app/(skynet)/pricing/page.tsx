@@ -546,8 +546,8 @@ export default function PricingPage() {
               lineHeight: 1.55,
             }}
           >
-            No quote form. No 30-min discovery dance. Just a written reply with
-            scope, price and ship window.
+            Send a brief and get scope and price in writing within 8 hours, or
+            book 30 minutes if you&apos;d rather talk.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
