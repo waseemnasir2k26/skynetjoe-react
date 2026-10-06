@@ -12,7 +12,7 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: pageTitle("AI Automation & AEO Glossary — 50+ Terms Defined"),
+  title: pageTitle("AI Automation & AEO Glossary — 50+ Terms"),
   description:
     pageDescription("Working reference for the vocabulary that comes up when shipping LLM features, automation workflows, and content that gets cited by answer engines. 50+ terms, plain definitions, no fluff."),
   alternates: { canonical: `${SITE.url}/glossary` },

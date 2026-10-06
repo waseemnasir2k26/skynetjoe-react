@@ -138,7 +138,7 @@ const ORDERED_STUDIES: CaseStudy[] = [...CASE_STUDIES].sort(
 );
 
 export const metadata: Metadata = {
-  title: pageTitle("Case Studies — 8 Shipped Builds With Honest Outcomes"),
+  title: pageTitle("Case Studies — 8 Shipped Builds, Honest Results"),
   description:
     pageDescription("Eight anonymized client wins from SkynetLabs: n8n automation, flagship websites, AEO content engines and CRM rebuilds. Honest outcomes, no vanity metrics."),
   alternates: { canonical: `${SITE.url}/case-studies` },

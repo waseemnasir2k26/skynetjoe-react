@@ -15,7 +15,7 @@ const html = fs.readFileSync(
 
 export const metadata: Metadata = {
   title:
-    pageTitle("The 5 Boring Automations Small Businesses Actually Pay For — Field Notes"),
+    pageTitle("5 Boring Automations Small Businesses Pay For"),
   description:
     pageDescription("Five automations I shipped and got paid for — email triage, after-hours lead capture, quote tracking, order ops, and a posting engine — grounded in real builds, with the honest lesson from over-engineering one."),
   alternates: {

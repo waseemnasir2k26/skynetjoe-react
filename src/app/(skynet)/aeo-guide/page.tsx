@@ -13,7 +13,7 @@ const html = fs.readFileSync(
 
 export const metadata: Metadata = {
   title:
-    pageTitle("AEO Field Guide — Get Cited by ChatGPT, Claude & Perplexity"),
+    pageTitle("AEO Field Guide — Get Cited by ChatGPT, Claude"),
   description:
     pageDescription("Eight chapters on Answer Engine Optimization: the 5-layer stack, llms.txt, citation-worthy content patterns, measurement, and a 90-day rollout."),
   alternates: { canonical: `${SITE.url}/aeo-guide` },

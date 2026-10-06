@@ -20,7 +20,7 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: pageTitle("Cold DM Script Generator — Free Outreach Scripts"),
+  title: pageTitle("Free Cold DM Script Generator"),
   description: pageDescription(
     "Free cold DM script generator for LinkedIn, Instagram, and email. Enter your niche, offer, and proof point — get personalized outreach scripts instantly. Email unlocks the full 15-script pack.",
   ),

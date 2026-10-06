@@ -116,7 +116,7 @@ const BUILDER_LIFE = [
 ];
 
 export const metadata: Metadata = {
-  title: pageTitle("About — From a $10 Fiverr gig (2019) to 180+ workflows (2026)"),
+  title: pageTitle("About — From a $10 Fiverr Gig to 180+ Workflows"),
   description:
     pageDescription("SkynetLabs is run by Waseem Nasir from Bali. Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon — kept building. Today: 180+ automations across 9 countries."),
   alternates: { canonical: `${SITE.url}/about` },

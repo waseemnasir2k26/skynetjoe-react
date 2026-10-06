@@ -15,7 +15,7 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: pageTitle(`Free Prompt Library — ${PROMPT_COUNT} Reusable AI Prompts for Service Businesses`),
+  title: pageTitle(`Free Prompt Library — ${PROMPT_COUNT} Reusable AI Prompts`),
   description:
     pageDescription("Free library of 50 production-tested AI prompts across sales, marketing, ops, content, data, recruitment, customer service and founder brain. Copy + run in Claude or ChatGPT."),
   alternates: { canonical: `${SITE.url}${PATH}` },

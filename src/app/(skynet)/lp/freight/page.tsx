@@ -9,7 +9,7 @@ import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 const PAGE_URL = `${SITE.url.replace(/\/+$/, "")}/lp/freight`;
 
 export const metadata: Metadata = {
-  title: pageTitle("Stop Losing Loads to Voicemail | AI Voice Agent for Carriers"),
+  title: pageTitle("Stop Losing Loads — AI Voice Agent for Carriers"),
   description:
     pageDescription("Small-fleet carriers & owner-operators: every call you miss while driving, the broker gives to the next truck. An AI voice agent answers every call and load offer 24/7. Free missed-load audit."),
   alternates: { canonical: PAGE_URL },

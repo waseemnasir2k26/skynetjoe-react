@@ -18,7 +18,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: pageTitle("Journal — Long-form on AI Automation, AEO & Shipping"),
+  title: pageTitle("Journal — AI Automation, AEO & Shipping"),
   description:
     pageDescription("Honest writing on automation, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying."),
   alternates: { canonical: `${SITE.url}/blog` },

@@ -12,7 +12,7 @@ const html = fs.readFileSync(
 );
 
 export const metadata: Metadata = {
-  title: pageTitle("n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)"),
+  title: pageTitle("n8n vs Zapier in 2026 — When to Pick Which"),
   description:
     pageDescription("Side-by-side n8n vs Zapier comparison from someone who has shipped 180+ workflows across both. 15-row criteria table, 5 real-world scenarios, decision tree, and when to use neither."),
   alternates: { canonical: `${SITE.url}/n8n-vs-zapier` },

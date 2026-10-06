@@ -14,7 +14,7 @@ const breadcrumbListSchema = breadcrumbSchema([
 ]);
 
 export const metadata: Metadata = {
-  title: pageTitle("Free llms.txt Generator — Spec-Valid llmstxt.org File in Minutes"),
+  title: pageTitle("Free llms.txt Generator — Spec-Valid in Minutes"),
   description:
     pageDescription("Generate a valid llms.txt file from your site name, summary, sections, and docs URLs. Free, spec-compliant, copy or download. Enter your email to unlock the download."),
   alternates: { canonical: `${SITE.url}${PATH}` },
