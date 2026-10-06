@@ -200,6 +200,14 @@ export default function FreightVoiceLandingPage() {
           &mdash; so you stop losing freight to voicemail.
         </p>
 
+        {/* Primary CTA sits above the cab + missed-load cards so it is on screen
+            at first paint on desktop (audit 2026-10-07). */}
+        <div style={{ margin: "0 0 28px" }}>
+          <a href="#audit" className="lp-frt-btn" data-meta-event="Lead">
+            Get my free missed-load audit
+          </a>
+        </div>
+
         <div
           className="lp-frt-cab"
           aria-label="A load offer ringing in while you are driving"
@@ -257,9 +265,6 @@ export default function FreightVoiceLandingPage() {
           </div>
         </div>
 
-        <a href="#audit" className="lp-frt-btn" data-meta-event="Lead">
-          Get my free missed-load audit
-        </a>
       </section>
 
       <section className="lp-frt-section" id="leak">

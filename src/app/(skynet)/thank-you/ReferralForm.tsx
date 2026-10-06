@@ -49,7 +49,14 @@ export default function ReferralForm() {
       setReferrerEmail("");
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
+      // A bare TypeError is fetch's "Failed to fetch" — show a human message.
+      setErrorMsg(
+        err instanceof TypeError
+          ? "That didn't send. Email waseem@skynetjoe.com and I'll reply today."
+          : err instanceof Error
+            ? err.message
+            : "Something went wrong.",
+      );
     }
   }
 

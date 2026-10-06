@@ -39,8 +39,18 @@ export default function HeroFunnel() {
         paddingBottom: "clamp(56px, 12vw, 112px)",
       }}
     >
-      <style>{`@media (max-width: 400px){.trust-sep{display:none}}`}</style>
-      <NodeGraphHero />
+      <style>{`@media (max-width: 400px){.trust-sep{display:none}}
+.trust-link{color:inherit;text-decoration:underline;text-decoration-color:rgba(168,69,31,0.35);text-underline-offset:3px}
+.trust-link:hover,.trust-link:focus-visible{text-decoration-color:currentColor}
+@media (min-width: 768px){.hero-graph-mask{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0.12) 0%,rgba(0,0,0,0.12) 42%,#000 66%);mask-image:linear-gradient(90deg,rgba(0,0,0,0.12) 0%,rgba(0,0,0,0.12) 42%,#000 66%)}}`}</style>
+      {/* Desktop: the graph's node labels used to run underneath the headline /
+          subhead column. Mask the left (text) side down to a faint trace. */}
+      <div
+        className="hero-graph-mask"
+        style={{ position: "absolute", inset: 0 }}
+      >
+        <NodeGraphHero />
+      </div>
       <div
         className="container-x relative z-10 grid md:grid-cols-[1.3fr_1fr] items-end"
         style={{
@@ -138,7 +148,13 @@ export default function HeroFunnel() {
               rowGap: 8,
             }}
           >
-            <span style={{ color: "#A8451F" }}>
+            <a
+              href="https://www.upwork.com/freelancers/waseemnasir"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="trust-link"
+              style={{ color: "#A8451F" }}
+            >
               <Star
                 style={{
                   display: "inline-block",
@@ -151,14 +167,20 @@ export default function HeroFunnel() {
                 }}
               />
               Top Rated Plus · Upwork
-            </span>
+            </a>
             <span
               className="trust-sep"
               style={{ margin: "0 8px", color: "rgba(26,26,26,0.18)" }}
             >
               ·
             </span>
-            <span style={{ color: "#A8451F" }}>
+            <a
+              href="https://www.fiverr.com/agencies/skynetjoellc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="trust-link"
+              style={{ color: "#A8451F" }}
+            >
               <Star
                 style={{
                   display: "inline-block",
@@ -171,7 +193,7 @@ export default function HeroFunnel() {
                 }}
               />
               Top Rated · Fiverr
-            </span>
+            </a>
             {/* 2026-09-21: "180+ workflows · 9 countries" removed — not
                 traceable to src/lib/case-studies.ts (board-truth rule). */}
           </div>

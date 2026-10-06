@@ -171,10 +171,14 @@ export default function LeadCaptureForm({
       setEmail("");
     } catch (err) {
       setStatus("error");
+      // fetch() rejects with a bare TypeError ("Failed to fetch") when the
+      // network call itself fails — never show that raw string to a visitor.
       setError(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong — try again, or email waseem@skynetjoe.com directly.",
+        err instanceof TypeError
+          ? "That didn't send. Email waseem@skynetjoe.com and I'll reply today."
+          : err instanceof Error
+            ? err.message
+            : "Something went wrong — try again, or email waseem@skynetjoe.com directly.",
       );
     }
   }
