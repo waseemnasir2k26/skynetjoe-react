@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description:
     pageDescription("For HVAC owner-operators running 1–5 trucks. When a call rings out, the system texts the homeowner back, qualifies the job (AC repair, heating, emergency call-outs) and books it onto your calendar while you stay on the tools."),
   alternates: { canonical: PAGE_URL },
-  // Same as the other 5 LPs (paid-traffic page; robots.txt already blocks /lp/).
+  // robots.txt no longer blocks /lp/, so the page itself must say noindex.
   robots: { index: false, follow: false },
   openGraph: {
     title: "HVAC Missed-Call Rescue — AI Speed-to-Lead",

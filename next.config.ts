@@ -287,6 +287,14 @@ const wpRedirects = [
     permanent: true,
   },
 
+  // ── Short / legacy paths → canonical routes (audit 2026-10-07) ───────────
+  { source: "/terms", destination: "/terms-of-service", permanent: true },
+  {
+    source: "/services/freightops-logistics",
+    destination: "/industries/freight-logistics",
+    permanent: true,
+  },
+
   // ── Tools / library / variants → /tools or / ─────────────────────────────
   { source: "/ai-tool", destination: "/tools", permanent: true },
   {
@@ -381,6 +389,8 @@ const nextConfig: NextConfig = {
   // Produces .next/standalone/server.js for smaller cold-boot on
   // Hostinger Node.js Web Apps (and any non-Vercel host).
   output: "standalone",
+  // Don't advertise the framework via `X-Powered-By: Next.js`.
+  poweredByHeader: false,
   experimental: {
     // Enables src/app/global-not-found.tsx — the branded 404 for URLs that
     // match no route. Required because the root layout lives in the (skynet)
