@@ -325,7 +325,14 @@ const wpRedirects = [
   // `:slug+` (one-or-more), NOT `:slug*` — `*` matches ZERO segments too, so
   // it matches /portfolio itself and self-redirects into an infinite loop.
   // Shipped that bug once; caught live at 50 hops. Keep the `+`.
-  { source: "/portfolio/:slug+", destination: "/portfolio", permanent: true },
+  // The negative lookahead keeps static image files under /public/portfolio/
+  // (thumbnails served raw and via /_next/image) OUT of this rule. Without it
+  // every /portfolio/<slug>.jpg 308'd to /portfolio and all thumbnails broke.
+  {
+    source: "/portfolio/:slug((?!.*[.](?:jpg|jpeg|png|webp|avif|svg)$).+)",
+    destination: "/portfolio",
+    permanent: true,
+  },
 ];
 
 /**
