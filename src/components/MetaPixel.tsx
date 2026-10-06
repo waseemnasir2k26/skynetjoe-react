@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import Link from "next/link";
 
 /**
@@ -97,26 +97,39 @@ function loadPixel() {
   window.dispatchEvent(new Event(READY_EVENT));
 }
 
-export function MetaPixel() {
-  // "off" = decided (or DNT/GPC) — render nothing. null = not yet read.
-  const [state, setState] = useState<"ask" | "off" | null>(null);
+// Tiny external store so the bar can read localStorage without a
+// setState-in-effect, and so the server snapshot ("off") matches hydration.
+const listeners = new Set<() => void>();
+let decidedThisSession = false; // covers browsers where storage is blocked
+function subscribe(cb: () => void) {
+  listeners.add(cb);
+  return () => {
+    listeners.delete(cb);
+  };
+}
+/** "ask" = show the bar; "off" = decided, DNT/GPC, or no pixel id. */
+function getSnapshot(): "ask" | "off" {
+  if (!PIXEL_ID || decidedThisSession || privacySignalOn()) return "off";
+  return readChoice() ? "off" : "ask";
+}
+const getServerSnapshot = (): "ask" | "off" => "off";
 
+export function MetaPixel() {
+  const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
+  // Returning visitor who already accepted: load straight away.
   useEffect(() => {
-    if (!PIXEL_ID || privacySignalOn()) {
-      setState("off");
-      return;
-    }
-    const choice = readChoice();
-    if (choice === "granted") loadPixel();
-    setState(choice ? "off" : "ask");
+    if (!PIXEL_ID || privacySignalOn()) return;
+    if (readChoice() === "granted") loadPixel();
   }, []);
 
   if (state !== "ask") return null;
 
   const decide = (v: "granted" | "denied") => {
     storeChoice(v);
+    decidedThisSession = true;
     if (v === "granted") loadPixel();
-    setState("off");
+    listeners.forEach((cb) => cb());
   };
 
   return (
