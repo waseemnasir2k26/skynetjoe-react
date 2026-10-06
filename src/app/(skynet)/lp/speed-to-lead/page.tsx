@@ -4,7 +4,7 @@ import SpeedToLeadClient from "./client";
 
 // Meta-ads companion page for the HVAC AI Speed-to-Lead system
 // ($2,500 setup + $395/mo). Illustration page, not a demo: the Instant Form
-// thank-you button and the 15-min sales call both land here.
+// thank-you button and the 30-min sales call both land here.
 // Claims discipline (CLAIMS-WHITELIST.md rules apply): no statistics, no
 // client names/counts, no testimonials, no guarantees, no asserted reply-time
 // numbers. The animated SMS walkthrough (client.tsx) is fictional and labeled

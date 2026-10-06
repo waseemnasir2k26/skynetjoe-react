@@ -565,7 +565,7 @@ function BookCall() {
             textColor: "1A1A1A",
             hideGdprBanner: true,
           }}
-          iframeTitle="SkynetLabs · Free 15-minute call"
+          iframeTitle="SkynetLabs · Free 30-minute call"
         />
         {scheduled && (
           <div className="s2l-book-done">
@@ -577,7 +577,7 @@ function BookCall() {
 
   return (
     <form className="s2l-book-card" onSubmit={unlock}>
-      <h3>Book a free 15-minute call</h3>
+      <h3>Book a free 30-minute call</h3>
       <p className="hint">
         No pitch deck, no obligation — we look at how your calls are handled
         today and whether this fits. Calendar opens right after.
@@ -635,7 +635,7 @@ function StickyCta() {
   return (
     <div className={`s2l-sticky${show ? " show" : ""}`}>
       <span className="txt">
-        <b>HVAC missed-call rescue</b> — free 15-min call
+        <b>HVAC missed-call rescue</b> — free 30-min call
       </span>
       <a href="#book">📅 Book a call</a>
     </div>
@@ -678,7 +678,7 @@ export default function SpeedToLeadClient() {
         </p>
         <LiveClock />
         <a className="s2l-hero-cta" href="#book">
-          📅 Book a free 15-min call →
+          📅 Book a free 30-min call →
         </a>
         <div className="s2l-spec">
           <span>HVAC · AC REPAIR · HEATING</span>
@@ -744,7 +744,7 @@ export default function SpeedToLeadClient() {
 
       <section className="s2l-sec" id="book">
         <div className="s2l-rev">
-          <h2>See if it fits — free 15-minute call</h2>
+          <h2>See if it fits — free 30-minute call</h2>
           <p className="lead">
             Bring your phone habits, I&apos;ll show you the machine. Straight
             answers, no pitch deck.

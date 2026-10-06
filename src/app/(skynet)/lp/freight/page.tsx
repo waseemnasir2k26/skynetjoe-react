@@ -425,7 +425,7 @@ export default function FreightVoiceLandingPage() {
           className="lp-frt-secondary"
           data-meta-event="Schedule"
         >
-          Or book a 15-min call instead
+          Or book a 30-min call instead
         </a>
       </section>
 

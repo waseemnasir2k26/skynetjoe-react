@@ -569,7 +569,7 @@ export default function LogisticsLP() {
                   data-meta-event="Schedule"
                   data-meta-name="hero-book-audit"
                 >
-                  Book a 15-min discovery call →
+                  Book a 30-min discovery call →
                 </a>
                 <a href="#pricing" className="btn-line">
                   See public pricing
@@ -1449,7 +1449,7 @@ export default function LogisticsLP() {
               Reading this at <em>2am</em> because dispatch died again?
             </h3>
             <p>
-              Audit takes 15 minutes. Reply window: 8 hours, weekday Bali time.
+              Audit takes 30 minutes. Reply window: 8 hours, weekday Bali time.
               Yes, no, or referral — you walk with the findings.
             </p>
             <a
@@ -1678,7 +1678,7 @@ export default function LogisticsLP() {
                   </h3>
                   <p className="risk-p">
                     Public pricing, sourced-controlled, fixed ship windows. The
-                    audit is free. You only commit after the 15-minute call.
+                    audit is free. You only commit after the 30-minute call.
                   </p>
                 </div>
                 <ul className="risk-list">
@@ -2015,7 +2015,7 @@ export default function LogisticsLP() {
         <section className="closer">
           <div className="closer-scarcity">● Limited build slots</div>
           <h2>
-            Fifteen minutes. <em>Yes, no, or referral.</em>
+            Thirty minutes. <em>Yes, no, or referral.</em>
           </h2>
           <p>
             Eight-hour reply on weekday Bali time. No funnel, no quote theater,

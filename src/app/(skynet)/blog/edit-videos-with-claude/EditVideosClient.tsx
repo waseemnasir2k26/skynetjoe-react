@@ -258,7 +258,7 @@ export default function EditVideosClient({
         <h2 className="evc-h2">Want us to just edit it for you?</h2>
         <p className="evc-section-sub">
           Hand us the raw footage. We run these exact prompts and send back the
-          finished cut. Book a 15-minute call.
+          finished cut. Book a 30-minute call.
         </p>
         <Link href="/contact" className="evc-cta">
           Book a discovery call <ArrowRight size={16} />

@@ -337,7 +337,7 @@ export default function HomeServicesLandingPage() {
           className="hs-secondary"
           data-meta-event="Schedule"
         >
-          Prefer to talk it through? Book a 15-min call instead
+          Prefer to talk it through? Book a 30-min call instead
         </a>
       </section>
 
