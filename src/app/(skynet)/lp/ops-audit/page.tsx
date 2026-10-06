@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
+import { MetaPixelEvents } from "@/components/MetaPixel";
 import { SITE, CAL_URL, pageTitle, pageDescription } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
@@ -184,7 +184,6 @@ export default function OpsAuditLandingPage() {
   return (
     <main className="lp-ops-wrap">
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <MetaPixel />
       <MetaPixelEvents />
 
       <section className="lp-ops-hero">

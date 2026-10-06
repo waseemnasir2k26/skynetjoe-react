@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
+import { MetaPixelEvents } from "@/components/MetaPixel";
 import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
@@ -140,7 +140,6 @@ export default function HomeServicesLandingPage() {
   return (
     <main className="hs-wrap">
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <MetaPixel />
       <MetaPixelEvents />
 
       <section className="hs-hero">

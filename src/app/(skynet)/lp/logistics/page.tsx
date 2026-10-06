@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
+import { MetaPixelEvents } from "@/components/MetaPixel";
 import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
@@ -522,7 +522,6 @@ html { scroll-behavior:smooth; }
 export default function LogisticsLP() {
   return (
     <div className="lp-log-v3">
-      <MetaPixel />
       <MetaPixelEvents />
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <script
