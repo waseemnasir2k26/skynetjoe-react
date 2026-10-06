@@ -5,6 +5,7 @@ import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink, type SinkLead } from "@/lib/lead-sink";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
+import { guardJsonPost, tooManyRequests } from "@/lib/request-guard";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 
 export const runtime = "nodejs";
@@ -190,17 +191,15 @@ function flattenAutomation(q: Qualification | undefined): string | undefined {
 }
 
 export async function POST(req: Request) {
+  const refused = guardJsonPost(req);
+  if (refused) return refused;
+
   const rl = checkRateLimit(req, {
     limit: 8,
     windowMs: 60_000,
     keyPrefix: "leads",
   });
-  if (!rl.allowed) {
-    return NextResponse.json(
-      { error: "Too many requests. Try again in a minute." },
-      { status: 429 },
-    );
-  }
+  if (!rl.allowed) return tooManyRequests(rl.retryAfterSec);
 
   let payload: Payload;
   try {

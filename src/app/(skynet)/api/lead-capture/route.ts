@@ -7,6 +7,7 @@ import { appendLeadToSink } from "@/lib/lead-sink";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 import { sendCapiLead } from "@/lib/meta-capi";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
+import { guardJsonPost, tooManyRequests } from "@/lib/request-guard";
 
 /**
  * MA-04 refuses any payload without a dedupe key, so the fallback paths — which
@@ -87,17 +88,15 @@ function isValidEmail(s: string | undefined): s is string {
 }
 
 export async function POST(req: Request) {
+  const refused = guardJsonPost(req);
+  if (refused) return refused;
+
   const rl = checkRateLimit(req, {
     limit: 8,
     windowMs: 60_000,
     keyPrefix: "lead-capture",
   });
-  if (!rl.allowed) {
-    return NextResponse.json(
-      { error: "Too many requests. Try again in a minute." },
-      { status: 429 },
-    );
-  }
+  if (!rl.allowed) return tooManyRequests(rl.retryAfterSec);
 
   let payload: Payload;
   try {

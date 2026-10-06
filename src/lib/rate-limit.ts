@@ -30,7 +30,12 @@ export function getClientIp(req: Request): string {
   return "unknown";
 }
 
-export type RateLimitResult = { allowed: boolean; remaining: number };
+export type RateLimitResult = {
+  allowed: boolean;
+  remaining: number;
+  /** Seconds until the window resets; set when `allowed` is false. */
+  retryAfterSec?: number;
+};
 
 /**
  * Fixed-window per-IP rate limit. Returns `allowed: false` once the caller
@@ -58,7 +63,11 @@ export function checkRateLimit(
 
     existing.count += 1;
     if (existing.count > opts.limit) {
-      return { allowed: false, remaining: 0 };
+      return {
+        allowed: false,
+        remaining: 0,
+        retryAfterSec: Math.max(1, Math.ceil((existing.resetAt - now) / 1000)),
+      };
     }
     return { allowed: true, remaining: opts.limit - existing.count };
   } catch (err) {
