@@ -681,7 +681,7 @@ export default async function ThankYouPage({
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2"
                   style={{
-                    background: "var(--terracotta)",
+                    background: "var(--terracotta-aa)",
                     color: "var(--cream-3)",
                     padding: "14px 22px",
                     fontFamily: "var(--font-sans)",

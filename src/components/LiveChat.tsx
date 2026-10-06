@@ -473,7 +473,7 @@ export default function LiveChat() {
                 position: "relative",
                 width: isMobile ? 44 : 64,
                 height: isMobile ? 44 : 64,
-                background: "var(--terracotta)",
+                background: "var(--terracotta-aa)",
                 color: "var(--cream-3)",
                 borderRadius: 2,
                 border: "1px solid rgba(26,26,26,0.18)",
@@ -598,7 +598,7 @@ export default function LiveChat() {
                   style={
                     m.from === "user"
                       ? {
-                          background: "var(--terracotta)",
+                          background: "var(--terracotta-aa)",
                           color: "var(--cream-3)",
                           borderRadius: 2,
                         }
@@ -673,7 +673,7 @@ export default function LiveChat() {
               aria-label="Send"
               className="w-9 h-9 flex items-center justify-center"
               style={{
-                background: "var(--terracotta)",
+                background: "var(--terracotta-aa)",
                 color: "var(--cream-3)",
                 borderRadius: 2,
                 border: "none",

@@ -895,7 +895,7 @@ export default function AboutPage() {
             <Link
               href="/contact"
               style={{
-                background: "var(--terracotta)",
+                background: "var(--terracotta-aa)",
                 color: "var(--cream-3)",
                 padding: "16px 28px",
                 fontFamily: "var(--font-sans)",

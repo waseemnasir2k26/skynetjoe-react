@@ -320,7 +320,7 @@ export default async function ToolsIndexPage({
                                   fontWeight: 700,
                                   letterSpacing: "0.12em",
                                   padding: "3px 8px",
-                                  background: "var(--terracotta)",
+                                  background: "var(--terracotta-aa)",
                                   color: "var(--cream)",
                                   borderRadius: 999,
                                 }}

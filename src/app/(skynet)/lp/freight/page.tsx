@@ -47,7 +47,7 @@ const css = `
   .lp-frt-cab { display: flex; align-items: center; gap: 18px; background: var(--ink); color: var(--cream);
     border-radius: 16px; padding: 22px 24px; margin: 0 0 22px; border: 1px solid rgba(0,0,0,0.2); }
   .lp-frt-phone { position: relative; flex-shrink: 0; width: 54px; height: 54px; border-radius: 50%;
-    background: var(--terracotta); display: flex; align-items: center; justify-content: center; }
+    background: var(--terracotta-aa); display: flex; align-items: center; justify-content: center; }
   .lp-frt-phone span { display: block; width: 22px; height: 22px; border-radius: 5px;
     border: 3px solid var(--cream); border-top: none; border-right: none; transform: rotate(-45deg); }
   .lp-frt-phone::before, .lp-frt-phone::after { content: ""; position: absolute; inset: -6px; border-radius: 50%;
@@ -75,7 +75,7 @@ const css = `
   .lp-frt-load .gone { font-family: var(--font-mono-plex), monospace; font-size: 1.1rem; font-weight: 700; color: var(--oxblood); white-space: nowrap; }
   @keyframes lp-frt-slide { to { opacity: 1; transform: translateX(0); } }
 
-  .lp-frt-btn { display: inline-block; background: var(--terracotta); color: #fff; padding: 15px 30px; border-radius: 11px;
+  .lp-frt-btn { display: inline-block; background: var(--terracotta-aa); color: #fff; padding: 15px 30px; border-radius: 11px;
     font-weight: 700; text-decoration: none; border: none; cursor: pointer; font-size: 1.02rem; font-family: inherit; line-height: 1.1; }
   .lp-frt-btn:hover { background: #a8541f; }
   .lp-frt-btn:focus-visible, .lp-frt-form input:focus-visible, .lp-frt-faq summary:focus-visible {

@@ -369,7 +369,7 @@ export default function PricingCalculator() {
         <div
           style={{
             padding: 32,
-            background: "var(--terracotta)",
+            background: "var(--terracotta-aa)",
             color: "var(--cream-3)",
           }}
         >

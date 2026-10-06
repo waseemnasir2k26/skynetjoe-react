@@ -990,7 +990,7 @@ html:not(.theme-dark) [style*="linear-gradient(135deg, #1E88E5"] {
 
 /* btn-primary gradient → flat terracotta on cream (kills the ocean blue) */
 html:not(.theme-dark) .btn-primary {
-  background: var(--terracotta) !important;
+  background: var(--terracotta-aa) !important;
   color: var(--cream-3) !important;
   border-radius: 2px !important;
   box-shadow: none !important;
@@ -1102,7 +1102,7 @@ html:not(.theme-dark) main.bg-gradient-to-br[class*="061827"] {
   box-shadow: 0 6px 18px rgba(26, 26, 26, 0.22) !important;
 }
 .cream-zoom-dialog [data-rmiz-btn-zoom] {
-  background: var(--terracotta) !important;
+  background: var(--terracotta-aa) !important;
   color: var(--cream-3) !important;
   border-radius: 2px !important;
   border: 1px solid var(--terracotta) !important;
@@ -1148,7 +1148,7 @@ html:not(.theme-dark) main.bg-gradient-to-br[class*="061827"] {
   opacity: 1;
 }
 .zoom-badge:hover {
-  background: var(--terracotta);
+  background: var(--terracotta-aa);
   color: var(--cream-3);
   border-color: var(--terracotta);
 }

@@ -79,7 +79,7 @@ export default function Header() {
               width: 30,
               height: 30,
               borderRadius: 6,
-              background: "var(--terracotta)",
+              background: "var(--terracotta-aa)",
               color: "var(--cream-3)",
               fontFamily: "var(--font-display)",
               fontSize: "0.78rem",

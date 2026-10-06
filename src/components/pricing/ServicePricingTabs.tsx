@@ -181,7 +181,7 @@ function TierCard({ tier, idx }: { tier: ServiceTier; idx: number }) {
                 fontFamily: "var(--font-sans)",
                 fontSize: "0.875rem",
                 fontWeight: 700,
-                background: "var(--terracotta)",
+                background: "var(--terracotta-aa)",
                 color: "var(--cream-3)",
                 borderRadius: 2,
                 border: "none",

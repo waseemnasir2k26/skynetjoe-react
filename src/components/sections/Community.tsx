@@ -171,7 +171,7 @@ export default function Community() {
           <Link
             href="/contact"
             style={{
-              background: "var(--terracotta)",
+              background: "var(--terracotta-aa)",
               color: "var(--cream-3)",
               padding: "14px 22px",
               fontFamily: "var(--font-sans)",

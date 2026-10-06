@@ -79,7 +79,7 @@ const cardCream = {
   borderRadius: 2,
 };
 const ctaPrimary = {
-  background: "var(--terracotta)",
+  background: "var(--terracotta-aa)",
   color: "var(--cream-3)",
   padding: "16px 28px",
   fontFamily: "var(--font-sans)",
@@ -704,7 +704,7 @@ export default function IndustryLanding({ industry: i }: Props) {
                     style={
                       featured
                         ? {
-                            background: "var(--terracotta)",
+                            background: "var(--terracotta-aa)",
                             color: "var(--cream-3)",
                             padding: "14px 22px",
                             fontFamily: "var(--font-sans)",

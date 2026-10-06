@@ -443,7 +443,7 @@ export default function ExitIntentModal() {
                 disabled={status === "submitting"}
                 className="mt-1 inline-flex items-center justify-center gap-2"
                 style={{
-                  background: "var(--terracotta)",
+                  background: "var(--terracotta-aa)",
                   color: "var(--cream-3)",
                   padding: "14px 24px",
                   fontFamily: "var(--font-sans)",

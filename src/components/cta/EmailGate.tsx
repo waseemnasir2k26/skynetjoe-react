@@ -280,7 +280,7 @@ export default function EmailGate({
             className="hover:opacity-90"
             style={{
               marginTop: 14,
-              background: "var(--terracotta)",
+              background: "var(--terracotta-aa)",
               color: "var(--cream-3)",
               padding: "14px 24px",
               fontFamily: "var(--font-sans)",

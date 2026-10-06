@@ -155,7 +155,7 @@ const callCss = `
 .ic-row { display: flex; align-items: center; gap: 14px; padding-top: 4px; }
 .ic-avatar {
   position: relative; width: 56px; height: 56px; border-radius: 50%;
-  background: var(--terracotta);
+  background: var(--terracotta-aa);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
@@ -226,7 +226,7 @@ const callCss = `
 }
 .ic-btn-decline:hover { background: rgba(107, 44, 44, 0.08); filter: none; }
 .ic-btn-accept {
-  background: var(--terracotta);
+  background: var(--terracotta-aa);
   color: var(--cream-3);
   animation: ic-shake 0.9s ease-in-out infinite;
 }

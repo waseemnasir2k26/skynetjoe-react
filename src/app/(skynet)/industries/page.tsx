@@ -149,7 +149,7 @@ export default function IndustriesIndexPage() {
               href="/contact"
               className="inline-flex items-center gap-2"
               style={{
-                background: "var(--terracotta)",
+                background: "var(--terracotta-aa)",
                 color: "var(--cream-3)",
                 padding: "16px 28px",
                 fontFamily: "var(--font-sans)",
@@ -361,7 +361,7 @@ export default function IndustriesIndexPage() {
               href="/contact"
               className="inline-flex items-center gap-2"
               style={{
-                background: "var(--terracotta)",
+                background: "var(--terracotta-aa)",
                 color: "var(--cream-3)",
                 padding: "16px 28px",
                 fontFamily: "var(--font-sans)",

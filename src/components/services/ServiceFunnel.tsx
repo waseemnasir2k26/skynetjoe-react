@@ -253,7 +253,7 @@ export default function ServiceFunnel({
     maxWidth: "26ch",
   };
   const primaryBtn: React.CSSProperties = {
-    background: "var(--terracotta)",
+    background: "var(--terracotta-aa)",
     color: "var(--cream-3)",
     padding: "16px 28px",
     fontFamily: "var(--font-sans)",
@@ -315,7 +315,7 @@ export default function ServiceFunnel({
       {/* 1. UTILITY STRIP */}
       <div
         style={{
-          background: "var(--terracotta)",
+          background: "var(--terracotta-aa)",
           color: "var(--cream-3)",
           fontFamily: "var(--font-mono)",
           fontSize: 11,
@@ -790,7 +790,7 @@ export default function ServiceFunnel({
                     width: 36,
                     height: 36,
                     borderRadius: 4,
-                    background: "var(--terracotta)",
+                    background: "var(--terracotta-aa)",
                     color: "var(--cream-3)",
                     fontFamily: "var(--font-display)",
                     fontWeight: 600,
@@ -1214,7 +1214,7 @@ export default function ServiceFunnel({
                             textTransform: "uppercase",
                             letterSpacing: "0.12em",
                             color: "var(--cream-3)",
-                            background: "var(--terracotta)",
+                            background: "var(--terracotta-aa)",
                             padding: "4px 8px",
                             borderRadius: 999,
                           }}

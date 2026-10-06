@@ -104,7 +104,7 @@ export default function StickyBookCallBar() {
         aria-label="Book a strategy call"
         className="hidden md:flex fixed top-0 left-0 right-0 z-40 items-center justify-center px-4 py-2.5"
         style={{
-          background: "var(--terracotta)",
+          background: "var(--terracotta-aa)",
           color: "var(--cream-3)",
           fontFamily: "var(--font-sans)",
           transform: visible
@@ -218,7 +218,7 @@ export default function StickyBookCallBar() {
           href="/contact"
           className="inline-flex items-center justify-center shrink-0"
           style={{
-            background: "var(--terracotta)",
+            background: "var(--terracotta-aa)",
             color: "var(--cream-3)",
             padding: "10px 14px",
             borderRadius: 2,

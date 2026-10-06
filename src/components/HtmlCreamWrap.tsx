@@ -179,7 +179,7 @@ export default function HtmlCreamWrap({ html }: { html: string }) {
         }
         .cream-html-wrap article[class*="wn-"] .wn-cta a,
         .cream-html-wrap article[class*="wn-"] .wn-final-cta a {
-          background: var(--terracotta) !important;
+          background: var(--terracotta-aa) !important;
           color: var(--cream-3) !important;
           border-radius: 2px !important;
           font-weight: 600 !important;
