@@ -19,11 +19,27 @@ const buckets = new Map<string, Bucket>();
 // Hard cap so a distributed-IP flood can't grow this Map without bound.
 const MAX_TRACKED_KEYS = 5000;
 
+/**
+ * Client IP used as the rate-limit key.
+ *
+ * ASSUMPTION: the app runs behind exactly one trusted reverse proxy
+ * (Hostinger's front end for the Node app) that APPENDS the connecting
+ * address to X-Forwarded-For. Anything to the left of that last hop is
+ * supplied by the client and trivially spoofable, so the FIRST value (what
+ * this used to read) let an attacker mint a fresh bucket per request. We take
+ * the LAST hop instead. No CDN-specific client-IP header (cf-connecting-ip,
+ * true-client-ip) is evidently present in this stack, so none is trusted. If
+ * a CDN is ever put in front, revisit: the last hop would then be the CDN edge.
+ */
 export function getClientIp(req: Request): string {
   const fwd = req.headers.get("x-forwarded-for");
   if (fwd) {
-    const first = fwd.split(",")[0]?.trim();
-    if (first) return first;
+    const hops = fwd
+      .split(",")
+      .map((h) => h.trim())
+      .filter(Boolean);
+    const last = hops[hops.length - 1];
+    if (last) return last;
   }
   const real = req.headers.get("x-real-ip");
   if (real) return real.trim();
