@@ -116,6 +116,8 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .brand { font-family:var(--font-serif-fraunces),serif; font-weight:600; font-size:22px; letter-spacing:-0.02em; display:flex; align-items:center; gap:10px; }
 .lp-log-v3 .brand-dot { width:10px; height:10px; background:var(--terracotta); border-radius:2px; box-shadow:0 0 0 0 rgba(198,107,63,0.6); animation:pulse-soft 2.4s infinite; }
 .lp-log-v3 .brand em { color:var(--ink-faint); font-style:italic; font-weight:500; font-size:18px; }
+.lp-log-v3 .brand { white-space:nowrap; }
+@media (max-width:480px) { .lp-log-v3 .brand em { display:none; } }
 .lp-log-v3 .nav-cta { font-size:13px; font-weight:600; padding:10px 18px; background:var(--ink); color:var(--cream); border-radius:999px; transition:background 0.18s,transform 0.18s; }
 .lp-log-v3 .nav-cta:hover { background:var(--terracotta); transform:translateY(-1px); }
 
@@ -147,6 +149,10 @@ html { scroll-behavior:smooth; }
 .lp-log-v3 .scroll-indicator:hover { border-color:var(--terracotta); color:var(--terracotta); }
 @keyframes bounce-down { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(6px); } }
 
+/* SIMULATED-DEMO-DATA LABEL (honesty: demo numbers stay, but are labelled) */
+.lp-log-v3 .sim-label { display:inline-block; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; white-space:nowrap; padding:3px 8px; border:1px solid currentColor; border-radius:999px; color:var(--ink-2); background:rgba(26,26,26,0.05); }
+.lp-log-v3 .live-ticker .sim-label { color:var(--cream); background:rgba(242,239,230,0.12); }
+.lp-log-v3 .sim-label-block { display:block; width:fit-content; margin:0 auto 12px; }
 /* LIVE TICKER */
 .lp-log-v3 .live-ticker { background:var(--ink); color:var(--cream); padding:14px 24px; display:flex; align-items:center; justify-content:center; gap:14px; font-size:13px; letter-spacing:0.02em; flex-wrap:wrap; }
 .lp-log-v3 .live-ticker strong { color:var(--ochre); font-family:var(--font-mono-plex),monospace; font-weight:700; padding:0 4px; }
@@ -578,17 +584,12 @@ export default function LogisticsLP() {
               <div className="hero-scarcity">
                 <strong>Limited build slots</strong>&nbsp;· 8-hour reply window
               </div>
-              <div className="featured-in">
-                <span className="featured-lbl">Featured</span>
-                <span>Upwork Top Rated Plus</span>
-                <span>Vercel SaaS</span>
-                <span>Canggu Builders Bali</span>
-              </div>
             </div>
           </div>
 
           {/* DASHBOARD MOCKUP — interactive tabs */}
           <div className="mockup-wrap">
+            <div className="sim-label sim-label-block">Simulated demo data</div>
             <div
               className="mockup"
               role="region"
@@ -1195,6 +1196,7 @@ export default function LogisticsLP() {
         <div className="live-ticker">
           <span className="ticker-pulse"></span>
           <span className="ticker-lbl">LIVE</span>
+          <span className="sim-label">Simulated demo data</span>
           <span>
             <strong>47</strong> calls qualified across cohort today
           </span>
@@ -1211,7 +1213,7 @@ export default function LogisticsLP() {
         {/* MARQUEE LOGO STRIP */}
         <section className="logo-strip">
           <div className="logo-label">
-            Operators on the stack — 9 shipped builds, every repo handed over
+            9 shipped builds across other industries — every repo handed over
           </div>
           <div className="logo-marquee">
             <span className="name">Vow Sanctuary</span>
@@ -1515,7 +1517,10 @@ export default function LogisticsLP() {
                   qualifying loads, fee-aware ranking, auto invoice attach.
                 </div>
                 <ul className="feat-list">
-                  <li>74% queue settled within 4 hours</li>
+                  <li>
+                    74% queue settled within 4 hours{" "}
+                    <span className="sim-label">Simulated demo data</span>
+                  </li>
                   <li>Fee diff display per load</li>
                   <li>Push to QuickBooks ledger</li>
                 </ul>
@@ -1873,7 +1878,6 @@ export default function LogisticsLP() {
                 You&apos;re probably thinking <em>one of these.</em>
               </h2>
               <p className="section-sub">
-                Cold ad clicks land here with the same six objections.
                 We&apos;ve heard them on every audit call. Honest answers below.
               </p>
             </div>
