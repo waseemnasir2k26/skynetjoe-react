@@ -399,6 +399,13 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: securityHeaders,
       },
+      // Everything under /lp/ stays out of the index, including the static
+      // concept files in public/lp/*.html that carry no robots meta of their
+      // own. robots.txt no longer disallows /lp/, so crawlers can see this.
+      {
+        source: "/lp/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
   async redirects() {

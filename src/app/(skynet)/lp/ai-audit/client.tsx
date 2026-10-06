@@ -146,7 +146,7 @@ function BookingEmbed({
             hideGdprBanner: true,
             hideLandingPageDetails: false,
           }}
-          iframeTitle="SkynetLabs · Free 20-minute AI systems audit"
+          iframeTitle="SkynetLabs · Free 30-minute AI systems audit"
           LoadingSpinner={() => (
             <div
               style={{
@@ -535,7 +535,7 @@ export default function AiAuditClient() {
             marginBottom: 18,
           }}
         >
-          Free · 20 minutes · on Zoom · for business owners
+          Free · 30 minutes · on Zoom · for business owners
         </p>
         <h1
           style={{
@@ -560,7 +560,7 @@ export default function AiAuditClient() {
         >
           Most businesses take enquiries through four doors at once — the form,
           the phone, the inbox, the DMs — and nobody is standing behind all
-          four. On a free 20-minute audit call we walk through <em>your</em>{" "}
+          four. On a free 30-minute audit call we walk through <em>your</em>{" "}
           funnel together, find where enquiries leak, and map what an AI system
           would do at each hole. You keep the findings either way.
         </p>
@@ -652,7 +652,7 @@ export default function AiAuditClient() {
             margin: "0 0 34px",
           }}
         >
-          How the 20 minutes run
+          How the 30 minutes run
         </h2>
         <div style={{ display: "grid", gap: 14 }}>
           {STEPS.map((s) => (

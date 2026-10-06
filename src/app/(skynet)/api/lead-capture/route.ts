@@ -6,6 +6,7 @@ import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink } from "@/lib/lead-sink";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 import { sendCapiLead } from "@/lib/meta-capi";
+import { hasMetaConsent } from "@/lib/request-guard";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 import { guardJsonPost, tooManyRequests } from "@/lib/request-guard";
 
@@ -139,7 +140,7 @@ export async function POST(req: Request) {
   // Fail-soft by design: no token (pre-Gate-1) or Graph error never blocks
   // the lead paths below. Fire-and-forget would risk the runtime freezing
   // the promise on some hosts, so we await but ignore the result.
-  if (payload.eventId) {
+  if (payload.eventId && hasMetaConsent(req)) {
     await sendCapiLead({
       email,
       eventId: payload.eventId,

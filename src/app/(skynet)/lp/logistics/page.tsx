@@ -1194,7 +1194,7 @@ export default function LogisticsLP() {
         {/* LIVE TICKER — across-cohort activity */}
         <div className="live-ticker">
           <span className="ticker-pulse"></span>
-          <span className="ticker-lbl">LIVE</span>
+          <span className="ticker-lbl">DEMO</span>
           <span className="sim-label">Simulated demo data</span>
           <span>
             <strong>47</strong> calls qualified across cohort today

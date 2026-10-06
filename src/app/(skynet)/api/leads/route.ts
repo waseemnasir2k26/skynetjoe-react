@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendCapiLead } from "@/lib/meta-capi";
+import { hasMetaConsent } from "@/lib/request-guard";
 import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { postTriageShadow } from "@/lib/jev-triage";
@@ -304,7 +305,7 @@ export async function POST(req: Request) {
   // Server-side CAPI mirror of the browser pixel event, deduped via eventId
   // (browser fires fbq('track', <event>, {}, {eventID}) with the same id).
   // Fail-soft by design — never blocks the lead path.
-  if (payload.eventId) {
+  if (payload.eventId && hasMetaConsent(req)) {
     const capi = await sendCapiLead({
       email,
       eventId: payload.eventId,

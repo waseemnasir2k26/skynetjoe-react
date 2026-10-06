@@ -12,13 +12,13 @@ import AiAuditClient from "./client";
 const PAGE_URL = `${SITE.url.replace(/\/+$/, "")}/lp/ai-audit`;
 
 export const metadata: Metadata = {
-  title: pageTitle("Free AI Systems Audit — 20-Minute Call | SkynetLabs"),
+  title: pageTitle("Free AI Systems Audit — 30-Minute Call | SkynetLabs"),
   description:
-    pageDescription("A 20-minute call for business owners: we walk through how your website, phone and inbox actually handle an enquiry, find where leads leak, and map what an AI system would do at each hole. Free — you keep the findings."),
+    pageDescription("A 30-minute call for business owners: we walk through how your website, phone and inbox actually handle an enquiry, find where leads leak, and map what an AI system would do at each hole. Free — you keep the findings."),
   alternates: { canonical: PAGE_URL },
   robots: { index: false, follow: false },
   openGraph: {
-    title: "Free AI Systems Audit — 20 minutes, on Zoom",
+    title: "Free AI Systems Audit — 30 minutes, on Zoom",
     description:
       "Watch your own enquiry funnel leak, live on the call — and leave with a map of what to fix first.",
     url: PAGE_URL,
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free AI Systems Audit — 20 minutes",
+    title: "Free AI Systems Audit — 30 minutes",
     description:
       "Watch your own enquiry funnel leak, live on the call. Free, findings are yours.",
     images: ["/og-default.png"],

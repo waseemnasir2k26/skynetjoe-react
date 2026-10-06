@@ -71,6 +71,16 @@ function storeChoice(v: "granted" | "denied") {
   } catch {
     /* storage blocked — choice just won't persist */
   }
+  // First-party cookie mirror so the server can honour the same choice before
+  // it mirrors a lead to Meta's Conversions API (see hasMetaConsent).
+  try {
+    document.cookie =
+      v === "granted"
+        ? `${STORAGE_KEY}=granted; Path=/; Max-Age=15552000; SameSite=Lax; Secure`
+        : `${STORAGE_KEY}=; Path=/; Max-Age=0; SameSite=Lax; Secure`;
+  } catch {
+    /* cookies blocked — server treats the visitor as not consented */
+  }
 }
 
 /** Standard Meta bootstrap, written out so it only runs after consent. */
@@ -136,7 +146,7 @@ export function MetaPixel() {
     <div
       role="region"
       aria-label="Advertising cookie choice"
-      className="fixed left-3 bottom-3 right-3 sm:right-auto z-[70] sm:max-w-[420px]"
+      className="fixed left-3 right-3 top-3 sm:top-auto sm:bottom-24 sm:right-auto z-[70] sm:max-w-[420px]"
       style={{
         background: "var(--cream-3)",
         color: "var(--ink)",
@@ -148,7 +158,7 @@ export function MetaPixel() {
     >
       <p style={{ fontSize: "0.875rem", lineHeight: 1.5, margin: 0 }}>
         May we load Meta&apos;s advertising pixel to measure our ads? It sets
-        cookies. Nothing loads unless you accept.{" "}
+        cookies. Nothing is sent to Meta unless you accept.{" "}
         <Link
           href="/privacy-policy"
           style={{ color: "var(--terracotta-aa)", textDecoration: "underline" }}

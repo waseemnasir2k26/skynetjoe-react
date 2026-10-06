@@ -7,8 +7,10 @@ import { SITE } from "@/lib/site";
 // generic `/api/` disallow (specific allow beats generic disallow per RFC 9309).
 // /lp/ is NOT disallowed (2026-10-07): robots.txt blocks crawling, so a crawler
 // could never see the pages' `noindex` meta and URLs that were linked
-// elsewhere could still be indexed as bare URLs. Every /lp/* page carries
-// `robots: { index: false, follow: false }` instead — keep it that way.
+// elsewhere could still be indexed as bare URLs. Every /lp/* route carries
+// `robots: { index: false, follow: false }`, and next.config.ts sends
+// `X-Robots-Tag: noindex, nofollow` for all of /lp/ (that also covers the
+// static concept files in public/lp/) — keep both.
 const DISALLOW = ["/admin", "/admin/", "/api/"];
 const ALLOW = ["/", "/api/llms-feed"];
 
