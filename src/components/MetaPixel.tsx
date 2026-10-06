@@ -146,19 +146,26 @@ export function MetaPixel() {
     <div
       role="region"
       aria-label="Advertising cookie choice"
-      className="fixed left-3 right-3 top-3 sm:top-auto sm:bottom-24 sm:right-auto z-[70] sm:max-w-[420px]"
+      className="fixed left-3 right-3 top-[68px] sm:top-auto sm:bottom-3 sm:right-auto z-[70] sm:max-w-[420px]"
       style={{
         background: "var(--cream-3)",
         color: "var(--ink)",
         border: "1px solid var(--ink)",
         borderRadius: 2,
-        padding: "14px 16px",
+        padding: "10px 14px",
         boxShadow: "0 8px 28px rgba(26,26,26,0.18)",
       }}
     >
       <p style={{ fontSize: "0.875rem", lineHeight: 1.5, margin: 0 }}>
-        May we load Meta&apos;s advertising pixel to measure our ads? It sets
-        cookies. Nothing is sent to Meta unless you accept.{" "}
+        {/* Phones get the short form so the bar stays clear of the header
+            menu above it and the hero / sticky CTAs below it. */}
+        <span className="sm:hidden">
+          OK to load Meta&apos;s ad pixel? It sets cookies.{" "}
+        </span>
+        <span className="hidden sm:inline">
+          May we load Meta&apos;s advertising pixel to measure our ads? It sets
+          cookies. Nothing is sent to Meta unless you accept.{" "}
+        </span>
         <Link
           href="/privacy-policy"
           style={{ color: "var(--terracotta-aa)", textDecoration: "underline" }}
@@ -166,7 +173,7 @@ export function MetaPixel() {
           Privacy policy
         </Link>
       </p>
-      <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+      <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
         <button
           type="button"
           onClick={() => decide("granted")}
