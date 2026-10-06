@@ -433,7 +433,7 @@ export const INDUSTRIES: Industry[] = [
       "Book a spa-specific audit. We pull a week of your IG DMs, your no-show rate from MindBody or Vagaro, and tell you honestly what the Concierge AI is worth to your spa in month one.",
     finalCtaButtonLabel: "Book the spa audit",
     finalCtaHref: "/contact",
-    metaTitle: "Wellness Spa Concierge AI — MindBody, Vagaro, Boulevard",
+    metaTitle: "Wellness Spa Concierge AI — MindBody & Vagaro",
     metaDescription:
       "Concierge AI for wellness spas & medspas. DM-to-book in 90 sec, refills no-shows, runs reactivation. Integrates with MindBody, Vagaro, Boulevard. 5-14 day ship.",
     integrationsListedForSchema: [
@@ -620,7 +620,7 @@ export const INDUSTRIES: Industry[] = [
       "Book a freight-specific audit. We pull a week of your dispatch logs, model the off-hours capture rate and the margin lift from lane intelligence, and tell you honestly whether this earns out inside 60 days.",
     finalCtaButtonLabel: "Book the freight audit",
     finalCtaHref: "/contact",
-    metaTitle: "Freight Dispatch Agent — McLeod, AscendTMS, FreightWaves",
+    metaTitle: "Freight Dispatch Agent — McLeod & AscendTMS",
     metaDescription:
       "AI dispatch agent for freight carriers. Calls answered in seconds, rate-sheet OCR, lane intelligence. Integrates with McLeod, AscendTMS, Truckstop, Samsara.",
     integrationsListedForSchema: [

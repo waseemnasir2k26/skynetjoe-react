@@ -45,6 +45,8 @@ export type EngagementKind = "client" | "internal" | "demo";
 
 export type CaseStudy = {
   slug: string;
+  /** Hand-written <title> (<=47 chars, no brand suffix). */
+  seoTitle?: string;
   position: number; // 01..09 ordering badge from index
   /** Defaults to "client" when omitted. See EngagementKind. */
   engagementKind?: EngagementKind;
@@ -70,6 +72,7 @@ export type CaseStudy = {
 export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "eu-logistics-email-triage-n8n",
+    seoTitle: "EU Logistics Group — Automation Case Study",
     position: 1,
     clientName: "EU logistics group (anonymized)",
     industry: "Mining & freight logistics",
@@ -141,6 +144,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "bali-wellness-conversion-funnel",
+    seoTitle: "Ubud Wellness Practitioner — Web Case Study",
     position: 2,
     clientName: "Wellness practitioner, Ubud",
     industry: "Holistic wellness & coaching",
@@ -206,6 +210,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "northeast-recovery-brand-intake-rescue",
+    seoTitle: "Northeast US Recovery Network — Case Study",
     position: 3,
     clientName: "Clinical recovery network, Northeast US",
     industry: "Clinical recovery & behavioral health",
@@ -276,6 +281,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "us-insurance-gohighlevel-rebuild",
+    seoTitle: "US Insurance Retainer — Automation Case Study",
     position: 4,
     clientName: "Insurance retainer client, US",
     industry: "Insurance",
@@ -410,6 +416,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "premium-auto-dealership-network-demo",
+    seoTitle: "Auto Dealer Network (anonymized) — Case Study",
     position: 6,
     // Speculative pitch build shipped to win the work — not a delivered
     // engagement. Figures describe the demo, not a client's live results.
@@ -481,6 +488,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "ksa-fashion-retailer-shopify-ecommerce",
+    seoTitle: "KSA Fashion Retailer — Websites Case Study",
     position: 7,
     clientName: "KSA fashion retailer (anonymized)",
     industry: "Fashion e-commerce (footwear)",
@@ -550,6 +558,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: "saas-multi-channel-aeo-content-engine",
+    seoTitle: "SaaS Launch (anonymized) — Content Case Study",
     position: 8,
     clientName: "Multi-channel SaaS launch (anonymized)",
     industry: "SaaS / B2B software",

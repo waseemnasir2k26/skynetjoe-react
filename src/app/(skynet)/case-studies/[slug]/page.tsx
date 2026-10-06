@@ -31,7 +31,9 @@ export async function generateMetadata({
 
   // No `| SkynetLabs` suffix — root layout's title.template already
   // appends it; a hardcoded suffix here doubled the brand in <title>.
-  const title = pageTitle(`${c.clientName} — ${c.industryTag} case study`);
+  const title = pageTitle(
+    c.seoTitle ?? `${c.clientName} — ${c.industryTag} case study`,
+  );
   const description = pageDescription(c.oneLineOutcome);
 
   return {

@@ -145,30 +145,35 @@ export const SERVICE_CATEGORIES = [
     services: [
       {
         slug: "n8n-automation",
+        seoTitle: "n8n Automation Agency — Fixed-Price Builds",
         label: "n8n Automation",
         icon: "Bot",
         desc: "Workflow automation that runs while you sleep",
       },
       {
         slug: "ai-chatbots",
+        seoTitle: "AI Chatbots for Small Business — Done for You",
         label: "AI Chatbots",
         icon: "MessageSquare",
         desc: "Live chat + web + voice agents",
       },
       {
         slug: "gohighlevel",
+        seoTitle: "GoHighLevel CRM Setup & Automation",
         label: "GoHighLevel CRM",
         icon: "Target",
         desc: "Full CRM + sales pipeline setup",
       },
       {
         slug: "vibe-coded-sites",
+        seoTitle: "Vibe-Coded Websites — Custom Next.js Builds",
         label: "Vibe-Coded Websites",
         icon: "Zap",
         desc: "Custom Next.js builds, 7-day ship",
       },
       {
         slug: "wordpress-seo",
+        seoTitle: "WordPress SEO Blog Service",
         label: "WordPress SEO Blog",
         icon: "Globe",
         desc: "AEO-tuned content engine",
@@ -307,7 +312,8 @@ function clampAtBoundary(input: string, max: number): string {
 
 /**
  * Normalise a page title: drop any hardcoded brand suffix (the layout template
- * adds exactly one) and clamp to the per-page budget.
+ * adds exactly one). Over-budget titles THROW at build/dev time instead of being
+ * silently truncated (see below).
  * `pageTitle("Foo — Bar | SkynetLabs")` -> `"Foo — Bar"`.
  */
 export function pageTitle(title: string, max = MAX_PAGE_TITLE_CHARS): string {
@@ -316,7 +322,22 @@ export function pageTitle(title: string, max = MAX_PAGE_TITLE_CHARS): string {
     .replace(/\s*[|·—–-]\s*SkynetJoe\s*$/i, "")
     .replace(/\s*[|·—–-]\s*SkynetLabs\s*$/i, "") // handles a doubled suffix
     .trim();
-  return clampAtBoundary(deBranded, max);
+  const text = deBranded.replace(/\s+/g, " ");
+  if (text.length > max) {
+    // A title that needs cutting is a copy bug: the clamp used to chop it
+    // mid-phrase and nobody saw. Fail the build / dev render so it gets
+    // hand-written. At production RUNTIME we still clamp, so a late data change
+    // can never 500 a live page.
+    const strict =
+      process.env.NODE_ENV !== "production" ||
+      process.env.NEXT_PHASE === "phase-production-build";
+    if (strict) {
+      throw new Error(
+        `pageTitle(): "${text}" is ${text.length} chars, over the ${max}-char budget. Hand-write a shorter title (do not rely on truncation).`,
+      );
+    }
+  }
+  return clampAtBoundary(text, max);
 }
 
 /** Clamp a meta description to what Google will actually render. */

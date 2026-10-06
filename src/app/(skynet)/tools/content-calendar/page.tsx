@@ -16,7 +16,7 @@ const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?ut
 
 export const metadata: Metadata = {
   title:
-    pageTitle("30-Day Content Calendar Generator — cross-platform posts in 30 seconds"),
+    pageTitle("30-Day Content Calendar Generator"),
   description:
     pageDescription("Free 30-day cross-platform content calendar. Set niche, cadence and goal. Get LinkedIn, X, IG, Shorts and email ideas — with CSV, ICS and markdown export."),
   alternates: { canonical: `${SITE.url}${PATH}` },

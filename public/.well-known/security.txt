@@ -1,4 +1,4 @@
-Contact: mailto:waseem@skynetjoe.com
+Contact: mailto:info@skynetjoe.com
 Expires: 2027-10-07T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://skynetjoe.com/.well-known/security.txt

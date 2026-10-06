@@ -17,7 +17,7 @@ const breadcrumbListSchema = breadcrumbSchema([
 
 export const metadata: Metadata = {
   title:
-    pageTitle("Free Automation Gap Analyzer — Find Your Biggest Time Drain in 90 Seconds"),
+    pageTitle("Automation Gap Analyzer — Find Your Time Drain"),
   description:
     pageDescription("Free 12-question diagnostic across lead capture, follow-up, reporting, team productivity. Get an automation gap % score plus the one axis to fix first."),
   alternates: { canonical: `${SITE.url}${PATH}` },

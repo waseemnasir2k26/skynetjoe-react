@@ -51,7 +51,7 @@ export async function generateMetadata({
     // No brand suffix here — the (skynet) layout's title.template
     // (`%s | ${SITE.brand}`) already appends it; a hardcoded suffix rendered
     // "... — SkynetLabs | SkynetLabs".
-    title: pageTitle(svc.label),
+    title: pageTitle(svc.seoTitle),
     // buildLongDescription() runs 287-309 chars — great on-page, truncated in
     // the SERP. Clamp for <meta>, keep the long form for og/twitter below.
     description: pageDescription(longDesc),

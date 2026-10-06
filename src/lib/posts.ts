@@ -693,6 +693,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "ai-ops-command-center-never-miss-a-lead",
+    seoTitle: "AI Ops Command Center: Stop Missing Leads",
     title:
       "The AI Ops Command Center: How Small Businesses Stop Missing Leads Forever",
     description:
@@ -712,6 +713,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "claude-fable-5-prompts-40-master-prompts",
+    seoTitle: "Claude Fable 5 Prompts: 40 Master Prompts",
     title: "Claude Fable 5 Prompts: 40 Master Prompts to Run Before July 12",
     description:
       "40 master prompts for Claude Fable 5 — Claude Code, n8n, GHL and agency templates that build reusable assets.",
@@ -731,6 +733,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "aeo-playbook-service-businesses",
+    seoTitle: "The AEO Playbook for Service Businesses",
     title:
       "The AEO Playbook for Service Businesses: Getting Cited by ChatGPT, Claude & Perplexity",
     description:
@@ -743,6 +746,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "llmo-vs-geo-vs-aeo",
+    seoTitle: "LLMO vs GEO vs AEO: The 2026 Acronym Guide",
     title:
       "LLMO vs GEO vs AEO: The 2026 Acronym Guide for AI Search Optimization",
     description:
@@ -756,6 +760,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "track-ai-citations",
+    seoTitle: "How to Track Your AI Search Citations",
     title:
       "How to Track AI Citations Across ChatGPT, Claude, Gemini and Perplexity",
     description:
@@ -777,6 +782,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "how-to-rank-in-chatgpt",
+    seoTitle: "How to Rank in ChatGPT: Direct Answers",
     title:
       "How to Rank in ChatGPT: Direct Answers for Brands That Want to Be Cited",
     description:
@@ -790,6 +796,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "get-cited-by-claude",
+    seoTitle: "How to Get Cited by Claude",
     title:
       "How to Get Cited by Claude: Direct Answers for Anthropic AI Visibility",
     description:
@@ -803,6 +810,7 @@ export const POSTS: Post[] = [
   },
   {
     slug: "aeo-vs-seo",
+    seoTitle: "AEO vs SEO: Differences and Why You Need Both",
     title: "AEO vs SEO: How They Differ and Why You Need Both in 2026",
     seoTitle: "AEO vs SEO: How They Differ, Why You Need Both",
     description:
@@ -846,7 +854,7 @@ export const POSTS: Post[] = [
     slug: "bali-canggu-coworking-economics",
     title:
       "Bali co-working economics — what shipping from Canggu actually costs",
-    seoTitle: "Bali Co-Working Economics: The Real Monthly Cost",
+    seoTitle: "Bali Co-Working Economics: Real Monthly Cost",
     description:
       "A line-by-line breakdown of the monthly cost of running SkynetLabs from Canggu, Bali — including the categories digital-nomad blogs leave out: visa runs, scooter rental, fast Wi-Fi tax, and food delivery.",
     publishedAt: "2026-05-19",

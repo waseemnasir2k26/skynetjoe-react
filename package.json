@@ -15,6 +15,7 @@
     "lint": "eslint",
     "seo:check": "node scripts/seo-guard.mjs",
     "sync-wp": "node scripts/sync-wp-templates.mjs",
+    "test:titles": "node scripts/titles.test.mjs",
     "test": "node scripts/redirects.test.mjs && node scripts/jev-triage.test.mjs && node scripts/redirect-loops.test.mjs && node scripts/client-ip.test.mjs && node scripts/hq-push.test.mjs"
   },
   "dependencies": {
