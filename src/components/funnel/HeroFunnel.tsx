@@ -42,7 +42,7 @@ export default function HeroFunnel() {
       <style>{`@media (max-width: 400px){.trust-sep{display:none}}
 .trust-link{color:inherit;text-decoration:underline;text-decoration-color:rgba(168,69,31,0.35);text-underline-offset:3px}
 .trust-link:hover,.trust-link:focus-visible{text-decoration-color:currentColor}
-@media (min-width: 768px){.hero-graph-mask{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0.12) 0%,rgba(0,0,0,0.12) 42%,#000 66%);mask-image:linear-gradient(90deg,rgba(0,0,0,0.12) 0%,rgba(0,0,0,0.12) 42%,#000 66%)}}`}</style>
+@media (min-width: 768px){.hero-graph-mask{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0.12) 0%,rgba(0,0,0,0.12) 54%,#000 74%);mask-image:linear-gradient(90deg,rgba(0,0,0,0.12) 0%,rgba(0,0,0,0.12) 54%,#000 74%)}}`}</style>
       {/* Desktop: the graph's node labels used to run underneath the headline /
           subhead column. Mask the left (text) side down to a faint trace. */}
       <div
