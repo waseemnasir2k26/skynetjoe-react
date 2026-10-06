@@ -2,13 +2,14 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 
 // Shared rule body — every UA gets the same allow/disallow set so admin,
-// generic API, and LP routes stay off-limits everywhere (including LLM bots).
+// and generic API routes stay off-limits everywhere (including LLM bots).
 // `/api/llms-feed` is the AEO feed and stays explicitly allowed despite the
 // generic `/api/` disallow (specific allow beats generic disallow per RFC 9309).
-// TODO 2026-09-11 — re-review the "/lp/" disallow. Waseem's paid-traffic
-// freeze keeps the ad landing pages out of the index until then; do NOT lift
-// it earlier (memory: reference-skynetjoe-paid-traffic-freeze-still-live).
-const DISALLOW = ["/admin", "/admin/", "/api/", "/lp/"];
+// /lp/ is NOT disallowed (2026-10-07): robots.txt blocks crawling, so a crawler
+// could never see the pages' `noindex` meta and URLs that were linked
+// elsewhere could still be indexed as bare URLs. Every /lp/* page carries
+// `robots: { index: false, follow: false }` instead — keep it that way.
+const DISALLOW = ["/admin", "/admin/", "/api/"];
 const ALLOW = ["/", "/api/llms-feed"];
 
 export default function robots(): MetadataRoute.Robots {
