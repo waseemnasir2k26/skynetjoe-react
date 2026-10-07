@@ -134,8 +134,8 @@ export default function Page() {
             ride home.
           </li>
           <li>
-            <strong>Cal.com</strong> — only available slots, two days out, 15
-            and 30 minute options. No back-and-forth scheduling.
+            <strong>Calendly</strong> — only available slots, two days out, one
+            30-minute option. No back-and-forth scheduling.
           </li>
           <li>
             <strong>Loom</strong> — when something can&apos;t be explained in a
@@ -145,7 +145,7 @@ export default function Page() {
         </ul>
         <p>
           That&apos;s the entire ops stack. Total cost: $35/month for Notion
-          Plus and a Loom seat. Signal and Cal.com are free.
+          Plus and a Loom seat. Signal and Calendly are free.
         </p>
 
         <h2>The weekly rhythm</h2>

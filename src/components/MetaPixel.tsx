@@ -164,7 +164,9 @@ export function MetaPixel() {
         </span>
         <span className="hidden sm:inline">
           May we load Meta&apos;s advertising pixel to measure our ads? It sets
-          cookies. Nothing is sent to Meta unless you accept. The Calendly booking widget opens only when you ask for it.{" "}
+          cookies. Our pages send nothing to Meta unless you accept. The
+          Calendly booking widget opens only when you ask for it and loads
+          Meta’s script inside its own frame.{" "}
         </span>
         <Link
           href="/privacy-policy"
@@ -223,12 +225,13 @@ export function MetaPixelEvents() {
       attached = true;
       const track = (...a: unknown[]) => w.fbq && w.fbq(...a);
       // Lead: form submit on email capture
-      document.querySelectorAll<HTMLElement>("form[data-meta-event]").forEach(
-        (f) =>
+      document
+        .querySelectorAll<HTMLElement>("form[data-meta-event]")
+        .forEach((f) =>
           f.addEventListener("submit", () =>
             track("track", f.dataset.metaEvent || "Lead"),
           ),
-      );
+        );
       // InitiateCheckout: pricing card CTAs
       document
         .querySelectorAll<HTMLElement>(

@@ -14,8 +14,9 @@ export const metadata: Metadata = {
   // No ", SkynetLabs" here — title.template in (skynet)/layout.tsx appends
   // " | SkynetLabs", which produced "... SkynetLabs | SkynetLabs" live.
   title: pageTitle("Waseem Nasir — Founder & Automation Engineer"),
-  description:
-    pageDescription("Founder of SkynetLabs. n8n workflows, AI chatbots and conversion-tuned websites, built solo from Bali for service businesses worldwide."),
+  description: pageDescription(
+    "Founder of SkynetLabs. n8n workflows, AI chatbots and conversion-tuned websites, built solo from Bali for service businesses worldwide.",
+  ),
   alternates: { canonical: `${SITE.url}/author/waseem-nasir` },
   openGraph: {
     title: "Waseem Nasir — Founder, SkynetLabs",
@@ -107,7 +108,6 @@ const schema = {
       sameAs: [
         "https://www.linkedin.com/in/waseemnasir",
         SITE.social.linkedin,
-        "https://x.com/Skynetjoe1",
         SITE.social.twitter,
         SITE.social.github,
         SITE.social.fiverr,
