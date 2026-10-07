@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { InlineWidget, useCalendlyEventListener } from "react-calendly";
-import { Loader2, CalendarClock } from "lucide-react";
+import { Loader2, CalendarClock, CalendarDays } from "lucide-react";
 
 /**
  * Cream editorial pivot 2026-05-25 — Calendly container.
@@ -15,6 +15,12 @@ import { Loader2, CalendarClock } from "lucide-react";
  * now a plain booking widget. On a confirmed booking it fires the dataLayer
  * event and forwards to /thank-you; the lead is written by the Calendly
  * webhook route (/api/webhooks/calendly), not from the browser.
+ *
+ * 2026-10-07 (audit gate, round 2): the widget is click-to-open. Calendly's
+ * iframe loads Meta's fbevents.js inside its own frame the moment it mounts,
+ * which made the consent bar's promise false on every booking page. Now the
+ * frame mounts only after the visitor clicks "Open the calendar", or at once
+ * when they already accepted the Meta bar (localStorage sj_meta_consent).
  */
 
 const C = {
@@ -43,6 +49,17 @@ export default function CalendlyEmbed({
 } = {}) {
   const router = useRouter();
   const [scheduled, setScheduled] = useState(false);
+  const [opened, setOpened] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem("sj_meta_consent") === "granted") {
+        setOpened(true);
+      }
+    } catch {
+      /* storage unavailable: stay click-to-open */
+    }
+  }, []);
 
   useCalendlyEventListener({
     onEventScheduled: () => {
@@ -86,66 +103,147 @@ export default function CalendlyEmbed({
           minHeight: 720,
         }}
       >
-        <InlineWidget
-          url={CALENDLY_URL}
-          utm={UTM}
-          styles={{ height: "720px", minWidth: "320px" }}
-          pageSettings={{
-            backgroundColor: "FAF7F0",
-            primaryColor: "C66B3F",
-            textColor: "1A1A1A",
-            hideEventTypeDetails: false,
-            hideGdprBanner: true,
-            hideLandingPageDetails: false,
-          }}
-          iframeTitle="SkynetLabs · Free 30-minute strategy call"
-          LoadingSpinner={() => (
-            <div
+        {!opened && (
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              padding: "0 24px",
+              background: C.cream3,
+            }}
+          >
+            <CalendarDays
               style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                background: C.cream3,
+                width: 44,
+                height: 44,
+                color: C.terra,
+                marginBottom: 14,
+              }}
+            />
+            <p
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: 22,
+                fontWeight: 600,
+                color: C.ink,
+                margin: "0 0 8px",
+                letterSpacing: "-0.01em",
               }}
             >
-              <Loader2
+              Free 30-minute strategy call
+            </p>
+            <p
+              style={{
+                fontSize: 15,
+                color: C.ink2,
+                maxWidth: 420,
+                margin: "0 0 18px",
+                lineHeight: 1.5,
+              }}
+            >
+              Pick a slot that suits you. Bali time, auto-converted to your
+              timezone.
+            </p>
+            <button
+              type="button"
+              onClick={() => setOpened(true)}
+              style={{
+                background: C.terra,
+                color: "#fff",
+                border: "none",
+                padding: "14px 26px",
+                fontSize: 15,
+                fontWeight: 600,
+                cursor: "pointer",
+                fontFamily: "var(--font-display)",
+              }}
+            >
+              Open the calendar
+            </button>
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.14em",
+                color: C.inkFaint,
+                marginTop: 14,
+                maxWidth: 420,
+                lineHeight: 1.6,
+              }}
+            >
+              Opens Calendly&apos;s booking widget, which sets its own cookies
+              under Calendly&apos;s terms.
+            </p>
+          </div>
+        )}
+        {opened && (
+          <InlineWidget
+            url={CALENDLY_URL}
+            utm={UTM}
+            styles={{ height: "720px", minWidth: "320px" }}
+            pageSettings={{
+              backgroundColor: "FAF7F0",
+              primaryColor: "C66B3F",
+              textColor: "1A1A1A",
+              hideEventTypeDetails: false,
+              hideGdprBanner: true,
+              hideLandingPageDetails: false,
+            }}
+            iframeTitle="SkynetLabs · Free 30-minute strategy call"
+            LoadingSpinner={() => (
+              <div
                 style={{
-                  width: 36,
-                  height: 36,
-                  color: C.terra,
-                  marginBottom: 12,
-                }}
-                className="animate-spin"
-              />
-              <p
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  color: C.ink,
-                  margin: 0,
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: C.cream3,
                 }}
               >
-                Loading calendar…
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 10,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: C.inkFaint,
-                  marginTop: 6,
-                }}
-              >
-                — Bali · GMT+8 · auto-converts to your timezone
-              </p>
-            </div>
-          )}
-        />
+                <Loader2
+                  style={{
+                    width: 36,
+                    height: 36,
+                    color: C.terra,
+                    marginBottom: 12,
+                  }}
+                  className="animate-spin"
+                />
+                <p
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: 15,
+                    fontWeight: 600,
+                    color: C.ink,
+                    margin: 0,
+                  }}
+                >
+                  Loading calendar…
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.16em",
+                    color: C.inkFaint,
+                    marginTop: 6,
+                  }}
+                >
+                  — Bali · GMT+8 · auto-converts to your timezone
+                </p>
+              </div>
+            )}
+          />
+        )}
       </div>
 
       {scheduled && (

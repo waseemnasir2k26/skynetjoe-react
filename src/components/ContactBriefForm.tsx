@@ -81,10 +81,11 @@ export default function ContactBriefForm() {
         const body = (await res.json().catch(() => null)) as {
           error?: string;
         } | null;
-        return fail(
-          body?.error ||
-            "Couldn't send that. Email waseem@skynetjoe.com directly instead.",
-        );
+        const friendly =
+          body?.error && res.status !== 403 && res.status !== 415
+            ? body.error
+            : "Couldn't send that. Email waseem@skynetjoe.com directly instead.";
+        return fail(friendly);
       }
       setStatus("success");
     } catch {

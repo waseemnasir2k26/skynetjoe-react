@@ -149,7 +149,7 @@ export default function HeroFunnel() {
             }}
           >
             <a
-              href="https://www.upwork.com/freelancers/waseemnasir"
+              href="https://www.upwork.com/freelancers/muhammadwaseemnasir"
               target="_blank"
               rel="noopener noreferrer"
               className="trust-link"

@@ -164,7 +164,7 @@ export function MetaPixel() {
         </span>
         <span className="hidden sm:inline">
           May we load Meta&apos;s advertising pixel to measure our ads? It sets
-          cookies. Nothing is sent to Meta unless you accept.{" "}
+          cookies. Nothing is sent to Meta unless you accept. The Calendly booking widget opens only when you ask for it.{" "}
         </span>
         <Link
           href="/privacy-policy"

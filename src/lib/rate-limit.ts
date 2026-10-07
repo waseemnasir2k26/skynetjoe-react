@@ -106,5 +106,12 @@ export async function readCappedJson<T>(
   if (text.length > maxBytes) {
     throw new Error(`payload too large (${text.length} > ${maxBytes} bytes)`);
   }
-  return JSON.parse(text) as T;
+  const parsed: unknown = JSON.parse(text);
+  // A literal `null`, number, string or array parses fine and then crashes the
+  // first property read in the route (`payload._honeypot` on null = 500). Only a
+  // plain object is a payload; anything else is an invalid body, same as bad JSON.
+  if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
+    throw new Error("payload must be a JSON object");
+  }
+  return parsed as T;
 }

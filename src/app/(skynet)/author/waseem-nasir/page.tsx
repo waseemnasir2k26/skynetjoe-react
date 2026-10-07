@@ -111,7 +111,7 @@ const schema = {
         SITE.social.twitter,
         SITE.social.github,
         SITE.social.fiverr,
-        "https://www.upwork.com/freelancers/waseemnasir",
+        "https://www.upwork.com/freelancers/muhammadwaseemnasir",
         SITE.social.youtube,
         SITE.url,
         SITE.founderUrl,

@@ -40,7 +40,19 @@ export function guardJsonPost(req: Request): Response | null {
       /* unparseable → refused below */
     }
     const dev = process.env.NODE_ENV !== "production" && DEV_HOSTS.has(host);
-    if (!ALLOWED_HOSTS.has(host) && !dev) {
+    // Same-origin by the request's own Host header: a production build reached
+    // on a preview hostname, staging or a bare IP must not lose every lead form.
+    // The browser sets Host and Origin itself, so matching them is a genuine
+    // same-origin check, not an allowlist bypass.
+    let originHost = "";
+    try {
+      originHost = new URL(origin).host.toLowerCase(); // host:port as the browser sent it
+    } catch {
+      /* unparseable → not same-origin */
+    }
+    const reqHost = (req.headers.get("host") || "").toLowerCase();
+    const sameOrigin = reqHost !== "" && originHost === reqHost;
+    if (!ALLOWED_HOSTS.has(host) && !dev && !sameOrigin) {
       logRefusal(req, 403, `origin=${origin}`);
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
