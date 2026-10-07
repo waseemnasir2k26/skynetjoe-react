@@ -54,6 +54,10 @@ const MAX_BODY_BYTES = 8 * 1024;
 // Newsletter sign-ups: which site slugs may be mirrored to HQ, and a
 // process-wide cap (matches HQ's own 120/min) so a rotating-XFF flood is bounded
 // without locking real visitors out at the first burst.
+// A same-site path: single leading slash, no protocol-relative or backslash form,
+// no control / bidi characters. Used for the popup's page AND the Referer fallback.
+const PATH_RE =
+  /^\/(?![\/\\])[^\s<>\u0000-\u001f\u007f-\u009f\u200e\u200f\u202a-\u202e]{0,198}$/;
 const NEWSLETTER_SITES = new Set(["skynetjoe", "waseemnasir"]);
 const NEWSLETTER_PER_MIN = 120;
 let nlWindowStart = 0;
@@ -157,7 +161,8 @@ export async function POST(req: Request) {
   // is one id everywhere. This route's callers are email-only gates, so there
   // is no name/company/message to carry — only the capture page.
   const leadId = syntheticLeadKey(email, capturedAt);
-  const page = refererPath(req);
+  const refPath = refererPath(req);
+  const page = refPath && PATH_RE.test(refPath) ? refPath : undefined;
 
   // Newsletter sign-ups ALSO go to HQ (hq.skynetjoe.com), the one list Waseem
   // reads — but only AFTER a delivery path below confirmed the write, so a
@@ -194,8 +199,7 @@ export async function POST(req: Request) {
           ? n.interest
           : null,
       page:
-        typeof n.page === "string" &&
-        /^\/(?![\/\\])[^\s<>]{0,198}$/.test(n.page)
+        typeof n.page === "string" && PATH_RE.test(n.page)
           ? n.page
           : (page ?? null),
     });

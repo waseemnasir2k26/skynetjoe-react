@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * AiPortfolioGallery — /aiportfolio. 102 AI-generated videos in 11 categories.
+ * AiPortfolioGallery — /aiportfolio. 99 AI-generated videos in 11 categories.
  *
  * Design rules (cream kit, 2026-10-07):
  *   - Sticky category rail under the header; scroll-spy highlights the section

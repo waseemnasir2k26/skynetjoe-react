@@ -118,6 +118,11 @@ export default function NewsletterPopup({
     };
   }, [pathname]);
 
+  // ── route change while open (Back/Forward onto a blocked page): hide, no snooze ──
+  useEffect(() => {
+    if (show && BLOCKED.some((re) => re.test(pathname))) setShow(false);
+  }, [pathname, show]);
+
   // ── keyboard + focus ──
   useEffect(() => {
     if (!show) return;
