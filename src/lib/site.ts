@@ -115,6 +115,7 @@ export const TOOL_LINKS: NavSubItem[] = TOOLS_REGISTRY.map((t) => ({
 export const NAV_PRIMARY: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/portfolio" },
+  { label: "AI Portfolio", href: "/aiportfolio" },
   { label: "Tools", href: "/tools" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },

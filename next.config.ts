@@ -48,7 +48,7 @@ const cspReportOnly = [
   "img-src 'self' data: https:",
   "font-src 'self' data: https://fonts.gstatic.com",
   "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://www.facebook.com https://calendly.com https://*.calendly.com https://n8n.skynetjoe.com",
-  "frame-src 'self' https://calendly.com https://*.calendly.com https://www.youtube.com https://www.youtube-nocookie.com",
+  "frame-src 'self' https://calendly.com https://*.calendly.com https://www.youtube.com https://www.youtube-nocookie.com https://drive.google.com",
   "frame-ancestors 'self'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -91,13 +91,8 @@ const securityHeaders = [
  * to the closest topical landing (e.g. AEO-variant pages → /aeo-guide).
  */
 const wpRedirects = [
-  // ── External: AI portfolio → Google Drive folder ─────────────────────────
-  {
-    source: "/aiportfolio",
-    destination:
-      "https://drive.google.com/drive/folders/1g2JV0LktfCHdEK0BFdQsUKpN0K7llIJQ?usp=sharing",
-    permanent: false,
-  },
+  // 2026-10-07: /aiportfolio is a real page now (src/app/(skynet)/aiportfolio);
+  // the Drive-folder redirect that lived here is gone.
 
   // ── Service slugs (WP single-page → Next /services/[slug]) ───────────────
   {

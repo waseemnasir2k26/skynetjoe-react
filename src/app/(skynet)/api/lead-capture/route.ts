@@ -5,6 +5,7 @@ import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink } from "@/lib/lead-sink";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
+import { pushSubscriberToHq } from "@/lib/hq-subscriber";
 import { sendCapiLead } from "@/lib/meta-capi";
 import { hasMetaConsent } from "@/lib/request-guard";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
@@ -64,6 +65,12 @@ type Payload = {
   value?: number;
   currency?: string;
   _honeypot?: string;
+  /** Newsletter popup extras (source "newsletter-<site>"). Mirrored to HQ. */
+  newsletter?: {
+    firstName?: string;
+    interest?: string;
+    page?: string;
+  };
 };
 
 /**
@@ -128,6 +135,29 @@ export async function POST(req: Request) {
   // is no name/company/message to carry — only the capture page.
   const leadId = syntheticLeadKey(email, capturedAt);
   const page = refererPath(req);
+
+  // Newsletter sign-ups ALSO go to HQ (hq.skynetjoe.com), the one list Waseem
+  // reads. Awaited so the log line is true; a miss never fails the visitor,
+  // because the GHL → email → sink chain below still records the address.
+  if (source.startsWith("newsletter-")) {
+    const n = payload.newsletter ?? {};
+    const hqOk = await pushSubscriberToHq({
+      email,
+      site: source.slice("newsletter-".length) || "skynetjoe",
+      source: "popup",
+      first_name:
+        typeof n.firstName === "string" ? n.firstName.slice(0, 80) : null,
+      interest:
+        typeof n.interest === "string" && /^[a-z0-9-]{1,32}$/.test(n.interest)
+          ? n.interest
+          : null,
+      page: typeof n.page === "string" ? n.page.slice(0, 200) : (page ?? null),
+    });
+    if (!hqOk)
+      console.warn("[lead-capture] newsletter: HQ mirror did not confirm", {
+        source,
+      });
+  }
 
   /**
    * Shadow triage (JEV_TRIAGE_WEBHOOK). Fire-and-forget, never awaited, never
