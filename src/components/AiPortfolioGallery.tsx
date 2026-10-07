@@ -64,7 +64,19 @@ export default function AiPortfolioGallery() {
       { rootMargin: "-140px 0px -60% 0px", threshold: 0 },
     );
     els.forEach((e) => io.observe(e));
-    return () => io.disconnect();
+    // An instant jump to the top leaves no intersection event behind; pin the
+    // first chip whenever the rail is above every section.
+    const onScroll = () => {
+      const first = els[0];
+      if (first && first.getBoundingClientRect().top > 160) {
+        setActiveCat(AI_CATEGORIES[0].key);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   // keep the active chip in view on the horizontal rail (phones)
@@ -117,6 +129,23 @@ export default function AiPortfolioGallery() {
       if (e.key === "Escape") close();
       if (e.key === "ArrowRight") go(1);
       if (e.key === "ArrowLeft") go(-1);
+      if (e.key === "Tab") {
+        const root = document.querySelector<HTMLElement>(".aip-lb-card");
+        if (!root) return;
+        const f = root.querySelectorAll<HTMLElement>(
+          'button, a[href], iframe, [tabindex]:not([tabindex="-1"])',
+        );
+        if (!f.length) return;
+        const first = f[0];
+        const last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;

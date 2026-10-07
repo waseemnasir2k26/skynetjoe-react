@@ -145,6 +145,7 @@ export function MetaPixel() {
   return (
     <div
       role="region"
+      data-consent-bar=""
       aria-label="Advertising cookie choice"
       className="fixed left-3 right-3 top-[68px] sm:top-auto sm:bottom-3 sm:right-auto z-[70] sm:max-w-[420px]"
       style={{

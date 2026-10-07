@@ -53,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/author/waseem-nasir",
     "/blog",
     "/portfolio",
+  "/aiportfolio",
     "/privacy-policy",
     "/terms-of-service",
     "/industries",

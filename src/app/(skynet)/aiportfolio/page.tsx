@@ -19,7 +19,7 @@ import "./aiportfolio.css";
 export const metadata: Metadata = {
   title: pageTitle("AI Video Portfolio"),
   description: pageDescription(
-    `${AI_VIDEOS.length} AI-generated videos across ${AI_CATEGORIES.length} categories: spokesperson ads, automotive, real estate, product, pets, healthcare, explainers and more. Made by SkynetLabs in Bali.`,
+    `${AI_VIDEOS.length} AI-generated videos in ${AI_CATEGORIES.length} categories: ads, cars, listings, products, pets, explainers. Click any tile to play.`,
   ),
   alternates: { canonical: `${SITE.url}/aiportfolio` },
   openGraph: {
@@ -57,7 +57,7 @@ const itemListSchema = {
       thumbnailUrl: `${SITE.url}${thumbUrl(v.id)}`,
       contentUrl: driveOpenUrl(v.id),
       embedUrl: `https://drive.google.com/file/d/${v.id}/preview`,
-      uploadDate: "2026-10-07",
+      
       genre: AI_CATEGORIES.find((c) => c.key === v.cat)?.name,
     },
   })),

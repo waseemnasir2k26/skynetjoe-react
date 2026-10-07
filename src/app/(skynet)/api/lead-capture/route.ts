@@ -51,6 +51,22 @@ export const dynamic = "force-dynamic";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_BODY_BYTES = 8 * 1024;
 
+// Newsletter sign-ups: which site slugs may be mirrored to HQ, and a
+// process-wide cap so a rotating-XFF flood cannot starve HQ's own 120/min cap.
+const NEWSLETTER_SITES = new Set(["skynetjoe", "waseemnasir"]);
+const NEWSLETTER_PER_MIN = 40;
+let nlWindowStart = 0;
+let nlWindowCount = 0;
+function newsletterAllowed(): boolean {
+  const now = Date.now();
+  if (now - nlWindowStart > 60_000) {
+    nlWindowStart = now;
+    nlWindowCount = 0;
+  }
+  nlWindowCount += 1;
+  return nlWindowCount <= NEWSLETTER_PER_MIN;
+}
+
 type Payload = {
   email?: string;
   source?: string;
@@ -122,8 +138,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  if (
+    (payload.email !== undefined && typeof payload.email !== "string") ||
+    (payload.source !== undefined && typeof payload.source !== "string")
+  ) {
+    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+  }
   const email = payload.email?.trim();
-  const source = payload.source?.trim() || "unknown-tool";
+  const source = (payload.source?.trim() || "unknown-tool").slice(0, 64);
   const capturedAt = payload.capturedAt || new Date().toISOString();
 
   if (!isValidEmail(email)) {
@@ -137,13 +159,27 @@ export async function POST(req: Request) {
   const page = refererPath(req);
 
   // Newsletter sign-ups ALSO go to HQ (hq.skynetjoe.com), the one list Waseem
-  // reads. Awaited so the log line is true; a miss never fails the visitor,
-  // because the GHL → email → sink chain below still records the address.
-  if (source.startsWith("newsletter-")) {
+  // reads — but only AFTER a delivery path below confirmed the write, so a
+  // visitor retrying a failed submit cannot double-write HQ. The site slug is
+  // allowlisted; anything else is a logged miss, never a 500.
+  const isNewsletter = source.startsWith("newsletter-");
+  if (isNewsletter && !newsletterAllowed()) {
+    return tooManyRequests(60);
+  }
+  const mirrorToHq = async () => {
+    if (!isNewsletter) return;
     const n = payload.newsletter ?? {};
+    const site = source.slice("newsletter-".length);
+    if (!NEWSLETTER_SITES.has(site)) {
+      console.warn(
+        "[lead-capture] newsletter: unknown site slug, HQ mirror skipped",
+        { source },
+      );
+      return;
+    }
     const hqOk = await pushSubscriberToHq({
       email,
-      site: source.slice("newsletter-".length) || "skynetjoe",
+      site,
       source: "popup",
       first_name:
         typeof n.firstName === "string" ? n.firstName.slice(0, 80) : null,
@@ -157,7 +193,7 @@ export async function POST(req: Request) {
       console.warn("[lead-capture] newsletter: HQ mirror did not confirm", {
         source,
       });
-  }
+  };
 
   /**
    * Shadow triage (JEV_TRIAGE_WEBHOOK). Fire-and-forget, never awaited, never
@@ -245,6 +281,7 @@ export async function POST(req: Request) {
           extras: { delivery: "disk-sink", ghl_confirmed: false, reason },
         });
         fireTriage();
+        await mirrorToHq();
         return NextResponse.json({ ok: true, sink: true });
       }
     }
@@ -285,6 +322,7 @@ export async function POST(req: Request) {
   });
 
   fireTriage();
+  await mirrorToHq();
 
   return NextResponse.json({
     ok: true,

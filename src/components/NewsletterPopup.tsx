@@ -21,7 +21,6 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Sparkles, X } from "lucide-react";
 
 const DONE_KEY = "sj_newsletter"; // "subscribed" | ISO snooze-until
 const SHARED_POPUP_KEY = "skynet-popup-fired";
@@ -84,6 +83,12 @@ export default function NewsletterPopup({
     let fired = false;
     const fire = () => {
       if (fired) return;
+      // Never on top of another dialog or an undecided consent bar: Esc or a
+      // backdrop click meant for them would otherwise snooze this for 14 days.
+      if (document.querySelector('[role="dialog"], [data-consent-bar]') !== null) {
+        window.setTimeout(fire, 8000);
+        return;
+      }
       fired = true;
       try {
         window.sessionStorage.setItem(SHARED_POPUP_KEY, "1");
@@ -153,7 +158,7 @@ export default function NewsletterPopup({
     setError(null);
     setStatus("submitting");
     try {
-      const res = await fetch("/api/lead-capture", {
+      const res = await fetch(site === "waseemnasir" ? "/api/subscribe" : "/api/lead-capture", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -222,36 +227,33 @@ export default function NewsletterPopup({
               onClick={snooze}
               aria-label="Close"
             >
-              <X size={18} />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
             </button>
 
             <div className="nlp-art" aria-hidden="true">
               <span className="nlp-orb nlp-orb-a" />
               <span className="nlp-orb nlp-orb-b" />
-              <Sparkles size={26} />
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" /><path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z" /></svg>
             </div>
 
             {status === "success" ? (
               <div className="nlp-body">
-                <p className="nlp-eyebrow">You&apos;re in</p>
+                <p className="nlp-eyebrow">You&apos;re on the list</p>
                 <h2 id="nlp-title" className="nlp-title">
-                  Thanks{firstName.trim() ? `, ${firstName.trim()}` : ""}. First
-                  one lands Friday.
+                  Thanks{firstName.trim() ? `, ${firstName.trim()}` : ""}. You&apos;ll get the first issue when it launches.
                 </h2>
                 <p className="nlp-lede">
-                  One email a week. Builds, workflows, the tools that actually
-                  paid off. Reply to any of them and it reaches me.
+                  Builds, workflows, the tools that actually paid off. Reply to any issue and it reaches me; reply &ldquo;stop&rdquo; and you are removed.
                 </p>
               </div>
             ) : (
               <form className="nlp-body" onSubmit={submit} noValidate>
-                <p className="nlp-eyebrow">Free, every Friday</p>
+                <p className="nlp-eyebrow">Free email list · launching soon</p>
                 <h2 id="nlp-title" className="nlp-title">
                   We ship a lot. Get the best of it in one email.
                 </h2>
                 <p className="nlp-lede">
-                  New AI videos, free n8n workflows, site teardowns and the
-                  services we add. No spam, unsubscribe in one click.
+                  New AI videos, free n8n workflows, site teardowns and the services we add. Join now and you are in the first send. No spam; reply &ldquo;stop&rdquo; to any email and you are off the list.
                 </p>
 
                 <div className="nlp-row">
@@ -263,7 +265,7 @@ export default function NewsletterPopup({
                       autoComplete="given-name"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      placeholder="Waseem"
+                      placeholder="Your first name"
                       maxLength={80}
                     />
                   </label>
@@ -343,7 +345,7 @@ export default function NewsletterPopup({
                   </button>
                 </div>
                 <p className="nlp-fine">
-                  Fridays. Unsubscribe anytime.{" "}
+                  Occasional, not weekly. Leave anytime.{" "}
                   <a href="/privacy-policy">Privacy</a>
                 </p>
               </form>
