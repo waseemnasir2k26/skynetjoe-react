@@ -1,147 +1,532 @@
 <article class="wn-privacy-policy">
-<style>
-.wn-privacy-policy{--wn-fg:#f7f7f7;--wn-fg-muted:#c6c7c6;--wn-fg-faint:#98989d;--wn-bg:#100f14;--wn-surface:#1f1f23;--wn-surface-alt:#29282d;--wn-border:rgba(255,255,255,.08);--wn-border-strong:rgba(255,255,255,.16);--wn-green:#1E88E5;--wn-green-light:#42A5F5;--wn-purple:#14B8A6;--wn-cyan:#00D4FF;color:var(--wn-fg);background:var(--wn-bg);font-family:var(--font-lexend,"Lexend",system-ui,-apple-system,"Segoe UI",sans-serif);line-height:1.7;display:block;-webkit-font-smoothing:antialiased}
-.wn-privacy-policy *,.wn-privacy-policy *::before,.wn-privacy-policy *::after{box-sizing:border-box}
-.wn-privacy-policy a{color:var(--wn-green-light);text-decoration:underline;text-underline-offset:3px;transition:color .15s ease}
-.wn-privacy-policy a:hover{color:var(--wn-green)}
-.wn-privacy-policy .wn-wrap{max-width:820px;margin:0 auto;padding:5rem 1.5rem}
-.wn-privacy-policy .wn-hero{padding-bottom:2rem;margin-bottom:2.5rem;border-bottom:1px solid var(--wn-border)}
-.wn-privacy-policy .wn-eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .85rem;border:1px solid var(--wn-border-strong);border-radius:999px;background:rgba(19,185,115,.08);color:var(--wn-green-light);font-size:.78rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-bottom:1.1rem}
-.wn-privacy-policy .wn-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--wn-green);box-shadow:0 0 8px var(--wn-green)}
-.wn-privacy-policy h1{font-size:clamp(1.85rem,3.8vw,2.6rem);line-height:1.15;font-weight:800;letter-spacing:-.02em;margin:0 0 .85rem}
-.wn-privacy-policy .wn-lede{font-size:1.05rem;color:var(--wn-fg-muted);margin:0;max-width:62ch}
-.wn-privacy-policy .wn-meta{margin-top:1.5rem;font-size:.85rem;color:var(--wn-fg-faint);display:flex;flex-wrap:wrap;gap:.85rem}
-.wn-privacy-policy .wn-meta span{padding:.3rem .7rem;border:1px solid var(--wn-border);border-radius:6px;background:var(--wn-surface)}
-.wn-privacy-policy h2{font-size:1.25rem;font-weight:700;margin:2.5rem 0 .85rem;letter-spacing:-.01em;color:var(--wn-fg)}
-.wn-privacy-policy h2 .wn-num{display:inline-block;margin-right:.55rem;color:var(--wn-green-light);font-weight:800}
-.wn-privacy-policy h3{font-size:1rem;font-weight:600;margin:1.5rem 0 .5rem;color:var(--wn-fg)}
-.wn-privacy-policy p{margin:0 0 1rem;color:var(--wn-fg-muted)}
-.wn-privacy-policy strong{color:var(--wn-fg);font-weight:600}
-.wn-privacy-policy ul{margin:0 0 1.25rem;padding-left:1.4rem;color:var(--wn-fg-muted)}
-.wn-privacy-policy ul li{margin-bottom:.45rem}
-.wn-privacy-policy ul li::marker{color:var(--wn-green-light)}
-.wn-privacy-policy .wn-callout{padding:1.2rem 1.35rem;border-left:3px solid var(--wn-green);background:rgba(19,185,115,.05);margin:1.5rem 0;border-radius:0 8px 8px 0}
-.wn-privacy-policy .wn-callout p{margin:0;color:var(--wn-fg)}
-.wn-privacy-policy .wn-cta-block{margin-top:3.5rem;padding:2rem 1.6rem;border:1px solid var(--wn-border);border-radius:14px;background:linear-gradient(135deg,rgba(19,185,115,.07) 0%,rgba(139,92,246,.05) 100%);text-align:center}
-.wn-privacy-policy .wn-cta-block h2{margin-top:0;font-size:1.3rem}
-.wn-privacy-policy .wn-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s ease;margin-top:.5rem}
-.wn-privacy-policy .wn-btn-primary{background:linear-gradient(135deg,var(--wn-green),var(--wn-cyan));color:#0a0a0a}
-.wn-privacy-policy .wn-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(19,185,115,.4);color:#0a0a0a;text-decoration:none}
-@media(min-width:768px){.wn-privacy-policy h1{font-size:2.6rem}}
-html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-faint:#6e6e73;--wn-bg:#fafaf7;--wn-surface:#ffffff;--wn-surface-alt:#f3f3ee;--wn-border:rgba(16,15,20,.08);--wn-border-strong:rgba(16,15,20,.16)}
-</style>
+  <style>
+    .wn-privacy-policy {
+      --wn-fg: #f7f7f7;
+      --wn-fg-muted: #c6c7c6;
+      --wn-fg-faint: #98989d;
+      --wn-bg: #100f14;
+      --wn-surface: #1f1f23;
+      --wn-surface-alt: #29282d;
+      --wn-border: rgba(255, 255, 255, 0.08);
+      --wn-border-strong: rgba(255, 255, 255, 0.16);
+      --wn-green: #1e88e5;
+      --wn-green-light: #42a5f5;
+      --wn-purple: #14b8a6;
+      --wn-cyan: #00d4ff;
+      color: var(--wn-fg);
+      background: var(--wn-bg);
+      font-family: var(
+        --font-lexend,
+        "Lexend",
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        sans-serif
+      );
+      line-height: 1.7;
+      display: block;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wn-privacy-policy *,
+    .wn-privacy-policy *::before,
+    .wn-privacy-policy *::after {
+      box-sizing: border-box;
+    }
+    .wn-privacy-policy a {
+      color: var(--wn-green-light);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.15s ease;
+    }
+    .wn-privacy-policy a:hover {
+      color: var(--wn-green);
+    }
+    .wn-privacy-policy .wn-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+    .wn-privacy-policy .wn-hero {
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--wn-border);
+    }
+    .wn-privacy-policy .wn-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--wn-border-strong);
+      border-radius: 999px;
+      background: rgba(19, 185, 115, 0.08);
+      color: var(--wn-green-light);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+    .wn-privacy-policy .wn-eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--wn-green);
+      box-shadow: 0 0 8px var(--wn-green);
+    }
+    .wn-privacy-policy h1 {
+      font-size: clamp(1.85rem, 3.8vw, 2.6rem);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.85rem;
+    }
+    .wn-privacy-policy .wn-lede {
+      font-size: 1.05rem;
+      color: var(--wn-fg-muted);
+      margin: 0;
+      max-width: 62ch;
+    }
+    .wn-privacy-policy .wn-meta {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--wn-fg-faint);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+    .wn-privacy-policy .wn-meta span {
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--wn-border);
+      border-radius: 6px;
+      background: var(--wn-surface);
+    }
+    .wn-privacy-policy h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 2.5rem 0 0.85rem;
+      letter-spacing: -0.01em;
+      color: var(--wn-fg);
+    }
+    .wn-privacy-policy h2 .wn-num {
+      display: inline-block;
+      margin-right: 0.55rem;
+      color: var(--wn-green-light);
+      font-weight: 800;
+    }
+    .wn-privacy-policy h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.5rem;
+      color: var(--wn-fg);
+    }
+    .wn-privacy-policy p {
+      margin: 0 0 1rem;
+      color: var(--wn-fg-muted);
+    }
+    .wn-privacy-policy strong {
+      color: var(--wn-fg);
+      font-weight: 600;
+    }
+    .wn-privacy-policy ul {
+      margin: 0 0 1.25rem;
+      padding-left: 1.4rem;
+      color: var(--wn-fg-muted);
+    }
+    .wn-privacy-policy ul li {
+      margin-bottom: 0.45rem;
+    }
+    .wn-privacy-policy ul li::marker {
+      color: var(--wn-green-light);
+    }
+    .wn-privacy-policy .wn-callout {
+      padding: 1.2rem 1.35rem;
+      border-left: 3px solid var(--wn-green);
+      background: rgba(19, 185, 115, 0.05);
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .wn-privacy-policy .wn-callout p {
+      margin: 0;
+      color: var(--wn-fg);
+    }
+    .wn-privacy-policy .wn-cta-block {
+      margin-top: 3.5rem;
+      padding: 2rem 1.6rem;
+      border: 1px solid var(--wn-border);
+      border-radius: 14px;
+      background: linear-gradient(
+        135deg,
+        rgba(19, 185, 115, 0.07) 0%,
+        rgba(139, 92, 246, 0.05) 100%
+      );
+      text-align: center;
+    }
+    .wn-privacy-policy .wn-cta-block h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+    .wn-privacy-policy .wn-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      margin-top: 0.5rem;
+    }
+    .wn-privacy-policy .wn-btn-primary {
+      background: linear-gradient(135deg, var(--wn-green), var(--wn-cyan));
+      color: #0a0a0a;
+    }
+    .wn-privacy-policy .wn-btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(19, 185, 115, 0.4);
+      color: #0a0a0a;
+      text-decoration: none;
+    }
+    @media (min-width: 768px) {
+      .wn-privacy-policy h1 {
+        font-size: 2.6rem;
+      }
+    }
+    html.light .wn-privacy-policy {
+      --wn-fg: #100f14;
+      --wn-fg-muted: #4a4a52;
+      --wn-fg-faint: #6e6e73;
+      --wn-bg: #fafaf7;
+      --wn-surface: #ffffff;
+      --wn-surface-alt: #f3f3ee;
+      --wn-border: rgba(16, 15, 20, 0.08);
+      --wn-border-strong: rgba(16, 15, 20, 0.16);
+    }
+  </style>
 
-<div class="wn-wrap">
-  <header class="wn-hero">
-    <span class="wn-eyebrow">Privacy Policy</span>
-    <h1>How SkynetLabs handles your data</h1>
-    <p class="wn-lede">Plain-language privacy policy for the website at skynetjoe.com and any consulting engagement run by Waseem Nasir. Written to be lawyer-readable but founder-friendly.</p>
-    <div class="wn-meta">
-      <span>Last updated: 2026-10-07</span>
-      <span>Operating from Bali, Indonesia</span>
+  <div class="wn-wrap">
+    <header class="wn-hero">
+      <span class="wn-eyebrow">Privacy Policy</span>
+      <h1>How SkynetLabs handles your data</h1>
+      <p class="wn-lede">
+        Plain-language privacy policy for the website at skynetjoe.com and any
+        consulting engagement run by Waseem Nasir. Written to be lawyer-readable
+        but founder-friendly.
+      </p>
+      <div class="wn-meta">
+        <span>Last updated: 2026-10-07</span>
+        <span>Operating from Bali, Indonesia</span>
+      </div>
+    </header>
+
+    <h2><span class="wn-num">1.</span> Who we are</h2>
+    <p>
+      <strong>SkynetLabs</strong> is the operating name of the sole-proprietor
+      consulting practice run by <strong>Waseem Nasir</strong>, based in Bali,
+      Indonesia. We build AI automation, websites, and content systems for
+      clients across nine countries.
+    </p>
+    <p>
+      If you need to reach a human about any data question, email
+      <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a>. That inbox
+      is read every weekday.
+    </p>
+
+    <h2><span class="wn-num">2.</span> What we collect</h2>
+    <p>
+      We try to collect the smallest amount of data needed to actually reply to
+      you and ship the work.
+    </p>
+    <ul>
+      <li>
+        <strong>Site visit data</strong> — an anonymous, cookieless funnel
+        counter we run ourselves. On page load, booking-link clicks and
+        completed bookings, the browser sends the site name, event name, page
+        path (no query string), referring domain, booking step and (on a click)
+        the address of the booking link you clicked to our own self-hosted n8n
+        server. No cookies, no local storage, no user or device identifier; it
+        stays silent if your browser sends Do-Not-Track or Global Privacy
+        Control. Like any web request, the receiving server sees your IP address
+        in transit; it is not written to the events table. The same n8n server
+        separately receives lead details (name, email, phone) from the forms
+        above so we can respond quickly — that is a lead alert, not part of the
+        anonymous counter.
+      </li>
+      <li>
+        <strong>Advertising measurement</strong> — the
+        <strong>Meta Pixel</strong> loads only after you press "Accept" on the
+        consent bar (never when Do-Not-Track or Global Privacy Control is on)
+        and then sets Meta cookies, governed by Meta's privacy terms. Google
+        Analytics / Tag Manager are not loaded on this site today.
+      </li>
+      <li>
+        <strong>Lead forms and tool email gates</strong> — when you enter an
+        email to unlock a free tool result or submit a lead form, that email
+        (plus the tool you used) is sent to our CRM so we can follow up, and the
+        tool remembers it in your browser so you are not asked twice. When the
+        Meta Conversions API integration is switched on, and only if you pressed
+        "Accept" on the consent bar (never when Do-Not-Track or Global Privacy
+        Control is on), a hashed (SHA-256) copy of that email plus browser
+        identifiers is also sent to Meta server-side so ad results can be
+        matched to enquiries.
+      </li>
+      <li>
+        <strong>Contact form submissions</strong> — name, email, and the project
+        brief you send through the form on /contact. Nothing else is required.
+      </li>
+      <li>
+        <strong>Discovery brief (/discovery-call)</strong> — first and last
+        name, email, phone/WhatsApp, company, website, role, current tool stack,
+        how you heard about us, budget range, timeline and the problem you
+        describe. It goes to our CRM, to an internal notification email, and to
+        our self-hosted n8n server so we get paged when a lead lands.
+      </li>
+      <li>
+        <strong>Tool feedback</strong> — the message you type into a free tool's
+        feedback box and, if you add it, your email; forwarded to our internal
+        Slack so we can reply, and — if you gave an email — that email is also
+        saved to our CRM as a contact tagged with the tool name so we can follow
+        up.
+      </li>
+      <li>
+        <strong>Email correspondence</strong> — anything you email to us is
+        stored in Google Workspace inside our mailbox.
+      </li>
+      <li>
+        <strong>Email-list signups</strong> — a small sign-up card may appear
+        once per browser. If you fill it in, it collects your email address,
+        optionally your first name and the topic you picked, plus the page you
+        were on. The address is saved the same way as any other form on this
+        site: to our CRM (tagged <code>newsletter-skynetjoe</code> and
+        <code>tool-lead</code>) when the CRM confirms, otherwise by email to us
+        or to a file on our server, and our own n8n server is pinged that a
+        sign-up happened; once that link is switched on, it is also copied to
+        our operations dashboard (hq.skynetjoe.com, self-hosted on our Hostinger
+        VPS). It is used only to send that email once the list goes live.
+        Nothing has been sent yet. To leave the list, reply to any email or
+        write to waseem@skynetjoe.com; Waseem removes the address by hand within
+        7 days. “Not right now” stores a 14-day snooze in your browser; the card
+        also sets a session flag so no other pop-up fires in the same visit.
+      </li>
+    </ul>
+
+    <h2><span class="wn-num">3.</span> Why we collect it</h2>
+    <ul>
+      <li>To reply to inbound work briefs and questions.</li>
+      <li>To ship the project you've engaged us for.</li>
+      <li>To send invoices and accept payment.</li>
+    </ul>
+    <p>We do not sell, rent, or trade your data. We never have.</p>
+
+    <h2><span class="wn-num">4.</span> Who we share it with</h2>
+    <p>
+      The small number of third-party services we rely on to run the business:
+    </p>
+    <ul>
+      <li>
+        <strong>Stripe</strong> — payment processing for clients who pay by
+        card. Stripe sees the transaction data needed to settle the payment.
+      </li>
+      <li>
+        <strong>Wise</strong> — international bank transfers for clients who
+        prefer wire payment. Wise sees the transfer details.
+      </li>
+      <li>
+        <strong>Google Workspace</strong> — for email correspondence with
+        clients and inbound briefs.
+      </li>
+      <li>
+        <strong>Hostinger</strong> — hosts skynetjoe.com and our self-hosted n8n
+        server, which receives the anonymous funnel counts and the lead alerts
+        (name, email, phone) described in section 2.
+      </li>
+      <li>
+        <strong>Meta Platforms</strong> — receives Meta Pixel events for
+        advertising measurement.
+      </li>
+      <li>
+        <strong>GoHighLevel</strong> — our CRM; receives whatever you enter on a
+        lead form, a tool email gate, a tool feedback box or the discovery brief
+        (name, email, phone/WhatsApp, company, website, role, current tool
+        stack, how you heard about us, your brief, and which form or tool it
+        came from) so we can follow up.
+      </li>
+      <li>
+        <strong>Resend</strong> — transactional email service; sends us an
+        internal notification email carrying the same lead details at the same
+        time as the CRM write, so a lead is never lost if one path fails.
+      </li>
+      <li>
+        <strong>Slack</strong> — receives tool-feedback messages and the
+        optional email you attach to them.
+      </li>
+      <li>
+        <strong>Enquiry triage</strong> — when enabled, the name, company,
+        message and page of a contact-form submission (never your email or
+        phone) are sent to a typed-decision model (TypeSafe Jev via OpenRouter)
+        to decide how quickly we reply. Email addresses and phone numbers typed
+        into the message itself are stripped before it is sent. Not used for
+        training.
+      </li>
+      <li>
+        <strong>Calendly</strong> — runs the call booking on /contact (opens
+        only after you click “Open the calendar”) and on the landing pages
+        (opens only after you submit the page’s form); when you book, your name,
+        email, time zone and any answers you type go to Calendly under its own
+        privacy terms, and its webhook tells us a booking happened.
+      </li>
+      <li>
+        <strong>GitHub</strong> — source code storage. No client business data
+        lives here unless a client has explicitly asked us to host their repo
+        for them.
+      </li>
+    </ul>
+    <p>
+      Beyond the services listed here, we do not share your data with any other
+      third party without your explicit written consent.
+    </p>
+
+    <h2><span class="wn-num">5.</span> How long we keep it</h2>
+    <ul>
+      <li>
+        <strong>Active client records</strong> — kept indefinitely while the
+        engagement is live, then for 7 years after engagement close (Indonesian
+        tax record requirement).
+      </li>
+      <li>
+        <strong>Inbound briefs that don't become clients</strong> — deleted
+        after 90 days.
+      </li>
+      <li>
+        <strong>Anonymous funnel counts</strong> — aggregate rows only, no
+        identifiers; we can't tie them back to a person. Meta Pixel data is
+        retained under Meta's own policy.
+      </li>
+    </ul>
+
+    <h2><span class="wn-num">6.</span> Your rights</h2>
+    <p>
+      You can request any of the following by emailing
+      <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a> with the
+      subject line "Data request":
+    </p>
+    <ul>
+      <li>A copy of every piece of data we hold on you.</li>
+      <li>
+        Deletion of your data (subject to the tax-record retention rule above).
+      </li>
+      <li>Correction of any data you believe is inaccurate.</li>
+      <li>Export of your data in a portable format.</li>
+    </ul>
+    <p>
+      We respond to data requests within <strong>14 days</strong>. No charges,
+      no friction, no "we'll get back to you" loop.
+    </p>
+
+    <h2><span class="wn-num">7.</span> Cookies</h2>
+    <p>What this site stores in your browser:</p>
+    <ul>
+      <li>
+        <strong>localStorage</strong> (browser-side store, never read by the
+        funnel counter): the free tools keep your in-progress answers and the
+        results you generate so a refresh does not lose them; if you unlocked a
+        tool with your email, that email is remembered so you are not asked
+        again (the same email was already sent to our CRM when you entered it);
+        the call qualifier on /discovery-call keeps your answers the same way;
+        and small dismissal flags remember that you closed the announcement bar,
+        the exit prompt or the sticky book-a-call bar.
+      </li>
+      <li>
+        <strong>sessionStorage</strong> (cleared when the tab closes): flags
+        that stop pop-ups, the chat bubble and article-view counters from
+        repeating within one visit. Nothing identifying.
+      </li>
+      <li>
+        If you accept, the <strong>Meta Pixel</strong> sets Meta's advertising
+        cookies (e.g. <code>_fbp</code>) so ad performance can be measured; if
+        you decline, or have Do-Not-Track / Global Privacy Control on, it never
+        loads from our pages. Our own funnel counter sets nothing. Calendly's
+        booking widget, which opens only when you click “Open the calendar” on
+        /contact or submit a landing-page form, sets its own cookies and loads
+        Meta's script inside Calendly's own frame, under Calendly's terms,
+        whatever you chose on our bar.
+      </li>
+    </ul>
+    <p>
+      A small consent bar asks before the Meta Pixel loads. Your choice is
+      stored in your browser (localStorage) and the bar is not shown again;
+      clear your site data to be asked again. Calendly's widget opens only on
+      your click and sets its own cookies, under Calendly's terms. Our own
+      counter sets nothing and already honours Do-Not-Track / Global Privacy
+      Control.
+    </p>
+
+    <h2><span class="wn-num">8.</span> Data location</h2>
+    <p>
+      The infrastructure we use is hosted in the United States and the European
+      Union:
+    </p>
+    <ul>
+      <li>
+        Hostinger — website hosting (EU data center) and our self-hosted n8n
+        server (Hostinger VPS, EU) that receives the anonymous funnel counts and
+        lead alerts.
+      </li>
+      <li>Meta Platforms — US (Pixel and Conversions API data).</li>
+      <li>Calendly — US (booking details).</li>
+      <li>
+        Our own operations dashboard (hq.skynetjoe.com) — our own Hostinger VPS
+        (email-list signups: email, optional first name, topic, page).
+      </li>
+      <li>GoHighLevel — US (CRM contact records).</li>
+      <li>Resend — US (internal lead-notification emails).</li>
+      <li>Slack — US (tool-feedback messages).</li>
+      <li>Google Workspace — US and EU data centers.</li>
+      <li>GitHub — US data centers.</li>
+      <li>Stripe — US and EU.</li>
+      <li>Wise — UK and EU.</li>
+    </ul>
+    <p>
+      No client data is stored on servers located inside Indonesia. We operate
+      from Bali but our infrastructure is not in Indonesia.
+    </p>
+
+    <h2><span class="wn-num">9.</span> Children's data</h2>
+    <p>
+      This service is not directed at people under the age of 18. We do not
+      knowingly collect data from children. If you believe a child has submitted
+      data to us, email
+      <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a> and we'll
+      remove it immediately.
+    </p>
+
+    <h2><span class="wn-num">10.</span> Changes to this policy</h2>
+    <p>Last updated <strong>2026-10-07</strong>.</p>
+    <p>
+      If we make material changes to how we handle your data, active clients
+      will receive an email notice. The "last updated" date at the top of this
+      page always reflects the most recent revision. Minor wording changes are
+      made silently.
+    </p>
+
+    <div class="wn-callout">
+      <p>
+        <strong>Quick read:</strong> we collect the bare minimum, we don't sell
+        anything, we delete on request, and the only advertising tracker we load
+        ourselves is the Meta Pixel, disclosed above; the Calendly widget, which
+        you open by clicking, sets its own cookies and loads Meta's script
+        inside its frame.
+      </p>
     </div>
-  </header>
 
-  <h2><span class="wn-num">1.</span> Who we are</h2>
-  <p><strong>SkynetLabs</strong> is the operating name of the sole-proprietor consulting practice run by <strong>Waseem Nasir</strong>, based in Bali, Indonesia. We build AI automation, websites, and content systems for clients across nine countries.</p>
-  <p>If you need to reach a human about any data question, email <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a>. That inbox is read every weekday.</p>
-
-  <h2><span class="wn-num">2.</span> What we collect</h2>
-  <p>We try to collect the smallest amount of data needed to actually reply to you and ship the work.</p>
-  <ul>
-    <li><strong>Site visit data</strong> — an anonymous, cookieless funnel counter we run ourselves. On page load, booking-link clicks and completed bookings, the browser sends the site name, event name, page path (no query string), referring domain, booking step and (on a click) the address of the booking link you clicked to our own self-hosted n8n server. No cookies, no local storage, no user or device identifier; it stays silent if your browser sends Do-Not-Track or Global Privacy Control. Like any web request, the receiving server sees your IP address in transit; it is not written to the events table. The same n8n server separately receives lead details (name, email, phone) from the forms above so we can respond quickly — that is a lead alert, not part of the anonymous counter.</li>
-    <li><strong>Advertising measurement</strong> — the <strong>Meta Pixel</strong> loads only after you press "Accept" on the consent bar (never when Do-Not-Track or Global Privacy Control is on) and then sets Meta cookies, governed by Meta's privacy terms. Google Analytics / Tag Manager are not loaded on this site today.</li>
-    <li><strong>Lead forms and tool email gates</strong> — when you enter an email to unlock a free tool result or submit a lead form, that email (plus the tool you used) is sent to our CRM so we can follow up, and the tool remembers it in your browser so you are not asked twice. When the Meta Conversions API integration is switched on, and only if you pressed "Accept" on the consent bar (never when Do-Not-Track or Global Privacy Control is on), a hashed (SHA-256) copy of that email plus browser identifiers is also sent to Meta server-side so ad results can be matched to enquiries.</li>
-    <li><strong>Contact form submissions</strong> — name, email, and the project brief you send through the form on /contact. Nothing else is required.</li>
-    <li><strong>Discovery brief (/discovery-call)</strong> — first and last name, email, phone/WhatsApp, company, website, role, current tool stack, how you heard about us, budget range, timeline and the problem you describe. It goes to our CRM, to an internal notification email, and to our self-hosted n8n server so we get paged when a lead lands.</li>
-    <li><strong>Tool feedback</strong> — the message you type into a free tool's feedback box and, if you add it, your email; forwarded to our internal Slack so we can reply, and — if you gave an email — that email is also saved to our CRM as a contact tagged with the tool name so we can follow up.</li>
-    <li><strong>Email correspondence</strong> — anything you email to us is stored in Google Workspace inside our mailbox.</li>
-    <li><strong>Email-list signups</strong> — a small sign-up card may appear once per browser. If you fill it in, it collects your email address, optionally your first name and the topic you picked, plus the page you were on. The address is saved the same way as any other form on this site: to our CRM (tagged <code>newsletter-skynetjoe</code> and <code>tool-lead</code>) when the CRM confirms, otherwise by email to us or to a file on our server, and our own n8n server is pinged that a sign-up happened; it is then copied to our operations dashboard (hq.skynetjoe.com, self-hosted on our Hostinger VPS). It is used only to send that email once the list goes live. Nothing has been sent yet. To leave the list, reply to any email or write to waseem@skynetjoe.com; Waseem removes the address by hand within 7 days. “Not right now” stores a 14-day snooze in your browser; the card also sets a session flag so no other pop-up fires in the same visit.</li>
-  </ul>
-
-  <h2><span class="wn-num">3.</span> Why we collect it</h2>
-  <ul>
-    <li>To reply to inbound work briefs and questions.</li>
-    <li>To ship the project you've engaged us for.</li>
-    <li>To send invoices and accept payment.</li>
-  </ul>
-  <p>We do not sell, rent, or trade your data. We never have.</p>
-
-  <h2><span class="wn-num">4.</span> Who we share it with</h2>
-  <p>The small number of third-party services we rely on to run the business:</p>
-  <ul>
-    <li><strong>Stripe</strong> — payment processing for clients who pay by card. Stripe sees the transaction data needed to settle the payment.</li>
-    <li><strong>Wise</strong> — international bank transfers for clients who prefer wire payment. Wise sees the transfer details.</li>
-    <li><strong>Google Workspace</strong> — for email correspondence with clients and inbound briefs.</li>
-    <li><strong>Hostinger</strong> — hosts skynetjoe.com and our self-hosted n8n server, which receives the anonymous funnel counts and the lead alerts (name, email, phone) described in section 2.</li>
-    <li><strong>Meta Platforms</strong> — receives Meta Pixel events for advertising measurement.</li>
-    <li><strong>GoHighLevel</strong> — our CRM; receives whatever you enter on a lead form, a tool email gate, a tool feedback box or the discovery brief (name, email, phone/WhatsApp, company, website, role, current tool stack, how you heard about us, your brief, and which form or tool it came from) so we can follow up.</li>
-    <li><strong>Resend</strong> — transactional email service; sends us an internal notification email carrying the same lead details at the same time as the CRM write, so a lead is never lost if one path fails.</li>
-    <li><strong>Slack</strong> — receives tool-feedback messages and the optional email you attach to them.</li>
-    <li><strong>Enquiry triage</strong> — when enabled, the name, company, message and page of a contact-form submission (never your email or phone) are sent to a typed-decision model (TypeSafe Jev via OpenRouter) to decide how quickly we reply. Email addresses and phone numbers typed into the message itself are stripped before it is sent. Not used for training.</li>
-    <li><strong>Calendly</strong> — runs the call booking on /contact (opens only after you click “Open the calendar”) and on the landing pages (opens only after you submit the page’s form); when you book, your name, email, time zone and any answers you type go to Calendly under its own privacy terms, and its webhook tells us a booking happened.</li>
-    <li><strong>GitHub</strong> — source code storage. No client business data lives here unless a client has explicitly asked us to host their repo for them.</li>
-  </ul>
-  <p>Beyond the services listed here, we do not share your data with any other third party without your explicit written consent.</p>
-
-  <h2><span class="wn-num">5.</span> How long we keep it</h2>
-  <ul>
-    <li><strong>Active client records</strong> — kept indefinitely while the engagement is live, then for 7 years after engagement close (Indonesian tax record requirement).</li>
-    <li><strong>Inbound briefs that don't become clients</strong> — deleted after 90 days.</li>
-    <li><strong>Anonymous funnel counts</strong> — aggregate rows only, no identifiers; we can't tie them back to a person. Meta Pixel data is retained under Meta's own policy.</li>
-  </ul>
-
-  <h2><span class="wn-num">6.</span> Your rights</h2>
-  <p>You can request any of the following by emailing <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a> with the subject line "Data request":</p>
-  <ul>
-    <li>A copy of every piece of data we hold on you.</li>
-    <li>Deletion of your data (subject to the tax-record retention rule above).</li>
-    <li>Correction of any data you believe is inaccurate.</li>
-    <li>Export of your data in a portable format.</li>
-  </ul>
-  <p>We respond to data requests within <strong>14 days</strong>. No charges, no friction, no "we'll get back to you" loop.</p>
-
-  <h2><span class="wn-num">7.</span> Cookies</h2>
-  <p>What this site stores in your browser:</p>
-  <ul>
-    <li><strong>localStorage</strong> (browser-side store, never read by the funnel counter): the free tools keep your in-progress answers and the results you generate so a refresh does not lose them; if you unlocked a tool with your email, that email is remembered so you are not asked again (the same email was already sent to our CRM when you entered it); the call qualifier on /discovery-call keeps your answers the same way; and small dismissal flags remember that you closed the announcement bar, the exit prompt or the sticky book-a-call bar.</li>
-    <li><strong>sessionStorage</strong> (cleared when the tab closes): flags that stop pop-ups, the chat bubble and article-view counters from repeating within one visit. Nothing identifying.</li>
-    <li>If you accept, the <strong>Meta Pixel</strong> sets Meta's advertising cookies (e.g. <code>_fbp</code>) so ad performance can be measured; if you decline, or have Do-Not-Track / Global Privacy Control on, it never loads from our pages. Our own funnel counter sets nothing. Calendly's booking widget, which opens only when you click “Open the calendar” on /contact or submit a landing-page form, sets its own cookies and loads Meta's script inside Calendly's own frame, under Calendly's terms, whatever you chose on our bar.</li>
-  </ul>
-  <p>A small consent bar asks before the Meta Pixel loads. Your choice is stored in your browser (localStorage) and the bar is not shown again; clear your site data to be asked again. Calendly's widget opens only on your click and sets its own cookies, under Calendly's terms. Our own counter sets nothing and already honours Do-Not-Track / Global Privacy Control.</p>
-
-  <h2><span class="wn-num">8.</span> Data location</h2>
-  <p>The infrastructure we use is hosted in the United States and the European Union:</p>
-  <ul>
-    <li>Hostinger — website hosting (EU data center) and our self-hosted n8n server (Hostinger VPS, EU) that receives the anonymous funnel counts and lead alerts.</li>
-    <li>Meta Platforms — US (Pixel and Conversions API data).</li>
-    <li>Calendly — US (booking details).</li>
-    <li>Our own operations dashboard (hq.skynetjoe.com) — our own Hostinger VPS (email-list signups: email, optional first name, topic, page).</li>
-    <li>GoHighLevel — US (CRM contact records).</li>
-    <li>Resend — US (internal lead-notification emails).</li>
-    <li>Slack — US (tool-feedback messages).</li>
-    <li>Google Workspace — US and EU data centers.</li>
-    <li>GitHub — US data centers.</li>
-    <li>Stripe — US and EU.</li>
-    <li>Wise — UK and EU.</li>
-  </ul>
-  <p>No client data is stored on servers located inside Indonesia. We operate from Bali but our infrastructure is not in Indonesia.</p>
-
-  <h2><span class="wn-num">9.</span> Children's data</h2>
-  <p>This service is not directed at people under the age of 18. We do not knowingly collect data from children. If you believe a child has submitted data to us, email <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a> and we'll remove it immediately.</p>
-
-  <h2><span class="wn-num">10.</span> Changes to this policy</h2>
-  <p>Last updated <strong>2026-10-07</strong>.</p>
-  <p>If we make material changes to how we handle your data, active clients will receive an email notice. The "last updated" date at the top of this page always reflects the most recent revision. Minor wording changes are made silently.</p>
-
-  <div class="wn-callout">
-    <p><strong>Quick read:</strong> we collect the bare minimum, we don't sell anything, we delete on request, and the only advertising tracker we load ourselves is the Meta Pixel, disclosed above; the Calendly widget, which you open by clicking, sets its own cookies and loads Meta's script inside its frame.</p>
+    <section class="wn-cta-block">
+      <h2>Questions about your data?</h2>
+      <p>
+        Email <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a> or
+        send a note via the contact form.
+      </p>
+      <a href="/contact" class="wn-btn wn-btn-primary">Open contact form</a>
+    </section>
   </div>
-
-  <section class="wn-cta-block">
-    <h2>Questions about your data?</h2>
-    <p>Email <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a> or send a note via the contact form.</p>
-    <a href="/contact" class="wn-btn wn-btn-primary">Open contact form</a>
-  </section>
-</div>
 </article>

@@ -1,7 +1,7 @@
 /**
  * AI video portfolio — generated 2026-10-07 from two public Google Drive folders
  * (1-1Px6Av7816evCcPkeKvXdaKRdhJZy8y + 1g2JV0LktfCHdEK0BFdQsUKpN0K7llIJQ).
- * 130 finished pieces curated out of 201; raw cuts, blanks, tests and client
+ * 109 finished pieces curated out of 201; raw cuts, blanks, tests and client
  * filenames left out. Thumbnails live in public/aiportfolio/thumbs/<id>.webp;
  * playback is the Drive preview iframe, mounted only when a tile is opened.
  */
@@ -251,33 +251,9 @@ export const AI_VIDEOS: AiVideo[] = [
     orient: "portrait",
   },
   {
-    id: "16ZRUClNRD_yI1R_DYpT6NFukBdxVwUkZ",
-    cat: "pets",
-    title: "Cooling mat for dogs, revision",
-    orient: "portrait",
-  },
-  {
-    id: "1coomLu_MZpoepWJMpzUnYPJHC7MSyyi9",
-    cat: "pets",
-    title: "Dental ad, patient close-up",
-    orient: "portrait",
-  },
-  {
-    id: "18nklM0Mb_fPQSaMRDM6_PVA8d3uAkkgS",
-    cat: "pets",
-    title: "Cool Paws, hot pavement",
-    orient: "portrait",
-  },
-  {
-    id: "1l5dmXXzIzqvVSs8wjeBszd7pVzYPTNnf",
-    cat: "pets",
-    title: "Cool Paws walk 2",
-    orient: "portrait",
-  },
-  {
     id: "1R4Q0Dw6Ke-AWAjUcaiu_fycxnNT_oCKW",
     cat: "health",
-    title: "Dentist video",
+    title: "Dental ad, patient close-up",
     orient: "landscape",
   },
   {
@@ -311,12 +287,6 @@ export const AI_VIDEOS: AiVideo[] = [
     orient: "portrait",
   },
   {
-    id: "1vsAXJmomu9XhnGx7AwVep7wvetdOENS5",
-    cat: "spokesperson",
-    title: "Coach spokesperson 2",
-    orient: "portrait",
-  },
-  {
     id: "1chI87LJB81q1QZr1tvmFB48GMR_gFKQe",
     cat: "spokesperson",
     title: "Coach spokesperson 3",
@@ -332,24 +302,6 @@ export const AI_VIDEOS: AiVideo[] = [
     id: "184U-3SMcSoVgR6iRQOtdUwSKfNLYA06S",
     cat: "cinematic",
     title: "Sketchbook",
-    orient: "portrait",
-  },
-  {
-    id: "1dh2YgiIytWzeYlQuUCNt7QD8B4q9ureb",
-    cat: "realestate",
-    title: "Warehouse sample 1",
-    orient: "portrait",
-  },
-  {
-    id: "1xt6zTonKpvl6N6pYpU1MRBoJ91VpQdUx",
-    cat: "realestate",
-    title: "Warehouse sample 2",
-    orient: "portrait",
-  },
-  {
-    id: "1dJgjkqwLkXVpCDIdi8cfIifGUSRV5et4",
-    cat: "realestate",
-    title: "Warehouse presenter",
     orient: "portrait",
   },
   {
@@ -380,12 +332,6 @@ export const AI_VIDEOS: AiVideo[] = [
     id: "1vO4Iml5xdrKO9w8x84hI_6581I_Q_AHw",
     cat: "meme",
     title: "Breakfast baby",
-    orient: "portrait",
-  },
-  {
-    id: "1fKedwLZHuEhtAl6m4w7U4SE6xB4ihz5s",
-    cat: "meme",
-    title: "Dental patient sketch",
     orient: "portrait",
   },
   {
@@ -473,10 +419,16 @@ export const AI_VIDEOS: AiVideo[] = [
     orient: "landscape",
   },
   {
-    id: "1vU3w8g9Rq7sU5KoqniL3Mu8cFJxHMbfm",
+    id: "11sdbJwmDkMC83r1k2oAwDTm9ovvqYwPk",
     cat: "cinematic",
-    title: "Coffee brand intro, new script",
+    title: "Eagle's grasp",
     orient: "landscape",
+  },
+  {
+    id: "1ylUxM9pN91MD6AtUGLHve_S_Uy-xa9mD",
+    cat: "automation",
+    title: "GHL AI automation",
+    orient: "portrait",
   },
   {
     id: "1x8vRxhoJSebLcCBH1O5VONABWeRVfBWD",
@@ -533,36 +485,6 @@ export const AI_VIDEOS: AiVideo[] = [
     orient: "landscape",
   },
   {
-    id: "1_Ng6kdsUtY8wfwcBdL-gd_9hdCUHhUV3",
-    cat: "product",
-    title: "Six-to-pizza variation",
-    orient: "landscape",
-  },
-  {
-    id: "16aLENczPg_oTX3WVdE5GlRwkxuA0Rga0",
-    cat: "character",
-    title: "Birthday present",
-    orient: "landscape",
-  },
-  {
-    id: "1kO5VyPYUNQx7Wwm_240tMg5_BmKc8Mkf",
-    cat: "product",
-    title: "Toy-brick snack brand, cut 1",
-    orient: "landscape",
-  },
-  {
-    id: "1p_Vjp4dGglNQgcLykiyqLXy_sF5HsOKv",
-    cat: "product",
-    title: "Brand outro, 4K",
-    orient: "landscape",
-  },
-  {
-    id: "1KtGSggC9z5CNTlYc51ONvwao0bIIzQNU",
-    cat: "product",
-    title: "Toy-brick snack brand, corn",
-    orient: "landscape",
-  },
-  {
     id: "1OyIa2fIO8Vyt-oQSjU82fUusgCZ24A5j",
     cat: "realestate",
     title: "Listing walk-through, Sora 2, part 2",
@@ -599,6 +521,12 @@ export const AI_VIDEOS: AiVideo[] = [
     orient: "landscape",
   },
   {
+    id: "1qdv3eZRaWwEY8MDsW4ERbbNThZa1E0ks",
+    cat: "cinematic",
+    title: "Consistent character, scene 1",
+    orient: "landscape",
+  },
+  {
     id: "1nzQ-m3oje7RGjW0buwiymlB0LzhTUl3X",
     cat: "cinematic",
     title: "Candlelit newborn",
@@ -629,30 +557,6 @@ export const AI_VIDEOS: AiVideo[] = [
     orient: "landscape",
   },
   {
-    id: "1ZFqv_cPGyVoGidZ5dvMlYRObYrMwAp4Q",
-    cat: "product",
-    title: "Skincare elixir, drop",
-    orient: "landscape",
-  },
-  {
-    id: "1wBYUjwoinwsWjfHf-k5CSQqoUKx9Un_B",
-    cat: "product",
-    title: "Skincare elixir, mist",
-    orient: "landscape",
-  },
-  {
-    id: "1hKMLTUM6q7NCPMvbUbGpC6bgqAdwvyEp",
-    cat: "product",
-    title: "Skincare elixir, forest",
-    orient: "landscape",
-  },
-  {
-    id: "1x6HAsKzm75xgXAJ9yGcKUT8KF9vIieUA",
-    cat: "product",
-    title: "Skincare elixir, dusk",
-    orient: "landscape",
-  },
-  {
     id: "1gtG8RY9QsP-Y5sUeSRWHgADRvx94F__B",
     cat: "product",
     title: "Modest-fashion TikTok style",
@@ -675,24 +579,6 @@ export const AI_VIDEOS: AiVideo[] = [
     cat: "meme",
     title: "Car argument",
     orient: "landscape",
-  },
-  {
-    id: "1iyCtu-tzwslffAQzJBwDZ90uJBGKEGxD",
-    cat: "automotive",
-    title: "$0 down Mercedes, 8s ad 1",
-    orient: "portrait",
-  },
-  {
-    id: "1iyX818DrPBDkuni1yp0x_C7HnGlzGF-y",
-    cat: "automotive",
-    title: "$0 down Mercedes, 8s ad 2",
-    orient: "portrait",
-  },
-  {
-    id: "1-pCSnZhUxpQVP_X1NtLJhPViOsfEWkQQ",
-    cat: "automotive",
-    title: "$0 down Mercedes, 8s ad 3",
-    orient: "portrait",
   },
   {
     id: "1GwQb6jWddhVlEKBlZNBJXBFHSXpdZSvV",
@@ -761,12 +647,6 @@ export const AI_VIDEOS: AiVideo[] = [
     orient: "landscape",
   },
   {
-    id: "1dWynFQWfUmJDzOAj_VKJxyqDoPUSxWzh",
-    cat: "fashion",
-    title: "Hair reveal, branded",
-    orient: "landscape",
-  },
-  {
     id: "1CoKKLAFYqQZMkmBU5IH02xDAXwvyFHGK",
     cat: "character",
     title: "Panda portrait 1",
@@ -824,12 +704,6 @@ export const AI_VIDEOS: AiVideo[] = [
     id: "1yoUQPrxTtdem-a1iM6r-EvRXnAWzJDeE",
     cat: "cinematic",
     title: "Lakeside, monochrome",
-    orient: "landscape",
-  },
-  {
-    id: "1Dpwox6PhqHPhmDnCNmejKJK_HIkcTXXn",
-    cat: "pets",
-    title: "Dog wipes, park",
     orient: "landscape",
   },
   {

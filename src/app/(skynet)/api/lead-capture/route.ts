@@ -194,8 +194,8 @@ export async function POST(req: Request) {
           ? n.interest
           : null,
       page:
-        typeof n.page === "string"
-          ? n.page.replace(/[\u0000-\u001f\u007f<>]/g, "").slice(0, 200)
+        typeof n.page === "string" && /^\/[^\s<>]{0,199}$/.test(n.page)
+          ? n.page
           : (page ?? null),
     });
     if (!hqOk)

@@ -92,6 +92,7 @@ export default function NewsletterPopup({
       if (
         document.querySelector('[role="dialog"], [data-consent-bar]') !== null
       ) {
+        if (retry) window.clearTimeout(retry);
         retry = window.setTimeout(fire, 8000);
         return;
       }
