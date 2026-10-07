@@ -52,9 +52,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_BODY_BYTES = 8 * 1024;
 
 // Newsletter sign-ups: which site slugs may be mirrored to HQ, and a
-// process-wide cap so a rotating-XFF flood cannot starve HQ's own 120/min cap.
+// process-wide cap (matches HQ's own 120/min) so a rotating-XFF flood is bounded
+// without locking real visitors out at the first burst.
 const NEWSLETTER_SITES = new Set(["skynetjoe", "waseemnasir"]);
-const NEWSLETTER_PER_MIN = 40;
+const NEWSLETTER_PER_MIN = 120;
 let nlWindowStart = 0;
 let nlWindowCount = 0;
 function newsletterAllowed(): boolean {
@@ -182,12 +183,20 @@ export async function POST(req: Request) {
       site,
       source: "popup",
       first_name:
-        typeof n.firstName === "string" ? n.firstName.slice(0, 80) : null,
+        typeof n.firstName === "string"
+          ? n.firstName
+              .replace(/[\u0000-\u001f\u007f<>]/g, "")
+              .trim()
+              .slice(0, 80) || null
+          : null,
       interest:
         typeof n.interest === "string" && /^[a-z0-9-]{1,32}$/.test(n.interest)
           ? n.interest
           : null,
-      page: typeof n.page === "string" ? n.page.slice(0, 200) : (page ?? null),
+      page:
+        typeof n.page === "string"
+          ? n.page.replace(/[\u0000-\u001f\u007f<>]/g, "").slice(0, 200)
+          : (page ?? null),
     });
     if (!hqOk)
       console.warn("[lead-capture] newsletter: HQ mirror did not confirm", {

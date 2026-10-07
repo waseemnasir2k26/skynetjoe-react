@@ -56,7 +56,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li><strong>Discovery brief (/discovery-call)</strong> — first and last name, email, phone/WhatsApp, company, website, role, current tool stack, how you heard about us, budget range, timeline and the problem you describe. It goes to our CRM, to an internal notification email, and to our self-hosted n8n server so we get paged when a lead lands.</li>
     <li><strong>Tool feedback</strong> — the message you type into a free tool's feedback box and, if you add it, your email; forwarded to our internal Slack so we can reply, and — if you gave an email — that email is also saved to our CRM as a contact tagged with the tool name so we can follow up.</li>
     <li><strong>Email correspondence</strong> — anything you email to us is stored in Google Workspace inside our mailbox.</li>
-    <li><strong>Email-list signups</strong> — a small sign-up card may appear once per browser. If you fill it in, it collects your email address, optionally your first name and the topic you picked, plus the page you were on. The address goes to our CRM (tagged <code>newsletter-skynetjoe</code>) and to our own operations dashboard (hq.skynetjoe.com, self-hosted on our Hostinger VPS), and is used only to send that email once the list goes live. Nothing has been sent yet. To leave the list, reply to any email or write to waseem@skynetjoe.com and the address is removed within 7 days. “Not right now” stores a 14-day snooze in your browser and nothing else.</li>
+    <li><strong>Email-list signups</strong> — a small sign-up card may appear once per browser. If you fill it in, it collects your email address, optionally your first name and the topic you picked, plus the page you were on. The address is saved the same way as any other form on this site: to our CRM (tagged <code>newsletter-skynetjoe</code> and <code>tool-lead</code>) when the CRM confirms, otherwise by email to us or to a file on our server, and our own n8n server is pinged that a sign-up happened; it is then copied to our operations dashboard (hq.skynetjoe.com, self-hosted on our Hostinger VPS). It is used only to send that email once the list goes live. Nothing has been sent yet. To leave the list, reply to any email or write to waseem@skynetjoe.com; Waseem removes the address by hand within 7 days. “Not right now” stores a 14-day snooze in your browser; the card also sets a session flag so no other pop-up fires in the same visit.</li>
   </ul>
 
   <h2><span class="wn-num">3.</span> Why we collect it</h2>
@@ -113,7 +113,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
   <h2><span class="wn-num">8.</span> Data location</h2>
   <p>The infrastructure we use is hosted in the United States and the European Union:</p>
   <ul>
-    <li>Hostinger — website hosting (EU data center) and our self-hosted n8n server (Contabo/Hostinger VPS, EU) that receives the anonymous funnel counts and lead alerts.</li>
+    <li>Hostinger — website hosting (EU data center) and our self-hosted n8n server (Hostinger VPS, EU) that receives the anonymous funnel counts and lead alerts.</li>
     <li>Meta Platforms — US (Pixel and Conversions API data).</li>
     <li>Calendly — US (booking details).</li>
     <li>Our own operations dashboard (hq.skynetjoe.com) — our own Hostinger VPS (email-list signups: email, optional first name, topic, page).</li>

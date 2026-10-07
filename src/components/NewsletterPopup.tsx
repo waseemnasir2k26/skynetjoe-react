@@ -11,10 +11,10 @@
  *     (shared "skynet-popup-fired" key kept for the retired popups).
  *   - "Not right now" snoozes for 14 days; a successful subscribe never shows
  *     it again. ?popup=off disables it for QA.
- *   - Posts to /api/lead-capture with source "newsletter" (GHL → Resend → disk
- *     sink, honeypot, rate-limit) AND mirrors to HQ via the same route
- *     (server-side, see lib/hq-subscriber.ts). Success only after the server
- *     confirms a write.
+ *   - skynetjoe: posts to /api/lead-capture (source "newsletter-skynetjoe";
+ *     GHL → Resend → disk sink, then an HQ mirror after a confirmed write).
+ *     waseemnasir: posts to /api/subscribe (HQ only, honest 502 otherwise).
+ *     Success only after the server confirms a write.
  *   - Zero third-party requests. Keyboard: Esc closes, focus trapped inside.
  */
 
@@ -67,6 +67,7 @@ export default function NewsletterPopup({
   >("idle");
   const [error, setError] = useState<string | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const shownAtRef = useRef<number>(0);
 
   // ── trigger ──
   useEffect(() => {
@@ -81,12 +82,17 @@ export default function NewsletterPopup({
       /* ignore */
     }
     let fired = false;
+    let retry: number | undefined;
     const fire = () => {
       if (fired) return;
+      if (BLOCKED.some((re) => re.test(window.location.pathname))) return;
+      if (readDone()) return;
       // Never on top of another dialog or an undecided consent bar: Esc or a
       // backdrop click meant for them would otherwise snooze this for 14 days.
-      if (document.querySelector('[role="dialog"], [data-consent-bar]') !== null) {
-        window.setTimeout(fire, 8000);
+      if (
+        document.querySelector('[role="dialog"], [data-consent-bar]') !== null
+      ) {
+        retry = window.setTimeout(fire, 8000);
         return;
       }
       fired = true;
@@ -95,6 +101,7 @@ export default function NewsletterPopup({
       } catch {
         /* ignore */
       }
+      shownAtRef.current = Date.now();
       setShow(true);
     };
     const t = window.setTimeout(fire, DELAY_MS);
@@ -105,6 +112,7 @@ export default function NewsletterPopup({
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.clearTimeout(t);
+      if (retry) window.clearTimeout(retry);
       window.removeEventListener("scroll", onScroll);
     };
   }, [pathname]);
@@ -115,7 +123,10 @@ export default function NewsletterPopup({
     const first = cardRef.current?.querySelector<HTMLElement>("input,button");
     first?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") snooze();
+      if (e.key === "Escape") {
+        if (Date.now() - shownAtRef.current < 1500) return; // grace after open
+        snooze();
+      }
       if (e.key === "Tab" && cardRef.current) {
         const f = cardRef.current.querySelectorAll<HTMLElement>(
           'input,button,select,[href],[tabindex]:not([tabindex="-1"])',
@@ -138,7 +149,16 @@ export default function NewsletterPopup({
   }, [show]);
 
   const snooze = () => {
+    // Closing the success card must not downgrade "subscribed" to a snooze.
+    if (status === "success") {
+      setShow(false);
+      return;
+    }
     try {
+      if (window.localStorage.getItem(DONE_KEY) === "subscribed") {
+        setShow(false);
+        return;
+      }
       const until = new Date(Date.now() + SNOOZE_DAYS * 864e5).toISOString();
       window.localStorage.setItem(DONE_KEY, until);
     } catch {
@@ -158,21 +178,24 @@ export default function NewsletterPopup({
     setError(null);
     setStatus("submitting");
     try {
-      const res = await fetch(site === "waseemnasir" ? "/api/subscribe" : "/api/lead-capture", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: em,
-          source: `newsletter-${site}`,
-          capturedAt: new Date().toISOString(),
-          _honeypot: hp,
-          newsletter: {
-            firstName: firstName.trim().slice(0, 80) || undefined,
-            interest: interest || undefined,
-            page: pathname,
-          },
-        }),
-      });
+      const res = await fetch(
+        site === "waseemnasir" ? "/api/subscribe" : "/api/lead-capture",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: em,
+            source: `newsletter-${site}`,
+            capturedAt: new Date().toISOString(),
+            _honeypot: hp,
+            newsletter: {
+              firstName: firstName.trim().slice(0, 80) || undefined,
+              interest: interest || undefined,
+              page: pathname,
+            },
+          }),
+        },
+      );
       if (!res.ok) {
         const body = (await res.json().catch(() => null)) as {
           error?: string;
@@ -227,23 +250,50 @@ export default function NewsletterPopup({
               onClick={snooze}
               aria-label="Close"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
             </button>
 
             <div className="nlp-art" aria-hidden="true">
               <span className="nlp-orb nlp-orb-a" />
               <span className="nlp-orb nlp-orb-b" />
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" /><path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z" /></svg>
+              <svg
+                width="26"
+                height="26"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" />
+                <path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z" />
+              </svg>
             </div>
 
             {status === "success" ? (
               <div className="nlp-body">
                 <p className="nlp-eyebrow">You&apos;re on the list</p>
                 <h2 id="nlp-title" className="nlp-title">
-                  Thanks{firstName.trim() ? `, ${firstName.trim()}` : ""}. You&apos;ll get the first issue when it launches.
+                  Thanks{firstName.trim() ? `, ${firstName.trim()}` : ""}.
+                  You&apos;ll get the first issue when it launches.
                 </h2>
                 <p className="nlp-lede">
-                  Builds, workflows, the tools that actually paid off. Reply to any issue and it reaches me; reply &ldquo;stop&rdquo; and you are removed.
+                  Builds, workflows, the tools that actually paid off. Reply to
+                  any issue and it reaches me; reply &ldquo;stop&rdquo; and you
+                  are removed.
                 </p>
               </div>
             ) : (
@@ -253,7 +303,10 @@ export default function NewsletterPopup({
                   We ship a lot. Get the best of it in one email.
                 </h2>
                 <p className="nlp-lede">
-                  New AI videos, free n8n workflows, site teardowns and the services we add. Join now and you are in the first send. No spam; reply &ldquo;stop&rdquo; to any email and you are off the list.
+                  New AI videos, free n8n workflows, site teardowns and the
+                  services we add. Join now and you are in the first send. No
+                  spam; reply &ldquo;stop&rdquo; to any email and you are off
+                  the list.
                 </p>
 
                 <div className="nlp-row">
@@ -346,7 +399,13 @@ export default function NewsletterPopup({
                 </div>
                 <p className="nlp-fine">
                   Occasional, not weekly. Leave anytime.{" "}
-                  <a href="/privacy-policy">Privacy</a>
+                  <a
+                    href={
+                      site === "waseemnasir" ? "/privacy" : "/privacy-policy"
+                    }
+                  >
+                    Privacy
+                  </a>
                 </p>
               </form>
             )}
