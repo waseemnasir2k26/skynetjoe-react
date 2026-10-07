@@ -1,7 +1,7 @@
 /**
  * AI video portfolio — generated 2026-10-07 from two public Google Drive folders
  * (1-1Px6Av7816evCcPkeKvXdaKRdhJZy8y + 1g2JV0LktfCHdEK0BFdQsUKpN0K7llIJQ).
- * 109 finished pieces curated out of 201; raw cuts, blanks, tests and client
+ * 102 finished pieces curated out of 201; raw cuts, blanks, tests and client
  * filenames left out. Thumbnails live in public/aiportfolio/thumbs/<id>.webp;
  * playback is the Drive preview iframe, mounted only when a tile is opened.
  */
@@ -41,13 +41,12 @@ export const AI_CATEGORIES: AiCategory[] = [
   {
     key: "realestate",
     name: "Real Estate & Spaces",
-    blurb: "Listings, warehouses and interiors walked by an AI presenter.",
+    blurb: "Listing walk-throughs narrated by an AI presenter.",
   },
   {
     key: "product",
-    name: "Product & Skincare",
-    blurb:
-      "Hero shots, pours and unboxings for products that never left the warehouse.",
+    name: "Product & Seasonal",
+    blurb: "Hero shots, seasonal sets and small-brand spots, no studio day.",
   },
   {
     key: "pets",
@@ -104,12 +103,6 @@ export const AI_VIDEOS: AiVideo[] = [
     id: "1l84VK5fQcTrr4PHkNVKgX4Z1NGX9mn3f",
     cat: "spokesperson",
     title: "Contractor UGC ad, cut 2",
-    orient: "portrait",
-  },
-  {
-    id: "1TjDt1lNCTuU4hwm0x5yBu91TKSk4SHa0",
-    cat: "spokesperson",
-    title: "Contractor UGC ad, cut 3",
     orient: "portrait",
   },
   {
@@ -211,7 +204,7 @@ export const AI_VIDEOS: AiVideo[] = [
   {
     id: "1UTAZvm7GgsKB3HB211-jtehSe06lawsO",
     cat: "automotive",
-    title: "Range Rover, AI sample",
+    title: "Luxury SUV, AI sample",
     orient: "portrait",
   },
   {
@@ -335,12 +328,6 @@ export const AI_VIDEOS: AiVideo[] = [
     orient: "portrait",
   },
   {
-    id: "1KV9yhL5zGYULKjS4z4YJtA1RI9qhlztD",
-    cat: "meme",
-    title: "Skincare bite",
-    orient: "portrait",
-  },
-  {
     id: "1UYQi-kOw2O1vl3HvXKKD9ApI4I5-foGT",
     cat: "meme",
     title: "Grin, reaction",
@@ -363,12 +350,6 @@ export const AI_VIDEOS: AiVideo[] = [
     cat: "product",
     title: "Winter forest, cinematic 8s",
     orient: "landscape",
-  },
-  {
-    id: "1lvihMGtcDBLNOIkbySfCqP5kXL9NbY0i",
-    cat: "automation",
-    title: "AI agents 24/7",
-    orient: "portrait",
   },
   {
     id: "1BoTpohqioFBTuDEp2PFa5Az-EWQAeXPu",
@@ -401,12 +382,6 @@ export const AI_VIDEOS: AiVideo[] = [
     orient: "portrait",
   },
   {
-    id: "1Tja8TFifEfiPLb_5aY3RKaDQU87K13YF",
-    cat: "meme",
-    title: "Milk wali, Urdu",
-    orient: "landscape",
-  },
-  {
     id: "1kPObFT--CUWxBjCmMXtrOM3rmOCiapmE",
     cat: "automation",
     title: "Spokesperson ad skit",
@@ -435,18 +410,6 @@ export const AI_VIDEOS: AiVideo[] = [
     cat: "automation",
     title: "Hotel owners in Bali, booking bot",
     orient: "landscape",
-  },
-  {
-    id: "1kpim24ADAabVAK6vYfTIhgTLWhYXs2i-",
-    cat: "automation",
-    title: "HVAC spokesperson 1",
-    orient: "portrait",
-  },
-  {
-    id: "1HDfySQv5UEh6if8u_BpJDbZdDf6L7Jd1",
-    cat: "automation",
-    title: "HVAC spokesperson 2",
-    orient: "portrait",
   },
   {
     id: "1tz9Zypwm3jER-T6aa4InnbOcwxOSIzh2",
@@ -584,12 +547,6 @@ export const AI_VIDEOS: AiVideo[] = [
     id: "1GwQb6jWddhVlEKBlZNBJXBFHSXpdZSvV",
     cat: "cinematic",
     title: "Library background",
-    orient: "landscape",
-  },
-  {
-    id: "14EbZI_K6OV-jHWazs7XSknsbah8H8jPF",
-    cat: "character",
-    title: "Cat at the laptop",
     orient: "landscape",
   },
   {

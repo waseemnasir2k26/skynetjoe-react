@@ -194,7 +194,8 @@ export async function POST(req: Request) {
           ? n.interest
           : null,
       page:
-        typeof n.page === "string" && /^\/[^\s<>]{0,199}$/.test(n.page)
+        typeof n.page === "string" &&
+        /^\/(?![\/\\])[^\s<>]{0,198}$/.test(n.page)
           ? n.page
           : (page ?? null),
     });
