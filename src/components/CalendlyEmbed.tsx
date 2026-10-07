@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 import { Loader2, CalendarClock, CalendarDays } from "lucide-react";
@@ -19,8 +19,7 @@ import { Loader2, CalendarClock, CalendarDays } from "lucide-react";
  * 2026-10-07 (audit gate, round 2): the widget is click-to-open. Calendly's
  * iframe loads Meta's fbevents.js inside its own frame the moment it mounts,
  * which made the consent bar's promise false on every booking page. Now the
- * frame mounts only after the visitor clicks "Open the calendar", or at once
- * when they already accepted the Meta bar (localStorage sj_meta_consent).
+ * frame mounts only after the visitor clicks "Open the calendar". No auto-open.
  */
 
 const C = {
@@ -49,17 +48,9 @@ export default function CalendlyEmbed({
 } = {}) {
   const router = useRouter();
   const [scheduled, setScheduled] = useState(false);
+  // Click-only, on purpose: an auto-open for returning accepters made the bar
+  // and the policy ("opens only when you click") false, and ignored GPC.
   const [opened, setOpened] = useState(false);
-
-  useEffect(() => {
-    try {
-      if (window.localStorage.getItem("sj_meta_consent") === "granted") {
-        setOpened(true);
-      }
-    } catch {
-      /* storage unavailable: stay click-to-open */
-    }
-  }, []);
 
   useCalendlyEventListener({
     onEventScheduled: () => {
