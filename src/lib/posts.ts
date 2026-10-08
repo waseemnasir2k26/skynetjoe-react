@@ -56,6 +56,27 @@ export function categoryLabel(c: PostCategory): string {
 
 export const POSTS: Post[] = [
   {
+    slug: "free-n8n-workflows-small-business-2026",
+    title:
+      "10 Free n8n Workflows for Small Business (Latest 2026): Import in 4 Steps",
+    seoTitle: "10 Free n8n Workflows for Small Business 2026",
+    description:
+      "10 free n8n workflows for small business, built for freight, plumbers, Shopify, gyms and more. Each imports in 4 steps and send nodes ship disabled.",
+    publishedAt: "2026-10-12",
+    updatedAt: "2026-10-12",
+    readingTime: 6,
+    category: "automation",
+    tags: [
+      "free n8n workflows",
+      "small business automation",
+      "n8n templates",
+      "n8n workflow json",
+      "whatsapp automation",
+      "shopify automation",
+    ],
+    author: "Waseem Nasir",
+  },
+  {
     slug: "muse-ai-account-vps-free-vpn-1-billion-tokens",
     title:
       "Muse AI Account Not Working? VPS + Free VPN Fix for 1 Billion Free Tokens",

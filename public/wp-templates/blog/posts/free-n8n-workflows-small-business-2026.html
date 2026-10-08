@@ -1,0 +1,222 @@
+<style>
+  .wn-free-n8n-workflows-small-business-2026 {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-free-n8n-workflows-small-business-2026 h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-free-n8n-workflows-small-business-2026 h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-free-n8n-workflows-small-business-2026 p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-free-n8n-workflows-small-business-2026 ul,
+  .wn-free-n8n-workflows-small-business-2026 ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-free-n8n-workflows-small-business-2026 li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-free-n8n-workflows-small-business-2026 strong {
+    color: #fff;
+  }
+  .wn-free-n8n-workflows-small-business-2026 a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-free-n8n-workflows-small-business-2026 a:hover {
+    color: #7ee4ff;
+  }
+  .wn-free-n8n-workflows-small-business-2026 .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-free-n8n-workflows-small-business-2026 .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-free-n8n-workflows-small-business-2026 .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-free-n8n-workflows-small-business-2026 table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-free-n8n-workflows-small-business-2026 th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-free-n8n-workflows-small-business-2026 td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-free-n8n-workflows-small-business-2026 code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-free-n8n-workflows-small-business-2026 .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-free-n8n-workflows-small-business-2026 .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-free-n8n-workflows-small-business-2026 .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<div class="wn-free-n8n-workflows-small-business-2026">
+<img src="/blog/free-n8n-workflows-small-business-2026/cover.jpg" alt="Waseem Nasir of SkynetLabs at a laptop, cover for 10 free n8n workflows" width="1280" height="720" loading="eager" style="width:100%;height:auto;border-radius:12px;margin-bottom:1.5rem">
+<p>Every one imports into n8n in 4 steps, and the send nodes ship disabled. So you can look at the workflow, run it once, and check the output before it touches a single customer. Below are 10 free n8n workflows for small business owners. Each one fixes one boring job: quotes, missed calls, stock, paperwork, CVs, lapsed members, repair requests, reviews, service reminders and WhatsApp orders. Pick your trade, read the short summary, and grab the JSON from GitHub.</p>
+<h2 id="freight-quote-parser">Freight forwarders: turn a quote email into a table row and a draft reply</h2>
+<p>Someone on your team retypes every quote request. Ports, weights, dates and cargo type all get copied by hand. It is slow, and one typo costs you money.</p>
+<p><strong>What it does:</strong> It reads the email, pulls eight fields into a fixed schema, and writes one row per message. Then it leaves a draft reply that repeats the details back for confirmation. Nothing sends on its own.</p>
+<p><strong>Nodes:</strong> Webhook, Claude API call, a validator, Postgres write, Gmail draft (disabled).</p>
+<!-- YT:S01 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/04-freight-quote-parser">Get it free</a></p>
+<h2 id="missed-call-to-text">Plumbers and HVAC crews: text back every missed call within a minute</h2>
+<p>You are up a ladder and the phone rings out. The caller dials the next name on the list. That one missed call can be a $400 job.</p>
+<p><strong>What it does:</strong> It takes the missed-call event, writes the job into a table as a callback you still owe, and composes the text back. The send is simulated, so you add your own SMS provider when ready.</p>
+<p><strong>Nodes:</strong> Webhook, plus a step that logs the job and the ready-made text. Four nodes in total.</p>
+<!-- YT:S02 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/11-missed-call-to-text">Get it free</a></p>
+<h2 id="shopify-low-stock-reorder">Shopify store owners: get a reorder email to your supplier before you sell out</h2>
+<p>You find out a bestseller is nearly gone when a customer asks where it is. Sold out on a Saturday means sales you never see.</p>
+<p><strong>What it does:</strong> Every morning at 07:00 it checks each variant. Anything under 20 units gets a purchase-order email written to your supplier, and you get a short heads-up. A cap of 50 variants per run stops floods.</p>
+<p><strong>Nodes:</strong> Schedule, Shopify, Code, Limit, IF, two Gmail nodes (disabled).</p>
+<!-- YT:S03 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/14-shopify-low-stock-reorder">Get it free</a></p>
+<h2 id="client-document-reminders">Accountants: stop chasing receipts and let Monday and Thursday emails do it</h2>
+<p>Chasing missing client documents eats hours every week. You send the same polite email again and again. Then you send a sharper one.</p>
+<p><strong>What it does:</strong> On Monday it reads your tracker sheet and sends a friendly reminder. On Thursday it sends a firmer note, only to clients who were already reminded. Each send stamps the date in the sheet.</p>
+<p><strong>Nodes:</strong> Two schedules, Google Sheets, Limit, IF, two Gmail nodes (disabled), Sheets write.</p>
+<!-- YT:S04 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/15-client-document-reminders">Get it free</a></p>
+<h2 id="cv-shortlist-assistant">Recruiters: score a pile of CVs and see the top 5, then you decide</h2>
+<p>Forty CVs land for one role and you read the first ten properly. The best person might be number thirty-one. You need a sort order, not a robot boss.</p>
+<p><strong>What it does:</strong> It reads each PDF CV, scores it 0 to 100 against your job spec with three short reasons, and logs it. At 17:00 Slack lists the top 5. It has no reject step and emails no candidate.</p>
+<p><strong>Nodes:</strong> Gmail trigger, PDF read, Code, Groq LLM call, Parse, Google Sheets, Schedule, Slack.</p>
+<!-- YT:S05 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/16-cv-shortlist-assistant">Get it free</a></p>
+<h2 id="gym-member-winback">Gym owners: win back quiet members with a text and a nudge to the coach</h2>
+<p>Members skip a week, then two, then stop paying. Five lapsed members at $60 a month is $3,600 a year gone. Nobody notices until the bank statement.</p>
+<p><strong>What it does:</strong> Every night at 20:00 it finds anyone with no check-in for 14 days. It texts them a come-back message with an opt-out line and tells their coach in Slack.</p>
+<p><strong>Nodes:</strong> Schedule, Google Sheets, Limit, IF, Twilio SMS (disabled), Slack.</p>
+<!-- YT:S06 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/17-gym-member-winback">Get it free</a></p>
+<h2 id="maintenance-request-router">Property managers: sort emergency repairs from routine ones while you sleep</h2>
+<p>A tenant messages at 2am about water through the ceiling. Another asks about a dripping tap. Both land in the same inbox, and you read them at breakfast.</p>
+<p><strong>What it does:</strong> It reads each message and tags it emergency or routine. Emergencies text your on-call person. Every request is logged, and a short acknowledgement is drafted for the tenant.</p>
+<p><strong>Nodes:</strong> Gmail or WhatsApp trigger, Code, Text Classifier with Groq, Twilio (disabled), Google Sheets, Gmail reply (disabled).</p>
+<!-- YT:S07 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/18-maintenance-request-router">Get it free</a></p>
+<h2 id="review-reply-drafts">Cafe and restaurant owners: get a calm draft reply to every bad review</h2>
+<p>A 1-star review arrives at 9pm and you see it three days later. By then it has sat there looking ignored. A rushed angry reply makes it worse.</p>
+<p><strong>What it does:</strong> It reads the review email and checks the stars. For 3 stars or fewer, it writes a calm reply and sends it to Slack for approval. You post it by hand. Nothing is ever posted for you.</p>
+<p><strong>Nodes:</strong> Gmail trigger, Limit, Code, IF, Basic LLM Chain with Groq, Slack (disabled).</p>
+<!-- YT:S08 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/19-review-reply-drafts">Get it free</a></p>
+<h2 id="car-service-reminders">Garage owners: text customers when their car is due for a service</h2>
+<p>The garage down the road texts its customers. You have a job sheet and no time to chase anyone. Customers drift away without a reminder.</p>
+<p><strong>What it does:</strong> Every morning at 08:00 it finds customers whose last service was 6 or more months ago. It texts a booking link, then stamps the sheet so nobody is texted twice.</p>
+<p><strong>Nodes:</strong> Schedule, Google Sheets, IF, Limit, Twilio SMS (disabled), Sheets write.</p>
+<!-- YT:S09 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/20-car-service-reminders">Get it free</a></p>
+<h2 id="whatsapp-order-capture">Distributors: turn WhatsApp orders into clean spreadsheet rows</h2>
+<p>Your reps read orders in WhatsApp and retype them into Excel. It takes all day, and typos mean wrong shipments. The sales rep also never knows if stock is short.</p>
+<p><strong>What it does:</strong> It reads a message like 20 of SKU-1001 for Sam, pulls out SKU, quantity and customer, and checks stock. In stock, it writes the order row and confirms. Out of stock, it tells your rep.</p>
+<p><strong>Nodes:</strong> WhatsApp trigger, Information Extractor with Groq, Google Sheets lookup, IF, Sheets write, WhatsApp and Slack (disabled).</p>
+<!-- YT:S10 -->
+<p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/21-whatsapp-order-capture">Get it free</a></p>
+<h2 id="faq">FAQ</h2>
+<h3>Are these n8n workflows really free?</h3>
+<p>Yes. Each workflow is a free JSON file in a public GitHub repo under an MIT licence. You import it into your own n8n. You only pay for the accounts it connects to, such as Twilio for texts or a Groq key for the AI step.</p>
+<h3>Will anything send messages when I import one?</h3>
+<p>No. The workflows import inactive, and every send node ships disabled. Run it by hand first, check the output, and then turn on the send step. Most of them also cap each run at 50 items.</p>
+<h3>Do I need to know how to code?</h3>
+<p>No. You import the file, connect your own accounts, swap the placeholder sheet and phone numbers, and test with your own address. If you would rather not touch it, SkynetLabs can build and run it for you.</p>
+<h2 id="build-for-you">Want it built for you?</h2>
+<div class="callout"><p>Rather not touch the JSON yourself? SkynetLabs builds and runs these for small teams.</p></div>
+<p>Hire SkynetLabs, our Top Rated agency on Fiverr:<br><a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a></p>
+<p>More from the series:</p><ul><li><a href="/blog/n8n-freight-quote-email-parser">the full build log of the freight quote parser, with real run numbers</a></li><li><a href="/blog/n8n-shorts-factory-workflow">the first workflow in the series, a shorts factory</a></li></ul>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are these n8n workflows really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Each workflow is a free JSON file in a public GitHub repo under an MIT licence. You import it into your own n8n. You only pay for the accounts it connects to, such as Twilio for texts or a Groq key for the AI step."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will anything send messages when I import one?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The workflows import inactive, and every send node ships disabled. Run it by hand first, check the output, and then turn on the send step. Most of them also cap each run at 50 items."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to know how to code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You import the file, connect your own accounts, swap the placeholder sheet and phone numbers, and test with your own address. If you would rather not touch it, SkynetLabs can build and run it for you."
+      }
+    }
+  ]
+}
+</script>
