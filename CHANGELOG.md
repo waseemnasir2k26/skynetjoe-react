@@ -3,6 +3,13 @@
 All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2026.10] - 2026-10-12
+
+- October 2026 review of skynetjoe-react, the public Next.js 16 / React 19 / Tailwind v4 rebuild of skynetjoe.com for SkynetLabs; package version bumped 0.2.0 to 0.3.0, documentation and metadata only.
+- Status: last code commit 2026-06-04; deploy is an archive upload to Hostinger per DEPLOY-REAL.md, which supersedes DEPLOY_HOSTINGER.md.
+- Reviewed this month: README links checked, all resolve (localhost excluded); a Work with SkynetLabs footer was added.
+- Known gaps: README below the project header is still create-next-app boilerplate; package.json name is the generic `app`; no LICENSE; about 40 dated planning and audit markdown files sit in the repo root; two conflicting deploy documents remain.
+
 ## [2026.09] - 2026-09-16
 
 - Maintenance review of skynetjoe-react — the Next.js rebuild of skynetjoe.com (SkynetLabs), Next 16.2.6 / React 19.2.4 / TypeScript / Tailwind v4, App Router under `src/app/(skynet)`.
