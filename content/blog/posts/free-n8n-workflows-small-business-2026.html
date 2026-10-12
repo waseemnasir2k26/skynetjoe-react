@@ -120,61 +120,101 @@
 <p>Someone on your team retypes every quote request. Ports, weights, dates and cargo type all get copied by hand. It is slow, and one typo costs you money.</p>
 <p><strong>What it does:</strong> It reads the email, pulls eight fields into a fixed schema, and writes one row per message. Then it leaves a draft reply that repeats the details back for confirmation. Nothing sends on its own.</p>
 <p><strong>Nodes:</strong> Webhook, Claude API call, a validator, Postgres write, Gmail draft (disabled).</p>
-<!-- YT:S01 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/ICTjvhfQZPM" title="Freight Quote Automation: Email to Priced Quote in 40 Seconds" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/ICTjvhfQZPM">youtube.com/shorts/ICTjvhfQZPM</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "Freight Quote Automation: Email to Priced Quote in 40 Seconds", "description": "Freight forwarders spend 25 minutes per quote. This free n8n workflow reads the email, pulls weight, lane and dates, checks your rate sheet and drafts the reply in 40 seconds.", "thumbnailUrl": "https://i.ytimg.com/vi/ICTjvhfQZPM/hqdefault.jpg", "uploadDate": "2026-10-11", "embedUrl": "https://www.youtube.com/embed/ICTjvhfQZPM", "contentUrl": "https://youtube.com/shorts/ICTjvhfQZPM", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/04-freight-quote-parser">Get it free</a></p>
 <h2 id="missed-call-to-text">Plumbers and HVAC crews: text back every missed call within a minute</h2>
 <p>You are up a ladder and the phone rings out. The caller dials the next name on the list. That one missed call can be a $400 job.</p>
 <p><strong>What it does:</strong> It takes the missed-call event, writes the job into a table as a callback you still owe, and composes the text back. The send is simulated, so you add your own SMS provider when ready.</p>
 <p><strong>Nodes:</strong> Webhook, plus a step that logs the job and the ready-made text. Four nodes in total.</p>
-<!-- YT:S02 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/wVTyTAuz9xM" title="Missed Call Text Back Automation for Plumbers &amp; HVAC" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/wVTyTAuz9xM">youtube.com/shorts/wVTyTAuz9xM</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "Missed Call Text Back Automation for Plumbers & HVAC", "description": "A missed call for a plumber or HVAC company is a $400 job gone. This free n8n workflow texts the caller back in 5 seconds, logs it in Sheets and pings Slack.", "thumbnailUrl": "https://i.ytimg.com/vi/wVTyTAuz9xM/hqdefault.jpg", "uploadDate": "2026-10-12", "embedUrl": "https://www.youtube.com/embed/wVTyTAuz9xM", "contentUrl": "https://youtube.com/shorts/wVTyTAuz9xM", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/11-missed-call-to-text">Get it free</a></p>
 <h2 id="shopify-low-stock-reorder">Shopify store owners: get a reorder email to your supplier before you sell out</h2>
 <p>You find out a bestseller is nearly gone when a customer asks where it is. Sold out on a Saturday means sales you never see.</p>
 <p><strong>What it does:</strong> Every morning at 07:00 it checks each variant. Anything under 20 units gets a purchase-order email written to your supplier, and you get a short heads-up. A cap of 50 variants per run stops floods.</p>
 <p><strong>Nodes:</strong> Schedule, Shopify, Code, Limit, IF, two Gmail nodes (disabled).</p>
-<!-- YT:S03 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/Xavnr9C0DpM" title="Shopify Low Stock Alert + Auto Reorder Email to Supplier" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/Xavnr9C0DpM">youtube.com/shorts/Xavnr9C0DpM</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "Shopify Low Stock Alert + Auto Reorder Email to Supplier", "description": "Sold out on Saturday means sales you never see. This free n8n workflow checks Shopify stock every morning at 7am and emails your supplier a purchase order when units drop under 20.", "thumbnailUrl": "https://i.ytimg.com/vi/Xavnr9C0DpM/hqdefault.jpg", "uploadDate": "2026-10-13", "embedUrl": "https://www.youtube.com/embed/Xavnr9C0DpM", "contentUrl": "https://youtube.com/shorts/Xavnr9C0DpM", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/14-shopify-low-stock-reorder">Get it free</a></p>
 <h2 id="client-document-reminders">Accountants: stop chasing receipts and let Monday and Thursday emails do it</h2>
 <p>Chasing missing client documents eats hours every week. You send the same polite email again and again. Then you send a sharper one.</p>
 <p><strong>What it does:</strong> On Monday it reads your tracker sheet and sends a friendly reminder. On Thursday it sends a firmer note, only to clients who were already reminded. Each send stamps the date in the sheet.</p>
 <p><strong>Nodes:</strong> Two schedules, Google Sheets, Limit, IF, two Gmail nodes (disabled), Sheets write.</p>
-<!-- YT:S04 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/SljcA8gyhnc" title="Automatic Document Reminder Emails for Accountants" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/SljcA8gyhnc">youtube.com/shorts/SljcA8gyhnc</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "Automatic Document Reminder Emails for Accountants", "description": "Accounting firms lose 6 hours a week chasing client documents. This free n8n workflow checks your tracker every Monday, sends a friendly reminder, then a firmer one on Thursday.", "thumbnailUrl": "https://i.ytimg.com/vi/SljcA8gyhnc/hqdefault.jpg", "uploadDate": "2026-10-14", "embedUrl": "https://www.youtube.com/embed/SljcA8gyhnc", "contentUrl": "https://youtube.com/shorts/SljcA8gyhnc", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/15-client-document-reminders">Get it free</a></p>
 <h2 id="cv-shortlist-assistant">Recruiters: score a pile of CVs and see the top 5, then you decide</h2>
 <p>Forty CVs land for one role and you read the first ten properly. The best person might be number thirty-one. You need a sort order, not a robot boss.</p>
 <p><strong>What it does:</strong> It reads each PDF CV, scores it 0 to 100 against your job spec with three short reasons, and logs it. At 17:00 Slack lists the top 5. It has no reject step and emails no candidate.</p>
 <p><strong>Nodes:</strong> Gmail trigger, PDF read, Code, Groq LLM call, Parse, Google Sheets, Schedule, Slack.</p>
-<!-- YT:S05 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/0A5szRChPH4" title="AI CV Screening for Recruiters: 200 CVs to Top 5 Shortlist" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/0A5szRChPH4">youtube.com/shorts/0A5szRChPH4</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "AI CV Screening for Recruiters: 200 CVs to Top 5 Shortlist", "description": "200 CVs and one job. This free n8n workflow reads every PDF, scores it against the job spec, logs it in Sheets and sends your top 5 to Slack. A human still decides.", "thumbnailUrl": "https://i.ytimg.com/vi/0A5szRChPH4/hqdefault.jpg", "uploadDate": "2026-10-15", "embedUrl": "https://www.youtube.com/embed/0A5szRChPH4", "contentUrl": "https://youtube.com/shorts/0A5szRChPH4", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/16-cv-shortlist-assistant">Get it free</a></p>
 <h2 id="gym-member-winback">Gym owners: win back quiet members with a text and a nudge to the coach</h2>
 <p>Members skip a week, then two, then stop paying. Five lapsed members at $60 a month is $3,600 a year gone. Nobody notices until the bank statement.</p>
 <p><strong>What it does:</strong> Every night at 20:00 it finds anyone with no check-in for 14 days. It texts them a come-back message with an opt-out line and tells their coach in Slack.</p>
 <p><strong>Nodes:</strong> Schedule, Google Sheets, Limit, IF, Twilio SMS (disabled), Slack.</p>
-<!-- YT:S06 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/xeQ2t-8c5xQ" title="Gym Member Win-Back Text Automation for Lapsed Members" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/xeQ2t-8c5xQ">youtube.com/shorts/xeQ2t-8c5xQ</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "Gym Member Win-Back Text Automation for Lapsed Members", "description": "Five lapsed members at $60 a month is $3,600 gone. This free n8n workflow spots anyone 14 days without a check-in, sends a win-back text and tells the coach.", "thumbnailUrl": "https://i.ytimg.com/vi/xeQ2t-8c5xQ/hqdefault.jpg", "uploadDate": "2026-10-16", "embedUrl": "https://www.youtube.com/embed/xeQ2t-8c5xQ", "contentUrl": "https://youtube.com/shorts/xeQ2t-8c5xQ", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/17-gym-member-winback">Get it free</a></p>
 <h2 id="maintenance-request-router">Property managers: sort emergency repairs from routine ones while you sleep</h2>
 <p>A tenant messages at 2am about water through the ceiling. Another asks about a dripping tap. Both land in the same inbox, and you read them at breakfast.</p>
 <p><strong>What it does:</strong> It reads each message and tags it emergency or routine. Emergencies text your on-call person. Every request is logged, and a short acknowledgement is drafted for the tenant.</p>
 <p><strong>Nodes:</strong> Gmail or WhatsApp trigger, Code, Text Classifier with Groq, Twilio (disabled), Google Sheets, Gmail reply (disabled).</p>
-<!-- YT:S07 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/y2T54etGkbo" title="Property Maintenance Requests: Emergency vs Routine at 2am" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/y2T54etGkbo">youtube.com/shorts/y2T54etGkbo</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "Property Maintenance Requests: Emergency vs Routine at 2am", "description": "A tenant messages at 2am about water through the ceiling. This free n8n workflow reads the request, tags it emergency or routine, texts the on-call tech and replies to the tenant.", "thumbnailUrl": "https://i.ytimg.com/vi/y2T54etGkbo/hqdefault.jpg", "uploadDate": "2026-10-17", "embedUrl": "https://www.youtube.com/embed/y2T54etGkbo", "contentUrl": "https://youtube.com/shorts/y2T54etGkbo", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/18-maintenance-request-router">Get it free</a></p>
 <h2 id="review-reply-drafts">Cafe and restaurant owners: get a calm draft reply to every bad review</h2>
 <p>A 1-star review arrives at 9pm and you see it three days later. By then it has sat there looking ignored. A rushed angry reply makes it worse.</p>
 <p><strong>What it does:</strong> It reads the review email and checks the stars. For 3 stars or fewer, it writes a calm reply and sends it to Slack for approval. You post it by hand. Nothing is ever posted for you.</p>
 <p><strong>Nodes:</strong> Gmail trigger, Limit, Code, IF, Basic LLM Chain with Groq, Slack (disabled).</p>
-<!-- YT:S08 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/jnjSC1OnbO4" title="Google Review Reply Automation for Restaurants (AI Draft)" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/jnjSC1OnbO4">youtube.com/shorts/jnjSC1OnbO4</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "Google Review Reply Automation for Restaurants (AI Draft)", "description": "A 1-star review lands at 9pm and gets seen days later. This free n8n workflow catches reviews of 3 stars or less, drafts a calm reply with AI and sends it to Slack for your approval.", "thumbnailUrl": "https://i.ytimg.com/vi/jnjSC1OnbO4/hqdefault.jpg", "uploadDate": "2026-10-18", "embedUrl": "https://www.youtube.com/embed/jnjSC1OnbO4", "contentUrl": "https://youtube.com/shorts/jnjSC1OnbO4", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/19-review-reply-drafts">Get it free</a></p>
 <h2 id="car-service-reminders">Garage owners: text customers when their car is due for a service</h2>
 <p>The garage down the road texts its customers. You have a job sheet and no time to chase anyone. Customers drift away without a reminder.</p>
 <p><strong>What it does:</strong> Every morning at 08:00 it finds customers whose last service was 6 or more months ago. It texts a booking link, then stamps the sheet so nobody is texted twice.</p>
 <p><strong>Nodes:</strong> Schedule, Google Sheets, IF, Limit, Twilio SMS (disabled), Sheets write.</p>
-<!-- YT:S09 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/yJqgp-jDukY" title="Car Service Reminder SMS Automation for Garages" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/yJqgp-jDukY">youtube.com/shorts/yJqgp-jDukY</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "Car Service Reminder SMS Automation for Garages", "description": "The garage down the road texts customers and you don't. This free n8n workflow reads your job sheet, finds cars due at 6 months and texts a booking link.", "thumbnailUrl": "https://i.ytimg.com/vi/yJqgp-jDukY/hqdefault.jpg", "uploadDate": "2026-10-19", "embedUrl": "https://www.youtube.com/embed/yJqgp-jDukY", "contentUrl": "https://youtube.com/shorts/yJqgp-jDukY", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/20-car-service-reminders">Get it free</a></p>
 <h2 id="whatsapp-order-capture">Distributors: turn WhatsApp orders into clean spreadsheet rows</h2>
 <p>Your reps read orders in WhatsApp and retype them into Excel. It takes all day, and typos mean wrong shipments. The sales rep also never knows if stock is short.</p>
 <p><strong>What it does:</strong> It reads a message like 20 of SKU-1001 for Sam, pulls out SKU, quantity and customer, and checks stock. In stock, it writes the order row and confirms. Out of stock, it tells your rep.</p>
 <p><strong>Nodes:</strong> WhatsApp trigger, Information Extractor with Groq, Google Sheets lookup, IF, Sheets write, WhatsApp and Slack (disabled).</p>
-<!-- YT:S10 -->
+<div class="video-embed" style="aspect-ratio:9/16;max-width:360px;margin-left:auto;margin-right:auto;">
+  <iframe src="https://www.youtube.com/embed/-T1w2mPCDMI" title="WhatsApp Order to Google Sheets Automation for Distributors" loading="lazy" allowfullscreen></iframe>
+</div>
+<p class="video-note">Short on YouTube: <a href="https://youtube.com/shorts/-T1w2mPCDMI">youtube.com/shorts/-T1w2mPCDMI</a></p>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoObject", "name": "WhatsApp Order to Google Sheets Automation for Distributors", "description": "Your reps retype WhatsApp orders into Excel all day. This free n8n workflow reads the message, pulls SKU and quantity, checks stock, adds a clean row to Sheets and confirms on WhatsApp.", "thumbnailUrl": "https://i.ytimg.com/vi/-T1w2mPCDMI/hqdefault.jpg", "uploadDate": "2026-10-20", "embedUrl": "https://www.youtube.com/embed/-T1w2mPCDMI", "contentUrl": "https://youtube.com/shorts/-T1w2mPCDMI", "publisher": {"@type": "Organization", "name": "SkynetLabs", "url": "https://skynetjoe.com"}}</script>
 <p><a href="https://github.com/waseemnasir2k26/n8n-workflows/tree/main/workflows/21-whatsapp-order-capture">Get it free</a></p>
 <h2 id="faq">FAQ</h2>
 <h3>Are these n8n workflows really free?</h3>
