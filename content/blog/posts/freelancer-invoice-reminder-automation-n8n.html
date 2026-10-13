@@ -1,0 +1,99 @@
+<style>
+  .wn-freelancer-invoice-reminder-automation-n8n{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-freelancer-invoice-reminder-automation-n8n h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-freelancer-invoice-reminder-automation-n8n p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-freelancer-invoice-reminder-automation-n8n ul,.wn-freelancer-invoice-reminder-automation-n8n ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-freelancer-invoice-reminder-automation-n8n li{margin-bottom:0.6rem}
+  .wn-freelancer-invoice-reminder-automation-n8n strong{color:#fff}
+  .wn-freelancer-invoice-reminder-automation-n8n a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-freelancer-invoice-reminder-automation-n8n a:hover{color:#7ee4ff}
+  .wn-freelancer-invoice-reminder-automation-n8n .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-freelancer-invoice-reminder-automation-n8n .callout strong{color:#7ee4ff}
+  .wn-freelancer-invoice-reminder-automation-n8n .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-freelancer-invoice-reminder-automation-n8n .verdict a{color:#fff}
+  .wn-freelancer-invoice-reminder-automation-n8n table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-freelancer-invoice-reminder-automation-n8n th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-freelancer-invoice-reminder-automation-n8n td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-freelancer-invoice-reminder-automation-n8n code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-freelancer-invoice-reminder-automation-n8n">
+<p>Chasing invoices is the worst part of freelancing. You did the work, you sent the bill, and now you have to write the email that starts, just checking in. It feels awkward, so it gets put off, and the payment gets later.</p>
+<p>Our short video shows an n8n workflow that watches your due dates for you. Day one, a friendly nudge. Day seven, a firmer reminder. Day fourteen, the final notice with a late fee. You never send an awkward email again.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> The day 1, day 7 and day 14 schedule and the late-fee step are an example from the video. Your payment terms and contract decide what you can really apply.</div>
+<h2 id="the-problem">What does late payment cost a freelancer?</h2>
+<p>Late payment is a cash-flow problem first and a relationship problem second. If you bill 10 clients a month and half pay a week or two late, you are effectively lending money interest-free while still paying your own bills on time.</p>
+<p>The time cost is real too. Opening your invoicing tool, checking who has paid, drafting a polite message, and doing it again next week is a small chore that never ends. Automating the chore also removes the emotion: the system is the one asking, in the same tone every time.</p>
+<h2 id="how-it-works">How does the invoice-chaser workflow work?</h2>
+<p>The workflow reads your invoice list on a schedule and acts only on unpaid items that have reached a trigger date.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Read the invoice list</strong></td><td>Every morning n8n pulls open invoices from your sheet or invoicing tool, with due date, amount, client and status.</td><td>Schedule + Sheets / API node</td></tr>
+<tr><td><strong>2. Skip anything paid</strong></td><td>Paid or disputed invoices are filtered out so nobody gets a reminder for a bill they already settled.</td><td>IF node</td></tr>
+<tr><td><strong>3. Day 1: friendly nudge</strong></td><td>A light message goes out shortly after the due date: a reminder with the invoice attached or linked.</td><td>Email node</td></tr>
+<tr><td><strong>4. Day 7: firmer reminder</strong></td><td>The tone steps up, restates the amount and terms, and asks for a payment date.</td><td>Email node</td></tr>
+<tr><td><strong>5. Day 14: final notice</strong></td><td>A formal notice that references your late-fee clause if your contract has one, and copies you so you can phone the client.</td><td>Email node</td></tr>
+</tbody></table>
+<p>Each message is a template you write once. The workflow only fills in the client name, invoice number, amount and link.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An n8n instance</li>
+<li>An invoice list n8n can read: a Google Sheet or your invoicing tool's API</li>
+<li>A sending email address you control</li>
+<li>Three message templates in your voice</li>
+<li>Written payment terms, including any late fee, agreed with the client in advance</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>A late fee only works if it is in your contract or terms. The workflow cannot create that right.</li>
+<li>It cannot confirm a payment landed unless your sheet or tool is kept up to date.</li>
+<li>Automation will not fix a client who cannot or will not pay. At that point you need a call, and perhaps legal advice.</li>
+<li>Some clients expect a personal note. Keep a manual route for your best relationships.</li>
+</ul>
+<div class="verdict">Money in, friendships intact. The system asks so you do not have to.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Can n8n really send invoice reminders automatically?</h3><p>Yes. n8n can read a list of invoices on a schedule and send emails when an unpaid invoice passes a set number of days. The schedule in this article is an example you can change.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Is it okay to charge a late fee?</h3><p>Only if it was agreed up front, for example in your contract or invoice terms, and local law allows it. The workflow can mention the fee but cannot make it enforceable.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Will this annoy my clients?</h3><p>A short reminder in a consistent tone usually reads as professional. Keep the first message friendly and escalate only if there is no response.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">What if a client has already paid?</h3><p>Mark the invoice paid in your sheet or tool. The workflow checks status before every message, so paid invoices stop receiving reminders.</p>
+<h2 id="next-step">Next step</h2>
+<p>List every invoice currently overdue and how long it has been waiting. That is your starting case. Then ask for the invoice-chaser workflow and we will wire it to your invoicing tool.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can n8n really send invoice reminders automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. n8n can read a list of invoices on a schedule and send emails when an unpaid invoice passes a set number of days. The schedule in this article is an example you can change."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it okay to charge a late fee?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if it was agreed up front, for example in your contract or invoice terms, and local law allows it. The workflow can mention the fee but cannot make it enforceable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will this annoy my clients?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A short reminder in a consistent tone usually reads as professional. Keep the first message friendly and escalate only if there is no response."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if a client has already paid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mark the invoice paid in your sheet or tool. The workflow checks status before every message, so paid invoices stop receiving reminders."
+      }
+    }
+  ]
+}
+</script>

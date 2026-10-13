@@ -1,0 +1,100 @@
+<style>
+  .wn-medspa-client-rebooking-reminder-automation{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-medspa-client-rebooking-reminder-automation h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-medspa-client-rebooking-reminder-automation p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-medspa-client-rebooking-reminder-automation ul,.wn-medspa-client-rebooking-reminder-automation ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-medspa-client-rebooking-reminder-automation li{margin-bottom:0.6rem}
+  .wn-medspa-client-rebooking-reminder-automation strong{color:#fff}
+  .wn-medspa-client-rebooking-reminder-automation a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-medspa-client-rebooking-reminder-automation a:hover{color:#7ee4ff}
+  .wn-medspa-client-rebooking-reminder-automation .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-medspa-client-rebooking-reminder-automation .callout strong{color:#7ee4ff}
+  .wn-medspa-client-rebooking-reminder-automation .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-medspa-client-rebooking-reminder-automation .verdict a{color:#fff}
+  .wn-medspa-client-rebooking-reminder-automation table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-medspa-client-rebooking-reminder-automation th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-medspa-client-rebooking-reminder-automation td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-medspa-client-rebooking-reminder-automation code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-medspa-client-rebooking-reminder-automation">
+<p>Your best clients forget to re-book, then they go somewhere else. Not because they were unhappy, but because life got busy and nobody reminded them that their next facial was due.</p>
+<p>Our short video shows an n8n workflow that knows when each treatment is due. Six weeks after a facial, the text goes out: time for your glow-up? Your book fills itself with regulars.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> The six-week gap after a facial is an example from the video. Different treatments have different intervals, and your practitioners should set them.</div>
+<h2 id="the-problem">Why do good clients drift away?</h2>
+<p>Repeat clients are the most profitable part of a med spa. They cost nothing to acquire, they trust you, and they tend to spend more over time. Yet many spas rely on front-desk staff remembering to mention the next appointment at checkout, which often does not happen on a busy day.</p>
+<p>Clients who do not rebook in the window often just forget. A well-timed reminder, written warmly, is a service rather than a sales push. It works best when it is tied to the actual treatment cycle rather than a generic monthly newsletter.</p>
+<h2 id="how-it-works">How does the rebooking workflow work?</h2>
+<p>The workflow stores what each client had and when, then uses a rule for each treatment to decide when to nudge.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Record the treatment</strong></td><td>After each appointment, the booking system or a form sends the client, treatment and date to n8n.</td><td>Webhook / booking API</td></tr>
+<tr><td><strong>2. Look up the interval</strong></td><td>A small table gives the recommended interval for each treatment, such as six weeks for a facial in the example.</td><td>Sheets / database node</td></tr>
+<tr><td><strong>3. Wait until it is due</strong></td><td>n8n schedules a reminder for the due date, and cancels it if the client has already booked.</td><td>Wait + IF node</td></tr>
+<tr><td><strong>4. Send the text</strong></td><td>A short, warm message with a direct booking link, using the client's first name.</td><td>SMS or email node</td></tr>
+<tr><td><strong>5. Handle replies</strong></td><td>Replies are passed to your front desk, so a person confirms the booking and answers any questions.</td><td>Notification node</td></tr>
+</tbody></table>
+<p>The reminder should feel like a note from your spa, not a coupon blast. Keep it short and let the booking link do the work.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An n8n instance</li>
+<li>A booking system that can send events or export appointments</li>
+<li>Treatment intervals set by your practitioners</li>
+<li>Client consent to receive reminders</li>
+<li>An SMS provider or email account</li>
+</ul>
+<p>Think about the tone before the timing. A reminder that reads like a friendly note from the person who looked after them will outperform a generic promotion. Use the client's first name, mention the treatment in general terms only, and make the booking link the single call to action. Review results quarterly: how many reminders went out, how many clients rebooked, and how many asked to stop, then adjust the intervals accordingly.</p>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>Treatment records can count as health information in some places. Keep messages generic, with no medical detail in the text itself, and check the privacy rules that apply to you.</li>
+<li>The workflow suggests timing, but a practitioner decides what is right for a particular client.</li>
+<li>Clients who opted out must be excluded every time.</li>
+<li>If your booking system has no API, the data may need a manual export.</li>
+</ul>
+<div class="verdict">Your regulars come back because someone remembered for them.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Can n8n connect to my booking software?</h3><p>If your booking tool has an API, webhooks or a spreadsheet export, usually yes. Tell us which one you use and we can check the options.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Is it okay to text clients about their treatments?</h3><p>With consent, and keeping the message general, usually yes. Avoid including clinical details, and follow the privacy rules in your region.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">How do I choose the reminder interval?</h3><p>Ask your practitioners. The six-week figure in the video is an example for a facial, and other treatments will differ.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Will it double-book clients who already rebooked?</h3><p>The workflow checks for an existing future booking before sending, so clients who have rebooked are skipped.</p>
+<h2 id="next-step">Next step</h2>
+<p>List your five most common treatments and how often a regular client should come back. That table is the heart of the workflow. Ask for the rebooking workflow and we will connect it to your booking system.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can n8n connect to my booking software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If your booking tool has an API, webhooks or a spreadsheet export, usually yes. Tell us which one you use and we can check the options."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it okay to text clients about their treatments?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "With consent, and keeping the message general, usually yes. Avoid including clinical details, and follow the privacy rules in your region."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I choose the reminder interval?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ask your practitioners. The six-week figure in the video is an example for a facial, and other treatments will differ."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it double-book clients who already rebooked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The workflow checks for an existing future booking before sending, so clients who have rebooked are skipped."
+      }
+    }
+  ]
+}
+</script>

@@ -1,0 +1,100 @@
+<style>
+  .wn-restaurant-shift-cover-text-automation-n8n{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-restaurant-shift-cover-text-automation-n8n h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-restaurant-shift-cover-text-automation-n8n p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-restaurant-shift-cover-text-automation-n8n ul,.wn-restaurant-shift-cover-text-automation-n8n ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-restaurant-shift-cover-text-automation-n8n li{margin-bottom:0.6rem}
+  .wn-restaurant-shift-cover-text-automation-n8n strong{color:#fff}
+  .wn-restaurant-shift-cover-text-automation-n8n a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-restaurant-shift-cover-text-automation-n8n a:hover{color:#7ee4ff}
+  .wn-restaurant-shift-cover-text-automation-n8n .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-restaurant-shift-cover-text-automation-n8n .callout strong{color:#7ee4ff}
+  .wn-restaurant-shift-cover-text-automation-n8n .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-restaurant-shift-cover-text-automation-n8n .verdict a{color:#fff}
+  .wn-restaurant-shift-cover-text-automation-n8n table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-restaurant-shift-cover-text-automation-n8n th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-restaurant-shift-cover-text-automation-n8n td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-restaurant-shift-cover-text-automation-n8n code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-restaurant-shift-cover-text-automation-n8n">
+<p>Someone calls in sick 20 minutes before service. Panic. You start texting people one by one, or fire a message into the group chat and hope someone sees it between other conversations.</p>
+<p>Our short video shows an n8n workflow that handles it. It texts your backup list in order, the first person to reply gets the shift, and the rota updates itself. No group-chat chaos at 5 pm, and service runs smooth.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> The 20-minute scenario in the video is an example. In practice you would set a realistic cut-off and a longer reply window for shifts further away.</div>
+<h2 id="the-problem">What does a last-minute gap cost a restaurant?</h2>
+<p>A short-staffed shift hits service speed, staff stress and sometimes revenue when you have to turn tables away. The owner or manager usually absorbs the cost personally, by stopping everything to phone around.</p>
+<p>The hidden cost is the scramble itself. A group chat means multiple people reply, two staff both think they have the shift, and nobody updates the rota. A set order and a single clear winner removes the argument.</p>
+<h2 id="how-it-works">How does the shift-cover workflow work?</h2>
+<p>The workflow turns a sick call into a short, ordered, automatic process.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Log the gap</strong></td><td>A manager submits a short form or message with the date, shift and role needed.</td><td>Form or chat trigger</td></tr>
+<tr><td><strong>2. Text the first backup</strong></td><td>n8n texts the first person on your ranked backup list with the shift details and asks for a yes.</td><td>SMS provider node</td></tr>
+<tr><td><strong>3. Wait a short window</strong></td><td>If there is no reply in a set time, such as ten minutes, n8n moves to the next person on the list.</td><td>Wait + IF node</td></tr>
+<tr><td><strong>4. First yes wins</strong></td><td>The first confirmed reply gets the shift. Others on the list are told it has been filled.</td><td>Webhook + SMS node</td></tr>
+<tr><td><strong>5. Update the rota</strong></td><td>n8n writes the new name into your rota sheet and notifies the manager.</td><td>Google Sheets node</td></tr>
+</tbody></table>
+<p>The ordering is the policy. Put reliable staff first, and keep the list current so the workflow never texts someone who left.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An n8n instance</li>
+<li>A ranked backup list with phone numbers and permission to text them</li>
+<li>A rota that lives somewhere n8n can edit, such as a Google Sheet</li>
+<li>An SMS provider account</li>
+<li>A rule on who is eligible for which role</li>
+</ul>
+<p>It helps to agree the rules with your team before switching it on. Decide how long each person has to answer, whether cover shifts count toward overtime, and what happens if the person who accepts later cancels. Putting those rules in the message itself, in one line, avoids arguments later. Review the backup list every month so it never includes someone who has moved on or asked not to be contacted.</p>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>Staff must agree to be contacted this way. Check employment rules in your country about out-of-hours messages.</li>
+<li>It cannot create staff. If nobody on the list is free, the manager is alerted and has to decide.</li>
+<li>Overtime and minimum-rest rules are your responsibility. The workflow only follows the eligibility you set.</li>
+<li>Rotas held on paper or in a closed scheduling app are harder to update automatically.</li>
+</ul>
+<div class="verdict">First reply gets the shift, the rota updates itself, and the group chat stays quiet.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Can n8n text my staff automatically?</h3><p>Yes, using an SMS provider node. You supply the numbers and the message wording, and staff should agree to receive them.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">What if two people reply at the same time?</h3><p>The workflow processes replies in order and treats the first confirmed reply as the winner. Everyone else receives a polite message that the shift is filled.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Can it handle role-specific cover, like kitchen versus floor?</h3><p>Yes. Keep separate backup lists per role and have the form pick the right list.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Does it work with my scheduling app?</h3><p>If your app has an API or exports to a spreadsheet, usually yes. A Google Sheet rota is the simplest to connect.</p>
+<h2 id="next-step">Next step</h2>
+<p>Write your ranked backup list on one page, with each person's phone number and role. That is the hard part. Then ask for the shift-cover workflow and we will connect it to your rota.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can n8n text my staff automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, using an SMS provider node. You supply the numbers and the message wording, and staff should agree to receive them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if two people reply at the same time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The workflow processes replies in order and treats the first confirmed reply as the winner. Everyone else receives a polite message that the shift is filled."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it handle role-specific cover, like kitchen versus floor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Keep separate backup lists per role and have the form pick the right list."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work with my scheduling app?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If your app has an API or exports to a spreadsheet, usually yes. A Google Sheet rota is the simplest to connect."
+      }
+    }
+  ]
+}
+</script>

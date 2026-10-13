@@ -1,0 +1,108 @@
+<style>
+  .wn-abandoned-cart-recovery-automation { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-abandoned-cart-recovery-automation h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-abandoned-cart-recovery-automation p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-abandoned-cart-recovery-automation ul, .wn-abandoned-cart-recovery-automation ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-abandoned-cart-recovery-automation li { margin-bottom: 0.6rem; }
+  .wn-abandoned-cart-recovery-automation strong { color: #fff; }
+  .wn-abandoned-cart-recovery-automation a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-abandoned-cart-recovery-automation a:hover { color: #7ee4ff; }
+  .wn-abandoned-cart-recovery-automation .callout { background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(20, 184, 166, 0.08)); border-left: 3px solid #00d4ff; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-abandoned-cart-recovery-automation .callout strong { color: #7ee4ff; }
+  .wn-abandoned-cart-recovery-automation .verdict { background: linear-gradient(135deg, #1e88e5, #14b8a6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-abandoned-cart-recovery-automation table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-abandoned-cart-recovery-automation th { background: rgba(0, 212, 255, 0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-abandoned-cart-recovery-automation td { padding: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #d1d5db; vertical-align: top; }
+  .wn-abandoned-cart-recovery-automation .faq-q { color: #fff; font-weight: 700; margin: 1.4rem 0 0.4rem; }
+</style>
+<p>A shopper adds three items to the cart, then the phone rings, the kettle boils or the kids need something. The tab closes, and the sale is gone. These buyers did not say no. They got distracted.</p>
+<p>This article walks through the abandoned cart workflow from our short video: wait an hour, send a reminder email, and if the cart is still open, follow up with a text and a small nudge. It only fires when the customer does not come back on their own.</p>
+<div class="callout"><strong>About the numbers.</strong> The video quotes that about 70% of online shopping carts are abandoned. That is an often-quoted industry figure, not a measurement from our own work, and the rate varies by store, product and season.</div>
+<h2 id="the-problem">How much revenue do abandoned carts hide?</h2>
+<p>If most carts never turn into orders, then even a small recovery rate is meaningful. Take an example store with 1,000 abandoned carts a month and an average order of 60 dollars. Recovering just 5 percent would be 50 orders, or 3,000 dollars. The numbers in this example are made up to show the arithmetic, so replace them with your own store data.</p>
+<p>Most small stores handle this by hoping. A few use a default email from their platform, which is better than nothing but rarely adds a second channel or sensible timing. A workflow lets you control both.</p>
+<p>The reasons carts get abandoned are mostly ordinary: surprise shipping costs, a phone call, comparing prices in another tab, or simply not being ready to buy. A well-timed reminder cannot fix a bad offer, but it can catch the many people who just got interrupted.</p>
+<h2 id="how-it-works">How the cart rescue workflow works</h2>
+<div class="verdict">Wait an hour, send an email, check again, then text. The sequence stops the moment the customer completes the purchase.</div>
+<table>
+  <thead><tr><th>Step</th><th>What happens</th><th>Typical tool</th></tr></thead>
+  <tbody>
+    <tr><td>1. Cart is abandoned</td><td>Your store sends an event when someone starts checkout but does not finish.</td><td>Shopify, WooCommerce or similar webhook</td></tr>
+    <tr><td>2. Wait one hour</td><td>The workflow pauses so you do not nag someone who is still deciding.</td><td>n8n Wait node</td></tr>
+    <tr><td>3. Check the order</td><td>Before sending anything, the workflow asks the store whether the cart has since become an order.</td><td>Store API lookup</td></tr>
+    <tr><td>4. Reminder email</td><td>If not, a short email shows the items left behind with a link straight back to the cart.</td><td>Email service</td></tr>
+    <tr><td>5. Second check, then text</td><td>If the cart is still open after the email, a text with a small nudge goes out, provided the customer gave consent.</td><td>SMS provider</td></tr>
+    <tr><td>6. Stop and log</td><td>The sequence ends on purchase, and each step is logged so you can see what recovered what.</td><td>Sheet or database</td></tr>
+  </tbody>
+</table>
+<p>The key design choice is the check before every message. Without it, a customer who bought five minutes ago receives a reminder, which looks careless and annoys people.</p>
+<p>The nudge can be a free-shipping note, a small discount code or simply a friendly line. We usually recommend testing the plain reminder first, because a discount you did not need to give costs margin.</p>
+<h2 id="what-you-need">What you need to get started</h2>
+<ul>
+  <li>An online store that can send abandoned checkout events, with the customer's email captured at checkout.</li>
+  <li>An email sending account, and an SMS provider if you want the text step.</li>
+  <li>Customer consent for marketing messages, collected the way your local rules require.</li>
+  <li>Your decision on whether to offer any discount at all.</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2>
+<ul>
+  <li>You can only message people whose contact details you captured, so carts abandoned before the email field are invisible.</li>
+  <li>Text messages cost money per send and have consent rules that differ by country. Check yours first.</li>
+  <li>It recovers some carts, not most. Treat any recovery rate as something to measure, not promise.</li>
+  <li>Over-messaging hurts your brand. We keep to two touches by default.</li>
+</ul>
+<h2 id="cost">What does it cost to set up?</h2>
+<p>A cart recovery sequence is one of the more contained workflows we build. Pricing depends on your tools, your volume and how many branches the workflow needs, so we scope it on a short call rather than quoting a number here. <a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> and we will tell you plainly whether it is worth building for your business.</p>
+<h2 id="faq">Frequently asked questions</h2>
+<p class="faq-q">When should the first abandoned cart email go out?</p>
+<p>The video uses one hour, which gives the shopper time to come back by themselves. Some stores test shorter or longer gaps. It is a setting you can change.</p>
+<p class="faq-q">Will it send a reminder to someone who already bought?</p>
+<p>No. The workflow checks the order status before each message and stops as soon as a purchase is recorded.</p>
+<p class="faq-q">Do I have to give a discount?</p>
+<p>No. The reminder alone works for many stores. A nudge can be a discount, free shipping or just a friendly line, and you decide.</p>
+<p class="faq-q">Is texting customers allowed?</p>
+<p>It depends on your country and on whether the customer agreed to receive messages. Collect consent clearly at checkout and ask us to configure the text step accordingly.</p>
+<h2 id="next-step">Want this running in your business?</h2>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25, then get in touch. We build, test and hand over automations like this for small businesses.</p>
+<p><a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> &middot; Hire SkynetLabs, our agency on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When should the first abandoned cart email go out?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The video uses one hour, which gives the shopper time to come back by themselves. Some stores test shorter or longer gaps. It is a setting you can change."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it send a reminder to someone who already bought?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The workflow checks the order status before each message and stops as soon as a purchase is recorded."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to give a discount?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The reminder alone works for many stores. A nudge can be a discount, free shipping or just a friendly line, and you decide."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is texting customers allowed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your country and on whether the customer agreed to receive messages. Collect consent clearly at checkout and ask us to configure the text step accordingly."
+      }
+    }
+  ]
+}
+</script>

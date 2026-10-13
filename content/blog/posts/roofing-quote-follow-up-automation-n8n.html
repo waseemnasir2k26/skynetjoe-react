@@ -1,0 +1,99 @@
+<style>
+  .wn-roofing-quote-follow-up-automation-n8n{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-roofing-quote-follow-up-automation-n8n h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-roofing-quote-follow-up-automation-n8n p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-roofing-quote-follow-up-automation-n8n ul,.wn-roofing-quote-follow-up-automation-n8n ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-roofing-quote-follow-up-automation-n8n li{margin-bottom:0.6rem}
+  .wn-roofing-quote-follow-up-automation-n8n strong{color:#fff}
+  .wn-roofing-quote-follow-up-automation-n8n a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-roofing-quote-follow-up-automation-n8n a:hover{color:#7ee4ff}
+  .wn-roofing-quote-follow-up-automation-n8n .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-roofing-quote-follow-up-automation-n8n .callout strong{color:#7ee4ff}
+  .wn-roofing-quote-follow-up-automation-n8n .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-roofing-quote-follow-up-automation-n8n .verdict a{color:#fff}
+  .wn-roofing-quote-follow-up-automation-n8n table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-roofing-quote-follow-up-automation-n8n th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-roofing-quote-follow-up-automation-n8n td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-roofing-quote-follow-up-automation-n8n code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-roofing-quote-follow-up-automation-n8n">
+<p>Roofing quotes cool off fast when nobody follows up. You send the number, go back to the next job, and the homeowner gets three other quotes and a busy week. By the time you think to call, they have picked someone, or gone quiet.</p>
+<p>This article walks through the roofing quote follow-up workflow from our short video: n8n sends the quote, then checks on it for you. Day two, day five, day ten, each message a little warmer, and you get pinged the moment the customer replies.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> The day 2, day 5 and day 10 timing and the message wording below are an example schedule from the video. Change them to match how your customers actually decide.</div>
+<h2 id="the-problem">Why do roofing quotes go cold?</h2>
+<p>A roof is a big, slow decision. Homeowners compare, wait for an insurance answer, or talk it over with a partner. The quote itself is rarely the problem. The silence afterwards is. Most small roofing firms follow up when they remember to, which usually means when the diary is quiet, not when the customer is deciding.</p>
+<p>The cost is easy to count. Take your last ten quotes, work out how many got no follow-up at all, and multiply by your average job value. Even one extra closed roof a quarter from quotes that would otherwise have lapsed can pay for the setup. That is arithmetic you can do with your own numbers, not a promise from us.</p>
+<h2 id="how-it-works">How does the n8n quote follow-up workflow work?</h2>
+<p>The workflow is short on purpose. It does one job: stop a live quote from going quiet, and stop the moment a human answers.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Quote goes out</strong></td><td>When you mark a quote as sent in your sheet, CRM or form, n8n receives it and stores the customer name, contact and quote date.</td><td>Webhook or sheet trigger</td></tr>
+<tr><td><strong>2. Wait 2 days</strong></td><td>n8n pauses. If the customer has not replied, it sends a short, friendly check-in: did the quote arrive, any questions?</td><td>Wait + text/email node</td></tr>
+<tr><td><strong>3. Wait until day 5</strong></td><td>Still silent, so a second message goes out, a little warmer, offering to walk through the quote or adjust the scope.</td><td>Wait + text/email node</td></tr>
+<tr><td><strong>4. Final nudge on day 10</strong></td><td>A last polite message that leaves the door open without pressure.</td><td>Wait + text/email node</td></tr>
+<tr><td><strong>5. Reply pings you</strong></td><td>Any reply stops the sequence and sends you an alert with the customer's words, so you can pick up the phone yourself.</td><td>IF node + notification</td></tr>
+</tbody></table>
+<p>The important design choice is the stop condition. A follow-up that keeps firing after the customer says yes is worse than no follow-up. Every step checks for a reply first.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An n8n instance (self-hosted or n8n cloud)</li>
+<li>A place your quotes live: a Google Sheet, your CRM, or a simple form is enough</li>
+<li>A way to send messages: email is easiest, SMS needs a provider such as Twilio</li>
+<li>Your own wording for the three messages, in your voice</li>
+<li>Customers' permission to be contacted by the channel you use</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>It does not write the quote or price the job. It only chases a quote you already sent.</li>
+<li>Replies by phone call or in person are invisible to the workflow unless you mark the quote as won or lost, so keep the status updated.</li>
+<li>SMS carries consent rules that vary by country. Email is the safer first channel.</li>
+<li>Three messages is a ceiling, not a target. If a customer says no, the workflow should stop and stay stopped.</li>
+</ul>
+<div class="verdict">Follow-up closes roofs, and a workflow does it every time without you remembering.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">How many follow-ups should a roofer send after a quote?</h3><p>The video uses three: day two, day five and day ten. That is an example schedule, not a rule. Many owners find two or three polite touches is the point where more messages start to annoy rather than help.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Will the customer know it is automated?</h3><p>The messages are written in your voice and signed by you, and they are short. If the customer replies, a human (you) takes over. We recommend never pretending the message is something it is not.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Do I need to know how to code to run this?</h3><p>No. n8n is visual, so each step is a block you can open and edit. Connecting your quote source and your messaging account is the part most owners want help with.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Can this work for other trades?</h3><p>Yes. Any business that sends quotes and waits, such as builders, electricians, landscapers or cleaners, can reuse the same pattern with different wording and timing.</p>
+<h2 id="next-step">Next step</h2>
+<p>Pull your last ten quotes and note how many ever got a second touch. If the answer is close to none, this is a cheap fix. Ask for the roofing follow-up workflow and we will set it up with your wording.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many follow-ups should a roofer send after a quote?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The video uses three: day two, day five and day ten. That is an example schedule, not a rule. Many owners find two or three polite touches is the point where more messages start to annoy rather than help."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the customer know it is automated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The messages are written in your voice and signed by you, and they are short. If the customer replies, a human (you) takes over. We recommend never pretending the message is something it is not."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to know how to code to run this?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. n8n is visual, so each step is a block you can open and edit. Connecting your quote source and your messaging account is the part most owners want help with."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can this work for other trades?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Any business that sends quotes and waits, such as builders, electricians, landscapers or cleaners, can reuse the same pattern with different wording and timing."
+      }
+    }
+  ]
+}
+</script>

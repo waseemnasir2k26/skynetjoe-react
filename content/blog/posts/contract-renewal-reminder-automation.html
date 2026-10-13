@@ -1,0 +1,108 @@
+<style>
+  .wn-contract-renewal-reminder-automation { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-contract-renewal-reminder-automation h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-contract-renewal-reminder-automation p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-contract-renewal-reminder-automation ul, .wn-contract-renewal-reminder-automation ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-contract-renewal-reminder-automation li { margin-bottom: 0.6rem; }
+  .wn-contract-renewal-reminder-automation strong { color: #fff; }
+  .wn-contract-renewal-reminder-automation a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-contract-renewal-reminder-automation a:hover { color: #7ee4ff; }
+  .wn-contract-renewal-reminder-automation .callout { background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(20, 184, 166, 0.08)); border-left: 3px solid #00d4ff; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-contract-renewal-reminder-automation .callout strong { color: #7ee4ff; }
+  .wn-contract-renewal-reminder-automation .verdict { background: linear-gradient(135deg, #1e88e5, #14b8a6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-contract-renewal-reminder-automation table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-contract-renewal-reminder-automation th { background: rgba(0, 212, 255, 0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-contract-renewal-reminder-automation td { padding: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #d1d5db; vertical-align: top; }
+  .wn-contract-renewal-reminder-automation .faq-q { color: #fff; font-weight: 700; margin: 1.4rem 0 0.4rem; }
+</style>
+<p>Software subscriptions, supplier agreements, leases, insurance, free trials that quietly turned into paid plans. Each one has a date hiding in a PDF, and each one costs money if you miss it. Most small businesses track these in someone's memory.</p>
+<p>This article explains the contract watchdog workflow from our short video. It reads every contract, records the renewal and expiry dates, and taps you on the shoulder 90 days before anything renews or ends.</p>
+<div class="callout"><strong>About the numbers.</strong> The video says researchers estimate poor contract management drains around nine percent of annual revenue. That is an often-quoted estimate for contract-heavy organisations, not a figure from our clients, and your own exposure may be far lower or higher.</div>
+<h2 id="the-problem">What does a missed renewal actually cost?</h2>
+<p>The expensive moments are quiet ones: an auto-renewal for another full year on a tool nobody uses, a supplier price rise you could have negotiated if you had asked sooner, or a lease option that lapsed because nobody noticed the notice period. Notice periods are the trap, because the date that matters is often 60 or 90 days before the end date, not the end date itself.</p>
+<p>A spreadsheet helps only if someone keeps it current. The point of the workflow is to remove that human step, so the dates come from the documents themselves.</p>
+<p>It also helps when people leave. A contract owner who moves on takes the renewal calendar in their head with them. A shared register that warns the right people means the knowledge stays with the business.</p>
+<h2 id="how-it-works">How the contract watchdog works</h2>
+<div class="verdict">Drop contracts in one folder. The workflow reads them, stores the key dates, and warns you 90 days before each one.</div>
+<table>
+  <thead><tr><th>Step</th><th>What happens</th><th>Typical tool</th></tr></thead>
+  <tbody>
+    <tr><td>1. Collect</td><td>New contracts arrive in a shared folder or a dedicated inbox.</td><td>Google Drive, OneDrive or email</td></tr>
+    <tr><td>2. Read</td><td>An AI model extracts the parties, start date, end date, renewal terms and notice period.</td><td>n8n plus an AI model</td></tr>
+    <tr><td>3. Store</td><td>The fields go into a single register, one row per contract, with a link to the original file.</td><td>Sheet or Airtable</td></tr>
+    <tr><td>4. Check daily</td><td>A scheduled run compares every date against today.</td><td>n8n schedule trigger</td></tr>
+    <tr><td>5. Alert</td><td>Ninety days before a renewal or expiry, you get a message with the contract, the date and what is at stake.</td><td>Email or chat message</td></tr>
+    <tr><td>6. Human review</td><td>You decide: renew, renegotiate or cancel. The workflow never cancels anything itself.</td><td>You</td></tr>
+  </tbody>
+</table>
+<p>The 90-day lead time is a default. Contracts with long notice periods can be flagged earlier, and short ones later. We set this per contract type.</p>
+<p>We recommend a human spot-check of the first batch of extracted dates. AI reading is good on clean documents and weaker on scans, so the first run is how you find out how much to trust it.</p>
+<h2 id="what-you-need">What you need to get started</h2>
+<ul>
+  <li>Your contracts in digital form, even if scanned.</li>
+  <li>A decision on who receives the alerts and who is the backup.</li>
+  <li>A list of the contract types that matter most, so we start there.</li>
+  <li>About an hour to check the first extracted batch against the originals.</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2>
+<ul>
+  <li>Poor scans and unusual layouts can produce wrong dates, which is why a person checks the first batch.</li>
+  <li>The workflow reminds you. It does not give legal advice and it cannot interpret complex clauses for you.</li>
+  <li>Contracts held only on paper or in someone's drawer have to be scanned first.</li>
+  <li>If nobody acts on the alert, nothing is saved.</li>
+</ul>
+<h2 id="cost">What does it cost to set up?</h2>
+<p>The size of the job mostly depends on how many contracts you hold today and how messy they are. Pricing depends on your tools, your volume and how many branches the workflow needs, so we scope it on a short call rather than quoting a number here. <a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> and we will tell you plainly whether it is worth building for your business.</p>
+<h2 id="faq">Frequently asked questions</h2>
+<p class="faq-q">How does it know when a contract renews?</p>
+<p>An AI model reads the document and extracts the dates and the renewal wording. You verify the first batch, then new contracts are processed automatically.</p>
+<p class="faq-q">Why 90 days?</p>
+<p>It gives time to renegotiate or cancel before a notice period closes. You can change the lead time per contract type.</p>
+<p class="faq-q">Can it cancel a subscription for me?</p>
+<p>No. It only alerts you. Cancelling or renegotiating stays a human decision.</p>
+<p class="faq-q">Is it legal advice?</p>
+<p>No. It is a reminder system. For legal questions about a contract, speak to a qualified professional.</p>
+<h2 id="next-step">Want this running in your business?</h2>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25, then get in touch. We build, test and hand over automations like this for small businesses.</p>
+<p><a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> &middot; Hire SkynetLabs, our agency on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does it know when a contract renews?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An AI model reads the document and extracts the dates and the renewal wording. You verify the first batch, then new contracts are processed automatically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why 90 days?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It gives time to renegotiate or cancel before a notice period closes. You can change the lead time per contract type."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it cancel a subscription for me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It only alerts you. Cancelling or renegotiating stays a human decision."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal advice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It is a reminder system. For legal questions about a contract, speak to a qualified professional."
+      }
+    }
+  ]
+}
+</script>

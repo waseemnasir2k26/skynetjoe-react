@@ -1,0 +1,100 @@
+<style>
+  .wn-boutique-abandoned-cart-text-recovery-n8n{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-boutique-abandoned-cart-text-recovery-n8n h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-boutique-abandoned-cart-text-recovery-n8n p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-boutique-abandoned-cart-text-recovery-n8n ul,.wn-boutique-abandoned-cart-text-recovery-n8n ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-boutique-abandoned-cart-text-recovery-n8n li{margin-bottom:0.6rem}
+  .wn-boutique-abandoned-cart-text-recovery-n8n strong{color:#fff}
+  .wn-boutique-abandoned-cart-text-recovery-n8n a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-boutique-abandoned-cart-text-recovery-n8n a:hover{color:#7ee4ff}
+  .wn-boutique-abandoned-cart-text-recovery-n8n .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-boutique-abandoned-cart-text-recovery-n8n .callout strong{color:#7ee4ff}
+  .wn-boutique-abandoned-cart-text-recovery-n8n .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-boutique-abandoned-cart-text-recovery-n8n .verdict a{color:#fff}
+  .wn-boutique-abandoned-cart-text-recovery-n8n table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-boutique-abandoned-cart-text-recovery-n8n th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-boutique-abandoned-cart-text-recovery-n8n td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-boutique-abandoned-cart-text-recovery-n8n code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-boutique-abandoned-cart-text-recovery-n8n">
+<p>That abandoned cart was one click from paying. The shopper chose the item, picked the size, maybe even typed in their address, then the phone rang or the kids called and the tab was forgotten. For a small boutique that is money left on the table.</p>
+<p>Our short video shows an n8n workflow that texts the shopper an hour later: still thinking about it? Here is 10% off. The store recovers sales while you sleep, without you chasing anyone by hand.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> The one-hour delay and the 10% discount are an example from the video. Many shops prefer a smaller offer, or none at all on the first message. Test what suits your margins.</div>
+<h2 id="the-problem">Why do shoppers abandon carts?</h2>
+<p>People abandon carts for ordinary reasons: shipping costs appear late, the checkout is awkward on a phone, they get interrupted, or they wanted to compare prices. Most are not lost for good. They simply need a nudge at the right moment.</p>
+<p>Cart abandonment figures are often quoted as very high across online retail, but they vary a lot by shop and product. Your own store's numbers matter more. Check how many carts start and how many finish in your shop admin, then see what a modest recovery rate would be worth.</p>
+<h2 id="how-it-works">How does the cart recovery workflow work?</h2>
+<p>The workflow watches for carts that were started but not completed, waits, and sends one polite reminder.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Cart is left behind</strong></td><td>Your store sends an abandoned-checkout event to n8n with the shopper's name, contact, items and cart link.</td><td>Store webhook</td></tr>
+<tr><td><strong>2. Wait one hour</strong></td><td>n8n pauses so you do not message someone who is still browsing or about to finish.</td><td>Wait node</td></tr>
+<tr><td><strong>3. Check it is still unpaid</strong></td><td>Before sending, n8n confirms the order has not been completed in the meantime.</td><td>HTTP / store API node</td></tr>
+<tr><td><strong>4. Send the reminder</strong></td><td>A short text or email: still thinking about it? A link straight back to their cart, and an optional discount code.</td><td>SMS or email node</td></tr>
+<tr><td><strong>5. Track the result</strong></td><td>If the order completes, n8n logs a recovered sale so you can see whether the message paid for itself.</td><td>Sheets / database node</td></tr>
+</tbody></table>
+<p>The first message is the one that matters. A second reminder a day later is optional, and a third is usually too much.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An online store that can send abandoned-checkout events (most major platforms can)</li>
+<li>An n8n instance</li>
+<li>A messaging channel: email is simplest, SMS needs a provider and consent</li>
+<li>A discount code you are comfortable giving, or a plan to send no discount</li>
+<li>Shopper consent to marketing messages where the law requires it</li>
+</ul>
+<p>Review the results monthly: how many carts were abandoned, how many reminders went out, and how many orders were completed afterwards. If few shoppers respond, the problem may be the offer, the timing or the checkout itself, so change one thing at a time and watch the numbers.</p>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>You can only message shoppers who gave you contact details and permission. Anonymous visitors cannot be reached.</li>
+<li>Discounts train some customers to abandon carts on purpose. Watch for that.</li>
+<li>It cannot fix a clumsy checkout or surprise shipping costs, which are often the real cause.</li>
+<li>Recovery rates vary widely. Do not expect a fixed percentage.</li>
+</ul>
+<div class="verdict">Your store recovers sales while you sleep, but only the ones with permission and a good offer.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Does n8n work with my online store?</h3><p>n8n has built-in nodes for several popular store platforms and a generic webhook for the rest. If your store can send an event when a checkout is abandoned, n8n can pick it up.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Should I always offer a discount?</h3><p>No. Some shops send a simple reminder first and save a discount for the second message. The 10% in the video is an example.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Is it legal to text people who left a cart?</h3><p>Rules differ by country. In many places you need consent to send marketing messages, and an easy way to opt out. Check your local rules and store settings.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">How long should I wait before sending?</h3><p>The video uses one hour as an example. Test one hour against several hours, and measure completed orders rather than opens.</p>
+<h2 id="next-step">Next step</h2>
+<p>Open your store admin and find your abandoned-checkout count for last month. If it is not zero, there is something to recover. Ask us for the cart-recovery workflow and we will connect it to your shop.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does n8n work with my online store?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "n8n has built-in nodes for several popular store platforms and a generic webhook for the rest. If your store can send an event when a checkout is abandoned, n8n can pick it up."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I always offer a discount?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Some shops send a simple reminder first and save a discount for the second message. The 10% in the video is an example."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to text people who left a cart?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rules differ by country. In many places you need consent to send marketing messages, and an easy way to opt out. Check your local rules and store settings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should I wait before sending?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The video uses one hour as an example. Test one hour against several hours, and measure completed orders rather than opens."
+      }
+    }
+  ]
+}
+</script>

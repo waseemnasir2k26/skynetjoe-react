@@ -1,0 +1,99 @@
+<style>
+  .wn-after-hours-lead-response-ai-agent-small-business{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-after-hours-lead-response-ai-agent-small-business h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-after-hours-lead-response-ai-agent-small-business p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-after-hours-lead-response-ai-agent-small-business ul,.wn-after-hours-lead-response-ai-agent-small-business ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-after-hours-lead-response-ai-agent-small-business li{margin-bottom:0.6rem}
+  .wn-after-hours-lead-response-ai-agent-small-business strong{color:#fff}
+  .wn-after-hours-lead-response-ai-agent-small-business a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-after-hours-lead-response-ai-agent-small-business a:hover{color:#7ee4ff}
+  .wn-after-hours-lead-response-ai-agent-small-business .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-after-hours-lead-response-ai-agent-small-business .callout strong{color:#7ee4ff}
+  .wn-after-hours-lead-response-ai-agent-small-business .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-after-hours-lead-response-ai-agent-small-business .verdict a{color:#fff}
+  .wn-after-hours-lead-response-ai-agent-small-business table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-after-hours-lead-response-ai-agent-small-business th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-after-hours-lead-response-ai-agent-small-business td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-after-hours-lead-response-ai-agent-small-business code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-after-hours-lead-response-ai-agent-small-business">
+<p>Friday night, 11 p.m. A customer visits your website, ready to buy. They have one question about pricing. No one is there to answer. They wait five minutes, then open your competitor's site. By morning, the deal is done somewhere else.</p>
+<p>Our short video asks: what if something was always there? An AI agent that answers questions instantly, books calls and follows up automatically, in your brand's voice, never tired and never off duty.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> The Friday night scene is an illustrative scenario from the video, not a client case study. The '30% of leads' line is an often-quoted sales-industry figure of uncertain origin, so treat it as a prompt to measure your own leads.</div>
+<h2 id="the-problem">What does a slow reply cost you?</h2>
+<p>Most small businesses are open when the owner is awake and working. Customers shop when they are free, which is often evenings and weekends. A question that goes unanswered for hours is, to the customer, a closed door.</p>
+<p>You can measure this for yourself. Look at your enquiries from the last month, note the time each arrived and how long you took to reply, and count how many never answered back. That tells you how much of the problem is real for your business, whatever the industry statistics say.</p>
+<h2 id="how-it-works">How does an AI lead-response agent work?</h2>
+<p>The agent covers the gap between the moment someone asks and the moment you are free to respond.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Catch the enquiry</strong></td><td>A website chat box, contact form or message channel sends each new question to n8n the moment it arrives.</td><td>Webhook trigger</td></tr>
+<tr><td><strong>2. Answer from your facts</strong></td><td>An AI model replies using only information you have approved: services, opening hours, price ranges and common questions.</td><td>AI node + knowledge notes</td></tr>
+<tr><td><strong>3. Hand off when unsure</strong></td><td>If the question is outside what the agent knows, it says so honestly and promises a human follow-up instead of guessing.</td><td>IF node</td></tr>
+<tr><td><strong>4. Book the call</strong></td><td>The agent offers real time slots from your calendar and confirms the booking by message.</td><td>Calendar node</td></tr>
+<tr><td><strong>5. Follow up</strong></td><td>If the customer goes quiet, a short follow-up goes out later. You get a summary in the morning of who asked, what was said and what is booked.</td><td>Wait + email / SMS node</td></tr>
+</tbody></table>
+<p>The line between a helpful agent and a risky one is what it is allowed to say. Prices, promises and policies should come from approved text, not from the model's imagination.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An n8n instance</li>
+<li>A website chat, form or messaging channel connected to it</li>
+<li>An AI model account</li>
+<li>A short document of approved answers: services, hours, price ranges, what you do not do</li>
+<li>A calendar with real availability</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>The agent can be wrong or too confident. Restrict it to approved facts and make handoff to a human easy.</li>
+<li>It should tell customers it is an automated assistant. Pretending to be a person is a trust risk and may be regulated.</li>
+<li>It cannot replace the personal touch needed for complex or high-value sales.</li>
+<li>Messaging channels such as WhatsApp have their own business rules and approval steps.</li>
+</ul>
+<div class="verdict">Speed wins deals and silence loses them, so put something on duty when you are not.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Will customers know they are talking to AI?</h3><p>They should. We recommend a clear first line saying it is an automated assistant, with an easy route to a person.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">What happens when the AI does not know the answer?</h3><p>It should say so and pass the question to you, rather than guess. You set the rules for what counts as out of scope.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Can the agent quote prices?</h3><p>Only if you give it the prices. Many businesses allow price ranges and leave final quotes for a human.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Is the 30% lost-leads figure true for my business?</h3><p>It is an often-quoted figure with no single source, so do not rely on it. Check your own enquiry times and reply gaps to see what you are really losing.</p>
+<h2 id="next-step">Next step</h2>
+<p>Pull last month's enquiries, note when each came in and when you answered, and count the gaps over a few hours. If the gaps are real, ask SkynetLabs to scope an after-hours agent for your business.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will customers know they are talking to AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They should. We recommend a clear first line saying it is an automated assistant, with an easy route to a person."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when the AI does not know the answer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It should say so and pass the question to you, rather than guess. You set the rules for what counts as out of scope."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can the agent quote prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if you give it the prices. Many businesses allow price ranges and leave final quotes for a human."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the 30% lost-leads figure true for my business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is an often-quoted figure with no single source, so do not rely on it. Check your own enquiry times and reply gaps to see what you are really losing."
+      }
+    }
+  ]
+}
+</script>

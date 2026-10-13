@@ -1,0 +1,100 @@
+<style>
+  .wn-cafe-review-request-text-automation-n8n{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-cafe-review-request-text-automation-n8n h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-cafe-review-request-text-automation-n8n p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-cafe-review-request-text-automation-n8n ul,.wn-cafe-review-request-text-automation-n8n ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-cafe-review-request-text-automation-n8n li{margin-bottom:0.6rem}
+  .wn-cafe-review-request-text-automation-n8n strong{color:#fff}
+  .wn-cafe-review-request-text-automation-n8n a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-cafe-review-request-text-automation-n8n a:hover{color:#7ee4ff}
+  .wn-cafe-review-request-text-automation-n8n .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-cafe-review-request-text-automation-n8n .callout strong{color:#7ee4ff}
+  .wn-cafe-review-request-text-automation-n8n .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-cafe-review-request-text-automation-n8n .verdict a{color:#fff}
+  .wn-cafe-review-request-text-automation-n8n table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-cafe-review-request-text-automation-n8n th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-cafe-review-request-text-automation-n8n td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-cafe-review-request-text-automation-n8n code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-cafe-review-request-text-automation-n8n">
+<p>Happy customers forget to leave reviews. Unhappy ones often leave one anyway, or just never come back. The result is a rating that reflects your loudest moments, not your everyday service.</p>
+<p>Our short video shows an n8n workflow that texts customers after their visit, so asking for a review stops depending on a busy barista remembering. Every customer gets the review link and a private feedback option, so asking never depends on how the visit went.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> The message wording and timing in the video are an example. Choose a delay that suits your cafe, such as the same afternoon or the next morning.</div>
+<h2 id="the-problem">Why do cafes struggle to collect reviews?</h2>
+<p>A great flat white earns a smile, not a five-star rating. Owners rarely have time to ask at the till, and a printed QR code on the counter only catches the most motivated customers. Meanwhile, a rating of 4.2 against a neighbour's 4.6 can quietly send walk-in tourists elsewhere.</p>
+<p>Reviews matter to local search, and they are one of the first things a stranger checks before choosing a cafe. A steady trickle of honest reviews does more than a sudden burst, so the aim is a simple system that asks everyone, every day.</p>
+<h2 id="how-it-works">How does the review-request workflow work?</h2>
+<p>The workflow asks each customer once after a visit and gives unhappy customers an easy private route as well as the public one.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Capture the visit</strong></td><td>Customer details come from a loyalty app, an online order, a booking tool or a till export that n8n can read.</td><td>Webhook / Sheets / API node</td></tr>
+<tr><td><strong>2. Wait a few hours</strong></td><td>n8n waits so the message arrives after the visit rather than during it.</td><td>Wait node</td></tr>
+<tr><td><strong>3. Send one text</strong></td><td>A friendly message thanks them and offers two links: leave a public review, or send us private feedback.</td><td>SMS or email node</td></tr>
+<tr><td><strong>4. Route private feedback</strong></td><td>Anything sent through the private form goes straight to you by email or chat, so you can fix it quickly.</td><td>Form + notification</td></tr>
+<tr><td><strong>5. Never ask twice</strong></td><td>n8n records that the customer was asked and skips them for a set period.</td><td>Database / Sheets node</td></tr>
+</tbody></table>
+<p>Keep the wording honest: invite everyone to review, and offer private feedback as an extra option.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An n8n instance</li>
+<li>A way to get customer contact details with permission, such as loyalty sign-ups or online orders</li>
+<li>Your Google Business Profile review link</li>
+<li>A simple private feedback form</li>
+<li>An SMS provider or email account</li>
+</ul>
+<p>A practical tip: keep the message under two lines and put the review link first. Most people read a text on a phone while doing something else, so the easier the next tap, the more likely they are to follow through. Check your results monthly: how many messages went out, how many reviews arrived, and how many private notes you received. The private notes are often the most useful part, because they tell you what to fix before it shows up as a public one-star review.</p>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>Review sites have rules against selectively asking only happy customers for public reviews, sometimes called review gating. Offer the public link to everyone and add private feedback alongside it.</li>
+<li>Walk-in customers who never gave contact details cannot be reached.</li>
+<li>Never offer rewards in exchange for positive reviews. Many platforms prohibit it.</li>
+<li>A workflow cannot raise your rating on its own. It only makes asking consistent.</li>
+</ul>
+<div class="verdict">Ask every customer, listen privately, and let the rating build one honest review at a time.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Is it allowed to send customers a review link by text?</h3><p>Generally yes, if you have permission to message them and you do not pressure them or offer rewards for positive reviews. Check the current rules for each review platform you use.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Should I only send the review link to happy customers?</h3><p>No. Selectively soliciting only positive reviews is discouraged by major platforms. Send the same invitation to everyone and offer a private feedback option as well.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">How do I get customer phone numbers in a cafe?</h3><p>Common routes are loyalty sign-ups, online or app orders, and reservations. Always get permission when collecting them.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">How quickly will my rating improve?</h3><p>There is no guaranteed timeline. More consistent asking tends to produce more reviews, but the rating still depends on the experience customers had.</p>
+<h2 id="next-step">Next step</h2>
+<p>Find your Google review link and write down how many reviews you gained last month. Then ask for the review-request workflow and we will set it up around your loyalty or ordering system.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it allowed to send customers a review link by text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generally yes, if you have permission to message them and you do not pressure them or offer rewards for positive reviews. Check the current rules for each review platform you use."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I only send the review link to happy customers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Selectively soliciting only positive reviews is discouraged by major platforms. Send the same invitation to everyone and offer a private feedback option as well."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get customer phone numbers in a cafe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common routes are loyalty sign-ups, online or app orders, and reservations. Always get permission when collecting them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly will my rating improve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no guaranteed timeline. More consistent asking tends to produce more reviews, but the rating still depends on the experience customers had."
+      }
+    }
+  ]
+}
+</script>

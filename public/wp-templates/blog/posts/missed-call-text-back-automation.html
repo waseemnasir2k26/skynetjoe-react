@@ -1,0 +1,108 @@
+<style>
+  .wn-missed-call-text-back-automation { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-missed-call-text-back-automation h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-missed-call-text-back-automation p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-missed-call-text-back-automation ul, .wn-missed-call-text-back-automation ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-missed-call-text-back-automation li { margin-bottom: 0.6rem; }
+  .wn-missed-call-text-back-automation strong { color: #fff; }
+  .wn-missed-call-text-back-automation a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-missed-call-text-back-automation a:hover { color: #7ee4ff; }
+  .wn-missed-call-text-back-automation .callout { background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(20, 184, 166, 0.08)); border-left: 3px solid #00d4ff; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-missed-call-text-back-automation .callout strong { color: #7ee4ff; }
+  .wn-missed-call-text-back-automation .verdict { background: linear-gradient(135deg, #1e88e5, #14b8a6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-missed-call-text-back-automation table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-missed-call-text-back-automation th { background: rgba(0, 212, 255, 0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-missed-call-text-back-automation td { padding: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #d1d5db; vertical-align: top; }
+  .wn-missed-call-text-back-automation .faq-q { color: #fff; font-weight: 700; margin: 1.4rem 0 0.4rem; }
+</style>
+<p>You are with a customer, on a roof, or at lunch, and the phone rings. You cannot answer. The caller waits a few seconds, hangs up and tries the next business on the list.</p>
+<p>This article explains the missed-call text-back workflow from our short video. The moment a call goes unanswered, n8n sends a text such as sorry we missed you, how can we help, with a booking link straight into your calendar.</p>
+<div class="callout"><strong>About the numbers.</strong> The video says 62% of calls to small businesses go unanswered and most of those callers never call back. These are often-quoted figures, not our own measurements. Your own missed-call count is in your phone records, and that is the number to look at.</div>
+<h2 id="the-problem">What happens to a caller who gets voicemail?</h2>
+<p>Many people do not leave voicemails. They move to the next result. For a business that wins work from phone enquiries, each missed call is a potential job, and the callers who matter most tend to be those with an urgent need and no patience.</p>
+<p>Answering every call personally is not realistic for a one-to-ten person team. A fast, human-sounding text is the next best thing, and it often gets a reply because people read texts within minutes.</p>
+<p>The side benefit is data. When every missed call is logged with a time and a reply status, you finally see when you miss the most calls, and can decide whether the fix is staffing, opening hours or just the text itself.</p>
+<h2 id="how-it-works">How the text-back works</h2>
+<div class="verdict">Missed call in, text out within seconds, with a link that lets the customer book without a phone call.</div>
+<table>
+  <thead><tr><th>Step</th><th>What happens</th><th>Typical tool</th></tr></thead>
+  <tbody>
+    <tr><td>1. Call is missed</td><td>Your phone system reports a missed or unanswered call with the caller's number.</td><td>Business phone or VoIP provider</td></tr>
+    <tr><td>2. Filter</td><td>The workflow ignores your own numbers, known suppliers and repeat spam callers.</td><td>n8n rules</td></tr>
+    <tr><td>3. Send the text</td><td>A short, friendly message goes out at once: sorry we missed you, how can we help?</td><td>SMS provider</td></tr>
+    <tr><td>4. Offer booking</td><td>The text includes a link to your calendar so the person can pick a time.</td><td>Calendly, Google Calendar or similar</td></tr>
+    <tr><td>5. Capture replies</td><td>If they reply instead, the message is routed to you and logged.</td><td>Shared inbox or CRM</td></tr>
+    <tr><td>6. Notify you</td><td>You get a summary of who called and what they said.</td><td>Email or chat</td></tr>
+  </tbody>
+</table>
+<p>The text should read like you wrote it. We keep it short, avoid jargon and make sure it names your business, so the caller knows who is writing.</p>
+<p>Out-of-hours is a good place to start, because that is where almost every call is lost. You can switch it on for all hours later if it works for you.</p>
+<h2 id="what-you-need">What you need to get started</h2>
+<ul>
+  <li>A phone system that can trigger an event on a missed call.</li>
+  <li>An SMS number or provider and a booking link.</li>
+  <li>A short message in your own words.</li>
+  <li>Awareness of your local rules on messaging callers.</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2>
+<ul>
+  <li>It does not answer the call itself. A caller who needs an immediate answer may still go elsewhere.</li>
+  <li>SMS sending costs money per message, and some countries restrict automated texts.</li>
+  <li>Some phone systems do not expose missed-call events, which limits what we can connect.</li>
+  <li>Spam and withheld numbers cannot be texted.</li>
+</ul>
+<h2 id="cost">What does it cost to set up?</h2>
+<p>This is typically one of the faster workflows to put live once your phone system supports it. Pricing depends on your tools, your volume and how many branches the workflow needs, so we scope it on a short call rather than quoting a number here. <a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> and we will tell you plainly whether it is worth building for your business.</p>
+<h2 id="faq">Frequently asked questions</h2>
+<p class="faq-q">What does the text say?</p>
+<p>Something like: sorry we missed you, how can we help? Then a link to book a time. The wording is yours and we write it with you.</p>
+<p class="faq-q">Will callers be annoyed by a text?</p>
+<p>Most callers expect some response, and a short, polite message tends to be welcome. Keep it brief and honest.</p>
+<p class="faq-q">Does it work outside business hours?</p>
+<p>Yes, and that is where it helps most because nobody is available to answer.</p>
+<p class="faq-q">Can it handle emergencies?</p>
+<p>It is not an emergency line. If your business handles urgent cases, we can add keywords that notify you immediately.</p>
+<h2 id="next-step">Want this running in your business?</h2>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25, then get in touch. We build, test and hand over automations like this for small businesses.</p>
+<p><a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> &middot; Hire SkynetLabs, our agency on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the text say?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Something like: sorry we missed you, how can we help? Then a link to book a time. The wording is yours and we write it with you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will callers be annoyed by a text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most callers expect some response, and a short, polite message tends to be welcome. Keep it brief and honest."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work outside business hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, and that is where it helps most because nobody is available to answer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it handle emergencies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is not an emergency line. If your business handles urgent cases, we can add keywords that notify you immediately."
+      }
+    }
+  ]
+}
+</script>

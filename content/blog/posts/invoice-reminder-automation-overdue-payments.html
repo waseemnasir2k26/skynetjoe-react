@@ -1,0 +1,108 @@
+<style>
+  .wn-invoice-reminder-automation-overdue-payments { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-invoice-reminder-automation-overdue-payments h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-invoice-reminder-automation-overdue-payments p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-invoice-reminder-automation-overdue-payments ul, .wn-invoice-reminder-automation-overdue-payments ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-invoice-reminder-automation-overdue-payments li { margin-bottom: 0.6rem; }
+  .wn-invoice-reminder-automation-overdue-payments strong { color: #fff; }
+  .wn-invoice-reminder-automation-overdue-payments a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-invoice-reminder-automation-overdue-payments a:hover { color: #7ee4ff; }
+  .wn-invoice-reminder-automation-overdue-payments .callout { background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(20, 184, 166, 0.08)); border-left: 3px solid #00d4ff; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-invoice-reminder-automation-overdue-payments .callout strong { color: #7ee4ff; }
+  .wn-invoice-reminder-automation-overdue-payments .verdict { background: linear-gradient(135deg, #1e88e5, #14b8a6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-invoice-reminder-automation-overdue-payments table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-invoice-reminder-automation-overdue-payments th { background: rgba(0, 212, 255, 0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-invoice-reminder-automation-overdue-payments td { padding: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #d1d5db; vertical-align: top; }
+  .wn-invoice-reminder-automation-overdue-payments .faq-q { color: #fff; font-weight: 700; margin: 1.4rem 0 0.4rem; }
+</style>
+<p>Chasing money feels awkward, so many owners put it off, and the invoice sits there. The work is done, the client is happy, and your cash is in someone else's account.</p>
+<p>This article explains the invoice chaser workflow from our short video: a friendly nudge at 7 days, a firmer one at 14 and a final notice at 30. It runs by itself and stops the moment the invoice is paid.</p>
+<div class="callout"><strong>About the numbers.</strong> The video says 59% of small businesses are waiting on invoices overdue by 30 days or more. That is an often-quoted survey figure, not our own data, and it will differ by country and industry.</div>
+<h2 id="the-problem">Why do overdue invoices pile up?</h2>
+<p>Most late payments are not refusals. The invoice went to the wrong person, got buried, or simply was not a priority that week. A prompt, polite reminder fixes a surprising share of these. The trouble is that sending reminders is manual, repetitive and socially uncomfortable, so it keeps slipping down the list.</p>
+<p>When cash is tight, an unpaid invoice is also a financing problem. You may be covering costs from your own pocket while a client holds your money for free.</p>
+<p>Consistency is the other missing piece. If you chase one client hard and forget another, you create unfairness and confusion. A fixed schedule treats everyone the same and removes the guesswork.</p>
+<h2 id="how-it-works">How the invoice chaser works</h2>
+<div class="verdict">Three escalating messages on a fixed schedule, with a check before each one so paid invoices are never chased.</div>
+<table>
+  <thead><tr><th>Step</th><th>What happens</th><th>Typical tool</th></tr></thead>
+  <tbody>
+    <tr><td>1. Watch invoices</td><td>The workflow reads your accounting tool daily and finds invoices past their due date.</td><td>Xero, QuickBooks or a sheet</td></tr>
+    <tr><td>2. Day 7 nudge</td><td>A friendly note: here is the invoice again, a payment link, let us know if anything is unclear.</td><td>Email</td></tr>
+    <tr><td>3. Check status</td><td>Before each step it asks the accounting tool whether the invoice has been paid.</td><td>Accounting API</td></tr>
+    <tr><td>4. Day 14 reminder</td><td>A firmer message that references the earlier note and the terms you agreed.</td><td>Email</td></tr>
+    <tr><td>5. Day 30 final notice</td><td>A formal message stating next steps according to your terms.</td><td>Email, optionally a copy to you</td></tr>
+    <tr><td>6. Log and escalate</td><td>Every send is logged. After the final notice, the case is flagged to you for a personal call or other action.</td><td>Sheet and notification</td></tr>
+  </tbody>
+</table>
+<p>The tone matters. We write the three templates with you so they sound like your business: warm at 7 days, direct at 14, formal at 30.</p>
+<p>You can add exceptions, such as a VIP client list that gets a personal message from you instead of the automatic sequence.</p>
+<h2 id="what-you-need">What you need to get started</h2>
+<ul>
+  <li>An accounting or invoicing tool the workflow can read, or a clean invoice sheet.</li>
+  <li>Your payment terms and your preferred wording for each stage.</li>
+  <li>A decision on what happens after the final notice.</li>
+  <li>A list of clients who should be excluded from automation.</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2>
+<ul>
+  <li>It speeds up honest late payers. It does not force a client who refuses to pay.</li>
+  <li>Messages go out from your business, so the wording needs your approval before launch.</li>
+  <li>If invoice data is wrong in your accounting tool, the reminders will be wrong too.</li>
+  <li>Legal steps for unpaid debts are outside the workflow. Take proper advice.</li>
+</ul>
+<h2 id="cost">What does it cost to set up?</h2>
+<p>This is a fairly standard build once we know which accounting tool you use. Pricing depends on your tools, your volume and how many branches the workflow needs, so we scope it on a short call rather than quoting a number here. <a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> and we will tell you plainly whether it is worth building for your business.</p>
+<h2 id="faq">Frequently asked questions</h2>
+<p class="faq-q">When are the reminders sent?</p>
+<p>The video describes a friendly nudge at 7 days overdue, a firmer one at 14 and a final notice at 30. The schedule is adjustable.</p>
+<p class="faq-q">What if the client already paid?</p>
+<p>The workflow checks payment status before every message and stops chasing as soon as the invoice is marked as paid.</p>
+<p class="faq-q">Will it damage client relationships?</p>
+<p>The first message is deliberately friendly and the wording is yours. You can also exclude important clients and handle them personally.</p>
+<p class="faq-q">Which accounting tools does it work with?</p>
+<p>Most common ones with an API, such as Xero and QuickBooks, or a well-kept spreadsheet. We confirm compatibility on the call.</p>
+<h2 id="next-step">Want this running in your business?</h2>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25, then get in touch. We build, test and hand over automations like this for small businesses.</p>
+<p><a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> &middot; Hire SkynetLabs, our agency on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When are the reminders sent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The video describes a friendly nudge at 7 days overdue, a firmer one at 14 and a final notice at 30. The schedule is adjustable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the client already paid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The workflow checks payment status before every message and stops chasing as soon as the invoice is marked as paid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it damage client relationships?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The first message is deliberately friendly and the wording is yours. You can also exclude important clients and handle them personally."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which accounting tools does it work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most common ones with an API, such as Xero and QuickBooks, or a well-kept spreadsheet. We confirm compatibility on the call."
+      }
+    }
+  ]
+}
+</script>

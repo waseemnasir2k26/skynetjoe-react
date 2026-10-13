@@ -1,0 +1,100 @@
+<style>
+  .wn-cafe-supplier-price-watch-alert-n8n{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-cafe-supplier-price-watch-alert-n8n h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-cafe-supplier-price-watch-alert-n8n p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-cafe-supplier-price-watch-alert-n8n ul,.wn-cafe-supplier-price-watch-alert-n8n ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-cafe-supplier-price-watch-alert-n8n li{margin-bottom:0.6rem}
+  .wn-cafe-supplier-price-watch-alert-n8n strong{color:#fff}
+  .wn-cafe-supplier-price-watch-alert-n8n a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-cafe-supplier-price-watch-alert-n8n a:hover{color:#7ee4ff}
+  .wn-cafe-supplier-price-watch-alert-n8n .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-cafe-supplier-price-watch-alert-n8n .callout strong{color:#7ee4ff}
+  .wn-cafe-supplier-price-watch-alert-n8n .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-cafe-supplier-price-watch-alert-n8n .verdict a{color:#fff}
+  .wn-cafe-supplier-price-watch-alert-n8n table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-cafe-supplier-price-watch-alert-n8n th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-cafe-supplier-price-watch-alert-n8n td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-cafe-supplier-price-watch-alert-n8n code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-cafe-supplier-price-watch-alert-n8n">
+<p>Coffee prices jump and you find out on the invoice. By then the order has shipped, the menu is printed, and your margin on every flat white has quietly shrunk.</p>
+<p>Our short video shows an n8n workflow that watches your supplier prices every week. Spike detected? You get an alert with options: renegotiate, switch, or adjust the menu. Never blindsided again.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> The weekly check and the three options in the video are an example. Choose thresholds that match your margins, such as flagging any rise above a set percentage.</div>
+<h2 id="the-problem">Why do supplier price rises hurt small cafes?</h2>
+<p>Cafes run on thin margins, and ingredients such as coffee, milk and packaging move in price more often than menus do. A small rise on a high-volume item adds up over a month, and invoices often arrive after you have already served the stock.</p>
+<p>Most owners track prices by memory or by scanning invoices when they have time. That means a rise is noticed late and acted on later. A weekly automatic check turns a surprise into a decision made with time on your side.</p>
+<h2 id="how-it-works">How does the price-watch workflow work?</h2>
+<p>The workflow compares this week's prices with a stored baseline and speaks up only when something moves.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Read current prices</strong></td><td>Every week n8n collects your supplier's latest prices from a price list page, a spreadsheet or emailed price sheets.</td><td>Schedule + HTTP / email node</td></tr>
+<tr><td><strong>2. Compare with last time</strong></td><td>Each item is checked against the stored price from the previous week and a longer baseline.</td><td>Code / Sheets node</td></tr>
+<tr><td><strong>3. Flag a spike</strong></td><td>Any item that rises more than your threshold is marked as a spike. Everything else stays quiet.</td><td>IF node</td></tr>
+<tr><td><strong>4. Send an alert with options</strong></td><td>You get a short message: the item, the old and new price, and a prompt to renegotiate, switch or adjust the menu.</td><td>Email / chat node</td></tr>
+<tr><td><strong>5. Save the history</strong></td><td>The new prices are stored so you can see trends and prove a rise when you negotiate.</td><td>Sheets / database node</td></tr>
+</tbody></table>
+<p>The workflow does not decide for you. It makes sure you hear about a rise while there is still time to choose.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An n8n instance</li>
+<li>A source of supplier prices n8n can read, such as a web price list, a shared spreadsheet or regular price emails</li>
+<li>A baseline list of the items you care about most</li>
+<li>A threshold for what counts as a spike</li>
+<li>An email or chat account for alerts</li>
+</ul>
+<p>Start small. Track just the five or ten items that make up most of your spend, such as espresso beans, milk, oat milk and takeaway cups. A short list keeps the alert useful. Once you trust it, add more. Keep the history sheet too: when a supplier announces a rise, being able to show the last twelve weeks of prices makes the conversation about fairness rather than guesswork.</p>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>It can only watch prices that are available in a readable form. Prices given only by phone cannot be tracked.</li>
+<li>Some supplier sites block automated checks or change layout, which means the workflow needs occasional maintenance.</li>
+<li>It spots a rise but cannot negotiate or find a cheaper supplier for you.</li>
+<li>Prices that include delivery or bundle discounts may need extra rules.</li>
+</ul>
+<div class="verdict">Hear about the rise this week, not on next month's invoice.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">How does n8n know the supplier's prices?</h3><p>It reads them from wherever they are published: a web page, a spreadsheet the supplier shares, or emailed price lists. If the prices are not available digitally, the workflow cannot watch them.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">How often should I check prices?</h3><p>The video uses weekly as an example. Daily is rarely needed for a cafe, and weekly is usually enough to catch a trend.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Can it switch suppliers for me?</h3><p>No. It alerts you and offers options. The decision, and any conversation with a supplier, stays with you.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Is it legal to check a supplier's website automatically?</h3><p>Public price lists are generally fine to read, but check the supplier's terms. A friendlier route is to ask them to email you their price list.</p>
+<h2 id="next-step">Next step</h2>
+<p>Pick your five biggest ingredient costs and write down what you paid last month. That is the starting watch list. Ask for the price-watch workflow and we will build it around your suppliers.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does n8n know the supplier's prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It reads them from wherever they are published: a web page, a spreadsheet the supplier shares, or emailed price lists. If the prices are not available digitally, the workflow cannot watch them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I check prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The video uses weekly as an example. Daily is rarely needed for a cafe, and weekly is usually enough to catch a trend."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it switch suppliers for me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It alerts you and offers options. The decision, and any conversation with a supplier, stays with you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to check a supplier's website automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Public price lists are generally fine to read, but check the supplier's terms. A friendlier route is to ask them to email you their price list."
+      }
+    }
+  ]
+}
+</script>

@@ -1,0 +1,108 @@
+<style>
+  .wn-sales-call-to-crm-automation-ai-notes { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-sales-call-to-crm-automation-ai-notes h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-sales-call-to-crm-automation-ai-notes p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-sales-call-to-crm-automation-ai-notes ul, .wn-sales-call-to-crm-automation-ai-notes ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-sales-call-to-crm-automation-ai-notes li { margin-bottom: 0.6rem; }
+  .wn-sales-call-to-crm-automation-ai-notes strong { color: #fff; }
+  .wn-sales-call-to-crm-automation-ai-notes a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-sales-call-to-crm-automation-ai-notes a:hover { color: #7ee4ff; }
+  .wn-sales-call-to-crm-automation-ai-notes .callout { background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(20, 184, 166, 0.08)); border-left: 3px solid #00d4ff; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-sales-call-to-crm-automation-ai-notes .callout strong { color: #7ee4ff; }
+  .wn-sales-call-to-crm-automation-ai-notes .verdict { background: linear-gradient(135deg, #1e88e5, #14b8a6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-sales-call-to-crm-automation-ai-notes table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-sales-call-to-crm-automation-ai-notes th { background: rgba(0, 212, 255, 0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-sales-call-to-crm-automation-ai-notes td { padding: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #d1d5db; vertical-align: top; }
+  .wn-sales-call-to-crm-automation-ai-notes .faq-q { color: #fff; font-weight: 700; margin: 1.4rem 0 0.4rem; }
+</style>
+<p>A good sales call ends, and then the real work starts: typing notes, updating the CRM, writing a follow-up email. It is the part everyone skips when they are busy, so the CRM drifts out of date and follow-ups get forgotten.</p>
+<p>This article covers the meeting filer workflow from our short video. It takes each sales call, has AI pull out decisions, action items and next steps, and files them in your CRM so the admin is done when the call ends.</p>
+<div class="callout"><strong>About the numbers.</strong> The video says salespeople spend only about 40% of their week actually selling. That is an often-quoted industry figure, not a measurement from our work. Your own team's split could be quite different, so it is worth measuring it.</div>
+<h2 id="the-problem">Where does the selling time go?</h2>
+<p>Admin around calls is small per call and large in total. Ten minutes of typing after each of six calls a day is an hour gone, every day, and it is the least valued hour of the day. Notes written from memory are also incomplete, which makes the next conversation weaker.</p>
+<p>Missing CRM data has a second cost: managers cannot see the pipeline, so decisions rely on what people remember to report.</p>
+<p>Follow-ups suffer most. A promise made on a call, such as sending a quote on Thursday, only happens if someone wrote it down. Capturing action items automatically turns spoken promises into tracked tasks.</p>
+<h2 id="how-it-works">How the meeting filer works</h2>
+<div class="verdict">The call is recorded and transcribed, AI extracts what matters, and the CRM record is updated automatically.</div>
+<table>
+  <thead><tr><th>Step</th><th>What happens</th><th>Typical tool</th></tr></thead>
+  <tbody>
+    <tr><td>1. Capture</td><td>The call or video meeting is recorded with the participants' knowledge and consent.</td><td>Your call or meeting tool</td></tr>
+    <tr><td>2. Transcribe</td><td>The recording becomes text as soon as the call ends.</td><td>Speech-to-text service</td></tr>
+    <tr><td>3. Extract</td><td>AI pulls out decisions, objections, action items, owners, dates and the agreed next step.</td><td>n8n plus an AI model</td></tr>
+    <tr><td>4. File</td><td>A concise note and the structured fields are written to the right contact and deal.</td><td>CRM such as HubSpot or Pipedrive</td></tr>
+    <tr><td>5. Create tasks</td><td>Each action item becomes a task with a due date for the right person.</td><td>CRM tasks</td></tr>
+    <tr><td>6. Draft follow-up</td><td>Optionally, a follow-up email is drafted for the rep to check and send.</td><td>Email draft</td></tr>
+  </tbody>
+</table>
+<p>We keep the human in the loop for anything customer-facing: the follow-up email is a draft, not an automatic send. The rep reads it, edits it and sends it.</p>
+<p>Structured fields matter more than long summaries. A next-step date and a deal stage that updates are what make the pipeline usable.</p>
+<h2 id="what-you-need">What you need to get started</h2>
+<ul>
+  <li>A CRM with an API, and a call or meeting tool that produces recordings or transcripts.</li>
+  <li>Everyone on the call being told it is recorded, as local law requires.</li>
+  <li>Agreement on which CRM fields should be filled.</li>
+  <li>A few sample calls so we can tune the extraction.</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2>
+<ul>
+  <li>Recording consent rules vary by country. Get this right before anything else.</li>
+  <li>AI summaries can miss nuance or mishear names, so reps should skim the note.</li>
+  <li>Poor audio produces a poor transcript, and the notes are only as good as that.</li>
+  <li>It does not replace coaching or reviewing important calls.</li>
+</ul>
+<h2 id="cost">What does it cost to set up?</h2>
+<p>Setup depends mostly on your CRM and your calling tool. Pricing depends on your tools, your volume and how many branches the workflow needs, so we scope it on a short call rather than quoting a number here. <a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> and we will tell you plainly whether it is worth building for your business.</p>
+<h2 id="faq">Frequently asked questions</h2>
+<p class="faq-q">What does the AI pull out of a sales call?</p>
+<p>Decisions, objections, action items with owners and dates, and the agreed next step, written to the CRM record.</p>
+<p class="faq-q">Do I need to tell people I am recording?</p>
+<p>Yes. Recording laws differ by country, and you should always inform participants and follow your local rules.</p>
+<p class="faq-q">Will it send emails to customers by itself?</p>
+<p>No. The follow-up is created as a draft so the rep can check it first.</p>
+<p class="faq-q">Which CRMs does it work with?</p>
+<p>Most that offer an API, such as HubSpot and Pipedrive. We confirm yours during scoping.</p>
+<h2 id="next-step">Want this running in your business?</h2>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25, then get in touch. We build, test and hand over automations like this for small businesses.</p>
+<p><a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> &middot; Hire SkynetLabs, our agency on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the AI pull out of a sales call?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Decisions, objections, action items with owners and dates, and the agreed next step, written to the CRM record."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to tell people I am recording?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Recording laws differ by country, and you should always inform participants and follow your local rules."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it send emails to customers by itself?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The follow-up is created as a draft so the rep can check it first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which CRMs does it work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most that offer an API, such as HubSpot and Pipedrive. We confirm yours during scoping."
+      }
+    }
+  ]
+}
+</script>

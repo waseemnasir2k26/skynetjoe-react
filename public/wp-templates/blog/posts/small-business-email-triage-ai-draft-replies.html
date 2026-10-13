@@ -1,0 +1,99 @@
+<style>
+  .wn-small-business-email-triage-ai-draft-replies{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-small-business-email-triage-ai-draft-replies h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-small-business-email-triage-ai-draft-replies p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-small-business-email-triage-ai-draft-replies ul,.wn-small-business-email-triage-ai-draft-replies ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-small-business-email-triage-ai-draft-replies li{margin-bottom:0.6rem}
+  .wn-small-business-email-triage-ai-draft-replies strong{color:#fff}
+  .wn-small-business-email-triage-ai-draft-replies a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-small-business-email-triage-ai-draft-replies a:hover{color:#7ee4ff}
+  .wn-small-business-email-triage-ai-draft-replies .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-small-business-email-triage-ai-draft-replies .callout strong{color:#7ee4ff}
+  .wn-small-business-email-triage-ai-draft-replies .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-small-business-email-triage-ai-draft-replies .verdict a{color:#fff}
+  .wn-small-business-email-triage-ai-draft-replies table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-small-business-email-triage-ai-draft-replies th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-small-business-email-triage-ai-draft-replies td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-small-business-email-triage-ai-draft-replies code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-small-business-email-triage-ai-draft-replies">
+<p>Picture a Tuesday at 9 a.m. A business owner opens an inbox with 147 unread emails. By lunch they have answered 20. By 5 p.m. 30 more have arrived. The clients and the deals are buried somewhere in the middle.</p>
+<p>Our short video tells that story and then shows the fix: an AI automation that reads, sorts and drafts replies in your voice, and flags only what needs you. The owner in the video, Sarah, is an illustrative character, not a client.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> Sarah, the 147 unread emails and the three hours a day are an illustrative scenario from the video. They are not a customer case study or a measured result.</div>
+<h2 id="the-problem">What does a full inbox really cost?</h2>
+<p>Email feels like work, but much of it is sorting: what is a client, what is a supplier, what is a newsletter, what can wait. Every glance at the inbox interrupts something more valuable. If the inbox takes even two hours of a day, that is roughly a quarter of the working week you are not spending on selling, serving or planning.</p>
+<p>The deeper risk is the important email that gets buried. A new enquiry, a payment question or an unhappy customer can sit under routine messages for days. Speed matters, and a slow reply is often read as a lack of interest.</p>
+<h2 id="how-it-works">How does an AI email triage workflow work?</h2>
+<p>The system sits between your inbox and you. It reads everything, sorts it, and prepares answers, but nothing is sent without your say-so.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Read new email</strong></td><td>An n8n workflow watches your inbox and picks up each new message as it arrives.</td><td>Email trigger</td></tr>
+<tr><td><strong>2. Sort and label</strong></td><td>An AI model classifies each message: client, lead, supplier, invoice, newsletter or other, and applies a label.</td><td>AI node + Gmail / IMAP node</td></tr>
+<tr><td><strong>3. Draft a reply</strong></td><td>For routine questions, the AI writes a draft in your voice using notes you supply about prices, hours and common answers.</td><td>AI node</td></tr>
+<tr><td><strong>4. Flag what needs you</strong></td><td>Anything involving money, complaints, legal matters or unusual requests is marked for personal attention and never auto-answered.</td><td>IF node + notification</td></tr>
+<tr><td><strong>5. Daily summary</strong></td><td>You get a short digest each morning of what came in, what was drafted and what needs a decision.</td><td>Schedule + email node</td></tr>
+</tbody></table>
+<p>The safest setup keeps drafts in your drafts folder rather than sending them. You review, edit and click send, which takes seconds instead of minutes.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An n8n instance</li>
+<li>Access to your mailbox through a method your provider allows</li>
+<li>An AI model account (the cost is usually small compared with the time saved)</li>
+<li>A short guide to your tone and common answers</li>
+<li>A list of topics the AI must never answer on its own</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>AI drafts can be wrong. Treat them as drafts and review anything involving a price, a promise or a date.</li>
+<li>Email contains personal data. Check how your AI provider handles it and what your privacy policy says.</li>
+<li>It will not fix an inbox full of work that only you can do. It removes the sorting, not the thinking.</li>
+<li>The first weeks need tuning, as the labels and the voice improve with your feedback.</li>
+</ul>
+<div class="verdict">Get your afternoons back: the inbox sorts itself and only the important mail waits for you.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Will the AI send emails on my behalf?</h3><p>It does not have to. The recommended setup creates drafts that you review and send. Fully automatic replies are possible for simple cases but need careful rules.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Is my email safe with an AI tool?</h3><p>It depends on the provider and your settings. Choose a provider with clear data-handling terms, tell clients in your privacy policy, and keep sensitive categories out of the automation.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Does this work with Gmail and Outlook?</h3><p>Generally yes. n8n has connectors for the major email providers, and a generic IMAP option for many others.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">How long does setup take?</h3><p>A basic triage and drafting workflow can be built quickly, but the tuning of labels and tone usually takes a couple of weeks of real use.</p>
+<h2 id="next-step">Next step</h2>
+<p>Spend one day noting what kind of email you get and how long each kind takes. That log is the brief for the build. Ask SkynetLabs and we will design the triage around it.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will the AI send emails on my behalf?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It does not have to. The recommended setup creates drafts that you review and send. Fully automatic replies are possible for simple cases but need careful rules."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my email safe with an AI tool?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the provider and your settings. Choose a provider with clear data-handling terms, tell clients in your privacy policy, and keep sensitive categories out of the automation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work with Gmail and Outlook?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generally yes. n8n has connectors for the major email providers, and a generic IMAP option for many others."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does setup take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A basic triage and drafting workflow can be built quickly, but the tuning of labels and tone usually takes a couple of weeks of real use."
+      }
+    }
+  ]
+}
+</script>

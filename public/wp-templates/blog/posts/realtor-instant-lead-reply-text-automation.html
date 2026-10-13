@@ -1,0 +1,99 @@
+<style>
+  .wn-realtor-instant-lead-reply-text-automation{color:#e5e7eb;line-height:1.7;font-size:1.05rem}
+  .wn-realtor-instant-lead-reply-text-automation h2{color:#fff;font-size:1.75rem;font-weight:800;margin:2.5rem 0 1rem;letter-spacing:-0.02em}
+  .wn-realtor-instant-lead-reply-text-automation p{margin-bottom:1.1rem;color:#d1d5db}
+  .wn-realtor-instant-lead-reply-text-automation ul,.wn-realtor-instant-lead-reply-text-automation ol{margin:1rem 0 1.4rem 1.5rem;color:#d1d5db}
+  .wn-realtor-instant-lead-reply-text-automation li{margin-bottom:0.6rem}
+  .wn-realtor-instant-lead-reply-text-automation strong{color:#fff}
+  .wn-realtor-instant-lead-reply-text-automation a{color:#5eead4;text-decoration:underline;text-underline-offset:3px}
+  .wn-realtor-instant-lead-reply-text-automation a:hover{color:#7ee4ff}
+  .wn-realtor-instant-lead-reply-text-automation .callout{background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(20,184,166,0.08));border-left:3px solid #00d4ff;padding:1.25rem 1.5rem;border-radius:10px;margin:2rem 0}
+  .wn-realtor-instant-lead-reply-text-automation .callout strong{color:#7ee4ff}
+  .wn-realtor-instant-lead-reply-text-automation .verdict{background:linear-gradient(135deg,#1e88e5,#14b8a6);color:#fff;padding:1.25rem 1.5rem;border-radius:12px;margin:2rem 0;font-weight:600}
+  .wn-realtor-instant-lead-reply-text-automation .verdict a{color:#fff}
+  .wn-realtor-instant-lead-reply-text-automation table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem}
+  .wn-realtor-instant-lead-reply-text-automation th{background:rgba(0,212,255,0.1);color:#7ee4ff;padding:0.75rem;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.8rem}
+  .wn-realtor-instant-lead-reply-text-automation td{padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top}
+  .wn-realtor-instant-lead-reply-text-automation code{background:rgba(0,212,255,0.12);color:#7ee4ff;padding:0.15rem 0.45rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:0.9em}
+</style>
+<div class="wn-realtor-instant-lead-reply-text-automation">
+<p>In real estate the first agent to respond often wins the listing. A seller or buyer fills in an inquiry form, then fills in two more on competing agents' sites. Whoever answers first gets the conversation.</p>
+<p>Our short video shows the fix: an n8n workflow that texts every new inquiry the second it lands. Something like, thanks for your interest, when can we talk? While other agents are still checking email, you are already booked in.</p>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25.</p>
+<div class="callout"><strong>Example, not a result.</strong> The reply wording, 'Thanks for your interest. When can we talk?', is an example from the video. Use your own name, brokerage and tone.</div>
+<h2 id="the-problem">Why does the first reply matter so much?</h2>
+<p>Portal leads and website forms arrive at awkward moments: during a showing, at dinner, at 10 pm. Agents who rely on checking email in the gaps answer in hours. A buyer who is actively searching has usually moved on by then, and the lead you paid for or worked for is gone.</p>
+<p>There is an often-quoted figure in sales circles that responding within minutes makes you many times likelier to qualify a lead than responding later. Treat that as a reason to test, not a guarantee. The reliable part is simpler: an instant reply cannot be slower than a manual one.</p>
+<h2 id="how-it-works">How does the realtor instant-reply workflow work?</h2>
+<p>The workflow listens for new inquiries and answers before you have even seen the notification.</p>
+<table><thead><tr><th>Step</th><th>What happens</th><th>Tool</th></tr></thead><tbody>
+<tr><td><strong>1. Inquiry arrives</strong></td><td>A new lead from your website form, a portal email or your CRM triggers the workflow with name, phone and property of interest.</td><td>Webhook / email trigger</td></tr>
+<tr><td><strong>2. Clean the details</strong></td><td>n8n checks the phone number is valid and pulls the property address or listing so the text can mention it.</td><td>Code or Set node</td></tr>
+<tr><td><strong>3. Text within seconds</strong></td><td>A short personal message goes out in your name, asking when they would like to talk.</td><td>SMS provider node</td></tr>
+<tr><td><strong>4. Alert you</strong></td><td>You get a notification with the lead's details and the text that was sent, so you know exactly where the conversation stands.</td><td>Slack, WhatsApp or email</td></tr>
+<tr><td><strong>5. Log it</strong></td><td>The lead and the timestamp are saved to your sheet or CRM, so you can see how quickly each lead was answered.</td><td>Google Sheets / CRM node</td></tr>
+</tbody></table>
+<p>The goal of the first text is one thing only: start a human conversation. It should not try to sell, quote a price or give legal or financial advice.</p>
+<h2 id="what-you-need">What you need to run it</h2><ul>
+<li>An n8n instance</li>
+<li>An SMS provider account (a business number your clients will recognise)</li>
+<li>A lead source that can trigger n8n: a web form, a CRM or parsed portal emails</li>
+<li>Consent from the lead to be texted, usually captured on the form</li>
+<li>A calendar link or a set of times you can really offer</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2><ul>
+<li>Portals sometimes restrict how their leads can be contacted. Read the terms of each lead source before automating a reply.</li>
+<li>A fast text is only the first step. If you cannot follow up personally, the speed is wasted.</li>
+<li>Texting rules differ by country and state, including opt-out requirements. Check yours.</li>
+<li>It cannot judge lead quality. Some inquiries will be tyre-kickers, and that is normal.</li>
+</ul>
+<div class="verdict">Speed to lead is not about being clever. It is about being there first.</div>
+<h2 id="faq">Frequently asked questions</h2>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">How fast can an automated text reach a new inquiry?</h3><p>Usually within seconds of the form being submitted, limited mainly by your SMS provider. We have not published a measured figure for this realtor version, so test it with your own forms before relying on a number.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Is it legal to text a new inquiry automatically?</h3><p>It depends on where you and the lead are. In many places you need clear consent, and every message should be easy to opt out of. Capture consent on your form and check your local rules.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Does the text sound robotic?</h3><p>It does not need to. Keep it to one or two lines in your own words, then take over the conversation yourself once they reply.</p>
+<h3 style="color:#7ee4ff;font-size:1.15rem;margin:1.5rem 0 0.5rem">Can I use email instead of SMS?</h3><p>Yes. Email is simpler to set up and has fewer consent hurdles, though texts are usually read faster.</p>
+<h2 id="next-step">Next step</h2>
+<p>Time yourself: submit a test inquiry on your own site and see how long until anyone replies. If it is more than a few minutes, set up the instant-reply workflow and test it again.</p>
+<p>To have us build it for you, get in touch through <a href="https://skynetjoe.com">skynetjoe.com</a> or hire SkynetLabs on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a>.</p>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How fast can an automated text reach a new inquiry?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually within seconds of the form being submitted, limited mainly by your SMS provider. We have not published a measured figure for this realtor version, so test it with your own forms before relying on a number."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to text a new inquiry automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on where you and the lead are. In many places you need clear consent, and every message should be easy to opt out of. Capture consent on your form and check your local rules."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the text sound robotic?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It does not need to. Keep it to one or two lines in your own words, then take over the conversation yourself once they reply."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use email instead of SMS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Email is simpler to set up and has fewer consent hurdles, though texts are usually read faster."
+      }
+    }
+  ]
+}
+</script>

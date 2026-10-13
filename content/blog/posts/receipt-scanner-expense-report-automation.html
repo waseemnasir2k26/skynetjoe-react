@@ -1,0 +1,108 @@
+<style>
+  .wn-receipt-scanner-expense-report-automation { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-receipt-scanner-expense-report-automation h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-receipt-scanner-expense-report-automation p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-receipt-scanner-expense-report-automation ul, .wn-receipt-scanner-expense-report-automation ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-receipt-scanner-expense-report-automation li { margin-bottom: 0.6rem; }
+  .wn-receipt-scanner-expense-report-automation strong { color: #fff; }
+  .wn-receipt-scanner-expense-report-automation a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-receipt-scanner-expense-report-automation a:hover { color: #7ee4ff; }
+  .wn-receipt-scanner-expense-report-automation .callout { background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(20, 184, 166, 0.08)); border-left: 3px solid #00d4ff; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-receipt-scanner-expense-report-automation .callout strong { color: #7ee4ff; }
+  .wn-receipt-scanner-expense-report-automation .verdict { background: linear-gradient(135deg, #1e88e5, #14b8a6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-receipt-scanner-expense-report-automation table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-receipt-scanner-expense-report-automation th { background: rgba(0, 212, 255, 0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-receipt-scanner-expense-report-automation td { padding: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #d1d5db; vertical-align: top; }
+  .wn-receipt-scanner-expense-report-automation .faq-q { color: #fff; font-weight: 700; margin: 1.4rem 0 0.4rem; }
+</style>
+<p>Receipts are small and endless. They live in wallets, glove boxes and camera rolls until someone has to turn them into a spreadsheet at the end of the month, and that someone is usually you.</p>
+<p>This article explains the receipt killer workflow from our short video. You snap a photo of the receipt, AI reads the amount, vendor and category, and the entry is filed in your books.</p>
+<div class="callout"><strong>About the numbers.</strong> The video says each manual expense report costs about 58 dollars and 20 minutes. That is an often-quoted figure, not one we measured, and your cost depends on who does the entry and what they are paid. Time a few real receipts to get your own number.</div>
+<h2 id="the-problem">Why is expense entry such a time sink?</h2>
+<p>Each receipt is a tiny job: find it, read it, type the vendor, amount, date and category, attach the image. Multiply that by a team and a month and the hours add up. Errors creep in too, such as a swapped digit, a wrong category or a receipt that never gets entered.</p>
+<p>Missing receipts are also a tax problem. If you cannot show the paper trail later, you may lose a deduction.</p>
+<p>The end-of-month rush is its own cost. When expenses are entered weeks late, nobody remembers what a charge was for, and your bookkeeper has to chase the team. Entering each receipt when it is fresh avoids that.</p>
+<h2 id="how-it-works">How the receipt workflow runs</h2>
+<div class="verdict">Photo in, structured entry out. The workflow reads the receipt and files it where your accountant expects it.</div>
+<table>
+  <thead><tr><th>Step</th><th>What happens</th><th>Typical tool</th></tr></thead>
+  <tbody>
+    <tr><td>1. Snap</td><td>The employee sends a photo of the receipt by chat, email or an upload form.</td><td>Telegram, WhatsApp, email or form</td></tr>
+    <tr><td>2. Read</td><td>AI extracts vendor, date, total, tax and currency from the image.</td><td>n8n plus a vision model</td></tr>
+    <tr><td>3. Categorise</td><td>The entry is matched to a category using your own list and past choices.</td><td>AI model with your rules</td></tr>
+    <tr><td>4. Check</td><td>Odd cases, such as an unreadable total, are flagged for a human to review.</td><td>Notification</td></tr>
+    <tr><td>5. File</td><td>The entry and the image are saved to your books or a shared sheet.</td><td>QuickBooks, Xero or Google Sheets</td></tr>
+    <tr><td>6. Confirm</td><td>The sender gets a short reply showing what was recorded.</td><td>Chat reply</td></tr>
+  </tbody>
+</table>
+<p>The confirmation message is important. It lets the person catch a misread total right away, while the receipt is still in their hand.</p>
+<p>Your accountant should approve the category list first. A good list makes the monthly review quick, and a vague one just moves the mess later.</p>
+<h2 id="what-you-need">What you need to get started</h2>
+<ul>
+  <li>A place to receive photos that everyone already uses.</li>
+  <li>A categories list agreed with your accountant or bookkeeper.</li>
+  <li>Access to your accounting tool or a sheet to write into.</li>
+  <li>Someone to review the flagged receipts.</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2>
+<ul>
+  <li>Crumpled, faded or handwritten receipts can be misread, which is why unclear ones are flagged.</li>
+  <li>The AI suggests a category. It does not decide tax treatment.</li>
+  <li>Foreign currency and split bills need rules set up in advance.</li>
+  <li>You should still keep original receipts if your tax rules require them.</li>
+</ul>
+<h2 id="cost">What does it cost to set up?</h2>
+<p>Setup depends on your accounting tool and how many categories and people are involved. Pricing depends on your tools, your volume and how many branches the workflow needs, so we scope it on a short call rather than quoting a number here. <a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> and we will tell you plainly whether it is worth building for your business.</p>
+<h2 id="faq">Frequently asked questions</h2>
+<p class="faq-q">How accurate is the AI at reading receipts?</p>
+<p>It is usually good on clear printed receipts and weaker on faded or handwritten ones. Uncertain results are flagged for review instead of being filed blindly.</p>
+<p class="faq-q">Which accounting tools can it file into?</p>
+<p>Most with an API, such as QuickBooks and Xero, or a Google Sheet. We confirm your setup on the call.</p>
+<p class="faq-q">Does it replace my bookkeeper?</p>
+<p>No. It removes data entry so your bookkeeper can focus on checking and advice.</p>
+<p class="faq-q">Do I still need to keep paper receipts?</p>
+<p>That depends on your local tax rules. Ask your accountant before throwing anything away.</p>
+<h2 id="next-step">Want this running in your business?</h2>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25, then get in touch. We build, test and hand over automations like this for small businesses.</p>
+<p><a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> &middot; Hire SkynetLabs, our agency on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How accurate is the AI at reading receipts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is usually good on clear printed receipts and weaker on faded or handwritten ones. Uncertain results are flagged for review instead of being filed blindly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which accounting tools can it file into?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most with an API, such as QuickBooks and Xero, or a Google Sheet. We confirm your setup on the call."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it replace my bookkeeper?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It removes data entry so your bookkeeper can focus on checking and advice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I still need to keep paper receipts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That depends on your local tax rules. Ask your accountant before throwing anything away."
+      }
+    }
+  ]
+}
+</script>

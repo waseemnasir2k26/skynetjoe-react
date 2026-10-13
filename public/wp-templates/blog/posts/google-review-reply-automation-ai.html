@@ -1,0 +1,108 @@
+<style>
+  .wn-google-review-reply-automation-ai { color: #e5e7eb; line-height: 1.7; font-size: 1.05rem; }
+  .wn-google-review-reply-automation-ai h2 { color: #fff; font-size: 1.75rem; font-weight: 800; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+  .wn-google-review-reply-automation-ai p { margin-bottom: 1.1rem; color: #d1d5db; }
+  .wn-google-review-reply-automation-ai ul, .wn-google-review-reply-automation-ai ol { margin: 1rem 0 1.4rem 1.5rem; color: #d1d5db; }
+  .wn-google-review-reply-automation-ai li { margin-bottom: 0.6rem; }
+  .wn-google-review-reply-automation-ai strong { color: #fff; }
+  .wn-google-review-reply-automation-ai a { color: #5eead4; text-decoration: underline; text-underline-offset: 3px; }
+  .wn-google-review-reply-automation-ai a:hover { color: #7ee4ff; }
+  .wn-google-review-reply-automation-ai .callout { background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(20, 184, 166, 0.08)); border-left: 3px solid #00d4ff; padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; }
+  .wn-google-review-reply-automation-ai .callout strong { color: #7ee4ff; }
+  .wn-google-review-reply-automation-ai .verdict { background: linear-gradient(135deg, #1e88e5, #14b8a6); color: #fff; padding: 1.25rem 1.5rem; border-radius: 12px; margin: 2rem 0; font-weight: 600; }
+  .wn-google-review-reply-automation-ai table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  .wn-google-review-reply-automation-ai th { background: rgba(0, 212, 255, 0.1); color: #7ee4ff; padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+  .wn-google-review-reply-automation-ai td { padding: 0.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #d1d5db; vertical-align: top; }
+  .wn-google-review-reply-automation-ai .faq-q { color: #fff; font-weight: 700; margin: 1.4rem 0 0.4rem; }
+</style>
+<p>Reviews matter to anyone who finds customers on Google. Replying to them matters too, but with a business to run, replies are the first thing to slip. A month passes and a dozen reviews sit unanswered, including the unhappy ones.</p>
+<p>This article explains the review responder workflow from our short video. Every new Google review flows into n8n, AI reads whether it is happy or furious, drafts a reply in your tone of voice, and posts it in under a minute.</p>
+<div class="callout"><strong>About the numbers.</strong> The video says 88% of customers will choose a business that replies to every review. That is an often-quoted survey figure, not our own research, so treat it as a sign of direction rather than a promise of results.</div>
+<h2 id="the-problem">Why does replying to reviews matter?</h2>
+<p>A reply shows future customers that someone is paying attention. A calm answer to a bad review often says more about your business than the review itself. Unanswered complaints, on the other hand, look like you do not care.</p>
+<p>Writing thoughtful replies by hand takes time and is easy to put off, and a rushed reply to an angry customer can make things worse.</p>
+<p>Reviews also contain information. Patterns such as slow service on Fridays or a dish people love are useful, and a log of every review makes those patterns visible instead of buried in a feed.</p>
+<h2 id="how-it-works">How the review responder works</h2>
+<div class="verdict">New review in, sentiment checked, tailored reply drafted and posted. Unhappy customers can be routed to you first.</div>
+<table>
+  <thead><tr><th>Step</th><th>What happens</th><th>Typical tool</th></tr></thead>
+  <tbody>
+    <tr><td>1. Detect</td><td>A new review on your Google Business Profile triggers the workflow.</td><td>Google Business Profile API</td></tr>
+    <tr><td>2. Read</td><td>AI works out whether the review is positive, mixed or negative, and what it mentions.</td><td>n8n plus an AI model</td></tr>
+    <tr><td>3. Draft</td><td>A reply is written in your tone, using the reviewer's name and the specific points they raised.</td><td>AI model with your style guide</td></tr>
+    <tr><td>4. Rules check</td><td>The draft is checked against your rules, such as no promises, no refunds, no personal data.</td><td>n8n checks</td></tr>
+    <tr><td>5. Post or hold</td><td>Positive reviews are posted automatically. Negative ones can be held for your approval.</td><td>Google Business Profile API</td></tr>
+    <tr><td>6. Log</td><td>Every review and reply is logged so you can see themes over time.</td><td>Sheet</td></tr>
+  </tbody>
+</table>
+<p>We usually recommend auto-posting positive replies and holding negative ones for a quick human check. It keeps the speed where it is safe and the care where it matters.</p>
+<p>The style guide is the heart of it: a few examples of replies you like, words you never use, and how you handle complaints.</p>
+<h2 id="what-you-need">What you need to get started</h2>
+<ul>
+  <li>A verified Google Business Profile with API access.</li>
+  <li>A short style guide with example replies.</li>
+  <li>A rule for what the AI must never promise, such as refunds or discounts.</li>
+  <li>Someone to approve held replies.</li>
+</ul>
+<h2 id="honest-limits">Honest limits</h2>
+<ul>
+  <li>Replies can sound generic if the style guide is thin. We tune it on your past reviews first.</li>
+  <li>It cannot resolve the underlying complaint. It only responds well.</li>
+  <li>Google's API access can require approval, which can take time.</li>
+  <li>Fake or abusive reviews need a separate report process.</li>
+</ul>
+<h2 id="cost">What does it cost to set up?</h2>
+<p>The effort is mostly in the style guide and the Google API access. Pricing depends on your tools, your volume and how many branches the workflow needs, so we scope it on a short call rather than quoting a number here. <a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> and we will tell you plainly whether it is worth building for your business.</p>
+<h2 id="faq">Frequently asked questions</h2>
+<p class="faq-q">Will the reply sound like me?</p>
+<p>It is guided by your style guide and sample replies, then tested against past reviews. You can review early drafts before any go live.</p>
+<p class="faq-q">What about angry reviews?</p>
+<p>The workflow can hold negative replies for your approval so you control anything sensitive.</p>
+<p class="faq-q">Can the AI promise refunds?</p>
+<p>No. We set rules so it never offers refunds, discounts or other commitments. Those stay with you.</p>
+<p class="faq-q">How fast are replies posted?</p>
+<p>The video says under a minute for automatic ones. Held replies post as soon as you approve them.</p>
+<h2 id="next-step">Want this running in your business?</h2>
+<p>Watch the 30-second walkthrough on our YouTube channel @Skynetlabs2k25, then get in touch. We build, test and hand over automations like this for small businesses.</p>
+<p><a href="https://skynetjoe.com/contact">Book a call at skynetjoe.com</a> &middot; Hire SkynetLabs, our agency on Fiverr: <a href="https://www.fiverr.com/agencies/skynetjoellc">https://www.fiverr.com/agencies/skynetjoellc</a></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will the reply sound like me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is guided by your style guide and sample replies, then tested against past reviews. You can review early drafts before any go live."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What about angry reviews?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The workflow can hold negative replies for your approval so you control anything sensitive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can the AI promise refunds?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. We set rules so it never offers refunds, discounts or other commitments. Those stay with you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast are replies posted?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The video says under a minute for automatic ones. Held replies post as soon as you approve them."
+      }
+    }
+  ]
+}
+</script>
