@@ -10,7 +10,7 @@
  * directory if missing so parallel agents that haven't shipped yet don't
  * break the pipeline.
  */
-import { mkdir, cp, stat, readdir } from "node:fs/promises";
+import { mkdir, cp, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";

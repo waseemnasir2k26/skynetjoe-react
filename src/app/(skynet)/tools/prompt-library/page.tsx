@@ -180,7 +180,7 @@ export default function PromptLibraryPage() {
               Eight categories — sales, marketing, ops, content, data,
               recruitment, customer service, founder brain. Every prompt is
               structured with constraints, banned phrases, and an output format.
-              Not 'write me a cold email' — 'write me a cold email that ships'.
+              Not &lsquo;write me a cold email&rsquo; — &lsquo;write me a cold email that ships&rsquo;.
             </p>
             <p
               style={{

@@ -21,7 +21,6 @@ const WINDOW_MS = 30_000;
 const MAX_SESSIONS = 5000; // hard cap so a flood can't grow the map unbounded
 
 declare global {
-  // eslint-disable-next-line no-var
   var __presence: Map<string, number> | undefined;
 }
 

@@ -30,10 +30,11 @@ type ZoomableImageProps = ImageProps & {
 export default function ZoomableImage({
   zoomable = true,
   zoomClassName,
+  alt,
   ...imageProps
 }: ZoomableImageProps) {
   if (!zoomable) {
-    return <Image {...imageProps} />;
+    return <Image alt={alt} {...imageProps} />;
   }
 
   const classDialog = zoomClassName
@@ -42,7 +43,7 @@ export default function ZoomableImage({
 
   return (
     <Zoom classDialog={classDialog} zoomMargin={40}>
-      <Image {...imageProps} />
+      <Image alt={alt} {...imageProps} />
     </Zoom>
   );
 }

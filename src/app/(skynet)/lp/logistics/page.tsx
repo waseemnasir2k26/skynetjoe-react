@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
 import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
@@ -2056,13 +2057,13 @@ export default function LogisticsLP() {
               </div>
               <div>
                 <h5>Pages</h5>
-                <a href="/services">Services</a>
-                <a href="/portfolio">Work</a>
-                <a href="/pricing">Pricing</a>
+                <Link href="/services">Services</Link>
+                <Link href="/portfolio">Work</Link>
+                <Link href="/pricing">Pricing</Link>
               </div>
               <div>
                 <h5>Reach</h5>
-                <a href="/contact">Book discovery</a>
+                <Link href="/contact">Book discovery</Link>
                 <a href="mailto:info@skynetjoe.com">Email</a>
               </div>
               <div>
