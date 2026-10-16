@@ -117,17 +117,20 @@ export default async function BlogPost({
       "@type": "Organization",
       name: SITE.brand,
       url: SITE.url,
+      // Square logo (og-default.png is 1200x630, not the 1200x1200 declared).
       logo: {
         "@type": "ImageObject",
-        url: `${SITE.url}/og-default.png`,
-        width: 1200,
-        height: 1200,
+        url: `${SITE.url}/icon-512.png`,
+        width: 512,
+        height: 512,
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE.url}/blog/${post.slug}`,
     },
+    // BlogPosting rich results want an image; same one the OG tags use.
+    image: `${SITE.url}/og-default.png`,
     keywords: post.tags.join(", "),
   };
 

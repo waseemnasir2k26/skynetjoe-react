@@ -47,7 +47,7 @@ const organization = {
     "@type": "ContactPoint",
     contactType: "sales",
       telephone: "+6281316077185",
-    email: "waseem@skynetjoe.com",
+    email: SITE.email,
     url: `${SITE.url}/contact`,
     availableLanguage: ["en"],
   },
@@ -102,10 +102,8 @@ export function faqSchema(items: { question: string; answer: string }[]) {
       acceptedAnswer: {
         "@type": "Answer",
         text: it.answer,
-        speakable: {
-          "@type": "SpeakableSpecification",
-          xpath: ['//*[@itemprop="answer"]'],
-        },
+        // (speakable removed: schema.org only allows it on Article/WebPage,
+        // and the xpath pointed at an itemprop no page renders.)
       },
     })),
   };
