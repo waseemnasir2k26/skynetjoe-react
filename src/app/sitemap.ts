@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/case-studies",
     "/tools",
     ...TOOLS_REGISTRY.map((t) => `/tools/${t.slug}`),
+    "/digital-products",
     "/pricing",
     "/about",
     "/contact",

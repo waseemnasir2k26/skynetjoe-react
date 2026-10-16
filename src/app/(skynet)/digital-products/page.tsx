@@ -1,0 +1,349 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import {
+  SITE,
+  DEFAULT_OG_IMAGES,
+  pageTitle,
+  pageDescription,
+} from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
+import { Reveal } from "@/components/motion/Reveal";
+import {
+  DIGITAL_PRODUCTS,
+  ETSY_LISTING_URL,
+  type DigitalProduct,
+} from "./products";
+
+// Static page: product list is a code constant, no per-request data.
+export const dynamic = "force-static";
+
+const PATH = "/digital-products";
+
+export const metadata: Metadata = {
+  title: pageTitle("Digital Products: Templates, Scripts & Trackers"),
+  description: pageDescription(
+    "Ready-made templates, scripts and trackers for small businesses: realtors, cleaners, spas, loan officers, insurance agents and more. Instant download on Etsy.",
+  ),
+  alternates: { canonical: `${SITE.url}${PATH}` },
+  openGraph: {
+    title:
+      "Digital Products: templates, scripts and trackers for small businesses",
+    description:
+      "Ready-made kits for small businesses. Buy on Etsy and download instantly.",
+    url: `${SITE.url}${PATH}`,
+    type: "website",
+    images: [...DEFAULT_OG_IMAGES],
+  },
+};
+
+// Product schema without ratings or reviews (none exist on this page).
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "SkynetLabs digital products on Etsy",
+  url: `${SITE.url}${PATH}`,
+  itemListElement: DIGITAL_PRODUCTS.map((p, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Product",
+      name: p.name,
+      description: p.inside,
+      image: `${SITE.url}/digital-products/${p.slug}.webp`,
+      brand: { "@type": "Brand", name: SITE.brand },
+      offers: {
+        "@type": "Offer",
+        url: ETSY_LISTING_URL(p.id),
+        price: p.price.toFixed(2),
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+    },
+  })),
+};
+
+const crumbs = breadcrumbSchema([
+  { name: "Home", url: SITE.url },
+  { name: "Digital Products", url: `${SITE.url}${PATH}` },
+]);
+
+const mono = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11,
+  textTransform: "uppercase",
+  letterSpacing: "0.14em",
+} as const;
+
+function EtsyButton({ p, big }: { p: DigitalProduct; big?: boolean }) {
+  return (
+    <a
+      href={ETSY_LISTING_URL(p.id)}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Buy ${p.name} on Etsy (opens in a new tab)`}
+      className="inline-flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
+      style={{
+        background: "var(--terracotta-aa)",
+        color: "#fff",
+        fontWeight: 600,
+        fontSize: big ? 16 : 14,
+        padding: big ? "14px 26px" : "11px 18px",
+        borderRadius: 2,
+        minHeight: 44,
+        borderBottom: "none",
+      }}
+    >
+      Buy on Etsy
+      <ArrowUpRight size={16} aria-hidden="true" />
+    </a>
+  );
+}
+
+function Card({ p }: { p: DigitalProduct }) {
+  return (
+    <article
+      className="flex flex-col"
+      style={{
+        background: "var(--cream-3)",
+        border: "1px solid rgba(26,26,26,0.12)",
+        borderRadius: 2,
+        overflow: "hidden",
+      }}
+    >
+      <Image
+        src={`/digital-products/${p.slug}.webp`}
+        alt={`${p.name} cover image`}
+        width={800}
+        height={800}
+        sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 92vw"
+        className="w-full h-auto"
+        style={{ borderBottom: "1px solid rgba(26,26,26,0.10)" }}
+      />
+      <div className="flex flex-col flex-1 p-5 gap-3">
+        <h3
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 600,
+            fontSize: 22,
+            lineHeight: 1.15,
+            letterSpacing: "-0.015em",
+            color: "var(--ink)",
+            margin: 0,
+          }}
+        >
+          {p.name}
+        </h3>
+        <p style={{ fontSize: 14, color: "var(--ink-2)", margin: 0 }}>
+          <b style={{ color: "var(--ink)" }}>For: </b>
+          {p.forWho}
+        </p>
+        <p style={{ fontSize: 14, color: "var(--ink-2)", margin: 0 }}>
+          <b style={{ color: "var(--ink)" }}>Inside: </b>
+          {p.inside}
+        </p>
+        <div className="mt-auto pt-3 flex items-center justify-between gap-3 flex-wrap">
+          <span
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 700,
+              fontSize: 26,
+              color: "var(--ink)",
+            }}
+          >
+            ${p.price}
+          </span>
+          <EtsyButton p={p} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default function DigitalProductsPage() {
+  const [featured, ...rest] = DIGITAL_PRODUCTS;
+  return (
+    <>
+      <JsonLd data={itemListSchema} />
+      <JsonLd data={crumbs} />
+
+      {/* HERO */}
+      <section
+        className="relative pt-32 md:pt-40 pb-14"
+        style={{
+          background: "var(--cream-3)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+        }}
+      >
+        <Reveal
+          initialVisible
+          className="container-x px-6 relative z-10 max-w-4xl"
+        >
+          <div
+            className="inline-flex items-center gap-3 mb-5"
+            style={{ ...mono, color: "var(--terracotta-aa)" }}
+          >
+            <span
+              style={{
+                width: 28,
+                height: 1,
+                background: "var(--terracotta)",
+                display: "inline-block",
+              }}
+            />
+            Digital Products · SkynetLabs
+          </div>
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 600,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.04,
+              color: "var(--ink)",
+              fontSize: "clamp(36px, 6vw, 64px)",
+              margin: "0 0 20px",
+            }}
+          >
+            Ready-made kits for{" "}
+            <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
+              small businesses.
+            </span>
+          </h1>
+          <p
+            style={{
+              fontSize: 19,
+              color: "var(--ink-2)",
+              maxWidth: "54ch",
+              lineHeight: 1.6,
+              margin: 0,
+            }}
+          >
+            Templates, scripts and trackers you edit and use the same day. Each
+            kit is a single download: Word and Google Docs files, a printable
+            PDF and Excel / Google Sheets trackers. Buy on Etsy and download
+            instantly.
+          </p>
+        </Reveal>
+      </section>
+
+      {/* FEATURED BUNDLE */}
+      <section
+        className="py-12 md:py-16"
+        style={{ background: "var(--cream)" }}
+      >
+        <div className="container-x px-6 max-w-6xl mx-auto">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-0"
+            style={{
+              background: "var(--cream-3)",
+              border: "1px solid rgba(26,26,26,0.18)",
+              borderRadius: 2,
+              overflow: "hidden",
+            }}
+          >
+            <Image
+              src={`/digital-products/${featured.slug}.webp`}
+              alt={`${featured.name} cover image`}
+              width={800}
+              height={800}
+              priority
+              sizes="(min-width: 768px) 560px, 92vw"
+              className="w-full h-auto"
+            />
+            <div className="flex flex-col justify-center gap-4 p-6 md:p-10">
+              <span style={{ ...mono, color: "var(--terracotta-aa)" }}>
+                Best value · Save ${featured.savings}
+              </span>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 600,
+                  fontSize: "clamp(28px, 4vw, 40px)",
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.02em",
+                  color: "var(--ink)",
+                  margin: 0,
+                }}
+              >
+                {featured.name}
+              </h2>
+              <p style={{ fontSize: 16, color: "var(--ink-2)", margin: 0 }}>
+                <b style={{ color: "var(--ink)" }}>For: </b>
+                {featured.forWho}.
+              </p>
+              <p style={{ fontSize: 16, color: "var(--ink-2)", margin: 0 }}>
+                <b style={{ color: "var(--ink)" }}>Inside: </b>
+                {featured.inside}
+              </p>
+              <div className="flex items-baseline gap-3 flex-wrap">
+                <span
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 700,
+                    fontSize: 40,
+                    color: "var(--ink)",
+                  }}
+                >
+                  ${featured.price}
+                </span>
+                <span
+                  style={{
+                    fontSize: 15,
+                    color: "var(--ink-faint)",
+                    textDecoration: "line-through",
+                  }}
+                >
+                  ${featured.was}
+                </span>
+                <span style={{ fontSize: 14, color: "var(--ink-2)" }}>
+                  if bought one by one
+                </span>
+              </div>
+              <div>
+                <EtsyButton p={featured} big />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GRID */}
+      <section
+        className="pb-16 md:pb-20"
+        style={{ background: "var(--cream)" }}
+      >
+        <div className="container-x px-6 max-w-6xl mx-auto">
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 600,
+              fontSize: "clamp(26px, 3.5vw, 34px)",
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
+              margin: "0 0 24px",
+            }}
+          >
+            Or pick one kit
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {rest.map((p) => (
+              <Card key={p.id} p={p} />
+            ))}
+          </div>
+          <p
+            style={{
+              marginTop: 28,
+              fontSize: 13,
+              color: "var(--ink-faint)",
+              maxWidth: "70ch",
+            }}
+          >
+            Digital downloads, sold and delivered by Etsy. Prices shown are the
+            Etsy prices today; prices on Etsy may change.
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
