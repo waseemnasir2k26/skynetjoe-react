@@ -41,6 +41,16 @@ export const GHL_STAGE_IDS = {
 
 export type GhlStageKey = keyof typeof GHL_STAGE_IDS;
 
+/** Funnel order, used so public form submits only ever move a deal forward. */
+const STAGE_RANK: Record<GhlStageKey, number> = {
+  inbound: 0,
+  "appointment-set": 1,
+  referral: 1,
+  "no-show": 2,
+  "appointment-conducted": 3,
+  client: 4,
+};
+
 /**
  * Custom field IDs (contact model) — verified from MCP introspection.
  * These hold the quiz answers from /discovery + /thank-you.
@@ -373,16 +383,30 @@ export async function createOrUpdateGhlOpportunity(input: {
 
   if (existing) {
     type UpdateResp = { opportunity?: { id?: string } };
-    const updateBody: Record<string, unknown> = {
-      pipelineStageId: stageId,
-      name: input.name,
-    };
-    if (input.monetaryValue !== undefined) {
-      updateBody.monetaryValue = input.monetaryValue;
+    // This path is reachable from PUBLIC lead forms with any email address,
+    // so it must never drag an existing deal backwards (e.g. a "client" or
+    // "appointment-set" opp reset to "inbound" by a re-submitted form) or
+    // rename it. Only move forward; unknown stages (other pipeline) stay put.
+    const currentKey = (Object.keys(GHL_STAGE_IDS) as GhlStageKey[]).find(
+      (k) => GHL_STAGE_IDS[k] === existing.pipelineStageId,
+    );
+    const currentRank =
+      currentKey !== undefined ? STAGE_RANK[currentKey] : Number.POSITIVE_INFINITY;
+    const updateBody: Record<string, unknown> = {};
+    if (STAGE_RANK[input.stage] > currentRank) {
+      updateBody.pipelineStageId = stageId;
+      // Deal value is only (re)set alongside a forward move — a public
+      // re-submit must not overwrite the value on a live deal.
+      if (input.monetaryValue !== undefined) {
+        updateBody.monetaryValue = input.monetaryValue;
+      }
     }
     // Only flip to open if it's currently abandoned/lost — don't downgrade won.
-    if (existing.status && existing.status !== "won") {
+    if (existing.status && existing.status !== "won" && existing.status !== "open") {
       updateBody.status = "open";
+    }
+    if (Object.keys(updateBody).length === 0) {
+      return { opportunityId: existing.id };
     }
     const resp = await ghlFetch<UpdateResp>(
       `/opportunities/${existing.id}`,
