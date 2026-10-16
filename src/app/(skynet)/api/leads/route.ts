@@ -4,7 +4,7 @@ import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink, type SinkLead } from "@/lib/lead-sink";
-import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
+import { checkRateLimit, getClientIpOrUndefined, readCappedJson } from "@/lib/rate-limit";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 
 export const runtime = "nodejs";
@@ -320,7 +320,7 @@ export async function POST(req: Request) {
       eventName: payload.booking ? "Schedule" : "Lead",
       sourceUrl: req.headers.get("referer") || undefined,
       ip:
-        req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || undefined,
+        getClientIpOrUndefined(req),
       userAgent: req.headers.get("user-agent") || undefined,
       source,
     });

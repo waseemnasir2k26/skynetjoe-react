@@ -6,7 +6,7 @@ import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink } from "@/lib/lead-sink";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 import { sendCapiLead } from "@/lib/meta-capi";
-import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
+import { checkRateLimit, getClientIpOrUndefined, readCappedJson } from "@/lib/rate-limit";
 
 /**
  * MA-04 refuses any payload without a dedupe key, so the fallback paths — which
@@ -157,9 +157,7 @@ export async function POST(req: Request) {
       currency: payload.currency,
       sourceUrl: req.headers.get("referer") || undefined,
       ip:
-        req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-        req.headers.get("x-real-ip") ||
-        undefined,
+        getClientIpOrUndefined(req),
       userAgent: req.headers.get("user-agent") || undefined,
       fbp: req.headers.get("cookie")?.match(/(?:^|;\s*)_fbp=([^;]+)/)?.[1],
       fbc: req.headers.get("cookie")?.match(/(?:^|;\s*)_fbc=([^;]+)/)?.[1],
