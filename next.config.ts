@@ -382,6 +382,14 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: securityHeaders,
       },
+      {
+        // public/wp-templates/ is the WordPress copy-paste mirror of content/
+        // (scripts/sync-wp-templates.mjs). It is publicly served, so every blog
+        // post exists twice (duplicate content) and unregistered drafts are
+        // reachable. Keep it fetchable for Waseem, but out of every index.
+        source: "/wp-templates/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
   async redirects() {
