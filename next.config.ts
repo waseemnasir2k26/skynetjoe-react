@@ -99,6 +99,13 @@ const wpRedirects = [
     permanent: false,
   },
 
+  // ── Retired static landing-page concepts (files removed 2026-10-16) ───────
+  {
+    source: "/lp/:concept(aurora-v1|brutalist-v1|darkops-v1|logistics-v1).html",
+    destination: "/",
+    permanent: true,
+  },
+
   // ── Service slugs (WP single-page → Next /services/[slug]) ───────────────
   {
     source: "/n8n-automation",
@@ -331,7 +338,11 @@ const wpRedirects = [
   // old `:slug+` also swallowed /portfolio/*.jpg screenshots (308 -> page,
   // next/image 400) and blanked every tile on /portfolio. Dotted paths are
   // files; legacy WP portfolio slugs never contain a dot.
-  { source: "/portfolio/:slug([^.]+)", destination: "/portfolio", permanent: true },
+  {
+    source: "/portfolio/:slug([^.]+)",
+    destination: "/portfolio",
+    permanent: true,
+  },
 ];
 
 /**
