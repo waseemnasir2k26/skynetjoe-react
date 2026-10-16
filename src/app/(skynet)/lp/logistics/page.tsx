@@ -534,9 +534,9 @@ export default function LogisticsLP() {
 
       <header className="nav">
         <div className="nav-inner">
-          <a href="#" className="brand">
+          <Link href="/lp/logistics" className="brand">
             <span className="brand-dot"></span>SkynetLabs <em>FreightOps</em>
-          </a>
+          </Link>
           <a href="/contact" className="nav-cta">
             Book audit →
           </a>
