@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Check, Copy, Sparkles } from "lucide-react";
 import {
@@ -57,14 +57,12 @@ export default function Calculator() {
   const selectedModel = findModel(inputs.modelId);
   const requestsPerMonth = monthlyRequestVolume(inputs.requestsPerDay);
 
-  const rows = useMemo(
-    () =>
-      LLM_PRICING.map((m) => ({
-        model: m,
-        monthlyCost: estimateMonthlyCost(m, inputs),
-      })).sort((a, b) => a.monthlyCost - b.monthlyCost),
-    [inputs],
-  );
+  // Small fixed table — recomputing per render is cheap; a manual useMemo
+  // here blocked React Compiler optimisation (lint: preserve-manual-memoization).
+  const rows = LLM_PRICING.map((m) => ({
+    model: m,
+    monthlyCost: estimateMonthlyCost(m, inputs),
+  })).sort((a, b) => a.monthlyCost - b.monthlyCost);
 
   const selectedMonthly = estimateMonthlyCost(selectedModel, inputs);
 

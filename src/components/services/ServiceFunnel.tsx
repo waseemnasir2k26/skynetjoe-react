@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import JsonLd from "@/components/JsonLd";
@@ -188,19 +188,26 @@ function Counter({
   numRef: React.RefObject<HTMLSpanElement | null>;
 }) {
   const started = useRef(false);
-  if (inView && numRef.current && !started.current) {
+  // Animation is a side effect: run it after commit, never during render.
+  useEffect(() => {
+    if (!inView || started.current || !numRef.current) return;
     started.current = true;
     const start = performance.now();
     const dur = 1400;
+    let raf = 0;
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / dur);
       const eased = 1 - Math.pow(1 - p, 3);
       if (numRef.current)
         numRef.current.textContent = String(Math.round(target * eased));
-      if (p < 1) requestAnimationFrame(tick);
+      if (p < 1) raf = requestAnimationFrame(tick);
     };
-    requestAnimationFrame(tick);
-  }
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      started.current = false;
+    };
+  }, [inView, target, numRef]);
   return <span ref={numRef}>{inView ? 0 : target}</span>;
 }
 

@@ -34,7 +34,7 @@ export default function ExitIntentModal() {
   const [status, setStatus] = useState<SubmitState>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const triggeredRef = useRef(false);
-  const mountedAtRef = useRef<number>(Date.now());
+  const mountedAtRef = useRef<number>(0); // set on mount (effect below) — keeps render pure
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const disabled =
