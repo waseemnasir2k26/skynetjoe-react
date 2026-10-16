@@ -116,7 +116,14 @@ export async function POST(req: Request) {
   }
 
   const email = payload.email?.trim();
-  const source = payload.source?.trim() || "unknown-tool";
+  // `source` becomes a GHL tag (tags can trigger GHL workflows), so clamp it
+  // to a slug: lowercase [a-z0-9-_:], max 64 chars. Every real caller already
+  // sends a slug ("prompt-library", "lp-freight", tool slugs), so this only
+  // affects hand-crafted requests.
+  const source =
+    (typeof payload.source === "string"
+      ? payload.source.trim().toLowerCase().replace(/[^a-z0-9:_-]/g, "").slice(0, 64)
+      : "") || "unknown-tool";
   const capturedAt = payload.capturedAt || new Date().toISOString();
 
   if (!isValidEmail(email)) {

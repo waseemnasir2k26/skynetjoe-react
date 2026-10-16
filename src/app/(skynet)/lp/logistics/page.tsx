@@ -522,7 +522,7 @@ export default function LogisticsLP() {
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
       />
 
       <div className="scroll-progress" aria-hidden="true"></div>

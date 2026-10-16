@@ -70,7 +70,16 @@ export async function POST(req: Request) {
   if (leave) {
     sessions.delete(id);
   } else {
-    if (!sessions.has(id) && sessions.size >= MAX_SESSIONS) prune(now);
+    if (!sessions.has(id) && sessions.size >= MAX_SESSIONS) {
+      prune(now);
+      // Cap was documented but not enforced: refuse new ids while full.
+      if (sessions.size >= MAX_SESSIONS) {
+        return NextResponse.json(
+          { ok: false, live: liveCount(now) },
+          { status: 429, headers: { "Cache-Control": "no-store" } },
+        );
+      }
+    }
     sessions.set(id, now);
   }
   prune(now);

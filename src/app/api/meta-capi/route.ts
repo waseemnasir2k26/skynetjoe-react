@@ -1,5 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
+import { checkRateLimit, getClientIp, readCappedJson } from "@/lib/rate-limit";
+
+// Public, unauthenticated relay that spends the server CAPI token. No in-repo
+// caller uses it today (server code calls @/lib/meta-capi directly), so it is
+// locked down: allowlisted event names, no caller-controlled custom_data /
+// value, per-IP rate limit, body cap, and no upstream error details echoed.
+const ALLOWED_EVENTS = new Set([
+  "Lead",
+  "ViewContent",
+  "InitiateCheckout",
+  "CompleteRegistration",
+  "Schedule",
+]);
 
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const CAPI_TOKEN = process.env.META_CAPI_TOKEN;
@@ -20,14 +33,22 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Meta CAPI not configured" }, { status: 503 });
   }
 
+  if (!checkRateLimit(req, { limit: 10, windowMs: 60_000, keyPrefix: "meta-capi" }).allowed) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   let body: CapiBody;
   try {
-    body = await req.json();
+    body = await readCappedJson<CapiBody>(req, 8 * 1024);
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
+  if (typeof body?.event_name !== "string" || !ALLOWED_EVENTS.has(body.event_name)) {
+    return NextResponse.json({ error: "Unsupported event" }, { status: 400 });
+  }
 
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || undefined;
+  const ipRaw = getClientIp(req);
+  const ip = ipRaw === "unknown" ? undefined : ipRaw;
   const userAgent = req.headers.get("user-agent") || undefined;
   const fbp = req.cookies.get("_fbp")?.value;
   const fbc = req.cookies.get("_fbc")?.value;
@@ -51,7 +72,7 @@ export async function POST(req: NextRequest) {
     event_source_url: body.event_source_url || req.headers.get("referer") || undefined,
     action_source: "website",
     user_data,
-    custom_data: body.custom_data || {},
+    custom_data: {},
   };
 
   const payload: Record<string, unknown> = { data: [event], access_token: CAPI_TOKEN };
@@ -63,12 +84,13 @@ export async function POST(req: NextRequest) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    const data = await res.json();
     if (!res.ok) {
-      return NextResponse.json({ error: "Meta CAPI error", details: data }, { status: 502 });
+      console.error("[meta-capi] upstream error", res.status, await res.text().catch(() => ""));
+      return NextResponse.json({ error: "Meta CAPI error" }, { status: 502 });
     }
-    return NextResponse.json({ ok: true, event_id: event.event_id, fb: data });
+    return NextResponse.json({ ok: true, event_id: event.event_id });
   } catch (err) {
-    return NextResponse.json({ error: "Network error", message: String(err) }, { status: 502 });
+    console.error("[meta-capi] network error", err);
+    return NextResponse.json({ error: "Network error" }, { status: 502 });
   }
 }

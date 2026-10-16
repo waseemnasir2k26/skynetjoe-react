@@ -232,11 +232,19 @@ export async function POST(req: Request) {
   }
 
   // Resolve email — top-level OR nested
-  const email =
+  const rawEmail =
     payload.email ||
     payload.qualification?.email ||
     payload.booking?.inviteeEmail ||
     "";
+  // Type + shape check before this reaches GHL / Resend (same rule as
+  // /api/lead-capture).
+  const email =
+    typeof rawEmail === "string" &&
+    rawEmail.trim().length <= 254 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail.trim())
+      ? rawEmail.trim()
+      : "";
 
   if (!email) {
     return NextResponse.json(

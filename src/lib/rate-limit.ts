@@ -78,6 +78,12 @@ export async function readCappedJson<T>(
   req: Request,
   maxBytes: number,
 ): Promise<T> {
+  // Reject on the declared length first so an oversized body is never
+  // buffered; the post-read check still catches a missing/lying header.
+  const declared = Number(req.headers.get("content-length") || 0);
+  if (declared > maxBytes) {
+    throw new Error(`payload too large (${declared} > ${maxBytes} bytes)`);
+  }
   const text = await req.text();
   if (text.length > maxBytes) {
     throw new Error(`payload too large (${text.length} > ${maxBytes} bytes)`);

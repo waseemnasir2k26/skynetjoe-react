@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { TOOL_SLUGS } from "@/data/tools-registry";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -90,7 +91,7 @@ export async function GET(
 }
 
 export async function POST(
-  _req: Request,
+  req: Request,
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await params;
@@ -101,6 +102,18 @@ export async function POST(
     );
   }
   const store = await load();
+  // The count is shown publicly ("N people used this"), so one IP may only
+  // bump a given tool a few times an hour; over that we return the count
+  // unchanged instead of erroring the tool UI.
+  if (
+    !checkRateLimit(req, { limit: 3, windowMs: 3_600_000, keyPrefix: `tool-usage:${slug}` })
+      .allowed
+  ) {
+    return NextResponse.json(
+      { ok: true, slug, count: countFor(store, slug) },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
   const next = countFor(store, slug) + 1;
   store[slug] = next;
   void persist(store);

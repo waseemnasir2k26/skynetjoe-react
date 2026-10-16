@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { upsertGhlContact } from "@/lib/ghl";
+import { checkRateLimit } from "@/lib/rate-limit";
+import { TOOL_SLUGS } from "@/data/tools-registry";
 
 export const runtime = "nodejs";
 
@@ -114,10 +116,14 @@ async function forwardSlack(args: {
 }): Promise<boolean> {
   const url = process.env.SLACK_FEEDBACK_WEBHOOK;
   if (!url) return false;
+  // Escape Slack mrkdwn control chars so user text can't inject
+  // <!channel>/<!here> pings or disguised <url|label> links.
+  const esc = (x: string) =>
+    x.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const text =
-    `*Tool feedback — ${args.tool}*\n` +
-    `${args.message}\n` +
-    (args.email ? `_from: ${args.email}_` : "_no email — anonymous_");
+    `*Tool feedback — ${esc(args.tool)}*\n` +
+    `${esc(args.message)}\n` +
+    (args.email ? `_from: ${esc(args.email)}_` : "_no email — anonymous_");
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -153,7 +159,31 @@ async function appendLog(args: {
   }
 }
 
+const MAX_BODY_BYTES = 16 * 1024;
+
 export async function POST(req: Request) {
+  // Abuse guards: this route posts to Slack, appends to a log file and can
+  // create GHL contacts, so cap request size and per-IP rate.
+  const declaredLen = Number(req.headers.get("content-length") || 0);
+  if (declaredLen > MAX_BODY_BYTES) {
+    return NextResponse.json(
+      { ok: false, error: "payload too large" },
+      { status: 413 },
+    );
+  }
+  if (
+    !checkRateLimit(req, {
+      limit: 5,
+      windowMs: 60_000,
+      keyPrefix: "tool-feedback",
+    }).allowed
+  ) {
+    return NextResponse.json(
+      { ok: false, error: "too many requests" },
+      { status: 429 },
+    );
+  }
+
   const { data, isForm } = await parseBody(req);
 
   const tool = data.tool ? sanitize(data.tool, 80) : "";
@@ -196,10 +226,15 @@ export async function POST(req: Request) {
     // upsertGhlContact never throws (dev-skips on missing env / API failure);
     // the extra catch is belt-and-suspenders so feedback never 500s on GHL.
     if (email) {
-      void upsertGhlContact({ email, source: "tool-feedback" }, null, [
-        tool,
-        "tool-feedback",
-      ]).catch(() => {
+      // Only known tool slugs become GHL tags (tags can trigger workflows).
+      const tags = TOOL_SLUGS.includes(tool)
+        ? [tool, "tool-feedback"]
+        : ["tool-feedback"];
+      void upsertGhlContact(
+        { email, source: "tool-feedback" },
+        null,
+        tags,
+      ).catch(() => {
         // swallow — Slack/log already have the feedback
       });
     }
