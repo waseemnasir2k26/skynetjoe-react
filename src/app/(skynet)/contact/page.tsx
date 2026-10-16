@@ -22,7 +22,7 @@ import ContactBriefForm from "@/components/ContactBriefForm";
  */
 
 export const metadata: Metadata = {
-  title: pageTitle("Contact — Book a free 30-min call or send a brief"),
+  title: pageTitle("Contact — Free 30-min Call or Send a Brief"),
   description: pageDescription(
     "Book a free 30-minute call with Waseem Nasir, or send a 3-field brief. Reply within 8 hours on weekdays, fixed-price scope back in 48 hours. Bali, GMT+8.",
   ),

@@ -804,6 +804,7 @@ export const POSTS: Post[] = [
   {
     slug: "aeo-vs-seo",
     title: "AEO vs SEO: How They Differ and Why You Need Both in 2026",
+    seoTitle: "AEO vs SEO: How They Differ, Why You Need Both",
     description:
       "AEO targets AI citation rate across four engines. SEO targets blue-link Google ranking. Shared technical foundation, genuinely different surfaces. Why most service businesses in 2026 need both, sequenced sensibly.",
     publishedAt: "2026-05-13",
