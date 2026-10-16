@@ -44,7 +44,10 @@ const ESCAPE_RE = /[.*+?^${}()|[\]\\]/g;
 function toRegExp(source) {
   let re = "";
   for (const seg of source.split("/").filter(Boolean)) {
-    if (/^:[A-Za-z0-9_]+\*$/.test(seg)) {
+    const custom = seg.match(/^:[A-Za-z0-9_]+\((.+)\)$/);
+    if (custom) {
+      re += "/(?:" + custom[1] + ")"; // `:p(regex)` — custom pattern, may span "/"
+    } else if (/^:[A-Za-z0-9_]+\*$/.test(seg)) {
       re += "(?:/[^/]+)*"; // zero or more — the trap
     } else if (/^:[A-Za-z0-9_]+\+$/.test(seg)) {
       re += "(?:/[^/]+)+"; // one or more
@@ -74,3 +77,30 @@ if (loops.length) {
   process.exit(1);
 }
 console.log("PASS — no self-redirect loops");
+
+// Redirects run BEFORE public/ files are served. A source that matches a real
+// static file silently breaks it (2026-10-16: `/portfolio/:slug+` swallowed
+// every /portfolio/*.jpg screenshot). No rule may match any file in public/.
+const PUBLIC = path.join(ROOT, "public");
+const files = [];
+(function walk(dir) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) walk(full);
+    else files.push("/" + path.relative(PUBLIC, full).split(path.sep).join("/"));
+  }
+})(PUBLIC);
+const shadowed = [];
+for (const r of pairs) {
+  const re = toRegExp(r.source);
+  for (const f of files) if (re.test(f)) shadowed.push(`${r.source}  swallows  ${f}`);
+}
+console.log(`redirect-loops.test: ${files.length} public/ files checked against redirect sources`);
+if (shadowed.length) {
+  console.error(`
+FAIL — ${shadowed.length} public file(s) shadowed by a redirect:
+`);
+  for (const s of shadowed.slice(0, 20)) console.error("  " + s);
+  process.exit(1);
+}
+console.log("PASS — no redirect shadows a public/ file");

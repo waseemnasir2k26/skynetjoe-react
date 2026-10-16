@@ -268,8 +268,10 @@ const wpRedirects = [
     permanent: true,
   },
   {
+    // was /case-studies/manhattan-dental-atelier-flagship — no such case
+    // study exists (404). Nearest live page:
     source: "/dental-practice-website",
-    destination: "/case-studies/manhattan-dental-atelier-flagship",
+    destination: "/industries/dental-clinics",
     permanent: true,
   },
   {
@@ -324,8 +326,12 @@ const wpRedirects = [
    */
   // `:slug+` (one-or-more), NOT `:slug*` — `*` matches ZERO segments too, so
   // it matches /portfolio itself and self-redirects into an infinite loop.
-  // Shipped that bug once; caught live at 50 hops. Keep the `+`.
-  { source: "/portfolio/:slug+", destination: "/portfolio", permanent: true },
+  // Shipped that bug once; caught live at 50 hops. Keep it one-or-more.
+  // `[^.]+` (no dot): redirects run BEFORE public/ files are served, so the
+  // old `:slug+` also swallowed /portfolio/*.jpg screenshots (308 -> page,
+  // next/image 400) and blanked every tile on /portfolio. Dotted paths are
+  // files; legacy WP portfolio slugs never contain a dot.
+  { source: "/portfolio/:slug([^.]+)", destination: "/portfolio", permanent: true },
 ];
 
 /**
