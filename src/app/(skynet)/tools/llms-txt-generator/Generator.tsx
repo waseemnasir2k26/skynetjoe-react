@@ -192,10 +192,11 @@ export default function Generator() {
         </p>
         <div className="grid sm:grid-cols-2 gap-4 mb-5">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
+            <label htmlFor="llms-site-name" className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
               Site / project name *
             </label>
             <input
+              id="llms-site-name"
               value={form.siteName}
               onChange={(e) =>
                 setForm((f) => ({
@@ -208,10 +209,11 @@ export default function Generator() {
             />
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
+            <label htmlFor="llms-contact-email" className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
               Contact email
             </label>
             <input
+              id="llms-contact-email"
               type="email"
               value={form.contactEmail}
               onChange={(e) =>
@@ -224,10 +226,11 @@ export default function Generator() {
         </div>
 
         <div className="mb-5">
-          <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
+          <label htmlFor="llms-summary" className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
             One-sentence summary *
           </label>
           <input
+            id="llms-summary"
             value={form.summary}
             onChange={(e) =>
               setForm((f) => ({ ...f, summary: e.target.value.slice(0, 240) }))
@@ -238,10 +241,11 @@ export default function Generator() {
         </div>
 
         <div className="mb-6">
-          <label className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
+          <label htmlFor="llms-context" className="block text-[11px] uppercase tracking-wider text-[var(--terracotta-aa)]/80 font-semibold mb-1.5">
             Optional context paragraph
           </label>
           <textarea
+            id="llms-context"
             value={form.context}
             onChange={(e) =>
               setForm((f) => ({ ...f, context: e.target.value.slice(0, 1200) }))
@@ -273,6 +277,7 @@ export default function Generator() {
                       title: e.target.value.slice(0, 60),
                     })
                   }
+                  aria-label="Section title"
                   placeholder="Section title (e.g. Docs, Guides, Optional)"
                   className="lg-input flex-1 font-semibold"
                 />
@@ -301,6 +306,7 @@ export default function Generator() {
                           title: e.target.value.slice(0, 80),
                         })
                       }
+                      aria-label="Link title"
                       placeholder="Link title"
                       className="lg-input lg-input-sm"
                     />
@@ -311,6 +317,7 @@ export default function Generator() {
                           url: e.target.value.slice(0, 300),
                         })
                       }
+                      aria-label="Link URL"
                       placeholder="https://..."
                       className="lg-input lg-input-sm"
                     />
@@ -321,6 +328,7 @@ export default function Generator() {
                           description: e.target.value.slice(0, 160),
                         })
                       }
+                      aria-label="Link description"
                       placeholder="Optional description"
                       className="lg-input lg-input-sm"
                     />

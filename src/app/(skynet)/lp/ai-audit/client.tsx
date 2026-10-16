@@ -377,6 +377,7 @@ function BookingSection() {
       />
       <div style={{ display: "grid", gap: 12 }}>
         <input
+          aria-label="Your name"
           type="text"
           autoComplete="name"
           placeholder="Your name"
@@ -391,6 +392,7 @@ function BookingSection() {
           }}
         />
         <input
+          aria-label="Your email"
           type="email"
           autoComplete="email"
           placeholder="you@yourbusiness.com"

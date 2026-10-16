@@ -383,6 +383,7 @@ export default function Library() {
         <form action="/api/tool-feedback" method="POST" className="space-y-3">
           <input type="hidden" name="tool" value="prompt-library" />
           <textarea
+            aria-label="What should we improve, fix, or build?"
             name="message"
             required
             rows={3}
@@ -398,6 +399,7 @@ export default function Library() {
             }}
           />
           <input
+            aria-label="Email (optional — only if you want a reply)"
             type="email"
             name="email"
             placeholder="Email (optional — only if you want a reply)"

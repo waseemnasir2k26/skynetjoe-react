@@ -1108,6 +1108,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         ) : (
           <form onSubmit={onSendFeedback} className="space-y-3">
             <textarea
+              aria-label="What should we improve, fix, or build?"
               name="message"
               required
               rows={3}
@@ -1129,6 +1130,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
               }}
             />
             <input
+              aria-label="Email (optional — only if you want a reply)"
               type="email"
               name="email"
               value={feedback.email}
@@ -1267,15 +1269,16 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <label className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-1.5">
+    // Wrapping label ties the visible text to the control (WCAG 1.3.1).
+    <label className="block">
+      <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--terracotta-aa)] mb-1.5">
         {label}
-      </label>
+      </span>
       {children}
       {hint ? (
-        <p className="text-xs text-[var(--ink-faint)] mt-1.5">{hint}</p>
+        <span className="block text-xs text-[var(--ink-faint)] mt-1.5">{hint}</span>
       ) : null}
-    </div>
+    </label>
   );
 }
 

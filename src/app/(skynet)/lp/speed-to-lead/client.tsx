@@ -600,6 +600,7 @@ function BookCall() {
       />
       <div style={{ display: "grid", gap: 12 }}>
         <input
+          aria-label="Your name"
           className="fld"
           type="text"
           placeholder="Your name"
@@ -608,6 +609,7 @@ function BookCall() {
           autoComplete="name"
         />
         <input
+          aria-label="Email for the call details"
           className="fld"
           type="email"
           placeholder="Email for the call details"
