@@ -121,7 +121,7 @@ export const metadata: Metadata = {
     pageDescription("SkynetLabs is run by Waseem Nasir from Bali. Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon — kept building. Today: 180+ automations across 9 countries."),
   alternates: { canonical: `${SITE.url}/about` },
   openGraph: {
-    title: "About SkynetLabs — From $10 Fiverr gig to 180+ workflows",
+    title: "About SkynetLabs — $10 Fiverr gig to 180+ workflows",
     description:
       "Solo founder. Bali base. 7 years of failing in public and building in public. Public pricing, AI as second seat.",
     url: `${SITE.url}/about`,
