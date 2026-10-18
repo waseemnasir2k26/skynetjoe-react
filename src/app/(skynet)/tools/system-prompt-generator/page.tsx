@@ -16,7 +16,7 @@ const breadcrumbListSchema = breadcrumbSchema([
 const TOOL_CAL_URL = `${CAL_URL}?utm_source=system-prompt-generator`;
 
 export const metadata: Metadata = {
-  title: pageTitle("System Prompt Generator — Free for Agents/GPTs"),
+  title: pageTitle("Free System Prompt Generator for AI Agents"),
   description:
     pageDescription("Free system prompt generator for custom GPTs and AI agents. Role, constraints, tone and output format in — a production-ready system prompt out. Enter your email to unlock the full prompt pack."),
   alternates: { canonical: `${SITE.url}${PATH}` },
