@@ -33,7 +33,7 @@ const schema = {
     "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement.",
   url: `${SITE.url}/privacy-policy`,
   inLanguage: "en",
-  dateModified: "2026-10-16",
+  dateModified: "2026-10-20",
   author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
   publisher: {
     "@type": "Organization",
