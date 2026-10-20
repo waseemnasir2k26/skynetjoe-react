@@ -56,7 +56,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li><strong>Discovery brief (/discovery-call)</strong> — first and last name, email, phone/WhatsApp, company, website, role, current tool stack, how you heard about us, budget range, timeline and the problem you describe. It goes to our CRM, to an internal notification email, and to our self-hosted n8n server so we get paged when a lead lands.</li>
     <li><strong>Tool feedback</strong> — the message you type into a free tool's feedback box and, if you add it, your email; forwarded to our internal Slack so we can reply, and — if you gave an email — that email is also saved to our CRM as a contact tagged with the tool name so we can follow up.</li>
     <li><strong>Email correspondence</strong> — anything you email to us is stored in Google Workspace inside our mailbox.</li>
-    <li><strong>Newsletter and resource emails</strong> — when you enter your email to get the monthly prompt-library emails, or to unlock the Claude Code video prompts and receive new ones, we collect your email address (and a name, only if the form asks for one) and record which form it came from. The prompt-library form also remembers your email in your browser so it is not asked twice. Section 3a below explains how we use it.</li>
+    <li><strong>Newsletter and resource emails</strong> — when you enter your email to get the monthly prompt-library emails, or to unlock the Claude Code video prompts and receive new ones, we collect your email address (and a name, only if the form asks for one) and record which form it came from. The prompt-library form also remembers your email in your browser so it is not asked twice. A small email-list sign-up card may also appear once per browser; if you fill it in it collects your email, optionally your first name and the topic you picked, and the page you were on. Section 3a below explains how we use it.</li>
   </ul>
 
   <h2><span class="wn-num">3.</span> Why we collect it</h2>
@@ -69,13 +69,13 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
 
   <h3>3a. Our newsletter</h3>
   <ul>
-    <li><strong>What we collect:</strong> your email address and, if the form asks for it, your name, plus the name of the form or tool you signed up through.</li>
-    <li><strong>Why:</strong> to email you the newsletter and free resources you asked for (for example new prompts for the prompt library and the Claude Code video prompts).</li>
+    <li><strong>What we collect:</strong> your email address and, if the form asks for it, your name, plus the name of the form or tool you signed up through. The sign-up card also records the topic you picked and the page you were on.</li>
+    <li><strong>Why:</strong> to email you the newsletter and free resources you asked for (for example new prompts for the prompt library and the Claude Code video prompts). If you join through the sign-up card you will get a welcome email when you join, three more over the next two weeks, then only occasional emails. Brevo records whether these emails are opened and which links are clicked, so we can see what is useful.</li>
     <li><strong>Legal basis:</strong> your consent. You give it by submitting the form, and you can withdraw it at any time.</li>
-    <li><strong>Where it goes:</strong> the signup is sent to our CRM (GoHighLevel), tagged with the form it came from. If the CRM write does not go through, Resend sends us an internal email with the same details so the signup is not lost. The other processors listed in section 4 may also see it where they are described there (for example Meta, which receives a hashed copy of the email when the Conversions API integration is on).</li>
-    <li><strong>Unsubscribe:</strong> use the unsubscribe link in any email we send, or reply to any email and ask to be removed. You can also write to <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a>.</li>
+    <li><strong>Where it goes:</strong> the signup is sent to our CRM (GoHighLevel), tagged with the form it came from. If the CRM write does not go through, Resend sends us an internal email with the same details so the signup is not lost; if both of those fail, it is written to a file on our web server so it is still not lost. Every lead form, the sign-up card included, also sends an alert with the email (and the name, where the form asks for one) to our self-hosted n8n server when that alert is switched on. Sign-up card entries are also stored in our own operations dashboard (hq.skynetjoe.com, self-hosted on a server rented from Contabo in France), which passes them to Brevo, the email service that sends the welcome email and the newsletter. The other processors listed in section 4 may also see it where they are described there (for example Meta, which receives a hashed copy of the email when the Conversions API integration is on).</li>
+    <li><strong>Unsubscribe:</strong> every list email has a one-click unsubscribe link, which stops all list emails immediately; our dashboard never emails you itself. Replying "stop" to any email works too and is handled by hand. The topic you pick on the sign-up card only decides which links the welcome email sends you. You can also write to <a href="mailto:info@skynetjoe.com">info@skynetjoe.com</a>.</li>
     <li><strong>How long:</strong> until you unsubscribe or ask us to delete it. After you unsubscribe we keep only what we need to remember not to email you again, unless you ask for full deletion.</li>
-    <li><strong>Contact:</strong> <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a>.</li>
+    <li><strong>Contact:</strong> <a href="mailto:info@skynetjoe.com">info@skynetjoe.com</a>.</li>
   </ul>
 
   <h2><span class="wn-num">4.</span> Who we share it with</h2>
@@ -87,7 +87,9 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li><strong>Hostinger</strong> — hosts skynetjoe.com and our self-hosted n8n server, which receives the anonymous funnel counts and the lead alerts (name, email, phone) described in section 2.</li>
     <li><strong>Meta Platforms</strong> — receives Meta Pixel events for advertising measurement.</li>
     <li><strong>GoHighLevel</strong> — our CRM; receives whatever you enter on a lead form, a tool email gate, a tool feedback box or the discovery brief (name, email, phone/WhatsApp, company, website, role, current tool stack, how you heard about us, your brief, and which form or tool it came from) so we can follow up.</li>
-    <li><strong>Resend</strong> — transactional email service; sends us an internal notification email carrying the same lead details at the same time as the CRM write, so a lead is never lost if one path fails.</li>
+    <li><strong>Resend</strong> — transactional email service; sends us an internal notification email carrying the same lead details. For the contact form it is sent at the same time as the CRM write; for the other forms (tools, lead magnets, newsletter) only when the CRM write does not go through. Either way a lead is never lost if one path fails.</li>
+    <li><strong>Our operations dashboard</strong> (hq.skynetjoe.com, self-hosted on a server rented from Contabo in France) — stores email-list sign-ups (email, optional first name, chosen topic, page, which site).</li>
+    <li><strong>Brevo</strong> — email-sending service; receives the same email-list sign-up details from our dashboard and sends the welcome email, the welcome series and the newsletter, and records opens and link clicks on them. Every one of those emails carries Brevo's unsubscribe link.</li>
     <li><strong>Slack</strong> — receives tool-feedback messages and the optional email you attach to them.</li>
     <li><strong>Enquiry triage</strong> — when enabled, the name, company, message and page of a contact-form submission (never your email or phone) are sent to a typed-decision model (TypeSafe Jev via OpenRouter) to decide how quickly we reply. Email addresses and phone numbers typed into the message itself are stripped before it is sent. Not used for training.</li>
     <li><strong>Calendly</strong> — runs the call booking on /discovery-call and the landing pages; when you book, your name, email, time zone and any answers you type go to Calendly under its own privacy terms, and its webhook tells us a booking happened.</li>
@@ -130,6 +132,8 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li>Calendly — US (booking details).</li>
     <li>GoHighLevel — US (CRM contact records).</li>
     <li>Resend — US (internal lead-notification emails).</li>
+    <li>Brevo — EU, France (email-list contacts and the emails sent to them).</li>
+    <li>Our operations dashboard — our self-hosted VPS, EU, France (email-list sign-ups).</li>
     <li>Slack — US (tool-feedback messages).</li>
     <li>Google Workspace — US and EU data centers.</li>
     <li>GitHub — US data centers.</li>
@@ -142,7 +146,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
   <p>This service is not directed at people under the age of 18. We do not knowingly collect data from children. If you believe a child has submitted data to us, email <a href="mailto:info@skynetjoe.com">info@skynetjoe.com</a> and we'll remove it immediately.</p>
 
   <h2><span class="wn-num">10.</span> Changes to this policy</h2>
-  <p>Last updated <strong>2026-10-16</strong>.</p>
+  <p>Last updated <strong>2026-10-20</strong>.</p>
   <p>If we make material changes to how we handle your data, active clients will receive an email notice. The "last updated" date at the top of this page always reflects the most recent revision. Minor wording changes are made silently.</p>
 
   <div class="wn-callout">
