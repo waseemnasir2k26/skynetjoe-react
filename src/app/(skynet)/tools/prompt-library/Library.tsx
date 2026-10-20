@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import {
   Search,
   Copy,
@@ -450,17 +450,24 @@ export default function Library() {
  */
 function MonthlyPromptsCapture() {
   const STORAGE_KEY = "skynet-tool-prompt-library-email";
+  const OPTIN_KEY = "skynet-tool-prompt-library-optin";
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const [optIn, setOptIn] = useState(false);
+  const [joined, setJoined] = useState(false);
+  const optInId = useId();
 
   /* already subscribed on a previous visit → show success state */
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (stored && EMAIL_RE.test(stored)) setDone(true);
+      if (stored && EMAIL_RE.test(stored)) {
+        setDone(true);
+        setJoined(window.localStorage.getItem(OPTIN_KEY) === "1");
+      }
     } catch {
       /* ignore */
     }
@@ -496,6 +503,7 @@ function MonthlyPromptsCapture() {
           email: trimmed,
           source: "prompt-library",
           capturedAt: new Date().toISOString(),
+          ...(optIn ? { newsletterOptIn: true } : {}),
         }),
         signal: ctrl.signal,
       });
@@ -507,6 +515,12 @@ function MonthlyPromptsCapture() {
 
     setSubmitting(false);
     if (ok) {
+      try {
+        if (optIn) window.localStorage.setItem(OPTIN_KEY, "1");
+      } catch {
+        /* ignore */
+      }
+      setJoined(optIn);
       setDone(true);
     } else {
       setError(
@@ -527,21 +541,23 @@ function MonthlyPromptsCapture() {
         <div className="flex items-center gap-2 text-[var(--ink)] font-semibold">
           <Check className="h-5 w-5 text-[var(--terracotta-aa)]" />
           <span>
-            You&apos;re in. First batch lands in your inbox this month.
+            {joined
+              ? "You’re in. Watch your inbox for a welcome email."
+              : "Saved. Tick the box next time if you want the email list."}
           </span>
         </div>
       ) : (
         <>
           <p className="text-sm text-[var(--ink-2)] max-w-xl mb-5 leading-relaxed">
-            Once a month I ship 20 new production-tested prompts to email before
-            they hit the site. No course pitch, no drip sequence — one email,
-            unsubscribe anytime.
+            Tick the box to join the free SkynetLabs email list, which includes
+            new production-tested prompts. No course pitch. Unsubscribe anytime.
           </p>
           <form
             onSubmit={handleSubmit}
             noValidate
-            className="flex flex-col sm:flex-row gap-3 max-w-xl"
+            className="flex flex-col gap-3 max-w-xl"
           >
+            <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="email"
               inputMode="email"
@@ -581,9 +597,26 @@ function MonthlyPromptsCapture() {
                   Sending…
                 </>
               ) : (
-                <>Send me the prompts →</>
+                <>Save my email →</>
               )}
             </button>
+            </div>
+            <div className="flex items-start gap-2">
+              <input
+                id={optInId}
+                type="checkbox"
+                checked={optIn}
+                disabled={submitting}
+                onChange={(e) => setOptIn(e.target.checked)}
+                className="mt-0.5 shrink-0"
+              />
+              <label
+                htmlFor={optInId}
+                className="text-xs text-[var(--ink-2)] leading-relaxed"
+              >
+                Send me the free SkynetLabs email list, including new prompts: a welcome email plus 3 more over 2 weeks, then occasional. Unsubscribe anytime.
+              </label>
+            </div>
           </form>
           {error && (
             <p
@@ -594,8 +627,8 @@ function MonthlyPromptsCapture() {
             </p>
           )}
           <p className="mt-3 text-[11px] text-[var(--ink-faint)] leading-relaxed">
-            Stored locally + sent to my CRM. I&apos;m the only person who sees
-            it.
+            Stored locally + sent to my CRM and email dashboard. You only get
+            emails if you tick the box.
           </p>
         </>
       )}

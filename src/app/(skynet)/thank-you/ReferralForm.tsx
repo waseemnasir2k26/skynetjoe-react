@@ -21,6 +21,13 @@ export default function ReferralForm() {
       return;
     }
 
+    const referrer = referrerEmail.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(referrer)) {
+      setStatus("error");
+      setErrorMsg("Add your own email so we know who to credit.");
+      return;
+    }
+
     setStatus("loading");
     try {
       const res = await fetch("/api/leads", {
@@ -28,6 +35,9 @@ export default function ReferralForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           source: "referral",
+          // Top-level email = the SUBMITTER (referrer). /api/leads requires one,
+          // and mirrors only this address to HQ, never the referred friend's.
+          email: referrer,
           _honeypot: honeypot, // server silently swallows if present
           qualification: {
             businessType: "referral",
@@ -103,11 +113,12 @@ export default function ReferralForm() {
       />
 
       <label className="sr-only" htmlFor="referrer-email">
-        Your email (optional, for credit tracking)
+        Your email (required, for credit tracking)
       </label>
       <input
         id="referrer-email"
         type="email"
+        required
         placeholder="your email (for the credit)"
         value={referrerEmail}
         onChange={(e) => setReferrerEmail(e.target.value)}

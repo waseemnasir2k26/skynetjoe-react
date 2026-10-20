@@ -30,10 +30,20 @@ globalThis.__stub = { ghlConfirm: true };
 
 let hqCalls = [];
 let hqMode = "ok"; // ok | 500 | throw
+// HQ requires a non-empty slug source and an explicit boolean consent on EVERY push.
+const violations = [];
+let totalPushes = 0;
 const realFetch = globalThis.fetch;
 globalThis.fetch = async (url, init) => {
   if (String(url).startsWith("https://hq.test")) {
-    hqCalls.push(JSON.parse(init.body));
+    const sent = JSON.parse(init.body);
+    hqCalls.push(sent);
+    totalPushes++;
+    if (typeof sent.source !== "string" || !/^[a-z0-9_-]{1,32}$/.test(sent.source)) violations.push(["source", sent]);
+    if (typeof sent.consent !== "boolean") violations.push(["consent", sent]);
+    if (!/^[a-z0-9-]{1,32}$/.test(sent.site)) violations.push(["site", sent]);
+    if (sent.page != null && sent.page.length > 200) violations.push(["page", sent]);
+    if (sent.first_name != null && sent.first_name.length > 80) violations.push(["first_name", sent]);
     if (hqMode === "throw") throw new Error("network down");
     return new Response("{}", { status: hqMode === "500" ? 500 : 201 });
   }
@@ -188,6 +198,27 @@ for (const mode of ["500", "throw"]) {
     assert.equal((await res.json()).ok, true);
   });
 }
+await t("leads: ReferralForm payload (referrer top-level email) is accepted and mirrors only the referrer", async () => {
+  // Exact body shape ReferralForm.tsx sends.
+  const res = await leads.POST(
+    post("https://x.test/api/leads", {
+      source: "referral",
+      email: "referrer@b.co",
+      _honeypot: "",
+      qualification: {
+        businessType: "referral",
+        customAnswers: { referred_email: "friend@b.co", referrer_email: "referrer@b.co", referral_origin: "thank-you-page" },
+      },
+      submittedAt: new Date().toISOString(),
+    }),
+  );
+  assert.equal(res.status, 200);
+  assert.equal(hqCalls.length, 1);
+  assert.deepEqual(hqCalls[0], {
+    email: "referrer@b.co", site: "skynetjoe", source: "referral", first_name: null, page: null, consent: false,
+  });
+  assert.ok(!JSON.stringify(hqCalls).includes("friend@b.co"));
+});
 await t("leads: honeypot pushes nothing", async () => {
   await leads.POST(post("https://x.test/a", { email: "q@b.co", qualification: {}, _honeypot: "x" }));
   assert.equal(hqCalls.length, 0);
@@ -264,5 +295,8 @@ await t("tool-feedback: HQ throw never changes the response", async () => {
 });
 
 console.warn = origWarn;
+assert.ok(totalPushes >= 20, `expected many HQ pushes, saw ${totalPushes}`);
+assert.deepEqual(violations, [], "every HQ push needs a slug source + boolean consent");
+console.log(`hq-push: ${totalPushes} pushes all carried a slug source + boolean consent`);
 console.log(`hq-push.test: ${passed} tests passed`);
 process.exit(0);

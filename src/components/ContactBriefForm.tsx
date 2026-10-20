@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
 /**
@@ -47,6 +47,7 @@ export default function ContactBriefForm() {
   const [pain, setPain] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [newsletterOptIn, setNewsletterOptIn] = useState(false);
+  const optInId = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -228,7 +229,7 @@ export default function ContactBriefForm() {
 
       <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
         <input
-          id="cb-newsletter"
+          id={optInId}
           type="checkbox"
           checked={newsletterOptIn}
           onChange={(e) => setNewsletterOptIn(e.target.checked)}
@@ -236,7 +237,7 @@ export default function ContactBriefForm() {
           style={{ marginTop: 3, flexShrink: 0, accentColor: "var(--terracotta)" }}
         />
         <label
-          htmlFor="cb-newsletter"
+          htmlFor={optInId}
           style={{
             fontFamily: "var(--font-sans)",
             fontSize: 13,

@@ -219,6 +219,18 @@ export async function POST(req: Request) {
   }
 
   try {
+    // HQ lead record (consent false) starts first and is awaited last, so it
+    // overlaps the Slack/log work and adds no latency. Never throws; 4s cap
+    // inside pushSubscriberToHq.
+    const hqPush = email
+      ? pushSubscriberToHq({
+          email,
+          site: "skynetjoe",
+          source: "tool-feedback",
+          consent: false,
+        }).catch(() => false)
+      : Promise.resolve(false);
+
     const slackOk = await forwardSlack({ tool, message, email });
     // Always also append to log as belt-and-suspenders
     await appendLog({ tool, message, email });
@@ -238,14 +250,8 @@ export async function POST(req: Request) {
       ).catch(() => {
         // swallow — Slack/log already have the feedback
       });
-      // HQ lead record only (consent false); never throws, 4s cap inside.
-      await pushSubscriberToHq({
-        email,
-        site: "skynetjoe",
-        source: "tool-feedback",
-        consent: false,
-      }).catch(() => false);
     }
+    await hqPush;
 
     if (isForm) {
       return NextResponse.redirect(

@@ -1,8 +1,10 @@
 /**
- * hq-subscriber — mirror a newsletter sign-up into HQ (hq.skynetjoe.com).
+ * hq-subscriber — mirror an email capture into HQ (hq.skynetjoe.com): the
+ * newsletter popup (consent true) and every other form (lead only unless the
+ * visitor ticked the opt-in box).
  *
  * Awaited (4s cap) by the lead routes: HQ being down must never fail the
- * visitor's subscribe. Returns true only when HQ confirmed a row (201/200),
+ * visitor's submission. Returns true only when HQ confirmed a row (201/200),
  * so the caller can log the miss. Needs HQ_SUBSCRIBER_URL + HQ_SUBSCRIBER_SECRET;
  * with either unset it is a silent no-op that returns false.
  */
@@ -10,7 +12,7 @@
 export type HqSubscriber = {
   email: string;
   site: string; // "skynetjoe" | "waseemnasir"
-  source?: string; // "popup" (default)
+  source?: string; // "popup", "contact", "lp-freight", ... (HQ is making it required)
   first_name?: string | null;
   interest?: string | null;
   page?: string | null;
