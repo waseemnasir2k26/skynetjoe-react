@@ -70,10 +70,10 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
   <h3>3a. Our newsletter</h3>
   <ul>
     <li><strong>What we collect:</strong> your email address and, if the form asks for it, your name, plus the name of the form or tool you signed up through. The sign-up card also records the topic you picked and the page you were on.</li>
-    <li><strong>Why:</strong> to email you the newsletter and free resources you asked for (for example new prompts for the prompt library and the Claude Code video prompts). If you join through the sign-up card you get a welcome email straight away and a short welcome series (three more emails over two weeks), then only occasional emails.</li>
+    <li><strong>Why:</strong> to email you the newsletter and free resources you asked for (for example new prompts for the prompt library and the Claude Code video prompts). If you join through the sign-up card you will get a welcome email when you join and a short welcome series (up to three more emails over two weeks), then only occasional emails.</li>
     <li><strong>Legal basis:</strong> your consent. You give it by submitting the form, and you can withdraw it at any time.</li>
-    <li><strong>Where it goes:</strong> the signup is sent to our CRM (GoHighLevel), tagged with the form it came from. If the CRM write does not go through, Resend sends us an internal email with the same details so the signup is not lost. Sign-up card entries are also stored in our own operations dashboard (hq.skynetjoe.com, self-hosted on our VPS), which passes them to Brevo, the email service that sends the welcome email and the newsletter. The other processors listed in section 4 may also see it where they are described there (for example Meta, which receives a hashed copy of the email when the Conversions API integration is on).</li>
-    <li><strong>Unsubscribe:</strong> use the unsubscribe link in any email we send, or reply to any email and ask to be removed. You can also write to <a href="mailto:info@skynetjoe.com">info@skynetjoe.com</a>.</li>
+    <li><strong>Where it goes:</strong> the signup is sent to our CRM (GoHighLevel), tagged with the form it came from. If the CRM write does not go through, Resend sends us an internal email with the same details so the signup is not lost; if both of those fail, it is written to a file on our web server so it is still not lost. Every lead form, the sign-up card included, also sends an alert with the name and email to our self-hosted n8n server. Sign-up card entries are also stored in our own operations dashboard (hq.skynetjoe.com, self-hosted on our VPS in France), which passes them to Brevo, the email service that sends the welcome email and the newsletter. The other processors listed in section 4 may also see it where they are described there (for example Meta, which receives a hashed copy of the email when the Conversions API integration is on).</li>
+    <li><strong>Unsubscribe:</strong> use the unsubscribe link in our newsletter emails, or reply "stop" to any email (including the welcome email) and we remove you. You can also write to <a href="mailto:info@skynetjoe.com">info@skynetjoe.com</a>.</li>
     <li><strong>How long:</strong> until you unsubscribe or ask us to delete it. After you unsubscribe we keep only what we need to remember not to email you again, unless you ask for full deletion.</li>
     <li><strong>Contact:</strong> <a href="mailto:info@skynetjoe.com">info@skynetjoe.com</a>.</li>
   </ul>
@@ -88,7 +88,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li><strong>Meta Platforms</strong> — receives Meta Pixel events for advertising measurement.</li>
     <li><strong>GoHighLevel</strong> — our CRM; receives whatever you enter on a lead form, a tool email gate, a tool feedback box or the discovery brief (name, email, phone/WhatsApp, company, website, role, current tool stack, how you heard about us, your brief, and which form or tool it came from) so we can follow up.</li>
     <li><strong>Resend</strong> — transactional email service; sends us an internal notification email carrying the same lead details. For the contact form it is sent at the same time as the CRM write; for the other forms (tools, lead magnets, newsletter) only when the CRM write does not go through. Either way a lead is never lost if one path fails.</li>
-    <li><strong>Our operations dashboard</strong> (hq.skynetjoe.com, self-hosted on our VPS) — stores email-list sign-ups (email, optional first name, chosen topic, page, which site).</li>
+    <li><strong>Our operations dashboard</strong> (hq.skynetjoe.com, self-hosted on our VPS in France) — stores email-list sign-ups (email, optional first name, chosen topic, page, which site).</li>
     <li><strong>Brevo</strong> — email-sending service; receives the same email-list sign-up details from our dashboard and sends the welcome email, the welcome series and the newsletter. Every newsletter email carries Brevo's unsubscribe link.</li>
     <li><strong>Slack</strong> — receives tool-feedback messages and the optional email you attach to them.</li>
     <li><strong>Enquiry triage</strong> — when enabled, the name, company, message and page of a contact-form submission (never your email or phone) are sent to a typed-decision model (TypeSafe Jev via OpenRouter) to decide how quickly we reply. Email addresses and phone numbers typed into the message itself are stripped before it is sent. Not used for training.</li>
@@ -133,7 +133,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li>GoHighLevel — US (CRM contact records).</li>
     <li>Resend — US (internal lead-notification emails).</li>
     <li>Brevo — EU, France (email-list contacts and the emails sent to them).</li>
-    <li>Our operations dashboard — our self-hosted VPS, EU (email-list sign-ups).</li>
+    <li>Our operations dashboard — our self-hosted VPS, EU, France (email-list sign-ups).</li>
     <li>Slack — US (tool-feedback messages).</li>
     <li>Google Workspace — US and EU data centers.</li>
     <li>GitHub — US data centers.</li>

@@ -12,7 +12,7 @@
  *   - "Not right now" snoozes for 14 days; a successful subscribe never shows
  *     it again. ?popup=off disables it for QA.
  *   - skynetjoe: posts to /api/lead-capture (source "newsletter-skynetjoe";
- *     GHL → Resend → disk sink, then an HQ mirror after a confirmed write).
+ *     GHL → Resend → disk sink, with an HQ mirror in parallel).
  *     waseemnasir: posts to /api/subscribe (HQ only, honest 502 otherwise).
  *     Success only after the server confirms a write.
  *   - Zero third-party requests. Keyboard: Esc closes, focus trapped inside.
@@ -294,23 +294,23 @@ export default function NewsletterPopup({
                 <p className="nlp-eyebrow">You&apos;re on the list</p>
                 <h2 id="nlp-title" className="nlp-title">
                   Thanks{firstName.trim() ? `, ${firstName.trim()}` : ""}.
-                  You&apos;ll get the first issue when it launches.
+                  Check your inbox for a welcome email.
                 </h2>
                 <p className="nlp-lede">
                   Builds, workflows, the tools that actually paid off. Reply to
-                  any issue and it reaches me; reply &ldquo;stop&rdquo; and you
+                  any email and it reaches me; reply &ldquo;stop&rdquo; and you
                   are removed.
                 </p>
               </div>
             ) : (
               <form className="nlp-body" onSubmit={submit} noValidate>
-                <p className="nlp-eyebrow">Free email list · launching soon</p>
+                <p className="nlp-eyebrow">Free email list</p>
                 <h2 id="nlp-title" className="nlp-title">
                   We ship a lot. Get the best of it in one email.
                 </h2>
                 <p className="nlp-lede">
                   New AI videos, free n8n workflows, site teardowns and the
-                  services we add. Join now and you are in the first send. No
+                  services we add. You get a welcome email now and a short welcome series. No
                   spam; reply &ldquo;stop&rdquo; to any email and you are off
                   the list.
                 </p>
@@ -404,7 +404,7 @@ export default function NewsletterPopup({
                   </button>
                 </div>
                 <p className="nlp-fine">
-                  Occasional, not weekly. Leave anytime.{" "}
+                  4 welcome emails over 2 weeks, then occasional. Leave anytime.{" "}
                   <a
                     href={
                       site === "waseemnasir" ? "/privacy" : "/privacy-policy"

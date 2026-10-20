@@ -33,6 +33,8 @@ export async function pushSubscriberToHq(s: HqSubscriber): Promise<boolean> {
       body: JSON.stringify(s),
       signal: ctrl.signal,
       cache: "no-store",
+      // Never re-send the secret header to a redirect target.
+      redirect: "error",
     });
     clearTimeout(t);
     if (!res.ok) {

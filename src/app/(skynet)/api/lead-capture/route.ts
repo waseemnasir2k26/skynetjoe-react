@@ -54,6 +54,7 @@ const MAX_BODY_BYTES = 8 * 1024;
 const PATH_RE =
   /^\/(?![\/\\])[^\s<>\u0000-\u001f\u007f-\u009f\u200e\u200f\u202a-\u202e]{0,198}$/;
 const NEWSLETTER_SITES = new Set(["skynetjoe", "waseemnasir"]);
+const NEWSLETTER_INTERESTS = new Set(["ai-video", "automation", "websites", "everything"]);
 const NEWSLETTER_PER_MIN = 120;
 let nlWindowStart = 0;
 let nlWindowCount = 0;
@@ -162,12 +163,10 @@ export async function POST(req: Request) {
   // with the GHL path, is awaited (4s cap inside pushSubscriberToHq) before
   // every response, and can never throw or change the response.
   const isNewsletter = source.startsWith("newsletter-");
-  if (isNewsletter && !newsletterAllowed()) {
-    return NextResponse.json(
-      { error: "Too many requests. Try again in a minute." },
-      { status: 429, headers: { "Retry-After": "60" } },
-    );
-  }
+  // Site-wide cap only throttles the HQ mirror (which triggers Brevo emails);
+  // the visitor's GHL write still happens, so a distributed flood cannot lock
+  // real sign-ups out. The per-IP limit above stays the main guard.
+  const nlOverCap = isNewsletter && !newsletterAllowed();
   const nl = isNewsletter && payload.newsletter && typeof payload.newsletter === "object"
     ? payload.newsletter
     : {};
@@ -176,11 +175,15 @@ export async function POST(req: Request) {
       ? nl.firstName.replace(/[\u0000-\u001f\u007f<>]/g, "").trim().slice(0, 80) || undefined
       : undefined;
   const nlInterest =
-    typeof nl.interest === "string" && /^[a-z0-9-]{1,32}$/.test(nl.interest)
+    typeof nl.interest === "string" && NEWSLETTER_INTERESTS.has(nl.interest)
       ? nl.interest
       : undefined;
   const hqMirror: Promise<void> = (async () => {
     if (!isNewsletter) return;
+    if (nlOverCap) {
+      console.warn("[lead-capture] newsletter site-wide cap hit; HQ mirror skipped");
+      return;
+    }
     const site = source.slice("newsletter-".length);
     if (!NEWSLETTER_SITES.has(site)) {
       console.warn("[lead-capture] newsletter: unknown site, HQ mirror skipped", { source });
