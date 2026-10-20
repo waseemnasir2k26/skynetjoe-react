@@ -5,6 +5,7 @@ import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink } from "@/lib/lead-sink";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
+import { pushSubscriberToHq } from "@/lib/hq-subscriber";
 import { sendCapiLead } from "@/lib/meta-capi";
 import { checkRateLimit, getClientIpOrUndefined, readCappedJson } from "@/lib/rate-limit";
 
@@ -48,6 +49,24 @@ export const dynamic = "force-dynamic";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_BODY_BYTES = 8 * 1024;
 
+// Newsletter popup sign-ups (source "newsletter-<site>") are mirrored to HQ.
+// Same-site path: single leading slash, no protocol-relative/backslash, no control/bidi chars.
+const PATH_RE =
+  /^\/(?![\/\\])[^\s<>\u0000-\u001f\u007f-\u009f\u200e\u200f\u202a-\u202e]{0,198}$/;
+const NEWSLETTER_SITES = new Set(["skynetjoe", "waseemnasir"]);
+const NEWSLETTER_PER_MIN = 120;
+let nlWindowStart = 0;
+let nlWindowCount = 0;
+function newsletterAllowed(): boolean {
+  const now = Date.now();
+  if (now - nlWindowStart > 60_000) {
+    nlWindowStart = now;
+    nlWindowCount = 0;
+  }
+  nlWindowCount += 1;
+  return nlWindowCount <= NEWSLETTER_PER_MIN;
+}
+
 type Payload = {
   email?: string;
   source?: string;
@@ -62,6 +81,8 @@ type Payload = {
   value?: number;
   currency?: string;
   _honeypot?: string;
+  /** Newsletter popup extras (source "newsletter-<site>"). Mirrored to HQ. */
+  newsletter?: { firstName?: string; interest?: string; page?: string };
 };
 
 /**
@@ -134,7 +155,51 @@ export async function POST(req: Request) {
   // is one id everywhere. This route's callers are email-only gates, so there
   // is no name/company/message to carry — only the capture page.
   const leadId = syntheticLeadKey(email, capturedAt);
-  const page = refererPath(req);
+  const refPath = refererPath(req);
+  const page = refPath && PATH_RE.test(refPath) ? refPath : undefined;
+
+  // Newsletter popup: GHL and HQ both get the sign-up. HQ runs in parallel
+  // with the GHL path, is awaited (4s cap inside pushSubscriberToHq) before
+  // every response, and can never throw or change the response.
+  const isNewsletter = source.startsWith("newsletter-");
+  if (isNewsletter && !newsletterAllowed()) {
+    return NextResponse.json(
+      { error: "Too many requests. Try again in a minute." },
+      { status: 429, headers: { "Retry-After": "60" } },
+    );
+  }
+  const nl = isNewsletter && payload.newsletter && typeof payload.newsletter === "object"
+    ? payload.newsletter
+    : {};
+  const nlFirstName =
+    typeof nl.firstName === "string"
+      ? nl.firstName.replace(/[\u0000-\u001f\u007f<>]/g, "").trim().slice(0, 80) || undefined
+      : undefined;
+  const nlInterest =
+    typeof nl.interest === "string" && /^[a-z0-9-]{1,32}$/.test(nl.interest)
+      ? nl.interest
+      : undefined;
+  const hqMirror: Promise<void> = (async () => {
+    if (!isNewsletter) return;
+    const site = source.slice("newsletter-".length);
+    if (!NEWSLETTER_SITES.has(site)) {
+      console.warn("[lead-capture] newsletter: unknown site, HQ mirror skipped", { source });
+      return;
+    }
+    try {
+      const ok = await pushSubscriberToHq({
+        email,
+        site,
+        source: "popup",
+        first_name: nlFirstName ?? null,
+        interest: nlInterest ?? null,
+        page: typeof nl.page === "string" && PATH_RE.test(nl.page) ? nl.page : (page ?? null),
+      });
+      if (!ok) console.warn("[lead-capture] newsletter: HQ mirror did not confirm", { source });
+    } catch (err) {
+      console.warn("[lead-capture] newsletter: HQ mirror threw", err);
+    }
+  })();
 
   /**
    * Shadow triage (JEV_TRIAGE_WEBHOOK). Fire-and-forget, never awaited, never
@@ -171,7 +236,7 @@ export async function POST(req: Request) {
   if (ghlConfigured) {
     try {
       const result = await upsertGhlContact(
-        { email, source: `tool-gate:${source}` },
+        { email, source: `tool-gate:${source}`, firstName: nlFirstName },
         null,
         [source, "tool-lead"],
       );
@@ -220,6 +285,7 @@ export async function POST(req: Request) {
           extras: { delivery: "disk-sink", ghl_confirmed: false, reason },
         });
         fireTriage();
+        await hqMirror;
         return NextResponse.json({ ok: true, sink: true });
       }
     }
@@ -238,6 +304,7 @@ export async function POST(req: Request) {
     // Both delivery paths failed to confirm — tell the truth instead of
     // showing a fake success screen. The client renders this as a real
     // error state so the visitor knows to email directly.
+    await hqMirror; // HQ is a separate list: the sign-up still lands there.
     return NextResponse.json(
       {
         error:
@@ -260,6 +327,7 @@ export async function POST(req: Request) {
   });
 
   fireTriage();
+  await hqMirror;
 
   return NextResponse.json({
     ok: true,

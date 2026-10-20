@@ -13,6 +13,8 @@ import LiveChat from "@/components/LiveChat";
 // LiveChat (passive chat bubble, click-to-open) kept on — smart intent bot rebuilt 2026-05-29.
 import LiveVisitors from "@/components/LiveVisitors";
 import { MetaPixel } from "@/components/MetaPixel";
+import NewsletterPopup from "@/components/NewsletterPopup";
+import "@/components/newsletter-popup.css";
 import "../globals.css";
 
 // Readability overhaul 2026-06-01 — ONE clean, highly-legible sans site-wide.
@@ -165,6 +167,8 @@ export default function RootLayout({
             the sibling-ban fingerprint). LP pages also mount it; next/script
             dedupes by id so this is safe. */}
         <MetaPixel />
+        {/* Newsletter popup — the ONE interrupting popup allowed back (Waseem, 2026-10-07). */}
+        <NewsletterPopup site="skynetjoe" />
         {/* Cookieless 4-event funnel counter -> n8n SXO-01. No cookies, no ids. */}
         <SxoBeacon />
       </body>
