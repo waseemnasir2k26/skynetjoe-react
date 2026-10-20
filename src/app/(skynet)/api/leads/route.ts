@@ -6,6 +6,7 @@ import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink, type SinkLead } from "@/lib/lead-sink";
 import { checkRateLimit, getClientIpOrUndefined, readCappedJson } from "@/lib/rate-limit";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
+import { hqFirstName, hqSourceSlug, pushSubscriberToHq } from "@/lib/hq-subscriber";
 
 export const runtime = "nodejs";
 
@@ -86,6 +87,8 @@ type Payload = {
   source?: string;
   email?: string;
   eventId?: string;
+  /** Unchecked-by-default "also send me the email list" box. true = HQ newsletter list. */
+  newsletterOptIn?: boolean;
   firstName?: string;
   lastName?: string;
   phone?: string;
@@ -267,6 +270,36 @@ export async function POST(req: Request) {
       ? bookingNameParts.slice(1).join(" ")
       : undefined;
 
+  // Mirror to HQ in parallel with the CRM write. Awaited below (4s cap inside
+  // pushSubscriberToHq), never throws, never changes the response. Only the
+  // submitting address is pushed: a "referral" payload carries the referred
+  // friend's address in customAnswers, which is never read here.
+  const hqMirror: Promise<void> = (async () => {
+    const referredEmail = payload.qualification?.customAnswers?.referred_email;
+    if (
+      typeof referredEmail === "string" &&
+      referredEmail.trim().toLowerCase() === email.toLowerCase()
+    ) {
+      return; // resolved address is the referred friend's, not the submitter's
+    }
+    try {
+      const page = resolvePage(req, payload);
+      const ok = await pushSubscriberToHq({
+        email,
+        site: source === "lp-speed-to-lead" ? "skynetlabsai" : "skynetjoe",
+        source: hqSourceSlug(String(source), "discovery-call"),
+        first_name: hqFirstName(
+          payload.firstName || payload.qualification?.firstName || firstNameFromBooking,
+        ),
+        page: page && /^\/(?![\/\\])[^\s<>]{0,198}$/.test(page) ? page : null,
+        consent: payload.newsletterOptIn === true,
+      });
+      if (!ok) console.warn("[leads] HQ mirror did not confirm", { source });
+    } catch (err) {
+      console.warn("[leads] HQ mirror threw", err);
+    }
+  })();
+
   const ghl = await handleGhlLead({
     qualification: {
       email,
@@ -309,6 +342,8 @@ export async function POST(req: Request) {
         : "",
     ].filter(Boolean) as string[],
   });
+
+  await hqMirror;
 
   // Server-side CAPI mirror of the browser pixel event, deduped via eventId
   // (browser fires fbq('track', <event>, {}, {eventID}) with the same id).

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { appendLeadToSink } from "@/lib/lead-sink";
+import { hqFirstName, pushSubscriberToHq } from "@/lib/hq-subscriber";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -29,7 +30,10 @@ type Payload = {
   stack?: string[];
   pain?: string;
   heard?: string;
+  /** Existing field (privacy-notice acknowledgement). NOT the newsletter opt-in. */
   consent?: boolean;
+  /** Unchecked-by-default "also send me the email list" box. */
+  newsletterOptIn?: boolean;
 };
 
 const BUDGET_LABELS: Record<string, string> = {
@@ -198,10 +202,23 @@ export async function POST(req: Request) {
 
   const lead = score(payload.budget, payload.timeline);
 
+  // HQ mirror runs alongside GHL/Resend; never throws, never alters the response.
+  const hqPush = pushSubscriberToHq({
+    email: payload.email,
+    site: "skynetjoe",
+    source: "contact",
+    first_name: hqFirstName(payload.name),
+    consent: payload.newsletterOptIn === true,
+  }).catch((err) => {
+    console.warn("[discovery] HQ mirror threw", err);
+    return false;
+  });
+
   const [ghlRes, emailRes] = await Promise.allSettled([
     sendToGhl(payload, lead),
     sendEmailFallback(payload, lead),
   ]);
+  if (!(await hqPush)) console.warn("[discovery] HQ mirror did not confirm");
 
   // "skipped" (env unset) is NOT delivery. It used to count as OK here,
   // which meant a host with neither GHL nor Resend configured returned

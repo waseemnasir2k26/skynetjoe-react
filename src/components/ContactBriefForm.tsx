@@ -46,6 +46,7 @@ export default function ContactBriefForm() {
   const [email, setEmail] = useState("");
   const [pain, setPain] = useState("");
   const [honeypot, setHoneypot] = useState("");
+  const [newsletterOptIn, setNewsletterOptIn] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -73,6 +74,7 @@ export default function ContactBriefForm() {
           email: em,
           pain: p,
           consent: true,
+          ...(newsletterOptIn ? { newsletterOptIn: true } : {}),
           source: "contact",
           _honeypot: honeypot,
         }),
@@ -222,6 +224,28 @@ export default function ContactBriefForm() {
           value={honeypot}
           onChange={(e) => setHoneypot(e.target.value)}
         />
+      </div>
+
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+        <input
+          id="cb-newsletter"
+          type="checkbox"
+          checked={newsletterOptIn}
+          onChange={(e) => setNewsletterOptIn(e.target.checked)}
+          disabled={status === "submitting"}
+          style={{ marginTop: 3, flexShrink: 0, accentColor: "var(--terracotta)" }}
+        />
+        <label
+          htmlFor="cb-newsletter"
+          style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: 13,
+            lineHeight: 1.5,
+            color: "var(--ink-2)",
+          }}
+        >
+          Also send me the free SkynetLabs email list: a welcome email plus 3 more over 2 weeks, then occasional. Unsubscribe anytime.
+        </label>
       </div>
 
       {error && (

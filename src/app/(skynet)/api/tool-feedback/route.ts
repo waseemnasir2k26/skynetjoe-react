@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { upsertGhlContact } from "@/lib/ghl";
+import { pushSubscriberToHq } from "@/lib/hq-subscriber";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { TOOL_SLUGS } from "@/data/tools-registry";
 
@@ -237,6 +238,13 @@ export async function POST(req: Request) {
       ).catch(() => {
         // swallow — Slack/log already have the feedback
       });
+      // HQ lead record only (consent false); never throws, 4s cap inside.
+      await pushSubscriberToHq({
+        email,
+        site: "skynetjoe",
+        source: "tool-feedback",
+        consent: false,
+      }).catch(() => false);
     }
 
     if (isForm) {

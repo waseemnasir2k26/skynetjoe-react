@@ -24,7 +24,7 @@
  * so it drops into each LP's existing hand-written CSS unchanged.
  */
 
-import { useState } from "react";
+import { useId, useState } from "react";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -99,6 +99,8 @@ export default function LeadCaptureForm({
 }: LeadCaptureFormProps) {
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState("");
+  const [newsletterOptIn, setNewsletterOptIn] = useState(false);
+  const optInId = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -136,6 +138,7 @@ export default function LeadCaptureForm({
           value: metaValue,
           currency: metaCurrency,
           _honeypot: honeypot,
+          ...(newsletterOptIn ? { newsletterOptIn: true } : {}),
         }),
       });
 
@@ -239,6 +242,29 @@ export default function LeadCaptureForm({
           if (error) setError(null);
         }}
       />
+
+      <label
+        htmlFor={optInId}
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+          gap: 8,
+          fontSize: 12,
+          lineHeight: 1.45,
+          opacity: 0.85,
+          textAlign: "left",
+        }}
+      >
+        <input
+          id={optInId}
+          type="checkbox"
+          checked={newsletterOptIn}
+          disabled={status === "submitting"}
+          onChange={(e) => setNewsletterOptIn(e.target.checked)}
+          style={{ marginTop: 2, flexShrink: 0 }}
+        />
+        <span>Also send me the free SkynetLabs email list: a welcome email plus 3 more over 2 weeks, then occasional. Unsubscribe anytime.</span>
+      </label>
 
       <button
         type="submit"

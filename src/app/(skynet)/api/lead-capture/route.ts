@@ -5,7 +5,7 @@ import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink } from "@/lib/lead-sink";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
-import { pushSubscriberToHq } from "@/lib/hq-subscriber";
+import { hqSourceSlug, pushSubscriberToHq } from "@/lib/hq-subscriber";
 import { sendCapiLead } from "@/lib/meta-capi";
 import { checkRateLimit, getClientIpOrUndefined, readCappedJson } from "@/lib/rate-limit";
 
@@ -68,8 +68,25 @@ function newsletterAllowed(): boolean {
   return nlWindowCount <= NEWSLETTER_PER_MIN;
 }
 
+// Separate site-wide cap for the non-popup HQ mirror (LP forms, tool gates), so a
+// flood there can never lock popup sign-ups out of HQ, and vice versa.
+const LEAD_HQ_PER_MIN = 120;
+let leadWindowStart = 0;
+let leadWindowCount = 0;
+function leadHqAllowed(): boolean {
+  const now = Date.now();
+  if (now - leadWindowStart > 60_000) {
+    leadWindowStart = now;
+    leadWindowCount = 0;
+  }
+  leadWindowCount += 1;
+  return leadWindowCount <= LEAD_HQ_PER_MIN;
+}
+
 type Payload = {
   email?: string;
+  /** Unchecked-by-default "also send me the email list" box on the shared forms. */
+  newsletterOptIn?: boolean;
   source?: string;
   capturedAt?: string;
   /** Browser-generated UUID shared with the client-side fbq Lead event so
@@ -179,7 +196,28 @@ export async function POST(req: Request) {
       ? nl.interest
       : undefined;
   const hqMirror: Promise<void> = (async () => {
-    if (!isNewsletter) return;
+    if (!isNewsletter) {
+      // Every other capture (LP forms, tool gates, prompt library) lands in HQ
+      // too — as a lead only unless the visitor ticked the opt-in box.
+      if (!leadHqAllowed()) {
+        console.warn("[lead-capture] HQ lead mirror site-wide cap hit; skipped", { source });
+        return;
+      }
+      try {
+        const ok = await pushSubscriberToHq({
+          email,
+          site: "skynetjoe",
+          source: hqSourceSlug(source, "unknown-tool"),
+          first_name: null,
+          page: page ?? null,
+          consent: payload.newsletterOptIn === true,
+        });
+        if (!ok) console.warn("[lead-capture] HQ lead mirror did not confirm", { source });
+      } catch (err) {
+        console.warn("[lead-capture] HQ lead mirror threw", err);
+      }
+      return;
+    }
     if (nlOverCap) {
       console.warn("[lead-capture] newsletter site-wide cap hit; HQ mirror skipped");
       return;
@@ -194,6 +232,7 @@ export async function POST(req: Request) {
         email,
         site,
         source: "popup",
+        consent: true,
         first_name: nlFirstName ?? null,
         interest: nlInterest ?? null,
         page: typeof nl.page === "string" && PATH_RE.test(nl.page) ? nl.page : (page ?? null),

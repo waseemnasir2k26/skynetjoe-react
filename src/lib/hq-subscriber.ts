@@ -14,7 +14,25 @@ export type HqSubscriber = {
   first_name?: string | null;
   interest?: string | null;
   page?: string | null;
+  /**
+   * true = newsletter list + welcome email (popup, or a ticked opt-in box).
+   * false/omitted = HQ stores the address as a lead only and never marketing-mails it.
+   */
+  consent?: boolean;
 };
+
+/** HQ validates source as ^[a-z0-9_-]{1,32}$ — clamp any free-form slug to that. */
+export function hqSourceSlug(raw: string, fallback = "unknown"): string {
+  const s = raw.toLowerCase().replace(/[^a-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 32);
+  return s.replace(/-+$/g, "") || fallback;
+}
+
+/** First word of a human name, stripped of control chars/angle brackets, max 80 (HQ limit). */
+export function hqFirstName(raw: unknown): string | null {
+  if (typeof raw !== "string") return null;
+  const cleaned = raw.replace(/[\x00-\x1f\x7f<>]/g, "").trim().split(/\s+/)[0] ?? "";
+  return cleaned.slice(0, 80) || null;
+}
 
 export async function pushSubscriberToHq(s: HqSubscriber): Promise<boolean> {
   const url = process.env.HQ_SUBSCRIBER_URL?.trim();

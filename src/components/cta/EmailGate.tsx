@@ -17,7 +17,7 @@
  * Cream tokens — bg cream-3, ink, terracotta accent. Fraunces/Onest/Plex Mono.
  */
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 import { Loader2 } from "lucide-react";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -71,6 +71,8 @@ export default function EmailGate({
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [newsletterOptIn, setNewsletterOptIn] = useState(false);
+  const optInId = useId();
   // hydration: null = still checking storage, false = no stored email, true = unlock'd
   const [storedUnlock, setStoredUnlock] = useState<boolean | null>(null);
 
@@ -117,6 +119,7 @@ export default function EmailGate({
       email: trimmed,
       source: toolSlug,
       capturedAt: new Date().toISOString(),
+      ...(newsletterOptIn ? { newsletterOptIn: true } : {}),
     };
 
     // Fire to backend — short await for toast feedback, never blocks unlock
@@ -273,6 +276,36 @@ export default function EmailGate({
               {error}
             </p>
           )}
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: 8,
+              marginTop: 14,
+              maxWidth: "52ch",
+            }}
+          >
+            <input
+              id={optInId}
+              type="checkbox"
+              checked={newsletterOptIn}
+              disabled={submitting}
+              onChange={(e) => setNewsletterOptIn(e.target.checked)}
+              style={{ marginTop: 2, flexShrink: 0, accentColor: "var(--terracotta)" }}
+            />
+            <label
+              htmlFor={optInId}
+              style={{
+                fontSize: 12,
+                color: "var(--ink-2)",
+                lineHeight: 1.5,
+                fontFamily: "var(--font-sans)",
+              }}
+            >
+              Also send me the free SkynetLabs email list: a welcome email plus 3 more over 2 weeks, then occasional. Unsubscribe anytime.
+            </label>
+          </div>
 
           <button
             type="submit"
