@@ -130,7 +130,7 @@ function AuditForm({ id }: { id?: string }) {
       emailPlaceholder="you@yourcompany.com"
       buttonLabel="Get my free missed-call audit"
       submittingLabel="Sending…"
-      successHeading="Got it — check your inbox."
+      successHeading="Got it. I'll email it to you."
       successBody="I'll personally send you the breakdown within one business day. If you don't hear from me by then, email info@skynetjoe.com and I'll chase it down."
     />
   );

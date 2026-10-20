@@ -378,7 +378,7 @@ export default function Library() {
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
           One missing field, one weird output, one tool you wish existed — tell
-          me. I read every reply.
+          me. Feedback is saved for me to read.
         </p>
         <form action="/api/tool-feedback" method="POST" className="space-y-3">
           <input type="hidden" name="tool" value="prompt-library" />
@@ -399,10 +399,10 @@ export default function Library() {
             }}
           />
           <input
-            aria-label="Email (optional — only if you want a reply)"
+            aria-label="Email (optional, if you want a reply; also saved to our CRM)"
             type="email"
             name="email"
-            placeholder="Email (optional — only if you want a reply)"
+            placeholder="Email (optional, if you want a reply; also saved to our CRM)"
             className="w-full rounded-xl px-4 py-2.5 text-[var(--ink)] text-sm focus:outline-none transition"
             style={{
               background: "var(--cream-3)",
@@ -559,7 +559,7 @@ function MonthlyPromptsCapture() {
           <Check className="h-5 w-5 text-[var(--terracotta-aa)]" />
           <span>
             {joined === "confirmed"
-              ? "You’re on the email list. Watch your inbox for a welcome email."
+              ? "You're in. If you're new to the list, a welcome email is on its way."
               : joined === "pending"
                 ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
                 : "Saved. Tick the box next time if you want the email list."}

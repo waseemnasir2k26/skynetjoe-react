@@ -493,7 +493,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
           One missing field, one weird output, one tool you wish existed — tell
-          me. I read every reply.
+          me. Feedback is saved for me to read.
         </p>
         <form action="/api/tool-feedback" method="POST" className="space-y-3">
           <input type="hidden" name="tool" value="system-prompt-generator" />
@@ -511,7 +511,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
           <input
             type="email"
             name="email"
-            placeholder="Email (optional — only if you want a reply)"
+            placeholder="Email (optional, if you want a reply; also saved to our CRM)"
             className="spg-input"
           />
           <button

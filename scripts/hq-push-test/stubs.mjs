@@ -24,7 +24,7 @@ export const appendLeadToSink = async (lead) => {
 };
 export const pingLeadFirehose = async (p) => {
   rec("pings", p);
-  return { sent: true };
+  return st.pingFails ? { sent: false, reason: "HTTP 500" } : { sent: true };
 };
 export const sendCapiLead = async () => ({ sent: true });
 export const TOOL_SLUGS = ["aeo-audit"];

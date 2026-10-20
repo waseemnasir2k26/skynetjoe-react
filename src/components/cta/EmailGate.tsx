@@ -153,10 +153,10 @@ export default function EmailGate({
       // Only promise the welcome email when the server said HQ confirmed the sign-up.
       setNotice(
         listState === "confirmed"
-          ? "You're on the email list. Watch your inbox for a welcome email."
+          ? "You're in. If you're new to the list, a welcome email is on its way."
           : listState === "pending"
             ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
-            : "Couldn't save your email-list sign-up. Try again, or email waseem@skynetjoe.com.",
+            : "Couldn't save your email-list sign-up. Email waseem@skynetjoe.com and I'll add you.",
       );
       await new Promise((resolve) => setTimeout(resolve, 2200));
     }

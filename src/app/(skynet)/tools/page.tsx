@@ -125,7 +125,7 @@ export default async function ToolsIndexPage({
               border: "1px solid var(--terracotta)",
             }}
           >
-            Feedback received — thank you. I read every reply.
+            Feedback received — thank you. It is saved for me to read.
           </p>
         </div>
       )}

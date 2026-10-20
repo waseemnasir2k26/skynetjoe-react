@@ -70,7 +70,7 @@ const reset = () => {
   hqCalls = [];
   hqMode = "ok";
   globalThis.__stub = Object.assign(globalThis.__stub, {
-    ghlConfirm: true, sinkOk: false, noteFails: false, triage: [], upserts: [], leadsGhl: [], notes: [], pings: [], sinks: [],
+    ghlConfirm: true, sinkOk: false, noteFails: false, pingFails: false, triage: [], upserts: [], leadsGhl: [], notes: [], pings: [], sinks: [],
   });
 };
 let passed = 0;
@@ -351,6 +351,38 @@ await t("discovery: invalid payload pushes nothing; HQ failure keeps status", as
   hqMode = "throw";
   const res = await discovery.POST(post("https://x.test/a", { name: "D L", email: "d@b.co", pain: "long enough pain" }));
   assert.equal(res.status, base.status);
+});
+
+await t("discovery: n8n lead alert carries the brief, unique contact_id, counts as delivery", async () => {
+  const body = { name: "Dana Lee", email: "d@b.co", pain: "leads go cold overnight", newsletterOptIn: true };
+  // Prod shape: no GHL webhook, no Resend, sink unwritable -> only the alert can deliver.
+  const r1 = await discovery.POST(post("https://x.test/a", body));
+  assert.equal(r1.status, 200);
+  assert.equal((await r1.json()).alert, true);
+  const r2 = await discovery.POST(post("https://x.test/a", body));
+  assert.equal(r2.status, 200);
+  const st = globalThis.__stub;
+  assert.equal(st.pings.length, 2);
+  assert.match(st.pings[0].contactId, /^contact-/);
+  assert.notEqual(st.pings[0].contactId, st.pings[1].contactId);
+  assert.equal(st.pings[0].email, "d@b.co");
+  assert.equal(st.pings[0].firstName, "Dana");
+  assert.equal(st.pings[0].lastName, "Lee");
+  assert.equal(st.pings[0].extras.pain, "leads go cold overnight");
+  assert.equal(st.pings[0].extras.newsletter_optin, true);
+  // sink is still written as a backup when GHL+email did not confirm
+  assert.equal(st.sinks.length, 2);
+  assert.equal(st.sinks[0].leadId, st.pings[0].contactId);
+});
+await t("discovery: alert failed + sink unwritable -> honest 502; sink written -> 200", async () => {
+  globalThis.__stub.pingFails = true;
+  const r = await discovery.POST(post("https://x.test/a", { name: "D L", email: "d@b.co", pain: "long enough pain" }));
+  assert.equal(r.status, 502);
+  globalThis.__stub.sinkOk = true;
+  const r2 = await discovery.POST(post("https://x.test/a", { name: "D L", email: "d@b.co", pain: "long enough pain" }));
+  assert.equal(r2.status, 200);
+  assert.equal((await r2.json()).alert, false);
+  globalThis.__stub.pingFails = false;
 });
 
 // ---- /api/webhooks/calendly

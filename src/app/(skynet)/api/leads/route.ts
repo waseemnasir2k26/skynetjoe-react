@@ -596,14 +596,15 @@ async function confirmOrEscalate(
   if (sink.written && sink.durable) {
     console.warn(
       "[leads] CRM and email both unavailable — lead persisted to the on-disk sink. Read it with: cat .data/leads.jsonl",
-      { ...lead, reason, file: sink.file },
+      // Ids + source only: never log the message/friend/contact fields.
+      { leadId: lead.leadId, source: lead.source, reason, file: sink.file },
     );
     return { confirmed: false, emailFallbackSent: false, sunk: true };
   }
 
   console.error(
     "[leads] LEAD AT RISK — no CRM write, no email fallback, no durable sink. Check GHL_API_TOKEN and RESEND_API_KEY.",
-    { ...lead, reason },
+    { leadId: lead.leadId, source: lead.source, reason },
   );
   return { confirmed: false, emailFallbackSent: false, sunk: false };
 }

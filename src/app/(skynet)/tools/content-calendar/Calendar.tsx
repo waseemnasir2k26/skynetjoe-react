@@ -1096,14 +1096,14 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
         </h3>
         <p className="text-sm text-[var(--ink-2)] mb-4">
           One missing field, one weird output, one tool you wish existed — tell
-          me. I read every reply.
+          me. Feedback is saved for me to read.
         </p>
         {feedback.state === "sent" ? (
           <p
             role="status"
             className="rounded-xl border border-[rgba(138,154,123,0.40)] bg-[rgba(138,154,123,0.10)] px-4 py-3 text-sm text-[var(--ink)]"
           >
-            Sent — thank you. I read every reply.
+            Sent — thank you. Feedback is saved for me to read.
           </p>
         ) : (
           <form onSubmit={onSendFeedback} className="space-y-3">
@@ -1130,14 +1130,14 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
               }}
             />
             <input
-              aria-label="Email (optional — only if you want a reply)"
+              aria-label="Email (optional, if you want a reply; also saved to our CRM)"
               type="email"
               name="email"
               value={feedback.email}
               onChange={(e) =>
                 setFeedback((f) => ({ ...f, email: e.target.value }))
               }
-              placeholder="Email (optional — only if you want a reply)"
+              placeholder="Email (optional, if you want a reply; also saved to our CRM)"
               className="cc-input"
             />
             {feedback.state === "error" && (

@@ -294,7 +294,7 @@ export default function NewsletterPopup({
 
             {status === "success" ? (
               <div className="nlp-body">
-                <p className="nlp-eyebrow">You&apos;re on the list</p>
+                <p className="nlp-eyebrow">{listPending ? "Saved" : "You’re on the list"}</p>
                 <h2 id="nlp-title" className="nlp-title">
                   Thanks{firstName.trim() ? `, ${firstName.trim()}` : ""}.{" "}
                   {listPending

@@ -94,7 +94,7 @@ export default function ContactBriefForm() {
         const j = (await res.json().catch(() => null)) as { newsletter?: string } | null;
         setListNotice(
           j?.newsletter === "confirmed"
-            ? "You're on the email list. Watch your inbox for a welcome email."
+            ? "You're in. If you're new to the list, a welcome email is on its way."
             : j?.newsletter === "pending"
               ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
               : "Couldn't save your email-list sign-up. Try again, or email waseem@skynetjoe.com.",

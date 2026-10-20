@@ -1,4 +1,6 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
+import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 import { appendLeadToSink } from "@/lib/lead-sink";
 import { hqFirstName, pushToHqCapped } from "@/lib/hq-subscriber";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
@@ -216,9 +218,32 @@ export async function POST(req: Request) {
     "discovery",
   );
 
-  const [ghlRes, emailRes] = await Promise.allSettled([
+  // n8n lead alert (MA-04). In production the GHL webhook and Resend are not
+  // configured, so this is what actually tells us a brief arrived. MA-04 dedupes
+  // on contact_id, so every submission gets its own unique id.
+  const leadId = `contact-${randomUUID()}`;
+  const nameParts = payload.name.trim().split(/\s+/);
+  const pingP = pingLeadFirehose({
+    contactId: leadId,
+    email: payload.email,
+    firstName: nameParts[0],
+    lastName: nameParts.slice(1).join(" ") || undefined,
+    source: "contact",
+    score: lead,
+    extras: {
+      pain: payload.pain,
+      company:
+        typeof payload.company === "string" && payload.company.trim()
+          ? payload.company.trim().slice(0, 200)
+          : null,
+      newsletter_optin: payload.newsletterOptIn === true,
+    },
+  }).catch((err) => ({ sent: false, reason: String(err) }));
+
+  const [ghlRes, emailRes, pingRes] = await Promise.allSettled([
     sendToGhl(payload, lead),
     sendEmailFallback(payload, lead),
+    pingP,
   ]);
   const hqConfirmed = await hqPush;
   if (!hqConfirmed) console.warn("[discovery] HQ mirror did not confirm");
@@ -229,20 +254,30 @@ export async function POST(req: Request) {
   const ghlOk = ghlRes.status === "fulfilled" && ghlRes.value.ok;
   const emailOk = emailRes.status === "fulfilled" && emailRes.value.ok;
 
+  const pingOk = pingRes.status === "fulfilled" && pingRes.value.sent;
+  if (!pingOk) {
+    console.warn("[discovery] lead alert not sent", {
+      reason: pingRes.status === "fulfilled" ? pingRes.value.reason : "rejected",
+    });
+  }
+
   if (!ghlOk && !emailOk) {
     console.error("[discovery] neither GHL nor email confirmed", {
-      ghlRes,
-      emailRes,
+      leadId,
+      alertSent: pingOk,
     });
     const sink = await appendLeadToSink({
       email: payload.email,
       source: payload.source || "contact",
       capturedAt: new Date().toISOString(),
       reason: "discovery: ghl+email unconfirmed",
+      leadId,
       payload: { name: payload.name, pain: payload.pain, lead },
       ...(payload.newsletterOptIn === true ? { newsletterOptIn: true } : {}),
     });
-    if (!sink.written) {
+    // The sink is always written as a backup; a sent n8n alert counts as
+    // delivery, so the visitor only sees an error when nothing took the brief.
+    if (!sink.written && !pingOk) {
       return NextResponse.json(
         { error: "Couldn't deliver brief. Email info@skynetjoe.com directly." },
         { status: 502 },
@@ -258,5 +293,6 @@ export async function POST(req: Request) {
     lead_score: lead,
     ghl: ghlOk,
     email: emailOk,
+    alert: pingOk,
   });
 }
