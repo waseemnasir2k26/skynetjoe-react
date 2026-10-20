@@ -103,6 +103,7 @@ async function sendToGhl(payload: Payload, lead: "HOT" | "WARM" | "COLD") {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
+    signal: AbortSignal.timeout(4000),
   });
   return { ok: res.ok, status: res.status };
 }
@@ -154,6 +155,7 @@ async function sendEmailFallback(payload: Payload, lead: "HOT" | "WARM" | "COLD"
       subject,
       html,
     }),
+    signal: AbortSignal.timeout(4000),
   });
   return { ok: res.ok, status: res.status };
 }
@@ -193,6 +195,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  if (
+    typeof payload.name !== "string" ||
+    typeof payload.email !== "string" ||
+    typeof payload.pain !== "string"
+  ) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
   if (!payload.name || !payload.email || !payload.pain) {
     return NextResponse.json(
       { error: "Name, email and what's broken are required." },
@@ -231,7 +240,7 @@ export async function POST(req: Request) {
     source: "contact",
     score: lead,
     extras: {
-      pain: payload.pain,
+      pain: payload.pain.slice(0, 2000),
       company:
         typeof payload.company === "string" && payload.company.trim()
           ? payload.company.trim().slice(0, 200)

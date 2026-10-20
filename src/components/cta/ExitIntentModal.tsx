@@ -13,6 +13,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X, Loader2, CheckCircle2 } from "lucide-react";
 
@@ -475,7 +476,10 @@ export default function ExitIntentModal() {
                   marginTop: 4,
                 }}
               >
-                — One-shot · I personally review every URL · No spam
+                — One-shot · I personally review every URL · No spam ·{" "}
+                <Link href="/privacy-policy" style={{ textDecoration: "underline" }}>
+                  Privacy
+                </Link>
               </p>
             </form>
           )}

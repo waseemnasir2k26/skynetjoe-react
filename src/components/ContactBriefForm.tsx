@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useId, useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
@@ -271,6 +272,22 @@ export default function ContactBriefForm() {
           Also send me the free SkynetLabs email list: a welcome email plus 3 more over 2 weeks, then occasional. Unsubscribe anytime.
         </label>
       </div>
+
+      <p
+        style={{
+          margin: 0,
+          fontFamily: "var(--font-sans)",
+          fontSize: 12,
+          lineHeight: 1.5,
+          color: "var(--ink-2)",
+        }}
+      >
+        By sending, you agree to our{" "}
+        <Link href="/privacy-policy" style={{ textDecoration: "underline" }}>
+          privacy policy
+        </Link>
+        .
+      </p>
 
       {error && (
         <p

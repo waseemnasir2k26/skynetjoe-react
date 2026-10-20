@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
 import { SITE, pageTitle, pageDescription } from "@/lib/site";
+import Link from "next/link";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
 // Canonical/OG host resolves via SITE.url (env-overridable, defaults to the
@@ -417,8 +418,9 @@ export default function FreightVoiceLandingPage() {
         </p>
         <AuditForm id="audit-form" />
         <p className="lp-frt-note">
-          One email, from me directly. No sales call, no funnel. I don&apos;t
-          share your info.
+          One email, from me directly. No sales call, no funnel. Your details
+          stay with us and the services listed in our{" "}
+          <Link href="/privacy-policy">privacy policy</Link>.
         </p>
         <a
           href="https://calendly.com/skynetlabs/schedule-a-free-consultation"

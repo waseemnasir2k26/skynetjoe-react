@@ -425,6 +425,27 @@ await t("tool-feedback: email present -> lead-only push; absent -> none", async 
   await feedback.POST(post("https://x.test/a", { tool: "aeo-audit", message: "works great" }));
   assert.equal(hqCalls.length, 0);
 });
+await t("tool-feedback: n8n alert carries tool/message/email with a unique feedback- id", async () => {
+  const long = "x".repeat(3000);
+  await feedback.POST(post("https://x.test/a", { tool: "aeo-audit", message: long, email: "f@b.co" }));
+  await feedback.POST(post("https://x.test/a", { tool: "aeo-audit", message: "second one" }));
+  const st = globalThis.__stub;
+  assert.equal(st.pings.length, 2);
+  assert.match(st.pings[0].contactId, /^feedback-/);
+  assert.notEqual(st.pings[0].contactId, st.pings[1].contactId);
+  assert.equal(st.pings[0].email, "f@b.co");
+  assert.equal(st.pings[0].extras.tool, "aeo-audit");
+  assert.equal(st.pings[0].extras.message.length, 2000);
+  // alert down: the log file still keeps it, so the visitor still gets ok
+  globalThis.__stub.pingFails = true;
+  const res = await feedback.POST(post("https://x.test/a", { tool: "aeo-audit", message: "third one" }));
+  assert.equal(res.status, 200);
+});
+await t("discovery: non-string fields are rejected with 400", async () => {
+  const res = await discovery.POST(post("https://x.test/a", { name: { a: 1 }, email: "d@b.co", pain: "long enough pain" }));
+  assert.equal(res.status, 400);
+  assert.equal(hqCalls.length, 0);
+});
 await t("tool-feedback: HQ throw never changes the response", async () => {
   hqMode = "throw";
   const res = await feedback.POST(post("https://x.test/a", { tool: "aeo-audit", message: "works great", email: "f@b.co" }));

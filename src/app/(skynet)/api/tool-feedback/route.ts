@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { randomUUID } from "node:crypto";
 import { upsertGhlContact } from "@/lib/ghl";
+import { pingLeadFirehose } from "@/lib/ma-lead-ping";
 import { pushToHqCapped } from "@/lib/hq-subscriber";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { TOOL_SLUGS } from "@/data/tools-registry";
@@ -141,9 +143,9 @@ async function appendLog(args: {
   tool: string;
   message: string;
   email?: string;
-}): Promise<void> {
+}): Promise<boolean> {
   // Vercel: /tmp is writable, ephemeral. Local dev: also writable.
-  // We swallow all errors — Slack is the real durable sink.
+  // Reports success so the route can tell when NOTHING kept the feedback.
   try {
     const dir = process.env.VERCEL ? "/tmp" : path.join(process.cwd(), ".data");
     await fs.mkdir(dir, { recursive: true });
@@ -155,8 +157,9 @@ async function appendLog(args: {
         email: args.email ?? null,
       }) + "\n";
     await fs.appendFile(path.join(dir, "tool-feedback.log"), line, "utf8");
+    return true;
   } catch {
-    // swallow
+    return false;
   }
 }
 
@@ -234,9 +237,36 @@ export async function POST(req: Request) {
         )
       : Promise.resolve(false);
 
-    const slackOk = await forwardSlack({ tool, message, email });
-    // Always also append to log as belt-and-suspenders
-    await appendLog({ tool, message, email });
+    // n8n lead alert -> Slack. MA-04 dedupes on contact_id, so each feedback
+    // gets its own unique id. Runs in parallel with the Slack hook and the log.
+    const pingP = pingLeadFirehose({
+      contactId: `feedback-${randomUUID()}`,
+      email,
+      source: "tool-feedback",
+      extras: { tool, message: message.slice(0, 2000) },
+    }).catch(() => ({ sent: false }));
+
+    const [slackOk, logOk, ping] = await Promise.all([
+      forwardSlack({ tool, message, email }),
+      // Always also append to log as belt-and-suspenders
+      appendLog({ tool, message, email }),
+      pingP,
+    ]);
+    const pingOk = Boolean(ping.sent);
+    if (!slackOk && !pingOk && !logOk) {
+      console.error("[tool-feedback] nothing kept the feedback", { tool });
+      await hqPush;
+      if (isForm) {
+        return NextResponse.redirect(
+          new URL("/tools?feedback=error", req.url),
+          303,
+        );
+      }
+      return NextResponse.json(
+        { ok: false, error: "couldn't save your feedback, please try again" },
+        { status: 502 },
+      );
+    }
 
     // Email present → fire-and-forget GHL upsert so replies land in the CRM.
     // upsertGhlContact never throws (dev-skips on missing env / API failure);
@@ -263,7 +293,7 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json({ ok: true, slack: slackOk });
+    return NextResponse.json({ ok: true, slack: slackOk, alert: pingOk });
   } catch {
     if (isForm) {
       return NextResponse.redirect(

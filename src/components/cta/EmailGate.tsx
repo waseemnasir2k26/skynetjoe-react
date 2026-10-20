@@ -124,7 +124,8 @@ export default function EmailGate({
     };
 
     // Fire to backend — short await for toast feedback, never blocks unlock
-    // undefined = no confirmed response (request failed, threw, or timed out)
+    // listState: "confirmed" | "pending" = server answered; "failed" = the request
+    // errored; undefined = no answer yet when the wait ran out (it may still succeed).
     let listState: string | undefined;
     try {
       await Promise.race([
@@ -134,16 +135,21 @@ export default function EmailGate({
           body: JSON.stringify(payload),
         })
           .then(async (r) => {
-            if (newsletterOptIn && r.ok) {
+            if (newsletterOptIn) {
+              if (!r.ok) {
+                listState = "failed";
+                return;
+              }
               const j = (await r.json().catch(() => null)) as { newsletter?: string } | null;
-              listState = j?.newsletter === "confirmed" ? "confirmed" : j?.newsletter === "pending" ? "pending" : undefined;
+              listState = j?.newsletter === "confirmed" ? "confirmed" : "pending";
             }
           })
           .catch((err) => {
             console.log("[email-gate] /api/lead-capture failed silently", err);
+            if (newsletterOptIn) listState = "failed";
           }),
         // Opted-in visitors wait a little longer so the notice below is truthful.
-        new Promise((resolve) => setTimeout(resolve, newsletterOptIn ? 5000 : 1500)),
+        new Promise((resolve) => setTimeout(resolve, newsletterOptIn ? 8000 : 1500)),
       ]);
     } catch {
       // Swallow — local save already done, unlock proceeds
@@ -154,9 +160,9 @@ export default function EmailGate({
       setNotice(
         listState === "confirmed"
           ? "You're in. If you're new to the list, a welcome email is on its way."
-          : listState === "pending"
-            ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
-            : "Couldn't save your email-list sign-up. Email waseem@skynetjoe.com and I'll add you.",
+          : listState === "failed"
+            ? "Couldn't save your email-list sign-up. Email waseem@skynetjoe.com and I'll add you."
+            : "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand.",
       );
       await new Promise((resolve) => setTimeout(resolve, 2200));
     }

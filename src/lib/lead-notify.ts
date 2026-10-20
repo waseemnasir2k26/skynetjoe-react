@@ -91,6 +91,7 @@ export async function sendLeadFallbackEmail(
         subject,
         html,
       }),
+      signal: AbortSignal.timeout(4000),
     });
     return { ok: res.ok, status: res.status };
   } catch (err) {
