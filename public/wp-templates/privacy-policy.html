@@ -91,7 +91,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li><strong>Resend</strong> — transactional email service. It is a backup route that can send us an internal notification carrying the same lead details, and it is used only when it is configured on our server; when it is not, the details are kept in a file on our web host server and in our operations dashboard instead.</li>
     <li><strong>Our operations dashboard</strong> (hq.skynetjoe.com, self-hosted on a server rented from Contabo in France) — stores email-list sign-ups and the lead-form details described in section 2 (email, optional first name, chosen topic, page, which site, and whether you ticked the email-list box).</li>
     <li><strong>Brevo</strong> — email-sending service; receives the same details from our dashboard (lead-form contacts go on a separate list that is never emailed) and, for email-list sign-ups, sends the welcome email, the welcome series and the newsletter, and records opens and link clicks on them. Every one of those emails carries Brevo's unsubscribe link.</li>
-    <li><strong>Slack</strong> — receives tool-feedback messages and the optional email you attach to them, only when that Slack hook is configured; otherwise feedback is saved in a file on our web host server.</li>
+    <li><strong>Slack</strong> — our n8n lead alert posts each new lead (name, email and, for the contact form, the problem you described) to our internal Slack so we can follow up quickly. Tool-feedback messages and the optional email attached to them also go there, only when that Slack hook is configured; otherwise feedback is saved in a file on our web host server.</li>
     <li><strong>Enquiry triage</strong> — when enabled, the name, company, message and page of a contact-form submission (never your email or phone) are sent to a typed-decision model (TypeSafe Jev via OpenRouter) to decide how quickly we reply. Email addresses and phone numbers typed into the message itself are stripped before it is sent. Not used for training.</li>
     <li><strong>Calendly</strong> — runs the call booking on /contact and the landing pages; when you book, your name, email, time zone and any answers you type go to Calendly under its own privacy terms, and Calendly emails us the booking details. If we switch on Calendly's booking notifications, the booking name and email are also stored in our operations dashboard and in Brevo as a no-marketing contact.</li>
     <li><strong>GitHub</strong> — source code storage. No client business data lives here unless a client has explicitly asked us to host their repo for them.</li>
@@ -136,7 +136,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li>Resend — US (internal lead-notification emails, only if that backup is configured).</li>
     <li>Brevo — EU, France (email-list contacts and the emails sent to them).</li>
     <li>Our operations dashboard — our self-hosted VPS, EU, France (email-list sign-ups).</li>
-    <li>Slack — US (tool-feedback messages, only when configured).</li>
+    <li>Slack — US (lead alerts from our n8n server; tool-feedback messages, only when configured).</li>
     <li>Google Workspace — US and EU data centers.</li>
     <li>GitHub — US data centers.</li>
     <li>Stripe — US and EU.</li>
