@@ -30,6 +30,10 @@ export type FallbackLead = {
   email: string;
   source: string;
   capturedAt: string;
+  /** Free text carried with the lead (e.g. a referral's friend details). */
+  message?: string;
+  /** Visitor ticked the email-list box. */
+  newsletterOptIn?: boolean;
 };
 
 export async function sendLeadFallbackEmail(
@@ -58,9 +62,17 @@ export async function sendLeadFallbackEmail(
           <td style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);">${esc(lead.source)}</td>
         </tr>
         <tr>
-          <td style="padding:8px 12px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7ee4ff;">Captured at</td>
-          <td style="padding:8px 12px;">${esc(lead.capturedAt)}</td>
+          <td style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7ee4ff;">Captured at</td>
+          <td style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);">${esc(lead.capturedAt)}</td>
         </tr>
+        <tr>
+          <td style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7ee4ff;">Email list</td>
+          <td style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);">${lead.newsletterOptIn ? "YES - ticked the opt-in box" : "no"}</td>
+        </tr>${lead.message ? `
+        <tr>
+          <td style="padding:8px 12px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7ee4ff;">Message</td>
+          <td style="padding:8px 12px;">${esc(lead.message)}</td>
+        </tr>` : ""}
       </table>
     </div>
   `;

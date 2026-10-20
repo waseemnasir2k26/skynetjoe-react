@@ -109,8 +109,8 @@ export default function EditVideosClient({
           The reels, vlogs, and promos we make start as one prompt. Here&apos;s
           the whole library — {VIDEO_SKILL_COUNT} editing skills, each with the
           full master prompt you can paste into Claude Code and run. Drop your
-          email once — unlock all of them now, and get every new prompt as we
-          ship it.
+          email once to unlock all of them now. The email list for new prompts is
+          optional.
         </p>
         <a href="#unlock" className="evc-cta">
           Unlock the {VIDEO_SKILL_COUNT} prompts <ArrowRight size={16} />

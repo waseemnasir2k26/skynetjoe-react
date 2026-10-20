@@ -554,9 +554,9 @@ function MonthlyPromptsCapture() {
           <Check className="h-5 w-5 text-[var(--terracotta-aa)]" />
           <span>
             {joined === "confirmed"
-              ? "You’re in. Watch your inbox for a welcome email."
+              ? "You’re on the email list. Watch your inbox for a welcome email."
               : joined === "pending"
-                ? "Saved. Your email-list sign-up is being processed."
+                ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
                 : "Saved. Tick the box next time if you want the email list."}
           </span>
         </div>

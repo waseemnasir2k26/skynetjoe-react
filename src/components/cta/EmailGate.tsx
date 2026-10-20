@@ -37,7 +37,7 @@ export type EmailGateProps = {
   storageKey?: string;
   /** Sentence after the promise. Default "One result, sent to your inbox. The email list is optional." */
   subnote?: ReactNode;
-  /** Fine print under the button. Default "Stored locally + sent to my CRM…". */
+  /** Fine print under the button. Default "Sent to my CRM and email dashboard…". */
   finePrint?: ReactNode;
   /** Submit button label. Default "Show my result →". */
   buttonLabel?: string;
@@ -72,6 +72,7 @@ export default function EmailGate({
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [newsletterOptIn, setNewsletterOptIn] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
   const optInId = useId();
   // hydration: null = still checking storage, false = no stored email, true = unlock'd
   const [storedUnlock, setStoredUnlock] = useState<boolean | null>(null);
@@ -123,19 +124,38 @@ export default function EmailGate({
     };
 
     // Fire to backend — short await for toast feedback, never blocks unlock
+    let listState: string | undefined;
     try {
       await Promise.race([
         fetch("/api/lead-capture", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }).catch((err) => {
-          console.log("[email-gate] /api/lead-capture failed silently", err);
-        }),
-        new Promise((resolve) => setTimeout(resolve, 1500)),
+        })
+          .then(async (r) => {
+            if (newsletterOptIn && r.ok) {
+              const j = (await r.json().catch(() => null)) as { newsletter?: string } | null;
+              listState = j?.newsletter;
+            }
+          })
+          .catch((err) => {
+            console.log("[email-gate] /api/lead-capture failed silently", err);
+          }),
+        // Opted-in visitors wait a little longer so the notice below is truthful.
+        new Promise((resolve) => setTimeout(resolve, newsletterOptIn ? 5000 : 1500)),
       ]);
     } catch {
       // Swallow — local save already done, unlock proceeds
+    }
+
+    if (newsletterOptIn) {
+      // Only promise the welcome email when the server said HQ confirmed the sign-up.
+      setNotice(
+        listState === "confirmed"
+          ? "You're on the email list. Watch your inbox for a welcome email."
+          : "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand.",
+      );
+      await new Promise((resolve) => setTimeout(resolve, 2200));
     }
 
     setSubmitting(false);
@@ -263,6 +283,20 @@ export default function EmailGate({
             }}
           />
 
+          {notice && (
+            <p
+              role="status"
+              style={{
+                fontSize: 13,
+                color: "var(--ink-2)",
+                marginTop: 10,
+                fontFamily: "var(--font-sans)",
+              }}
+            >
+              {notice}
+            </p>
+          )}
+
           {error && (
             <p
               role="alert"
@@ -350,7 +384,7 @@ export default function EmailGate({
             }}
           >
             {finePrint ??
-              "Stored locally + sent to my CRM. I'll be the only person who sees it."}
+              "Remembered in your browser and sent to my CRM and email dashboard. You only get the email list if you tick the box."}
           </p>
           {skippable && (
             <button

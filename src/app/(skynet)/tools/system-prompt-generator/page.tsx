@@ -48,7 +48,7 @@ const faqs = [
   },
   {
     q: "Is anything sent to a server?",
-    a: "Your inputs and the generated prompt are built entirely in your browser and saved to localStorage. The only thing sent to my CRM is the email you enter to unlock the full pack.",
+    a: "Your inputs and the generated prompt are built entirely in your browser and saved to localStorage. The only thing sent to my CRM and email dashboard is the email you enter to unlock the full pack (you only get the email list if you tick the box).",
   },
 ];
 

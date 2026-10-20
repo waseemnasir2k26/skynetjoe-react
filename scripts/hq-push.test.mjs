@@ -70,7 +70,7 @@ const reset = () => {
   hqCalls = [];
   hqMode = "ok";
   globalThis.__stub = Object.assign(globalThis.__stub, {
-    ghlConfirm: true, sinkOk: false, upserts: [], leadsGhl: [], notes: [], pings: [], sinks: [],
+    ghlConfirm: true, sinkOk: false, noteFails: false, triage: [], upserts: [], leadsGhl: [], notes: [], pings: [], sinks: [],
   });
 };
 let passed = 0;
@@ -251,6 +251,30 @@ await t("referral: friend details go to GHL note + n8n ping + sink, never to HQ"
   assert.equal(globalThis.__stub.sinks.length, 1);
   assert.match(JSON.stringify(globalThis.__stub.sinks[0].payload), /friend@b\.co/);
   assert.equal(globalThis.__stub.pings[0].extras.referred_email, "friend@b.co"); // ping still fires (leadId key)
+  assert.ok(!JSON.stringify(hqCalls).includes("friend@b.co"));
+});
+await t("referral: failed GHL note -> full payload kept in sink; unique ping key; no triage", async () => {
+  const body = {
+    source: "referral", email: "referrer@b.co",
+    qualification: { customAnswers: { referred_email: "friend@b.co", referred_name: "Fran" } },
+  };
+  globalThis.__stub.noteFails = true;
+  globalThis.__stub.sinkOk = true;
+  const res = await leads.POST(post("https://x.test/a", body));
+  assert.equal(res.status, 200);
+  const st = globalThis.__stub;
+  assert.equal(st.sinks.length, 1);
+  assert.match(JSON.stringify(st.sinks[0].payload), /friend@b\.co/);
+  assert.match(st.sinks[0].message, /friend@b\.co/);
+  assert.equal(st.triage.length, 0, "referral must not reach the triage model");
+  await leads.POST(post("https://x.test/a", body));
+  assert.equal(st.pings.length, 2);
+  assert.notEqual(st.pings[0].contactId, st.pings[1].contactId, "dedupe key unique per submission");
+  assert.match(st.pings[0].contactId, /^ref-/);
+  assert.equal(st.pings[0].extras.ghl_contact_id, "c1");
+  // non-referral still reaches triage
+  await leads.POST(post("https://x.test/a", { email: "q@b.co", qualification: {} }));
+  assert.equal(st.triage.length, 1);
   assert.ok(!JSON.stringify(hqCalls).includes("friend@b.co"));
 });
 await t("opt-in: newsletter-optin GHL tag, durable sink flag, confirmed/pending response", async () => {

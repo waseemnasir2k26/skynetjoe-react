@@ -103,6 +103,7 @@ export default function LeadCaptureForm({
   const optInId = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [listNotice, setListNotice] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -145,6 +146,15 @@ export default function LeadCaptureForm({
       if (!res.ok) {
         const body = await res.json().catch(() => ({}) as { error?: string });
         throw new Error(body?.error || `Server error ${res.status}`);
+      }
+
+      if (newsletterOptIn) {
+        const j = (await res.json().catch(() => null)) as { newsletter?: string } | null;
+        setListNotice(
+          j?.newsletter === "confirmed"
+            ? "You're on the email list. Watch your inbox for a welcome email."
+            : "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand.",
+        );
       }
 
       // Fire the browser Lead only on CONFIRMED capture (better signal than
@@ -193,6 +203,11 @@ export default function LeadCaptureForm({
         <p style={{ fontSize: "0.92rem", margin: 0, opacity: 0.85 }}>
           {successBody}
         </p>
+        {listNotice && (
+          <p style={{ fontSize: "0.85rem", margin: "8px 0 0", opacity: 0.85 }}>
+            {listNotice}
+          </p>
+        )}
         {successCta}
       </div>
     );

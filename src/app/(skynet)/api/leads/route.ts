@@ -367,17 +367,20 @@ export async function POST(req: Request) {
   const hqConfirmed = await hqMirror;
 
   // Referral: park the friend's details on the referrer's GHL contact as a note.
+  let referralNoteFailed = false;
   if (referred && referred.email && ghl.contactId !== "dev-skip") {
     try {
-      await addGhlNote(
+      const noteOk = await addGhlNote(
         ghl.contactId,
         `Referral intro requested by ${email}. Friend: ${referred.email}` +
           (referred.name ? ` (${referred.name})` : "") +
           (referred.note ? `. Note: ${referred.note}` : "") +
           ". Reach out within 24 hours; $200 credit applies if they book.",
       );
+      referralNoteFailed = !noteOk;
     } catch (err) {
       console.warn("[leads] referral GHL note failed", err);
+      referralNoteFailed = true;
     }
   }
 
@@ -407,8 +410,9 @@ export async function POST(req: Request) {
   // this is an alert, not a delivery path, and it must never be able
   // to fail a lead or hold a visitor's form open.
   void pingLeadFirehose({
-    contactId:
-      referred && ghl.contactId === "dev-skip" ? leadId : ghl.contactId,
+    // Referral: leadId is unique per submission, so MA-04's contact_id dedupe
+    // can never swallow a second referral from the same referrer contact.
+    contactId: referred ? `ref-${leadId}` : ghl.contactId,
     email,
     phone: payload.phone || payload.qualification?.phone,
     firstName: payload.firstName || payload.qualification?.firstName,
@@ -425,6 +429,7 @@ export async function POST(req: Request) {
       utm_content: payload.utm?.content ?? null,
       ...(referred
         ? {
+            ghl_contact_id: ghl.contactId === "dev-skip" ? null : ghl.contactId,
             referred_email: referred.email || null,
             referred_name: referred.name || null,
             referred_note: referred.note || null,
@@ -446,7 +451,7 @@ export async function POST(req: Request) {
     : resolveMessage(payload);
   const page = resolvePage(req, payload);
 
-  const { confirmed, emailFallbackSent, sunk } = await confirmOrEscalate(
+  const escalation = await confirmOrEscalate(
     ghl.contactId,
     {
       email,
@@ -461,6 +466,28 @@ export async function POST(req: Request) {
     },
     payload,
   );
+  const { confirmed, emailFallbackSent, sunk } = escalation;
+
+  // Referral whose GHL note did not land: the friend's details would otherwise
+  // exist only in the n8n alert. Keep them in the disk sink (full payload) and
+  // email them to us if Resend is configured.
+  let referralKept = false;
+  if (referred && referralNoteFailed) {
+    const reason = "referral: GHL note did not confirm";
+    const row = {
+      email,
+      source,
+      capturedAt,
+      name,
+      company,
+      message,
+      page,
+      leadId,
+    };
+    await sendLeadFallbackEmail(row, reason);
+    const sink = await appendLeadToSink({ ...row, reason, payload });
+    referralKept = sink.written && sink.durable;
+  }
 
   /**
    * Shadow triage (JEV_TRIAGE_WEBHOOK). Fire-and-forget, never awaited, never
@@ -469,17 +496,21 @@ export async function POST(req: Request) {
    * exactly the one a triage lane wants to see. It sits after the delivery
    * attempt so it can never delay or fail the visitor's response.
    */
-  postTriageShadow({
-    leadId,
-    source,
-    ts: capturedAt,
-    name,
-    company,
-    message,
-    page,
-  });
+  // Skipped for referrals: the message carries the friend's name/note, which
+  // must not leave for the triage model.
+  if (!referred) {
+    postTriageShadow({
+      leadId,
+      source,
+      ts: capturedAt,
+      name,
+      company,
+      message,
+      page,
+    });
+  }
 
-  if (!confirmed && !emailFallbackSent && !sunk) {
+  if (!confirmed && !emailFallbackSent && !sunk && !referralKept) {
     // Nothing took the lead. Tell the truth instead of showing a success state
     // over a discarded submission.
     return NextResponse.json(

@@ -45,7 +45,7 @@ const faqs = [
   },
   {
     q: "What do you collect?",
-    a: "Your answers stay in your browser's localStorage and never leave it. To unlock your full score and the axis breakdown you enter an email — that one email is sent to my CRM so I can follow up. No name, no company required. Your score lives in the URL only if you choose to share it.",
+    a: "Your answers stay in your browser's localStorage and never leave it. To unlock your full score and the axis breakdown you enter an email — that one email is sent to my CRM and email dashboard so I can follow up (you only get the email list if you tick the box). No name, no company required. Your score lives in the URL only if you choose to share it.",
   },
   {
     q: "Why 4 axes specifically?",

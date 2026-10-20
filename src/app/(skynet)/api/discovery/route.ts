@@ -130,6 +130,7 @@ async function sendEmailFallback(payload: Payload, lead: "HOT" | "WARM" | "COLD"
         ${row("Timeline", TIMELINE_LABELS[payload.timeline || ""] || payload.timeline)}
         ${row("Stack", stackList)}
         ${row("Heard from", payload.heard)}
+        ${row("Email list", payload.newsletterOptIn === true ? "YES - ticked the opt-in box" : "no")}
       </table>
       <div style="margin-top:20px;padding:16px;background:rgba(255,255,255,0.06);border-radius:8px;border-left:3px solid #00D4FF;">
         <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#7ee4ff;margin-bottom:8px;">Main pain</div>

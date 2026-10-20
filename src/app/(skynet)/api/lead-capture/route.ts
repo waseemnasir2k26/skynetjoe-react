@@ -273,7 +273,7 @@ export async function POST(req: Request) {
       ? "GHL upsert did not confirm a contact id"
       : "GHL_API_TOKEN is not configured";
     const fallback = await sendLeadFallbackEmail(
-      { email, source, capturedAt },
+      { email, source, capturedAt, newsletterOptIn: optIn || isNewsletter },
       reason,
     );
     emailFallbackSent = fallback.ok;
