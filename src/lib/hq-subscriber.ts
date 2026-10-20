@@ -36,6 +36,44 @@ export function hqFirstName(raw: unknown): string | null {
   return cleaned.slice(0, 80) || null;
 }
 
+// Site-wide, in-process caps on what we mirror to HQ (per minute). Two buckets so
+// lead-only traffic can never consume the opt-in (email-list) budget: consent
+// true pushes draw from the opt-in bucket, everything else from the lead bucket.
+const PER_MIN = 120;
+function makeBucket(limit: number) {
+  let start = 0;
+  let count = 0;
+  return () => {
+    const now = Date.now();
+    if (now - start > 60_000) {
+      start = now;
+      count = 0;
+    }
+    count += 1;
+    return count <= limit;
+  };
+}
+export const hqOptInAllowed = makeBucket(PER_MIN);
+export const hqLeadAllowed = makeBucket(PER_MIN);
+
+/**
+ * Cap-aware, never-throwing push used by every route. Returns true only when
+ * HQ confirmed the row; false covers cap hit, HQ down, or env unset.
+ */
+export async function pushToHqCapped(s: HqSubscriber, tag: string): Promise<boolean> {
+  const allowed = s.consent === true ? hqOptInAllowed() : hqLeadAllowed();
+  if (!allowed) {
+    console.warn(`[${tag}] HQ mirror site-wide cap hit; skipped`, { source: s.source });
+    return false;
+  }
+  try {
+    return await pushSubscriberToHq(s);
+  } catch (err) {
+    console.warn(`[${tag}] HQ mirror threw`, err);
+    return false;
+  }
+}
+
 export async function pushSubscriberToHq(s: HqSubscriber): Promise<boolean> {
   const url = process.env.HQ_SUBSCRIBER_URL?.trim();
   const secret = process.env.HQ_SUBSCRIBER_SECRET?.trim();

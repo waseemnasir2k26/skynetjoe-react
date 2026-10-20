@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { sendCapiLead } from "@/lib/meta-capi";
-import { handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
+import { addGhlNote, handleGhlLead, type GhlLeadScore } from "@/lib/ghl";
 import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink, type SinkLead } from "@/lib/lead-sink";
 import { checkRateLimit, getClientIpOrUndefined, readCappedJson } from "@/lib/rate-limit";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
-import { hqFirstName, hqSourceSlug, pushSubscriberToHq } from "@/lib/hq-subscriber";
+import { hqFirstName, hqSourceSlug, pushToHqCapped } from "@/lib/hq-subscriber";
 
 export const runtime = "nodejs";
 
@@ -270,21 +270,41 @@ export async function POST(req: Request) {
       ? bookingNameParts.slice(1).join(" ")
       : undefined;
 
+  const optIn = payload.newsletterOptIn === true;
+
+  // Referral: the friend's details ride only to the owner (GHL note on the
+  // referrer's record + the n8n firehose ping + the disk sink). They are NEVER
+  // sent to HQ/Brevo: the HQ push below carries the submitting (referrer)
+  // address alone.
+  const isReferral = source === "referral";
+  const clip = (v: unknown, n: number): string =>
+    typeof v === "string"
+      ? Array.from(v)
+          .filter((c) => c.charCodeAt(0) >= 32 && c.charCodeAt(0) !== 127)
+          .join("")
+          .trim()
+          .slice(0, n)
+      : "";
+  const ca = payload.qualification?.customAnswers;
+  const referred = isReferral
+    ? {
+        email: clip(ca?.referred_email, 254),
+        name: clip(ca?.referred_name, 100),
+        note: clip(ca?.referred_note, 300),
+        origin: clip(ca?.referral_origin, 60),
+      }
+    : null;
+
   // Mirror to HQ in parallel with the CRM write. Awaited below (4s cap inside
-  // pushSubscriberToHq), never throws, never changes the response. Only the
-  // submitting address is pushed: a "referral" payload carries the referred
-  // friend's address in customAnswers, which is never read here.
-  const hqMirror: Promise<void> = (async () => {
-    const referredEmail = payload.qualification?.customAnswers?.referred_email;
-    if (
-      typeof referredEmail === "string" &&
-      referredEmail.trim().toLowerCase() === email.toLowerCase()
-    ) {
-      return; // resolved address is the referred friend's, not the submitter's
+  // pushSubscriberToHq), never throws, never changes the response. Resolves
+  // true only when HQ confirmed the row.
+  const hqMirror: Promise<boolean> = (async () => {
+    if (referred && referred.email.toLowerCase() === email.toLowerCase()) {
+      return false; // resolved address is the referred friend's, not the submitter's
     }
-    try {
-      const page = resolvePage(req, payload);
-      const ok = await pushSubscriberToHq({
+    const page = resolvePage(req, payload);
+    const ok = await pushToHqCapped(
+      {
         email,
         site: source === "lp-speed-to-lead" ? "skynetlabsai" : "skynetjoe",
         source: hqSourceSlug(String(source), "discovery-call"),
@@ -292,12 +312,12 @@ export async function POST(req: Request) {
           payload.firstName || payload.qualification?.firstName || firstNameFromBooking,
         ),
         page: page && /^\/(?![\/\\])[^\s<>]{0,198}$/.test(page) ? page : null,
-        consent: payload.newsletterOptIn === true,
-      });
-      if (!ok) console.warn("[leads] HQ mirror did not confirm", { source });
-    } catch (err) {
-      console.warn("[leads] HQ mirror threw", err);
-    }
+        consent: optIn,
+      },
+      "leads",
+    );
+    if (!ok) console.warn("[leads] HQ mirror did not confirm", { source });
+    return ok;
   })();
 
   const ghl = await handleGhlLead({
@@ -331,6 +351,7 @@ export async function POST(req: Request) {
     source,
     extraTags: [
       "discovery-call",
+      optIn ? "newsletter-optin" : "",
       payload.booking ? "booked" : "qualified-only",
       // ad-level attribution tag — makes per-ad booking counts queryable in GHL
       payload.utm?.content ? `ad:${payload.utm.content.slice(0, 60)}` : "",
@@ -343,7 +364,22 @@ export async function POST(req: Request) {
     ].filter(Boolean) as string[],
   });
 
-  await hqMirror;
+  const hqConfirmed = await hqMirror;
+
+  // Referral: park the friend's details on the referrer's GHL contact as a note.
+  if (referred && referred.email && ghl.contactId !== "dev-skip") {
+    try {
+      await addGhlNote(
+        ghl.contactId,
+        `Referral intro requested by ${email}. Friend: ${referred.email}` +
+          (referred.name ? ` (${referred.name})` : "") +
+          (referred.note ? `. Note: ${referred.note}` : "") +
+          ". Reach out within 24 hours; $200 credit applies if they book.",
+      );
+    } catch (err) {
+      console.warn("[leads] referral GHL note failed", err);
+    }
+  }
 
   // Server-side CAPI mirror of the browser pixel event, deduped via eventId
   // (browser fires fbq('track', <event>, {}, {eventID}) with the same id).
@@ -371,7 +407,8 @@ export async function POST(req: Request) {
   // this is an alert, not a delivery path, and it must never be able
   // to fail a lead or hold a visitor's form open.
   void pingLeadFirehose({
-    contactId: ghl.contactId,
+    contactId:
+      referred && ghl.contactId === "dev-skip" ? leadId : ghl.contactId,
     email,
     phone: payload.phone || payload.qualification?.phone,
     firstName: payload.firstName || payload.qualification?.firstName,
@@ -386,6 +423,14 @@ export async function POST(req: Request) {
       biggest_leak: payload.qualification?.biggestLeak ?? null,
       utm_campaign: payload.utm?.campaign ?? null,
       utm_content: payload.utm?.content ?? null,
+      ...(referred
+        ? {
+            referred_email: referred.email || null,
+            referred_name: referred.name || null,
+            referred_note: referred.note || null,
+            referral_origin: referred.origin || null,
+          }
+        : {}),
     },
   }).then((r) => {
     if (!r.sent) console.warn("[leads] MA-04 lead ping not sent:", r.reason);
@@ -394,12 +439,26 @@ export async function POST(req: Request) {
   const capturedAt = new Date().toISOString();
   const name = resolveName(payload);
   const company = payload.qualification?.businessName?.trim() || undefined;
-  const message = resolveMessage(payload);
+  const message = referred
+    ? `Referral intro requested. Friend: ${referred.email || "(none given)"}` +
+      (referred.name ? ` (${referred.name})` : "") +
+      (referred.note ? `. Note: ${referred.note}` : "")
+    : resolveMessage(payload);
   const page = resolvePage(req, payload);
 
   const { confirmed, emailFallbackSent, sunk } = await confirmOrEscalate(
     ghl.contactId,
-    { email, source, capturedAt, name, company, message, page, leadId },
+    {
+      email,
+      source,
+      capturedAt,
+      name,
+      company,
+      message,
+      page,
+      leadId,
+      ...(optIn ? { newsletterOptIn: true } : {}),
+    },
     payload,
   );
 
@@ -434,6 +493,7 @@ export async function POST(req: Request) {
 
   return NextResponse.json({
     ok: true,
+    ...(optIn ? { newsletter: hqConfirmed ? "confirmed" : "pending" } : {}),
     leadId,
     score,
     // "dev-skip" is the sentinel handleGhlLead returns when nothing was

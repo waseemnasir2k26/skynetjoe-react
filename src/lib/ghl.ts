@@ -320,6 +320,26 @@ export async function addGhlTags(
 }
 
 /**
+ * Add a plain-text note to a contact (best effort: silently no-ops if env is
+ * missing or the API call fails). Used to keep a referral's friend details on
+ * the referrer's record.
+ */
+export async function addGhlNote(
+  contactId: string,
+  body: string,
+): Promise<void> {
+  if (!body.trim()) return;
+  if (!contactId || contactId === "dev-skip") return;
+  const { token } = getEnv();
+  if (!token) return;
+
+  await ghlFetch(`/contacts/${contactId}/notes`, {
+    method: "POST",
+    body: { body: body.slice(0, 4000) },
+  });
+}
+
+/**
  * Look up an existing opportunity for a contact (returns the most recent
  * one in the configured pipeline), or null.
  */

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { upsertGhlContact } from "@/lib/ghl";
-import { pushSubscriberToHq } from "@/lib/hq-subscriber";
+import { pushToHqCapped } from "@/lib/hq-subscriber";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { TOOL_SLUGS } from "@/data/tools-registry";
 
@@ -223,12 +223,15 @@ export async function POST(req: Request) {
     // overlaps the Slack/log work and adds no latency. Never throws; 4s cap
     // inside pushSubscriberToHq.
     const hqPush = email
-      ? pushSubscriberToHq({
-          email,
-          site: "skynetjoe",
-          source: "tool-feedback",
-          consent: false,
-        }).catch(() => false)
+      ? pushToHqCapped(
+          {
+            email,
+            site: "skynetjoe",
+            source: "tool-feedback",
+            consent: false,
+          },
+          "tool-feedback",
+        )
       : Promise.resolve(false);
 
     const slackOk = await forwardSlack({ tool, message, email });

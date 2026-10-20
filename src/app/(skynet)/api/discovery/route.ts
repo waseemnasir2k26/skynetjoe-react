@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { appendLeadToSink } from "@/lib/lead-sink";
-import { hqFirstName, pushSubscriberToHq } from "@/lib/hq-subscriber";
+import { hqFirstName, pushToHqCapped } from "@/lib/hq-subscriber";
 import { checkRateLimit, readCappedJson } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -92,6 +92,7 @@ async function sendToGhl(payload: Payload, lead: "HOT" | "WARM" | "COLD") {
       `budget:${payload.budget || "not-asked"}`,
       `timeline:${payload.timeline || "not-asked"}`,
       `score:${lead}`,
+      ...(payload.newsletterOptIn === true ? ["newsletter-optin"] : []),
     ],
     submitted_at: new Date().toISOString(),
   };
@@ -203,22 +204,23 @@ export async function POST(req: Request) {
   const lead = score(payload.budget, payload.timeline);
 
   // HQ mirror runs alongside GHL/Resend; never throws, never alters the response.
-  const hqPush = pushSubscriberToHq({
-    email: payload.email,
-    site: "skynetjoe",
-    source: "contact",
-    first_name: hqFirstName(payload.name),
-    consent: payload.newsletterOptIn === true,
-  }).catch((err) => {
-    console.warn("[discovery] HQ mirror threw", err);
-    return false;
-  });
+  const hqPush = pushToHqCapped(
+    {
+      email: payload.email,
+      site: "skynetjoe",
+      source: "contact",
+      first_name: hqFirstName(payload.name),
+      consent: payload.newsletterOptIn === true,
+    },
+    "discovery",
+  );
 
   const [ghlRes, emailRes] = await Promise.allSettled([
     sendToGhl(payload, lead),
     sendEmailFallback(payload, lead),
   ]);
-  if (!(await hqPush)) console.warn("[discovery] HQ mirror did not confirm");
+  const hqConfirmed = await hqPush;
+  if (!hqConfirmed) console.warn("[discovery] HQ mirror did not confirm");
 
   // "skipped" (env unset) is NOT delivery. It used to count as OK here,
   // which meant a host with neither GHL nor Resend configured returned
@@ -237,6 +239,7 @@ export async function POST(req: Request) {
       capturedAt: new Date().toISOString(),
       reason: "discovery: ghl+email unconfirmed",
       payload: { name: payload.name, pain: payload.pain, lead },
+      ...(payload.newsletterOptIn === true ? { newsletterOptIn: true } : {}),
     });
     if (!sink.written) {
       return NextResponse.json(
@@ -248,6 +251,9 @@ export async function POST(req: Request) {
 
   return NextResponse.json({
     ok: true,
+    ...(payload.newsletterOptIn === true
+      ? { newsletter: hqConfirmed ? "confirmed" : "pending" }
+      : {}),
     lead_score: lead,
     ghl: ghlOk,
     email: emailOk,

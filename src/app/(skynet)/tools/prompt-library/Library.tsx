@@ -457,7 +457,8 @@ function MonthlyPromptsCapture() {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [optIn, setOptIn] = useState(false);
-  const [joined, setJoined] = useState(false);
+  // "none" = saved without the list, "pending" = list sign-up still processing, "confirmed" = HQ took it
+  const [joined, setJoined] = useState<"none" | "pending" | "confirmed">("none");
   const optInId = useId();
 
   /* already subscribed on a previous visit → show success state */
@@ -465,8 +466,14 @@ function MonthlyPromptsCapture() {
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
       if (stored && EMAIL_RE.test(stored)) {
-        setDone(true);
-        setJoined(window.localStorage.getItem(OPTIN_KEY) === "1");
+        const prev = window.localStorage.getItem(OPTIN_KEY);
+        if (prev === "confirmed" || prev === "pending") {
+          setDone(true);
+          setJoined(prev);
+        } else {
+          // Saved earlier without the list: keep the form (and the tick box) available.
+          setEmail(stored);
+        }
       }
     } catch {
       /* ignore */
@@ -493,6 +500,7 @@ function MonthlyPromptsCapture() {
     /* Success only when the backend confirms the signup (jury 2026-09-21:
        "You're in" used to render on a 502 or an aborted request). */
     let ok = false;
+    let state: "none" | "pending" | "confirmed" = "none";
     try {
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), 8000);
@@ -509,6 +517,10 @@ function MonthlyPromptsCapture() {
       });
       clearTimeout(t);
       ok = res.ok;
+      if (ok && optIn) {
+        const data = (await res.json().catch(() => null)) as { newsletter?: string } | null;
+        state = data?.newsletter === "confirmed" ? "confirmed" : "pending";
+      }
     } catch {
       ok = false;
     }
@@ -516,11 +528,11 @@ function MonthlyPromptsCapture() {
     setSubmitting(false);
     if (ok) {
       try {
-        if (optIn) window.localStorage.setItem(OPTIN_KEY, "1");
+        if (optIn) window.localStorage.setItem(OPTIN_KEY, state);
       } catch {
         /* ignore */
       }
-      setJoined(optIn);
+      setJoined(state);
       setDone(true);
     } else {
       setError(
@@ -535,15 +547,17 @@ function MonthlyPromptsCapture() {
         — Optional · The library above stays free either way
       </p>
       <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[var(--ink)] mb-3">
-        Get 20 more prompts monthly.
+        Get new prompts by email.
       </h3>
       {done ? (
         <div className="flex items-center gap-2 text-[var(--ink)] font-semibold">
           <Check className="h-5 w-5 text-[var(--terracotta-aa)]" />
           <span>
-            {joined
+            {joined === "confirmed"
               ? "You’re in. Watch your inbox for a welcome email."
-              : "Saved. Tick the box next time if you want the email list."}
+              : joined === "pending"
+                ? "Saved. Your email-list sign-up is being processed."
+                : "Saved. Tick the box next time if you want the email list."}
           </span>
         </div>
       ) : (

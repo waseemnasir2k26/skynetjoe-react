@@ -49,6 +49,8 @@ export type SinkLead = {
   page?: string;
   /** Route-minted id, so a sink row can be matched to a log line. */
   leadId?: string;
+  /** Visitor ticked the email-list box. Recorded so a failed HQ push never loses the opt-in. */
+  newsletterOptIn?: boolean;
   payload?: unknown;
 };
 

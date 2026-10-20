@@ -69,7 +69,9 @@ const post = (url, body, headers = {}, raw) =>
 const reset = () => {
   hqCalls = [];
   hqMode = "ok";
-  globalThis.__stub.ghlConfirm = true;
+  globalThis.__stub = Object.assign(globalThis.__stub, {
+    ghlConfirm: true, sinkOk: false, upserts: [], leadsGhl: [], notes: [], pings: [], sinks: [],
+  });
 };
 let passed = 0;
 const t = async (name, fn) => {
@@ -219,6 +221,79 @@ await t("leads: ReferralForm payload (referrer top-level email) is accepted and 
   });
   assert.ok(!JSON.stringify(hqCalls).includes("friend@b.co"));
 });
+await t("referral: friend details go to GHL note + n8n ping + sink, never to HQ", async () => {
+  const body = {
+    source: "referral",
+    email: "referrer@b.co",
+    qualification: {
+      businessType: "referral",
+      customAnswers: { referred_email: "friend@b.co", referred_name: "Fran Friend", referred_note: "needs a chatbot", referral_origin: "thank-you-page" },
+    },
+  };
+  const res = await leads.POST(post("https://x.test/api/leads", body));
+  assert.equal(res.status, 200);
+  assert.ok(!JSON.stringify(hqCalls).includes("friend@b.co"));
+  const st = globalThis.__stub;
+  assert.equal(st.notes.length, 1);
+  assert.match(st.notes[0].body, /friend@b\.co/);
+  assert.match(st.notes[0].body, /Fran Friend/);
+  assert.equal(st.pings.length, 1);
+  assert.equal(st.pings[0].email, "referrer@b.co");
+  assert.equal(st.pings[0].extras.referred_email, "friend@b.co");
+  assert.equal(st.pings[0].extras.referred_name, "Fran Friend");
+  assert.equal(st.pings[0].extras.referred_note, "needs a chatbot");
+  // CRM down + disk sink: the full payload (friend included) is kept.
+  reset();
+  globalThis.__stub.ghlConfirm = false;
+  globalThis.__stub.sinkOk = true;
+  const res2 = await leads.POST(post("https://x.test/api/leads", body));
+  assert.equal(res2.status, 200);
+  assert.equal(globalThis.__stub.sinks.length, 1);
+  assert.match(JSON.stringify(globalThis.__stub.sinks[0].payload), /friend@b\.co/);
+  assert.equal(globalThis.__stub.pings[0].extras.referred_email, "friend@b.co"); // ping still fires (leadId key)
+  assert.ok(!JSON.stringify(hqCalls).includes("friend@b.co"));
+});
+await t("opt-in: newsletter-optin GHL tag, durable sink flag, confirmed/pending response", async () => {
+  const st = globalThis.__stub;
+  // lead-capture
+  let res = await leadCapture.POST(post("https://x.test/a", { email: "o@b.co", source: "prompt-library", newsletterOptIn: true }));
+  let j = await res.json();
+  assert.equal(j.newsletter, "confirmed");
+  assert.ok(st.upserts[0].tags.includes("newsletter-optin"));
+  reset();
+  hqMode = "500";
+  res = await leadCapture.POST(post("https://x.test/a", { email: "o@b.co", source: "prompt-library", newsletterOptIn: true }));
+  assert.equal((await res.json()).newsletter, "pending");
+  reset();
+  res = await leadCapture.POST(post("https://x.test/a", { email: "o@b.co", source: "prompt-library" }));
+  j = await res.json();
+  assert.equal(j.newsletter, undefined);
+  assert.ok(!globalThis.__stub.upserts[0].tags.includes("newsletter-optin"));
+  // sink keeps the opt-in even when HQ is down
+  reset();
+  hqMode = "throw";
+  globalThis.__stub.ghlConfirm = false;
+  globalThis.__stub.sinkOk = true;
+  res = await leadCapture.POST(post("https://x.test/a", { email: "o@b.co", source: "lp-freight", newsletterOptIn: true }));
+  assert.equal((await res.json()).sink, true);
+  assert.equal(globalThis.__stub.sinks[0].newsletterOptIn, true);
+  // leads
+  reset();
+  res = await leads.POST(post("https://x.test/a", { email: "o@b.co", source: "discovery-call", newsletterOptIn: true, qualification: {} }));
+  assert.equal((await res.json()).newsletter, "confirmed");
+  assert.ok(globalThis.__stub.leadsGhl[0].extraTags.includes("newsletter-optin"));
+  reset();
+  hqMode = "500";
+  res = await leads.POST(post("https://x.test/a", { email: "o@b.co", source: "discovery-call", newsletterOptIn: true, qualification: {} }));
+  assert.equal((await res.json()).newsletter, "pending");
+  // discovery
+  reset();
+  globalThis.__stub.sinkOk = true; // GHL webhook/Resend are unset in the test, so the sink confirms delivery
+  res = await discovery.POST(post("https://x.test/a", { name: "D L", email: "d@b.co", pain: "long enough pain", newsletterOptIn: true }));
+  assert.equal(res.status, 200);
+  assert.equal((await res.json()).newsletter, "confirmed");
+  assert.equal(globalThis.__stub.sinks[0].newsletterOptIn, true);
+});
 await t("leads: honeypot pushes nothing", async () => {
   await leads.POST(post("https://x.test/a", { email: "q@b.co", qualification: {}, _honeypot: "x" }));
   assert.equal(hqCalls.length, 0);
@@ -292,6 +367,26 @@ await t("tool-feedback: HQ throw never changes the response", async () => {
   hqMode = "throw";
   const res = await feedback.POST(post("https://x.test/a", { tool: "aeo-audit", message: "works great", email: "f@b.co" }));
   assert.equal(res.status, 200);
+});
+
+// ---- caps: opt-in and lead-only buckets are independent (runs last: exhausts the lead bucket)
+await t("caps: lead-only floods never consume the opt-in bucket; opt-in floods never block leads", async () => {
+  const hq = await import(pathToFileURL(path.resolve("src/lib/hq-subscriber.ts")).href);
+  const lead = { email: "c@b.co", site: "skynetjoe", source: "contact", consent: false };
+  const opt = { ...lead, consent: true };
+  let leadOk = 0;
+  for (let n = 0; n < 130; n++) if (await hq.pushToHqCapped(lead, "cap-test")) leadOk++;
+  assert.ok(leadOk < 130 && leadOk > 0, `lead bucket should cap (got ${leadOk})`);
+  // lead bucket is now exhausted: a route lead-only push is skipped, an opt-in one still lands.
+  hqCalls = [];
+  await leads.POST(post("https://x.test/a", { email: "c@b.co", source: "discovery-call", qualification: {} }));
+  assert.equal(hqCalls.length, 0);
+  await leads.POST(post("https://x.test/a", { email: "c@b.co", source: "discovery-call", newsletterOptIn: true, qualification: {} }));
+  assert.equal(hqCalls.length, 1);
+  assert.equal(hqCalls[0].consent, true);
+  let optOk = 0;
+  for (let n = 0; n < 130; n++) if (await hq.pushToHqCapped(opt, "cap-test")) optOk++;
+  assert.ok(optOk < 130, "opt-in bucket should cap too");
 });
 
 console.warn = origWarn;

@@ -5,7 +5,7 @@ import {
   getOrCreateContactByEmail,
 } from "@/lib/ghl";
 
-import { pushSubscriberToHq } from "@/lib/hq-subscriber";
+import { pushToHqCapped } from "@/lib/hq-subscriber";
 
 export const runtime = "nodejs";
 
@@ -250,13 +250,16 @@ export async function POST(req: Request) {
   if (event === "invitee.created") {
     // HQ lead record (never marketed: consent false). Runs after signature
     // verification above; never throws, never changes the response.
-    const hqPush = pushSubscriberToHq({
-      email: qualification.email,
-      site: "skynetjoe",
-      source: "calendly-booking",
-      first_name: qualification.firstName ? qualification.firstName.slice(0, 80) : null,
-      consent: false,
-    }).catch(() => false);
+    const hqPush = pushToHqCapped(
+      {
+        email: qualification.email,
+        site: "skynetjoe",
+        source: "calendly-booking",
+        first_name: qualification.firstName ? qualification.firstName.slice(0, 80) : null,
+        consent: false,
+      },
+      "calendly-webhook",
+    );
     const result = await handleGhlLead({
       qualification: {
         ...qualification,

@@ -167,13 +167,13 @@ export default function EditVideosClient({
             toolSlug="video-editing-playbook"
             toolName="Claude Code Video Prompts"
             promise={`all ${VIDEO_SKILL_COUNT} master prompts now`}
-            subnote="Plus every new prompt as we ship it. Unsubscribe anytime."
+            subnote="Tick the box below if you also want new prompts by email. Unsubscribe anytime."
             buttonLabel="Unlock the prompts →"
             finePrint={
               <>
-                By unlocking you agree I can store your email and send the
-                prompts plus new ones. No spam, unsubscribe from any email. See
-                our{" "}
+                By unlocking you agree I can store your email. You only get the
+                email list if you tick the box above, and every email has an
+                unsubscribe link. See our{" "}
                 <Link
                   href="/privacy-policy"
                   style={{ textDecoration: "underline", color: "inherit" }}
@@ -187,8 +187,8 @@ export default function EditVideosClient({
           />
         ) : (
           <div className="evc-unlocked-banner">
-            <Check size={16} /> Unlocked — every master prompt is below, and
-            you&apos;re on the list for new ones. Copy, fill the brackets, run
+            <Check size={16} /> Unlocked — every master prompt is below.
+            Copy, fill the brackets, run
             it in Claude Code.
           </div>
         )}

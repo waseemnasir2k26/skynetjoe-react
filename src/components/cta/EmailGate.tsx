@@ -35,7 +35,7 @@ export type EmailGateProps = {
   onUnlock: (email: string) => void;
   /** Override localStorage key. Default `skynet-tool-${toolSlug}-email`. */
   storageKey?: string;
-  /** Sentence after the promise. Default "No spam, no drip. One result, one inbox." */
+  /** Sentence after the promise. Default "One result, sent to your inbox. The email list is optional." */
   subnote?: ReactNode;
   /** Fine print under the button. Default "Stored locally + sent to my CRM…". */
   finePrint?: ReactNode;
@@ -221,7 +221,7 @@ export default function EmailGate({
           <span style={{ color: "var(--terracotta)", fontWeight: 600 }}>
             {promise}
           </span>
-          . {subnote ?? "No spam, no drip. One result, one inbox."}
+          . {subnote ?? "One result, sent to your inbox. The email list is optional."}
         </p>
 
         <form onSubmit={handleSubmit} noValidate>

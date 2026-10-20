@@ -5,7 +5,7 @@ import { sendLeadFallbackEmail } from "@/lib/lead-notify";
 import { postTriageShadow } from "@/lib/jev-triage";
 import { appendLeadToSink } from "@/lib/lead-sink";
 import { pingLeadFirehose } from "@/lib/ma-lead-ping";
-import { hqSourceSlug, pushSubscriberToHq } from "@/lib/hq-subscriber";
+import { hqOptInAllowed, hqSourceSlug, pushSubscriberToHq, pushToHqCapped } from "@/lib/hq-subscriber";
 import { sendCapiLead } from "@/lib/meta-capi";
 import { checkRateLimit, getClientIpOrUndefined, readCappedJson } from "@/lib/rate-limit";
 
@@ -55,33 +55,8 @@ const PATH_RE =
   /^\/(?![\/\\])[^\s<>\u0000-\u001f\u007f-\u009f\u200e\u200f\u202a-\u202e]{0,198}$/;
 const NEWSLETTER_SITES = new Set(["skynetjoe", "waseemnasir"]);
 const NEWSLETTER_INTERESTS = new Set(["ai-video", "automation", "websites", "everything"]);
-const NEWSLETTER_PER_MIN = 120;
-let nlWindowStart = 0;
-let nlWindowCount = 0;
-function newsletterAllowed(): boolean {
-  const now = Date.now();
-  if (now - nlWindowStart > 60_000) {
-    nlWindowStart = now;
-    nlWindowCount = 0;
-  }
-  nlWindowCount += 1;
-  return nlWindowCount <= NEWSLETTER_PER_MIN;
-}
-
-// Separate site-wide cap for the non-popup HQ mirror (LP forms, tool gates), so a
-// flood there can never lock popup sign-ups out of HQ, and vice versa.
-const LEAD_HQ_PER_MIN = 120;
-let leadWindowStart = 0;
-let leadWindowCount = 0;
-function leadHqAllowed(): boolean {
-  const now = Date.now();
-  if (now - leadWindowStart > 60_000) {
-    leadWindowStart = now;
-    leadWindowCount = 0;
-  }
-  leadWindowCount += 1;
-  return leadWindowCount <= LEAD_HQ_PER_MIN;
-}
+// Site-wide caps live in hq-subscriber.ts (one opt-in bucket shared with
+// /api/leads and /api/discovery, a separate bucket for lead-only pushes).
 
 type Payload = {
   email?: string;
@@ -180,10 +155,11 @@ export async function POST(req: Request) {
   // with the GHL path, is awaited (4s cap inside pushSubscriberToHq) before
   // every response, and can never throw or change the response.
   const isNewsletter = source.startsWith("newsletter-");
+  const optIn = payload.newsletterOptIn === true;
   // Site-wide cap only throttles the HQ mirror (which triggers Brevo emails);
   // the visitor's GHL write still happens, so a distributed flood cannot lock
   // real sign-ups out. The per-IP limit above stays the main guard.
-  const nlOverCap = isNewsletter && !newsletterAllowed();
+  const nlOverCap = isNewsletter && !hqOptInAllowed();
   const nl = isNewsletter && payload.newsletter && typeof payload.newsletter === "object"
     ? payload.newsletter
     : {};
@@ -195,37 +171,33 @@ export async function POST(req: Request) {
     typeof nl.interest === "string" && NEWSLETTER_INTERESTS.has(nl.interest)
       ? nl.interest
       : undefined;
-  const hqMirror: Promise<void> = (async () => {
+  // Resolves true only when HQ confirmed the row (drives the "newsletter" field).
+  const hqMirror: Promise<boolean> = (async () => {
     if (!isNewsletter) {
       // Every other capture (LP forms, tool gates, prompt library) lands in HQ
-      // too — as a lead only unless the visitor ticked the opt-in box.
-      if (!leadHqAllowed()) {
-        console.warn("[lead-capture] HQ lead mirror site-wide cap hit; skipped", { source });
-        return;
-      }
-      try {
-        const ok = await pushSubscriberToHq({
+      // too, as a lead only unless the visitor ticked the opt-in box.
+      const ok = await pushToHqCapped(
+        {
           email,
           site: "skynetjoe",
           source: hqSourceSlug(source, "unknown-tool"),
           first_name: null,
           page: page ?? null,
-          consent: payload.newsletterOptIn === true,
-        });
-        if (!ok) console.warn("[lead-capture] HQ lead mirror did not confirm", { source });
-      } catch (err) {
-        console.warn("[lead-capture] HQ lead mirror threw", err);
-      }
-      return;
+          consent: optIn,
+        },
+        "lead-capture",
+      );
+      if (!ok) console.warn("[lead-capture] HQ lead mirror did not confirm", { source });
+      return ok;
     }
     if (nlOverCap) {
       console.warn("[lead-capture] newsletter site-wide cap hit; HQ mirror skipped");
-      return;
+      return false;
     }
     const site = source.slice("newsletter-".length);
     if (!NEWSLETTER_SITES.has(site)) {
       console.warn("[lead-capture] newsletter: unknown site, HQ mirror skipped", { source });
-      return;
+      return false;
     }
     try {
       const ok = await pushSubscriberToHq({
@@ -238,8 +210,10 @@ export async function POST(req: Request) {
         page: typeof nl.page === "string" && PATH_RE.test(nl.page) ? nl.page : (page ?? null),
       });
       if (!ok) console.warn("[lead-capture] newsletter: HQ mirror did not confirm", { source });
+      return ok;
     } catch (err) {
       console.warn("[lead-capture] newsletter: HQ mirror threw", err);
+      return false;
     }
   })();
 
@@ -280,7 +254,7 @@ export async function POST(req: Request) {
       const result = await upsertGhlContact(
         { email, source: `tool-gate:${source}`, firstName: nlFirstName },
         null,
-        [source, "tool-lead"],
+        [source, "tool-lead", ...(optIn ? ["newsletter-optin"] : [])],
       );
       if (result.contactId && result.contactId !== "dev-skip") {
         ghlConfirmed = true;
@@ -313,6 +287,7 @@ export async function POST(req: Request) {
         reason,
         leadId,
         page,
+        ...(optIn || isNewsletter ? { newsletterOptIn: true } : {}),
       });
       if (sink.written && sink.durable) {
         console.warn(
@@ -327,8 +302,12 @@ export async function POST(req: Request) {
           extras: { delivery: "disk-sink", ghl_confirmed: false, reason },
         });
         fireTriage();
-        await hqMirror;
-        return NextResponse.json({ ok: true, sink: true });
+        const nlSink = await hqMirror;
+        return NextResponse.json({
+          ok: true,
+          sink: true,
+          ...(optIn || isNewsletter ? { newsletter: nlSink ? "confirmed" : "pending" } : {}),
+        });
       }
     }
 
@@ -369,10 +348,11 @@ export async function POST(req: Request) {
   });
 
   fireTriage();
-  await hqMirror;
+  const nlConfirmed = await hqMirror;
 
   return NextResponse.json({
     ok: true,
+    ...(optIn || isNewsletter ? { newsletter: nlConfirmed ? "confirmed" : "pending" } : {}),
     contactId,
     ghl: ghlConfirmed,
     emailFallback: emailFallbackSent,
