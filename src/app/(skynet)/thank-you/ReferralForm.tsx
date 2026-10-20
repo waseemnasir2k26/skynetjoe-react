@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -111,6 +112,14 @@ export default function ReferralForm() {
         onChange={(e) => setEmail(e.target.value)}
         className="px-4 py-3 rounded-xl bg-[var(--cream-2)] border border-[rgba(26,26,26,0.12)] text-[var(--ink)] placeholder-gray-500 focus:outline-none focus:border-[var(--terracotta)] focus:bg-[var(--cream-2)] transition"
       />
+
+      <p className="text-xs text-[var(--ink-2)] leading-relaxed">
+        Only share a friend&apos;s email if they&apos;re happy to hear from us.
+        We&apos;ll contact them once to introduce ourselves.{" "}
+        <Link href="/privacy-policy" className="underline">
+          Privacy policy
+        </Link>
+      </p>
 
       <label className="sr-only" htmlFor="referrer-email">
         Your email (required, for credit tracking)

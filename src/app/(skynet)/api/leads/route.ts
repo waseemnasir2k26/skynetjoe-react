@@ -429,11 +429,15 @@ export async function POST(req: Request) {
       utm_content: payload.utm?.content ?? null,
       ...(referred
         ? {
+            // Alert only: the friend's email/name/note are deliberately NOT sent
+            // here. They live in the GHL note (note_saved) or the disk sink.
+            referral: true,
+            lead_id: leadId,
             ghl_contact_id: ghl.contactId === "dev-skip" ? null : ghl.contactId,
-            referred_email: referred.email || null,
-            referred_name: referred.name || null,
-            referred_note: referred.note || null,
-            referral_origin: referred.origin || null,
+            note_saved:
+              Boolean(referred.email) &&
+              ghl.contactId !== "dev-skip" &&
+              !referralNoteFailed,
           }
         : {}),
     },

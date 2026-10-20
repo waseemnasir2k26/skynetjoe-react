@@ -1747,7 +1747,7 @@ export default function LogisticsLP() {
                   successBody="I'll send the teardown to that inbox myself, usually within a day."
                   belowButton={
                     <p className="ec-note">
-                      No spam. One email, from me directly.
+                      One email with your teardown, from me directly. The email list is optional.
                     </p>
                   }
                 />

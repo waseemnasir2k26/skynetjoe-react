@@ -459,6 +459,7 @@ function MonthlyPromptsCapture() {
   const [optIn, setOptIn] = useState(false);
   // "none" = saved without the list, "pending" = list sign-up still processing, "confirmed" = HQ took it
   const [joined, setJoined] = useState<"none" | "pending" | "confirmed">("none");
+  const [retryNote, setRetryNote] = useState(false);
   const optInId = useId();
 
   /* already subscribed on a previous visit → show success state */
@@ -467,9 +468,13 @@ function MonthlyPromptsCapture() {
       const stored = window.localStorage.getItem(STORAGE_KEY);
       if (stored && EMAIL_RE.test(stored)) {
         const prev = window.localStorage.getItem(OPTIN_KEY);
-        if (prev === "confirmed" || prev === "pending") {
+        if (prev === "confirmed") {
           setDone(true);
           setJoined(prev);
+        } else if (prev === "pending") {
+          // Last attempt may not have reached the list: let them try again.
+          setEmail(stored);
+          setRetryNote(true);
         } else {
           // Saved earlier without the list: keep the form (and the tick box) available.
           setEmail(stored);
@@ -566,6 +571,12 @@ function MonthlyPromptsCapture() {
             Tick the box to join the free SkynetLabs email list, which includes
             new production-tested prompts. No course pitch. Unsubscribe anytime.
           </p>
+          {retryNote && (
+            <p className="text-sm text-[var(--ink-2)] max-w-xl mb-3">
+              Your last email-list sign-up may not have gone through. Tick the
+              box and submit again.
+            </p>
+          )}
           <form
             onSubmit={handleSubmit}
             noValidate

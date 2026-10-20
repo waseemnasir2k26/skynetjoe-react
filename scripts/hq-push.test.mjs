@@ -239,9 +239,13 @@ await t("referral: friend details go to GHL note + n8n ping + sink, never to HQ"
   assert.match(st.notes[0].body, /Fran Friend/);
   assert.equal(st.pings.length, 1);
   assert.equal(st.pings[0].email, "referrer@b.co");
-  assert.equal(st.pings[0].extras.referred_email, "friend@b.co");
-  assert.equal(st.pings[0].extras.referred_name, "Fran Friend");
-  assert.equal(st.pings[0].extras.referred_note, "needs a chatbot");
+  // The n8n alert only says a referral arrived: no friend fields at all.
+  assert.ok(!JSON.stringify(st.pings[0]).includes("friend@b.co"));
+  assert.ok(!JSON.stringify(st.pings[0]).includes("Fran Friend"));
+  assert.ok(!JSON.stringify(st.pings[0]).includes("needs a chatbot"));
+  assert.equal(st.pings[0].extras.referral, true);
+  assert.equal(st.pings[0].extras.note_saved, true);
+  assert.equal(st.pings[0].extras.ghl_contact_id, "c1");
   // CRM down + disk sink: the full payload (friend included) is kept.
   reset();
   globalThis.__stub.ghlConfirm = false;
@@ -250,7 +254,8 @@ await t("referral: friend details go to GHL note + n8n ping + sink, never to HQ"
   assert.equal(res2.status, 200);
   assert.equal(globalThis.__stub.sinks.length, 1);
   assert.match(JSON.stringify(globalThis.__stub.sinks[0].payload), /friend@b\.co/);
-  assert.equal(globalThis.__stub.pings[0].extras.referred_email, "friend@b.co"); // ping still fires (leadId key)
+  assert.ok(!JSON.stringify(globalThis.__stub.pings[0]).includes("friend@b.co")); // ping still fires, friend-free
+  assert.equal(globalThis.__stub.pings[0].extras.note_saved, false);
   assert.ok(!JSON.stringify(hqCalls).includes("friend@b.co"));
 });
 await t("referral: failed GHL note -> full payload kept in sink; unique ping key; no triage", async () => {
@@ -272,6 +277,7 @@ await t("referral: failed GHL note -> full payload kept in sink; unique ping key
   assert.notEqual(st.pings[0].contactId, st.pings[1].contactId, "dedupe key unique per submission");
   assert.match(st.pings[0].contactId, /^ref-/);
   assert.equal(st.pings[0].extras.ghl_contact_id, "c1");
+  assert.equal(st.pings[0].extras.note_saved, false);
   // non-referral still reaches triage
   await leads.POST(post("https://x.test/a", { email: "q@b.co", qualification: {} }));
   assert.equal(st.triage.length, 1);

@@ -35,7 +35,7 @@ export type EmailGateProps = {
   onUnlock: (email: string) => void;
   /** Override localStorage key. Default `skynet-tool-${toolSlug}-email`. */
   storageKey?: string;
-  /** Sentence after the promise. Default "One result, sent to your inbox. The email list is optional." */
+  /** Sentence after the promise. Default "One result, shown on screen. The email list is optional." */
   subnote?: ReactNode;
   /** Fine print under the button. Default "Sent to my CRM and email dashboard…". */
   finePrint?: ReactNode;
@@ -124,6 +124,7 @@ export default function EmailGate({
     };
 
     // Fire to backend — short await for toast feedback, never blocks unlock
+    // undefined = no confirmed response (request failed, threw, or timed out)
     let listState: string | undefined;
     try {
       await Promise.race([
@@ -135,7 +136,7 @@ export default function EmailGate({
           .then(async (r) => {
             if (newsletterOptIn && r.ok) {
               const j = (await r.json().catch(() => null)) as { newsletter?: string } | null;
-              listState = j?.newsletter;
+              listState = j?.newsletter === "confirmed" ? "confirmed" : j?.newsletter === "pending" ? "pending" : undefined;
             }
           })
           .catch((err) => {
@@ -153,7 +154,9 @@ export default function EmailGate({
       setNotice(
         listState === "confirmed"
           ? "You're on the email list. Watch your inbox for a welcome email."
-          : "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand.",
+          : listState === "pending"
+            ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
+            : "Couldn't save your email-list sign-up. Try again, or email waseem@skynetjoe.com.",
       );
       await new Promise((resolve) => setTimeout(resolve, 2200));
     }
@@ -241,7 +244,7 @@ export default function EmailGate({
           <span style={{ color: "var(--terracotta)", fontWeight: 600 }}>
             {promise}
           </span>
-          . {subnote ?? "One result, sent to your inbox. The email list is optional."}
+          . {subnote ?? "One result, shown on screen. The email list is optional."}
         </p>
 
         <form onSubmit={handleSubmit} noValidate>

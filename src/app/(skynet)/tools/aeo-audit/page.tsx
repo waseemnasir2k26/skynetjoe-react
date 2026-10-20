@@ -51,7 +51,7 @@ const faqs = [
   },
   {
     q: "What do you collect?",
-    a: "Your answers stay in your browser's localStorage. To unlock the full score breakdown and fix list you enter an email — that goes to my CRM so I can follow up. No name or company required.",
+    a: "Your answers stay in your browser's localStorage. To unlock the full score breakdown and fix list you enter an email — that goes to my CRM and email dashboard so I can follow up (you only get the email list if you tick the box). No name or company required.",
   },
   {
     q: "What's a good score?",

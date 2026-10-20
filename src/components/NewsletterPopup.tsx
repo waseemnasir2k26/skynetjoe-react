@@ -66,6 +66,7 @@ export default function NewsletterPopup({
     "idle" | "submitting" | "success" | "error"
   >("idle");
   const [error, setError] = useState<string | null>(null);
+  const [listPending, setListPending] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const shownAtRef = useRef<number>(0);
 
@@ -214,6 +215,8 @@ export default function NewsletterPopup({
         );
         return;
       }
+      const resBody = (await res.json().catch(() => null)) as { newsletter?: string } | null;
+      setListPending(resBody?.newsletter === "pending");
       try {
         window.localStorage.setItem(DONE_KEY, "subscribed");
       } catch {
@@ -293,8 +296,10 @@ export default function NewsletterPopup({
               <div className="nlp-body">
                 <p className="nlp-eyebrow">You&apos;re on the list</p>
                 <h2 id="nlp-title" className="nlp-title">
-                  Thanks{firstName.trim() ? `, ${firstName.trim()}` : ""}.
-                  If you&apos;re new to the list, a welcome email is on its way.
+                  Thanks{firstName.trim() ? `, ${firstName.trim()}` : ""}.{" "}
+                  {listPending
+                    ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
+                    : "If you're new to the list, a welcome email is on its way."}
                 </h2>
                 <p className="nlp-lede">
                   Builds, workflows, the tools that actually paid off. Reply to

@@ -50,6 +50,7 @@ export default function ContactBriefForm() {
   const optInId = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [listNotice, setListNotice] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -87,6 +88,16 @@ export default function ContactBriefForm() {
         return fail(
           body?.error ||
             "Couldn't send that. Email info@skynetjoe.com directly instead.",
+        );
+      }
+      if (newsletterOptIn) {
+        const j = (await res.json().catch(() => null)) as { newsletter?: string } | null;
+        setListNotice(
+          j?.newsletter === "confirmed"
+            ? "You're on the email list. Watch your inbox for a welcome email."
+            : j?.newsletter === "pending"
+              ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
+              : "Couldn't save your email-list sign-up. Try again, or email waseem@skynetjoe.com.",
         );
       }
       setStatus("success");
@@ -145,6 +156,18 @@ export default function ContactBriefForm() {
             Either a clarifying question or a one-page scope with price and ship
             date within 48 hours.
           </p>
+          {listNotice && (
+            <p
+              style={{
+                fontSize: 13,
+                color: "var(--ink-2)",
+                lineHeight: 1.6,
+                margin: "8px 0 0",
+              }}
+            >
+              {listNotice}
+            </p>
+          )}
         </div>
       </div>
     );

@@ -153,7 +153,9 @@ export default function LeadCaptureForm({
         setListNotice(
           j?.newsletter === "confirmed"
             ? "You're on the email list. Watch your inbox for a welcome email."
-            : "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand.",
+            : j?.newsletter === "pending"
+              ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
+              : "Couldn't save your email-list sign-up. Try again, or email waseem@skynetjoe.com.",
         );
       }
 
