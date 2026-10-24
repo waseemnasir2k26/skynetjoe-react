@@ -1,52 +1,26 @@
 # skynetjoe-react
 
-Next.js (App Router) rebuild of skynetjoe.com for SkynetLabs. Deploy is an archive upload to Hostinger - see `DEPLOY-REAL.md`, not `DEPLOY_HOSTINGER.md`.
+Next.js 16 (App Router, React 19, Tailwind 4, Framer Motion) rebuild of the SkynetLabs agency site at https://skynetjoe.com. Cream editorial theme, portfolio grid, service pages, community section.
 
-## Status
-
-Last reviewed: October 2026 · release v2026.10
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # fill in your own values
+npm run dev                  # http://localhost:3000
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploying
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The live site is deployed as an archive upload to Hostinger. Follow `DEPLOY-REAL.md`; `DEPLOY_HOSTINGER.md` is an older note.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Notes
 
-## Learn More
+The repo root also holds working notes from the rebuild (audits, SEO plans, parity checks). They are build history, not documentation.
 
-To learn more about Next.js, take a look at the following resources:
+Live: https://skynetjoe.com
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Work with SkynetLabs
-
-Built by [Waseem Nasir](https://www.skynetjoe.com/?utm_source=github&utm_medium=readme&utm_campaign=skynetjoe-react) at SkynetLabs — n8n + AI automation for small businesses.
-
-- Hire on Fiverr: https://www.fiverr.com/agencies/skynetjoellc
-- Hire on Upwork: https://www.upwork.com/freelancers/muhammadwaseemnasir
-- Book a free call: https://calendly.com/skynetlabs/schedule-a-free-consultation
+Demo built by SkynetLabs (https://skynetjoe.com).
