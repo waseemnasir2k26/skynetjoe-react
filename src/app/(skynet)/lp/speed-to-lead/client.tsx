@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 
 // Claims discipline (CLAIMS-WHITELIST.md): no statistics, no client names,
@@ -815,6 +816,21 @@ export default function SpeedToLeadClient() {
             product.
           </p>
         </div>
+        <a
+          href="https://www.hostinger.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="SkynetLabs is a Hostinger Partner"
+          style={{ display: "inline-block", marginTop: 26 }}
+        >
+          <Image
+            src="/badges/hostinger-partner.svg"
+            alt="Hostinger Partner"
+            width={160}
+            height={60}
+            unoptimized
+          />
+        </a>
         <p className="s2l-foot-note">
           SkynetLabs builds operations automation — lead routing, booking flows,
           follow-up systems. The walkthrough above is a simulated demonstration;

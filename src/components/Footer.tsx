@@ -138,6 +138,23 @@ export default function Footer() {
                   Built by Waseem, SkynetLabs · Bali
                 </span>
               </div>
+
+              {/* Hostinger partner badge (official asset from the Agency Hub) */}
+              <a
+                href="https://www.hostinger.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-5"
+                aria-label="SkynetLabs is a Hostinger Partner"
+              >
+                <Image
+                  src="/badges/hostinger-partner.svg"
+                  alt="Hostinger Partner"
+                  width={160}
+                  height={60}
+                  unoptimized
+                />
+              </a>
             </div>
 
             {FOOTER_COLUMNS.map((col) => (
