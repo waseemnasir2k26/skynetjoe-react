@@ -19,9 +19,9 @@
   <text x="480" y="260" font-size="13" fill="#3A3A36" text-anchor="middle">window closes</text>
 
   <circle cx="780" cy="220" r="9" fill="#C66B3F"/>
-  <text x="780" y="176" font-size="15" fill="#1A1A1A" font-weight="700" text-anchor="middle">After the window</text>
-  <text x="780" y="196" font-size="14" fill="#3A3A36" text-anchor="middle">Terms were due to change</text>
-  <text x="780" y="256" font-size="14" fill="#3A3A36" text-anchor="middle">See Anthropic pricing page</text>
+  <text x="780" y="176" font-size="15" fill="#1A1A1A" font-weight="700" text-anchor="middle">Usage pricing</text>
+  <text x="780" y="196" font-size="14" fill="#3A3A36" text-anchor="middle">$10 / M input tokens</text>
+  <text x="780" y="256" font-size="14" fill="#3A3A36" text-anchor="middle">$50 / M output tokens</text>
 
   <text x="48" y="336" font-size="13" fill="#56564F" font-style="italic">Terms have changed once already — confirm current dates in your Claude billing page.</text>
 </svg>
