@@ -58,7 +58,9 @@ const cspReportOnly = [
 const securityHeaders = [
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "X-Content-Type-Options", value: "nosniff" },
-  { key: "X-XSS-Protection", value: "1; mode=block" },
+  // Obsolete X-XSS-Protection dropped (2026-10-30); CSP is the modern control.
+  // allow-popups keeps Calendly / WhatsApp window.open() popups working.
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
     key: "Permissions-Policy",
@@ -68,6 +70,9 @@ const securityHeaders = [
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
   },
+  // same-site: other origins can't embed our responses cross-site, while
+  // same-site subdomains (hq.skynetjoe.com) still can. Applied to HTML too.
+  { key: "Cross-Origin-Resource-Policy", value: "same-site" },
   // Report-only CSP — observes violations without blocking. See cspReportOnly
   // comment above for the enforcement path (nonces → rename to enforcing).
   { key: "Content-Security-Policy-Report-Only", value: cspReportOnly },
@@ -385,7 +390,30 @@ const removedToolRedirects = [
   },
 ];
 
+// Static files in public/ keep stable (un-hashed) filenames, so no `immutable`:
+// 30 days + SWR. Hashed /_next/static already gets 1y immutable from Next.
+const PUBLIC_ASSET_CACHE = "public, max-age=2592000, stale-while-revalidate=86400";
+const publicAssetDirs = [
+  "portfolio",
+  "img",
+  "images",
+  "portraits",
+  "blog",
+  "community",
+  "news",
+  "case-studies",
+  "ad-assets",
+  "badges",
+  "bali-trek",
+  "digital-products",
+];
+
 const nextConfig: NextConfig = {
+  images: {
+    // Optimised images default to a 4h TTL; source files are stable.
+    minimumCacheTTL: 2592000,
+    formats: ["image/avif", "image/webp"],
+  },
   // Produces .next/standalone/server.js for smaller cold-boot on
   // Hostinger Node.js Web Apps (and any non-Vercel host).
   output: "standalone",
@@ -403,6 +431,16 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+      {
+        // Cross-origin policies above come from the catch-all; this adds
+        // caching for static media only (never HTML or /api).
+        source: `/:dir(${publicAssetDirs.join("|")})/:path*.:ext(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2|mp4|webm)`,
+        headers: [{ key: "Cache-Control", value: PUBLIC_ASSET_CACHE }],
+      },
+      {
+        source: "/:file(waseem-portrait|og-default|icon-192|icon-512|apple-touch-icon).:ext(jpg|png)",
+        headers: [{ key: "Cache-Control", value: PUBLIC_ASSET_CACHE }],
       },
       {
         // public/wp-templates/ is the WordPress copy-paste mirror of content/

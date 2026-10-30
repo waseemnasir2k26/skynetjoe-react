@@ -319,12 +319,8 @@ export async function POST(req: Request) {
 }
 
 // Health check — useful for confirming the route is live before configuring
-// the webhook subscription.
+// the webhook subscription. Public, so it must NOT disclose config state
+// (secret / API-token presence) — minimal {ok:true} only.
 export async function GET() {
-  return NextResponse.json({
-    ok: true,
-    route: "/api/webhooks/calendly",
-    signature_required: Boolean(process.env.CALENDLY_WEBHOOK_SECRET),
-    ghl_api_configured: Boolean(process.env.GHL_API_TOKEN),
-  });
+  return NextResponse.json({ ok: true });
 }
