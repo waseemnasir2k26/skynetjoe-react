@@ -49,7 +49,7 @@ const routes = fs.readFileSync(path.join("scripts", "must-have-routes.txt"), "ut
 const pages = sh('git ls-files "src/app"').split("\n").filter((f) => /\/page\.(tsx|ts|jsx|js|mdx)$/.test(f));
 const cfg = fs.readFileSync("next.config.ts", "utf8");
 for (const r of routes) {
-  const hit = pages.some((f) => f.replace(/\([^)]*\)\//g, "").replace(/^src\/app/, "").replace(/\/page\.\w+$/, "") === r);
+  const hit = pages.some((f) => (f.replace(/\([^)]*\)\//g, "").replace(/^src\/app/, "").replace(/\/page\.\w+$/, "") || "/") === r);
   if (!hit) fail.push(`must-have route ${r} has no page`);
   if (cfg.includes(`source: "${r}"`)) fail.push(`must-have route ${r} is a redirect source in next.config.ts`);
 }
