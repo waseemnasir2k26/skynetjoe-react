@@ -221,6 +221,10 @@ export default function PricingPage() {
             5 core services. 3 tiers each. Optional add-ons and a live calculator
             below. No quote form, no &ldquo;request pricing&rdquo; wall.
           </p>
+          <Link href="/contact" className="btn-primary inline-flex items-center gap-2 mb-8">
+            Start a brief
+            <ArrowRight size={16} aria-hidden="true" />
+          </Link>
           <div
             className="flex flex-wrap items-center gap-x-5 gap-y-2"
             style={{

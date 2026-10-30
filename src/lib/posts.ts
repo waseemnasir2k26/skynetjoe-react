@@ -714,7 +714,7 @@ export const POSTS: Post[] = [
   {
     slug: "claude-fable-5-prompts-40-master-prompts",
     seoTitle: "Claude Fable 5 Prompts: 40 Master Prompts",
-    title: "Claude Fable 5 Prompts: 40 Master Prompts to Run Before July 12",
+    title: "Claude Fable 5 Prompts: 40 Master Prompts",
     description:
       "40 master prompts for Claude Fable 5 — Claude Code, n8n, GHL and agency templates that build reusable assets.",
     publishedAt: "2026-07-11",

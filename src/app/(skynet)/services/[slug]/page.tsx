@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SERVICE_CATEGORIES, SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
@@ -6,6 +7,14 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ServiceFunnel from "@/components/services/ServiceFunnel";
 import { SERVICE_FUNNELS } from "@/data/service-funnels";
 import { findServicePricing } from "@/lib/service-pricing";
+import { INDUSTRIES } from "@/data/industries";
+
+// Contextual internal links (SEO-04): service -> matching industry pages.
+const SERVICE_INDUSTRIES: Record<string, string[]> = {
+  "ai-chatbots": ["dental-clinics", "wellness-spas"],
+  gohighlevel: ["dental-clinics", "wellness-spas"],
+  "n8n-automation": ["freight-logistics"],
+};
 
 /**
  * 2026-09-21: 5 core services (src/lib/site.ts SERVICE_CATEGORIES), each
@@ -85,6 +94,9 @@ export default async function ServicePage({
   const funnel = SERVICE_FUNNELS[slug];
   if (!funnel) notFound();
   const svc = SERVICES.find((s) => s.slug === slug)!;
+  const industryLinks = INDUSTRIES.filter((i) =>
+    (SERVICE_INDUSTRIES[slug] ?? []).includes(i.slug),
+  );
 
   const schema = {
     "@context": "https://schema.org",
@@ -126,6 +138,28 @@ export default async function ServicePage({
         ]}
       />
       <ServiceFunnel content={funnel} pricing={findServicePricing(slug)} />
+      {industryLinks.length > 0 && (
+        <section
+          className="container-x px-6 py-12"
+          aria-label="Industries we build this for"
+        >
+          <p style={{ fontWeight: 600, marginBottom: 8 }}>
+            See this built for your industry
+          </p>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {industryLinks.map((i) => (
+              <li key={i.slug}>
+                <Link
+                  href={`/industries/${i.slug}`}
+                  style={{ color: "var(--terracotta-aa)", fontWeight: 600 }}
+                >
+                  {i.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </>
   );
 }

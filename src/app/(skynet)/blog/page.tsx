@@ -21,7 +21,10 @@ export const metadata: Metadata = {
   title: pageTitle("Journal — AI Automation, AEO & Shipping"),
   description:
     pageDescription("Honest writing on automation, answer-engine optimization, and shipping software for service businesses across 9 countries. New posts when there's something worth saying."),
-  alternates: { canonical: `${SITE.url}/blog` },
+  alternates: {
+    canonical: `${SITE.url}/blog`,
+    types: { "application/rss+xml": `${SITE.url}/blog/feed.xml` },
+  },
   openGraph: {
     title: "SkynetLabs Journal",
     description:
