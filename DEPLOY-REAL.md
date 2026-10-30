@@ -3,12 +3,30 @@
 > This is the **accurate** deploy guide. The older `DEPLOY_HOSTINGER.md` describes
 > a GitHub auto-deploy flow that is **NOT wired** — ignore it for deploys.
 
+## Deploy protocol (HARD — added 2026-10-30)
+
+On 2026-10-29 a deploy built from an old branch wiped Digital Products and the
+AI Portfolio page from the live site. Every deploy now follows these steps:
+
+1. Branch new work from `main` or tag `live/skynetjoe.com`. Both equal what is
+   live. Never branch from an old feature branch.
+2. `npm test && npm run build`
+3. `node scripts/predeploy-guard.mjs --smoke`. Exit 1 means DO NOT deploy. It checks:
+   - HEAD contains the live tag
+   - every route in `scripts/must-have-routes.txt` exists and is not a redirect
+   - every same-site link and asset on those pages loads
+4. `/critic-loop`, then build the archive and deploy (TL;DR below).
+5. Check the live site, then `node scripts/predeploy-guard.mjs --mark-live` and
+   `git push origin HEAD:main`.
+6. When a new page ships, add its route to `scripts/must-have-routes.txt`.
+
 ## TL;DR
 
 ```powershell
 # Windows
 .\scripts\deploy-archive.ps1
 ```
+
 ```bash
 # macOS / Linux / Git Bash
 ./scripts/deploy-archive.sh
@@ -19,15 +37,15 @@ exact Hostinger MCP call to run. One command → ready to deploy.
 
 ## What's actually true
 
-| Fact | Value |
-| --- | --- |
-| Host | Hostinger **Node.js Web App** |
-| Domain | `skynetjoe.com` |
-| Hostinger username | `u361032549` |
-| App type | `next` (Node **20**, output **standalone**) |
+| Fact                | Value                                                                      |
+| ------------------- | -------------------------------------------------------------------------- |
+| Host                | Hostinger **Node.js Web App**                                              |
+| Domain              | `skynetjoe.com`                                                            |
+| Hostinger username  | `u361032549`                                                               |
+| App type            | `next` (Node **20**, output **standalone**)                                |
 | Build (server-side) | `npm install && npm run build` (build script: `build`, output dir `.next`) |
-| Deploy mechanism | **Manual ZIP source-archive upload** via the Hostinger API / MCP |
-| GitHub auto-deploy | **NOT configured.** Pushing to `main` does nothing on the host. |
+| Deploy mechanism    | **Manual ZIP source-archive upload** via the Hostinger API / MCP           |
+| GitHub auto-deploy  | **NOT configured.** Pushing to `main` does nothing on the host.            |
 
 ## How a deploy works
 
