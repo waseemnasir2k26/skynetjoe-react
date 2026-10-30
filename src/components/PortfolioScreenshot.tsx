@@ -14,7 +14,7 @@
  * outer <a> nav from firing.
  */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Controlled } from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import Image from "next/image";
@@ -27,9 +27,26 @@ type Props = {
 
 export default function PortfolioScreenshot({ src, alt }: Props) {
   const [isZoomed, setIsZoomed] = useState(false);
+  const wrapRef = useRef<HTMLSpanElement>(null);
+
+  // rmiz sets aria-owns to a modal id that only exists while open (axe:
+  // aria-valid-attr-value). Strip it.
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const strip = () =>
+      el.querySelectorAll("[data-rmiz][aria-owns]").forEach((n) =>
+        n.removeAttribute("aria-owns"),
+      );
+    strip();
+    const mo = new MutationObserver(strip);
+    mo.observe(el, { attributes: true, attributeFilter: ["aria-owns"], subtree: true, childList: true });
+    return () => mo.disconnect();
+  }, []);
 
   return (
     <>
+      <span ref={wrapRef} style={{ display: "contents" }}>
       <Controlled
         isZoomed={isZoomed}
         onZoomChange={setIsZoomed}
@@ -47,6 +64,7 @@ export default function PortfolioScreenshot({ src, alt }: Props) {
           className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
       </Controlled>
+      </span>
 
       <button
         type="button"
