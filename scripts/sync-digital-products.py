@@ -22,6 +22,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DP_DIR = ROOT / "src" / "app" / "(skynet)" / "digital-products"
 PRODUCTS_JSON = DP_DIR / "products.json"
+# Etsy listings filed in a shop section that misleads site visitors.
+CATEGORY_OVERRIDE = {
+    "4596117658": "Insurance & Tax",  # Insurance Agent Renewal Tracker (Etsy section: Small Business Systems)
+}
 COPY_JSON = DP_DIR / "copy.json"
 PUBLIC_DIR = ROOT / "public" / "digital-products"
 
@@ -121,7 +125,9 @@ def main():
         if it["store"] == "etsy":
             if int(it["id"]) in EXCLUDE:
                 continue
-            if it["section"] in CATEGORY_ORDER:
+            if it["id"] in CATEGORY_OVERRIDE:
+                it["category"] = CATEGORY_OVERRIDE[it["id"]]
+            elif it["section"] in CATEGORY_ORDER:
                 it["category"] = it["section"]
             else:
                 print(f"WARN unknown Etsy section {it['section']!r} -> Small Business Systems ({it['slug']})")

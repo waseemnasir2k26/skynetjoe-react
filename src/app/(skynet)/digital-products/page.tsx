@@ -320,7 +320,7 @@ export default function DigitalProductsPage() {
             }}
           >
             Digital downloads, sold and delivered by Etsy or Gumroad. Prices
-            shown are the store prices today; prices on the store may change.
+            shown are the store prices when this page was last updated; the store price is the one you pay.
           </p>
         </div>
       </section>
