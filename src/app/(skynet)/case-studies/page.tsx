@@ -283,8 +283,8 @@ export default function CaseStudiesPage() {
       >
         <style>{`
           .cs-grid-wrap {
-            --x-green: #C66B3F;
-            --x-green-light: #C66B3F;
+            --x-green: var(--terracotta);
+            --x-green-light: var(--terracotta);
             --x-purple-light: #8A9A7B;
             --x-cyan: #C9A96E;
             --x-amber: #C9A96E;
@@ -349,15 +349,15 @@ export default function CaseStudiesPage() {
             letter-spacing: 0.04em;
             z-index: 3;
           }
-          .cs-grid-wrap .wn-x-thumb.g1 { background: linear-gradient(135deg, #C66B3F 0%, #6B2C2C 100%); }
-          .cs-grid-wrap .wn-x-thumb.g2 { background: linear-gradient(135deg, #8A9A7B 0%, #6B2C2C 50%, #C66B3F 100%); }
-          .cs-grid-wrap .wn-x-thumb.g3 { background: linear-gradient(135deg, #C9A96E 0%, #C66B3F 100%); }
-          .cs-grid-wrap .wn-x-thumb.g4 { background: linear-gradient(135deg, #C66B3F 0%, #8A9A7B 100%); }
-          .cs-grid-wrap .wn-x-thumb.g5 { background: linear-gradient(135deg, #EDE8DC 0%, #C66B3F 90%); }
+          .cs-grid-wrap .wn-x-thumb.g1 { background: linear-gradient(135deg, var(--terracotta) 0%, #6B2C2C 100%); }
+          .cs-grid-wrap .wn-x-thumb.g2 { background: linear-gradient(135deg, #8A9A7B 0%, #6B2C2C 50%, var(--terracotta) 100%); }
+          .cs-grid-wrap .wn-x-thumb.g3 { background: linear-gradient(135deg, #C9A96E 0%, var(--terracotta) 100%); }
+          .cs-grid-wrap .wn-x-thumb.g4 { background: linear-gradient(135deg, var(--terracotta) 0%, #8A9A7B 100%); }
+          .cs-grid-wrap .wn-x-thumb.g5 { background: linear-gradient(135deg, #EDE8DC 0%, var(--terracotta) 90%); }
           .cs-grid-wrap .wn-x-thumb.g6 { background: linear-gradient(135deg, #8A9A7B 0%, #C9A96E 100%); }
-          .cs-grid-wrap .wn-x-thumb.g7 { background: linear-gradient(135deg, #C9A96E 0%, #C66B3F 60%, #8A9A7B 100%); }
+          .cs-grid-wrap .wn-x-thumb.g7 { background: linear-gradient(135deg, #C9A96E 0%, var(--terracotta) 60%, #8A9A7B 100%); }
           .cs-grid-wrap .wn-x-thumb.g8 { background: linear-gradient(135deg, #6B2C2C 0%, #C9A96E 100%); }
-          .cs-grid-wrap .wn-x-thumb.g9 { background: linear-gradient(135deg, #FAF7F0 0%, #8A9A7B 70%, #C66B3F 100%); }
+          .cs-grid-wrap .wn-x-thumb.g9 { background: linear-gradient(135deg, #FAF7F0 0%, #8A9A7B 70%, var(--terracotta) 100%); }
           .cs-grid-wrap .wn-x-card-body {
             padding: 1.5rem;
             display: flex;

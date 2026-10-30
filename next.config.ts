@@ -411,6 +411,7 @@ const publicAssetDirs = [
   "badges",
   "bali-trek",
   "digital-products",
+  "aiportfolio",
 ];
 
 const nextConfig: NextConfig = {

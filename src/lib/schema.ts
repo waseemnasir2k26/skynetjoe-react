@@ -109,6 +109,9 @@ const organization = {
     height: 512,
   },
   description: SITE.description,
+  foundingDate: "2019",
+  foundingLocation: { "@type": "Place", name: "Lahore, Pakistan" },
+  location: { "@type": "Place", name: "Bali, Indonesia" },
   // TODO(reviews): wire aggregateRating/review here using ONLY real,
   // attributable testimonial data. Current testimonials in
   // src/components/sections/Testimonials.tsx are named text quotes with NO

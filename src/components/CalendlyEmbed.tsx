@@ -92,7 +92,7 @@ export default function CalendlyEmbed({
           styles={{ height: "720px", minWidth: "320px" }}
           pageSettings={{
             backgroundColor: "FAF7F0",
-            primaryColor: "C66B3F",
+            primaryColor: "A8451F",
             textColor: "1A1A1A",
             hideEventTypeDetails: false,
             hideGdprBanner: true,

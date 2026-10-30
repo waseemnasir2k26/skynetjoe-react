@@ -144,15 +144,9 @@ const schema = {
       isPartOf: { "@id": `${SITE.url}/#website` },
       mainEntity: { "@id": `${SITE.url}/#organization` },
     },
-    {
-      // Spread the canonical Organization (logo ImageObject, founder→#person
-      // ref, address, full sameAs) from @/lib/schema instead of redefining a
-      // thinner duplicate. Layer only the about-page-relevant founding facts.
-      ...organization,
-      foundingDate: "2019",
-      foundingLocation: { "@type": "Place", name: "Lahore, Pakistan" },
-      location: { "@type": "Place", name: "Bali, Indonesia" },
-    },
+    // Shared canonical Organization node, identical to the homepage's
+    // (founding facts live in @/lib/schema).
+    { ...organization },
     // Include the canonical Person node so the Organization.founder #person
     // reference resolves on this page (same pattern the homepage uses).
     { ...person },
