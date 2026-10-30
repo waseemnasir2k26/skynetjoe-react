@@ -412,6 +412,12 @@ const nextConfig: NextConfig = {
         source: "/wp-templates/:path*",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
+      {
+        // robots.txt no longer disallows /lp/ (so crawlers can see noindex);
+        // this header covers anything under /lp/ that has no robots meta.
+        source: "/lp/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
   async redirects() {
