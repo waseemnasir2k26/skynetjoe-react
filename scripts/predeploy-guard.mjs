@@ -23,6 +23,9 @@ const root = sh("git rev-parse --show-toplevel");
 process.chdir(root);
 
 if (process.argv.includes("--mark-live")) {
+  if (sh("git status --porcelain --untracked-files=no")) { console.error("--mark-live refused: uncommitted changes"); process.exit(1); }
+  try { sh(`git merge-base --is-ancestor ${TAG} HEAD`); }
+  catch (e) { if (sh(`git tag -l ${TAG}`)) { console.error(`--mark-live refused: HEAD does not contain current ${TAG} (would move it backwards)`); process.exit(1); } }
   sh(`git tag -f ${TAG} HEAD`);
   try { sh(`git push -f origin refs/tags/${TAG}`); } catch { console.warn("tag set locally; push failed (push it by hand)"); }
   console.log(`${TAG} -> ${sh("git rev-parse --short HEAD")}`);
@@ -47,11 +50,17 @@ if (live) {
 const routes = fs.readFileSync(path.join("scripts", "must-have-routes.txt"), "utf8")
   .split(/\r?\n/).map((l) => l.trim()).filter((l) => l && !l.startsWith("#"));
 const pages = sh('git ls-files "src/app"').split("\n").filter((f) => /\/page\.(tsx|ts|jsx|js|mdx)$/.test(f));
-const cfg = fs.readFileSync("next.config.ts", "utf8");
+// Redirect sources live in next.config.ts AND in src/lib/*redirect* helpers (r("/x","/y")).
+const cfg = [
+  fs.readFileSync("next.config.ts", "utf8"),
+  ...sh('git ls-files "src/lib"').split("\n").filter((f) => /redirect/i.test(f)).map((f) => fs.readFileSync(f, "utf8")),
+].join("\n");
 for (const r of routes) {
   const hit = pages.some((f) => (f.replace(/\([^)]*\)\//g, "").replace(/^src\/app/, "").replace(/\/page\.\w+$/, "") || "/") === r);
   if (!hit) fail.push(`must-have route ${r} has no page`);
-  if (cfg.includes(`source: "${r}"`)) fail.push(`must-have route ${r} is a redirect source in next.config.ts`);
+  const esc = r.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
+  const asSource = new RegExp(`(?:source:\\s*|\\br\\(\\s*)["'\`]${esc}(?:["'\`]|/:\\w+[*?]["'\`])`); // exact, or /:x* /:x? (zero segments = the route itself)
+  if (asSource.test(cfg)) fail.push(`must-have route ${r} is a redirect source (next.config.ts / src/lib redirects)`);
 }
 
 // 5. --smoke (needs a fresh `npm run build`): start the built app, load every
@@ -60,7 +69,10 @@ for (const r of routes) {
 //    -> 99 broken tiles; only a served-page check catches template-built paths.
 if (process.argv.includes("--smoke") && !fail.length) {
   const { spawn } = await import("node:child_process");
-  const PORT = 3199;
+  const net = await import("node:net");
+  const PORT = await new Promise((res, rej) => {
+    const t = net.createServer().once("error", rej).listen(0, "127.0.0.1", () => { const p = t.address().port; t.close(() => res(p)); });
+  });
   const base = `http://localhost:${PORT}`;
   const srv = spawn(process.execPath, [path.join("node_modules", "next", "dist", "bin", "next"), "start", "-p", String(PORT)], { stdio: "ignore" });
   try {
@@ -87,6 +99,7 @@ if (process.argv.includes("--smoke") && !fail.length) {
         await res.arrayBuffer();
       }));
     }
+    if (!list.length) fail.push("smoke: 0 same-site links/assets found — wrong server answered or pages empty");
     if (broken.length) fail.push(`smoke: ${broken.length} broken same-site link(s)/asset(s):\n    ` + broken.slice(0, 15).join("\n    "));
     else console.log(`smoke: ${routes.length} routes 200, ${list.length} same-site links/assets OK`);
   } catch (e) {
