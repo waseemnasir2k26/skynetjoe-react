@@ -810,7 +810,6 @@ export const POSTS: Post[] = [
   },
   {
     slug: "aeo-vs-seo",
-    seoTitle: "AEO vs SEO: Differences and Why You Need Both",
     title: "AEO vs SEO: How They Differ and Why You Need Both in 2026",
     seoTitle: "AEO vs SEO: How They Differ, Why You Need Both",
     description:

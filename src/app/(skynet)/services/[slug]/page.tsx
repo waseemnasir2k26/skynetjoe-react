@@ -15,7 +15,7 @@ import { findServicePricing } from "@/lib/service-pricing";
  * /services/<slug>/in/<state> URLs 301 to the hub (simplify-redirects.ts).
  */
 
-type ServiceItem = { slug: string; label: string; icon: string; desc: string };
+type ServiceItem = { slug: string; seoTitle: string; label: string; icon: string; desc: string };
 const SERVICES: ServiceItem[] = SERVICE_CATEGORIES.flatMap(
   (c) => c.services as readonly (ServiceItem & { href?: string })[],
 ).filter((s): s is ServiceItem => !("href" in s) || !s.href);
