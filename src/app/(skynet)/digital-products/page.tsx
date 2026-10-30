@@ -12,7 +12,9 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { Reveal } from "@/components/motion/Reveal";
 import {
   DIGITAL_PRODUCTS,
-  ETSY_LISTING_URL,
+  STORE_LABEL,
+  categoryAnchor,
+  groupByCategory,
   type DigitalProduct,
 } from "./products";
 
@@ -24,14 +26,14 @@ const PATH = "/digital-products";
 export const metadata: Metadata = {
   title: pageTitle("Digital Products: Templates, Scripts & Trackers"),
   description: pageDescription(
-    "Ready-made templates, scripts and trackers for small businesses: realtors, cleaners, spas, loan officers, insurance agents and more. Instant download on Etsy.",
+    "Ready-made templates, scripts and trackers for small businesses: realtors, cleaners, spas, loan officers, insurance agents and more. Instant download on Etsy or Gumroad.",
   ),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title:
       "Digital Products: templates, scripts and trackers for small businesses",
     description:
-      "Ready-made kits for small businesses. Buy on Etsy and download instantly.",
+      "Ready-made kits for small businesses. Buy on Etsy or Gumroad and download instantly.",
     url: `${SITE.url}${PATH}`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -42,7 +44,7 @@ export const metadata: Metadata = {
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "SkynetLabs digital products on Etsy",
+  name: "SkynetLabs digital products",
   url: `${SITE.url}${PATH}`,
   itemListElement: DIGITAL_PRODUCTS.map((p, i) => ({
     "@type": "ListItem",
@@ -51,11 +53,11 @@ const itemListSchema = {
       "@type": "Product",
       name: p.name,
       description: p.inside,
-      image: `${SITE.url}/digital-products/${p.slug}.webp`,
+      image: `${SITE.url}${p.image}`,
       brand: { "@type": "Brand", name: SITE.brand },
       offers: {
         "@type": "Offer",
-        url: ETSY_LISTING_URL(p.id),
+        url: p.url,
         price: p.price.toFixed(2),
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
@@ -76,26 +78,29 @@ const mono = {
   letterSpacing: "0.14em",
 } as const;
 
-function EtsyButton({ p, big }: { p: DigitalProduct; big?: boolean }) {
+const GROUPS = groupByCategory();
+
+function StoreButton({ p }: { p: DigitalProduct }) {
+  const store = STORE_LABEL[p.store];
   return (
     <a
-      href={ETSY_LISTING_URL(p.id)}
+      href={p.url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Buy ${p.name} on Etsy (opens in a new tab)`}
+      aria-label={`View ${p.name} on ${store} (opens in a new tab)`}
       className="inline-flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
       style={{
         background: "var(--terracotta-aa)",
         color: "#fff",
         fontWeight: 600,
-        fontSize: big ? 16 : 14,
-        padding: big ? "14px 26px" : "11px 18px",
+        fontSize: 14,
+        padding: "11px 18px",
         borderRadius: 2,
         minHeight: 44,
         borderBottom: "none",
       }}
     >
-      Buy on Etsy
+      View on {store}
       <ArrowUpRight size={16} aria-hidden="true" />
     </a>
   );
@@ -113,7 +118,7 @@ function Card({ p }: { p: DigitalProduct }) {
       }}
     >
       <Image
-        src={`/digital-products/${p.slug}.webp`}
+        src={p.image}
         alt={`${p.name} cover image`}
         width={800}
         height={800}
@@ -135,14 +140,18 @@ function Card({ p }: { p: DigitalProduct }) {
         >
           {p.name}
         </h3>
-        <p style={{ fontSize: 14, color: "var(--ink-2)", margin: 0 }}>
-          <b style={{ color: "var(--ink)" }}>For: </b>
-          {p.forWho}
-        </p>
-        <p style={{ fontSize: 14, color: "var(--ink-2)", margin: 0 }}>
-          <b style={{ color: "var(--ink)" }}>Inside: </b>
-          {p.inside}
-        </p>
+        {p.forWho && (
+          <p style={{ fontSize: 14, color: "var(--ink-2)", margin: 0 }}>
+            <b style={{ color: "var(--ink)" }}>For: </b>
+            {p.forWho}
+          </p>
+        )}
+        {p.inside && (
+          <p style={{ fontSize: 14, color: "var(--ink-2)", margin: 0 }}>
+            <b style={{ color: "var(--ink)" }}>Inside: </b>
+            {p.inside}
+          </p>
+        )}
         <div className="mt-auto pt-3 flex items-center justify-between gap-3 flex-wrap">
           <span
             style={{
@@ -152,9 +161,9 @@ function Card({ p }: { p: DigitalProduct }) {
               color: "var(--ink)",
             }}
           >
-            ${p.price}
+            ${p.price.toFixed(2)}
           </span>
-          <EtsyButton p={p} />
+          <StoreButton p={p} />
         </div>
       </div>
     </article>
@@ -162,7 +171,7 @@ function Card({ p }: { p: DigitalProduct }) {
 }
 
 export default function DigitalProductsPage() {
-  const [featured, ...rest] = DIGITAL_PRODUCTS;
+  const total = DIGITAL_PRODUCTS.length;
   return (
     <>
       <JsonLd data={itemListSchema} />
@@ -219,94 +228,54 @@ export default function DigitalProductsPage() {
               margin: 0,
             }}
           >
-            Templates, scripts and trackers you edit and use the same day. Each
-            kit is a single download: Word and Google Docs files, a printable
-            PDF and Excel / Google Sheets trackers. Buy on Etsy and download
-            instantly.
+            {total} ready-made templates, scripts and trackers you edit and use
+            the same day. Each kit is a single download: Word and Google Docs
+            files, printable PDFs and Excel / Google Sheets trackers. Buy on
+            Etsy or Gumroad and download instantly.
           </p>
         </Reveal>
       </section>
 
-      {/* FEATURED BUNDLE */}
-      <section
-        className="py-12 md:py-16"
-        style={{ background: "var(--cream)" }}
+      {/* CATEGORY CHIPS */}
+      <nav
+        aria-label="Product categories"
+        className="sticky z-20"
+        style={{
+          top: 64,
+          background: "var(--cream)",
+          borderBottom: "1px solid rgba(26,26,26,0.10)",
+        }}
       >
         <div className="container-x px-6 max-w-6xl mx-auto">
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 gap-0"
-            style={{
-              background: "var(--cream-3)",
-              border: "1px solid rgba(26,26,26,0.18)",
-              borderRadius: 2,
-              overflow: "hidden",
-            }}
+          <ul
+            className="flex gap-2 py-3 m-0 list-none overflow-x-auto"
+            style={{ WebkitOverflowScrolling: "touch" }}
           >
-            <Image
-              src={`/digital-products/${featured.slug}.webp`}
-              alt={`${featured.name} cover image`}
-              width={800}
-              height={800}
-              priority
-              sizes="(min-width: 768px) 560px, 92vw"
-              className="w-full h-auto"
-            />
-            <div className="flex flex-col justify-center gap-4 p-6 md:p-10">
-              <span style={{ ...mono, color: "var(--terracotta-aa)" }}>
-                Best value · Save ${featured.savings}
-              </span>
-              <h2
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 600,
-                  fontSize: "clamp(28px, 4vw, 40px)",
-                  lineHeight: 1.08,
-                  letterSpacing: "-0.02em",
-                  color: "var(--ink)",
-                  margin: 0,
-                }}
-              >
-                {featured.name}
-              </h2>
-              <p style={{ fontSize: 16, color: "var(--ink-2)", margin: 0 }}>
-                <b style={{ color: "var(--ink)" }}>For: </b>
-                {featured.forWho}.
-              </p>
-              <p style={{ fontSize: 16, color: "var(--ink-2)", margin: 0 }}>
-                <b style={{ color: "var(--ink)" }}>Inside: </b>
-                {featured.inside}
-              </p>
-              <div className="flex items-baseline gap-3 flex-wrap">
-                <span
+            {GROUPS.map((g) => (
+              <li key={g.category} className="shrink-0">
+                <a
+                  href={`#${categoryAnchor(g.category)}`}
+                  className="inline-flex items-center gap-2 whitespace-nowrap"
                   style={{
-                    fontFamily: "var(--font-display)",
-                    fontWeight: 700,
-                    fontSize: 40,
+                    border: "1px solid rgba(26,26,26,0.22)",
+                    borderRadius: 999,
+                    padding: "8px 14px",
+                    fontSize: 14,
+                    minHeight: 44,
                     color: "var(--ink)",
+                    background: "var(--cream-3)",
                   }}
                 >
-                  ${featured.price}
-                </span>
-                <span
-                  style={{
-                    fontSize: 15,
-                    color: "var(--ink-faint)",
-                    textDecoration: "line-through",
-                  }}
-                >
-                  ${featured.was}
-                </span>
-                <span style={{ fontSize: 14, color: "var(--ink-2)" }}>
-                  if bought one by one
-                </span>
-              </div>
-              <div>
-                <EtsyButton p={featured} big />
-              </div>
-            </div>
-          </div>
+                  {g.category}
+                  <span style={{ color: "var(--ink-faint)", fontSize: 12 }}>
+                    {g.products.length}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-      </section>
+      </nav>
 
       {/* GRID */}
       <section
@@ -314,23 +283,33 @@ export default function DigitalProductsPage() {
         style={{ background: "var(--cream)" }}
       >
         <div className="container-x px-6 max-w-6xl mx-auto">
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 600,
-              fontSize: "clamp(26px, 3.5vw, 34px)",
-              letterSpacing: "-0.02em",
-              color: "var(--ink)",
-              margin: "0 0 24px",
-            }}
-          >
-            Or pick one kit
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {rest.map((p) => (
-              <Card key={p.id} p={p} />
-            ))}
-          </div>
+          {GROUPS.map((g) => (
+            <section
+              key={g.category}
+              id={categoryAnchor(g.category)}
+              aria-labelledby={`h-${categoryAnchor(g.category)}`}
+              style={{ scrollMarginTop: 140, paddingTop: 40 }}
+            >
+              <h2
+                id={`h-${categoryAnchor(g.category)}`}
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 600,
+                  fontSize: "clamp(26px, 3.5vw, 34px)",
+                  letterSpacing: "-0.02em",
+                  color: "var(--ink)",
+                  margin: "0 0 24px",
+                }}
+              >
+                {g.category}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {g.products.map((p) => (
+                  <Card key={p.slug} p={p} />
+                ))}
+              </div>
+            </section>
+          ))}
           <p
             style={{
               marginTop: 28,
@@ -339,8 +318,8 @@ export default function DigitalProductsPage() {
               maxWidth: "70ch",
             }}
           >
-            Digital downloads, sold and delivered by Etsy. Prices shown are the
-            Etsy prices today; prices on Etsy may change.
+            Digital downloads, sold and delivered by Etsy or Gumroad. Prices
+            shown are the store prices today; prices on the store may change.
           </p>
         </div>
       </section>
