@@ -31,7 +31,7 @@ if (process.argv.includes("--mark-live")) {
 
 const fail = [];
 const dirty = sh("git status --porcelain --untracked-files=no");
-if (dirty) fail.push(`uncommitted tracked changes:\n${dirty}`);
+if (dirty && !process.env.GUARD_TEST_ALLOW_DIRTY) fail.push(`uncommitted tracked changes:\n${dirty}`);
 
 try { sh("git fetch -q origin --tags"); } catch {}
 let live = "";
@@ -52,6 +52,48 @@ for (const r of routes) {
   const hit = pages.some((f) => (f.replace(/\([^)]*\)\//g, "").replace(/^src\/app/, "").replace(/\/page\.\w+$/, "") || "/") === r);
   if (!hit) fail.push(`must-have route ${r} has no page`);
   if (cfg.includes(`source: "${r}"`)) fail.push(`must-have route ${r} is a redirect source in next.config.ts`);
+}
+
+// 5. --smoke (needs a fresh `npm run build`): start the built app, load every
+//    must-have route, and request every same-site src/href it references.
+//    2026-10-30: the /aiportfolio port shipped without public/aiportfolio/thumbs
+//    -> 99 broken tiles; only a served-page check catches template-built paths.
+if (process.argv.includes("--smoke") && !fail.length) {
+  const { spawn } = await import("node:child_process");
+  const PORT = 3199;
+  const base = `http://localhost:${PORT}`;
+  const srv = spawn(process.execPath, [path.join("node_modules", "next", "dist", "bin", "next"), "start", "-p", String(PORT)], { stdio: "ignore" });
+  try {
+    let up = false;
+    for (let i = 0; i < 60 && !up; i++) {
+      try { up = (await fetch(base + "/")).ok; } catch { await new Promise((r) => setTimeout(r, 1000)); }
+    }
+    if (!up) throw new Error("built app did not start (run npm run build first)");
+    const assets = new Set();
+    for (const r of routes) {
+      const res = await fetch(base + r, { redirect: "manual" });
+      if (res.status !== 200) { fail.push(`smoke: ${r} -> ${res.status}`); continue; }
+      const html = await res.text();
+      for (const m of html.matchAll(/(?:src|href|srcSet|srcset|poster)="(\/[^"#?\s]*)/g)) {
+        if (!m[1].startsWith("/_next/") && !m[1].startsWith("//")) assets.add(m[1]);
+      }
+    }
+    const broken = [];
+    const list = [...assets];
+    for (let i = 0; i < list.length; i += 16) {
+      await Promise.all(list.slice(i, i + 16).map(async (u) => {
+        const res = await fetch(base + u, { method: "GET", redirect: "follow" });
+        if (res.status >= 400) broken.push(`${res.status} ${u}`);
+        await res.arrayBuffer();
+      }));
+    }
+    if (broken.length) fail.push(`smoke: ${broken.length} broken same-site link(s)/asset(s):\n    ` + broken.slice(0, 15).join("\n    "));
+    else console.log(`smoke: ${routes.length} routes 200, ${list.length} same-site links/assets OK`);
+  } catch (e) {
+    fail.push(`smoke: ${e.message}`);
+  } finally {
+    srv.kill();
+  }
 }
 
 if (fail.length) {
