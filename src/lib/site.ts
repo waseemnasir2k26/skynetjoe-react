@@ -222,6 +222,9 @@ export const FOOTER_COLUMNS = [
       { label: "GoHighLevel CRM", href: "/services/gohighlevel" },
       { label: "Vibe-Coded Sites", href: "/services/vibe-coded-sites" },
       { label: "WordPress SEO", href: "/services/wordpress-seo" },
+      { label: "Dental Clinics", href: "/industries/dental-clinics" },
+      { label: "Wellness Spas", href: "/industries/wellness-spas" },
+      { label: "Freight & Logistics", href: "/industries/freight-logistics" },
     ],
   },
   {

@@ -35,7 +35,7 @@ const field: React.CSSProperties = {
 const label: React.CSSProperties = {
   display: "block",
   fontFamily: "var(--font-mono)",
-  fontSize: 11,
+  fontSize: 12,
   textTransform: "uppercase",
   letterSpacing: "0.12em",
   color: "var(--ink-2)",
@@ -97,8 +97,8 @@ export default function ContactBriefForm() {
           j?.newsletter === "confirmed"
             ? "You're in. If you're new to the list, a welcome email is on its way."
             : j?.newsletter === "pending"
-              ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
-              : "Couldn't save your email-list sign-up. Try again, or email waseem@skynetjoe.com.",
+              ? "Saved. If no welcome email arrives within a day, email info@skynetjoe.com and I'll add you by hand."
+              : "Couldn't save your email-list sign-up. Try again, or email info@skynetjoe.com.",
         );
       }
       setStatus("success");
@@ -251,14 +251,14 @@ export default function ContactBriefForm() {
         />
       </div>
 
-      <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 10, minHeight: 44 }}>
         <input
           id={optInId}
           type="checkbox"
           checked={newsletterOptIn}
           onChange={(e) => setNewsletterOptIn(e.target.checked)}
           disabled={status === "submitting"}
-          style={{ marginTop: 3, flexShrink: 0, accentColor: "var(--terracotta)" }}
+          style={{ marginTop: 3, flexShrink: 0, width: 20, height: 20, accentColor: "var(--terracotta)" }}
         />
         <label
           htmlFor={optInId}

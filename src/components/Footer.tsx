@@ -159,11 +159,12 @@ export default function Footer() {
 
             {FOOTER_COLUMNS.map((col) => (
               <div key={col.title}>
-                <h4
+                <h2
                   className="mb-4"
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 11,
+                    fontSize: 12,
+                    lineHeight: 1.5,
                     textTransform: "uppercase",
                     letterSpacing: "0.16em",
                     color: "#A8451F",
@@ -171,14 +172,14 @@ export default function Footer() {
                   }}
                 >
                   — {col.title}
-                </h4>
-                <ul className="space-y-2.5">
+                </h2>
+                <ul className="space-y-1">
                   {col.links.map((link) => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-sm transition-colors"
-                        style={{ color: "var(--ink-2)", borderBottom: "none" }}
+                        className="text-sm transition-colors inline-block py-[3px]"
+                        style={{ color: "var(--ink-2)", borderBottom: "none", minHeight: 24 }}
                         onMouseEnter={(e) =>
                           (e.currentTarget.style.color = "var(--terracotta)")
                         }

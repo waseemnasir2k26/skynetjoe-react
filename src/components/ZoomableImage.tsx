@@ -16,6 +16,7 @@
  * does that correctly — verified.
  */
 
+import { useEffect, useRef } from "react";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import Image, { type ImageProps } from "next/image";
@@ -33,6 +34,24 @@ export default function ZoomableImage({
   alt,
   ...imageProps
 }: ZoomableImageProps) {
+  const wrapRef = useRef<HTMLSpanElement>(null);
+
+  // react-medium-image-zoom sets aria-owns on its wrapper pointing at a modal
+  // id that only exists while open → invalid ARIA reference while closed.
+  // Strip it (kept out while open too; the dialog is announced on its own).
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el || !zoomable) return;
+    const strip = () =>
+      el.querySelectorAll("[data-rmiz][aria-owns]").forEach((n) =>
+        n.removeAttribute("aria-owns"),
+      );
+    strip();
+    const mo = new MutationObserver(strip);
+    mo.observe(el, { attributes: true, attributeFilter: ["aria-owns"], subtree: true, childList: true });
+    return () => mo.disconnect();
+  }, [zoomable]);
+
   if (!zoomable) {
     return <Image alt={alt} {...imageProps} />;
   }
@@ -42,8 +61,10 @@ export default function ZoomableImage({
     : "cream-zoom-dialog";
 
   return (
-    <Zoom classDialog={classDialog} zoomMargin={40}>
-      <Image alt={alt} {...imageProps} />
-    </Zoom>
+    <span ref={wrapRef} style={{ display: "contents" }}>
+      <Zoom classDialog={classDialog} zoomMargin={40}>
+        <Image alt={alt} {...imageProps} />
+      </Zoom>
+    </span>
   );
 }

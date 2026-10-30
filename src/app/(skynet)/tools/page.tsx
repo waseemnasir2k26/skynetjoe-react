@@ -129,7 +129,7 @@ export default async function ToolsIndexPage({
           </p>
         </div>
       )}
-      <main
+      <div
         style={{
           minHeight: "100vh",
           background: "var(--cream)",
@@ -240,7 +240,7 @@ export default async function ToolsIndexPage({
                 <div
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 10,
+                    fontSize: 12,
                     textTransform: "uppercase",
                     letterSpacing: "0.16em",
                     color: "var(--terracotta-aa)",
@@ -316,7 +316,7 @@ export default async function ToolsIndexPage({
                               <span
                                 style={{
                                   fontFamily: "var(--font-mono)",
-                                  fontSize: 9,
+                                  fontSize: 12,
                                   fontWeight: 700,
                                   letterSpacing: "0.12em",
                                   padding: "3px 8px",
@@ -365,7 +365,7 @@ export default async function ToolsIndexPage({
             </section>
           );
         })}
-      </main>
+      </div>
     </>
   );
 }
