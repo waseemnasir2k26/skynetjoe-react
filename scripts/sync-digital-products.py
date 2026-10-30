@@ -82,8 +82,10 @@ def pull_live(img_dir):
                          capture_output=True, text=True).stdout.strip()
     if not tok:
         sys.exit("GUMROAD_TOKEN user env var missing")
-    for p in requests.get("https://api.gumroad.com/v2/products",
-                          headers={"Authorization": f"Bearer {tok}"}, timeout=60).json()["products"]:
+    gr = requests.get("https://api.gumroad.com/v2/products",
+                      headers={"Authorization": f"Bearer {tok}"}, timeout=60)
+    gr.raise_for_status()
+    for p in gr.json()["products"]:
         if p.get("published"):
             items.append({"store": "gumroad", "id": p["id"], "title": p["name"], "price": p["price"] / 100,
                           "url": p["short_url"], "img": p.get("thumbnail_url") or p.get("preview_url"),
@@ -151,6 +153,13 @@ def main():
             "image": f"/digital-products/{it['slug']}.webp",
         })
     products.sort(key=lambda p: (CATEGORY_ORDER.index(p["category"]), -p["price"], p["slug"]))
+
+    # Fail closed before touching anything: an empty/partial API answer (wrong
+    # token, filter, truncated cache) must never wipe the live page.
+    prev_n = len(json.loads(PRODUCTS_JSON.read_text(encoding="utf-8"))) if PRODUCTS_JSON.exists() else 0
+    stores = {p["store"] for p in products}
+    if len(products) < max(10, int(prev_n * 0.7)) or stores != {"etsy", "gumroad"}:
+        sys.exit(f"FAIL: suspicious catalogue ({len(products)} products, previous {prev_n}, stores {sorted(stores)}) - nothing written")
 
     PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
     no_img = []

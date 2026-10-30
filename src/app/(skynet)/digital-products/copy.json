@@ -70,9 +70,9 @@
     "inside": "Form 8867 file sheet, penalty exposure tracker, Schedule 1-A client questionnaire and 11 document-chase messages."
   },
   "e-etsy-seller-tax-spreadsheet-no-1099-k-quarterly": {
-    "name": "Seller Quarterly Tax Tracker",
-    "forWho": "US online shop sellers who get no 1099-K and are unsure what to set aside",
-    "inside": "13-tab spreadsheet for Google Sheets and Excel. Paste your payment statement CSV and read the answer on the DO I OWE tab."
+    "name": "Etsy Seller Quarterly Tax Tracker",
+    "forWho": "US Etsy sellers who get no 1099-K and are unsure what to set aside",
+    "inside": "13-tab spreadsheet for Google Sheets and Excel. Paste your Etsy payment statement CSV and read the answer on the DO I OWE tab."
   },
   "e-california-security-deposit-itemized-deduction-s": {
     "name": "California Security Deposit Kit",
@@ -121,7 +121,7 @@
   },
   "e-hvac-maintenance-agreement-template-service-plan": {
     "name": "HVAC Maintenance Plan Kit",
-    "forWho": "HVAC owners whose plan members forget visits, cancel or argue about auto-renewal",
+    "forWho": "HVAC companies whose plan members forget visits, cancel or argue about auto-renewal",
     "inside": "Membership agreement in Word with 16 clauses, plus an 8-tab Excel and Google Sheets workbook for renewals and visits."
   },
   "e-hvac-quote-template-repair-vs-replace-estimate-c": {
@@ -137,7 +137,7 @@
   "e-personal-injury-law-firm-intake-kit-missed-call": {
     "name": "Personal Injury Intake Rescue Kit",
     "forWho": "Solo and small injury firms that lose inquiries while in court or on another line",
-    "inside": "Missed-call text-backs, intake scripts, a follow-up sequence and a Google Sheets tracker so every inquiry gets a reply."
+    "inside": "Missed-call text-backs, intake scripts, a follow-up sequence and a Google Sheets or Excel tracker to help you answer and follow up with every inquiry."
   },
   "e-wire-fraud-callback-log-title-company-escrow-wir": {
     "name": "Wire Fraud Callback Kit",
@@ -202,7 +202,7 @@
   "e-virtual-assistant-packages-pricing-template-va-r": {
     "name": "VA Packages and Pricing Kit",
     "forWho": "Freelance virtual assistants who charge too little and do unpaid extra tasks",
-    "inside": "Rate calculator, 3 monthly packages, a proposal and scope-guard emails. Everything is editable."
+    "inside": "Rate calculator, 3 monthly packages, a proposal, a scope-guard form set and client email scripts. Everything is editable."
   },
   "e-social-media-manager-onboarding-kit-client-contr": {
     "name": "Social Media Manager Onboarding Kit",
@@ -221,7 +221,7 @@
   },
   "e-loan-officer-follow-up-kit-scripts-client-tracke": {
     "name": "Loan Officer Follow-Up Kit",
-    "forWho": "Loan officers who lose leads between the first call and closing",
+    "forWho": "Loan officers who need scripts for every stage of a home loan",
     "inside": "36 call, text and email scripts, 30 social post captions, a printable PDF guide and a follow-up tracker."
   },
   "e-cleaning-business-forms-client-tracker-quote-con": {
@@ -252,7 +252,7 @@
   "g-dental-same-day-gap-fill-waitlist-kit-ranked-wai": {
     "name": "Dental Same-Day Gap-Fill Kit",
     "forWho": "Dental front desks that have minutes to fill a cancelled chair",
-    "inside": "Ranked waitlist sheet, tiered text offers, a call script, an SMS consent log and n8n flows. Workbook for Excel and Google Sheets."
+    "inside": "Ranked waitlist sheet, tiered text offers, call and text scripts, an SMS consent log and 3 optional n8n workflows. Workbook for Excel and Google Sheets."
   },
   "g-glp-1-member-retention-rebooking-pack-for-med-sp": {
     "name": "GLP-1 Member Retention Pack",

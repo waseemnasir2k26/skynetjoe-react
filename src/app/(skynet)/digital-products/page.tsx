@@ -26,14 +26,14 @@ const PATH = "/digital-products";
 export const metadata: Metadata = {
   title: pageTitle("Digital Products: Templates, Scripts & Trackers"),
   description: pageDescription(
-    "Ready-made templates, scripts and trackers for small businesses: realtors, cleaners, spas, loan officers, insurance agents and more. Instant download on Etsy or Gumroad.",
+    "Ready-made templates, trackers and printables for realtors, agents, clinics, small businesses and Christmas. Instant download.",
   ),
   alternates: { canonical: `${SITE.url}${PATH}` },
   openGraph: {
     title:
-      "Digital Products: templates, scripts and trackers for small businesses",
+      "Digital Products: templates, trackers and printables",
     description:
-      "Ready-made kits for small businesses. Buy on Etsy or Gumroad and download instantly.",
+      "Ready-made kits for small businesses and the holidays. Buy on Etsy or Gumroad and download instantly.",
     url: `${SITE.url}${PATH}`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -216,8 +216,9 @@ export default function DigitalProductsPage() {
           >
             Ready-made kits for{" "}
             <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-              small businesses.
-            </span>
+              small businesses
+            </span>{" "}
+            and the holidays.
           </h1>
           <p
             style={{
@@ -228,10 +229,10 @@ export default function DigitalProductsPage() {
               margin: 0,
             }}
           >
-            {total} ready-made templates, scripts and trackers you edit and use
-            the same day. Each kit is a single download: Word and Google Docs
-            files, printable PDFs and Excel / Google Sheets trackers. Buy on
-            Etsy or Gumroad and download instantly.
+            {total} ready-made templates, scripts, trackers and printables.
+            Formats differ by kit (Word, Google Docs, PDF, Excel or Google
+            Sheets), and each card says what is inside. Buy on Etsy or Gumroad
+            and download instantly.
           </p>
         </Reveal>
       </section>
