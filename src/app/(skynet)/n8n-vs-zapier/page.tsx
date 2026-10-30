@@ -3,7 +3,7 @@ import path from "path";
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, personRef, organizationRef } from "@/lib/schema";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
@@ -36,13 +36,11 @@ const schema = {
     "Side-by-side comparison of n8n and Zapier from 180+ shipped workflows. Pricing, self-hosting, branching, compliance, AI nodes, 5 scenarios with picks.",
   url: `${SITE.url}/n8n-vs-zapier`,
   inLanguage: "en",
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-  publisher: {
-    "@type": "Organization",
-    name: SITE.brand,
-    url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.url}/og-default.png` },
-  },
+  datePublished: "2026-05-21",
+  dateModified: "2026-09-21",
+  image: `${SITE.url}/og-default.png`,
+  author: personRef,
+  publisher: organizationRef,
   mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/n8n-vs-zapier` },
   about: [
     { "@type": "SoftwareApplication", name: "n8n" },

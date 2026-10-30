@@ -3,7 +3,7 @@ import path from "path";
 import type { Metadata } from "next";
 import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, personRef, organizationRef } from "@/lib/schema";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
 const html = fs.readFileSync(
@@ -37,13 +37,11 @@ const schema = {
     "8-chapter guide to Answer Engine Optimization: 5-layer stack, llms.txt, citation patterns, measurement, 90-day rollout.",
   url: `${SITE.url}/aeo-guide`,
   inLanguage: "en",
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-  publisher: {
-    "@type": "Organization",
-    name: SITE.brand,
-    url: SITE.url,
-    logo: { "@type": "ImageObject", url: `${SITE.assetsUrl}/waseem-portrait.jpg` },
-  },
+  datePublished: "2026-05-21",
+  dateModified: "2026-09-21",
+  image: `${SITE.url}/og-default.png`,
+  author: personRef,
+  publisher: organizationRef,
   mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/aeo-guide` },
   about: [
     { "@type": "Thing", name: "Answer Engine Optimization" },

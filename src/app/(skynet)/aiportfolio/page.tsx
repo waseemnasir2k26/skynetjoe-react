@@ -40,7 +40,7 @@ const collectionSchema = {
   inLanguage: "en",
   isPartOf: { "@id": `${SITE.url}/#website` },
   publisher: { "@id": `${SITE.url}/#organization` },
-  author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
+  author: { "@id": `${SITE.url}/#person` },
 };
 
 const itemListSchema = {
@@ -54,10 +54,11 @@ const itemListSchema = {
     item: {
       "@type": "VideoObject",
       name: v.title,
+      description: `${v.title}: AI-generated ${(AI_CATEGORIES.find((c) => c.key === v.cat)?.name ?? "video").toLowerCase()} video by SkynetLabs.`,
       thumbnailUrl: `${SITE.url}${thumbUrl(v.id)}`,
       contentUrl: driveOpenUrl(v.id),
       embedUrl: `https://drive.google.com/file/d/${v.id}/preview`,
-      
+      // uploadDate intentionally omitted: no real upload date is recorded for these clips.
       genre: AI_CATEGORIES.find((c) => c.key === v.cat)?.name,
     },
   })),

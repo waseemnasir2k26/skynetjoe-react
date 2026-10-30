@@ -4,12 +4,14 @@ const person = {
   "@type": "Person",
   "@id": `${SITE.url}/#person`,
   name: SITE.founder,
-  url: SITE.founderUrl,
+  // Canonical Person.url = on-site author page; waseemnasir.com lives in sameAs.
+  url: `${SITE.url}/author/waseem-nasir`,
   jobTitle: "Founder, SkynetLabs",
-  image: `${SITE.url}/og-default.png`,
+  image: `${SITE.url}/waseem-portrait.jpg`,
   email: SITE.emailFounder,
   worksFor: { "@id": `${SITE.url}/#organization` },
   sameAs: [
+    SITE.founderUrl,
     SITE.social.linkedin,
     SITE.social.twitter,
     SITE.social.github,
@@ -23,6 +25,32 @@ const person = {
     addressCountry: "ID",
   },
 };
+
+/**
+ * Light-weight Person / Organization nodes for page-level schema (Article,
+ * BlogPosting, VideoObject...). They carry the same stable @id as the full
+ * nodes on the home / author pages so graph consumers merge them into ONE
+ * entity instead of 100+ anonymous duplicates.
+ */
+export const personRef = {
+  "@type": "Person",
+  "@id": `${SITE.url}/#person`,
+  name: SITE.founder,
+  url: `${SITE.url}/author/waseem-nasir`,
+} as const;
+
+export const organizationRef = {
+  "@type": "Organization",
+  "@id": `${SITE.url}/#organization`,
+  name: SITE.brand,
+  url: SITE.url,
+  logo: {
+    "@type": "ImageObject",
+    url: `${SITE.url}/icon-512.png`,
+    width: 512,
+    height: 512,
+  },
+} as const;
 
 const organization = {
   "@type": "Organization",
@@ -84,8 +112,8 @@ export function articleSchema(opts: {
     image: opts.image || `${SITE.url}/og-default.png`,
     datePublished: opts.datePublished,
     dateModified: opts.dateModified || opts.datePublished,
-    author: person,
-    publisher: organization,
+    author: personRef,
+    publisher: organizationRef,
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/blog/${opts.slug}` },
     keywords: opts.keywords?.join(", "),
     inLanguage: "en",

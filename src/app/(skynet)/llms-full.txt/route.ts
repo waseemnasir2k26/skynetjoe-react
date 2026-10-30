@@ -121,6 +121,14 @@ ${readContent("portfolio.html").slice(0, 3000)}
 
 ---
 
+## AI Video Portfolio and Digital Products
+
+- AI Video Portfolio: ${SITE.url}/aiportfolio (finished AI-generated videos sorted by category: spokesperson ads, automotive, real estate, product, pets, explainers)
+- Digital Products: ${SITE.url}/digital-products (templates, scripts and trackers)
+- 5 Boring Automations Small Businesses Pay For: ${SITE.url}/boring-automations-small-businesses-pay-for
+
+---
+
 ## FAQs
 
 ${readContent("faqs.html").slice(0, 4000)}

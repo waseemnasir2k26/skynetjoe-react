@@ -7,6 +7,7 @@ import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { getPost, postsByDate, categoryLabel } from "@/lib/posts";
 import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
+import { personRef, organizationRef } from "@/lib/schema";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
 import TableOfContents, {
@@ -104,6 +105,8 @@ export default async function BlogPost({
       ? post.updatedAt
       : null;
 
+  const byline = post.author ?? SITE.founder;
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -112,19 +115,8 @@ export default async function BlogPost({
     url: `${SITE.url}/blog/${post.slug}`,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
-    author: { "@type": "Person", name: SITE.founder, url: SITE.founderUrl },
-    publisher: {
-      "@type": "Organization",
-      name: SITE.brand,
-      url: SITE.url,
-      // Square logo (og-default.png is 1200x630, not the 1200x1200 declared).
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE.url}/icon-512.png`,
-        width: 512,
-        height: 512,
-      },
-    },
+    author: personRef,
+    publisher: organizationRef,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE.url}/blog/${post.slug}`,
@@ -226,6 +218,26 @@ export default async function BlogPost({
                 </time>
               </p>
             )}
+            <p
+              className="text-sm mb-4"
+              style={{ color: "var(--ink-2)" }}
+              data-byline
+            >
+              By{" "}
+              {byline === SITE.founder ? (
+                <Link
+                  href="/author/waseem-nasir"
+                  rel="author"
+                  className="font-semibold underline underline-offset-2"
+                  style={{ color: "var(--ink)" }}
+                >
+                  {byline}
+                </Link>
+              ) : (
+                <span className="font-semibold">{byline}</span>
+              )}
+              , Founder, {SITE.brand}
+            </p>
             <p
               className="text-lg md:text-xl leading-relaxed"
               style={{ color: "var(--ink-2)" }}

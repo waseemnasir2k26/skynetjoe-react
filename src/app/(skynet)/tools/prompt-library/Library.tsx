@@ -561,7 +561,7 @@ function MonthlyPromptsCapture() {
             {joined === "confirmed"
               ? "You're in. If you're new to the list, a welcome email is on its way."
               : joined === "pending"
-                ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
+                ? "Saved. If no welcome email arrives within a day, email info@skynetjoe.com and I'll add you by hand."
                 : "Saved. Tick the box next time if you want the email list."}
           </span>
         </div>

@@ -211,7 +211,7 @@ export default function NewsletterPopup({
         setError(
           res.status === 400 && body?.error
             ? body.error
-            : "Couldn't save that. Email waseem@skynetjoe.com and I'll add you by hand.",
+            : "Couldn't save that. Email info@skynetjoe.com and I'll add you by hand.",
         );
         return;
       }
@@ -298,7 +298,7 @@ export default function NewsletterPopup({
                 <h2 id="nlp-title" className="nlp-title">
                   Thanks{firstName.trim() ? `, ${firstName.trim()}` : ""}.{" "}
                   {listPending
-                    ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
+                    ? "Saved. If no welcome email arrives within a day, email info@skynetjoe.com and I'll add you by hand."
                     : "If you're new to the list, a welcome email is on its way."}
                 </h2>
                 <p className="nlp-lede">
