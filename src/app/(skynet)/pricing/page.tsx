@@ -177,7 +177,7 @@ export default function PricingPage() {
             className="inline-flex items-center gap-3 mb-5"
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: 11,
+              fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
               color: "var(--terracotta-aa)",
@@ -229,7 +229,7 @@ export default function PricingPage() {
             className="flex flex-wrap items-center gap-x-5 gap-y-2"
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: 11,
+              fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
               color: "var(--ink-faint)",
@@ -293,7 +293,7 @@ export default function PricingPage() {
               style={{
                 marginTop: 14,
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
                 color: "var(--terracotta-aa)",
@@ -319,7 +319,7 @@ export default function PricingPage() {
               className="inline-flex items-center gap-3 mb-3"
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
                 color: "var(--terracotta-aa)",
@@ -420,7 +420,7 @@ export default function PricingPage() {
               className="inline-flex items-center gap-3 mb-3"
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
                 color: "var(--terracotta-aa)",
@@ -507,11 +507,10 @@ export default function PricingPage() {
           <div
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: 11,
+              fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
               color: "var(--cream-3)",
-              opacity: 0.85,
               marginBottom: 18,
             }}
           >
@@ -544,7 +543,7 @@ export default function PricingPage() {
           <p
             style={{
               fontSize: 17,
-              color: "rgba(250, 247, 240, 0.92)",
+              color: "var(--cream-3)",
               maxWidth: "44ch",
               margin: "0 auto 28px",
               lineHeight: 1.55,

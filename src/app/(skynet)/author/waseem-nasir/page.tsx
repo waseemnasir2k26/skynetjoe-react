@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { Metadata } from "next";
 import { SITE, pageTitle, pageDescription } from "@/lib/site";
+import { person } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import HtmlCreamWrap from "@/components/HtmlCreamWrap";
 
@@ -53,69 +54,7 @@ const schema = {
       mainEntity: { "@id": `${SITE.url}/#person` },
       inLanguage: "en",
     },
-    {
-      "@type": "Person",
-      "@id": `${SITE.url}/#person`,
-      name: SITE.founder,
-      givenName: "Waseem",
-      familyName: "Nasir",
-      url: `${SITE.url}/author/waseem-nasir`,
-      image: `${SITE.assetsUrl}/waseem-portrait.jpg`,
-      jobTitle: "Founder, SkynetLabs",
-      worksFor: { "@id": `${SITE.url}/#organization` },
-      nationality: { "@type": "Country", name: "Pakistan" },
-      birthPlace: { "@type": "Place", name: "Lahore, Pakistan" },
-      homeLocation: { "@type": "Place", name: "Bali, Indonesia" },
-      description:
-        "Founder of SkynetLabs. Builds n8n automation, AI chatbots and conversion-tuned websites for service businesses across 9 countries.",
-      knowsAbout: [
-        "n8n workflow automation",
-        "Zapier and Make integrations",
-        "AI chatbot development",
-        "Anthropic Claude API",
-        "OpenAI GPT API",
-        "Google Gemini API",
-        "WordPress development",
-        "Next.js development",
-        "Answer Engine Optimization (AEO)",
-        "Generative Engine Optimization (GEO)",
-        "Schema.org structured data",
-        "Conversational APIs (WhatsApp Cloud, Telegram)",
-        "GoHighLevel CRM",
-        "Shopify e-commerce automation",
-        "Retrieval-Augmented Generation (RAG)",
-        "Vector databases (Qdrant, pgvector)",
-        "Headless CMS (Sanity, Contentful)",
-      ],
-      hasOccupation: {
-        "@type": "Occupation",
-        name: "AI Automation Agency Founder",
-        occupationLocation: { "@type": "City", name: "Bali, Indonesia" },
-        skills:
-          "n8n, OpenAI, Anthropic Claude, Next.js, WordPress, AEO, schema markup, RAG, chatbot development",
-      },
-      alumniOf: {
-        "@type": "EducationalOrganization",
-        name: "Self-taught — 180+ shipped automation workflows and 40+ websites since 2019",
-      },
-      award: [
-        "180+ n8n workflows shipped (2019–2026)",
-        "40+ websites delivered across 9 countries",
-        "Top Rated Plus on Upwork",
-        "Top Rated on Fiverr",
-      ],
-      sameAs: [
-        "https://www.linkedin.com/in/waseemnasir",
-        SITE.social.linkedin,
-        SITE.social.twitter,
-        SITE.social.github,
-        SITE.social.fiverr,
-        "https://www.upwork.com/freelancers/muhammadwaseemnasir",
-        SITE.social.youtube,
-        SITE.url,
-        SITE.founderUrl,
-      ],
-    },
+    person,
   ],
 };
 

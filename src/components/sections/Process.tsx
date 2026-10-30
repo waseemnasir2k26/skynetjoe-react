@@ -11,7 +11,7 @@ const C = {
   ink: "#1A1A1A",
   ink2: "#3A3A36",
   inkFaint: "#6B6B65",
-  terra: "#C66B3F",
+  terra: "var(--terracotta-aa)",
   terraAA: "#A8451F", // AA-safe terracotta for small/accent TEXT
   ochre: "#C9A96E",
   sage: "#8A9A7B",

@@ -19,7 +19,7 @@
 }
 .aip-eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--terracotta);
@@ -113,8 +113,8 @@
 }
 .aip-chip-n {
   font-family: var(--font-mono);
-  font-size: 11px;
-  opacity: 0.7;
+  font-size: 12px;
+  opacity: 0.85;
 }
 
 /* ── sections ── */
@@ -157,7 +157,7 @@
 }
 .aip-section-count {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -282,7 +282,7 @@
 }
 .aip-tile-meta {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   opacity: 0.8;
   flex: 0 0 auto;
@@ -320,7 +320,7 @@
 .aip-lb-cat {
   margin: 0 0 2px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--terracotta);

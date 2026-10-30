@@ -83,7 +83,7 @@ export default function PortfolioPage() {
           <div
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: 11,
+              fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
               color: "var(--terracotta-aa)",
@@ -166,7 +166,7 @@ export default function PortfolioPage() {
       <section
         style={{
           padding: "clamp(56px, 14vw, 88px) 0",
-          background: "var(--terracotta)",
+          background: "var(--terracotta-2)",
           position: "relative",
           zIndex: 2,
         }}
@@ -182,11 +182,10 @@ export default function PortfolioPage() {
           <div
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: 11,
+              fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: "0.18em",
               color: "var(--cream-3)",
-              opacity: 0.85,
               marginBottom: 18,
             }}
           >
@@ -218,7 +217,7 @@ export default function PortfolioPage() {
           <p
             style={{
               fontSize: 16,
-              color: "rgba(250, 247, 240, 0.92)",
+              color: "var(--cream-3)",
               maxWidth: "50ch",
               margin: "0 auto 28px",
               lineHeight: 1.6,

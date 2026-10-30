@@ -120,8 +120,11 @@ export default async function BlogPost({
       "@type": "WebPage",
       "@id": `${SITE.url}/blog/${post.slug}`,
     },
-    // BlogPosting rich results want an image; same one the OG tags use.
-    image: `${SITE.url}/og-default.png`,
+    // BlogPosting rich results want an image; same per-post card the OG tags
+    // use. "-3f5mqg" is the path hash Next appends to the file-based
+    // opengraph-image route (the og:image URL adds a ?content-hash on top);
+    // re-check against a built page's og:image if that file ever moves.
+    image: `${SITE.url}/blog/${post.slug}/opengraph-image-3f5mqg`,
     keywords: post.tags.join(", "),
   };
 

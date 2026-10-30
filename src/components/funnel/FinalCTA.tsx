@@ -24,12 +24,11 @@ export default function FinalCTA() {
           <div
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: 11,
+              fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: "0.16em",
               color: "var(--cream-3)",
               marginBottom: 20,
-              opacity: 0.85,
             }}
           >
             — Limited audits each month
@@ -63,7 +62,7 @@ export default function FinalCTA() {
           <p
             style={{
               fontSize: "clamp(15px, 3.6vw, 17px)",
-              color: "rgba(250, 247, 240, 0.92)",
+              color: "var(--cream-3)",
               maxWidth: "46ch",
               margin: "0 auto 32px",
               lineHeight: 1.6,
@@ -99,10 +98,10 @@ export default function FinalCTA() {
           <div
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: 10,
+              fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: "0.12em",
-              color: "rgba(250, 247, 240, 0.78)",
+              color: "var(--cream-3)",
               marginTop: 22,
             }}
           >

@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 
 const C = {
   cream3: "#FAF7F0",
-  terra: "#C66B3F",
+  terra: "var(--terracotta-aa)",
   terra2: "#B85A30",
 };
 

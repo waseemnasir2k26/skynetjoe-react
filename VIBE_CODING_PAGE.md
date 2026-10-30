@@ -17,7 +17,7 @@ File: `src/app/vibe-coding/page.tsx` (server component, fully static)
 7. **A few we've shipped** — 3 case study cards linked into `/case-studies/{slug}` (manhattan-dental-atelier-flagship, bali-wellness-conversion-funnel, premium-auto-dealership-network-demo). Filtered by `vibe-coded-sites` relatedServices tag.
 8. **Real talk / Why human** — Pull-quote block with the "AI doesn't replace the builder, it replaces the typing" copy. Right column: `waseem-rooftop-smile.jpg` portrait. Attribution line under the quote.
 9. **FAQ** — 6 `<details>` accordions: bootcamp / who-writes-code / after-delivery / live-build / mid-build-pivot / claude-code-vs-copilot. First-person warm voice. Schema-linked to FAQPage.
-10. **Final CTA** — Big ocean-gradient block, "Book a vibe check" headline, Cal.com primary button + mailto:waseem@skynetjoe.com secondary. Bali GMT+8 timezone disclaimer. No WhatsApp anywhere.
+10. **Final CTA** — Big ocean-gradient block, "Book a vibe check" headline, Cal.com primary button + mailto:info@skynetjoe.com secondary. Bali GMT+8 timezone disclaimer. No WhatsApp anywhere.
 
 ---
 

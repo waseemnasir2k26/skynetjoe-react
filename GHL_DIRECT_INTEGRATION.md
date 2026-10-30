@@ -212,7 +212,7 @@ curl -X POST https://app-mauve-eta-66.vercel.app/api/leads \
 ```bash
 # Health check first
 curl https://app-mauve-eta-66.vercel.app/api/webhooks/calendly
-# → { ok:true, signature_required:true|false, ghl_api_configured:true|false }
+# → { ok: true }   (liveness only; whether CALENDLY_WEBHOOK_SECRET and the GHL token are set is checked in the hPanel env, not via GET)
 
 # Real invitee.created (replace t= and v1= with real Calendly HMAC)
 curl -X POST https://app-mauve-eta-66.vercel.app/api/webhooks/calendly \

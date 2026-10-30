@@ -22,7 +22,7 @@ const C = {
   ink: "#1A1A1A",
   ink2: "#3A3A36",
   inkFaint: "#6B6B65",
-  terra: "#C66B3F",
+  terra: "var(--terracotta-aa)",
   terra2: "#B85A30",
   ochre: "#C9A96E",
   oxblood: "#6B2C2C",

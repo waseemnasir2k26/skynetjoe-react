@@ -114,7 +114,7 @@ export default function WorkShowcase() {
                 className="relative inline-flex items-center gap-2"
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: "0.6875rem",
+                  fontSize: "0.75rem",
                   fontWeight: 600,
                   textTransform: "uppercase",
                   letterSpacing: "0.12em",
@@ -258,7 +258,7 @@ export default function WorkShowcase() {
                   <p
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.6875rem",
+                      fontSize: "0.75rem",
                       color: "var(--terracotta-aa)",
                       marginBottom: 12,
                       whiteSpace: "nowrap",

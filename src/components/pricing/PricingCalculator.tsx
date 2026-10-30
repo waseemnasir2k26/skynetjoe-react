@@ -94,7 +94,7 @@ export default function PricingCalculator() {
             className="inline-flex items-center gap-3 mb-3"
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: "0.6875rem",
+              fontSize: "0.75rem",
               textTransform: "uppercase",
               letterSpacing: "0.16em",
               color: "var(--terracotta)",
@@ -156,7 +156,7 @@ export default function PricingCalculator() {
                   <span
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.6875rem",
+                      fontSize: "0.75rem",
                       textTransform: "uppercase",
                       letterSpacing: "0.16em",
                       color: "var(--terracotta)",
@@ -171,7 +171,7 @@ export default function PricingCalculator() {
                       className="inline-flex items-center gap-1"
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: "0.6875rem",
+                        fontSize: "0.75rem",
                         textTransform: "uppercase",
                         letterSpacing: "0.12em",
                         color: "var(--oxblood)",
@@ -378,10 +378,10 @@ export default function PricingCalculator() {
               <div
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: "0.6875rem",
+                  fontSize: "0.75rem",
                   textTransform: "uppercase",
                   letterSpacing: "0.16em",
-                  color: "rgba(250,247,240,0.85)",
+                  color: "var(--cream-3)",
                   marginBottom: 10,
                 }}
               >
@@ -404,7 +404,7 @@ export default function PricingCalculator() {
                     style={{
                       fontFamily: "var(--font-mono)",
                       fontSize: "0.75rem",
-                      color: "rgba(250,247,240,0.8)",
+                      color: "var(--cream-3)",
                       marginLeft: 10,
                       textTransform: "uppercase",
                       letterSpacing: "0.12em",
@@ -430,7 +430,7 @@ export default function PricingCalculator() {
                       style={{
                         fontFamily: "var(--font-mono)",
                         fontSize: "0.75rem",
-                        color: "rgba(250,247,240,0.8)",
+                        color: "var(--cream-3)",
                         marginLeft: 10,
                         textTransform: "uppercase",
                         letterSpacing: "0.12em",

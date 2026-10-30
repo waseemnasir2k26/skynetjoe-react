@@ -28,7 +28,7 @@ export default function CodeCopyButtons() {
         fontWeight: "600",
         fontFamily: "inherit",
         color: "#FAF7F0",
-        background: "#C66B3F",
+        background: "#A8451F",
         border: "none",
         borderRadius: "2px",
         cursor: "pointer",
@@ -43,7 +43,7 @@ export default function CodeCopyButtons() {
       b.style.background = "#3d7a4a";
       setTimeout(() => {
         b.textContent = orig;
-        b.style.background = "#C66B3F";
+        b.style.background = "#A8451F";
       }, 1600);
     };
 
@@ -82,7 +82,7 @@ export default function CodeCopyButtons() {
         fontWeight: "700",
         fontFamily: "inherit",
         color: "#FAF7F0",
-        background: "#C66B3F",
+        background: "#A8451F",
         border: "none",
         borderRadius: "2px",
         cursor: "pointer",

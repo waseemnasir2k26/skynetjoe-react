@@ -209,7 +209,7 @@ export default function AboutPage() {
             <div
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
                 color: "var(--terracotta-aa)",
@@ -262,7 +262,7 @@ export default function AboutPage() {
             <div
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.10em",
                 color: "var(--ink-faint)",
@@ -316,7 +316,7 @@ export default function AboutPage() {
               <figcaption
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: 11,
+                  fontSize: 12,
                   textTransform: "uppercase",
                   letterSpacing: "0.10em",
                   color: "var(--ink-faint)",
@@ -401,7 +401,7 @@ export default function AboutPage() {
             <div
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
                 color: "var(--terracotta-aa)",
@@ -495,7 +495,7 @@ export default function AboutPage() {
                       <span
                         style={{
                           fontFamily: "var(--font-mono)",
-                          fontSize: 11,
+                          fontSize: 12,
                           textTransform: "uppercase",
                           letterSpacing: "0.16em",
                           color: "var(--terracotta-aa)",
@@ -556,7 +556,7 @@ export default function AboutPage() {
             <div
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.22em",
                 color: "var(--cream-3)",
@@ -586,7 +586,7 @@ export default function AboutPage() {
               style={{
                 marginTop: 24,
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.18em",
                 color: "var(--cream-3)",
@@ -619,7 +619,7 @@ export default function AboutPage() {
             <div
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
                 color: "var(--terracotta-aa)",
@@ -705,7 +705,7 @@ export default function AboutPage() {
                   <figcaption
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: 10,
+                      fontSize: 12,
                       textTransform: "uppercase",
                       letterSpacing: "0.10em",
                       color: "var(--ink-faint)",
@@ -740,7 +740,7 @@ export default function AboutPage() {
                 <div
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 11,
+                    fontSize: 12,
                     textTransform: "uppercase",
                     letterSpacing: "0.16em",
                     color: "var(--terracotta-aa)",
@@ -822,7 +822,7 @@ export default function AboutPage() {
                 <div
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 11,
+                    fontSize: 12,
                     textTransform: "uppercase",
                     letterSpacing: "0.16em",
                     color: "var(--ink-faint)",

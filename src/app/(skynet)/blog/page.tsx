@@ -81,7 +81,7 @@ export default function BlogPage() {
               className="inline-flex items-center gap-3 mb-6"
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
                 color: "var(--terracotta-aa)",
@@ -162,7 +162,7 @@ export default function BlogPage() {
                   <div
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: 10,
+                      fontSize: 12,
                       textTransform: "uppercase",
                       letterSpacing: "0.14em",
                       color: "var(--terracotta-aa)",
@@ -206,7 +206,7 @@ export default function BlogPage() {
                     className="flex items-center justify-between"
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: 11,
+                      fontSize: 12,
                       color: "var(--ink-faint)",
                       marginTop: "auto",
                       paddingTop: 14,
@@ -253,7 +253,7 @@ export default function BlogPage() {
               className="inline-flex items-center gap-3 mb-5"
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
+                fontSize: 12,
                 textTransform: "uppercase",
                 letterSpacing: "0.16em",
                 color: "var(--terracotta-aa)",

@@ -21,7 +21,7 @@
   --ink-faint: #56564f; /* WCAG AA: ~5:1 on cream (#FAF7F0); was #6B6B65 (~4.0:1, failed AA) */
   /* A11Y: darkened from #c66b3f (3.5:1) so cream-on-terracotta CTAs and terracotta
      text clear AA 4.5:1. Same hue family; legacy dark theme restores the original. */
-  --terracotta: #b04c25;
+  --terracotta: #a8451f;
   --terracotta-2: #98401d;
   /* AA-safe terracotta for SMALL text (eyebrows/labels ≤12px). #C66B3F is ~3.4:1
      on cream (fine for large display per WCAG, fails AA small-text 4.5:1). #A8451F

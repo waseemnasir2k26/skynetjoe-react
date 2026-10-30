@@ -391,8 +391,13 @@ const removedToolRedirects = [
 ];
 
 // Static files in public/ keep stable (un-hashed) filenames, so no `immutable`:
-// 30 days + SWR. Hashed /_next/static already gets 1y immutable from Next.
-const PUBLIC_ASSET_CACHE = "public, max-age=2592000, stale-while-revalidate=86400";
+// 7 days + SWR. Hashed /_next/static already gets 1y immutable from Next.
+const PUBLIC_ASSET_CACHE = "public, max-age=604800, stale-while-revalidate=86400";
+// Static media may be embedded by our other domains; HTML/API keep same-site.
+const CORP_CROSS_ORIGIN = {
+  key: "Cross-Origin-Resource-Policy",
+  value: "cross-origin",
+};
 const publicAssetDirs = [
   "portfolio",
   "img",
@@ -411,8 +416,8 @@ const publicAssetDirs = [
 const nextConfig: NextConfig = {
   images: {
     // Optimised images default to a 4h TTL; source files are stable.
-    minimumCacheTTL: 2592000,
-    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 604800,
+    formats: ["image/webp"],
   },
   // Produces .next/standalone/server.js for smaller cold-boot on
   // Hostinger Node.js Web Apps (and any non-Vercel host).
@@ -436,11 +441,21 @@ const nextConfig: NextConfig = {
         // Cross-origin policies above come from the catch-all; this adds
         // caching for static media only (never HTML or /api).
         source: `/:dir(${publicAssetDirs.join("|")})/:path*.:ext(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2|mp4|webm)`,
-        headers: [{ key: "Cache-Control", value: PUBLIC_ASSET_CACHE }],
+        headers: [
+          { key: "Cache-Control", value: PUBLIC_ASSET_CACHE },
+          CORP_CROSS_ORIGIN,
+        ],
       },
       {
         source: "/:file(waseem-portrait|og-default|icon-192|icon-512|apple-touch-icon).:ext(jpg|png)",
-        headers: [{ key: "Cache-Control", value: PUBLIC_ASSET_CACHE }],
+        headers: [
+          { key: "Cache-Control", value: PUBLIC_ASSET_CACHE },
+          CORP_CROSS_ORIGIN,
+        ],
+      },
+      {
+        source: "/:file(llms|ai).txt",
+        headers: [CORP_CROSS_ORIGIN],
       },
       {
         // public/wp-templates/ is the WordPress copy-paste mirror of content/

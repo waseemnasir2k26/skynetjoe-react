@@ -34,7 +34,6 @@ const schema = {
     "Terms governing engagements with SkynetLabs and use of skynetjoe.com. 50% deposit, IP transfer on payment, Indonesian jurisdiction.",
   url: `${SITE.url}/terms-of-service`,
   inLanguage: "en",
-  datePublished: "2026-05-21",
   dateModified: "2026-05-20",
   image: `${SITE.url}/og-default.png`,
   author: personRef,

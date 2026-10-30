@@ -3,7 +3,7 @@
   --nlp-cream: #faf7f0;
   --nlp-ink: #1a1a1a;
   --nlp-ink2: #3a3a36;
-  --nlp-rust: #c66b3f;
+  --nlp-rust: #a8451f;
   position: fixed;
   inset: 0;
   z-index: 2000; /* above any host-site bar or launcher */

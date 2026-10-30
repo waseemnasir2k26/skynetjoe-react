@@ -87,7 +87,7 @@ curl https://waseemnasir.com/api/services?limit=20   # JSON w/ 16 services
 curl https://waseemnasir.com/sitemap.xml             # XML
 curl https://waseemnasir.com/robots.txt              # has Disallow /admin
 curl https://waseemnasir.com/llms.txt                # LLM citation surface
-curl https://waseemnasir.com/api/webhooks/calendly   # 200 health check
+curl https://waseemnasir.com/api/webhooks/calendly   # → { ok: true } liveness only; secret status is checked in hPanel env, not via GET
 ```
 
 ## Post-cutover from Vercel
