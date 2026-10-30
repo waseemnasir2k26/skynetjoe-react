@@ -112,7 +112,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center" aria-label="Primary">
+        <nav className="hidden xl:flex items-center" aria-label="Primary">
           {NAV_PRIMARY.map((item) => {
             const active = isActive(item.href);
             const restColor = active ? "var(--terracotta-aa)" : "var(--ink-2)";
@@ -141,7 +141,7 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <span
             className="h-5 w-px"
             style={{ background: "var(--border)" }}
@@ -210,7 +210,7 @@ export default function Header() {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden p-3 -mr-1"
+          className="xl:hidden p-3 -mr-1"
           style={{ color: "var(--ink)" }}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
@@ -225,7 +225,7 @@ export default function Header() {
 
       {mobileOpen && (
         <div
-          className="lg:hidden backdrop-blur-md max-h-[calc(100vh_-_64px)] overflow-y-auto"
+          className="xl:hidden backdrop-blur-md max-h-[calc(100vh_-_64px)] overflow-y-auto"
           style={{
             background: "rgba(242, 239, 230, 0.97)",
             borderTop: "1px solid var(--border)",

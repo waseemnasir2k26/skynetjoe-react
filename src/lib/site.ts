@@ -116,6 +116,7 @@ export const NAV_PRIMARY: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/portfolio" },
   { label: "Tools", href: "/tools" },
+  { label: "Digital Products", href: "/digital-products" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
@@ -224,6 +225,7 @@ export const FOOTER_COLUMNS = [
       { label: "Case Studies", href: "/case-studies" },
       { label: "Blog", href: "/blog" },
       { label: "Free Tools", href: "/tools" },
+      { label: "Digital Products", href: "/digital-products" },
       { label: "FAQs", href: "/faqs" },
       { label: "Glossary", href: "/glossary" },
       {
