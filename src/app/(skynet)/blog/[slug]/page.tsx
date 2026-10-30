@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { getPost, postsByDate, categoryLabel } from "@/lib/posts";
-import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
+import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { personRef, organizationRef } from "@/lib/schema";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -61,7 +61,6 @@ export async function generateMetadata({
       modifiedTime: post.updatedAt,
       authors: [SITE.founder],
       tags: post.tags,
-      images: [...DEFAULT_OG_IMAGES],
     },
     twitter: {
       card: "summary_large_image",
