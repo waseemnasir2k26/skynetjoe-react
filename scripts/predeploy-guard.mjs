@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+// predeploy-guard.mjs — run BEFORE every skynetjoe.com deploy. Exit 1 = do not deploy.
+//
+// Why: 2026-10-29 a deploy shipped from a branch line that never merged
+// feat/digital-products-2026-10-16 or audit-fixes-2026-10-07, so the live site
+// lost Digital Products + /aiportfolio. Every deploy must build ON TOP of what
+// is live, never beside it.
+//
+// Checks:
+//   1. Clean tree (only tracked, committed code gets archived).
+//   2. HEAD contains the `live/skynetjoe.com` tag (= last commit that went live).
+//   3. Every route in scripts/must-have-routes.txt still has a page in src/app.
+//   4. No /aiportfolio-style regression: a must-have route is not also a redirect source.
+//
+// After a deploy is verified live:  node scripts/predeploy-guard.mjs --mark-live
+import { execSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
+
+const TAG = "live/skynetjoe.com";
+const sh = (c) => execSync(c, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
+const root = sh("git rev-parse --show-toplevel");
+process.chdir(root);
+
+if (process.argv.includes("--mark-live")) {
+  sh(`git tag -f ${TAG} HEAD`);
+  try { sh(`git push -f origin refs/tags/${TAG}`); } catch { console.warn("tag set locally; push failed (push it by hand)"); }
+  console.log(`${TAG} -> ${sh("git rev-parse --short HEAD")}`);
+  process.exit(0);
+}
+
+const fail = [];
+const dirty = sh("git status --porcelain --untracked-files=no");
+if (dirty) fail.push(`uncommitted tracked changes:\n${dirty}`);
+
+try { sh("git fetch -q origin --tags"); } catch {}
+let live = "";
+try { live = sh(`git rev-parse ${TAG}`); } catch { fail.push(`tag ${TAG} missing — set it on the commit that is live now`); }
+if (live) {
+  try { sh(`git merge-base --is-ancestor ${live} HEAD`); }
+  catch {
+    const lost = sh(`git log --format="  %h %s" HEAD..${live}`).split("\n").slice(0, 15).join("\n");
+    fail.push(`HEAD does not contain live (${live.slice(0, 7)}). Deploying would DROP:\n${lost}\n  -> merge ${TAG} into this branch first`);
+  }
+}
+
+const routes = fs.readFileSync(path.join("scripts", "must-have-routes.txt"), "utf8")
+  .split(/\r?\n/).map((l) => l.trim()).filter((l) => l && !l.startsWith("#"));
+const pages = sh('git ls-files "src/app"').split("\n").filter((f) => /\/page\.(tsx|ts|jsx|js|mdx)$/.test(f));
+const cfg = fs.readFileSync("next.config.ts", "utf8");
+for (const r of routes) {
+  const hit = pages.some((f) => f.replace(/\([^)]*\)\//g, "").replace(/^src\/app/, "").replace(/\/page\.\w+$/, "") === r);
+  if (!hit) fail.push(`must-have route ${r} has no page`);
+  if (cfg.includes(`source: "${r}"`)) fail.push(`must-have route ${r} is a redirect source in next.config.ts`);
+}
+
+if (fail.length) {
+  console.error("PREDEPLOY GUARD: FAIL — do not deploy\n- " + fail.join("\n- "));
+  process.exit(1);
+}
+console.log(`PREDEPLOY GUARD: PASS (HEAD ${sh("git rev-parse --short HEAD")} contains live ${live.slice(0, 7)}, ${routes.length} routes present)`);

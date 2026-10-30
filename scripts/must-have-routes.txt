@@ -1,0 +1,13 @@
+# Routes that must exist on every skynetjoe.com deploy. predeploy-guard.mjs fails if one is missing.
+# Add a line whenever a new page ships. Never remove one without Waseem's OK.
+/
+/services
+/portfolio
+/aiportfolio
+/digital-products
+/tools
+/pricing
+/blog
+/about
+/contact
+/privacy-policy
