@@ -43,6 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools",
     ...TOOLS_REGISTRY.map((t) => `/tools/${t.slug}`),
     "/digital-products",
+    "/aiportfolio",
     "/pricing",
     "/about",
     "/contact",

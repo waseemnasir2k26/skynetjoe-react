@@ -94,6 +94,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li><strong>Slack</strong> — our n8n lead alert posts each new lead to our internal Slack with the details you entered on that form (for example name, email, phone, business details, the answers or problem you typed, and campaign tags such as utm) so we can follow up quickly. Tool-feedback messages and the optional email attached to them go there too.</li>
     <li><strong>Enquiry triage</strong> — when enabled, the name, company, message and page of a contact-form submission (never your email or phone) are sent to a typed-decision model (TypeSafe Jev via OpenRouter) to decide how quickly we reply. Email addresses and phone numbers typed into the message itself are stripped before it is sent. Not used for training.</li>
     <li><strong>Calendly</strong> — runs the call booking on /contact and the landing pages; when you book, your name, email, time zone and any answers you type go to Calendly under its own privacy terms, and Calendly emails us the booking details. If we switch on Calendly's booking notifications, the booking name and email are also stored in our operations dashboard and in Brevo as a no-marketing contact.</li>
+    <li><strong>Google (Drive embedded player)</strong> — plays the clips on /aiportfolio. Nothing from Google loads until you click a video; when you do, Google receives your IP address and the page address and may set its own cookies, under Google's privacy terms.</li>
     <li><strong>GitHub</strong> — source code storage. No client business data lives here unless a client has explicitly asked us to host their repo for them.</li>
   </ul>
   <p>Beyond the services listed here, we do not share your data with any other third party without your explicit written consent.</p>
@@ -132,6 +133,7 @@ html.light .wn-privacy-policy{--wn-fg:#100f14;--wn-fg-muted:#4a4a52;--wn-fg-fain
     <li>Contabo (France) — the server running our self-hosted n8n (anonymous funnel counts and lead alerts) and our operations dashboard.</li>
     <li>Meta Platforms — US (Pixel and Conversions API data).</li>
     <li>Calendly — US (booking details).</li>
+    <li>Google (Drive embedded player) — US; loads only when you click a video on /aiportfolio.</li>
     <li>GoHighLevel — US (CRM contact records).</li>
     <li>Resend — US (internal lead-notification emails, only if that backup is configured).</li>
     <li>Brevo — EU, France (email-list contacts and the emails sent to them).</li>
