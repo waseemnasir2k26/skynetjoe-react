@@ -7,7 +7,7 @@ import {
   Copy,
   Loader2,
   RotateCcw,
-  CalendarCheck,
+  MessageCircle,
 } from "lucide-react";
 import {
   QUESTIONS,
@@ -22,7 +22,7 @@ import {
 } from "@/data/tools/aeo-audit";
 import EmailGate from "@/components/cta/EmailGate";
 import ToolUsage from "@/components/tools/ToolUsage";
-import { CAL_URL } from "@/lib/site";
+import { waLink } from "@/lib/site";
 
 const STORAGE_KEY = "skynet:aeo-audit:v1";
 
@@ -411,14 +411,14 @@ function ResultCard({
       <div className="border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-7 py-7 md:px-12 md:py-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a
-            href={`${CAL_URL}?utm_source=aeo-audit`}
+            href={waLink("Hi Waseem, I ran the AEO audit tool on skynetjoe.com and would like to talk about the results.")}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
             style={{ background: "var(--terracotta)" }}
           >
-            <CalendarCheck className="h-4 w-4" />
-            Book a strategy call with this context
+            <MessageCircle className="h-4 w-4" />
+            Message us on WhatsApp with this context
             <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
           </a>
           <a

@@ -28,8 +28,8 @@ export const HOME_FAQS = [
     a: "Most builds ship in 5 to 14 days from kickoff — Starter scopes in about 5 to 7 days, larger Pro/flagship builds in 10 to 14 days.",
   },
   {
-    q: "What happens after I book the free call?",
-    a: "You get a 30-minute audit (not a pitch), then a one-page scope back within 48 hours — deliverables, price, and ship date. A 50% deposit unlocks work at a fixed price, no hourly creep.",
+    q: "What happens after I message you?",
+    a: "We look at your setup together (not a pitch), then a one-page scope back within 48 hours — deliverables, price, and ship date. A 50% deposit unlocks work at a fixed price, no hourly creep.",
   },
   {
     q: "Do you sign NDAs?",

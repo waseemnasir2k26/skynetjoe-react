@@ -1,4 +1,5 @@
 import type { ServiceFunnelContent } from "./types";
+import { WHATSAPP } from "@/lib/site";
 
 /**
  * Vibe-Coded Websites — migrated from the bespoke VibeCodedSitesLP component
@@ -17,7 +18,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Development · Bespoke Next.js Builds · 2026",
     h1: "A fast site you own outright, not a template.",
     sub: "Your old site loads slowly on a phone, looks tired, and no developer wants to touch the code. I build bespoke Next.js sites — conversion-tuned, mobile-first, and structured so both search engines and AI answers can actually read them — deployed to Vercel with analytics wired from day one.",
-    primary: { label: "Book a free 30-min check-up", href: "/contact" },
+    primary: { label: "Chat on WhatsApp", href: WHATSAPP.href },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
       "Public pricing",
@@ -165,8 +166,8 @@ const content: ServiceFunnelContent = {
 
   finalCta: {
     h2: "Stop paying for a site that loses on a phone.",
-    body: "A free 30-minute check-up. I'll review the current site, name what's actually costing you conversions, and have a fixed-scope build plan back within 48 hours.",
-    ctaLabel: "Book the check-up",
+    body: "Message me on WhatsApp. I'll review the current site, name what's actually costing you conversions, and have a fixed-scope build plan back within 48 hours.",
+    ctaLabel: "Chat on WhatsApp",
   },
 
   freeTools: {

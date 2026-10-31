@@ -224,7 +224,7 @@ export default function PortfolioPage() {
             }}
           >
             Send a brief, get a fixed-price scope back. Reply in 8h · scope in
-            48h — and a 30-min call decides if we&apos;re the right fit.
+            48h — and a quick chat decides if we&apos;re the right fit.
           </p>
           <div
             style={{

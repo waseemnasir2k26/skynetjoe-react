@@ -1,5 +1,8 @@
 # Thank-You + GHL Pipeline
 
+> **2026-10-31 UPDATE:** Calendly was removed from the site (booking is now WhatsApp +62 813-1607-7185, see src/lib/site.ts WHATSAPP, email waseem@skynetjoe.com). The Calendly embed, the `/api/webhooks/calendly` route and `CALENDLY_WEBHOOK_SECRET` no longer exist; the Calendly-specific sections below are historical only.
+
+
 Post-booking experience for SkynetLabs discovery-call funnel. Owns the
 `/thank-you` page and the Calendly → GHL webhook plumbing.
 

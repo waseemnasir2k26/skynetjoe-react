@@ -22,6 +22,7 @@ import { INDUSTRIES } from "@/data/industries";
 import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { WHATSAPP } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: pageTitle("Industries — Vertical-Built AI Systems"),
@@ -146,7 +147,9 @@ export default function IndustriesIndexPage() {
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/contact"
+              href={WHATSAPP.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--terracotta)",
@@ -160,7 +163,7 @@ export default function IndustriesIndexPage() {
                 transition: "background 0.18s",
               }}
             >
-              Book a vertical-specific audit
+              Message us on WhatsApp
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   Calculator,
-  CalendarCheck,
+  MessageCircle,
   Check,
   Copy,
   Loader2,
@@ -19,7 +19,6 @@ import {
   AXES,
   bucketForScore,
   buildCalculatorParams,
-  buildBookingParams,
   computeSubscores,
   normalizedScore,
   weakestAxis,
@@ -29,10 +28,10 @@ import {
   type Bucket,
 } from "@/data/automation-gap-questions";
 import EmailGate from "@/components/cta/EmailGate";
+import { waLink } from "@/lib/site";
 
 const STORAGE_KEY = "skynet:automation-gap:v1";
 const RESULT_TTL_MS = 14 * 24 * 60 * 60 * 1000;
-const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 type Phase = "quiz" | "loading" | "result";
 
@@ -647,10 +646,7 @@ function ResultCard({
   shared = false,
 }: ResultProps) {
   const calcQuery = buildCalculatorParams(subs);
-  const bookingQuery = buildBookingParams({
-    score,
-    weakestAxis: weakest.key,
-  });
+  const waText = `Hi Waseem, I took the automation gap analyzer on skynetjoe.com (score ${score}, weakest area: ${weakest.key}) and would like to talk about it.`;
   const hours = impliedManualHours(subs);
 
   return (
@@ -775,7 +771,7 @@ function ResultCard({
       <div className="border-t border-[rgba(26,26,26,0.12)] bg-[var(--cream-2)] px-7 py-7 md:px-12 md:py-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a
-            href={`${CAL_URL}?${bookingQuery}`}
+            href={waLink(waText)}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex w-full sm:w-auto sm:min-w-[320px] items-center justify-center gap-2 whitespace-nowrap rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
@@ -784,8 +780,8 @@ function ResultCard({
               boxShadow: "0 10px 32px rgba(198,107,63,0.25)",
             }}
           >
-            <CalendarCheck className="h-4 w-4" />
-            Book a strategy call with this context
+            <MessageCircle className="h-4 w-4" />
+            Message us on WhatsApp with this context
             <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
           </a>
           <a

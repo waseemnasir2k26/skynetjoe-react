@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MessageCircle, X, Send, ArrowRight } from "lucide-react";
+import { WHATSAPP } from "@/lib/site";
 
 type Msg = {
   id: number;
@@ -15,7 +16,7 @@ type Msg = {
 const INITIAL: Msg = {
   id: 0,
   from: "bot",
-  text: "Hey 👋 I'm Waseem's assistant. Ask me about services, pricing, n8n automation, AEO/SEO, chatbots — or how to book a call.",
+  text: "Hey 👋 I'm Waseem's assistant. Ask me about services, pricing, n8n automation, AEO/SEO, chatbots — or how to reach Waseem on WhatsApp.",
 };
 
 function botReply(input: string, nextId: number): Msg {
@@ -33,8 +34,8 @@ function botReply(input: string, nextId: number): Msg {
     has("book", "call", "audit", "consult", "meeting", "schedule", "discovery")
   )
     return reply(
-      "Easiest path: book a free 30-min call on the contact page — or send a 3-field brief there and Waseem replies within 8 hours.",
-      { label: "Book a call", href: "/contact" },
+      "Easiest path: message Waseem on WhatsApp, or send a 3-field brief on the contact page and he replies within 8 hours.",
+      { label: "Chat on WhatsApp", href: WHATSAPP.href },
     );
 
   if (
@@ -170,12 +171,12 @@ function botReply(input: string, nextId: number): Msg {
   )
     return reply(
       "Based in Canggu, Bali (GMT+8) with roots in Lahore, Pakistan. Fully remote — clients across 9 countries.",
-      { label: "Book a call", href: "/contact" },
+      { label: "Chat on WhatsApp", href: WHATSAPP.href },
     );
 
   if (has("contact", "email", "reach", "get in touch", "phone", "number"))
     return reply(
-      "Everything lives on the contact page — book a call or send a short brief. 8-hour reply on weekdays.",
+      "Everything lives on the contact page — WhatsApp, email or a short brief. 8-hour reply on weekdays.",
       { label: "Contact", href: "/contact" },
     );
 
@@ -200,7 +201,7 @@ function botReply(input: string, nextId: number): Msg {
     )
   )
     return reply(
-      "Hey! 👋 Ask me about services, pricing, n8n automation, AEO/SEO, chatbots — or say 'book a call'.",
+      "Hey! 👋 Ask me about services, pricing, n8n automation, AEO/SEO, chatbots — or say 'WhatsApp'.",
     );
 
   if (
@@ -218,13 +219,13 @@ function botReply(input: string, nextId: number): Msg {
     )
   )
     return reply(
-      "Anytime! Want me to point you to services, pricing, or set up a quick call?",
-      { label: "Book a call", href: "/contact" },
+      "Anytime! Want me to point you to services, pricing, or chat with Waseem on WhatsApp?",
+      { label: "Chat on WhatsApp", href: WHATSAPP.href },
     );
 
   // ── Helpful fallback (not a dead-end) ──
   return reply(
-    "Not sure I caught that — I can help with: services, pricing, n8n/automation, AEO/SEO, chatbots, or booking a call. Which one?",
+    "Not sure I caught that — I can help with: services, pricing, n8n/automation, AEO/SEO, chatbots, or reaching Waseem on WhatsApp. Which one?",
     { label: "Browse services", href: "/services" },
   );
 }
@@ -370,7 +371,7 @@ export default function LiveChat() {
   }, [msgs, open]);
 
   if (pathname?.startsWith("/lp/freight-")) return null;
-  // /contact carries the Calendly embed + brief form; the bubble would sit on
+  // /contact carries the WhatsApp/email cards + brief form; the bubble would sit on
   // top of the primary CTA there for no gain.
   if (pathname === "/contact") return null;
   if (modalOpen && !open) return null;
@@ -614,6 +615,7 @@ export default function LiveChat() {
                   {m.cta && (
                     <Link
                       href={m.cta.href}
+                      {...(m.cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       onClick={() => {
                         setOpen(false);
                         try {

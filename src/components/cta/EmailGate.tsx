@@ -161,8 +161,8 @@ export default function EmailGate({
         listState === "confirmed"
           ? "You're in. If you're new to the list, a welcome email is on its way."
           : listState === "failed"
-            ? "Couldn't save your email-list sign-up. Email info@skynetjoe.com and I'll add you."
-            : "Saved. If no welcome email arrives within a day, email info@skynetjoe.com and I'll add you by hand.",
+            ? "Couldn't save your email-list sign-up. Email waseem@skynetjoe.com and I'll add you."
+            : "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand.",
       );
       await new Promise((resolve) => setTimeout(resolve, 2200));
     }

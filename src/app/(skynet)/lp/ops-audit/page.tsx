@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
-import { SITE, CAL_URL, pageTitle, pageDescription } from "@/lib/site";
+import { SITE, waLink, pageTitle, pageDescription } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
 // Free-step CTA for the ~98% of cold Meta traffic not ready to pay $497 on
 // first contact. Deliberately secondary (smaller, outline, "not ready to
 // buy?" framing) — the $497 audit stays the hero offer everywhere on this
-// page. Copy is duration-agnostic on purpose: the live Calendly event is
-// titled "Schedule a Free Consultation" and is currently 30 minutes, not
-// the 20 a prior draft of this CTA assumed. Calendly's API cannot change
-// event duration — only Waseem can, by hand, in the Calendly dashboard —
-// so this string must stay true whether he does that or not.
-const FREE_CONSULT_URL = `${CAL_URL}?utm_source=meta-ads&utm_content=lp-ops-audit`;
+// page. Copy carries no call duration. Calendly was removed 2026-10-31;
+// the CTA opens WhatsApp with a prefilled message.
+const FREE_CONSULT_URL = waLink(
+  "Hi Waseem, I saw the ops audit page and would like a free look at my setup.",
+);
 
 // Meta-ads destination LP for the 48-Hour Ops Audit ($497).
 // Claims discipline: every factual assertion on this page must exist in
@@ -129,12 +128,8 @@ const css = `
 `;
 
 // Secondary, deliberately smaller CTA for the ~98% of cold Meta traffic who
-// won't buy a $497 audit on first contact. Links straight to the live
-// Calendly event ("Schedule a Free Consultation") with ad attribution.
-// Copy carries no duration — the event is 30 minutes on Calendly today, not
-// the 20 an earlier draft assumed, and Calendly's API cannot change that
-// duration, only Waseem can by hand. Naming a number here that Calendly then
-// contradicts on the next screen is a trust break, so this stays generic.
+// won't buy a $497 audit on first contact. Opens WhatsApp with a
+// prefilled message. Copy carries no duration, so this stays generic.
 function FreeStepCta() {
   return (
     <p className="lp-ops-free-step">
@@ -146,7 +141,7 @@ function FreeStepCta() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Book a free look at your setup →
+        Message us for a free look at your setup →
       </a>
     </p>
   );
@@ -172,8 +167,8 @@ function OpsAuditForm({ id }: { id?: string }) {
       successHeading="Got it — you're in the queue."
       successBody="I'll reply personally with the intake checklist (what access to send, nothing invasive). Your 48 hours start when access arrives. Want to talk first?"
       successCta={
-        <a className="lp-ops-book" href="/contact">
-          Book the consult call
+        <a className="lp-ops-book" href={waLink("Hi Waseem, I just joined the ops audit queue and would like to talk first.")} target="_blank" rel="noopener noreferrer">
+          Message us on WhatsApp
         </a>
       }
     />

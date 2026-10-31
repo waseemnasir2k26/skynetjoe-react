@@ -18,6 +18,7 @@ import {
 } from "@/lib/site";
 import { findServicePricing } from "@/lib/service-pricing";
 import JsonLd from "@/components/JsonLd";
+import { WHATSAPP } from "@/lib/site";
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   Bot,
@@ -364,12 +365,14 @@ export default function ServicesIndexPage() {
               lineHeight: 1.6,
             }}
           >
-            One 30-min call. Honest scope. Fixed price. No back-and-forth.
+            One WhatsApp chat. Honest scope. Fixed price. No back-and-forth.
             Yes or no in 8 hours.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/contact"
+              href={WHATSAPP.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--terracotta)",
@@ -382,7 +385,7 @@ export default function ServicesIndexPage() {
                 border: "none",
               }}
             >
-              Book my strategy call
+              Message us on WhatsApp
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link

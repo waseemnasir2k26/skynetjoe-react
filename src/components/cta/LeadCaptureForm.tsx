@@ -154,8 +154,8 @@ export default function LeadCaptureForm({
           j?.newsletter === "confirmed"
             ? "You're in. If you're new to the list, a welcome email is on its way."
             : j?.newsletter === "pending"
-              ? "Saved. If no welcome email arrives within a day, email info@skynetjoe.com and I'll add you by hand."
-              : "Couldn't save your email-list sign-up. Try again, or email info@skynetjoe.com.",
+              ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
+              : "Couldn't save your email-list sign-up. Try again, or email waseem@skynetjoe.com.",
         );
       }
 
@@ -189,7 +189,7 @@ export default function LeadCaptureForm({
       setError(
         err instanceof Error
           ? err.message
-          : "Something went wrong — try again, or email info@skynetjoe.com directly.",
+          : "Something went wrong — try again, or email waseem@skynetjoe.com directly.",
       );
     }
   }

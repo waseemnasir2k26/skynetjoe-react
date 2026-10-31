@@ -13,6 +13,7 @@ import {
   RevealItem,
   ParallaxFigure,
 } from "@/components/motion/Reveal";
+import { WHATSAPP } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -857,7 +858,9 @@ export default async function CaseStudyDetail({
             hostage situation.
           </p>
           <Link
-            href="/contact"
+            href={WHATSAPP.href}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               background: "var(--cream-3)",
               color: "var(--terracotta)",
@@ -873,7 +876,7 @@ export default async function CaseStudyDetail({
               boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
             }}
           >
-            Apply for a discovery call
+            Message us on WhatsApp
             <ArrowRight style={{ width: 16, height: 16 }} />
           </Link>
         </Reveal>

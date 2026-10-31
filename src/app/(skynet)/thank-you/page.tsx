@@ -1,5 +1,5 @@
 /**
- * /thank-you — booking confirmation page (post-Calendly + post-quiz funnel).
+ * /thank-you — next-steps page (post-quiz + post-form funnel; Calendly removed 2026-10-31).
  *
  * Cream-pivot port 2026-05-25:
  *   - Hero: cream-3 bg, terracotta check SVG, Fraunces H1 with terracotta em
@@ -10,12 +10,13 @@
  *   - Case study trio: cream-2 cards with terracotta hover
  *   - Referral nudge: cream-2 panel with terracotta gift accent (was amber)
  *   - SVG check animation, ReferralForm, schema, helpers all unchanged.
- *   - Searchparam handling + Calendly redirect parsing unchanged.
+ *   - Searchparam handling unchanged (name/email/ref/bucket/score).
  */
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, WHATSAPP, pageTitle, pageDescription } from "@/lib/site";
+import ContactDirect from "@/components/cta/ContactDirect";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
 import ReferralForm from "./ReferralForm";
@@ -33,13 +34,13 @@ import {
 export const metadata: Metadata = {
   title: pageTitle("You're in — see what happens next"),
   description:
-    pageDescription("Your discovery call with Waseem is confirmed. Here's exactly what happens next, what to bring to the call, and what I'll have ready before we talk."),
+    pageDescription("Thanks for reaching out. Here's exactly what happens next, what to bring when we talk, and how to reach Waseem on WhatsApp or email."),
   alternates: { canonical: `${SITE.url}/thank-you` },
   robots: { index: false, follow: false },
   openGraph: {
     title: "You're in — see what happens next",
     description:
-      "Your discovery call with Waseem is confirmed. Here's exactly what happens next.",
+      "Thanks for reaching out. Here's exactly what happens next.",
     url: `${SITE.url}/thank-you`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -58,24 +59,6 @@ const FEATURED_SLUGS = [
 function firstParam(v: string | string[] | undefined): string | undefined {
   if (Array.isArray(v)) return v[0];
   return v;
-}
-
-function formatBookedTime(raw: string | undefined): string {
-  if (!raw) return "soon";
-  try {
-    const d = new Date(raw);
-    if (Number.isNaN(d.getTime())) return raw;
-    return d.toLocaleString("en-US", {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      timeZoneName: "short",
-    });
-  } catch {
-    return raw;
-  }
 }
 
 // Tailor the AI Audit Preview bullets to the stress-quiz bucket if present.
@@ -119,19 +102,19 @@ const TIMELINE = [
   {
     icon: Mail,
     when: "right now",
-    title: "Confirmation email lands",
-    body: "Calendar invite + zoom/meet link in your inbox within 60 seconds.",
+    title: "Message us on WhatsApp or email",
+    body: `Send a note to ${WHATSAPP.display} or ${SITE.email} and we pick this up from there.`,
   },
   {
     icon: MessageSquareText,
-    when: "24h before the call",
-    title: "Prep video + reminder",
-    body: "I'll send a 2-min Loom walking through what we'll cover so we don't burn time on intros.",
+    when: "before we talk",
+    title: "Quick prep",
+    body: "Send a 2-min Loom of your funnel (below) so we don't burn time on intros.",
   },
   {
     icon: Calendar,
-    when: "call day",
-    title: "30-min strategy session",
+    when: "when we talk",
+    title: "Strategy session",
     body: "Bring your CRM/funnel URL + your last 30 days of lead count. We diagnose live.",
   },
   {
@@ -189,14 +172,9 @@ export default async function ThankYouPage({
   const ref = firstParam(sp.ref);
   const bucket = firstParam(sp.bucket);
   const score = firstParam(sp.score);
-  const startTime =
-    firstParam(sp.event_start_time) ||
-    firstParam(sp.invitee_event_start_time) ||
-    firstParam(sp.start_time);
   const inviteeName = firstParam(sp.invitee_full_name) || firstParam(sp.name);
   const inviteeEmail = firstParam(sp.invitee_email) || firstParam(sp.email);
 
-  const bookedTime = formatBookedTime(startTime);
   const greetingName = inviteeName ? inviteeName.split(" ")[0] : null;
   const leakBullets = leakBulletsFor(bucket);
 
@@ -217,7 +195,7 @@ export default async function ThankYouPage({
       {
         "@type": "ListItem",
         position: 2,
-        name: "Discovery call confirmed",
+        name: "Thank you",
         item: `${SITE.url}/thank-you`,
       },
     ],
@@ -328,7 +306,7 @@ export default async function ThankYouPage({
                       textTransform: "uppercase",
                     }}
                   >
-                    Booking confirmed
+                    Thanks for reaching out
                   </span>
                 </div>
               </div>
@@ -345,7 +323,7 @@ export default async function ThankYouPage({
                 }}
               >
                 {greetingName ? `${greetingName}, ` : ""}you&apos;re in.{" "}
-                <em style={emTerra}>Talk to you on {bookedTime}.</em>
+                <em style={emTerra}>Message us on WhatsApp to start.</em>
               </h1>
 
               <p
@@ -357,10 +335,18 @@ export default async function ThankYouPage({
                   maxWidth: "60ch",
                 }}
               >
-                I&apos;ll personally show up to this call. No SDR, no junior, no
-                discovery script. Just me, your funnel on screen, and a working
-                doc we&apos;ll build together.
+                I&apos;ll personally handle this. No SDR, no junior, no discovery
+                script. Just me, your funnel on screen, and a working doc
+                we&apos;ll build together.
               </p>
+              <div style={{ margin: "0 0 20px" }}>
+                <ContactDirect
+                  label="Chat on WhatsApp"
+                  text="Hi Waseem, I just submitted on skynetjoe.com and would like to talk next steps."
+                  emailSubject="Next steps from skynetjoe.com"
+                  metaName="thank-you-whatsapp"
+                />
+              </div>
               <p
                 style={{
                   fontSize: 16,
@@ -649,7 +635,7 @@ export default async function ThankYouPage({
               </div>
               <div>
                 <div className="mb-3" style={eyebrow}>
-                  <span style={eyebrowRule} />1 thing to do before our call
+                  <span style={eyebrowRule} />1 thing to do before we talk
                 </div>
                 <h2
                   style={{

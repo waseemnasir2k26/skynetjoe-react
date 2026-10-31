@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, waLink, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Calendar from "./Calendar";
@@ -12,7 +12,7 @@ const breadcrumbListSchema = breadcrumbSchema([
   { name: "Tools", url: `${SITE.url}/tools` },
   { name: "Content Calendar Generator", url: `${SITE.url}${PATH}` },
 ]);
-const CAL_URL = "https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=content-calendar";
+const WA_URL = waLink("Hi Waseem, I used the content calendar generator on skynetjoe.com and would like help automating it.");
 
 export const metadata: Metadata = {
   title:
@@ -175,7 +175,7 @@ export default function ContentCalendarPage() {
       <section className="section">
         <div className="container-x px-6">
           <div className="max-w-6xl mx-auto">
-            <Calendar calUrl={CAL_URL} />
+            <Calendar calUrl={WA_URL} />
           </div>
         </div>
       </section>

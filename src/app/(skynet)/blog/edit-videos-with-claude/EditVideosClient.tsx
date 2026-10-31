@@ -18,6 +18,7 @@ import Link from "next/link";
 import { Check, Copy, Lock, ArrowRight } from "lucide-react";
 import EmailGate from "@/components/cta/EmailGate";
 import { VIDEO_SKILLS, VIDEO_SKILL_COUNT } from "@/data/video-skills";
+import { WHATSAPP } from "@/lib/site";
 
 const UNLOCK_KEY = "skynet-tool-video-editing-playbook-email";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -258,10 +259,10 @@ export default function EditVideosClient({
         <h2 className="evc-h2">Want us to just edit it for you?</h2>
         <p className="evc-section-sub">
           Hand us the raw footage. We run these exact prompts and send back the
-          finished cut. Book a 15-minute call.
+          finished cut. Message us on WhatsApp.
         </p>
-        <Link href="/contact" className="evc-cta">
-          Book a discovery call <ArrowRight size={16} />
+        <Link href={WHATSAPP.href} target="_blank" rel="noopener noreferrer" className="evc-cta">
+          Message us on WhatsApp <ArrowRight size={16} />
         </Link>
       </section>
     </main>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { WHATSAPP } from "@/lib/site";
 
 const EVENTS = [
   { src: "/bali-trek/heart-frame-group.jpg", caption: "Heart-frame viewpoint · Bali trek crew · May 2026" },
@@ -169,7 +170,9 @@ export default function Community() {
             no broker layer, just warm DMs.
           </p>
           <Link
-            href="/contact"
+            href={WHATSAPP.href}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               background: "var(--terracotta)",
               color: "var(--cream-3)",
@@ -184,7 +187,7 @@ export default function Community() {
               textDecoration: "none",
             }}
           >
-            Book a strategy call
+            Chat on WhatsApp
             <ArrowRight style={{ width: 14, height: 14 }} />
           </Link>
         </div>

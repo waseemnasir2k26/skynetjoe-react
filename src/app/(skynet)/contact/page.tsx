@@ -1,36 +1,39 @@
 import type { Metadata } from "next";
-import { Clock, Mail } from "lucide-react";
+import { Clock, Mail, MessageCircle } from "lucide-react";
 import {
   SITE,
   DEFAULT_OG_IMAGES,
+  WHATSAPP,
+  mailtoLink,
   pageTitle,
   pageDescription,
 } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
-import CalendlyEmbed from "@/components/CalendlyEmbed";
 import ContactBriefForm from "@/components/ContactBriefForm";
+import ContactDirect from "@/components/cta/ContactDirect";
 
 /**
  * /contact — ONE page (2026-09-21 simplification).
  *
- * Absorbs the old /discovery-call: the Calendly embed sits at the top, a
- * 3-field brief form below it, then the 8-hour-reply line. Everything
- * /discovery-call did that mattered (book a slot, drop a brief, land on
+ * Absorbs the old /discovery-call: two direct-contact cards (WhatsApp +
+ * email — Calendly was removed 2026-10-31) sit at the top, a 3-field brief
+ * form below them, then the 8-hour-reply line. Everything
+ * /discovery-call did that mattered (reach Waseem, drop a brief, land on
  * /thank-you) happens here; the 7-step qualifier and the 11-field
  * application are gone. /discovery-call 301s here (next.config.ts).
  */
 
 export const metadata: Metadata = {
-  title: pageTitle("Contact — Free 30-min Call or Send a Brief"),
+  title: pageTitle("Contact — WhatsApp, Email or Send a Brief"),
   description: pageDescription(
-    "Book a free 30-minute call with Waseem Nasir, or send a 3-field brief. Reply within 8 hours on weekdays, fixed-price scope back in 48 hours. Bali, GMT+8.",
+    "Message Waseem Nasir on WhatsApp or email, or send a 3-field brief. Reply within 8 hours on weekdays, fixed-price scope back in 48 hours. Bali, GMT+8.",
   ),
   alternates: { canonical: `${SITE.url}/contact` },
   openGraph: {
-    title: "Book a free 30-min call — SkynetLabs",
+    title: "Message us on WhatsApp or email — SkynetLabs",
     description:
-      "Pick a slot or send a brief. 8-hour reply on weekdays, fixed scope in 48 hours.",
+      "Message on WhatsApp, email, or send a brief. 8-hour reply on weekdays, fixed scope in 48 hours.",
     url: `${SITE.url}/contact`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
@@ -43,7 +46,7 @@ const schema = {
   name: "Contact SkynetLabs",
   url: `${SITE.url}/contact`,
   description:
-    "Book a free 30-minute call or send a short brief. 8-hour reply on weekdays.",
+    "Message on WhatsApp or email, or send a short brief. 8-hour reply on weekdays.",
   inLanguage: "en",
   mainEntity: {
     "@type": "Organization",
@@ -63,6 +66,7 @@ const schema = {
         "@type": "ContactPoint",
         contactType: "sales",
         email: SITE.emailFounder,
+        telephone: `+${WHATSAPP.number}`,
         availableLanguage: ["English"],
         areaServed: "Worldwide",
       },
@@ -96,13 +100,44 @@ const eyebrow = (text: string) => (
   </div>
 );
 
+const cardStyle: React.CSSProperties = {
+  background: "var(--bg)",
+  border: "1px solid rgba(26,26,26,0.10)",
+  borderRadius: 4,
+  padding: "clamp(20px, 4vw, 28px)",
+  display: "flex",
+  flexDirection: "column",
+  gap: 10,
+};
+const cardTitle: React.CSSProperties = {
+  fontFamily: "var(--font-display)",
+  fontSize: 24,
+  fontWeight: 700,
+  letterSpacing: "-0.02em",
+  color: "var(--ink)",
+  margin: 0,
+};
+const cardNumber: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 15,
+  color: "var(--terracotta-aa)",
+  margin: 0,
+  wordBreak: "break-word",
+};
+const cardBody: React.CSSProperties = {
+  fontSize: 15,
+  color: "var(--ink-2)",
+  lineHeight: 1.6,
+  margin: "0 0 6px",
+};
+
 export default function ContactPage() {
   return (
     <>
       <JsonLd data={schema} />
       <JsonLd data={hubBreadcrumbSchema} />
 
-      {/* 1. BOOK — Calendly at the top */}
+      {/* 1. REACH US — WhatsApp + email cards at the top */}
       <section
         id="book"
         style={{
@@ -119,7 +154,7 @@ export default function ContactPage() {
           }}
         >
           <div style={{ maxWidth: 680, marginBottom: 32 }}>
-            {eyebrow("Free · 30 minutes · Bali GMT+8, auto-converts")}
+            {eyebrow("WhatsApp · Email · Bali GMT+8")}
             <h1
               style={{
                 fontFamily: "var(--font-display)",
@@ -132,9 +167,9 @@ export default function ContactPage() {
                 wordBreak: "break-word",
               }}
             >
-              Book a free{" "}
+              Message us on{" "}
               <span style={{ color: "var(--terracotta-aa)", fontWeight: 700 }}>
-                30-min call.
+                WhatsApp.
               </span>
             </h1>
             <p
@@ -146,12 +181,70 @@ export default function ContactPage() {
                 margin: 0,
               }}
             >
-              We share screens, find the one fix that pays off fastest, and you
-              get a one-page scope with price and ship date within 48 hours. No
-              pitch deck.
+              Tell us what&apos;s broken and we&apos;ll find the one fix that
+              pays off fastest, then send a one-page scope with price and ship
+              date within 48 hours. No pitch deck.
             </p>
           </div>
-          <CalendlyEmbed />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              gap: 20,
+            }}
+          >
+            <div style={cardStyle}>
+              <MessageCircle
+                style={{ width: 22, height: 22, color: "var(--terracotta-aa)" }}
+                aria-hidden="true"
+              />
+              <h2 style={cardTitle}>WhatsApp</h2>
+              <p style={cardNumber}>{WHATSAPP.display}</p>
+              <p style={cardBody}>
+                The fastest way to reach Waseem. Opens a chat with a message
+                already written for you.
+              </p>
+              <ContactDirect
+                showEmail={false}
+                label="Chat on WhatsApp"
+                text="Hi Waseem, I found you on skynetjoe.com/contact and would like to talk about a project."
+                metaName="contact-whatsapp"
+              />
+            </div>
+            <div style={cardStyle}>
+              <Mail
+                style={{ width: 22, height: 22, color: "var(--terracotta-aa)" }}
+                aria-hidden="true"
+              />
+              <h2 style={cardTitle}>Email</h2>
+              <p style={cardNumber}>{SITE.email}</p>
+              <p style={cardBody}>
+                Prefer to write it out? Email works too, with the same reply
+                window.
+              </p>
+              <a
+                href={mailtoLink("Project enquiry from skynetjoe.com")}
+                style={{
+                  background: "var(--terracotta)",
+                  color: "var(--cream-3)",
+                  padding: "14px 24px",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 600,
+                  fontSize: 15,
+                  borderRadius: 2,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 8,
+                  textDecoration: "none",
+                  minHeight: 48,
+                  alignSelf: "flex-start",
+                }}
+              >
+                Email {SITE.email}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -182,7 +275,7 @@ export default function ContactPage() {
             }
           `}</style>
           <div>
-            {eyebrow("Rather not book yet?")}
+            {eyebrow("Prefer to write it down?")}
             <h2
               style={{
                 fontFamily: "var(--font-display)",

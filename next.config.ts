@@ -14,9 +14,9 @@ import {
  * Content-Security-Policy — shipped as REPORT-ONLY (2026-05-29).
  *
  * Why report-only: the site loads inline GTM/GA4/Meta-Pixel bootstrap scripts
- * plus third-party widgets (Calendly, Payload admin, YouTube embeds). A strict
+ * plus third-party widgets (Payload admin, YouTube embeds). A strict
  * blocking CSP with nonces is high-risk to ship blind — one missed origin and
- * analytics or the Calendly booking widget silently breaks. `*-Report-Only`
+ * analytics silently breaks. `*-Report-Only`
  * does NOT block anything; it only emits violation reports, so we can observe
  * what the policy WOULD break in prod before enforcing.
  *
@@ -33,22 +33,21 @@ import {
  *   - Google Tag Manager / GA4: www.googletagmanager.com,
  *     www.google-analytics.com, *.google-analytics.com
  *   - Meta Pixel: connect.facebook.net, www.facebook.com
- *   - Calendly: assets.calendly.com, calendly.com (script + frame + connect)
  *   - Payload admin: same-origin (covered by 'self')
  *   - Fonts: fonts.gstatic.com (+ fonts.googleapis.com stylesheet)
  *   - Images: data:, https: (broad on purpose for CDN/analytics pixels)
- *   - Frames: Calendly + YouTube (youtube.com, youtube-nocookie.com)
+ *   - Frames: YouTube (youtube.com, youtube-nocookie.com)
  */
 const cspReportOnly = [
   "default-src 'self'",
   // 'unsafe-inline' kept for now because GTM/GA4/Pixel bootstraps are inline.
   // Report-only, so acceptable until nonces land (see header comment above).
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://assets.calendly.com",
-  "style-src 'self' 'unsafe-inline' https://assets.calendly.com https://fonts.googleapis.com",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "img-src 'self' data: https:",
   "font-src 'self' data: https://fonts.gstatic.com",
-  "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://www.facebook.com https://calendly.com https://*.calendly.com https://n8n.skynetjoe.com",
-  "frame-src 'self' https://calendly.com https://*.calendly.com https://www.youtube.com https://www.youtube-nocookie.com https://drive.google.com",
+  "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://www.facebook.com https://n8n.skynetjoe.com",
+  "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://drive.google.com",
   "frame-ancestors 'self'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -59,7 +58,7 @@ const securityHeaders = [
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   // Obsolete X-XSS-Protection dropped (2026-10-30); CSP is the modern control.
-  // allow-popups keeps Calendly / WhatsApp window.open() popups working.
+  // allow-popups keeps WhatsApp window.open() popups working.
   { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {

@@ -5,6 +5,7 @@ import { SITE, DEFAULT_OG_IMAGES, pageTitle, pageDescription } from "@/lib/site"
 import { CASE_STUDIES, type CaseStudy } from "@/lib/case-studies";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
+import { WHATSAPP } from "@/lib/site";
 
 /**
  * Card presentation metadata, keyed by case-study `slug`.
@@ -544,7 +545,7 @@ export default function CaseStudiesPage() {
               lineHeight: 1.6,
             }}
           >
-            8 builds shipped. Limited slots each month. 30-min call decides if
+            8 builds shipped. Limited slots each month. A WhatsApp chat decides if
             we&apos;re the right fit — yes/no in 8 hours.
           </p>
           <div
@@ -556,7 +557,9 @@ export default function CaseStudiesPage() {
             }}
           >
             <Link
-              href="/contact"
+              href={WHATSAPP.href}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 background: "var(--cream-3)",
                 color: "var(--terracotta)",
@@ -572,7 +575,7 @@ export default function CaseStudiesPage() {
                 boxShadow: "0 16px 40px rgba(26,26,26,0.18)",
               }}
             >
-              Apply for a discovery call
+              Message us on WhatsApp
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
             <Link

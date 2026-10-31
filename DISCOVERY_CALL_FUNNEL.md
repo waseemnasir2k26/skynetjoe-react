@@ -1,5 +1,8 @@
 # /discovery-call — Premium 3-Phase High-Ticket Funnel
 
+> **2026-10-31 UPDATE:** Calendly was removed from the site (booking is now WhatsApp +62 813-1607-7185, see src/lib/site.ts WHATSAPP, email waseem@skynetjoe.com). The Calendly embed, the `/api/webhooks/calendly` route and `CALENDLY_WEBHOOK_SECRET` no longer exist; the Calendly-specific sections below are historical only.
+
+
 **Status:** Built and verified (Next build green: `/discovery-call` static, `/api/leads` dynamic POST). Calendly redirect targets `/thank-you?ref=discovery-call` — that page is owned by a parallel agent.
 
 ---

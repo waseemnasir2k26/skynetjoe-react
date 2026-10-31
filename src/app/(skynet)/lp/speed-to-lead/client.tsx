@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { InlineWidget, useCalendlyEventListener } from "react-calendly";
+import ContactDirect from "@/components/cta/ContactDirect";
+import { SITE, WHATSAPP } from "@/lib/site";
 
 // Claims discipline (CLAIMS-WHITELIST.md): no statistics, no client names,
 // no testimonials, no guarantees, no asserted reply-time numbers. The SMS
@@ -12,8 +13,6 @@ import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 const WHATSAPP_URL =
   "https://wa.me/6281316077185?text=Hi%20Waseem%20—%20saw%20the%20HVAC%20speed-to-lead%20page.";
 const INSTAGRAM_URL = "https://instagram.com/waseemnasir009";
-const CALENDLY_URL =
-  "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 function fireFbq(event: string, eventId?: string) {
   if (typeof window === "undefined") return;
@@ -433,10 +432,10 @@ function SmsDemo() {
   );
 }
 
-// Free-call booking: same gate→calendar pattern as /lp/ai-audit. Email gate
+// Free-call contact: same gate→hand-off pattern as /lp/ai-audit. Email gate
 // posts the lead (fires pixel Lead + CAPI mirror via /api/leads) BEFORE the
-// calendar opens; the Calendly onEventScheduled then fires Schedule and
-// updates the same leadId. Booking is never blocked by a CRM hiccup.
+// WhatsApp/email hand-off shows (Calendly removed 2026-10-31). Contact is
+// never blocked by a CRM hiccup.
 function BookCall() {
   const [lead, setLead] = useState<{
     name: string;
@@ -448,45 +447,7 @@ function BookCall() {
   const [trap, setTrap] = useState(""); // honeypot — humans never see it
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
-  const [scheduled, setScheduled] = useState(false);
   const [mountedAt] = useState(() => Date.now());
-
-  useCalendlyEventListener({
-    onEventScheduled: async (e) => {
-      if (!lead || scheduled) return;
-      setScheduled(true);
-      const eventId = newEventId();
-      fireFbq("Schedule", eventId);
-      try {
-        await fetch("/api/leads", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            leadId: lead.leadId,
-            source: "lp-speed-to-lead",
-            email: lead.email,
-            eventId,
-            booking: {
-              event: e.data.payload?.event?.uri,
-              invitee: e.data.payload?.invitee?.uri,
-              inviteeEmail: lead.email,
-              inviteeName: lead.name,
-              scheduledAt: new Date().toISOString(),
-            },
-            utm: {
-              source: "meta",
-              medium: "paid-social",
-              campaign: "hvac-speed-to-lead-2026",
-              content: utmContent(),
-            },
-            submittedAt: new Date().toISOString(),
-          }),
-        });
-      } catch (e2) {
-        console.error("[lp-speed-to-lead] booking POST failed", e2);
-      }
-    },
-  });
 
   async function unlock(ev: React.FormEvent) {
     ev.preventDefault();
@@ -550,38 +511,29 @@ function BookCall() {
 
   if (lead)
     return (
-      <div className="s2l-book-wrap">
-        <InlineWidget
-          url={CALENDLY_URL}
-          prefill={{ name: lead.name, email: lead.email }}
-          utm={{
-            utmSource: "meta",
-            utmMedium: "paid-social",
-            utmCampaign: "hvac-speed-to-lead-2026",
-          }}
-          styles={{ height: "700px", minWidth: "300px" }}
-          pageSettings={{
-            backgroundColor: "FAF7F0",
-            primaryColor: "C66B3F",
-            textColor: "1A1A1A",
-            hideGdprBanner: true,
-          }}
-          iframeTitle="SkynetLabs · Free 15-minute call"
+      <div className="s2l-book-card">
+        <h3>Thanks, {lead.name.split(/\s+/)[0]}. Message us next.</h3>
+        <p className="hint">
+          WhatsApp {WHATSAPP.display} is the fastest way to reach me, or email
+          {" "}
+          {SITE.email}.
+        </p>
+        <ContactDirect
+          variant="stack"
+          label="Chat on WhatsApp"
+          text={`Hi Waseem, it's ${lead.name}. I just left my details on the HVAC speed-to-lead page (${lead.email}).`}
+          emailSubject="HVAC speed-to-lead"
+          metaName="s2l-book-whatsapp"
         />
-        {scheduled && (
-          <div className="s2l-book-done">
-            Slot locked ✔ Check your email for the confirmation.
-          </div>
-        )}
       </div>
     );
 
   return (
     <form className="s2l-book-card" onSubmit={unlock}>
-      <h3>Book a free 15-minute call</h3>
+      <h3>Talk to me on WhatsApp or email</h3>
       <p className="hint">
         No pitch deck, no obligation — we look at how your calls are handled
-        today and whether this fits. Calendar opens right after.
+        today and whether this fits. WhatsApp and email links open right after.
       </p>
       <input
         type="text"
@@ -610,10 +562,10 @@ function BookCall() {
           autoComplete="name"
         />
         <input
-          aria-label="Email for the call details"
+          aria-label="Email for the follow-up"
           className="fld"
           type="email"
-          placeholder="Email for the call details"
+          placeholder="Email for the follow-up"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
@@ -621,7 +573,7 @@ function BookCall() {
       </div>
       {err && <p className="s2l-book-err">{err}</p>}
       <button className="s2l-book-btn" type="submit" disabled={busy}>
-        {busy ? "Opening calendar…" : "Pick a time →"}
+        {busy ? "One second…" : "Continue →"}
       </button>
     </form>
   );
@@ -638,9 +590,9 @@ function StickyCta() {
   return (
     <div className={`s2l-sticky${show ? " show" : ""}`}>
       <span className="txt">
-        <b>HVAC missed-call rescue</b> — free 15-min call
+        <b>HVAC missed-call rescue</b> — message us on WhatsApp
       </span>
-      <a href="#book">📅 Book a call</a>
+      <a href="#book">💬 WhatsApp / email</a>
     </div>
   );
 }
@@ -681,7 +633,7 @@ export default function SpeedToLeadClient() {
         </p>
         <LiveClock />
         <a className="s2l-hero-cta" href="#book">
-          📅 Book a free 15-min call →
+          💬 Message us on WhatsApp or email →
         </a>
         <div className="s2l-spec">
           <span>HVAC · AC REPAIR · HEATING</span>
@@ -747,7 +699,7 @@ export default function SpeedToLeadClient() {
 
       <section className="s2l-sec" id="book">
         <div className="s2l-rev">
-          <h2>See if it fits — free 15-minute call</h2>
+          <h2>See if it fits — message us</h2>
           <p className="lead">
             Bring your phone habits, I&apos;ll show you the machine. Straight
             answers, no pitch deck.

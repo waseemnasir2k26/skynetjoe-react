@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE, DEFAULT_OG_IMAGES, CAL_URL, pageTitle, pageDescription } from "@/lib/site";
+import { SITE, DEFAULT_OG_IMAGES, waLink, pageTitle, pageDescription } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import Link from "next/link";
@@ -13,7 +13,7 @@ const breadcrumbListSchema = breadcrumbSchema([
   { name: "Tools", url: `${SITE.url}/tools` },
   { name: "System Prompt Generator", url: `${SITE.url}${PATH}` },
 ]);
-const TOOL_CAL_URL = `${CAL_URL}?utm_source=system-prompt-generator`;
+const TOOL_CAL_URL = waLink("Hi Waseem, I built a prompt with the system prompt generator on skynetjoe.com and would like help turning it into an agent.");
 
 export const metadata: Metadata = {
   title: pageTitle("Free System Prompt Generator for AI Agents"),
@@ -245,7 +245,7 @@ export default function SystemPromptGeneratorPage() {
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">
-                Waseem, building from Bali · info@skynetjoe.com
+                Waseem, building from Bali · waseem@skynetjoe.com
               </p>
             </div>
           </div>
@@ -270,10 +270,12 @@ export default function SystemPromptGeneratorPage() {
               </Link>
               , or{" "}
               <Link
-                href="/contact"
+                href={waLink("Hi Waseem, I built a prompt with the system prompt generator on skynetjoe.com.")}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-semibold text-[var(--terracotta-aa)] hover:underline"
               >
-                book a free discovery call
+                message us on WhatsApp
               </Link>{" "}
               to have this agent actually wired into your stack.
             </p>

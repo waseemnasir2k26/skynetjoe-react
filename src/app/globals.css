@@ -986,7 +986,7 @@ html:not(.theme-dark) .border-fuchsia-400\/30 {
   border-color: rgba(198, 107, 63, 0.3) !important;
 }
 
-/* Calendly iframe surround — cream-3 paper */
+/* Legacy blue-gradient surround — cream-3 paper (was Calendly iframe) */
 html:not(.theme-dark) .bg-gradient-to-br.from-\[\#1E88E5\],
 html:not(.theme-dark) [style*="linear-gradient(135deg, #1E88E5"] {
   background: var(--cream-3) !important;

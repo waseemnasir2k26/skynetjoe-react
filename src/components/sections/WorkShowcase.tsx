@@ -24,6 +24,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ExternalLink, Play, Star } from "lucide-react";
 import PortfolioScreenshot from "@/components/PortfolioScreenshot";
 import { WORK_BUILDS as GIGS, type Gig } from "@/lib/work-builds";
+import { WHATSAPP } from "@/lib/site";
 
 // Category chip styles, cream-safe.
 const CATEGORY_CHIP: Record<Gig["category"], React.CSSProperties> = {
@@ -402,7 +403,9 @@ export default function WorkShowcase() {
               <Star className="w-4 h-4" /> All repos
             </a>
             <a
-              href="/contact"
+              href={WHATSAPP.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2"
               style={{
                 background: "var(--terracotta)",
@@ -416,7 +419,7 @@ export default function WorkShowcase() {
                 textDecoration: "none",
               }}
             >
-              <Play className="w-4 h-4" /> Book free audit
+              <Play className="w-4 h-4" /> Chat on WhatsApp
             </a>
           </div>
         </div>

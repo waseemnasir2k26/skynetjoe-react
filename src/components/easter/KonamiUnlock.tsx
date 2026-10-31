@@ -94,8 +94,8 @@ export default function KonamiUnlock() {
               className="text-[11px] md:text-xs leading-relaxed mb-6"
               style={{ color: "#b8d4e8", fontFamily: "var(--font-sans, system-ui)" }}
             >
-              Mention <span style={{ color: "#5EEAD4" }}>KONAMI</span> when you book a
-              discovery call and Waseem will throw in a free AEO audit with your
+              Mention <span style={{ color: "#5EEAD4" }}>KONAMI</span> when you message
+              us on WhatsApp and Waseem will throw in a free AEO audit with your
               first build. No catch. Just liked that you found this.
             </p>
             <div className="flex flex-col gap-2">

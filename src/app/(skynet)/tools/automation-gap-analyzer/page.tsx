@@ -53,7 +53,7 @@ const faqs = [
   },
   {
     q: "What happens after I get my score?",
-    a: "Two paths. Either you book a 30-minute call where I look at the lowest-scoring axis and tell you exactly what to wire first, or you bounce to the revenue calculator with your implied manual hours prefilled to see the dollar number behind the gap. Both are free.",
+    a: "Two paths. Either you message me on WhatsApp and I look at the lowest-scoring axis and tell you exactly what to wire first, or you bounce to the revenue calculator with your implied manual hours prefilled to see the dollar number behind the gap. Both are free.",
   },
 ];
 
@@ -207,7 +207,7 @@ export default function AutomationGapPage() {
               }}
             >
               You get a 0 to 100 automation gap %, a four-axis radar, and a
-              tailored callout for the weakest axis. Then choose: book a call,
+              tailored callout for the weakest axis. Then choose: message us on WhatsApp,
               run the revenue calculator on your implied manual hours, or share
               the result.
             </p>
@@ -329,8 +329,8 @@ export default function AutomationGapPage() {
                 },
                 {
                   href: "/contact",
-                  title: "Book a discovery call",
-                  body: "30 minutes on your weakest axis and exactly what to wire first.",
+                  title: "Message us",
+                  body: "WhatsApp or email on your weakest axis and exactly what to wire first.",
                 },
               ].map((l) => (
                 <Link

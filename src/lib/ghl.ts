@@ -468,8 +468,8 @@ export async function createOrUpdateGhlOpportunity(input: {
 /**
  * One-call helper: upsert contact → tag → create/update opportunity.
  *
- * Used by /api/leads (stage: "inbound") and /api/webhooks/calendly
- * (stage: "appointment-set" on invitee.created, "referral" if applicable).
+ * Used by /api/leads (stage: "inbound", or "appointment-set" / "referral"
+ * where the caller supplies them).
  *
  * On dev-skip we return `{ contactId: "dev-skip" }` with no opportunityId so
  * callers can branch but don't need to special-case errors.
@@ -518,54 +518,4 @@ export async function handleGhlLead(input: {
     contactId,
     opportunityId: opportunityId === "dev-skip" ? undefined : opportunityId,
   };
-}
-
-/**
- * Move an existing opportunity to a stage (used by calendly canceled events).
- * Returns true on success, false on any failure or dev-skip.
- */
-export async function moveContactOpportunityToStage(
-  contactId: string,
-  stage: GhlStageKey,
-  extraTags: string[] = [],
-): Promise<boolean> {
-  const { token } = getEnv();
-  if (!token || !contactId || contactId === "dev-skip") return false;
-
-  const existing = await findOpportunityForContact(contactId);
-  if (!existing) return false;
-
-  const stageId = GHL_STAGE_IDS[stage];
-  if (!stageId) return false;
-
-  const resp = await ghlFetch(`/opportunities/${existing.id}`, {
-    method: "PUT",
-    body: { pipelineStageId: stageId },
-  });
-
-  if (extraTags.length) {
-    await addGhlTags(contactId, extraTags);
-  }
-
-  return resp !== null;
-}
-
-/**
- * Look up a contact id by email — small helper used by the calendly cancel
- * path (we may not have a contactId in the canceled payload).
- *
- * Uses POST /contacts/upsert with just the email — GHL returns the existing
- * contact when it matches and creates one when it doesn't.
- */
-export async function getOrCreateContactByEmail(
-  email: string,
-  extra?: Partial<GhlQualification>,
-): Promise<string | null> {
-  if (!email) return null;
-  const { contactId } = await upsertGhlContact(
-    { email, ...extra },
-    null,
-    [],
-  );
-  return contactId === "dev-skip" ? null : contactId;
 }

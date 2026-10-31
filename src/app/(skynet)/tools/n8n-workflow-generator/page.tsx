@@ -6,6 +6,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 import Generator from "./Generator";
 import { N8N_TEMPLATES } from "@/data/tools/n8n-templates";
 import { Download, ShieldCheck, Sparkles, Workflow } from "lucide-react";
+import { waLink } from "@/lib/site";
 
 const PATH = "/tools/n8n-workflow-generator";
 
@@ -252,7 +253,7 @@ export default function N8nWorkflowGeneratorPage() {
                 </p>
               </div>
               <p className="mt-6 text-sm text-[var(--ink-faint)]">
-                Waseem, building from Bali · info@skynetjoe.com
+                Waseem, building from Bali · waseem@skynetjoe.com
               </p>
             </div>
           </div>
@@ -332,14 +333,16 @@ export default function N8nWorkflowGeneratorPage() {
               legacy system with no API — that&apos;s a build, not a download.
             </p>
             <Link
-              href="/contact"
+              href={waLink("Hi Waseem, I looked at the n8n workflow templates on skynetjoe.com and need something custom.")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-[var(--cream-3)] shadow-lg transition-transform hover:scale-[1.02] sm:text-base"
               style={{
                 background: "var(--terracotta)",
                 boxShadow: "0 10px 32px rgba(198,107,63,0.25)",
               }}
             >
-              Book a discovery call
+              Message us on WhatsApp
             </Link>
           </div>
         </div>

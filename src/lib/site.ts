@@ -44,15 +44,6 @@ function resolveAssetsUrl(): string {
  * Path is relative; metadataBase in layout.tsx resolves it against
  * SITE.assetsUrl at build time so the final absolute URL is correct.
  */
-/**
- * Canonical booking URL — Calendly.
- * Single source of truth. Per-tool UTM appended at call site:
- *   `${CAL_URL}?utm_source=<tool-slug>`
- *   `${CAL_URL}?${bookingQuery}`
- */
-export const CAL_URL =
-  "https://calendly.com/skynetlabs/schedule-a-free-consultation";
-
 export const DEFAULT_OG_IMAGE_URL = "/og-default.png";
 export const DEFAULT_OG_IMAGES = [
   {
@@ -78,8 +69,8 @@ export const SITE = {
   tagline: "AI Automation & AEO Agency for Service Businesses",
   description:
     "SkynetLabs builds n8n + AI automation, AEO-optimized websites, and chat-first CRM systems for service businesses. Run by Waseem Nasir from Bali.",
-  email: "info@skynetjoe.com",
-  emailFounder: "info@skynetjoe.com",
+  email: "waseem@skynetjoe.com",
+  emailFounder: "waseem@skynetjoe.com",
   social: {
     linkedin: "https://www.linkedin.com/in/waseemnasir2k26",
     twitter: "https://x.com/Skynetjoe1",
@@ -104,11 +95,11 @@ export const TOOL_LINKS: NavSubItem[] = TOOLS_REGISTRY.map((t) => ({
 
 /**
  * 2026-09-21 simplification: flat six-item nav, no mega menus, no dropdowns.
- * Header CTA ("Book a call" → /contact) lives in Header.tsx.
+ * Header CTA ("Email us" → mailto) lives in Header.tsx.
  *
  * 2026-09-23 CTA hierarchy ruling: the header carries NO "Contact" nav link.
- * /contact is reachable from the "Book a call" CTA (secondary style) and from
- * the footer Company column (FOOTER_COLUMNS) — both must stay. This list is
+ * /contact is reachable from the footer Company column (FOOTER_COLUMNS) and
+ * in-page CTAs; the header secondary CTA is now "Email us". This list is
  * header-only (Header.tsx is its sole consumer); the footer builds its own
  * links from FOOTER_COLUMNS, so removing/adding here never touches the footer.
  */
@@ -127,15 +118,31 @@ export const NAV_PRIMARY: NavItem[] = [
  * Header / mobile-drawer SECONDARY CTA (2026-09-23 ruling). Rendered as an
  * outline button so WhatsApp is unambiguously the primary action.
  */
-export const NAV_CTA = { label: "Book a call", href: "/contact" } as const;
-// WhatsApp = PRIMARY header CTA (Waseem, 2026-09-21; promoted over "Book a
-// call" 2026-09-23). E.164 without "+" for wa.me.
+export const NAV_CTA = {
+  label: "Email us",
+  href: "mailto:waseem@skynetjoe.com",
+} as const;
+// WhatsApp = PRIMARY header CTA (Waseem, 2026-09-21). E.164 without "+" for
+// wa.me. 2026-10-31 ruling: WhatsApp / email replace Calendly booking
+// everywhere — use waLink() for any CTA that needs a prefilled message.
 export const WHATSAPP = {
   number: "6281316077185",
   display: "+62 813-1607-7185",
   label: "WhatsApp",
   href: "https://wa.me/6281316077185?text=Hi%20Waseem%2C%20I%27m%20reaching%20out%20from%20skynetjoe.com",
 } as const;
+
+/** wa.me link with a custom prefilled message (defaults to the standard hello). */
+export function waLink(text?: string): string {
+  if (!text) return WHATSAPP.href;
+  return `https://wa.me/${WHATSAPP.number}?text=${encodeURIComponent(text)}`;
+}
+
+/** mailto link to the one site inbox, with optional subject. */
+export function mailtoLink(subject?: string): string {
+  const base = `mailto:${SITE.email}`;
+  return subject ? `${base}?subject=${encodeURIComponent(subject)}` : base;
+}
 
 // 5 core services, one category (2026-09-21 simplification — the 11
 // non-core slugs 301 via src/lib/simplify-redirects.ts).

@@ -14,8 +14,6 @@ export const handleGhlLead = async (input) => (rec("leadsGhl", input), {
   contactId: st.ghlConfirm ? "c1" : "dev-skip",
   opportunityId: "o1",
 });
-export const moveContactOpportunityToStage = async () => true;
-export const getOrCreateContactByEmail = async () => "c1";
 export const sendLeadFallbackEmail = async () => ({ ok: false });
 export const postTriageShadow = (p) => rec("triage", p);
 export const appendLeadToSink = async (lead) => {

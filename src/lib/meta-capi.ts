@@ -24,7 +24,7 @@ export type CapiLeadInput = {
   email: string;
   eventId: string;
   // Meta standard event name to send; defaults to "Lead". The ai-audit funnel
-  // also sends "Schedule" when a Calendly booking completes.
+  // previously also sent "Schedule" on a Calendly booking (removed 2026-10-31).
   eventName?: string;
   sourceUrl?: string;
   ip?: string;

@@ -13,10 +13,10 @@ import { NAV_PRIMARY, NAV_CTA, WHATSAPP } from "@/lib/site";
  *
  * CTA hierarchy (Waseem ruling, 2026-09-23):
  *   1. WhatsApp  — PRIMARY, filled green, first in both desktop and drawer.
- *   2. Book a call — SECONDARY, outline button, second in both.
+ *   2. Email us — SECONDARY, outline button (mailto), second in both.
+ *      (Calendly "Book a call" removed 2026-10-31.)
  *   3. NO "Contact" nav link in the header. /contact is still reachable via
- *      the Book-a-call CTA and the footer Company column; the page itself is
- *      unchanged. NAV_PRIMARY (src/lib/site.ts) is header-only, so this does
+ *      the footer Company column and in-page CTAs. NAV_PRIMARY (src/lib/site.ts) is header-only, so this does
  *      not touch the footer.
  */
 export default function Header() {
@@ -186,7 +186,7 @@ export default function Header() {
               dark or photographic hero is ever introduced, this button needs
               `bg-[color:var(--cream)]/80` + backdrop-blur in the scroll-top
               state. /lp/* is exempt — Header returns null there. */}
-          <Link
+          <a
             href={NAV_CTA.href}
             className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold transition-all hover:-translate-y-0.5"
             style={{
@@ -205,7 +205,7 @@ export default function Header() {
           >
             {NAV_CTA.label}
             <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          </a>
         </div>
 
         <button
@@ -257,7 +257,7 @@ export default function Header() {
               );
             })}
             {/* 2026-09-23 CTA hierarchy: WhatsApp first and filled (primary),
-                "Book a call" below it as an outline button (secondary). Order
+                "Email us" below it as an outline button (secondary). Order
                 here is the visual order in the drawer — do not re-sort. */}
             <div className="mt-5">
               <a
@@ -286,7 +286,7 @@ export default function Header() {
                 </svg>
                 Contact us on WhatsApp
               </a>
-              <Link
+              <a
                 href={NAV_CTA.href}
                 onClick={() => setMobileOpen(false)}
                 className="mt-3 inline-flex items-center justify-center gap-1.5 w-full"
@@ -303,7 +303,7 @@ export default function Header() {
               >
                 {NAV_CTA.label}
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
           </nav>
         </div>

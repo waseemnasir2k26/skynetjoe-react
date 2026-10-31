@@ -78,6 +78,12 @@ const cardCream = {
   padding: 28,
   borderRadius: 2,
 };
+/** External (wa.me) hrefs open in a new tab. */
+const ext = (href: string) =>
+  href.startsWith("http")
+    ? ({ target: "_blank", rel: "noopener noreferrer" } as const)
+    : {};
+
 const ctaPrimary = {
   background: "var(--terracotta)",
   color: "var(--cream-3)",
@@ -147,6 +153,7 @@ export default function IndustryLanding({ industry: i }: Props) {
           <div className="flex flex-wrap gap-3">
             <Link
               href={i.heroCtaPrimary.href}
+              {...ext(i.heroCtaPrimary.href)}
               className="inline-flex items-center gap-2"
               style={ctaPrimary}
             >
@@ -700,6 +707,7 @@ export default function IndustryLanding({ industry: i }: Props) {
                   </ul>
                   <Link
                     href={tier.ctaHref}
+                    {...ext(tier.ctaHref)}
                     className="inline-flex items-center justify-center gap-2"
                     style={
                       featured
@@ -842,6 +850,7 @@ export default function IndustryLanding({ industry: i }: Props) {
           </p>
           <Link
             href={i.finalCtaHref}
+            {...ext(i.finalCtaHref)}
             className="inline-flex items-center gap-2"
             style={ctaPrimary}
           >
@@ -858,7 +867,7 @@ export default function IndustryLanding({ industry: i }: Props) {
               marginTop: 20,
             }}
           >
-            30-minute call · Bali hours: 1-hour reply · otherwise within 6 hours
+            WhatsApp or email · Bali hours: 1-hour reply · otherwise within 6 hours
           </p>
         </div>
       </section>

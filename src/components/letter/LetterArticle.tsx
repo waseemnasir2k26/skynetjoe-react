@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Lora, Caveat } from "next/font/google";
 import type { ReactNode } from "react";
+import { WHATSAPP } from "@/lib/site";
 
 // FIX (2026-06-04): the LETTER_CSS string previously opened with a runtime
 // `@import url(fonts.googleapis.com...)` for Lora/Caveat/Inter. That import is
@@ -243,8 +244,8 @@ export default function LetterArticle({
                   <Link href={cta.href} className="btn btn-gold">
                     {cta.label} →
                   </Link>
-                  <Link href="/contact" className="btn btn-paper">
-                    Book a call
+                  <Link href={WHATSAPP.href} target="_blank" rel="noopener noreferrer" className="btn btn-paper">
+                    Message us on WhatsApp
                   </Link>
                 </div>
               </aside>

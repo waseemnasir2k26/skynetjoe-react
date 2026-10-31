@@ -390,14 +390,3 @@ export function buildCalculatorParams(subs: Record<Axis, number>): string {
   params.set("source", "automation-gap");
   return params.toString();
 }
-
-export function buildBookingParams(opts: {
-  score: number;
-  weakestAxis: Axis;
-}): string {
-  // Calendly drops arbitrary query params — only utm_* survive to the booking.
-  const params = new URLSearchParams();
-  params.set("utm_source", "automation-gap");
-  params.set("utm_content", `score-${opts.score}-${opts.weakestAxis}`);
-  return params.toString();
-}

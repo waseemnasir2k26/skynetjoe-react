@@ -1,4 +1,5 @@
 import type { ServiceFunnelContent } from "./types";
+import { WHATSAPP } from "@/lib/site";
 
 /**
  * WordPress SEO Blog — migrated from the bespoke WordpressSeoLP component
@@ -16,7 +17,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Development · WordPress SEO · 2026",
     h1: "Content that AI answers actually cite.",
     sub: "Search now answers the question on the page — and today the credit goes to the business next door. I rebuild the site's structured data, merge the thin pages dragging you down, and write AEO-tuned content built to get cited by Claude, GPT, and Perplexity, not just ranked by Google.",
-    primary: { label: "Book a free 30-min check-up", href: "/contact" },
+    primary: { label: "Chat on WhatsApp", href: WHATSAPP.href },
     secondary: { label: "Run a free AEO audit", href: "/tools/aeo-audit" },
     trust: ["Public pricing", "9 countries", "AEO-tuned", "Ship in 7-14 days"],
   },
@@ -157,8 +158,8 @@ const content: ServiceFunnelContent = {
 
   finalCta: {
     h2: "Stop losing the citation to the business next door.",
-    body: "A free 30-minute check-up. I'll audit the thin pages, the schema, and the AEO gaps, and have a fixed-scope plan back within 48 hours.",
-    ctaLabel: "Book the check-up",
+    body: "Message me on WhatsApp. I'll audit the thin pages, the schema, and the AEO gaps, and have a fixed-scope plan back within 48 hours.",
+    ctaLabel: "Chat on WhatsApp",
   },
 
   freeTools: {

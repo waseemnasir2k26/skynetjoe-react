@@ -459,7 +459,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               </p>
               <p className="text-[var(--ink)] text-base md:text-lg font-semibold">
                 I&apos;ll take this prompt and build the agent around it on a
-                free 30-minute call.
+                a quick WhatsApp chat.
               </p>
             </div>
             <a
@@ -469,7 +469,7 @@ export default function Generator({ calUrl }: { calUrl: string }) {
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] whitespace-nowrap hover:opacity-90 transition"
               style={{ background: "var(--terracotta)" }}
             >
-              Book the call
+              Message us on WhatsApp
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

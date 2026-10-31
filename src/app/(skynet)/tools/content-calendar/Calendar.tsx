@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
-  CalendarCheck,
+  MessageCircle,
   ClipboardList,
   Copy,
   Download,
@@ -936,7 +936,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             Want the calendar to post itself?
           </h3>
           <p className="text-sm text-[var(--ink-2)] leading-relaxed">
-            30-minute call. We wire the calendar into your GHL, Buffer, or n8n
+            Message us on WhatsApp. We wire the calendar into your GHL, Buffer, or n8n
             so posts ship on the day they should. If automation isn&apos;t worth
             it for your stage, we&apos;ll say so.
           </p>
@@ -950,7 +950,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             background: "var(--terracotta)",
           }}
         >
-          <CalendarCheck className="w-4 h-4" /> Book the call{" "}
+          <MessageCircle className="w-4 h-4" /> Message us on WhatsApp{" "}
           <ArrowRight className="w-4 h-4" />
         </a>
       </div>
@@ -1142,7 +1142,7 @@ export default function Calendar({ calUrl }: { calUrl: string }) {
             />
             {feedback.state === "error" && (
               <p role="alert" className="text-sm text-[var(--terracotta-aa)]">
-                Couldn&apos;t send just now — email info@skynetjoe.com instead
+                Couldn&apos;t send just now — email waseem@skynetjoe.com instead
                 and it still lands with me.
               </p>
             )}

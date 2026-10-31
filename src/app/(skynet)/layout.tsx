@@ -124,10 +124,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Calendly preconnect — speeds iframe load on /contact (was /discovery-call).
-            Ported from WP header-enhanced.php (lines 11, dns-prefetch chain). */}
-        <link rel="preconnect" href="https://calendly.com" />
-        <link rel="dns-prefetch" href="https://assets.calendly.com" />
         {/* RSS autodiscovery site-wide. Rendered here (not metadata.alternates.types)
             because a page-level `alternates` replaces the layout's wholesale. */}
         <link

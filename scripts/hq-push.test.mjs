@@ -10,7 +10,6 @@
  */
 import assert from "node:assert/strict";
 import { pathToFileURL } from "node:url";
-import { createHmac } from "node:crypto";
 import { register } from "node:module";
 import path from "node:path";
 
@@ -25,7 +24,6 @@ register(pathToFileURL(path.resolve("scripts/hq-push-test/hooks.mjs")).href);
 process.env.HQ_SUBSCRIBER_URL = "https://hq.test/api/subscribe";
 process.env.HQ_SUBSCRIBER_SECRET = "s3cret";
 process.env.GHL_API_TOKEN = "test-token"; // routes only read presence; ghl is stubbed
-delete process.env.CALENDLY_WEBHOOK_SECRET;
 globalThis.__stub = { ghlConfirm: true };
 
 let hqCalls = [];
@@ -56,7 +54,6 @@ const load = (rel) => import(pathToFileURL(path.resolve("src/app/(skynet)/api", 
 const leadCapture = await load("lead-capture/route.ts");
 const leads = await load("leads/route.ts");
 const discovery = await load("discovery/route.ts");
-const calendly = await load("webhooks/calendly/route.ts");
 const feedback = await load("tool-feedback/route.ts");
 
 let ip = 10;
@@ -383,37 +380,6 @@ await t("discovery: alert failed + sink unwritable -> honest 502; sink written -
   assert.equal(r2.status, 200);
   assert.equal((await r2.json()).alert, false);
   globalThis.__stub.pingFails = false;
-});
-
-// ---- /api/webhooks/calendly
-const created = {
-  event: "invitee.created",
-  payload: { invitee: { name: "Cal Endly", first_name: "Cal", email: "cal@b.co" } },
-};
-await t("calendly: invitee.created pushes lead-only record", async () => {
-  const res = await calendly.POST(post("https://x.test/a", created));
-  assert.equal(res.status, 200);
-  assert.deepEqual(hqCalls[0], { email: "cal@b.co", site: "skynetjoe", source: "calendly-booking", first_name: "Cal", consent: false });
-});
-await t("calendly: canceled / bad signature push nothing; good signature pushes", async () => {
-  await calendly.POST(post("https://x.test/a", { ...created, event: "invitee.canceled" }));
-  assert.equal(hqCalls.length, 0);
-  process.env.CALENDLY_WEBHOOK_SECRET = "whsec";
-  const raw = JSON.stringify(created);
-  const bad = await calendly.POST(post("https://x.test/a", null, { "calendly-webhook-signature": "t=1,v1=00" }, raw));
-  assert.equal(bad.status, 401);
-  assert.equal(hqCalls.length, 0);
-  const tsec = Math.floor(Date.now() / 1000);
-  const sig = createHmac("sha256", "whsec").update(`${tsec}.${raw}`).digest("hex");
-  const ok = await calendly.POST(post("https://x.test/a", null, { "calendly-webhook-signature": `t=${tsec},v1=${sig}` }, raw));
-  delete process.env.CALENDLY_WEBHOOK_SECRET;
-  assert.equal(ok.status, 200);
-  assert.equal(hqCalls.length, 1);
-});
-await t("calendly: HQ throw never changes the response", async () => {
-  hqMode = "throw";
-  const res = await calendly.POST(post("https://x.test/a", created));
-  assert.equal(res.status, 200);
 });
 
 // ---- /api/tool-feedback

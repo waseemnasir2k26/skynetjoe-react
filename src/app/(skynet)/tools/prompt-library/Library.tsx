@@ -18,6 +18,7 @@ import {
   type Prompt,
   type PromptCategory,
 } from "@/data/prompts-library";
+import { waLink } from "@/lib/site";
 
 
 /** Clipboard write with a legacy fallback (older mobile browsers / non-secure contexts). */
@@ -330,18 +331,18 @@ export default function Library() {
             <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[var(--terracotta)]/15 text-xs font-bold text-[var(--terracotta-aa)]">
               3
             </span>
-            When it&apos;s earning its keep, book a call and we&apos;ll wire it
+            When it&apos;s earning its keep, message us and we&apos;ll wire it
             into the rest of your stack.
           </li>
         </ul>
         <a
-          href="https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=prompt-library-closing"
+          href={waLink("Hi Waseem, I have been using the prompt library on skynetjoe.com and would like help wiring prompts into my stack.")}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
           style={{ background: "var(--terracotta)" }}
         >
-          Book the call →
+          Message us on WhatsApp →
         </a>
       </div>
 
@@ -359,7 +360,7 @@ export default function Library() {
           credit.
         </p>
         <a
-          href="mailto:info@skynetjoe.com?subject=Prompt%20Library%20submission&body=Category%3A%20%0AUse-case%3A%20%0APrompt%20body%3A%20%0AResult%20it%20produced%3A%20"
+          href="mailto:waseem@skynetjoe.com?subject=Prompt%20Library%20submission&body=Category%3A%20%0AUse-case%3A%20%0APrompt%20body%3A%20%0AResult%20it%20produced%3A%20"
           className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
           style={{ background: "var(--terracotta)" }}
         >
@@ -541,7 +542,7 @@ function MonthlyPromptsCapture() {
       setDone(true);
     } else {
       setError(
-        "Couldn't reach the signup service — email info@skynetjoe.com and I'll add you by hand.",
+        "Couldn't reach the signup service — email waseem@skynetjoe.com and I'll add you by hand.",
       );
     }
   }
@@ -561,7 +562,7 @@ function MonthlyPromptsCapture() {
             {joined === "confirmed"
               ? "You're in. If you're new to the list, a welcome email is on its way."
               : joined === "pending"
-                ? "Saved. If no welcome email arrives within a day, email info@skynetjoe.com and I'll add you by hand."
+                ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
                 : "Saved. Tick the box next time if you want the email list."}
           </span>
         </div>

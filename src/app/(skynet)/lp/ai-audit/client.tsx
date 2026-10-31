@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { InlineWidget, useCalendlyEventListener } from "react-calendly";
+import ContactDirect from "@/components/cta/ContactDirect";
+import { WHATSAPP } from "@/lib/site";
 import {
-  Loader2,
-  CalendarClock,
   PhoneMissed,
   Inbox,
   MessageSquare,
@@ -22,9 +20,6 @@ const C = {
   terra: "#C66B3F",
   rule: "rgba(26,26,26,0.12)",
 };
-
-const CALENDLY_URL =
-  "https://calendly.com/skynetlabs/schedule-a-free-consultation";
 
 const BOOK_ID = "book";
 
@@ -53,197 +48,59 @@ function utmContent() {
   );
 }
 
-// /api/leads requires an email; Calendly's scheduled event exposes only URIs.
-// So the email is captured in a gate step BEFORE the calendar (same pattern as
-// /discovery-call's qualifier): the lead posts to GHL immediately, and the
-// calendar opens prefilled. The booking POST then updates the same leadId.
+// /api/leads requires an email, so the email is captured in a gate step first
+// (same pattern as /discovery-call's qualifier): the lead posts to GHL
+// immediately, then we hand the visitor to WhatsApp / email with their name
+// prefilled. (Calendly booking removed 2026-10-31.)
 function BookingEmbed({
   lead,
 }: {
   lead: { name: string; email: string; leadId: string };
 }) {
-  const router = useRouter();
-  const [scheduled, setScheduled] = useState(false);
-
-  useCalendlyEventListener({
-    onEventScheduled: async (e) => {
-      if (scheduled) return;
-      setScheduled(true);
-      const eventId = newEventId();
-      fireFbq("Schedule", eventId);
-      try {
-        const res = await fetch("/api/leads", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            leadId: lead.leadId,
-            source: "lp-ai-audit",
-            email: lead.email,
-            eventId,
-            booking: {
-              event: e.data.payload?.event?.uri,
-              invitee: e.data.payload?.invitee?.uri,
-              inviteeEmail: lead.email,
-              inviteeName: lead.name,
-              scheduledAt: new Date().toISOString(),
-            },
-            utm: {
-              source: "meta",
-              medium: "paid-social",
-              campaign: "ai-audit-2026",
-              content: utmContent(),
-            },
-            submittedAt: new Date().toISOString(),
-          }),
-        });
-        if (!res.ok) {
-          console.error("[lp-ai-audit] booking POST rejected", {
-            status: res.status,
-          });
-        }
-      } catch (err) {
-        console.error("[lp-ai-audit] booking POST failed", err);
-      }
-      window.setTimeout(() => {
-        router.push("/thank-you?ref=ai-audit");
-      }, 1200);
-    },
-  });
-
+  const firstName = lead.name.split(/\s+/)[0];
   return (
     <div
       style={{
         background: C.cream3,
         border: `1px solid ${C.ink}`,
-        padding: 6,
-        position: "relative",
-        overflow: "hidden",
+        padding: "34px 28px",
+        maxWidth: 520,
+        margin: "0 auto",
+        textAlign: "center",
         boxShadow: "0 18px 48px rgba(26,26,26,0.10)",
       }}
     >
-      <div
+      <p
         style={{
-          overflow: "hidden",
-          position: "relative",
-          background: "#fff",
-          minHeight: 720,
+          fontFamily: "var(--font-display)",
+          fontSize: 22,
+          fontWeight: 600,
+          color: C.ink,
+          margin: "0 0 8px",
+          letterSpacing: "-0.01em",
         }}
       >
-        <InlineWidget
-          url={CALENDLY_URL}
-          prefill={{ name: lead.name, email: lead.email }}
-          utm={{
-            utmSource: "meta",
-            utmMedium: "paid-social",
-            utmCampaign: "ai-audit-2026",
-          }}
-          styles={{ height: "720px", minWidth: "320px" }}
-          pageSettings={{
-            backgroundColor: "FAF7F0",
-            primaryColor: "C66B3F",
-            textColor: "1A1A1A",
-            hideEventTypeDetails: false,
-            hideGdprBanner: true,
-            hideLandingPageDetails: false,
-          }}
-          iframeTitle="SkynetLabs · Free 20-minute AI systems audit"
-          LoadingSpinner={() => (
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                background: C.cream3,
-              }}
-            >
-              <Loader2
-                style={{
-                  width: 36,
-                  height: 36,
-                  color: C.terra,
-                  marginBottom: 12,
-                }}
-                className="animate-spin"
-              />
-              <p
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  color: C.ink,
-                  margin: 0,
-                }}
-              >
-                Loading calendar…
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 10,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: C.inkFaint,
-                  marginTop: 6,
-                }}
-              >
-                — times auto-convert to your timezone
-              </p>
-            </div>
-          )}
-        />
-      </div>
-
-      {scheduled && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "rgba(250, 247, 240, 0.94)",
-            zIndex: 10,
-          }}
-        >
-          <div style={{ textAlign: "center", padding: "0 24px" }}>
-            <CalendarClock
-              style={{
-                width: 48,
-                height: 48,
-                color: C.terra,
-                margin: "0 auto 16px",
-              }}
-            />
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: 22,
-                fontWeight: 600,
-                color: C.ink,
-                marginBottom: 6,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Slot locked. Redirecting…
-            </p>
-            <p
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                textTransform: "uppercase",
-                letterSpacing: "0.16em",
-                color: C.inkFaint,
-                margin: 0,
-              }}
-            >
-              — Check your email for the confirmation
-            </p>
-          </div>
-        </div>
-      )}
+        Got it, {firstName}. Message us to pick the next step.
+      </p>
+      <p
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: 11,
+          textTransform: "uppercase",
+          letterSpacing: "0.16em",
+          color: C.inkFaint,
+          margin: "0 0 22px",
+        }}
+      >
+        — WhatsApp {WHATSAPP.display}
+      </p>
+      <ContactDirect
+        variant="stack"
+        label="Chat on WhatsApp"
+        text={`Hi Waseem, it's ${lead.name}. I just requested the free AI systems audit on skynetjoe.com (${lead.email}).`}
+        emailSubject="Free AI systems audit"
+        metaName="ai-audit-whatsapp"
+      />
     </div>
   );
 }
@@ -325,8 +182,8 @@ function BookingSection() {
     } catch (e) {
       console.error("[lp-ai-audit] lead POST failed", e);
     }
-    // Calendar opens regardless — the booking itself must never be blocked
-    // by a CRM hiccup; Calendly's own confirmation is the safety net.
+    // WhatsApp / email hand-off shows regardless — contact must never be
+    // blocked by a CRM hiccup.
     setLead({ name: n, email: em, leadId });
     setBusy(false);
   }
@@ -356,8 +213,8 @@ function BookingSection() {
         First, where should the audit summary go?
       </p>
       <p style={{ fontSize: 14, color: C.ink2, margin: "0 0 18px" }}>
-        You&apos;ll get the calendar right after — and the written findings land
-        in this inbox after the call.
+        You&apos;ll get a WhatsApp and email link right after — and the written
+        findings land in this inbox after the call.
       </p>
       <input
         type="text"
@@ -424,7 +281,7 @@ function BookingSection() {
             opacity: busy ? 0.7 : 1,
           }}
         >
-          {busy ? "One second…" : "Show me the calendar"}
+          {busy ? "One second…" : "Continue to WhatsApp / email"}
         </button>
       </div>
     </form>
@@ -706,7 +563,7 @@ export default function AiAuditClient() {
           ))}
         </div>
         <div style={{ textAlign: "center", marginTop: 30 }}>
-          <BookButton label="Pick a slot — it takes a minute" />
+          <BookButton label="Message us — it takes a minute" />
         </div>
       </section>
 

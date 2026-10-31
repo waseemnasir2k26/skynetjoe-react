@@ -14,6 +14,8 @@
  *   - No WhatsApp anywhere.
  */
 
+import { WHATSAPP } from "../lib/site";
+
 export type IndustryPainPoint = {
   title: string;
   body: string;
@@ -95,8 +97,8 @@ export const INDUSTRIES: Industry[] = [
     heroSubhead:
       "An AI receptionist trained on your practice, your insurance list, and your hygiene cadence. It books, confirms, and recalls patients while your team treats the ones already in the chair.",
     heroCtaPrimary: {
-      label: "Book a dental-specific audit",
-      href: "/contact",
+      label: "Message us for a dental-specific audit",
+      href: WHATSAPP.href,
     },
     heroCtaSecondary: {
       label: "See case studies",
@@ -181,7 +183,7 @@ export const INDUSTRIES: Industry[] = [
           "5-day ship, 30-day post-launch tuning",
         ],
         ctaLabel: "Start with missed-call rescue",
-        ctaHref: "/contact",
+        ctaHref: WHATSAPP.href,
       },
       {
         tierName: "Dental Pro",
@@ -195,8 +197,8 @@ export const INDUSTRIES: Industry[] = [
           "Insurance plan verification flow",
           "10-day ship, 60-day tuning, monthly report",
         ],
-        ctaLabel: "Book Dental Pro audit",
-        ctaHref: "/contact",
+        ctaLabel: "Message us: Dental Pro audit",
+        ctaHref: WHATSAPP.href,
         featured: true,
       },
       {
@@ -212,7 +214,7 @@ export const INDUSTRIES: Industry[] = [
           "Priority response: 1 business hour",
         ],
         ctaLabel: "Talk DSO scope",
-        ctaHref: "/contact",
+        ctaHref: WHATSAPP.href,
       },
     ],
     faqs: [
@@ -243,9 +245,9 @@ export const INDUSTRIES: Industry[] = [
     ],
     finalCtaHeadline: "Stop losing new patients to the lunch-hour rush.",
     finalCtaSubhead:
-      "Book a dental-specific audit. We pull your last 30 days of missed-call data, model the recovered revenue, and tell you honestly whether this pays for itself inside 90 days.",
-    finalCtaButtonLabel: "Book the dental audit",
-    finalCtaHref: "/contact",
+      "Message us for a dental-specific audit. We pull your last 30 days of missed-call data, model the recovered revenue, and tell you honestly whether this pays for itself inside 90 days.",
+    finalCtaButtonLabel: "Message us on WhatsApp",
+    finalCtaHref: WHATSAPP.href,
     metaTitle: "Dental AI Receptionist — Dentrix & Open Dental | SkynetLabs",
     metaDescription:
       "AI receptionist for dental clinics. Recovers missed calls, fills hygiene cancels, works recall lists. Integrates with Dentrix, Open Dental, Eaglesoft. 5-14 day ship.",
@@ -270,8 +272,8 @@ export const INDUSTRIES: Industry[] = [
     heroSubhead:
       "A concierge AI that lives in MindBody, Vagaro or Boulevard, answers Instagram DMs in your spa's tone, confirms in three taps, and recovers no-shows the same hour they happen.",
     heroCtaPrimary: {
-      label: "Book a spa-specific audit",
-      href: "/contact",
+      label: "Message us for a spa-specific audit",
+      href: WHATSAPP.href,
     },
     heroCtaSecondary: {
       label: "See wellness case study",
@@ -366,7 +368,7 @@ export const INDUSTRIES: Industry[] = [
           "5-day ship, 30-day post-launch tuning",
         ],
         ctaLabel: "Start with DM-to-book",
-        ctaHref: "/contact",
+        ctaHref: WHATSAPP.href,
       },
       {
         tierName: "Spa Pro",
@@ -380,8 +382,8 @@ export const INDUSTRIES: Industry[] = [
           "Review & reputation engine",
           "10-day ship, 60-day tuning, monthly report",
         ],
-        ctaLabel: "Book Spa Pro audit",
-        ctaHref: "/contact",
+        ctaLabel: "Message us: Spa Pro audit",
+        ctaHref: WHATSAPP.href,
         featured: true,
       },
       {
@@ -398,7 +400,7 @@ export const INDUSTRIES: Industry[] = [
           "Priority response: 1 business hour",
         ],
         ctaLabel: "Talk multi-location scope",
-        ctaHref: "/contact",
+        ctaHref: WHATSAPP.href,
       },
     ],
     faqs: [
@@ -430,9 +432,9 @@ export const INDUSTRIES: Industry[] = [
     finalCtaHeadline:
       "Reclaim the hours you are losing to no-shows and ghosted DMs.",
     finalCtaSubhead:
-      "Book a spa-specific audit. We pull a week of your IG DMs, your no-show rate from MindBody or Vagaro, and tell you honestly what the Concierge AI is worth to your spa in month one.",
-    finalCtaButtonLabel: "Book the spa audit",
-    finalCtaHref: "/contact",
+      "Message us for a spa-specific audit. We pull a week of your IG DMs, your no-show rate from MindBody or Vagaro, and tell you honestly what the Concierge AI is worth to your spa in month one.",
+    finalCtaButtonLabel: "Message us on WhatsApp",
+    finalCtaHref: WHATSAPP.href,
     metaTitle: "Wellness Spa Concierge AI — MindBody & Vagaro",
     metaDescription:
       "Concierge AI for wellness spas & medspas. DM-to-book in 90 sec, refills no-shows, runs reactivation. Integrates with MindBody, Vagaro, Boulevard. 5-14 day ship.",
@@ -458,8 +460,8 @@ export const INDUSTRIES: Industry[] = [
     heroSubhead:
       "A dispatch agent that triages broker calls, parses rate sheets, quotes back inside 30 seconds, and logs everything to McLeod, AscendTMS or Truckstop while your dispatchers sleep.",
     heroCtaPrimary: {
-      label: "Book a freight-specific audit",
-      href: "/contact",
+      label: "Message us for a freight-specific audit",
+      href: WHATSAPP.href,
     },
     heroCtaSecondary: {
       label: "See freight case study",
@@ -554,7 +556,7 @@ export const INDUSTRIES: Industry[] = [
           "7-day ship, 30-day post-launch tuning",
         ],
         ctaLabel: "Start with voice dispatch",
-        ctaHref: "/contact",
+        ctaHref: WHATSAPP.href,
       },
       {
         tierName: "Freight Pro",
@@ -569,8 +571,8 @@ export const INDUSTRIES: Industry[] = [
           "FreightWaves SONAR or DAT RateView integration (if subscribed)",
           "14-day ship, 60-day tuning, monthly report",
         ],
-        ctaLabel: "Book Freight Pro audit",
-        ctaHref: "/contact",
+        ctaLabel: "Message us: Freight Pro audit",
+        ctaHref: WHATSAPP.href,
         featured: true,
       },
       {
@@ -586,7 +588,7 @@ export const INDUSTRIES: Industry[] = [
           "Priority response: 1 business hour",
         ],
         ctaLabel: "Talk multi-terminal scope",
-        ctaHref: "/contact",
+        ctaHref: WHATSAPP.href,
       },
     ],
     faqs: [
@@ -617,9 +619,9 @@ export const INDUSTRIES: Industry[] = [
     ],
     finalCtaHeadline: "Stop losing loads to dispatch lag.",
     finalCtaSubhead:
-      "Book a freight-specific audit. We pull a week of your dispatch logs, model the off-hours capture rate and the margin lift from lane intelligence, and tell you honestly whether this earns out inside 60 days.",
-    finalCtaButtonLabel: "Book the freight audit",
-    finalCtaHref: "/contact",
+      "Message us for a freight-specific audit. We pull a week of your dispatch logs, model the off-hours capture rate and the margin lift from lane intelligence, and tell you honestly whether this earns out inside 60 days.",
+    finalCtaButtonLabel: "Message us on WhatsApp",
+    finalCtaHref: WHATSAPP.href,
     metaTitle: "Freight Dispatch Agent — McLeod & AscendTMS",
     metaDescription:
       "AI dispatch agent for freight carriers. Calls answered in seconds, rate-sheet OCR, lane intelligence. Integrates with McLeod, AscendTMS, Truckstop, Samsara.",

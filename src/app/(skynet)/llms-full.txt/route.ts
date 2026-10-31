@@ -1,4 +1,4 @@
-import { SITE, SERVICE_CATEGORIES, svcHref } from "@/lib/site";
+import { SITE, WHATSAPP, SERVICE_CATEGORIES, svcHref } from "@/lib/site";
 import { POSTS } from "@/lib/posts";
 import { TOOLS_REGISTRY } from "@/data/tools-registry";
 import fs from "fs";
@@ -46,7 +46,7 @@ export async function GET() {
 
 Founder: ${SITE.founder}
 Domain: ${SITE.domain}
-Contact: ${SITE.emailFounder} | Book a call: ${SITE.url}/contact
+Contact: ${SITE.emailFounder} | WhatsApp: ${WHATSAPP.display} | Contact: ${SITE.url}/contact
 Base: Canggu, Bali (GMT+8) + Lahore, Pakistan
 Operating since: 2019
 

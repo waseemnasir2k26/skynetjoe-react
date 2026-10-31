@@ -4,7 +4,8 @@ import AiAuditClient from "./client";
 
 // Meta-ads companion page for the free AI Systems Audit call funnel
 // (ADSET-AUDIT-CALL-2026-08-22). Conversion location for the campaign:
-// booking a slot on the embedded Calendly is the conversion event.
+// the lead gate + WhatsApp/email hand-off is the conversion event
+// (Calendly removed 2026-10-31).
 // Claims discipline (CLAIMS-WHITELIST.md rules apply): no statistics,
 // no client names/counts, no testimonials, no guarantees, no asserted
 // reply-time numbers. The audit is genuinely free and the findings are

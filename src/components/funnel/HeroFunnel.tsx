@@ -6,6 +6,7 @@ import { ArrowRight, Star, Zap, Repeat, ListChecks } from "lucide-react";
 import NodeGraphHero from "@/components/home/NodeGraphHero";
 import MagneticButton from "@/components/home/MagneticButton";
 import ScrambleText from "@/components/home/ScrambleText";
+import { WHATSAPP } from "@/lib/site";
 
 /**
  * Cream editorial hero (2026-06-01 readability + plain-language overhaul).
@@ -186,7 +187,9 @@ export default function HeroFunnel() {
           >
             <MagneticButton>
               <Link
-                href="/contact"
+                href={WHATSAPP.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   background: "var(--terracotta)",
                   color: "var(--cream-3)",
@@ -203,7 +206,7 @@ export default function HeroFunnel() {
                   minHeight: 48,
                 }}
               >
-                Book a free 30-min check-up
+                Chat on WhatsApp
                 <ArrowRight style={{ width: 16, height: 16 }} />
               </Link>
             </MagneticButton>

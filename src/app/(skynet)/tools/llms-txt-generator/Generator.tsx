@@ -8,7 +8,7 @@ import {
   Plus,
   Trash2,
   FileCode2,
-  CalendarCheck,
+  MessageCircle,
   ArrowRight,
 } from "lucide-react";
 import {
@@ -22,7 +22,7 @@ import {
 } from "@/data/tools/llms-txt-generator";
 import EmailGate from "@/components/cta/EmailGate";
 import ToolUsage from "@/components/tools/ToolUsage";
-import { CAL_URL } from "@/lib/site";
+import { waLink } from "@/lib/site";
 
 const STORAGE_KEY = "skynet:llms-txt:v1";
 
@@ -488,19 +488,19 @@ export default function Generator() {
             Want the whole AEO stack done for you?
           </p>
           <h3 className="text-xl md:text-2xl font-extrabold text-[var(--ink)] mb-2">
-            Book a 30-min call — schema, llms.txt, and content structure, scoped
+            Message us on WhatsApp — schema, llms.txt, and content structure, scoped
             for your site.
           </h3>
         </div>
         <a
-          href={`${CAL_URL}?utm_source=llms-txt-generator`}
+          href={waLink("Hi Waseem, I used the llms.txt generator on skynetjoe.com and would like help with schema, llms.txt and content structure.")}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-[var(--cream-3)] whitespace-nowrap hover:opacity-90 transition"
           style={{ background: "var(--terracotta)" }}
         >
-          <CalendarCheck className="w-4 h-4" />
-          Book the call
+          <MessageCircle className="w-4 h-4" />
+          Message us on WhatsApp
           <ArrowRight className="w-4 h-4" />
         </a>
       </div>

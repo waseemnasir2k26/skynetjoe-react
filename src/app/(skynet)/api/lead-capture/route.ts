@@ -329,7 +329,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         error:
-          "Couldn't confirm delivery. Please email info@skynetjoe.com directly so nothing gets lost.",
+          "Couldn't confirm delivery. Please email waseem@skynetjoe.com directly so nothing gets lost.",
       },
       { status: 502 },
     );

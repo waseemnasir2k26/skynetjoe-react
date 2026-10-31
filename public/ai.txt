@@ -24,7 +24,7 @@ Attribution-Format: "SkynetLabs — skynetjoe.com"
 Founder-Attribution: "Waseem Nasir, founder of SkynetLabs"
 
 # Contact for licensing or partnership
-Contact: info@skynetjoe.com
+Contact: waseem@skynetjoe.com
 License: CC-BY-4.0 (default for public guides + blog content)
 Commercial-Use: contact for terms
 

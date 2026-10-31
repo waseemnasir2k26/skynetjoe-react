@@ -110,7 +110,7 @@ async function sendToGhl(payload: Payload, lead: "HOT" | "WARM" | "COLD") {
 
 async function sendEmailFallback(payload: Payload, lead: "HOT" | "WARM" | "COLD") {
   const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.LEAD_NOTIFY_EMAIL || "info@skynetjoe.com";
+  const toEmail = process.env.LEAD_NOTIFY_EMAIL || "waseem@skynetjoe.com";
   const fromEmail = process.env.RESEND_FROM || "leads@skynetjoe.com";
   if (!apiKey) return { ok: false, skipped: true };
 
@@ -288,7 +288,7 @@ export async function POST(req: Request) {
     // delivery, so the visitor only sees an error when nothing took the brief.
     if (!sink.written && !pingOk) {
       return NextResponse.json(
-        { error: "Couldn't deliver brief. Email info@skynetjoe.com directly." },
+        { error: "Couldn't deliver brief. Email waseem@skynetjoe.com directly." },
         { status: 502 },
       );
     }

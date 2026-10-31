@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
-import { SITE, pageTitle, pageDescription } from "@/lib/site";
+import { SITE, WHATSAPP, pageTitle, pageDescription } from "@/lib/site";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
 
 // Canonical/OG host resolves via SITE.url (env-overridable, defaults to the
@@ -537,8 +537,8 @@ export default function LogisticsLP() {
           <Link href="/lp/logistics" className="brand">
             <span className="brand-dot"></span>SkynetLabs <em>FreightOps</em>
           </Link>
-          <a href="/contact" className="nav-cta">
-            Book audit →
+          <a href={WHATSAPP.href} target="_blank" rel="noopener noreferrer" className="nav-cta">
+            Message us on WhatsApp →
           </a>
         </div>
       </header>
@@ -565,12 +565,12 @@ export default function LogisticsLP() {
               </p>
               <div className="cta-row">
                 <a
-                  href="/contact"
+                  href={WHATSAPP.href} target="_blank" rel="noopener noreferrer"
                   className="btn-primary"
-                  data-meta-event="Schedule"
+                  data-meta-event="Contact"
                   data-meta-name="hero-book-audit"
                 >
-                  Book a 15-min discovery call →
+                  Message us on WhatsApp →
                 </a>
                 <a href="#pricing" className="btn-line">
                   See public pricing
@@ -1454,12 +1454,12 @@ export default function LogisticsLP() {
               Yes, no, or referral — you walk with the findings.
             </p>
             <a
-              href="/contact"
+              href={WHATSAPP.href} target="_blank" rel="noopener noreferrer"
               className="btn-primary"
-              data-meta-event="Schedule"
+              data-meta-event="Contact"
               data-meta-name="mid-cta-2am"
             >
-              Book the audit — free →
+              Message us on WhatsApp — free audit →
             </a>
           </div>
         </section>
@@ -1679,7 +1679,7 @@ export default function LogisticsLP() {
                   </h3>
                   <p className="risk-p">
                     Public pricing, sourced-controlled, fixed ship windows. The
-                    audit is free. You only commit after the 15-minute call.
+                    audit is free. You only commit after we have talked.
                   </p>
                 </div>
                 <ul className="risk-list">
@@ -1785,13 +1785,13 @@ export default function LogisticsLP() {
                   <li>Two revision rounds</li>
                 </ul>
                 <a
-                  href="/contact"
+                  href={WHATSAPP.href} target="_blank" rel="noopener noreferrer"
                   className="price-cta"
                   data-meta-event="InitiateCheckout"
                   data-meta-name="Starter"
                   data-meta-value="1497"
                 >
-                  Book discovery →
+                  Message us on WhatsApp →
                 </a>
               </div>
               <div className="price-cell">
@@ -1807,13 +1807,13 @@ export default function LogisticsLP() {
                   <li>Monthly opt call</li>
                 </ul>
                 <a
-                  href="/contact"
+                  href={WHATSAPP.href} target="_blank" rel="noopener noreferrer"
                   className="price-cta"
                   data-meta-event="InitiateCheckout"
                   data-meta-name="Pro"
                   data-meta-value="3997"
                 >
-                  Book discovery →
+                  Message us on WhatsApp →
                 </a>
               </div>
               <div className="price-cell featured">
@@ -1830,13 +1830,13 @@ export default function LogisticsLP() {
                   <li>Weekly review call</li>
                 </ul>
                 <a
-                  href="/contact"
+                  href={WHATSAPP.href} target="_blank" rel="noopener noreferrer"
                   className="price-cta"
                   data-meta-event="InitiateCheckout"
                   data-meta-name="Premium"
                   data-meta-value="7997"
                 >
-                  Book Premium →
+                  Message us on WhatsApp →
                 </a>
               </div>
               <div className="price-cell">
@@ -1852,7 +1852,7 @@ export default function LogisticsLP() {
                   <li>Inbound load auto-book</li>
                 </ul>
                 <a
-                  href="/contact"
+                  href={WHATSAPP.href} target="_blank" rel="noopener noreferrer"
                   className="price-cta"
                   data-meta-event="InitiateCheckout"
                   data-meta-name="Flagship"
@@ -2024,12 +2024,12 @@ export default function LogisticsLP() {
           </p>
           <div className="cta-row">
             <a
-              href="/contact"
+              href={WHATSAPP.href} target="_blank" rel="noopener noreferrer"
               className="btn-primary"
-              data-meta-event="Schedule"
+              data-meta-event="Contact"
               data-meta-name="closer-book-audit"
             >
-              Book the discovery call →
+              Message us on WhatsApp →
             </a>
             <a href="#pricing" className="btn-line">
               Review pricing
@@ -2063,8 +2063,8 @@ export default function LogisticsLP() {
               </div>
               <div>
                 <h5>Reach</h5>
-                <Link href="/contact">Book discovery</Link>
-                <a href="mailto:info@skynetjoe.com">Email</a>
+                <a href={WHATSAPP.href} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <a href="mailto:waseem@skynetjoe.com">Email</a>
               </div>
               <div>
                 <h5>Elsewhere</h5>
@@ -2088,13 +2088,13 @@ export default function LogisticsLP() {
 
         {/* MOBILE STICKY CTA */}
         <a
-          href="/contact"
+          href={WHATSAPP.href} target="_blank" rel="noopener noreferrer"
           className="mobile-cta"
-          data-meta-event="Schedule"
+          data-meta-event="Contact"
           data-meta-name="mobile-sticky"
         >
           <span>
-            <strong>Limited build slots</strong> · Book audit
+            <strong>Limited build slots</strong> · Message us on WhatsApp
           </span>
         </a>
       </main>

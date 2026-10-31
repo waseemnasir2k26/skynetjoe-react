@@ -549,7 +549,7 @@ export default function PricingPage() {
               lineHeight: 1.55,
             }}
           >
-            No quote form. No 30-min discovery dance. Just a written reply with
+            No quote form. No discovery dance. Just a written reply with
             scope, price and ship window.
           </p>
           <div className="flex flex-wrap justify-center gap-3">

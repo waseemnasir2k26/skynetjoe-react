@@ -1,4 +1,5 @@
 import type { ServiceFunnelContent } from "./types";
+import { WHATSAPP } from "@/lib/site";
 
 /**
  * AI Chatbots — migrated from the bespoke AiChatbotsLP component
@@ -16,7 +17,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Development · AI Chatbots · 2026",
     h1: "A chat flow that closes leads instead of losing them.",
     sub: "Stop the flow getting stuck on one branch while the customer rage-types out. I build web, WhatsApp, and voice agents trained on your actual knowledge base, wired straight into your CRM with source and campaign data intact — so sales stops blaming marketing every Monday.",
-    primary: { label: "Book a free 30-min check-up", href: "/contact" },
+    primary: { label: "Chat on WhatsApp", href: WHATSAPP.href },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
       "8h weekday reply guarantee",
@@ -162,8 +163,8 @@ const content: ServiceFunnelContent = {
 
   finalCta: {
     h2: "Stop losing leads to a flow that gets stuck.",
-    body: "A free 30-minute check-up. I'll review your current flow, name where it's losing people, and have a fixed-scope build plan back within 48 hours.",
-    ctaLabel: "Book the check-up",
+    body: "Message me on WhatsApp. I'll review your current flow, name where it's losing people, and have a fixed-scope build plan back within 48 hours.",
+    ctaLabel: "Chat on WhatsApp",
   },
 
   freeTools: {

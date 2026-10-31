@@ -14,7 +14,7 @@ const html = fs.readFileSync(
 export const metadata: Metadata = {
   title: pageTitle("Privacy Policy"),
   description:
-    pageDescription("How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement. Last updated 2026-10-20."),
+    pageDescription("How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement. Last updated 2026-10-31."),
   alternates: { canonical: `${SITE.url}/privacy-policy` },
   openGraph: {
     title: "SkynetLabs Privacy Policy",
@@ -34,7 +34,7 @@ const schema = {
     "How SkynetLabs collects, stores, and shares data. Plain-language policy for skynetjoe.com and any consulting engagement.",
   url: `${SITE.url}/privacy-policy`,
   inLanguage: "en",
-  dateModified: "2026-10-20",
+  dateModified: "2026-10-31",
   image: `${SITE.url}/og-default.png`,
   author: personRef,
   publisher: organizationRef,

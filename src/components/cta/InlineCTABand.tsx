@@ -15,6 +15,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { WHATSAPP } from "@/lib/site";
 
 export type InlineCTAVariant = "default" | "dense" | "loss-frame";
 
@@ -80,7 +81,7 @@ const VARIANT_STYLES: Record<InlineCTAVariant, VariantStyle> = {
 export default function InlineCTABand({
   headline,
   subhead,
-  primaryCTA = { label: "Book a 30-min strategy call", href: "/contact" },
+  primaryCTA = { label: "Chat on WhatsApp", href: WHATSAPP.href },
   secondaryCTA = { label: "See case studies", href: "/case-studies" },
   variant = "default",
   id,
@@ -92,7 +93,7 @@ export default function InlineCTABand({
     <section
       id={id}
       className={isDense ? "px-4 md:px-6 my-10" : "px-4 md:px-6 my-14 md:my-20"}
-      aria-label="Strategy call invitation"
+      aria-label="Contact invitation"
       style={{ fontFamily: "var(--font-sans)" }}
     >
       <div
@@ -137,6 +138,7 @@ export default function InlineCTABand({
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <Link
               href={primaryCTA.href}
+              {...(primaryCTA.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="inline-flex items-center justify-center gap-2"
               style={{
                 background: v.primaryBg,

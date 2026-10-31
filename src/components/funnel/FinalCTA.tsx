@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import MagneticButton from "@/components/home/MagneticButton";
+import { WHATSAPP } from "@/lib/site";
 
 export default function FinalCTA() {
   return (
@@ -68,12 +69,14 @@ export default function FinalCTA() {
               lineHeight: 1.6,
             }}
           >
-            A free 30-min check-up. We share screens, spot the one fix that pays
-            off fastest, and send you a short build plan. No pitch deck.
+            Message us on WhatsApp. We spot the one fix that pays off fastest
+            and send you a short build plan. No pitch deck.
           </p>
           <MagneticButton>
             <Link
-              href="/contact"
+              href={WHATSAPP.href}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 background: "var(--cream-3)",
                 color: "var(--terracotta-aa)",
@@ -91,7 +94,7 @@ export default function FinalCTA() {
                 minHeight: 48,
               }}
             >
-              Book free 30-min audit
+              Chat on WhatsApp
               <ArrowRight style={{ width: 16, height: 16 }} />
             </Link>
           </MagneticButton>

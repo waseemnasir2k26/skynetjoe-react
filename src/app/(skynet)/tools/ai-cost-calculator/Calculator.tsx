@@ -13,6 +13,7 @@ import {
   type CostInputs,
 } from "@/data/tools/llm-pricing";
 import ToolUsage from "@/components/tools/ToolUsage";
+import { waLink } from "@/lib/site";
 
 const STATE_KEY = "skynet:ai-cost-calculator:v1";
 
@@ -337,10 +338,12 @@ export default function Calculator() {
             Prompt Library →
           </Link>
           <Link
-            href="/contact"
+            href={waLink("Hi Waseem, I used the AI cost calculator on skynetjoe.com and would like to talk about the numbers.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full border border-[var(--terracotta)] bg-[rgba(198,107,63,0.10)] px-4 py-2 text-sm font-semibold text-[var(--terracotta-aa)] transition hover:bg-[rgba(198,107,63,0.18)]"
           >
-            Book a discovery call →
+            Message us on WhatsApp →
           </Link>
         </div>
       </div>

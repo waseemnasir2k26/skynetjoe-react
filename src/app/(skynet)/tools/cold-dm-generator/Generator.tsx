@@ -16,6 +16,7 @@ import {
   type DmTemplate,
 } from "@/data/tools/cold-dm-scripts";
 import EmailGate from "@/components/cta/EmailGate";
+import { waLink } from "@/lib/site";
 
 const STATE_KEY = "skynet:cold-dm-generator:v1";
 const UNLOCK_KEY = "skynet-tool-cold-dm-generator-email";
@@ -402,10 +403,12 @@ export default function Generator() {
             n8n Workflow Generator →
           </Link>
           <Link
-            href="/contact"
+            href={waLink("Hi Waseem, I used the cold DM generator on skynetjoe.com and would like to talk.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full border border-[var(--terracotta)] bg-[rgba(198,107,63,0.10)] px-4 py-2 text-sm font-semibold text-[var(--terracotta-aa)] transition hover:bg-[rgba(198,107,63,0.18)]"
           >
-            Book a discovery call →
+            Message us on WhatsApp →
           </Link>
         </div>
       </div>

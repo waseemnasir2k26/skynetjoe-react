@@ -5,6 +5,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 import Library from "./Library";
 import { PROMPT_COUNT, CATEGORIES } from "@/data/prompts-library";
 import { Sparkles, Search, Copy, Library as LibraryIcon } from "lucide-react";
+import { waLink } from "@/lib/site";
 
 const PATH = "/tools/prompt-library";
 
@@ -274,18 +275,18 @@ export default function PromptLibraryPage() {
               </h2>
               <p className="text-base md:text-lg text-[var(--ink-2)] mb-6 max-w-2xl mx-auto leading-relaxed">
                 Standalone, the prompts work. Wired into your CRM, helpdesk, or
-                n8n flow they earn back their rent every week. Book a strategy
-                call and we&apos;ll map the integration on a whiteboard with
+                n8n flow they earn back their rent every week. Message us on WhatsApp
+                and we&apos;ll map the integration on a whiteboard with
                 you.
               </p>
               <a
-                href="https://calendly.com/skynetlabs/schedule-a-free-consultation?utm_source=prompt-library"
+                href={waLink("Hi Waseem, I looked at the prompt library on skynetjoe.com and would like help wiring it into my CRM/helpdesk/n8n.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-[var(--cream-3)] hover:opacity-90 transition"
                 style={{ background: "var(--terracotta)" }}
               >
-                Book the call →
+                Message us on WhatsApp →
               </a>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import type { ServiceFunnelContent } from "./types";
+import { WHATSAPP } from "@/lib/site";
 
 /**
  * GoHighLevel CRM — migrated from the bespoke GoHighLevelLP component
@@ -17,7 +18,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Automation · GoHighLevel · 2026",
     h1: "Stop losing booked customers. Bring them back.",
     sub: "Fewer missed appointments. Fewer leads slipping past. I set up your booking and follow-up around how your team actually sells, with pipeline stages and reminders mapped to your real sales motion — not a stock template nobody uses.",
-    primary: { label: "Book a free 30-min check-up", href: "/contact" },
+    primary: { label: "Chat on WhatsApp", href: WHATSAPP.href },
     secondary: { label: "See real builds", href: "/case-studies" },
     trust: [
       "Public pricing",
@@ -170,8 +171,8 @@ const content: ServiceFunnelContent = {
 
   finalCta: {
     h2: "Stop losing booked customers to a template that doesn't fit.",
-    body: "A free 30-minute check-up. I'll audit the instance, rank where bookings are leaking, and have a fixed-scope rebuild plan back within 48 hours.",
-    ctaLabel: "Book the check-up",
+    body: "Message me on WhatsApp. I'll audit the instance, rank where bookings are leaking, and have a fixed-scope rebuild plan back within 48 hours.",
+    ctaLabel: "Chat on WhatsApp",
   },
 
   freeTools: {

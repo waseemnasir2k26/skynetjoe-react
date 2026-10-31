@@ -1,4 +1,5 @@
 import { Search, Wrench, Rocket, TrendingUp, ArrowRight, Calendar, Terminal } from "lucide-react";
+import { WHATSAPP } from "@/lib/site";
 
 /**
  * Cream editorial pivot 2026-05-25 — process section.
@@ -363,7 +364,9 @@ export default function Process() {
             </p>
           </div>
           <a
-            href="/contact"
+            href={WHATSAPP.href}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -379,7 +382,7 @@ export default function Process() {
             }}
           >
             <Calendar style={{ width: 14, height: 14 }} />
-            Apply for a discovery call
+            Message us on WhatsApp
           </a>
         </div>
       </div>

@@ -19,6 +19,7 @@ import {
 } from "@/components/illustrations";
 import type { ServiceFunnelContent } from "@/data/service-funnels/types";
 import type { findServicePricing } from "@/lib/service-pricing";
+import { WHATSAPP } from "@/lib/site";
 
 /**
  * ServiceFunnel — reusable, data-driven conversion funnel for the non-top-5
@@ -390,7 +391,7 @@ export default function ServiceFunnel({
                 flexWrap: "wrap",
               }}
             >
-              <Link href={content.hero.primary.href} style={primaryBtn}>
+              <Link href={content.hero.primary.href} {...(content.hero.primary.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} style={primaryBtn}>
                 {content.hero.primary.label}
                 <ArrowRight style={{ width: 16, height: 16 }} />
               </Link>
@@ -606,8 +607,8 @@ export default function ServiceFunnel({
                 flexWrap: "wrap",
               }}
             >
-              <Link href="/contact" style={primaryBtn}>
-                Book a free 30-min check-up
+              <Link href={WHATSAPP.href} target="_blank" rel="noopener noreferrer" style={primaryBtn}>
+                Chat on WhatsApp
                 <ArrowRight style={{ width: 16, height: 16 }} />
               </Link>
               <span
@@ -1414,7 +1415,7 @@ export default function ServiceFunnel({
               Questions
             </div>
             <h2 style={{ ...h2style, marginBottom: 28 }}>
-              Before you <span style={accentText}>book the call.</span>
+              Before you <span style={accentText}>message us.</span>
             </h2>
           </Reveal>
           {content.faqs.map((f) => (
@@ -1573,7 +1574,9 @@ export default function ServiceFunnel({
             {content.finalCta.body}
           </p>
           <Link
-            href="/contact"
+            href={WHATSAPP.href}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               ...primaryBtn,
               padding: "18px 32px",
@@ -1613,7 +1616,9 @@ export default function ServiceFunnel({
         }}
       >
         <Link
-          href="/contact"
+          href={WHATSAPP.href}
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             ...primaryBtn,
             flex: 1,
@@ -1621,7 +1626,7 @@ export default function ServiceFunnel({
             fontWeight: 700,
           }}
         >
-          Book a 30-min call
+          Chat on WhatsApp
           <ArrowRight style={{ width: 16, height: 16 }} />
         </Link>
       </div>

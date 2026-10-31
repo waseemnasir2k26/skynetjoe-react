@@ -88,7 +88,7 @@ export default function ContactBriefForm() {
         } | null;
         return fail(
           body?.error ||
-            "Couldn't send that. Email info@skynetjoe.com directly instead.",
+            "Couldn't send that. Email waseem@skynetjoe.com directly instead.",
         );
       }
       if (newsletterOptIn) {
@@ -97,13 +97,13 @@ export default function ContactBriefForm() {
           j?.newsletter === "confirmed"
             ? "You're in. If you're new to the list, a welcome email is on its way."
             : j?.newsletter === "pending"
-              ? "Saved. If no welcome email arrives within a day, email info@skynetjoe.com and I'll add you by hand."
-              : "Couldn't save your email-list sign-up. Try again, or email info@skynetjoe.com.",
+              ? "Saved. If no welcome email arrives within a day, email waseem@skynetjoe.com and I'll add you by hand."
+              : "Couldn't save your email-list sign-up. Try again, or email waseem@skynetjoe.com.",
         );
       }
       setStatus("success");
     } catch {
-      fail("Network hiccup. Email info@skynetjoe.com directly instead.");
+      fail("Network hiccup. Email waseem@skynetjoe.com directly instead.");
     }
   }
 

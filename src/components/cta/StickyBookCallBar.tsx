@@ -5,7 +5,7 @@
  *
  * Psychology stack unchanged:
  *   - Cialdini scarcity ("3 slots left this week", real number from data/availability)
- *   - Fogg ability (1-click route to /contact, no form first)
+ *   - Fogg ability (1-click route to WhatsApp, no form first)
  *   - Hick's Law (1 destination, no choice paralysis)
  *
  * Behavior unchanged:
@@ -18,10 +18,10 @@
  */
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 import { SLOTS_LEFT_THIS_WEEK } from "@/data/availability";
+import { WHATSAPP } from "@/lib/site";
 
 const STORAGE_KEY = "skynet:sticky-cta:dismissed";
 const DISMISS_TTL_MS = 24 * 60 * 60 * 1000; // 24h
@@ -101,7 +101,7 @@ export default function StickyBookCallBar() {
       {/* DESKTOP: top bar — flat terracotta */}
       <div
         role="region"
-        aria-label="Book a strategy call"
+        aria-label="Message us on WhatsApp"
         className="hidden md:flex fixed top-0 left-0 right-0 z-40 items-center justify-center px-4 py-2.5"
         style={{
           background: "var(--terracotta)",
@@ -128,8 +128,10 @@ export default function StickyBookCallBar() {
             }}
             aria-hidden
           />
-          <Link
-            href="/contact"
+          <a
+            href={WHATSAPP.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex-1 flex items-center gap-2"
             style={{
               fontSize: 13,
@@ -142,13 +144,13 @@ export default function StickyBookCallBar() {
             }}
           >
             <span>
-              Book a 30-min strategy call ·{" "}
+              Message us on WhatsApp ·{" "}
               <span style={{ fontWeight: 700 }}>
                 {SLOTS_LEFT_THIS_WEEK} slots left this week
               </span>
             </span>
             <ArrowRight className="w-3.5 h-3.5" style={{ color: "var(--cream-3)" }} />
-          </Link>
+          </a>
           <button
             type="button"
             onClick={dismiss}
@@ -170,7 +172,7 @@ export default function StickyBookCallBar() {
       {/* MOBILE: bottom pill — cream-3 with terracotta button */}
       <div
         role="region"
-        aria-label="Book a strategy call"
+        aria-label="Message us on WhatsApp"
         className="md:hidden fixed left-3 right-3 z-40 flex items-center gap-2 px-3 py-3"
         style={{
           bottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)",
@@ -199,8 +201,10 @@ export default function StickyBookCallBar() {
           }}
           aria-hidden
         />
-        <Link
-          href="/contact"
+        <a
+          href={WHATSAPP.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex-1 leading-snug"
           style={{
             fontSize: 13,
@@ -209,13 +213,15 @@ export default function StickyBookCallBar() {
             textDecoration: "none",
           }}
         >
-          Book a 30-min call ·{" "}
+          Message us on WhatsApp ·{" "}
           <span style={{ color: "var(--terracotta)", fontWeight: 700 }}>
             {SLOTS_LEFT_THIS_WEEK} slots left
           </span>
-        </Link>
-        <Link
-          href="/contact"
+        </a>
+        <a
+          href={WHATSAPP.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center shrink-0"
           style={{
             background: "var(--terracotta)",
@@ -228,9 +234,9 @@ export default function StickyBookCallBar() {
             minHeight: 40,
           }}
         >
-          Book
+          Chat
           <ArrowRight className="w-3 h-3 ml-1" />
-        </Link>
+        </a>
         <button
           type="button"
           onClick={dismiss}

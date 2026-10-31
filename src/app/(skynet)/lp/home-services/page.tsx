@@ -3,6 +3,7 @@ import { MetaPixel, MetaPixelEvents } from "@/components/MetaPixel";
 import { SITE, pageTitle, pageDescription } from "@/lib/site";
 import Link from "next/link";
 import LeadCaptureForm from "@/components/cta/LeadCaptureForm";
+import { WHATSAPP } from "@/lib/site";
 
 // Canonical/OG host resolves via SITE.url (env-overridable, defaults to the
 // production domain) — same source the rest of the app uses for canonicals.
@@ -132,7 +133,7 @@ function AuditForm({ id }: { id?: string }) {
       buttonLabel="Get my free missed-call audit"
       submittingLabel="Sending…"
       successHeading="Got it. I'll email it to you."
-      successBody="I'll personally send you the breakdown within one business day. If you don't hear from me by then, email info@skynetjoe.com and I'll chase it down."
+      successBody="I'll personally send you the breakdown within one business day. If you don't hear from me by then, email waseem@skynetjoe.com and I'll chase it down."
     />
   );
 }
@@ -335,11 +336,13 @@ export default function HomeServicesLandingPage() {
           <Link href="/privacy-policy">privacy policy</Link>.
         </p>
         <a
-          href="https://calendly.com/skynetlabs"
+          href={WHATSAPP.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="hs-secondary"
-          data-meta-event="Schedule"
+          data-meta-event="Contact"
         >
-          Prefer to talk it through? Book a 15-min call instead
+          Prefer to talk it through? Message us on WhatsApp instead
         </a>
       </section>
 

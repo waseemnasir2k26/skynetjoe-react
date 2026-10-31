@@ -31,7 +31,6 @@ WordPress Hosting Premium+ with Node.js Web App add-on enabled.
 - `GHL_API_TOKEN` = your GHL Private Integration Token
 - `GHL_LOCATION_ID` = `HSQ2lvxtEpWQUVinspzq`
 - `GHL_PIPELINE_ID` = `y1EwUjRMn2UWd9g2paa3`
-- `CALENDLY_WEBHOOK_SECRET` = from Calendly webhook setup (REQUIRED in prod — webhook fail-closes without it)
 - `NEXT_PUBLIC_SITE_URL` = `https://waseemnasir.com` (or chosen apex domain)
 - `NEXT_PUBLIC_SITE_DOMAIN` = `waseemnasir.com`
 - `NEXT_PUBLIC_SITE_ASSETS_URL` = same as SITE_URL
@@ -87,11 +86,10 @@ curl https://waseemnasir.com/api/services?limit=20   # JSON w/ 16 services
 curl https://waseemnasir.com/sitemap.xml             # XML
 curl https://waseemnasir.com/robots.txt              # has Disallow /admin
 curl https://waseemnasir.com/llms.txt                # LLM citation surface
-curl https://waseemnasir.com/api/webhooks/calendly   # → { ok: true } liveness only; secret status is checked in hPanel env, not via GET
 ```
 
 ## Post-cutover from Vercel
 1. Keep Vercel deploy running until DNS fully propagated + Hostinger confirmed
-2. Switch Calendly webhook URL to point at Hostinger
+2. (Calendly removed 2026-10-31: no booking webhook to repoint.)
 3. Update GSC property to new domain
 4. Disable Vercel auto-deploy (or delete project) once stable

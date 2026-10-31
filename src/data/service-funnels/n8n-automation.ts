@@ -1,4 +1,5 @@
 import type { ServiceFunnelContent } from "./types";
+import { WHATSAPP } from "@/lib/site";
 
 /**
  * n8n Automation — migrated from the bespoke N8nAutomationLP component
@@ -18,7 +19,7 @@ const content: ServiceFunnelContent = {
     eyebrow: "Automation · n8n · 2026",
     h1: "Stop renting your automation. Own it.",
     sub: "Keep the automations your business runs on — without the rising monthly SaaS bill. The same flows you pay hundreds a month for, rebuilt on n8n to run for a few dollars, version-controlled, with auto-retry so they stop failing in silence.",
-    primary: { label: "Book a free 30-min check-up", href: "/contact" },
+    primary: { label: "Chat on WhatsApp", href: WHATSAPP.href },
     secondary: { label: "Compare n8n vs Zapier", href: "/n8n-vs-zapier" },
     trust: [
       "180+ flows shipped",
@@ -142,8 +143,8 @@ const content: ServiceFunnelContent = {
 
   finalCta: {
     h2: "Tell me what's breaking. I'll build the fix.",
-    body: "A free 30-minute check-up. I'll name the fixes that recover the most, sequenced biggest-first, with a fixed-scope plan back within 48 hours.",
-    ctaLabel: "Book the check-up",
+    body: "Message me on WhatsApp. I'll name the fixes that recover the most, sequenced biggest-first, with a fixed-scope plan back within 48 hours.",
+    ctaLabel: "Chat on WhatsApp",
   },
 
   freeTools: {
