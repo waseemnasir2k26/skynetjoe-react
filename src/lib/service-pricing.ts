@@ -78,7 +78,7 @@ export const SERVICE_PRICING: ServicePricing[] = [
           "Team SOP + 2 rounds of revisions",
         ],
         badge: "Most picked",
-        ctaLabel: "Book Pro build",
+        ctaLabel: "Start Pro build",
         ctaHref: "/contact",
       },
       {
@@ -137,7 +137,7 @@ export const SERVICE_PRICING: ServicePricing[] = [
           "Loom team SOP",
         ],
         badge: "Most picked",
-        ctaLabel: "Book Pro rebuild",
+        ctaLabel: "Start Pro rebuild",
         ctaHref: "/contact",
       },
       {
@@ -183,7 +183,7 @@ export const SERVICE_PRICING: ServicePricing[] = [
         tagline: "Full engine — 30 posts + automation.",
         features: ["30 AEO-tuned articles", "Auto-publishing pipeline", "Internal linking strategy", "GSC monitoring setup"],
         badge: "Most picked",
-        ctaLabel: "Book Pro",
+        ctaLabel: "Start Pro",
         ctaHref: "/contact",
       },
       {
@@ -224,7 +224,7 @@ export const SERVICE_PRICING: ServicePricing[] = [
         tagline: "Full flagship site (10-14 sections).",
         features: ["10-14 bespoke sections", "SEO + AEO base layer", "CMS or static content", "Conversion funnel wired"],
         badge: "Most picked",
-        ctaLabel: "Book Flagship",
+        ctaLabel: "Start Flagship",
         ctaHref: "/contact",
       },
       {
@@ -269,7 +269,7 @@ export const SERVICE_PRICING: ServicePricing[] = [
         tagline: "Multi-channel + voice + handoff.",
         features: ["3 channels (web + WA + voice)", "Human handoff routing", "GHL/CRM integration", "Conversation analytics"],
         badge: "Most picked",
-        ctaLabel: "Book Pro",
+        ctaLabel: "Start Pro",
         ctaHref: "/contact",
       },
       {
