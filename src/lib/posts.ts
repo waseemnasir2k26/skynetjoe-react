@@ -919,7 +919,7 @@ export const POSTS: Post[] = [
       label: "See the public pricing",
       href: "/pricing",
       tagline:
-        'Tired of "request a quote" theater? The full SkynetLabs price list is public — flat tiers, no custom-quote runaround. See where your build lands before you ever book a call.',
+        'Tired of "request a quote" theater? The full SkynetLabs price list is public — flat tiers, no custom-quote runaround. See where your build lands before we ever talk.',
     },
   },
   {
