@@ -43,7 +43,7 @@ export default function KonamiUnlock() {
 
   return (
     <>
-      {/* Hint chip — bottom-left (moved from right to avoid StickyBookCallBar overlap), pixel font */}
+      {/* Hint chip — bottom-left, pixel font */}
       <div
         aria-hidden="true"
         className="fixed bottom-3 left-3 z-40 px-2 py-1 text-[10px] tracking-widest"

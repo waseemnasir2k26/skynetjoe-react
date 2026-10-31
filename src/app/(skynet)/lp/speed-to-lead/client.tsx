@@ -11,7 +11,8 @@ import { SITE, WHATSAPP } from "@/lib/site";
 // visible element of the phone mock.
 
 const WHATSAPP_URL =
-  "https://wa.me/6281316077185?text=Hi%20Waseem%20—%20saw%20the%20HVAC%20speed-to-lead%20page.";
+  "https://wa.me/6281316077185?text=" +
+  encodeURIComponent("Hi Waseem — saw the HVAC speed-to-lead page.");
 const INSTAGRAM_URL = "https://instagram.com/waseemnasir009";
 
 function fireFbq(event: string, eventId?: string) {

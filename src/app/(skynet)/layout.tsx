@@ -8,7 +8,7 @@ import SxoBeacon from "@/components/SxoBeacon";
 import AISignals from "@/components/aeo/AISignals";
 import LiveChat from "@/components/LiveChat";
 // 2026-05-29 — Interrupting popups disabled (kept in repo, re-add JSX to restore):
-//   DiscoveryPopup @/components/DiscoveryPopup · StickyBookCallBar @/components/cta/StickyBookCallBar
+//   DiscoveryPopup @/components/DiscoveryPopup
 //   ExitIntentModal @/components/cta/ExitIntentModal · (earlier: IncomingCallPopup, SocialProofPopup)
 // LiveChat (passive chat bubble, click-to-open) kept on — smart intent bot rebuilt 2026-05-29.
 import LiveVisitors from "@/components/LiveVisitors";

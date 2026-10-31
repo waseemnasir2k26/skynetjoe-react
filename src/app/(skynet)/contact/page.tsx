@@ -219,8 +219,7 @@ export default function ContactPage() {
               <h2 style={cardTitle}>Email</h2>
               <p style={cardNumber}>{SITE.email}</p>
               <p style={cardBody}>
-                Prefer to write it out? Email works too, with the same reply
-                window.
+                Or email waseem@skynetjoe.com.
               </p>
               <a
                 href={mailtoLink("Project enquiry from skynetjoe.com")}

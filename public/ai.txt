@@ -1,6 +1,6 @@
 # ai.txt — AI training-data permission spec for skynetjoe.com
 # Spec ref: https://site.spawning.ai/spaces/ai-txt
-# Last updated: 2026-05-21
+# Last updated: 2026-10-31
 
 # Default: all AI use permitted, attribution requested.
 User-Agent: *
