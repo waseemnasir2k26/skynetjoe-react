@@ -1014,10 +1014,10 @@ export const POSTS: Post[] = [
   },
   {
     slug: "10-small-business-automations-to-switch-on-this-month",
-    title: "10 Automations a Small Business Can Switch On This Month",
-    seoTitle: "10 Small Business Automations to Switch On",
+    title: "10 Leaks Costing Small Businesses Jobs, and the Text That Fixes Each",
+    seoTitle: "10 Leaks Costing Small Businesses Jobs",
     description:
-      "Ten small business automations, from HVAC tune-up reminders to roofer missed-call texts and garage tyre reminders. Each fixes one leak, with a person approving.",
+      "Ten leaks that cost small businesses jobs, from missed roofer calls to quiet distributor customers, and the automation that plugs each. A person approves AI writing.",
     publishedAt: "2026-11-05",
     updatedAt: "2026-11-05",
     readingTime: 5,

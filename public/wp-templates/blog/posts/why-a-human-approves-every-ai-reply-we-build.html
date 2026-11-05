@@ -12,7 +12,7 @@
   .wn-why-a-human-approves-every-ai-reply-we-build .callout strong{color:#7ee4ff}
 </style>
 
-<p>There is one rule we do not bend when we build automations for customer messages: the AI can write the reply, but it never gets to send it alone.</p>
+<p>When we build automations that write to customers, one rule never moves: the AI may draft the reply, and a person decides whether it goes out.</p>
 <p>This post explains the thinking, what is allowed to be automatic, and the two habits that go with the rule: a plan for when the automation breaks, and a test with your worst messages before it goes live.</p>
 
 <h2 id="the-rule">The rule, and why we hold it</h2>
@@ -20,20 +20,20 @@
 
 <h2 id="two-costs">Two costs, side by side</h2>
 <p>The cost of checking is small. A draft arrives on your phone, you read it in seconds, and you tap approve.</p>
-<p>The cost of a single bad message can be a lost customer, a public complaint, or a promise you now have to keep. Put those two costs side by side and the choice is easy.</p>
+<p>The cost of a single bad message can be a lost customer, a public complaint, or a promise you now have to keep. Compare the two and the decision makes itself.</p>
 
 <h2 id="example">A small example</h2>
-<p>A customer writes in upset about a late delivery. An AI draft might open with a cheerful greeting and an offer of a discount nobody approved. A person reads that in two seconds, removes the discount, and adds a real apology.</p>
-<p>That small edit is the difference between rescuing the customer and making them angrier.</p>
+<p>Say an order shows up days late and the customer writes in annoyed. A draft could start breezy and promise a refund that no one signed off on. Whoever reviews it spots both problems at a glance, deletes the promise, and replaces the chirpy opening with an honest apology.</p>
+<p>A few seconds of editing separates a saved customer from an angrier one.</p>
 
 <h2 id="automatic">Does that mean nothing is ever automatic?</h2>
 <p>No. Fixed confirmations, like "your appointment is booked", can be plain templates that you wrote, with no AI improvising. Internal alerts can be automatic too.</p>
 <p>The line we draw is simple: if an AI is writing words to a customer, a person approves them.</p>
-<p>Over time the drafts get better, because you fix the instructions once and every future draft improves. You keep the control, and the customer keeps a human behind the message. Customers rarely notice a good reply, but they never forget a bad one. Checking every message is how we make sure they only ever see the good ones.</p>
+<p>Over time the drafts get better, because you fix the instructions once and every future draft improves. You keep the control, and the customer keeps a human behind the message. A good reply passes without comment, while a bad one gets remembered and repeated. Reviewing each message is how the bad ones get caught before anyone outside sees them.</p>
 
 <h2 id="fallback">Decide what happens when it breaks</h2>
-<p>Your automation will fail one day. Decide now what happens when it does.</p>
-<p>If a step breaks, the customer should still get an answer. Route the message to a person and tell them what went wrong. One owner, one inbox, one rule. Nothing is silently dropped.</p>
+<p>Assume your automation will break at some point, and decide today what happens then.</p>
+<p>If a step breaks, the customer should still get an answer. Send the message to a person and tell them what failed. Name a single owner, give failures a single place to land, and keep the instruction short. No message should vanish without someone knowing.</p>
 
 <h2 id="test">Test it with your worst messages first</h2>
 <p>Before your automation goes live, send it your worst messages:</p>
@@ -48,15 +48,15 @@
 <h2 id="in-practice">How this shows up in the automations we build</h2>
 <p>You can see the rule in action across our other posts. The <a href="/blog/10-small-business-automations-to-switch-on-this-month">ten automations post</a> has the approve-then-send pattern in most of its examples, and <a href="/blog/missed-call-text-back-for-trades-step-by-step">missed call text-back for trades</a> shows the other side: a text you wrote yourself, sent exactly as written.</p>
 
-<div class="callout"><strong>Want replies drafted, not guessed?</strong> <a href="https://wa.me/6281316077185?text=Hi%20Waseem%2C%20I%20read%20your%20blog%20and%20have%20a%20question." target="_blank" rel="noopener noreferrer">message us on WhatsApp +62 813 1607 7185</a> or email <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a> and tell us which messages you want help with.</div>
+<div class="callout"><strong>Want replies drafted, not guessed?</strong> Send us the one customer message you dread answering and we will reply with how we would set up the draft and approval step: <a href="https://wa.me/6281316077185?text=Hi%20Waseem%2C%20I%20read%20your%20blog%20and%20have%20a%20question." target="_blank" rel="noopener noreferrer">message us on WhatsApp +62 813 1607 7185</a> or email <a href="mailto:waseem@skynetjoe.com">waseem@skynetjoe.com</a>.</div>
 
 <h2 id="faq">Frequently asked questions</h2>
 <h3>Does an AI ever send a message to a customer alone?</h3>
-<p>No. If an AI is writing words to a customer, a person approves them first. The AI can write the reply, but it never gets to send it alone.</p>
+<p>No. The AI may draft the reply, but a person approves it before it goes out.</p>
 <h3>Is anything allowed to be fully automatic?</h3>
 <p>Yes. Fixed confirmations, like your appointment is booked, can be plain templates that you wrote with no AI improvising. Internal alerts can be automatic too.</p>
 <h3>What happens if a step in the automation breaks?</h3>
-<p>The customer should still get an answer. The message is routed to a person, who is told what went wrong. One owner, one inbox, one rule, and nothing is silently dropped.</p>
+<p>The customer should still get an answer. It is sent to a person who is told what failed. One named owner and one place for failures keeps any message from vanishing unnoticed.</p>
 <h3>What should I test before going live?</h3>
 <p>Send it your worst messages: an angry customer, a message in another language, a blank one, and a question it should not answer. Fix what breaks and decide who gets alerted, then switch it on.</p>
 <script type="application/ld+json">
@@ -69,7 +69,7 @@
       "name": "Does an AI ever send a message to a customer alone?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. If an AI is writing words to a customer, a person approves them first. The AI can write the reply, but it never gets to send it alone."
+        "text": "No. The AI may draft the reply, but a person approves it before it goes out."
       }
     },
     {
@@ -85,7 +85,7 @@
       "name": "What happens if a step in the automation breaks?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The customer should still get an answer. The message is routed to a person, who is told what went wrong. One owner, one inbox, one rule, and nothing is silently dropped."
+        "text": "The customer should still get an answer. It is sent to a person who is told what failed. One named owner and one place for failures keeps any message from vanishing unnoticed."
       }
     },
     {
