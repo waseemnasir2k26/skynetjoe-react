@@ -1013,7 +1013,7 @@ export const POSTS: Post[] = [
     author: "Waseem Nasir",
   },
   {
-    slug: "10-small-business-automations-to-switch-on-this-month",
+    slug: "10-leaks-costing-small-businesses-jobs",
     title: "10 Leaks Costing Small Businesses Jobs, and the Text That Fixes Each",
     seoTitle: "10 Leaks Costing Small Businesses Jobs",
     description:
