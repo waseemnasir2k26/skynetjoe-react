@@ -1012,6 +1012,45 @@ export const POSTS: Post[] = [
     ],
     author: "Waseem Nasir",
   },
+  {
+    slug: "10-small-business-automations-to-switch-on-this-month",
+    title: "10 Automations a Small Business Can Switch On This Month",
+    seoTitle: "10 Small Business Automations to Switch On",
+    description:
+      "Ten small business automations, from HVAC tune-up reminders to roofer missed-call texts and garage tyre reminders. Each fixes one leak, with a person approving.",
+    publishedAt: "2026-11-05",
+    updatedAt: "2026-11-05",
+    readingTime: 5,
+    category: "playbook",
+    tags: ["small business automation","automation ideas","missed call text back","review reply automation","customer follow-up automation"],
+    author: "Waseem Nasir",
+  },
+  {
+    slug: "missed-call-text-back-for-trades-step-by-step",
+    title: "Missed Call Text-Back for Trades: How It Works, Step by Step",
+    seoTitle: "Missed Call Text-Back for Trades, Step by Step",
+    description:
+      "How a missed call text-back works for roofers and plumbers: detect the call, reply in your own words, and get a lead card or a draft quote on your phone.",
+    publishedAt: "2026-11-05",
+    updatedAt: "2026-11-05",
+    readingTime: 5,
+    category: "automation",
+    tags: ["missed call text back","roofing automation","plumber quote automation","trades lead capture","small business automation"],
+    author: "Waseem Nasir",
+  },
+  {
+    slug: "why-a-human-approves-every-ai-reply-we-build",
+    title: "Why a Human Approves Every AI Reply We Build",
+    seoTitle: "Why a Human Approves Every AI Reply We Build",
+    description:
+      "The AI can write the reply, but it never sends it alone. Why we keep a person in the loop, what can stay automatic, and how to test before going live.",
+    publishedAt: "2026-11-05",
+    updatedAt: "2026-11-05",
+    readingTime: 4,
+    category: "playbook",
+    tags: ["human in the loop","ai customer replies","ai safety small business","automation fallback","ai draft approval"],
+    author: "Waseem Nasir",
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {
