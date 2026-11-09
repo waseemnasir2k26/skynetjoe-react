@@ -222,6 +222,29 @@ export default function Footer() {
               </a>
             ))}
           </p>
+          <p
+            className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm"
+            style={{ color: "var(--ink-2)" }}
+          >
+            <span>
+              WhatsApp:{" "}
+              <a
+                href="https://wa.me/6281316077185"
+                style={{ color: "var(--ink-2)", borderBottom: "1px solid var(--border)" }}
+              >
+                +62 813 1607 7185
+              </a>{" "}
+              (Indonesia) ·{" "}
+              <a
+                href="https://wa.me/923001001957"
+                style={{ color: "var(--ink-2)", borderBottom: "1px solid var(--border)" }}
+              >
+                +92 300 1001957
+              </a>{" "}
+              (Pakistan)
+            </span>
+            <span>Registered in Pakistan as SkynetJoe LLP and in Indonesia.</span>
+          </p>
 
           <div
             className="mt-6 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
