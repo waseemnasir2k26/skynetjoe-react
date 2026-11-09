@@ -52,6 +52,10 @@ const faqs = [
     a: "The copy and preview are free to use while you build it. I gate the download so I know who's generating one — mainly so I can follow up if you want help wiring the rest of your AEO setup.",
   },
   {
+    q: "Does Google Search use llms.txt?",
+    a: "No. Google's AI optimization guide (developers.google.com/search/docs/fundamentals/ai-optimization-guide) says it is fine to create and maintain llms.txt files for other services or systems that use them, but that doing so will neither harm nor help your visibility or rankings in Google Search, as Google Search ignores them. Treat llms.txt as an optional extra for other AI tools, not a Google ranking lever.",
+  },
+  {
     q: "Do you actually use this on your own site?",
     a: "Yes — skynetjoe.com's own llms.txt was built with this generator, not hand-written. You can see it live at skynetjoe.com/llms.txt.",
   },

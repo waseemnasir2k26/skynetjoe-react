@@ -1,0 +1,412 @@
+<style>
+  .wn-self-hosted-n8n-vs-n8n-cloud {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud ul,
+  .wn-self-hosted-n8n-vs-n8n-cloud ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud strong {
+    color: #fff;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud a:hover {
+    color: #7ee4ff;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud .rules {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud .rules strong {
+    color: #7ee4ff;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud .rules ol {
+    margin: 0.75rem 0 0 1.25rem;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-self-hosted-n8n-vs-n8n-cloud .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+<p>
+  Before you build anything on n8n you have to decide where it runs: on n8n's
+  hosted Cloud, or on a server you control. The choice changes your monthly
+  bill, who looks after backups and updates, and what happens if something
+  breaks at 2am. We run our own n8n on a VPS, so we have opinions, but the
+  honest answer depends on the business. This post lays out the costs from n8n's
+  own pages and the trade-offs that do not show up in a price table.
+</p>
+<p>
+  Prices below come from n8n's pricing page and Hetzner's cloud page, both read
+  on 10 November 2026. Neither page showed an effective date, so check them
+  before you budget. For how these costs sit next to an agency fee, see
+  <a href="/blog/n8n-agency-cost-what-you-get">what an n8n agency costs</a>.
+</p>
+
+<h2 id="cloud-costs">What n8n Cloud costs</h2>
+<p>
+  n8n's pricing page lists these plans in euros, with the figures shown for
+  annual billing:
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th>Price a month</th>
+      <th>Executions a month</th>
+      <th>Notable limits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Starter</td>
+      <td>€20</td>
+      <td>2.5K</td>
+      <td>
+        1 shared project, 5 concurrent executions, 5-minute maximum execution,
+        7-day log retention
+      </td>
+    </tr>
+    <tr>
+      <td>Pro</td>
+      <td>€50</td>
+      <td>10K</td>
+      <td>
+        3 shared projects, 40-minute maximum execution, 30-day log retention, 7
+        days of Insights
+      </td>
+    </tr>
+    <tr>
+      <td>Business</td>
+      <td>€667</td>
+      <td>40K</td>
+      <td>Listed as self-hosted only, with a Cloud version on a waitlist</td>
+    </tr>
+    <tr>
+      <td>Enterprise</td>
+      <td>Contact sales</td>
+      <td>Custom</td>
+      <td>Hosted by n8n or self-hosted</td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  The page lists unlimited active workflows on all of these. The thing you are
+  buying is executions. A workflow that checks an inbox every five minutes uses
+  roughly 8,600 executions in a 30-day month on its own, so a polling trigger
+  can use up the Starter allowance quickly. That is simple arithmetic, not a
+  figure from n8n, but it is worth doing for your own schedule before you pick a
+  plan.
+</p>
+
+<h2 id="self-host-costs">What self-hosting costs</h2>
+<p>
+  The Community Edition is a standard self-hosted version available on GitHub.
+  Its pricing entry gives no price and no limits, so the practical ceiling is
+  your server rather than a plan. You pay for the machine and for the time spent
+  looking after it.
+</p>
+<ul>
+  <li>
+    <strong>The server.</strong> Hetzner's cloud page lists shared-vCPU servers
+    from €6.49 a month excluding VAT. n8n's own Hetzner guide says a CPX11-size
+    server is enough for most usage, and recommends at least 4 GB of RAM and 2
+    vCPUs if you add the n8n Assistant. Other providers are comparable.
+  </li>
+  <li>
+    <strong>The setup.</strong> n8n's hosting documentation lists Docker Compose
+    as the route for production deployments with databases, alongside one-line
+    setup and several cloud-provider guides.
+  </li>
+  <li>
+    <strong>The time.</strong> Updates, monitoring and backups are yours. The
+    Hetzner guide does not cover backups, and it notes that n8n uses its
+    built-in SQLite database by default unless you set up something else. A
+    serious deployment usually adds a proper database and a backup routine on
+    top.
+  </li>
+</ul>
+<p>
+  So the hardware is cheap and the labour is the real cost. If nobody on your
+  side wants that job, that labour either becomes a monthly agency line or a
+  risk you are carrying without noticing.
+</p>
+
+<h2 id="tradeoffs">The trade-offs that matter more than the price</h2>
+<h3>Control and data location</h3>
+<p>
+  On your own server you choose the region, the network rules and who can log
+  in. If you handle customer details you may care where they sit. n8n Cloud is
+  simpler, but you accept n8n's hosting setup.
+</p>
+<h3>Limits</h3>
+<p>
+  Cloud plans have execution and time limits written on the pricing page. The
+  Starter plan's five-minute maximum execution rules out some long-running jobs,
+  such as processing a big batch of files in one go. A self-hosted instance has
+  whatever limits your server and configuration give it.
+</p>
+<h3>Features by plan</h3>
+<p>
+  Some features are tied to plans. On the pricing page, the Business plan lists
+  things like SSO, LDAP, multiple environments and Git version control. If you
+  need those, check which hosting options each plan allows, because the page
+  describes Business as self-hosted only. It also says Business and Enterprise
+  license keys can be applied to unlimited self-hosted instances, and that the
+  Business license key pings a license server daily. That last detail matters if
+  your server is in a locked-down network.
+</p>
+<h3>Reliability and who gets paged</h3>
+<p>
+  On Cloud, n8n runs the platform, though your workflows can still fail for
+  their own reasons. Self-hosted, you also own server uptime, disk space,
+  certificates and upgrades. Set up monitoring that tells you when a workflow
+  stops running, not only when it throws an error, because a stopped schedule is
+  silent.
+</p>
+
+<h3>Moving later</h3>
+<p>
+  Starting on one and moving to the other is possible, because workflows can be
+  exported as JSON and imported elsewhere. What does not move on its own are the
+  credentials, the execution history and any webhook URLs that other tools point
+  at. Plan an afternoon for that, and keep a list of every service that calls a
+  webhook so none are missed. If you expect to move, keep the workflows tidy and
+  documented from day one, because that is what makes it a small job rather than
+  a rebuild.
+</p>
+
+<h2 id="licence">The licence question for agencies and resellers</h2>
+<p>
+  n8n's source is under the Sustainable Use License, which is not a standard
+  open-source licence. The text in the n8n GitHub repository says you "may use
+  or modify the software only for your own internal business purposes or for
+  non-commercial or personal use", and that you may distribute it or provide it
+  to others only "free of charge for non-commercial purposes". It does not
+  mention consulting. It does not say whether hosting n8n for a client counts. I
+  am not a lawyer and this is not legal advice. If you plan to run n8n for other
+  people, read the licence and ask n8n directly, and ask any agency you hire how
+  they stay inside it.
+</p>
+
+<p>
+  One more thing to ask on either route: who holds the admin login? Whether the
+  instance is on n8n's Cloud or on a server, it should be in an account your
+  business owns, with the agency added as a user. That way, ending the
+  relationship never means losing the workflows.
+</p>
+
+<h2 id="decision">How to choose</h2>
+<table>
+  <thead>
+    <tr>
+      <th>If this describes you</th>
+      <th>Lean towards</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>One or two workflows, nobody technical, low volume</td>
+      <td>n8n Cloud, Starter or Pro</td>
+    </tr>
+    <tr>
+      <td>
+        Polling triggers or high volume that would burn through executions
+      </td>
+      <td>Self-hosted, or a higher plan after doing the arithmetic</td>
+    </tr>
+    <tr>
+      <td>Strict data location or network rules</td>
+      <td>Self-hosted in your chosen region</td>
+    </tr>
+    <tr>
+      <td>You want Business-plan features</td>
+      <td>Self-hosted, per the pricing page</td>
+    </tr>
+    <tr>
+      <td>You want someone else to run and monitor it</td>
+      <td>
+        Cloud, or self-hosted with an agency retainer that includes monitoring
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="what-we-do">What we do</h2>
+<p>
+  We self-host n8n on a VPS for our own work. On our
+  <a href="/pricing">pricing page</a>, the n8n Starter build includes "n8n cloud
+  or self-hosted setup", and there is a separate $750 add-on for self-hosting on
+  your own VPS (setup and hardening), as listed on 10 November 2026. Which one
+  we recommend depends on the questions above, not on which is cheaper for us.
+  The service details are on the
+  <a href="/services/n8n-automation">n8n automation page</a>.
+</p>
+<div class="callout">
+  <strong>The rule of thumb:</strong> Cloud buys you time and costs you
+  executions. Self-hosting buys you control and costs you upkeep. Pick the one
+  whose cost you can actually afford to pay.
+</div>
+
+<h2 id="faq">Questions people ask</h2>
+<h3>Is self-hosted n8n free?</h3>
+<p>
+  The Community Edition is a standard self-hosted version available on GitHub,
+  but you still pay for the server and the time to maintain it. Hetzner, for
+  example, lists shared-vCPU servers from €6.49 a month excluding VAT.
+</p>
+<h3>How much does n8n Cloud cost?</h3>
+<p>
+  On n8n's pricing page, read on 10 November 2026, Starter is €20 a month for
+  2.5K executions and Pro is €50 a month for 10K executions, with figures shown
+  for annual billing. Business and Enterprise cost more.
+</p>
+<h3>Can I use n8n for client work?</h3>
+<p>
+  The Sustainable Use License allows use for your own internal business purposes
+  or non-commercial use and does not mention consulting. Read the licence and
+  ask n8n if you are unsure; this is not legal advice.
+</p>
+<h3>Which is better for a small business?</h3>
+<p>
+  If nobody on the team wants to look after a server, Cloud is usually simpler.
+  If you run frequent polling workflows, have data location rules, or want
+  features listed as self-hosted only, self-hosting may suit you better.
+</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is self-hosted n8n free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Community Edition is a standard self-hosted version available on GitHub, but you still pay for the server and the time to maintain it. Hetzner, for example, lists shared-vCPU servers from €6.49 a month excluding VAT."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does n8n Cloud cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On n8n's pricing page, read on 10 November 2026, Starter is €20 a month for 2.5K executions and Pro is €50 a month for 10K executions, with figures shown for annual billing. Business and Enterprise cost more."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use n8n for client work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Sustainable Use License allows use for your own internal business purposes or non-commercial use and does not mention consulting. Read the licence and ask n8n if you are unsure; this is not legal advice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which is better for a small business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If nobody on the team wants to look after a server, Cloud is usually simpler. If you run frequent polling workflows, have data location rules, or want features listed as self-hosted only, self-hosting may suit you better."
+      }
+    }
+  ]
+}
+</script>

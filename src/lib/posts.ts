@@ -1051,6 +1051,45 @@ export const POSTS: Post[] = [
     tags: ["human in the loop","ai customer replies","ai safety small business","automation fallback","ai draft approval"],
     author: "Waseem Nasir",
   },
+  {
+    slug: "n8n-agency-cost-what-you-get",
+    title: "What an n8n Agency Costs in 2026, and What You Should Get",
+    seoTitle: "What an n8n Agency Costs in 2026: Buyer's Guide",
+    description:
+      "What drives n8n agency pricing, project vs retainer vs per workflow, what a fixed quote must include, red flags and 10 questions to ask before you sign.",
+    publishedAt: "2026-11-10",
+    updatedAt: "2026-11-10",
+    readingTime: 7,
+    category: "pricing",
+    tags: ["n8n agency cost","n8n pricing","n8n consultant","automation agency pricing","hire n8n expert"],
+    author: "Waseem Nasir",
+  },
+  {
+    slug: "google-ai-overviews-report-opt-out-service-business",
+    title: "Google's AI Overviews Report and Opt-Out Toggle: What a Service Business Should Do",
+    seoTitle: "Google AI Overviews Report and Opt-Out Toggle",
+    description:
+      "Google's Search Console AI report and opt-out control, what each shows and does, what Google says helps, and a 30-minute monthly check for service businesses.",
+    publishedAt: "2026-11-10",
+    updatedAt: "2026-11-10",
+    readingTime: 6,
+    category: "aeo",
+    tags: ["ai overviews","search console ai report","ai overviews opt out","ai mode","aeo for service businesses"],
+    author: "Waseem Nasir",
+  },
+  {
+    slug: "self-hosted-n8n-vs-n8n-cloud",
+    title: "Self-Hosted n8n vs n8n Cloud: Costs and Trade-Offs for a Small Business",
+    seoTitle: "Self-Hosted n8n vs n8n Cloud: Costs Compared",
+    description:
+      "Self-hosted n8n or n8n Cloud? Running costs from n8n's own pricing page, what a VPS adds, limits, licence notes and a simple way to choose for a small business.",
+    publishedAt: "2026-11-10",
+    updatedAt: "2026-11-10",
+    readingTime: 6,
+    category: "stack",
+    tags: ["self-hosted n8n","n8n cloud pricing","n8n vps","n8n hosting","n8n community edition"],
+    author: "Waseem Nasir",
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {
