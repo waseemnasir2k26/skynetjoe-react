@@ -25,6 +25,13 @@ const ICON_GH =
 const ICON_YT =
   "M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z";
 
+const NETWORK_LINKS = [
+  { label: "SkynetLabs Agency", href: "https://skynetjoe.com/", current: true },
+  { label: "SkynetLabs — AI growth consultancy", href: "https://skynetlabs.si/", current: false },
+  { label: "SkynetLabs AI for home services", href: "https://skynetlabsai.com/", current: false },
+  { label: "Waseem Nasir, founder", href: "https://www.waseemnasir.com/", current: false },
+];
+
 export default function Footer() {
   const pathname = usePathname();
   if (pathname?.startsWith("/lp/")) return null;
@@ -196,8 +203,28 @@ export default function Footer() {
             ))}
           </div>
 
+          <p
+            className="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm"
+            style={{ color: "var(--ink-2)" }}
+          >
+            <span>SkynetLabs network:</span>
+            {NETWORK_LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                aria-current={l.current ? "page" : undefined}
+                style={{
+                  color: "var(--ink-2)",
+                  borderBottom: "1px solid var(--border)",
+                }}
+              >
+                {l.label}
+              </a>
+            ))}
+          </p>
+
           <div
-            className="mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+            className="mt-6 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
             style={{ borderTop: "1px solid var(--border)" }}
           >
             <p

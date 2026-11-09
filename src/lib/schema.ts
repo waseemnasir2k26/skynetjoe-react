@@ -132,6 +132,9 @@ const organization = {
     SITE.social.github,
     SITE.social.youtube,
     SITE.social.fiverr,
+    "https://skynetlabs.si/",
+    "https://skynetlabsai.com/",
+    "https://www.waseemnasir.com/",
   ],
   address: {
     "@type": "PostalAddress",
