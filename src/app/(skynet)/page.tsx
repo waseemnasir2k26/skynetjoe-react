@@ -89,9 +89,10 @@ export default function Home() {
           Outcomes' message), ProofReceipts (untraceable stat wall) and the
           standalone Testimonials were folded into <Proof/>. */}
       <HeroFunnel />
+      {/* 2026-11-10 Waseem: reviews must be seen right after the hero. */}
+      <ClientReviews />
       <Outcomes />
       <Proof />
-      <ClientReviews />
       <ToolsTeaser />
       <FAQHome />
       <FinalCTA />

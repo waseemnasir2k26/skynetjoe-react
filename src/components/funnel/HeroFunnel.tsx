@@ -7,7 +7,10 @@ import NodeGraphHero from "@/components/home/NodeGraphHero";
 import MagneticButton from "@/components/home/MagneticButton";
 import ScrambleText from "@/components/home/ScrambleText";
 import { WHATSAPP } from "@/lib/site";
-import { RATINGS } from "@/lib/reviews";
+import { RATINGS, REVIEWS } from "@/lib/reviews";
+
+// Shortest verbatim 5-star quote for the hero card.
+const HERO_QUOTE = REVIEWS.find((r) => r.country === "Netherlands" && r.stars === 5) ?? REVIEWS[0];
 
 /**
  * Cream editorial hero (2026-06-01 readability + plain-language overhaul).
@@ -232,45 +235,95 @@ export default function HeroFunnel() {
             </Link>
           </div>
 
-          {/* Real review ratings (single source: src/lib/reviews.ts) */}
+          {/* Real review proof in the hero (single source: src/lib/reviews.ts).
+              2026-11-10: was a small mono line Waseem couldn't spot — now a
+              visible card: stars, rating, one verbatim quote, links. */}
           <div
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              letterSpacing: "0.04em",
-              marginTop: 20,
+              marginTop: 22,
+              maxWidth: 560,
+              background: "var(--cream-2, #F3EEE6)",
+              border: "1px solid rgba(26,26,26,0.12)",
+              borderLeft: "3px solid #A8451F",
+              padding: "14px 16px",
               display: "flex",
-              flexWrap: "wrap",
-              columnGap: 16,
-              rowGap: 6,
+              flexDirection: "column",
+              gap: 8,
             }}
           >
-            {[
-              {
-                r: RATINGS.fiverr,
-                text: `★ ${RATINGS.fiverr.rating} · ${RATINGS.fiverr.count} reviews on Fiverr`,
-              },
-              {
-                r: RATINGS.google,
-                text: `★ ${RATINGS.google.rating} · ${RATINGS.google.count} Google reviews`,
-              },
-            ].map(({ r, text }) => (
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                columnGap: 10,
+                rowGap: 4,
+              }}
+            >
+              <span role="img" aria-label={`Rated ${RATINGS.fiverr.rating} out of 5`} style={{ display: "inline-flex", gap: 2 }}>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Star
+                    key={i}
+                    aria-hidden="true"
+                    style={{ width: 16, height: 16, fill: "#A8451F", stroke: "#A8451F", strokeWidth: 0 }}
+                  />
+                ))}
+              </span>
               <a
-                key={r.label}
-                href={r.url}
+                href={RATINGS.fiverr.url}
                 target="_blank"
                 rel="noopener"
-                aria-label={`Rated ${r.rating} out of 5 — ${text.replace("★ ", "")}`}
                 className="hover:underline"
                 style={{
-                  color: "#A8451F",
-                  textUnderlineOffset: 3,
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 700,
+                  fontSize: 15,
+                  color: "var(--ink)",
                   textDecoration: "none",
+                  textUnderlineOffset: 3,
                 }}
               >
-                {text}
+                {RATINGS.fiverr.rating}/5 from {RATINGS.fiverr.count} reviews on Fiverr
               </a>
-            ))}
+            </div>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: "var(--font-sans)",
+                fontSize: 14,
+                lineHeight: 1.5,
+                color: "var(--ink)",
+              }}
+            >
+              “{HERO_QUOTE.text}”{" "}
+              <span style={{ color: "var(--ink-faint)", fontSize: 12 }}>
+                — Fiverr client, {HERO_QUOTE.country}
+              </span>
+            </p>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 12,
+                letterSpacing: "0.04em",
+                display: "flex",
+                flexWrap: "wrap",
+                columnGap: 16,
+                rowGap: 6,
+              }}
+            >
+              <a href="#reviews" className="hover:underline" style={{ color: "#A8451F", textDecoration: "none", textUnderlineOffset: 3 }}>
+                Read client reviews ↓
+              </a>
+              <a
+                href={RATINGS.google.url}
+                target="_blank"
+                rel="noopener"
+                className="hover:underline"
+                style={{ color: "#A8451F", textDecoration: "none", textUnderlineOffset: 3 }}
+              >
+                ★ {RATINGS.google.rating} · {RATINGS.google.count} Google reviews
+              </a>
+            </div>
           </div>
 
           <div
