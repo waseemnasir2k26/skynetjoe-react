@@ -581,7 +581,6 @@ export default function LogisticsLP() {
               </div>
               <div className="featured-in">
                 <span className="featured-lbl">Featured</span>
-                <span>Upwork Top Rated Plus</span>
                 <span>Vercel SaaS</span>
                 <span>Canggu Builders Bali</span>
               </div>

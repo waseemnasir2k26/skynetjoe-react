@@ -152,7 +152,7 @@ export default function HeroFunnel() {
                   stroke: "none",
                 }}
               />
-              Top Rated Plus · Upwork
+              Level 2 agency · Fiverr
             </span>
             <span
               className="trust-sep"
@@ -172,7 +172,7 @@ export default function HeroFunnel() {
                   stroke: "none",
                 }}
               />
-              Top Rated · Fiverr
+              Established 2018
             </span>
             {/* 2026-09-21: "180+ workflows · 9 countries" removed — not
                 traceable to src/lib/case-studies.ts (board-truth rule). */}

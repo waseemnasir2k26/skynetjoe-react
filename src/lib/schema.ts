@@ -49,8 +49,6 @@ const person = {
   award: [
     "180+ n8n workflows shipped (2019–2026)",
     "40+ websites delivered across 9 countries",
-    "Top Rated Plus on Upwork",
-    "Top Rated on Fiverr",
   ],
   email: SITE.emailFounder,
   sameAs: [
