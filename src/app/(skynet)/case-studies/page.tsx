@@ -81,7 +81,7 @@ const CARD_META: Record<string, CardMeta> = {
     num: "04 / 08",
     title: "US insurance retainer client — GHL pipeline rebuilt end-to-end",
     blurb:
-      "Seventh GoHighLevel batch for the same operator: funnels, drip cadences, pipeline stages, calendar links, SMS templates — all rebuilt from a stagnant prior install.",
+      "Repeat GoHighLevel engagement for a retainer client: funnels, drip cadences, pipeline stages, calendar links, SMS templates — all rebuilt from a stagnant prior install.",
     outcomes: [
       "Removed 3hrs/day of manual triage",
       "Seventh repeat engagement with the same operations team",

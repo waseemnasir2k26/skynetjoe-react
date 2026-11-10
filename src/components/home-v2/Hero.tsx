@@ -28,6 +28,8 @@ export default function Hero() {
             <span className="dot" aria-hidden />
             <span>Level 2 agency · Fiverr</span>
             <span className="dot" aria-hidden />
+            <span>Est. 2018</span>
+            <span className="dot" aria-hidden />
             <span>Bali · GMT+8</span>
           </div>
 

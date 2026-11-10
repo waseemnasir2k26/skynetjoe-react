@@ -289,7 +289,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: "United States",
     coverImage: "/case-studies/us-insurance-gohighlevel-rebuild.jpg",
     oneLineOutcome:
-      "Seventh GoHighLevel batch — full pipeline rebuild that removed 3 hours/day of manual triage.",
+      "Full GoHighLevel pipeline rebuild for a US insurance retainer client — removed 3 hours/day of manual triage.",
     problemStatement: [
       "A US insurance operator on a recurring retainer had inherited a stagnant GoHighLevel install from a prior agency. Funnels were half-wired, drip cadences had been paused for months, pipeline stages didn't reflect the actual sales motion, and calendar links pointed to a calendar that no longer existed.",
       "The team was effectively running on spreadsheets and forwarded emails despite paying for the full GHL stack every month.",

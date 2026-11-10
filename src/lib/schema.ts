@@ -44,7 +44,7 @@ const person = {
   },
   alumniOf: {
     "@type": "EducationalOrganization",
-    name: "Self-taught — 180+ shipped automation workflows and 40+ websites since 2019",
+    name: "Self-taught — 180+ shipped automation workflows and 40+ websites since 2018",
   },
   award: [
     "180+ n8n workflows shipped (2019–2026)",
@@ -107,7 +107,7 @@ const organization = {
     height: 512,
   },
   description: SITE.description,
-  foundingDate: "2019",
+  foundingDate: "2018",
   foundingLocation: { "@type": "Place", name: "Lahore, Pakistan" },
   location: { "@type": "Place", name: "Bali, Indonesia" },
   // TODO(reviews): wire aggregateRating/review here using ONLY real,

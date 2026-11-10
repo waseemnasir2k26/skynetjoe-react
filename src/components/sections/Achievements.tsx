@@ -155,7 +155,7 @@ export default function Achievements() {
             <span
               style={{ width: 28, height: 1, background: "var(--terracotta)" }}
             />
-            The receipts · 2019 → 2026
+            The receipts · 2018 → 2026
           </div>
           <h2
             id="achievements-heading"

@@ -21,6 +21,11 @@ const TIMELINE = [
     note: "Enrolled in a 4-year bachelor's program. Books by day, internet rabbit-holes by night.",
   },
   {
+    year: "2018",
+    title: "SkynetLabs founded — Lahore",
+    note: "Started SkynetLabs in Lahore while still at uni.",
+  },
+  {
     year: "2019",
     title: "First $10 on Fiverr",
     note: "Still a uni student. First gig pays $10. Could have quit there. Didn't — kept stacking gigs between lectures.",
@@ -118,7 +123,7 @@ const BUILDER_LIFE = [
 export const metadata: Metadata = {
   title: pageTitle("About — $10 Fiverr gig to 180+ workflows"),
   description:
-    pageDescription("SkynetLabs is run by Waseem Nasir from Bali. Started in 2019 as a uni student in Lahore. Failed at video editing, ecommerce, Amazon — kept building. Today: 180+ automations across 9 countries."),
+    pageDescription("SkynetLabs is run by Waseem Nasir from Bali. Founded in 2018 in Lahore while still a uni student. Failed at video editing, ecommerce, Amazon — kept building. Today: 180+ automations across 9 countries."),
   alternates: { canonical: `${SITE.url}/about` },
   openGraph: {
     title: "About SkynetLabs — $10 Fiverr gig to 180+ workflows",
@@ -139,7 +144,7 @@ const schema = {
       url: `${SITE.url}/about`,
       name: `About ${SITE.brand}`,
       description:
-        "SkynetLabs is run solo by Waseem Nasir from Bali. Founded 2019 in Lahore as a $10 Fiverr gig, scaled to 180+ workflows across 9 countries by 2026.",
+        "SkynetLabs is run solo by Waseem Nasir from Bali. Founded 2018 in Lahore, scaled to 180+ workflows across 9 countries by 2026.",
       inLanguage: "en",
       isPartOf: { "@id": `${SITE.url}/#website` },
       mainEntity: { "@id": `${SITE.url}/#organization` },
@@ -220,7 +225,7 @@ export default function AboutPage() {
                   background: "var(--terracotta)",
                 }}
               />
-              About · since 2019
+              About · since 2018
             </div>
             <h1
               style={{

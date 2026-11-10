@@ -34,7 +34,7 @@ export async function GET() {
         primary: "Canggu, Bali, Indonesia (GMT+8)",
         secondary: "Lahore, Pakistan (Liberty Market)",
       },
-      operating_since: 2019,
+      operating_since: 2018,
       social: SITE.social,
     },
     canonical: {

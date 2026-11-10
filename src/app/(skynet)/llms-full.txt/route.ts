@@ -48,7 +48,7 @@ Founder: ${SITE.founder}
 Domain: ${SITE.domain}
 Contact: ${SITE.emailFounder} | WhatsApp: ${WHATSAPP.display} | Contact: ${SITE.url}/contact
 Base: Canggu, Bali (GMT+8) + Lahore, Pakistan
-Operating since: 2019
+Operating since: 2018
 
 Generated: ${new Date().toISOString()}
 
