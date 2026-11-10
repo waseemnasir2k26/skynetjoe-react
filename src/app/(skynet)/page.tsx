@@ -1,10 +1,14 @@
-import HeroFunnel from "@/components/funnel/HeroFunnel";
-import Outcomes from "@/components/funnel/Outcomes";
-import Proof from "@/components/sections/Proof";
-import ClientReviews from "@/components/sections/ClientReviews";
-import ToolsTeaser from "@/components/home/ToolsTeaser";
+import Hero from "@/components/home-v2/Hero";
+import Problem from "@/components/home-v2/Problem";
+import Offer from "@/components/home-v2/Offer";
+import Steps from "@/components/home-v2/Steps";
+import Reviews from "@/components/home-v2/Reviews";
+import CaseProof from "@/components/home-v2/CaseProof";
+import PricingAnchor from "@/components/home-v2/PricingAnchor";
+import FinalCTA from "@/components/home-v2/FinalCTA";
+import StickyCTA from "@/components/home-v2/StickyCTA";
 import FAQHome, { HOME_FAQS } from "@/components/sections/FAQHome";
-import FinalCTA from "@/components/funnel/FinalCTA";
+import "@/components/home-v2/home-v2.css";
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { SITE, DEFAULT_OG_IMAGES, pageDescription } from "@/lib/site";
@@ -85,17 +89,23 @@ export default function Home() {
   return (
     <>
       <JsonLd data={orgSchema} />
-      {/* 2026-09-21 simplification: 9 sections → 6. PainPoints (repeated
-          Outcomes' message), ProofReceipts (untraceable stat wall) and the
-          standalone Testimonials were folded into <Proof/>. */}
-      <HeroFunnel />
-      {/* 2026-11-10 Waseem: reviews must be seen right after the hero. */}
-      <ClientReviews />
-      <Outcomes />
-      <Proof />
-      <ToolsTeaser />
+      {/* 2026-11-11 homepage v2 — single-page funnel (src/components/home-v2).
+          Order: hero (with ratings) → problem → offer → how it works →
+          reviews → case proof → pricing anchor → FAQ → final CTA.
+          Every section is a server component; StickyCTA is the only client
+          island (mobile WhatsApp bar). Static render, no fetches, no
+          dynamic APIs — stays fully prerendered like before. */}
+      <Hero />
+      <Problem />
+      <Offer />
+      <Steps />
+      {/* 2026-11-10 Waseem: reviews must be visible — also in the hero. */}
+      <Reviews />
+      <CaseProof />
+      <PricingAnchor />
       <FAQHome />
       <FinalCTA />
+      <StickyCTA />
     </>
   );
 }
