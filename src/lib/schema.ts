@@ -47,7 +47,7 @@ const person = {
     name: "Self-taught — 180+ shipped automation workflows and 40+ websites since 2018",
   },
   award: [
-    "180+ n8n workflows shipped (2019–2026)",
+    "180+ n8n workflows shipped (2018–2026)",
     "40+ websites delivered across 9 countries",
   ],
   email: SITE.emailFounder,
