@@ -2,7 +2,7 @@
  * Homepage FAQ — answer-first, question-phrased headings.
  *
  * Facts sourced only from what's already published elsewhere in this repo:
- *   - Pricing (Starter $1,497 / Pro $5,000, 5-14 day ship window) from
+ *   - Pricing (Starter $1,497 / Pro from $4,500, 5-14 day ship window) from
  *     src/lib/service-pricing.ts + src/app/(skynet)/pricing/page.tsx.
  *   - Service catalog (5 core services, 2026-09-21) from src/lib/site.ts
  *     (SERVICE_CATEGORIES).
@@ -21,7 +21,7 @@ export const HOME_FAQS = [
   },
   {
     q: "How much does a project cost?",
-    a: "Pricing is public, not a quote form. A single-workflow Starter build runs $1,497 one-time; a multi-system Pro build runs $5,000. Full per-service tiers and a live calculator are on the Pricing page.",
+    a: "Pricing is public, not a quote form. A single-workflow Starter build runs $1,497 one-time; a multi-system Pro build starts from $4,500 depending on the service. Full per-service tiers and a live calculator are on the Pricing page.",
   },
   {
     q: "How fast can you ship?",

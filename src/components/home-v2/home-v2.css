@@ -1204,3 +1204,10 @@
   min-height: 48px;
   font-size: 15px;
 }
+
+/* Keep the sticky mobile bar from covering the bottom of the footer. */
+@media (max-width: 759px) {
+  body:has(.hv2-sticky) footer {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+}
