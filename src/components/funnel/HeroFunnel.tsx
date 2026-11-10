@@ -7,6 +7,7 @@ import NodeGraphHero from "@/components/home/NodeGraphHero";
 import MagneticButton from "@/components/home/MagneticButton";
 import ScrambleText from "@/components/home/ScrambleText";
 import { WHATSAPP } from "@/lib/site";
+import { RATINGS } from "@/lib/reviews";
 
 /**
  * Cream editorial hero (2026-06-01 readability + plain-language overhaul).
@@ -231,6 +232,47 @@ export default function HeroFunnel() {
             </Link>
           </div>
 
+          {/* Real review ratings (single source: src/lib/reviews.ts) */}
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 12,
+              letterSpacing: "0.04em",
+              marginTop: 20,
+              display: "flex",
+              flexWrap: "wrap",
+              columnGap: 16,
+              rowGap: 6,
+            }}
+          >
+            {[
+              {
+                r: RATINGS.fiverr,
+                text: `★ ${RATINGS.fiverr.rating} · ${RATINGS.fiverr.count} reviews on Fiverr`,
+              },
+              {
+                r: RATINGS.google,
+                text: `★ ${RATINGS.google.rating} · ${RATINGS.google.count} Google reviews`,
+              },
+            ].map(({ r, text }) => (
+              <a
+                key={r.label}
+                href={r.url}
+                target="_blank"
+                rel="noopener"
+                aria-label={`Rated ${r.rating} out of 5 — ${text.replace("★ ", "")}`}
+                className="hover:underline"
+                style={{
+                  color: "#A8451F",
+                  textUnderlineOffset: 3,
+                  textDecoration: "none",
+                }}
+              >
+                {text}
+              </a>
+            ))}
+          </div>
+
           <div
             style={{
               fontFamily: "var(--font-mono)",
@@ -238,7 +280,7 @@ export default function HeroFunnel() {
               textTransform: "uppercase",
               letterSpacing: "0.12em",
               color: "var(--ink-faint)",
-              marginTop: 20,
+              marginTop: 12,
             }}
           >
             — Bali hours · GMT+8 · usually books within 48 hours

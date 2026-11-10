@@ -1,6 +1,7 @@
 import HeroFunnel from "@/components/funnel/HeroFunnel";
 import Outcomes from "@/components/funnel/Outcomes";
 import Proof from "@/components/sections/Proof";
+import ClientReviews from "@/components/sections/ClientReviews";
 import ToolsTeaser from "@/components/home/ToolsTeaser";
 import FAQHome, { HOME_FAQS } from "@/components/sections/FAQHome";
 import FinalCTA from "@/components/funnel/FinalCTA";
@@ -90,6 +91,7 @@ export default function Home() {
       <HeroFunnel />
       <Outcomes />
       <Proof />
+      <ClientReviews />
       <ToolsTeaser />
       <FAQHome />
       <FinalCTA />
