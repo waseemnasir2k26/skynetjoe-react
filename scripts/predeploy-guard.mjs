@@ -57,7 +57,9 @@ const cfg = [
 ].join("\n");
 for (const r of routes) {
   const hit = pages.some((f) => (f.replace(/\([^)]*\)\//g, "").replace(/^src\/app/, "").replace(/\/page\.\w+$/, "") || "/") === r);
-  if (!hit) fail.push(`must-have route ${r} has no page`);
+  // Blog posts render via the dynamic /blog/[slug] route backed by content/blog/posts/<slug>.html.
+  const blogHit = /^\/blog\/[a-z0-9-]+$/.test(r) && fs.existsSync(`content/blog/posts/${r.slice(6)}.html`);
+  if (!hit && !blogHit) fail.push(`must-have route ${r} has no page`);
   const esc = r.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
   const asSource = new RegExp(`(?:source:\\s*|\\br\\(\\s*)["'\`]${esc}(?:["'\`]|/:\\w+[*?]["'\`])`); // exact, or /:x* /:x? (zero segments = the route itself)
   if (asSource.test(cfg)) fail.push(`must-have route ${r} is a redirect source (next.config.ts / src/lib redirects)`);

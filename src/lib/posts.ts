@@ -1090,6 +1090,19 @@ export const POSTS: Post[] = [
     tags: ["self-hosted n8n","n8n cloud pricing","n8n vps","n8n hosting","n8n community edition"],
     author: "Waseem Nasir",
   },
+  {
+    slug: "n8n-error-workflow-alert-when-automation-fails",
+    title: "n8n Error Workflow: Get Alerted When an Automation Fails",
+    seoTitle: "n8n Error Workflow: Alerts on Failure",
+    description:
+      "Set up an n8n error workflow in six steps: Error Trigger, a useful alert message, retries, Stop and Error for bad data, and how to test it properly.",
+    publishedAt: "2026-11-17",
+    updatedAt: "2026-11-17",
+    readingTime: 6,
+    category: "automation",
+    tags: ["n8n error workflow", "n8n error trigger", "n8n failed workflow alert", "n8n retry on fail", "workflow monitoring"],
+    author: "Waseem Nasir",
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {

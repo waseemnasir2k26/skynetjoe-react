@@ -1,0 +1,393 @@
+<style>
+  .wn-n8n-error-workflow-alert-when-automation-fails {
+    color: #e5e7eb;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails h2 {
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails h3 {
+    color: #7ee4ff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails p {
+    margin-bottom: 1.1rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails ul,
+  .wn-n8n-error-workflow-alert-when-automation-fails ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    color: #d1d5db;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails li {
+    margin-bottom: 0.6rem;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails strong {
+    color: #fff;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails a:hover {
+    color: #7ee4ff;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails .callout {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.08),
+      rgba(20, 184, 166, 0.08)
+    );
+    border-left: 3px solid #00d4ff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails .callout strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails .verdict {
+    background: linear-gradient(135deg, #1e88e5, #14b8a6);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    font-weight: 600;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails .rules {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails .rules strong {
+    color: #7ee4ff;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails .rules ol {
+    margin: 0.75rem 0 0 1.25rem;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #7ee4ff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: top;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails code {
+    background: rgba(0, 212, 255, 0.12);
+    color: #7ee4ff;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails .video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 2rem 0 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0f172a;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .wn-n8n-error-workflow-alert-when-automation-fails .video-note {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+</style>
+<p>
+  The most expensive automation failure is the one nobody hears about. A lead
+  form stops reaching your CRM on Tuesday, and you find out on Friday when a
+  customer asks why nobody replied. n8n can tell you the moment a workflow
+  fails, but only if you switch that on. By default a failed run just sits in
+  the executions list until someone opens it. This post shows how to set up an
+  error workflow, add retries where they help, and send yourself a message that
+  is clear enough to act on.
+</p>
+<p>
+  Everything here uses features documented by n8n: the Error Trigger node, the
+  workflow Error Workflow setting, node-level Retry On Fail and On Error, and
+  the Stop and Error node. Menu labels can shift between versions, so check them
+  against your own install. Any numbers below are examples, not measurements.
+</p>
+
+<h2 id="why">Why a failed run goes unnoticed</h2>
+<p>
+  A production workflow runs without anyone watching. If a credential expires,
+  an API changes a field name, or a spreadsheet column gets renamed, the
+  affected node throws an error and the run stops. n8n records it, but nothing
+  pushes that fact to you. For a small business with no one checking a dashboard
+  every morning, a broken workflow can stay broken for days.
+</p>
+<p>
+  There are two separate problems here, and they need two separate fixes. A
+  workflow that <strong>throws an error</strong> is solved with an error
+  workflow, which is this post. A workflow that
+  <strong>stops running without any error</strong>, such as a schedule that
+  never fires, needs a different check. We covered that case in
+  <a href="/blog/n8n-silent-lane-watchdog">the silent lane watchdog</a>.
+</p>
+
+<h2 id="build">Step by step: build the error workflow</h2>
+<ol>
+  <li>
+    <strong>Create a new workflow</strong> and name it something obvious, for
+    example "Error alerts".
+  </li>
+  <li>
+    <strong>Add the Error Trigger node</strong> as the first node. This is the
+    only trigger the workflow needs. It fires when another workflow fails and
+    hands over details about the failure.
+  </li>
+  <li>
+    <strong>Add a message node</strong> for the place you actually look. A
+    Slack, Telegram, email or WhatsApp node all work. Pick the channel you check
+    several times a day, not the one you check weekly.
+  </li>
+  <li>
+    <strong>Build the message from the trigger data.</strong> The Error Trigger
+    passes the workflow name, the execution ID and link, the error message and
+    the last node that ran. Put those four things in the alert, and nothing
+    else.
+  </li>
+  <li>
+    <strong>Save the error workflow.</strong> It does not need a schedule or a
+    webhook of its own.
+  </li>
+  <li>
+    <strong>Attach it to your real workflows.</strong> Open each production
+    workflow, go to its settings, and choose "Error workflow" from the dropdown.
+    Select "Error alerts". Repeat for every workflow you care about.
+  </li>
+</ol>
+
+<div class="callout">
+  <strong>Testing trap:</strong> the error workflow only runs when the failing
+  workflow was started automatically, by a trigger or a schedule. Clicking
+  "Execute workflow" in the editor does not call it. To test, activate a
+  throwaway workflow that is built to fail, such as a Code node that throws an
+  error, and let its trigger fire.
+</div>
+
+<h2 id="message">What a useful alert says</h2>
+<p>
+  An alert that says "something failed" wastes the first ten minutes of your
+  morning. Write it so you can decide in five seconds whether it is urgent. Here
+  is a layout that works:
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Line</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>What broke</td>
+      <td>Workflow: New enquiry to CRM</td>
+    </tr>
+    <tr>
+      <td>Where</td>
+      <td>Last node: Create contact</td>
+    </tr>
+    <tr>
+      <td>Why</td>
+      <td>Error: 401 unauthorized</td>
+    </tr>
+    <tr>
+      <td>Where to look</td>
+      <td>Link to the execution</td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  The example is illustrative. A 401 from a CRM node usually points to an
+  expired or revoked credential, which is a two-minute fix once you know about
+  it. The same fix discovered after four days means four days of enquiries that
+  never reached the CRM.
+</p>
+<p>
+  If several workflows fail at once, for instance because one shared credential
+  died, you will get one alert per workflow. That is fine for a handful of
+  workflows. If it becomes noisy, send a single summary instead, but do not
+  start filtering alerts out until you have lived with them for a few weeks.
+</p>
+
+<h2 id="retries">Add retries so you only hear about real failures</h2>
+<p>
+  Many failures fix themselves. An API times out, a service returns a brief
+  server error, a rate limit clears after a few seconds. Alerting on every one
+  of those trains you to ignore the channel. n8n has a node setting for this.
+</p>
+<ul>
+  <li>
+    <strong>Retry On Fail</strong> is in each node's settings. Turn it on, set
+    the maximum number of tries and the wait between them. As an example, three
+    tries with a short wait between each covers most brief outages.
+  </li>
+  <li>
+    <strong>Be careful with retries on actions that send something.</strong> A
+    retried email or text node can send twice if the first attempt actually went
+    through before the error came back. Use retries freely on reads and lookups,
+    and think twice on sends.
+  </li>
+  <li>
+    <strong>On Error</strong> controls what happens after the retries run out.
+    The default stops the workflow, which triggers your error workflow. You can
+    instead continue, or route the failed item down a separate error output,
+    which suits batch jobs where one bad row should not stop the other hundred.
+  </li>
+</ul>
+
+<h2 id="stop-and-error">Raise your own errors for bad data</h2>
+<p>
+  Some problems are not technical errors at all. A form arrives with no phone
+  number, an invoice total comes through as zero, a date is in the past. The
+  workflow runs happily and produces garbage. The Stop and Error node lets you
+  fail on purpose with a message you write, so the same alert path catches it.
+</p>
+<p>
+  Put an IF node before the risky step, check the condition you care about, and
+  send the bad branch into Stop and Error with a plain sentence such as "Enquiry
+  has no contact method". The error workflow then reports it like any other
+  failure, and you decide whether to fix the form or the workflow.
+</p>
+
+<h2 id="own-failure">Make sure the alert itself cannot fail silently</h2>
+<p>
+  The error workflow is a workflow, so it can break too. A few habits keep it
+  honest:
+</p>
+<ul>
+  <li>
+    Use a stable credential for the message node, not a personal login that gets
+    reset when someone changes a password.
+  </li>
+  <li>
+    Send the alert to a shared channel, not one person's inbox, so a holiday
+    does not become a blind spot.
+  </li>
+  <li>
+    Once a month, trigger a deliberate test failure and confirm the alert
+    arrives.
+  </li>
+  <li>
+    Keep a list of your production workflows. Any new one needs the Error
+    workflow setting chosen, and it is easy to forget on the one you built in a
+    hurry.
+  </li>
+</ul>
+
+<h2 id="what-we-do">How we handle this for clients</h2>
+<p>
+  Every workflow we build for a client gets the error workflow attached before
+  it goes live, with the alert going to a channel the client already uses.
+  Failure handling is part of the build, not an add-on. If you want that set up
+  on workflows you already run, or built from scratch, see our
+  <a href="/services/n8n-automation">n8n automation service</a>. If you are
+  still deciding where n8n should run, read
+  <a href="/blog/self-hosted-n8n-vs-n8n-cloud">self-hosted n8n vs n8n Cloud</a>
+  first.
+</p>
+
+<h2 id="faq">Questions people ask</h2>
+
+<h3>Do I need a separate error workflow for each workflow?</h3>
+<p>
+  No. One error workflow can be selected in the settings of many workflows. The
+  alert includes the workflow name from the Error Trigger data, so you can tell
+  which one failed.
+</p>
+
+<h3>Why did my error workflow not run when I tested it?</h3>
+<p>
+  Error workflows run for automatic executions, not for manual runs from the
+  editor. Activate a workflow that is designed to fail and let its trigger fire
+  by itself.
+</p>
+
+<h3>Will n8n alert me if a workflow never runs at all?</h3>
+<p>
+  No. The Error Trigger fires on a failed execution. A schedule that does not
+  fire produces no execution, so it produces no error. That needs a separate
+  check, covered in the silent lane watchdog post linked above.
+</p>
+
+<h3>Is this the same on n8n Cloud and self-hosted n8n?</h3>
+<p>
+  The Error Trigger node and the Error workflow setting are part of n8n itself,
+  so the steps are the same in both. Check the docs for your version if a menu
+  label looks different.
+</p>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need a separate error workflow for each workflow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. One error workflow can be selected in the settings of many workflows. The alert includes the workflow name from the Error Trigger data, so you can tell which one failed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did my error workflow not run when I tested it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Error workflows run for automatic executions, not for manual runs from the editor. Activate a workflow that is designed to fail and let its trigger fire by itself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will n8n alert me if a workflow never runs at all?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The Error Trigger fires on a failed execution. A schedule that does not fire produces no execution, so it produces no error. That needs a separate check."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this the same on n8n Cloud and self-hosted n8n?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Error Trigger node and the Error workflow setting are part of n8n itself, so the steps are the same in both. Check the docs for your version if a menu label looks different."
+        }
+      }
+    ]
+  }
+</script>

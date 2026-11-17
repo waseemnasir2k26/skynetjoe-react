@@ -11,3 +11,4 @@
 /about
 /contact
 /privacy-policy
+/blog/n8n-error-workflow-alert-when-automation-fails

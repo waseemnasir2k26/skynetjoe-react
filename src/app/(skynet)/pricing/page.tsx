@@ -32,14 +32,14 @@ const MONTHLY_PRICES = SERVICE_PRICING.flatMap((s) =>
 const MIN_MONTHLY = Math.min(...MONTHLY_PRICES);
 
 export const metadata: Metadata = {
-  title: pageTitle("Pricing — Public, honest, no 'request a quote'"),
+  title: pageTitle("Public Automation Pricing, No Quote Forms"),
   description:
     pageDescription("Transparent per-service pricing across 16 SkynetLabs services. Three tiers each, optional add-ons, live stack calculator. No hidden enterprise tier, no discovery dance."),
   alternates: { canonical: `${SITE.url}/pricing` },
   openGraph: {
     title: "SkynetLabs Pricing — public, per-service, calculator-backed",
     description:
-      "5 services × 3 tiers each. Live calculator. Public prices. No quote form.",
+      "16 services, three tiers each. Live calculator. Public prices. No quote form.",
     url: `${SITE.url}/pricing`,
     type: "website",
     images: [...DEFAULT_OG_IMAGES],
