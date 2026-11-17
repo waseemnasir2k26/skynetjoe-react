@@ -124,21 +124,33 @@
     font-size: 0.9rem;
     margin-bottom: 2rem;
   }
+  .wn-n8n-error-workflow-alert-when-automation-fails pre {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1.25rem 0;
+  }
 </style>
 <p>
-  The most expensive automation failure is the one nobody hears about. A lead
-  form stops reaching your CRM on Tuesday, and you find out on Friday when a
-  customer asks why nobody replied. n8n can tell you the moment a workflow
-  fails, but only if you switch that on. By default a failed run just sits in
-  the executions list until someone opens it. This post shows how to set up an
-  error workflow, add retries where they help, and send yourself a message that
-  is clear enough to act on.
+  To get alerted when an n8n workflow fails, create a new workflow that starts
+  with an Error Trigger node and ends in a Slack or email node. Publish it,
+  then open each production workflow, go to Options, Settings, and pick it
+  under Error workflow. One catch: it only fires when a published workflow
+  fails on its own, not when you click Execute workflow in the editor, so a
+  manual test will never trigger it.
 </p>
 <p>
-  Everything here uses features documented by n8n: the Error Trigger node, the
-  workflow Error Workflow setting, node-level Retry On Fail and On Error, and
-  the Stop and Error node. Menu labels can shift between versions, so check them
-  against your own install. Any numbers below are examples, not measurements.
+  By default a failed run just sits in the executions list until someone opens
+  it, so a lead form can stop reaching your CRM on Tuesday and you find out on
+  Friday. The steps below follow n8n's own docs for the
+  <a href="https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.errortrigger/" rel="noopener" target="_blank">Error Trigger node</a>
+  and its
+  <a href="https://docs.n8n.io/build/flow-logic/handle-errors-gracefully" rel="noopener" target="_blank">error handling guide</a>,
+  read on 17 November 2026. Menu labels can shift between versions, so check
+  them against your own install. Any numbers below are examples, not
+  measurements.
 </p>
 
 <h2 id="why">Why a failed run goes unnoticed</h2>
@@ -178,11 +190,12 @@
     <strong>Build the message from the trigger data.</strong> The Error Trigger
     passes the workflow name, the execution ID and link, the error message and
     the last node that ran. Put those four things in the alert, and nothing
-    else.
+    else. A copy-paste version is in the next section.
   </li>
   <li>
-    <strong>Save the error workflow.</strong> It does not need a schedule or a
-    webhook of its own.
+    <strong>Save and publish the error workflow.</strong> n8n's docs say the
+    workflow that contains the Error Trigger must be published. It does not
+    need a schedule or a webhook of its own.
   </li>
   <li>
     <strong>Attach it to your real workflows.</strong> Open each production
@@ -202,37 +215,37 @@
 <h2 id="message">What a useful alert says</h2>
 <p>
   An alert that says "something failed" wastes the first ten minutes of your
-  morning. Write it so you can decide in five seconds whether it is urgent. Here
-  is a layout that works:
+  morning. Write it so you can decide in five seconds whether it is urgent.
+  Paste this into the message field of your Slack, email or Telegram node. The
+  field names are the ones n8n lists for the Error Trigger output:
+</p>
+<pre><code>Workflow failed: {{ $json.workflow.name }}
+Last node: {{ $json.execution.lastNodeExecuted }}
+Error: {{ $json.execution.error.message }}
+Open it: {{ $json.execution.url }}</code></pre>
+<p>
+  A filled-in example, with made-up values:
 </p>
 <table>
   <thead>
-    <tr>
-      <th>Line</th>
-      <th>Example</th>
-    </tr>
+    <tr><th>Line</th><th>Example</th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td>What broke</td>
-      <td>Workflow: New enquiry to CRM</td>
-    </tr>
-    <tr>
-      <td>Where</td>
-      <td>Last node: Create contact</td>
-    </tr>
-    <tr>
-      <td>Why</td>
-      <td>Error: 401 unauthorized</td>
-    </tr>
-    <tr>
-      <td>Where to look</td>
-      <td>Link to the execution</td>
-    </tr>
+    <tr><td>What broke</td><td>Workflow: New enquiry to CRM</td></tr>
+    <tr><td>Where</td><td>Last node: Create contact</td></tr>
+    <tr><td>Why</td><td>Error: 401 unauthorized</td></tr>
+    <tr><td>Where to look</td><td>Link to the execution</td></tr>
   </tbody>
 </table>
 <p>
-  The example is illustrative. A 401 from a CRM node usually points to an
+  One exception from n8n's docs: if the failure is in the workflow's own
+  trigger node, the run never starts, so there is no execution ID or URL, and
+  the details arrive under <code>trigger</code> instead of <code>execution</code>.
+  Use <code>{{ $json.trigger.error.message }}</code> for those cases, or add an
+  IF node that picks the right message.
+</p>
+<p>
+  A 401 from a CRM node usually points to an
   expired or revoked credential, which is a two-minute fix once you know about
   it. The same fix discovered after four days means four days of enquiries that
   never reached the CRM.
@@ -323,18 +336,20 @@
 
 <h2 id="faq">Questions people ask</h2>
 
+<h3>Why is my n8n error workflow not triggering?</h3>
+<p>
+  The usual cause is testing it by hand. The Error Trigger only runs when a
+  workflow fails automatically, so clicking Execute workflow in the editor
+  never calls it. Other causes: the error workflow is not published, or the
+  failing workflow does not have it selected under Settings, Error workflow.
+  Test with a published workflow built to fail and let its trigger fire.
+</p>
+
 <h3>Do I need a separate error workflow for each workflow?</h3>
 <p>
   No. One error workflow can be selected in the settings of many workflows. The
   alert includes the workflow name from the Error Trigger data, so you can tell
   which one failed.
-</p>
-
-<h3>Why did my error workflow not run when I tested it?</h3>
-<p>
-  Error workflows run for automatic executions, not for manual runs from the
-  editor. Activate a workflow that is designed to fail and let its trigger fire
-  by itself.
 </p>
 
 <h3>Will n8n alert me if a workflow never runs at all?</h3>
@@ -352,42 +367,42 @@
 </p>
 
 <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Do I need a separate error workflow for each workflow?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. One error workflow can be selected in the settings of many workflows. The alert includes the workflow name from the Error Trigger data, so you can tell which one failed."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Why did my error workflow not run when I tested it?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Error workflows run for automatic executions, not for manual runs from the editor. Activate a workflow that is designed to fail and let its trigger fire by itself."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Will n8n alert me if a workflow never runs at all?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. The Error Trigger fires on a failed execution. A schedule that does not fire produces no execution, so it produces no error. That needs a separate check."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is this the same on n8n Cloud and self-hosted n8n?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The Error Trigger node and the Error workflow setting are part of n8n itself, so the steps are the same in both. Check the docs for your version if a menu label looks different."
-        }
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is my n8n error workflow not triggering?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The usual cause is testing it by hand. The Error Trigger only runs when a workflow fails automatically, so clicking Execute workflow in the editor never calls it. Other causes: the error workflow is not published, or the failing workflow does not have it selected under Settings, Error workflow."
       }
-    ]
-  }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a separate error workflow for each workflow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. One error workflow can be selected in the settings of many workflows. The alert includes the workflow name from the Error Trigger data, so you can tell which one failed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will n8n alert me if a workflow never runs at all?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Error Trigger fires on a failed execution. A schedule that does not fire produces no execution, so it produces no error. That needs a separate check."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this the same on n8n Cloud and self-hosted n8n?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Error Trigger node and the Error workflow setting are part of n8n itself, so the steps are the same in both. Check the docs for your version if a menu label looks different."
+      }
+    }
+  ]
+}
 </script>

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     pageDescription("Transparent per-service pricing across 16 SkynetLabs services. Three tiers each, optional add-ons, live stack calculator. No hidden enterprise tier, no discovery dance."),
   alternates: { canonical: `${SITE.url}/pricing` },
   openGraph: {
-    title: "SkynetLabs Pricing — public, per-service, calculator-backed",
+    title: "SkynetLabs Pricing: public, per-service, calculator-backed",
     description:
       "16 services, three tiers each. Live calculator. Public prices. No quote form.",
     url: `${SITE.url}/pricing`,

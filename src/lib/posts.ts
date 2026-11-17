@@ -1095,7 +1095,7 @@ export const POSTS: Post[] = [
     title: "n8n Error Workflow: Get Alerted When an Automation Fails",
     seoTitle: "n8n Error Workflow: Alerts on Failure",
     description:
-      "Set up an n8n error workflow in six steps: Error Trigger, a useful alert message, retries, Stop and Error for bad data, and how to test it properly.",
+      "How to get an alert when an n8n workflow fails: build an Error Trigger workflow, paste a copy-ready alert message, add retries, and test it the right way.",
     publishedAt: "2026-11-17",
     updatedAt: "2026-11-17",
     readingTime: 6,
