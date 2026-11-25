@@ -36,7 +36,7 @@ const schema = {
     "Side-by-side comparison of n8n and Zapier from 180+ shipped workflows. Pricing, self-hosting, branching, compliance, AI nodes, 5 scenarios with picks.",
   url: `${SITE.url}/n8n-vs-zapier`,
   inLanguage: "en",
-  dateModified: "2026-05-22",
+  dateModified: "2026-11-25",
   image: `${SITE.url}/og-default.png`,
   author: personRef,
   publisher: organizationRef,
