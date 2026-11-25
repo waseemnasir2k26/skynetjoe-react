@@ -47,7 +47,7 @@
 </style>
 
 <div class="wn-wrap">
-<p class="wn-byline">SkynetLabs · Engineer's Field Notes · Last updated 22 May 2026 · By <a href="/author/waseem-nasir" style="color:#1E88E5;text-decoration:none;">Waseem Nasir</a></p>
+<p class="wn-byline">SkynetLabs · Engineer's Field Notes · Last updated 25 November 2026 · By <a href="/author/waseem-nasir" style="color:#1E88E5;text-decoration:none;">Waseem Nasir</a></p>
 <h1>n8n vs Zapier in 2026 — When to Pick Which (Honest Engineer's Take)</h1>
 <p class="wn-sub">Side-by-side comparison from someone who has shipped 180+ workflows across both platforms. No affiliate links. No "it depends." Concrete recommendations.</p>
 
@@ -76,12 +76,44 @@
 <tr><td>AI / LLM nodes</td><td>OpenAI, Anthropic, Gemini, plus generic HTTP and LangChain nodes for any custom model.</td><td>Decent OpenAI / Claude integration. Less flexible for custom LLM stacks.</td></tr>
 <tr><td>Marketplace size</td><td>~400 integrations + write-your-own HTTP node for anything missing.</td><td>~6,000 apps. The widest integration library in the category.</td></tr>
 <tr><td>Learning curve</td><td>2–4 weeks to fluency if you have basic API literacy.</td><td>2–4 days to fluency. The lowest-barrier automation tool on the market.</td></tr>
-<tr><td>Compliance (HIPAA / SOC2)</td><td>Self-host gives you full control. Cloud plans add compliance tiers.</td><td>Enterprise plans include HIPAA + SOC2 (Zapier holds both).</td></tr>
+<tr><td>Compliance (HIPAA / SOC 2)</td><td>States SOC 2 Type II and SOC 3. Self-hosting puts the data on your own servers. No HIPAA agreement found on n8n's own pages.</td><td>States SOC 2 Type II and SOC 3. Says it does not offer a HIPAA agreement (BAA), including on Enterprise.</td></tr>
 <tr><td>Vendor lock-in</td><td>Low. Workflows export as JSON; you can move providers in a day.</td><td>High. Zaps don't export to other platforms in any useful format.</td></tr>
 <tr><td>Speed of building a 5-step flow</td><td>30–60 minutes once you know the platform.</td><td>15–30 minutes — fastest in the category for simple flows.</td></tr>
 <tr><td>Speed of building a 25-step flow with branching</td><td>4–8 hours including testing. Manageable.</td><td>12+ hours and painful — Paths multiply, debugging gets messy.</td></tr>
 </tbody>
 </table>
+
+<h2 id="security">Security and compliance: straight answers</h2>
+
+<p>These are the questions people type into Google before they land on this page. Each answer comes from what n8n and Zapier say on their own pages, checked on 25 November 2026. Vendors change these pages, so confirm before you sign anything.</p>
+
+<h3>Does Zapier have better security certifications than n8n?</h3>
+<p>No. On their own pages both companies state the same two: SOC 2 Type II and SOC 3. Neither one lists ISO 27001 or PCI. Zapier says it has not pursued PCI. So on paper they are level, and the real difference is where your data sits, not the badges.</p>
+<p style="font-size:13px;opacity:.75;">Sources: <a href="https://trust.n8n.io" rel="noopener">n8n Trust Center</a>, <a href="https://zapier.com/security-compliance" rel="noopener">Zapier security page</a></p>
+
+<h3>Which meets more security standards, n8n or Zapier?</h3>
+<p>It is a tie on audited standards: SOC 2 Type II and SOC 3 for both. Zapier also states EU-US Data Privacy Framework certification, which covers data transfers, not security controls. With self-hosted n8n the standards you meet are your own, because you run the server.</p>
+<p style="font-size:13px;opacity:.75;">Sources: <a href="https://n8n.io/legal/security/" rel="noopener">n8n security</a>, <a href="https://zapier.com/legal/data-privacy" rel="noopener">Zapier data privacy</a></p>
+
+<h3>Does n8n offer better data control than Zapier?</h3>
+<p>Yes. n8n can run on your own server, so workflow data never leaves your infrastructure, and you decide how long run history is kept (the default is 14 days or 10,000 runs, both adjustable). Zapier is hosted software only, stores data on AWS in the United States, and keeps Zap history for 29 to 69 days by default. Company and Enterprise plans can shorten that.</p>
+<p style="font-size:13px;opacity:.75;">Sources: <a href="https://docs.n8n.io/hosting/configuration/environment-variables/executions/" rel="noopener">n8n execution settings</a>, <a href="https://zapier.com/legal/data-retention-deletion" rel="noopener">Zapier data retention</a></p>
+
+<h3>Is n8n or Zapier better for GDPR compliance?</h3>
+<p>Both can be used lawfully: each offers a data processing agreement with standard contractual clauses. n8n is the easier fit if you want personal data to stay in the EU. n8n Cloud states that it hosts in the European Union, and self-hosting lets you pick the country. Zapier states that it hosts in the United States and does not support EU-only storage.</p>
+<p style="font-size:13px;opacity:.75;">Sources: <a href="https://docs.n8n.io/privacy-and-security/privacy/" rel="noopener">n8n privacy docs</a>, <a href="https://zapier.com/legal/data-privacy" rel="noopener">Zapier data privacy</a></p>
+
+<h3>Has n8n had fewer security breaches than Zapier?</h3>
+<p>Nobody can say that honestly, because the two have different kinds of public record. Zapier has two incidents on record from 2025: unauthorised access to code repositories in February (reported in the press) and a compromised npm package in November (Zapier's own write-up); Zapier said it found no evidence that customer data was exposed in the November one. n8n is open source, so its software flaws are published as advisories, including a critical one in January 2026 (CVE-2026-21858) fixed in version 1.121.0. If you self-host n8n, updating promptly is your job. A missing disclosure is not proof that nothing happened.</p>
+<p style="font-size:13px;opacity:.75;">Sources: <a href="https://github.com/n8n-io/n8n/security/advisories" rel="noopener">n8n security advisories</a>, <a href="https://status.zapier.com/incidents/01KAV9DDHMYT7R6MFHSB8C09E3/write-up" rel="noopener">Zapier incident write-up</a></p>
+
+<h3>Which keeps my data more private, n8n or Zapier?</h3>
+<p>Self-hosted n8n, because no vendor sees the data at all. Between the two hosted products it is close. n8n says it will not use customer content or output to train machine learning models. Zapier says it does not train on workflow data.</p>
+<p style="font-size:13px;opacity:.75;">Sources: <a href="https://n8n.io/legal/ai-terms/" rel="noopener">n8n AI terms</a>, <a href="https://zapier.com/security-compliance" rel="noopener">Zapier security page</a></p>
+
+<h3>Can I use n8n or Zapier for HIPAA work?</h3>
+<p>Not on the hosted plans as they stand. Zapier says it does not offer a business associate agreement (BAA), including for Enterprise. We found no BAA offer on n8n's own pages either. The workable route for patient data is self-hosted n8n inside infrastructure that is already covered by your own agreements, with someone accountable for running it.</p>
+<p style="font-size:13px;opacity:.75;">Sources: <a href="https://zapier.com/blog/is-zapier-hipaa-compliant/" rel="noopener">Zapier on HIPAA</a></p>
 
 <h2 id="scenarios">Five real-world scenarios</h2>
 
@@ -102,8 +134,8 @@
 <div class="wn-scenario">
 <h4>Scenario 3: "I need HIPAA compliance"</h4>
 <p>You're in healthcare, mental health, or any vertical where PHI flows through your automation. Patient names, appointment data, insurance numbers — anything that would land you in legal trouble if it leaked through an unaudited third party.</p>
-<p>Both can do this but the path differs. Zapier Enterprise has HIPAA available with a signed BAA — fast to set up, expensive monthly, no infrastructure questions. n8n self-hosted on your own AWS VPC or HIPAA-compliant hosting (Aptible, OpsCompass) gives you full control of where PHI lives and how it's logged. The right choice depends on whether you're already on AWS — if yes, n8n self-hosted is cheaper and tighter. If you're a small clinic with no cloud team, Zapier Enterprise removes a whole category of risk.</p>
-<span class="wn-verdict-line">Verdict — Zapier Enterprise if no cloud team. n8n self-hosted on HIPAA-compliant infra if you have one.</span>
+<p>Zapier is out for this one: it says it does not offer a business associate agreement (BAA), including on Enterprise. We found no BAA offer on n8n's own pages either, so hosted n8n Cloud is not the answer. What works is n8n self-hosted on your own AWS VPC or on hosting that signs a BAA with you, which gives you full control of where PHI lives and how it's logged. If you're a small clinic with no cloud team, pay someone to run that server properly or pick a tool that is built for healthcare and signs a BAA.</p>
+<span class="wn-verdict-line">Verdict: n8n self-hosted on infrastructure covered by a BAA. Not Zapier, not hosted n8n Cloud.</span>
 </div>
 
 <div class="wn-scenario">
@@ -150,7 +182,7 @@
 
 <div class="wn-node"><strong>Q6.</strong> Are you already running on AWS, Azure, or GCP with a security team?</div>
 <div class="wn-arrow">└── No →</div>
-<div class="wn-leaf-alt">→ Zapier Enterprise with signed BAA</div>
+<div class="wn-leaf-alt">→ For SOC 2 or EU hosting: n8n Cloud. For patient data: Zapier offers no HIPAA agreement and we found none from n8n, so get help self-hosting n8n or use a platform that signs one</div>
 <div class="wn-arrow">└── Yes →</div>
 <div class="wn-leaf-n8n">→ n8n self-hosted on your VPC with audited PHI handling</div>
 </div>
@@ -194,6 +226,68 @@
       "@type": "Table",
       "@id": "https://skynetjoe.com/n8n-vs-zapier#comparison-table",
       "about": "Feature comparison between n8n and Zapier across 15 criteria including pricing, self-hosting, branching, error handling, AI integrations, and compliance."
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://skynetjoe.com/n8n-vs-zapier#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Zapier have better security certifications than n8n?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. On their own pages both companies state the same two: SOC 2 Type II and SOC 3. Neither one lists ISO 27001 or PCI. Zapier says it has not pursued PCI. So on paper they are level, and the real difference is where your data sits, not the badges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which meets more security standards, n8n or Zapier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a tie on audited standards: SOC 2 Type II and SOC 3 for both. Zapier also states EU-US Data Privacy Framework certification, which covers data transfers, not security controls. With self-hosted n8n the standards you meet are your own, because you run the server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does n8n offer better data control than Zapier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. n8n can run on your own server, so workflow data never leaves your infrastructure, and you decide how long run history is kept (the default is 14 days or 10,000 runs, both adjustable). Zapier is hosted software only, stores data on AWS in the United States, and keeps Zap history for 29 to 69 days by default. Company and Enterprise plans can shorten that."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is n8n or Zapier better for GDPR compliance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both can be used lawfully: each offers a data processing agreement with standard contractual clauses. n8n is the easier fit if you want personal data to stay in the EU. n8n Cloud states that it hosts in the European Union, and self-hosting lets you pick the country. Zapier states that it hosts in the United States and does not support EU-only storage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Has n8n had fewer security breaches than Zapier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nobody can say that honestly, because the two have different kinds of public record. Zapier has two incidents on record from 2025: unauthorised access to code repositories in February (reported in the press) and a compromised npm package in November (Zapier's own write-up); Zapier said it found no evidence that customer data was exposed in the November one. n8n is open source, so its software flaws are published as advisories, including a critical one in January 2026 (CVE-2026-21858) fixed in version 1.121.0. If you self-host n8n, updating promptly is your job. A missing disclosure is not proof that nothing happened."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which keeps my data more private, n8n or Zapier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Self-hosted n8n, because no vendor sees the data at all. Between the two hosted products it is close. n8n says it will not use customer content or output to train machine learning models. Zapier says it does not train on workflow data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use n8n or Zapier for HIPAA work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not on the hosted plans as they stand. Zapier says it does not offer a business associate agreement (BAA), including for Enterprise. We found no BAA offer on n8n's own pages either. The workable route for patient data is self-hosted n8n inside infrastructure that is already covered by your own agreements, with someone accountable for running it."
+          }
+        }
+      ]
     }
   ]
 }
